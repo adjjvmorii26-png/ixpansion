@@ -1,4 +1,4 @@
-# ixpansion
+# IXPANSION
 
 Sovereign multi-agent mesh: simulate · verify · evolve · publish.
 
@@ -53,4 +53,3 @@ Details: `XAI_INTEGRATION.md`
 - HMAC compilation receipts + policy hash grace
 - Shadow CoW staging (no durable I/O on abort)
 - Byzantine VSA isolation + Raft quorum
-- 
