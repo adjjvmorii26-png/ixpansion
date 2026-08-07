@@ -8,11 +8,18 @@ def main() -> None:
     parser.add_argument("--name", default="ixpansion-agent", help="Name of the agent.")
     parser.add_argument("--goal", default="Explore the mesh", help="Goal for the agent to pursue.")
     parser.add_argument(
-        "--use-xai", action="store_true", help="Ask xAI to summarize the goal."
+        "--use-tokenrouter",
+        "--use-xai",
+        dest="use_tokenrouter",
+        action="store_true",
+        help="Ask TokenRouter to summarize the goal.",
     )
     args = parser.parse_args()
 
     agent = Agent(name=args.name)
+    if args.use_tokenrouter and not agent.api_key:
+        parser.error("TOKENROUTER_API_KEY is not configured")
+
     output = agent.run(args.goal)
 
     print(f"Agent: {agent.name}")
@@ -23,9 +30,12 @@ def main() -> None:
     print("Results:")
     for result in output["results"]:
         print(f"  - {result}")
-    if args.use_xai:
-        print("xAI:")
-        print(agent.ask(args.goal))
+    if args.use_tokenrouter:
+        print("TokenRouter:")
+        try:
+            print(agent.ask(args.goal))
+        except RuntimeError as exc:
+            parser.error(str(exc))
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Optional
 
 from dotenv import dotenv_values
 
-from xai_client import XAIClient
+from tokenrouter_client import TokenRouterClient
 
 
 def _load_env_file(env_path: Optional[Path] = None) -> None:
@@ -22,7 +22,13 @@ def _get_api_key() -> Optional[str]:
     """Return a configured API key from the environment or a local .env file."""
     _load_env_file()
 
-    for key_name in ("XAI_API_KEY", "API_KEY", "OPENAI_API_KEY", "ANTHROPIC_API_KEY"):
+    for key_name in (
+        "TOKENROUTER_API_KEY",
+        "XAI_API_KEY",
+        "API_KEY",
+        "OPENAI_API_KEY",
+        "ANTHROPIC_API_KEY",
+    ):
         value = os.getenv(key_name)
         if value:
             return value
@@ -40,10 +46,10 @@ class Agent:
         self.api_key = _get_api_key()
 
     def ask(self, prompt: str) -> str:
-        """Send a prompt to xAI, failing clearly when no key is configured."""
+        """Send a prompt to TokenRouter, failing clearly when no key is configured."""
         if not self.api_key:
-            raise RuntimeError("XAI_API_KEY is not configured")
-        return XAIClient(self.api_key).complete(prompt)
+            raise RuntimeError("TOKENROUTER_API_KEY is not configured")
+        return TokenRouterClient(self.api_key).complete(prompt)
 
     def remember(self, item: str) -> None:
         self.memory.append(item)
