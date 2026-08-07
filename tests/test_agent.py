@@ -4,10 +4,10 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
-from urllib import request
+from urllib import error, request
 
 from agent import Agent, _get_api_key, _load_env_file
-from tokenrouter_client import TokenRouterClient
+from tokenrouter_client import TokenRouterClient, TokenRouterClientError
 
 
 class FakeResponse:
@@ -21,6 +21,16 @@ class FakeResponse:
         return json.dumps(
             {"choices": [{"message": {"content": "TokenRouter response"}}]}
         ).encode("utf-8")
+
+
+class InvalidJsonResponse(FakeResponse):
+    def read(self):
+        return b"not-json"
+
+
+class MissingContentResponse(FakeResponse):
+    def read(self):
+        return json.dumps({"choices": []}).encode("utf-8")
 
 
 class AgentTests(unittest.TestCase):
@@ -50,6 +60,16 @@ class AgentTests(unittest.TestCase):
         payload = json.loads(sent_request.data)
         self.assertEqual(payload["model"], "moonshotai/kimi-k3-free")
         self.assertEqual(payload["messages"][1]["content"], "hello")
+
+    @patch.object(request, "urlopen", return_value=InvalidJsonResponse())
+    def test_tokenrouter_client_rejects_invalid_json(self, urlopen):
+        with self.assertRaisesRegex(TokenRouterClientError, "invalid JSON"):
+            TokenRouterClient("test-key").complete("hello")
+
+    @patch.object(request, "urlopen", return_value=MissingContentResponse())
+    def test_tokenrouter_client_rejects_missing_message_content(self, urlopen):
+        with self.assertRaisesRegex(TokenRouterClientError, "message content"):
+            TokenRouterClient("test-key").complete("hello")
 
     def test_agent_run_builds_plan_and_history(self):
         output = Agent(name="test").run("goal")

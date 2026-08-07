@@ -26,9 +26,9 @@ For example:
 python run_agent.py --name explorer --goal "Inspect the API"
 ```
 
-## xAI integration
+## TokenRouter integration
 
-Copy `.env.example` to `.env`, then set `XAI_API_KEY` to a newly generated key:
+Copy `.env.example` to `.env`, then set `TOKENROUTER_API_KEY` to a newly generated key:
 
 ```bash
 cp .env.example .env
