@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from dotenv import dotenv_values
+
 from xai_client import XAIClient
 
 
@@ -11,13 +13,9 @@ def _load_env_file(env_path: Optional[Path] = None) -> None:
     if not path.exists():
         return
 
-    for line in path.read_text(encoding="utf-8").splitlines():
-        stripped = line.strip()
-        if not stripped or stripped.startswith("#") or "=" not in stripped:
-            continue
-
-        key, value = stripped.split("=", 1)
-        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+    for key, value in dotenv_values(path).items():
+        if value is not None:
+            os.environ.setdefault(key, value)
 
 
 def _get_api_key() -> Optional[str]:
