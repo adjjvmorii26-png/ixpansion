@@ -1,55 +1,49 @@
 # IXPANSION
 
-Sovereign multi-agent mesh: simulate · verify · evolve · publish.
+Small FastAPI and CLI agent scaffold with optional xAI integration.
 
 ## Quick start
 
 ```bash
-# Regression (core health)
-python run_regression.py
-
-# Intent → primitive compiler
-python mesh_compiler.py
-
-# Full publish package
-python swarm.py --publish-package
-
-# Daemon once (breakthrough → YouTube bundle)
-python swarm_daemon.py --once
-
-# Chaos drill
-python chaos_mesh_drill.py
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python run_agent.py --goal "Explore the mesh"
 ```
 
-## Architecture layers
+The default CLI path is offline and does not require an API key.
 
-| Layer | Modules |
-|-------|---------|
-| Consensus | `raft_consensus.py`, `swarm_crdt.py`, `swarm_merkle_crdt.py` |
-| Security | `node_auth.py`, `mesh_tunnel.py`, `task_verifiability.py`, `oci_sandbox.py` |
-| Cognition | `vsa_memory.py`, `vsa_semantic_router.py`, `neural_symbolic_core.py` |
-| Execution | `spatial_shard.py`, `genetic_sandbox.py`, `closed_loop_physics.py`, `ixpansion_executor.py` |
-| Compiler | `mesh_compiler.py` (AST → IR → gas → receipt → dry-run) |
-| Orchestration | `task_dag.py`, `swarm_daemon.py`, `swarm.py` |
-| Content | `auto_content_engine.py`, `youtube_publish_pipeline.py`, `grok_swarm_client.py` |
-| Ops | `chaos_mesh_drill.py`, `cluster_operator.py`, `reputation_ledger.py`, `run_regression.py` |
+## xAI integration
 
-## Brand
-
-See `BRANDING.md`. Channel target: **@adjjv** · series *IXPANSION Logs*.
-
-## xAI / Grok
+Copy `.env.example` to `.env`, then set `XAI_API_KEY` to a newly generated key:
 
 ```bash
-export XAI_API_KEY=...
-python grok_swarm_client.py
+cp .env.example .env
+python run_agent.py --goal "Summarize this project" --use-xai
 ```
 
-Details: `XAI_INTEGRATION.md`
+Never commit `.env` or share an API key. `XAI_MODEL` defaults to `grok-3-mini`,
+and `XAI_API_URL` can override the OpenAI-compatible endpoint for testing.
 
-## Safety model
+If a key has ever been pasted into chat, source control, logs, or an issue,
+revoke it in the xAI dashboard and create a replacement.
 
-- AST sandbox + OCI process isolation for evolved code
-- HMAC compilation receipts + policy hash grace
-- Shadow CoW staging (no durable I/O on abort)
-- Byzantine VSA isolation + Raft quorum
+## API
+
+Run the local server:
+
+```bash
+uvicorn api.main:app --reload
+```
+
+Available endpoints:
+
+- `GET /` returns service metadata.
+- `GET /health` returns a health status.
+
+## Development checks
+
+```bash
+python -m py_compile agent.py run_agent.py xai_client.py api/main.py
+python -m unittest discover -s tests -v
+```

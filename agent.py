@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from xai_client import XAIClient
+
 
 def _load_env_file(env_path: Optional[Path] = None) -> None:
     """Populate os.environ from a local .env file when present."""
@@ -38,6 +40,12 @@ class Agent:
         self.memory = memory or []
         self.history: List[str] = []
         self.api_key = _get_api_key()
+
+    def ask(self, prompt: str) -> str:
+        """Send a prompt to xAI, failing clearly when no key is configured."""
+        if not self.api_key:
+            raise RuntimeError("XAI_API_KEY is not configured")
+        return XAIClient(self.api_key).complete(prompt)
 
     def remember(self, item: str) -> None:
         self.memory.append(item)
