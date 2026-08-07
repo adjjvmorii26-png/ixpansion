@@ -1,5 +1,33 @@
-import time
+import os
+from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+
+def _load_env_file(env_path: Optional[Path] = None) -> None:
+    """Populate os.environ from a local .env file when present."""
+    path = env_path or Path(".env")
+    if not path.exists():
+        return
+
+    for line in path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            continue
+
+        key, value = stripped.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
+
+def _get_api_key() -> Optional[str]:
+    """Return a configured API key from the environment or a local .env file."""
+    _load_env_file()
+
+    for key_name in ("XAI_API_KEY", "API_KEY", "OPENAI_API_KEY", "ANTHROPIC_API_KEY"):
+        value = os.getenv(key_name)
+        if value:
+            return value
+
+    return None
 
 
 class Agent:
@@ -9,6 +37,7 @@ class Agent:
         self.name = name
         self.memory = memory or []
         self.history: List[str] = []
+        self.api_key = _get_api_key()
 
     def remember(self, item: str) -> None:
         self.memory.append(item)
@@ -44,4 +73,5 @@ class Agent:
             "plan": plan,
             "results": results,
             "history": self.history,
+            "api_key_configured": bool(self.api_key),
         }
