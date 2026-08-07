@@ -44,6 +44,54 @@ class Agent:
         self.memory = memory or []
         self.history: List[str] = []
         self.api_key = _get_api_key()
+        self.skills = {
+            "summarize": self.summarize,
+            "tasks": self.extract_tasks,
+            "check_goal": self.check_goal,
+        }
+
+    def list_skills(self) -> List[str]:
+        """Return the names of the skills available without network access."""
+        return sorted(self.skills)
+
+    def use_skill(self, skill: str, text: str) -> str:
+        """Run a named local skill and record its result."""
+        try:
+            result = self.skills[skill](text)
+        except KeyError as exc:
+            available = ", ".join(self.list_skills())
+            raise ValueError(f"Unknown skill '{skill}'. Available skills: {available}") from exc
+        self.history.append(f"Used skill: {skill}")
+        return result
+
+    def summarize(self, text: str) -> str:
+        """Return a compact first-sentence summary of text."""
+        cleaned = " ".join(text.split())
+        if not cleaned:
+            return "No content provided."
+        first_sentence = cleaned.split(".", 1)[0].strip()
+        return f"Summary: {first_sentence}."
+
+    def extract_tasks(self, text: str) -> str:
+        """Extract simple task lines from text using common task markers."""
+        tasks = []
+        for line in text.splitlines():
+            cleaned = line.strip()
+            if cleaned.startswith(("- [ ]", "- ", "TODO:", "Task:")):
+                task = cleaned.replace("- [ ]", "", 1).replace("- ", "", 1).strip()
+                task = task.removeprefix("TODO:").removeprefix("Task:").strip()
+                if task:
+                    tasks.append(task)
+        if not tasks:
+            return "Tasks: none found."
+        return "Tasks:\n" + "\n".join(f"- {task}" for task in tasks)
+
+    def check_goal(self, goal: str) -> str:
+        """Report whether a goal contains enough detail to act on."""
+        cleaned = " ".join(goal.split())
+        if len(cleaned.split()) < 3:
+            return "Goal needs more detail. Add an outcome and useful constraints."
+        return "Goal is actionable."
 
     def ask(self, prompt: str) -> str:
         """Send a prompt to TokenRouter, failing clearly when no key is configured."""

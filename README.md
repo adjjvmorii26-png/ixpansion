@@ -26,6 +26,17 @@ For example:
 python run_agent.py --name explorer --goal "Inspect the API"
 ```
 
+## Local skills
+
+The agent includes offline skills that do not require an API key:
+
+- `summarize`: create a compact first-sentence summary.
+- `tasks`: extract tasks from checklist, `TODO:`, and `Task:` lines.
+- `check_goal`: check whether a goal has enough detail to act on.
+
+These skills are available through `Agent.list_skills()` and
+`Agent.use_skill(name, text)` for Python callers.
+
 ## TokenRouter integration
 
 Copy `.env.example` to `.env`, then set `TOKENROUTER_API_KEY` to a newly generated key:

@@ -76,3 +76,20 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(output["goal"], "goal")
         self.assertEqual(len(output["plan"]), 5)
         self.assertTrue(output["history"])
+
+    def test_local_skills_are_discoverable_and_callable(self):
+        agent = Agent(name="test")
+        self.assertEqual(agent.list_skills(), ["check_goal", "summarize", "tasks"])
+        self.assertEqual(
+            agent.use_skill("summarize", "Inspect the API. Then run tests."),
+            "Summary: Inspect the API.",
+        )
+        self.assertIn("Used skill: summarize", agent.history)
+
+    def test_tasks_skill_extracts_task_markers(self):
+        result = Agent().use_skill("tasks", "- [ ] Add tests\nTODO: update docs")
+        self.assertEqual(result, "Tasks:\n- Add tests\n- update docs")
+
+    def test_unknown_skill_lists_available_skills(self):
+        with self.assertRaisesRegex(ValueError, "Available skills"):
+            Agent().use_skill("missing", "text")
