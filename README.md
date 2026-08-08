@@ -61,9 +61,11 @@ Current repository coverage:
 | Fabric | No mesh core, CRDT, MPMC ring, gas, or shard runtime | Planned |
 | SI/federation | No SI toolkit or multi-host transport | Planned |
 
-The current release is a safe scaffold for the operator and trust layers. Forge,
-fabric, SI, and federation work should land behind tests and `make verify` before
-being presented as production capabilities.
+The current release is a safe scaffold for the operator and trust layers. The
+Aether Lattice foundation now composes the offline agent, machine lattice,
+trust/audit controls, federation simulator, and swarm metadata behind one
+inspectable runtime. Forge, fabric, SI, and federation work should still land
+behind tests and `make verify` before being presented as production capabilities.
 
 The local 1.3 federation demonstration is now available as a deterministic,
 offline simulator:
@@ -164,6 +166,10 @@ Available endpoints:
 
 - `GET /` returns `{"service": "ixpansion", "status": "ok"}`.
 - `GET /health` returns `{"status": "healthy"}`.
+- `GET /aether` returns the unified foundation snapshot across agent, lattice,
+  federation, trust, safety, and swarm layers.
+- `POST /aether/dispatch` allocates safe capacity, runs the offline agent plan,
+  updates node trust, and records an audit event.
 - `GET /skills` lists local skill contracts.
 - `POST /skills/{skill}` executes a local skill with `{"text": "..."}`.
 - `GET /lattice` reports machine states and active leases.
@@ -178,7 +184,11 @@ Example requests:
 ```bash
 curl http://127.0.0.1:8000/
 curl http://127.0.0.1:8000/health
+curl http://127.0.0.1:8000/aether
 curl http://127.0.0.1:8000/skills
+curl -X POST http://127.0.0.1:8000/aether/dispatch \
+  -H 'Content-Type: application/json' \
+  -d '{"task":"Inspect the lattice","task_id":"demo-1"}'
 curl -X POST http://127.0.0.1:8000/skills/summarize \
   -H 'Content-Type: application/json' \
   -d '{"text":"Inspect the API. Then run tests."}'

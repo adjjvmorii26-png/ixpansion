@@ -11,6 +11,19 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(client.get("/").status_code, 200)
         self.assertEqual(client.get("/health").json(), {"status": "healthy"})
 
+    def test_aether_foundation_snapshot_and_dispatch(self):
+        client = TestClient(app)
+        snapshot = client.get("/aether")
+        self.assertEqual(snapshot.status_code, 200)
+        self.assertEqual(snapshot.json()["name"], "aether-lattice")
+        dispatch = client.post(
+            "/aether/dispatch",
+            json={"task": "Inspect the lattice", "task_id": "api-task-1"},
+        )
+        self.assertEqual(dispatch.status_code, 200)
+        self.assertEqual(dispatch.json()["task_id"], "api-task-1")
+        self.assertIn("agent", dispatch.json())
+
     def test_dashboard_is_a_browser_page(self):
         response = TestClient(app).get("/dashboard")
         self.assertEqual(response.status_code, 200)

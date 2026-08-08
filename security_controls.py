@@ -17,7 +17,7 @@ class AuditStore:
     """Persist every gate decision in a local SQLite database."""
 
     def __init__(self, path: str = "ixpansion_audit.sqlite3"):
-        self.connection = sqlite3.connect(path)
+        self.connection = sqlite3.connect(path, check_same_thread=False)
         self.connection.execute(
             """
             CREATE TABLE IF NOT EXISTS gate_audits (

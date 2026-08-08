@@ -5,17 +5,22 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
 from agent import Agent
+from aether_lattice import AetherLattice
 from lattice_stack import LatticePolicy, Machine, MachineLattice
 
 app = FastAPI(title="IXPANSION API", version="1.2.0-rc3")
-agent = Agent()
-lattice = MachineLattice(
-    [
-        Machine("api-healthy-0", health=0.95, capacity=0.8),
-        Machine("api-reuse-0", health=0.55, capacity=0.35),
-    ],
-    policy=LatticePolicy(heartbeat_timeout=300),
+foundation = AetherLattice(
+    agent=Agent(name="aether-agent"),
+    lattice=MachineLattice(
+        [
+            Machine("api-healthy-0", health=0.95, capacity=0.8),
+            Machine("api-reuse-0", health=0.55, capacity=0.35),
+        ],
+        policy=LatticePolicy(heartbeat_timeout=300),
+    ),
 )
+agent = foundation.agent
+lattice = foundation.lattice
 
 
 class SkillRequest(BaseModel):
@@ -36,9 +41,33 @@ class AllocationRequest(BaseModel):
     lease_seconds: Optional[float] = None
 
 
+class AetherDispatchRequest(AllocationRequest):
+    operator: str = "aether"
+    task_id: Optional[str] = None
+
+
 @app.get("/")
 def read_root() -> dict:
     return {"service": "ixpansion", "status": "ok"}
+
+
+@app.get("/aether")
+def aether_status() -> dict:
+    return foundation.snapshot()
+
+
+@app.post("/aether/dispatch")
+def aether_dispatch(request: AetherDispatchRequest) -> dict:
+    try:
+        return foundation.dispatch(
+            request.task,
+            critical=request.critical,
+            lease_seconds=request.lease_seconds,
+            operator=request.operator,
+            task_id=request.task_id,
+        )
+    except (LookupError, ValueError) as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
 
 
 @app.get("/dashboard", response_class=HTMLResponse)
