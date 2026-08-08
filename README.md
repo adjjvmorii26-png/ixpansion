@@ -19,11 +19,18 @@ The CLI accepts these options:
 | `--name` | `ixpansion-agent` | Name printed for the agent. |
 | `--goal` | `Explore the mesh` | Goal used to build the plan. |
 | `--use-tokenrouter` | disabled | Request a TokenRouter summary; requires an API key. |
+| `--dashboard` | disabled | Show a compact visual dashboard after the run. |
 
 For example:
 
 ```bash
 python run_agent.py --name explorer --goal "Inspect the API"
+```
+
+For a terminal-friendly visual summary:
+
+```bash
+python run_agent.py --goal "Inspect the API" --dashboard
 ```
 
 ## Local skills

@@ -1,6 +1,53 @@
 import argparse
+import textwrap
+from typing import Any, Dict
 
 from agent import Agent
+
+
+def render_dashboard(agent: Agent, output: Dict[str, Any]) -> str:
+    """Render a compact, terminal-safe view of one agent run."""
+    width = 62
+
+    def row(content: str = "") -> str:
+        return "|" + content[:width].ljust(width) + "|"
+
+    lines = [
+        "+" + "-" * width + "+",
+        row(" IXPANSION AGENT DASHBOARD"),
+        "+" + "-" * width + "+",
+        row(f" Agent: {agent.name}"),
+        row(f" Goal: {output['goal']}"),
+        row(" Status: complete"),
+        "+" + "-" * width + "+",
+        row(" PLAN"),
+    ]
+    lines.extend(
+        row(f" [{index}] {step}")
+        for index, step in enumerate(output["plan"], start=1)
+    )
+    skills = ", ".join(agent.list_skills())
+    skill_rows = textwrap.wrap(
+        skills,
+        width=width - 1,
+        break_long_words=False,
+        break_on_hyphens=False,
+    ) or ["none"]
+    lines.extend(
+        [
+            "+" + "-" * width + "+",
+            row(" SKILLS"),
+            "+" + "-" * width + "+",
+        ]
+    )
+    lines.extend(row(f" {skill_row}") for skill_row in skill_rows)
+    lines.extend(
+        [
+            row(f" Memory entries: {len(agent.memory)}"),
+            "+" + "-" * width + "+",
+        ]
+    )
+    return "\n".join(lines)
 
 
 def main() -> None:
@@ -14,6 +61,11 @@ def main() -> None:
         action="store_true",
         help="Ask TokenRouter to summarize the goal.",
     )
+    parser.add_argument(
+        "--dashboard",
+        action="store_true",
+        help="Show a compact visual dashboard after the run.",
+    )
     args = parser.parse_args()
 
     agent = Agent(name=args.name)
@@ -21,6 +73,10 @@ def main() -> None:
         parser.error("TOKENROUTER_API_KEY is not configured")
 
     output = agent.run(args.goal)
+
+    if args.dashboard:
+        print(render_dashboard(agent, output))
+        return
 
     print(f"Agent: {agent.name}")
     print(f"Goal: {output['goal']}")
