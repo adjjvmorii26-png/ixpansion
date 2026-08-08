@@ -33,6 +33,37 @@ For a terminal-friendly visual summary:
 python run_agent.py --goal "Inspect the API" --dashboard
 ```
 
+## Architecture map
+
+The intended system is organized into five layers:
+
+```text
+Operators / daily batch / feature flags / metrics
+					|
+Forge agents: PSO / ACO / Island / Federated / 1.3
+					|
+Trust: EMA reputation -> VSA routing -> Byzantine votes
+					|
+Fabric: mesh_core / CRDT / MPMC ring / gas / shards
+					|
+1.0 GA baseline / 1.2 SI toolkit / 1.3 federation
+```
+
+Current repository coverage:
+
+| Layer | Available now | Status |
+| --- | --- | --- |
+| Operators | CLI, dashboard, `make verify` | Implemented |
+| Trust | Namespaced trust, EMA updates, idle decay, human gates | Baseline implemented |
+| Safety | SQLite audits, dual control, dry-run API automation, URL allowlist | Implemented |
+| Forge agents | No PSO, ACO, Island, or Federated executors | Planned |
+| Fabric | No mesh core, CRDT, MPMC ring, gas, or shard runtime | Planned |
+| SI/federation | No SI toolkit or multi-host transport | Planned |
+
+The current release is a safe scaffold for the operator and trust layers. Forge,
+fabric, SI, and federation work should land behind tests and `make verify` before
+being presented as production capabilities.
+
 ## Local skills
 
 The agent includes offline skills that do not require an API key:
