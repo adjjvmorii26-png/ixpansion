@@ -1,0 +1,36 @@
+services:
+  hub:
+    build: .
+    command: ["uvicorn", "swarm_runtime:app", "--host", "0.0.0.0", "--port", "8765"]
+    environment:
+      SWARM_ROLE: hub
+      SWARM_TOKEN: ${SWARM_TOKEN:-}
+      SWARM_PORT: "8765"
+    ports:
+      - "8765:8765"
+    restart: unless-stopped
+
+  worker:
+    build: .
+    command: ["python", "swarm_runtime.py"]
+    environment:
+      SWARM_ROLE: worker
+      SWARM_HUB: http://hub:8765
+      SWARM_TOKEN: ${SWARM_TOKEN:-}
+      SWARM_NODE_ID: ""
+    depends_on:
+      - hub
+    restart: unless-stopped
+
+  panel:
+    build: .
+    command: ["uvicorn", "swarm_runtime:app", "--host", "0.0.0.0", "--port", "8080"]
+    environment:
+      SWARM_ROLE: panel
+      SWARM_HUB: http://hub:8765
+      SWARM_TOKEN: ${SWARM_TOKEN:-}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - hub
+    restart: unless-stopped

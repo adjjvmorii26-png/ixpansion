@@ -160,6 +160,23 @@ The repository does not currently contain Forge, SI, CRDT, or federation
 implementations, so those controls need to be integrated when those systems
 are introduced.
 
+## Container swarm demo
+
+The repository includes a small role-based container topology for local testing:
+
+```bash
+export SWARM_TOKEN=mysecret
+docker compose up --build
+docker compose up --build --scale worker=3
+```
+
+- `hub` exposes health, registration, and status on port `8765`.
+- `worker` registers a generated node ID with the hub every 10 seconds.
+- `panel` exposes its health endpoint on port `8080`.
+
+This is an HTTP registration demo, not the planned production WebSocket/RDMA
+mesh. Set a non-empty `SWARM_TOKEN`; requests without the token are rejected.
+
 ## Development checks
 
 ```bash
