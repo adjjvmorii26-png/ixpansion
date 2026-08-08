@@ -126,10 +126,19 @@ def dashboard() -> str:
         .machine-name { font: 700 1.1rem "Arial Narrow", Arial, sans-serif; } .machine-meta, .hint { color: var(--muted); font-size: .9rem; }
         .badge { align-self: center; padding: 4px 9px; background: var(--lime); color: var(--ink); font: 700 .7rem "Arial Narrow", Arial, sans-serif; text-transform: uppercase; }
         .skill-list { display: flex; flex-wrap: wrap; gap: 8px; } .skill { padding: 7px 10px; border: 1px solid var(--line); font: 700 .8rem "Arial Narrow", Arial, sans-serif; }
+        .workflow-panel { grid-column: 1 / -1; background: var(--ink); color: var(--panel); }
+        .workflow-panel .panel-head { border-color: #ffffff2b; }
+        .workflow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .workflow-card { display: grid; gap: 12px; min-height: 145px; padding: 15px; border: 1px solid #ffffff2b; background: #24342b; }
+        .workflow-card h3 { margin: 0; color: var(--lime); font: 700 1rem "Arial Narrow", Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+        .workflow-card p { color: #d4ddd5; font-size: .88rem; }
+        .workflow-card button { align-self: end; justify-self: start; padding: 8px 10px; background: var(--lime); color: var(--ink); }
+        .workflow-card button:hover { background: #efffb1; }
+        .workflow-output { grid-column: 1 / -1; min-height: 25px; color: var(--lime); font-size: .9rem; white-space: pre-wrap; }
         form { display: grid; gap: 11px; } label { font: 700 .78rem "Arial Narrow", Arial, sans-serif; text-transform: uppercase; letter-spacing: .07em; }
         input { width: 100%; padding: 11px 12px; border: 1px solid var(--line); background: #fff; color: var(--ink); font: 1rem Georgia, serif; } button { cursor: pointer; border: 0; padding: 12px 15px; background: var(--green); color: #fff; font: 700 .85rem "Arial Narrow", Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; } button:hover { background: #18583c; }
         #message { min-height: 22px; color: var(--green); font-size: .9rem; } footer { margin-top: 24px; color: var(--muted); font: .8rem "Arial Narrow", Arial, sans-serif; }
-        @media (max-width: 760px) { header { display: block; } .status { margin-top: 18px; } .overview, .machines, .skills, .actions { grid-column: 1 / -1; } }
+        @media (max-width: 760px) { header { display: block; } .status { margin-top: 18px; } .overview, .machines, .skills, .actions { grid-column: 1 / -1; } .workflow-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -142,6 +151,7 @@ def dashboard() -> str:
             <article class="panel machines"><div class="panel-head"><h2>Lattice telemetry</h2><span class="hint" id="updated">Waiting for data</span></div><div id="machines"><p class="hint">Loading machine states...</p></div></article>
             <article class="panel skills"><div class="panel-head"><h2>Agent skills</h2><span class="hint">ready offline</span></div><div id="skills" class="skill-list"></div></article>
             <article class="panel actions"><div class="panel-head"><h2>Allocate work</h2></div><form id="allocate-form"><label for="task">Task description</label><input id="task" name="task" placeholder="e.g. inspect the API" required><button type="submit">Request a machine</button><p id="message" role="status"></p></form></article>
+            <article class="panel workflow-panel"><div class="panel-head"><h2>Automation workflows</h2><span>offline / one click</span></div><div id="workflows" class="workflow-grid"><p>Loading workflows...</p></div><p id="workflow-output" class="workflow-output" role="status"></p></article>
         </section>
         <footer>IXPANSION local dashboard · data refreshes every 10 seconds · <a href="/docs">API docs</a></footer>
     </main>
@@ -150,18 +160,20 @@ def dashboard() -> str:
         let countdown = 10;
         async function refresh() {
             try {
-                const [health, lattice, skillData] = await Promise.all([fetch('/health'), fetch('/lattice'), fetch('/skills')]);
-                if (!health.ok || !lattice.ok || !skillData.ok) throw new Error('API unavailable');
-                const latticeJson = await lattice.json(); const skillsJson = await skillData.json();
+                const [health, lattice, skillData, workflowData] = await Promise.all([fetch('/health'), fetch('/lattice'), fetch('/skills'), fetch('/aether/workflows')]);
+                if (!health.ok || !lattice.ok || !skillData.ok || !workflowData.ok) throw new Error('API unavailable');
+                const latticeJson = await lattice.json(); const skillsJson = await skillData.json(); const workflowsJson = await workflowData.json();
                 const machines = Object.entries(latticeJson.states || {});
                 $('health-dot').classList.add('live'); $('health-text').textContent = 'System healthy';
                 $('machine-count').textContent = machines.length; $('skill-count').textContent = skillsJson.skills.length;
                 $('machines').innerHTML = machines.map(([name, state]) => `<div class="machine"><div><div class="machine-name">${name}</div><div class="machine-meta">${state}</div></div><span class="badge">${state}</span></div>`).join('') || '<p class="hint">No machines registered.</p>';
                 $('skills').innerHTML = skillsJson.skills.map((skill) => `<span class="skill">${skill.name}</span>`).join('');
+                $('workflows').innerHTML = workflowsJson.workflows.map((workflow) => `<div class="workflow-card"><h3>${workflow.name}</h3><p>${workflow.description}</p><button type="button" data-workflow="${workflow.name}">Run workflow</button></div>`).join('');
                 $('updated').textContent = `Updated ${new Date().toLocaleTimeString()}`; countdown = 10;
             } catch (error) { $('health-text').textContent = 'API unavailable'; $('message').textContent = error.message; }
         }
         $('allocate-form').addEventListener('submit', async (event) => { event.preventDefault(); $('message').textContent = 'Requesting...'; const response = await fetch('/lattice/allocate', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({task: $('task').value}) }); const data = await response.json(); $('message').textContent = response.ok ? `Assigned to ${data.machine_id}` : data.detail; if (response.ok) { $('task').value = ''; refresh(); } });
+        $('workflows').addEventListener('click', async (event) => { const button = event.target.closest('button[data-workflow]'); if (!button) return; const text = window.prompt(`Input for ${button.dataset.workflow}:`, 'Inspect the current foundation'); if (!text) return; $('workflow-output').textContent = 'Running...'; const response = await fetch(`/aether/workflows/${button.dataset.workflow}`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({text}) }); const data = await response.json(); $('workflow-output').textContent = response.ok ? (data.result || `Assigned to ${data.machine_id}`) : data.detail; });
         refresh(); setInterval(() => { countdown = Math.max(0, countdown - 1); $('refresh-count').textContent = countdown; if (countdown === 0) refresh(); }, 1000);
     </script>
 </body>

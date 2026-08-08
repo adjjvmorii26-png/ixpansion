@@ -40,6 +40,8 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("text/html", response.headers["content-type"])
         self.assertIn("IXPANSION / Control Room", response.text)
+        self.assertIn("Automation workflows", response.text)
+        self.assertIn("data-workflow", response.text)
 
     def test_skill_discovery_and_execution(self):
         client = TestClient(app)
