@@ -33,6 +33,9 @@ The agent includes offline skills that do not require an API key:
 - `summarize`: create a compact first-sentence summary.
 - `tasks`: extract tasks from checklist, `TODO:`, and `Task:` lines.
 - `check_goal`: check whether a goal has enough detail to act on.
+- `usage`: report how often local skills have been used.
+- `recycle`: trim old memory and history, then reset skill usage counters. Pass
+	a non-negative number to retain that many recent entries; the default is 5.
 
 These skills are available through `Agent.list_skills()` and
 `Agent.use_skill(name, text)` for Python callers.

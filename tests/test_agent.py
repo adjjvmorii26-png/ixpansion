@@ -79,7 +79,10 @@ class AgentTests(unittest.TestCase):
 
     def test_local_skills_are_discoverable_and_callable(self):
         agent = Agent(name="test")
-        self.assertEqual(agent.list_skills(), ["check_goal", "summarize", "tasks"])
+        self.assertEqual(
+            agent.list_skills(),
+            ["check_goal", "recycle", "summarize", "tasks", "usage"],
+        )
         self.assertEqual(
             agent.use_skill("summarize", "Inspect the API. Then run tests."),
             "Summary: Inspect the API.",
@@ -93,3 +96,19 @@ class AgentTests(unittest.TestCase):
     def test_unknown_skill_lists_available_skills(self):
         with self.assertRaisesRegex(ValueError, "Available skills"):
             Agent().use_skill("missing", "text")
+
+    def test_usage_skill_reports_and_recycles_agent_state(self):
+        agent = Agent()
+        agent.remember("old context")
+        agent.remember("keep context")
+        agent.use_skill("summarize", "One sentence.")
+        self.assertIn("summarize=1", agent.use_skill("usage", ""))
+
+        result = agent.use_skill("recycle", "1")
+        self.assertIn("retained 1", result)
+        self.assertEqual(agent.memory, ["keep context"])
+        self.assertEqual(agent.skill_usage, {"recycle": 1})
+
+    def test_recycle_requires_a_non_negative_integer(self):
+        with self.assertRaisesRegex(ValueError, "non-negative integer"):
+            Agent().use_skill("recycle", "many")

@@ -44,10 +44,13 @@ class Agent:
         self.memory = memory or []
         self.history: List[str] = []
         self.api_key = _get_api_key()
+        self.skill_usage: Dict[str, int] = {}
         self.skills = {
+            "recycle": self.recycle_usage,
             "summarize": self.summarize,
             "tasks": self.extract_tasks,
             "check_goal": self.check_goal,
+            "usage": self.usage_report,
         }
 
     def list_skills(self) -> List[str]:
@@ -61,8 +64,39 @@ class Agent:
         except KeyError as exc:
             available = ", ".join(self.list_skills())
             raise ValueError(f"Unknown skill '{skill}'. Available skills: {available}") from exc
+        self.skill_usage[skill] = self.skill_usage.get(skill, 0) + 1
         self.history.append(f"Used skill: {skill}")
         return result
+
+    def usage_report(self, _text: str = "") -> str:
+        """Report how often each local skill has been used."""
+        if not self.skill_usage:
+            return "Skill usage: none."
+        usage = ", ".join(
+            f"{skill}={self.skill_usage[skill]}"
+            for skill in sorted(self.skill_usage)
+        )
+        return f"Skill usage: {usage}."
+
+    def recycle_usage(self, text: str = "") -> str:
+        """Trim old agent state and reset usage counters.
+
+        The optional text is the number of recent entries to retain; it defaults
+        to five and never permits a negative retention count.
+        """
+        try:
+            keep = max(0, int(text.strip())) if text.strip() else 5
+        except ValueError as exc:
+            raise ValueError("Recycle count must be a non-negative integer") from exc
+        removed_history = max(0, len(self.history) - keep)
+        removed_memory = max(0, len(self.memory) - keep)
+        self.history = self.history[-keep:] if keep else []
+        self.memory = self.memory[-keep:] if keep else []
+        self.skill_usage.clear()
+        return (
+            f"Recycled usage: removed {removed_history} history entries and "
+            f"{removed_memory} memory entries; retained {keep}."
+        )
 
     def summarize(self, text: str) -> str:
         """Return a compact first-sentence summary of text."""
