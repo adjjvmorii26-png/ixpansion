@@ -98,9 +98,29 @@ curl http://127.0.0.1:8000/health
 FastAPI also exposes interactive API documentation at `/docs` while the local
 server is running.
 
+## Automation safety
+
+The dependency-free controls in `security_controls.py` provide a baseline for
+automation integrations:
+
+- `AuditStore` persists gate decisions in SQLite with task, tags, trust,
+	operator, timestamp, and decision fields.
+- `HumanGate` requires a second operator for `PROD_DEPLOY` and `SECRET_ROTATE`.
+- Approval rechecks the current namespaced agent trust before allowing a gate.
+- `API_AUTOMATION(..., dry_run=True)` validates the URL but never sends a
+	request.
+- `URLPolicy` rejects hosts that are not explicitly allowlisted.
+- `TrustStore` keeps `agent:` and `node:` identities separate and decays idle
+	trust after full idle days.
+
+The repository does not currently contain Forge, SI, CRDT, or federation
+implementations, so those controls need to be integrated when those systems
+are introduced.
+
 ## Development checks
 
 ```bash
+make verify
 python -m py_compile agent.py run_agent.py tokenrouter_client.py xai_client.py api/main.py
 python -m unittest discover -s tests -v
 ```
