@@ -55,6 +55,11 @@ def main() -> None:
     parser.add_argument("--name", default="ixpansion-agent", help="Name of the agent.")
     parser.add_argument("--goal", default="Explore the mesh", help="Goal for the agent to pursue.")
     parser.add_argument(
+        "--model",
+        default=None,
+        help="TokenRouter model override; defaults to TOKENROUTER_MODEL or the premium standard model.",
+    )
+    parser.add_argument(
         "--use-tokenrouter",
         "--use-xai",
         dest="use_tokenrouter",
@@ -68,7 +73,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    agent = Agent(name=args.name)
+    agent = Agent(name=args.name, model=args.model)
     if args.use_tokenrouter and not agent.api_key:
         parser.error("TOKENROUTER_API_KEY is not configured")
 

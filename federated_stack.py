@@ -10,6 +10,8 @@ import random
 from dataclasses import dataclass, field
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
 
+from lattice_stack import Machine, build_lattice_stack
+
 
 Fitness = Callable[[List[float]], float]
 
@@ -210,6 +212,14 @@ def run_1_3_stack(fitness: Optional[Fitness] = None, green_scores: Optional[Dict
         if recipient != winner:
             wan.send(bundle, recipient)
     delivered = {recipient: len(transport.recv(recipient)) for recipient in scores if recipient != winner}
+    lattice = build_lattice_stack(
+        [
+            Machine(f"{cluster}-healthy", health=0.95, capacity=0.8)
+            for cluster in scores
+        ]
+        + [Machine("reuse-lane-0", health=0.55, capacity=0.35)]
+        + [Machine("quarantine-0", health=0.1, capacity=0.2, trust=0.2)]
+    )
     return {
         "primary_carbon_federate": primary,
         "carbon_rank": rank_clusters_by_carbon(scores, scores),
@@ -219,4 +229,5 @@ def run_1_3_stack(fitness: Optional[Fitness] = None, green_scores: Optional[Dict
         "vsa_frames_received": {recipient: len(recv_gbest_frames(network, recipient)) for recipient in scores if recipient != winner},
         "packets_delivered": delivered,
         "scratchpad": pad.snapshot(),
+        "lattice": lattice,
     }

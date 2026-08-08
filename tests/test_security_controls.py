@@ -28,6 +28,13 @@ class SecurityControlsTests(unittest.TestCase):
         self.trust.observe("agent:alice", False, alpha=1.0)
         self.assertEqual(self.gate.approve("task-2", "bob"), "REJECTED_LOW_TRUST")
 
+    def test_audit_correlation_id_is_persisted(self):
+        self.assertEqual(
+            self.gate.request("task-correlation", [], "alice", correlation_id="req-123"),
+            "PENDING",
+        )
+        self.assertEqual(self.audit.decisions("task-correlation")[0][-2], "req-123")
+
     def test_dry_run_and_url_allowlist(self):
         automation = API_AUTOMATION(URLPolicy({"api.example.com"}), dry_run=True)
         self.assertEqual(automation.post("https://api.example.com/deploy"), "DRY_RUN: POST https://api.example.com/deploy")

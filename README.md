@@ -18,6 +18,7 @@ The CLI accepts these options:
 | --- | --- | --- |
 | `--name` | `ixpansion-agent` | Name printed for the agent. |
 | `--goal` | `Explore the mesh` | Goal used to build the plan. |
+| `--model` | `openai/gpt-4.1` | TokenRouter model override. |
 | `--use-tokenrouter` | disabled | Request a TokenRouter summary; requires an API key. |
 | `--dashboard` | disabled | Show a compact visual dashboard after the run. |
 
@@ -72,7 +73,12 @@ python run_1_3_stack.py
 ```
 
 It exercises carbon ranking, island-style PSO, lossy in-process transport, VSA
-gbest frames, and WAN elite migration. It does not open network sockets or
+gbest frames, WAN elite migration, and a lattice reuse lane for degraded
+machines. The lattice sends only noncritical work to degraded-but-trusted
+capacity and quarantines machines below the health, capacity, or trust floor.
+Machine telemetry can be refreshed through lattice heartbeats, with an optional
+heartbeat timeout that quarantines stale nodes.
+It does not open network sockets or
 execute production actions; replace the simulated transport and executors before
 using it as a multi-host system.
 
@@ -86,15 +92,35 @@ The agent includes offline skills that do not require an API key:
 - `usage`: report how often local skills have been used.
 - `recycle`: trim old memory and history, then reset skill usage counters. Pass
 	a non-negative number to retain that many recent entries; the default is 5.
+- `flush_memory`: clear retained memory in the current agent without restarting
+  it. Runtime memory and history are bounded to recent entries by default.
 - `priority`: classify text as high, medium, or low priority.
 - `validate`: check whether text is present and long enough to act on.
 - `dedupe`: remove repeated non-empty lines while preserving order.
 - `find`: search for a keyword; put the keyword on the first line and content below it.
 - `checklist`: format each non-empty line as an unchecked Markdown item.
 - `export_memory`: return the agent's current memory as plain text.
+- `normalize`: collapse whitespace into one line.
+- `outline`: number non-empty input lines.
+- `redact`: remove values assigned to common credential fields.
+- `sort_tasks`: order task lines by urgency.
+- `stats`: report line, word, and character counts.
+- `urls`: extract unique HTTP(S) URLs.
+- `chunks`: split text into fixed-size chunks; provide the size on the first line.
+- `emails`: extract unique email addresses.
+- `filename`: sanitize text into a portable filename.
+- `frequency`: count words by frequency.
+- `groups`: group lines by their first word.
+- `hash`: produce a SHA-256 digest without retaining input.
+- `kv`: parse `key=value` lines.
+- `mentions`: extract unique `@mentions`.
+- `status`: count checked and unchecked checklist items.
 
 These skills are available through `Agent.list_skills()` and
 `Agent.use_skill(name, text)` for Python callers.
+Skill contracts are available through `Agent.describe_skills()`. Memory can be
+isolated with `agent.remember(item, namespace="project")`, then exported or
+flushed by passing that namespace to the corresponding memory skill.
 
 ## TokenRouter integration
 
@@ -105,10 +131,13 @@ cp .env.example .env
 python run_agent.py --goal "Summarize this project" --use-tokenrouter
 ```
 
-`TOKENROUTER_MODEL` defaults to `moonshotai/kimi-k3-free`. Set
+`TOKENROUTER_MODEL` defaults to the premium standard model `openai/gpt-4.1`. Set
 `TOKENROUTER_API_URL` to override the OpenAI-compatible endpoint, which is
 useful when testing against a compatible service. The client raises a clear
 error when the request fails or the response does not contain message content.
+
+The CLI `--model` option takes precedence over `TOKENROUTER_MODEL`. The agent
+still runs its local plan and skills without an API key or network access.
 
 `--use-xai` remains accepted as a compatibility alias for
 `--use-tokenrouter`.
@@ -130,12 +159,24 @@ Available endpoints:
 
 - `GET /` returns `{"service": "ixpansion", "status": "ok"}`.
 - `GET /health` returns `{"status": "healthy"}`.
+- `GET /skills` lists local skill contracts.
+- `POST /skills/{skill}` executes a local skill with `{"text": "..."}`.
+- `GET /lattice` reports machine states and active leases.
+- `POST /lattice/heartbeat` updates machine telemetry.
+- `POST /lattice/allocate` selects a machine and can create a bounded lease.
+
+The skill and lattice API state is process-local and intentionally has no
+authentication or persistence claim yet.
 
 Example requests:
 
 ```bash
 curl http://127.0.0.1:8000/
 curl http://127.0.0.1:8000/health
+curl http://127.0.0.1:8000/skills
+curl -X POST http://127.0.0.1:8000/skills/summarize \
+	-H 'Content-Type: application/json' \
+	-d '{"text":"Inspect the API. Then run tests."}'
 ```
 
 FastAPI also exposes interactive API documentation at `/docs` while the local

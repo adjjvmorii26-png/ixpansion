@@ -58,8 +58,16 @@ class AgentTests(unittest.TestCase):
         sent_request = urlopen.call_args.args[0]
         self.assertEqual(sent_request.get_header("Authorization"), "Bearer test-key")
         payload = json.loads(sent_request.data)
-        self.assertEqual(payload["model"], "moonshotai/kimi-k3-free")
+        self.assertEqual(payload["model"], "openai/gpt-4.1")
         self.assertEqual(payload["messages"][1]["content"], "hello")
+
+    @patch.object(request, "urlopen", return_value=FakeResponse())
+    def test_agent_uses_explicit_model(self, urlopen):
+        with patch.dict(os.environ, {"TOKENROUTER_API_KEY": "test-key"}, clear=True):
+            Agent(model="anthropic/claude-sonnet-4").ask("hello")
+
+        payload = json.loads(urlopen.call_args.args[0].data)
+        self.assertEqual(payload["model"], "anthropic/claude-sonnet-4")
 
     @patch.object(request, "urlopen", return_value=InvalidJsonResponse())
     def test_tokenrouter_client_rejects_invalid_json(self, urlopen):
@@ -84,13 +92,29 @@ class AgentTests(unittest.TestCase):
             [
                 "check_goal",
                 "checklist",
+                "chunks",
                 "dedupe",
+                "emails",
                 "export_memory",
+                "filename",
                 "find",
+                "flush_memory",
+                "frequency",
+                "groups",
+                "hash",
+                "kv",
+                "mentions",
+                "normalize",
+                "outline",
                 "priority",
                 "recycle",
+                "redact",
+                "sort_tasks",
+                "stats",
+                "status",
                 "summarize",
                 "tasks",
+                "urls",
                 "usage",
                 "validate",
             ],
@@ -100,6 +124,12 @@ class AgentTests(unittest.TestCase):
             "Summary: Inspect the API.",
         )
         self.assertIn("Used skill: summarize", agent.history)
+
+    def test_skill_contracts_are_discoverable(self):
+        contracts = Agent().describe_skills()
+        self.assertEqual(contracts[0]["name"], "check_goal")
+        self.assertTrue(any(contract["name"] == "flush_memory" and contract["mutates_state"] for contract in contracts))
+        self.assertTrue(all(not contract["network_required"] for contract in contracts))
 
     def test_tasks_skill_extracts_task_markers(self):
         result = Agent().use_skill("tasks", "- [ ] Add tests\nTODO: update docs")
@@ -124,6 +154,21 @@ class AgentTests(unittest.TestCase):
     def test_recycle_requires_a_non_negative_integer(self):
         with self.assertRaisesRegex(ValueError, "non-negative integer"):
             Agent().use_skill("recycle", "many")
+
+    def test_memory_is_bounded_and_can_be_flushed(self):
+        agent = Agent(memory_limit=2, history_limit=2)
+        agent.remember("first")
+        agent.remember("second")
+        agent.remember("third")
+
+        self.assertEqual(agent.memory, ["second", "third"])
+        self.assertEqual(agent.use_skill("flush_memory", ""),
+                         "Flushed memory: removed 2 entries.")
+        self.assertEqual(agent.memory, [])
+
+    def test_invalid_state_limits_are_rejected(self):
+        with self.assertRaisesRegex(ValueError, "limits"):
+            Agent(memory_limit=-1)
 
     def test_priority_and_validation_skills(self):
         agent = Agent()
@@ -156,4 +201,75 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(
             agent.use_skill("export_memory", ""),
             "Memory:\n- API context\n- test context",
+        )
+
+    def test_memory_namespaces_are_isolated_and_flushable(self):
+        agent = Agent()
+        agent.remember("project context", namespace="project")
+        agent.remember("runtime context", namespace="runtime")
+        self.assertEqual(agent.use_skill("export_memory", "project"), "Memory (project):\n- project context")
+        self.assertEqual(agent.use_skill("flush_memory", "project"), "Flushed memory: removed 1 entries from project.")
+        self.assertEqual(agent.use_skill("export_memory", "runtime"), "Memory (runtime):\n- runtime context")
+
+    def test_text_automation_skills(self):
+        agent = Agent()
+        self.assertEqual(
+            agent.use_skill("normalize", "  one\n two  "),
+            "Normalized: one two",
+        )
+        self.assertEqual(
+            agent.use_skill("outline", "First\n\nSecond"),
+            "Outline:\n1. First\n2. Second",
+        )
+        self.assertEqual(
+            agent.use_skill("stats", "one two\nthree"),
+            "Stats: lines=2, words=3, characters=13.",
+        )
+
+    def test_security_and_routing_automation_skills(self):
+        agent = Agent()
+        self.assertEqual(
+            agent.use_skill("redact", "API_KEY=abc123 password: secret"),
+            "API_KEY=<REDACTED> password: <REDACTED>",
+        )
+        self.assertEqual(
+            agent.use_skill("urls", "See https://example.com/a. https://example.com/a"),
+            "URLs:\n- https://example.com/a",
+        )
+        self.assertEqual(
+            agent.use_skill("sort_tasks", "- normal task\nTODO: urgent production fix"),
+            "Sorted tasks:\n- urgent production fix\n- normal task",
+        )
+
+    def test_additional_data_automation_skills(self):
+        agent = Agent()
+        self.assertEqual(agent.use_skill("chunks", "3\nabcdef"), "Chunks:\n1. abc\n2. def")
+        self.assertEqual(
+            agent.use_skill("emails", "A@EXAMPLE.com a@example.com"),
+            "Emails:\n- A@EXAMPLE.com",
+        )
+        self.assertEqual(agent.use_skill("filename", " report / final "), "Filename: report_final")
+        self.assertEqual(
+            agent.use_skill("frequency", "One one two"),
+            "Frequency:\n- one: 2\n- two: 1",
+        )
+        self.assertEqual(
+            agent.use_skill("groups", "API one\nDB two\napi three"),
+            "Groups:\napi: API one | api three\ndb: DB two",
+        )
+        self.assertTrue(agent.use_skill("hash", "hello").startswith("SHA-256: "))
+
+    def test_key_value_mention_and_checklist_automation_skills(self):
+        agent = Agent()
+        self.assertEqual(
+            agent.use_skill("kv", "z=last\na=first"),
+            "Key values:\n- a: first\n- z: last",
+        )
+        self.assertEqual(
+            agent.use_skill("mentions", "@Alice and @alice with @bob"),
+            "Mentions:\n- @Alice\n- @bob",
+        )
+        self.assertEqual(
+            agent.use_skill("status", "- [x] Done\n- [ ] Next"),
+            "Checklist status: checked=1, unchecked=1.",
         )

@@ -11,6 +11,8 @@ class TokenRouterClientError(RuntimeError):
 class TokenRouterClient:
     """Small client for TokenRouter's OpenAI-compatible chat endpoint."""
 
+    DEFAULT_MODEL = "openai/gpt-4.1"
+
     def __init__(
         self,
         api_key: str,
@@ -19,9 +21,7 @@ class TokenRouterClient:
         timeout: float = 30.0,
     ):
         self.api_key = api_key
-        self.model = model or os.getenv(
-            "TOKENROUTER_MODEL", "moonshotai/kimi-k3-free"
-        )
+        self.model = model or os.getenv("TOKENROUTER_MODEL", self.DEFAULT_MODEL)
         self.endpoint = endpoint or os.getenv(
             "TOKENROUTER_API_URL", "https://api.tokenrouter.com/v1/chat/completions"
         )

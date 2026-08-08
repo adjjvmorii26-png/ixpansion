@@ -27,10 +27,16 @@ class AuditStore:
                 trust REAL NOT NULL,
                 operator TEXT NOT NULL,
                 timestamp TEXT NOT NULL,
-                decision TEXT NOT NULL
+                decision TEXT NOT NULL,
+                correlation_id TEXT
             )
             """
         )
+        columns = {
+            row[1] for row in self.connection.execute("PRAGMA table_info(gate_audits)")
+        }
+        if "correlation_id" not in columns:
+            self.connection.execute("ALTER TABLE gate_audits ADD COLUMN correlation_id TEXT")
         self.connection.commit()
 
     def record(
@@ -40,18 +46,19 @@ class AuditStore:
         trust: float,
         operator: str,
         decision: str,
+        correlation_id: Optional[str] = None,
     ) -> None:
         timestamp = datetime.now(timezone.utc).isoformat()
         self.connection.execute(
             "INSERT INTO gate_audits "
-            "(task_id, tags, trust, operator, timestamp, decision) "
-            "VALUES (?, ?, ?, ?, ?, ?)",
-            (task_id, json.dumps(sorted(set(tags))), trust, operator, timestamp, decision),
+            "(task_id, tags, trust, operator, timestamp, decision, correlation_id) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (task_id, json.dumps(sorted(set(tags))), trust, operator, timestamp, decision, correlation_id),
         )
         self.connection.commit()
 
     def decisions(self, task_id: Optional[str] = None):
-        query = "SELECT task_id, tags, trust, operator, timestamp, decision FROM gate_audits"
+        query = "SELECT task_id, tags, trust, operator, timestamp, correlation_id, decision FROM gate_audits"
         parameters = ()
         if task_id:
             query += " WHERE task_id = ?"
@@ -104,18 +111,24 @@ class HumanGate:
         self.minimum_trust = minimum_trust
         self.pending = {}
 
-    def request(self, task_id: str, tags: Iterable[str], operator: str) -> str:
+    def request(
+        self,
+        task_id: str,
+        tags: Iterable[str],
+        operator: str,
+        correlation_id: Optional[str] = None,
+    ) -> str:
         tag_set = set(tags)
         score = self.trust.trust(f"agent:{operator}")
         if score < self.minimum_trust:
-            self.audits.record(task_id, tag_set, score, operator, "REJECTED_LOW_TRUST")
+            self.audits.record(task_id, tag_set, score, operator, "REJECTED_LOW_TRUST", correlation_id)
             return "REJECTED_LOW_TRUST"
         self.pending[task_id] = PendingGate(task_id, tag_set, score, operator)
         decision = "PENDING_DUAL_CONTROL" if tag_set & PROTECTED_ACTIONS else "PENDING"
-        self.audits.record(task_id, tag_set, score, operator, decision)
+        self.audits.record(task_id, tag_set, score, operator, decision, correlation_id)
         return decision
 
-    def approve(self, task_id: str, operator: str) -> str:
+    def approve(self, task_id: str, operator: str, correlation_id: Optional[str] = None) -> str:
         pending = self.pending.get(task_id)
         if pending is None:
             raise KeyError(f"No pending gate for {task_id}")
@@ -126,7 +139,7 @@ class HumanGate:
             decision = "REJECTED_DUAL_CONTROL"
         else:
             decision = "APPROVED"
-        self.audits.record(task_id, pending.tags, score, operator, decision)
+        self.audits.record(task_id, pending.tags, score, operator, decision, correlation_id)
         if decision == "APPROVED":
             del self.pending[task_id]
         return decision
