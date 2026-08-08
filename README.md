@@ -64,6 +64,18 @@ The current release is a safe scaffold for the operator and trust layers. Forge,
 fabric, SI, and federation work should land behind tests and `make verify` before
 being presented as production capabilities.
 
+The local 1.3 federation demonstration is now available as a deterministic,
+offline simulator:
+
+```bash
+python run_1_3_stack.py
+```
+
+It exercises carbon ranking, island-style PSO, lossy in-process transport, VSA
+gbest frames, and WAN elite migration. It does not open network sockets or
+execute production actions; replace the simulated transport and executors before
+using it as a multi-host system.
+
 ## Local skills
 
 The agent includes offline skills that do not require an API key:
