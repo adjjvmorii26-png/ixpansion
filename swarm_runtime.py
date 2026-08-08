@@ -21,7 +21,7 @@ nodes: Dict[str, dict] = {}
 
 def _token_is_valid(token: str | None) -> bool:
     configured = os.getenv("SWARM_TOKEN", "")
-    return bool(configured) and token == configured
+    return not configured or token == configured
 
 
 def _require_token(token: str | None) -> None:

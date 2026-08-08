@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import unittest
 from unittest.mock import patch
 
@@ -29,6 +30,19 @@ class SwarmRuntimeTests(unittest.TestCase):
             response = self.client.get("/status", headers={"X-Swarm-Token": "secret"})
             self.assertEqual(response.status_code, 200)
             self.assertIn("node-1", response.json()["nodes"])
+
+    def test_empty_token_enables_local_swarm_mode(self):
+        with patch.dict(os.environ, {"SWARM_TOKEN": ""}, clear=False):
+            register = self.client.post("/register?node_id=local-node")
+            status = self.client.get("/status")
+        self.assertEqual(register.status_code, 200)
+        self.assertEqual(status.status_code, 200)
+        self.assertIn("local-node", status.json()["nodes"])
+
+    def test_swarm_services_do_not_publish_host_ports(self):
+        compose = Path(__file__).parents[1].joinpath("compose.yaml").read_text()
+        self.assertNotIn('"8765:8765"', compose)
+        self.assertNotIn('"8080:8080"', compose)
 
 
 if __name__ == "__main__":

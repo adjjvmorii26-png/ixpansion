@@ -11,6 +11,12 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(client.get("/").status_code, 200)
         self.assertEqual(client.get("/health").json(), {"status": "healthy"})
 
+    def test_dashboard_is_a_browser_page(self):
+        response = TestClient(app).get("/dashboard")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("text/html", response.headers["content-type"])
+        self.assertIn("IXPANSION / Control Room", response.text)
+
     def test_skill_discovery_and_execution(self):
         client = TestClient(app)
         skills = client.get("/skills")

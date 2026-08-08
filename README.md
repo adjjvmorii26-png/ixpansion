@@ -40,13 +40,13 @@ The intended system is organized into five layers:
 
 ```text
 Operators / daily batch / feature flags / metrics
-					|
+                    |
 Forge agents: PSO / ACO / Island / Federated / 1.3
-					|
+                    |
 Trust: EMA reputation -> VSA routing -> Byzantine votes
-					|
+                    |
 Fabric: mesh_core / CRDT / MPMC ring / gas / shards
-					|
+                    |
 1.0 GA baseline / 1.2 SI toolkit / 1.3 federation
 ```
 
@@ -91,7 +91,7 @@ The agent includes offline skills that do not require an API key:
 - `check_goal`: check whether a goal has enough detail to act on.
 - `usage`: report how often local skills have been used.
 - `recycle`: trim old memory and history, then reset skill usage counters. Pass
-	a non-negative number to retain that many recent entries; the default is 5.
+  a non-negative number to retain that many recent entries; the default is 5.
 - `flush_memory`: clear retained memory in the current agent without restarting
   it. Runtime memory and history are bounded to recent entries by default.
 - `priority`: classify text as high, medium, or low priority.
@@ -155,6 +155,11 @@ Run the local server:
 uvicorn api.main:app --reload
 ```
 
+Open [http://127.0.0.1:8000/dashboard](http://127.0.0.1:8000/dashboard) for the
+live browser dashboard. It shows health, lattice telemetry, available offline
+skills, and includes a small work-allocation control. The raw API remains
+available at `/`, `/health`, and the endpoints below.
+
 Available endpoints:
 
 - `GET /` returns `{"service": "ixpansion", "status": "ok"}`.
@@ -175,8 +180,8 @@ curl http://127.0.0.1:8000/
 curl http://127.0.0.1:8000/health
 curl http://127.0.0.1:8000/skills
 curl -X POST http://127.0.0.1:8000/skills/summarize \
-	-H 'Content-Type: application/json' \
-	-d '{"text":"Inspect the API. Then run tests."}'
+  -H 'Content-Type: application/json' \
+  -d '{"text":"Inspect the API. Then run tests."}'
 ```
 
 FastAPI also exposes interactive API documentation at `/docs` while the local
@@ -188,14 +193,14 @@ The dependency-free controls in `security_controls.py` provide a baseline for
 automation integrations:
 
 - `AuditStore` persists gate decisions in SQLite with task, tags, trust,
-	operator, timestamp, and decision fields.
+  operator, timestamp, and decision fields.
 - `HumanGate` requires a second operator for `PROD_DEPLOY` and `SECRET_ROTATE`.
 - Approval rechecks the current namespaced agent trust before allowing a gate.
 - `API_AUTOMATION(..., dry_run=True)` validates the URL but never sends a
-	request.
+  request.
 - `URLPolicy` rejects hosts that are not explicitly allowlisted.
 - `TrustStore` keeps `agent:` and `node:` identities separate and decays idle
-	trust after full idle days.
+  trust after full idle days.
 
 The repository does not currently contain Forge, SI, CRDT, or federation
 implementations, so those controls need to be integrated when those systems
@@ -211,12 +216,18 @@ docker compose up --build
 docker compose up --build --scale worker=3
 ```
 
-- `hub` exposes health, registration, and status on port `8765`.
+- `hub` serves health, registration, and status on internal port `8765`.
 - `worker` registers a generated node ID with the hub every 10 seconds.
-- `panel` exposes its health endpoint on port `8080`.
+- `panel` serves its health endpoint on internal port `8080`.
+
+The swarm ports are intentionally not published to the host. Only the local
+dashboard/API port `8000` needs to be opened for browser access; containers
+continue to reach the hub through the internal `hub:8765` service address.
 
 This is an HTTP registration demo, not the planned production WebSocket/RDMA
-mesh. Set a non-empty `SWARM_TOKEN`; requests without the token are rejected.
+mesh. `SWARM_TOKEN` is optional for this internal-only local swarm: leave it
+unset for trusted local development, or set it to require the
+`X-Swarm-Token` header. Add authentication before publishing swarm ports.
 
 ## Development checks
 
