@@ -15,6 +15,33 @@ from security_controls import AuditStore, TrustStore
 class AetherLattice:
     """Compose the offline project layers into one inspectable runtime."""
 
+    WORKFLOWS = {
+        "summarize": {
+            "description": "Create a compact summary from the first sentence.",
+            "skill": "summarize",
+        },
+        "extract_tasks": {
+            "description": "Extract checklist, TODO, and Task lines.",
+            "skill": "tasks",
+        },
+        "make_checklist": {
+            "description": "Turn each non-empty line into an unchecked item.",
+            "skill": "checklist",
+        },
+        "score_priority": {
+            "description": "Classify work as high, medium, or low priority.",
+            "skill": "priority",
+        },
+        "normalize_text": {
+            "description": "Collapse noisy whitespace into one readable line.",
+            "skill": "normalize",
+        },
+        "dispatch_work": {
+            "description": "Allocate safe capacity and run the agent plan.",
+            "skill": None,
+        },
+    }
+
     def __init__(
         self,
         agent: Optional[Agent] = None,
@@ -26,6 +53,42 @@ class AetherLattice:
         self.lattice = lattice or MachineLattice()
         self.trust = trust or TrustStore()
         self.audits = audits or AuditStore(":memory:")
+
+    def workflows(self) -> list[dict[str, str]]:
+        return [
+            {"name": name, "description": details["description"]}
+            for name, details in self.WORKFLOWS.items()
+        ]
+
+    def run_workflow(
+        self,
+        workflow: str,
+        text: str,
+        *,
+        critical: bool = False,
+        lease_seconds: Optional[float] = None,
+        operator: str = "aether",
+        task_id: Optional[str] = None,
+    ) -> dict[str, Any]:
+        details = self.WORKFLOWS.get(workflow)
+        if details is None:
+            available = ", ".join(self.WORKFLOWS)
+            raise ValueError(f"Unknown workflow '{workflow}'. Available: {available}")
+        if not text.strip():
+            raise ValueError("text is required")
+        if details["skill"] is None:
+            return self.dispatch(
+                text,
+                critical=critical,
+                lease_seconds=lease_seconds,
+                operator=operator,
+                task_id=task_id,
+            )
+        return {
+            "workflow": workflow,
+            "input": text,
+            "result": self.agent.use_skill(details["skill"], text),
+        }
 
     def snapshot(self) -> dict[str, Any]:
         federation = run_1_3_stack(

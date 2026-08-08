@@ -170,6 +170,9 @@ Available endpoints:
   federation, trust, safety, and swarm layers.
 - `POST /aether/dispatch` allocates safe capacity, runs the offline agent plan,
   updates node trust, and records an audit event.
+- `GET /aether/workflows` lists six token-free automation workflows.
+- `POST /aether/workflows/{workflow}` runs `summarize`, `extract_tasks`,
+  `make_checklist`, `score_priority`, `normalize_text`, or `dispatch_work`.
 - `GET /skills` lists local skill contracts.
 - `POST /skills/{skill}` executes a local skill with `{"text": "..."}`.
 - `GET /lattice` reports machine states and active leases.
@@ -185,6 +188,7 @@ Example requests:
 curl http://127.0.0.1:8000/
 curl http://127.0.0.1:8000/health
 curl http://127.0.0.1:8000/aether
+curl http://127.0.0.1:8000/aether/workflows
 curl http://127.0.0.1:8000/skills
 curl -X POST http://127.0.0.1:8000/aether/dispatch \
   -H 'Content-Type: application/json' \

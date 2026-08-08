@@ -46,6 +46,14 @@ class AetherDispatchRequest(AllocationRequest):
     task_id: Optional[str] = None
 
 
+class WorkflowRequest(BaseModel):
+    text: str
+    critical: bool = False
+    lease_seconds: Optional[float] = None
+    operator: str = "aether"
+    task_id: Optional[str] = None
+
+
 @app.get("/")
 def read_root() -> dict:
     return {"service": "ixpansion", "status": "ok"}
@@ -61,6 +69,26 @@ def aether_dispatch(request: AetherDispatchRequest) -> dict:
     try:
         return foundation.dispatch(
             request.task,
+            critical=request.critical,
+            lease_seconds=request.lease_seconds,
+            operator=request.operator,
+            task_id=request.task_id,
+        )
+    except (LookupError, ValueError) as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+
+
+@app.get("/aether/workflows")
+def aether_workflows() -> dict:
+    return {"workflows": foundation.workflows()}
+
+
+@app.post("/aether/workflows/{workflow}")
+def aether_workflow(workflow: str, request: WorkflowRequest) -> dict:
+    try:
+        return foundation.run_workflow(
+            workflow,
+            request.text,
             critical=request.critical,
             lease_seconds=request.lease_seconds,
             operator=request.operator,

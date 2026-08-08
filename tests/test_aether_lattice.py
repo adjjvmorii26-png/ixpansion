@@ -37,6 +37,26 @@ class AetherLatticeTests(unittest.TestCase):
         self.assertEqual(foundation.audits.decisions("task-1")[0][-1], "ALLOCATED")
         foundation.audits.close()
 
+    def test_six_offline_workflows_use_existing_agent_skills(self):
+        foundation = self.make_foundation()
+        self.assertEqual(len(foundation.workflows()), 6)
+        names = {item["name"] for item in foundation.workflows()}
+        self.assertEqual(
+            names,
+            {
+                "summarize",
+                "extract_tasks",
+                "make_checklist",
+                "score_priority",
+                "normalize_text",
+                "dispatch_work",
+            },
+        )
+        self.assertTrue(
+            foundation.run_workflow("summarize", "Check this first.")["result"].startswith("Summary:")
+        )
+        foundation.audits.close()
+
 
 if __name__ == "__main__":
     unittest.main()

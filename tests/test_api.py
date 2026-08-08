@@ -24,6 +24,17 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(dispatch.json()["task_id"], "api-task-1")
         self.assertIn("agent", dispatch.json())
 
+    def test_aether_workflows_are_listed_and_runnable(self):
+        client = TestClient(app)
+        workflows = client.get("/aether/workflows").json()["workflows"]
+        self.assertEqual(len(workflows), 6)
+        response = client.post(
+            "/aether/workflows/extract_tasks",
+            json={"text": "TODO: inspect API"},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["result"], "Tasks:\n- inspect API")
+
     def test_dashboard_is_a_browser_page(self):
         response = TestClient(app).get("/dashboard")
         self.assertEqual(response.status_code, 200)
