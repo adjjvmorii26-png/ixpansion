@@ -114,20 +114,41 @@ def recv_gbest_frames(network: Dict[Tuple[str, str], List[dict]], recipient: str
     return frames
 
 
-def rank_clusters_by_carbon(cluster_ids: Iterable[str], green_scores: Dict[str, float]) -> List[str]:
-    return sorted(cluster_ids, key=lambda cluster: green_scores.get(cluster, 0.0), reverse=True)
+def rank_clusters_by_carbon(
+    cluster_ids: Iterable[str],
+    green_scores: Dict[str, float],
+    default: float = 0.5,
+) -> List[Tuple[str, float]]:
+    """Rank clusters from greenest to least green."""
+    return sorted(
+        ((cluster, green_scores.get(cluster, default)) for cluster in cluster_ids),
+        key=lambda item: -item[1],
+    )
 
 
-def select_primary_federate(cluster_ids: Iterable[str], green_scores: Dict[str, float]) -> Optional[str]:
+def select_primary_federate(
+    cluster_ids: Iterable[str],
+    green_scores: Dict[str, float],
+    min_score: float = 0.0,
+) -> Optional[str]:
     ranked = rank_clusters_by_carbon(cluster_ids, green_scores)
-    return ranked[0] if ranked else None
+    for cluster, score in ranked:
+        if score >= min_score:
+            return cluster
+    return ranked[0][0] if ranked else None
 
 
 def carbon_aware_weights(green_scores: Dict[str, float]) -> Dict[str, float]:
-    total = sum(max(0.0, value) for value in green_scores.values())
-    if total == 0:
-        return {cluster: 0.0 for cluster in green_scores}
-    return {cluster: max(0.0, value) / total for cluster, value in green_scores.items()}
+    """Normalize carbon scores into trust-like federation weights."""
+    if not green_scores:
+        return {}
+    low = min(green_scores.values())
+    high = max(green_scores.values())
+    span = (high - low) or 1.0
+    return {
+        cluster: 0.2 + 0.8 * ((score - low) / span)
+        for cluster, score in green_scores.items()
+    }
 
 
 def _run_pso(fitness: Fitness, config: PSOConfig) -> Tuple[List[float], float]:
