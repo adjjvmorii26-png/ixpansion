@@ -81,7 +81,19 @@ class AgentTests(unittest.TestCase):
         agent = Agent(name="test")
         self.assertEqual(
             agent.list_skills(),
-            ["check_goal", "recycle", "summarize", "tasks", "usage"],
+            [
+                "check_goal",
+                "checklist",
+                "dedupe",
+                "export_memory",
+                "find",
+                "priority",
+                "recycle",
+                "summarize",
+                "tasks",
+                "usage",
+                "validate",
+            ],
         )
         self.assertEqual(
             agent.use_skill("summarize", "Inspect the API. Then run tests."),
@@ -112,3 +124,36 @@ class AgentTests(unittest.TestCase):
     def test_recycle_requires_a_non_negative_integer(self):
         with self.assertRaisesRegex(ValueError, "non-negative integer"):
             Agent().use_skill("recycle", "many")
+
+    def test_priority_and_validation_skills(self):
+        agent = Agent()
+        self.assertEqual(
+            agent.use_skill("priority", "Critical production issue"),
+            "Priority: high.",
+        )
+        self.assertEqual(
+            agent.use_skill("validate", "This has enough words"),
+            "Validation: valid.",
+        )
+
+    def test_dedupe_and_checklist_skills(self):
+        agent = Agent()
+        self.assertEqual(
+            agent.use_skill("dedupe", "one\none\ntwo\n\ntwo"),
+            "one\ntwo",
+        )
+        self.assertEqual(
+            agent.use_skill("checklist", "First\nSecond"),
+            "Checklist:\n- [ ] First\n- [ ] Second",
+        )
+
+    def test_find_and_export_memory_skills(self):
+        agent = Agent(memory=["API context", "test context"])
+        self.assertEqual(
+            agent.use_skill("find", "api\nReview the API context"),
+            "Find: 'api' found.",
+        )
+        self.assertEqual(
+            agent.use_skill("export_memory", ""),
+            "Memory:\n- API context\n- test context",
+        )

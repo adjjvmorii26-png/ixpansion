@@ -36,6 +36,12 @@ The agent includes offline skills that do not require an API key:
 - `usage`: report how often local skills have been used.
 - `recycle`: trim old memory and history, then reset skill usage counters. Pass
 	a non-negative number to retain that many recent entries; the default is 5.
+- `priority`: classify text as high, medium, or low priority.
+- `validate`: check whether text is present and long enough to act on.
+- `dedupe`: remove repeated non-empty lines while preserving order.
+- `find`: search for a keyword; put the keyword on the first line and content below it.
+- `checklist`: format each non-empty line as an unchecked Markdown item.
+- `export_memory`: return the agent's current memory as plain text.
 
 These skills are available through `Agent.list_skills()` and
 `Agent.use_skill(name, text)` for Python callers.

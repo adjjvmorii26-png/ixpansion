@@ -46,10 +46,16 @@ class Agent:
         self.api_key = _get_api_key()
         self.skill_usage: Dict[str, int] = {}
         self.skills = {
+            "checklist": self.format_checklist,
+            "dedupe": self.deduplicate_lines,
+            "find": self.find_keyword,
+            "priority": self.score_priority,
             "recycle": self.recycle_usage,
             "summarize": self.summarize,
             "tasks": self.extract_tasks,
+            "validate": self.validate_text,
             "check_goal": self.check_goal,
+            "export_memory": self.export_memory,
             "usage": self.usage_report,
         }
 
@@ -97,6 +103,64 @@ class Agent:
             f"Recycled usage: removed {removed_history} history entries and "
             f"{removed_memory} memory entries; retained {keep}."
         )
+
+    def score_priority(self, text: str) -> str:
+        """Classify text as high, medium, or low priority from its wording."""
+        lowered = text.lower()
+        if any(word in lowered for word in ("urgent", "critical", "immediately")):
+            return "Priority: high."
+        if any(word in lowered for word in ("important", "soon", "deadline")):
+            return "Priority: medium."
+        return "Priority: low."
+
+    def validate_text(self, text: str) -> str:
+        """Check whether text is present and contains at least three words."""
+        words = text.split()
+        if not words:
+            return "Validation: empty text."
+        if len(words) < 3:
+            return "Validation: too short."
+        return "Validation: valid."
+
+    def deduplicate_lines(self, text: str) -> str:
+        """Remove repeated non-empty lines while preserving their first order."""
+        seen = set()
+        lines = []
+        for line in text.splitlines():
+            cleaned = line.strip()
+            if cleaned and cleaned not in seen:
+                seen.add(cleaned)
+                lines.append(cleaned)
+        return "\n".join(lines) if lines else "No unique lines found."
+
+    def find_keyword(self, text: str) -> str:
+        """Find a case-insensitive keyword in text.
+
+        The first line is the keyword and the remaining lines are searched.
+        """
+        lines = text.splitlines()
+        keyword = lines[0].strip() if lines else ""
+        content = "\n".join(lines[1:])
+        if not keyword:
+            return "Find: provide a keyword on the first line."
+        return (
+            f"Find: '{keyword}' found."
+            if keyword.lower() in content.lower()
+            else f"Find: '{keyword}' not found."
+        )
+
+    def format_checklist(self, text: str) -> str:
+        """Format non-empty lines as unchecked Markdown checklist items."""
+        items = [line.strip(" -\t") for line in text.splitlines() if line.strip()]
+        if not items:
+            return "Checklist: empty."
+        return "Checklist:\n" + "\n".join(f"- [ ] {item}" for item in items)
+
+    def export_memory(self, _text: str = "") -> str:
+        """Return the current memory as a portable plain-text block."""
+        if not self.memory:
+            return "Memory: empty."
+        return "Memory:\n" + "\n".join(f"- {item}" for item in self.memory)
 
     def summarize(self, text: str) -> str:
         """Return a compact first-sentence summary of text."""
