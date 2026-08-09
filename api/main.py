@@ -58,6 +58,12 @@ class ReusableDataRequest(BaseModel):
     value: object
 
 
+class RecycleRequest(BaseModel):
+    text: str
+    chunk_size: int = 800
+    task_id: Optional[str] = None
+
+
 @app.get("/")
 def read_root() -> dict:
     return {"service": "ixpansion", "status": "ok"}
@@ -119,6 +125,18 @@ def aether_data_get(key: str) -> dict:
 def aether_data_put(key: str, request: ReusableDataRequest) -> dict:
     try:
         return foundation.save_data(key, request.value)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.post("/aether/recycle")
+def aether_recycle(request: RecycleRequest) -> dict:
+    try:
+        return foundation.recycle_data(
+            request.text,
+            chunk_size=request.chunk_size,
+            task_id=request.task_id,
+        )
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
 

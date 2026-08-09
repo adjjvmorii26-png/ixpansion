@@ -42,6 +42,30 @@ class ApiTests(unittest.TestCase):
         loaded = client.get("/aether/data/reusable-note")
         self.assertEqual(loaded.json(), {"key": "reusable-note", "value": {"ready": True}})
 
+    def test_recycle_endpoint_returns_bounded_context_artifact(self):
+        client = TestClient(app)
+        response = client.post(
+            "/aether/recycle",
+            json={
+                "text": "TOKEN=secret-value\nFirst fact.\nFirst fact.",
+                "chunk_size": 64,
+                "task_id": "api-recycle-1",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["data_key"], "api-recycle-1")
+        self.assertTrue(payload["redacted"])
+        self.assertNotIn("secret-value", response.text)
+        self.assertGreaterEqual(payload["approximate_tokens"], 1)
+
+    def test_recycle_endpoint_rejects_invalid_chunk_size(self):
+        response = TestClient(app).post(
+            "/aether/recycle",
+            json={"text": "source text", "chunk_size": 10},
+        )
+        self.assertEqual(response.status_code, 422)
+
     def test_dashboard_is_a_browser_page(self):
         response = TestClient(app).get("/dashboard")
         self.assertEqual(response.status_code, 200)

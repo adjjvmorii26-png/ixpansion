@@ -82,6 +82,29 @@ class AetherLatticeTests(unittest.TestCase):
                 foundation.save_data(key, "value")
         foundation.audits.close()
 
+    def test_recycle_data_compiles_redacted_reusable_context(self):
+        foundation = self.make_foundation()
+        result = foundation.recycle_data(
+            "API_KEY=secret-value\nKeep this fact.\nKeep this fact.",
+            chunk_size=64,
+            task_id="compiled-1",
+        )
+
+        self.assertEqual(result["data_key"], "compiled-1")
+        self.assertTrue(result["redacted"])
+        self.assertNotIn("secret-value", str(result))
+        self.assertGreaterEqual(result["approximate_tokens"], 1)
+        artifact = {key: value for key, value in result.items() if key != "data_key"}
+        self.assertEqual(foundation.load_data("compiled-1"), artifact)
+        self.assertTrue(all(len(chunk) <= 64 for chunk in result["chunks"]))
+        foundation.audits.close()
+
+    def test_recycle_data_rejects_invalid_chunk_size(self):
+        foundation = self.make_foundation()
+        with self.assertRaisesRegex(ValueError, "chunk_size"):
+            foundation.recycle_data("enough source text", chunk_size=10)
+        foundation.audits.close()
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import os
 import uuid
 from copy import deepcopy
@@ -17,6 +18,8 @@ class AetherLattice:
     """Compose the offline project layers into one inspectable runtime."""
 
     DATA_KEY_LIMIT = 128
+    RECYCLE_TEXT_LIMIT = 50_000
+    RECYCLE_CHUNK_LIMITS = (64, 4_096)
 
     WORKFLOWS = {
         "summarize": {
@@ -81,6 +84,46 @@ class AetherLattice:
         normalized_key = self._normalize_data_key(key)
         self.data[normalized_key] = deepcopy(value)
         return {"key": normalized_key, "value": deepcopy(self.data[normalized_key])}
+
+    def recycle_data(
+        self,
+        text: str,
+        *,
+        chunk_size: int = 800,
+        task_id: Optional[str] = None,
+    ) -> dict[str, Any]:
+        """Compile raw text into bounded, reusable context without retaining raw input."""
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError("text is required")
+        if len(text) > self.RECYCLE_TEXT_LIMIT:
+            raise ValueError(
+                f"text must be {self.RECYCLE_TEXT_LIMIT} characters or fewer"
+            )
+        minimum, maximum = self.RECYCLE_CHUNK_LIMITS
+        if not isinstance(chunk_size, int) or not minimum <= chunk_size <= maximum:
+            raise ValueError(f"chunk_size must be between {minimum} and {maximum}")
+
+        redacted_result = self.agent.redact_secrets(text)
+        redacted = text if redacted_result == "Redacted: no secrets found." else redacted_result
+        deduplicated = self.agent.deduplicate_lines(redacted)
+        normalized = " ".join(deduplicated.split())
+        summary = self.agent.summarize(normalized)
+        chunks = [
+            normalized[index:index + chunk_size]
+            for index in range(0, len(normalized), chunk_size)
+        ]
+        artifact = {
+            "summary": summary.removeprefix("Summary: "),
+            "chunks": chunks,
+            "source_sha256": hashlib.sha256(redacted.encode("utf-8")).hexdigest(),
+            "characters": len(normalized),
+            "approximate_tokens": max(1, (len(normalized) + 3) // 4),
+            "chunk_size": chunk_size,
+            "redacted": redacted_result != "Redacted: no secrets found.",
+        }
+        data_key = task_id or "recycle:latest"
+        self.save_data(data_key, artifact)
+        return {"data_key": self._normalize_data_key(data_key), **artifact}
 
     def load_data(self, key: str) -> Any:
         normalized_key = self._normalize_data_key(key)

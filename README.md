@@ -193,6 +193,10 @@ Available endpoints:
   `task_id` automatically save their result under that key.
   Data keys are trimmed, limited to 128 characters, and cannot contain
   whitespace or path separators.
+- `POST /aether/recycle` compiles raw text into redacted, deduplicated,
+  normalized context with a summary, bounded chunks, SHA-256 source hash, and
+  approximate token count. It stores the artifact under `task_id`, or under
+  `recycle:latest` when no task ID is supplied. Raw input is not retained.
 - `GET /skills` lists local skill contracts.
 - `POST /skills/{skill}` executes a local skill with `{"text": "..."}`.
 - `GET /lattice` reports machine states and active leases.
@@ -217,6 +221,9 @@ curl http://127.0.0.1:8000/skills
 curl -X POST http://127.0.0.1:8000/aether/dispatch \
   -H 'Content-Type: application/json' \
   -d '{"task":"Inspect the lattice","task_id":"demo-1"}'
+curl -X POST http://127.0.0.1:8000/aether/recycle \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"API_KEY=placeholder\nKeep this fact.","task_id":"context-1"}'
 curl -X POST http://127.0.0.1:8000/skills/summarize \
   -H 'Content-Type: application/json' \
   -d '{"text":"Inspect the API. Then run tests."}'
@@ -224,6 +231,96 @@ curl -X POST http://127.0.0.1:8000/skills/summarize \
 
 FastAPI also exposes interactive API documentation at `/docs` while the local
 server is running.
+
+### API request shapes
+
+All request bodies are JSON. FastAPI validates required fields and returns a
+validation response before the handler runs. Allocation conflicts, unavailable
+capacity, and unknown workflows return `409`; unknown skills and missing saved
+data return `404`.
+
+Run an offline workflow:
+
+```bash
+curl -X POST http://127.0.0.1:8000/aether/workflows/normalize_text \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"  Inspect   the lattice  ","task_id":"note-1"}'
+```
+
+The request supports `text` (required), plus optional `critical`,
+`lease_seconds`, `operator`, and `task_id`. The six workflow names are listed
+by `GET /aether/workflows`; use the exact returned name in the URL.
+
+Recycle context for later use:
+
+```bash
+curl -X POST http://127.0.0.1:8000/aether/recycle \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"API_KEY=placeholder\nFirst fact.\nFirst fact.","chunk_size":800,"task_id":"context-1"}'
+```
+
+The request requires `text` and accepts `chunk_size` from 64 through 4096 and
+an optional `task_id`. Input is limited to 50,000 characters. The response
+contains `data_key`, `summary`, `chunks`, `source_sha256`, `characters`,
+`approximate_tokens`, `chunk_size`, and whether redaction occurred. Recycling
+is offline and process-local; it does not send data to TokenRouter or survive
+a server restart.
+
+Refresh a machine's telemetry before allocating work:
+
+```bash
+curl -X POST http://127.0.0.1:8000/lattice/heartbeat \
+  -H 'Content-Type: application/json' \
+  -d '{"machine_id":"api-healthy-0","load":0.25}'
+```
+
+Heartbeat fields other than `machine_id` are optional: `health`, `capacity`,
+`trust`, and `load`. Values are applied to the process-local lattice and are
+not persisted after a server restart. Allocation accepts `task` (required),
+`critical` (default `false`), and optional `lease_seconds`; a lease response
+includes `expires_at`.
+
+### Development workflow
+
+Use the dependency-free checks from the repository root:
+
+```bash
+make verify
+```
+
+The equivalent commands are useful when isolating a failure:
+
+```bash
+python -m py_compile agent.py run_agent.py run_1_3_stack.py \
+  tokenrouter_client.py xai_client.py api/main.py aether_lattice.py \
+  security_controls.py federated_stack.py lattice_stack.py
+python -m unittest discover -s tests -v
+```
+
+For a focused test run, pass a test module or class to unittest, for example:
+
+```bash
+python -m unittest tests.test_api.ApiTests.test_skill_discovery_and_execution -v
+```
+
+The test suite uses local process state and does not require a TokenRouter key.
+When testing API changes, start the server in one terminal and use `/docs` or
+`curl` from another. Stop it with `Ctrl-C`; no background service is required.
+
+### Troubleshooting
+
+- `ModuleNotFoundError`: activate the virtual environment and run
+  `python -m pip install -r requirements.txt` from the repository root.
+- `Address already in use`: run Uvicorn on another port, for example
+  `uvicorn api.main:app --reload --port 8001`, then use that port in requests.
+- `TokenRouter API key is required`: omit `--use-tokenrouter` for the offline
+  path, or configure `TOKENROUTER_API_KEY` in an untracked `.env` file.
+- `409` from allocation or dispatch: inspect `GET /lattice` and
+  `GET /aether`; the requested work may be critical, capacity may be leased,
+  or all eligible machines may be degraded or quarantined.
+- A compose worker cannot register: check `docker compose ps`, then inspect
+  `docker compose logs hub worker`. The worker must reach the internal
+  `hub:8765` service and use the same `SWARM_TOKEN` as the hub.
 
 ## Automation safety
 
