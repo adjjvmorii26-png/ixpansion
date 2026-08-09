@@ -1,3 +1,4 @@
+import os
 from typing import Optional
 
 from fastapi import FastAPI, HTTPException
@@ -7,6 +8,8 @@ from pydantic import BaseModel
 from agent import Agent
 from aether_lattice import AetherLattice
 from lattice_stack import LatticePolicy, Machine, MachineLattice
+from security_controls import URLPolicy
+from web_resources import PublicResourceCollector
 
 app = FastAPI(title="IXPANSION API", version="1.2.0-rc3")
 foundation = AetherLattice(
@@ -21,6 +24,13 @@ foundation = AetherLattice(
 )
 agent = foundation.agent
 lattice = foundation.lattice
+resource_collector = PublicResourceCollector(
+    URLPolicy(
+        host.strip()
+        for host in os.getenv("IXPANSION_RESOURCE_HOSTS", "").split(",")
+        if host.strip()
+    )
+)
 
 
 class SkillRequest(BaseModel):
@@ -67,6 +77,12 @@ class RecycleRequest(BaseModel):
 class ContextRetrieveRequest(BaseModel):
     query: str = ""
     max_tokens: int = 800
+
+
+class ResourceRequest(BaseModel):
+    url: str
+    chunk_size: int = 800
+    task_id: Optional[str] = None
 
 
 @app.get("/")
