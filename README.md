@@ -240,6 +240,9 @@ Available endpoints:
   page and stores its redacted reusable artifact.
 - `GET /resources` lists Resource Passports; `GET /resources/{resource_id}`
   retrieves one passport and its bounded artifact.
+- `POST /resource-jobs` queues the same collection work and returns `202` with
+  a job ID; `GET /resource-jobs/{job_id}` reports `queued`, `running`,
+  `complete`, or `failed`.
 
 The skill and lattice API state is process-local and intentionally has no
 authentication or persistence claim yet.
@@ -251,6 +254,9 @@ SQLite database and defaults to `ixpansion_resources.sqlite3`:
 ```bash
 export IXPANSION_RESOURCE_HOSTS=docs.example.com,handbook.example.com
 export IXPANSION_RESOURCE_DB=ixpansion_resources.sqlite3
+export IXPANSION_RESOURCE_WORKERS=2
+export IXPANSION_RESOURCE_MAX_PENDING=20
+export IXPANSION_RESOURCE_JOBS_DB=ixpansion_resource_jobs.sqlite3
 ```
 
 The collector sends no browser cookies, authorization headers, or session
@@ -259,6 +265,11 @@ non-text content, empty pages, and oversized responses. A Resource Passport
 records the source URL, title, links, fetch time, content hash, and bounded
 redacted chunks. The SQLite file is local application data and should be
 protected accordingly.
+
+Job state is persisted in the separate SQLite jobs database. Completed and
+failed history survives restarts; jobs that were queued or running during a
+restart are marked `interrupted` because their callable work is not persisted
+yet and will not be replayed automatically.
 
 Example requests:
 
@@ -282,6 +293,10 @@ curl -X POST http://127.0.0.1:8000/resources \
   -H 'Content-Type: application/json' \
   -d '{"url":"https://docs.example.com/start","task_id":"resource-1"}'
 curl http://127.0.0.1:8000/resources
+curl -X POST http://127.0.0.1:8000/resource-jobs \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"https://docs.example.com/start"}'
+curl http://127.0.0.1:8000/resource-jobs/resource-job-id
 curl -X POST http://127.0.0.1:8000/aether/context/context-1/retrieve \
   -H 'Content-Type: application/json' \
   -d '{"query":"fact","max_tokens":400}'

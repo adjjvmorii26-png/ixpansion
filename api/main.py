@@ -12,6 +12,7 @@ from lattice_stack import LatticePolicy, Machine, MachineLattice
 from security_controls import URLPolicy
 from web_resources import PublicResourceCollector
 from resource_store import ResourceStore
+from resource_jobs import ResourceJobQueue, ResourceJobQueueFull
 
 app = FastAPI(title="IXPANSION API", version="1.2.0-rc3")
 foundation = AetherLattice(
@@ -34,6 +35,11 @@ resource_collector = PublicResourceCollector(
     )
 )
 resource_store = ResourceStore(os.getenv("IXPANSION_RESOURCE_DB", "ixpansion_resources.sqlite3"))
+resource_jobs = ResourceJobQueue(
+    workers=int(os.getenv("IXPANSION_RESOURCE_WORKERS", "2")),
+    max_pending=int(os.getenv("IXPANSION_RESOURCE_MAX_PENDING", "20")),
+    db_path=os.getenv("IXPANSION_RESOURCE_JOBS_DB", "ixpansion_resource_jobs.sqlite3"),
+)
 
 
 class SkillRequest(BaseModel):
@@ -91,6 +97,23 @@ class ResourceRequest(BaseModel):
 def _resource_id(url: str, text: str) -> str:
     digest = hashlib.sha256(f"{url}\n{text}".encode("utf-8")).hexdigest()[:24]
     return f"resource-{digest}"
+
+
+def _collect_resource(request: ResourceRequest) -> dict:
+    page = resource_collector.collect(request.url)
+    artifact = foundation.recycle_data(
+        str(page["text"]),
+        chunk_size=request.chunk_size,
+        task_id=request.task_id,
+    )
+    resource_id = _resource_id(str(page["url"]), str(page["text"]))
+    return resource_store.save(
+        resource_id,
+        source_url=str(page["url"]),
+        title=str(page["title"]),
+        links=list(page["links"]),
+        artifact=artifact,
+    )
 
 
 @app.get("/")
@@ -200,24 +223,27 @@ def get_resource(resource_id: str) -> dict:
 @app.post("/resources")
 def collect_resource(request: ResourceRequest) -> dict:
     try:
-        page = resource_collector.collect(request.url)
-        artifact = foundation.recycle_data(
-            str(page["text"]),
-            chunk_size=request.chunk_size,
-            task_id=request.task_id,
-        )
-        resource_id = _resource_id(str(page["url"]), str(page["text"]))
-        return resource_store.save(
-            resource_id,
-            source_url=str(page["url"]),
-            title=str(page["title"]),
-            links=list(page["links"]),
-            artifact=artifact,
-        )
+        return _collect_resource(request)
     except PermissionError as exc:
         raise HTTPException(status_code=403, detail=str(exc)) from exc
     except (ValueError, RuntimeError, OSError) as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.post("/resource-jobs", status_code=202)
+def submit_resource_job(request: ResourceRequest) -> dict:
+    try:
+        return resource_jobs.submit(lambda: _collect_resource(request))
+    except ResourceJobQueueFull as exc:
+        raise HTTPException(status_code=429, detail=str(exc)) from exc
+
+
+@app.get("/resource-jobs/{job_id}")
+def get_resource_job(job_id: str) -> dict:
+    try:
+        return resource_jobs.get(job_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
 
 
 @app.get("/dashboard", response_class=HTMLResponse)

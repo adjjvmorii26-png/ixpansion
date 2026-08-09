@@ -123,6 +123,25 @@ class ApiTests(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 403)
 
+    @patch("api.main._collect_resource", return_value={"resource_id": "resource-job-1"})
+    def test_resource_job_returns_202_and_can_be_polled(self, collect):
+        client = TestClient(app)
+        response = client.post(
+            "/resource-jobs",
+            json={"url": "https://docs.example.test/start"},
+        )
+
+        self.assertEqual(response.status_code, 202)
+        job_id = response.json()["job_id"]
+        job = response.json()
+        for _ in range(100):
+            job = client.get(f"/resource-jobs/{job_id}").json()
+            if job["status"] == "complete":
+                break
+        self.assertEqual(job["status"], "complete")
+        self.assertEqual(job["result"], {"resource_id": "resource-job-1"})
+        collect.assert_called_once()
+
     def test_dashboard_is_a_browser_page(self):
         response = TestClient(app).get("/dashboard")
         self.assertEqual(response.status_code, 200)
