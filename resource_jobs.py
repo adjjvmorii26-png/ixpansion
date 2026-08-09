@@ -58,7 +58,12 @@ class ResourceJobQueue:
         )
         self.connection.commit()
 
-    def submit(self, work: Callable[[], dict[str, Any]]) -> dict[str, Any]:
+    def submit(
+        self,
+        work: Callable[[], dict[str, Any]],
+        *,
+        metadata: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         with self.lock:
             pending = sum(
                 state["status"] in {"queued", "running"}
@@ -67,7 +72,11 @@ class ResourceJobQueue:
             if pending >= self.max_pending:
                 raise ResourceJobQueueFull("resource job queue is full")
             job_id = f"resource-job-{uuid.uuid4().hex[:16]}"
-            self.jobs[job_id] = {"job_id": job_id, "status": "queued"}
+            self.jobs[job_id] = {
+                "job_id": job_id,
+                "status": "queued",
+                "metadata": dict(metadata or {}),
+            }
             self._persist(self.jobs[job_id])
         self.executor.submit(self._run, job_id, work)
         return self.get(job_id)
@@ -101,6 +110,21 @@ class ResourceJobQueue:
             if state is None:
                 raise KeyError(f"No resource job named: {job_id}")
             return dict(state)
+
+    def retry(
+        self,
+        job_id: str,
+        work_factory: Callable[[dict[str, Any]], Callable[[], dict[str, Any]]],
+    ) -> dict[str, Any]:
+        with self.lock:
+            state = self.jobs.get(job_id)
+            if state is None:
+                raise KeyError(f"No resource job named: {job_id}")
+            if state["status"] not in {"failed", "interrupted"}:
+                raise ValueError("only failed or interrupted jobs can be retried")
+            metadata = dict(state.get("metadata", {}))
+        metadata["retry_of"] = job_id
+        return self.submit(work_factory(metadata), metadata=metadata)
 
     def close(self) -> None:
         self.executor.shutdown(wait=True)

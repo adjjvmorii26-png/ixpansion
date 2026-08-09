@@ -1,6 +1,6 @@
 import os
 import hashlib
-from typing import Optional
+from typing import Callable, Optional
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
@@ -114,6 +114,11 @@ def _collect_resource(request: ResourceRequest) -> dict:
         links=list(page["links"]),
         artifact=artifact,
     )
+
+
+def _resource_work(metadata: dict) -> Callable[[], dict]:
+    request = ResourceRequest(**metadata["request"])
+    return lambda: _collect_resource(request)
 
 
 @app.get("/")
@@ -233,7 +238,10 @@ def collect_resource(request: ResourceRequest) -> dict:
 @app.post("/resource-jobs", status_code=202)
 def submit_resource_job(request: ResourceRequest) -> dict:
     try:
-        return resource_jobs.submit(lambda: _collect_resource(request))
+        return resource_jobs.submit(
+            lambda: _collect_resource(request),
+            metadata={"request": request.model_dump()},
+        )
     except ResourceJobQueueFull as exc:
         raise HTTPException(status_code=429, detail=str(exc)) from exc
 
@@ -244,6 +252,18 @@ def get_resource_job(job_id: str) -> dict:
         return resource_jobs.get(job_id)
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.post("/resource-jobs/{job_id}/retry", status_code=202)
+def retry_resource_job(job_id: str) -> dict:
+    try:
+        return resource_jobs.retry(job_id, _resource_work)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    except ResourceJobQueueFull as exc:
+        raise HTTPException(status_code=429, detail=str(exc)) from exc
 
 
 @app.get("/dashboard", response_class=HTMLResponse)

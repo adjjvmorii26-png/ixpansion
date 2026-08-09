@@ -1,4 +1,5 @@
 import unittest
+from threading import Event
 from tempfile import TemporaryDirectory
 
 from resource_jobs import ResourceJobQueue
@@ -48,3 +49,35 @@ class ResourceJobQueueTests(unittest.TestCase):
                 {"resource_id": "resource-2"},
             )
             restarted.close()
+
+    def test_failed_job_can_be_retried_from_persisted_metadata(self):
+        queue = ResourceJobQueue(workers=1, max_pending=2)
+        failed = Event()
+        retried_done = Event()
+
+        def fail():
+            failed.set()
+            raise RuntimeError("failure")
+
+        first = queue.submit(
+            fail,
+            metadata={"request": {"url": "https://docs.example/page"}},
+        )
+        self.assertTrue(failed.wait(1))
+        self.assertEqual(queue.get(first["job_id"])["status"], "failed")
+
+        def retry_work():
+            retried_done.set()
+            return {"request": {"url": "https://docs.example/page"}}
+
+        retried = queue.retry(
+            first["job_id"],
+            lambda metadata: retry_work,
+        )
+        self.assertTrue(retried_done.wait(1))
+        self.assertEqual(queue.get(retried["job_id"])["status"], "complete")
+        self.assertEqual(
+            queue.get(retried["job_id"])["result"]["request"]["url"],
+            "https://docs.example/page",
+        )
+        queue.close()
