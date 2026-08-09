@@ -12,6 +12,23 @@ starts by stating the execution boundary, inspecting the owner, and ends with
 focused validation plus an honest limitations report. Use `workflow-force` when
 multiple recipes must be coordinated.
 
+## Selection Protocol
+
+1. Match the requested outcome to one recipe by its name and domain.
+2. If several recipes match, choose the narrowest one that can produce evidence.
+3. If the work crosses domains, select one primary recipe and list the others as supporting checks.
+4. Use `workflow-force` when the work needs an ordered chain of three or more recipes.
+
+## Execution Contract
+
+For the selected recipe, record:
+
+- **Boundary**: read-only, simulated, local, or externally effectful.
+- **Owner**: implementation surface and relevant tests.
+- **Evidence**: command, assertion, observation, or review finding.
+- **Failure**: what was blocked, exhausted, unavailable, or left unverified.
+- **Closeout**: changed files, validation result, limitations, and next decision.
+
 ## Planning And Discovery
 
 1. **Clarify Mission**: intake -> acceptance criteria -> first discriminating check.
