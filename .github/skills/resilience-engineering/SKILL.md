@@ -18,14 +18,14 @@ Make failure behavior bounded, observable, and safe to retry.
 5. Preserve useful partial results without misrepresenting completion.
 6. Test recovery, exhaustion, replay, and degraded operation.
 
-## Rules
+## Safety boundaries
 
 - Fail closed for unsafe URLs, invalid trust, exceeded budgets, and missing required capacity.
 - Do not retry non-idempotent effects without an explicit policy.
 - Keep network and credentials mocked in tests.
 - Distinguish simulated recovery from real distributed guarantees.
 
-## Output
+## Report
 
 Return: failure matrix, safety decisions, retry budget, idempotency strategy,
 and focused test results.

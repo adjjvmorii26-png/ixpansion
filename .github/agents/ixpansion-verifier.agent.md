@@ -30,7 +30,7 @@ changes are treated as complete.
 - Run `git diff --check` and inspect documentation/configuration consistency.
 - Avoid network-dependent tests and real credentials.
 
-## Output format
+## Report
 
 Report findings first, ordered by severity, with clickable file references when
 available. Then list open questions, validation results, and residual risk.

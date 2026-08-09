@@ -197,6 +197,9 @@ Available endpoints:
   normalized context with a summary, bounded chunks, SHA-256 source hash, and
   approximate token count. It stores the artifact under `task_id`, or under
   `recycle:latest` when no task ID is supplied. Raw input is not retained.
+- `POST /aether/context/{key}/retrieve` selects relevant stored chunks under an
+  approximate token budget. Matching terms are ranked first, ties preserve
+  source order, and the operation remains offline and process-local.
 - `GET /skills` lists local skill contracts.
 - `POST /skills/{skill}` executes a local skill with `{"text": "..."}`.
 - `GET /lattice` reports machine states and active leases.
@@ -224,6 +227,9 @@ curl -X POST http://127.0.0.1:8000/aether/dispatch \
 curl -X POST http://127.0.0.1:8000/aether/recycle \
   -H 'Content-Type: application/json' \
   -d '{"text":"API_KEY=placeholder\nKeep this fact.","task_id":"context-1"}'
+curl -X POST http://127.0.0.1:8000/aether/context/context-1/retrieve \
+  -H 'Content-Type: application/json' \
+  -d '{"query":"fact","max_tokens":400}'
 curl -X POST http://127.0.0.1:8000/skills/summarize \
   -H 'Content-Type: application/json' \
   -d '{"text":"Inspect the API. Then run tests."}'
@@ -265,6 +271,19 @@ contains `data_key`, `summary`, `chunks`, `source_sha256`, `characters`,
 `approximate_tokens`, `chunk_size`, and whether redaction occurred. Recycling
 is offline and process-local; it does not send data to TokenRouter or survive
 a server restart.
+
+Retrieve only the context needed for a task:
+
+```bash
+curl -X POST http://127.0.0.1:8000/aether/context/context-1/retrieve \
+  -H 'Content-Type: application/json' \
+  -d '{"query":"fact","max_tokens":400}'
+```
+
+The retrieval request accepts an optional `query` and `max_tokens` from 1
+through 8,000. Its response contains the selected `chunks`, the approximate
+tokens returned, and the applied budget. A missing key returns `404`; a key
+that does not contain recycled chunks or an invalid budget returns `422`.
 
 Refresh a machine's telemetry before allocating work:
 
@@ -351,18 +370,39 @@ docker compose up --build
 docker compose up --build --scale worker=3
 ```
 
-- `hub` serves health, registration, and status on internal port `8765`.
-- `worker` registers a generated node ID with the hub every 10 seconds.
+- `hub` serves health, registration, heartbeat, task leasing, and status on
+  internal port `8765`.
+- `worker` registers a generated node ID, reports capacity, claims one task at
+  a time, and acknowledges completion every 10 seconds.
 - `panel` serves its health endpoint on internal port `8080`.
+
+The hub exposes a bounded local task loop. From another compose service, submit
+work through the internal `hub:8765` address with a shared token:
+
+```bash
+curl -X POST http://hub:8765/tasks \
+  -H "X-Swarm-Token: $SWARM_TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"task":"Inspect the mesh","task_id":"mesh-1"}'
+```
+
+Workers claim queued tasks through `/tasks/claim?node_id=...`. Each claim has
+a 30-second lease and must be completed by the assigned node. Repeating a
+completion for an already completed task is idempotent. `POST /heartbeat`
+accepts `node_id`, `load`, `capacity`, and `health`, each bounded from `0` to
+`1`; unhealthy or zero-capacity nodes are reported as degraded and cannot claim
+work. Nodes that have not refreshed telemetry for 30 seconds are also rejected.
 
 The swarm ports are intentionally not published to the host. Only the local
 dashboard/API port `8000` needs to be opened for browser access; containers
 continue to reach the hub through the internal `hub:8765` service address.
 
-This is an HTTP registration demo, not the planned production WebSocket/RDMA
-mesh. `SWARM_TOKEN` is optional for this internal-only local swarm: leave it
-unset for trusted local development, or set it to require the
-`X-Swarm-Token` header. Add authentication before publishing swarm ports.
+This is an HTTP coordination demo, not the planned production WebSocket/RDMA
+mesh. Queue state, leases, and node telemetry are process-local and disappear
+when the hub restarts. `SWARM_TOKEN` is optional for this internal-only local
+swarm: leave it unset for trusted local development, or set it to require the
+`X-Swarm-Token` header. Add stronger authentication and durable coordination
+before publishing swarm ports or using it across trust boundaries.
 
 ## Development checks
 

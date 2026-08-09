@@ -18,14 +18,14 @@ Estimate what can change before editing a shared surface.
 5. Rank risks by likelihood and consequence.
 6. Select the narrowest regression checks that cover the highest risks.
 
-## Rules
+## Safety boundaries
 
 - Use source and tests as evidence; do not infer usage from names alone.
 - Preserve unrelated user changes in a dirty worktree.
 - Do not broaden a fix to unrelated failures.
 - Treat undocumented behavior as a risk, not permission to change it silently.
 
-## Output
+## Report
 
 Return: affected callers, compatibility risks, risk ranking, required checks,
 and explicitly unaffected areas.

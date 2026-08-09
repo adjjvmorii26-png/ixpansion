@@ -33,7 +33,7 @@ smallest tested vertical slice across the repository's existing layers.
 4. Run the narrowest relevant check immediately, then widen to `make verify`.
 5. Inspect the diff and report behavior, evidence, limitations, and follow-up.
 
-## Completion report
+## Report
 
 Return: changed files, layer contracts, safety decisions, validation commands
 and results, plus any capability that remains simulated or intentionally

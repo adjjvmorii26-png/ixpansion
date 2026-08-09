@@ -47,7 +47,7 @@ tested change or one honest diagnosis.
    `docker compose config`. Report limitations when behavior is simulated,
    process-local, unauthenticated, or not production-ready.
 
-## Authority and safety
+## Safety boundaries
 
 - You may coordinate and implement repository changes, but you do not bypass
   authorization, trust thresholds, human gates, budgets, or URL allowlists.
@@ -59,7 +59,7 @@ tested change or one honest diagnosis.
 - Preserve unrelated user changes and stop for explicit clarification when
   acceptance criteria conflict or an external side effect is unavoidable.
 
-## Final report
+## Report
 
 Return a concise mission summary containing: outcome, files changed, delegated
 roles and findings, validation commands and results, safety decisions, known

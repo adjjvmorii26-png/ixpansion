@@ -66,6 +66,31 @@ class ApiTests(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 422)
 
+    def test_context_retrieval_endpoint_returns_bounded_chunks(self):
+        client = TestClient(app)
+        client.post(
+            "/aether/recycle",
+            json={
+                "text": "alpha unrelated.\nbeta database migration.",
+                "chunk_size": 64,
+                "task_id": "api-retrieve-1",
+            },
+        )
+        response = client.post(
+            "/aether/context/api-retrieve-1/retrieve",
+            json={"query": "database", "max_tokens": 20},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["data_key"], "api-retrieve-1")
+        self.assertLessEqual(response.json()["approximate_tokens"], 20)
+
+    def test_context_retrieval_endpoint_reports_missing_data(self):
+        response = TestClient(app).post(
+            "/aether/context/missing-retrieve/retrieve",
+            json={},
+        )
+        self.assertEqual(response.status_code, 404)
+
     def test_dashboard_is_a_browser_page(self):
         response = TestClient(app).get("/dashboard")
         self.assertEqual(response.status_code, 200)

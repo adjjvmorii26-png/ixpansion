@@ -18,14 +18,14 @@ Make important decisions and failures inspectable without exposing secrets.
 5. Test success, failure, retry, and degraded paths.
 6. Document whether the signal is in-memory, local, or persistent.
 
-## Rules
+## Safety boundaries
 
 - Never log API keys, tokens, credentials, or sensitive payloads.
 - Keep audit records factual and useful for replay or diagnosis.
 - Do not claim durable telemetry when state is process-local.
 - Prefer deterministic signals that work offline.
 
-## Output
+## Report
 
 Return: operator question, signal design, redaction policy, observation points,
 and validation evidence.

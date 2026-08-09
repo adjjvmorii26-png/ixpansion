@@ -18,14 +18,14 @@ Prove that the smallest real workflow still crosses its boundaries correctly.
 5. Exercise one malformed or unavailable dependency case.
 6. Report environment limits separately from product failures.
 
-## Rules
+## Safety boundaries
 
 - Prefer in-process tests and local smoke checks over network-dependent tests.
 - Do not use production credentials or destructive external actions.
 - Keep simulated and live transport results distinct.
 - Reuse existing fixtures and test commands.
 
-## Output
+## Report
 
 Return: workflow exercised, setup, expected versus actual result, failure case,
 commands, and environment limitations.

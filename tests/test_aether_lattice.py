@@ -105,6 +105,58 @@ class AetherLatticeTests(unittest.TestCase):
             foundation.recycle_data("enough source text", chunk_size=10)
         foundation.audits.close()
 
+    def test_recycle_data_rejects_oversized_input(self):
+        foundation = self.make_foundation()
+        oversized = "x" * (AetherLattice.RECYCLE_TEXT_LIMIT + 1)
+        with self.assertRaisesRegex(ValueError, "characters or fewer"):
+            foundation.recycle_data(oversized)
+        foundation.audits.close()
+
+    def test_recycle_data_prefers_word_boundaries(self):
+        chunks = AetherLattice._chunk_context("alpha beta gamma delta epsilon", 12)
+
+        self.assertEqual(chunks, ["alpha beta", "gamma delta", "epsilon"])
+        self.assertTrue(all(len(chunk) <= 12 for chunk in chunks))
+
+    def test_retrieve_context_prioritizes_matching_chunks_within_budget(self):
+        foundation = self.make_foundation()
+        foundation.save_data(
+            "retrieve-1",
+            {
+                "chunks": [
+                    "alpha unrelated",
+                    "beta database migration",
+                    "gamma unrelated",
+                ]
+            },
+        )
+
+        result = foundation.retrieve_context("retrieve-1", query="database", max_tokens=20)
+
+        self.assertEqual(result["data_key"], "retrieve-1")
+        self.assertEqual(result["chunks"][0], "beta database migration")
+        self.assertLessEqual(result["approximate_tokens"], 20)
+        foundation.audits.close()
+
+    def test_retrieve_context_rejects_invalid_budget_and_non_context_data(self):
+        foundation = self.make_foundation()
+        foundation.save_data("plain-1", {"value": "not context"})
+        with self.assertRaisesRegex(ValueError, "max_tokens"):
+            foundation.retrieve_context("plain-1", max_tokens=0)
+        with self.assertRaisesRegex(ValueError, "recyclable context"):
+            foundation.retrieve_context("plain-1")
+        foundation.audits.close()
+
+    def test_retrieve_context_truncates_a_chunk_to_budget(self):
+        foundation = self.make_foundation()
+        foundation.save_data("long-1", {"chunks": ["abcdefghij"]})
+
+        result = foundation.retrieve_context("long-1", max_tokens=1)
+
+        self.assertEqual(result["chunks"], ["abcd"])
+        self.assertEqual(result["approximate_tokens"], 1)
+        foundation.audits.close()
+
 
 if __name__ == "__main__":
     unittest.main()

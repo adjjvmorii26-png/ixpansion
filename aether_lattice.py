@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import os
+import re
 import uuid
 from copy import deepcopy
 from typing import Any, Optional
@@ -20,6 +21,7 @@ class AetherLattice:
     DATA_KEY_LIMIT = 128
     RECYCLE_TEXT_LIMIT = 50_000
     RECYCLE_CHUNK_LIMITS = (64, 4_096)
+    RETRIEVE_TOKEN_LIMITS = (1, 8_000)
 
     WORKFLOWS = {
         "summarize": {
@@ -108,10 +110,7 @@ class AetherLattice:
         deduplicated = self.agent.deduplicate_lines(redacted)
         normalized = " ".join(deduplicated.split())
         summary = self.agent.summarize(normalized)
-        chunks = [
-            normalized[index:index + chunk_size]
-            for index in range(0, len(normalized), chunk_size)
-        ]
+        chunks = self._chunk_context(normalized, chunk_size)
         artifact = {
             "summary": summary.removeprefix("Summary: "),
             "chunks": chunks,
@@ -125,11 +124,70 @@ class AetherLattice:
         self.save_data(data_key, artifact)
         return {"data_key": self._normalize_data_key(data_key), **artifact}
 
+    @staticmethod
+    def _chunk_context(text: str, chunk_size: int) -> list[str]:
+        """Split context at whitespace where possible without exceeding the limit."""
+        chunks = []
+        remaining = text
+        while remaining:
+            if len(remaining) <= chunk_size:
+                chunks.append(remaining)
+                break
+            cut = remaining.rfind(" ", 0, chunk_size + 1)
+            if cut <= 0:
+                cut = chunk_size
+            chunks.append(remaining[:cut].rstrip())
+            remaining = remaining[cut:].lstrip()
+        return chunks
+
     def load_data(self, key: str) -> Any:
         normalized_key = self._normalize_data_key(key)
         if normalized_key not in self.data:
             raise KeyError(f"No reusable data named: {normalized_key}")
         return deepcopy(self.data[normalized_key])
+
+    def retrieve_context(
+        self,
+        key: str,
+        *,
+        query: str = "",
+        max_tokens: int = 800,
+    ) -> dict[str, Any]:
+        """Return the most relevant stored chunks within an approximate token budget."""
+        minimum, maximum = self.RETRIEVE_TOKEN_LIMITS
+        if not isinstance(max_tokens, int) or not minimum <= max_tokens <= maximum:
+            raise ValueError(f"max_tokens must be between {minimum} and {maximum}")
+        artifact = self.load_data(key)
+        if not isinstance(artifact, dict) or not isinstance(artifact.get("chunks"), list):
+            raise ValueError("data key does not contain recyclable context")
+        query_terms = set(re.findall(r"[a-z0-9]+", query.casefold()))
+        ranked = []
+        for index, chunk in enumerate(artifact["chunks"]):
+            if not isinstance(chunk, str):
+                continue
+            chunk_terms = set(re.findall(r"[a-z0-9]+", chunk.casefold()))
+            score = len(query_terms & chunk_terms)
+            ranked.append((0 if score else 1, -score, index, chunk))
+        ranked.sort()
+        selected = []
+        used_tokens = 0
+        for _, _, _, chunk in ranked:
+            chunk_tokens = max(1, (len(chunk) + 3) // 4)
+            if selected and used_tokens + chunk_tokens > max_tokens:
+                continue
+            if not selected and chunk_tokens > max_tokens:
+                chunk = chunk[: max_tokens * 4]
+                chunk_tokens = max_tokens
+            selected.append(chunk)
+            used_tokens += chunk_tokens
+        normalized_key = self._normalize_data_key(key)
+        return {
+            "data_key": normalized_key,
+            "query": query,
+            "chunks": selected,
+            "approximate_tokens": used_tokens,
+            "max_tokens": max_tokens,
+        }
 
     def workflows(self) -> list[dict[str, str]]:
         return [

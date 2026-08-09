@@ -36,7 +36,7 @@ The workflow is complete only when the requested behavior is evidenced by
 focused checks, known limitations are stated, and no unsupported capability is
 reported as production-ready.
 
-## Output
+## Report
 
 Return: mission brief, ownership and risk summary, delegated work, evidence,
 safety decisions, changed surfaces, limitations, and next blocking decision.

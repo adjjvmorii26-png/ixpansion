@@ -22,7 +22,7 @@ when they are not stored permanently.
 7. Test malformed input, secret redaction, unauthorized access, and retention behavior where applicable.
 8. Document user-visible data handling and any external transfer or optional integration.
 
-## Rules
+## Safety boundaries
 
 - Never log credentials, authorization headers, tokens, private keys, or raw sensitive payloads.
 - Prefer data minimization over collecting fields for possible future use.
@@ -31,7 +31,7 @@ when they are not stored permanently.
 - Do not claim deletion, privacy, encryption, or persistence guarantees that the code does not enforce.
 - Preserve only the identifiers and audit facts needed for bounded replay, diagnosis, or accountability.
 
-## Output
+## Report
 
 Return: data-flow map, classification, purpose, minimization decisions,
 retention and access rules, validation evidence, external-transfer boundary,

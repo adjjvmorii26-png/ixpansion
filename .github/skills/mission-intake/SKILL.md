@@ -18,14 +18,14 @@ Convert the request into an actionable, testable mission before implementation.
 5. Choose the smallest validation that could disconfirm the interpretation.
 6. Return a short mission brief for the implementing agent.
 
-## Rules
+## Safety boundaries
 
 - Prefer observable behavior over implementation language.
 - Preserve offline behavior when credentials or network access are absent.
 - Do not invent requirements from architecture plans or comments alone.
 - Escalate only decisions that change scope, public contracts, or external effects.
 
-## Output
+## Report
 
 Return: outcome, acceptance criteria, affected surfaces, execution boundary,
 non-goals, assumptions, risks, and the first discriminating check.

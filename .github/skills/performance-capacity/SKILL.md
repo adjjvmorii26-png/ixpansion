@@ -18,14 +18,14 @@ Measure the limiting resource before optimizing and keep resource use bounded.
 5. Re-measure normal, empty, worst-case, and budget-exhaustion inputs.
 6. Record capacity assumptions and regression thresholds.
 
-## Rules
+## Safety boundaries
 
 - Do not trade correctness, trust, or safety for speed without explicit approval.
 - Preserve deterministic offline behavior.
 - Avoid benchmark claims without workload, environment, and measurement details.
 - Keep concurrency, queue, lease, and gas limits explicit.
 
-## Output
+## Report
 
 Return: baseline, bottleneck, bounded change, measurements, capacity limits,
 and residual risk.

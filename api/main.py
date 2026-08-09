@@ -64,6 +64,11 @@ class RecycleRequest(BaseModel):
     task_id: Optional[str] = None
 
 
+class ContextRetrieveRequest(BaseModel):
+    query: str = ""
+    max_tokens: int = 800
+
+
 @app.get("/")
 def read_root() -> dict:
     return {"service": "ixpansion", "status": "ok"}
@@ -137,6 +142,20 @@ def aether_recycle(request: RecycleRequest) -> dict:
             chunk_size=request.chunk_size,
             task_id=request.task_id,
         )
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.post("/aether/context/{key}/retrieve")
+def aether_context_retrieve(key: str, request: ContextRetrieveRequest) -> dict:
+    try:
+        return foundation.retrieve_context(
+            key,
+            query=request.query,
+            max_tokens=request.max_tokens,
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
 

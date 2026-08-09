@@ -18,14 +18,14 @@ stable boundary.
 4. Identify contract, persistence, trust, safety, and transport boundaries.
 5. Recommend the smallest vertical slice and the tests that observe each boundary.
 
-## Rules
+## Safety boundaries
 
 - Do not add speculative layers for planned architecture.
 - Keep simulated transport visibly separate from real network behavior.
 - Preserve public APIs unless a contract change is required and documented.
 - Call out ownership ambiguity instead of distributing logic across neighbors.
 
-## Output
+## Report
 
 Return: ownership map, boundary invariants, proposed change surface,
 contract risks, and focused test points.

@@ -18,14 +18,14 @@ Turn an approved mission into the smallest sequence of executable edits.
 5. Define the first focused validation before implementation begins.
 6. Include rollback or containment behavior for partial failure.
 
-## Rules
+## Safety boundaries
 
 - Prefer existing patterns and helpers.
 - Avoid speculative abstractions and unrelated cleanup.
 - Keep budgets, retries, trust thresholds, and human gates explicit.
 - Stop planning when the requested behavior is fully covered by the slice.
 
-## Output
+## Report
 
 Return: ordered task list, file ownership, dependencies, first validation,
 completion criteria, and known blockers.
