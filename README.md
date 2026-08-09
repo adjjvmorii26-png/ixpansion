@@ -67,6 +67,37 @@ trust/audit controls, federation simulator, and swarm metadata behind one
 inspectable runtime. Forge, fabric, SI, and federation work should still land
 behind tests and `make verify` before being presented as production capabilities.
 
+## Design principles
+
+IXPANSION treats autonomy as a controlled feedback loop rather than an
+unbounded agent process:
+
+```text
+observe -> classify -> allocate -> act -> audit -> update trust
+    ^                                             |
+    +------------- bounded, inspectable state ----+
+```
+
+The implementation follows four practical computer-science ideas:
+
+- **Deterministic degradation:** offline skills and simulated transport remain
+  useful without credentials or network access. External integrations are an
+  optional edge, not a prerequisite for the core loop.
+- **Trust-aware scheduling:** health, capacity, load, and reputation are part of
+  placement. Critical work does not silently fall through to degraded capacity,
+  and stale machines can be quarantined instead of receiving new leases.
+- **Bounded context:** recycling redacts, deduplicates, chunks, hashes, and
+  budgets retained context before retrieval. This keeps memory use and prompt
+  size explicit while preserving source-order ties.
+- **Evidence before scale:** every new autonomous behavior should have a local
+  simulation, a visible snapshot or audit event, and a focused test before it
+  grows into a networked or persistent subsystem.
+
+For operators, this produces a simple loop: start offline, inspect `/aether` and
+`/lattice`, dispatch a bounded task, then verify the resulting audit and trust
+state. The dashboard is deliberately a control surface for that loop, not a
+claim that the local process is a secure multi-host deployment.
+
 The local 1.3 federation demonstration is now available as a deterministic,
 offline simulator:
 
