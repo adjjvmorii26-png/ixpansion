@@ -18,6 +18,7 @@ multiple recipes must be coordinated.
 2. If several recipes match, choose the narrowest one that can produce evidence.
 3. If the work crosses domains, select one primary recipe and list the others as supporting checks.
 4. Use `workflow-force` when the work needs an ordered chain of three or more recipes.
+5. Add [data-governance](../data-governance/SKILL.md) whenever data is logged, stored, transmitted, transformed, or exposed.
 
 ## Execution Contract
 
@@ -139,6 +140,7 @@ For the selected recipe, record:
 ## Completion Rules
 
 - Keep network, credentials, destructive actions, and deployment behind explicit boundaries.
+- Classify, minimize, redact, and define retention for data handled by the workflow.
 - Preserve public contracts unless the selected workflow explicitly includes a contract change.
 - Never report simulated, process-local, or unauthenticated behavior as production-ready.
 - Never commit, push, reset, create branches, or open pull requests unless explicitly requested.

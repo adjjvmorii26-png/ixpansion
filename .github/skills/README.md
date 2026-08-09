@@ -40,6 +40,7 @@ security-sensitive, or externally effectful work.
 ## Quality And Safety
 
 - [ci-pipeline-maintainer](ci-pipeline-maintainer/SKILL.md): maintain CI workflows and validation commands.
+- [data-governance](data-governance/SKILL.md): review data classification, minimization, retention, and transfer boundaries.
 - [dependency-auditor](dependency-auditor/SKILL.md): audit dependency declarations and import failures.
 - [python-test-engineer](python-test-engineer/SKILL.md): write focused Python regression and boundary tests.
 - [release-preparer](release-preparer/SKILL.md): check release readiness and compatibility.
