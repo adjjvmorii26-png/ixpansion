@@ -54,6 +54,10 @@ class WorkflowRequest(BaseModel):
     task_id: Optional[str] = None
 
 
+class ReusableDataRequest(BaseModel):
+    value: object
+
+
 @app.get("/")
 def read_root() -> dict:
     return {"service": "ixpansion", "status": "ok"}
@@ -96,6 +100,27 @@ def aether_workflow(workflow: str, request: WorkflowRequest) -> dict:
         )
     except (LookupError, ValueError) as exc:
         raise HTTPException(status_code=409, detail=str(exc)) from exc
+
+
+@app.get("/aether/data")
+def aether_data_keys() -> dict:
+    return {"keys": foundation.list_data()}
+
+
+@app.get("/aether/data/{key}")
+def aether_data_get(key: str) -> dict:
+    try:
+        return {"key": key, "value": foundation.load_data(key)}
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.put("/aether/data/{key}")
+def aether_data_put(key: str, request: ReusableDataRequest) -> dict:
+    try:
+        return foundation.save_data(key, request.value)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
 
 
 @app.get("/dashboard", response_class=HTMLResponse)

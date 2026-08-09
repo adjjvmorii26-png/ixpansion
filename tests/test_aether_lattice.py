@@ -57,6 +57,31 @@ class AetherLatticeTests(unittest.TestCase):
         )
         foundation.audits.close()
 
+    def test_workflow_results_are_reusable_by_key(self):
+        foundation = self.make_foundation()
+        result = foundation.run_workflow("normalize_text", "  reuse   this  ", task_id="saved-1")
+        self.assertEqual(result["data_key"], "saved-1")
+        self.assertEqual(foundation.load_data("saved-1")["result"], "Normalized: reuse this")
+        self.assertEqual(foundation.list_data(), ["saved-1"])
+        foundation.audits.close()
+
+    def test_reusable_data_keys_are_normalized_and_values_are_copied(self):
+        foundation = self.make_foundation()
+        value = {"items": ["one"]}
+        saved = foundation.save_data("  note-1  ", value)
+        value["items"].append("caller-change")
+
+        self.assertEqual(saved, {"key": "note-1", "value": {"items": ["one"]}})
+        self.assertEqual(foundation.load_data("note-1"), {"items": ["one"]})
+        foundation.audits.close()
+
+    def test_reusable_data_rejects_unsafe_keys(self):
+        foundation = self.make_foundation()
+        for key in ("", "has space", "../outside", "x" * 129):
+            with self.subTest(key=key), self.assertRaisesRegex(ValueError, "data key"):
+                foundation.save_data(key, "value")
+        foundation.audits.close()
+
 
 if __name__ == "__main__":
     unittest.main()

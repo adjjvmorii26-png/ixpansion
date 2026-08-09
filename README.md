@@ -173,6 +173,11 @@ Available endpoints:
 - `GET /aether/workflows` lists six token-free automation workflows.
 - `POST /aether/workflows/{workflow}` runs `summarize`, `extract_tasks`,
   `make_checklist`, `score_priority`, `normalize_text`, or `dispatch_work`.
+- `GET /aether/data` lists reusable data keys; `GET` and `PUT
+  /aether/data/{key}` retrieve or store JSON data. Workflow calls with a
+  `task_id` automatically save their result under that key.
+  Data keys are trimmed, limited to 128 characters, and cannot contain
+  whitespace or path separators.
 - `GET /skills` lists local skill contracts.
 - `POST /skills/{skill}` executes a local skill with `{"text": "..."}`.
 - `GET /lattice` reports machine states and active leases.
@@ -189,6 +194,10 @@ curl http://127.0.0.1:8000/
 curl http://127.0.0.1:8000/health
 curl http://127.0.0.1:8000/aether
 curl http://127.0.0.1:8000/aether/workflows
+curl -X PUT http://127.0.0.1:8000/aether/data/project-note \
+  -H 'Content-Type: application/json' \
+  -d '{"value":{"status":"ready"}}'
+curl http://127.0.0.1:8000/aether/data/project-note
 curl http://127.0.0.1:8000/skills
 curl -X POST http://127.0.0.1:8000/aether/dispatch \
   -H 'Content-Type: application/json' \

@@ -35,6 +35,13 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["result"], "Tasks:\n- inspect API")
 
+    def test_aether_data_can_be_saved_and_reused(self):
+        client = TestClient(app)
+        saved = client.put("/aether/data/reusable-note", json={"value": {"ready": True}})
+        self.assertEqual(saved.status_code, 200)
+        loaded = client.get("/aether/data/reusable-note")
+        self.assertEqual(loaded.json(), {"key": "reusable-note", "value": {"ready": True}})
+
     def test_dashboard_is_a_browser_page(self):
         response = TestClient(app).get("/dashboard")
         self.assertEqual(response.status_code, 200)
