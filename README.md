@@ -124,6 +124,21 @@ Skill contracts are available through `Agent.describe_skills()`. Memory can be
 isolated with `agent.remember(item, namespace="project")`, then exported or
 flushed by passing that namespace to the corresponding memory skill.
 
+## Testing and debugging
+
+Run the full dependency-free test suite from the repository root:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+In VS Code, select the configured Python interpreter and use **Python Tests:
+All Unittest** to debug the suite. **Python Debugger: Current File** also sets
+the repository root on `PYTHONPATH`, so tests that import top-level modules such
+as `aether_lattice` resolve correctly. Running a test file directly without
+that path, for example `python tests/test_aether_lattice.py`, can fail because
+Python starts with `tests/` as its import directory.
+
 ## TokenRouter integration
 
 Copy `.env.example` to `.env`, then set `TOKENROUTER_API_KEY` to a newly generated key:

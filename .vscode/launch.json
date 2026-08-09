@@ -14,6 +14,23 @@
                 "PYTHONPATH": "${workspaceFolder}"
             },
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Python Tests: All Unittest",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "unittest",
+            "args": [
+                "discover",
+                "-s",
+                "tests",
+                "-v"
+            ],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "console": "integratedTerminal"
         }
     ]
 }
