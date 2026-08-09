@@ -17,6 +17,7 @@ security-sensitive, or externally effectful work.
 ## Coordination
 
 - [workflow-force](workflow-force/SKILL.md): sequence a complex mission and enforce completion evidence.
+- [workflow-library](workflow-library/SKILL.md): select one of 80 bounded workflow recipes.
 - [multi-layer-autonomous](multi-layer-autonomous/SKILL.md): coordinate bounded autonomous behavior across layers.
 
 ## Engineering
