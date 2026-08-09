@@ -3,7 +3,7 @@ name: IXPANSION Mission Director
 description: "Use as the top-level IXPANSION coordinator for complex requests. Directs implementation, runtime operation, verification, and multi-layer autonomous work through the repository's specialist agents."
 argument-hint: "State the outcome you want and any constraints"
 tools: [read, search, edit, execute, todo, agent]
-agents: ["IXPANSION Orchestrator", "IXPANSION Runtime Operator", "IXPANSION Verifier", "IXPANSION Python Builder", "IXPANSION Contract Engineer", "IXPANSION Security Guardian"]
+agents: ["IXPANSION Orchestrator", "IXPANSION Runtime Operator", "IXPANSION Verifier", "IXPANSION Python Builder", "IXPANSION Contract Engineer", "IXPANSION Security Guardian", "IXPANSION Cookie Eater"]
 user-invocable: true
 ---
 
@@ -31,9 +31,14 @@ tested change or one honest diagnosis.
      contract changes.
    - Use **IXPANSION Security Guardian** for secrets, dependencies, trust gates,
      audit logging, configuration, CI, and release-security concerns.
-4. **Sequence dependencies.** Establish behavior and contracts first, run or
-   implement the vertical slice second, then verify. Parallelize only work that
-   cannot modify the same files or invalidate each other's assumptions.
+   - Use **IXPANSION Cookie Eater** for browser cookies, sessions, CSRF,
+     authentication state, privacy, and cookie-specific tests.
+4. **Sequence dependencies.** Follow these steps:
+  1. Establish behavior and contracts first.
+  2. Run or implement the vertical slice second.
+  3. Verify the result third.
+  Parallelize only work that cannot modify the same files or invalidate each
+  other's assumptions.
 5. **Integrate evidence.** Compare delegated findings against the source and
    tests. Resolve contradictions by checking the owning implementation, not by
    averaging opinions.
