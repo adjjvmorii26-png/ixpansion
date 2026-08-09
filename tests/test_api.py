@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
@@ -90,6 +91,37 @@ class ApiTests(unittest.TestCase):
             json={},
         )
         self.assertEqual(response.status_code, 404)
+
+    @patch("api.main.resource_collector.collect")
+    def test_resource_collection_creates_reusable_passport(self, collect):
+        collect.return_value = {
+            "url": "https://docs.example.test/start",
+            "title": "Docs",
+            "text": "TOKEN=secret-value\nKeep this fact.",
+            "links": ["https://docs.example.test/next"],
+            "bytes": 42,
+        }
+        client = TestClient(app)
+        response = client.post(
+            "/resources",
+            json={"url": "https://docs.example.test/start", "task_id": "resource-api-1"},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertTrue(payload["artifact"]["redacted"])
+        self.assertNotIn("secret-value", response.text)
+        resource = client.get(f"/resources/{payload['resource_id']}")
+        self.assertEqual(resource.status_code, 200)
+        self.assertEqual(resource.json()["title"], "Docs")
+        self.assertEqual(client.get("/resources").status_code, 200)
+
+    def test_resource_collection_rejects_disallowed_host(self):
+        response = TestClient(app).post(
+            "/resources",
+            json={"url": "https://not-allowlisted.example/page"},
+        )
+        self.assertEqual(response.status_code, 403)
 
     def test_dashboard_is_a_browser_page(self):
         response = TestClient(app).get("/dashboard")

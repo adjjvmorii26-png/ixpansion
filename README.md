@@ -236,9 +236,29 @@ Available endpoints:
 - `GET /lattice` reports machine states and active leases.
 - `POST /lattice/heartbeat` updates machine telemetry.
 - `POST /lattice/allocate` selects a machine and can create a bounded lease.
+- `POST /resources` fetches an explicitly allowlisted public HTML or plain-text
+  page and stores its redacted reusable artifact.
+- `GET /resources` lists Resource Passports; `GET /resources/{resource_id}`
+  retrieves one passport and its bounded artifact.
 
 The skill and lattice API state is process-local and intentionally has no
 authentication or persistence claim yet.
+
+Resource ingestion is configured separately with `IXPANSION_RESOURCE_HOSTS`, a
+comma-separated exact-host allowlist. `IXPANSION_RESOURCE_DB` selects the local
+SQLite database and defaults to `ixpansion_resources.sqlite3`:
+
+```bash
+export IXPANSION_RESOURCE_HOSTS=docs.example.com,handbook.example.com
+export IXPANSION_RESOURCE_DB=ixpansion_resources.sqlite3
+```
+
+The collector sends no browser cookies, authorization headers, or session
+state. It rejects non-HTTP(S) URLs, hosts outside the allowlist, redirects,
+non-text content, empty pages, and oversized responses. A Resource Passport
+records the source URL, title, links, fetch time, content hash, and bounded
+redacted chunks. The SQLite file is local application data and should be
+protected accordingly.
 
 Example requests:
 
@@ -258,6 +278,10 @@ curl -X POST http://127.0.0.1:8000/aether/dispatch \
 curl -X POST http://127.0.0.1:8000/aether/recycle \
   -H 'Content-Type: application/json' \
   -d '{"text":"API_KEY=placeholder\nKeep this fact.","task_id":"context-1"}'
+curl -X POST http://127.0.0.1:8000/resources \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"https://docs.example.com/start","task_id":"resource-1"}'
+curl http://127.0.0.1:8000/resources
 curl -X POST http://127.0.0.1:8000/aether/context/context-1/retrieve \
   -H 'Content-Type: application/json' \
   -d '{"query":"fact","max_tokens":400}'
