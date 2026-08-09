@@ -4,6 +4,8 @@ For complex, cross-module, user-facing, security-sensitive, or externally effect
 
 For a simple question, focused diagnosis, or single-file change with a clear owner, use the smallest relevant workflow and validation instead of expanding the task unnecessarily.
 
+Use [.github/skills/README.md](skills/README.md) as the human-readable index of available skills and their recommended order.
+
 Always:
 
 - Establish the behavior, acceptance criteria, and execution boundary before editing.
