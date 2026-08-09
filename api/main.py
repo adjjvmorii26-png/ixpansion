@@ -1,4 +1,5 @@
 import os
+import hashlib
 from typing import Optional
 
 from fastapi import FastAPI, HTTPException
@@ -10,6 +11,7 @@ from aether_lattice import AetherLattice
 from lattice_stack import LatticePolicy, Machine, MachineLattice
 from security_controls import URLPolicy
 from web_resources import PublicResourceCollector
+from resource_store import ResourceStore
 
 app = FastAPI(title="IXPANSION API", version="1.2.0-rc3")
 foundation = AetherLattice(
@@ -31,6 +33,7 @@ resource_collector = PublicResourceCollector(
         if host.strip()
     )
 )
+resource_store = ResourceStore(os.getenv("IXPANSION_RESOURCE_DB", "ixpansion_resources.sqlite3"))
 
 
 class SkillRequest(BaseModel):
@@ -83,6 +86,11 @@ class ResourceRequest(BaseModel):
     url: str
     chunk_size: int = 800
     task_id: Optional[str] = None
+
+
+def _resource_id(url: str, text: str) -> str:
+    digest = hashlib.sha256(f"{url}\n{text}".encode("utf-8")).hexdigest()[:24]
+    return f"resource-{digest}"
 
 
 @app.get("/")
@@ -173,6 +181,42 @@ def aether_context_retrieve(key: str, request: ContextRetrieveRequest) -> dict:
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.get("/resources")
+def list_resources() -> dict:
+    return {"resources": resource_store.list()}
+
+
+@app.get("/resources/{resource_id}")
+def get_resource(resource_id: str) -> dict:
+    try:
+        return resource_store.get(resource_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.post("/resources")
+def collect_resource(request: ResourceRequest) -> dict:
+    try:
+        page = resource_collector.collect(request.url)
+        artifact = foundation.recycle_data(
+            str(page["text"]),
+            chunk_size=request.chunk_size,
+            task_id=request.task_id,
+        )
+        resource_id = _resource_id(str(page["url"]), str(page["text"]))
+        return resource_store.save(
+            resource_id,
+            source_url=str(page["url"]),
+            title=str(page["title"]),
+            links=list(page["links"]),
+            artifact=artifact,
+        )
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from exc
+    except (ValueError, RuntimeError, OSError) as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
 
 
