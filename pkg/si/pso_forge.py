@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""PSO-backed Forge agent — Particle Swarm Optimization for Forge-role agents."""
+"""PSO-backed Forge agent"""
 from __future__ import annotations
-
-import random
-import math
+import random, math
 from dataclasses import dataclass, field
-from typing import Callable, Dict, List, Optional, Sequence, Tuple
+from typing import Callable, List, Optional, Sequence, Tuple
 
 
 @dataclass
@@ -36,25 +34,8 @@ def sphere(x: Sequence[float]) -> float:
     return sum(xi * xi for xi in x)
 
 
-def rosenbrock(x: Sequence[float]) -> float:
-    return sum(100.0 * (x[i+1] - x[i]**2)**2 + (1 - x[i])**2 for i in range(len(x)-1)) if len(x) > 1 else (1-x[0])**2
-
-
-def ackley(x: Sequence[float]) -> float:
-    n = len(x) or 1
-    a, b, c = 20.0, 0.2, 2 * math.pi
-    s1 = sum(xi*xi for xi in x) / n
-    s2 = sum(math.cos(c*xi) for xi in x) / n
-    return -a * math.exp(-b * math.sqrt(s1)) - math.exp(s2) + a + math.e
-
-
-def rastrigin(x: Sequence[float]) -> float:
-    a = 10.0
-    return a * len(x) + sum(xi * xi - a * math.cos(2 * math.pi * xi) for xi in x)
-
-
 class ParticleSwarm:
-    def __init__(self, config: Optional[PSOConfig] = None, fitness: Optional[Callable[[List[float]], float]] = None):
+    def __init__(self, config: Optional[PSOConfig] = None, fitness: Optional[Callable] = None):
         self.cfg = config or PSOConfig()
         self.fitness = fitness or sphere
         self.rng = random.Random(self.cfg.seed)
@@ -71,18 +52,17 @@ class ParticleSwarm:
         pbest = [p[:] for p in pos]
         pbest_f = [self.fitness(p) for p in pbest]
         g_idx = min(range(cfg.n_particles), key=lambda i: pbest_f[i])
-        gbest = pbest[g_idx][:]
-        gbest_f = pbest_f[g_idx]
+        gbest, gbest_f = pbest[g_idx][:], pbest_f[g_idx]
         history = [gbest_f]
-
         for it in range(cfg.iters):
+            w = cfg.w
             if cfg.w_decay:
-                cfg.w = max(cfg.w_min, cfg.w * 0.99)
+                w = cfg.w_min + (cfg.w - cfg.w_min) * (1 - it / max(1, cfg.iters - 1))
             for i in range(cfg.n_particles):
                 for d in range(cfg.dim):
                     r1, r2 = self.rng.random(), self.rng.random()
                     vel[i][d] = (
-                        cfg.w * vel[i][d]
+                        w * vel[i][d]
                         + cfg.c1 * r1 * (pbest[i][d] - pos[i][d])
                         + cfg.c2 * r2 * (gbest[d] - pos[i][d])
                     )
@@ -90,39 +70,13 @@ class ParticleSwarm:
                     pos[i][d] = self._clamp(pos[i][d] + vel[i][d])
                 f = self.fitness(pos[i])
                 if f < pbest_f[i]:
-                    pbest_f[i] = f
-                    pbest[i] = pos[i][:]
+                    pbest[i], pbest_f[i] = pos[i][:], f
                     if f < gbest_f:
-                        gbest_f = f
-                        gbest = pos[i][:]
+                        gbest, gbest_f = pos[i][:], f
             history.append(gbest_f)
-
-        return PSOResult(
-            best_x=[round(x, 6) for x in gbest],
-            best_fitness=gbest_f,
-            history=history,
-            iters=cfg.iters,
-            particles=cfg.n_particles,
-        )
+        return PSOResult(best_x=gbest, best_fitness=gbest_f, history=history, iters=cfg.iters, particles=cfg.n_particles)
 
 
-def forge_pso(
-    fitness: Optional[Callable[[List[float]], float]] = None,
-    config: Optional[PSOConfig] = None,
-) -> Dict:
-    swarm = ParticleSwarm(config=config, fitness=fitness or sphere)
-    result = swarm.optimize()
-    return {
-        "optimizer": "PSO",
-        "best_x": result.best_x,
-        "best_fitness": result.best_fitness,
-        "iters": result.iters,
-        "particles": result.particles,
-        "final_history": result.history[-5:],
-        "improved": result.history[0] - result.best_fitness,
-    }
-
-
-if __name__ == "__main__":
-    out = forge_pso(config=PSOConfig(dim=3, n_particles=20, iters=50, seed=42))
-    print(out)
+def run_pso_sphere(seed: int = 0) -> dict:
+    r = ParticleSwarm(PSOConfig(seed=seed, iters=30, n_particles=12)).optimize()
+    return {"best_fitness": r.best_fitness, "best_x": r.best_x, "iters": r.iters}

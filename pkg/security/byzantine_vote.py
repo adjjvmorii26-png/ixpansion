@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
-"""
-Distributed Byzantine Consensus Vote (1.3 trust scope)
-Simple f-fault tolerant majority: requires 2f+1 agrees from 3f+1 participants.
-"""
+"""Distributed Byzantine Consensus Vote (1.3 trust scope)"""
 from __future__ import annotations
-from collections import Counter
 from dataclasses import dataclass
 from typing import Dict, List
 
@@ -13,7 +9,7 @@ from typing import Dict, List
 class Ballot:
     voter_id: str
     proposal_id: str
-    choice: str  # accept | reject | abstain
+    choice: str
     weight: float = 1.0
 
 
@@ -57,30 +53,11 @@ class ByzantineVoter:
             and tally["accept"] >= (self.f + 1)
         )
         result = VoteResult(
-            proposal_id=proposal_id,
-            accepted=accepted,
-            tally=tally,
-            participating=participating,
-            threshold=threshold,
-            byzantine_tolerance_f=self.f,
+            proposal_id=proposal_id, accepted=accepted, tally=tally,
+            participating=participating, threshold=threshold, byzantine_tolerance_f=self.f,
         )
         self.results.append(result)
         return result
 
     def snapshot(self) -> dict:
-        return {
-            "f": self.f,
-            "min_nodes": self.min_nodes,
-            "proposals": len(self.ballots),
-            "results": len(self.results),
-        }
-
-
-if __name__ == "__main__":
-    v = ByzantineVoter(f=1)
-    pid = "upgrade-1.3"
-    for i, c in enumerate(["accept", "accept", "accept", "reject"]):
-        v.cast(pid, f"n{i}", c)
-    r = v.tally(pid)
-    print(r)
-    print(v.snapshot())
+        return {"f": self.f, "min_nodes": self.min_nodes, "proposals": len(self.ballots), "results": len(self.results)}
