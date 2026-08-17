@@ -1,16 +1,17 @@
 # Continue log — 1.5.4-organism
 
-## Done this pass
-- SOLID ORGANISM map (21 limbs)
-- Cross-links: workforce-, aegis, capability-sandbox, dev
-- pkg/ tree expanding (core, si, security, signal, experimental)
-- NEXUS + sandbox already on master
+## Done
+- pkg/security/vectra_hitl_gate.py + byzantine_vote.py
+- ORGANISM_LINK on workforce-, aegis, capability-sandbox, dev, feature-1.5, base
+- pkg/ experimental toys + domain_config
+- SOLID ORGANISM registry (ORGANISM.md / ORGANISM.json)
 
-## Blockers
-- Remote `ixpansion/` is a **submodule** — package ships as `pkg/`
-- Large modules (mesh_core, full workforce_pipeline, vivarium.html) push in follow-on commits
+## Still local-first (next)
+- pkg/security/workforce_pipeline.py
+- pkg/si/pso_forge.py, aco_forge.py
+- pkg/signal/lumen_constellation.py
+- mesh_public/vivarium.html
+- full mesh_core (remote ixpansion/ is a submodule)
 
-## Next
-1. Push vectra_hitl + workforce_pipeline into pkg/security
-2. Push lumen_constellation + pso_forge full sources
-3. Optional: remove submodule on machine, rename pkg → ixpansion
+## Note
+Package code ships under **pkg/** because remote path `ixpansion/` is a git submodule (mode 160000).
