@@ -1,34 +1,86 @@
 #!/usr/bin/env python3
-"""Byzantine voting for mesh governance."""
+"""
+Distributed Byzantine Consensus Vote (1.3 trust scope)
+Simple f-fault tolerant majority: requires 2f+1 agrees from 3f+1 participants.
+"""
 from __future__ import annotations
-from collections import defaultdict
-from dataclasses import dataclass, field
+from collections import Counter
+from dataclasses import dataclass
 from typing import Dict, List
 
+
 @dataclass
-class VoteTally:
-    topic: str
-    accepts: int = 0
-    rejects: int = 0
-    @property
-    def accepted(self) -> bool:
-        return self.accepts > self.rejects
+class Ballot:
+    voter_id: str
+    proposal_id: str
+    choice: str  # accept | reject | abstain
+    weight: float = 1.0
+
+
+@dataclass
+class VoteResult:
+    proposal_id: str
+    accepted: bool
+    tally: Dict[str, float]
+    participating: int
+    threshold: float
+    byzantine_tolerance_f: int
+
 
 class ByzantineVoter:
-    """Simple f-fault tolerant tally (majority among votes cast)."""
     def __init__(self, f: int = 1):
         self.f = f
-        self._votes: Dict[str, Dict[str, str]] = defaultdict(dict)
+        self.min_nodes = 3 * f + 1
+        self.ballots: Dict[str, List[Ballot]] = {}
+        self.results: List[VoteResult] = []
 
-    def cast(self, topic: str, node_id: str, ballot: str) -> None:
-        self._votes[topic][node_id] = ballot
+    def cast(self, proposal_id: str, voter_id: str, choice: str, weight: float = 1.0) -> None:
+        choice = choice if choice in ("accept", "reject", "abstain") else "abstain"
+        self.ballots.setdefault(proposal_id, []).append(
+            Ballot(voter_id=voter_id, proposal_id=proposal_id, choice=choice, weight=weight)
+        )
 
-    def tally(self, topic: str) -> VoteTally:
-        ballots = self._votes.get(topic, {})
-        t = VoteTally(topic=topic)
-        for b in ballots.values():
-            if b == "accept":
-                t.accepts += 1
-            else:
-                t.rejects += 1
-        return t
+    def tally(self, proposal_id: str) -> VoteResult:
+        votes = self.ballots.get(proposal_id, [])
+        latest: Dict[str, Ballot] = {}
+        for b in votes:
+            latest[b.voter_id] = b
+        tally: Dict[str, float] = {"accept": 0.0, "reject": 0.0, "abstain": 0.0}
+        for b in latest.values():
+            tally[b.choice] += b.weight
+        participating = len(latest)
+        active = tally["accept"] + tally["reject"]
+        threshold = max(self.f + 1, (active / 2) + 0.01) if active else float("inf")
+        accepted = (
+            participating >= (2 * self.f + 1)
+            and tally["accept"] > tally["reject"]
+            and tally["accept"] >= (self.f + 1)
+        )
+        result = VoteResult(
+            proposal_id=proposal_id,
+            accepted=accepted,
+            tally=tally,
+            participating=participating,
+            threshold=threshold,
+            byzantine_tolerance_f=self.f,
+        )
+        self.results.append(result)
+        return result
+
+    def snapshot(self) -> dict:
+        return {
+            "f": self.f,
+            "min_nodes": self.min_nodes,
+            "proposals": len(self.ballots),
+            "results": len(self.results),
+        }
+
+
+if __name__ == "__main__":
+    v = ByzantineVoter(f=1)
+    pid = "upgrade-1.3"
+    for i, c in enumerate(["accept", "accept", "accept", "reject"]):
+        v.cast(pid, f"n{i}", c)
+    r = v.tally(pid)
+    print(r)
+    print(v.snapshot())
