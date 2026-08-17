@@ -1,0 +1,43 @@
+x-swarm-environment: &swarm-environment
+  SWARM_TOKEN: ${SWARM_TOKEN:-}
+
+services:
+  hub:
+    build: .
+    command: ["uvicorn", "swarm_runtime:app", "--host", "0.0.0.0", "--port", "8765"]
+    environment:
+      <<: *swarm-environment
+      SWARM_ROLE: hub
+      SWARM_PORT: "8765"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8765/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  worker:
+    build: .
+    command: ["python", "swarm_runtime.py"]
+    environment:
+      <<: *swarm-environment
+      SWARM_ROLE: worker
+      SWARM_HUB: http://hub:8765
+      SWARM_NODE_ID: ""
+    depends_on:
+      hub:
+        condition: service_healthy
+    restart: unless-stopped
+
+  panel:
+    build: .
+    command: ["uvicorn", "swarm_runtime:app", "--host", "0.0.0.0", "--port", "8080"]
+    environment:
+      <<: *swarm-environment
+      SWARM_ROLE: panel
+      SWARM_HUB: http://hub:8765
+    depends_on:
+      hub:
+        condition: service_healthy
+    restart: unless-stopped
