@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IXPANSION · 4D Neural Ecosystem</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #030508; font-family: monospace; }
+        canvas { width: 100%; height: 100%; display: block; }
+        #hud { position: absolute; top: 15px; left: 15px; color: #00f3ff; background: rgba(0,0,0,0.7); padding: 12px; border-radius: 8px; border: 1px solid rgba(0,243,255,0.3); }
+        #hud a { color: #00f3ff; }
+    </style>
+</head>
+<body>
+    <div id="hud">
+        <div style="letter-spacing:0.25em;font-size:11px;opacity:0.85;margin-bottom:6px;">IXPANSION · NEXUS</div>
+        <div>Worker FPS: <span id="worker-fps">0</span></div>
+        <div>Active Organisms: <span id="agent-count">0</span></div>
+        <div>Thread Model: <span style="color:#00ff88;">Zero-Copy Transferable Memory</span></div>
+        <div style="margin-top:8px;font-size:11px;opacity:0.7;">
+          <a href="vivarium.html">VIVARIUM</a> ·
+          <a href="lumen.html">LUMEN</a>
+        </div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script id="worker-code" type="javascript/worker">
+        let warpVelocity = 0.012;
+        self.onmessage = function(e) {
+            const { stateBuffer, brainBuffer, count, width, height } = e.data;
+            const states = new Float32Array(stateBuffer);
+            const brains = new Float32Array(brainBuffer);
+            const STRIDE = 12, BRAIN_STRIDE = 16;
+            for (let i = 0; i < count; i++) {
+                let sIdx = i * STRIDE, bIdx = i * BRAIN_STRIDE;
+                if (states[sIdx + 11] === 0) continue;
+                let x = states[sIdx], y = states[sIdx+1], z = states[sIdx+2], w = states[sIdx+3];
+                let vx = states[sIdx+4], vy = states[sIdx+5], vz = states[sIdx+6], vw = states[sIdx+7];
+                let energy = states[sIdx+8];
+                let cosA = Math.cos(warpVelocity), sinA = Math.sin(warpVelocity);
+                let zN = z * cosA - w * sinA, wN = z * sinA + w * cosA;
+                z = zN; w = wN;
+                let inputs = [Math.hypot(x, y) / 500, w / 400, energy / 200, 1.0];
+                let outputs = [0, 0, 0, 0];
+                for (let row = 0; row < 4; row++) {
+                    for (let col = 0; col < 4; col++) {
+                        outputs[row] += inputs[col] * brains[bIdx + (row * 4 + col)];
+                    }
+                    outputs[row] = Math.tanh(outputs[row]);
+                }
+                vx += outputs[0] * 0.1; vy += outputs[1] * 0.1;
+                vz += outputs[2] * 0.1; vw += outputs[3] * 0.1;
+                x += vx; y += vy; z += vz; w += vw;
+                const limit = Math.min(width, height) * 0.4;
+                if (Math.hypot(x, y) > limit) { vx -= (x / limit) * 0.2; vy -= (y / limit) * 0.2; }
+                states[sIdx]=x; states[sIdx+1]=y; states[sIdx+2]=z; states[sIdx+3]=w;
+                states[sIdx+4]=vx; states[sIdx+5]=vy; states[sIdx+6]=vz; states[sIdx+7]=vw;
+                states[sIdx+8]=energy-0.05;
+            }
+            self.postMessage({ stateBuffer: states.buffer, brainBuffer: brains.buffer, count }, [states.buffer, brains.buffer]);
+        };
+    </script>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        const MAX_AGENTS = 5000, STATE_STRIDE = 12, BRAIN_STRIDE = 16;
+        let stateArray = new Float32Array(MAX_AGENTS * STATE_STRIDE);
+        let brainArray = new Float32Array(MAX_AGENTS * BRAIN_STRIDE);
+        let activeCount = 1000;
+        for (let i = 0; i < activeCount; i++) {
+            let sIdx = i * STATE_STRIDE, bIdx = i * BRAIN_STRIDE;
+            stateArray[sIdx] = (Math.random()-0.5)*width*0.6;
+            stateArray[sIdx+1] = (Math.random()-0.5)*height*0.6;
+            stateArray[sIdx+2] = (Math.random()-0.5)*400;
+            stateArray[sIdx+3] = (Math.random()-0.5)*400;
+            stateArray[sIdx+8] = 100 + Math.random()*50;
+            stateArray[sIdx+11] = 1;
+            for (let j = 0; j < 16; j++) brainArray[bIdx+j] = (Math.random()-0.5)*2;
+        }
+        const blob = new Blob([document.getElementById('worker-code').textContent], { type: 'text/javascript' });
+        const worker = new Worker(URL.createObjectURL(blob));
+        let workerBusy = false, lastWorkerTime = performance.now();
+        worker.onmessage = function(e) {
+            stateArray = new Float32Array(e.data.stateBuffer);
+            brainArray = new Float32Array(e.data.brainBuffer);
+            let now = performance.now();
+            document.getElementById('worker-fps').innerText = Math.round(1000 / (now - lastWorkerTime));
+            lastWorkerTime = now;
+            workerBusy = false;
+            dispatchToWorker();
+        };
+        function dispatchToWorker() {
+            if (workerBusy) return;
+            workerBusy = true;
+            worker.postMessage({
+                stateBuffer: stateArray.buffer, brainBuffer: brainArray.buffer,
+                count: activeCount, width, height
+            }, [stateArray.buffer, brainArray.buffer]);
+        }
+        function render() {
+            ctx.fillStyle = 'rgba(3, 5, 8, 0.25)';
+            ctx.fillRect(0, 0, width, height);
+            if (stateArray.length > 0) {
+                let fov = 400, halfW = width/2, halfH = height/2;
+                for (let i = 0; i < activeCount; i++) {
+                    let sIdx = i * STATE_STRIDE;
+                    if (stateArray[sIdx+11] === 0) continue;
+                    let x = stateArray[sIdx], y = stateArray[sIdx+1], z = stateArray[sIdx+2], w = stateArray[sIdx+3];
+                    let scale = fov / (fov + z + 220);
+                    let screenX = halfW + x * scale, screenY = halfH + y * scale;
+                    let hue = (180 + w * 0.4) % 360;
+                    ctx.fillStyle = `hsla(${hue}, 100%, 65%, ${Math.min(1, scale)})`;
+                    ctx.beginPath();
+                    ctx.arc(screenX, screenY, Math.max(1, 3 * scale), 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            document.getElementById('agent-count').innerText = activeCount;
+            requestAnimationFrame(render);
+        }
+        window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
+        dispatchToWorker();
+        render();
+    </script>
+</body>
+</html>
