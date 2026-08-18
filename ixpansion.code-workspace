@@ -1,0 +1,28 @@
+{
+    "folders": [
+        {
+            "name": "ixpansion",
+            "path": "."
+        }
+    ]git clone https://github.com/adjjvmorii26-png/ixpansion.git
+    cd ixpansion
+    git checkout -b feature/1.3-mesh-hitl-si
+      "servers": {
+          "github": {
+                "type": "http",
+                      "url": "https://api.githubcopilot.com/mcp/",
+                            "headers": {
+                                    "Authorization": "Bearer ${input:github_mcp_pat}"
+                                          }
+                                              }
+                                                },
+                                                  "inputs": [
+                                                      {
+                                                            "type": "promptString",
+                                                                  "id": "github_mcp_pat",
+                                                                        "description": "GitHub Personal Access Token",
+                                                                              "password": true
+                                                                                  }
+                                                                                    ]
+                                                                                    }
+}

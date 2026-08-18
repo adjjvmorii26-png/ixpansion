@@ -1,0 +1,36 @@
+{
+  "name": "SOLID_ORGANISM",
+  "version": "IXPANSION/1.5.4-organism",
+  "cortex": "ixpansion",
+  "limbs": [
+    {"name": "ixpansion", "role": "cortex", "organ": "primary_mesh", "url": "https://github.com/adjjvmorii26-png/ixpansion", "visibility": "public"},
+    {"name": "dev", "role": "nerve_lab", "organ": "dev_spine", "url": "https://github.com/adjjvmorii26-png/dev", "visibility": "private"},
+    {"name": "dev0", "role": "nerve_stub", "organ": "dev_seed", "url": "https://github.com/adjjvmorii26-png/dev0", "visibility": "private"},
+    {"name": "workforce-", "role": "immune", "organ": "workforce_hitl", "url": "https://github.com/adjjvmorii26-png/workforce-", "visibility": "private"},
+    {"name": "aegis-workspace", "role": "guard", "organ": "aegis_tests", "url": "https://github.com/adjjvmorii26-png/aegis-workspace", "visibility": "public"},
+    {"name": "capability-sandbox", "role": "sandbox", "organ": "capability_lab", "url": "https://github.com/adjjvmorii26-png/capability-sandbox", "visibility": "public"},
+    {"name": "feature-1.3-mesh-hitl-si", "role": "lineage", "organ": "fossil_1_3", "url": "https://github.com/adjjvmorii26-png/feature-1.3-mesh-hitl-si", "visibility": "private"},
+    {"name": "feature-1.5-vivarium-lattice", "role": "lineage", "organ": "fossil_1_5", "url": "https://github.com/adjjvmorii26-png/feature-1.5-vivarium-lattice", "visibility": "public"},
+    {"name": "NDSO-Engine", "role": "sense", "organ": "ndso_engine", "url": "https://github.com/adjjvmorii26-png/NDSO-Engine", "visibility": "private"},
+    {"name": "hyper_symbiosis.html", "role": "sense", "organ": "symbiosis_ui", "url": "https://github.com/adjjvmorii26-png/hyper_symbiosis.html", "visibility": "private"},
+    {"name": "yaweht", "role": "experiment", "organ": "yaweht", "url": "https://github.com/adjjvmorii26-png/yaweht", "visibility": "private"},
+    {"name": "eve-slack-agent", "role": "limb", "organ": "slack_agent", "url": "https://github.com/adjjvmorii26-png/eve-slack-agent", "visibility": "private"},
+    {"name": "nextjs-ai-chatbot", "role": "limb", "organ": "chat_ui", "url": "https://github.com/adjjvmorii26-png/nextjs-ai-chatbot", "visibility": "private"},
+    {"name": "nextjs-boilerplate", "role": "limb", "organ": "web_shell", "url": "https://github.com/adjjvmorii26-png/nextjs-boilerplate", "visibility": "private"},
+    {"name": "github-copilot", "role": "tooling", "organ": "copilot", "url": "https://github.com/adjjvmorii26-png/github-copilot", "visibility": "private"},
+    {"name": "github-copiot-upgrade-", "role": "tooling", "organ": "copilot_upgrade", "url": "https://github.com/adjjvmorii26-png/github-copiot-upgrade-", "visibility": "private"},
+    {"name": "exciting-river-ww9k2c", "role": "fossil", "organ": "csb_river", "url": "https://github.com/adjjvmorii26-png/exciting-river-ww9k2c", "visibility": "public"},
+    {"name": "romantic-star-xqlgp4", "role": "fossil", "organ": "csb_star", "url": "https://github.com/adjjvmorii26-png/romantic-star-xqlgp4", "visibility": "public"},
+    {"name": "amazing-galois", "role": "fossil", "organ": "csb_galois", "url": "https://github.com/adjjvmorii26-png/amazing-galois", "visibility": "private"},
+    {"name": "snowy-firefly", "role": "fossil", "organ": "csb_firefly", "url": "https://github.com/adjjvmorii26-png/snowy-firefly", "visibility": "private"},
+    {"name": "base", "role": "root", "organ": "base_plate", "url": "https://github.com/adjjvmorii26-png/base", "visibility": "public"}
+  ],
+  "wiring": {
+    "cortex": ["ixpansion"],
+    "immune": ["workforce-", "aegis-workspace"],
+    "nerves_dev": ["dev", "dev0", "capability-sandbox"],
+    "senses_ui": ["NDSO-Engine", "hyper_symbiosis.html", "nextjs-ai-chatbot"],
+    "lineage": ["feature-1.3-mesh-hitl-si", "feature-1.5-vivarium-lattice"],
+    "fossils": ["exciting-river-ww9k2c", "romantic-star-xqlgp4", "amazing-galois", "snowy-firefly"]
+  }
+}
