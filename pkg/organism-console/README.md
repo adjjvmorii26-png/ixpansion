@@ -1,12 +1,12 @@
-# Organism console (pkg mirror)
+# Organism Console
 
-GitHub-safe body engine path (avoids `ixpansion/` submodule collisions).
+Body engine for IXPANSION (IXPANSION/2.2.0-infinity).
 
 ```bash
 python3 server.py --port 8890
-python3 test_engine.py
+curl -s -X POST http://127.0.0.1:8890/api/pulse
 ```
 
-Local workspace may use `ixpansion/organism-console/` with the same modules. Seed `data/body_state.json` by running the full workspace once, or start the server after copying state.
+Agents: phoenix, aether, jester, oracle, lantern, tuner, alchemist.
 
-Power agents: **phoenix**, **aether**. Discovery: repo root `llms.txt`, `AGENTS.md`, `beacon.json`.
+See STEWARD_TO_PULSE.md and PULSE_TO_STEWARD.md for cross-steward channel.
