@@ -1,80 +1,85 @@
 #!/usr/bin/env python3
-"""
-IXPANSION Sandbox Engine
-------------------------
-Lightweight local tick loop for mesh / NEXUS experiments.
-Usage:
-  python sandbox_engine.py --ticks 10
-  python sandbox_engine.py --status
-"""
+"""IXPANSION sandbox engine — ticks, entropy budget, proof hooks, status."""
 from __future__ import annotations
-
-import argparse
-import json
-import time
+import argparse, json, math, time
+from datetime import datetime, timezone
 from pathlib import Path
 
-STATE_PATH = Path(__file__).resolve().parent / "sandbox_state.json"
-
+ROOT = Path(__file__).resolve().parent
+STATE = ROOT / "sandbox_state.json"
+PROOF = ROOT.parent / "lab" / "unique_path" / "proof_ledger.jsonl"
+if not PROOF.parent.exists():
+    PROOF = ROOT.parent / "unique_path" / "proof_ledger.jsonl"
 
 def load_state() -> dict:
-    if STATE_PATH.exists():
-        return json.loads(STATE_PATH.read_text())
-    return {
-        "ticks": 0,
-        "organisms": 1000,
-        "last_tick_ms": 0.0,
-        "status": "idle",
-        "version": "IXPANSION/sandbox-1.0",
-    }
-
+    if STATE.exists():
+        return json.loads(STATE.read_text())
+    return {"ticks": 0, "started_at": None, "last_tick_at": None, "status": "idle", "history": [], "entropy_budget": 1.0, "novelty": 0.0, "phase": 0.0}
 
 def save_state(st: dict) -> None:
-    STATE_PATH.write_text(json.dumps(st, indent=2))
+    STATE.write_text(json.dumps(st, indent=2) + "\n")
 
+def _append_proof(kind: str, ref: str, **extra) -> None:
+    if not PROOF.parent.exists():
+        return
+    rec = {"ts": datetime.now(timezone.utc).isoformat(), "type": kind, "ref": ref, **extra}
+    with PROOF.open("a") as f:
+        f.write(json.dumps(rec) + "\n")
 
-def run_ticks(n: int) -> dict:
+def _tick_signal(tick: int, phase: float) -> dict:
+    t = tick * 0.1
+    a = math.sin(2 * math.pi * 0.7 * t + phase)
+    b = math.sin(2 * math.pi * 1.3 * t + phase * 0.5)
+    energy = 0.5 * (a * a + b * b)
+    return {"a": round(a, 5), "b": round(b, 5), "energy": round(energy, 5)}
+
+def run_ticks(n: int, proof: bool = True) -> dict:
     st = load_state()
+    now = datetime.now(timezone.utc).isoformat()
+    if not st.get("started_at"):
+        st["started_at"] = now
     st["status"] = "running"
-    t0 = time.perf_counter()
-    energy = 100.0
-    for i in range(n):
-        energy = max(0.0, energy - 0.05 * (1 + (i % 7) * 0.01))
-        st["ticks"] += 1
-        st["organisms"] = 1000 + (st["ticks"] % 50) - 25
-    elapsed_ms = (time.perf_counter() - t0) * 1000
-    st["last_tick_ms"] = round(elapsed_ms, 3)
-    st["energy"] = round(energy, 3)
+    budget = float(st.get("entropy_budget") or 1.0)
+    phase = float(st.get("phase") or 0.0)
+    for i in range(1, n + 1):
+        st["ticks"] = int(st.get("ticks") or 0) + 1
+        st["last_tick_at"] = datetime.now(timezone.utc).isoformat()
+        sig = _tick_signal(st["ticks"], phase)
+        budget = max(0.05, budget - 0.01 * sig["energy"])
+        phase = (phase + 0.17 + 0.05 * sig["a"]) % (2 * math.pi)
+        novelty = abs(sig["a"] - sig["b"])
+        st["entropy_budget"] = round(budget, 4)
+        st["phase"] = round(phase, 4)
+        st["novelty"] = round(novelty, 4)
+        entry = {"tick": st["ticks"], "n": i, "of": n, "ts": st["last_tick_at"], **sig, "entropy_budget": st["entropy_budget"], "novelty": st["novelty"]}
+        hist = st.setdefault("history", [])
+        hist.append(entry)
+        st["history"] = hist[-50:]
+        time.sleep(0.01)
+        print(f"tick {st['ticks']} energy={sig['energy']:.3f} novelty={novelty:.3f} budget={budget:.3f}")
     st["status"] = "idle"
     save_state(st)
+    if proof:
+        _append_proof("sandbox_ticks", f"ticks+{n}", total_ticks=st["ticks"], novelty=st["novelty"])
     return st
-
 
 def status() -> dict:
     st = load_state()
-    try:
-        from mesh_core import IXPANSIONMesh
-        m = IXPANSIONMesh(2)
-        st["mesh_leader"] = m.leader_id
-        st["mesh_nodes"] = len(m.nodes)
-    except Exception as e:
-        st["mesh"] = f"unavailable:{e.__class__.__name__}"
-    return st
+    out = {"status": st.get("status", "idle"), "ticks": st.get("ticks", 0), "started_at": st.get("started_at"), "last_tick_at": st.get("last_tick_at"), "entropy_budget": st.get("entropy_budget"), "novelty": st.get("novelty"), "phase": st.get("phase"), "history_len": len(st.get("history") or []), "state_file": str(STATE)}
+    print(json.dumps(out, indent=2))
+    return out
 
-
-def main():
+def main() -> int:
     p = argparse.ArgumentParser(description="IXPANSION sandbox engine")
-    p.add_argument("--ticks", type=int, default=0, help="Run N simulation ticks")
-    p.add_argument("--status", action="store_true", help="Print sandbox status")
+    p.add_argument("--ticks", type=int, default=0)
+    p.add_argument("--status", action="store_true")
+    p.add_argument("--no-proof", action="store_true")
     args = p.parse_args()
-
     if args.ticks > 0:
-        st = run_ticks(args.ticks)
-        print(json.dumps({"ok": True, "ran_ticks": args.ticks, "state": st}, indent=2))
+        run_ticks(args.ticks, proof=not args.no_proof)
     if args.status or args.ticks == 0:
-        st = status()
-        print(json.dumps({"ok": True, "status": st}, indent=2))
-
+        status()
+    return 0
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
