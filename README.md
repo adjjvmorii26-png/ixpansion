@@ -12,7 +12,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`fractal_engine`](omega_fractal_engine/) | Python | 36 | Self-expanding engine: mutable physics, paradox resolution, dimensional spaces, self-rewriting code |
 | [`project_root`](project_root/) | Python | 25 | HEX-native strata, fractal pipelines, and layered event mesh |
 | [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator and resonance display |
-| [`bridges`](bridges/) | Python | 42 | Counterfactual twins, causal replay, divergence forensics, and resilience analysis |
+| [`bridges`](bridges/) | Python | 49 | Counterfactual twins, causal replay, resilience analysis, and semantic treaties |
 
 ## Run Tests
 
@@ -121,6 +121,19 @@ python3 -m bridges.resilience_ledger --seed 42 probe \
   --baseline-valence 0.25 --baseline-arousal 0.75 \
   --twin-valence -0.35 --twin-arousal 0.9 \
   --recovery-steps 4
+```
+
+### Concordance Engine
+
+When two realities should not merely recover but reconcile, the Concordance
+Engine converts each recursive state delta into a treaty clause. Policies can
+choose `baseline`, `twin`, lexical precedence, recursive union, or an explicit
+preserved conflict. The resulting merged state and contract hash are
+deterministic, so the same history always ratifies the same treaty.
+
+```bash
+python3 -m bridges.concordance_engine forge \
+  --output runs/treaty.json --spec runs/states.json
 ```
 
 The Observatory shell displays the latest resonance fingerprint during boot.
