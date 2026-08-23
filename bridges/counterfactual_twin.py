@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from bridges.bridge_core import BridgeHub
+from bridges.divergence_forensics import diagnose_divergence, diff_state
 from bridges.resonance_loom import ResonanceLoom, _atomic_write
 
 
@@ -105,6 +106,12 @@ class CounterfactualTwin:
             "distance": distance,
             "similarity": max(0.0, round(1.0 - distance / 64, 4)),
             "changed_status_fields": self._changed_fields(baseline_status, twin_status),
+            "changed_paths": [
+                delta["path"] for delta in diff_state(
+                    self.baseline_hub.state_core.raw,
+                    self.twin_hub.state_core.raw,
+                )
+            ],
             "state_changed": not semantic_match,
             "resonance_changed": not resonance_match,
             "baseline_signature": old,
@@ -147,8 +154,14 @@ class CounterfactualTwin:
             "resonance_match": resonance_match,
             "baseline": baseline_payload,
             "twin": twin_payload,
+            "baseline_state": self.baseline_hub.state_core.raw,
+            "twin_state": self.twin_hub.state_core.raw,
             "baseline_state_snapshot": self.baseline_hub.state_core.snapshot(),
             "twin_state_snapshot": self.twin_hub.state_core.snapshot(),
+            "state_delta": diff_state(
+                self.baseline_hub.state_core.raw,
+                self.twin_hub.state_core.raw,
+            ),
         }
         boundary = None
         if not semantic_match or not resonance_match:
@@ -177,6 +190,27 @@ class CounterfactualTwin:
 
         baseline_final = self.baseline_loom.observe("final")
         twin_final = self.twin_loom.observe("final")
+        latest = self.timeline[-1] if self.timeline else {
+            "baseline": self.origin_baseline.payload(),
+            "twin": self.origin_twin.payload(),
+            "baseline_state_snapshot": self.baseline_hub.state_core.snapshot(),
+            "twin_state_snapshot": self.twin_hub.state_core.snapshot(),
+            "state_delta": [],
+        }
+        forensics = diagnose_divergence(
+            baseline_state=self.baseline_hub.state_core.raw,
+            twin_state=self.twin_hub.state_core.raw,
+            baseline_status={
+                field: latest["baseline"][field]
+                for field in ("chaos", "mood", "mesh_events", "reactor_events", "state_keys")
+            },
+            twin_status={
+                field: latest["twin"][field]
+                for field in ("chaos", "mood", "mesh_events", "reactor_events", "state_keys")
+            },
+            baseline_signature=latest["baseline"]["signature"],
+            twin_signature=latest["twin"]["signature"],
+        ).payload()
         report = {
             "experiment": "counterfactual-twin",
             "engine_version": 1,
@@ -185,6 +219,7 @@ class CounterfactualTwin:
             "intervention_count": len(interventions),
             "divergence": divergence,
             "timeline": self.timeline,
+            "forensics": forensics,
             "final": {
                 "semantic_match": (
                     self.baseline_hub.state_core.snapshot()

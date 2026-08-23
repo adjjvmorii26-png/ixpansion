@@ -12,7 +12,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`fractal_engine`](omega_fractal_engine/) | Python | 36 | Self-expanding engine: mutable physics, paradox resolution, dimensional spaces, self-rewriting code |
 | [`project_root`](project_root/) | Python | 25 | HEX-native strata, fractal pipelines, and layered event mesh |
 | [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator and resonance display |
-| [`bridges`](bridges/) | Python | 11 | Cross-engine state propagation and deterministic pulse analysis |
+| [`bridges`](bridges/) | Python | 30 | Counterfactual twins, temporal oracles, divergence forensics, and cross-project telemetry |
 
 ## Run Tests
 
@@ -71,6 +71,27 @@ python3 -m bridges.resonance_cli --seed 42 persist runs/resonance.jsonl \
   --agent scout --valence 0.6 --arousal 0.8
 python3 -m bridges.resonance_cli analyze runs/resonance.jsonl
 python3 -m bridges.resonance_cli compare runs/baseline.jsonl runs/resonance.jsonl
+```
+
+### Divergence Forensics
+
+Counterfactual Twin artifacts now include recursive state diffs and a forensic
+diagnosis. The system distinguishes:
+
+- `latent_mutation`: exact state changed while aggregate telemetry hid it
+- `visible_mutation`: state and telemetry changed together
+- `phantom_signal`: telemetry moved without a semantic cause
+- `synchronized`: no meaningful divergence
+
+Each diagnosis has a camouflage index and deterministic evidence hash suitable
+for CI containment workflows.
+
+```bash
+python3 -m bridges.counterfactual_twin --seed 42 twin \
+  --output runs/forensic-twin.json \
+  --agent scout --baseline-valence 0.1 --baseline-arousal 0.4 \
+  --twin-valence -0.1 --twin-arousal 0.4
+jq '.forensics' runs/forensic-twin.json
 ```
 
 The Observatory shell displays the latest resonance fingerprint during boot.

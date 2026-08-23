@@ -60,6 +60,13 @@ jobs:
           out.write(f"- First split: `{divergence['kind']}` at step `{divergence['step_index']}`\n")
           out.write(f"- Similarity: `{divergence['similarity']:.2%}`\n")
           out.write(f"- Report: `{twin['report_hash'][:12]}`\n")
+          forensics = twin["forensics"]
+          out.write("\n## Divergence Forensics\n\n")
+          out.write(f"- Classification: `{forensics['classification']}`\n")
+          out.write(f"- Camouflage index: `{forensics['camouflage_index']:.2%}`\n")
+          out.write(f"- Evidence: `{forensics['evidence_hash'][:12]}`\n")
+          if forensics["changed_paths"]:
+              out.write(f"- Paths: `{', '.join(forensics['changed_paths'])}`\n")
           PY
       - uses: actions/upload-artifact@v4
         with:
