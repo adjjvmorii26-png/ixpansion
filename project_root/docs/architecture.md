@@ -86,3 +86,13 @@ deltas when a union policy applies, resolves each semantic path through
 precedence rules, and records both source values plus the selected value in a
 treaty clause. Conflicts may remain visible under `$conflict`; they are never
 silently erased.
+
+## Astral Braid Boundary
+
+The Chrono-Mycelium seam converts lived dreams into HEX ritual evidence. Before
+a ritual is treated as actionable, the Astral Braid Conservatory creates three
+reversible shadow timelines and scores them against an explicit consent
+contract. Promotion is deterministic, transport timestamps stay outside the
+certificate hash, and failed candidates are quarantined rather than discarded.
+This keeps experimentation imaginative while making irreversible action a
+separate, auditable decision.
