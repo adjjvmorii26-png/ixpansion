@@ -7,6 +7,18 @@ from typing import Any
 class Instruction:
     opcode: str
     operands: list[str]
+    line_number: int = 0
+
+
+OPERAND_ARITY = {
+    "PUSH": (1, 1),
+    "STORE": (1, 1),
+    "LOAD": (1, 1),
+    "ADD": (0, 0),
+    "SUB": (0, 0),
+    "EMIT": (0, 0),
+    "HALT": (0, 0),
+}
 
 
 def parse(source: str) -> list[Instruction]:
@@ -16,9 +28,12 @@ def parse(source: str) -> list[Instruction]:
         if not line:
             continue
         parts = line.replace(",", " ").split()
-        instructions.append(Instruction(parts[0].upper(), parts[1:]))
-        unknown = instructions[-1]
-        allowed = {"PUSH", "STORE", "LOAD", "ADD", "SUB", "EMIT", "HALT"}
-        if unknown.opcode not in allowed:
-            raise ValueError(f"line {number}: unknown opcode {unknown.opcode}")
+        opcode = parts[0].upper()
+        if opcode not in OPERAND_ARITY:
+            raise ValueError(f"line {number}: unknown opcode {opcode}")
+        minimum, maximum = OPERAND_ARITY[opcode]
+        count = len(parts) - 1
+        if not minimum <= count <= maximum:
+            raise ValueError(f"line {number}: {opcode} expects {minimum} operand(s)")
+        instructions.append(Instruction(opcode, parts[1:], number))
     return instructions

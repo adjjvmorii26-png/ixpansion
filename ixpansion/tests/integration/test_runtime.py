@@ -38,3 +38,38 @@ def test_inspectors_summarize_workspace():
     summary = summarize(results)
     assert structure["python_files"] > 10
     assert summary["actions"] >= 3
+
+
+def test_every_accepted_action_has_mesh_delivery_and_witness():
+    runtime = IxpansionRuntime()
+    timeline = runtime.run(3)
+
+    for tick_result in timeline:
+        assert tick_result["mesh_delivered"] == len(tick_result["results"])
+        assert len(tick_result["witnesses"]) == len(tick_result["results"])
+        assert all(result["delivered"] > 0 for result in tick_result["results"])
+
+    assert len(runtime.witnesses) == sum(len(item["witnesses"]) for item in timeline)
+
+
+def test_witness_receipts_are_deterministic():
+    first = IxpansionRuntime().run(2)
+    second = IxpansionRuntime().run(2)
+    keys = ("tick", "agent", "evidence_hash", "program")
+
+    assert [
+        {key: item[key] for key in keys}
+        for item in first[0]["witnesses"]
+    ] == [
+        {key: item[key] for key in keys}
+        for item in second[0]["witnesses"]
+    ]
+
+
+def test_mutation_actions_use_shared_applier_contract():
+    runtime = IxpansionRuntime()
+    before = runtime.graph.nodes["origin"].state["energy"]
+    outcome = runtime._apply_action({"type": "mutate", "node": "origin", "operation": "multiply", "field": "energy", "value": 2})
+
+    assert outcome == {"applied": True}
+    assert runtime.graph.nodes["origin"].state["energy"] == before * 2
