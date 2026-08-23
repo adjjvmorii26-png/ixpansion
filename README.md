@@ -13,6 +13,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`project_root`](project_root/) | Python | 25 | HEX-native strata, fractal pipelines, and layered event mesh |
 | [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator and resonance display |
 | [`bridges`](bridges/) | Python | 49 | Counterfactual twins, causal replay, resilience analysis, and semantic treaties |
+| [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
 
 ## Run Tests
 

@@ -1,4 +1,4 @@
-.PHONY: test test-prime test-fractal test-root test-bridges lint clean backup push
+.PHONY: test test-prime test-fractal test-root test-bridges test-mycelium lint clean backup push
 
 test:
 	python3 -m pytest -q --tb=short
@@ -14,6 +14,9 @@ test-root:
 
 test-bridges:
 	python3 -m pytest bridges -q --tb=short
+
+test-mycelium:
+	python3 -m pytest mycelium/tests -q --tb=short
 
 lint:
 	@find . -type f -name '*.py' \
