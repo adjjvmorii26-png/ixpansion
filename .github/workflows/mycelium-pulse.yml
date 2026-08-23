@@ -1,0 +1,68 @@
+name: Mycelium Pulse
+
+on:
+  schedule:
+    - cron: '40 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mycelium-pulse-${{ github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  pulse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pytest
+      - name: Validate living substrate contracts
+        run: python -m pytest mycelium/tests -q --tb=short
+      - name: Grow nightly pulse
+        run: |
+          mkdir -p artifacts
+          python -m mycelium.interfaces.cli simulate \
+            --seed 20260823 --steps 16 --sites 9 --spores 4 --tail 64 \
+            > artifacts/mycelium-pulse.json
+      - name: Compile nightly dream
+        run: |
+          python -m mycelium.interfaces.cli dream \
+            --seed 20260823 --steps 18 --sites 9 \
+            > artifacts/mycelium-dream.json
+      - name: Write job summary
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          pulse = json.loads(Path("artifacts/mycelium-pulse.json").read_text())
+          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a") as out:
+              out.write("## Mycelium Pulse\n\n")
+              out.write(f"- Living tips: `{pulse['stats']['living_tips']}`\n")
+              out.write(f"- Exchanges: `{pulse['stats']['exchanges']}`\n")
+              out.write(f"- Declines: `{pulse['stats']['declines']}`\n")
+              out.write(f"- Remaining nutrient: `{pulse['stats']['substrate_nutrient']}`\n")
+
+          dream_path = Path("artifacts/mycelium-dream.json")
+          if dream_path.exists():
+              dream = json.loads(dream_path.read_text()).get("dream")
+              if dream:
+                  out.write("\n## Compiled Dream\n\n")
+                  out.write(f"- Hypothesis: {dream['hypothesis']}\n")
+                  out.write(f"- Confidence: `{dream['confidence']:.2%}`\n")
+                  out.write(f"- Entropy budget: `{dream['entropy_budget']}`\n")
+                  out.write(f"- Evidence: `{dream['evidence_hash'][:12]}`\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aleph-mycelium-pulse
+          path: artifacts/*
+          if-no-files-found: error
+          retention-days: 30

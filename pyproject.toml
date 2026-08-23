@@ -18,9 +18,10 @@ testpaths = [
     "omega_fractal_engine/tests",
     "project_root/tests",
     "bridges",
+    "mycelium/tests",
 ]
 pythonpath = ["."]
 asyncio_mode = "auto"
 
 [tool.setuptools.packages.find]
-include = ["omega_prime*"]
+include = ["omega_prime*", "mycelium*"]
