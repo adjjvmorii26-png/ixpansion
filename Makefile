@@ -1,7 +1,10 @@
-.PHONY: test test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium lint clean backup push
+.PHONY: test test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium lint clean backup push
 
 test:
 	python3 -m pytest -q --tb=short
+
+test-solid-organism:
+	python3 -m pytest solid-organism/tests -q --tb=short
 
 test-ixpansion:
 	python3 -m pytest ixpansion/tests -q --tb=short

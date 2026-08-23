@@ -20,6 +20,7 @@ testpaths = [
     "bridges",
     "mycelium/tests",
     "ixpansion/tests",
+    "solid-organism/tests",
 ]
 pythonpath = ["."]
 asyncio_mode = "auto"
