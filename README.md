@@ -12,7 +12,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`fractal_engine`](omega_fractal_engine/) | Python | 36 | Self-expanding engine: mutable physics, paradox resolution, dimensional spaces, self-rewriting code |
 | [`project_root`](project_root/) | Python | 25 | HEX-native strata, fractal pipelines, and layered event mesh |
 | [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator and resonance display |
-| [`bridges`](bridges/) | Python | 30 | Counterfactual twins, temporal oracles, divergence forensics, and cross-project telemetry |
+| [`bridges`](bridges/) | Python | 36 | Counterfactual twins, causal replay, divergence forensics, and cross-project telemetry |
 
 ## Run Tests
 
@@ -92,6 +92,20 @@ python3 -m bridges.counterfactual_twin --seed 42 twin \
   --agent scout --baseline-valence 0.1 --baseline-arousal 0.4 \
   --twin-valence -0.1 --twin-arousal 0.4
 jq '.forensics' runs/forensic-twin.json
+```
+
+### Causal Attribution
+
+Each intervention is replayed in three worlds: observed, ablated, and isolated.
+ALEPH classifies its causal role as `direct_cause`, `required_catalyst`,
+`independent_trigger`, `alternative_route`, `contextual_synergist`, or
+`dormant_potential`. The result is a reproducible causal fingerprint rather than
+a narrative explanation.
+
+```bash
+python3 -m bridges.causal_attribution --seed 42 attribute \
+  --output runs/attribution.json --target semantic \
+  --spec runs/interventions.json
 ```
 
 The Observatory shell displays the latest resonance fingerprint during boot.

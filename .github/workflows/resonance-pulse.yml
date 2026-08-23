@@ -38,6 +38,19 @@ jobs:
             --agent nightly-drift \
             --baseline-valence 0.25 --baseline-arousal 0.75 \
             --twin-valence -0.35 --twin-arousal 0.9
+          cat > artifacts/interventions.json <<'JSON'
+          {
+            "interventions": [{
+              "agent": "nightly-drift",
+              "baseline": {"valence": 0.25, "arousal": 0.75},
+              "twin": {"valence": -0.35, "arousal": 0.9}
+            }]
+          }
+          JSON
+          python -m bridges.causal_attribution --seed 20260823 attribute \
+            --spec artifacts/interventions.json \
+            --output artifacts/causal-attribution.json \
+            --target semantic
       - name: Write job summary
         if: always()
         run: |
@@ -67,6 +80,15 @@ jobs:
           out.write(f"- Evidence: `{forensics['evidence_hash'][:12]}`\n")
           if forensics["changed_paths"]:
               out.write(f"- Paths: `{', '.join(forensics['changed_paths'])}`\n")
+
+          attribution = json.loads(Path("artifacts/causal-attribution.json").read_text())
+          verdict = attribution["verdicts"][0]
+          out.write("\n## Causal Attribution\n\n")
+          out.write(f"- Classification: `{verdict['classification']}`\n")
+          out.write(f"- Necessary: `{verdict['necessary']}`\n")
+          out.write(f"- Sufficient: `{verdict['sufficient']}`\n")
+          out.write(f"- Causal mass: `{verdict['causal_mass']:.2f}`\n")
+          out.write(f"- Fingerprint: `{attribution['causal_fingerprint'][:12]}`\n")
           PY
       - uses: actions/upload-artifact@v4
         with:
