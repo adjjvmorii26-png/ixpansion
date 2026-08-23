@@ -62,11 +62,17 @@ class BridgeHub:
         if not raw:
             return {}
 
-        # Map omega_prime valence/arousal to fractal_engine mood vector
+        # Map omega_prime's atom into fractal_engine's affect vector.
+        self.mood_engine.mood.valence = max(
+            -1.0, min(1.0, float(raw.get("valence", 0.0)))
+        )
+        self.mood_engine.mood.arousal = max(
+            0.0, min(1.0, float(raw.get("arousal", 0.5)))
+        )
         event = {
-            "tick": 0,
-            "valence": raw.get("valence", 0),
-            "arousal": raw.get("arousal", 0.5),
+            "tick": len(self.mood_engine.history_labels) + 1,
+            "valence": self.mood_engine.mood.valence,
+            "arousal": self.mood_engine.mood.arousal,
         }
         label = self.mood_engine.process(event)
         return {"mood": label, "source_agent": agent_id}

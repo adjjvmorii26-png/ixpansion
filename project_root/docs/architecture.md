@@ -44,3 +44,11 @@ The repository-level bridge exposes three contracts:
 `PulseOracle` treats identical pulses as attractors and uses hexadecimal Hamming
 distance to distinguish stable drift from mutation. This gives CI a compact,
 replayable signal for detecting unintended behavioral changes.
+
+## Counterfactual Twin
+
+The twin instantiates two `BridgeHub` graphs with the same seed and applies each
+paired signal to both. Exact `StateCore` snapshots identify the first semantic
+split; resonance signatures identify when coarse telemetry later reflects it.
+This separation prevents an unchanged aggregate metric from hiding a real
+counterfactual mutation.

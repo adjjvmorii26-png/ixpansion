@@ -75,6 +75,20 @@ python3 -m bridges.resonance_cli compare runs/baseline.jsonl runs/resonance.json
 
 The Observatory shell displays the latest resonance fingerprint during boot.
 
+### Counterfactual Twin
+
+`CounterfactualTwin` runs two identically seeded bridge realities and records
+the earliest causal boundary. It distinguishes exact semantic divergence from
+coarse resonance divergence, making invisible state mutations auditable.
+
+```bash
+python3 -m bridges.counterfactual_twin --seed 42 twin \
+  --output runs/twin.json \
+  --agent scout \
+  --baseline-valence 0.25 --baseline-arousal 0.75 \
+  --twin-valence -0.35 --twin-arousal 0.9
+```
+
 All experiments are synthetic simulations; they do not claim consciousness or
 autonomous agency beyond their deterministic data models.
 
