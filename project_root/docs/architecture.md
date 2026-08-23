@@ -52,3 +52,12 @@ paired signal to both. Exact `StateCore` snapshots identify the first semantic
 split; resonance signatures identify when coarse telemetry later reflects it.
 This separation prevents an unchanged aggregate metric from hiding a real
 counterfactual mutation.
+
+## Divergence Forensics
+
+Every paired intervention stores exact semantic deltas, aggregate status fields,
+and both resonance signatures. `divergence_forensics` computes semantic and
+resonance magnitudes, derives a camouflage index, and classifies the boundary as
+latent mutation, visible mutation, phantom signal, or synchronized state. The
+evidence hash is computed over the complete comparison, so CI can preserve a
+replayable causal record rather than a lossy alert.
