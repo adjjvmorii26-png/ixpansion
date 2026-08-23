@@ -12,7 +12,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`fractal_engine`](omega_fractal_engine/) | Python | 36 | Self-expanding engine: mutable physics, paradox resolution, dimensional spaces, self-rewriting code |
 | [`project_root`](project_root/) | Python | 25 | HEX-native strata, fractal pipelines, and layered event mesh |
 | [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator and resonance display |
-| [`bridges`](bridges/) | Python | 36 | Counterfactual twins, causal replay, divergence forensics, and cross-project telemetry |
+| [`bridges`](bridges/) | Python | 42 | Counterfactual twins, causal replay, divergence forensics, and resilience analysis |
 
 ## Run Tests
 
@@ -106,6 +106,21 @@ a narrative explanation.
 python3 -m bridges.causal_attribution --seed 42 attribute \
   --output runs/attribution.json --target semantic \
   --spec runs/interventions.json
+```
+
+### Resilience Ledger
+
+After a counterfactual wound, ALEPH applies identical recovery experiences to
+both realities and records whether the split is elastic, delayed, hysteretic,
+plastic, or relapsed. This separates surface-level telemetry repair from exact
+semantic restoration.
+
+```bash
+python3 -m bridges.resilience_ledger --seed 42 probe \
+  --output runs/resilience.json --agent scout \
+  --baseline-valence 0.25 --baseline-arousal 0.75 \
+  --twin-valence -0.35 --twin-arousal 0.9 \
+  --recovery-steps 4
 ```
 
 The Observatory shell displays the latest resonance fingerprint during boot.

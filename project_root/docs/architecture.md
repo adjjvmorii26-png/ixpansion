@@ -70,3 +70,11 @@ world where only that intervention differs. Comparing semantic or resonance
 divergence across these worlds yields a replay-backed classification instead of
 a post-hoc story. The causal fingerprint records only stable classifications,
 world outcomes, and boundary kinds, making it useful as a regression signature.
+
+## Resilience Ledger
+
+Counterfactual divergence is followed by identical recovery experiences. The
+ledger samples recursive state deltas and resonance signatures at each step,
+classifying recovery as elastic, delayed, hysteretic, plastic, relapsed, or
+inert. In particular, it can detect a hysteretic trace where dashboards return
+to agreement while underlying semantic history remains different.
