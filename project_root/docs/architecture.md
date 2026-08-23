@@ -38,6 +38,8 @@ The repository-level bridge exposes three contracts:
 1. **State propagation** — `omega_prime` atom state becomes mood input for the fractal engine.
 2. **Event routing** — `project_root` mesh deliveries are mirrored into the `omega_prime` reactor.
 3. **Resonance telemetry** — status fields are canonicalized into a stable SHA-256 pulse.
+4. **Temporal analysis** — locked JSONL journals feed attractor detection, drift rates,
+   and mutation verdicts through `bridges.resonance_cli`.
 
 `PulseOracle` treats identical pulses as attractors and uses hexadecimal Hamming
 distance to distinguish stable drift from mutation. This gives CI a compact,

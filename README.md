@@ -59,10 +59,21 @@ make test
 ## Resonance Bridge
 
 `BridgeHub` connects `omega_prime`, `omega_fractal_engine`, and `project_root`.
-`ResonanceLoom` folds their state into a deterministic SHA-256 signature.
-`PulseOracle` compares signatures to classify engine behavior as recurrence,
-stable drift, shifting drift, or mutation. The Observatory shell displays the
-latest resonance fingerprint during boot.
+`ResonanceLoom` folds their state into deterministic SHA-256 signatures, writes
+append-only JSONL under an exclusive lock, and publishes the latest record with
+an atomic rename. `PulseOracle` classifies recurrence, stable drift, shifting
+drift, or mutation; `analyze` adds attractor counts, recurrence/novelty rates,
+and a replayable trajectory.
+
+```bash
+python3 -m bridges.resonance_cli --seed 42 observe
+python3 -m bridges.resonance_cli --seed 42 persist runs/resonance.jsonl \
+  --agent scout --valence 0.6 --arousal 0.8
+python3 -m bridges.resonance_cli analyze runs/resonance.jsonl
+python3 -m bridges.resonance_cli compare runs/baseline.jsonl runs/resonance.jsonl
+```
+
+The Observatory shell displays the latest resonance fingerprint during boot.
 
 All experiments are synthetic simulations; they do not claim consciousness or
 autonomous agency beyond their deterministic data models.
