@@ -3,8 +3,13 @@ name: Integration Bridge Tests
 on:
   pull_request:
     branches: [main]
-  push:
-    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: integration-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   bridge-test:
@@ -14,22 +19,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pytest pytest-asyncio
-
-      - name: Test all three projects together
-        run: pytest bridges/test_cross_project.py -v --tb=short
-
-      - name: Verify module imports don't conflict
+      - run: python -m pip install pytest pytest-asyncio
+      - name: Test cross-project bridge contracts
+        run: python -m pytest bridges -q --tb=short
+      - name: Verify simultaneous engine imports
         run: |
-          python3 -c "
-          import sys
-          sys.path.insert(0, '.')
-          sys.path.insert(1, 'omega_prime')
-          sys.path.insert(2, 'omega_fractal_engine')
-          sys.path.insert(3, 'project_root')
+          python3 - <<'PY'
+          from bridges.bridge_core import BridgeHub
 
-          # Import key modules from each project simultaneously
-          from omega_prime.nucleus.kernel.state_core import StateCore
-          from omega_prime.nucleus.kernel.reactor import Reactor
-          print('omega_prime imports OK')
-          "
+          hub = BridgeHub(seed=42)
+          assert set(hub.status) == {
+              "state_keys", "reactor_events", "chaos", "mood", "mesh_events"
+          }
+          print("omega_prime + omega_fractal_engine + project_root imports OK")
+          PY

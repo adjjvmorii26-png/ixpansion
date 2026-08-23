@@ -8,20 +8,23 @@ Multi-agent consciousness engine where observers collapse reality into existence
 
 | Module | Language | Tests | Purpose |
 |--------|----------|-------|---------|
-| [`omega_prime`](omega_prime/) | Python | 110 | Multi-agent sandbox: entropy, superposition, morphic fields, pheromones, temporal realms, speciation, ghosts |
+| [`omega_prime`](omega_prime/) | Python | 248 | Multi-agent sandbox: entropy, superposition, morphic fields, tunneling, temporal debt, semantic fossils |
 | [`fractal_engine`](omega_fractal_engine/) | Python | 36 | Self-expanding engine: mutable physics, paradox resolution, dimensional spaces, self-rewriting code |
-| [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator with plugin architecture |
+| [`project_root`](project_root/) | Python | 25 | HEX-native strata, fractal pipelines, and layered event mesh |
+| [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator and resonance display |
+| [`bridges`](bridges/) | Python | 11 | Cross-engine state propagation and deterministic pulse analysis |
 
 ## Run Tests
 
 ```bash
-python3 -m pytest omega_prime/tests/ omega_fractal_engine/tests/
+make test
+# or: python3 -m pytest
 ```
 
 ## Systems Inventory
 
 <details>
-<summary><b>omega_prime — 15 experimental systems</b></summary>
+<summary><b>omega_prime — selected experimental systems</b></summary>
 
 | System | Innovation |
 |--------|-----------|
@@ -43,8 +46,26 @@ python3 -m pytest omega_prime/tests/ omega_fractal_engine/tests/
 | Possession | Ghosts override weak agents; memories leak during control |
 | Time Crystals | Periodic structures create temporal echoes from past cycles |
 | Physics Evolution | Universal constants evolve via natural selection |
+| Attention Economy | Finite attention becomes an allocatable resource |
+| Cognitive Dissonance | Contradictory beliefs create measurable pressure |
+| Emotional Contagion | Affective states spread through proximity and affinity |
+| Quantum Zeno Effect | Repeated observation suppresses state transitions |
+| Quantum Tunneling | Collective curiosity erodes otherwise impassable barriers |
+| Temporal Debt | Deferred obligations accrue compound interest |
+| Semantic Fossilization | Unused words compress into excavatable linguistic fossils |
 
 </details>
+
+## Resonance Bridge
+
+`BridgeHub` connects `omega_prime`, `omega_fractal_engine`, and `project_root`.
+`ResonanceLoom` folds their state into a deterministic SHA-256 signature.
+`PulseOracle` compares signatures to classify engine behavior as recurrence,
+stable drift, shifting drift, or mutation. The Observatory shell displays the
+latest resonance fingerprint during boot.
+
+All experiments are synthetic simulations; they do not claim consciousness or
+autonomous agency beyond their deterministic data models.
 
 <details>
 <summary><b>fractal_engine — core systems</b></summary>

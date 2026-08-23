@@ -1,25 +1,36 @@
-.PHONY: test test-prime test-fractal lint clean backup push
+.PHONY: test test-prime test-fractal test-root test-bridges lint clean backup push
 
 test:
-	python3 -m pytest omega_prime/tests/ omega_fractal_engine/tests/ -v --tb=short
+	python3 -m pytest -q --tb=short
 
 test-prime:
-	python3 -m pytest omega_prime/tests/ -v --tb=short
+	python3 -m pytest omega_prime/tests -q --tb=short
 
 test-fractal:
-	python3 -m pytest omega_fractal_engine/tests/ -v --tb=short
+	python3 -m pytest omega_fractal_engine/tests -q --tb=short
+
+test-root:
+	python3 -m pytest project_root/tests -q --tb=short
+
+test-bridges:
+	python3 -m pytest bridges -q --tb=short
 
 lint:
-	find . -name '*.py' ! -path './backup/*' ! -path '*__pycache__*' | while read f; do \
-		python3 -m py_compile "$$f"; \
-	done; echo "All files compile."
+	@find . -type f -name '*.py' \
+		! -path './backup/*' ! -path '*/__pycache__/*' -print0 | \
+		xargs -0 -n1 python3 -m py_compile
+	@echo "All Python files compile."
 
 clean:
-	find . -name '__pycache__' -type d -exec rm -rf {} + 2>/dev/null || true
-	rm -rf .pytest_cache omega_fractal_engine/.pytest_cache
+	@find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+	@rm -rf .pytest_cache omega_fractal_engine/.pytest_cache
 
 backup:
-	tar czf backup/aleph-$$(date +%Y%m%d-%H%M%S).tgz --exclude='__pycache__' --exclude='.pytest_cache' --exclude='*.pyc' --exclude='backup' .
+	@mkdir -p backup
+	@tar czf "backup/aleph-$$(date -u +%Y%m%d-%H%M%S).tgz" \
+		--exclude='.git' --exclude='__pycache__' --exclude='.pytest_cache' \
+		--exclude='*.pyc' --exclude='backup' .
+	@echo "Backup created."
 
 push: test lint
 	git add -A && git commit -m "refine: automated commit" || echo "nothing to commit"

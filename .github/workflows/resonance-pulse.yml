@@ -1,13 +1,16 @@
 name: Resonance Pulse
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   schedule:
     - cron: '15 2 * * *'
   workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: resonance-pulse-${{ github.run_id }}
+  cancel-in-progress: false
 
 jobs:
   pulse:
@@ -17,24 +20,56 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install test dependencies
-        run: python -m pip install pytest pytest-asyncio
-      - name: Run complete ALEPH suite
-        run: pytest omega_prime/tests omega_fractal_engine/tests project_root/tests bridges -q --tb=short
-      - name: Capture resonance journal
+      - run: python -m pip install pytest pytest-asyncio
+      - name: Gate pulse on complete ALEPH suite
+        run: python -m pytest -q --tb=short
+      - name: Capture resonance journal and oracle verdict
         run: |
           mkdir -p artifacts
           python3 - <<'PY'
+          import json
           from pathlib import Path
-          from bridges.resonance_loom import ResonanceLoom
+          from bridges.resonance_loom import ResonanceLoom, PulseOracle
 
           loom = ResonanceLoom(seed=20260823)
-          print(loom.weave("github-actions", 0.25, 0.75))
-          print(loom.persist("artifacts/resonance.jsonl", "ci-heartbeat").payload())
+          oracle = PulseOracle()
+          loom.weave("nightly-baseline", 0.25, 0.75)
+          baseline = loom.persist("artifacts/baseline.jsonl", "baseline")
+          loom.weave("nightly-variation", -0.35, 0.9)
+          variation = loom.persist("artifacts/resonance.jsonl", "variation")
+          comparison = oracle.compare_journals(
+              "artifacts/baseline.jsonl", "artifacts/resonance.jsonl"
+          )
+          summary = {
+              "baseline": baseline.payload(),
+              "variation": variation.payload(),
+              "comparison": comparison,
+          }
+          Path("artifacts/oracle.json").write_text(
+              json.dumps(summary, sort_keys=True, indent=2) + "\n"
+          )
+          print(json.dumps(summary, sort_keys=True, indent=2))
+          PY
+      - name: Write job summary
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          data = json.loads(Path("artifacts/oracle.json").read_text())
+          compare = data["comparison"]
+          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a") as out:
+              out.write("## Resonance Oracle\n\n")
+              out.write(f"- Verdict: `{compare['verdict']}`\n")
+              out.write(f"- Similarity: `{compare['similarity']:.2%}`\n")
+              out.write(f"- Baseline: `{compare['old_signature'][:12]}`\n")
+              out.write(f"- Variation: `{compare['new_signature'][:12]}`\n")
           PY
       - uses: actions/upload-artifact@v4
         with:
           name: aleph-resonance-pulse
-          path: artifacts/resonance.jsonl
+          path: artifacts/*
           if-no-files-found: error
           retention-days: 30

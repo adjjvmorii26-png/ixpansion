@@ -127,3 +127,120 @@ class ResonanceLoom:
             except json.JSONDecodeError:
                 continue
         return pulses
+
+
+@dataclass(frozen=True)
+class ResonanceVerdict:
+    """A compact comparison between two engine pulses."""
+
+    old_signature: str
+    new_signature: str
+    distance: int
+    similarity: float
+    verdict: str
+    changed_fields: tuple[str, ...]
+
+    def payload(self) -> dict[str, Any]:
+        value = asdict(self)
+        value["changed_fields"] = list(self.changed_fields)
+        return value
+
+
+class PulseOracle:
+    """Detect repetition, drift, and attractors across resonance pulses.
+
+    Two identical states are a *recurrence*. Small hexadecimal divergence is
+    stability; broad divergence is mutation. The exact thresholds are public so
+    experiments remain reproducible and comparable.
+    """
+
+    STABLE_DISTANCE = 8
+    SHIFTING_DISTANCE = 32
+
+    def __init__(self) -> None:
+        self.history: list[ResonancePulse] = []
+        self._seen: set[str] = set()
+
+    @staticmethod
+    def _distance(old: str, new: str) -> int:
+        return sum(a != b for a, b in zip(old, new)) + abs(len(old) - len(new))
+
+    @classmethod
+    def _verdict(cls, distance: int, repeated: bool) -> str:
+        if repeated:
+            return "recurrence"
+        if distance == 0:
+            return "identical"
+        if distance <= cls.STABLE_DISTANCE:
+            return "stable"
+        if distance <= cls.SHIFTING_DISTANCE:
+            return "shifting"
+        return "mutation"
+
+    def record(self, pulse: ResonancePulse) -> ResonanceVerdict:
+        previous = self.history[-1] if self.history else None
+        repeated = pulse.signature in self._seen
+        if previous is None:
+            distance, changed = 0, ()
+            verdict = "baseline"
+        else:
+            distance = self._distance(previous.signature, pulse.signature)
+            fields = (
+                "chaos", "mood", "mesh_events", "reactor_events", "state_keys",
+            )
+            old_status = {
+                "chaos": previous.chaos,
+                "mood": previous.mood,
+                "mesh_events": previous.mesh_events,
+                "reactor_events": previous.reactor_events,
+                "state_keys": previous.state_keys,
+            }
+            new_status = {
+                "chaos": pulse.chaos,
+                "mood": pulse.mood,
+                "mesh_events": pulse.mesh_events,
+                "reactor_events": pulse.reactor_events,
+                "state_keys": pulse.state_keys,
+            }
+            changed = tuple(field for field in fields if old_status[field] != new_status[field])
+            verdict = self._verdict(distance, repeated)
+
+        self.history.append(pulse)
+        self._seen.add(pulse.signature)
+        similarity = 1.0 - (distance / 64 if distance else 0.0)
+        return ResonanceVerdict(
+            old_signature=previous.signature if previous else pulse.signature,
+            new_signature=pulse.signature,
+            distance=distance,
+            similarity=max(0.0, round(similarity, 4)),
+            verdict=verdict,
+            changed_fields=changed,
+        )
+
+    @property
+    def attractors(self) -> int:
+        """Number of distinct states encountered by the oracle."""
+        return len(self._seen)
+
+    def compare_journals(self, old_path: str | Path, new_path: str | Path) -> dict[str, Any]:
+        """Compare the latest valid records from two JSONL journals."""
+        old_pulses = ResonanceLoom.load(old_path)
+        new_pulses = ResonanceLoom.load(new_path)
+        if not old_pulses or not new_pulses:
+            raise ValueError("both resonance journals must contain at least one pulse")
+        old = old_pulses[-1]
+        new = new_pulses[-1]
+        distance = self._distance(old["signature"], new["signature"])
+        changed_fields = sorted(
+            field for field in ("chaos", "mood", "mesh_events", "reactor_events", "state_keys")
+            if old.get(field) != new.get(field)
+        )
+        repeated = old["signature"] == new["signature"]
+        return {
+            "old_signature": old["signature"],
+            "new_signature": new["signature"],
+            "distance": distance,
+            "similarity": max(0.0, round(1.0 - distance / 64, 4)),
+            "verdict": self._verdict(distance, repeated),
+            "changed_fields": changed_fields,
+        }

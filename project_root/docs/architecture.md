@@ -30,3 +30,15 @@
 - **Event mesh**: Multi-layered pub/sub where events propagate upward through abstraction layers
 - **Emergent behavior**: Agents performing unusual actions repeatedly can codify new physics rules
 - **Strata**: Three independent runtime layers (alpha, beta, gamma) that can run isolated simulations
+
+## Cross-Project Resonance
+
+The repository-level bridge exposes three contracts:
+
+1. **State propagation** — `omega_prime` atom state becomes mood input for the fractal engine.
+2. **Event routing** — `project_root` mesh deliveries are mirrored into the `omega_prime` reactor.
+3. **Resonance telemetry** — status fields are canonicalized into a stable SHA-256 pulse.
+
+`PulseOracle` treats identical pulses as attractors and uses hexadecimal Hamming
+distance to distinguish stable drift from mutation. This gives CI a compact,
+replayable signal for detecting unintended behavioral changes.
