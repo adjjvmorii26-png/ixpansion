@@ -40,6 +40,14 @@ jobs:
             --dream-file artifacts/mycelium-dream.json \
             --transcript artifacts/astral-bus.jsonl \
             --output artifacts/astral-braid.json
+      - name: Grow proof garden
+        run: |
+          python -m bridges.proof_garden \
+            --ledger artifacts/proof-garden.jsonl plant \
+            --report artifacts/astral-braid.json \
+            --output artifacts/proof-packet.json
+          python -m bridges.proof_garden \
+            --ledger artifacts/proof-garden.jsonl audit
       - name: Write job summary
         if: always()
         run: |
@@ -73,6 +81,16 @@ jobs:
               out.write(f"- Timelines rehearsed: `{len(braid['candidates'])}`\n")
               out.write(f"- Selected: `{braid['selected_strategy'] or 'quarantined'}`\n")
               out.write(f"- Certificate: `{braid['certificate_hash'][:12]}`\n")
+
+          proof_path = Path("artifacts/proof-packet.json")
+          if proof_path.exists():
+              planted = json.loads(proof_path.read_text())
+              ring = planted["record"]
+              out.write("\n## Proof Garden\n\n")
+              out.write(f"- Growth ring: `{ring['sequence']}`\n")
+              out.write(f"- Decision: `{ring['kind']}`\n")
+              out.write(f"- Root: `{ring['root'][:12]}`\n")
+              out.write(f"- Portable proof: `{planted['verified']}`\n")
           PY
       - uses: actions/upload-artifact@v4
         with:
