@@ -48,6 +48,14 @@ jobs:
             --output artifacts/proof-packet.json
           python -m bridges.proof_garden \
             --ledger artifacts/proof-garden.jsonl audit
+      - name: Weigh dormant futures
+        run: |
+          python -m bridges.resurrection_garden \
+            --report artifacts/astral-braid.json \
+            --proof-packet artifacts/proof-packet.json \
+            --contract-file configs/resurrection_contract.json \
+            --environment-file configs/resurrection_environment.json \
+            --output artifacts/resurrection.json
       - name: Write job summary
         if: always()
         run: |
@@ -91,6 +99,15 @@ jobs:
               out.write(f"- Decision: `{ring['kind']}`\n")
               out.write(f"- Root: `{ring['root'][:12]}`\n")
               out.write(f"- Portable proof: `{planted['verified']}`\n")
+
+          resurrection_path = Path("artifacts/resurrection.json")
+          if resurrection_path.exists():
+              court = json.loads(resurrection_path.read_text())
+              out.write("\n## Resurrection Garden\n\n")
+              out.write(f"- Verdict: `{court['verdict']}`\n")
+              out.write(f"- Candidate: `{court['selected_strategy'] or 'none'}`\n")
+              out.write(f"- Activation: `{court.get('activation_gate', 'not_applicable')}`\n")
+              out.write(f"- Certificate: `{court['certificate_hash'][:12]}`\n")
           PY
       - uses: actions/upload-artifact@v4
         with:

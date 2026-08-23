@@ -105,3 +105,12 @@ growth ring records its predecessor's Merkle root and produces a portable
 inclusion proof, allowing a remote auditor to validate one event without access
 to the complete ledger. Quarantine is archived with the same rigor as promotion,
 so refusal remains first-class institutional memory.
+
+## Resurrection Garden
+
+Dormancy is reversible only when the reason for dormancy was environmental or
+budgetary. The Resurrection Garden validates the original quarantine
+certificate, applies a new contract and resource envelope, and emits lineage
+evidence rather than an executable command. Consent failures receive a permanent
+seal, unknown historical violations fail closed, and every awakened future must
+repeat rehearsal before it can approach execution.
