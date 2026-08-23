@@ -96,3 +96,12 @@ contract. Promotion is deterministic, transport timestamps stay outside the
 certificate hash, and failed candidates are quarantined rather than discarded.
 This keeps experimentation imaginative while making irreversible action a
 separate, auditable decision.
+
+## Proof Garden
+
+The Proof Garden is the memory-immune layer beneath Astral Braid. It does not
+decide whether a ritual is good; it preserves proof of what was decided. Every
+growth ring records its predecessor's Merkle root and produces a portable
+inclusion proof, allowing a remote auditor to validate one event without access
+to the complete ledger. Quarantine is archived with the same rigor as promotion,
+so refusal remains first-class institutional memory.

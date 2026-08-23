@@ -7,6 +7,7 @@
 - mimic agent — short caption variants
 - unified_resource_tick — entropy + gas + astral
 - form_inventor_safe — gated form ids
+- proof_garden — Merkle pollen packets for promoted/quarantined braids
 
 ## Still open
 - swarm.py --sandbox-ticks N
