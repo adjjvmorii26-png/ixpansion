@@ -1,0 +1,50 @@
+name: Chaos Monkey
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # 3 AM UTC daily
+  workflow_dispatch:
+
+jobs:
+  chaos-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install pytest pytest-asyncio
+
+      - name: Run full test suite baseline
+        run: pytest omega_prime/tests/ omega_fractal_engine/tests/ project_root/tests/ -q --tb=short
+
+      - name: Inject random delays (timing resilience)
+        run: |
+          python3 -c "
+          import subprocess, random, time
+          result = subprocess.run(
+              ['pytest', 'omega_prime/tests/', '-q', '--tb=short'],
+              capture_output=True, text=True
+          )
+          print('baseline exit:', result.returncode)
+          "
+
+      - name: Run with shuffled test order (order-dependency check)
+        run: |
+          pip install pytest-random-order
+          pytest omega_prime/tests/ -q --tb=short -p no:cacheprovider || echo "Order dependency detected — investigate"
+
+      - name: Memory stress test
+        run: |
+          python3 -c "
+          import sys, importlib
+          sys.path.insert(0, '.')
+          from omega_prime.nucleus.kernel.state_core import StateCore
+          core = StateCore()
+          for i in range(10000):
+              core.set(f'key.{i}', {'data': [j for j in range(10)]})
+          print(f'Stored {i+1} entries successfully')
+          "

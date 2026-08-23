@@ -1,0 +1,40 @@
+name: Resonance Pulse
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '15 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  pulse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependencies
+        run: python -m pip install pytest pytest-asyncio
+      - name: Run complete ALEPH suite
+        run: pytest omega_prime/tests omega_fractal_engine/tests project_root/tests bridges -q --tb=short
+      - name: Capture resonance journal
+        run: |
+          mkdir -p artifacts
+          python3 - <<'PY'
+          from pathlib import Path
+          from bridges.resonance_loom import ResonanceLoom
+
+          loom = ResonanceLoom(seed=20260823)
+          print(loom.weave("github-actions", 0.25, 0.75))
+          print(loom.persist("artifacts/resonance.jsonl", "ci-heartbeat").payload())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aleph-resonance-pulse
+          path: artifacts/resonance.jsonl
+          if-no-files-found: error
+          retention-days: 30
