@@ -9,11 +9,13 @@ from agents.observer import Observer
 from core.events import EventBus
 from core.state_graph import StateGraph
 from expansion.models.mutation import Mutation
+from expansion.mutation_applier import MutationApplier
 from expansion.rule_engine import RuleEngine
 from glitch.divergence_tracker import DivergenceTracker
+from hex.action_compiler import action_evidence, compile_action
 from hex.vm import HexVM
 from mesh.channels import MeshChannels
-from mesh.topology import build_topology
+from mesh.topology import build_agent_mesh
 from worlds.world_state import WorldState
 
 
@@ -25,12 +27,15 @@ class IxpansionRuntime:
         self.graph = StateGraph()
         self.graph.add_node("origin", "core", stability=1.0, energy=10)
         self.bus = EventBus()
-        self.mesh = MeshChannels(build_topology(topology, ["origin", "alpha", "beta"]))
+        self.agent_names = [agent.name for agent in [Observer(), Architect(), Mutator(), Glitcher()]]
+        self.mesh = MeshChannels(build_agent_mesh(topology, self.agent_names))
         self.world = WorldState(scene)
         self.agents: list[Agent] = [Observer(), Architect(), Mutator(), Glitcher()]
+        self.applier = MutationApplier()
         self.rules = RuleEngine()
         self.tracker = DivergenceTracker()
         self.vm = HexVM()
+        self.witnesses: list[dict[str, Any]] = []
         self.ticks = 0
 
     def _apply_action(self, action: dict[str, Any]) -> dict[str, Any] | None:
@@ -46,11 +51,8 @@ class IxpansionRuntime:
                 target=str(action["node"]), operation=str(action.get("operation", "add")),
                 field=str(action.get("field", "energy")), value=action.get("value", 1),
             )
-            node = self.graph.nodes.get(mutation.target)
-            if node:
-                current = node.state.get(mutation.field, 0)
-                node.state[mutation.field] = current + int(mutation.value)
-            return {"applied": node is not None}
+            applied = self.applier.apply(self.graph, mutation)
+            return {"applied": applied}
         if kind == "anomaly":
             target = self.graph.nodes.get(str(action.get("node", "origin")))
             if target:
@@ -62,11 +64,30 @@ class IxpansionRuntime:
         self.ticks += 1
         perception = self.world.tick(self.ticks, self.graph)
         results: list[Any] = []
+        witnesses: list[dict[str, Any]] = []
         for agent in self.agents:
             for action in agent.act(perception):
                 delivered = self.mesh.broadcast(agent.name, action)
                 outcome = self._apply_action(action)
-                results.append({"agent": agent.name, "action": action, "delivered": delivered, "outcome": outcome})
+                program = compile_action(action, agent=agent.name)
+                evidence = self.vm.execute(program)[0]
+                witness = {
+                    "tick": self.ticks,
+                    "agent": agent.name,
+                    "sigil": f"0x{action_evidence(action)[:8].upper()}",
+                    "evidence_hash": action_evidence(action),
+                    "program": program,
+                    "evidence_word": evidence,
+                }
+                self.witnesses.append(witness)
+                witnesses.append(witness)
+                results.append({
+                    "agent": agent.name,
+                    "action": action,
+                    "delivered": delivered,
+                    "outcome": outcome,
+                    "witness_sigil": witness["sigil"],
+                })
                 self.bus.publish(f"agent.{agent.name}", {"tick": self.ticks, "action": action})
         triggered = self.rules.evaluate(self.graph)
         anomalies = self.tracker.observe(self.ticks, self.graph.fingerprint())
@@ -77,6 +98,8 @@ class IxpansionRuntime:
             "results": results,
             "triggered_rules": triggered,
             "anomalies": anomalies,
+            "mesh_delivered": sum(item["delivered"] for item in results),
+            "witnesses": witnesses,
             "fingerprint": self.graph.fingerprint(),
             "vm_outputs": self.vm.outputs,
         }

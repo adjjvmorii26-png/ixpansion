@@ -23,7 +23,13 @@ def main(argv: list[str] | None = None) -> int:
         timeline = IxpansionRuntime(args.scene, args.topology).run(args.ticks)
         if args.compact:
             timeline = [
-                {"tick": item["tick"], "fingerprint": item["fingerprint"], "anomalies": item["anomalies"]}
+                {
+                    "tick": item["tick"],
+                    "mesh_delivered": item["mesh_delivered"],
+                    "witnesses": len(item["witnesses"]),
+                    "anomalies": item["anomalies"],
+                    "fingerprint": item["fingerprint"],
+                }
                 for item in timeline
             ]
         print(json.dumps(timeline, sort_keys=True, indent=2))

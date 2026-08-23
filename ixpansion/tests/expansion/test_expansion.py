@@ -36,3 +36,14 @@ def test_seed_loader_reads_json(tmp_path):
 def test_mutation_validates_operations():
     with pytest.raises(ValueError):
         Mutation("origin", "energy", "explode", 1)
+
+
+def test_rule_engine_prefers_registered_named_mutation():
+    graph = StateGraph()
+    graph.add_node("origin", heat=100)
+    engine = RuleEngine()
+    engine.add(Rule("transform", "heat", ">", 50, "cool"))
+    engine.register_mutation("cool", Mutation("origin", "heat", "set", 20))
+
+    assert engine.evaluate(graph) == ["transform"]
+    assert graph.nodes["origin"].state["heat"] == 20

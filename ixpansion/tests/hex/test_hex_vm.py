@@ -34,3 +34,34 @@ def test_engine_compiler_maps_bytecode_to_actions():
     actions = bytecode_to_actions(bytecode)
     assert {"type": "store", "target": "x"} in actions
     assert {"type": "emit"} in actions
+
+
+def test_parser_rejects_invalid_operand_arity():
+    with pytest.raises(ValueError, match="PUSH expects"):
+        parse("PUSH")
+    with pytest.raises(ValueError, match="ADD expects"):
+        parse("ADD 1")
+
+
+def test_vm_resets_memory_between_runs():
+    vm = HexVM("PUSH 7\nSTORE value\nHALT")
+    vm.execute("PUSH 1\nEMIT\nHALT")
+    assert vm.memory == {}
+    assert vm.outputs == [1]
+
+
+def test_vm_reports_stack_underflow_line():
+    with pytest.raises(ValueError, match="line 2"):
+        HexVM().execute("# empty\nEMIT\nHALT")
+
+
+def test_action_compiler_creates_deterministic_witness():
+    from hex.action_compiler import action_evidence, compile_action
+
+    action = {"type": "mutate", "node": "origin"}
+    program = compile_action(action, agent="mutator")
+    repeat = compile_action(dict(action), agent="mutator")
+
+    assert program == repeat
+    assert "STORE witness_mutator_" in program
+    assert HexVM(program).outputs[0] == int(action_evidence(action)[:12], 16)

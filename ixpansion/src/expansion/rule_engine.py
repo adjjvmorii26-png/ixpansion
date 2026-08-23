@@ -9,10 +9,14 @@ from expansion.mutation_applier import MutationApplier
 class RuleEngine:
     def __init__(self) -> None:
         self.rules: list[Rule] = []
+        self.mutations: dict[str, Mutation] = {}
         self.applier = MutationApplier()
 
     def add(self, rule: Rule) -> None:
         self.rules.append(rule)
+
+    def register_mutation(self, mutation_id: str, mutation: Mutation) -> None:
+        self.mutations[mutation_id] = mutation
 
     def evaluate(self, graph: StateGraph) -> list[str]:
         applied: list[str] = []
@@ -28,12 +32,11 @@ class RuleEngine:
                     "<=": actual <= rule.value,
                     "==": actual == rule.value,
                 }[rule.operator]
-                if matches and rule.mutation_id and self.applier.apply(
-                    graph,
-                    Mutation(
-                        target=node.id, field=rule.path, operation="multiply", value=0.9
-                    ),
-                ):
+                if not matches or not rule.mutation_id:
+                    continue
+                fallback = Mutation(node.id, rule.path, "multiply", 0.9)
+                mutation = self.mutations.get(rule.mutation_id, fallback)
+                if self.applier.apply(graph, mutation):
                     applied.append(rule.id)
                     break
         return applied
