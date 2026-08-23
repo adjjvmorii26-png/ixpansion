@@ -12,7 +12,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`fractal_engine`](omega_fractal_engine/) | Python | 36 | Self-expanding engine: mutable physics, paradox resolution, dimensional spaces, self-rewriting code |
 | [`project_root`](project_root/) | Python | 25 | HEX-native strata, fractal pipelines, and layered event mesh |
 | [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator and resonance display |
-| [`bridges`](bridges/) | Python | 76 | Counterfactual twins, causal replay, resilience analysis, semantic treaties, and reversible Astral Braids |
+| [`bridges`](bridges/) | Python | 88 | Counterfactual twins, causal replay, resilience analysis, semantic treaties, and reversible Astral Braids |
 | [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
 
 ## Run Tests
@@ -180,9 +180,32 @@ packet** carries one event plus its Merkle audit path, so another runtime can
 verify that exact decision without receiving—or trusting—the whole archive.
 
 ```bash
-python -m bridges.proof_garden   --ledger artifacts/proof-garden.jsonl plant   --report artifacts/braid-report.json   --output artifacts/proof-packet.json
-python -m bridges.proof_garden   --ledger artifacts/proof-garden.jsonl prove --sequence 1
-python -m bridges.proof_garden   --ledger artifacts/proof-garden.jsonl audit
+python -m bridges.proof_garden \
+  --ledger artifacts/proof-garden.jsonl plant \
+  --report artifacts/braid-report.json \
+  --output artifacts/proof-packet.json
+python -m bridges.proof_garden \
+  --ledger artifacts/proof-garden.jsonl prove --sequence 1
+python -m bridges.proof_garden \
+  --ledger artifacts/proof-garden.jsonl audit
+```
+
+### Resurrection Garden
+
+Quarantine is not oblivion. The Resurrection Garden re-reads a preserved
+quarantine certificate whenever consent limits or available entropy change. It
+can issue a deterministic **awakening certificate**, but that artifact has no
+executor: its mandatory activation gate sends the candidate back through the
+Astral Braid Conservatory. Futures marked for consent violations carry a
+permanent seal; they may be studied, never revived.
+
+```bash
+python -m bridges.resurrection_garden \
+  --report artifacts/braid-report.json \
+  --proof-packet artifacts/proof-packet.json \
+  --contract-file configs/resurrection_contract.json \
+  --environment-file configs/resurrection_environment.json \
+  --output artifacts/resurrection.json
 ```
 
 All experiments are synthetic simulations; they do not claim consciousness or
