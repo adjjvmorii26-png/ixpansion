@@ -78,3 +78,11 @@ ledger samples recursive state deltas and resonance signatures at each step,
 classifying recovery as elastic, delayed, hysteretic, plastic, relapsed, or
 inert. In particular, it can detect a hysteretic trace where dashboards return
 to agreement while underlying semantic history remains different.
+
+## Concordance Engine
+
+Reconciliation is explicit rather than implicit. The engine groups collection
+deltas when a union policy applies, resolves each semantic path through
+precedence rules, and records both source values plus the selected value in a
+treaty clause. Conflicts may remain visible under `$conflict`; they are never
+silently erased.

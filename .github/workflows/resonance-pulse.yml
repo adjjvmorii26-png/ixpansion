@@ -59,6 +59,24 @@ jobs:
             --recovery-agent recovery-pulse \
             --recovery-valence 0 --recovery-arousal 0.5 \
             --recovery-steps 4
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          twin = json.loads(Path("artifacts/counterfactual.json").read_text())
+          outcome = twin["timeline"][-1]
+          spec = {
+              "baseline_state": outcome["baseline_state"],
+              "twin_state": outcome["twin_state"],
+              "policy": {"default": "union"},
+          }
+          Path("artifacts/treaty-input.json").write_text(
+              json.dumps(spec, sort_keys=True, indent=2) + "\n"
+          )
+          PY
+          python -m bridges.concordance_engine forge \
+            --spec artifacts/treaty-input.json \
+            --output artifacts/concordance-treaty.json
       - name: Write job summary
         if: always()
         run: |
@@ -105,6 +123,13 @@ jobs:
           out.write(f"- Final semantic repair: `{resilience['final_semantic_recovered']}`\n")
           out.write(f"- Final resonance repair: `{resilience['final_resonance_recovered']}`\n")
           out.write(f"- Evidence: `{resilience['evidence_hash'][:12]}`\n")
+
+          treaty = json.loads(Path("artifacts/concordance-treaty.json").read_text())
+          out.write("\n## Concordance Treaty\n\n")
+          out.write(f"- Ratified: `{treaty['ratified']}`\n")
+          out.write(f"- Clauses: `{treaty['clause_count']}`\n")
+          out.write(f"- Preserved conflicts: `{treaty['preserved_conflicts']}`\n")
+          out.write(f"- Treaty hash: `{treaty['treaty_hash'][:12]}`\n")
           PY
       - uses: actions/upload-artifact@v4
         with:
