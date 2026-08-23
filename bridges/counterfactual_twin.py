@@ -250,7 +250,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _interventions_from_spec(path: Path) -> list[tuple[Signal, Signal]]:
+def load_interventions(path: Path) -> list[tuple[Signal, Signal]]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     pairs: list[tuple[Signal, Signal]] = []
     for item in payload.get("interventions", []):
@@ -275,7 +275,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "twin":
             if args.spec:
-                interventions = _interventions_from_spec(args.spec)
+                interventions = load_interventions(args.spec)
             elif args.agent:
                 interventions = [(
                     Signal(args.agent, args.baseline_valence, args.baseline_arousal),

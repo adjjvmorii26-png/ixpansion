@@ -61,3 +61,12 @@ resonance magnitudes, derives a camouflage index, and classifies the boundary as
 latent mutation, visible mutation, phantom signal, or synchronized state. The
 evidence hash is computed over the complete comparison, so CI can preserve a
 replayable causal record rather than a lossy alert.
+
+## Causal Attribution
+
+The attribution engine replays every paired intervention against two controls:
+an ablated world where both realities receive the same signal, and an isolated
+world where only that intervention differs. Comparing semantic or resonance
+divergence across these worlds yields a replay-backed classification instead of
+a post-hoc story. The causal fingerprint records only stable classifications,
+world outcomes, and boundary kinds, making it useful as a regression signature.
