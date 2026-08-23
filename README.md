@@ -15,6 +15,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`bridges`](bridges/) | Python | 88 | Counterfactual twins, causal replay, resilience analysis, semantic treaties, and reversible Astral Braids |
 | [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
 | [`ixpansion`](ixpansion/) | Python | 37 | Self-expanding HEX mesh: agent-coupled routing, HEX witnesses, world scenes, mutations, and preserved glitches |
+| [`solid-organism`](solid-organism/) | Python | 13 | Deterministic organism labs: kintsugi seams, dice constellations, consent-bounded cordyceps, negative space, and synthetic mood superposition |
 
 ## Run Tests
 
@@ -24,6 +25,23 @@ make test
 ```
 
 ## Systems Inventory
+## Solid Organism Labs
+
+Solid Organism is a compact laboratory for metaphors made executable. Kintsugi
+turns fractures into golden, inspectable seams; constellation dice turn bounded
+randomness into named star graphs; cordyceps treats refusal as immunity memory
+rather than failure; negative-space reads absent cells as organizing evidence;
+and mood superposition collapses synthetic affect vectors without claiming felt
+experience.
+
+```bash
+python3 solid-organism/lab/kintsugi.py
+python3 solid-organism/lab/constellation_dice.py
+python3 solid-organism/lab/cordyceps.py
+python3 solid-organism/lab/negative_space.py
+python3 solid-organism/omega/experiments/mood_superposition.py
+```
+
 ## IXpansion Mesh
 
 IXpansion is a deterministic self-expansion laboratory. World scenes emit
