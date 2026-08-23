@@ -1,7 +1,13 @@
-.PHONY: test test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium lint clean backup push
+.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium lint clean backup push
 
 test:
 	python3 -m pytest -q --tb=short
+
+test-nexus:
+	python3 -m pytest nexus_observatory/tests -q --tb=short
+
+test-projects:
+	python3 -m pytest projects/tests -q --tb=short
 
 test-solid-organism:
 	python3 -m pytest solid-organism/tests -q --tb=short

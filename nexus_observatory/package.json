@@ -1,0 +1,19 @@
+{
+  "name": "nexus-observatory",
+  "version": "0.4.0",
+  "private": true,
+  "description": "Zero-dependency command surface for Nexus pulses, journals, relics, and creative waves",
+  "scripts": {
+    "health": "python3 tools/observatory_cli.py health",
+    "quiet": "npm run --silent cycle && npm run --silent journal && npm run --silent index",
+    "cycle": "python3 tools/observatory_cli.py cycle",
+    "watch": "python3 tools/observatory_cli.py watch",
+    "index": "python3 tools/observatory_cli.py index",
+    "journal": "python3 tools/observatory_cli.py journal",
+    "dashboard": "python3 tools/observatory_cli.py dashboard",
+    "compare": "python3 tools/observatory_cli.py compare",
+    "creative": "python3 tools/observatory_cli.py creative",
+    "reliquary": "python3 tools/observatory_cli.py reliquary",
+    "ci": "python3 tools/observatory_cli.py ci"
+  }
+}
