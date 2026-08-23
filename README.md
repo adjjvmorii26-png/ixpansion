@@ -12,7 +12,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`fractal_engine`](omega_fractal_engine/) | Python | 36 | Self-expanding engine: mutable physics, paradox resolution, dimensional spaces, self-rewriting code |
 | [`project_root`](project_root/) | Python | 25 | HEX-native strata, fractal pipelines, and layered event mesh |
 | [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator and resonance display |
-| [`bridges`](bridges/) | Python | 49 | Counterfactual twins, causal replay, resilience analysis, and semantic treaties |
+| [`bridges`](bridges/) | Python | 64 | Counterfactual twins, causal replay, resilience analysis, semantic treaties, and reversible Astral Braids |
 | [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
 
 ## Run Tests
@@ -151,6 +151,24 @@ python3 -m bridges.counterfactual_twin --seed 42 twin \
   --agent scout \
   --baseline-valence 0.25 --baseline-arousal 0.75 \
   --twin-valence -0.35 --twin-arousal 0.9
+```
+
+### Astral Braid Conservatory
+
+A MYCELIUM dream can be dangerous before anyone understands its consequences.
+The conservatory expands each dream into three reversible **shadow timelines**:
+conservative, lateral, and paradox. Every timeline receives an explicit consent,
+entropy, duration, and confidence audit; low-scoring futures remain visible but
+cannot be promoted. The winning braid is published to an astral JSONL bus with a
+deterministic certificate, while the original dream remains untouched in its
+capsule.
+
+```bash
+python -m mycelium.interfaces.cli dream --seed 20260823 > artifacts/dream.json
+python -m bridges.astral_braid \
+  --dream-file artifacts/dream.json \
+  --transcript artifacts/astral-bus.jsonl \
+  --output artifacts/braid-report.json
 ```
 
 All experiments are synthetic simulations; they do not claim consciousness or

@@ -34,6 +34,12 @@ jobs:
           python -m mycelium.interfaces.cli dream \
             --seed 20260823 --steps 18 --sites 9 \
             > artifacts/mycelium-dream.json
+      - name: Rehearse astral braids
+        run: |
+          python -m bridges.astral_braid \
+            --dream-file artifacts/mycelium-dream.json \
+            --transcript artifacts/astral-bus.jsonl \
+            --output artifacts/astral-braid.json
       - name: Write job summary
         if: always()
         run: |
@@ -59,6 +65,14 @@ jobs:
                   out.write(f"- Confidence: `{dream['confidence']:.2%}`\n")
                   out.write(f"- Entropy budget: `{dream['entropy_budget']}`\n")
                   out.write(f"- Evidence: `{dream['evidence_hash'][:12]}`\n")
+
+          braid_path = Path("artifacts/astral-braid.json")
+          if braid_path.exists():
+              braid = json.loads(braid_path.read_text())
+              out.write("\n## Astral Braid Conservatory\n\n")
+              out.write(f"- Timelines rehearsed: `{len(braid['candidates'])}`\n")
+              out.write(f"- Selected: `{braid['selected_strategy'] or 'quarantined'}`\n")
+              out.write(f"- Certificate: `{braid['certificate_hash'][:12]}`\n")
           PY
       - uses: actions/upload-artifact@v4
         with:
