@@ -14,6 +14,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator and resonance display |
 | [`bridges`](bridges/) | Python | 88 | Counterfactual twins, causal replay, resilience analysis, semantic treaties, and reversible Astral Braids |
 | [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
+| [`ixpansion`](ixpansion/) | Python | 26 | Self-expanding HEX mesh: state graph, agent rituals, world scenes, mutations, and preserved glitches |
 
 ## Run Tests
 
@@ -23,6 +24,19 @@ make test
 ```
 
 ## Systems Inventory
+## IXpansion Mesh
+
+IXpansion is a deterministic self-expansion laboratory. World scenes emit
+perceptions, four agents propose data-only actions, mesh edges route those
+actions, a StateGraph absorbs mutations, and the HEX VM preserves ritual traces.
+Paradox systems never hide failure: identity splits, temporal loops, and rule
+collisions become inspectable evidence.
+
+```bash
+python3 -m pytest ixpansion/tests -q
+python3 ixpansion/src/interfaces/cli.py --scene hex_storm --topology ring --ticks 3 --compact
+```
+
 
 <details>
 <summary><b>omega_prime — selected experimental systems</b></summary>

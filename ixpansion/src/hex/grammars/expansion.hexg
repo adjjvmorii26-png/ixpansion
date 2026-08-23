@@ -1,0 +1,4 @@
+OPCODE PUSH <value> # place a literal on the stack
+OPCODE STORE <key>
+OPCODE LOAD <key>
+OPCODE ADD | SUB | EMIT | HALT

@@ -19,9 +19,10 @@ testpaths = [
     "project_root/tests",
     "bridges",
     "mycelium/tests",
+    "ixpansion/tests",
 ]
 pythonpath = ["."]
 asyncio_mode = "auto"
 
 [tool.setuptools.packages.find]
-include = ["omega_prime*", "mycelium*"]
+include = ["omega_prime*", "mycelium*", "ixpansion*"]
