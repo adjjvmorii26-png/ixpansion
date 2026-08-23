@@ -51,6 +51,14 @@ jobs:
             --spec artifacts/interventions.json \
             --output artifacts/causal-attribution.json \
             --target semantic
+          python -m bridges.resilience_ledger --seed 20260823 probe \
+            --output artifacts/resilience.json \
+            --agent nightly-drift \
+            --baseline-valence 0.25 --baseline-arousal 0.75 \
+            --twin-valence -0.35 --twin-arousal 0.9 \
+            --recovery-agent recovery-pulse \
+            --recovery-valence 0 --recovery-arousal 0.5 \
+            --recovery-steps 4
       - name: Write job summary
         if: always()
         run: |
@@ -89,6 +97,14 @@ jobs:
           out.write(f"- Sufficient: `{verdict['sufficient']}`\n")
           out.write(f"- Causal mass: `{verdict['causal_mass']:.2f}`\n")
           out.write(f"- Fingerprint: `{attribution['causal_fingerprint'][:12]}`\n")
+
+          resilience = json.loads(Path("artifacts/resilience.json").read_text())
+          out.write("\n## Resilience Ledger\n\n")
+          out.write(f"- Classification: `{resilience['classification']}`\n")
+          out.write(f"- Recovery efficiency: `{resilience['recovery_efficiency']:.2%}`\n")
+          out.write(f"- Final semantic repair: `{resilience['final_semantic_recovered']}`\n")
+          out.write(f"- Final resonance repair: `{resilience['final_resonance_recovered']}`\n")
+          out.write(f"- Evidence: `{resilience['evidence_hash'][:12]}`\n")
           PY
       - uses: actions/upload-artifact@v4
         with:
