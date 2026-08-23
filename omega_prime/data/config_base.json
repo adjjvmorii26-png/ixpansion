@@ -1,0 +1,18 @@
+{
+  "system": {
+    "name": "Omega Prime",
+    "version": "0.1.0",
+    "pulse_hz": 10,
+    "log_level": "INFO"
+  },
+  "sandbox": {
+    "default_realm": "lattice",
+    "lattice": {"size": 16},
+    "continuum": {"gravity_scale": 1.0}
+  },
+  "agents": {
+    "max_active": 64,
+    "default_memory_capacity": 256,
+    "spawn_timeout_s": 5.0
+  }
+}

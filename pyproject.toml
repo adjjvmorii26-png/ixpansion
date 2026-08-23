@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omega-prime"
+version = "0.1.0"
+description = "Modular multi-agent sandbox and protocol framework"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-asyncio>=0.21"]
+
+[tool.pytest.ini_options]
+testpaths = ["omega_prime/tests"]
+asyncio_mode = "auto"
+
+[tool.setuptools.packages.find]
+include = ["omega_prime*"]
