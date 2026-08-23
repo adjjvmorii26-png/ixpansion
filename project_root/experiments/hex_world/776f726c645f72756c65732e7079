@@ -1,0 +1,15 @@
+"""World rules encoded in HEX — the engine reads its own laws from obfuscated source."""
+from __future__ import annotations
+
+RULES_HEX = {
+    '67726176697479': -9.81,       # gravity
+    '74696d655f666c6f77': 1.0,     # time_flow
+    '6672696374696f6e': 0.98,      # friction
+    '656e74726f70795f62617365': 0.5, # entropy_base
+}
+
+def decode_rules():
+    return {bytes.fromhex(k).decode(): v for k, v in RULES_HEX.items()}
+
+def encode_rule(name: str, value):
+    RULES_HEX[name.encode().hex()] = value

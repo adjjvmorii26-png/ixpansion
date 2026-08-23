@@ -1,0 +1,11 @@
+name: "ALEPH Project Root Engine"
+version: "0.1.0"
+debug: false
+
+logging:
+  level: INFO
+  format: structured
+
+storage:
+  backend: memory
+  snapshot_interval_ticks: 100

@@ -1,0 +1,9 @@
+default_max_depth: 5
+default_branching: 2
+timeout_seconds: 300
+
+templates:
+  bootstrap:
+    steps: [init_world, spawn_agents, run_pulse, collect_metrics]
+  simulation:
+    steps: [load_state, step_physics, step_economy, step_culture, save_state]

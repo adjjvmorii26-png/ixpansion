@@ -1,0 +1,12 @@
+"""A matrix of HEX-encoded spatial data."""
+from __future__ import annotations
+from typing import Any
+
+def encode_cell(x: int, y: int, terrain: str) -> str:
+    return f'{x:04x}{y:04x}{terrain.encode().hex()}'
+
+def decode_cell(cell_hex: str) -> dict[str, Any]:
+    x = int(cell_hex[:4], 16)
+    y = int(cell_hex[4:8], 16)
+    terrain = bytes.fromhex(cell_hex[8:]).decode()
+    return {'x': x, 'y': y, 'terrain': terrain}

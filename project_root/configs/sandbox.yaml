@@ -1,0 +1,14 @@
+grid_size: 32
+layers: [alpha, beta, gamma]
+
+domains:
+  physics:
+    gravity: -9.81
+  economy:
+    starting_balance: 100.0
+  culture:
+    norm_decay_rate: 0.01
+
+event_mesh:
+  max_log_size: 5000
+  layers: [physical, social, economic, cultural, meta]

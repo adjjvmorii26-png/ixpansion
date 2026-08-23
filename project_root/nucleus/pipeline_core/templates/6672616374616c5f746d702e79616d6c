@@ -1,0 +1,17 @@
+pipeline:
+  name: fractal_bootstrap
+  max_depth: 3
+  branching: 2
+  steps:
+    - id: init
+      handler: init_world_state
+      children:
+        - id: terrain_gen
+          handler: generate_terrain
+        - id: entity_seed
+          handler: seed_entities
+          children:
+            - id: assign_species
+              handler: randomize_species
+            - id: place_positions
+              handler: scatter_on_grid
