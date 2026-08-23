@@ -1,98 +1,68 @@
-# Omega Systems
+# ALEPH
 
-Three interconnected experimental frameworks for multi-agent simulation, consciousness modeling, and observatory bootstrapping.
+> *A point in space that contains all other points.* — Jorge Luis Borges
+
+Multi-agent consciousness engine where observers collapse reality into existence through consensus, entropy budgets constrain action, ghosts possess the living, and physics itself evolves by natural selection.
 
 ## Projects
 
-| Project | Language | Tests | Purpose |
-|---------|----------|-------|---------|
-| **omega_prime** | Python 3.11+ | 110 | Multi-agent sandbox with entropy budgets, quantum superposition, morphic fields, pheromone trails, temporal realms, and emergent speciation |
-| **omega_fractal_engine** | Python 3.11+ | 36 | Self-expanding consciousness engine with mutable physics, dimensional folding, paradox resolution, and self-rewriting code |
-| **nexus_observatory** | R + Bash | — | Modular boot system with plugin architecture, health checks, and diagnostics |
+| Module | Language | Tests | Purpose |
+|--------|----------|-------|---------|
+| [`omega_prime`](omega_prime/) | Python | 110 | Multi-agent sandbox: entropy, superposition, morphic fields, pheromones, temporal realms, speciation, ghosts |
+| [`fractal_engine`](omega_fractal_engine/) | Python | 36 | Self-expanding engine: mutable physics, paradox resolution, dimensional spaces, self-rewriting code |
+| [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator with plugin architecture |
 
-## Quick Start
+## Run Tests
 
-### Omega Prime
 ```bash
-python3 -m pytest omega_prime/tests/
-python3 omega_prime/scripts/run_dev.py
+python3 -m pytest omega_prime/tests/ omega_fractal_engine/tests/
 ```
 
-### Omega Fractal Engine
-```bash
-python3 -m pytest omega_fractal_engine/tests/
-```
+## Systems Inventory
 
-### Nexus Observatory
-```bash
-./nexus_observatory/nexus_boot.sh boot
-./nexus_observatory/nexus_boot.sh doctor
-```
+<details>
+<summary><b>omega_prime — 15 experimental systems</b></summary>
 
-## Architecture
+| System | Innovation |
+|--------|-----------|
+| Entropy Budget | Actions drain thermodynamic reservoir; lockout when depleted |
+| Dream Cycle | Idle agents pattern-match memories, discover hidden correlations |
+| Morphic Field | Same-species knowledge resonance without explicit communication |
+| Quantum Superposition | Agents hedge via amplitude-weighted action collapse |
+| Pheromone Field | Stigmergic coordination through evaporating spatial signals |
+| Causal Echo Graph | DAG tracing action→effect chains for root-cause analysis |
+| Symbiosis Protocol | Cross-species bonds sharing emergent capabilities |
+| Speciation Engine | Spontaneous genome mutation under environmental stress |
+| Temporal Realm | Grid zones with different time-dilation factors |
+| Fossil Layer | Dead agents leave excavatable knowledge fossils |
+| Chronicle Engine | Narrative memory compressed into interpretive stories |
+| Reality Fabric | Mutable physics law patches that erode over time |
+| Pulse Harmonics | Kuramoto oscillators; synced actions amplify constructively |
+| Ghost Protocol | Depleted agents become observing ghosts that whisper hints |
+| Consensus Reality | Observers must agree before spatial cells consolidate |
+| Possession | Ghosts override weak agents; memories leak during control |
+| Time Crystals | Periodic structures create temporal echoes from past cycles |
+| Physics Evolution | Universal constants evolve via natural selection |
 
-```
-├── omega_prime/                  # Multi-agent sandbox framework
-│   ├── nucleus/kernel/           # StateCore, Reactor, PulseLoop, EntropyGovernor,
-│   │                             #   SuperpositionState, CausalGraph, PulseHarmonics,
-│   │                             #   ChronicleEngine
-│   ├── nucleus/interfaces/       # AgentPort, SandboxPort, ProtocolPort
-│   ├── agents/                   # BaseAgent, Registry, species (Sentinel/Architect/Wanderer),
-│   │                             #   cognition (DreamCycle, MorphicField, GoalStack...),
-│   │                             #   SymbiosisManager, SpeciationEngine, GhostProtocol
-│   ├── sandbox/                  # Conductor, realms (void/lattice/continuum/temporal),
-│   │                             #   modules (pheromone field, physics, reality fabric...),
-│   │                             #   fossil layer, dimensional fold
-│   ├── protocols/hex/            # Binary codec (3 dialects), glyph codec, event bus
-│   └── tests/                    # 110 tests across all subsystems
-│
-├── omega_fractal_engine/         # Self-expanding consciousness engine
-│   ├── nucleus/kernel/           # Axioms (immutable laws), EntropyRegulator, Pulse
-│   ├── nucleus/genesis/          # Autogenesis (self-bootstrapping), RecursionDriver
-│   ├── nucleus/identity/         # MoodVectors, dialects, signatures
-│   ├── lattice/                  # Euclidean/non-Euclidean/hyperbolic spaces,
-│   │                             #   TopologyEngine, PortalNetwork
-│   ├── agents/                   # AgentFabricator with genetic blending
-│   ├── rituals/                  # Convergence, divergence, metamorphosis, invocation
-│   ├── archives/                 # EchoIndex (memory search), chronicle/anomalies/dreams
-│   ├── reactors/                 # Chaos/order/fusion/inversion reactors
-│   ├── meta/                     # ParadoxSolver (5 strategies), SelfRewrite
-│   └── tests/                    # 36 tests
-│
-├── nexus_observatory/            # R package + bash boot system
-│   ├── DESCRIPTION               # R package metadata
-│   ├── R/                        # R wrappers for boot system
-│   ├── nexus_boot.sh             # Shell entry point with plugin loading
-│   └── modules.d/                # Drop-in boot modules
-│
-└── project_root/                 # Earlier prototype (superseded by omega_prime)
-```
+</details>
 
-## Experimental Systems
+<details>
+<summary><b>fractal_engine — core systems</b></summary>
 
-| System | Project | Innovation |
-|--------|---------|-----------|
-| Entropy Budget | omega_prime | Actions drain a thermodynamic reservoir; lockout when depleted |
-| Dream Cycle | omega_prime | Idle agents pattern-match memories and discover hidden correlations |
-| Morphic Field | omega_prime | Same-species knowledge resonance without explicit communication |
-| Quantum Superposition | omega_prime | Agents hedge decisions via amplitude-weighted action collapse |
-| Pheromone Field | omega_prime | Stigmergic coordination through evaporating spatial signals |
-| Causal Echo Graph | omega_prime | DAG tracing action→effect chains for root-cause analysis |
-| Symbiosis Protocol | omega_prime | Cross-species bonds sharing emergent capabilities |
-| Speciation Engine | omega_prime | Spontaneous genome mutation under environmental stress |
-| Temporal Realm | omega_prime | Grid zones with different time-dilation factors |
-| Fossil Layer | omega_prime | Dead agents leave excavatable knowledge fossils in terrain |
-| Chronicle Engine | omega_prime | Narrative memory compressed into interpretive stories |
-| Reality Fabric | omega_prime | Mutable physics law patches that erode over time |
-| Pulse Harmonics | omega_prime | Kuramoto-coupled oscillators; synced actions amplify |
-| Ghost Protocol | omega_prime | Depleted agents become observing ghosts that whisper hints |
-| Glyph Codec | omega_prime | Self-evolving compression protocol with learned symbol table |
-| Axiom System | fractal_engine | Immutable validator laws the engine cannot violate |
-| Autogenesis | fractal_engine | Spawns new subsystems from environmental triggers |
-| Mood Vectors | fractal_engine | Emotional state simulation with stimulus responses |
-| Dimensional Spaces | fractal_engine | Euclidean, non-Euclidean, and hyperbolic geometry |
-| Paradox Solver | fractal_engine | Resolves contradictions via superposition/synthesis/temporal strategies |
-| Self-Rewrite | fractal_engine | Engine monitors and modifies its own source code |
+| System | Innovation |
+|--------|-----------|
+| Axioms | Immutable validator laws the engine cannot violate |
+| Entropy Regulator | Global chaos thermostat with hysteresis |
+| Autogenesis | Spawns new subsystems from environmental triggers |
+| Mood Vectors | Emotional state simulation with stimulus responses |
+| Dimensional Spaces | Euclidean, non-Euclidean, hyperbolic geometry |
+| Portal Network | BFS routing between dimensions with stability decay |
+| Paradox Solver | Resolves contradictions via superposition/synthesis/temporal strategies |
+| Self-Rewrite | Engine monitors and modifies its own source code |
+| Reactors | Chaos/order/fusion/inversion transformation pipelines |
+
+</details>
 
 ## License
+
 MIT
