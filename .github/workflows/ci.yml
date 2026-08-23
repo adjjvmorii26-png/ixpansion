@@ -22,7 +22,6 @@ jobs:
       matrix:
         python-version: ["3.11", "3.12"]
     steps:
-      # Node 24 runtimes (avoids Node 20 deprecation warnings)
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
@@ -32,6 +31,13 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install pytest pytest-asyncio httpx
+      - name: Lab smoke
+        run: |
+          if [ -f lab/experiments/lab_smoke.py ]; then
+            python lab/experiments/lab_smoke.py
+          else
+            echo "lab_smoke missing — skip"
+          fi
       - name: Pytest (if present)
         run: |
           if ls tests/test_*.py >/dev/null 2>&1 || ls test_*.py >/dev/null 2>&1; then
@@ -65,5 +71,4 @@ jobs:
       - name: Compile lab + sandbox if present
         run: |
           python -m compileall -q lab sandbox scripts 2>/dev/null || true
-          python -m compileall -q . -x '(^|/)(\.git|node_modules|\.venv|dist|coverage_html)/' 2>/dev/null || true
           echo "compile done"
