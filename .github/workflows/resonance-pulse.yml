@@ -33,6 +33,11 @@ jobs:
             --agent nightly-drift --valence -0.35 --arousal 0.9
           python -m bridges.resonance_cli compare artifacts/baseline.jsonl \
             artifacts/resonance.jsonl > artifacts/oracle.json
+          python -m bridges.counterfactual_twin --seed 20260823 twin \
+            --output artifacts/counterfactual.json \
+            --agent nightly-drift \
+            --baseline-valence 0.25 --baseline-arousal 0.75 \
+            --twin-valence -0.35 --twin-arousal 0.9
       - name: Write job summary
         if: always()
         run: |
@@ -48,6 +53,13 @@ jobs:
               out.write(f"- Similarity: `{data['similarity']:.2%}`\n")
               out.write(f"- Baseline: `{data['old_signature'][:12]}`\n")
               out.write(f"- Variation: `{data['new_signature'][:12]}`\n")
+
+          twin = json.loads(Path("artifacts/counterfactual.json").read_text())
+          divergence = twin["divergence"]
+          out.write("\n## Counterfactual Twin\n\n")
+          out.write(f"- First split: `{divergence['kind']}` at step `{divergence['step_index']}`\n")
+          out.write(f"- Similarity: `{divergence['similarity']:.2%}`\n")
+          out.write(f"- Report: `{twin['report_hash'][:12]}`\n")
           PY
       - uses: actions/upload-artifact@v4
         with:
