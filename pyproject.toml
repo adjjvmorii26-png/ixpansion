@@ -21,6 +21,8 @@ testpaths = [
     "mycelium/tests",
     "ixpansion/tests",
     "solid-organism/tests",
+    "projects/tests",
+    "nexus_observatory/tests",
 ]
 pythonpath = ["."]
 asyncio_mode = "auto"

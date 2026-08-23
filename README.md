@@ -11,7 +11,8 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`omega_prime`](omega_prime/) | Python | 248 | Multi-agent sandbox: entropy, superposition, morphic fields, tunneling, temporal debt, semantic fossils |
 | [`fractal_engine`](omega_fractal_engine/) | Python | 36 | Self-expanding engine: mutable physics, paradox resolution, dimensional spaces, self-rewriting code |
 | [`project_root`](project_root/) | Python | 25 | HEX-native strata, fractal pipelines, and layered event mesh |
-| [`observatory`](nexus_observatory/) | R + Bash | — | Modular boot orchestrator and resonance display |
+| [`observatory`](nexus_observatory/) | R + Bash + Python | 11 | Boot orchestrator, pulse journal, dashboard, Wave 9 runner, and sealed reliquary |
+| [`projects`](projects/) | Python | 7 | Echolalia, schism, tide clock, interloper, and infinity listening-post labs |
 | [`bridges`](bridges/) | Python | 88 | Counterfactual twins, causal replay, resilience analysis, semantic treaties, and reversible Astral Braids |
 | [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
 | [`ixpansion`](ixpansion/) | Python | 37 | Self-expanding HEX mesh: agent-coupled routing, HEX witnesses, world scenes, mutations, and preserved glitches |
@@ -26,6 +27,23 @@ make test
 
 ## Systems Inventory
 ## Solid Organism Labs
+## Nexus Command Surface
+
+`nexus_observatory` now has a dependency-free NPM command surface over the same
+resonance contract used by the shell modules. Cycles append a JSONL journal,
+publish `resonance.jsonl.latest`, rebuild Markdown indexes, render a dashboard,
+compare adjacent pulses, seal hash-chained relics, and run Project Wave 9.
+
+```bash
+cd nexus_observatory
+npm run health
+npm run quiet
+npm run watch -- 2 10
+npm run creative
+npm run reliquary
+npm run ci
+```
+
 
 Solid Organism is a compact laboratory for metaphors made executable. Kintsugi
 turns fractures into golden, inspectable seams; constellation dice turn bounded
