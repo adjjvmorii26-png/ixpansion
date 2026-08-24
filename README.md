@@ -13,12 +13,12 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`project_root`](project_root/) | Python | 25 | HEX-native strata, fractal pipelines, and layered event mesh |
 | [`observatory`](nexus_observatory/) | R + Bash + Python | 11 | Boot orchestrator, pulse journal, dashboard, Wave 9 runner, and sealed reliquary |
 | [`projects`](projects/) | Python | 7 | Echolalia, schism, tide clock, interloper, and infinity listening-post labs |
-| [`bridges`](bridges/) | Python | 95 | Counterfactual twins, causal replay, resilience analysis, semantic treaties, reversible braids, and Kintsugi ledger repair |
+| [`bridges`](bridges/) | Python | 102 | Counterfactual twins, causal replay, resilience analysis, semantic treaties, reversible braids, and Kintsugi ledger repair |
 | [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
 | [`ixpansion`](ixpansion/) | Python | 37 | Self-expanding HEX mesh: agent-coupled routing, HEX witnesses, world scenes, mutations, and preserved glitches |
 | [`solid-organism`](solid-organism/) | Python | 13 | Deterministic organism labs: kintsugi seams, dice constellations, consent-bounded cordyceps, negative space, and synthetic mood superposition |
 | [`constellation`](constellation/) | Python | 42 | Dispersed repository resonance: scored concepts, adapter targets, integration graphs, and phased ritual contracts |
-| [`chrono_forge`](lab/chrono_forge/) | Python | 37 | Pinned ritual automation: pulse heartbeat, sentinel invariants, sandbox entropy budget, Forge Mind triage, and proof runner |
+| [`chrono_forge`](lab/chrono_forge/) | Python | 45 | Pinned ritual automation: pulse heartbeat, sentinel invariants, sandbox entropy budget, Forge Mind triage, and proof runner |
 
 ## Run Tests
 
@@ -26,6 +26,8 @@ Multi-agent consciousness engine where observers collapse reality into existence
 make test
 # or: python3 -m pytest
 ```
+
+The complete monorepo suite contains **579 tests**.
 
 ## Systems Inventory
 ## Solid Organism Labs
