@@ -1,4 +1,4 @@
-.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-constellation lint clean backup push
+.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation mandate-dry mandate-run lint clean backup push
 
 test:
 	python3 -m pytest -q --tb=short
@@ -35,6 +35,16 @@ test-lab:
 
 test-constellation:
 	python3 -m pytest constellation/tests -q --tb=short
+
+mandate-dry:
+	python3 lab/pulse_oracle.py
+	python3 lab/ritual_parliament.py
+	python3 lab/reversible_mandate.py --dry-run
+
+mandate-run:
+	python3 lab/pulse_oracle.py
+	python3 lab/ritual_parliament.py
+	python3 lab/reversible_mandate.py
 
 lint:
 	@find . -type f -name '*.py' \

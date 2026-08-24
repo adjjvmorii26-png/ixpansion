@@ -141,6 +141,7 @@ def deliberate(oracle: dict[str, Any]) -> dict[str, Any]:
         "quorum_met": len(coalition) >= 2,
         "simulations": simulations,
         "ballots": ballots,
+        "oracle": oracle,
         "directive": {
             "allowed_ticks_per_window": POLICIES[chosen]["ticks"],
             "consumption_multiplier": POLICIES[chosen]["consumption"],
