@@ -1,4 +1,4 @@
-.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation mandate-dry mandate-run genome-list genome-atlas genome-echo evolution-council lint clean backup push
+.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation temporal-paradox mandate-dry mandate-run genome-list genome-atlas genome-echo evolution-council lint clean backup push
 
 test:
 	python3 -m pytest -q --tb=short
@@ -61,6 +61,9 @@ genome-echo:
 
 evolution-council:
 	python3 lab/evolution_council.py
+
+temporal-paradox:
+	python3 lab/temporal_paradox.py --no-ledger
 
 lint:
 	@find . -type f -name '*.py' \
