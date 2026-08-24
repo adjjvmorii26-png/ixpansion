@@ -17,7 +17,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
 | [`ixpansion`](ixpansion/) | Python | 37 | Self-expanding HEX mesh: agent-coupled routing, HEX witnesses, world scenes, mutations, and preserved glitches |
 | [`solid-organism`](solid-organism/) | Python | 13 | Deterministic organism labs: kintsugi seams, dice constellations, consent-bounded cordyceps, negative space, and synthetic mood superposition |
-| [`constellation`](constellation/) | Python | 34 | Dispersed repository resonance: scored concepts, adapter targets, integration graphs, and phased ritual contracts |
+| [`constellation`](constellation/) | Python | 42 | Dispersed repository resonance: scored concepts, adapter targets, integration graphs, and phased ritual contracts |
 
 ## Run Tests
 
@@ -74,10 +74,11 @@ python3 -m constellation.engine weave --format markdown
 python3 -m constellation.engine rehearse --format markdown
 python3 -m constellation.engine recover --format markdown
 python3 -m constellation.engine negotiate --format markdown
+python3 -m constellation.engine atlas --output runs/constellation-atlas.html
 make test-constellation
 ```
 
-Before a concept touches its target, the Shadow Rehearsal replays every phase under a deterministic chaos budget. Nested targets are quarantined, failed releases receive rollback witnesses, and the complete ledger remains replayable from `weave_hash` plus `rehearsal_hash`. Recovery Braids close the loop: collision groups split into non-overlapping lanes, while rollback failures become bounded retry orbits tied to their original witnesses. Lane Treaties then negotiate pairwise consent for namespace partitioning, event leases, witness exchange, rollback noninterference, and stale-lease arbitration.
+Before a concept touches its target, the Shadow Rehearsal replays every phase under a deterministic chaos budget. Nested targets are quarantined, failed releases receive rollback witnesses, and the complete ledger remains replayable from `weave_hash` plus `rehearsal_hash`. Recovery Braids close the loop: collision groups split into non-overlapping lanes, while rollback failures become bounded retry orbits tied to their original witnesses. Lane Treaties then negotiate pairwise consent for namespace partitioning, event leases, witness exchange, rollback noninterference, and stale-lease arbitration. The Atlas compiles every layer into one dependency-free HTML/SVG observatory, preserving the full canonical hash chain.
 
 IXpansion is a deterministic self-expansion laboratory. World scenes emit
 perceptions, four agents propose data-only actions, mesh edges route those
