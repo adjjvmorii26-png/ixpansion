@@ -122,6 +122,14 @@ def forecast(
     return model
 
 
+def seal_oracle(result: dict[str, Any], status: str = "sealed") -> dict[str, Any]:
+    """Set terminal status and sign the exact serialized oracle body."""
+    sealed = {key: value for key, value in result.items() if key != "oracle_hash"}
+    sealed["status"] = status
+    sealed["oracle_hash"] = hashlib.sha256(_canonical(sealed)).hexdigest()
+    return sealed
+
+
 def collect() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], list[dict[str, Any]], dict[str, Any]]:
     audit = verify_jsonl(ledger_path())
     records = read_jsonl(ledger_path())
@@ -153,13 +161,12 @@ def main(argv: list[str] | None = None) -> int:
         horizon=args.horizon,
     )
     if not audit.get("ok"):
-        result["status"] = "refused"
         result["refusal"] = "ledger audit failed"
-        result.pop("oracle_hash", None)
+        result = seal_oracle(result, "refused")
         write_json(report_path("pulse-oracle.json"), result)
         print(json.dumps(result, sort_keys=True, indent=2))
         return 1
-    result["status"] = "sealed"
+    result = seal_oracle(result, "sealed")
     write_json(report_path("pulse-oracle.json"), result)
     if not args.no_ledger:
         append_jsonl(ledger_path(), {

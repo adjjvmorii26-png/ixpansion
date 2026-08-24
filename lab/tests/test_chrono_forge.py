@@ -21,7 +21,7 @@ class TestChronoForgePort:
     def test_pinned_manifest_is_unique_and_executable(self):
         data = load_manifest()
         projects = data["projects"]
-        assert len(projects) == 12
+        assert len(projects) == 13
         assert len({item["id"] for item in projects}) == len(projects)
         assert all((Path(item["path"]).is_file()) for item in projects)
         assert sum(item["critical"] for item in projects) == 5
