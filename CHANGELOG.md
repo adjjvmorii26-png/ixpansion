@@ -15,6 +15,8 @@
 - **Evolution Council** — sealed advisory-only playbooks for preservation, monitoring, containment, retirement, and consent-gated breeding
 - Archivist/Sentinel/Explorer quorum opinions with monoculture and generation-ceiling guardrails
 - Portable terminal-hash verification for echo and council reports
+- **Evolution Consent Gate** — separate request/approve/execute phases with HMAC proof, nonce binding, ledger witnesses, replay refusal, and one-action authorization
+- Scheduled advisory automation extended to Genome Observatory and Evolution Council; keyed consent remains manual only
 
 ## [0.5.0] — Reversible Governance
 

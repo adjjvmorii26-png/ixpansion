@@ -21,10 +21,16 @@ class TestChronoForgePort:
     def test_pinned_manifest_is_unique_and_executable(self):
         data = load_manifest()
         projects = data["projects"]
-        assert len(projects) == 13
+        assert len(projects) == 15
         assert len({item["id"] for item in projects}) == len(projects)
         assert all((Path(item["path"]).is_file()) for item in projects)
         assert sum(item["critical"] for item in projects) == 5
+
+    def test_evolution_automations_are_advisory_and_consent_is_manual(self):
+        data = load_manifest()
+        ids = [item["id"] for item in data["projects"]]
+        assert ids.index("ritual_parliament") < ids.index("genome_atlas") < ids.index("evolution_council")
+        assert all(item["path"] != "lab/evolution_consent.py" for item in data["projects"])
 
     def test_critical_runner_records_four_successful_entries(self, tmp_path, monkeypatch):
         import lab.run_pinned as runner
