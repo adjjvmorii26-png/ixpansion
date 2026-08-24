@@ -17,7 +17,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
 | [`ixpansion`](ixpansion/) | Python | 37 | Self-expanding HEX mesh: agent-coupled routing, HEX witnesses, world scenes, mutations, and preserved glitches |
 | [`solid-organism`](solid-organism/) | Python | 13 | Deterministic organism labs: kintsugi seams, dice constellations, consent-bounded cordyceps, negative space, and synthetic mood superposition |
-| [`constellation`](constellation/) | Python | 7 | Dispersed repository resonance: scored concepts, adapter targets, and a deterministic integration graph |
+| [`constellation`](constellation/) | Python | 13 | Dispersed repository resonance: scored concepts, adapter targets, integration graphs, and phased ritual contracts |
 
 ## Run Tests
 
@@ -70,6 +70,7 @@ Constellation Corpus turns dispersed concept repositories into one mergeable map
 ```bash
 python3 -m constellation.engine plan
 python3 -m constellation.engine graph
+python3 -m constellation.engine weave --format markdown
 make test-constellation
 ```
 
