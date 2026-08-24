@@ -19,6 +19,8 @@
 - Scheduled advisory automation extended to Genome Observatory and Evolution Council; keyed consent remains manual only
 - **Temporal Paradox Resolver** — read-only correlation of multiple hash-chained ledgers
 - Classification for identity collisions, state forks, clock regressions, replay echoes, broken chains, and post-terminal activity
+- Paradox constellations preserve every witness while collapsing duplicate alarms
+- Deterministic risk index and dominant-signal ranking for forensic triage
 - Deterministic fail-closed resolutions plus portable terminal-hash sealing
 - Pinned advisory automation extended to Temporal Paradox Resolver
 
