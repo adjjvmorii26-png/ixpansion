@@ -107,6 +107,14 @@
       "path": "lab/evolution_council.py",
       "args": [],
       "critical": false
+    },
+    {
+      "id": "temporal_paradox",
+      "path": "lab/temporal_paradox.py",
+      "args": [
+        "--no-ledger"
+      ],
+      "critical": false
     }
   ]
 }

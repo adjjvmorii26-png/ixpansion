@@ -17,6 +17,10 @@
 - Portable terminal-hash verification for echo and council reports
 - **Evolution Consent Gate** — separate request/approve/execute phases with HMAC proof, nonce binding, ledger witnesses, replay refusal, and one-action authorization
 - Scheduled advisory automation extended to Genome Observatory and Evolution Council; keyed consent remains manual only
+- **Temporal Paradox Resolver** — read-only correlation of multiple hash-chained ledgers
+- Classification for identity collisions, state forks, clock regressions, replay echoes, broken chains, and post-terminal activity
+- Deterministic fail-closed resolutions plus portable terminal-hash sealing
+- Pinned advisory automation extended to Temporal Paradox Resolver
 
 ## [0.5.0] — Reversible Governance
 
