@@ -3,7 +3,6 @@ import tomllib
 from datetime import date
 from pathlib import Path
 
-import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -27,11 +26,13 @@ class TestReleaseMetadata:
         assert root_version == fractal_version
 
     def test_citation_matches_latest_release(self):
-        with (ROOT / "CITATION.cff").open(encoding="utf-8") as stream:
-            citation = yaml.safe_load(stream)
+        citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
         latest = _latest_changelog_version()
-        assert citation["version"] == latest
-        date.fromisoformat(citation["date-released"])
+        version_match = re.search(r'^version: "(\d+\.\d+\.\d+)"$', citation, flags=re.MULTILINE)
+        released_match = re.search(r'^date-released: "(\d{4}-\d{2}-\d{2})"$', citation, flags=re.MULTILINE)
+        assert version_match is not None and version_match.group(1) == latest
+        assert released_match is not None
+        date.fromisoformat(released_match.group(1))
 
     def test_release_ledger_documents_the_current_version(self):
         current = _package_version("pyproject.toml")
