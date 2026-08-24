@@ -174,6 +174,7 @@ def execute(
         "parliament_hash": parliament_report["parliament_hash"],
         "oracle_hash": parliament_report["oracle_hash"],
         "oracle": parliament_report["oracle"],
+        "directive": parliament_report["directive"],
         "planned_ticks": planned_ticks,
         "ghost_final_budget": ghost["entropy_budget"],
         "ghost_peak_energy": max(

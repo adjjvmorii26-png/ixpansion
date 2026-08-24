@@ -1,4 +1,4 @@
-.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation mandate-dry mandate-run lint clean backup push
+.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation mandate-dry mandate-run genome-list lint clean backup push
 
 test:
 	python3 -m pytest -q --tb=short
@@ -47,6 +47,10 @@ mandate-run:
 	python3 lab/ritual_parliament.py
 	python3 lab/reversible_mandate.py
 	python3 bridges/mandate_resonance.py
+	python3 lab/mandate_genome.py forge
+
+genome-list:
+	python3 lab/mandate_genome.py list
 
 lint:
 	@find . -type f -name '*.py' \

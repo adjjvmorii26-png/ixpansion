@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- **Mandate Genome Forge** — sealed, data-only behavioral lineages from successful, dream, rollback, and unverified mandates
+- Compatibility-bounded breeding for successful genomes with deterministic second-generation traits
+- Separate hash-chained genome ledger and duplicate-mandate protection
+- Execution certificates now include the voted directive envelope
+
 ## [0.5.0] — Reversible Governance
 
 ### Added
