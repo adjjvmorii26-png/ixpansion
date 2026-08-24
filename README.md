@@ -66,7 +66,7 @@ python3 solid-organism/omega/experiments/mood_superposition.py
 
 ## Chrono Forge
 
-Chrono Forge is the executable refinement bench for pulse-driven agents and sandbox worlds. Its pinned runner proves the critical heartbeat, sentinel, sandbox, smoke, and Forge Mind paths on every schedule; optional acts cover flux, void timing, proof density, constellations, and handshake artifacts. The Runtime Vault centralizes state under an atomic, lock-protected `.runtime/lab` root; every new proof record is linked by sequence and SHA-256, with Sentinel failing closed on a broken chain. The Pulse Oracle converts that evidence into deterministic entropy forecasts and reversible ritual recommendations. A three-faction Parliament votes those forecasts into sealed, self-contained policy directives. The Reversible Mandate Engine then rehearses each mandate on a ghost timeline before live execution; it enforces quorum, freshness, entropy floors, rollback thresholds, and a hard seven-tick cap while sealing one hash-chained witness per tick. Witness failure restores the pre-mandate world and records the rollback as evidence rather than hiding it.
+Chrono Forge is the executable refinement bench for pulse-driven agents and sandbox worlds. Its pinned runner proves the critical heartbeat, sentinel, sandbox, smoke, and Forge Mind paths on every schedule; optional acts cover flux, void timing, proof density, constellations, and handshake artifacts. The Runtime Vault centralizes state under an atomic, lock-protected `.runtime/lab` root; every new proof record is linked by sequence and SHA-256, with Sentinel failing closed on a broken chain. The Pulse Oracle converts that evidence into deterministic entropy forecasts and reversible ritual recommendations. A three-faction Parliament votes those forecasts into sealed, self-contained policy directives. The Reversible Mandate Engine then rehearses each mandate on a ghost timeline before live execution; it enforces quorum, freshness, entropy floors, rollback thresholds, and a hard seven-tick cap while sealing one hash-chained witness per tick. Witness failure restores the pre-mandate world and records the rollback as evidence rather than hiding it. The Mandate Resonance Loom verifies each execution certificate and publishes a Nexus-compatible pulse; rehearsal pulses are explicitly marked as dreams.
 
 ```bash
 make test-lab
@@ -75,6 +75,7 @@ make mandate-run
 python3 lab/pulse_oracle.py --horizon 9
 python3 lab/ritual_parliament.py
 python3 lab/reversible_mandate.py --dry-run
+python3 bridges/mandate_resonance.py --no-publish
 python3 lab/run_pinned.py --critical-only
 python3 lab/run_pinned.py
 ```

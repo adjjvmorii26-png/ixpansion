@@ -40,11 +40,13 @@ mandate-dry:
 	python3 lab/pulse_oracle.py
 	python3 lab/ritual_parliament.py
 	python3 lab/reversible_mandate.py --dry-run
+	python3 bridges/mandate_resonance.py
 
 mandate-run:
 	python3 lab/pulse_oracle.py
 	python3 lab/ritual_parliament.py
 	python3 lab/reversible_mandate.py
+	python3 bridges/mandate_resonance.py
 
 lint:
 	@find . -type f -name '*.py' \

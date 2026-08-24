@@ -22,7 +22,6 @@ from lab.runtime_vault import (
     append_jsonl,
     ledger_path,
     read_json,
-    read_jsonl,
     report_path,
     state_path,
     verify_jsonl,
@@ -174,6 +173,7 @@ def execute(
         "chosen_policy": parliament_report["chosen_policy"],
         "parliament_hash": parliament_report["parliament_hash"],
         "oracle_hash": parliament_report["oracle_hash"],
+        "oracle": parliament_report["oracle"],
         "planned_ticks": planned_ticks,
         "ghost_final_budget": ghost["entropy_budget"],
         "ghost_peak_energy": max(
@@ -212,11 +212,11 @@ def execute(
                 "parliament_hash": parliament_report["parliament_hash"],
                 "oracle_hash": parliament_report["oracle_hash"],
             }
-            append_jsonl(ledger_path(), witness)
+            sealed_witness = append_jsonl(ledger_path(), witness)
             write_json(state_path("sandbox", "engine.json"), sandbox_state)
             executed.append(witness)
             result["witnesses"].append({
-                "entry_hash": "", "tick": witness["tick"],
+                "entry_hash": sealed_witness["entry_hash"], "tick": witness["tick"],
                 "before_hash": before_hash, "after_hash": after_hash,
             })
             if policy != "ration" and float(sandbox_state["entropy_budget"]) < ROLLBACK_THRESHOLD:
@@ -251,8 +251,6 @@ def execute(
     result["ledger_audit_ok"] = bool(chained.get("ok"))
     if not chained.get("ok"):
         result["status"] = "unverified"
-    for item, witness in zip(result["witnesses"], read_jsonl(ledger_path())[-len(result["witnesses"]):]):
-        item["entry_hash"] = witness.get("entry_hash", "")
     result["execution_certificate"] = _hash(result)
     write_json(report_path("reversible-mandate.json"), result)
     print(json.dumps(result, sort_keys=True, indent=2))
