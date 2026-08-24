@@ -14,6 +14,7 @@
     "compare": "python3 tools/observatory_cli.py compare",
     "creative": "python3 tools/observatory_cli.py creative",
     "reliquary": "python3 tools/observatory_cli.py reliquary",
+    "kintsugi": "python3 ../bridges/kintsugi_ledger.py --ledger artifacts/proof-garden.jsonl repair",
     "ci": "python3 tools/observatory_cli.py ci"
   }
 }
