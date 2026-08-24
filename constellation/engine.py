@@ -17,6 +17,11 @@ try:
 except ModuleNotFoundError:
     from recovery import recover, render_recovery
 
+try:
+    from constellation.treaties import negotiate, render_treaties
+except ModuleNotFoundError:
+    from treaties import negotiate, render_treaties
+
 DEFAULT_MANIFEST = Path(__file__).parent / "data" / "manifest.json"
 
 
@@ -121,6 +126,8 @@ def build_parser() -> argparse.ArgumentParser:
     rehearse_command.add_argument("--format", choices=("json", "markdown"), default="json")
     recovery_command = commands.add_parser("recover")
     recovery_command.add_argument("--format", choices=("json", "markdown"), default="json")
+    treaty_command = commands.add_parser("negotiate")
+    treaty_command.add_argument("--format", choices=("json", "markdown"), default="json")
     weave_command = commands.add_parser("weave")
     weave_command.add_argument("--format", choices=("json", "markdown"), default="json")
     return parser
@@ -143,6 +150,11 @@ def main(argv: list[str] | None = None) -> int:
             result = recover(rehearsal=rehearse(weave(manifest)))
             if args.format == "markdown":
                 print(render_recovery(result), end="")
+                return 0
+        elif args.command == "negotiate":
+            result = negotiate(recover(rehearsal=rehearse(weave(manifest))))
+            if args.format == "markdown":
+                print(render_treaties(result), end="")
                 return 0
         else:
             result = weave(manifest)
