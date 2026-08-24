@@ -29,4 +29,4 @@ pythonpath = ["."]
 asyncio_mode = "auto"
 
 [tool.setuptools.packages.find]
-include = ["omega_prime*", "mycelium*", "ixpansion*"]
+include = ["constellation*", "omega_prime*", "mycelium*", "ixpansion*"]
