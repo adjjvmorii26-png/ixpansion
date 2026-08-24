@@ -9,6 +9,9 @@
 - Execution certificates now include the voted directive envelope
 - **Genome Observatory** — sealed HTML/SVG lineage atlas, diversity telemetry, ancestry validation, monoculture warnings, and safe pairing recommendations
 - `make genome-atlas` for a read-only population snapshot
+- **Ancestral Echo Engine** — non-mutating rehearsal of verified genomes against the present world
+- Resonance scoring with policy alignment, trait drift, vitality, and fossil/quarantine verdicts
+- Hash-chained echo evidence plus atomic latest-echo reports and `@latest` lineage selection
 
 ## [0.5.0] — Reversible Governance
 
