@@ -8,9 +8,9 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from constellation.loom import render_loom, weave
+    from constellation.loom import render_loom, render_rehearsal, rehearse, weave
 except ModuleNotFoundError:
-    from loom import render_loom, weave
+    from loom import render_loom, render_rehearsal, rehearse, weave
 
 DEFAULT_MANIFEST = Path(__file__).parent / "data" / "manifest.json"
 
@@ -112,6 +112,8 @@ def build_parser() -> argparse.ArgumentParser:
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("plan")
     commands.add_parser("graph")
+    rehearse_command = commands.add_parser("rehearse")
+    rehearse_command.add_argument("--format", choices=("json", "markdown"), default="json")
     weave_command = commands.add_parser("weave")
     weave_command.add_argument("--format", choices=("json", "markdown"), default="json")
     return parser
@@ -125,6 +127,11 @@ def main(argv: list[str] | None = None) -> int:
             result = plan(manifest)
         elif args.command == "graph":
             result = resonance_graph(manifest)
+        elif args.command == "rehearse":
+            result = rehearse(weave(manifest))
+            if args.format == "markdown":
+                print(render_rehearsal(result), end="")
+                return 0
         else:
             result = weave(manifest)
             if args.format == "markdown":
