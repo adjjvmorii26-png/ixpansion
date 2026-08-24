@@ -22,6 +22,11 @@ try:
 except ModuleNotFoundError:
     from treaties import negotiate, render_treaties
 
+try:
+    from constellation.atlas import compile_atlas, render_atlas, write_atlas
+except ModuleNotFoundError:
+    from atlas import compile_atlas, render_atlas, write_atlas
+
 DEFAULT_MANIFEST = Path(__file__).parent / "data" / "manifest.json"
 
 
@@ -128,6 +133,9 @@ def build_parser() -> argparse.ArgumentParser:
     recovery_command.add_argument("--format", choices=("json", "markdown"), default="json")
     treaty_command = commands.add_parser("negotiate")
     treaty_command.add_argument("--format", choices=("json", "markdown"), default="json")
+    atlas_command = commands.add_parser("atlas")
+    atlas_command.add_argument("--format", choices=("json", "html"), default="html")
+    atlas_command.add_argument("--output", type=Path)
     weave_command = commands.add_parser("weave")
     weave_command.add_argument("--format", choices=("json", "markdown"), default="json")
     return parser
@@ -155,6 +163,14 @@ def main(argv: list[str] | None = None) -> int:
             result = negotiate(recover(rehearsal=rehearse(weave(manifest))))
             if args.format == "markdown":
                 print(render_treaties(result), end="")
+                return 0
+        elif args.command == "atlas":
+            result = compile_atlas(manifest)
+            if args.format == "html":
+                if args.output:
+                    print(json.dumps(write_atlas(result, args.output), sort_keys=True))
+                else:
+                    print(render_atlas(result), end="")
                 return 0
         else:
             result = weave(manifest)
