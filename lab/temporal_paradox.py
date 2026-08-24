@@ -26,7 +26,7 @@ from lab.runtime_vault import (
 )
 
 
-SCHEMA = "aleph.chronoforge.temporal-paradox.v1"
+SCHEMA = "aleph.chronoforge.temporal-paradox.v2"
 TERMINAL_STATES = {"archived", "fossilized", "retired", "sealed", "terminated"}
 
 
@@ -78,6 +78,7 @@ def _scan(paths: list[Path]) -> tuple[list[dict[str, Any]], dict[str, dict[str, 
     event_bodies: dict[str, set[str]] = defaultdict(set)
     state_bodies: dict[tuple[str, Any], set[str]] = defaultdict(set)
     timelines: dict[str, list[tuple[int, int, Any]]] = defaultdict(list)
+    state_witnesses: dict[tuple[str, Any], list[dict[str, Any]]] = defaultdict(list)
 
     for path_index, ordinal, path, record in observations:
         public = _public(record)
@@ -109,18 +110,14 @@ def _scan(paths: list[Path]) -> tuple[list[dict[str, Any]], dict[str, dict[str, 
                 ))
 
         state_hash = record.get("state_hash")
-        if subject_id and tick is not None and state_hash:
-            key = (str(subject_id), tick)
+        if isinstance(subject_id, str) and subject_id and tick is not None and state_hash:
+            key = (subject_id, tick)
             state_bodies[key].add(str(state_hash))
-            if len(state_bodies[key]) > 1:
-                paradoxes.append(_contradiction(
-                    "state_fork",
-                    "critical",
-                    "the same subject and clock collapsed into distinct states",
-                    subject_id=subject_id,
-                    tick=tick,
-                    ledger=source,
-                ))
+            state_witnesses[key].append({
+                "state_hash": str(state_hash),
+                "ledger": source,
+                "record_ordinal": ordinal,
+            })
 
         if subject_id and status in TERMINAL_STATES:
             later_activity = any(
@@ -140,6 +137,24 @@ def _scan(paths: list[Path]) -> tuple[list[dict[str, Any]], dict[str, dict[str, 
                     terminal_status=status,
                     ledger=source,
                 ))
+
+    for (subject_id, tick), witnesses in sorted(
+        state_witnesses.items(), key=lambda item: (item[0][0], item[0][1])
+    ):
+        hashes = {witness["state_hash"] for witness in witnesses}
+        if len(hashes) > 1:
+            paradoxes.append(_contradiction(
+                "state_fork",
+                "critical",
+                "the same subject and clock collapsed into distinct states",
+                subject_id=subject_id,
+                tick=tick,
+                witness_count=len(witnesses),
+                witnesses=[
+                    {"fingerprint": _hash(witness), "evidence": witness}
+                    for witness in witnesses
+                ],
+            ))
 
     for event_id in sorted(event_bodies):
         occurrences = sum(
@@ -166,6 +181,75 @@ def _scan(paths: list[Path]) -> tuple[list[dict[str, Any]], dict[str, dict[str, 
     return paradoxes, audits
 
 
+def _constellation_key(item: dict[str, Any]) -> tuple[Any, ...]:
+    evidence = item["evidence"]
+    if item["kind"] == "broken_chain":
+        return item["kind"], evidence.get("ledger")
+    if item["kind"] in {"identity_collision", "replay_echo"}:
+        return item["kind"], evidence.get("event_id")
+    if item["kind"] == "state_fork":
+        return item["kind"], evidence.get("subject_id"), evidence.get("tick")
+    return item["kind"], evidence.get("subject_id")
+
+
+def _aggregate_constellations(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Keep every witness while collapsing repeated alarms into one anomaly."""
+    grouped: dict[tuple[Any, ...], list[dict[str, Any]]] = defaultdict(list)
+    for item in items:
+        grouped[_constellation_key(item)].append(item)
+
+    constellations = []
+    for members in grouped.values():
+        members.sort(key=lambda item: _canonical(item))
+        first = members[0]
+        if isinstance(first.get("evidence"), dict) and isinstance(first["evidence"].get("witnesses"), list):
+            constellations.append(dict(first))
+            continue
+        witnesses = []
+        for member in members:
+            fingerprint = _hash(member["evidence"])
+            if fingerprint not in {item["fingerprint"] for item in witnesses}:
+                witnesses.append({"fingerprint": fingerprint, "evidence": member["evidence"]})
+
+        common_keys = set(members[0]["evidence"])
+        for member in members[1:]:
+            common_keys &= set(member["evidence"])
+        common = {
+            key: first["evidence"][key] for key in sorted(common_keys)
+            if all(member["evidence"][key] == first["evidence"][key] for member in members)
+        }
+        constellation = dict(first)
+        constellation["evidence"] = {
+            **common,
+            "witness_count": len(witnesses),
+            "witnesses": witnesses,
+        }
+        constellations.append(constellation)
+
+    severity_rank = {"critical": 0, "major": 1, "warning": 2}
+    return sorted(
+        constellations,
+        key=lambda item: (
+            severity_rank[item["severity"]], item["kind"], _canonical(item["evidence"])
+        ),
+    )
+
+
+def _risk_profile(paradoxes: list[dict[str, Any]]) -> dict[str, Any]:
+    counts = {
+        severity: sum(item["severity"] == severity for item in paradoxes)
+        for severity in ("critical", "major", "warning")
+    }
+    raw_risk = counts["critical"] * 0.34 + counts["major"] * 0.18 + counts["warning"] * 0.07
+    return {
+        "index": round(min(1.0, raw_risk), 5),
+        "critical_constellations": counts["critical"],
+        "major_constellations": counts["major"],
+        "warning_constellations": counts["warning"],
+        "dominant_signal": paradoxes[0]["kind"] if paradoxes else None,
+    }
+
+
 def resolve(*, ledgers: list[Path] | None = None, record: bool = True) -> dict[str, Any]:
     """Correlate ledgers without changing their bytes or sequence."""
     paths = sorted({Path(item).resolve() for item in ledgers}) if ledgers is not None else _default_ledgers()
@@ -174,14 +258,7 @@ def resolve(*, ledgers: list[Path] | None = None, record: bool = True) -> dict[s
     for item in raw_paradoxes:
         fingerprint = _hash(item)[:24]
         unique[(item["kind"], item["severity"], fingerprint)] = item
-    paradoxes = sorted(
-        unique.values(),
-        key=lambda item: (
-            {"critical": 0, "major": 1, "warning": 2}[item["severity"]],
-            item["kind"],
-            _canonical(item["evidence"]),
-        ),
-    )
+    paradoxes = _aggregate_constellations(list(unique.values()))
     kinds = {item["kind"] for item in paradoxes}
     corrupt_count = sum(not audit["ok"] for audit in audits.values())
     verdict = "paradox" if corrupt_count or any(item["severity"] == "critical" for item in paradoxes) else (
@@ -216,6 +293,7 @@ def resolve(*, ledgers: list[Path] | None = None, record: bool = True) -> dict[s
         },
         "paradox_count": len(paradoxes),
         "paradoxes": paradoxes,
+        "risk": _risk_profile(paradoxes),
         "resolutions": resolutions,
         "guardrails": [
             "Source ledgers are opened read-only.",

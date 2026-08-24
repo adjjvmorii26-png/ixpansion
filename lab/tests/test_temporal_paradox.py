@@ -99,6 +99,38 @@ def test_state_fork_and_broken_chain_fail_closed(tmp_path):
     assert "quarantine the affected ledger" in result["resolutions"][0]
 
 
+def test_related_witnesses_collapse_into_one_risk_constellation(tmp_path):
+    first = _ledger(tmp_path, "fork-alpha.jsonl", [
+        {"event_id": "one", "subject_id": "ghost", "tick": 7, "state_hash": "a" * 64},
+    ])
+    second = _ledger(tmp_path, "fork-beta.jsonl", [
+        {"event_id": "two", "subject_id": "ghost", "tick": 7, "state_hash": "b" * 64},
+    ])
+    result = resolve(ledgers=[first, second], record=False)
+
+    forks = [item for item in result["paradoxes"] if item["kind"] == "state_fork"]
+    assert len(forks) == 1
+    assert forks[0]["evidence"]["witness_count"] == 2
+    assert forks[0]["evidence"]["witnesses"][0]["evidence"]["ledger"] == "fork-alpha.jsonl"
+    assert forks[0]["evidence"]["witnesses"][1]["evidence"]["ledger"] == "fork-beta.jsonl"
+    assert result["risk"]["critical_constellations"] == 1
+    assert result["risk"]["dominant_signal"] == "state_fork"
+    assert result["risk"]["index"] == 0.34
+
+
+def test_resolver_output_is_deterministic(tmp_path):
+    ledger = _ledger(tmp_path, "repeat.jsonl", [
+        {"event_id": "same", "subject_id": "agent", "tick": 3, "status": "active"},
+    ])
+    mirror = _ledger(tmp_path, "repeat-mirror.jsonl", [
+        {"event_id": "same", "subject_id": "agent", "tick": 2, "status": "active"},
+    ])
+    first = resolve(ledgers=[ledger, mirror], record=False)
+    second = resolve(ledgers=[ledger, mirror], record=False)
+    assert first == second
+    assert first["schema"] == "aleph.chronoforge.temporal-paradox.v2"
+
+
 def test_recorded_report_survives_ledger_metadata(tmp_path, monkeypatch):
     ledger = _ledger(tmp_path, "source.jsonl", [{"event_id": "stable", "value": 1}])
     monkeypatch.setenv("NEXUS_LAB_RUNTIME", str(tmp_path))
