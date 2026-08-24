@@ -18,6 +18,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`ixpansion`](ixpansion/) | Python | 37 | Self-expanding HEX mesh: agent-coupled routing, HEX witnesses, world scenes, mutations, and preserved glitches |
 | [`solid-organism`](solid-organism/) | Python | 13 | Deterministic organism labs: kintsugi seams, dice constellations, consent-bounded cordyceps, negative space, and synthetic mood superposition |
 | [`constellation`](constellation/) | Python | 42 | Dispersed repository resonance: scored concepts, adapter targets, integration graphs, and phased ritual contracts |
+| [`chrono_forge`](lab/chrono_forge/) | Python | 8 | Pinned ritual automation: pulse heartbeat, sentinel invariants, sandbox entropy budget, Forge Mind triage, and proof runner |
 
 ## Run Tests
 
@@ -62,6 +63,16 @@ python3 solid-organism/omega/experiments/mood_superposition.py
 ```
 
 ## IXpansion Mesh
+
+## Chrono Forge
+
+Chrono Forge is the executable refinement bench for pulse-driven agents and sandbox worlds. Its pinned runner proves the critical heartbeat, sentinel, sandbox, smoke, and Forge Mind paths on every schedule; optional acts cover flux, void timing, proof density, constellations, and handshake artifacts.
+
+```bash
+make test-lab
+python3 lab/run_pinned.py --critical-only
+python3 lab/run_pinned.py
+```
 
 ## Constellation Corpus
 

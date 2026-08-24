@@ -30,6 +30,9 @@ test-bridges:
 test-mycelium:
 	python3 -m pytest mycelium/tests -q --tb=short
 
+test-lab:
+	python3 -m pytest lab/tests -q --tb=short
+
 test-constellation:
 	python3 -m pytest constellation/tests -q --tb=short
 
