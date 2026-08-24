@@ -17,7 +17,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
 | [`ixpansion`](ixpansion/) | Python | 37 | Self-expanding HEX mesh: agent-coupled routing, HEX witnesses, world scenes, mutations, and preserved glitches |
 | [`solid-organism`](solid-organism/) | Python | 13 | Deterministic organism labs: kintsugi seams, dice constellations, consent-bounded cordyceps, negative space, and synthetic mood superposition |
-| [`constellation`](constellation/) | Python | 20 | Dispersed repository resonance: scored concepts, adapter targets, integration graphs, and phased ritual contracts |
+| [`constellation`](constellation/) | Python | 27 | Dispersed repository resonance: scored concepts, adapter targets, integration graphs, and phased ritual contracts |
 
 ## Run Tests
 
@@ -72,10 +72,11 @@ python3 -m constellation.engine plan
 python3 -m constellation.engine graph
 python3 -m constellation.engine weave --format markdown
 python3 -m constellation.engine rehearse --format markdown
+python3 -m constellation.engine recover --format markdown
 make test-constellation
 ```
 
-Before a concept touches its target, the Shadow Rehearsal replays every phase under a deterministic chaos budget. Nested targets are quarantined, failed releases receive rollback witnesses, and the complete ledger remains replayable from `weave_hash` plus `rehearsal_hash`.
+Before a concept touches its target, the Shadow Rehearsal replays every phase under a deterministic chaos budget. Nested targets are quarantined, failed releases receive rollback witnesses, and the complete ledger remains replayable from `weave_hash` plus `rehearsal_hash`. Recovery Braids close the loop: collision groups split into non-overlapping lanes, while rollback failures become bounded retry orbits tied to their original witnesses.
 
 IXpansion is a deterministic self-expansion laboratory. World scenes emit
 perceptions, four agents propose data-only actions, mesh edges route those

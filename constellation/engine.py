@@ -12,6 +12,11 @@ try:
 except ModuleNotFoundError:
     from loom import render_loom, render_rehearsal, rehearse, weave
 
+try:
+    from constellation.recovery import recover, render_recovery
+except ModuleNotFoundError:
+    from recovery import recover, render_recovery
+
 DEFAULT_MANIFEST = Path(__file__).parent / "data" / "manifest.json"
 
 
@@ -114,6 +119,8 @@ def build_parser() -> argparse.ArgumentParser:
     commands.add_parser("graph")
     rehearse_command = commands.add_parser("rehearse")
     rehearse_command.add_argument("--format", choices=("json", "markdown"), default="json")
+    recovery_command = commands.add_parser("recover")
+    recovery_command.add_argument("--format", choices=("json", "markdown"), default="json")
     weave_command = commands.add_parser("weave")
     weave_command.add_argument("--format", choices=("json", "markdown"), default="json")
     return parser
@@ -131,6 +138,11 @@ def main(argv: list[str] | None = None) -> int:
             result = rehearse(weave(manifest))
             if args.format == "markdown":
                 print(render_rehearsal(result), end="")
+                return 0
+        elif args.command == "recover":
+            result = recover(rehearsal=rehearse(weave(manifest)))
+            if args.format == "markdown":
+                print(render_recovery(result), end="")
                 return 0
         else:
             result = weave(manifest)
