@@ -12,6 +12,9 @@
 - **Ancestral Echo Engine** — non-mutating rehearsal of verified genomes against the present world
 - Resonance scoring with policy alignment, trait drift, vitality, and fossil/quarantine verdicts
 - Hash-chained echo evidence plus atomic latest-echo reports and `@latest` lineage selection
+- **Evolution Council** — sealed advisory-only playbooks for preservation, monitoring, containment, retirement, and consent-gated breeding
+- Archivist/Sentinel/Explorer quorum opinions with monoculture and generation-ceiling guardrails
+- Portable terminal-hash verification for echo and council reports
 
 ## [0.5.0] — Reversible Governance
 

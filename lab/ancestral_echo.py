@@ -52,6 +52,21 @@ def _clamp(value: float) -> float:
     return round(max(0.0, min(1.0, value)), 5)
 
 
+def echo_is_sealed(report: dict[str, Any]) -> bool:
+    """Validate the final report even after transport metadata is attached."""
+    if report.get("schema") != SCHEMA or report.get("status") != "sealed":
+        return False
+    claimed = report.get("echo_hash")
+    if not claimed:
+        return False
+    body = {
+        key: value
+        for key, value in report.items()
+        if key not in {"echo_hash", "ledger_entry_hash", "sequence", "previous_hash", "entry_hash"}
+    }
+    return _hash(body) == claimed
+
+
 def _state_signature(state: dict[str, Any]) -> dict[str, Any]:
     history = [item for item in state.get("history", []) if isinstance(item, dict)][-7:]
     return {
@@ -154,10 +169,15 @@ def echo(
     result["current_state_signature_hash"] = _hash(signature)
 
     def finish() -> dict[str, Any]:
-        result["echo_hash"] = _hash(result)
+        result["echo_hash"] = _hash({
+            key: value for key, value in result.items()
+            if key not in {"echo_hash", "ledger_entry_hash"}
+        })
         if record:
-            write_json(report_path("genome-echo.json"), result)
-            sealed = append_jsonl(ledger_path("genome-echoes.jsonl"), result)
+            sealed = append_jsonl(
+                ledger_path("genome-echoes.jsonl"),
+                {key: value for key, value in result.items() if key != "ledger_entry_hash"},
+            )
             result["ledger_entry_hash"] = sealed["entry_hash"]
             write_json(report_path("genome-echo.json"), result)
         return result
