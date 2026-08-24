@@ -1,0 +1,47 @@
+name: Pinned Lab Automations
+
+on:
+  schedule:
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+    inputs:
+      critical_only:
+        description: "Run critical pinned only"
+        required: false
+        default: "false"
+        type: choice
+        options: ["false", "true"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pinned-lab
+  cancel-in-progress: true
+
+jobs:
+  pinned:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Ensure dirs
+        run: mkdir -p lab/unique_path sandbox
+      - name: Run pinned projects
+        env:
+          CRITICAL_ONLY: ${{ github.event.inputs.critical_only || 'false' }}
+        run: |
+          FLAG=""
+          if [ "$CRITICAL_ONLY" = "true" ]; then
+            FLAG="--critical-only"
+          fi
+          python lab/run_pinned.py $FLAG
+      - name: Upload pinned report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pinned-report
+          path: lab/pinned_report.json
+          if-no-files-found: ignore
