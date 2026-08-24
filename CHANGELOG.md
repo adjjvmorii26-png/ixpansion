@@ -7,6 +7,8 @@
 - Compatibility-bounded breeding for successful genomes with deterministic second-generation traits
 - Separate hash-chained genome ledger and duplicate-mandate protection
 - Execution certificates now include the voted directive envelope
+- **Genome Observatory** — sealed HTML/SVG lineage atlas, diversity telemetry, ancestry validation, monoculture warnings, and safe pairing recommendations
+- `make genome-atlas` for a read-only population snapshot
 
 ## [0.5.0] — Reversible Governance
 
