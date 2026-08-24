@@ -23,6 +23,10 @@
 - Deterministic risk index and dominant-signal ranking for forensic triage
 - Deterministic fail-closed resolutions plus portable terminal-hash sealing
 - Pinned advisory automation extended to Temporal Paradox Resolver
+- **Repair Dream Weaver** — zero-authority recovery compiler for paradox constellations
+- Deterministic branch, rewind, identity-split, backup-restore, and replay-retention blueprints
+- Consent-gated operations with preserved witnesses, bounded output, and portable dream seals
+- Pinned advisory automation extended to Repair Dream Weaver
 
 ## [0.5.0] — Reversible Governance
 

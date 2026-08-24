@@ -115,6 +115,14 @@
         "--no-ledger"
       ],
       "critical": false
+    },
+    {
+      "id": "repair_dreams",
+      "path": "lab/repair_dreams.py",
+      "args": [
+        "--no-ledger"
+      ],
+      "critical": false
     }
   ]
 }
