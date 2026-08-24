@@ -13,7 +13,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`project_root`](project_root/) | Python | 25 | HEX-native strata, fractal pipelines, and layered event mesh |
 | [`observatory`](nexus_observatory/) | R + Bash + Python | 11 | Boot orchestrator, pulse journal, dashboard, Wave 9 runner, and sealed reliquary |
 | [`projects`](projects/) | Python | 7 | Echolalia, schism, tide clock, interloper, and infinity listening-post labs |
-| [`bridges`](bridges/) | Python | 88 | Counterfactual twins, causal replay, resilience analysis, semantic treaties, and reversible Astral Braids |
+| [`bridges`](bridges/) | Python | 95 | Counterfactual twins, causal replay, resilience analysis, semantic treaties, reversible braids, and Kintsugi ledger repair |
 | [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
 | [`ixpansion`](ixpansion/) | Python | 37 | Self-expanding HEX mesh: agent-coupled routing, HEX witnesses, world scenes, mutations, and preserved glitches |
 | [`solid-organism`](solid-organism/) | Python | 13 | Deterministic organism labs: kintsugi seams, dice constellations, consent-bounded cordyceps, negative space, and synthetic mood superposition |
@@ -240,6 +240,19 @@ python -m bridges.proof_garden \
   --ledger artifacts/proof-garden.jsonl prove --sequence 1
 python -m bridges.proof_garden \
   --ledger artifacts/proof-garden.jsonl audit
+```
+
+### Kintsugi Ledger
+
+A fractured proof chain is evidence, not garbage. The Kintsugi Ledger scans for
+the longest valid Merkle prefix, preserves every damaged byte in a scar ledger,
+and atomically restores only the golden growth rings. The repair certificate
+binds the preserved root to hashes of every quarantined fracture, so recovery
+never becomes silent rewriting.
+
+```bash
+python -m bridges.kintsugi_ledger diagnose --ledger artifacts/proof-garden.jsonl
+python -m bridges.kintsugi_ledger repair --ledger artifacts/proof-garden.jsonl
 ```
 
 ### Resurrection Garden

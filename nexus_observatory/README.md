@@ -14,6 +14,7 @@ npm run dashboard              # render and save the ASCII dashboard
 npm run compare                # compare the two newest pulses
 npm run creative               # execute all Project Wave 9 experiments
 npm run reliquary              # seal bus events into a hash-chain relic
+npm run kintsugi               # preserve scars and repair a fractured Proof Garden
 npm run ci                     # health → cycle → index → relic → dashboard
 ```
 
