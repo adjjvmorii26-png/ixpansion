@@ -17,6 +17,7 @@ Multi-agent consciousness engine where observers collapse reality into existence
 | [`mycelium`](mycelium/) | Python | 12 | Consent-bounded living substrate: spores, hyphal gradients, and dream compilation |
 | [`ixpansion`](ixpansion/) | Python | 37 | Self-expanding HEX mesh: agent-coupled routing, HEX witnesses, world scenes, mutations, and preserved glitches |
 | [`solid-organism`](solid-organism/) | Python | 13 | Deterministic organism labs: kintsugi seams, dice constellations, consent-bounded cordyceps, negative space, and synthetic mood superposition |
+| [`constellation`](constellation/) | Python | 7 | Dispersed repository resonance: scored concepts, adapter targets, and a deterministic integration graph |
 
 ## Run Tests
 
@@ -61,6 +62,16 @@ python3 solid-organism/omega/experiments/mood_superposition.py
 ```
 
 ## IXpansion Mesh
+
+## Constellation Corpus
+
+Constellation Corpus turns dispersed concept repositories into one mergeable map instead of duplicating their scaffolding. Each source is scored for structural richness, symbolic payload, density, and adapter fit; recommendations become `integrate_concept`, `prototype_adapter`, or `preserve_reference` actions mapped to an existing IXpansion subsystem.
+
+```bash
+python3 -m constellation.engine plan
+python3 -m constellation.engine graph
+make test-constellation
+```
 
 IXpansion is a deterministic self-expansion laboratory. World scenes emit
 perceptions, four agents propose data-only actions, mesh edges route those

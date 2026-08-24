@@ -1,0 +1,33 @@
+{
+  "schema": "aleph.constellation.manifest.v1",
+  "repositories": [
+    {"name":"metamorph-forge","concept":"Transformation substrate","target":"omega_prime/agents","files":9,"disk_kb":2,"version":"0.28.0-morph"},
+    {"name":"probability-engine","concept":"Chance and collapse substrate","target":"solid-organism/lab","files":9,"disk_kb":2,"version":"0.27.0-prob"},
+    {"name":"quietus-array","concept":"Silence and absence substrate","target":"solid-organism/lab/negative_space","files":9,"disk_kb":2,"version":"0.26.0-quiet"},
+    {"name":"multiself-engine","concept":"Origin multiplicity","target":"omega_prime/core","files":9,"disk_kb":2,"version":"0.25.0-multi"},
+    {"name":"parallax-engine","concept":"Horizon projection","target":"nexus_observatory/dashboard","files":9,"disk_kb":2,"version":"0.24.0-parallax"},
+    {"name":"attention-labyrinth","concept":"Focus, blindspot and drift","target":"ixpansion/src/agents","files":9,"disk_kb":2,"version":"0.23.0-attention"},
+    {"name":"glitch-cathedral","concept":"Fault architecture","target":"ixpansion/src/glitch","files":9,"disk_kb":2,"version":"0.22.0-glitch"},
+    {"name":"phaseshift-manifold","concept":"Solid logic phase changes","target":"project_root/nucleus/pipeline_core","files":9,"disk_kb":2,"version":"0.21.0-phase"},
+    {"name":"geometric-anthology","concept":"Vector flow","target":"ixpansion/src/mesh","files":9,"disk_kb":2,"version":"0.20.0-geo"},
+    {"name":"semiotic-engine","concept":"Sign and meaning ingestion","target":"ixpansion/src/hex","files":9,"disk_kb":2,"version":"0.19.0-semi"},
+    {"name":"ontoforge-singularity","concept":"Being crucible","target":"omega_fractal_engine/nucleus/genesis","files":9,"disk_kb":2,"version":"0.18.0-onto"},
+    {"name":"neuroglyph-forge","concept":"Thought glyph forging","target":"lab/assets","files":9,"disk_kb":2,"version":"0.17.0-neuroglyph"},
+    {"name":"chronovore-archive","concept":"Temporal consumption memory","target":"mycelium/archives","files":9,"disk_kb":2,"version":"0.16.0-chrono"},
+    {"name":"paraconstruct-engine","concept":"Recursive paradox construction","target":"bridges/divergence_forensics.py","files":13,"disk_kb":4,"version":"0.15.0-para"},
+    {"name":"hyperfractal-relay","concept":"Fracture bloom relay","target":"bridges/resonance_loom.py","files":12,"disk_kb":4,"version":"0.14.0-hyper"},
+    {"name":"antimemetic-architecton","concept":"Negative loom and forgetting","target":"bridges/resurrection_garden.py","files":10,"disk_kb":3,"version":"0.13.0-anti"},
+    {"name":"sensorium-engine","concept":"Multi-sensory telemetry","target":"nexus_observatory/modules.d","files":13,"disk_kb":4,"version":"0.12.0-sensorium"},
+    {"name":"topologic-alchemy","concept":"Knots and warped manifolds","target":"ixpansion/src/mesh/topology.py","files":12,"disk_kb":4,"version":"0.11.0-alchemy"},
+    {"name":"quantum-folio","concept":"Spin, collapse and entanglement","target":"omega_prime/core","files":13,"disk_kb":4,"version":"0.10.0-quantum"},
+    {"name":"lexicon-chrysalis","concept":"Language mutation cocoon","target":"ixpansion/src/hex/grammars","files":13,"disk_kb":4,"version":"0.9.0-chrysalis"},
+    {"name":"luminant-reliquary","concept":"Shatterproof evidence","target":"bridges/proof_garden.py","files":18,"disk_kb":5,"version":"0.8.0-luminant"},
+    {"name":"auric-labyrinth","concept":"Prized recursive path","target":"bridges/kintsugi_ledger.py","files":14,"disk_kb":5,"version":"0.7.0-auric"},
+    {"name":"polychron-atlas","concept":"Multi-temporal cartography","target":"bridges/temporal_oracle.py","files":54,"disk_kb":16,"version":"0.6.0-polychron"},
+    {"name":"chronocrypt-orrery","concept":"Cyclic encrypted memory","target":"lab/chrono_forge","files":47,"disk_kb":15,"version":"0.5.0-chronocrypt"},
+    {"name":"echotide-engine","concept":"Tidal wave memory","target":"mycelium/hyphae","files":42,"disk_kb":14,"version":"0.4.0-echotide"},
+    {"name":"nebula-archive","concept":"Observational archive lattice","target":"nexus_observatory/R","files":40,"disk_kb":14,"version":"0.3.0-nebula"},
+    {"name":"parallax","concept":"Core veil chorus","target":"nexus_observatory/tools","files":13,"disk_kb":9,"version":"0.2.0-parallax-core"},
+    {"name":"astral-forge","concept":"Relational agent foundry","target":"omega_prime/agents/base_agent.py","files":38,"disk_kb":14,"version":"0.1.0-astral"}
+  ]
+}
