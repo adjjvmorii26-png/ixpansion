@@ -7,6 +7,11 @@ import json
 from pathlib import Path
 from typing import Any
 
+try:
+    from constellation.loom import render_loom, weave
+except ModuleNotFoundError:
+    from loom import render_loom, weave
+
 DEFAULT_MANIFEST = Path(__file__).parent / "data" / "manifest.json"
 
 
@@ -107,6 +112,8 @@ def build_parser() -> argparse.ArgumentParser:
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("plan")
     commands.add_parser("graph")
+    weave_command = commands.add_parser("weave")
+    weave_command.add_argument("--format", choices=("json", "markdown"), default="json")
     return parser
 
 
@@ -114,7 +121,15 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
         manifest = load_manifest(args.manifest)
-        result = plan(manifest) if args.command == "plan" else resonance_graph(manifest)
+        if args.command == "plan":
+            result = plan(manifest)
+        elif args.command == "graph":
+            result = resonance_graph(manifest)
+        else:
+            result = weave(manifest)
+            if args.format == "markdown":
+                print(render_loom(result), end="")
+                return 0
         print(json.dumps(result, sort_keys=True, indent=2))
         return 0
     except (OSError, TypeError, ValueError, json.JSONDecodeError) as error:
