@@ -12,6 +12,7 @@
     {"id": "void", "path": "lab/chrono_forge/6_worlds/sandbox_void.py", "args": [], "critical": false},
     {"id": "handshake", "path": "lab/experiments/handshake_card.py", "args": [], "critical": false},
     {"id": "cli_portal_help", "path": "lab/chrono_forge/5_interfaces/cli_portal.py", "args": ["help"], "critical": false},
-    {"id": "pulse_oracle", "path": "lab/pulse_oracle.py", "args": ["--no-ledger"], "critical": false}
+    {"id": "pulse_oracle", "path": "lab/pulse_oracle.py", "args": ["--no-ledger"], "critical": false},
+    {"id": "ritual_parliament", "path": "lab/ritual_parliament.py", "args": ["--no-ledger"], "critical": false}
   ]
 }
