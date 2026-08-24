@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "omega-prime"
-version = "0.1.0"
+version = "0.5.0"
 description = "Modular multi-agent sandbox and protocol framework"
 requires-python = ">=3.11"
 dependencies = []
@@ -14,6 +14,7 @@ dev = ["pytest>=7.0", "pytest-asyncio>=0.21"]
 
 [tool.pytest.ini_options]
 testpaths = [
+    "tests",
     "omega_prime/tests",
     "omega_fractal_engine/tests",
     "project_root/tests",

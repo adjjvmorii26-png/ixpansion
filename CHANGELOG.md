@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.5.0] — Reversible Governance
+
+### Added
+- **Runtime Vault** — atomic, environment-overridable state with process-safe ledgers
+- **Ledger Chain** — sequence-linked SHA-256 evidence that fails closed when tampered
+- **Pulse Oracle** — deterministic entropy forecasts and bounded ritual recommendations
+- **Ritual Parliament** — three-faction Borda policy votes with emergency ration veto
+- **Reversible Mandate Engine** — ghost rehearsal, hard tick caps, per-tick witnesses, rollback evidence, and portable execution certificates
+- **Mandate Resonance Bridge** — verified Chrono Forge mandates translated into Nexus-compatible pulses; rehearsals are marked as dreams
+- `make mandate-dry` and `make mandate-run` automation targets
+
+### Changed
+- Parliament mandates now carry their sealed Oracle forecast
+- Execution certificates now embed the signed Oracle body for portable verification
+- Witness hashes are captured directly from each append, eliminating completion-record drift
+
 ## [0.4.0] — Consensus & Consciousness
 
 ### Added
