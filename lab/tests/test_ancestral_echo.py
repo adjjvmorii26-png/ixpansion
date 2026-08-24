@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from lab.ancestral_echo import SCHEMA, build_parser, echo, main
+from lab.ancestral_echo import SCHEMA, build_parser, echo, echo_is_sealed, main
 from lab.mandate_genome import find_genome, forge, load_genomes
 from lab.pulse_oracle import forecast, seal_oracle
 from lab.reversible_mandate import execute
@@ -77,6 +77,8 @@ class TestAncestralEcho:
         assert echoes[0]["entry_hash"] == result["ledger_entry_hash"]
         stored = read_json(tmp_path / "reports" / "genome-echo.json")
         assert stored["echo_hash"] == result["echo_hash"]
+        assert echo_is_sealed(stored) is True
+        assert echo_is_sealed(echoes[0]) is True
 
     def test_latest_alias_selects_the_newest_sealed_lineage(self, tmp_path, monkeypatch):
         install(tmp_path, monkeypatch)
@@ -87,6 +89,16 @@ class TestAncestralEcho:
         alias = echo("@latest", record=False)
         assert alias["genome_id"] == genome["genome_id"]
         assert alias["resonance"] == direct["resonance"]
+
+    def test_terminal_report_remains_verifiable_after_ledger_metadata(self, tmp_path, monkeypatch):
+        install(tmp_path, monkeypatch)
+        genome = make_genome()
+        reset_world(sandbox_state())
+        result = echo(genome["genome_id"])
+        assert echo_is_sealed(result) is True
+        modified = dict(result)
+        modified["resonance"] = 1.0
+        assert echo_is_sealed(modified) is False
 
     def test_depleted_present_turns_expansion_into_a_fossil(self, tmp_path, monkeypatch):
         install(tmp_path, monkeypatch)

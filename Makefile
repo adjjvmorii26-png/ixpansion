@@ -1,4 +1,4 @@
-.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation mandate-dry mandate-run genome-list genome-atlas genome-echo lint clean backup push
+.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation mandate-dry mandate-run genome-list genome-atlas genome-echo evolution-council lint clean backup push
 
 test:
 	python3 -m pytest -q --tb=short
@@ -58,6 +58,9 @@ genome-atlas:
 
 genome-echo:
 	python3 lab/ancestral_echo.py @latest
+
+evolution-council:
+	python3 lab/evolution_council.py
 
 lint:
 	@find . -type f -name '*.py' \
