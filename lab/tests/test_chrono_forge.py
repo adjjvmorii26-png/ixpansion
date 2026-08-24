@@ -21,20 +21,20 @@ class TestChronoForgePort:
     def test_pinned_manifest_is_unique_and_executable(self):
         data = load_manifest()
         projects = data["projects"]
-        assert len(projects) == 10
+        assert len(projects) == 11
         assert len({item["id"] for item in projects}) == len(projects)
         assert all((Path(item["path"]).is_file()) for item in projects)
-        assert sum(item["critical"] for item in projects) == 4
+        assert sum(item["critical"] for item in projects) == 5
 
     def test_critical_runner_records_four_successful_entries(self, tmp_path, monkeypatch):
         import lab.run_pinned as runner
 
         monkeypatch.setattr(runner, "REPORT", tmp_path / "report.json")
         monkeypatch.setattr(runner, "LEDGER", tmp_path / "ledger.jsonl")
-        assert runner.main_with(["--critical-only"]) == 0
+        assert runner.main(["--critical-only"]) == 0
         report = json.loads((tmp_path / "report.json").read_text())
         assert report["ok"] is True
-        assert [entry["id"] for entry in report["results"]] == ["lab_smoke", "pulse", "sentinel", "sandbox_status"]
+        assert [entry["id"] for entry in report["results"]] == ["lab_smoke", "pulse", "sentinel", "sandbox_status", "sandbox_tick"]
         assert all(entry["ok"] for entry in report["results"])
         assert (tmp_path / "ledger.jsonl").exists()
 
@@ -73,7 +73,7 @@ class TestChronoForgePort:
 
     def test_cli_portal_help_lists_all_acts(self, capsys):
         cli_portal = load_script("lab/chrono_forge/5_interfaces/cli_portal.py")
-        assert cli_portal.main_with(["help"]) == 0
+        assert cli_portal.main(["help"]) == 0
         payload = json.loads(capsys.readouterr().out)
         assert {"invoke", "flux", "mirror", "smoke"}.issubset(payload["acts"])
 

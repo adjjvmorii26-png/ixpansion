@@ -1,11 +1,20 @@
 #!/usr/bin/env python3
 """Merkle-style root over last N proof ledger lines."""
+
 from __future__ import annotations
-import hashlib, json, sys
+
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-LEDGERS = [ROOT / "lab" / "unique_path" / "proof_ledger.jsonl", ROOT / "unique_path" / "proof_ledger.jsonl"]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+import hashlib, json, sys
+from pathlib import Path
+
+from lab.runtime_vault import ledger_path, report_path
+
+LEDGERS = [ledger_path(), Path("unique_path/proof_ledger.jsonl")]
 
 def leaf(line: str) -> bytes:
     return hashlib.sha256(line.encode()).digest()
@@ -32,7 +41,7 @@ def main() -> int:
     lines = path.read_text().strip().splitlines()[-n:]
     root = merkle_root(lines)
     out = {"ok": True, "n": len(lines), "root": root, "path": str(path)}
-    (Path(__file__).resolve().parent / "proof_merkle_root.json").write_text(json.dumps(out, indent=2) + "\n")
+    (report_path("proof-merkle-root.json")).write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps(out, indent=2))
     return 0
 

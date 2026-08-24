@@ -1,31 +1,34 @@
 #!/usr/bin/env python3
 """IXPANSION sandbox engine — ticks, entropy budget, status."""
+
 from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 import argparse, json, math, time
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
-STATE = ROOT / "sandbox_state.json"
-PROOF = ROOT.parent / "lab" / "unique_path" / "proof_ledger.jsonl"
+from lab.runtime_vault import append_jsonl, ledger_path, read_json, state_path, write_json
+
+STATE = state_path("sandbox", "engine.json")
+PROOF = ledger_path()
 
 def load_state() -> dict:
-    if STATE.exists():
-        return json.loads(STATE.read_text())
-    return {"ticks": 0, "started_at": None, "last_tick_at": None, "status": "idle",
-            "history": [], "entropy_budget": 1.0, "novelty": 0.0, "phase": 0.0}
+    return read_json(STATE, {"ticks": 0, "started_at": None, "last_tick_at": None,
+                             "status": "idle", "history": [], "entropy_budget": 1.0,
+                             "novelty": 0.0, "phase": 0.0})
 
-def save_state(st: dict) -> None:
-    STATE.write_text(json.dumps(st, indent=2) + "\n")
+def save_state(state: dict) -> None:
+    write_json(STATE, state)
 
 def _append_proof(kind: str, ref: str, **extra) -> None:
-    try:
-        PROOF.parent.mkdir(parents=True, exist_ok=True)
-        rec = {"ts": datetime.now(timezone.utc).isoformat(), "type": kind, "ref": ref, **extra}
-        with PROOF.open("a") as f:
-            f.write(json.dumps(rec) + "\n")
-    except OSError:
-        pass
+    append_jsonl(PROOF, {"ts": datetime.now(timezone.utc).isoformat(), "type": kind,
+                         "ref": ref, **extra})
 
 def _tick_signal(tick: int, phase: float) -> dict:
     t = tick * 0.1
@@ -42,7 +45,7 @@ def run_ticks(n: int, proof: bool = True) -> dict:
     st["status"] = "running"
     budget = float(st.get("entropy_budget") or 1.0)
     phase = float(st.get("phase") or 0.0)
-    for i in range(1, n + 1):
+    for _ in range(n):
         st["ticks"] = int(st.get("ticks") or 0) + 1
         st["last_tick_at"] = datetime.now(timezone.utc).isoformat()
         sig = _tick_signal(st["ticks"], phase)

@@ -21,13 +21,9 @@ ACTS = {
     "smoke": [EXP / "lab_smoke.py"],
 }
 
-def main_with(argv: list[str] | None = None) -> int:
-    sys.argv = [sys.argv[0], *(argv or [])]
-    return main()
-
-
-def main() -> int:
-    act = (sys.argv[1] if len(sys.argv) > 1 else "help").lower()
+def main(argv: list[str] | None = None) -> int:
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    act = (arguments[0] if arguments else "help").lower()
     if act in ("help", "-h", "--help") or act not in ACTS:
         print(json.dumps({"acts": sorted(ACTS), "usage": "python cli_portal.py <act>"}, indent=2))
         return 0 if act in ("help", "-h", "--help") else 1
