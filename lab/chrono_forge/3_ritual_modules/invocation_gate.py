@@ -1,9 +1,19 @@
 #!/usr/bin/env python3
 """Boot ritual: sigils → pulse → sentinel → wanderer → forge_mind → chronicle → observer."""
+
 from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[3]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 import json, subprocess, sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+from lab.runtime_vault import append_jsonl, ledger_path
 
 CF = Path(__file__).resolve().parents[1]
 
@@ -23,8 +33,7 @@ def run() -> dict:
     chron = CF / "7_lore" / "chronicles" / "chronicle.jsonl"
     chron.parent.mkdir(parents=True, exist_ok=True)
     line = {"ts": datetime.now(timezone.utc).isoformat(), "event": "invocation_v2", "steps": [s["step"] for s in steps], "ok": all(s.get("ok") for s in steps)}
-    with chron.open("a") as f:
-        f.write(json.dumps(line) + "\n")
+    append_jsonl(chron, line)
     steps.append({"step": "chronicle", "ok": True})
     steps.append({"step": "observer", **_run("8_meta/observer_log.py", ["invocation_gate"])})
     return {"ritual": "invocation_gate_v2", "steps": steps, "ok": all(s.get("ok") for s in steps)}

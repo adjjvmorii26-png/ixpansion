@@ -1,34 +1,53 @@
 #!/usr/bin/env python3
-"""Global heartbeat."""
+"""Global heartbeat with atomically persisted pulse state."""
+
 from __future__ import annotations
-import argparse, json, math, time
-from datetime import datetime, timezone
+
+import sys
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-STATE = HERE / "pulse_state.json"
+ROOT = Path(__file__).resolve().parents[3]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-def pulse(n: int = 1) -> dict:
-    st = json.loads(STATE.read_text()) if STATE.exists() else {"beats": 0, "phase": 0.0}
-    for _ in range(n):
-        st["beats"] = int(st.get("beats") or 0) + 1
-        st["phase"] = (float(st.get("phase") or 0) + 0.6180339887) % (2 * math.pi)
-        st["last"] = datetime.now(timezone.utc).isoformat()
-        st["sigil"] = f"PULSE-{st['beats']:04X}"
+import argparse
+import json
+import math
+import time
+from datetime import datetime, timezone
+
+from lab.runtime_vault import read_json, state_path, write_json
+
+STATE = state_path("pulse", "state.json")
+
+
+def pulse(beats: int = 1) -> dict:
+    state = read_json(STATE, {"beats": 0, "phase": 0.0})
+    for _ in range(beats):
+        state["beats"] = int(state.get("beats") or 0) + 1
+        state["phase"] = (float(state.get("phase") or 0) + 0.6180339887) % (2 * math.pi)
+        state["last"] = datetime.now(timezone.utc).isoformat()
+        state["sigil"] = f"PULSE-{state['beats']:04X}"
         time.sleep(0.005)
-    STATE.write_text(json.dumps(st, indent=2) + "\n")
-    return st
+    write_json(STATE, state)
+    return state
+
 
 def status() -> dict:
-    st = json.loads(STATE.read_text()) if STATE.exists() else {}
-    return {"pulse": st}
+    return {"pulse": read_json(STATE, {})}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--beats", type=int, default=0)
+    parser.add_argument("--status", action="store_true")
+    args = parser.parse_args()
+    if args.beats:
+        print(json.dumps(pulse(args.beats), indent=2))
+    if args.status or not args.beats:
+        print(json.dumps(status(), indent=2))
+    return 0
+
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--beats", type=int, default=0)
-    ap.add_argument("--status", action="store_true")
-    a = ap.parse_args()
-    if a.beats:
-        print(json.dumps(pulse(a.beats), indent=2))
-    if a.status or not a.beats:
-        print(json.dumps(status(), indent=2))
+    raise SystemExit(main())

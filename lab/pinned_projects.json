@@ -5,6 +5,7 @@
     {"id": "pulse", "path": "lab/chrono_forge/0_primal_core/pulse_driver.py", "args": ["--beats", "3"], "critical": true},
     {"id": "sentinel", "path": "lab/chrono_forge/2_agents/sentinel.py", "args": [], "critical": true},
     {"id": "sandbox_status", "path": "sandbox/sandbox_engine.py", "args": ["--status"], "critical": true},
+    {"id": "sandbox_tick", "path": "sandbox/sandbox_engine.py", "args": ["--ticks", "2", "--no-proof"], "critical": true},
     {"id": "proof_density", "path": "lab/experiments/proof_density.py", "args": [], "critical": false},
     {"id": "sigil_constellation", "path": "lab/experiments/sigil_constellation.py", "args": [], "critical": false},
     {"id": "flux", "path": "lab/chrono_forge/6_worlds/sandbox_flux.py", "args": [], "critical": false},

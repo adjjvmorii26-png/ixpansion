@@ -1,60 +1,77 @@
 #!/usr/bin/env python3
-"""Run pinned lab projects from lab/pinned_projects.json."""
+"""Run pinned Chrono Forge projects from a versioned manifest."""
+
 from __future__ import annotations
-import argparse, json, subprocess, sys
-from datetime import datetime, timezone
+
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+import argparse
+import json
+import subprocess
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+from lab.runtime_vault import append_jsonl, ledger_path, report_path, write_json
+
 MANIFEST = Path(__file__).resolve().parent / "pinned_projects.json"
-REPORT = Path(__file__).resolve().parent / "pinned_report.json"
-LEDGER = ROOT / "lab" / "unique_path" / "proof_ledger.jsonl"
-
-def main_with(argv: list[str] | None = None) -> int:
-    sys.argv = [sys.argv[0], *(argv or [])]
-    return main()
+REPORT = report_path("pinned-report.json")
+LEDGER = ledger_path()
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--critical-only", action="store_true")
-    ap.add_argument("--fail-fast", action="store_true")
-    args = ap.parse_args()
-    data = json.loads(MANIFEST.read_text())
-    results = []
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--critical-only", action="store_true")
+    parser.add_argument("--fail-fast", action="store_true")
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+    data = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    results: list[dict[str, object]] = []
     ok_all = True
-    for p in data.get("projects") or []:
-        if args.critical_only and not p.get("critical"):
+    for project in data.get("projects") or []:
+        if args.critical_only and not project.get("critical"):
             continue
-        path = ROOT / p["path"]
-        if not path.exists():
-            entry = {"id": p["id"], "ok": False, "err": "missing", "critical": bool(p.get("critical"))}
-            results.append(entry)
-            if p.get("critical"):
+        script = ROOT / project["path"]
+        if not script.is_file():
+            results.append({
+                "id": project["id"], "ok": False, "err": "missing",
+                "critical": bool(project.get("critical")),
+            })
+            if project.get("critical"):
                 ok_all = False
-            if args.fail_fast and p.get("critical"):
-                break
+                if args.fail_fast:
+                    break
             continue
-        r = subprocess.run(
-            [sys.executable, str(path)] + list(p.get("args") or []),
-            capture_output=True, text=True, cwd=str(ROOT),
+        completed = subprocess.run(
+            [sys.executable, str(script), *map(str, project.get("args") or [])],
+            capture_output=True, text=True, cwd=str(ROOT), check=False,
         )
-        entry = {"id": p["id"], "ok": r.returncode == 0, "code": r.returncode, "critical": bool(p.get("critical"))}
+        entry = {
+            "id": project["id"], "ok": completed.returncode == 0,
+            "code": completed.returncode, "critical": bool(project.get("critical")),
+        }
         results.append(entry)
-        if not entry["ok"] and p.get("critical"):
+        if not entry["ok"] and entry["critical"]:
             ok_all = False
             if args.fail_fast:
                 break
-    report = {"ts": datetime.now(timezone.utc).isoformat(), "ok": ok_all, "results": results}
-    REPORT.write_text(json.dumps(report, indent=2) + "\n")
-    try:
-        LEDGER.parent.mkdir(parents=True, exist_ok=True)
-        with LEDGER.open("a") as f:
-            f.write(json.dumps({"ts": report["ts"], "type": "pinned_run", "ref": f"ok={ok_all}", "n": len(results)}) + "\n")
-    except OSError:
-        pass
+    timestamp = datetime.now(timezone.utc).isoformat()
+    report = {"ts": timestamp, "ok": ok_all, "results": results}
+    write_json(REPORT, report)
+    append_jsonl(LEDGER, {
+        "ts": timestamp, "type": "pinned_run", "ref": f"ok={ok_all}", "n": len(results),
+    })
     print(json.dumps(report, indent=2))
     return 0 if ok_all else 1
+
 
 if __name__ == "__main__":
     raise SystemExit(main())
