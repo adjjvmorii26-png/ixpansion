@@ -1,4 +1,4 @@
-.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium lint clean backup push
+.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-constellation lint clean backup push
 
 test:
 	python3 -m pytest -q --tb=short
@@ -29,6 +29,9 @@ test-bridges:
 
 test-mycelium:
 	python3 -m pytest mycelium/tests -q --tb=short
+
+test-constellation:
+	python3 -m pytest constellation/tests -q --tb=short
 
 lint:
 	@find . -type f -name '*.py' \
