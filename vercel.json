@@ -156,6 +156,34 @@
       "dest": "/api/memory_palace.py"
     },
     {
+      "src": "/gravity(.*)",
+      "dest": "/api/gravitational_pricing.py"
+    },
+    {
+      "src": "/speciation(.*)",
+      "dest": "/api/speciation_engine.py"
+    },
+    {
+      "src": "/synesthesia(.*)",
+      "dest": "/api/synesthetic_api.py"
+    },
+    {
+      "src": "/chronicle(.*)",
+      "dest": "/api/chronicle_of_chaos.py"
+    },
+    {
+      "src": "/mycelium(.*)",
+      "dest": "/api/mycelial_commerce.py"
+    },
+    {
+      "src": "/warp(.*)",
+      "dest": "/api/warp_drive_optimizer.py"
+    },
+    {
+      "src": "/dream_interpret(.*)",
+      "dest": "/api/dream_interpreter.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dashboard/$1"
     }
@@ -163,7 +191,7 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "99"
+    "NEXUS_WAVE": "101"
   },
   "regions": [
     "iad1"
