@@ -139,6 +139,15 @@
         "--no-ledger"
       ],
       "critical": false
+    },
+    {
+      "id": "recovery_atlas",
+      "path": "lab/recovery_atlas.py",
+      "args": [
+        "--stdout",
+        "--no-ledger"
+      ],
+      "critical": false
     }
   ]
 }

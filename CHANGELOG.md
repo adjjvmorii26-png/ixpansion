@@ -36,6 +36,10 @@
 - Deterministic consent packets with two-human signature requirements and zero execution authority
 - Blocked or corrupted scenes routed to human tribunal instead of automated repair
 - Pinned advisory automation extended to Recovery Quorum
+- **Recovery Atlas** — deterministic HTML/SVG observatory for the complete paradox-to-consent journey
+- Unified upstream seals for paradox constellations, repair dreams, ghost stages, and quorum decisions
+- Radial branch visualization, consent-packet inventory, source audit badges, and portable terminal hashes
+- Pinned advisory automation extended to Recovery Atlas
 
 ## [0.5.0] — Reversible Governance
 
