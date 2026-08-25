@@ -106,6 +106,7 @@ ALEPH_MANIFEST_LOOM_KEY_ONE=author-one ALEPH_MANIFEST_LOOM_KEY_TWO=author-two \
 ALEPH_ANSWER_CRUCIBLE_KEY_ONE=responder-one ALEPH_ANSWER_CRUCIBLE_KEY_TWO=responder-two \
   python3 lab/recovery_answer_crucible.py seal --report recovery-manifest-loom.json \
   --answers recovery-lens-answers.json --operator-one responder-one --operator-two responder-two
+make swarm-sandbox
 python3 lab/run_pinned.py --critical-only
 python3 lab/run_pinned.py
 ```

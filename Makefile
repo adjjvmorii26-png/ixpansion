@@ -49,6 +49,9 @@ mandate-run:
 	python3 bridges/mandate_resonance.py
 	python3 lab/mandate_genome.py forge
 
+swarm-sandbox:
+	python3 lab/experiments/swarm.py --sandbox-ticks 3 --agents 5
+
 genome-list:
 	python3 lab/mandate_genome.py list
 

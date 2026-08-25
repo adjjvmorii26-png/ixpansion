@@ -7,16 +7,19 @@ from pathlib import Path
 
 CHAN = Path(__file__).resolve().parent / "astral_channel.jsonl"
 
-def send(topic: str, payload: dict) -> dict:
+def send(topic: str, payload: dict, *, path: Path | None = None) -> dict:
+    target = path or CHAN
     rec = {"ts": datetime.now(timezone.utc).isoformat(), "topic": topic, "payload": payload}
-    with CHAN.open("a") as f:
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with target.open("a") as f:
         f.write(json.dumps(rec) + "\n")
     return rec
 
-def tail(n: int = 10) -> list:
-    if not CHAN.exists():
+def tail(n: int = 10, *, path: Path | None = None) -> list:
+    target = path or CHAN
+    if not target.exists():
         return []
-    return [json.loads(x) for x in CHAN.read_text().strip().splitlines()[-n:] if x.strip()]
+    return [json.loads(x) for x in target.read_text().strip().splitlines()[-n:] if x.strip()]
 
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "tail":
