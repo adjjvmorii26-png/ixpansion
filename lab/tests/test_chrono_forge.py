@@ -31,6 +31,7 @@ class TestChronoForgePort:
         ids = [item["id"] for item in data["projects"]]
         assert ids.index("ritual_parliament") < ids.index("genome_atlas") < ids.index("evolution_council")
         assert all(item["path"] != "lab/evolution_consent.py" for item in data["projects"])
+        assert all(item["path"] != "lab/recovery_treaty.py" for item in data["projects"])
         assert ids[-5:] == ["temporal_paradox", "repair_dreams", "repair_theater", "recovery_quorum", "recovery_atlas"]
         assert all("--no-ledger" in data["projects"][index]["args"] for index in (-5, -4, -3, -2, -1))
         assert "--stdout" in data["projects"][-1]["args"]
