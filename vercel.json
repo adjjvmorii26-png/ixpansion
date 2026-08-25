@@ -212,6 +212,10 @@
       "dest": "/api/temporal_arbitrage.py"
     },
     {
+      "src": "/experiments/run(.*)",
+      "dest": "/api/experiment_runner.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dashboard/$1"
     }

@@ -1,0 +1,22 @@
+# IXpansion — Dependencies
+# Core
+json5>=5.0
+pyyaml>=6.0
+
+# Testing
+pytest>=7.0
+pytest-asyncio>=0.21
+
+# API
+httpx>=0.24
+
+# Crypto
+hashlib-additions>=1.0
+
+# Optional: Dashboard
+# flask>=3.0
+# fastapi>=0.100
+# uvicorn>=0.23
+
+# Optional: Vercel
+# vercel>=1.0
