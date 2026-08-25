@@ -1,4 +1,4 @@
-.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation temporal-paradox repair-dreams repair-theater recovery-quorum mandate-dry mandate-run genome-list genome-atlas genome-echo evolution-council lint clean backup push
+.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation temporal-paradox repair-dreams repair-theater recovery-quorum recovery-atlas mandate-dry mandate-run genome-list genome-atlas genome-echo evolution-council lint clean backup push
 
 test:
 	python3 -m pytest -q --tb=short
@@ -73,6 +73,10 @@ repair-theater:
 
 recovery-quorum:
 	python3 lab/recovery_quorum.py --no-ledger
+
+recovery-atlas:
+	@mkdir -p .runtime/lab/reports
+	python3 lab/recovery_atlas.py --stdout --no-ledger > .runtime/lab/reports/recovery-atlas-stdout.html
 
 lint:
 	@find . -type f -name '*.py' \
