@@ -100,6 +100,34 @@
       "dest": "/api/usage_dashboard.py"
     },
     {
+      "src": "/agents/rent(.*)",
+      "dest": "/api/agent_rental.py"
+    },
+    {
+      "src": "/sponsors(.*)",
+      "dest": "/api/sponsored_experiments.py"
+    },
+    {
+      "src": "/sim(.*)",
+      "dest": "/api/simulation_as_a_service.py"
+    },
+    {
+      "src": "/random(.*)",
+      "dest": "/api/quantum_randomness.py"
+    },
+    {
+      "src": "/cert(.*)",
+      "dest": "/api/certification.py"
+    },
+    {
+      "src": "/twin(.*)",
+      "dest": "/api/digital_twin.py"
+    },
+    {
+      "src": "/alerts(.*)",
+      "dest": "/api/alert_service.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dashboard/$1"
     }
@@ -107,7 +135,7 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "79"
+    "NEXUS_WAVE": "98"
   },
   "regions": [
     "iad1"
