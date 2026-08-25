@@ -1,231 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Observatory — Wave 79 Dashboard</title>
-    <style>
-        :root {
-            --bg: #060610; --fg: #e0e0e0; --accent: #7c3aed;
-            --green: #10b981; --red: #ef4444; --yellow: #f59e0b; --cyan: #06b6d4;
-            --pink: #ec4899; --orange: #f97316;
-            --card: #0d1117; --border: #1c2333;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--fg); font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 13px; }
-        .header { padding: 1.5rem 2rem; border-bottom: 1px solid var(--border); text-align: center; background: linear-gradient(180deg, #0d0d1a 0%, var(--bg) 100%); }
-        .header h1 { font-size: 1.6rem; color: var(--accent); letter-spacing: 2px; }
-        .header .subtitle { color: #6b7280; margin-top: 0.3rem; font-size: 0.75rem; }
-        .wave-badge { display: inline-block; background: var(--accent); color: white; padding: 2px 10px; border-radius: 12px; font-size: 0.65rem; margin: 2px; letter-spacing: 1px; }
-        .wave-badge.active { background: var(--green); }
-        #status { text-align: center; padding: 0.8rem; font-size: 0.8rem; }
-        .status-online { color: var(--green); }
-        .status-offline { color: var(--red); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; padding: 1.5rem; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; transition: border-color 0.3s; }
-        .card:hover { border-color: var(--accent); }
-        .card h2 { font-size: 0.8rem; color: var(--accent); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
-        .stat { display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-size: 0.75rem; }
-        .stat-label { color: #9ca3af; }
-        .stat-value { font-weight: bold; }
-        .bar { height: 3px; background: var(--border); border-radius: 2px; margin-top: 0.4rem; }
-        .bar-fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
-        .bar-green { background: var(--green); }
-        .bar-accent { background: var(--accent); }
-        .bar-yellow { background: var(--yellow); }
-        .bar-cyan { background: var(--cyan); }
-        .bar-pink { background: var(--pink); }
-        .experiments { max-height: 200px; overflow-y: auto; }
-        .exp-item { padding: 0.3rem 0; border-bottom: 1px solid var(--border); font-size: 0.7rem; display: flex; justify-content: space-between; }
-        .exp-name { color: var(--cyan); }
-        .exp-size { color: #6b7280; }
-        .subsystem-bar { display: flex; align-items: center; margin-bottom: 0.5rem; }
-        .subsystem-name { width: 120px; color: #9ca3af; font-size: 0.7rem; }
-        .subsystem-fill { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
-        .subsystem-fill-inner { height: 100%; border-radius: 3px; transition: width 0.8s; }
-        .subsystem-count { width: 40px; text-align: right; font-size: 0.65rem; color: #6b7280; }
-        .anomaly-item { padding: 0.3rem 0; border-bottom: 1px solid var(--border); font-size: 0.65rem; }
-        .anomaly-type { color: var(--yellow); }
-        .anomaly-file { color: #6b7280; }
-        .pulse-ring { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent); margin: 0 auto 0.5rem; display: flex; align-items: center; justify-content: center; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { border-color: var(--accent); } 50% { border-color: var(--green); } }
-        .pulse-value { font-size: 1.2rem; font-weight: bold; color: var(--green); }
-        .constellation-canvas { width: 100%; height: 150px; background: #060610; border: 1px solid var(--border); border-radius: 6px; margin-top: 0.5rem; }
-        #loading { text-align: center; padding: 3rem; color: #6b7280; }
-        .refresh-btn { background: var(--accent); color: white; border: none; padding: 6px 16px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 0.7rem; margin-top: 0.5rem; }
-        .refresh-btn:hover { background: #6d28d9; }
-        footer { text-align: center; padding: 1.5rem; color: #374151; font-size: 0.6rem; border-top: 1px solid var(--border); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IXpansion — The Computational Frontier</title>
+<meta name="description" content="157+ experiments across quantum computing, ecology, folklore, and cosmology. Run them via API or explore the observatory.">
+<style>
+:root{--bg:#05050a;--surface:#0c0c14;--surface2:#111119;--border:#1a1a2a;--text:#d4d4d8;--dim:#52525b;--accent:#7c3aed;--accent2:#a78bfa;--green:#22c55e;--gold:#f59e0b;--red:#ef4444;--blue:#3b82f6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.6}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+
+/* Hero */
+.hero{padding:6rem 0 4rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,.08) 0%,transparent 70%);transform:translate(-50%,-50%);pointer-events:none}
+.hero h1{font-size:3.5rem;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff 0%,var(--accent2) 50%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+.hero .sub{font-size:1.25rem;color:var(--dim);max-width:600px;margin:0 auto 2rem}
+.hero .cta{display:inline-flex;gap:1rem;margin-top:1rem}
+.btn{padding:.75rem 1.75rem;border-radius:.5rem;font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#6d28d9;text-decoration:none}
+.btn-secondary{background:transparent;color:var(--accent2);border:1px solid var(--accent)}
+.btn-secondary:hover{background:rgba(124,58,237,.1);text-decoration:none}
+
+/* Stats bar */
+.stats-bar{display:flex;justify-content:center;gap:3rem;padding:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:3rem 0}
+.stat{text-align:center}
+.stat .num{font-size:2rem;font-weight:800;color:#fff}
+.stat .label{font-size:.8rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em}
+
+/* Section */
+section{padding:4rem 0}
+section h2{font-size:2rem;font-weight:700;margin-bottom:.5rem}
+section .desc{color:var(--dim);margin-bottom:2rem;max-width:600px}
+
+/* Cards grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;transition:border-color .2s}
+.card:hover{border-color:var(--accent)}
+.card h3{font-size:1.1rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.card p{color:var(--dim);font-size:.9rem;line-height:1.5}
+.card .tag{display:inline-block;background:rgba(124,58,237,.15);color:var(--accent2);padding:.15rem .5rem;border-radius:1rem;font-size:.7rem;margin-top:.5rem}
+
+/* Pricing */
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.price-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center}
+.price-card.featured{border-color:var(--accent);position:relative}
+.price-card.featured::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:.2rem .75rem;border-radius:1rem;font-size:.65rem;font-weight:700;letter-spacing:.05em}
+.price-card h3{font-size:1.25rem;margin-bottom:.25rem}
+.price-card .price{font-size:2.5rem;font-weight:800;margin:1rem 0}
+.price-card .price span{font-size:.9rem;color:var(--dim);font-weight:400}
+.price-card ul{text-align:left;list-style:none;margin:1.5rem 0;font-size:.9rem}
+.price-card ul li{padding:.35rem 0;color:var(--dim)}
+.price-card ul li::before{content:'✓ ';color:var(--green);font-weight:700}
+
+/* API section */
+.api-demo{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;font-family:'JetBrains Mono',monospace;font-size:.8rem;overflow-x:auto;margin-top:1.5rem}
+.api-demo .line{padding:.2rem 0}
+.api-demo .method{color:var(--green);font-weight:700}
+.api-demo .path{color:var(--accent2)}
+.api-demo .comment{color:var(--dim)}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:3rem 0;text-align:center;color:var(--dim);font-size:.85rem}
+footer a{color:var(--accent2)}
+
+@media(max-width:768px){
+  .hero h1{font-size:2rem}
+  .stats-bar{flex-wrap:wrap;gap:1.5rem}
+  .pricing{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
-    <div class="header">
-        <h1>🜁 NEXUS OBSERVATORY</h1>
-        <p class="subtitle">Wave 79 — Vercel Server Deep Integration</p>
-        <div style="margin-top:0.5rem">
-            <span class="wave-badge">72</span><span class="wave-badge">73</span>
-            <span class="wave-badge">74</span><span class="wave-badge">75</span>
-            <span class="wave-badge">76</span><span class="wave-badge">77</span>
-            <span class="wave-badge">78</span><span class="wave-badge active">79</span>
-        </div>
+
+<div class="container">
+<nav style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;border-bottom:1px solid var(--border)">
+  <div style="font-weight:800;font-size:1.1rem;color:var(--accent2)">⚛ IXpansion</div>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem">
+    <a href="#experiments">Experiments</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#api">API</a>
+    <a href="premium.html">Dashboard</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>The Computational Frontier</h1>
+  <p class="sub">157+ experiments across quantum computing, ecology, folklore, cosmology, and emergent complexity. Run them via API, explore in the observatory, or build on top of them.</p>
+  <div class="cta">
+    <a href="#pricing" class="btn btn-primary">Get Started Free</a>
+    <a href="#api" class="btn btn-secondary">View API Docs</a>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat"><div class="num">157</div><div class="label">Experiments</div></div>
+  <div class="stat"><div class="num">9</div><div class="label">Domains</div></div>
+  <div class="stat"><div class="num">22K+</div><div class="label">Lines of Code</div></div>
+  <div class="stat"><div class="num">19</div><div class="label">API Endpoints</div></div>
+  <div class="stat"><div class="num">146</div><div class="label">Tests</div></div>
+  <div class="stat"><div class="num">95</div><div class="label">Waves Shipped</div></div>
+</div>
+
+<section id="experiments">
+  <h2>Experiments</h2>
+  <p class="desc">Each experiment is a self-contained, runnable module. Run one via API or explore all in the observatory.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>🔬 Quantum Physics</h3>
+      <p>Photon memory, quantum tunneling, superposition engines, entanglement networks, error correction, and strange attractors.</p>
+      <span class="tag">12 experiments</span>
     </div>
-    <div id="status">Connecting...</div>
-    <div id="loading">Loading telemetry...</div>
-    <div class="grid" id="dashboard"></div>
-    <footer>ALEPH — IXPANSION v0.5.0 — Nexus Observatory</footer>
-    <script>
-        const API = '/api';
-        async function fetchJSON(url) {
-            try { const r = await fetch(url); return await r.json(); }
-            catch(e) { return { error: e.message }; }
-        }
-        function statRow(label, value, cls='') {
-            return `<div class="stat"><span class="stat-label">${label}</span><span class="stat-value ${cls}">${value}</span></div>`;
-        }
-        function bar(pct, cls='bar-accent') {
-            return `<div class="bar"><div class="bar-fill ${cls}" style="width:${Math.min(100,pct)}%"></div></div>`;
-        }
-        function subsystemBar(name, count, max, color) {
-            const pct = max > 0 ? (count / max * 100) : 0;
-            return `<div class="subsystem-bar">
-                <span class="subsystem-name">${name}</span>
-                <div class="subsystem-fill"><div class="subsystem-fill-inner" style="width:${pct}%;background:${color}"></div></div>
-                <span class="subsystem-count">${count}</span>
-            </div>`;
-        }
-        async function loadDashboard() {
-            const [health, telemetry, experiments, agents, sandbox, constellation, anomalies, waveLog, reactor] = await Promise.all([
-                fetchJSON(`${API}/health.py`),
-                fetchJSON(`${API}/telemetry.py`),
-                fetchJSON(`${API}/experiments.py`),
-                fetchJSON(`${API}/agents.py`),
-                fetchJSON(`${API}/sandbox.py`),
-                fetchJSON(`${API}/constellation.py`),
-                fetchJSON(`${API}/anomaly_detector.py`),
-                fetchJSON(`${API}/wave_log.py`),
-                fetchJSON(`${API}/stream_reactor.py`),
-            ]);
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('status').innerHTML = health.status === 'healthy'
-                ? '<span class="status-online">● System Online</span>'
-                : '<span class="status-offline">○ System Offline</span>';
-            let html = '';
-            // Health card
-            html += `<div class="card"><h2>⚡ System Health</h2>`;
-            html += statRow('Status', health.status || 'unknown', 'healthy');
-            html += statRow('Version', health.version || '?');
-            html += statRow('Mode', health.mode || '?');
-            html += statRow('API Modules', health.modules || 0);
-            html += bar(Math.min(100, (health.modules || 0) / 0.6), 'bar-green');
-            html += `</div>`;
-            // Reactor pulse card
-            if (reactor.pulse) {
-                html += `<div class="card"><h2>🜂 Reactor Pulse</h2>`;
-                html += `<div class="pulse-ring"><span class="pulse-value">${reactor.pulse.energy}</span></div>`;
-                html += statRow('Composite Hash', reactor.pulse.composite_hash);
-                html += statRow('Energy', reactor.pulse.energy, reactor.pulse.energy > 0.5 ? 'healthy' : 'warning');
-                html += statRow('Entropy', reactor.pulse.entropy);
-                html += statRow('Module Count', reactor.pulse.module_count);
-                html += statRow('Total Lines', reactor.pulse.total_lines);
-                html += `</div>`;
-            }
-            // Telemetry summary
-            if (telemetry.summary) {
-                html += `<div class="card"><h2>📡 Telemetry</h2>`;
-                html += statRow('Total Modules', telemetry.summary.total_modules);
-                html += statRow('Total Tests', telemetry.summary.total_tests);
-                html += statRow('Subsystems', telemetry.summary.subsystem_count);
-                html += bar(telemetry.summary.total_modules / 5, 'bar-accent');
-                html += `</div>`;
-            }
-            // Subsystem breakdown
-            if (telemetry.subsystems) {
-                const colors = ['var(--accent)', 'var(--green)', 'var(--cyan)', 'var(--pink)', 'var(--orange)', 'var(--yellow)', 'var(--red)', '#8b5cf6'];
-                let i = 0;
-                html += `<div class="card"><h2>🏗 Subsystems</h2>`;
-                const maxMod = Math.max(...Object.values(telemetry.subsystems).filter(s => s.modules !== undefined).map(s => s.modules), 1);
-                for (const [name, data] of Object.entries(telemetry.subsystems)) {
-                    if (data.modules !== undefined) {
-                        html += subsystemBar(name, data.modules, maxMod, colors[i % colors.length]);
-                        i++;
-                    }
-                }
-                html += `</div>`;
-            }
-            // Constellation graph
-            if (constellation.stats) {
-                html += `<div class="card"><h2>✦ Constellation</h2>`;
-                html += statRow('Nodes', constellation.stats.total_nodes);
-                html += statRow('Edges', constellation.stats.total_edges);
-                html += statRow('Density', constellation.stats.density);
-                if (constellation.stats.most_connected && constellation.stats.most_connected.length > 0) {
-                    const top = constellation.stats.most_connected.slice(0, 5);
-                    html += `<div style="margin-top:0.5rem;font-size:0.65rem;color:#6b7280">Most connected:</div>`;
-                    top.forEach(([name, count]) => {
-                        html += statRow(name, `${count} connections`);
-                    });
-                }
-                html += `</div>`;
-            }
-            // Anomaly detector
-            if (anomalies.summary) {
-                html += `<div class="card"><h2>⚠ Anomaly Detector</h2>`;
-                html += statRow('Health Score', `${anomalies.summary.health_score}/100`,
-                    anomalies.summary.health_score > 80 ? 'healthy' : anomalies.summary.health_score > 50 ? 'warning' : 'critical');
-                html += statRow('Anomalies', anomalies.summary.anomaly_count, 'warning');
-                html += statRow('Warnings', anomalies.summary.warning_count);
-                html += bar(anomalies.summary.health_score, anomalies.summary.health_score > 80 ? 'bar-green' : 'bar-yellow');
-                if (anomalies.anomalies && anomalies.anomalies.length > 0) {
-                    html += `<div style="max-height:100px;overflow-y:auto;margin-top:0.5rem">`;
-                    anomalies.anomalies.slice(0, 5).forEach(a => {
-                        html += `<div class="anomaly-item"><span class="anomaly-type">${a.type}</span> <span class="anomaly-file">${a.file || ''}</span></div>`;
-                    });
-                    html += `</div>`;
-                }
-                html += `</div>`;
-            }
-            // Wave log
-            if (waveLog.waves) {
-                html += `<div class="card"><h2>🌊 Wave Log</h2>`;
-                html += statRow('Total Waves', waveLog.wave_count);
-                html += statRow('Total Commits', waveLog.total_commits);
-                waveLog.waves.slice(0, 6).forEach(w => {
-                    html += statRow(`Wave ${w.wave || '?'}`, w.message.substring(0, 50));
-                });
-                html += `</div>`;
-            }
-            // Agents
-            if (agents.agents) {
-                html += `<div class="card"><h2>🤖 Agents</h2>`;
-                html += statRow('Agent Count', agents.count);
-                html += statRow('Signature', agents.signature);
-                if (agents.agents.length > 0) {
-                    html += `<div style="max-height:120px;overflow-y:auto">`;
-                    agents.agents.slice(0, 8).forEach(a => {
-                        html += `<div class="exp-item"><span class="exp-name">${a.name}</span><span class="exp-size">${a.subsystem}</span></div>`;
-                    });
-                    html += `</div>`;
-                }
-                html += `</div>`;
-            }
-            // Sandbox
-            if (sandbox.modules) {
-                html += `<div class="card"><h2>🌐 Sandbox</h2>`;
-                html += statRow('Sandbox Modules', sandbox.count);
-                html += statRow('Signature', sandbox.signature);
-                html += `</div>`;
-            }
-            // Experiments
-            if (experiments.experiments) {
-                html += `<div class="card" style="grid-column: span 2"><h2>🧪 Experiments (${experiments.count})</h2><div class="experiments">`;
-                experiments.experiments.forEach(exp => {
-                    html += `<div class="exp-item"><span class="exp-name">${exp.name}</span><span class="exp-size">${(exp.size_bytes/1024).toFixed(1)}KB</span></div>`;
-                });
-                html += `</div></div>`;
-            }
-            document.getElementById('dashboard').innerHTML = html;
-        }
-        loadDashboard();
-        setInterval(loadDashboard, 30000);
-    </script>
+    <div class="card">
+      <h3>🌿 Ecology & Biology</h3>
+      <p>Coral reef simulation, silicon lifeforms, keystone species detection, trophic cascades, and ecosystem services mapping.</p>
+      <span class="tag">10 experiments</span>
+    </div>
+    <div class="card">
+      <h3>🌌 Cosmology</h3>
+      <p>Dark energy, cosmic web mapping, gravitational wells, spacetime manifolds, and dimensional folding.</p>
+      <span class="tag">8 experiments</span>
+    </div>
+    <div class="card">
+      <h3>📖 Computational Folklore</h3>
+      <p>Myth generators, oral traditions, sacred geometry, ritual automation, and language drift tracking.</p>
+      <span class="tag">10 experiments</span>
+    </div>
+    <div class="card">
+      <h3>🧬 Emergent Systems</h3>
+      <p>Phase transitions, edge of chaos, emergent grammar, fractal languages, and neural dust clouds.</p>
+      <span class="tag">12 experiments</span>
+    </div>
+    <div class="card">
+      <h3>🔗 Cross-System Synthesis</h3>
+      <p>Reality synthesis, consent propagation, provenance tracking, information theory, and cross-pollination engines.</p>
+      <span class="tag">11 experiments</span>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <h2>Simple Pricing</h2>
+  <p class="desc">Start free. Upgrade when you need more. Pay with crypto or fiat.</p>
+  <div class="pricing">
+    <div class="price-card">
+      <h3>Explorer</h3>
+      <div class="price">Free</div>
+      <ul>
+        <li>12 curated experiments</li>
+        <li>100 API calls/day</li>
+        <li>Basic dashboard</li>
+        <li>Community support</li>
+        <li>Pay-per-use credits available</li>
+      </ul>
+      <a href="#" class="btn btn-secondary" style="width:100%">Start Free</a>
+    </div>
+    <div class="price-card featured">
+      <h3>Scientist</h3>
+      <div class="price">$29<span>/mo</span></div>
+      <ul>
+        <li>157+ experiments</li>
+        <li>10,000 API calls/day</li>
+        <li>Real-time dashboard</li>
+        <li>Anomaly detection</li>
+        <li>BTC, ETH, SOL payments</li>
+        <li>Email support</li>
+      </ul>
+      <a href="#" class="btn btn-primary" style="width:100%">Upgrade to Scientist</a>
+    </div>
+    <div class="price-card">
+      <h3>Architect</h3>
+      <div class="price">$199<span>/mo</span></div>
+      <ul>
+        <li>Unlimited API calls</li>
+        <li>Custom agent development</li>
+        <li>White-label options</li>
+        <li>99.9% SLA</li>
+        <li>Dedicated Slack support</li>
+        <li>Webhook integrations</li>
+      </ul>
+      <a href="#" class="btn btn-secondary" style="width:100%">Contact Sales</a>
+    </div>
+  </div>
+  <p style="text-align:center;color:var(--dim);margin-top:1.5rem;font-size:.85rem">Also available: Pay-per-use credits ($0.01/credit) · Data licensing ($15–$99/dataset) · Annual plans save 17%</p>
+</section>
+
+<section id="api">
+  <h2>API</h2>
+  <p class="desc">Every experiment, every feature, every data point — accessible via REST API.</p>
+  <div class="api-demo">
+    <div class="line"><span class="comment"># List all experiments</span></div>
+    <div class="line"><span class="method">GET</span> <span class="path">/api/experiments</span></div>
+    <div class="line">&nbsp;</div>
+    <div class="line"><span class="comment"># Run an experiment</span></div>
+    <div class="line"><span class="method">POST</span> <span class="path">/api/experiments/run</span> { "name": "quantum_tunneling" }</div>
+    <div class="line">&nbsp;</div>
+    <div class="line"><span class="comment"># Get your API key</span></div>
+    <div class="line"><span class="method">POST</span> <span class="path">/api/auth/keys</span> { "owner": "you", "tier": "pro" }</div>
+    <div class="line">&nbsp;</div>
+    <div class="line"><span class="comment"># Pay with crypto</span></div>
+    <div class="line"><span class="method">POST</span> <span class="path">/api/crypto/create_invoice</span> { "amount": 29, "currency": "BTC" }</div>
+    <div class="line">&nbsp;</div>
+    <div class="line"><span class="comment"># Buy credits</span></div>
+    <div class="line"><span class="method">POST</span> <span class="path">/api/credits/buy</span> { "user": "you", "package": "explorer" }</div>
+    <div class="line">&nbsp;</div>
+    <div class="line"><span class="comment"># Vote on next experiment</span></div>
+    <div class="line"><span class="method">POST</span> <span class="path">/api/governance/vote</span> { "proposal_id": "...", "vote": 1 }</div>
+    <div class="line">&nbsp;</div>
+    <div class="line"><span class="comment"># Browse datasets</span></div>
+    <div class="line"><span class="method">GET</span> <span class="path">/api/data/catalog</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>IXpansion Observatory · Built by <a href="https://github.com/adjjvmorii26-png/ixpansion">ALEPH</a> · 95 waves shipped · <a href="premium.html">Dashboard</a></p>
+    <p style="margin-top:.5rem">MIT License · <a href="https://github.com/adjjvmorii26-png/ixpansion">GitHub</a></p>
+  </div>
+</footer>
+</div>
 </body>
 </html>
