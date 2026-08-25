@@ -103,6 +103,9 @@ ALEPH_EXECUTOR_CONTRACT_KEY_ONE=reviewer-one ALEPH_EXECUTOR_CONTRACT_KEY_TWO=rev
 ALEPH_MANIFEST_LOOM_KEY_ONE=author-one ALEPH_MANIFEST_LOOM_KEY_TWO=author-two \
   python3 lab/recovery_manifest_loom.py weave --report recovery-shadow-red-cell.json \
   --intents recovery-intents.json --operator-one author-one --operator-two author-two
+ALEPH_ANSWER_CRUCIBLE_KEY_ONE=responder-one ALEPH_ANSWER_CRUCIBLE_KEY_TWO=responder-two \
+  python3 lab/recovery_answer_crucible.py seal --report recovery-manifest-loom.json \
+  --answers recovery-lens-answers.json --operator-one responder-one --operator-two responder-two
 python3 lab/run_pinned.py --critical-only
 python3 lab/run_pinned.py
 ```

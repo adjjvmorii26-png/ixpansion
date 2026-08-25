@@ -64,7 +64,10 @@
 - **Recovery Manifest Loom** — dual-author sealing of structured observe/preserve/prepare-review intents
 - Strict intent schemas, reviewed-ledger binding, duplicate replay refusal, and immutable lineage propagation
 - Each thread receives provenance, consequence, and reversibility questions for independent offline human answers
-- Full shadow→contract→verdict→treaty reverification with zero execution authority and no executor registry
+- **Recovery Answer Crucible** — dual-responder sealing of provenance, consequence, and reversibility answers
+- Every provenance answer must reproduce its bound ledger's immutable SHA-256 witness
+- Strict answer schemas, independence from manifest authors, replay refusal, and full upstream reverification
+- Readiness only records completed offline review; it grants no executor, mutation, or implementation authority
 - Manual-only operation outside pinned automation
 - Verdict recorder remains outside pinned automation
 
