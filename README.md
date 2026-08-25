@@ -98,6 +98,8 @@ ALEPH_VERDICT_KEY_ONE=juror-one ALEPH_VERDICT_KEY_TWO=juror-two \
   --operator-one juror-one --operator-two juror-two
 ALEPH_EXECUTOR_CONTRACT_KEY_ONE=reviewer-one ALEPH_EXECUTOR_CONTRACT_KEY_TWO=reviewer-two \
   python3 lab/recovery_executor_contract.py forge --report recovery-verdict.json
+ALEPH_EXECUTOR_CONTRACT_KEY_ONE=reviewer-one ALEPH_EXECUTOR_CONTRACT_KEY_TWO=reviewer-two \
+  python3 lab/recovery_shadow_red_cell.py convene --report recovery-executor-contract.json
 python3 lab/run_pinned.py --critical-only
 python3 lab/run_pinned.py
 ```

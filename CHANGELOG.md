@@ -57,7 +57,11 @@
 - **Recovery Executor Contract Forge** — manual-only draft compiler for separately reviewed approval handoffs
 - Full verdict→dossier→treaty verification, immutable lineage budgets, and source-witness rebinding
 - Dual independent reviewer signatures, explicit capability allow/deny lists, empty executor registry, and zero authority
-- Portable terminal-hash verification and ledger witnesses; the forge remains outside pinned automation
+- **Recovery Shadow Red Cell** — deterministic seven-adversary review of approved executor contracts
+- Synthetic authority-laundering, lineage-rewind, replay, source-forgery, quorum-splitting, and capability-smuggling attacks
+- All attacks fail closed as contained evidence; open findings produce a non-ready disposition boundary
+- Full contract reverification, recorded-contract replay refusal, zero mutation authority, and portable terminal hashes
+- Manual-only operation outside pinned automation
 - Verdict recorder remains outside pinned automation
 
 ## [0.5.0] — Reversible Governance
