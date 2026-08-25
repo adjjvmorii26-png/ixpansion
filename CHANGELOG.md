@@ -61,6 +61,10 @@
 - Synthetic authority-laundering, lineage-rewind, replay, source-forgery, quorum-splitting, and capability-smuggling attacks
 - All attacks fail closed as contained evidence; open findings produce a non-ready disposition boundary
 - Full contract reverification, recorded-contract replay refusal, zero mutation authority, and portable terminal hashes
+- **Recovery Manifest Loom** — dual-author sealing of structured observe/preserve/prepare-review intents
+- Strict intent schemas, reviewed-ledger binding, duplicate replay refusal, and immutable lineage propagation
+- Each thread receives provenance, consequence, and reversibility questions for independent offline human answers
+- Full shadow→contract→verdict→treaty reverification with zero execution authority and no executor registry
 - Manual-only operation outside pinned automation
 - Verdict recorder remains outside pinned automation
 
