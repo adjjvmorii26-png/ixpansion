@@ -50,6 +50,11 @@
 - Deterministic 16×16 witness-glyph seal, signature fingerprints, bound-source table, and human checklist
 - Explicit empty executor registry, zero mutation budget, and forbidden execution boundary
 - Manual-only operation outside pinned automation
+- **Recovery Verdict Recorder** — manual-only dual-juror sealing of tribunal outcomes
+- Portable approve, reject, and defer verdicts bound to the dossier, treaty, nonce, rationale, and source bytes
+- Approval requires a separate future executor contract and remains zero-authority
+- Independent juror keys, replay-resistant signatures, source-change voiding, and ledger witnesses
+- Verdict recorder remains outside pinned automation
 
 ## [0.5.0] — Reversible Governance
 
