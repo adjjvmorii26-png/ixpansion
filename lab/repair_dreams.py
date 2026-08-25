@@ -14,6 +14,7 @@ import hashlib
 import json
 from typing import Any
 
+from lab.recovery_sources import RECOVERY_DERIVED_LEDGERS as DERIVED_LEDGERS, source_ledgers
 from lab.runtime_vault import (
     CHAIN_FIELDS,
     append_jsonl,
@@ -27,7 +28,6 @@ from lab.temporal_paradox import resolve
 
 SCHEMA = "aleph.chronoforge.repair-dream.v1"
 MAX_OPERATIONS_CEILING = 64
-DERIVED_LEDGERS = {"paradox-resolutions.jsonl", "repair-dreams.jsonl"}
 SEVERITY_WEIGHT = {"critical": 0.34, "major": 0.18, "warning": 0.07}
 
 
@@ -40,17 +40,7 @@ def _hash(payload: Any) -> str:
 
 
 def _source_ledgers(explicit: list[Path] | None) -> list[Path]:
-    if explicit is None:
-        directory = ledger_path().parent
-        return sorted(
-            path for path in directory.glob("*.jsonl")
-            if path.name not in DERIVED_LEDGERS
-        )
-    paths = sorted({Path(path).resolve() for path in explicit})
-    for path in paths:
-        if not path.is_file():
-            raise ValueError(f"ledger does not exist: {path}")
-    return paths
+    return source_ledgers(explicit)
 
 
 def _state_hashes(evidence: dict[str, Any]) -> list[str]:

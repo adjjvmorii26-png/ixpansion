@@ -14,7 +14,7 @@ import hashlib
 import json
 from typing import Any
 
-from lab.repair_dreams import DERIVED_LEDGERS
+from lab.recovery_sources import source_ledgers
 from lab.repair_theater import rehearse
 from lab.runtime_vault import (
     CHAIN_FIELDS,
@@ -38,15 +38,7 @@ def _hash(payload: Any) -> str:
 
 
 def _paths(explicit: list[Path] | None) -> list[Path]:
-    if explicit is None:
-        directory = ledger_path().parent
-        excluded = {*DERIVED_LEDGERS, "repair-theater.jsonl", "recovery-quorums.jsonl"}
-        return sorted(path for path in directory.glob("*.jsonl") if path.name not in excluded)
-    resolved = sorted({Path(item).resolve() for item in explicit})
-    for item in resolved:
-        if not item.is_file():
-            raise ValueError(f"ledger does not exist: {item}")
-    return resolved
+    return source_ledgers(explicit)
 
 
 def _votes(scene: dict[str, Any], source_audits_ok: bool) -> dict[str, str]:

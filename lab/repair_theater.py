@@ -14,7 +14,8 @@ import hashlib
 import json
 from typing import Any
 
-from lab.repair_dreams import DERIVED_LEDGERS, weave
+from lab.recovery_sources import source_ledgers
+from lab.repair_dreams import weave
 from lab.runtime_vault import (
     CHAIN_FIELDS,
     append_jsonl,
@@ -50,15 +51,7 @@ def _public(record: dict[str, Any]) -> dict[str, Any]:
 
 
 def _paths(explicit: list[Path] | None) -> list[Path]:
-    if explicit is None:
-        directory = ledger_path().parent
-        excluded = {*DERIVED_LEDGERS, "repair-theater.jsonl"}
-        return sorted(path for path in directory.glob("*.jsonl") if path.name not in excluded)
-    resolved = sorted({Path(item).resolve() for item in explicit})
-    for item in resolved:
-        if not item.is_file():
-            raise ValueError(f"ledger does not exist: {item}")
-    return resolved
+    return source_ledgers(explicit)
 
 
 def _observations(paths: list[Path]) -> list[dict[str, Any]]:
