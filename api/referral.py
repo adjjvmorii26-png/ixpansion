@@ -119,5 +119,11 @@ def demo():
     return {"leaderboard": board}
 
 
+def handler(request, response):
+    rs = ReferralSystem()
+    lb = rs.leaderboard(5)
+    return {"leaderboard": lb, "total_referrers": len(lb)}
+
+
 if __name__ == "__main__":
     demo()

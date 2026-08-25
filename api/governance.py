@@ -176,5 +176,10 @@ def demo():
     return tok
 
 
+def handler(request, response):
+    gs = GovernanceSystem()
+    return {"proposals": len(gs.list_proposals()), "total_tokens": sum(gs.get_balance(u) for u in set(p["creator"] for p in gs.list_proposals("all"))) if gs.list_proposals("all") else 0}
+
+
 if __name__ == "__main__":
     demo()
