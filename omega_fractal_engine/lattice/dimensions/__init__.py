@@ -1,0 +1,1 @@
+"""lattice.dimensions — submodule."""
