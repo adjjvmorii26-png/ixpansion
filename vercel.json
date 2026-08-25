@@ -184,6 +184,34 @@
       "dest": "/api/dream_interpreter.py"
     },
     {
+      "src": "/gateway(.*)",
+      "dest": "/api/api_gateway.py"
+    },
+    {
+      "src": "/plugins(.*)",
+      "dest": "/api/plugin_loader.py"
+    },
+    {
+      "src": "/events(.*)",
+      "dest": "/api/event_stream.py"
+    },
+    {
+      "src": "/bridge(.*)",
+      "dest": "/api/interdimensional_bridge.py"
+    },
+    {
+      "src": "/entangle(.*)",
+      "dest": "/api/quantum_entanglement.py"
+    },
+    {
+      "src": "/neural(.*)",
+      "dest": "/api/neural_fabric.py"
+    },
+    {
+      "src": "/arb(.*)",
+      "dest": "/api/temporal_arbitrage.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dashboard/$1"
     }
@@ -191,7 +219,7 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "101"
+    "NEXUS_WAVE": "102"
   },
   "regions": [
     "iad1"
