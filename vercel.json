@@ -88,6 +88,18 @@
       "dest": "/api/governance.py"
     },
     {
+      "src": "/webhooks(.*)",
+      "dest": "/api/webhooks.py"
+    },
+    {
+      "src": "/docs(.*)",
+      "dest": "/api/docs.py"
+    },
+    {
+      "src": "/usage(.*)",
+      "dest": "/api/usage_dashboard.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dashboard/$1"
     }
