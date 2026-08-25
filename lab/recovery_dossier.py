@@ -130,18 +130,21 @@ def compile_dossier(
     ledgers: list[Path] | None = None,
     key_one: str | None = None,
     key_two: str | None = None,
-    max_operations: int = 16,
+    max_operations: int | None = None,
     output: Path | None = None,
     record: bool = True,
     clock=utc_now,
 ) -> dict[str, Any]:
     """Verify a treaty and seal a printable offline tribunal handoff."""
+    bound_budget = treaty["binding"].get("lineage_parameters", {}).get(
+        "max_operations", 16
+    )
     valid_treaty = verify_treaty(
         treaty,
         ledgers=ledgers,
         key_one=key_one,
         key_two=key_two,
-        max_operations=max_operations,
+        max_operations=max_operations if max_operations is not None else bound_budget,
     )
     if not valid_treaty:
         raise ValueError("recovery treaty is invalid, modified, expired, or unverifiable")
@@ -154,6 +157,7 @@ def compile_dossier(
         "verdict": "ready_for_tribunal",
         "compiled_at": clock(),
         "treaty": treaty,
+        "lineage_parameters": dict(treaty["binding"].get("lineage_parameters", {})),
         "authority": {
             "execution_enabled": False,
             "compatible_executors": [],
@@ -217,7 +221,7 @@ def build_parser() -> argparse.ArgumentParser:
     compiler.add_argument("--report", type=Path, required=True)
     compiler.add_argument("--output", type=Path, default=None)
     compiler.add_argument("ledgers", nargs="*", type=Path)
-    compiler.add_argument("--max-operations", type=int, default=16)
+    compiler.add_argument("--max-operations", type=int, default=None)
     compiler.add_argument("--no-ledger", action="store_true")
     verifier = commands.add_parser("verify", help="verify a sealed dossier terminal hash")
     verifier.add_argument("--report", type=Path, required=True)

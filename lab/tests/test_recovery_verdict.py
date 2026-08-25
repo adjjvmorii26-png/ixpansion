@@ -85,6 +85,45 @@ def test_approved_verdict_remains_completely_non_executable(sealed_dossier):
     ) is True
 
 
+def test_custom_operation_budget_survives_full_tribunal_chain(tmp_path):
+    first = tmp_path / "alpha.jsonl"
+    second = tmp_path / "beta.jsonl"
+    append_jsonl(first, {"subject_id": "ghost", "tick": 7, "state_hash": "a" * 64})
+    append_jsonl(second, {"subject_id": "ghost", "tick": 7, "state_hash": "b" * 64})
+    sources = [first, second]
+    treaty = compile_treaty(
+        ledgers=sources,
+        operator_one="archivist",
+        operator_two="sentinel",
+        max_operations=5,
+        key_one=TREATY_KEY_ONE,
+        key_two=TREATY_KEY_TWO,
+        nonce="ef" * 16,
+        clock=FIXED_CLOCK,
+        record=False,
+    )
+    dossier = compile_dossier(
+        treaty,
+        ledgers=sources,
+        key_one=TREATY_KEY_ONE,
+        key_two=TREATY_KEY_TWO,
+        clock=FIXED_CLOCK,
+        record=False,
+    )
+
+    assert dossier["lineage_parameters"] == {"max_operations": 5}
+    verdict = _record(dossier, sources)
+    assert verdict["decision_binding"]["lineage_parameters"] == {"max_operations": 5}
+    assert verify_verdict(
+        verdict,
+        ledgers=sources,
+        decision_key_one=VERDICT_KEY_ONE,
+        decision_key_two=VERDICT_KEY_TWO,
+        treaty_key_one=TREATY_KEY_ONE,
+        treaty_key_two=TREATY_KEY_TWO,
+    ) is True
+
+
 @pytest.mark.parametrize("verdict,status,next_action", [
     ("approve", "approved_for_separate_executor_contract", "draft_independent_executor_contract_for_review"),
     ("reject", "rejected", "archive_without_execution"),

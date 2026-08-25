@@ -148,6 +148,9 @@ def compile_treaty(
         "atlas_hash": atlas["atlas_hash"],
         "upstream_hashes": upstream_hashes,
         "sources": _source_binding(paths) if paths else atlas["sources"],
+        "lineage_parameters": {
+            "max_operations": max_operations,
+        },
     }
     grant = _grant_material(
         packet=packet,
@@ -212,7 +215,7 @@ def verify_treaty(
     ledgers: list[Path] | None = None,
     key_one: str | None = None,
     key_two: str | None = None,
-    max_operations: int = 16,
+    max_operations: int | None = None,
 ) -> bool:
     """Verify both signatures and confirm every bound witness remains unchanged."""
     if report.get("schema") != SCHEMA or report.get("status") != "authorized_for_human_tribunal":
@@ -228,8 +231,13 @@ def verify_treaty(
     if _hash(body) != claimed:
         return False
 
-    atlas = compile_atlas(ledgers=ledgers, max_operations=max_operations, record=False)
     binding = report["binding"]
+    bound_parameters = binding.get("lineage_parameters", {})
+    bound_max_operations = bound_parameters.get("max_operations", 16)
+    if max_operations is not None and max_operations != bound_max_operations:
+        return False
+
+    atlas = compile_atlas(ledgers=ledgers, max_operations=bound_max_operations, record=False)
     current_hashes = {name: item["hash"] for name, item in atlas["upstream"].items()}
     current_sources = _source_binding(sorted({Path(item) for item in ledgers})) if ledgers else atlas["sources"]
     if binding["atlas_hash"] != atlas["atlas_hash"]:
@@ -279,7 +287,7 @@ def build_parser() -> argparse.ArgumentParser:
     verifier = commands.add_parser("verify", help="verify a treaty against unchanged sources")
     verifier.add_argument("ledgers", nargs="*", type=Path)
     verifier.add_argument("--report", type=Path, default=None)
-    verifier.add_argument("--max-operations", type=int, default=16)
+    verifier.add_argument("--max-operations", type=int, default=None)
     return parser
 
 
