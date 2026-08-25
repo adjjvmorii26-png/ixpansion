@@ -71,6 +71,9 @@
 - Manual-only operation outside pinned automation
 - Verdict recorder remains outside pinned automation
 
+- **Swarm Sandbox Pulse** — `swarm.py --sandbox-ticks N` runs bounded sandbox pulses through deterministic Sentinel/Archivist/Wanderer observers
+- Data-only preserve/inspect/drift verdicts, coherence scoring, runtime-vault cycle history, injectable astral routing, and hash-chained proof evidence
+- Removed the obsolete subprocess bridge and its missing gas dependency
 ## [0.5.0] — Reversible Governance
 
 ### Added

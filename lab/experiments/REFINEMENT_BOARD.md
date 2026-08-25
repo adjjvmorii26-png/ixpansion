@@ -6,10 +6,10 @@
 - recursion_anchor — max depth 5 on self-rewrite
 - mimic agent — short caption variants
 - unified_resource_tick — entropy + gas + astral
+- swarm.py --sandbox-ticks N — deterministic inert observers, runtime bus, proof ledger
 - form_inventor_safe — gated form ids
 
 ## Still open
-- swarm.py --sandbox-ticks N
 - viewer_node_webhook always-on
 - MFE host serving /sandbox state
 - Live checkout for handshake offers (when payment rails ready)
