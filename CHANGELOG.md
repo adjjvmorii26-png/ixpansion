@@ -1,5 +1,49 @@
 # Changelog
 
+## [3.17.0] — Wave 102: Infrastructure Renaissance
+
+### Added
+- **API Gateway** — intelligent routing, caching, circuit breaker, rate limiting
+- **Plugin Loader** — dynamic plugin architecture with dependency resolution
+- **Event Stream** — real-time pub/sub with priority queues and filtering
+- **Interdimensional Bridge** — cross-domain data transfer with protocol translation
+- **Quantum Entanglement** — linked subsystem states with fidelity tracking
+- **Neural Fabric** — neural network connecting all modules with learning
+- **Temporal Arbitrage** — automated buy-low-sell-high across time periods
+
+## [3.16.0] — Wave 101: Cosmic Infrastructure & Sentient Commerce
+
+### Added
+- **Gravitational Pricing** — dynamic demand-warp pricing engine
+- **Speciation Engine** — agent evolution, breeding, phylogeny
+- **Synesthetic API** — data-to-sound/color/texture/taste transformation
+- **Chronicle of Chaos** — living narrative of system events
+- **Mycelial Commerce** — marketplace where listings grow like mycelium
+- **Warp Drive Optimizer** — subsystem performance via warp physics
+- **Dream Interpreter** — AI extraction of insights from dream outputs
+
+## [3.15.0] — Wave 100: Emergent Intelligence & Living Systems
+
+### Added
+- **Cognitive Resonance Engine** — multi-agent thought clusters & emergent synthesis
+- **Temporal Market** — buy/sell future system state predictions
+- **Entropy Auction** — bid for chaos injection rights
+- **Dream Synthesis** — AI-generated creative compositions
+- **Symbiosis Network** — agent capability trading & emergent properties
+- **Paradox Marketplace** — buy/sell contradictions for innovations
+- **Memory Palace** — persistent structured memory architecture
+
+## [3.14.0] — Wave 98: Advanced Revenue Streams
+
+### Added
+- **Agent Rental** — 6 rentable AI agents with hourly pricing
+- **Sponsored Experiments** — 4-tier corporate sponsorship
+- **Simulation-as-a-Service** — 6 simulation templates
+- **Quantum Randomness** — CSPRNG, UUIDs, passphrases
+- **Certification Program** — ICE/ICS/ICA certification
+- **Digital Twin** — create/mirror/simulate digital twins
+- **Alert Service** — 5 channels, 8 alert rules
+
 ## [Unreleased]
 
 ### Added
