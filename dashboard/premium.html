@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IXpansion — Premium Observatory</title>
+<style>
+:root {
+  --bg: #0a0a0f; --surface: #12121a; --border: #1e1e2e;
+  --text: #e0e0e0; --dim: #666; --accent: #7c3aed;
+  --green: #22c55e; --red: #ef4444; --gold: #f59e0b;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; }
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+h1 { font-size: 1.5rem; color: var(--accent); }
+.badge { background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; }
+.card h3 { color: var(--accent); margin-bottom: 1rem; font-size: 1rem; }
+.metric { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+.metric:last-child { border-bottom: none; }
+.metric .label { color: var(--dim); }
+.metric .value { font-weight: bold; }
+.green { color: var(--green); } .red { color: var(--red); } .gold { color: var(--gold); }
+.plan-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+.plan { background: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; text-align: center; }
+.plan.popular { border-color: var(--accent); }
+.plan h4 { color: var(--accent); margin-bottom: 0.5rem; }
+.plan .price { font-size: 2rem; font-weight: bold; margin: 1rem 0; }
+.plan .price span { font-size: 0.875rem; color: var(--dim); }
+.plan ul { text-align: left; list-style: none; margin: 1rem 0; }
+.plan ul li { padding: 0.25rem 0; }
+.plan ul li::before { content: "✓ "; color: var(--green); }
+.btn { background: var(--accent); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-family: inherit; font-size: 0.875rem; }
+.btn:hover { opacity: 0.9; }
+.btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+.status-bar { display: flex; gap: 2rem; padding: 1rem 0; margin-top: 1rem; }
+.status-item { display: flex; align-items: center; gap: 0.5rem; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+.dot.warn { background: var(--gold); }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>⚛ IXpansion Observatory</h1>
+  <div><span class="badge">PRO</span></div>
+</header>
+<div class="status-bar">
+  <div class="status-item"><div class="dot"></div> System Operational</div>
+  <div class="status-item"><div class="dot"></div> API Active</div>
+  <div class="status-item"><div class="dot warn"></div> 95 Waves</div>
+</div>
+<div class="grid">
+  <div class="card">
+    <h3>📊 System Overview</h3>
+    <div class="metric"><span class="label">Experiments</span><span class="value">157</span></div>
+    <div class="metric"><span class="label">Test Files</span><span class="value">56</span></div>
+    <div class="metric"><span class="label">Lines of Code</span><span class="value">22,431</span></div>
+    <div class="metric"><span class="label">API Calls Today</span><span class="value green">847 / 10,000</span></div>
+    <div class="metric"><span class="label">Uptime</span><span class="value green">99.9%</span></div>
+  </div>
+  <div class="card">
+    <h3>🔬 Top Experiments</h3>
+    <div class="metric"><span class="label">reality_synthesis</span><span class="value gold">★</span></div>
+    <div class="metric"><span class="label">quantum_tunneling</span><span class="value gold">★</span></div>
+    <div class="metric"><span class="label">strange_attractor</span><span class="value gold">★</span></div>
+    <div class="metric"><span class="label">photon_memory</span><span class="value">—</span></div>
+    <div class="metric"><span class="label">coral_reef_simulator</span><span class="value">—</span></div>
+  </div>
+  <div class="card">
+    <h3>💰 Revenue</h3>
+    <div class="metric"><span class="label">Marketplace Items</span><span class="value">3</span></div>
+    <div class="metric"><span class="label">Total Purchases</span><span class="value">12</span></div>
+    <div class="metric"><span class="label">Platform Revenue</span><span class="value green">$59.88</span></div>
+    <div class="metric"><span class="label">Creator Payouts</span><span class="value">$47.90</span></div>
+    <div class="metric"><span class="label">Commission (20%)</span><span class="value gold">$11.98</span></div>
+  </div>
+</div>
+<h2 style="margin-top:2rem;color:var(--accent)">Plans</h2>
+<div class="plan-cards">
+  <div class="plan">
+    <h4>Explorer</h4>
+    <div class="price">Free</div>
+    <ul><li>12 experiments</li><li>100 API calls/day</li><li>Basic dashboard</li><li>Community support</li></ul>
+    <button class="btn btn-outline">Current Plan</button>
+  </div>
+  <div class="plan popular">
+    <h4>Scientist</h4>
+    <div class="price">$29<span>/mo</span></div>
+    <ul><li>157+ experiments</li><li>10,000 API calls/day</li><li>Real-time dashboard</li><li>Anomaly detection</li><li>Email support</li></ul>
+    <button class="btn">Upgrade</button>
+  </div>
+  <div class="plan">
+    <h4>Architect</h4>
+    <div class="price">$199<span>/mo</span></div>
+    <ul><li>Unlimited API</li><li>Custom agents</li><li>White-label</li><li>99.9% SLA</li><li>Dedicated support</li></ul>
+    <button class="btn btn-outline">Contact Sales</button>
+  </div>
+</div>
+</div>
+</body>
+</html>
