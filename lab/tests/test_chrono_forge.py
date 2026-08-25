@@ -21,7 +21,7 @@ class TestChronoForgePort:
     def test_pinned_manifest_is_unique_and_executable(self):
         data = load_manifest()
         projects = data["projects"]
-        assert len(projects) == 18
+        assert len(projects) == 19
         assert len({item["id"] for item in projects}) == len(projects)
         assert all((Path(item["path"]).is_file()) for item in projects)
         assert sum(item["critical"] for item in projects) == 5
@@ -31,9 +31,9 @@ class TestChronoForgePort:
         ids = [item["id"] for item in data["projects"]]
         assert ids.index("ritual_parliament") < ids.index("genome_atlas") < ids.index("evolution_council")
         assert all(item["path"] != "lab/evolution_consent.py" for item in data["projects"])
-        assert ids[-3:] == ["temporal_paradox", "repair_dreams", "repair_theater"]
-        assert all("--no-ledger" in data["projects"][index]["args"] for index in (-3, -2, -1))
-        assert all(data["projects"][index]["critical"] is False for index in (-3, -2, -1))
+        assert ids[-4:] == ["temporal_paradox", "repair_dreams", "repair_theater", "recovery_quorum"]
+        assert all("--no-ledger" in data["projects"][index]["args"] for index in (-4, -3, -2, -1))
+        assert all(data["projects"][index]["critical"] is False for index in (-4, -3, -2, -1))
 
     def test_critical_runner_records_four_successful_entries(self, tmp_path, monkeypatch):
         import lab.run_pinned as runner

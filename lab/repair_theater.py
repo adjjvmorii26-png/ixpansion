@@ -138,7 +138,7 @@ def _regression_scenario(operation: dict[str, Any], rows: list[dict[str, Any]]) 
         if row["record"].get("subject_id") == subject
         and tick(row) is not None
         and quarantined_tick is not None
-        and tick(row) >= quarantined_tick
+        and tick(row) == quarantined_tick
     ]
     anchor = [_branch(row, operation["operation_id"], "anchor") for row in anchor_rows]
     side = [_branch(row, operation["operation_id"], "side-timeline") for row in side_rows]

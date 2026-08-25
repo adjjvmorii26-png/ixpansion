@@ -131,6 +131,14 @@
         "--no-ledger"
       ],
       "critical": false
+    },
+    {
+      "id": "recovery_quorum",
+      "path": "lab/recovery_quorum.py",
+      "args": [
+        "--no-ledger"
+      ],
+      "critical": false
     }
   ]
 }

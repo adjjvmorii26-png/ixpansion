@@ -31,6 +31,11 @@
 - State forks, clock regressions, identity collisions, replay echoes, broken chains, and lifecycle reopenings receive bounded stability scores
 - Zero live mutation authority with source-byte preservation and portable theater seals
 - Pinned advisory automation extended to Ghost Repair Theater
+- Fixed regression rehearsal so side timelines cannot absorb later valid events
+- **Recovery Quorum** — Archivist/Sentinel/Explorer review of ghost repair stages
+- Deterministic consent packets with two-human signature requirements and zero execution authority
+- Blocked or corrupted scenes routed to human tribunal instead of automated repair
+- Pinned advisory automation extended to Recovery Quorum
 
 ## [0.5.0] — Reversible Governance
 
