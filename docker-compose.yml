@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  ixpansion:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXUS_MODE=production
+      - NEXUS_SEED=42
+      - NEXUS_WAVE=102
+    volumes:
+      - ./.runtime:/app/.runtime
+      - ./backup:/app/backup
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:3000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  dashboard:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./dashboard:/usr/share/nginx/html:ro
+    restart: unless-stopped

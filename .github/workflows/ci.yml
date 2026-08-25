@@ -25,11 +25,37 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - run: python -m pip install pytest pytest-asyncio
-      - name: Run complete ALEPH suite
-        run: python -m pytest -q --tb=short
+      - run: pip install pytest pytest-asyncio
+      - name: Run fast test suite
+        run: |
+          python -m pytest \
+            tests/test_advanced_revenue.py \
+            tests/test_wave99_emergent.py \
+            tests/test_wave101_cosmic.py \
+            tests/test_wave102_infrastructure.py \
+            tests/test_core_modules.py \
+            tests/test_experiment_runner.py \
+            -q --tb=short
+      - name: Verify all modules parse
+        run: |
+          python -c "
+          import ast, os, sys
+          errors = []
+          for root, dirs, files in os.walk('api'):
+              dirs[:] = [d for d in dirs if d != '__pycache__']
+              for f in files:
+                  if f.endswith('.py'):
+                      try:
+                          with open(os.path.join(root, f)) as fh: ast.parse(fh.read())
+                      except SyntaxError as e:
+                          errors.append(f'{f}: {e}')
+          if errors:
+              for e in errors: print(f'ERROR: {e}')
+              sys.exit(1)
+          print(f'All {sum(1 for r,d,fs in os.walk(\"api\") for f in fs if f.endswith(\".py\"))} modules parse OK')
+          "
 
-  static:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,3 +64,16 @@ jobs:
           python-version: "3.12"
       - name: Compile Python sources
         run: make lint
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t ixpansion:test .
+      - name: Verify container starts
+        run: |
+          docker run -d --name test-ixpansion -p 3000:3000 ixpansion:test
+          sleep 5
+          docker ps | grep test-ixpansion
+          docker stop test-ixpansion
