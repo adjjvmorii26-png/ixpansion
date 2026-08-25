@@ -45,6 +45,8 @@
 - Portable two-signature verification with automatic voiding on any bound ledger change
 - Zero execution authority: treaties grant human-tribunal presentation only and remain outside pinned automation
 - **Recovery Tribunal Dossier** — printable offline handoff certificate for dual-key treaties
+- Fixed recovery source isolation so standalone stages cannot ingest newer derived ledgers
+- Centralized recovery-derived ledger exclusions in one shared, tested boundary contract
 - Deterministic 16×16 witness-glyph seal, signature fingerprints, bound-source table, and human checklist
 - Explicit empty executor registry, zero mutation budget, and forbidden execution boundary
 - Manual-only operation outside pinned automation

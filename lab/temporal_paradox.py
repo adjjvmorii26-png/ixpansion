@@ -15,6 +15,7 @@ import json
 from collections import defaultdict
 from typing import Any
 
+from lab.recovery_sources import source_ledgers
 from lab.runtime_vault import (
     CHAIN_FIELDS,
     append_jsonl,
@@ -50,8 +51,7 @@ def _contradiction(kind: str, severity: str, rationale: str, **evidence: Any) ->
 
 
 def _default_ledgers() -> list[Path]:
-    directory = ledger_path().parent
-    return sorted(directory.glob("*.jsonl"))
+    return source_ledgers()
 
 
 def _scan(paths: list[Path]) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:

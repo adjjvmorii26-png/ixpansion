@@ -17,6 +17,7 @@ from html import escape
 from typing import Any
 
 from lab.recovery_quorum import convene
+from lab.recovery_sources import source_ledgers
 from lab.repair_dreams import weave
 from lab.repair_theater import rehearse
 from lab.runtime_vault import (
@@ -32,13 +33,6 @@ from lab.temporal_paradox import resolve
 
 
 SCHEMA = "aleph.chronoforge.recovery-atlas.v1"
-DERIVED_LEDGERS = {
-    "paradox-resolutions.jsonl",
-    "repair-dreams.jsonl",
-    "repair-theater.jsonl",
-    "recovery-quorums.jsonl",
-    "recovery-atlases.jsonl",
-}
 STATUS_COLORS = {
     "staged": "#38bdf8",
     "retained": "#a78bfa",
@@ -56,14 +50,7 @@ def _hash(payload: Any) -> str:
 
 
 def _source_paths(explicit: list[Path] | None) -> list[Path]:
-    if explicit is None:
-        directory = ledger_path().parent
-        return sorted(path for path in directory.glob("*.jsonl") if path.name not in DERIVED_LEDGERS)
-    paths = sorted({Path(item).resolve() for item in explicit})
-    for item in paths:
-        if not item.is_file():
-            raise ValueError(f"ledger does not exist: {item}")
-    return paths
+    return source_ledgers(explicit)
 
 
 def _audit_paths(paths: list[Path]) -> dict[str, dict[str, Any]]:

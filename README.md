@@ -27,7 +27,7 @@ make test
 # or: python3 -m pytest
 ```
 
-The complete monorepo suite contains **700 tests**.
+The complete monorepo suite contains **703 tests**.
 
 ## Systems Inventory
 ## Solid Organism Labs
