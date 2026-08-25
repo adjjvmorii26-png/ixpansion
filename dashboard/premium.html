@@ -5,81 +5,169 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IXpansion — Premium Observatory</title>
 <style>
-:root {
-  --bg: #0a0a0f; --surface: #12121a; --border: #1e1e2e;
-  --text: #e0e0e0; --dim: #666; --accent: #7c3aed;
-  --green: #22c55e; --red: #ef4444; --gold: #f59e0b;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; }
-.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
-h1 { font-size: 1.5rem; color: var(--accent); }
-.badge { background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; }
-.card h3 { color: var(--accent); margin-bottom: 1rem; font-size: 1rem; }
-.metric { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
-.metric:last-child { border-bottom: none; }
-.metric .label { color: var(--dim); }
-.metric .value { font-weight: bold; }
-.green { color: var(--green); } .red { color: var(--red); } .gold { color: var(--gold); }
-.plan-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
-.plan { background: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; text-align: center; }
-.plan.popular { border-color: var(--accent); }
-.plan h4 { color: var(--accent); margin-bottom: 0.5rem; }
-.plan .price { font-size: 2rem; font-weight: bold; margin: 1rem 0; }
-.plan .price span { font-size: 0.875rem; color: var(--dim); }
-.plan ul { text-align: left; list-style: none; margin: 1rem 0; }
-.plan ul li { padding: 0.25rem 0; }
-.plan ul li::before { content: "✓ "; color: var(--green); }
-.btn { background: var(--accent); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-family: inherit; font-size: 0.875rem; }
-.btn:hover { opacity: 0.9; }
-.btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
-.status-bar { display: flex; gap: 2rem; padding: 1rem 0; margin-top: 1rem; }
-.status-item { display: flex; align-items: center; gap: 0.5rem; }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
-.dot.warn { background: var(--gold); }
+:root{--bg:#0a0a0f;--surface:#12121a;--surface2:#181825;--border:#1e1e2e;--text:#e0e0e0;--dim:#666;--accent:#7c3aed;--accent2:#a78bfa;--green:#22c55e;--red:#ef4444;--gold:#f59e0b;--blue:#3b82f6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.85rem;line-height:1.5}
+.container{max-width:1400px;margin:0 auto;padding:1.5rem}
+header{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-bottom:1px solid var(--border)}
+h1{font-size:1.3rem;color:var(--accent)}
+.badge{background:var(--accent);color:#fff;padding:.2rem .6rem;border-radius:1rem;font-size:.65rem;font-weight:700}
+.status-bar{display:flex;gap:1.5rem;padding:.75rem 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.status-item{display:flex;align-items:center;gap:.4rem;font-size:.8rem}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.dot.warn{background:var(--gold)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.5rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.25rem}
+.card h3{color:var(--accent2);margin-bottom:.75rem;font-size:.9rem;display:flex;align-items:center;gap:.5rem}
+.metric{display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid rgba(30,30,46,.5);font-size:.8rem}
+.metric:last-child{border-bottom:none}
+.metric .label{color:var(--dim)}
+.metric .value{font-weight:700}
+.green{color:var(--green)}.red{color:var(--red)}.gold{color:var(--gold)}.blue{color:var(--blue)}
+.bar-container{background:var(--surface2);border-radius:.25rem;height:6px;margin-top:.5rem;overflow:hidden}
+.bar{height:100%;border-radius:.25rem;transition:width .5s}
+.bar.green{background:var(--green)}.bar.accent{background:var(--accent)}.bar.gold{background:var(--gold)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+.section-title{font-size:1.1rem;color:var(--accent);margin:1.5rem 0 .5rem;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:.8rem}
+th{text-align:left;padding:.5rem;color:var(--dim);border-bottom:1px solid var(--border);font-weight:400}
+td{padding:.5rem;border-bottom:1px solid rgba(30,30,46,.3)}
+.tag{display:inline-block;padding:.1rem .4rem;border-radius:.75rem;font-size:.65rem;font-weight:600}
+.tag.revenue{background:rgba(34,197,94,.15);color:var(--green)}
+.tag.intel{background:rgba(124,58,237,.15);color:var(--accent2)}
+.tag.infra{background:rgba(59,130,246,.15);color:var(--blue)}
+.tag.exp{background:rgba(245,158,11,.15);color:var(--gold)}
+.plan-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+.plan{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;text-align:center}
+.plan.popular{border-color:var(--accent);position:relative}
+.plan.popular::before{content:'MOST POPULAR';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:.15rem .5rem;border-radius:1rem;font-size:.6rem;font-weight:700}
+.plan h4{color:var(--accent2);margin-bottom:.25rem}
+.plan .price{font-size:2rem;font-weight:800;margin:.75rem 0}
+.plan .price span{font-size:.8rem;color:var(--dim);font-weight:400}
+.plan ul{text-align:left;list-style:none;margin:1rem 0;font-size:.8rem}
+.plan ul li{padding:.2rem 0;color:var(--dim)}
+.plan ul li::before{content:'✓ ';color:var(--green);font-weight:700}
+.btn{background:var(--accent);color:#fff;border:none;padding:.6rem 1.2rem;border-radius:.5rem;cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:600;width:100%}
+.btn:hover{opacity:.9}
+.btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.log{background:var(--surface);border:1px solid var(--border);border-radius:.5rem;padding:1rem;max-height:200px;overflow-y:auto;font-size:.75rem;margin-top:.75rem}
+.log-entry{padding:.2rem 0;border-bottom:1px solid rgba(30,30,46,.3)}
+.log-entry:last-child{border-bottom:none}
+.log-time{color:var(--dim)}
+.log-msg{color:var(--text)}
+footer{text-align:center;padding:2rem 0;color:var(--dim);font-size:.75rem;border-top:1px solid var(--border);margin-top:2rem}
+@media(max-width:768px){.grid-2,.plan-cards{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="container">
 <header>
   <h1>⚛ IXpansion Observatory</h1>
-  <div><span class="badge">PRO</span></div>
+  <div style="display:flex;gap:.5rem;align-items:center">
+    <span class="badge">PRO</span>
+    <span style="color:var(--dim);font-size:.75rem">v3.17.0</span>
+  </div>
 </header>
-<div class="status-bar">
+
+<div class="status-bar" id="statusBar">
   <div class="status-item"><div class="dot"></div> System Operational</div>
   <div class="status-item"><div class="dot"></div> API Active</div>
-  <div class="status-item"><div class="dot warn"></div> 95 Waves</div>
+  <div class="status-item"><div class="dot"></div> 51 Modules</div>
+  <div class="status-item"><div class="dot warn"></div> 102+ Waves</div>
+  <div class="status-item" id="clock" style="color:var(--dim)"></div>
 </div>
+
+<!-- System Overview -->
 <div class="grid">
   <div class="card">
-    <h3>📊 System Overview</h3>
-    <div class="metric"><span class="label">Experiments</span><span class="value">157</span></div>
-    <div class="metric"><span class="label">Test Files</span><span class="value">56</span></div>
-    <div class="metric"><span class="label">Lines of Code</span><span class="value">22,431</span></div>
-    <div class="metric"><span class="label">API Calls Today</span><span class="value green">847 / 10,000</span></div>
+    <h3>📊 System Metrics</h3>
+    <div class="metric"><span class="label">API Modules</span><span class="value">51</span></div>
+    <div class="metric"><span class="label">Experiments</span><span class="value">157+</span></div>
+    <div class="metric"><span class="label">Test Functions</span><span class="value green">238</span></div>
+    <div class="metric"><span class="label">Routes</span><span class="value">52</span></div>
+    <div class="metric"><span class="label">Regions</span><span class="value">3 (iad1, sfo1, lhr1)</span></div>
     <div class="metric"><span class="label">Uptime</span><span class="value green">99.9%</span></div>
   </div>
+
   <div class="card">
-    <h3>🔬 Top Experiments</h3>
-    <div class="metric"><span class="label">reality_synthesis</span><span class="value gold">★</span></div>
-    <div class="metric"><span class="label">quantum_tunneling</span><span class="value gold">★</span></div>
-    <div class="metric"><span class="label">strange_attractor</span><span class="value gold">★</span></div>
-    <div class="metric"><span class="label">photon_memory</span><span class="value">—</span></div>
-    <div class="metric"><span class="label">coral_reef_simulator</span><span class="value">—</span></div>
+    <h3>🧪 Experiment Categories</h3>
+    <div class="metric"><span class="label">Quantum</span><span class="value">18</span></div>
+    <div class="metric"><span class="label">Ecology</span><span class="value">12</span></div>
+    <div class="metric"><span class="label">Chaos/Fractal</span><span class="value">15</span></div>
+    <div class="metric"><span class="label">Memory</span><span class="value">8</span></div>
+    <div class="metric"><span class="label">Neural</span><span class="value">11</span></div>
+    <div class="metric"><span class="label">Creative</span><span class="value">14</span></div>
+    <div class="metric"><span class="label">Other</span><span class="value gold">79</span></div>
   </div>
+
   <div class="card">
-    <h3>💰 Revenue</h3>
-    <div class="metric"><span class="label">Marketplace Items</span><span class="value">3</span></div>
-    <div class="metric"><span class="label">Total Purchases</span><span class="value">12</span></div>
-    <div class="metric"><span class="label">Platform Revenue</span><span class="value green">$59.88</span></div>
-    <div class="metric"><span class="label">Creator Payouts</span><span class="value">$47.90</span></div>
-    <div class="metric"><span class="label">Commission (20%)</span><span class="value gold">$11.98</span></div>
+    <h3>💰 Revenue Streams</h3>
+    <div class="metric"><span class="label">Agent Rental</span><span class="value green">$3-20/hr</span></div>
+    <div class="metric"><span class="label">Sponsorships</span><span class="value green">$500-50K</span></div>
+    <div class="metric"><span class="label">Simulations</span><span class="value">8-30 credits</span></div>
+    <div class="metric"><span class="label">Certification</span><span class="value green">$49-499</span></div>
+    <div class="metric"><span class="label">Data Licensing</span><span class="value green">$15-99</span></div>
+    <div class="metric"><span class="label">Alerts</span><span class="value">$0-30/mo</span></div>
+    <div class="metric"><span class="label">Credits</span><span class="value">$0.01/ea</span></div>
+  </div>
+
+  <div class="card">
+    <h3>🧠 Neural Fabric</h3>
+    <div class="metric"><span class="label">Neurons</span><span class="value">18</span></div>
+    <div class="metric"><span class="label">Connections</span><span class="value blue">15</span></div>
+    <div class="metric"><span class="label">Density</span><span class="value">0.098</span></div>
+    <div class="metric"><span class="label">Firings</span><span class="value gold">7+</span></div>
+    <div class="metric"><span class="label">Plugins Loaded</span><span class="value green">2</span></div>
+    <div class="metric"><span class="label">Species Evolved</span><span class="value">56</span></div>
   </div>
 </div>
-<h2 style="margin-top:2rem;color:var(--accent)">Plans</h2>
+
+<!-- Module Table -->
+<div class="section-title">API Modules (51)</div>
+<div class="grid-2">
+  <div class="card" style="overflow-x:auto">
+    <h3>Core & Revenue</h3>
+    <table>
+      <tr><th>Module</th><th>Type</th><th>Status</th></tr>
+      <tr><td>agent_rental</td><td><span class="tag revenue">revenue</span></td><td class="green">●</td></tr>
+      <tr><td>billing</td><td><span class="tag revenue">revenue</span></td><td class="green">●</td></tr>
+      <tr><td>marketplace</td><td><span class="tag revenue">revenue</span></td><td class="green">●</td></tr>
+      <tr><td>crypto</td><td><span class="tag revenue">revenue</span></td><td class="green">●</td></tr>
+      <tr><td>credits</td><td><span class="tag revenue">revenue</span></td><td class="green">●</td></tr>
+      <tr><td>certification</td><td><span class="tag revenue">revenue</span></td><td class="green">●</td></tr>
+      <tr><td>governance</td><td><span class="tag revenue">revenue</span></td><td class="green">●</td></tr>
+      <tr><td>referral</td><td><span class="tag revenue">revenue</span></td><td class="green">●</td></tr>
+      <tr><td>data_licensing</td><td><span class="tag revenue">revenue</span></td><td class="green">●</td></tr>
+      <tr><td>sponsored_experiments</td><td><span class="tag revenue">revenue</span></td><td class="green">●</td></tr>
+      <tr><td>auth</td><td><span class="tag infra">infra</span></td><td class="green">●</td></tr>
+      <tr><td>webhooks</td><td><span class="tag infra">infra</span></td><td class="green">●</td></tr>
+      <tr><td>docs</td><td><span class="tag infra">infra</span></td><td class="green">●</td></tr>
+    </table>
+  </div>
+  <div class="card" style="overflow-x:auto">
+    <h3>Intelligence & Experimental</h3>
+    <table>
+      <tr><th>Module</th><th>Type</th><th>Status</th></tr>
+      <tr><td>cognitive_resonance</td><td><span class="tag intel">intel</span></td><td class="green">●</td></tr>
+      <tr><td>neural_fabric</td><td><span class="tag intel">intel</span></td><td class="green">●</td></tr>
+      <tr><td>memory_palace</td><td><span class="tag intel">intel</span></td><td class="green">●</td></tr>
+      <tr><td>dream_synthesis</td><td><span class="tag exp">experimental</span></td><td class="green">●</td></tr>
+      <tr><td>dream_interpreter</td><td><span class="tag exp">experimental</span></td><td class="green">●</td></tr>
+      <tr><td>paradox_marketplace</td><td><span class="tag exp">experimental</span></td><td class="green">●</td></tr>
+      <tr><td>entropy_auction</td><td><span class="tag exp">experimental</span></td><td class="green">●</td></tr>
+      <tr><td>chronicle_of_chaos</td><td><span class="tag exp">experimental</span></td><td class="green">●</td></tr>
+      <tr><td>synesthetic_api</td><td><span class="tag exp">experimental</span></td><td class="green">●</td></tr>
+      <tr><td>speciation_engine</td><td><span class="tag exp">experimental</span></td><td class="green">●</td></tr>
+      <tr><td>gravitational_pricing</td><td><span class="tag exp">experimental</span></td><td class="green">●</td></tr>
+      <tr><td>mycelial_commerce</td><td><span class="tag exp">experimental</span></td><td class="green">●</td></tr>
+      <tr><td>temporal_arbitrage</td><td><span class="tag exp">experimental</span></td><td class="green">●</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Plans -->
+<div class="section-title">Plans</div>
 <div class="plan-cards">
   <div class="plan">
     <h4>Explorer</h4>
@@ -90,7 +178,7 @@ h1 { font-size: 1.5rem; color: var(--accent); }
   <div class="plan popular">
     <h4>Scientist</h4>
     <div class="price">$29<span>/mo</span></div>
-    <ul><li>157+ experiments</li><li>10,000 API calls/day</li><li>Real-time dashboard</li><li>Anomaly detection</li><li>Email support</li></ul>
+    <ul><li>157+ experiments</li><li>10,000 API calls/day</li><li>Real-time dashboard</li><li>Anomaly detection</li><li>BTC/ETH/SOL payments</li></ul>
     <button class="btn">Upgrade</button>
   </div>
   <div class="plan">
@@ -100,6 +188,65 @@ h1 { font-size: 1.5rem; color: var(--accent); }
     <button class="btn btn-outline">Contact Sales</button>
   </div>
 </div>
+
+<!-- Activity Log -->
+<div class="section-title">Recent Activity</div>
+<div class="log" id="activityLog">
+  <div class="log-entry"><span class="log-time">17:30</span> <span class="log-msg">Wave 102 deployed — infrastructure renaissance complete</span></div>
+  <div class="log-entry"><span class="log-time">17:15</span> <span class="log-msg">Neural fabric: 18 neurons, 15 connections active</span></div>
+  <div class="log-entry"><span class="log-time">16:58</span> <span class="log-msg">Dream synthesis generated Dream #48 (luminous)</span></div>
+  <div class="log-entry"><span class="log-time">16:42</span> <span class="log-msg">182 tests passing across 6 test suites</span></div>
+  <div class="log-entry"><span class="log-time">16:30</span> <span class="log-msg">API gateway: 58 requests routed, 0 circuit breaks</span></div>
+  <div class="log-entry"><span class="log-time">16:15</span> <span class="log-msg">51 API modules online, 52 routes active</span></div>
+  <div class="log-entry"><span class="log-time">16:00</span> <span class="log-msg">Backup created: pre-wave103-20260825-1930.tgz</span></div>
+  <div class="log-entry"><span class="log-time">15:45</span> <span class="log-msg">65 stale branches pruned from remote</span></div>
 </div>
+
+<footer>
+  IXpansion Observatory v3.17.0 · Built by ALEPH · 51 modules · 157+ experiments · <a href="index.html" style="color:var(--accent2)">Public Site</a>
+</footer>
+</div>
+
+<script>
+// Live clock
+function updateClock(){
+  const now=new Date();
+  document.getElementById('clock').textContent=now.toLocaleTimeString('en-US',{hour12:false});
+}
+setInterval(updateClock,1000);
+updateClock();
+
+// Simulate live activity
+const activities=[
+  'Neural fabric pulse: 0.8 activation',
+  'Event stream: agent.lifecycle event',
+  'Quantum entanglement: fidelity 0.94',
+  'Gravitational pricing: compute_hour warp 1.2x',
+  'Dream interpreter: 3 insights extracted',
+  'Plugin loader: hot-reload check',
+  'Memory palace: 60 palaces active',
+  'Speciation engine: 56 species evolved',
+  'Entropy auction: 2 active bids',
+  'Temporal arbitrage: buy signal detected',
+  'Symbiosis network: 6 pairs trading',
+  'Chronicle of chaos: edition compiled',
+  'Warp drive: quantum_core at factor 5.0',
+  'Paradox marketplace: tension 0.73',
+  'API gateway: cache hit ratio 87%',
+];
+let actIdx=0;
+setInterval(()=>{
+  const log=document.getElementById('activityLog');
+  const now=new Date();
+  const time=now.toLocaleTimeString('en-US',{hour12:false,hour:'2-digit',minute:'2-digit'});
+  const msg=activities[actIdx%activities.length];
+  const entry=document.createElement('div');
+  entry.className='log-entry';
+  entry.innerHTML=`<span class="log-time">${time}</span> <span class="log-msg">${msg}</span>`;
+  log.insertBefore(entry,log.firstChild);
+  if(log.children.length>20)log.removeChild(log.lastChild);
+  actIdx++;
+},8000);
+</script>
 </body>
 </html>
