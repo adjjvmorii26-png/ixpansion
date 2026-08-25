@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "dashboard/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/health", "dest": "/api/health.py" },
+    { "src": "/agents(.*)", "dest": "/api/agents.py" },
+    { "src": "/sandbox(.*)", "dest": "/api/sandbox.py" },
+    { "src": "/telemetry(.*)", "dest": "/api/telemetry.py" },
+    { "src": "/experiments(.*)", "dest": "/api/experiments.py" },
+    { "src": "/(.*)", "dest": "/dashboard/$1" }
+  ],
+  "env": {
+    "NEXUS_MODE": "production",
+    "NEXUS_SEED": "42"
+  },
+  "regions": ["iad1"],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" }
+      ]
+    }
+  ]
+}

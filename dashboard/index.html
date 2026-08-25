@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Observatory — Dashboard</title>
+    <style>
+        :root {
+            --bg: #0a0a0f; --fg: #e0e0e0; --accent: #7c3aed;
+            --green: #10b981; --red: #ef4444; --yellow: #f59e0b;
+            --card: #111827; --border: #1f2937;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--fg); font-family: 'JetBrains Mono', monospace; }
+        .header { padding: 2rem; border-bottom: 1px solid var(--border); text-align: center; }
+        .header h1 { font-size: 1.5rem; color: var(--accent); }
+        .header p { color: #6b7280; margin-top: 0.5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; padding: 2rem; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; }
+        .card h2 { font-size: 0.9rem; color: var(--accent); margin-bottom: 1rem; }
+        .stat { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .stat-label { color: #9ca3af; }
+        .stat-value { font-weight: bold; }
+        .healthy { color: var(--green); }
+        .warning { color: var(--yellow); }
+        .critical { color: var(--red); }
+        .bar { height: 4px; background: var(--border); border-radius: 2px; margin-top: 0.5rem; }
+        .bar-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
+        .experiments { max-height: 300px; overflow-y: auto; }
+        .exp-item { padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.8rem; }
+        .exp-name { color: var(--accent); }
+        #status { text-align: center; padding: 1rem; color: #6b7280; }
+        .wave-badge { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; margin: 2px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🜁 Nexus Observatory</h1>
+        <p>Meta-evolution dashboard — Waves 72–77</p>
+    </div>
+    <div id="status">Loading telemetry...</div>
+    <div class="grid" id="dashboard"></div>
+    <script>
+        const API_BASE = '/api';
+        async function fetchJSON(url) {
+            try {
+                const r = await fetch(url);
+                return await r.json();
+            } catch(e) { return { error: e.message }; }
+        }
+        function statRow(label, value, cls='') {
+            return `<div class="stat"><span class="stat-label">${label}</span><span class="stat-value ${cls}">${value}</span></div>`;
+        }
+        function bar(pct, color='var(--accent)') {
+            return `<div class="bar"><div class="bar-fill" style="width:${Math.min(100,pct)}%;background:${color}"></div></div>`;
+        }
+        async function loadDashboard() {
+            const [health, telemetry, experiments] = await Promise.all([
+                fetchJSON(`${API_BASE}/health.py`),
+                fetchJSON(`${API_BASE}/telemetry.py`),
+                fetchJSON(`${API_BASE}/experiments.py`),
+            ]);
+            document.getElementById('status').textContent = health.status === 'healthy' ? '● System Online' : '○ System Offline';
+            document.getElementById('status').className = health.status === 'healthy' ? 'healthy' : 'critical';
+            let html = '';
+            // Health card
+            html += `<div class="card"><h2>System Health</h2>`;
+            html += statRow('Status', health.status || 'unknown', 'healthy');
+            html += statRow('Version', health.version || '?');
+            html += statRow('Mode', health.mode || '?');
+            html += statRow('Modules', health.modules || 0);
+            html += `</div>`;
+            // Telemetry summary
+            if (telemetry.summary) {
+                html += `<div class="card"><h2>Telemetry</h2>`;
+                html += statRow('Total Modules', telemetry.summary.total_modules);
+                html += statRow('Total Tests', telemetry.summary.total_tests);
+                html += statRow('Subsystems', telemetry.summary.subsystem_count);
+                html += bar(telemetry.summary.total_modules / 5);
+                html += `</div>`;
+            }
+            // Subsystems
+            if (telemetry.subsystems) {
+                html += `<div class="card"><h2>Subsystems</h2>`;
+                for (const [name, data] of Object.entries(telemetry.subsystems)) {
+                    if (data.modules !== undefined) {
+                        html += statRow(name, `${data.modules} modules, ${data.tests} tests`);
+                    }
+                }
+                html += `</div>`;
+            }
+            // Experiments list
+            if (experiments.experiments) {
+                html += `<div class="card"><h2>Experiments (${experiments.count})</h2><div class="experiments">`;
+                for (const exp of experiments.experiments) {
+                    html += `<div class="exp-item"><span class="exp-name">${exp.name}</span> <span class="stat-label">${(exp.size_bytes/1024).toFixed(1)}KB</span></div>`;
+                }
+                html += `</div></div>`;
+            }
+            // Wave timeline
+            html += `<div class="card"><h2>Wave Timeline</h2>`;
+            [72,73,74,75,76,77].forEach(w => html += `<span class="wave-badge">Wave ${w}</span>`);
+            html += statRow('Total Waves', '6');
+            html += statRow('Total PRs', '#72–#77');
+            html += `</div>`;
+            document.getElementById('dashboard').innerHTML = html;
+        }
+        loadDashboard();
+        setInterval(loadDashboard, 30000);
+    </script>
+</body>
+</html>
