@@ -92,6 +92,12 @@ python3 lab/recovery_atlas.py --output .runtime/lab/reports/recovery-atlas.html
 ALEPH_TREATY_KEY_ONE=first-key ALEPH_TREATY_KEY_TWO=second-key \
   python3 lab/recovery_treaty.py sign .runtime/lab/ledgers/source.jsonl \
   --operator-one archivist --operator-two sentinel
+ALEPH_VERDICT_KEY_ONE=juror-one ALEPH_VERDICT_KEY_TWO=juror-two \
+  python3 lab/recovery_verdict.py record --report recovery-dossier.json \
+  --verdict approve --rationale "separate human review is required" \
+  --operator-one juror-one --operator-two juror-two
+ALEPH_EXECUTOR_CONTRACT_KEY_ONE=reviewer-one ALEPH_EXECUTOR_CONTRACT_KEY_TWO=reviewer-two \
+  python3 lab/recovery_executor_contract.py forge --report recovery-verdict.json
 python3 lab/run_pinned.py --critical-only
 python3 lab/run_pinned.py
 ```

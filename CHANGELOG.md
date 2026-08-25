@@ -54,6 +54,10 @@
 - Portable approve, reject, and defer verdicts bound to the dossier, treaty, nonce, rationale, and source bytes
 - Approval requires a separate future executor contract and remains zero-authority
 - Independent juror keys, replay-resistant signatures, source-change voiding, and ledger witnesses
+- **Recovery Executor Contract Forge** — manual-only draft compiler for separately reviewed approval handoffs
+- Full verdict→dossier→treaty verification, immutable lineage budgets, and source-witness rebinding
+- Dual independent reviewer signatures, explicit capability allow/deny lists, empty executor registry, and zero authority
+- Portable terminal-hash verification and ledger witnesses; the forge remains outside pinned automation
 - Verdict recorder remains outside pinned automation
 
 ## [0.5.0] — Reversible Governance
