@@ -129,11 +129,15 @@ def record_verdict(
         raise ValueError("juror keys must be independent")
 
     treaty = dossier["treaty"]
+    treaty_budget = treaty.get("binding", {}).get("lineage_parameters", {}).get(
+        "max_operations", 16
+    )
     if not verify_treaty(
         treaty,
         ledgers=ledgers,
         key_one=treaty_key_one,
         key_two=treaty_key_two,
+        max_operations=treaty_budget,
     ):
         raise ValueError("bound recovery treaty is invalid or its witnesses changed")
 
@@ -171,6 +175,7 @@ def record_verdict(
             "dossier_hash": dossier["dossier_hash"],
             "treaty_hash": treaty["treaty_hash"],
             "sources": treaty["binding"]["sources"],
+            "lineage_parameters": dict(treaty["binding"].get("lineage_parameters", {})),
             "nonce": grant["nonce"],
         },
         "authorization": {
@@ -236,11 +241,15 @@ def verify_verdict(
     treaty = report.get("dossier", {}).get("treaty", {})
     if binding.get("treaty_hash") != treaty.get("treaty_hash"):
         return False
+    bound_budget = treaty.get("binding", {}).get("lineage_parameters", {}).get(
+        "max_operations", 16
+    )
     if not verify_treaty(
         treaty,
         ledgers=ledgers,
         key_one=treaty_key_one,
         key_two=treaty_key_two,
+        max_operations=bound_budget,
     ):
         return False
 

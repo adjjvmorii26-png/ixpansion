@@ -98,6 +98,29 @@ def test_duplicate_operator_labels_are_refused(fork_sources):
         _sign(fork_sources, operator_one="same", operator_two="same")
 
 
+def test_signed_operation_budget_survives_verification_roundtrip(fork_sources, monkeypatch):
+    monkeypatch.setenv("ALEPH_TREATY_KEY_ONE", KEY_ONE)
+    monkeypatch.setenv("ALEPH_TREATY_KEY_TWO", KEY_TWO)
+    result = _sign(fork_sources, max_operations=5)
+
+    assert result["binding"]["lineage_parameters"] == {"max_operations": 5}
+    assert verify_treaty(result, ledgers=fork_sources, key_one=KEY_ONE, key_two=KEY_TWO)
+    assert verify_treaty(
+        result,
+        ledgers=fork_sources,
+        key_one=KEY_ONE,
+        key_two=KEY_TWO,
+        max_operations=5,
+    )
+    assert verify_treaty(
+        result,
+        ledgers=fork_sources,
+        key_one=KEY_ONE,
+        key_two=KEY_TWO,
+        max_operations=6,
+    ) is False
+
+
 def test_broken_journey_cannot_be_signed(tmp_path, monkeypatch):
     monkeypatch.setenv("ALEPH_TREATY_KEY_ONE", KEY_ONE)
     monkeypatch.setenv("ALEPH_TREATY_KEY_TWO", KEY_TWO)
