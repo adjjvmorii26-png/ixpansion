@@ -219,10 +219,14 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "102"
+    "NEXUS_WAVE": "102",
+    "NEXUS_MODULES": "50",
+    "NEXUS_ROUTES": "51"
   },
   "regions": [
-    "iad1"
+    "iad1",
+    "sfo1",
+    "lhr1"
   ],
   "headers": [
     {
