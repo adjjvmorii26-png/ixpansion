@@ -1,27 +1,26 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "api/**/*.py",
-      "use": "@vercel/python"
-    },
-    {
-      "src": "dashboard/**/*",
-      "use": "@vercel/static"
-    }
+    { "src": "api/**/*.py", "use": "@vercel/python" },
+    { "src": "dashboard/**/*", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/health", "dest": "/api/health.py" },
     { "src": "/agents(.*)", "dest": "/api/agents.py" },
     { "src": "/sandbox(.*)", "dest": "/api/sandbox.py" },
+    { "src": "/constellation(.*)", "dest": "/api/constellation.py" },
     { "src": "/telemetry(.*)", "dest": "/api/telemetry.py" },
     { "src": "/experiments(.*)", "dest": "/api/experiments.py" },
+    { "src": "/wave-log(.*)", "dest": "/api/wave_log.py" },
+    { "src": "/anomalies(.*)", "dest": "/api/anomaly_detector.py" },
+    { "src": "/reactor-stream(.*)", "dest": "/api/stream_reactor.py" },
     { "src": "/(.*)", "dest": "/dashboard/$1" }
   ],
   "env": {
     "NEXUS_MODE": "production",
-    "NEXUS_SEED": "42"
+    "NEXUS_SEED": "42",
+    "NEXUS_WAVE": "79"
   },
   "regions": ["iad1"],
   "headers": [
@@ -31,6 +30,13 @@
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" }
+      ]
+    },
+    {
+      "source": "/reactor-stream(.*)",
+      "headers": [
+        { "key": "Content-Type", "value": "text/event-stream" },
+        { "key": "Cache-Control", "value": "no-cache" }
       ]
     }
   ]
