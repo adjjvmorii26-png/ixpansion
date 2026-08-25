@@ -68,6 +68,26 @@
       "dest": "/api/analytics.py"
     },
     {
+      "src": "/crypto(.*)",
+      "dest": "/api/crypto.py"
+    },
+    {
+      "src": "/credits(.*)",
+      "dest": "/api/credits.py"
+    },
+    {
+      "src": "/referral(.*)",
+      "dest": "/api/referral.py"
+    },
+    {
+      "src": "/data(.*)",
+      "dest": "/api/data_licensing.py"
+    },
+    {
+      "src": "/governance(.*)",
+      "dest": "/api/governance.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dashboard/$1"
     }
