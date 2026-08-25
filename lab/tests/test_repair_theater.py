@@ -71,8 +71,11 @@ def test_clock_regression_splits_anchor_and_side_timeline(tmp_path):
     scene = result["scenes"][0]
 
     labels = {branch["label"] for branch in scene["branches"]}
+    ticks = {branch["ghost_event"]["tick"] for branch in scene["branches"]}
     assert scene["kind"] == "causal_regression"
     assert labels == {"anchor", "side-timeline"}
+    assert ticks == {9, 3}
+    assert len(scene["branches"]) == 2
     assert scene["stability"] == 0.78
     assert all(branch["ghost_event"]["subject_id"] == "wanderer" for branch in scene["branches"])
 

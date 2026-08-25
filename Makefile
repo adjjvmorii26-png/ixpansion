@@ -1,4 +1,4 @@
-.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation temporal-paradox repair-dreams repair-theater mandate-dry mandate-run genome-list genome-atlas genome-echo evolution-council lint clean backup push
+.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation temporal-paradox repair-dreams repair-theater recovery-quorum mandate-dry mandate-run genome-list genome-atlas genome-echo evolution-council lint clean backup push
 
 test:
 	python3 -m pytest -q --tb=short
@@ -70,6 +70,9 @@ repair-dreams:
 
 repair-theater:
 	python3 lab/repair_theater.py --no-ledger
+
+recovery-quorum:
+	python3 lab/recovery_quorum.py --no-ledger
 
 lint:
 	@find . -type f -name '*.py' \
