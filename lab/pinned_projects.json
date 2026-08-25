@@ -123,6 +123,14 @@
         "--no-ledger"
       ],
       "critical": false
+    },
+    {
+      "id": "repair_theater",
+      "path": "lab/repair_theater.py",
+      "args": [
+        "--no-ledger"
+      ],
+      "critical": false
     }
   ]
 }

@@ -27,6 +27,10 @@
 - Deterministic branch, rewind, identity-split, backup-restore, and replay-retention blueprints
 - Consent-gated operations with preserved witnesses, bounded output, and portable dream seals
 - Pinned advisory automation extended to Repair Dream Weaver
+- **Ghost Repair Theater** — synthetic rehearsal of recovery blueprints on isolated ghost branches
+- State forks, clock regressions, identity collisions, replay echoes, broken chains, and lifecycle reopenings receive bounded stability scores
+- Zero live mutation authority with source-byte preservation and portable theater seals
+- Pinned advisory automation extended to Ghost Repair Theater
 
 ## [0.5.0] — Reversible Governance
 
