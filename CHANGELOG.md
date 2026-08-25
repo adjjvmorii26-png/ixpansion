@@ -40,6 +40,10 @@
 - Unified upstream seals for paradox constellations, repair dreams, ghost stages, and quorum decisions
 - Radial branch visualization, consent-packet inventory, source audit badges, and portable terminal hashes
 - Pinned advisory automation extended to Recovery Atlas
+- **Recovery Treaty Compiler** — manual-only dual-key authorization for ready recovery packets
+- Independent out-of-band HMAC keys, operator labels, nonce binding, and immutable source-byte fingerprints
+- Portable two-signature verification with automatic voiding on any bound ledger change
+- Zero execution authority: treaties grant human-tribunal presentation only and remain outside pinned automation
 
 ## [0.5.0] — Reversible Governance
 
