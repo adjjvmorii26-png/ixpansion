@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.45.0] — Wave 129 — Semantic Alchemy Layer
+
+### Added
+- `api/semantic_transmuter.py` — Transmutes meaning between semantic domains
+- `api/conceptual_alchemist.py` — Refines concepts into higher-order insights
+- `api/metaphor_engine.py` — Generates metaphors between disparate domains
+- `api/semantic_catalyst.py` — Accelerates meaning-making processes
+- `api/ontological_forge.py` — Forges new categories of being
+- `api/meaning_furnace.py` — Burns noise to extract pure meaning
+- `api/hermeneutic_engine.py` — Deep interpretation with layered analysis
+- `api/semantic_precipitate.py` — Crystallises supersaturated understanding
+- `tests/test_wave129_semantic_alchemy.py` — 25 tests
+
+### Stats
+- **Modules:** 257 API modules
+- **Routes:** 264 vercel routes
+- **Tests:** 813 total (25 new)
+
 ## [3.44.0] — Wave 128 — Dimensional Threading Layer
 
 ### Added
