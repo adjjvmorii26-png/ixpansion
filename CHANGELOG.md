@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.31.0] — Wave 116: Cosmic & Transcendent Layer
+
+### Added
+- **Cosmic Narrator** — universe-voice commentary on system events
+- **Quantum Conscience** — moral superposition until forced choice
+- **Prophecy Network** — interconnected predictions with feedback loops
+- **Soul Forge** — identity crystallization through trials
+- **Universal Compass** — latent purpose detection and revelation
+- **Echoes of Tomorrow** — emotional signals from the future self
+
 ## [3.30.0] — Wave 115: Metaphysical & Abstract Layer
 
 ### Added
