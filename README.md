@@ -2,7 +2,7 @@
 
 > *The Computational Frontier* — 123 API modules, 157+ experiments, multi-agent sandbox
 
-[![Tests](https://img.shields.io/badge/tests-384%2B%20passing-brightgreen)]()
+[![Tests](https://img.shields.io/badge/tests-437%20passing-brightgreen)]()
 [![API](https://img.shields.io/badge/API-125%20routes-blue)]()
 [![Experiments](https://img.shields.io/badge/experiments-157%2B-purple)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
