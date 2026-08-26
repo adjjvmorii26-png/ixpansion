@@ -1,85 +1,10 @@
-.PHONY: test test-nexus test-projects test-solid-organism test-ixpansion test-prime test-fractal test-root test-bridges test-mycelium test-lab test-constellation temporal-paradox repair-dreams repair-theater recovery-quorum recovery-atlas mandate-dry mandate-run genome-list genome-atlas genome-echo evolution-council lint clean backup push
+.PHONY: test test-full lint clean backup push
 
 test:
-	python3 -m pytest -q --tb=short
+	python3 -m pytest tests/ -q --tb=short
 
-test-nexus:
-	python3 -m pytest nexus_observatory/tests -q --tb=short
-
-test-projects:
-	python3 -m pytest projects/tests -q --tb=short
-
-test-solid-organism:
-	python3 -m pytest solid-organism/tests -q --tb=short
-
-test-ixpansion:
-	python3 -m pytest ixpansion/tests -q --tb=short
-
-test-prime:
-	python3 -m pytest omega_prime/tests -q --tb=short
-
-test-fractal:
-	python3 -m pytest omega_fractal_engine/tests -q --tb=short
-
-test-root:
-	python3 -m pytest project_root/tests -q --tb=short
-
-test-bridges:
-	python3 -m pytest bridges -q --tb=short
-
-test-mycelium:
-	python3 -m pytest mycelium/tests -q --tb=short
-
-test-lab:
-	python3 -m pytest lab/tests -q --tb=short
-
-test-constellation:
-	python3 -m pytest constellation/tests -q --tb=short
-
-mandate-dry:
-	python3 lab/pulse_oracle.py
-	python3 lab/ritual_parliament.py
-	python3 lab/reversible_mandate.py --dry-run
-	python3 bridges/mandate_resonance.py
-
-mandate-run:
-	python3 lab/pulse_oracle.py
-	python3 lab/ritual_parliament.py
-	python3 lab/reversible_mandate.py
-	python3 bridges/mandate_resonance.py
-	python3 lab/mandate_genome.py forge
-
-swarm-sandbox:
-	python3 lab/experiments/swarm.py --sandbox-ticks 3 --agents 5
-
-genome-list:
-	python3 lab/mandate_genome.py list
-
-genome-atlas:
-	python3 lab/genome_observatory.py census
-	python3 lab/genome_observatory.py atlas
-
-genome-echo:
-	python3 lab/ancestral_echo.py @latest
-
-evolution-council:
-	python3 lab/evolution_council.py
-
-temporal-paradox:
-	python3 lab/temporal_paradox.py --no-ledger
-
-repair-dreams:
-	python3 lab/repair_dreams.py --no-ledger
-
-repair-theater:
-	python3 lab/repair_theater.py --no-ledger
-
-recovery-quorum:
-	python3 lab/recovery_quorum.py --no-ledger
-
-recovery-atlas:
-	@mkdir -p .runtime/lab/reports
-	python3 lab/recovery_atlas.py --stdout --no-ledger > .runtime/lab/reports/recovery-atlas-stdout.html
+test-full:
+	python3 -m pytest tests/ -v --tb=short
 
 lint:
 	@find . -type f -name '*.py' \

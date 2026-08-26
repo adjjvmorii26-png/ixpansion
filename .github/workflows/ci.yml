@@ -26,25 +26,19 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install pytest pytest-asyncio
-      - name: Run fast test suite
-        run: |
-          python -m pytest \
-            tests/test_advanced_revenue.py \
-            tests/test_wave99_emergent.py \
-            tests/test_wave101_cosmic.py \
-            tests/test_wave102_infrastructure.py \
-            tests/test_core_modules.py \
-            tests/test_experiment_runner.py \
-            -q --tb=short
+      - name: Run full test suite
+        run: python -m pytest tests/ -q --tb=short
       - name: Verify all modules parse
         run: |
           python -c "
           import ast, os, sys
           errors = []
+          count = 0
           for root, dirs, files in os.walk('api'):
               dirs[:] = [d for d in dirs if d != '__pycache__']
               for f in files:
                   if f.endswith('.py'):
+                      count += 1
                       try:
                           with open(os.path.join(root, f)) as fh: ast.parse(fh.read())
                       except SyntaxError as e:
@@ -52,7 +46,7 @@ jobs:
           if errors:
               for e in errors: print(f'ERROR: {e}')
               sys.exit(1)
-          print(f'All {sum(1 for r,d,fs in os.walk(\"api\") for f in fs if f.endswith(\".py\"))} modules parse OK')
+          print(f'All {count} API modules parse OK')
           "
 
   lint:
