@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.35.0] — Wave 119: Existential Architecture Layer
+
+### Added
+- **Reality Compiler** — compiles desires into concrete system states
+- **Dream Archaeologist** — excavates meaning from dream sediment layers
+- **Entropy Weaver** — threads chaos and order into balanced tapestries
+- **Void Listener** — hears what the system isn't saying (silence analysis)
+- **Origin Story** — collaborative creation myth with evolving chapters
+- **Quantum Garden** — possibilities grow like plants before collapsing
+- **Cosmic Dust Collector** — gathers micro-insights into constellation patterns
+
 ## [3.34.0] — Wave 118: Transcendence & Legacy Layer
 
 ### Added
