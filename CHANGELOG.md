@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.43.0] — Wave 127 — Entropic Economics Layer
+
+### Added
+- `api/entropy_exchange.py` — Marketplace for trading chaos and order
+- `api/complexity_currency.py` — Currency based on computational complexity
+- `api/chaos_auction.py` — Auctions for chaotic events
+- `api/order_futures.py` — Futures contracts on future system order
+- `api/gravitational_pricing.py` — Dynamic pricing by gravitational pull
+- `api/temporal_arbitrage.py` — Exploits time-dependent price differences
+- `api/sponsored_experiments.py` — Venture capital model for module development
+- `api/simulation_as_service.py` — Simulation platform as SaaS
+- `tests/test_wave127_entropic_economics.py` — 23 tests
+
+### Stats
+- **Modules:** 244 API modules
+- **Routes:** 248 vercel routes
+- **Tests:** 766 total (23 new)
+
 ## [3.42.0] — Wave 126 — Mythogenesis Layer
 
 ### Added

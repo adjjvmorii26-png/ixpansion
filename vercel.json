@@ -970,6 +970,38 @@
     {
       "src": "/api/folklore-repo",
       "dest": "/api/folklore_repository"
+    },
+    {
+      "src": "/api/entropy-exchange",
+      "dest": "/api/entropy_exchange"
+    },
+    {
+      "src": "/api/complexity-currency",
+      "dest": "/api/complexity_currency"
+    },
+    {
+      "src": "/api/chaos-auction",
+      "dest": "/api/chaos_auction"
+    },
+    {
+      "src": "/api/order-futures",
+      "dest": "/api/order_futures"
+    },
+    {
+      "src": "/api/gravitational-pricing",
+      "dest": "/api/gravitational_pricing"
+    },
+    {
+      "src": "/api/temporal-arbitrage",
+      "dest": "/api/temporal_arbitrage"
+    },
+    {
+      "src": "/api/sponsored-experiments",
+      "dest": "/api/sponsored_experiments"
+    },
+    {
+      "src": "/api/sim-as-service",
+      "dest": "/api/simulation_as_service"
     }
   ],
   "env": {
