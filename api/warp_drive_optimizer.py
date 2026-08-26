@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import math
 import time
 import sys
 from pathlib import Path

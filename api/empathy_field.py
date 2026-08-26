@@ -7,7 +7,6 @@ the ability to feel what other parts of the system are experiencing.
 """
 from __future__ import annotations
 
-import math
 import random
 import time
 import sys

@@ -6,7 +6,6 @@ Errors = anxious. New experiments = curious. Stagnation = bored.
 from __future__ import annotations
 
 import json
-import math
 import random
 import time
 import sys

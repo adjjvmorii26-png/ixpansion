@@ -7,7 +7,6 @@ mass and what happens when possibilities collapse into actuality.
 """
 from __future__ import annotations
 
-import math
 import random
 import time
 import sys

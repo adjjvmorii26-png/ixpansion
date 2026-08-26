@@ -2,27 +2,23 @@
 
 <!-- What does this PR do? -->
 
-## Which subsystem?
+## Which layer?
 
-- [ ] nucleus/kernel
-- [ ] agents
-- [ ] sandbox
-- [ ] protocols
-- [ ] tests
-- [ ] documentation/infra
+- [ ] Core (agents, experiments, sandbox)
+- [ ] Revenue (billing, crypto, marketplace)
+- [ ] Intelligence (cognitive, neural, memory)
+- [ ] Experimental (new wave modules)
+- [ ] Infrastructure (gateway, auth, events)
+- [ ] Tests
+- [ ] Documentation / Config
 
 ## Experimental justification
 
-<!-- Why is this system interesting? What emergent behavior might it produce? -->
+<!-- Why is this system interesting? What emergent behaviour might it produce? -->
 
 ## Testing
 
-- [ ] All existing tests pass (`make test`)
-- [ ] New tests added for new functionality
-- [ ] No external dependencies introduced
-
-## Checklist
-
-- [ ] Module has a docstring explaining what makes it experimental
-- [ ] Type hints on public functions
-- [ ] Stdlib only (no pip dependencies)
+- [ ] All existing tests pass (`python3 -m pytest tests/ -q`)
+- [ ] New modules have handler functions
+- [ ] Vercel routes added for new modules
+- [ ] CHANGELOG.md updated

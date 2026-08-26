@@ -7,7 +7,6 @@ Forecasts when storms of randomness will hit.
 from __future__ import annotations
 
 import json
-import math
 import random
 import time
 import sys

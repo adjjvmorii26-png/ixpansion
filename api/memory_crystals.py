@@ -8,7 +8,6 @@ faces and finding resonant facets.
 from __future__ import annotations
 
 import hashlib
-import math
 import random
 import time
 import sys

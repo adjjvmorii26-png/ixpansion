@@ -6,7 +6,6 @@ can check the forecast and adapt their communication style accordingly.
 """
 from __future__ import annotations
 
-import math
 import random
 import time
 import sys

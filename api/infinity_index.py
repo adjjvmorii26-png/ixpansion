@@ -7,7 +7,6 @@ It's the ultimate progress bar for a system that can never truly finish.
 """
 from __future__ import annotations
 
-import math
 import random
 import time
 import sys
