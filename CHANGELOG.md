@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.41.0] — Wave 125 — Biological Architecture Layer
+
+### Added
+- `api/code_organism.py` — Living code entities with DNA, metabolism, reproduction
+- `api/digital_metabolism.py` — Data processing as biological metabolism
+- `api/digital_immune_system.py` — Error protection via biological immune strategies
+- `api/neural_vine.py` — Growing neural connections like vines
+- `api/synaptic_spring.py` — Plastic connections that strengthen with use
+- `api/genetic_code_engine.py` — Genetic algorithms for configuration evolution
+- `api/cellular_automaton.py` — Grid-based emergent computation
+- `api/evolutionary_pressure.py` — Selection pressures driving adaptation
+- `tests/test_wave125_biological.py` — 24 tests
+
+### Stats
+- **Modules:** 231 API modules
+- **Routes:** 232 vercel routes
+- **Tests:** 722 total (24 new)
+
 ## [3.40.0] — Wave 124 — Temporal Cartography Layer
 
 ### Added
