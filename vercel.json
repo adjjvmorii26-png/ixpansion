@@ -590,6 +590,38 @@
     {
       "src": "/api/skills",
       "dest": "/api/skill_tree.py"
+    },
+    {
+      "src": "/api/philosophy",
+      "dest": "/api/philosophy_engine.py"
+    },
+    {
+      "src": "/api/aesthetic",
+      "dest": "/api/aesthetic_evaluator.py"
+    },
+    {
+      "src": "/api/conscience",
+      "dest": "/api/conscience_loop.py"
+    },
+    {
+      "src": "/api/miracle",
+      "dest": "/api/miracle_engine.py"
+    },
+    {
+      "src": "/api/paradox-res",
+      "dest": "/api/paradox_resonator.py"
+    },
+    {
+      "src": "/api/emotion-wx",
+      "dest": "/api/emotion_weather.py"
+    },
+    {
+      "src": "/api/dream-arch",
+      "dest": "/api/dream_architect.py"
+    },
+    {
+      "src": "/api/dreamweaver",
+      "dest": "/api/collective_dreamweaver.py"
     }
   ],
   "env": {

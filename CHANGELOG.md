@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.30.0] — Wave 115: Metaphysical & Abstract Layer
+
+### Added
+- **Philosophy Engine** — existential questions with school-of-thought debates
+- **Aesthetic Evaluator** — beauty, elegance, and novelty scoring with taste profiles
+- **Conscience Loop** — moral reflection and behavioral adjustment feedback
+- **Miracle Engine** — improbable transformative events with near-miss tracking
+- **Paradox Resonator** — amplifies contradictions into creative breakthroughs
+- **Emotion Weather** — emotional climate with fronts, pressure, and seasonal patterns
+- **Dream Architect** — intentional dream space construction with visitable rooms
+- **Collective Dreamweaver** — multi-agent collaborative dream creation
+
 ## [3.29.0] — Wave 114: Social & Ecosystem Layer
 
 ### Added
