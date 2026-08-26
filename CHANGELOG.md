@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.33.0] — Wave 117: Dimensional Consciousness Layer
+
+### Added
+- **Consciousness Map** — awareness topology with vortex detection
+- **Ego Dissolution** — temporary identity merging between agents
+- **Timewave Zero-Point** — possibility convergence engine
+- **Numinous Encoder** — symbol streams for ineffable experiences
+- **Mirror Self** — agent reflection and reconciliation encounters
+- **Resonance Memory** — frequency-tuned vibrating memories
+- **Paradox Lattice** — structured contradiction grid generating insights
+
 ## [3.32.0] — Refinements: Unified Infrastructure
 
 ### Added
