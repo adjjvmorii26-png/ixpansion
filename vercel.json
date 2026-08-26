@@ -470,6 +470,46 @@
     {
       "src": "/api/sentience",
       "dest": "/api/sentience_index.py"
+    },
+    {
+      "src": "/api/heatmap",
+      "dest": "/api/cognitive_heatmap.py"
+    },
+    {
+      "src": "/api/fossil",
+      "dest": "/api/knowledge_fossil.py"
+    },
+    {
+      "src": "/api/sleep",
+      "dest": "/api/sleep_cycle.py"
+    },
+    {
+      "src": "/api/subconscious",
+      "dest": "/api/collective_subconscious.py"
+    },
+    {
+      "src": "/api/oracle",
+      "dest": "/api/wisdom_oracle.py"
+    },
+    {
+      "src": "/api/gravity",
+      "dest": "/api/gravity_well.py"
+    },
+    {
+      "src": "/api/gardener",
+      "dest": "/api/entropy_gardener.py"
+    },
+    {
+      "src": "/api/prophecy",
+      "dest": "/api/prophecy_engine.py"
+    },
+    {
+      "src": "/api/empathy",
+      "dest": "/api/empathy_field.py"
+    },
+    {
+      "src": "/api/cascade",
+      "dest": "/api/resonance_cascade.py"
     }
   ],
   "env": {

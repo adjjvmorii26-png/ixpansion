@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.26.0] — Wave 111: Emergent Complexity Layer
+
+### Added
+- **Cognitive Heatmap** — spatial visualization of collective thought energy
+- **Knowledge Fossil** — ancient insights preserved as extractable artifacts
+- **Sleep Cycle** — system-wide rest states with consolidation and REM dreams
+- **Collective Subconscious** — shared symbol-space weaving archetypes
+- **Wisdom Oracle** — multi-perspective answers consulting accumulated knowledge
+- **Gravity Well** — ideas attract and merge, forming intellectual singularities
+- **Entropy Gardener** — cultivates productive disorder, prunes harmful chaos
+- **Prophecy Engine** — generates and tracks system predictions
+- **Empathy Field** — emotional contagion between agent nodes
+- **Resonance Cascade** — chain reactions of amplification across the system
+
 ## [3.25.0] — Wave 110: Systems & Ecology Layer
 
 ### Added

@@ -1,9 +1,9 @@
 # IXpansion
 
-> *The Computational Frontier* — 113 API modules, 157+ experiments, multi-agent sandbox
+> *The Computational Frontier* — 123 API modules, 157+ experiments, multi-agent sandbox
 
-[![Tests](https://img.shields.io/badge/tests-364%2B%20passing-brightgreen)]()
-[![API](https://img.shields.io/badge/API-115%20routes-blue)]()
+[![Tests](https://img.shields.io/badge/tests-384%2B%20passing-brightgreen)]()
+[![API](https://img.shields.io/badge/API-125%20routes-blue)]()
 [![Experiments](https://img.shields.io/badge/experiments-157%2B-purple)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
 
@@ -33,7 +33,7 @@ curl /api/telemetry
 
 ```
 ixpansion/
-├── api/                    # 113 REST API modules
+├── api/                    # 123 REST API modules
 │   ├── core/               # agents, experiments, sandbox
 │   ├── revenue/            # billing, crypto, credits, marketplace
 │   ├── intelligence/       # cognitive resonance, neural fabric, memory palace
