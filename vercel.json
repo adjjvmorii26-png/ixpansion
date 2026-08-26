@@ -232,6 +232,38 @@
       "dest": "/api/openapi_spec.py"
     },
     {
+      "src": "/dialogue",
+      "dest": "/api/autonomous_dialogue.py"
+    },
+    {
+      "src": "/dimensions",
+      "dest": "/api/cross_dimensional_mapper.py"
+    },
+    {
+      "src": "/crystal",
+      "dest": "/api/time_crystal.py"
+    },
+    {
+      "src": "/patterns",
+      "dest": "/api/pattern_recognizer.py"
+    },
+    {
+      "src": "/weather",
+      "dest": "/api/entropy_weather.py"
+    },
+    {
+      "src": "/mood",
+      "dest": "/api/system_mood.py"
+    },
+    {
+      "src": "/emergence",
+      "dest": "/api/emergence_detector.py"
+    },
+    {
+      "src": "/comm",
+      "dest": "/api/agent_communication.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dashboard/$1"
     }
