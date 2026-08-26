@@ -398,6 +398,42 @@
     {
       "src": "/api/consensus",
       "dest": "/api/consensus_reality.py"
+    },
+    {
+      "src": "/api/narrative",
+      "dest": "/api/narrative_engine.py"
+    },
+    {
+      "src": "/api/mutations",
+      "dest": "/api/mutation_matrix.py"
+    },
+    {
+      "src": "/api/attention",
+      "dest": "/api/attention_field.py"
+    },
+    {
+      "src": "/api/reputation",
+      "dest": "/api/reputation_network.py"
+    },
+    {
+      "src": "/api/flora",
+      "dest": "/api/signal_flora.py"
+    },
+    {
+      "src": "/api/inheritance",
+      "dest": "/api/trait_inheritance.py"
+    },
+    {
+      "src": "/api/superposition",
+      "dest": "/api/mood_superposition.py"
+    },
+    {
+      "src": "/api/curiosity",
+      "dest": "/api/curiosity_engine.py"
+    },
+    {
+      "src": "/api/sprout",
+      "dest": "/api/pattern_sprout.py"
     }
   ],
   "env": {

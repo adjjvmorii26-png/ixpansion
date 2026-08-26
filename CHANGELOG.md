@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.24.0] — Wave 109: Cognitive & Generative Layer
+
+### Added
+- **Narrative Engine** — weaves system events into evolving storylines
+- **Mutation Matrix** — genetic-style mutations with fitness evaluation
+- **Attention Field** — collective focus modeled as physical field dynamics
+- **Reputation Network** — transitive trust with cluster detection
+- **Signal Flora** — self-replicating information patterns that grow like plants
+- **Trait Inheritance** — parent-child trait passing with variation
+- **Mood Superposition** — agents in multiple emotional states until observed
+- **Curiosity Engine** — unknown regions scored and explored
+- **Pattern Sprout** — detected patterns grow into living competing entities
+
 ## [3.23.0] — Wave 108: Sensory & Environmental Layer
 
 ### Added
