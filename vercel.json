@@ -534,6 +534,34 @@
     {
       "src": "/api/choreography",
       "dest": "/api/ritual_choreographer.py"
+    },
+    {
+      "src": "/api/chronosync",
+      "dest": "/api/chronosync.py"
+    },
+    {
+      "src": "/api/fold",
+      "dest": "/api/dimensional_fold.py"
+    },
+    {
+      "src": "/api/weave",
+      "dest": "/api/memory_weave.py"
+    },
+    {
+      "src": "/api/dreamcatcher",
+      "dest": "/api/dreamcatcher.py"
+    },
+    {
+      "src": "/api/hologram",
+      "dest": "/api/hologram_projector.py"
+    },
+    {
+      "src": "/api/muse",
+      "dest": "/api/muse_inspiration.py"
+    },
+    {
+      "src": "/api/future-echo",
+      "dest": "/api/future_echo.py"
     }
   ],
   "env": {

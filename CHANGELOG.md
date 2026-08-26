@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.28.0] — Wave 113: Temporal & Dimensional Layer
+
+### Added
+- **ChronoSync** — time stream synchronization with paradox detection
+- **Dimensional Fold** — wormhole-like shortcuts between system regions
+- **Memory Weave** — shared tapestries woven from multi-agent memories
+- **Dreamcatcher** — dream filtering, categorization, and preservation
+- **Hologram Projector** — interactive 3D system state visualization
+- **Muse Inspiration** — probabilistic creative impulse channeling
+- **Future Echo** — faint traces of probable futures influencing the present
+
 ## [3.27.0] — Wave 112: Cross-Module Integration Layer
 
 ### Added
