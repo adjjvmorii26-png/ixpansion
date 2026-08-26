@@ -62,3 +62,9 @@ class ConceptualAlchemist:
         avg_purity = sum(c.purity for c in self._concepts) / max(len(self._concepts), 1)
         return {"total_concepts": len(self._concepts), "avg_purity": round(avg_purity, 4),
                 "transmutations": len(self._transmutations)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "conceptual_alchemist", "action": action}

@@ -84,3 +84,9 @@ class FractalMemoryPlaza:
             "total_cells": self.total_memory(),
             "total_recalls": self._recall_count,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "fractal_memory_plaza", "action": action}

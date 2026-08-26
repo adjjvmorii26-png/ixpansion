@@ -99,3 +99,9 @@ class OrganismEcosystem:
         alive = sum(1 for o in self._organisms.values() if o.is_alive())
         return {"total": len(self._organisms), "alive": alive,
                 "dead": len(self._organisms) - alive, "tick": self._generation_count}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "code_organism", "action": action}

@@ -58,3 +58,9 @@ class MeaningFurnace:
         avg_noise = sum(e.noise_removed for e in self._extracts) / max(len(self._extracts), 1)
         return {"temperature": self.temperature, "total_extracts": len(self._extracts),
                 "total_burned": self._total_burned, "avg_noise_removed": round(avg_noise, 4)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "meaning_furnace", "action": action}

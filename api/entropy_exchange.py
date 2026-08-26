@@ -75,3 +75,9 @@ class EntropyExchange:
         return {"commodities": len(self._commodities), "trades": len(self._trades),
                 "market_value": round(self.market_value(), 4),
                 "chaos_items": chaos, "order_items": order}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "entropy_exchange", "action": action}

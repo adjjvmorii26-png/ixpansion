@@ -63,3 +63,9 @@ class ComplexityCurrency:
         return {"total_coins": len(self._coins), "total_minted": round(self._total_minted, 4),
                 "average_complexity": round(self.average_complexity(), 4),
                 "transactions": len(self._ledger)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "complexity_currency", "action": action}

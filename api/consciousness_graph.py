@@ -95,3 +95,9 @@ class ConsciousnessGraph:
             "total_edges": self._edge_count,
             "clusters": len(self.clusters()),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "consciousness_graph", "action": action}

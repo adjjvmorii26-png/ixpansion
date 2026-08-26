@@ -60,3 +60,9 @@ class HermeneuticEngine:
     def status(self) -> Dict[str, Any]:
         return {"total_interpretations": len(self._interpretations),
                 "total_layers": self._total_layers}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "hermeneutic_engine", "action": action}

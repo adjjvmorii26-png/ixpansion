@@ -55,3 +55,9 @@ class TimelineWeaver:
 
     def status(self) -> Dict[str, Any]:
         return {"total_strands": len(self._strands), "total_weaves": len(self._weaves)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "timeline_weaver", "action": action}

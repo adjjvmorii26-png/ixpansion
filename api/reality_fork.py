@@ -77,3 +77,9 @@ class RealityForkManager:
     def status(self) -> Dict[str, Any]:
         return {"total_forks": len(self._forks), "merged": self._merge_count,
                 "unmerged": len(self._forks) - self._merge_count}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "reality_fork", "action": action}

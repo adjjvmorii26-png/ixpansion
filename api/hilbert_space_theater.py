@@ -73,3 +73,9 @@ class HilbertSpaceTheater:
             "total_performances": len(self._performances),
             "total_audience": self._audience_count,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "hilbert_space_theater", "action": action}

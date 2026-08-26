@@ -37,7 +37,10 @@ def _get_handler(module_name: str):
     try:
         module = importlib.import_module(f"api.{module_name}")
         handler_name = MODULE_REGISTRY[module_name]
-        return getattr(module, handler_name, None)
+        handler = getattr(module, handler_name, None)
+        if handler is None:
+            handler = getattr(module, "handler", None)
+        return handler
     except ImportError:
         return None
 

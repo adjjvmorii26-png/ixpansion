@@ -73,3 +73,9 @@ class EpochConstellation:
 
     def status(self) -> Dict[str, Any]:
         return {"total_epochs": len(self._stars), "total_connections": len(self._connections)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "epoch_constellation", "action": action}

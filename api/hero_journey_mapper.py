@@ -62,3 +62,9 @@ class HeroJourneyMapper:
     def status(self) -> Dict[str, Any]:
         completed = sum(1 for j in self._journeys if j.is_complete())
         return {"total_journeys": len(self._journeys), "completed": completed}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "hero_journey_mapper", "action": action}

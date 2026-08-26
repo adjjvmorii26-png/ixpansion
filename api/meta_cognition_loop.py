@@ -84,3 +84,9 @@ class MetaCognitionLoop:
             "resolutions": self._resolution_count,
             "max_level": self.MAX_LEVELS,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "meta_cognition_loop", "action": action}

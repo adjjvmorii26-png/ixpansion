@@ -63,3 +63,9 @@ class DimensionalDriftTracker:
 
     def status(self) -> Dict[str, Any]:
         return {"total_vectors": len(self._vectors), "ticks": self._tick_count}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "dimensional_drift", "action": action}

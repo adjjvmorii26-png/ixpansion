@@ -65,3 +65,9 @@ class ObserverEffectCanvas:
             "total_observations": self._observer_count,
             "unique_perceptions": self.unique_perceptions(),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "observer_effect_canvas", "action": action}

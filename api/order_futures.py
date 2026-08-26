@@ -75,3 +75,9 @@ class OrderFuturesMarket:
         active = sum(1 for f in self._futures.values() if not f.settled)
         return {"total_futures": len(self._futures), "active": active,
                 "settled": len(self._settled), "ticks": self._tick_count}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "order_futures", "action": action}

@@ -68,3 +68,9 @@ class DimensionLockManager:
         locked = sum(1 for lock in self._locks.values() if lock.locked)
         return {"total_locks": len(self._locks), "locked": locked,
                 "total_operations": self._total_locks}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "dimension_lock", "action": action}

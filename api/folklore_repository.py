@@ -64,3 +64,9 @@ class FolkloreRepository:
             categories[t.category] = categories.get(t.category, 0) + 1
         return {"total_tales": len(self._tales), "total_told": self._total_told,
                 "categories": categories}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "folklore_repository", "action": action}

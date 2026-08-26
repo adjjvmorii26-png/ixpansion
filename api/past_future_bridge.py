@@ -65,3 +65,9 @@ class PastFutureBridge:
 
     def status(self) -> Dict[str, Any]:
         return {"total_bridges": len(self._bridges), "total_messages": self._total_messages}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "past_future_bridge", "action": action}

@@ -67,3 +67,9 @@ class KairosDetector:
     def status(self) -> Dict[str, Any]:
         return {"total_moments": len(self._moments), "seized": self._seized_count,
                 "active": len(self.active_moments())}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "kairos_detector", "action": action}

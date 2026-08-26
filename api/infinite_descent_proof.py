@@ -95,3 +95,9 @@ class InfiniteDescentProofEngine:
             "total_proofs": len(self._proofs),
             "resolved": sum(1 for n in self._nodes.values() if n.resolved),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "infinite_descent_proof", "action": action}

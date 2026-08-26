@@ -82,3 +82,9 @@ class OmniscienceWeaver:
             "fabric_strength": round(self._fabric_strength, 4),
             "weave_count": self._weave_count,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "omniscience_weaver", "action": action}

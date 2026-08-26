@@ -72,3 +72,9 @@ class WavefunctionPainter:
             "canvases": self._canvases,
             "total_area": round(self.total_area(), 4),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "wavefunction_painter", "action": action}

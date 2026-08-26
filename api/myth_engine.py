@@ -109,3 +109,9 @@ class _MythEngineCompat:
 # Patch the main class
 for method_name in ['create_myth', 'believe', 'evolve']:
     setattr(MythEngine, method_name, getattr(_MythEngineCompat, method_name))
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "myth_engine", "action": action}

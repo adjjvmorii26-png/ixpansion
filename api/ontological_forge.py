@@ -62,3 +62,9 @@ class OntologicalForge:
     def status(self) -> Dict[str, Any]:
         return {"total_classes": len(self._classes),
                 "total_instances": sum(c.instances for c in self._classes.values())}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "ontological_forge", "action": action}

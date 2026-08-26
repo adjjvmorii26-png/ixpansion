@@ -78,3 +78,9 @@ class SynapticSpring:
     def status(self) -> Dict[str, Any]:
         avg = sum(s.strength for s in self._synapses) / max(len(self._synapses), 1)
         return {"total_synapses": len(self._synapses), "avg_strength": round(avg, 4)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "synaptic_spring", "action": action}

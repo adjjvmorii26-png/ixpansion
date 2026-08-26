@@ -84,3 +84,9 @@ class VoidArchitect:
             "total_evaluations": len(self._blueprints),
             "total_carved": sum(len(p.carved) for p in self._patterns),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "void_architect", "action": action}

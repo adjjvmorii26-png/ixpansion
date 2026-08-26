@@ -79,3 +79,9 @@ class SuperpositionGallery:
             "exhibitions": self._exhibitions,
             "total_observations": sum(a.observed_count for a in self._artworks),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "superposition_gallery", "action": action}

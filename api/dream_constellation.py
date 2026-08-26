@@ -76,3 +76,9 @@ class DreamConstellation:
             "total_connections": len(self._connections),
             "constellations_formed": self._constellation_count,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "dream_constellation", "action": action}

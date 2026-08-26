@@ -58,3 +58,9 @@ class MultiverseNavigator:
         edges = sum(len(v) for v in self._adjacency.values()) // 2
         return {"dimensions": len(self._adjacency), "connections": edges,
                 "paths_found": len(self._paths_found)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "multiverse_navigator", "action": action}

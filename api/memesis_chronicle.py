@@ -87,3 +87,9 @@ class MemesisChronicle:
     def status(self) -> Dict[str, Any]:
         return {"total_memes": len(self._memes), "generation": self._generation,
                 "extinction_events": len(self._extinction_events)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "memesis_chronicle", "action": action}

@@ -93,3 +93,9 @@ class TemporalCartographer:
             "landmarks": len(self._landmarks), "paths": len(self._paths),
             "bookmarks": len(self._bookmarks), "traversals": self._traversals,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "temporal_cartographer", "action": action}

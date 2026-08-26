@@ -98,3 +98,9 @@ class InfrastructureSoul:
             "total_declarations": len(self._declarations),
             "collective_states": self.collective_state(),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "infrastructure_soul", "action": action}

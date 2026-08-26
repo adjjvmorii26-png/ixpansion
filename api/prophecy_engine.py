@@ -77,3 +77,9 @@ class ProphecyEngine:
                 "observed": sum(1 for p in self._prophecies if p.observed),
                 "accuracy": round(self.accuracy(), 4)}
 
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "prophecy_engine", "action": action}

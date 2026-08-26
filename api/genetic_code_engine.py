@@ -87,3 +87,9 @@ class GeneticCodeEngine:
         avg_fitness = sum(g.fitness for g in self._population) / max(len(self._population), 1)
         return {"population": len(self._population), "avg_fitness": round(avg_fitness, 4),
                 "evolution_cycles": self._evolution_cycles}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "genetic_code_engine", "action": action}

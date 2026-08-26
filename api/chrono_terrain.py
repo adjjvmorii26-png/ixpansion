@@ -83,3 +83,9 @@ class ChronoTerrain:
             types[p.terrain_type] = types.get(p.terrain_type, 0) + 1
         return {"total_points": len(self._points), "terrain_distribution": types,
                 "explored": len(self._exploration_log)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "chrono_terrain", "action": action}

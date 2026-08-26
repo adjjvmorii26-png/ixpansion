@@ -64,3 +64,9 @@ class SemanticPrecipitate:
     def status(self) -> Dict[str, Any]:
         return {"total_crystals": len(self._crystals),
                 "precipitate_events": self._precipitate_count}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "semantic_precipitate", "action": action}

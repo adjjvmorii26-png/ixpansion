@@ -62,3 +62,9 @@ class OracleProphecy:
     def status(self) -> Dict[str, Any]:
         return {"total_prophecies": len(self._prophecies), "fulfilled": self._fulfilled_count,
                 "accuracy": round(self.accuracy(), 4)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "oracle_prophecy", "action": action}

@@ -60,3 +60,9 @@ class DigitalImmuneSystem:
         resolved = sum(1 for r in self._responses if r.resolved)
         return {"total_responses": len(self._responses), "resolved": resolved,
                 "unique_antibodies": len(self._antibodies)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "digital_immune_system", "action": action}

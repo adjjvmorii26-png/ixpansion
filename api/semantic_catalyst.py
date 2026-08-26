@@ -53,3 +53,9 @@ class SemanticCatalyst:
     def status(self) -> Dict[str, Any]:
         return {"name": self.name, "reactions": len(self._reactions),
                 "avg_speedup": round(self.avg_speedup(), 4)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "semantic_catalyst", "action": action}

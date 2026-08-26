@@ -69,3 +69,9 @@ class QuantumEntanglementNetwork:
         entangled = sum(1 for p in self._pairs.values() if p.is_entangled())
         return {"total_pairs": len(self._pairs), "entangled": entangled,
                 "total_measurements": self._total_measurements}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "quantum_entanglement_network", "action": action}

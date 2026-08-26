@@ -63,3 +63,9 @@ class SemanticTransmuter:
         completed = sum(1 for t in self._transmutations if t.target)
         return {"total_transmutations": len(self._transmutations), "completed": completed,
                 "domains_covered": len(self._domain_pairs)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "semantic_transmuter", "action": action}

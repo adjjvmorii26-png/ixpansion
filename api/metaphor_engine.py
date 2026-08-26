@@ -61,3 +61,9 @@ class MetaphorEngine:
     def status(self) -> Dict[str, Any]:
         total_mappings = sum(len(m.mappings) for m in self._metaphors)
         return {"total_metaphors": len(self._metaphors), "total_mappings": total_mappings}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "metaphor_engine", "action": action}

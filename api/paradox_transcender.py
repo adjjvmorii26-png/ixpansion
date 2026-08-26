@@ -74,3 +74,9 @@ class ParadoxTranscender:
             "pending": total - transcended,
             "transcendence_level": self._transcendence_count,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "paradox_transcender", "action": action}

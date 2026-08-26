@@ -88,3 +88,9 @@ class RecursiveCathedral:
             "total_value": round(self.total_value(), 4),
             "build_operations": self._build_count,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "recursive_cathedral", "action": action}

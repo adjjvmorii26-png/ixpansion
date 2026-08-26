@@ -84,3 +84,9 @@ class DecoherenceNarrative:
             "total_narratives": len(self._narratives),
             "total_cycles": self._cycle_count,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "decoherence_narrative", "action": action}

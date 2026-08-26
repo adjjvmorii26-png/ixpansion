@@ -90,3 +90,9 @@ class ParadoxCompressor:
     @staticmethod
     def _derive_synthesis(paradox: Paradox) -> str:
         return f"Synthesis: '{paradox.assertion_a}' and '{paradox.assertion_b}' are not contradictory when viewed from a higher-dimensional perspective — they describe complementary facets of the same underlying truth."
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "paradox_compressor", "action": action}

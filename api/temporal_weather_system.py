@@ -63,3 +63,9 @@ class TemporalWeatherSystem:
     def status(self) -> Dict[str, Any]:
         return {"current": self._current.pattern, "current_intensity": round(self._current.intensity, 4),
                 "history_length": len(self._history), "forecasts": len(self._forecasts)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "temporal_weather_system", "action": action}

@@ -92,3 +92,9 @@ class NeuralVineNetwork:
         total_segments = sum(len(v.segments) for v in self._vines.values())
         return {"total_vines": len(self._vines), "total_segments": total_segments,
                 "growth_cycles": self._growth_cycles}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "neural_vine", "action": action}

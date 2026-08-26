@@ -80,3 +80,9 @@ class SelfObserveEngine:
             "total_nodes": total_nodes,
             "max_depth": self.max_depth,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "self_observe_engine", "action": action}

@@ -75,3 +75,9 @@ class RecursionComposer:
             "total_performances": len(self._performance_log),
             "total_motifs": sum(len(c.motifs) for c in self._compositions),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "recursion_composer", "action": action}

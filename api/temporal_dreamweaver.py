@@ -92,3 +92,9 @@ class TemporalDreamweaver:
                 if self._threads else 0.0
             ),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "temporal_dreamweaver", "action": action}

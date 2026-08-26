@@ -105,3 +105,9 @@ class KnowledgeSingularity:
             "synthesis_events": len(self._synthesis_log),
             "singularity_distance": self.singularity_distance(),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "knowledge_singularity", "action": action}

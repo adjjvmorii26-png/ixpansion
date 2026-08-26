@@ -112,3 +112,9 @@ class EvolutionaryPressureSystem:
             self._organisms[child_id] = child
             offspring.append(child)
         return offspring
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "evolutionary_pressure", "action": action}

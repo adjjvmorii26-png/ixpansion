@@ -54,3 +54,9 @@ class CosmicOriginStory:
         total_events = sum(len(e.events) for e in self._eras)
         return {"total_eras": len(self._eras), "total_events": total_events,
                 "chapters": self._chapter_count}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "cosmic_origin_story", "action": action}

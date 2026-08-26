@@ -90,3 +90,9 @@ class QuantumMemoryFog:
             "total_accesses": self._total_accesses,
             "avg_clarity": round(avg_clarity, 4),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "quantum_memory_fog", "action": action}

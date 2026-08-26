@@ -74,3 +74,9 @@ class EntanglementPoetry:
             "total_poems": len(self._poems),
             "total_lines": total_lines,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "entanglement_poetry", "action": action}

@@ -82,3 +82,9 @@ class QuantumAestheticsEngine:
             "observed": sum(1 for s in self._states if s.observed),
             "total_evaluations": len(self._evaluations),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "quantum_aesthetics", "action": action}

@@ -92,3 +92,9 @@ class EmergenceOracle:
             "fulfilled": sum(1 for s in self._signals if s.fulfilled),
             "accuracy": round(self.accuracy(), 4),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "emergence_oracle", "action": action}

@@ -74,3 +74,9 @@ class DigitalMetabolism:
         total_output = sum(pw.output_total for pw in self._pathways.values())
         return {"pathways": len(self._pathways), "total_input": round(total_input, 4),
                 "total_output": round(total_output, 4), "energy_pool": round(self._energy_pool, 4)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "digital_metabolism", "action": action}

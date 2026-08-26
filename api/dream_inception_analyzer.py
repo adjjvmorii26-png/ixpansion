@@ -83,3 +83,9 @@ class DreamInceptionAnalyzer:
             "total_dreams": total,
             "total_analyses": len(self._analyses),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "dream_inception_analyzer", "action": action}

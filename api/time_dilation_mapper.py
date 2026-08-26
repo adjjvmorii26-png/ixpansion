@@ -73,3 +73,9 @@ class TimeDilationMapper:
 
     def status(self) -> Dict[str, Any]:
         return {"total_zones": len(self._zones), "total_readings": len(self._readings)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "time_dilation_mapper", "action": action}

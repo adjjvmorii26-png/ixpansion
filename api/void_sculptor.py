@@ -91,3 +91,9 @@ class VoidSculptor:
             "total_carvings": len(self._carvings),
             "total_elements_removed": total_removed,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "void_sculptor", "action": action}

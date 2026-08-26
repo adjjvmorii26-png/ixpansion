@@ -69,3 +69,9 @@ class NarrativeWeaver:
         total_events = sum(len(t.events) for t in self._threads.values())
         return {"total_threads": len(self._threads), "total_events": total_events,
                 "tapestry_connections": self._tapestry_count}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "narrative_weaver", "action": action}

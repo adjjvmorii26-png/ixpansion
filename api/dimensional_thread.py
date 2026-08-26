@@ -75,3 +75,9 @@ class DimensionalThreadingNetwork:
         return {"total_threads": len(self._threads), "dimensions": len(self._dimensions),
                 "total_messages": self._total_messages,
                 "active": sum(1 for t in self._threads.values() if t.is_active())}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "dimensional_thread", "action": action}

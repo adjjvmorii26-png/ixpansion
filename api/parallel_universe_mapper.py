@@ -83,3 +83,9 @@ class ParallelUniverseMapper:
 
     def status(self) -> Dict[str, Any]:
         return {"total_universes": len(self._universes), "total_portals": len(self._portals)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "parallel_universe_mapper", "action": action}

@@ -78,3 +78,9 @@ class ChaosAuction:
     def status(self) -> Dict[str, Any]:
         return {"total_lots": len(self._lots), "sold": sum(1 for l in self._lots.values() if l.sold),
                 "active": len(self.active_lots()), "sales": len(self._completed_sales)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "chaos_auction", "action": action}

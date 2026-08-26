@@ -89,3 +89,9 @@ class EigenstateResonator:
             "avg_stability": round(avg_stability, 4),
             "total_perturbations": sum(s.perturbation_count for s in self._states),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "eigenstate_resonator", "action": action}

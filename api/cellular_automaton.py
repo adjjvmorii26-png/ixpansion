@@ -66,3 +66,9 @@ class CellularAutomaton:
     def status(self) -> Dict[str, Any]:
         return {"generation": self._generation, "population": self.population(),
                 "grid": f"{self.width}x{self.height}"}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "cellular_automaton", "action": action}

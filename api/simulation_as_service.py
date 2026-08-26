@@ -70,3 +70,9 @@ class SimulationAsService:
         return {"total_runs": len(self._runs), "successful": successful,
                 "total_revenue": round(self._total_revenue, 4),
                 "clients": len(self._client_accounts)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "simulation_as_service", "action": action}

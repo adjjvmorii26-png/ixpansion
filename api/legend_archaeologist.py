@@ -57,3 +57,9 @@ class LegendArchaeologist:
     def status(self) -> Dict[str, Any]:
         return {"total_fossils": len(self._fossils), "excavations": self._excavations,
                 "reconstructed": sum(1 for f in self._fossils if f.reconstructed)}
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "legend_archaeologist", "action": action}

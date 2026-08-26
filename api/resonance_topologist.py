@@ -114,3 +114,9 @@ class ResonanceTopologist:
             "total_resonance": self.total_resonance(),
             "snapshots": len(self._snapshots),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "resonance_topologist", "action": action}

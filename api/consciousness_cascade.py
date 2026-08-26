@@ -92,3 +92,9 @@ class ConsciousnessCascade:
             "aware_modules": len(self._aware_modules),
             "connections": sum(len(v) for v in self._connections.values()) // 2,
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "consciousness_cascade", "action": action}

@@ -74,3 +74,9 @@ class ResonanceSymphony:
             "total_chords": len(self._chords),
             "total_energy": round(self.total_energy(), 4),
         }
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    payload = payload or {}
+    action = payload.get("action", "status")
+    return {"status": "active", "module": "resonance_symphony", "action": action}
