@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.40.0] — Wave 124 — Temporal Cartography Layer
+
+### Added
+- `api/temporal_cartographer.py` — Maps time as navigable terrain
+- `api/chrono_terrain.py` — Physical terrain model of time
+- `api/time_dilation_mapper.py` — Maps temporal dilation zones
+- `api/past_future_bridge.py` — Bridges between past and future
+- `api/epoch_constellation.py` — Historical epochs as constellations
+- `api/temporal_weather_system.py` — Temporal phenomena as weather
+- `api/kairos_detector.py` — Detects opportune temporal moments
+- `api/memesis_chronicle.py` — Chronicles memetic evolution
+- `tests/test_wave124_temporal_cartography.py` — 25 tests
+
+### Stats
+- **Modules:** 223 API modules
+- **Routes:** 224 vercel routes
+- **Tests:** 698 total (25 new)
+
 ## [3.39.0] — Wave 123 — Quantum Aesthetics Layer
 
 ### Added
