@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.46.0] — Wave 130 — Astral Navigation Layer
+
+### Added
+- `api/stellar_compass.py` — Navigates using digital stellar patterns
+- `api/nebula_mapper.py` — Maps nebulae and tracks star formation
+- `api/cosmic_ray_detector.py` — Detects high-energy cosmic ray events
+- `api/solar_wind_analyzer.py` — Analyses inter-module data flow as solar wind
+- `api/gravity_well_mapper.py` — Maps gravitational wells and orbital patterns
+- `api/event_horizon_monitor.py` — Monitors event horizons and breaches
+- `api/pulsar_clock.py` — Precision timekeeping based on pulsar signals
+- `api/supernova_remnant.py` — Tracks remnants from module explosions
+- `tests/test_wave130_astral_navigation.py` — 22 tests
+
+### Stats
+- **Modules:** 265 API modules
+- **Routes:** 272 vercel routes
+- **Tests:** 835 total (22 new)
+
 ## [3.45.0] — Wave 129 — Semantic Alchemy Layer
 
 ### Added

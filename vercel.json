@@ -1066,6 +1066,38 @@
     {
       "src": "/api/semantic-precipitate",
       "dest": "/api/semantic_precipitate"
+    },
+    {
+      "src": "/api/stellar-compass",
+      "dest": "/api/stellar_compass"
+    },
+    {
+      "src": "/api/nebula-mapper",
+      "dest": "/api/nebula_mapper"
+    },
+    {
+      "src": "/api/cosmic-ray",
+      "dest": "/api/cosmic_ray_detector"
+    },
+    {
+      "src": "/api/solar-wind",
+      "dest": "/api/solar_wind_analyzer"
+    },
+    {
+      "src": "/api/gravity-well",
+      "dest": "/api/gravity_well_mapper"
+    },
+    {
+      "src": "/api/event-horizon",
+      "dest": "/api/event_horizon_monitor"
+    },
+    {
+      "src": "/api/pulsar-clock",
+      "dest": "/api/pulsar_clock"
+    },
+    {
+      "src": "/api/supernova-remnant",
+      "dest": "/api/supernova_remnant"
     }
   ],
   "env": {
