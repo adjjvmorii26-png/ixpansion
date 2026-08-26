@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.27.0] — Wave 112: Cross-Module Integration Layer
+
+### Added
+- **Neural Pathway** — synaptic connections that strengthen with use
+- **Autonomous Market** — self-regulating capability trading economy
+- **Karma Engine** — moral weight from agent actions
+- **Cultural Memory** — shared myths, rituals, and stories
+- **Innovation Pipeline** — idea-to-deployment stage progression
+- **Ritual Choreographer** — multi-agent coordinated dance orchestration
+
 ## [3.26.0] — Wave 111: Emergent Complexity Layer
 
 ### Added

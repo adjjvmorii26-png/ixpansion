@@ -510,6 +510,30 @@
     {
       "src": "/api/cascade",
       "dest": "/api/resonance_cascade.py"
+    },
+    {
+      "src": "/api/pathway",
+      "dest": "/api/neural_pathway.py"
+    },
+    {
+      "src": "/api/auto-market",
+      "dest": "/api/autonomous_market.py"
+    },
+    {
+      "src": "/api/karma",
+      "dest": "/api/karma_engine.py"
+    },
+    {
+      "src": "/api/culture",
+      "dest": "/api/cultural_memory.py"
+    },
+    {
+      "src": "/api/innovation",
+      "dest": "/api/innovation_pipeline.py"
+    },
+    {
+      "src": "/api/choreography",
+      "dest": "/api/ritual_choreographer.py"
     }
   ],
   "env": {
