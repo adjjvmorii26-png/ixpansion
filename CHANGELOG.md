@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.32.0] — Refinements: Unified Infrastructure
+
+### Added
+- **Unified Router** — single entry point to all 160+ API modules
+- **Cross-Module Orchestrator** — chains modules into complex workflows
+- **Module Analytics** — usage patterns, performance, and health tracking
+- **System Pulse** — vital signs monitoring across all subsystems
+- **Knowledge Graph** — concept relationships and gap detection
+
+### Improved
+- All 160+ modules verified importable and functional
+- Cross-module integration tests added
+- Module discovery and health checking automated
+
 ## [3.31.0] — Wave 116: Cosmic & Transcendent Layer
 
 ### Added

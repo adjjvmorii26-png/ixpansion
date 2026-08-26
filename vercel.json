@@ -646,6 +646,26 @@
     {
       "src": "/api/tomorrow",
       "dest": "/api/echoes_of_tomorrow.py"
+    },
+    {
+      "src": "/api/router",
+      "dest": "/api/unified_router.py"
+    },
+    {
+      "src": "/api/orchestrator",
+      "dest": "/api/cross_module_orchestrator.py"
+    },
+    {
+      "src": "/api/analytics",
+      "dest": "/api/module_analytics.py"
+    },
+    {
+      "src": "/api/pulse",
+      "dest": "/api/system_pulse.py"
+    },
+    {
+      "src": "/api/knowledge",
+      "dest": "/api/knowledge_graph.py"
     }
   ],
   "env": {
