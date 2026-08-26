@@ -1,6 +1,6 @@
 # IXpansion
 
-> *The Computational Frontier* — 257 API modules, 157 experiments, 813 tests
+> *The Computational Frontier* — 265 API modules, 157 experiments, 835 tests
 
 [![Tests](https://img.shields.io/badge/tests-813%20passing-brightgreen)]()
 [![API](https://img.shields.io/badge/API-257%20modules-blue)]()
@@ -60,8 +60,8 @@ ixpansion/
 ├── lab/                    # 70 lab modules + 157 experiments
 ├── dashboard/              # Observatory web UI (3 pages)
 ├── main.py                 # CLI entry point
-├── vercel.json             # Deployment config (264 routes, 3 regions)
-├── tests/                  # 39 test files, 813 test functions
+├── vercel.json             # Deployment config (272 routes, 3 regions)
+├── tests/                  # 39 test files, 835 test functions
 └── Dockerfile              # Python 3.12-slim container
 ```
 
@@ -135,7 +135,7 @@ ixpansion/
 ## Testing
 
 ```bash
-python -m pytest tests/ -v          # full suite (813 tests)
+python -m pytest tests/ -v          # full suite (835 tests)
 python -m pytest tests/ -q          # quick run
 python -m pytest tests/test_core_modules.py  # core only
 ```
@@ -189,6 +189,7 @@ docker run -p 8000:8000 ixpansion
 | 127 | Entropic Economics | 8 | 23 |
 | 128 | Dimensional Threading | 8 | 22 |
 | 129 | Semantic Alchemy | 8 | 25 |
+| 130 | Astral Navigation | 8 | 22 |
 
 ## License
 
