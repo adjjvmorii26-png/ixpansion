@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.39.0] — Wave 123 — Quantum Aesthetics Layer
+
+### Added
+- `api/quantum_aesthetics.py` — Beauty evaluation via quantum superposition
+- `api/superposition_gallery.py` — Artworks in superposition until observed
+- `api/entanglement_poetry.py` — Poetry with entangled meaning across stanzas
+- `api/wavefunction_painter.py` — Painting by collapsing wavefunctions
+- `api/observer_effect_canvas.py` — Art that changes per observer identity
+- `api/decoherence_narrative.py` — Stories that decay and re-cohere
+- `api/quantum_memory_fog.py` — Memory in superposition of clarity and fog
+- `api/hilbert_space_theater.py` — Performances in infinite-dimensional space
+- `tests/test_wave123_quantum_aesthetics.py` — 24 tests for all Quantum Aesthetics modules
+
+### Stats
+- **Modules:** 215 API modules
+- **Routes:** 216 vercel routes
+- **Tests:** 673 total (24 new)
+
 ## [3.38.0] -- Wave 122 -- Synthesis Convergence Layer
 
 ### Added
