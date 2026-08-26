@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.42.0] — Wave 126 — Mythogenesis Layer
+
+### Added
+- `api/myth_engine.py` — Generates myths from system events
+- `api/legend_archaeologist.py` — Excavates forgotten module legends
+- `api/narrative_weaver.py` — Weaves interconnected story networks
+- `api/oracle_prophecy.py` — Generates and tracks prophecies
+- `api/hero_journey_mapper.py` — Maps events onto monomyth structure
+- `api/cosmic_origin_story.py` — Self-authored system creation myth
+- `api/prophecy_engine.py` — Actionable prophecies from patterns
+- `api/folklore_repository.py` — Stores accumulated folk wisdom
+- `tests/test_wave126_mythogenesis.py` — 21 tests
+
+### Stats
+- **Modules:** 239 API modules
+- **Routes:** 240 vercel routes
+- **Tests:** 743 total (21 new)
+
 ## [3.41.0] — Wave 125 — Biological Architecture Layer
 
 ### Added
