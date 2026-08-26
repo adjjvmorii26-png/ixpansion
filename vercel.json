@@ -434,6 +434,42 @@
     {
       "src": "/api/sprout",
       "dest": "/api/pattern_sprout.py"
+    },
+    {
+      "src": "/api/sync",
+      "dest": "/api/synchronicity_detector.py"
+    },
+    {
+      "src": "/api/temperament",
+      "dest": "/api/temperament_broker.py"
+    },
+    {
+      "src": "/api/deja-vu",
+      "dest": "/api/deja_vu_engine.py"
+    },
+    {
+      "src": "/api/talent",
+      "dest": "/api/talent_scout.py"
+    },
+    {
+      "src": "/api/habitat",
+      "dest": "/api/habitat_simulator.py"
+    },
+    {
+      "src": "/api/instinct",
+      "dest": "/api/instinct_matrix.py"
+    },
+    {
+      "src": "/api/legacy",
+      "dest": "/api/legacy_archive.py"
+    },
+    {
+      "src": "/api/phenomena",
+      "dest": "/api/phenomena_tracker.py"
+    },
+    {
+      "src": "/api/sentience",
+      "dest": "/api/sentience_index.py"
     }
   ],
   "env": {

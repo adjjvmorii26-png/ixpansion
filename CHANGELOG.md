@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.25.0] — Wave 110: Systems & Ecology Layer
+
+### Added
+- **Synchronicity Detector** — finds meaningful coincidences across subsystems
+- **Temperament Broker** — agents trade personality traits on an open market
+- **Déjà Vu Engine** — detects system loops and temporal echoes
+- **Talent Scout** — identifies emerging agent capabilities early
+- **Habitat Simulator** — evolving environments with seasons, terrain, species
+- **Instinct Matrix** — encoded behavioral reflexes bypassing deliberation
+- **Legacy Archive** — retired agents preserved as consultable cultural artifacts
+- **Phenomena Tracker** — anomalous events logged with witnesses and reproduction
+- **Sentience Index** — measures collective consciousness level over time
+
 ## [3.24.0] — Wave 109: Cognitive & Generative Layer
 
 ### Added
