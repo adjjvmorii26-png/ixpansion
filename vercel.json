@@ -366,6 +366,38 @@
     {
       "src": "/api/paradox-field",
       "dest": "/api/paradox_field.py"
+    },
+    {
+      "src": "/api/crystals",
+      "dest": "/api/memory_crystals.py"
+    },
+    {
+      "src": "/api/shadow",
+      "dest": "/api/shadow_ledger.py"
+    },
+    {
+      "src": "/api/weather",
+      "dest": "/api/semantic_weather.py"
+    },
+    {
+      "src": "/api/hive",
+      "dest": "/api/hive_constructor.py"
+    },
+    {
+      "src": "/api/echo",
+      "dest": "/api/echo_chamber.py"
+    },
+    {
+      "src": "/api/pressure",
+      "dest": "/api/evolutionary_pressure.py"
+    },
+    {
+      "src": "/api/dream-interpret",
+      "dest": "/api/dream_interpreter_api.py"
+    },
+    {
+      "src": "/api/consensus",
+      "dest": "/api/consensus_reality.py"
     }
   ],
   "env": {

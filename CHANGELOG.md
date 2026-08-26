@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.23.0] — Wave 108: Sensory & Environmental Layer
+
+### Added
+- **Memory Crystallization** — memories form searchable crystal lattices with facets
+- **Shadow Ledger** — records everything that DIDN'T happen (counterfactual history)
+- **Semantic Weather** — atmospheric conditions of meaning (fog, storms, auroras)
+- **Hive Constructor** — swarm-intelligence building without blueprints
+- **Echo Chamber** — messages gain distortion and amplification through bouncing
+- **Evolutionary Pressure** — environmental forces driving agent adaptation
+- **Dream Interpreter API** — extract metaphors, anomalies, and predictions from dreams
+- **Consensus Reality** — observers collapse possibility into shared existence through voting
+
 ## [3.22.0] — Wave 107: Meta-Evolution Layer
 
 ### Added

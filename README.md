@@ -1,9 +1,9 @@
 # IXpansion
 
-> *The Computational Frontier* — 87 API modules, 157+ experiments, multi-agent sandbox
+> *The Computational Frontier* — 95 API modules, 157+ experiments, multi-agent sandbox
 
-[![Tests](https://img.shields.io/badge/tests-299%2B%20passing-brightgreen)]()
-[![API](https://img.shields.io/badge/API-89%20routes-blue)]()
+[![Tests](https://img.shields.io/badge/tests-323%2B%20passing-brightgreen)]()
+[![API](https://img.shields.io/badge/API-97%20routes-blue)]()
 [![Experiments](https://img.shields.io/badge/experiments-157%2B-purple)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
 
@@ -33,7 +33,7 @@ curl /api/telemetry
 
 ```
 ixpansion/
-├── api/                    # 87 REST API modules
+├── api/                    # 95 REST API modules
 │   ├── core/               # agents, experiments, sandbox
 │   ├── revenue/            # billing, crypto, credits, marketplace
 │   ├── intelligence/       # cognitive resonance, neural fabric, memory palace
@@ -44,7 +44,7 @@ ixpansion/
 ├── dashboard/              # Observatory web UI
 ├── main.py                 # CLI entry point
 ├── vercel.json             # Deployment config (3 regions)
-└── tests/                  # 16 test files, 299+ test functions
+└── tests/                  # 17 test files, 323+ test functions
 ```
 
 ## API Modules (79)
