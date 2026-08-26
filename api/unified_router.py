@@ -1,4 +1,4 @@
-"""Unified Router — single entry point to all 158+ API modules.
+"""Unified Router — single entry point to all 191+ API modules.
 
 Routes requests to the appropriate module handler based on the module
 name. Provides module discovery, health checks, and batch execution.

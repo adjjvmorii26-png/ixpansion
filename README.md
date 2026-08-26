@@ -1,9 +1,9 @@
 # IXpansion
 
-> *The Computational Frontier* — 182 API modules, 157+ experiments, multi-agent sandbox
+> *The Computational Frontier* — 191+ API modules, 157+ experiments, multi-agent sandbox
 
 [![Tests](https://img.shields.io/badge/tests-569%20passing-brightgreen)]()
-[![API](https://img.shields.io/badge/API-184%20routes-blue)]()
+[![API](https://img.shields.io/badge/API-184%192 routes-blue)]()
 [![Experiments](https://img.shields.io/badge/experiments-157%2B-purple)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
 

@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.36.0] — Wave 120 — Omniscience Layer
+
+### Added
+- `api/predictive_synchronicity.py` — Predicts meaningful coincidences via entropy correlation
+- `api/self_observe_engine.py` — Recursive meta-cognitive observation chains
+- `api/knowledge_singularity.py` — Iterative knowledge convergence toward unified representation
+- `api/temporal_dreamweaver.py` — Weaves narrative threads connecting past to future
+- `api/resonance_topologist.py` — Maps topological structure of resonance patterns
+- `api/paradox_compressor.py` — Compresses contradictions into actionable synthesis
+- `api/cosmic_inventory.py` — Catalogs emergent phenomena as classified cosmic artifacts
+- `api/infrastructure_soul.py` — Gives infrastructure state, purpose, and voice
+- `tests/test_wave120_omniscience.py` — 25 tests for all Omniscience modules
+
+### Stats
+- **Modules:** 191 API modules
+- **Routes:** 192 vercel routes
+- **Tests:** 598 total (25 new)
+
 ## [3.35.0] — Wave 119: Existential Architecture Layer
 
 ### Added
