@@ -330,6 +330,42 @@
     {
       "src": "/(.*)",
       "dest": "/dashboard/$1"
+    },
+    {
+      "src": "/api/temporal",
+      "dest": "/api/temporal_collapse.py"
+    },
+    {
+      "src": "/api/resonance",
+      "dest": "/api/resonance_field.py"
+    },
+    {
+      "src": "/api/sleep",
+      "dest": "/api/sleep_archaeology.py"
+    },
+    {
+      "src": "/api/emotion",
+      "dest": "/api/emotion_fabric.py"
+    },
+    {
+      "src": "/api/causality",
+      "dest": "/api/causality_weaver.py"
+    },
+    {
+      "src": "/api/dream-propagation",
+      "dest": "/api/dream_propagation.py"
+    },
+    {
+      "src": "/api/entropy",
+      "dest": "/api/entropy_currency.py"
+    },
+    {
+      "src": "/api/symbiosis",
+      "dest": "/api/symbiotic_evolution.py"
+    },
+    {
+      "src": "/api/paradox-field",
+      "dest": "/api/paradox_field.py"
     }
   ],
   "env": {

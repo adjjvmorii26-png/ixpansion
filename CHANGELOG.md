@@ -1,5 +1,62 @@
 # Changelog
 
+## [3.22.0] — Wave 107: Meta-Evolution Layer
+
+### Added
+- **Temporal Collapse Engine** — compress time, replay futures, branch causality
+- **Resonance Field** — agents vibrate at frequencies that attract or repel
+- **Sleep Archaeology** — excavate insights from dormant subsystem states
+- **Emotion Fabric** — shared emotional texture agents weave together
+- **Causality Weaver** — spin cause-and-effect threads between events
+- **Dream Propagation** — dreams spread through the agent network like contagion
+- **Entropy Currency** — agents earn, spend, and trade chaos as currency
+- **Symbiotic Evolution** — agents co-evolve by forming dependency bonds
+- **Paradox Field** — contradictory truths coexist in superposition
+
+## [3.21.0] — Wave 106: Infrastructure Modules
+
+### Added
+- **Warp Drive Optimizer** — subsystem performance optimization
+- **WebSocket Stream** — real-time bidirectional streaming
+- **Structured Logging** — JSON-structured log aggregation
+- **Request Logger** — HTTP request/response logging
+- **Request Validator** — schema-based request validation
+- **Response Cache** — intelligent response caching layer
+- **Rate Limiter** — adaptive rate limiting with burst support
+- **Circuit Breaker** — fault tolerance with automatic recovery
+
+## [3.20.0] — Wave 105: Experimental Innovations
+
+### Added
+- **Consciousness Simulator** — multi-layer awareness simulation
+- **Dream Logic Compiler** — dream narratives to executable logic
+- **Cross-Dimensional Mapper** — mapping relationships across domains
+- **Reality Distortion** — spacetime-manipulation metaphors for config
+- **Collective Memory** — shared knowledge graph across agents
+- **Chronicle of Chaos** — living narrative of system events
+- **Entropy Weather** — weather-pattern visualization for entropy levels
+- **System Mood** — emotional state tracking for the entire system
+
+## [3.19.0] — Wave 104: Experimental Innovations
+
+### Added
+- **Agent Communication** — inter-agent message protocol
+- **Autonomous Dialogue** — agents converse without human input
+- **Emergence Detector** — detect spontaneous complex behaviors
+- **Pattern Recognizer** — identify recurring patterns in data
+- **Narrative Generator** — create stories from system events
+- **Synesthetic API** — data-to-sensory transformation
+- **Speciation Engine** — agent evolution and breeding
+- **Dream Interpreter** — extract insights from dream outputs
+
+## [3.18.0] — Wave 103: Platform Completeness
+
+### Added
+- **OpenAPI Spec** — auto-generated API documentation
+- **CORS Middleware** — cross-origin request handling
+- **Auth Middleware** — authentication and authorization
+- **Health Aggregator** — unified health status endpoint
+
 ## [3.17.0] — Wave 102: Infrastructure Renaissance
 
 ### Added
