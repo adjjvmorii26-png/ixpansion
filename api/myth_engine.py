@@ -75,3 +75,37 @@ class MythEngine:
         total_characters = sum(len(m.characters) for m in self._myths)
         return {"total_myths": len(self._myths), "total_chapters": total_chapters,
                 "total_characters": total_characters, "generations": self._generation_count}
+
+
+# Backward-compatible methods for Wave 118 tests
+class _MythEngineCompat:
+    """Mixin providing legacy API methods for backward compatibility."""
+
+    def create_myth(self, name: str, event: str, author: str = "") -> Dict[str, Any]:
+        myth = self.generate(name, event)
+        return {"myth": {"id": myth.id, "title": name, "name": name, "event": event, "author": author,
+                          "believers": [], "evolutions": 1}}
+
+    def believe(self, myth_id: str, believer: str) -> Dict[str, Any]:
+        for m in self._myths:
+            if m.id == myth_id:
+                if not hasattr(m, 'believers'):
+                    m.believers = []
+                m.believers.append(believer)
+                return {"now_believes": m.title}
+        return {"error": "myth not found"}
+
+    def evolve(self, myth_id: str, new_event: str, evolver: str = "") -> Dict[str, Any]:
+        for m in self._myths:
+            if m.id == myth_id:
+                m.add_chapter(f"Evolution: {new_event}")
+                if not hasattr(m, 'evolutions'):
+                    m.evolutions = 1
+                m.evolutions += 1
+                return {"evolution_count": m.evolutions}
+        return {"error": "myth not found"}
+
+
+# Patch the main class
+for method_name in ['create_myth', 'believe', 'evolve']:
+    setattr(MythEngine, method_name, getattr(_MythEngineCompat, method_name))

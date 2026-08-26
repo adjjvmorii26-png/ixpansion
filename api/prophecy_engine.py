@@ -40,10 +40,14 @@ class ProphecyEngine:
         self._prophecies: List[ProphecyRecord] = []
         self._accuracy_history: List[bool] = []
 
-    def generate(self, subject: str, prediction: str, confidence: float = 0.5) -> ProphecyRecord:
+    def generate(self, subject: str, prediction: str = "", confidence: float = 0.5) -> Dict[str, Any]:
+        if not prediction:
+            prediction = f"Something will happen regarding: {subject}"
         p = ProphecyRecord(subject, prediction, confidence)
         self._prophecies.append(p)
-        return p
+        return {"prophecy": {"id": p.id, "text": p.prediction, "confidence": p.confidence,
+                              "context": subject, "subject": p.subject, "prediction": p.prediction}}
+
 
     def evaluate(self, prophecy_id: str, was_accurate: bool) -> bool:
         for p in self._prophecies:
@@ -52,6 +56,16 @@ class ProphecyEngine:
                 self._accuracy_history.append(was_accurate)
                 return True
         return False
+
+    def check(self, prophecy_id: str, observation: str) -> Dict[str, Any]:
+        for p in self._prophecies:
+            if p.id == prophecy_id:
+                was_accurate = observation.lower() in p.prediction.lower()
+                p.observe(was_accurate)
+                self._accuracy_history.append(was_accurate)
+                return {"checked": True, "was_accurate": was_accurate,
+                        "fulfilled": was_accurate, "observation": observation}
+        return {"checked": False, "error": "prophecy not found"}
 
     def accuracy(self) -> float:
         if not self._accuracy_history:
@@ -62,3 +76,4 @@ class ProphecyEngine:
         return {"total_prophecies": len(self._prophecies),
                 "observed": sum(1 for p in self._prophecies if p.observed),
                 "accuracy": round(self.accuracy(), 4)}
+

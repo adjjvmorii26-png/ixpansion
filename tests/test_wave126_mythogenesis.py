@@ -128,8 +128,8 @@ class TestCosmicOriginStory:
 class TestProphecyEngine:
     def test_generate_and_evaluate(self):
         pe = ProphecyEngine()
-        p = pe.generate("uptime", "system will stay up", 0.9)
-        ok = pe.evaluate(p.id, was_accurate=True)
+        result = pe.generate("uptime", "system will stay up", 0.9)
+        ok = pe.evaluate(result["prophecy"]["id"], was_accurate=True)
         assert ok is True
         assert pe.accuracy() == 1.0
 
