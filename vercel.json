@@ -562,6 +562,34 @@
     {
       "src": "/api/future-echo",
       "dest": "/api/future_echo.py"
+    },
+    {
+      "src": "/api/gossip",
+      "dest": "/api/gossip_network.py"
+    },
+    {
+      "src": "/api/factions",
+      "dest": "/api/faction_system.py"
+    },
+    {
+      "src": "/api/auction",
+      "dest": "/api/talent_auction.py"
+    },
+    {
+      "src": "/api/story",
+      "dest": "/api/story_forge.py"
+    },
+    {
+      "src": "/api/territory",
+      "dest": "/api/territory_map.py"
+    },
+    {
+      "src": "/api/attention-econ",
+      "dest": "/api/attention_economy.py"
+    },
+    {
+      "src": "/api/skills",
+      "dest": "/api/skill_tree.py"
     }
   ],
   "env": {

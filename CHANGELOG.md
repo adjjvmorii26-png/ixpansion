@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.29.0] — Wave 114: Social & Ecosystem Layer
+
+### Added
+- **Gossip Network** — information spreads with mutation through social connections
+- **Faction System** — political groups with competing ideologies
+- **Talent Auction** — agents bid on each other's specialized capabilities
+- **Story Forge** — collaborative narrative writing across multiple agents
+- **Territory Map** — spatial claiming, defense, and resource generation
+- **Attention Economy** — limited attention as currency, engagement as earning
+- **Skill Tree** — hierarchical capability structures with teaching
+
 ## [3.28.0] — Wave 113: Temporal & Dimensional Layer
 
 ### Added
