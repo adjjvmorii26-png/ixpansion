@@ -68,3 +68,49 @@ class TemporalArbitrageEngine:
         executed = sum(1 for o in self._opportunities if o.executed)
         return {"opportunities": len(self._opportunities), "executed": executed,
                 "total_profit": round(self._total_profit, 4)}
+
+
+
+# Backward-compatibility for Wave 102 tests
+class TemporalArbitrage:
+    def __init__(self):
+        self._bridges: Dict[str, Dict[str, Any]] = {}
+        self._history: List[Dict[str, Any]] = []
+
+    def setup(self, resource: str, trader: str, low: float, high: float) -> Dict[str, Any]:
+        import hashlib as _hl
+        bid = _hl.sha256(f"{resource}:{trader}".encode()).hexdigest()[:8]
+        self._bridges[bid] = {"resource": resource, "trader": trader,
+                               "low": low, "high": high}
+        return {"bridge_id": bid, "resource": resource, "low": low, "high": high}
+
+    def execute(self, bridge_id: str, current_price: float = 0.0) -> Dict[str, Any]:
+        bridge = self._bridges.get(bridge_id)
+        if not bridge:
+            return {"error": "bridge not found"}
+        action = "buy" if current_price <= bridge["low"] else "sell" if current_price >= bridge["high"] else "hold"
+        profit = 0.0
+        if action == "buy":
+            profit = bridge["low"] - current_price
+        elif action == "sell":
+            profit = current_price - bridge["high"]
+        result = {"bridge_id": bridge_id, "action": action, "price": current_price,
+                  "profit": round(max(0.0, profit), 4), "trader": bridge["trader"]}
+        self._history.append(result)
+        return result
+
+    def opportunities(self) -> List[Dict[str, Any]]:
+        return [{"bridge_id": bid, "resource": b["resource"],
+                 "low": b["low"], "high": b["high"]} for bid, b in self._bridges.items()]
+
+    def history_log(self, limit: int = 10) -> List[Dict[str, Any]]:
+        return self._history[-limit:]
+
+    def get_history(self) -> List[Dict[str, Any]]:
+        return list(self._history)
+
+    def handler(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        return {"status": "active", "bridges": len(self._bridges)}
+
+def handler(payload: Dict[str, Any], context: Any = None) -> Dict[str, Any]:
+    return {"status": "active", "module": "temporal_arbitrage"}
