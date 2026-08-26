@@ -216,6 +216,22 @@
       "dest": "/api/experiment_runner.py"
     },
     {
+      "src": "/health/live",
+      "dest": "/api/unified_health.py"
+    },
+    {
+      "src": "/logging",
+      "dest": "/api/structured_logging.py"
+    },
+    {
+      "src": "/cors",
+      "dest": "/api/cors_middleware.py"
+    },
+    {
+      "src": "/openapi",
+      "dest": "/api/openapi_spec.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dashboard/$1"
     }
