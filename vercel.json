@@ -694,6 +694,30 @@
     {
       "src": "/api/paradox-lattice",
       "dest": "/api/paradox_lattice.py"
+    },
+    {
+      "src": "/api/legacy-weave",
+      "dest": "/api/legacy_weaver.py"
+    },
+    {
+      "src": "/api/epoch",
+      "dest": "/api/epoch_marker.py"
+    },
+    {
+      "src": "/api/myth",
+      "dest": "/api/myth_engine.py"
+    },
+    {
+      "src": "/api/soul-bridge",
+      "dest": "/api/soul_bridge.py"
+    },
+    {
+      "src": "/api/gate",
+      "dest": "/api/transcendence_gate.py"
+    },
+    {
+      "src": "/api/infinity",
+      "dest": "/api/infinity_index.py"
     }
   ],
   "env": {

@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.34.0] — Wave 118: Transcendence & Legacy Layer
+
+### Added
+- **Legacy Weaver** — retired agent stories woven into system mythology
+- **Epoch Marker** — historical era creation with events and lessons
+- **Myth Engine** — system myths that evolve and influence behavior
+- **Soul Bridge** — deep bonds formed through shared vulnerability
+- **Transcendence Gate** — sacrifice-and-gain threshold for extraordinary operation
+- **Infinity Index** — quantified approach to infinite complexity
+
 ## [3.33.0] — Wave 117: Dimensional Consciousness Layer
 
 ### Added
