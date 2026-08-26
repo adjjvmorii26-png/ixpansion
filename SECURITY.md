@@ -2,20 +2,25 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 3.45.x  | :white_check_mark: |
+| 3.44.x  | :white_check_mark: |
+| < 3.40  | :x:                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you discover a security vulnerability in IXpansion, please report it responsibly:
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+1. **Do not** open a public GitHub issue
+2. Email the maintainers or use GitHub's private vulnerability reporting
+3. Include a description of the vulnerability and steps to reproduce
+4. You can expect an initial response within 48 hours
+
+## Security Measures
+
+- No credentials are committed to the repository
+- API keys are validated at the gateway level
+- Rate limiting is enforced on all endpoints
+- CORS is configured to allow only necessary origins
+- The `.env` file is gitignored and must never be committed
