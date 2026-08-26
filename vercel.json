@@ -296,6 +296,38 @@
       "dest": "/api/fractal_growth.py"
     },
     {
+      "src": "/ws",
+      "dest": "/api/websocket_stream.py"
+    },
+    {
+      "src": "/health-agg",
+      "dest": "/api/health_aggregator.py"
+    },
+    {
+      "src": "/auth-mw",
+      "dest": "/api/auth_middleware.py"
+    },
+    {
+      "src": "/requestlog",
+      "dest": "/api/request_logger.py"
+    },
+    {
+      "src": "/ratelimit",
+      "dest": "/api/rate_limiter.py"
+    },
+    {
+      "src": "/circuit",
+      "dest": "/api/circuit_breaker_standalone.py"
+    },
+    {
+      "src": "/cache",
+      "dest": "/api/response_cache.py"
+    },
+    {
+      "src": "/validate",
+      "dest": "/api/request_validator.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dashboard/$1"
     }
