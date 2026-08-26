@@ -264,6 +264,38 @@
       "dest": "/api/agent_communication.py"
     },
     {
+      "src": "/narrative",
+      "dest": "/api/narrative_generator.py"
+    },
+    {
+      "src": "/chaos",
+      "dest": "/api/chaos_orchestration.py"
+    },
+    {
+      "src": "/evolution",
+      "dest": "/api/evolution_simulator.py"
+    },
+    {
+      "src": "/collective_memory",
+      "dest": "/api/collective_memory.py"
+    },
+    {
+      "src": "/distortion",
+      "dest": "/api/reality_distortion.py"
+    },
+    {
+      "src": "/dream_logic",
+      "dest": "/api/dream_logic_compiler.py"
+    },
+    {
+      "src": "/consciousness",
+      "dest": "/api/consciousness_simulator.py"
+    },
+    {
+      "src": "/fractal",
+      "dest": "/api/fractal_growth.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dashboard/$1"
     }
