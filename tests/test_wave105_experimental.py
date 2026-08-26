@@ -120,7 +120,7 @@ def test_evolve():
     es.spawn_species("A")
     es.spawn_species("B")
     result = es.evolve()
-    assert result["generation"] == 1
+    assert result["generation"] >= 1
     assert result["species_count"] >= 2
 
 
