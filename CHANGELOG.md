@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.44.0] — Wave 128 — Dimensional Threading Layer
+
+### Added
+- `api/dimensional_thread.py` — Threads connecting parallel dimensions
+- `api/reality_fork.py` — Alternative system state forks
+- `api/parallel_universe_mapper.py` — Topology map of parallel universes
+- `api/timeline_weaver.py` — Weaves multiple timelines into coherent tapestries
+- `api/dimension_lock.py` — Locks/unlocks dimensions against interference
+- `api/multiverse_navigator.py` — Navigates paths through the multiverse
+- `api/quantum_entanglement_network.py` — Instantaneous cross-module state sharing
+- `api/dimensional_drift.py` — Tracks divergence between parallel realities
+- `tests/test_wave128_dimensional_threading.py` — 22 tests
+
+### Stats
+- **Modules:** 249 API modules
+- **Routes:** 256 vercel routes
+- **Tests:** 788 total (22 new)
+
 ## [3.43.0] — Wave 127 — Entropic Economics Layer
 
 ### Added
