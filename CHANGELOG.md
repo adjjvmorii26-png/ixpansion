@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.37.0] — Wave 121 — Infinite Recursion Layer
+
+### Added
+- `api/recursive_cathedral.py` — Self-building recursive data structures
+- `api/meta_cognition_loop.py` — Three nested layers of meta-cognition
+- `api/infinite_descent_proof.py` — Proof by infinite descent for contradictions
+- `api/dream_inception_analyzer.py` — Analyzes dreams within dreams
+- `api/fractal_memory_plaza.py` — Self-similar memory at every scale
+- `api/eigenstate_resonator.py` — Finds stable resonant states
+- `api/consciousness_cascade.py` — Propagating waves of self-awareness
+- `api/void_sculptor.py` — Creates meaning through strategic removal
+- `tests/test_wave121_recursion.py` — 26 tests for all Recursion modules
+
+### Stats
+- **Modules:** 199 API modules
+- **Routes:** 200 vercel routes
+- **Tests:** 624 total (26 new)
+
 ## [3.36.0] — Wave 120 — Omniscience Layer
 
 ### Added
