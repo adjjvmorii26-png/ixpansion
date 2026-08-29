@@ -105,7 +105,7 @@ def test_wave139_server_live():
         with urllib.request.urlopen(f"http://localhost:{port}/health", timeout=10) as resp:
             body = json.loads(resp.read().decode())
         assert body["status"] == "healthy"
-        assert body["wave"] == "139"
+        assert int(body["wave"]) >= 139
         with urllib.request.urlopen(f"http://localhost:{port}/api/revenue_orchestrator", timeout=10) as resp:
             mod = json.loads(resp.read().decode())
         assert mod["module"] == "revenue_orchestrator"

@@ -1386,14 +1386,46 @@
     {
       "src": "/api/deployment-log",
       "dest": "/api/deployment_log"
+    },
+    {
+      "src": "/api/state-store",
+      "dest": "/api/state_store"
+    },
+    {
+      "src": "/api/cold-start-kit",
+      "dest": "/api/cold_start_kit"
+    },
+    {
+      "src": "/api/snapshot-engine",
+      "dest": "/api/snapshot_engine"
+    },
+    {
+      "src": "/api/event-replay",
+      "dest": "/api/event_replay"
+    },
+    {
+      "src": "/api/stream-gateway",
+      "dest": "/api/stream_gateway"
+    },
+    {
+      "src": "/api/state-lock",
+      "dest": "/api/state_lock"
+    },
+    {
+      "src": "/api/migration-runner",
+      "dest": "/api/migration_runner"
+    },
+    {
+      "src": "/api/garbage-collector",
+      "dest": "/api/garbage_collector"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "139",
-    "NEXUS_MODULES": "337",
-    "NEXUS_ROUTES": "344"
+    "NEXUS_WAVE": "140",
+    "NEXUS_MODULES": "345",
+    "NEXUS_ROUTES": "352"
   },
   "regions": [
     "iad1",

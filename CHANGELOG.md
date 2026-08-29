@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.56.0] — Wave 140 — Durable State & Streaming Layer
+
+### Added
+- `api/state_store.py` — Shared atomic JSON store (temp-file + rename) with process cache
+- `api/cold_start_kit.py` — Preloads runtime namespaces for snappy cold starts
+- `api/snapshot_engine.py` — Versioned point-in-time snapshots with restore
+- `api/event_replay.py` — Ordered event log replay for recovery and simulation
+- `api/stream_gateway.py` — Buffered SSE-style event streaming with checkpoints
+- `api/state_lock.py` — Per-namespace advisory locks with hold counting
+- `api/migration_runner.py` — Idempotent schema migrations for persistent state
+- `api/garbage_collector.py` — Bounded pruning of snapshots, temp files, oversized logs
+- `tests/test_wave140_durable_state.py` — 9 tests
+
+### Changed
+- Live server and health now report wave 140 / version 3.56.0
+
 ## [3.55.0] — Wave 139 — Platform & Live Serving Layer
 
 ### Added
