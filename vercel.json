@@ -1130,6 +1130,38 @@
     {
       "src": "/api/worker-economy",
       "dest": "/api/worker_economy"
+    },
+    {
+      "src": "/api/workforce-genetics",
+      "dest": "/api/workforce_genetics"
+    },
+    {
+      "src": "/api/worker-narrative",
+      "dest": "/api/worker_narrative"
+    },
+    {
+      "src": "/api/labor-market",
+      "dest": "/api/labor_market"
+    },
+    {
+      "src": "/api/reputation-system",
+      "dest": "/api/reputation_system"
+    },
+    {
+      "src": "/api/autonomous-marketplace",
+      "dest": "/api/autonomous_marketplace"
+    },
+    {
+      "src": "/api/career-ladder",
+      "dest": "/api/career_ladder"
+    },
+    {
+      "src": "/api/workforce-roster",
+      "dest": "/api/workforce_roster"
+    },
+    {
+      "src": "/api/attention-reservoir",
+      "dest": "/api/attention_reservoir"
     }
   ],
   "env": {

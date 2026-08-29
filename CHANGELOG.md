@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.48.0] — Wave 132 — Labor Ecosystem Layer
+
+### Added
+- `api/workforce_genetics.py` — Evolves workers through inherited traits and mutation
+- `api/worker_narrative.py` — Per-worker life stories that inform pairing decisions
+- `api/labor_market.py` — Internal market matching labor supply with bidding demand
+- `api/reputation_system.py` — Trust tiers unlocked by delivered quality and reviews
+- `api/autonomous_marketplace.py` — Sells workforce artifacts with reputation pricing
+- `api/career_ladder.py` — Career progression gated by reputation/task milestones
+- `api/workforce_roster.py` — 24/7 shift scheduling with rest-cycle awareness
+- `api/attention_reservoir.py` — Finite shared attention rationed across workers
+- `tests/test_wave132_labor_ecosystem.py` — 9 tests
+
+### Fixed
+- `api/reputation_system.py` — reward/penalize no longer reset reputation to zero
+
 ## [3.47.0] — Wave 131 — Autonomous Workforce Layer
 
 ### Added
