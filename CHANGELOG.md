@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.51.0] — Wave 135 — Revenue Orchestration Layer
+
+### Added
+- `api/revenue_orchestrator.py` — Consolidated income pipeline across all streams
+- `api/tiered_access_system.py` — Free/pro/nexus subscriptions with quota enforcement
+- `api/service_sla.py` — On-time delivery tracking with compensation credits
+- `api/royalty_registry.py` — Resale royalties distributed to creators
+- `api/marketplace_fees.py` — Transaction fees funding treasury and worker fund
+- `api/client_portal.py` — External client onboarding, deliverables, support
+- `api/invoice_engine.py` — Invoicing with payment and overdue escalation
+- `api/growth_engine.py` — Treasury reinvestment into ROI-ranked opportunities
+- `tests/test_wave135_revenue.py` — 9 tests
+
 ## [3.50.0] — Wave 134 — Autonomous Ascension Layer
 
 ### Added

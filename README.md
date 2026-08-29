@@ -1,6 +1,6 @@
 # IXpansion
 
-> *The Computational Frontier* — 297 API modules, 157 experiments, 871 tests
+> *The Computational Frontier* — 305 API modules, 157 experiments, 880 tests
 
 [![Tests](https://img.shields.io/badge/tests-813%20passing-brightgreen)]()
 [![API](https://img.shields.io/badge/API-257%20modules-blue)]()
@@ -60,8 +60,8 @@ ixpansion/
 ├── lab/                    # 70 lab modules + 157 experiments
 ├── dashboard/              # Observatory web UI (3 pages)
 ├── main.py                 # CLI entry point
-├── vercel.json             # Deployment config (304 routes, 3 regions)
-├── tests/                  # 39 test files, 871 test functions
+├── vercel.json             # Deployment config (312 routes, 3 regions)
+├── tests/                  # 39 test files, 880 test functions
 └── Dockerfile              # Python 3.12-slim container
 ```
 
@@ -135,7 +135,7 @@ ixpansion/
 ## Testing
 
 ```bash
-python -m pytest tests/ -v          # full suite (871 tests)
+python -m pytest tests/ -v          # full suite (880 tests)
 python -m pytest tests/ -q          # quick run
 python -m pytest tests/test_core_modules.py  # core only
 ```
@@ -194,6 +194,7 @@ docker run -p 8000:8000 ixpansion
 | 132 | Labor Ecosystem | 8 | 9 |
 | 133 | Workforce Civilization | 8 | 9 |
 | 134 | Autonomous Ascension | 8 | 9 |
+| 135 | Revenue Orchestration | 8 | 9 |
 
 ## License
 
