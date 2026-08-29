@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.50.0] — Wave 134 — Autonomous Ascension Layer
+
+### Added
+- `api/autonomous_contracts.py` — Self-enforcing contracts with deadline penalties
+- `api/workforce_nexus.py` — Organizational pulse unifying all workforce subsystems
+- `api/conflict_arbitrator.py` — Precedent-based fair dispute resolution
+- `api/succession_planner.py` — Leadership handover chains for survivability
+- `api/worker_wellness.py` — Burnout alerts and regenerative rest/rotation
+- `api/guild_orders.py` — External commissions routed to best-fit guilds
+- `api/autonomy_dial.py` — Supervisor-controlled self-direction levels
+- `api/self_improvement_loop.py` — Auto-installs safe high-value worker proposals
+- `tests/test_wave134_ascension.py` — 9 tests
+
 ## [3.49.0] — Wave 133 — Workforce Civilization Layer
 
 ### Added
