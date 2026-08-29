@@ -1258,6 +1258,38 @@
     {
       "src": "/api/growth-engine",
       "dest": "/api/growth_engine"
+    },
+    {
+      "src": "/api/sovereign-access",
+      "dest": "/api/sovereign_access"
+    },
+    {
+      "src": "/api/audit-trail",
+      "dest": "/api/audit_trail"
+    },
+    {
+      "src": "/api/escrow-engine",
+      "dest": "/api/escrow_engine"
+    },
+    {
+      "src": "/api/compliance-oracle",
+      "dest": "/api/compliance_oracle"
+    },
+    {
+      "src": "/api/identity-vault",
+      "dest": "/api/identity_vault"
+    },
+    {
+      "src": "/api/fraud-detector",
+      "dest": "/api/fraud_detector"
+    },
+    {
+      "src": "/api/integrity-oracle",
+      "dest": "/api/integrity_oracle"
+    },
+    {
+      "src": "/api/notary-service",
+      "dest": "/api/notary_service"
     }
   ],
   "env": {

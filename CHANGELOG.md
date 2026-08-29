@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.52.0] — Wave 136 — Integrity & Sovereignty Layer
+
+### Added
+- `api/sovereign_access.py` — Scoped capability tokens enforced per action
+- `api/audit_trail.py` — Append-only, hash-chained tamper-evident ledger
+- `api/escrow_engine.py` — Locked payment pools with dispute freezing
+- `api/compliance_oracle.py` — Standards scoring with flagged violations
+- `api/identity_vault.py` — Decentralized identities with attestations
+- `api/fraud_detector.py` — Anomaly detection for wash trades and impossible throughput
+- `api/integrity_oracle.py` — Fused integrity score with remediation steps
+- `api/notary_service.py` — Signed timestamped witnesses of events
+- `tests/test_wave136_integrity.py` — 9 tests
+
 ## [3.51.0] — Wave 135 — Revenue Orchestration Layer
 
 ### Added
