@@ -21,7 +21,7 @@ WAVE = "139"
 
 def collect_health() -> dict:
     api_dir = ROOT / "api"
-    module_count = len([p for p in api_dir.glob("*.py") if p.stem != "__init__"]) if api_dir.exists() else 0
+    module_count = len(list(api_dir.glob("*.py"))) if api_dir.exists() else 0
 
     route_count = 0
     try:
