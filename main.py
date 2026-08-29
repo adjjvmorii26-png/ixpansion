@@ -64,8 +64,8 @@ def cmd_status():
     print(f"  Species:         {len(se.species)} evolved")
 
     print()
-    print(f"  Total API modules: 329")
-    print(f"  Total routes:      336")
+    print(f"  Total API modules: 337")
+    print(f"  Total routes:      344")
     print(f"  Total regions:     3 (iad1, sfo1, lhr1)")
     print()
 
@@ -175,22 +175,10 @@ def cmd_entropy():
 
 
 def cmd_serve():
-    print("  Starting IXpansion dev server on http://localhost:3000")
-    print("  Dashboard: http://localhost:3000/dashboard/")
-    print("  API docs:  http://localhost:3000/docs.py")
-    print()
-    import http.server
-    import functools
-
-    class Handler(http.server.SimpleHTTPRequestHandler):
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, directory=ROOT, **kwargs)
-
-    server = http.server.HTTPServer(("0.0.0.0", 3000), Handler)
-    try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        print("\n  Server stopped.")
+    """Start the live API + dashboard server (Wave 139 platform layer)."""
+    import api_server
+    port = int(os.environ.get("PORT", "3000"))
+    api_server.serve(port=port)
 
 
 COMMANDS = {

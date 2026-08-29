@@ -8,7 +8,7 @@ services:
     environment:
       - NEXUS_MODE=production
       - NEXUS_SEED=42
-      - NEXUS_WAVE=102
+      - NEXUS_WAVE=139
     volumes:
       - ./.runtime:/app/.runtime
       - ./backup:/app/backup

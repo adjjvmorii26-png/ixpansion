@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.55.0] — Wave 139 — Platform & Live Serving Layer
+
+### Added
+- `api_server.py` — Live stdlib-only API + dashboard server mirroring the Vercel surface
+- `api/uptime_monitor.py` — Request success windows and availability tracking
+- `api/metrics_exporter.py` — Prometheus-style operational metrics export
+- `api/runtime_config.py` — Central runtime env config with validation
+- `api/route_registry.py` — Self-aware route map loaded from vercel.json
+- `api/cache_manager.py` — Bounded TTL response cache for warm paths
+- `api/endpoint_docs.py` — Self-documenting endpoint catalog
+- `api/platform_pulse.py` — Fused live-health signal for dashboards
+- `api/deployment_log.py` — Durable JSON deployment history
+- `tests/test_wave139_platform.py` — 10 tests (incl. live server round-trip)
+
+### Changed
+- `main.py serve` now boots the full API + dashboard server (was static-only)
+- `api/health.py` reflects real module/route/test telemetry
+- `vercel.json` env config corrected to wave 139 / 337 modules / 344 routes
+
 ## [3.54.0] — Wave 138 — Sovereign Federation Layer
 
 ### Added

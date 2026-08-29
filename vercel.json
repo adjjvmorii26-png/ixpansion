@@ -1354,14 +1354,46 @@
     {
       "src": "/api/summit-orchestrator",
       "dest": "/api/summit_orchestrator"
+    },
+    {
+      "src": "/api/uptime-monitor",
+      "dest": "/api/uptime_monitor"
+    },
+    {
+      "src": "/api/metrics-exporter",
+      "dest": "/api/metrics_exporter"
+    },
+    {
+      "src": "/api/runtime-config",
+      "dest": "/api/runtime_config"
+    },
+    {
+      "src": "/api/route-registry",
+      "dest": "/api/route_registry"
+    },
+    {
+      "src": "/api/cache-manager",
+      "dest": "/api/cache_manager"
+    },
+    {
+      "src": "/api/endpoint-docs",
+      "dest": "/api/endpoint_docs"
+    },
+    {
+      "src": "/api/platform-pulse",
+      "dest": "/api/platform_pulse"
+    },
+    {
+      "src": "/api/deployment-log",
+      "dest": "/api/deployment_log"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "102",
-    "NEXUS_MODULES": "50",
-    "NEXUS_ROUTES": "51"
+    "NEXUS_WAVE": "139",
+    "NEXUS_MODULES": "337",
+    "NEXUS_ROUTES": "344"
   },
   "regions": [
     "iad1",
