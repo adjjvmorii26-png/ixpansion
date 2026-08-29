@@ -138,3 +138,6 @@ def dream_architect_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "overview":
         return _architect.dreamscape_overview(payload.get("dreamscape", ""))
     return {"status": "active", **_architect.architect_stats()}
+
+
+handler = dream_architect_handler

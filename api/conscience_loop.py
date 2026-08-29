@@ -133,3 +133,6 @@ def conscience_loop_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "report":
         return _loop.conscience_report(payload.get("agent_id", ""))
     return {"status": "active", **_loop.loop_stats()}
+
+
+handler = conscience_loop_handler

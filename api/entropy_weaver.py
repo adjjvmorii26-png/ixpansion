@@ -98,3 +98,6 @@ def entropy_weaver_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "balanced":
         return {"threads": _weaver.perfect_balance()}
     return {"status": "active", **_weaver.weaver_stats()}
+
+
+handler = entropy_weaver_handler

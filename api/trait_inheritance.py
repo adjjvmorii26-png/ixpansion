@@ -152,3 +152,6 @@ def trait_inheritance_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "generation":
         return {"agents": _system.generation_report(payload.get("generation", 0))}
     return {"status": "active", **_system.inheritance_stats()}
+
+
+handler = trait_inheritance_handler

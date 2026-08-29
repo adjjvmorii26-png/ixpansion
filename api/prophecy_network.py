@@ -120,3 +120,6 @@ def prophecy_network_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "graph":
         return _network.prophecy_graph()
     return {"status": "active", **_network.network_stats()}
+
+
+handler = prophecy_network_handler

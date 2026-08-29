@@ -137,3 +137,6 @@ def cross_module_orchestrator_handler(payload: Dict[str, Any]) -> Dict[str, Any]
     elif action == "list":
         return {"workflows": _orchestrator.list_workflows()}
     return {"status": "active", **_orchestrator.orchestrator_stats()}
+
+
+handler = cross_module_orchestrator_handler

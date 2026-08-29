@@ -125,3 +125,6 @@ def legacy_archive_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "most_consulted":
         return {"top": _archive.most_consulted()}
     return {"status": "active", **_archive.archive_stats()}
+
+
+handler = legacy_archive_handler

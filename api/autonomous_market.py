@@ -118,3 +118,6 @@ def autonomous_market_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "trend":
         return _market.price_trend(payload.get("capability", ""))
     return {"status": "active", **_market.market_stats()}
+
+
+handler = autonomous_market_handler

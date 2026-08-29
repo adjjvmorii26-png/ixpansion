@@ -143,3 +143,6 @@ def ritual_choreographer_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "perform":
         return _choreographer.perform(payload.get("choreo_id", ""))
     return {"status": "active", **_choreographer.choreographer_stats()}
+
+
+handler = ritual_choreographer_handler

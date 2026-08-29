@@ -124,3 +124,6 @@ def pattern_sprout_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "similar":
         return {"similar": _sprout.find_similar(payload.get("pattern_type", ""))}
     return {"status": "active", **_sprout.ecosystem_stats()}
+
+
+handler = pattern_sprout_handler

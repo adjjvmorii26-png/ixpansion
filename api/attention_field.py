@@ -138,3 +138,6 @@ def attention_field_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "starved":
         return {"starved": _field.starved_topics(payload.get("threshold", 0.1))}
     return {"status": "active", **_field.field_stats()}
+
+
+handler = attention_field_handler

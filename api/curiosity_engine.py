@@ -128,3 +128,6 @@ def curiosity_engine_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "curiosity_map":
         return {"map": _engine.curiosity_map()}
     return {"status": "active", **_engine.engine_stats()}
+
+
+handler = curiosity_engine_handler

@@ -157,3 +157,6 @@ def memory_crystals_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "crystallize":
         return {"crystallized": _lattice.crystallize_all()}
     return {"status": "active", **_lattice.stats()}
+
+
+handler = memory_crystals_handler

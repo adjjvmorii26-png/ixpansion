@@ -105,3 +105,6 @@ def ego_dissolution_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "echoes":
         return {"echoes": _dissolution.agent_echoes(payload.get("agent_id", ""))}
     return {"status": "active", **_dissolution.dissolution_stats()}
+
+
+handler = ego_dissolution_handler

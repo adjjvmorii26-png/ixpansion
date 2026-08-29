@@ -102,3 +102,6 @@ def deja_vu_engine_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "cycles":
         return _engine.cycle_detection()
     return {"status": "active", **_engine.engine_stats()}
+
+
+handler = deja_vu_engine_handler

@@ -133,3 +133,6 @@ def quantum_garden_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "blooming":
         return {"plants": _garden.blooming()}
     return {"status": "active", **_garden.garden_stats()}
+
+
+handler = quantum_garden_handler

@@ -150,3 +150,6 @@ def temporal_collapse_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
         return {"replayed": future, "length": len(future)}
 
     return {"status": "active", **_engine.timeline_stats()}
+
+
+handler = temporal_collapse_handler

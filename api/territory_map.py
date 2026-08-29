@@ -119,3 +119,6 @@ def territory_map_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "power":
         return {"power_map": _map.power_map()}
     return {"status": "active", **_map.map_stats()}
+
+
+handler = territory_map_handler

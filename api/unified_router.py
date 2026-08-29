@@ -119,3 +119,6 @@ def unified_router_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
         "success_count": _router.success_count,
         "error_count": _router.error_count,
     }
+
+
+handler = unified_router_handler

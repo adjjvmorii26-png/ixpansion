@@ -106,3 +106,6 @@ def cosmic_dust_collector_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "constellations":
         return {"constellations": _collector.find_constellations()}
     return {"status": "active", **_collector.collector_stats()}
+
+
+handler = cosmic_dust_collector_handler

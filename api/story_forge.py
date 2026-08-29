@@ -122,3 +122,6 @@ def story_forge_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "library":
         return {"stories": _forge.story_library()}
     return {"status": "active", **_forge.forge_stats()}
+
+
+handler = story_forge_handler

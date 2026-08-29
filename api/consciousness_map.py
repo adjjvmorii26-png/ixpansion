@@ -150,3 +150,6 @@ def consciousness_map_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "report":
         return _map.consciousness_report()
     return {"status": "active", **_map.consciousness_report()}
+
+
+handler = consciousness_map_handler

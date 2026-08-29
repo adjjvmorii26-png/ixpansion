@@ -128,3 +128,6 @@ def resonance_memory_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
         _resonance.tick()
         return {"status": "decayed"}
     return {"status": "active", **_resonance.memory_stats()}
+
+
+handler = resonance_memory_handler

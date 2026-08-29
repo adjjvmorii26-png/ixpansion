@@ -135,3 +135,6 @@ def resonance_field_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
             )
         }
     return {"status": "active", **_field.field_stats()}
+
+
+handler = resonance_field_handler

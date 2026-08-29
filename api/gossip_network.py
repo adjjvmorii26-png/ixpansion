@@ -130,3 +130,6 @@ def gossip_network_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "agents":
         return {"agents": _network.agent_stats()}
     return {"status": "active", **_network.network_stats()}
+
+
+handler = gossip_network_handler

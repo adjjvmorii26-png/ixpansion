@@ -103,3 +103,6 @@ def infinity_index_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "report":
         return _index.full_report()
     return {"status": "active", **_index.index_stats()}
+
+
+handler = infinity_index_handler

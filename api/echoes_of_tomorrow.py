@@ -97,3 +97,6 @@ def echoes_of_tomorrow_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "emotions":
         return {"emotions": _echoes.emotion_distribution()}
     return {"status": "active", **_echoes.echo_stats()}
+
+
+handler = echoes_of_tomorrow_handler

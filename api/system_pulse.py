@@ -124,3 +124,6 @@ def system_pulse_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "report":
         return _pulse.full_report()
     return {"status": "active", **_pulse.pulse_stats()}
+
+
+handler = system_pulse_handler

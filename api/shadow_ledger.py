@@ -118,3 +118,6 @@ def shadow_ledger_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "most_rejected":
         return {"most_rejected": _ledger.most_rejected(payload.get("top_k", 5))}
     return {"status": "active", **_ledger.stats()}
+
+
+handler = shadow_ledger_handler

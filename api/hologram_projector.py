@@ -135,3 +135,6 @@ def hologram_projector_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "gallery":
         return {"holograms": _projector.gallery()}
     return {"status": "active", **_projector.projector_stats()}
+
+
+handler = hologram_projector_handler

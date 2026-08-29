@@ -137,3 +137,6 @@ def dream_interpreter_api_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "batch":
         return {"interpretations": _interpreter.batch_interpret(payload.get("dreams", []))}
     return {"status": "active", **_interpreter.stats()}
+
+
+handler = dream_interpreter_api_handler

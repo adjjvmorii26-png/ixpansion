@@ -146,3 +146,6 @@ def mutation_matrix_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "leaderboard":
         return {"leaderboard": _matrix.leaderboard()}
     return {"status": "active", **_matrix.matrix_stats()}
+
+
+handler = mutation_matrix_handler

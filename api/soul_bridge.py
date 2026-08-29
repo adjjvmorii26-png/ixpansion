@@ -104,3 +104,6 @@ def soul_bridge_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "strongest":
         return {"bridges": _bridge.strongest_bridges()}
     return {"status": "active", **_bridge.bridge_stats()}
+
+
+handler = soul_bridge_handler

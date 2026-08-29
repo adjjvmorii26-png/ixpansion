@@ -147,3 +147,6 @@ def cognitive_heatmap_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "clusters":
         return {"clusters": _heatmap.emerging_clusters()}
     return {"status": "active", **_heatmap.stats()}
+
+
+handler = cognitive_heatmap_handler

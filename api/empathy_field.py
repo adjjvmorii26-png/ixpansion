@@ -142,3 +142,6 @@ def empathy_field_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "collective":
         return _field.collective_mood()
     return {"status": "active", **_field.field_stats()}
+
+
+handler = empathy_field_handler

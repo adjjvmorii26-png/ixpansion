@@ -130,3 +130,6 @@ def attention_economy_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "leaderboard":
         return {"leaderboard": _economy.leaderboard()}
     return {"status": "active", **_economy.economy_stats()}
+
+
+handler = attention_economy_handler

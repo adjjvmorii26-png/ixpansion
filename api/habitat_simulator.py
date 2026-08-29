@@ -132,3 +132,6 @@ def habitat_simulator_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "species":
         return {"species": _simulator.species_report()}
     return {"status": "active", **_simulator.habitat_stats()}
+
+
+handler = habitat_simulator_handler

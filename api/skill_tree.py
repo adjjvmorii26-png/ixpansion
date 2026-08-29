@@ -134,3 +134,6 @@ def skill_tree_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "overview":
         return {"skills": _tree.tree_overview()}
     return {"status": "active", **_tree.tree_stats()}
+
+
+handler = skill_tree_handler

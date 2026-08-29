@@ -77,3 +77,6 @@ def cosmic_narrator_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "recent":
         return {"narratives": _narrator.recent_narratives(payload.get("count", 3))}
     return {"status": "active", **_narrator.cosmic_stats()}
+
+
+handler = cosmic_narrator_handler

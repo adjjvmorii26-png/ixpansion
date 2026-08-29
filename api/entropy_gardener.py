@@ -141,3 +141,6 @@ def entropy_gardener_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "harvest":
         return _gardener.harvest_benefits()
     return {"status": "active", **_gardener.garden_stats()}
+
+
+handler = entropy_gardener_handler

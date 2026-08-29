@@ -102,3 +102,6 @@ def philosophy_engine_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "dominant":
         return _engine.dominant_positions(payload.get("question_id", ""))
     return {"status": "active", **_engine.engine_stats()}
+
+
+handler = philosophy_engine_handler

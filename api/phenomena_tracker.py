@@ -130,3 +130,6 @@ def phenomena_tracker_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "witnessed_by":
         return {"phenomena": _tracker.witnessed_by(payload.get("agent_id", ""))}
     return {"status": "active", **_tracker.tracker_stats()}
+
+
+handler = phenomena_tracker_handler

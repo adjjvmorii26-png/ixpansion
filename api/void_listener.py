@@ -98,3 +98,6 @@ def void_listener_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "neglected":
         return {"neglected": _listener.neglected_topics(payload.get("threshold", 0.3))}
     return {"status": "active", **_listener.void_stats()}
+
+
+handler = void_listener_handler

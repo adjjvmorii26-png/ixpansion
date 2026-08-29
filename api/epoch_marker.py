@@ -110,3 +110,6 @@ def epoch_marker_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "timeline":
         return {"timeline": _marker.timeline()}
     return {"status": "active", **_marker.marker_stats()}
+
+
+handler = epoch_marker_handler

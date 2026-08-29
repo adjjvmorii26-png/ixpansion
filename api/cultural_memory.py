@@ -149,3 +149,6 @@ def cultural_memory_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "most_retold":
         return {"artifacts": _memory.most_retold()}
     return {"status": "active", **_memory.culture_stats()}
+
+
+handler = cultural_memory_handler

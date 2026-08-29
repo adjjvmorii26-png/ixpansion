@@ -145,3 +145,6 @@ def memory_weave_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "connections":
         return {"connections": _weave.discover_connections(payload.get("tapestry_id", ""))}
     return {"status": "active", **_weave.weave_stats()}
+
+
+handler = memory_weave_handler

@@ -159,3 +159,6 @@ def consensus_reality_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
         detail = _reality.entity_detail(payload.get("entity_id", ""))
         return detail or {"error": "entity not found"}
     return {"status": "active", **_reality.reality_stats()}
+
+
+handler = consensus_reality_handler

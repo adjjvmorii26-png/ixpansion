@@ -186,3 +186,6 @@ def symbiotic_evolution_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "report":
         return _evolver.agent_report(payload.get("agent_id", "")) or {"error": "agent not found"}
     return {"status": "active", **_evolver.evolution_stats()}
+
+
+handler = symbiotic_evolution_handler

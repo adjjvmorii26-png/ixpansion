@@ -151,3 +151,6 @@ def semantic_weather_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "advice":
         return _weather.advice_for_agents()
     return {"status": "active", **_weather.current_conditions()}
+
+
+handler = semantic_weather_handler

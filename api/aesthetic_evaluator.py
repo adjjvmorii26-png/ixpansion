@@ -107,3 +107,6 @@ def aesthetic_evaluator_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "recent":
         return {"scores": _evaluator.recent_scores(payload.get("count", 5))}
     return {"status": "active", **_evaluator.evaluator_stats()}
+
+
+handler = aesthetic_evaluator_handler

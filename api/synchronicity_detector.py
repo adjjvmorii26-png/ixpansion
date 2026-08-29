@@ -115,3 +115,6 @@ def synchronicity_detector_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "clusters":
         return {"clusters": _detector.coincidence_clusters()}
     return {"status": "active", **_detector.stats()}
+
+
+handler = synchronicity_detector_handler

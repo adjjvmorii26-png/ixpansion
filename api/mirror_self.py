@@ -98,3 +98,6 @@ def mirror_self_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "history":
         return {"history": _mirror.agent_history(payload.get("agent_id", ""))}
     return {"status": "active", **_mirror.mirror_stats()}
+
+
+handler = mirror_self_handler

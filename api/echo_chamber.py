@@ -147,3 +147,6 @@ def echo_chamber_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "exits":
         return {"exited": _chamber.collect_exits()}
     return {"status": "active", **_chamber.chamber_stats()}
+
+
+handler = echo_chamber_handler

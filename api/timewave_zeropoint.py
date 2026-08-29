@@ -101,3 +101,6 @@ def timewave_zeropoint_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "tick":
         return _zeropoint.tick()
     return {"status": "active", **_zeropoint.zeropoint_report()}
+
+
+handler = timewave_zeropoint_handler

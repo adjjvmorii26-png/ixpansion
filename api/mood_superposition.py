@@ -126,3 +126,6 @@ def mood_superposition_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "batch_observe":
         return {"results": _system.batch_observe(payload.get("observer", "observer"))}
     return {"status": "active", **_system.system_stats()}
+
+
+handler = mood_superposition_handler

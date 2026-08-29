@@ -118,3 +118,6 @@ def quantum_conscience_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "history":
         return {"history": _conscience.agent_history(payload.get("agent_id", ""))}
     return {"status": "active", **_conscience.conscience_stats()}
+
+
+handler = quantum_conscience_handler

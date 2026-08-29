@@ -104,3 +104,6 @@ def sleep_cycle_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "report":
         return _cycle.phase_report()
     return {"status": "active", **_cycle.sleep_stats()}
+
+
+handler = sleep_cycle_handler

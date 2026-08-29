@@ -108,3 +108,6 @@ def module_analytics_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "top":
         return {"modules": _analytics.top_modules(payload.get("by", "calls"), payload.get("top_k", 10))}
     return {"status": "active", **_analytics.system_health()}
+
+
+handler = module_analytics_handler

@@ -157,3 +157,6 @@ def dream_propagation_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
         vision = _propagator.collective_vision()
         return vision or {"message": "no collective vision yet"}
     return {"status": "active", **_propagator.stats()}
+
+
+handler = dream_propagation_handler

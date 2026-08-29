@@ -133,3 +133,6 @@ def wisdom_oracle_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "coverage":
         return {"coverage": _oracle.domain_coverage()}
     return {"status": "active", **_oracle.oracle_stats()}
+
+
+handler = wisdom_oracle_handler

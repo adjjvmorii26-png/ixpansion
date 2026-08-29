@@ -139,3 +139,6 @@ def karma_engine_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "tier":
         return {"agent": payload.get("agent_id", ""), "tier": _engine.karma_tier(payload.get("agent_id", ""))}
     return {"status": "active", **_engine.engine_stats()}
+
+
+handler = karma_engine_handler

@@ -114,3 +114,6 @@ def paradox_lattice_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "insights":
         return {"insights": _lattice.all_insights[-10:]}
     return {"status": "active", **_lattice.lattice_stats()}
+
+
+handler = paradox_lattice_handler

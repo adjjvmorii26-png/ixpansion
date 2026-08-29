@@ -127,3 +127,6 @@ def collective_dreamweaver_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "narrative":
         return _weaver.get_narrative(payload.get("session_id", ""))
     return {"status": "active", **_weaver.weaver_stats()}
+
+
+handler = collective_dreamweaver_handler

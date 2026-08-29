@@ -129,3 +129,6 @@ def paradox_resonator_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "active":
         return {"paradoxes": _resonator.active_paradoxes()}
     return {"status": "active", **_resonator.resonator_stats()}
+
+
+handler = paradox_resonator_handler

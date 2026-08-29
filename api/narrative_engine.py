@@ -143,3 +143,6 @@ def narrative_engine_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "climaxes":
         return {"climaxes": _engine.detect_climaxes()}
     return {"status": "active", **_engine.engine_stats()}
+
+
+handler = narrative_engine_handler

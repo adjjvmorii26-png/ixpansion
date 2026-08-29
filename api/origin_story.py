@@ -97,3 +97,6 @@ def origin_story_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "latest":
         return _story.latest_chapter()
     return {"status": "active", **_story.story_stats()}
+
+
+handler = origin_story_handler

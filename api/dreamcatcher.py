@@ -117,3 +117,6 @@ def dreamcatcher_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "interpretations":
         return {"interpretations": _catcher.interpretations()}
     return {"status": "active", **_catcher.catcher_stats()}
+
+
+handler = dreamcatcher_handler

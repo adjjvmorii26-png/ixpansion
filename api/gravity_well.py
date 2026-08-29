@@ -144,3 +144,6 @@ def gravity_well_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "strongest":
         return _well.strongest_attraction()
     return {"status": "active", **_well.stats()}
+
+
+handler = gravity_well_handler

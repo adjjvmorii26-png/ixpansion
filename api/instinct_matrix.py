@@ -118,3 +118,6 @@ def instinct_matrix_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "profile":
         return _matrix.matrix_profile(payload.get("agent_id", ""))
     return {"status": "active", **_matrix.stats()}
+
+
+handler = instinct_matrix_handler

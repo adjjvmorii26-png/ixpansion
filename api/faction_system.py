@@ -121,3 +121,6 @@ def faction_system_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "rankings":
         return {"rankings": _system.power_rankings()}
     return {"status": "active", **_system.system_stats()}
+
+
+handler = faction_system_handler

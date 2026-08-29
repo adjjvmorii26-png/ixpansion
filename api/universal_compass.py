@@ -121,3 +121,6 @@ def universal_compass_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "revealed":
         return {"purposes": _compass.revealed_purposes()}
     return {"status": "active", **_compass.compass_stats()}
+
+
+handler = universal_compass_handler

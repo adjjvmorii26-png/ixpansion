@@ -122,3 +122,6 @@ def dimensional_fold_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "active":
         return {"folds": _dimensional.active_folds()}
     return {"status": "active", **_dimensional.fold_stats()}
+
+
+handler = dimensional_fold_handler

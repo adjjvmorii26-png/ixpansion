@@ -150,3 +150,6 @@ def neural_pathway_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "strongest":
         return {"pathways": _pathway.strongest_pathways()}
     return {"status": "active", **_pathway.pathway_stats()}
+
+
+handler = neural_pathway_handler

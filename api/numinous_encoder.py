@@ -110,3 +110,6 @@ def numinous_encoder_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "recent":
         return {"messages": _encoder.recent(payload.get("count", 5))}
     return {"status": "active", **_encoder.encoder_stats()}
+
+
+handler = numinous_encoder_handler

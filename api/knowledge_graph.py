@@ -124,3 +124,6 @@ def knowledge_graph_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "gaps":
         return {"gaps": _graph.knowledge_gaps()}
     return {"status": "active", **_graph.graph_stats()}
+
+
+handler = knowledge_graph_handler

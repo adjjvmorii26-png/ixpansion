@@ -130,3 +130,6 @@ def soul_forge_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "report":
         return _forge.soul_report(payload.get("agent_id", ""))
     return {"status": "active", **_forge.forge_stats()}
+
+
+handler = soul_forge_handler

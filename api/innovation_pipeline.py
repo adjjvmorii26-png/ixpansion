@@ -135,3 +135,6 @@ def innovation_pipeline_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "view":
         return {"pipeline": _pipeline.pipeline_view()}
     return {"status": "active", **_pipeline.pipeline_stats()}
+
+
+handler = innovation_pipeline_handler

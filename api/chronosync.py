@@ -124,3 +124,6 @@ def chronosync_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "compare":
         return {"streams": _chrono.stream_comparison()}
     return {"status": "active", **_chrono.stats()}
+
+
+handler = chronosync_handler

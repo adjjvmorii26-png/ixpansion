@@ -128,3 +128,6 @@ def talent_scout_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "leaderboard":
         return {"leaderboard": _scout.leaderboard()}
     return {"status": "active", **_scout.stats()}
+
+
+handler = talent_scout_handler

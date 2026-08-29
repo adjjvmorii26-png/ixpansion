@@ -152,3 +152,6 @@ def hive_constructor_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "blueprint":
         return _constructor.blueprint_emergence()
     return {"status": "active", **_constructor.structural_integrity()}
+
+
+handler = hive_constructor_handler

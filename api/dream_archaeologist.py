@@ -112,3 +112,6 @@ def dream_archaeologist_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "eras":
         return {"eras": _archaeologist.era_report()}
     return {"status": "active", **_archaeologist.archaeologist_stats()}
+
+
+handler = dream_archaeologist_handler

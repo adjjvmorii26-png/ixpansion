@@ -170,3 +170,6 @@ def reputation_network_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "isolates":
         return {"isolates": _network.trusted_isolates()}
     return {"status": "active", **_network.network_stats()}
+
+
+handler = reputation_network_handler

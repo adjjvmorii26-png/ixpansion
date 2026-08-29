@@ -22,9 +22,9 @@ jobs:
           python-version: "3.12"
       - run: python -m pip install pytest pytest-asyncio pytest-randomly
       - name: Deterministic shuffled run A
-        run: python -m pytest -q --tb=short -p randomly --randomly-seed=101
+        run: python -m pytest tests/ -q --tb=short -p randomly --randomly-seed=101
       - name: Deterministic shuffled run B
-        run: python -m pytest -q --tb=short -p randomly --randomly-seed=202
+        run: python -m pytest tests/ -q --tb=short -p randomly --randomly-seed=202
       - name: State-core memory soak
         run: |
           python3 - <<'PY'

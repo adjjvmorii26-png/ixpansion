@@ -128,3 +128,6 @@ def emotion_weather_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "map":
         return {"zones": _weather.full_map()}
     return {"status": "active", **_weather.system_stats()}
+
+
+handler = emotion_weather_handler

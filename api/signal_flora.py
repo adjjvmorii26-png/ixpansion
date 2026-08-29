@@ -150,3 +150,6 @@ def signal_flora_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "census":
         return {"census": _garden.species_census()}
     return {"status": "active", **_garden.garden_stats()}
+
+
+handler = signal_flora_handler

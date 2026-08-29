@@ -172,3 +172,6 @@ def entropy_currency_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "leaderboard":
         return {"leaderboard": _market.leaderboard()}
     return {"status": "active", **_market.market_stats()}
+
+
+handler = entropy_currency_handler

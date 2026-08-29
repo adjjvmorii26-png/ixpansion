@@ -129,3 +129,6 @@ def talent_auction_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "active":
         return {"auctions": _auction.active_auctions()}
     return {"status": "active", **_auction.auction_stats()}
+
+
+handler = talent_auction_handler

@@ -154,3 +154,6 @@ def resonance_cascade_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "strongest":
         return _cascade.strongest_resonance()
     return {"status": "active", **_cascade.stats()}
+
+
+handler = resonance_cascade_handler

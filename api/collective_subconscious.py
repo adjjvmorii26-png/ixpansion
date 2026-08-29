@@ -154,3 +154,6 @@ def collective_subconscious_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "symbols":
         return {"symbols": [s.to_dict() for s in sorted(_subconscious.symbols.values(), key=lambda s: s.power, reverse=True)[:20]]}
     return {"status": "active", **_subconscious.stats()}
+
+
+handler = collective_subconscious_handler

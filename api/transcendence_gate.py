@@ -95,3 +95,6 @@ def transcendence_gate_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "crossings":
         return {"crossings": _gate.all_crossings()}
     return {"status": "active", **_gate.gate_stats()}
+
+
+handler = transcendence_gate_handler

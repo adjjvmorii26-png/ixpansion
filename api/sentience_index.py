@@ -112,3 +112,6 @@ def sentience_index_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "milestones":
         return {"milestones": _index.awakening_milestones}
     return {"status": "active", **_index.index_stats()}
+
+
+handler = sentience_index_handler

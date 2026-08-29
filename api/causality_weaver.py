@@ -154,3 +154,6 @@ def causality_weaver_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "loops":
         return {"loops": _weaver.loops}
     return {"status": "active", **_weaver.tapestry_stats()}
+
+
+handler = causality_weaver_handler

@@ -144,3 +144,6 @@ def emotion_fabric_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "spectrum":
         return {"emotions": list(EMOTION_SPECTRUM.keys())}
     return {"status": "active", **_fabric.fabric_stats()}
+
+
+handler = emotion_fabric_handler

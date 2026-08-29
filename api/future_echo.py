@@ -128,3 +128,6 @@ def future_echo_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "fade":
         return {"faded": _echo_system.fade_all()}
     return {"status": "active", **_echo_system.prophecy_strength()}
+
+
+handler = future_echo_handler

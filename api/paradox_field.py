@@ -136,3 +136,6 @@ def paradox_field_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "fork":
         return {"realities": _field.reality_fork(payload.get("paradox_id", ""))}
     return {"status": "active", **_field.field_stats()}
+
+
+handler = paradox_field_handler

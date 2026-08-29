@@ -105,3 +105,6 @@ def miracle_engine_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "near_misses":
         return {"near_misses": _engine.near_misses(payload.get("last_n", 10))}
     return {"status": "active", **_engine.engine_stats()}
+
+
+handler = miracle_engine_handler

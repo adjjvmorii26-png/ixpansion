@@ -91,3 +91,6 @@ def reality_compiler_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "active":
         return {"realities": _compiler.active_realities()}
     return {"status": "active", **_compiler.compiler_stats()}
+
+
+handler = reality_compiler_handler

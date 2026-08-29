@@ -132,3 +132,6 @@ def knowledge_fossil_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "finest":
         return {"finest": _bed.finest_fossils()}
     return {"status": "active", **_bed.bed_stats()}
+
+
+handler = knowledge_fossil_handler

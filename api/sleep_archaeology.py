@@ -155,3 +155,6 @@ def sleep_archaeology_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "compare":
         return _archaeologist.compare_strata(payload.get("subsystem", "unknown"))
     return {"status": "active", **_archaeologist.stratigraphy()}
+
+
+handler = sleep_archaeology_handler

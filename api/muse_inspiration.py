@@ -89,3 +89,6 @@ def muse_inspiration_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "recent":
         return {"inspirations": _muse.recent_inspirations(payload.get("count", 5))}
     return {"status": "active", **_muse.muse_report()}
+
+
+handler = muse_inspiration_handler

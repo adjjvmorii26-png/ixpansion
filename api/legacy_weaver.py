@@ -124,3 +124,6 @@ def legacy_weaver_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "mythology":
         return {"mythology": _weaver.mythology_book()}
     return {"status": "active", **_weaver.weaver_stats()}
+
+
+handler = legacy_weaver_handler

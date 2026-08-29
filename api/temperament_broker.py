@@ -123,3 +123,6 @@ def temperament_broker_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
     elif action == "market":
         return {"market": _broker.market_overview()}
     return {"status": "active", **_broker.broker_stats()}
+
+
+handler = temperament_broker_handler
