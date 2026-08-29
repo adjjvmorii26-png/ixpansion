@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.53.0] — Wave 137 — Adaptation & Resilience Layer
+
+### Added
+- `api/resilience_engine.py` — Subsystem resilience ratings with SPOF detection
+- `api/stress_simulator.py` — Synthetic shock scenarios exposing weak links
+- `api/recovery_protocol.py` — Ordered recovery plans with rollback phases
+- `api/adaptation_learner.py` — Turns shocks into applied strategy adaptations
+- `api/failure_injection.py` — Controlled fault injection with containment checks
+- `api/hazard_warning.py` — Early-warning severity ranking of emerging hazards
+- `api/continuity_planner.py` — RTO/RPO tracking with offline backups
+- `api/antifragility_core.py` — Compounding capacity gains from survived shocks
+- `tests/test_wave137_resilience.py` — 9 tests
+
 ## [3.52.0] — Wave 136 — Integrity & Sovereignty Layer
 
 ### Added

@@ -1290,6 +1290,38 @@
     {
       "src": "/api/notary-service",
       "dest": "/api/notary_service"
+    },
+    {
+      "src": "/api/resilience-engine",
+      "dest": "/api/resilience_engine"
+    },
+    {
+      "src": "/api/stress-simulator",
+      "dest": "/api/stress_simulator"
+    },
+    {
+      "src": "/api/recovery-protocol",
+      "dest": "/api/recovery_protocol"
+    },
+    {
+      "src": "/api/adaptation-learner",
+      "dest": "/api/adaptation_learner"
+    },
+    {
+      "src": "/api/failure-injection",
+      "dest": "/api/failure_injection"
+    },
+    {
+      "src": "/api/hazard-warning",
+      "dest": "/api/hazard_warning"
+    },
+    {
+      "src": "/api/continuity-planner",
+      "dest": "/api/continuity_planner"
+    },
+    {
+      "src": "/api/antifragility-core",
+      "dest": "/api/antifragility_core"
     }
   ],
   "env": {
