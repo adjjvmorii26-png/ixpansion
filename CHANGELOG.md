@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.49.0] — Wave 133 — Workforce Civilization Layer
+
+### Added
+- `api/civilization_kernel.py` — Governance hub binding economy/reputation/roster health
+- `api/heritage_system.py` — Lessons and rituals passed across worker generations
+- `api/worker_council.py` — Reputation-weighted voting on binding policies
+- `api/innovation_lab.py` — Isolated pods triaging workforce experiments
+- `api/craft_guilds.py` — Craft monopolies with certification standards
+- `api/civilization_timeline.py` — Epoch chronicle of foundings, crises, golden ages
+- `api/diaspora_engine.py` — Splinter colonies that seed domains and return knowledge
+- `api/values_compass.py` — Shared value scoreboard arbitrating policy drift
+- `tests/test_wave133_civilization.py` — 9 tests
+
 ## [3.48.0] — Wave 132 — Labor Ecosystem Layer
 
 ### Added
