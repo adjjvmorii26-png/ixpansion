@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.54.0] — Wave 138 — Sovereign Federation Layer
+
+### Added
+- `api/federation_treaty.py` — Inter-realm alliances gated by trust thresholds
+- `api/realm_ambassador.py` — Diplomatic envoys building rapport abroad
+- `api/cross_realm_trade.py` — Arbitrage commerce across trade lanes
+- `api/alliance_bank.py` — Pooled reserves and cross-realm credit issuance
+- `api/border_diplomacy.py` — Tunable border openness balancing trust and risk
+- `api/frontier_scout.py` — Ranks uncharted territories for expansion
+- `api/immigrant_integration.py` — Mentored onboarding of allied-realm arrivals
+- `api/summit_orchestrator.py` — Quorum-gated federation policies and resolutions
+- `tests/test_wave138_federation.py` — 9 tests
+
+### Refined
+- Added `handler` alias to all 101 legacy modules exposing named handlers
+- Scoped chaos-monkey and resonance-pulse CI runs to `tests/`
+
 ## [3.53.0] — Wave 137 — Adaptation & Resilience Layer
 
 ### Added
