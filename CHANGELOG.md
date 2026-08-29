@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.47.0] — Wave 131 — Autonomous Workforce Layer
+
+### Added
+- `api/workforce_orchestrator.py` — Hires workers, assigns tasks by capability, tracks quality
+- `api/skill_upgrade_path.py` — Skill evolution with proficiency levels and mastery unlocks
+- `api/task_mesh.py` — Distributed task graph with automatic rebalancing
+- `api/collaboration_hub.py` — Group task execution and worker communication journal
+- `api/performance_reviewer.py` — Evaluates workers, issues tier promotions
+- `api/automation_director.py` — Schedules recurring automated workforce jobs
+- `api/team_formation.py` — Assembles complementary teams by skill coverage
+- `api/worker_economy.py` — Internal token economy rewarding completed work
+- `tests/test_wave131_workforce.py` — 9 tests
+
 ## [3.46.0] — Wave 130 — Astral Navigation Layer
 
 ### Added

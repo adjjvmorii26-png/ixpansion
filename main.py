@@ -64,8 +64,8 @@ def cmd_status():
     print(f"  Species:         {len(se.species)} evolved")
 
     print()
-    print(f"  Total API modules: 265")
-    print(f"  Total routes:      272")
+    print(f"  Total API modules: 273")
+    print(f"  Total routes:      280")
     print(f"  Total regions:     3 (iad1, sfo1, lhr1)")
     print()
 
