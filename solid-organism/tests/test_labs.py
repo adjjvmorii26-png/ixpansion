@@ -12,6 +12,8 @@ import liminal_space
 import phosphorescence
 import memory_fern
 import tessellation
+import flocking
+import epigenetic_landscape
 
 
 class TestKintsugi:
@@ -271,3 +273,43 @@ class TestTessellation:
         r3 = tessellation.generate_tiling(depth=2)
         r5 = tessellation.generate_tiling(depth=5)
         assert r5["num_triangles"] > r3["num_triangles"]
+
+
+
+class TestFlocking:
+    def test_simulation_runs(self):
+        result = flocking.simulate(num_agents=20, num_steps=50, seed=42)
+        assert result["num_agents"] == 20
+        assert result["final_avg_speed"] > 0
+    
+    def test_flock_converges(self):
+        result = flocking.simulate(num_agents=30, num_steps=100, seed=42)
+        # Cohesion should decrease (flock gets tighter)
+        trajectory = result["cohesion_trajectory"]
+        assert trajectory[-1] < trajectory[0]
+    
+    def test_agents_stay_in_bounds(self):
+        result = flocking.simulate(num_agents=20, num_steps=50, seed=7)
+        assert result["num_steps"] == 50
+
+
+
+class TestEpigeneticLandscape:
+    def test_simulation_runs(self):
+        result = epigenetic_landscape.simulate(num_cells=10, num_steps=100, seed=42)
+        assert result["num_cells"] == 10
+        assert result["differentiated"] > 0
+    
+    def test_multiple_fates(self):
+        result = epigenetic_landscape.simulate(num_cells=15, num_steps=120, seed=42)
+        assert len(result["fate_distribution"]) > 1
+    
+    def test_all_differentiate(self):
+        result = epigenetic_landscape.simulate(num_cells=10, num_steps=150, seed=42)
+        assert result["differentiated"] == result["num_cells"]
+    
+    def test_landscape_function_works(self):
+        h1 = epigenetic_landscape._landscape_function(0.5, 5.0, 6)
+        h2 = epigenetic_landscape._landscape_function(0.5, 0.0, 6)
+        assert isinstance(h1, float)
+        assert isinstance(h2, float)
