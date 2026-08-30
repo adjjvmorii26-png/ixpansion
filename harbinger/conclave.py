@@ -18,7 +18,7 @@ from typing import Any, Dict, List
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from harbinger.agents import scout, overseer, archivist, chronicler
+from harbinger.agents import scout, overseer, archivist, chronicler, dreamer
 from harbinger.agents import gardener as gardener_agent
 from harbinger import memory as conclave_memory
 
@@ -34,6 +34,13 @@ def ceremony(dry: bool = False, ideas: List[str] = None, commit: bool = True) ->
     choice = overseer.run(pulse, ideas=ideas)
     report["agents"]["overseer"] = choice
     proposal = choice["proposal"]
+
+    # 2.5 dreamer — imagine future modules the frontier has not yet grown
+    dreamscape = dreamer.run(tense=0.6)
+    report["agents"]["dreamer"] = dreamscape
+    if dreamscape.get("dreams"):
+        # surface the freshest dream to the overseer as an available move
+        report["dreams"] = [d["name"] for d in dreamscape["dreams"][:3]]
 
     conceived: Dict[str, Any] = {"title": proposal["title"], "work": proposal["work"]}
 

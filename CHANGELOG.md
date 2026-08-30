@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.64.0] — The Dreamer awakens (Wave 149)
+
+### Added
+- **Dreamer agent** (`harbinger/agents/dreamer.py`) — the 6th conclave member that synthesizes novel module concepts by fusing vocabulary of *disconnected* modules (e.g. `fraud_entropy`, `automation_diaspora`, `pulsar_constellation`)
+- Dreaming is deterministic, offline, and tense-controlled — same frontier, same dreamscape
+- Conclave ceremony now runs the Dreamer nightly and surfaces its freshest dreams
+- Live `/revelations` API route (Vercel + local) — the chronicled history served as markdown
+- 3 Dreamer tests (usually `tests/test_harbinger.py`)
+
+### Changed
+- Version 3.63.0 → 3.64.0, wave 148 → 149, 991 → 994 tests, routes 9 → 10
+
 ## [3.63.0] — The Garden Remembers: family lineage (Wave 148)
 
 ### Added

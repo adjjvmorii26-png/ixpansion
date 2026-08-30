@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.63.0"
+VERSION = "3.64.0"
 WAVE = "147"
 WAVE_NAME = "Harbinger Conclave"
 
@@ -180,6 +180,12 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._text("ixpansion_up 1\nixpansion_modules "
                               + str(len(MODULE_REGISTRY) if MODULE_REGISTRY else 0)
                               + "\n", "text/plain; version=0.0.4; charset=utf-8")
+        if path == "/revelations":
+            rev = ROOT / "REVELATIONS.md"
+            if rev.exists():
+                return self._text(rev.read_text(encoding="utf-8"),
+                                  "text/markdown; charset=utf-8")
+            return self._json({"error": "no revelations yet"}, 404)
         if path == "/garden":
             try:
                 sys.path.insert(0, str(ROOT))

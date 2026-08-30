@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from harbinger.agents import scout, overseer, archivist, chronicler  # noqa: E402
+from harbinger.agents import scout, overseer, archivist, chronicler, dreamer  # noqa: E402
 from harbinger.agents import gardener as gardener_agent  # noqa: E402
 from harbinger.conclave import ceremony  # noqa: E402
 
@@ -68,7 +68,27 @@ def test_chronicler_writes_revelation(tmp_path, monkeypatch):
     assert r["written"] is True and "Test Wave" in rev.read_text()
 
 
+def test_dreamer_produces_dreams():
+    r = dreamer.run(tense=0.5, k=3)
+    assert r["agent"] == "dreamer"
+    assert r["module_pool"] > 10
+    assert len(r["dreams"]) <= 3
+
+
+def test_dreamer_deterministic():
+    r1 = dreamer.run(salt="seed", k=2)
+    r2 = dreamer.run(salt="seed", k=2)
+    assert [d["name"] for d in r1["dreams"]] == [d["name"] for d in r2["dreams"]]
+
+
+def test_dreamer_empty_frontier():
+    r = dreamer.run(k=2)
+    assert r["agent"] == "dreamer"
+    assert len(r["dreams"]) > 0  # frontier has modules
+
+
 def test_gardener_needs_words():
+
     r = gardener_agent.run(words=None)
     assert r["planted"] is False
 

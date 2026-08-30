@@ -40,6 +40,11 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return {"status": "active", "version": api_server.VERSION,
                 "dashboard": "served by static build"}
 
+    if path == "/revelations":
+        rev = ROOT / "REVELATIONS.md"
+        if rev.exists():
+            return {"markdown": rev.read_text(encoding="utf-8")}
+        return {"error": "no revelations yet"}
     if path == "/garden":
         import sys as _sys
         _sys.path.insert(0, str(ROOT))
