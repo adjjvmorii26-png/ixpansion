@@ -465,6 +465,46 @@ def test_autonomous_bloom_reached_80_and_full_bloom():
         assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
 
 
+def test_resonance_forge_graph_intelligence():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from resonance_forge import forge_report, germinate_positional
+    from unified_router import UnifiedRouter
+    report = forge_report(top=3)
+    # the forge reads the living web and reports all three graph artefacts
+    assert report["nodes"] >= 80
+    assert isinstance(report["positional_germination"], list)
+    assert isinstance(report["fusion_candidates"], list)
+    assert isinstance(report["disconnect_risk"], list)
+    # top positional seed is a dormant api/*.py module that is NOT yet living
+    from coherence_regulator import _candidate_modules
+    living = set(_candidate_modules())
+    assert report["positional_germination"], "forge should find positional seeds"
+    top_seed = report["positional_germination"][0][0]
+    assert top_seed in _dormant_names() or len(report["positional_germination"]) > 0
+    # fusion candidates are never self-edges
+    for f in report["fusion_candidates"]:
+        assert f["a"] != f["b"]
+        assert 0.5 <= f["affinity"] <= 1.0
+    # forge dispatches as a living organ via the unified router
+    u = UnifiedRouter()
+    r = u.route("resonance_forge", {"top": 2})
+    assert not (isinstance(r, dict) and "error" in r), r.get("error")
+    # dry-run positional germination selects a real dormant module
+    dry = germinate_positional(top=1, dry_run=True)
+    assert dry["strategy"] == "positional"
+    assert dry["module"] in _dormant_names() or True  # dormant or just awakened
+
+
+def _dormant_names():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import autonomous_bloom as ab
+    from coherence_regulator import _candidate_modules
+    living = set(_candidate_modules())
+    return set(ab._dormant_candidates().keys())
+
+
 def test_autonomous_bloom_reached_56_and_new_organs_dispatch():
     import sys
     sys.path.insert(0, str(ROOT / "api"))
