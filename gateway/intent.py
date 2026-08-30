@@ -93,6 +93,12 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # dream sequencer
     (r"\b(dream|narrative|story arc|sequence|premonition|revelation|return|journey)\b", "/api/dream_sequencer", {}),
 
+    # github bridge
+    (r"\b(github|webhook|commit|star|release|pull request|pr|fork)\b", "/api/github_bridge", {}),
+
+    # reflection pool
+    (r"\b(reflect|reflection|look at yourself|self report|how is the frontier|vitals|vital signs)\b", "/api/reflection_pool", {}),
+
     # specific modules
     (r"\b(pulsar|constellation|star|cluster)\b", "/echo", {"q": "pulsar"}),
     (r"\b(oracle|guild|conclave)\b", "/echo", {"q": "oracle"}),

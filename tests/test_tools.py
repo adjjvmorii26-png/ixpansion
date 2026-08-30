@@ -209,3 +209,36 @@ def test_intent_matcher_routes_correctly():
     assert r2["route"] == "/meter"
     r3 = match_intent("what's the frontier dreaming?")
     assert r3["route"] == "/ledger"
+
+
+def test_github_bridge_consumes_push():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import github_bridge
+    from pathlib import Path as _P
+    # clean journal first
+    jf = _P(str(ROOT / ".runtime" / "github_bridge.json"))
+    if jf.exists():
+        jf.unlink()
+    payload = {
+        "ref": "refs/heads/main",
+        "commits": [{"message": "test commit"}],
+        "repository": {"full_name": "test/repo"},
+        "sender": {"login": "tester"},
+    }
+    r = github_bridge.handler(payload)
+    assert r["action"] == "consume"
+    assert r["entry"]["event_type"] == "push"
+    state = github_bridge.bridge_state()
+    assert state["total_events_absorbed"] >= 1
+
+
+def test_reflection_pool_runs():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import reflection_pool
+    r = reflection_pool.handler({"focus": "all"})
+    assert "vitals" in r
+    assert r["vitals"]["modules"] > 0
+    assert "observations" in r
+    assert len(r["observations"]) > 0

@@ -30,7 +30,8 @@ TIER_FEATURES = {
                    "ledger", "platform_failure", "revelations", "capsule",
                    "song", "service_numinous", "temperament_origin",
                    "frontier_stream", "hex_tool", "constellation_cartographer",
-                   "reality_weaver", "synesthesia", "dream_sequencer"],
+                   "reality_weaver", "synesthesia", "dream_sequencer",
+                   "github_bridge", "reflection_pool"],
     "enterprise": ["*"],  # full access
 }
 

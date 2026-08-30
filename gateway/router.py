@@ -104,6 +104,10 @@ def _route_allowed(route: str) -> str:
         "synesthesia": "synesthesia",
         "api/dream_sequencer": "dream_sequencer",
         "dream_sequencer": "dream_sequencer",
+        "api/github_bridge": "github_bridge",
+        "github_bridge": "github_bridge",
+        "api/reflection_pool": "reflection_pool",
+        "reflection_pool": "reflection_pool",
     }
     return module_map.get(strip, strip)
 
