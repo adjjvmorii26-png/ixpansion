@@ -85,7 +85,10 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(constellation|map|cluster|neighborhood|hub|graph|topology)\b", "/api/constellation_cartographer", {}),
 
     # reality weaver
-    (r"\b(reality|weave|generate.*world|create.*world|simulate|universe|civilization)\b", "/api/reality_weaver", {}),
+    (r"\b(reality|weave|generate.*world|create.*world|simulate|universe|civilization)\b", "/api/reality_weaver", {"extract_topic": True}),
+
+    # synesthesia
+    (r"\b(synesthesia|sensory|color of|sound of|feel of|metaphor|richness|translate)\b", "/api/synesthesia", {"extract_module": True}),
 
     # specific modules
     (r"\b(pulsar|constellation|star|cluster)\b", "/echo", {"q": "pulsar"}),
@@ -115,6 +118,21 @@ def match_intent(query: str) -> Dict[str, str]:
                     result["route"] = "/echo"
             if params.get("q"):
                 result["q"] = params["q"]
+            # extract_module: for routes that need a named entity (synesthesia, reality_weaver)
+            if params.get("extract_module") or params.get("extract_topic"):
+                words = re.findall(r"[a-zA-Z_][a-zA-Z0-9_]{2,}", query_lower)
+                stop_words = {"the", "are", "what", "about", "show", "find", "search",
+                              "echo", "for", "from", "with", "what", "is", "the", "color",
+                              "sound", "feel", "metaphor", "synesthesia", "sensory", "translate",
+                              "reality", "weave", "create", "show", "me", "about", "generate",
+                              "of", "and", "a", "an", "in", "on", "how", "does", "do", "can"}
+                meaningful = [w for w in words if w.lower() not in stop_words and len(w) > 2]
+                if meaningful:
+                    target = meaningful[-1]  # last meaningful word = target
+                    if params.get("extract_module"):
+                        result["module"] = target
+                    if params.get("extract_topic"):
+                        result["q"] = " ".join(meaningful[-3:])
             return result
 
     # fallback: echo search on the whole query

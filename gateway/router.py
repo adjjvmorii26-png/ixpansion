@@ -58,8 +58,12 @@ def _dispatch(route: str, params: Optional[dict] = None) -> Tuple[Dict[str, Any]
         else:
             # Proxy through /api/<module>
             api_path = f"/api/{strip}"
-            if "q" in params:
-                api_path += f"?q={params['q']}"
+            query_parts = []
+            for k in ("q", "module", "seed", "top", "senses"):
+                if k in params:
+                    query_parts.append(f"{k}={params[k]}")
+            if query_parts:
+                api_path += "?" + "&".join(query_parts)
             result = _call("GET", api_path)
             return result, 200
 
@@ -96,6 +100,8 @@ def _route_allowed(route: str) -> str:
         "constellation_cartographer": "constellation_cartographer",
         "api/reality_weaver": "reality_weaver",
         "reality_weaver": "reality_weaver",
+        "api/synesthesia": "synesthesia",
+        "synesthesia": "synesthesia",
     }
     return module_map.get(strip, strip)
 
@@ -139,6 +145,8 @@ def handle(payload: Dict[str, Any]) -> Tuple[Dict[str, Any], int]:
         matched = match_intent(query)
         route = matched.get("route", "/health")
         params = {"q": matched["q"]} if matched.get("q") else {}
+        if matched.get("module"):
+            params["module"] = matched["module"]
     else:
         return {"error": "provide a query or route"}, 400
 

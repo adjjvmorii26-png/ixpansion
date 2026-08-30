@@ -10,6 +10,7 @@ import sympoiesis
 import stochastic_resonance
 import liminal_space
 import phosphorescence
+import memory_fern
 
 
 class TestKintsugi:
@@ -229,3 +230,25 @@ class TestPhosphorescence:
     def test_most_persistent_cell_exists(self):
         result = phosphorescence.simulate(seed=42)
         assert result["most_persistent_cell"]["persistence_ratio"] >= 0
+
+
+
+class TestMemoryFern:
+    def test_growth_runs(self):
+        result = memory_fern.analyze_growth("A", "fern", 4)
+        assert result["growth_summary"]["generations"] == 4
+        assert result["growth_summary"]["end_length"] > result["growth_summary"]["start_length"]
+
+    def test_different_rules_different_output(self):
+        r1 = memory_fern.analyze_growth("F", "dragon", 3)
+        r2 = memory_fern.analyze_growth("F", "sierpinski", 3)
+        assert r1["encoding"]["total_symbols"] != r2["encoding"]["total_symbols"]
+
+    def test_brackets_balanced(self):
+        result = memory_fern.analyze_growth("A", "fern", 5)
+        final = result["growth_curve"][-1]
+        assert final["balanced"]
+
+    def test_fractal_dimension_positive(self):
+        result = memory_fern.analyze_growth("F", "branching", 4)
+        assert result["growth_curve"][-1]["fractal_dim"] > 0

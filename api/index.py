@@ -131,6 +131,11 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}
+        # Parse query string params into payload (GET /api/<module>?key=val)
+        if "?" in raw_path:
+            from urllib.parse import urlparse, parse_qs
+            qs = parse_qs(urlparse(raw_path).query)
+            payload = {k: (v[0] if v else "") for k, v in qs.items()}
         if request_method == "POST" and body:
             try:
                 text = body.decode("utf-8", errors="replace")
