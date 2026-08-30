@@ -77,8 +77,8 @@ function renderStats(r){
   document.getElementById("stats").innerHTML = [
     ["living nodes", r.nodes],
     ["resonance edges", r.edges],
+    ["declared kinships", (r.declared_edges||[]).length],
     ["density", r.density.toFixed(2)],
-    ["avg affinity", r.avg_affinity.toFixed(3)],
   ].map(([k,v]) => `<div class="stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
 }
 function renderLists(r){

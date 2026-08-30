@@ -130,3 +130,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     result["action"] = "narrate"
     result["tones_available"] = list(TONE_ADJECTIVES.keys())
     return result
+
+
+def resonates_with() -> list:
+    """Declared kinships — the chronicler weaves narratives, so it
+    belongs beside the dream-sequencer (story arcs) and the
+    reflection-pool (both narrate the system to itself)."""
+    return ["dream_sequencer", "reflection_pool", "reality_weaver"]
+

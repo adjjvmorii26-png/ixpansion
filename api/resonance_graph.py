@@ -41,6 +41,20 @@ COMMUNITY_THRESHOLD = 0.22   # edges at/above this strength bind communities
 _CACHE_TTL = 30.0  # seconds before the graph rebuilds itself
 _GRAPH_CACHE = {"t": 0.0, "graph": None}
 
+# Declared resonance — the plug-in protocol's second rope.
+# Beyond the discovered semantic DNA, a living module may OPTIONALLY declare
+# its own chosen kinships:
+#
+#     def resonates_with() -> list:
+#         return ["dream_sequencer", "reflection_pool"]
+#
+# The graph honors these as intentional edges with DECLARED_WEIGHT. This is
+# how organs that speak a unique domain language (a chronicler, a composer)
+# can still be deliberately woven into the web instead of forced to adopt a
+# shared metric vocabulary. A web of chosen affinities is richer than a web
+# of coincidental overlaps.
+DECLARED_WEIGHT = 0.55   # strength of a chosen kinship edge
+
 # Tokens too common across the codebase to distinguish any two modules.
 _STOPWORDS = frozenset({
     "handler", "payload", "context", "return", "def", "class", "import",
@@ -86,6 +100,7 @@ def _living_modules() -> Dict[str, Dict[str, Any]]:
             "health": health,
             "metric_count": len(keys),
             "domain": _domain_tokens(name),
+            "declared": _declared_kinships(name),
         }
     return modules
 
@@ -115,6 +130,33 @@ def _domain_tokens(stem: str) -> set:
             if len(part) >= 4:
                 words.add(part.lower())
     return {w for w in words if w not in _STOPWORDS}
+
+
+def _declared_kinships(stem: str) -> set:
+    """Read an optionally-declared resonates_with() list from a living module.
+
+    Never import the module just to read this (cost + side effects) — blast
+    the function's return via regex instead. Falls back to empty set.
+    """
+    path = ROOT / "api" / f"{stem}.py"
+    try:
+        text = path.read_text(errors="ignore")
+    except OSError:
+        return set()
+    marker = "def resonates_with"
+    idx = text.rfind(marker)
+    if idx == -1:
+        return set()
+    rest = text[idx:]
+    open_i = rest.find("[")
+    close_i = rest.find("]", open_i)
+    if open_i == -1 or close_i == -1:
+        return set()
+    body = rest[open_i + 1:close_i]
+    return {tok.strip(" \"'\"") for tok in body.split(",") if tok.strip(" \"'\"")}
+
+    body = m.group(1)
+    return {tok.strip(" \'\"") for tok in body.split(",") if tok.strip(" \'\"")}
 
 
 def _vitals_keys(stem: str) -> set:
@@ -186,6 +228,7 @@ def _build_graph_uncached() -> Dict[str, Any]:
 
     adj: Dict[str, Dict[str, float]] = defaultdict(dict)
     edges = []
+    declared_edges = []
     for i in range(n):
         for j in range(i + 1, n):
             ai = _affinity(modules[names[i]], modules[names[j]])
@@ -193,6 +236,22 @@ def _build_graph_uncached() -> Dict[str, Any]:
                 adj[names[i]][names[j]] = ai
                 adj[names[j]][names[i]] = ai
                 edges.append((names[i], names[j], ai))
+    # declared resonances: chosen kinships honored as intentional edges.
+    # Add each declaration once (canonical alphabetical pair) regardless of
+    # which organ declared it, so one-sided kinships still form a symmetric edge.
+    declared_pairs = set()
+    for a in names:
+        for b in modules[a].get("declared", set()):
+            if b not in modules:
+                continue
+            pair = tuple(sorted((a, b)))
+            if pair in declared_pairs:
+                continue
+            declared_pairs.add(pair)
+            adj[a][b] = max(adj[a].get(b, 0.0), DECLARED_WEIGHT)
+            adj[b][a] = adj[a][b]
+            edges.append((pair[0], pair[1], DECLARED_WEIGHT))
+            declared_edges.append((pair[0], pair[1]))
 
     # degree centrality (weighted) — hubs are most interconnected
     degrees = {name: round(sum(adj[name].values()), 4) for name in names}
@@ -219,6 +278,7 @@ def _build_graph_uncached() -> Dict[str, Any]:
         "hubs": sorted(centrality.items(), key=lambda kv: kv[1], reverse=True),
         "bridges": sorted(betweenness.items(), key=lambda kv: kv[1], reverse=True),
         "communities": communities,
+        "declared_edges": declared_edges,
         "adjacency": {k: dict(v) for k, v in adj.items()},
         "modules": {name: modules[name]["health"] for name in names},
         "metrics": {name: sorted(modules[name]["metrics"]) for name in names},
@@ -364,3 +424,9 @@ if __name__ == "__main__":
         "bridges": [b for b in g["bridges"] if b[1] > 0][:5],
         "communities": g["communities"],
     }, indent=2))
+
+def resonates_with() -> list:
+    """Declared kinships — as the meta-observer, the graph stands beside
+    its fellow intelligence organs: the regulator that governs and the
+    bloom that grows."""
+    return ["coherence_regulator", "autonomous_bloom"]

@@ -375,6 +375,23 @@ def test_bloom_awakening_grows_the_organism():
     assert r["coherence"] > 0.95
 
 
+def test_declared_resonance_welds_isolates_into_the_web():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import resonance_graph
+    g = resonance_graph.build_graph()
+    # organs declare chosen kinships; the graph honors them as edges
+    assert len(g.get("declared_edges", [])) >= 3
+    # a chronicler that used to be an isolate is now in a community
+    communities = g["communities"]
+    all_members = [m for members in communities.values() for m in members]
+    assert "chronicle_storyteller" in all_members
+    assert "sound_cauldron" in all_members
+    assert "resonance_graph" in all_members
+    # no isolates remain
+    assert not any(len(members) == 1 for members in communities.values())
+
+
 def test_full_bloom_milestone_and_target_raised():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

@@ -160,3 +160,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     result["action"] = "brew"
     result["scales_available"] = list(SCALES.keys())
     return result
+
+
+def resonates_with() -> list:
+    """Declared kinships — the composer brews music from every
+    domain, so it sings through synesthesia (sensory translation),
+    draws worlds from reality_weaver, and dreams with dream_sequencer."""
+    return ["synesthesia", "reality_weaver", "dream_sequencer"]
+
