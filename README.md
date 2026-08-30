@@ -2,8 +2,8 @@
 
 > *The Computational Frontier* — 345 API modules, 157 experiments, 926 tests
 
-[![Tests](https://img.shields.io/badge/tests-813%20passing-brightgreen)]()
-[![API](https://img.shields.io/badge/API-257%20modules-blue)]()
+[![Tests](https://img.shields.io/badge/tests-926%20passing-brightgreen)]()
+[![API](https://img.shields.io/badge/API-344%20modules-blue)]()
 [![Routes](https://img.shields.io/badge/routes-7-blue)]()
 [![Experiments](https://img.shields.io/badge/experiments-157-purple)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
