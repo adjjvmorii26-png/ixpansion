@@ -54,3 +54,19 @@ def handler(payload: dict = None, context: object = None) -> dict:
     trade = CrossRealmTrade()
     return {"status": "active", "module": "cross_realm_trade",
             **trade.status()}
+
+
+def coherence_vitals() -> dict:
+    """cross_realm_trade reports its vital signs to the living system."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "cross_realm_trade_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships, auto-picked from shared domain language."""
+    return ['workforce_nexus', 'worker_wellness', 'system_pulse']
+

@@ -140,3 +140,19 @@ def dream_interpreter_api_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = dream_interpreter_api_handler
+
+
+def coherence_vitals() -> dict:
+    """dream_interpreter_api reports its vital signs to the living system."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "dream_interpreter_api_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships, auto-picked from shared domain language."""
+    return ['dream_synthesis', 'dream_interpreter', 'collective_subconscious']
+
