@@ -1,5 +1,29 @@
 # Changelog
 
+## [3.62.0] — Harbinger: the self-watching conclave (Wave 147)
+
+### Added
+- **Harbinger conclave** (`harbinger/`) — five agents that observe and steer the repo:
+  - **Scout** reads the pulse (modules, tests, health, dirty state, recent commits, broken refs)
+  - **Overseer** decides the next move (repair / module / garden / lean / fortify / rest / idea)
+  - **Gardener** plants new organisms via Hortus Hexis
+  - **Archivist** writes the CHANGELOG and mints the next patch version
+  - **Chronicler** records Revelations in `REVELATIONS.md`
+- **Constellation map** (`tools/constellation_map.py`) — renders every module as a star on an ASCII celestial map
+- **Crystal historian** (`tools/crystal_historian.py`) — reads git history into themed narrative timelines
+- Persistent memory ledger (`harbinger/memory.json`)
+- Orbiter entry point: `python -m harbinger.conclave --idea "..."`
+- 9 tests for the conclave (`tests/test_harbinger.py`)
+
+### Changed
+- Version 3.61.1 → 3.62.0, wave 146 → 147, 973 → 982 tests
+
+## [3.61.1] — plant a constellation seed in the garden
+
+- plant a constellation seed in the garden
+- add tests
+- commit cleanly
+
 ## [3.61.0] — Hortus Hexis: Web Garden + Cross-Pollination
 
 ### Added
