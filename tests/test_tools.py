@@ -128,3 +128,43 @@ def test_frontier_intent_analyzes_themes():
     assert len(r["focus_vector"]) >= 3
     total_share = round(sum(t["share"] for t in r["themes"]), 0)
     assert total_share >= 98  # shares roughly sum to 100
+
+def test_platform_failure_detects_health():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from platform_failure import handler
+    r = handler()
+    assert r["module"] == "platform_failure"
+    assert r["prophecy"] == "fulfilled"
+    assert "healthy" in r and "subsystems" in r
+
+
+def test_gossip_self_detects_echoes():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from gossip_self import handler
+    r = handler()
+    assert r["module"] == "gossip_self"
+    assert r["prophecy"] == "fulfilled"
+    assert r["total_echoes"] >= 5
+
+
+def test_service_numinous_finds_depth():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from service_numinous import handler
+    r = handler()
+    assert r["module"] == "service_numinous"
+    assert r["numinous_modules"] >= 10
+    assert r["deepest"]
+
+
+def test_temperament_origin_reads_character():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from temperament_origin import handler
+    r = handler()
+    assert r["module"] == "temperament_origin"
+    assert r["prophecy"] == "fulfilled"
+    assert r["character"] in ("visionary", "robust", "recollective", "emergent")
+    assert r["temperament"]["overall"] > 0

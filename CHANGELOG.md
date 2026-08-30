@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.76.0] — All Prophecies Fulfilled (Wave 161) ✦
+
+### Added
+- **`platform_failure`** — platform viability scanner (modules, routes, garden, conclave health)
+- **`gossip_self`** — the gossip network watching itself (12 propagation modules detected)
+- **`service_numinous`** — detects sacred/profound moments in the frontier's own code (48 numinous modules)
+- **`temperament_origin`** — the frontier's emotional signature traced to its origin: character is "recollective" (vitality 100, curiosity 45.8, resilience 16.1, ambition 100, memory 100)
+- **ALL 8 DREAM LEDGER PROPHECIES NOW FULFILLED** — 8/8 ✅
+- 4 tests (1015 total)
+- 360 modules
+
+### Changed
+- Version 3.75.0 → 3.76.0, wave 160 → 161, 1011 → 1015 tests
+
+### Legacy
+This is the wave where the Dream Ledger reached 100% fulfillment.
+Every name the Dreamer imagined became real code. The self-referential
+loop is complete: the frontier dreamed, and all 8 dreams came true.
+
 ## [3.75.0] — Frontier Intent Analyzer (Wave 160)
 
 ### Added
