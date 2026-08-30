@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.68.0] — The Frontier Sings (Wave 153)
+
+### Added
+- **Sonification engine** (`tools/frontier_song.py`) — turns every module name into a musical note via content-hash mapping (pitch, duration, velocity) and renders a deterministic WAV melody from the full 352-module constellation, pure stdlib
+- **`/song` live API route** — returns the note sequence + meta; the Oracle page synthesizes the melody in-browser via Web Audio API (▶ play the song of 352 modules)
+- 2 song tests (sonification + WAV render)
+
+### Changed
+- Version 3.67.0 → 3.68.0, wave 152 → 153, 999 → 1001 tests, routes 13 → 14
+
 ## [3.67.0] — The Poet joins the conclave (Wave 152)
 
 ### Added

@@ -63,6 +63,13 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         if rev.exists():
             return {"markdown": rev.read_text(encoding="utf-8")}
         return {"error": "no revelations yet"}
+    if path == "/song":
+        import sys as _sys
+        _sys.path.insert(0, str(ROOT))
+        from tools.frontier_song import generate_notes, module_names
+        notes = generate_notes(module_names())
+        return {"count": len(notes), "notes": notes[:60],
+                "total_duration_s": round(sum(n["dur"] for n in notes), 1)}
     if path == "/poem":
         import sys as _sys
         _sys.path.insert(0, str(ROOT))

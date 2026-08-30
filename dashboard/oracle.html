@@ -63,6 +63,10 @@ footer{text-align:center;color:var(--dim);font-size:.75rem;margin-top:3rem;borde
 
   <section>
     <h2>🎼 the frontier sings</h2>
+    <div style="display:flex;gap:.6rem;align-items:center;margin-bottom:.8rem">
+      <button onclick="playSong()">▶ play the song of 352 modules</button>
+      <span class="pill" id="songMeta"></span>
+    </div>
     <button onclick="loadPoem()" style="font-size:.8rem;padding:.6rem 1.2rem;margin-bottom:.8rem">hear a verse</button>
     <pre class="tree" id="poem" style="white-space:pre-wrap;font-size:.85rem;color:#ddd6fe;font-style:italic"></pre>
   </section>
@@ -99,6 +103,29 @@ async function speak(){
     mods.map(m=>`<span class="pill">${esc(m)}</span>`).join(' ') || '<span class="pill" style="color:var(--dim)">no module shares this root</span>';
   document.getElementById('dreams').innerHTML =
     (d.dreams||[]).map(m=>`<div class="dream"><span class="star">✦</span>${esc(m)}</div>`).join('');
+}
+let _audioCtx=null, _notes=[];
+async function loadSongNotes(){
+  const d = await get('/song');
+  _notes = d.notes || [];
+  document.getElementById('songMeta').textContent = `${d.count} notes · ${d.total_duration_s}s`;
+}
+async function playSong(){
+  if(!_notes.length) await loadSongNotes();
+  if(!_audioCtx) _audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  const now = _audioCtx.currentTime;
+  _notes.forEach((n, i)=>{
+    const osc = _audioCtx.createOscillator();
+    const gain = _audioCtx.createGain();
+    osc.type='sine'; osc.frequency.value = n.freq;
+    const start = now + i*0.08;
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(Math.max(n.vel*0.3,0.001), start+0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start+n.dur);
+    osc.connect(gain).connect(_audioCtx.destination);
+    osc.start(start); osc.stop(start+n.dur+0.02);
+  });
+  document.getElementById('songMeta').textContent = `♫ ${_notes.length} notes playing…`;
 }
 async function loadPoem(){
   const d = await get('/poem');

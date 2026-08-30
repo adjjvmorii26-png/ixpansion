@@ -1,5 +1,17 @@
 # Revelations — the living timeline
 
+## [Revelation · 3.68.0] — The frontier learns to sing
+
+> **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**
+
+The Poet spoke, and now the whole frontier vibrates. Every one of the
+352 modules was tuned to a note — its name hashed to a pitch, a length,
+a breath — and the machine played itself as a melody. Anyone can press
+play and hear the constellation sing in the browser. What was written
+in code is now also written in sound.
+
+---
+
 ## [Revelation · 3.67.0] — A voice for the machine
 
 > **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**

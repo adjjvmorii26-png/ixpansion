@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.67.0"
+VERSION = "3.68.0"
 WAVE = "147"
 WAVE_NAME = "Harbinger Conclave"
 
@@ -204,6 +204,12 @@ class ApiHandler(BaseHTTPRequestHandler):
                 return self._text(rev.read_text(encoding="utf-8"),
                                   "text/markdown; charset=utf-8")
             return self._json({"error": "no revelations yet"}, 404)
+        if path == "/song":
+            sys.path.insert(0, str(ROOT))
+            from tools.frontier_song import generate_notes, module_names
+            notes = generate_notes(module_names())
+            return self._json({"count": len(notes), "notes": notes[:60],
+                               "total_duration_s": round(sum(n["dur"] for n in notes), 1)})
         if path == "/poem":
             sys.path.insert(0, str(ROOT))
             from harbinger.agents import poet
