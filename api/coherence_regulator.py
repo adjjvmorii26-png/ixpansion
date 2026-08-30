@@ -104,9 +104,16 @@ def _load_state() -> Dict[str, Any]:
         return {"modules": {}, "history": [], "pulses": 0, "created_at": time.time()}
 
 
-def _save_state(state: Dict[str, Any]) -> None:
-    STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    STATE_FILE.write_text(json.dumps(state, indent=2))
+def _save_state(state: Dict[str, Any]) -> bool:
+    """Best-effort persistence. On serverless the filesystem is read-only,
+    so a failed write must never take down a reading — the regulator stays
+    self-sufficient by re-deriving the living system in-memory."""
+    try:
+        STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        STATE_FILE.write_text(json.dumps(state, indent=2))
+        return True
+    except OSError:  # pragma: no cover - read-only fs in serverless sandbox
+        return False
 
 
 # ---------------------------------------------------------------------------
@@ -176,16 +183,21 @@ def _call_vitals(module_name: str) -> Tuple[Optional[Dict[str, Any]], Optional[s
 
 
 def discover_modules(force_pulse: bool = False) -> Dict[str, Any]:
-    """Find every module with coherence_vitals(). Returns the living registry."""
+    """Find every module with coherence_vitals(). Returns the living registry.
+
+    Works identically on disk and in a serverless sandbox: the registry is
+    built in-memory from live imports, then best-effort persisted to disk.
+    """
     state = _load_state()
     modules = state.setdefault("modules", {})
 
     discovered = []
+    live = {}
     for name in _candidate_modules():
         vitals, err = _call_vitals(name)
         if vitals is None:
             continue  # not a living module — not part of the system yet
-        modules[name] = {
+        live[name] = {
             "first_seen": modules.get(name, {}).get("first_seen", time.time()),
             "last_pulse": time.time(),
             "metris": vitals,
@@ -193,9 +205,14 @@ def discover_modules(force_pulse: bool = False) -> Dict[str, Any]:
         }
         discovered.append(name)
 
-    _save_state(state)
-    return {"living_modules": sorted(discovered), "count": len(discovered)}
-
+    modules.update(live)  # merge into living memory (empty on serverless)
+    persisted = _save_state(state)
+    return {
+        "living_modules": sorted(discovered),
+        "count": len(discovered),
+        "modules": live,
+        "persisted": persisted,
+    }
 
 def _module_health(vitals: Dict[str, Dict[str, Any]]) -> float:
     """Aggregate a module's metrics into a 0..1 health score."""
@@ -222,10 +239,17 @@ def _module_health(vitals: Dict[str, Dict[str, Any]]) -> float:
 # ---------------------------------------------------------------------------
 
 def measure_coherence(module_states: Dict[str, Any] = None) -> Dict[str, Any]:
-    """Compute the whole-system coherence from module states."""
+    """Compute the whole-system coherence from module states.
+
+    When no persisted state exists (first boot, or a serverless sandbox where
+    the read-only fs means no history), the regulator self-heals by deriving
+    living modules live — the system is never dormant just because disk is.
+    """
     state = _load_state()
     modules = module_states if module_states is not None else state.get("modules", {})
-
+    if not modules:
+        live = discover_modules(force_pulse=True)
+        modules = live.get("modules", {})
     if not modules:
         return {"coherence": 0.0, "components": {}, "living_modules": 0, "status": "dormant"}
 
@@ -384,6 +408,8 @@ def handler(payload: dict = None, context: object = None) -> dict:
     # List living modules
     if payload.get("modules") or payload.get("list"):
         modules = _load_state().get("modules", {})
+        if not modules:
+            modules = discover_modules(force_pulse=True).get("modules", {})
         return {
             "action": "modules",
             "living_modules": sorted(modules.keys()),
