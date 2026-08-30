@@ -59,7 +59,7 @@ class UnifiedRouter:
             self.error_count += 1
             return {"error": f"module '{module}' not found", "available": list(MODULE_REGISTRY.keys())[:20]}
         try:
-            result = handler(payload)
+            result = self._invoke_handler(handler, payload)
             elapsed = time.time() - start
             self.success_count += 1
             self.request_log.append({
@@ -70,6 +70,25 @@ class UnifiedRouter:
         except Exception as e:
             self.error_count += 1
             return {"error": str(e), "module": module}
+
+    @staticmethod
+    def _invoke_handler(handler, payload: Dict[str, Any]) -> Any:
+        """Call a module handler regardless of its signature shape.
+
+        Some modules define handler(request, response) (two positional args),
+        others handler(payload). Inspect arity and call appropriately so the
+        unified router dispatches every living organ, old or newly germinated.
+        """
+        try:
+            import inspect
+            sig = inspect.signature(handler)
+            nparams = len([p for p in sig.parameters.values()
+                           if p.kind in (p.POSITIONAL_ONLY, p.POSITIONAL_OR_KEYWORD)])
+        except (TypeError, ValueError):
+            nparams = 1
+        if nparams >= 2:
+            return handler({}, {})
+        return handler(payload)
 
     def batch(self, requests: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         results = []

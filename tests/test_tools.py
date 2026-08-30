@@ -396,6 +396,33 @@ def test_autonomous_germination_dry_run_and_chronicle():
     assert "milestones" in c and "awakened" in c
 
 
+def test_gateway_serves_every_living_organ():
+    import sys
+    sys.path.insert(0, str(ROOT))
+    sys.path.insert(0, str(ROOT / "api"))
+    from gateway.keys import generate_key, can_access
+    from gateway.router import _route_allowed
+    import coherence_regulator
+    living = coherence_regulator.living_modules()
+    assert len(living) >= 32
+    key_data = {"tier": "free", "features": ["echo", "health", "modules"]}
+    # every living organ (incl. germinated ones) is free-tier accessible
+    for name in ("analytics", "docs", "anomaly_detector", "github_bridge"):
+        assert name in living
+        assert _route_allowed(f"/api/{name}") == name
+        assert can_access(key_data, name) is True
+
+
+def test_unified_router_dispatches_two_arg_handlers():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from unified_router import UnifiedRouter
+    u = UnifiedRouter()
+    # event_stream uses handler(request, response) -> must still dispatch
+    r = u.route("event_stream", {})
+    assert "channels" in r or "subscriptions" in r
+
+
 def test_germinated_organs_join_the_living_system():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

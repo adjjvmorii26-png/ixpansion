@@ -140,11 +140,24 @@ def validate_key(key: str) -> Optional[Dict[str, Any]]:
 
 
 def can_access(key_data: Dict[str, Any], module: str) -> bool:
-    """Check if a key's tier allows access to a module."""
+    """Check if a key's tier allows access to a module.
+
+    Anything the organism has grown (a living module reporting vitals) is
+    public knowledge — free tier can read any living organ. Explicit
+    growth/enterprise features still gate the richer, gated organs.
+    """
     features = key_data.get("features", [])
     if "*" in features:
         return True
-    return module in features
+    if module in features:
+        return True
+    try:
+        from coherence_regulator import living_modules
+        if module in living_modules():
+            return True
+    except Exception:
+        pass
+    return False
 
 
 def get_stats(key: str) -> Optional[Dict[str, Any]]:

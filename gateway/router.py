@@ -123,7 +123,19 @@ def _route_allowed(route: str) -> str:
         "api/autonomous_bloom": "autonomous_bloom",
         "autonomous_bloom": "autonomous_bloom",
     }
-    return module_map.get(strip, strip)
+    mapped = module_map.get(strip)
+    if mapped:
+        return mapped
+    # Living-module auto-discovery: any organ the bloom has germinated is
+    # addressable via /api/<name>. Strip the optional api/ prefix.
+    name = strip[len("api/"):] if strip.startswith("api/") else strip
+    try:
+        from coherence_regulator import living_modules
+        if name in living_modules():
+            return name
+    except Exception:
+        pass
+    return name
 
 
 def handle(payload: Dict[str, Any]) -> Tuple[Dict[str, Any], int]:

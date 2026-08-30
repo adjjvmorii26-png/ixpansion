@@ -263,6 +263,19 @@ def discover_modules(force_pulse: bool = False) -> Dict[str, Any]:
         "persisted": persisted,
     }
 
+def living_modules() -> List[str]:
+    """The authoritative list of currently-living module names.
+
+    Serves as the shared vocabulary the whole ecosystem grows from: the
+    bloom germinates by writing vitals into a dormant name, and the gateway
+    consults this list to know what is (and hence should be) queryable.
+    """
+    try:
+        return _candidate_modules()
+    except Exception:
+        return list(KNOWN_LIVING_MODULES)
+
+
 def _module_health(vitals: Dict[str, Dict[str, Any]]) -> float:
     """Aggregate a module's metrics into a 0..1 health score."""
     if not vitals:

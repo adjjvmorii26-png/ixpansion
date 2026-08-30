@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.84.0"
-WAVE = "169"
-WAVE_NAME = "Autonomous Bloom"
+VERSION = "3.85.0"
+WAVE = "170"
+WAVE_NAME = "Manifest Gateway"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
