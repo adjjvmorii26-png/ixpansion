@@ -90,6 +90,9 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # synesthesia
     (r"\b(synesthesia|sensory|color of|sound of|feel of|metaphor|richness|translate)\b", "/api/synesthesia", {"extract_module": True}),
 
+    # dream sequencer
+    (r"\b(dream|narrative|story arc|sequence|premonition|revelation|return|journey)\b", "/api/dream_sequencer", {}),
+
     # specific modules
     (r"\b(pulsar|constellation|star|cluster)\b", "/echo", {"q": "pulsar"}),
     (r"\b(oracle|guild|conclave)\b", "/echo", {"q": "oracle"}),

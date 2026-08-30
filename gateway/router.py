@@ -102,6 +102,8 @@ def _route_allowed(route: str) -> str:
         "reality_weaver": "reality_weaver",
         "api/synesthesia": "synesthesia",
         "synesthesia": "synesthesia",
+        "api/dream_sequencer": "dream_sequencer",
+        "dream_sequencer": "dream_sequencer",
     }
     return module_map.get(strip, strip)
 
