@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.57.0"
-WAVE = "141"
-WAVE_NAME = "AI Gateway & Frontier Cognition"
+VERSION = "3.58.0"
+WAVE = "142"
+WAVE_NAME = "Frontier Cognition Layer"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY

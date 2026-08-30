@@ -1,9 +1,9 @@
 # IXpansion
 
-> *The Computational Frontier* — 345 API modules, 157 experiments, 933 tests
+> *The Computational Frontier* — 350 API modules, 157 experiments, 951 tests
 
-[![Tests](https://img.shields.io/badge/tests-933%20passing-brightgreen)]()
-[![API](https://img.shields.io/badge/API-344%20modules-blue)]()
+[![Tests](https://img.shields.io/badge/tests-951%20passing-brightgreen)]()
+[![API](https://img.shields.io/badge/API-350%20modules-blue)]()
 [![Routes](https://img.shields.io/badge/routes-7-blue)]()
 [![Experiments](https://img.shields.io/badge/experiments-157-purple)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
@@ -152,6 +152,8 @@ curl -X POST https://ixpansion.vercel.app/api/ai_gateway \
 ```
 
 Actions: `status`, `chat`, `echo`, `handshake`, `models`, `catalog`, `estimate`.
+Wave 142 adds a cognition fabric over it: `cognition_forge`, `oracle_meter`,
+`fractal_oracle`, `cognition_fingerprint`, `dream_hexer` — all offline-degradable.
 The gateway key lives in the Vercel project env as `AI_GATEWAY_API_KEY` (never in the repo).
 
 ## Deployment
@@ -161,7 +163,7 @@ Live at **https://ixpansion.vercel.app**
 Single-function, catch-all serverless architecture:
 - `api/index.py` — universal WSGI/dict entrypoint routing `/health`, `/modules`, `/metrics`, `/api/<module>`, and `/dashboard`
 - `vercel.json` — 7 explicit routes forwarding to the single Python function + static dashboard
-- Zero cold-start bottlenecks: 345 API modules resolved at runtime, not 345 lambdas
+- Zero cold-start bottlenecks: 350 API modules resolved at runtime, not 350 lambdas
 
 ```bash
 vercel deploy --prod --yes
@@ -217,6 +219,7 @@ docker run -p 8000:8000 ixpansion
 | 139 | Platform & Live Serving | 8 | 10 |
 | 140 | Durable State & Streaming | 8 | 9 |
 | 141 | AI Gateway & Frontier Cognition | 1 | 7 |
+| 142 | Frontier Cognition Layer | 5 | 16 |
 
 ## License
 

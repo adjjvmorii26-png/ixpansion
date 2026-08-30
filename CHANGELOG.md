@@ -9,6 +9,21 @@
 - `.vercelignore` to slim deployment payloads
 - README deployment section rewritten to reflect the live architecture
 
+## [3.58.0] — Wave 142 — Frontier Cognition Layer
+
+### Added
+- `api/gateway_ink.py` — shared cognition medium with Shadow Oracle fallback (never raises)
+- `api/cognition_forge.py` — per-role thinker (strategist / reasoner / poet / paradox)
+- `api/oracle_meter.py` — metered oracle consultations with a public spend ledger
+- `api/fractal_oracle.py` — self-similar question tunneling + recursive sub-answers
+- `api/cognition_fingerprint.py` — samples and distills each agent's thinking signature
+- `api/dream_hexer.py` — binds dreams into HEX artifacts, unbinds them back into text
+- `tests/test_wave142_cognition.py` — 16 offline-safe tests (no network required)
+
+### Changed
+- Version bumped to 3.58.0, wave 141 → 142, modules 345 → 350
+- All five modules degrade gracefully when the gateway is unconfigured
+
 ## [3.57.0] — Wave 141 — AI Gateway & Frontier Cognition
 
 ### Added
