@@ -63,6 +63,13 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         if rev.exists():
             return {"markdown": rev.read_text(encoding="utf-8")}
         return {"error": "no revelations yet"}
+    if path == "/capsule":
+        import sys as _sys
+        _sys.path.insert(0, str(ROOT))
+        from tools.time_capsule import seal, verify
+        cap = seal()
+        cap["verified"] = verify(cap)["integrity"]
+        return cap
     if path == "/song":
         import sys as _sys
         _sys.path.insert(0, str(ROOT))

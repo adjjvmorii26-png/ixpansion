@@ -1,6 +1,6 @@
 # IXpansion
 
-> *The Computational Frontier* — 352 API modules, 157 experiments, 1001 tests
+> *The Computational Frontier* — 352 API modules, 157 experiments, 1003 tests
 
 [![Tests](https://img.shields.io/badge/tests-973%20passing-brightgreen)]()
 [![API](https://img.shields.io/badge/API-352%20modules-blue)]()

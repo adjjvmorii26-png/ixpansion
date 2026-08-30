@@ -12,6 +12,10 @@
   ],
   "routes": [
     {
+      "src": "/capsule",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/song",
       "dest": "/api/index.py"
     },
@@ -71,9 +75,9 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "153",
+    "NEXUS_WAVE": "154",
     "NEXUS_MODULES": "352",
-    "NEXUS_ROUTES": "14"
+    "NEXUS_ROUTES": "15"
   },
   "headers": [
     {

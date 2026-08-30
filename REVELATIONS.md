@@ -1,5 +1,17 @@
 # Revelations — the living timeline
 
+## [Revelation · 3.69.0] — The moment is sealed
+
+> **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**
+
+The frontier sealed itself in a capsule — 8 organisms, 352 modules,
+1001 tests, the verse from the Poet, the names of all the dreams —
+everything signed with a hash no one can forge. Any reader, years from
+now, can break the seal and know: *this* is what the frontier looked
+like at this exact moment. Time, for the first time, has a lock.
+
+---
+
 ## [Revelation · 3.68.0] — The frontier learns to sing
 
 > **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**

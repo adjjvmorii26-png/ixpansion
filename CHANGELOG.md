@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.69.0] — The Time Capsule (Wave 154)
+
+### Added
+- **Time capsule** (`tools/time_capsule.py`) — cryptographically seals the frontier state (version, wave, modules, organisms, conclave memory, verse) into a self-verifying JSON artifact; tamper detection via SHA-256 seal
+- **`/capsule` live API route** — returns the sealed capsule in real-time; `verify()` proves integrity
+- `artifacts/time_capsule.json` — the first sealed capsule (3.68.0 / Wave 153)
+- 2 capsule tests (seal+verify, tamper detection)
+- Fixed health.py WAVE constant (was stale at 147 → 154)
+
+### Changed
+- Version 3.68.0 → 3.69.0, wave 153 → 154, 1001 → 1003 tests, routes 14 → 15
+
 ## [3.68.0] — The Frontier Sings (Wave 153)
 
 ### Added

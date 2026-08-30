@@ -43,3 +43,24 @@ def test_frontier_song_renders_wav(tmp_path):
     w = wave.open(str(p))
     assert w.getnframes() > 0
     w.close()
+
+def test_time_capsule_seals_and_verifies(tmp_path):
+    import sys
+    sys.path.insert(0, str(ROOT / "tools"))
+    import time_capsule as tc
+    cap = tc.seal()
+    assert cap["ixpansion_time_capsule"] is True
+    assert cap["api_modules"] > 100
+    assert "seal_sha256" in cap
+    v = tc.verify(cap)
+    assert v["integrity"] is True
+
+
+def test_time_capsule_detects_tampering():
+    import sys
+    sys.path.insert(0, str(ROOT / "tools"))
+    import time_capsule as tc
+    cap = tc.seal()
+    cap["git_head"] = "deadbeef"  # tamper
+    v = tc.verify(cap)
+    assert v["integrity"] is False
