@@ -27,7 +27,10 @@ def record(name: str, seed: str, content: str, checked: int, commit: str = "") -
         "ts": time.time(), "name": safe_name(name), "seed": seed,
         "content": content[:120], "checked": bool(checked), "commit": commit,
     }
+    prev = next((e for e in entries if e["name"] == entry["name"]), None)
     entries = [e for e in entries if e["name"] != entry["name"]]
+    if prev and not entry["commit"] and prev.get("commit"):
+        entry["commit"] = prev["commit"]
     entries.append(entry)
     REG.parent.mkdir(parents=True, exist_ok=True)
     REG.write_text(json.dumps(entries, indent=2))

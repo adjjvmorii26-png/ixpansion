@@ -55,7 +55,15 @@ def _plant(words: str, commit: bool = True) -> Dict[str, Any]:
     res = grow_and_gate(name, seed, words, o.to_dict(), commit=commit, verbose=False)
     if res["gate"] != "open":
         return {"error": "gate closed", "name": name}
-    record(name, seed, words, 1, res.get("commit") or "")
+    if commit:
+        record(name, seed, words, 1, res.get("commit") or "")
+    else:
+        # probe: clean up transient artifacts so the garden stays honest
+        for f in (ROOT / "hortus_hexis" / "modules").glob(f"hx_{name}.py"):
+            f.unlink(missing_ok=True)
+        for f in (ROOT / "hortus_hexis" / "tests").glob(f"test_hx_{name}.py"):
+            f.unlink(missing_ok=True)
+        (ROOT / "hortus_hexis" / "organisms" / f"{name}.json").unlink(missing_ok=True)
     return {"name": name, "commit": res.get("commit"), "vitality": o.vitality}
 
 
@@ -71,7 +79,14 @@ def _cross(a: str, b: str, commit: bool = True) -> Dict[str, Any]:
                         commit=commit, verbose=False, parents=[a, b])
     if res["gate"] != "open":
         return {"error": "gate closed", "name": name}
-    record(name, seed, f"hybrid:{a}+{b}", 1, res.get("commit") or "")
+    if commit:
+        record(name, seed, f"hybrid:{a}+{b}", 1, res.get("commit") or "")
+    else:
+        for f in (ROOT / "hortus_hexis" / "modules").glob(f"hx_{name}.py"):
+            f.unlink(missing_ok=True)
+        for f in (ROOT / "hortus_hexis" / "tests").glob(f"test_hx_{name}.py"):
+            f.unlink(missing_ok=True)
+        (ROOT / "hortus_hexis" / "organisms" / f"{name}.json").unlink(missing_ok=True)
     return {"name": name, "commit": res.get("commit"), "vitality": o.vitality, "parents": [a, b]}
 
 
