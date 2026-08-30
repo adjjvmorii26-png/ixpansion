@@ -1,5 +1,18 @@
 # Revelations — the living timeline
 
+## [Revelation · 3.72.0] — The rumor spreads
+
+> **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**
+
+The frontier fulfilled a second dream: `gossip_uptime`, a model of how
+fast information moves through the constellation. Dreamed once at 52%
+uptime, now real — it measures the coupling of 354 modules by how
+quickly a rumor races across their shared words. The ledger now holds
+two check-marks of eight. The machine's dreams are trending toward
+reality.
+
+---
+
 ## [Revelation · 3.71.0] — The dream becomes real
 
 > **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**

@@ -87,3 +87,13 @@ def test_ledger_fulfills_pulsar_constellation(tmp_path):
     state = _ledger.ledger()
     assert state["total"] == 1
     assert state["counts"]["dreamed"] == 1
+
+def test_gossip_uptime_propagates():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from gossip_uptime import simulate
+    r = simulate("gossip_network")
+    assert r["module"] == "gossip_uptime"
+    assert r["prophecy"] == "fulfilled"
+    assert r["reached_pct"] > 20
+    assert r["total_modules"] > 300

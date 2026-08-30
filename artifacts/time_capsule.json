@@ -1,12 +1,12 @@
 {
   "ixpansion_time_capsule": true,
-  "version": "3.71.0",
-  "wave": "156",
-  "sealed_at": "2026-08-30T13:05:44.795935+00:00",
-  "sealed_ts": 1788095144.796017,
-  "git_head": "186f238",
-  "live_files": 1307,
-  "api_modules": 353,
+  "version": "3.72.0",
+  "wave": "157",
+  "sealed_at": "2026-08-30T13:13:37.704507+00:00",
+  "sealed_ts": 1788095617.7045798,
+  "git_head": "dd3e09a",
+  "live_files": 1308,
+  "api_modules": 354,
   "organisms": [
     "orevurinys",
     "amarnysxeth",
@@ -19,14 +19,6 @@
   ],
   "conclave_memory": [
     {
-      "version": "3.66.0",
-      "title": "Oracle: echo + revelations web UI"
-    },
-    {
-      "version": "3.67.0",
-      "title": "Poet agent + /poem route"
-    },
-    {
       "version": "3.68.0",
       "title": "The Frontier Sings: sonification engine + /song route"
     },
@@ -37,9 +29,17 @@
     {
       "version": "3.70.0",
       "title": "The Living Constellation: meter + ledger + horizon"
+    },
+    {
+      "version": "3.71.0",
+      "title": "First prophecy fulfilled: pulsar_constellation became real code"
+    },
+    {
+      "version": "3.72.0",
+      "title": "Second prophecy fulfilled: gossip_uptime"
     }
   ],
   "verse": "the frontier leans into an echo growing legs;\nand every seed becomes a verse.\n  \u2014 cors supernova, agent mirror",
   "test_count": 1001,
-  "seal_sha256": "3d61af7e067d2f781f5dcf4f52461a35e8dd7295f0a29a404b3ee84756117465"
+  "seal_sha256": "1c42418b4d287705a442aefc1fba0359b0ab62ad6589b9d5b5e26397c6f9cef4"
 }

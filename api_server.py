@@ -32,8 +32,8 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.71.0"
-WAVE = "156"
+VERSION = "3.72.0"
+WAVE = "157"
 WAVE_NAME = "Harbinger Conclave"
 
 try:

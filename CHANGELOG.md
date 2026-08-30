@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.72.0] — Second prophecy fulfilled: gossip_uptime (Wave 157)
+
+### Added
+- **`gossip_uptime` API module** — simulates how fast information spreads through the frontier via co-name-word adjacency; measures the "uptime" (how many hops for a rumor to reach 50% of modules)
+- Second Dream Ledger prophecy fulfilled (`gossip_uptime`)
+- 1 test (gossip propagation)
+
+### Changed
+- Version 3.71.0 → 3.72.0, wave 156 → 157, 1007 → 1008 tests, 353 → 354 modules
+
 ## [3.71.0] — The First Prophecy Fulfilled (Wave 156)
 
 ### Added
