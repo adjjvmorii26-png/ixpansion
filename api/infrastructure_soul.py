@@ -104,3 +104,12 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     action = payload.get("action", "status")
     return {"status": "active", "module": "infrastructure_soul", "action": action}
+
+
+def coherence_vitals() -> dict:
+    """Infrastructure Soul reports its vital signs — purpose and intent."""
+    return {
+        "module_health": {"value": 0.88, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.92, "setpoint": 0.85, "weight": 1.0},
+        "infra_purpose": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+    }

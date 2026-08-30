@@ -63,7 +63,7 @@ SYSTEM_SETPOINTS = {
 COHERENCE_TOLERANCE = 0.7          # below this → advisories fire
 REGULATION_THRESHOLD = 0.5         # below this → strong regulation
 PULSE_INTERVAL = 60.0              # seconds between automatic pulses
-ECOSYSTEM_TARGET = 32            # living modules = a full bloom (organism outgrew 24)
+ECOSYSTEM_TARGET = 40            # living modules = a full bloom (organism outgrew 32)
 
 
 # ---------------------------------------------------------------------------

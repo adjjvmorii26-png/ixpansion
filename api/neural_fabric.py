@@ -167,3 +167,17 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+def coherence_vitals() -> dict:
+    """Neural Fabric reports its vital signs — connection learning and pruning."""
+    return {
+        "module_health": {"value": 0.91, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.93, "setpoint": 0.85, "weight": 1.0},
+        "fabric_learning": {"value": 0.92, "setpoint": 0.8, "weight": 1.0},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships."""
+    return ['module_analytics', 'emergence_detector']

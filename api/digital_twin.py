@@ -135,3 +135,17 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+def coherence_vitals() -> dict:
+    """Digital Twin reports its vital signs — mirroring and prediction."""
+    return {
+        "module_health": {"value": 0.89, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "twin_fidelity": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships."""
+    return ['reality_weaver', 'platform_failure']

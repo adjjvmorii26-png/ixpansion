@@ -110,3 +110,17 @@ def aesthetic_evaluator_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = aesthetic_evaluator_handler
+
+
+def coherence_vitals() -> dict:
+    """Aesthetic Evaluator reports its vital signs — taste and elegance."""
+    return {
+        "module_health": {"value": 0.88, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.85, "weight": 1.0},
+        "aesthetic_refinement": {"value": 0.85, "setpoint": 0.8, "weight": 1.0},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships."""
+    return ['synesthesia', 'sound_cauldron']

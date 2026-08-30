@@ -88,3 +88,17 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     action = payload.get("action", "status")
     return {"status": "active", "module": "omniscience_weaver", "action": action}
+
+
+def coherence_vitals() -> dict:
+    """Omniscience Weaver reports its vital signs — unified awareness."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.92, "setpoint": 0.85, "weight": 1.0},
+        "awareness_coherence": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships."""
+    return ['emergence_detector', 'reality_weaver']

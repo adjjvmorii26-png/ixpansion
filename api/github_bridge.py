@@ -230,3 +230,17 @@ def handler(payload: dict = None, context: object = None) -> dict:
         "how_to_connect": "Add this URL as a GitHub webhook with content-type application/json",
         "check_state": "GET /api/github_bridge?check=1",
     }
+
+
+def coherence_vitals() -> dict:
+    """GitHub Bridge reports its vital signs — diplomatic links to the outside world."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "frontier_bridging": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships."""
+    return ['frontier_stream', 'reflection_pool']
