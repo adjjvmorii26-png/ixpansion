@@ -341,6 +341,38 @@ def test_coherence_regulator_serverless_fallback_and_diversity():
     assert all("coherence_regulator" != m for m in discovered)
 
 
+def test_resonance_graph_detects_hubs_and_edges():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import resonance_graph
+    g = resonance_graph.build_graph()
+    assert g["nodes"] >= 7
+    assert g["edges"] > 0
+    assert g["density"] > 0
+    # A connectivity leader must exist (non-zero weighted degree)
+    hub_strength = max((c for _, c in g["hubs"]), default=0)
+    assert hub_strength > 0
+    # Private/neighborhood query returns neighbors for a living module
+    n = resonance_graph.neighborhood("reflection_pool")
+    assert "neighbors" in n
+
+
+def test_autonomous_bloom_finds_seeds_and_trajectory():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import autonomous_bloom
+    r = autonomous_bloom.bloom_report(seed_limit=5)
+    assert r["state"]["living"] >= 7
+    assert r["state"]["target"] >= 12
+    assert len(r["seeds"]) > 0
+    assert len(r["trajectory"]) == 3
+    # a seed is a real dormant module
+    assert r["seeds"][0]["readiness"] > 0
+    # handler routes
+    h = autonomous_bloom.handler({"seeds": 3})
+    assert len(h) == 3
+
+
 def test_coherence_regulator_modules_list():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

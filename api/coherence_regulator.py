@@ -87,6 +87,8 @@ KNOWN_LIVING_MODULES: List[str] = [
     "sound_cauldron",
     "synesthesia",
     "thought_meteorology",
+    "resonance_graph",
+    "autonomous_bloom",
 ]
 
 

@@ -26,6 +26,12 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\bmodules?\b.*\b(count|list|all|available|what)\b", "/modules", {}),
     (r"\bmodules?\b", "/modules", {}),
 
+    # resonance graph intelligence (before garden/constellation so graph/web queries land here)
+    (r"\b(resonance graph|graph of the (living )?(system|frontier|organism)|who (are|is) (the )?hubs?|hubs? (of|in) the|bridge modules?|bridges? (connect|in|of|the)|what bridges|connective tissue|graph intelligence|web of (modules|the system)|topology of the (system|frontier))\b", "/api/resonance_graph", {}),
+
+    # autonomous bloom (before forecast/garden so growth-of-ecosystem lands here)
+    (r"\b(full bloom|bloom(ing|ed| plan)?|blossom|grow the organism|seeds? (ready|to awaken|should awaken)|awaken(ing)? (seeds?|modules?)|ecosystem growth|growth trajectory|next bloom)\b", "/api/autonomous_bloom", {}),
+
     # frontier-specific intent (move these before echo to prevent false matches)
     (r"(what|tell).*\b(dream\w*|want|hope|imagine|prophecy)\b", "/ledger", {}),
     (r"\bwhat.*\b(future|forecast|tomorrow|next|project|predict)\b", "/forecast", {}),

@@ -25,7 +25,8 @@ TIER_LIMITS = {
 
 TIER_FEATURES = {
     "free":       ["echo", "health", "modules", "poem", "intent", "meter",
-                   "coherence_regulator"],  # system health = free, forever
+                   "coherence_regulator",  # system health = free, forever
+                   "resonance_graph", "autonomous_bloom"],  # introspection = free
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",

@@ -118,6 +118,10 @@ def _route_allowed(route: str) -> str:
         "organism_index": "organism_index",
         "api/coherence_regulator": "coherence_regulator",
         "coherence_regulator": "coherence_regulator",
+        "api/resonance_graph": "resonance_graph",
+        "resonance_graph": "resonance_graph",
+        "api/autonomous_bloom": "autonomous_bloom",
+        "autonomous_bloom": "autonomous_bloom",
     }
     return module_map.get(strip, strip)
 
