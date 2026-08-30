@@ -375,6 +375,41 @@ def test_bloom_awakening_grows_the_organism():
     assert r["coherence"] > 0.95
 
 
+def test_autonomous_germination_dry_run_and_chronicle():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import autonomous_bloom as ab
+
+    # dry-run must never touch disk but returns a valid blueprint
+    r = ab.germinate("worker_wellness", dry_run=True)
+    assert r.get("dry_run") is True
+    assert r.get("valid") is True
+    assert "def coherence_vitals" in r.get("would_write", "")
+
+    # auto-selection picks the strongest seed(s)
+    a = ab.auto_germinate(dry_run=True, count=2)
+    assert len(a.get("chosen", [])) == 2
+    assert all(res.get("dry_run") for res in a.get("results", []))
+
+    # the evolution chronicle is readable
+    c = ab.chronicle()
+    assert "milestones" in c and "awakened" in c
+
+
+def test_germinated_organs_join_the_living_system():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import autonomous_bloom as ab, coherence_regulator as cr
+    # previously auto-germinated organs must now be living
+    living = set(cr._candidate_modules())
+    for name in ("analytics", "docs", "anomaly_detector"):
+        assert name in living, f"{name} should have been germinated"
+    # they should be recorded in the chronicle
+    awakened = [e["module"] for e in ab.chronicle().get("awakened", [])]
+    assert "analytics" in awakened
+    assert "docs" in awakened
+
+
 def test_manifest_stays_authoritative_for_serverless():
     import sys
     import pathlib

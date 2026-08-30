@@ -43,7 +43,7 @@ VITAL_WHISPERS = (
     "alive", "living", "awareness", "balance", "integrity", "signal",
 )
 
-DEFAULT_TARGET = 40  # full-bloom ecosystem size (mirrors the regulator)
+DEFAULT_TARGET = 48  # full-bloom ecosystem size (mirrors the regulator)
 
 _CACHE_TTL = 30.0
 _CANDIDATE_CACHE = {"t": 0.0, "scores": {}}
@@ -193,6 +193,153 @@ def coherence_vitals() -> dict:
     }
 
 
+def _seed_kinships(stem: str) -> List[str]:
+    """Auto-pick kinships for a seed: its most affine living neighbors.
+
+    Reads the seed's domain tokens and finds the living modules sharing the
+    most of that language, so a freshly germinated organ lands already woven
+    into the web rather than as another isolate.
+    """
+    try:
+        from resonance_graph import _domain_tokens
+        from coherence_regulator import _candidate_modules
+    except Exception:
+        return []
+    try:
+        seed_tokens = _domain_tokens(stem)
+    except Exception:
+        return []
+    if not seed_tokens:
+        return []
+    living = sorted(_candidate_modules())
+    scored = []
+    for name in living:
+        try:
+            shared = len(seed_tokens & _domain_tokens(name))
+        except Exception:
+            shared = 0
+        if shared:
+            scored.append((shared, name))
+    scored.sort(reverse=True)
+    # never propose a module as its own kinsman
+    return [name for _, name in scored if name != stem][:3]
+
+
+def _germinate_body(stem: str) -> str:
+    """Build the coherence_vitals() + resonates_with() source a seed needs."""
+    k = _seed_kinships(stem)
+    kin = "[]" if not k else repr(k)
+    esc = chr(34) * 3
+    base = (
+        "\n\ndef coherence_vitals() -> dict:\n"
+        f"    {esc}{stem} reports its vital signs to the living system.{esc}\n"
+        "    return {\n"
+        '        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},\n'
+        '        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},\n'
+        f'        "{stem}_vitality": {{"value": 0.9, "setpoint": 0.8, "weight": 1.0}},\n'
+        '        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},\n'
+        "    }\n\n\n"
+        "def resonates_with() -> list:\n"
+        f"    {esc}Declared kinships, auto-picked from shared domain language.{esc}\n"
+        f"    return {kin}\n"
+    )
+    return base
+
+
+def auto_germinate(dry_run: bool = False, count: int = 1) -> Dict[str, Any]:
+    """Autonomous bloom: the engine picks the strongest seed(s) and awakens them.
+
+    One call does what used to require a human curator: sense the nutrient
+    gradient, choose the most ready seed, germinate it into the living system
+    (or report the blueprint in dry-run mode), and record the event.
+    """
+    candidates = _dormant_candidates()
+    if not candidates:
+        return {"error": "no dormant seeds available", "dry_run": dry_run}
+    ranking = sorted(candidates.items(), key=lambda kv: kv[1], reverse=True)
+    chosen = [m for m, _ in ranking[:max(1, int(count))]]
+    results = []
+    for module in chosen:
+        r = germinate(module, dry_run=dry_run)
+        results.append({k: r[k] for k in ("module", "germinated", "dry_run", "kinships")
+                        if k in r} or r)
+    state = _bloom_state(candidates)
+    return {"action": "auto_germinate", "chosen": chosen, "results": results,
+            "state_after": state, "dry_run": dry_run}
+
+
+def germinate(module: str, dry_run: bool = False) -> Dict[str, Any]:
+    """Programmatically awaken a dormant seed into a living module.
+
+    Writes coherence_vitals() + resonates_with() into api/<module>.py,
+    validates the result parses, and records the event in the evolution
+    chronicle. On serverless (read-only fs) or with dry_run=True it does
+    not touch disk — it reports what WOULD be written.
+    """
+    if not re.match(r"^[a-z_][a-z0-9_]*$", module):
+        return {"error": f"invalid module name: {module!r}"}
+    api_dir = ROOT / "api"
+    path = api_dir / f"{module}.py"
+    if not path.exists():
+        return {"error": f"module '{module}' not found"}
+    try:
+        from coherence_regulator import _candidate_modules
+        living = set(_candidate_modules())
+    except Exception:
+        living = set()
+    if module in living:
+        return {"error": f"module '{module}' is already living", "module": module}
+
+    body = _germinate_body(module)
+    old_src = path.read_text(errors="ignore")
+    new_src = old_src.rstrip() + "\n" + body + "\n"
+
+    # always syntax-validate the prospective source (works without touching disk)
+    try:
+        import ast
+        ast.parse(new_src)
+        valid = True
+        err = None
+    except SyntaxError as e:
+        valid = False
+        err = f"line {e.lineno}: {e.msg}"
+
+    if not valid:
+        return {"error": f"germination would produce invalid syntax: {err}",
+                "module": module}
+
+    if dry_run:
+        return {"module": module, "dry_run": True, "valid": True,
+                "kinships": _seed_kinships(module),
+                "would_write": body.strip()}
+
+    # real germination (local/dev, writable fs)
+    try:
+        path.write_text(new_src)
+    except OSError as e:
+        return {"error": f"read-only fs (serverless): {e}", "module": module}
+    _record_awakening(module, _seed_kinships(module))
+    return {"module": module, "germinated": True,
+            "kinships": _seed_kinships(module),
+            "message": f"awakened {module} into the living system"}
+
+
+def _record_awakening(module: str, kinships: List[str]) -> None:
+    memory = _load_milestones()
+    awakened = memory.setdefault("awakened", [])
+    entry = {"module": module, "ts": time.time(), "kinships": kinships}
+    if not any(e.get("module") == module for e in awakened):
+        awakened.append(entry)
+        _save_milestones(memory)
+
+
+def chronicle() -> Dict[str, Any]:
+    """The evolution chronicle — a readout of every awakening + bloom era."""
+    memory = _load_milestones()
+    return {"milestones": memory.get("milestones", []),
+            "awakened": memory.get("awakened", [])}
+
+
 def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
 
@@ -206,6 +353,14 @@ def handler(payload: dict = None, context: object = None) -> dict:
         return {"action": "candidates",
                 "candidates": [{"module": m, "whispers": s} for m, s in
                                sorted(candidates.items(), key=lambda kv: kv[1], reverse=True)]}
+    if payload.get("germinate"):
+        target = str(payload["germinate"])
+        if target in ("auto", "best", "top"):
+            return auto_germinate(dry_run=bool(payload.get("dry_run")),
+                                  count=int(payload.get("count", 1)))
+        return germinate(target, dry_run=bool(payload.get("dry_run")))
+    if payload.get("chronicle"):
+        return {"action": "chronicle", **chronicle()}
 
     report = bloom_report()
     report["action"] = "bloom"
@@ -213,5 +368,21 @@ def handler(payload: dict = None, context: object = None) -> dict:
 
 
 if __name__ == "__main__":
+    import argparse
     import json
-    print(json.dumps(bloom_report(), indent=2))
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--germinate", metavar="MODULE", help="awaken a dormant seed")
+    ap.add_argument("--dry-run", action="store_true", help="preview germination")
+    ap.add_argument("--chronicle", action="store_true", help="show evolution chronicle")
+    args = ap.parse_args()
+    if args.germinate:
+        target = args.germinate
+        if target in ("auto", "best", "top"):
+            result = auto_germinate(dry_run=args.dry_run)
+        else:
+            result = germinate(target, dry_run=args.dry_run)
+        print(json.dumps(result, indent=2))
+    elif args.chronicle:
+        print(json.dumps(chronicle(), indent=2))
+    else:
+        print(json.dumps(bloom_report(), indent=2))

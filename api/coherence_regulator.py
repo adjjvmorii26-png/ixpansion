@@ -63,7 +63,7 @@ SYSTEM_SETPOINTS = {
 COHERENCE_TOLERANCE = 0.7          # below this → advisories fire
 REGULATION_THRESHOLD = 0.5         # below this → strong regulation
 PULSE_INTERVAL = 60.0              # seconds between automatic pulses
-ECOSYSTEM_TARGET = 40            # living modules = a full bloom (organism outgrew 32)
+ECOSYSTEM_TARGET = 48            # living modules = a full bloom (organism outgrew 40)
 
 
 # ---------------------------------------------------------------------------
@@ -77,6 +77,8 @@ ECOSYSTEM_TARGET = 40            # living modules = a full bloom (organism outgr
 # Keep this list in sync as new modules implement coherence_vitals().
 KNOWN_LIVING_MODULES: List[str] = [
     "aesthetic_evaluator",
+    "analytics",
+    "anomaly_detector",
     "autonomous_bloom",
     "chronicle_of_chaos",
     "chronicle_storyteller",
@@ -84,6 +86,7 @@ KNOWN_LIVING_MODULES: List[str] = [
     "code_organism",
     "constellation_cartographer",
     "digital_twin",
+    "docs",
     "dream_interpreter",
     "dream_sequencer",
     "dream_synthesis",
