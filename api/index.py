@@ -133,6 +133,9 @@ def application(environ: Dict[str, Any], start_response):
     """WSGI application entrypoint (canonical @vercel/python build)."""
     method = environ.get("REQUEST_METHOD", "GET")
     path = environ.get("PATH_INFO", "/")
+    qs = environ.get("QUERY_STRING", "")
+    if qs:
+        path = path + "?" + qs
     try:
         length = int(environ.get("CONTENT_LENGTH") or 0)
     except (TypeError, ValueError):
