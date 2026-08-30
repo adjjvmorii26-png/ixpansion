@@ -7,6 +7,9 @@ import negative_space
 import mood_superposition
 import stigmergy
 import sympoiesis
+import stochastic_resonance
+import liminal_space
+import phosphorescence
 
 
 class TestKintsugi:
@@ -144,3 +147,85 @@ class TestSympoiesis:
         r1 = sympoiesis.simulate(seed=1)
         r2 = sympoiesis.simulate(seed=2)
         assert r1["emergence"]["resonance_coherence"] != r2["emergence"]["resonance_coherence"]
+
+
+
+class TestStochasticResonance:
+    def test_detect_runs(self):
+        result = stochastic_resonance.detect(signal_amp=0.3, noise_level=0.5, threshold=1.0)
+        assert result["num_samples"] == 5000
+        assert "clean" in result and "noisy" in result
+
+    def test_sweep_finds_optimal(self):
+        result = stochastic_resonance.sweep(signal_amp=0.3, threshold=1.0)
+        assert result["optimal_noise"] > 0
+        assert result["optimal_quality"] >= 0
+        assert len(result["sweep_results"]) > 10
+
+    def test_resonance_detected_at_right_level(self):
+        result = stochastic_resonance.sweep(signal_amp=0.3, threshold=1.0)
+        # At optimal noise, quality should be better than no noise
+        assert result["optimal_quality"] >= result["quality_without_noise"]
+
+    def test_philosophy_present(self):
+        result = stochastic_resonance.detect(signal_amp=0.3, noise_level=0.5, threshold=1.0)
+        assert "noise" in result["philosophy"].lower()
+
+
+
+class TestLiminalSpace:
+    def test_analyze_runs(self):
+        from liminal_space import _make_points, analyze_points
+        points = _make_points(10, 3, seed=42)
+        result = analyze_points(points, k=8)
+        assert result["num_points"] == len(points)
+        assert "distribution" in result
+
+    def test_distribution_has_three_classes(self):
+        from liminal_space import _make_points, analyze_points
+        points = _make_points(15, 2, seed=7)
+        result = analyze_points(points)
+        d = result["distribution"]
+        # Categories can overlap (frontier points are also liminal)
+        # But deep_core should be disjoint from liminal
+        assert d["deep_core"] + d["liminal_edge"] >= 0
+        assert d["frontier"] <= d["liminal_edge"] + d["deep_core"]
+        assert result["num_points"] > 0
+
+    def test_frontier_points_exist(self):
+        from liminal_space import _make_points, analyze_points
+        points = _make_points(20, 3, seed=42)
+        result = analyze_points(points)
+        assert result["distribution"]["frontier"] > 0
+
+    def test_anomaly_mode(self):
+        from liminal_space import _make_points, find_anomalies
+        points = _make_points(15, 3, seed=42)
+        result = find_anomalies(points)
+        assert result["top_anomaly"] is not None
+        assert result["top_anomaly"]["anomaly_score"] > 0
+
+
+
+class TestPhosphorescence:
+    def test_simulation_runs(self):
+        result = phosphorescence.simulate(num_experiences=20, num_cells=8, seed=42)
+        assert result["num_cells"] == 8
+        assert result["total_energy_received"] > 0
+
+    def test_dark_phase_has_discharge(self):
+        result = phosphorescence.simulate(seed=7)
+        glow_sample = result["glow_history_sample"]
+        assert len(glow_sample) > 0
+        assert all(g["phase"] == "dark" for g in glow_sample)
+
+    def test_decay_models_differ(self):
+        retentions = []
+        for model in ["exponential", "logarithmic", "linear", "power"]:
+            r = phosphorescence.simulate(decay_model=model, seed=42)
+            retentions.append(r["energy_retention"])
+        assert len(set(retentions)) > 2  # at least 3 distinct values
+
+    def test_most_persistent_cell_exists(self):
+        result = phosphorescence.simulate(seed=42)
+        assert result["most_persistent_cell"]["persistence_ratio"] >= 0

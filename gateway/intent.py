@@ -84,6 +84,9 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # constellation cartographer
     (r"\b(constellation|map|cluster|neighborhood|hub|graph|topology)\b", "/api/constellation_cartographer", {}),
 
+    # reality weaver
+    (r"\b(reality|weave|generate.*world|create.*world|simulate|universe|civilization)\b", "/api/reality_weaver", {}),
+
     # specific modules
     (r"\b(pulsar|constellation|star|cluster)\b", "/echo", {"q": "pulsar"}),
     (r"\b(oracle|guild|conclave)\b", "/echo", {"q": "oracle"}),

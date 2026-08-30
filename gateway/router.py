@@ -94,6 +94,8 @@ def _route_allowed(route: str) -> str:
         "hex_tool": "hex_tool",
         "api/constellation_cartographer": "constellation_cartographer",
         "constellation_cartographer": "constellation_cartographer",
+        "api/reality_weaver": "reality_weaver",
+        "reality_weaver": "reality_weaver",
     }
     return module_map.get(strip, strip)
 
