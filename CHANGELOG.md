@@ -9,6 +9,19 @@
 - `.vercelignore` to slim deployment payloads
 - README deployment section rewritten to reflect the live architecture
 
+## [3.59.0] — Wave 143 — Cognition Ritual Pipeline
+
+### Added
+- `api/cognition_ritual.py` — full thought-loop in one call: forge → reflect → fractal → fingerprint → meter → hexer
+- `oracle_meter` gains a lightweight `record` action (ritual ledger entries without fresh LLM calls)
+- Fast mode (`fast: true`) defers the self-critique live call for latency-constrained runs
+- Ritual traces every stage with elapsed time, served disposition, and a HEX-bound immutable artifact
+- `tests/test_wave143_ritual.py` — 7 offline-safe tests
+
+### Changed
+- Version bumped to 3.59.0, wave 142 → 143, modules 351 → 352
+- README tree module count corrected to 352 (was stale at 345)
+
 ## [3.58.0] — Wave 142 — Frontier Cognition Layer
 
 ### Added

@@ -73,5 +73,16 @@ def oracle_meter_handler(payload: Optional[Dict[str, Any]] = None) -> Dict[str, 
         return {"status": "active", "entry": entry, "reply": result.get("reply"),
                 "served": result.get("ok"), "budget": _budget_status()}
 
+    if action == "record":
+        # Ledger entry without a fresh consultation (used by rituals).
+        cost = float(payload.get("cost_usd") or 0.0)
+        served = bool(payload.get("served", False))
+        entry = _record(prompt or "(ritual stage)", model, {
+            "ok": served,
+            "cost_est": {"cost_usd_est": cost},
+            "usage": {"cost": cost},
+        })
+        return {"status": "active", "entry": entry, "budget": _budget_status()}
+
     return {"status": "active", "error": f"unknown action '{action}'",
-            "available": ["status", "ledger", "spend", "consult"]}
+            "available": ["status", "ledger", "spend", "consult", "record"]}

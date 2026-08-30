@@ -1,9 +1,9 @@
 # IXpansion
 
-> *The Computational Frontier* — 351 API modules, 157 experiments, 951 tests
+> *The Computational Frontier* — 352 API modules, 157 experiments, 956 tests
 
-[![Tests](https://img.shields.io/badge/tests-951%20passing-brightgreen)]()
-[![API](https://img.shields.io/badge/API-351%20modules-blue)]()
+[![Tests](https://img.shields.io/badge/tests-956%20passing-brightgreen)]()
+[![API](https://img.shields.io/badge/API-352%20modules-blue)]()
 [![Routes](https://img.shields.io/badge/routes-7-blue)]()
 [![Experiments](https://img.shields.io/badge/experiments-157-purple)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
@@ -27,7 +27,7 @@ python main.py serve
 
 ```
 ixpansion/
-├── api/                    # 345 REST API modules
+├── api/                    # 352 REST API modules
 │   ├── core/               # agents, experiments, sandbox, telemetry
 │   ├── cognition/          # ai_gateway — frontier LLM bridge via Vercel AI Gateway
 │   ├── revenue/            # billing, crypto, credits, marketplace
@@ -163,7 +163,7 @@ Live at **https://ixpansion.vercel.app**
 Single-function, catch-all serverless architecture:
 - `api/index.py` — universal WSGI/dict entrypoint routing `/health`, `/modules`, `/metrics`, `/api/<module>`, and `/dashboard`
 - `vercel.json` — 7 explicit routes forwarding to the single Python function + static dashboard
-- Zero cold-start bottlenecks: 351 API modules resolved at runtime, not 351 lambdas
+- Zero cold-start bottlenecks: 352 API modules resolved at runtime, not 352 lambdas
 
 ```bash
 vercel deploy --prod --yes
@@ -220,6 +220,7 @@ docker run -p 8000:8000 ixpansion
 | 140 | Durable State & Streaming | 8 | 9 |
 | 141 | AI Gateway & Frontier Cognition | 1 | 7 |
 | 142 | Frontier Cognition Layer | 5 | 16 |
+| 143 | Cognition Ritual Pipeline | 1 | 7 |
 
 ## License
 

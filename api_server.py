@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.58.0"
-WAVE = "142"
-WAVE_NAME = "Frontier Cognition Layer"
+VERSION = "3.59.0"
+WAVE = "143"
+WAVE_NAME = "Cognition Ritual Pipeline"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
