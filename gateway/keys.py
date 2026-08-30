@@ -31,7 +31,8 @@ TIER_FEATURES = {
                    "song", "service_numinous", "temperament_origin",
                    "frontier_stream", "hex_tool", "constellation_cartographer",
                    "reality_weaver", "synesthesia", "dream_sequencer",
-                   "github_bridge", "reflection_pool"],
+                   "github_bridge", "reflection_pool", "chronicle_storyteller",
+                   "thought_meteorology"],
     "enterprise": ["*"],  # full access
 }
 

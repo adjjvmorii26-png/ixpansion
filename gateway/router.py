@@ -108,6 +108,10 @@ def _route_allowed(route: str) -> str:
         "github_bridge": "github_bridge",
         "api/reflection_pool": "reflection_pool",
         "reflection_pool": "reflection_pool",
+        "api/chronicle_storyteller": "chronicle_storyteller",
+        "chronicle_storyteller": "chronicle_storyteller",
+        "api/thought_meteorology": "thought_meteorology",
+        "thought_meteorology": "thought_meteorology",
     }
     return module_map.get(strip, strip)
 

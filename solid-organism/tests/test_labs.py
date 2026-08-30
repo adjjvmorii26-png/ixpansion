@@ -14,6 +14,7 @@ import memory_fern
 import tessellation
 import flocking
 import epigenetic_landscape
+import homing
 
 
 class TestKintsugi:
@@ -313,3 +314,20 @@ class TestEpigeneticLandscape:
         h2 = epigenetic_landscape._landscape_function(0.5, 0.0, 6)
         assert isinstance(h1, float)
         assert isinstance(h2, float)
+
+
+
+class TestHoming:
+    def test_simulation_runs(self):
+        result = homing.simulate(num_birds=15, max_steps=150, seed=42)
+        assert result["num_birds"] == 15
+        assert result["birds_arrived"] >= 0
+    
+    def test_flock_finds_home(self):
+        result = homing.simulate(num_birds=20, max_steps=250, seed=42)
+        assert result["birds_arrived"] > 0
+    
+    def test_higher_noise_fewer_arrivals(self):
+        noisy = homing.simulate(num_birds=10, noise=0.8, max_steps=200, seed=42)
+        clean = homing.simulate(num_birds=10, noise=0.1, max_steps=200, seed=42)
+        assert clean["birds_arrived"] >= noisy["birds_arrived"]

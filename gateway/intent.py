@@ -99,6 +99,12 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # reflection pool
     (r"\b(reflect|reflection|look at yourself|self report|how is the frontier|vitals|vital signs)\b", "/api/reflection_pool", {}),
 
+    # chronicle storyteller
+    (r"\b(story|saga|chronicle|tell me the story|history|origin|saga|narrate|chapter)\b", "/api/chronicle_storyteller", {}),
+
+    # thought meteorology
+    (r"\b(weather|forecast.*ideas|idea weather|concept.*trend|trending|storm|temperature of ideas)\b", "/api/thought_meteorology", {}),
+
     # specific modules
     (r"\b(pulsar|constellation|star|cluster)\b", "/echo", {"q": "pulsar"}),
     (r"\b(oracle|guild|conclave)\b", "/echo", {"q": "oracle"}),

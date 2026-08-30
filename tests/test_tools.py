@@ -242,3 +242,23 @@ def test_reflection_pool_runs():
     assert r["vitals"]["modules"] > 0
     assert "observations" in r
     assert len(r["observations"]) > 0
+
+
+def test_chronicle_storyteller_narrates():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import chronicle_storyteller
+    r = chronicle_storyteller.handler({"tone": "mythic"})
+    assert r["chapter_count"] > 0
+    assert "prologue" in r and "epilogue" in r
+
+
+def test_thought_meteorology_forecasts():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import thought_meteorology
+    r = thought_meteorology.handler({})
+    assert "overall_weather" in r
+    assert len(r["pressure_centers"]) > 0
+    f = thought_meteorology.handler({"forecast": 2})
+    assert len(f["forecast_periods"]) == 2
