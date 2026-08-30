@@ -63,7 +63,7 @@ SYSTEM_SETPOINTS = {
 COHERENCE_TOLERANCE = 0.7          # below this → advisories fire
 REGULATION_THRESHOLD = 0.5         # below this → strong regulation
 PULSE_INTERVAL = 60.0              # seconds between automatic pulses
-ECOSYSTEM_TARGET = 64            # living modules = a full bloom (organism outgrew 56)
+ECOSYSTEM_TARGET = 72            # living modules = a full bloom (organism outgrew 64)
 
 
 # ---------------------------------------------------------------------------
@@ -90,7 +90,15 @@ KNOWN_LIVING_MODULES: List[str] = [
     "civilization_timeline",
     "code_organism",
     "cognitive_resonance",
+    "collective_dreamweaver",
+    "collective_subconscious",
+    "consciousness_cascade",
+    "consciousness_graph",
+    "consciousness_map",
+    "consciousness_simulator",
     "constellation_cartographer",
+    "cosmic_inventory",
+    "credits",
     "digital_twin",
     "docs",
     "dream_interpreter",

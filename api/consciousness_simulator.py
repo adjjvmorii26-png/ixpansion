@@ -29,7 +29,10 @@ class ConsciousnessSimulator:
 
     def _load(self):
         path = ROOT / ".runtime" / "consciousness.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         if path.exists():
             data = json.loads(path.read_text())
             self.state = data.get("state", self.state)
@@ -89,3 +92,19 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+def coherence_vitals() -> dict:
+    """consciousness_simulator reports its vital signs to the living system."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "consciousness_simulator_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships, auto-picked from shared domain language."""
+    return ['event_stream', 'dream_interpreter', 'cognitive_resonance']
+

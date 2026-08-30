@@ -441,6 +441,27 @@ def test_germinated_organs_join_the_living_system():
     assert "docs" in awakened
 
 
+def test_autonomous_bloom_reached_64_and_frontier_hardening():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import autonomous_bloom as ab, coherence_regulator as cr
+    from unified_router import UnifiedRouter
+    b = ab.bloom_report()
+    # sixth full bloom reached (target was then raised, so we're re-hardening)
+    assert b["state"]["living"] >= 64
+    # phase logic: with the target re-raised and only faint seeds left,
+    # the organism correctly reports frontier_hardening
+    assert b["state"]["phase"] == "frontier_hardening"
+    # serverless manifest covers all living organs
+    assert len(cr.KNOWN_LIVING_MODULES) >= 64
+    # the consciousness cluster organs dispatch via the unified router
+    u = UnifiedRouter()
+    for name in ("collective_dreamweaver", "consciousness_graph",
+                 "consciousness_simulator", "credits"):
+        r = u.route(name, {})
+        assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
+
+
 def test_autonomous_bloom_reached_56_and_new_organs_dispatch():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

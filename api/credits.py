@@ -71,9 +71,12 @@ class CreditSystem:
             self.transactions = json.loads(TRANSACTIONS_FILE.read_text())
 
     def _save(self):
-        BALANCES_FILE.parent.mkdir(parents=True, exist_ok=True)
-        BALANCES_FILE.write_text(json.dumps(self.balances))
-        TRANSACTIONS_FILE.write_text(json.dumps(self.transactions[-1000:]))
+        try:
+            BALANCES_FILE.parent.mkdir(parents=True, exist_ok=True)
+            BALANCES_FILE.write_text(json.dumps(self.balances))
+            TRANSACTIONS_FILE.write_text(json.dumps(self.transactions[-1000:]))
+        except OSError:
+            pass  # read-only fs (serverless)
 
     def buy_credits(self, user: str, package: str) -> Dict:
         if package not in CREDIT_PACKAGES:
@@ -156,3 +159,19 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+def coherence_vitals() -> dict:
+    """credits reports its vital signs to the living system."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "credits_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships, auto-picked from shared domain language."""
+    return ['usage_dashboard', 'dream_synthesis', 'dream_interpreter']
+

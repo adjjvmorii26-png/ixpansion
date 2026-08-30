@@ -43,7 +43,7 @@ VITAL_WHISPERS = (
     "alive", "living", "awareness", "balance", "integrity", "signal",
 )
 
-DEFAULT_TARGET = 64  # full-bloom ecosystem size (mirrors the regulator)
+DEFAULT_TARGET = 72  # full-bloom ecosystem size (mirrors the regulator)
 
 _CACHE_TTL = 30.0
 _CANDIDATE_CACHE = {"t": 0.0, "scores": {}}
@@ -119,6 +119,19 @@ def _bloom_state(candidates: Dict[str, int]) -> Dict[str, Any]:
     target = ECOSYSTEM_TARGET
     ready = sum(1 for s in candidates.values() if s >= 2)  # strongly whispering
 
+    # the bloom has phases: while strong whispers remain it can awaken on
+    # momentum; once only faint signals exist it must reach into frontier
+    # territory — germinating organs that barely speak the vital language yet.
+    phase = "blooming"
+    if ready >= 5:
+        phase = "blooming"
+    elif ready > 0 and living_count < target:
+        phase = "ripening"
+    elif ready == 0 and living_count < target:
+        phase = "frontier_hardening"
+    elif living_count >= target:
+        phase = "full_bloom"
+
     return {
         "living": living_count,
         "candidates": len(candidates),
@@ -126,6 +139,7 @@ def _bloom_state(candidates: Dict[str, int]) -> Dict[str, Any]:
         "target": target,
         "to_full_bloom": max(target - living_count, 0),
         "bloom_fraction": round(min(1.0, living_count / max(target, 1)), 4),
+        "phase": phase,
     }
 
 
