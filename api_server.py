@@ -1,6 +1,6 @@
 """IXpansion Live Server — local API server mirroring the Vercel surface.
 
-Runs the full 330+ module API locally with the same URL layout as the
+Runs the full 352-module API locally with the same URL layout as the
 Vercel deployment:
 
   GET  /health              — platform health
@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.62.0"
-WAVE = "146"
-WAVE_NAME = "Hortus Hexis Garden"
+VERSION = "3.63.0"
+WAVE = "147"
+WAVE_NAME = "Harbinger Conclave"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -180,6 +180,15 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._text("ixpansion_up 1\nixpansion_modules "
                               + str(len(MODULE_REGISTRY) if MODULE_REGISTRY else 0)
                               + "\n", "text/plain; version=0.0.4; charset=utf-8")
+        if path == "/garden":
+            try:
+                sys.path.insert(0, str(ROOT))
+                from hortus_hexis.lineage import generations, render_ascii
+                payload = generations()
+                payload["tree"] = render_ascii()
+                return self._json(payload)
+            except Exception as e:
+                return self._json({"error": str(e)}, 500)
         if raw_path in ("/dashboard",) and not raw_path.endswith("/"):
             return self._redirect("/dashboard/")
         if path.startswith("/api/"):

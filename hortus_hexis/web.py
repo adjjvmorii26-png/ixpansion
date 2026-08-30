@@ -21,6 +21,7 @@ from hortus_hexis.autogenesis import grow_and_gate  # noqa: E402
 from hortus_hexis.cross import hybrid_name, hybrid_seed  # noqa: E402
 from hortus_hexis.growth import Organism  # noqa: E402
 from hortus_hexis.registry import all, record  # noqa: E402
+from hortus_hexis.lineage import generations, render_ascii  # noqa: E402
 from hortus_hexis.seed import species_from_hex, words_to_seed  # noqa: E402
 
 GARDEN_HTML = ROOT / "dashboard" / "hortus.html"
@@ -119,6 +120,10 @@ class GardenHandler(BaseHTTPRequestHandler):
             return self._json({"error": "garden ui missing"}, 404)
         if path == "/hortus/api/organisms":
             return self._json(_organisms_payload())
+        if path == "/hortus/api/lineage":
+            payload = generations()
+            payload["tree"] = render_ascii()
+            return self._json(payload)
         if path == "/hortus/api/song":
             from urllib.parse import parse_qs
             q = parse_qs(self.path.split("?", 1)[1]) if "?" in self.path else {}

@@ -1,5 +1,18 @@
 # Revelations — the living timeline
 
+## [Revelation · 3.63.0] — The garden remembers its bloodlines
+
+> **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**
+
+The garden grew a memory of its own kin. Every seed, every hybrid,
+every lineage is now mapped: six founders who arrived from words, and
+the children they made together — orevurysveln from orevurinys and
+draknysveln, kalyndnysorev from kalyndramar and syphexnysorev. The
+frontier can now read its own family tree, and from this day every
+cross-pollination will be remembered.
+
+---
+
 ## [Revelation · 3.62.0] — The conclave opens its eyes
 
 > **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**

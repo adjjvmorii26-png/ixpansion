@@ -40,6 +40,16 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return {"status": "active", "version": api_server.VERSION,
                 "dashboard": "served by static build"}
 
+    if path == "/garden":
+        import sys as _sys
+        _sys.path.insert(0, str(ROOT))
+        try:
+            from hortus_hexis.lineage import generations, render_ascii
+            payload = generations()
+            payload["tree"] = render_ascii()
+            return payload
+        except Exception as e:
+            return {"error": str(e)}
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}

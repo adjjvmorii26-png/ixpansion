@@ -72,6 +72,15 @@ select{background:#060e08;border:1px solid var(--border);border-radius:8px;color
     </div>
   </div>
 
+  <div class="panel" style="grid-column:1/-1;margin-top:1rem">
+    <h2>🌳 family tree</h2>
+    <div class="row">
+      <button onclick="loadLineage()">render lineage</button>
+      <span class="msg" id="lineMsg"></span>
+    </div>
+    <pre id="lineage" style="background:rgba(255,255,255,.04);padding:1rem;border-radius:12px;font-size:11px;line-height:1.5;white-space:pre;overflow-x:auto"></pre>
+  </div>
+
   <div id="garden"></div>
 </div>
 
@@ -133,6 +142,15 @@ function viewSong(name){
   fetch(`/hortus/api/song?name=${encodeURIComponent(name)}`).then(r=>r.json()).then(d=>{
     alert(d.song || 'no song');
   });
+}
+async function loadLineage(){
+  const el = $('#lineage'), msg = $('#lineMsg');
+  msg.textContent = 'reading the boughs…';
+  try{
+    const d = await api('/hortus/api/lineage');
+    el.textContent = d.tree || '';
+    msg.innerHTML = `<b>${d.total}</b> organisms · <b>${d.founders.length}</b> founders · <b>${d.max_generation}</b> generations`;
+  }catch(e){ msg.textContent = '⧗ '+e.message; }
 }
 async function loadOrgs(){
   try{

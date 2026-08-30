@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.63.0] — The Garden Remembers: family lineage (Wave 148)
+
+### Added
+- **Lineage engine** (`hortus_hexis/lineage.py`) — reads every provenance signal the garden leaves behind (registry `hybrid:A+B`, organism spec words, explicit `parents`) and assembles a real family tree
+- **Garden family tree CLI** (`tools/garden_family_tree.py`) — renders the ASCII tree of every organism, founders and hybrids
+- **`family_lineage.json`** — machine-readable family bible committed to the garden
+- Garden web `/hortus/api/lineage` endpoint + family-tree panel in the dashboard
+- Live API route `/garden` (Vercel + local server) — the lineage exposed to the world
+- Registered `velnsyphexlumex` (born from the Harbinger ceremony) in the registry — the ledger now counts all 8 organisms
+- 9 lineage tests (`tests/test_garden_lineage.py`)
+
+### Changed
+- Version 3.62.0 → 3.63.0, wave 147 → 148, 982 → 991 tests, routes 8 → 9
+
 ## [3.62.0] — Harbinger: the self-watching conclave (Wave 147)
 
 ### Added
