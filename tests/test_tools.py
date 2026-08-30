@@ -322,6 +322,25 @@ def test_coherence_regulator_vital_signs_are_shared_vocabulary():
     assert "resonance" in sample
 
 
+def test_coherence_regulator_serverless_fallback_and_diversity():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import coherence_regulator
+    # The embedded static manifest must exist and be non-empty (serverless path)
+    assert len(coherence_regulator.KNOWN_LIVING_MODULES) >= 7
+    # Directional diversity toward the ecosystem target must be bounded [0,1]
+    # and strictly greater than a fixed "fraction of every api/*.py" denominator
+    # (which would be tiny given the large tool surface in api/).
+    reading = coherence_regulator.regulate()
+    div = reading["components"]["ecosystem_diversity"]
+    assert 0.0 <= div <= 1.0
+    assert div > 0.2
+    assert reading["coherence"] > 0.5
+    # Fast source-text scan should not import dormant modules: consistency guard
+    discovered = coherence_regulator._candidate_modules()
+    assert all("coherence_regulator" != m for m in discovered)
+
+
 def test_coherence_regulator_modules_list():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

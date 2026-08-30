@@ -63,6 +63,32 @@ SYSTEM_SETPOINTS = {
 COHERENCE_TOLERANCE = 0.7          # below this → advisories fire
 REGULATION_THRESHOLD = 0.5         # below this → strong regulation
 PULSE_INTERVAL = 60.0              # seconds between automatic pulses
+ECOSYSTEM_TARGET = 24            # living modules = a full bloom
+
+
+# ---------------------------------------------------------------------------
+# Serverless resilience
+# ---------------------------------------------------------------------------
+
+# In a serverless sandbox (Vercel), only the invoked module is present on the
+# filesystem, so globbing api/*.py finds nothing.  To keep the living system
+# alive even there, we embed a static manifest of known living modules.  The
+# regulator attempts to import & pulse each one; modules that load get reported.
+# Keep this list in sync as new modules implement coherence_vitals().
+KNOWN_LIVING_MODULES: List[str] = [
+    "chronicle_storyteller",
+    "constellation_cartographer",
+    "dream_sequencer",
+    "frontier_stream",
+    "hex_tool",
+    "organism_index",
+    "reality_weaver",
+    "reflection_pool",
+    "sound_cauldron",
+    "synesthesia",
+    "thought_meteorology",
+]
+
 
 
 # ---------------------------------------------------------------------------
@@ -88,11 +114,31 @@ def _save_state(state: Dict[str, Any]) -> None:
 # ---------------------------------------------------------------------------
 
 def _candidate_modules() -> List[str]:
+    """Living candidates: modules whose *source* defines coherence_vitals().
+
+    Uses a fast text scan so we never import dormant modules just to check.
+    In a serverless sandbox (no api/ dir on disk) we fall back to the static
+    manifest, then verify each name with an import attempt at pulse time.
+    """
     api_dir = ROOT / "api"
-    return sorted(
-        p.stem for p in api_dir.glob("*.py")
-        if p.stem not in ("__init__", "index", "unified_router")
-    )
+    try:
+        scanned = sorted(p.stem for p in api_dir.glob("*.py"))
+    except (OSError, ValueError):
+        scanned = []
+    if not scanned:
+        return list(KNOWN_LIVING_MODULES)
+    living = []
+    for stem in scanned:
+        if stem in ("__init__", "index", "unified_router", "coherence_regulator"):
+            continue
+        path = api_dir / f"{stem}.py"
+        try:
+            text = path.read_text(errors="ignore")
+        except OSError:
+            continue
+        if "def coherence_vitals" in text or "coherence_vitals =" in text:
+            living.append(stem)
+    return living
 
 
 def _normalize_vitals(raw: Any, module_name: str) -> Dict[str, Any]:
@@ -201,10 +247,13 @@ def measure_coherence(module_states: Dict[str, Any] = None) -> Dict[str, Any]:
                 resonating_pairs += 1
     resonance = resonating_pairs / max(pairs, 1)
 
-    # 3. diversity — variety of living modules vs all candidate modules
+    # 3. diversity — how far the living system is toward a full bloom.
+    #    Not a fixed fraction of every api/*.py file (dozens of tools exist
+    #    outside the organism); it measures progress toward ECOSYSTEM_TARGET
+    #    living modules, so the metric is directional and reachable.
     living = len(modules)
     candidates = len(_candidate_modules())
-    diversity = living / max(candidates, 1)
+    diversity = min(1.0, living / max(ECOSYSTEM_TARGET, 1))
 
     # 4. frontier alignment — how well module healths cluster near system setpoints
     deviations = [abs(h - SYSTEM_SETPOINTS["module_health"]) for h in healths]
