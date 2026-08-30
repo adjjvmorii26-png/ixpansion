@@ -9,6 +9,20 @@
 - `.vercelignore` to slim deployment payloads
 - README deployment section rewritten to reflect the live architecture
 
+## [3.57.0] — Wave 141 — AI Gateway & Frontier Cognition
+
+### Added
+- `api/ai_gateway.py` — stdlib-only bridge to the Vercel AI Gateway (360-model catalog)
+- Actions: `status`, `chat`, `echo`, `handshake`, `models`, `catalog`, `estimate`
+- Defaults to `spacexai/grok-4.6` with the ALEPH system persona
+- Heuristic token/cost estimator for plausibility checks
+- `tests/test_wave141_ai_gateway.py` — 7 tests (stubbed network, no CI dependency)
+- Live verification: end-to-end grok-4.6 completions through the gateway (PONG / LINKED)
+
+### Changed
+- Version bumped to 3.57.0, wave 140 → 141
+- Live health now reports 345 modules (ai_gateway closes the count gap)
+
 ## [3.56.0] — Wave 140 — Durable State & Streaming Layer
 
 ### Added

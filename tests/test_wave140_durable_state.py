@@ -54,7 +54,7 @@ def test_wave140_cold_start_kit():
 def test_wave140_snapshot_engine():
     eng = SnapshotEngine()
     state_store.write(TEST_NS, {"snapshot_me": True})
-    result = eng.capture(version="3.56.0")
+    result = eng.capture(version="3.57.0")
     assert result["namespaces"] >= 1
     assert eng.status()["snapshots"] >= 1
     restore = eng.restore(result["snapshot"])
