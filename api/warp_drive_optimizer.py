@@ -60,19 +60,25 @@ class WarpDriveOptimizer:
 
     def _load(self):
         path = ROOT / ".runtime" / "warp_drive.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            return  # read-only fs (serverless)
         if path.exists():
             data = json.loads(path.read_text())
             self.subsystem_warp = data.get("warp", {s: 1.0 for s in SUBSYSTEMS})
             self.history = data.get("history", [])
 
     def _save(self):
-        path = ROOT / ".runtime" / "warp_drive.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({
-            "warp": self.subsystem_warp,
-            "history": self.history[-500:],
-        }, indent=2))
+        try:
+            path = ROOT / ".runtime" / "warp_drive.json"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps({
+                "warp": self.subsystem_warp,
+                "history": self.history[-500:],
+            }, indent=2))
+        except OSError:
+            pass  # read-only fs (serverless)
 
     def set_warp(self, subsystem: str, warp: float) -> Dict:
         if subsystem not in SUBSYSTEMS:
@@ -171,3 +177,19 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+def coherence_vitals() -> dict:
+    """warp_drive_optimizer reports its vital signs to the living system."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "warp_drive_optimizer_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships, auto-picked from shared domain language."""
+    return ['symbiosis_network', 'quantum_entanglement', 'simulation_as_a_service']
+

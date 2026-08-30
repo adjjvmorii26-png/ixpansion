@@ -512,21 +512,30 @@ def test_ecosystem_sentience_and_bloom_100():
     from unified_router import UnifiedRouter
     from ecosystem_sentience import sentience_report
     b = ab.bloom_report()
-    # tenth full bloom — hybrid positional carried 90 -> 100 (+ forge + index)
-    assert b["state"]["living"] >= 100
+    # eleventh full bloom — hybrid positional carried 101 -> 110
+    assert b["state"]["living"] >= 110
     assert b["state"]["to_full_bloom"] == 0
-    assert len(cr.KNOWN_LIVING_MODULES) >= 100
+    assert len(cr.KNOWN_LIVING_MODULES) >= 110
     # the sentience index reads the whole organism without crashing
     r = sentience_report()
     assert 0.0 <= r["sentience"] <= 1.0
     mv = r["mood_vector"]
     assert 0.0 <= mv["valence"] <= 1.0 and 0.0 <= mv["arousal"] <= 1.0
     assert isinstance(mv["mood"], str) and mv["mood"]
-    assert "signals" in r and r["signals"]["nodes"] >= 100
+    assert "signals" in r and r["signals"]["nodes"] >= 110
     # sentience organ dispatches via the unified router
     u = UnifiedRouter()
     rr = u.route("ecosystem_sentience", {})
     assert not (isinstance(rr, dict) and "error" in rr), rr.get("error")
+    # the bloom #11 organs all dispatch via the unified router
+    for name in ("symbiosis_network", "talent_scout", "warp_drive_optimizer",
+                 "health", "oracle_guild", "pulsar_constellation",
+                 "service_numinous", "temperament_origin", "unified_health"):
+        r2 = u.route(name, {})
+        assert not (isinstance(r2, dict) and "error" in r2), f"{name}: {r2.get('error')}"
+    # the Bloom Chamber dashboard exposes the mood aura (sentience panel)
+    bloom_html = (ROOT / "dashboard" / "bloom.html").read_text()
+    assert "moodname" in bloom_html and "ecosystem_sentience" in bloom_html
 
 def test_autonomous_bloom_reached_90_hybrid_positional_strategy():
     import sys
