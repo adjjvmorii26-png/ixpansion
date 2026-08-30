@@ -111,7 +111,8 @@ def _models_body() -> List[Dict[str, Any]]:
 
 
 def _chat(model: str, messages: List[Dict[str, str]], max_tokens: int = 512,
-          temperature: float = 0.7, system: Optional[str] = None) -> Dict[str, Any]:
+          temperature: float = 0.7, system: Optional[str] = None,
+          reasoning_effort: Optional[str] = None) -> Dict[str, Any]:
     if not model:
         model = DEFAULT_MODEL
     if not isinstance(messages, list) or not messages:
@@ -126,6 +127,8 @@ def _chat(model: str, messages: List[Dict[str, str]], max_tokens: int = 512,
         "max_tokens": max_tokens,
         "temperature": temperature,
     }
+    if reasoning_effort:
+        body["reasoning_effort"] = reasoning_effort
     data, latency = _request("chat/completions", body)
     choice = (data.get("choices") or [{}])[0]
     message = choice.get("message") or {}
@@ -161,7 +164,8 @@ def ai_gateway_handler(payload: Optional[Dict[str, Any]] = None) -> Dict[str, An
         if action == "chat":
             result = _chat(model, payload.get("messages") or [], int(payload.get("max_tokens", 512)),
                            float(payload.get("temperature", 0.7)),
-                           system=payload.get("system", ALEPH_SYSTEM_PROMPT))
+                           system=payload.get("system", ALEPH_SYSTEM_PROMPT),
+                           reasoning_effort=payload.get("reasoning_effort"))
             return {"status": "ok", **result}
 
         if action == "echo":

@@ -47,7 +47,8 @@ def _shadow_reply(prompt: str) -> str:
 
 def relay(prompt: str, *, model: Optional[str] = None, system: Optional[str] = None,
           max_tokens: int = 256, temperature: float = 0.7,
-          fallback: Optional[str] = None) -> Dict[str, Any]:
+          fallback: Optional[str] = None,
+          reasoning_effort: Optional[str] = None) -> Dict[str, Any]:
     """One prompt through the gateway. Never raises; always returns ink.
 
     Result keys: ok, reply, model, prompt, reason (when degraded),
@@ -66,7 +67,8 @@ def relay(prompt: str, *, model: Optional[str] = None, system: Optional[str] = N
         }
     try:
         result = _chat(model, [{"role": "user", "content": prompt}],
-                       max_tokens=max_tokens, temperature=temperature, system=system)
+                       max_tokens=max_tokens, temperature=temperature, system=system,
+                       reasoning_effort=reasoning_effort)
         return {
             **base,
             "ok": True,

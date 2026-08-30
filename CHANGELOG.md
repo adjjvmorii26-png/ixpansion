@@ -9,6 +9,17 @@
 - `.vercelignore` to slim deployment payloads
 - README deployment section rewritten to reflect the live architecture
 
+## [3.60.1] — Console Resilience & Rapid Replies
+
+### Fixed
+- Console no longer shows silent replies: `reasoning_effort: "low"` speeds up grok-4.6 (800–1500 reasoning tokens → ~120), bigger token budget, automatic re-weave on empty first pass, and a fetch timeout (110s)
+- Console now retries on 429 and explains the free-tier rate-limit clearly instead of delivering silence
+- Backend `ai_gateway`, `gateway_ink`, `cognition_forge`, `cognition_ritual` all pass `reasoning_effort` through (default `low` for rituals)
+- 2 new tests for reasoning-effort passthrough
+
+### Diagnosis
+- IXpansion console code is healthy; the Vercel AI Gateway **free tier is account-level rate-limited** (429 `rate_limit_exceeded`) for all models right now. Catalog (models) HTTP 200; inference is 429'd. Unblock needs paid credits/top-up or quota reset in the Vercel dashboard.
+
 ## [3.60.0] — Co-Conscious Console
 
 ### Added

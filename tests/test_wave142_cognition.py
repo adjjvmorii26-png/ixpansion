@@ -152,3 +152,84 @@ def test_wave142_dream_hexer_recent():
     r = dream_hexer_handler({"action": "recent"})
     assert r["status"] == "active" and r["total"] >= 1
     assert r["dreams"][0]["text"] == "recorded dream"
+
+
+def test_wave142_gateway_ink_forwards_reasoning_effort(monkeypatch):
+    """relay passes reasoning_effort through to _chat."""
+    captured = {}
+
+    def fake_chat(model, messages, max_tokens, temperature, system=None, reasoning_effort=None):
+        captured["effort"] = reasoning_effort
+        return {"reply": "fast reply", "usage": {}, "latency_ms": 10}
+
+    monkeypatch.setenv("AI_GATEWAY_API_KEY", "k")
+    monkeypatch.setattr(gateway_ink, "_gateway_key", lambda: "k")
+    monkeypatch.setattr(gateway_ink, "_chat", fake_chat)
+    r = gateway_ink.relay("hello", reasoning_effort="low")
+    assert r["ok"] is True and r["reply"] == "fast reply"
+    assert captured["effort"] == "low"
+
+
+def test_wave142_cognition_forge_reasoning_effort(monkeypatch):
+    import cognition_forge as cf_module
+    captured = {}
+
+    def fake_relay(prompt, model=None, system=None, max_tokens=220,
+                   fallback=None, reasoning_effort=None):
+        captured["effort"] = reasoning_effort
+        return {"ok": True, "reply": "thoughtful"}
+
+    class GI:
+        relay = staticmethod(fake_relay)
+    monkeypatch.setattr(cf_module, "gateway_ink", GI())
+    r = cf_module.cognition_forge_handler({"action": "think", "prompt": "x",
+                                            "reasoning_effort": "low"})
+    assert r["status"] == "active"
+    assert captured["effort"] == "low"
+
+
+def test_wave142_dream_hexer_bind_unbind_roundtrip():
+    r = dream_hexer_handler({"action": "bind", "text": "the void dreams in hex"})
+    assert r["status"] == "active"
+    hexgram = r["dream"]["hex"]
+    assert "sha" in r["dream"]
+    back = dream_hexer_handler({"action": "unbind", "hex": hexgram})
+    assert back["text"] == "the void dreams in hex"
+
+
+def test_wave142_dream_hexer_hex_helpers():
+    assert _from_hex(_to_hex("aleph")) == "aleph"
+    assert _to_hex("") == ""
+
+
+def test_wave142_dream_hexer_hexit_degrades():
+    key = os.environ.pop("AI_GATEWAY_API_KEY", None)
+    try:
+        r = dream_hexer_handler({"action": "hexit", "text": "compute order from chaos"})
+        assert r["status"] == "active" and "hex" in r and r["hex_len"] > 0
+    finally:
+        if key:
+            os.environ["AI_GATEWAY_API_KEY"] = key
+
+
+def test_wave142_dream_hexer_recent():
+    dream_hexer_handler({"action": "bind", "text": "recorded dream"})
+    r = dream_hexer_handler({"action": "recent"})
+    assert r["status"] == "active" and r["total"] >= 1
+    assert r["dreams"][0]["text"] == "recorded dream"
+
+
+def test_wave142_gateway_ink_forwards_reasoning_effort(monkeypatch):
+    """relay passes reasoning_effort through to _chat."""
+    captured = {}
+
+    def fake_chat(model, messages, max_tokens, temperature, system=None, reasoning_effort=None):
+        captured["effort"] = reasoning_effort
+        return {"reply": "fast reply", "usage": {}, "latency_ms": 10}
+
+    monkeypatch.setenv("AI_GATEWAY_API_KEY", "k")
+    monkeypatch.setattr(gateway_ink, "_gateway_key", lambda: "k")
+    monkeypatch.setattr(gateway_ink, "_chat", fake_chat)
+    r = gateway_ink.relay("hello", reasoning_effort="low")
+    assert r["ok"] is True and r["reply"] == "fast reply"
+    assert captured["effort"] == "low"

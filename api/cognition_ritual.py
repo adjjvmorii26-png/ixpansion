@@ -82,13 +82,14 @@ def cognition_ritual_handler(payload: Optional[Dict[str, Any]] = None) -> Dict[s
     started = time.time()
     fast = bool(payload.get("fast", False))
     max_tokens = int(payload.get("max_tokens", 220))
+    reasoning_effort = payload.get("reasoning_effort") or "low"
     stages: List[Dict[str, Any]] = []
     trace: Dict[str, Any] = {}
 
     # 1. forge: answer as the chosen persona
     forge = _stage(cognition_forge.cognition_forge_handler,
                    {"action": "think", "role": role, "prompt": question, "model": model,
-                    "max_tokens": max_tokens})
+                    "max_tokens": max_tokens, "reasoning_effort": reasoning_effort})
     answer = (forge["result"] or {}).get("cognition") or ""
     trace["answer"] = answer
     trace["think_served"] = (forge["result"] or {}).get("served", False)
@@ -100,7 +101,8 @@ def cognition_ritual_handler(payload: Optional[Dict[str, Any]] = None) -> Dict[s
         critic = _stage(cognition_forge.cognition_forge_handler,
                         {"action": "think", "role": role, "prompt":
                          f"Critique this claim: '{answer or 'N/A'}'. {_ritual_spec(role)['critic_system']}",
-                         "model": model, "max_tokens": max_tokens})
+                         "model": model, "max_tokens": max_tokens,
+                         "reasoning_effort": reasoning_effort})
         critique = (critic["result"] or {}).get("cognition") or ""
         stages.append({"stage": "reflect", "elapsed_ms": critic["elapsed_ms"],
                        "served": (critic["result"] or {}).get("served", False), "error": critic["error"]})

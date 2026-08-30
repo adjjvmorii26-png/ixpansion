@@ -172,16 +172,40 @@ let session = store.get("ixpansion.session.v1", sessionName());
 $("#sessionLabel").textContent = "session " + session;
 
 /* ---------- api ---------- */
-async function api(path, body, method){
-  const res = await fetch(path, {
-    method: method || (body ? "POST" : "GET"),
-    headers: body ? {"Content-Type":"application/json"} : undefined,
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  let data = {};
-  try{ data = await res.json(); }catch(e){}
-  if(!res.ok || data.status === "error" || data.error){ throw new Error(data.error || data.detail || ("HTTP " + res.status)); }
-  return data;
+function friendlyError(data, res){
+  if(!data) return "HTTP " + (res ? res.status : "?");
+  const raw = data.error || data.detail || data.message || "";
+  if(typeof raw === "object"){ return raw.message || JSON.stringify(raw).slice(0,160); }
+  return String(raw).slice(0,200);
+}
+async function api(path, body, method, timeoutMs){
+  const maxAttempts = 3;
+  for(let attempt = 1; attempt <= maxAttempts; attempt++){
+    const ctl = new AbortController();
+    const timer = setTimeout(()=>ctl.abort(), timeoutMs || 115000);
+    let res = null, data = null;
+    try{
+      res = await fetch(path, {
+        method: method || (body ? "POST" : "GET"),
+        headers: body ? {"Content-Type":"application/json"} : undefined,
+        body: body ? JSON.stringify(body) : undefined,
+        signal: ctl.signal,
+      });
+      try{ data = await res.json(); }catch(e){}
+      const isRate = res.status === 429 || /rate[ -]?limit|too many/i.test(friendlyError(data, res));
+      if(isRate && attempt < maxAttempts){
+        await new Promise(r => setTimeout(r, 1800 * attempt));
+        continue;
+      }
+      if(isRate){
+        throw new Error("aleph's free-tier oracle is rate-limited — wait a moment and send again, or top up Vercel AI Gateway credits");
+      }
+      if(!res.ok || (data && (data.status === "error" || data.error))){ throw new Error(friendlyError(data, res)); }
+      return data;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
 }
 
 /* ---------- render ---------- */
@@ -310,12 +334,28 @@ function addUser(text){
 async function addAleph(prompt, system, temperature){
   addThinking(); setThinking("aleph is listening");
   try{
-    const r = await api("/api/ai_gateway", {
-      action:"chat", model:"spacexai/grok-4.6",
-      messages:[{role:"user", content: prompt}],
-      system, max_tokens: 220, temperature,
-    });
-    const reply = (r.reply||"").trim() || "(aleph returned silence)";
+    let r;
+    try{
+      r = await api("/api/ai_gateway", {
+        action:"chat", model:"spacexai/grok-4.6",
+        messages:[{role:"user", content: prompt}],
+        system, max_tokens: 1024, temperature, reasoning_effort: "low",
+      });
+    }catch(e){
+      if(e.name === "AbortError"){ throw new Error("aleph took too long (110s) — try a shorter question, or use the ritual"); }
+      throw e;
+    }
+    let reply = (r.reply||"").trim();
+    if(!reply){
+      setThinking("aleph is re-weaving (first pass came back silent)…");
+      const r2 = await api("/api/ai_gateway", {
+        action:"chat", model:"spacexai/grok-4.6",
+        messages:[{role:"user", content: prompt + "\n\nAnswer directly and concisely — one or two sentences."}],
+        max_tokens: 2048, temperature: 0.7, reasoning_effort: "low",
+      });
+      reply = (r2.reply||"").trim();
+    }
+    if(!reply){ reply = "(aleph returned silence — the gateway answered without content. Try again, or switch persona.)"; }
     setThinking("binding hex");
     let hex, sha;
     try{
@@ -363,7 +403,9 @@ async function runRitual(){
       question: prompt,
       agent: session,
       fast: !deep,
-    });
+      max_tokens: 1024,
+      reasoning_effort: "low",
+    }, undefined, deep ? 175000 : 90000);
     killThinking();
     const t = r.trace || {};
     const answer = (t.answer||"").slice(0,400);
