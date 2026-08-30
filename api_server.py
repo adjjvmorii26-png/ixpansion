@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.60.1"
+VERSION = "3.60.2"
 WAVE = "144"
 WAVE_NAME = "Co-Conscious Console"
 

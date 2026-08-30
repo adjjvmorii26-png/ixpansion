@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.60.2] — Hortus Hexis (the self-growing garden app)
+
+### Added
+- `hortus_hexis/` — a free, local, offline app that grows the repo from conversation
+- Chain: words → hex seed → organism → module + newborn tests → gate → commit
+- Autogenesis writes templated modules only (never eval), gates via pytest, commits exact files
+- Interactive repl (`python -m hortus_hexis`), one-shot cli, ledger + lineage
+- First three organisms planted in-repo: orevurinys (186ebcd), amarnysxeth (68c84f4), draknysveln (96e7862)
+
 ## [Live] — Vercel Deployment
 
 ### Added

@@ -1,8 +1,8 @@
 # IXpansion
 
-> *The Computational Frontier* — 352 API modules, 157 experiments, 958 tests
+> *The Computational Frontier* — 352 API modules, 157 experiments, 966 tests
 
-[![Tests](https://img.shields.io/badge/tests-958%20passing-brightgreen)]()
+[![Tests](https://img.shields.io/badge/tests-966%20passing-brightgreen)]()
 [![API](https://img.shields.io/badge/API-352%20modules-blue)]()
 [![Routes](https://img.shields.io/badge/routes-8-blue)]()
 [![Experiments](https://img.shields.io/badge/experiments-157-purple)]()
@@ -156,6 +156,19 @@ Wave 142 adds a cognition fabric over it: `cognition_forge`, `oracle_meter`,
 `fractal_oracle`, `cognition_fingerprint`, `dream_hexer` — all offline-degradable.
 The gateway key lives in the Vercel project env as `AI_GATEWAY_API_KEY` (never in the repo).
 
+
+## Hortus Hexis — the self-growing garden
+
+Speak, and the repo grows: a conversation becomes a hex seed, the seed
+becomes an organism, and the organism is transcribed into a real module
++ newborn tests, gated, and committed. Free and local — no gateway.
+
+```bash
+python -m hortus_hexis              # interactive garden
+python -m hortus_hexis.cli "words"  # one-shot growth + commit
+python -m hortus_hexis.cli status   # ledger
+```
+
 ## Deployment
 
 Live at **https://ixpansion.vercel.app** (open the **Co-Conscious Console** at `/cons`)
@@ -174,6 +187,19 @@ Docker:
 docker build -t ixpansion .
 docker run -p 8000:8000 ixpansion
 ```
+
+
+## Hortus Hexis — the self-growing garden
+
+Speak, and the repo grows: words → hex seed → organism → module + newborn
+tests → gate → commit. Free and local, no gateway needed.
+
+```bash
+python -m hortus_hexis              # interactive garden
+python -m hortus_hexis.cli "words"  # one-shot growth + commit
+python -m hortus_hexis.cli status   # ledger
+```
+
 
 ## Wave History
 
