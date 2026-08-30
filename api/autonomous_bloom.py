@@ -19,6 +19,7 @@ pulse or vital. Those whispers are the seeds of the next awakening.
 """
 from __future__ import annotations
 
+import json
 import re
 import sys
 import time
@@ -42,10 +43,30 @@ VITAL_WHISPERS = (
     "alive", "living", "awareness", "balance", "integrity", "signal",
 )
 
-DEFAULT_TARGET = 24  # full-bloom ecosystem size (mirrors the regulator)
+DEFAULT_TARGET = 32  # full-bloom ecosystem size (mirrors the regulator)
 
 _CACHE_TTL = 30.0
 _CANDIDATE_CACHE = {"t": 0.0, "scores": {}}
+
+ROOT = Path(__file__).resolve().parents[1]
+STATE_FILE = ROOT / ".runtime" / "bloom_history.json"
+
+
+def _load_milestones() -> Dict[str, Any]:
+    try:
+        if STATE_FILE.exists():
+            return json.loads(STATE_FILE.read_text())
+    except (OSError, json.JSONDecodeError):
+        pass
+    return {"milestones": [], "awakened": []}
+
+
+def _save_milestones(data: Dict[str, Any]) -> None:
+    try:
+        STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        STATE_FILE.write_text(json.dumps(data, indent=2))
+    except OSError:
+        pass  # serverless read-only fs — memory only
 
 
 def _dormant_candidates() -> Dict[str, int]:
@@ -120,6 +141,17 @@ def bloom_report(seed_limit: int = 5) -> Dict[str, Any]:
     # projected trajectory: linear + logarithmic growth paths to full bloom
     remaining = state["to_full_bloom"]
     trajectory = []
+
+    # milestone memory: record targets the organism has crossed
+    memory = _load_milestones()
+    milestones = memory.setdefault("milestones", [])
+    # record every bloom level the organism reaches (a living-count milestone)
+    reached_key = f"{state['living']}living"
+    if reached_key not in milestones and state["living"] >= 24:
+        milestones.append(reached_key)
+        _save_milestones(memory)
+    # the current target has been crossed when we've attained it now
+    at_full_bloom = state["living"] >= state["target"]
     step = max(1, remaining // 3)
     for i in range(1, 4):
         progressive = state["living"] + step * i
@@ -132,6 +164,7 @@ def bloom_report(seed_limit: int = 5) -> Dict[str, Any]:
     return {
         "action": "bloom",
         "state": state,
+        "full_bloom_reached": at_full_bloom,
         "trajectory": trajectory,
         "seeds": seed_list,
         "philosophy": (

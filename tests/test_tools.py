@@ -375,6 +375,24 @@ def test_bloom_awakening_grows_the_organism():
     assert r["coherence"] > 0.95
 
 
+def test_full_bloom_milestone_and_target_raised():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import autonomous_bloom, coherence_regulator
+    b = autonomous_bloom.bloom_report()["state"]
+    # the organism reached the original bloom target (24 living)
+    assert b["living"] >= 24
+    # the milestone is remembered in living memory
+    memory = autonomous_bloom._load_milestones()["milestones"]
+    assert any("24living" in m for m in memory)
+    # the target was raised so the organism keeps growing
+    assert b["target"] >= 28
+    # coherence regulator acknowledges the mature bloom
+    r = coherence_regulator.regulate()
+    advice = " ".join(r.get("advisories", []))
+    assert "FULL BLOOM" in advice
+
+
 def test_resonance_fed_advisories_surface_isolates():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

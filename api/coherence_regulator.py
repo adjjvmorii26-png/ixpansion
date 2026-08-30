@@ -63,7 +63,7 @@ SYSTEM_SETPOINTS = {
 COHERENCE_TOLERANCE = 0.7          # below this → advisories fire
 REGULATION_THRESHOLD = 0.5         # below this → strong regulation
 PULSE_INTERVAL = 60.0              # seconds between automatic pulses
-ECOSYSTEM_TARGET = 24            # living modules = a full bloom
+ECOSYSTEM_TARGET = 32            # living modules = a full bloom (organism outgrew 24)
 
 
 # ---------------------------------------------------------------------------
@@ -338,6 +338,16 @@ def _graph_advisories(reading: Dict[str, Any]) -> List[str]:
         g = build_graph()
     except Exception:
         return advisories
+
+    # milestone: a mature bloom
+    density = g.get("density", 0.0)
+    nodes = g.get("nodes", 0)
+    if nodes >= 24 and density >= 0.6:
+        advisories.append(
+            f"FULL BLOOM: the organism has reached {nodes} living modules at "
+            f"{density:.0%} interconnection. The target has been raised — "
+            "keep awakening seeds and let the web thicken."
+        )
 
     nodes = g.get("nodes", 0)
     if nodes < 3:

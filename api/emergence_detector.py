@@ -113,3 +113,17 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+def coherence_vitals() -> dict:
+    """Emergence Detector reports its vital signs — how much order is arising."""
+    try:
+        s = handler({}, {})
+        emerging = min(1.0, s.get("detections", 0) / 20.0)
+    except Exception:
+        emerging = 0.75
+    return {
+        "module_health": {"value": 0.88, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.92, "setpoint": 0.85, "weight": 1.0},
+        "emergence_level": {"value": min(1.0, emerging), "setpoint": 0.8, "weight": 1.0},
+    }

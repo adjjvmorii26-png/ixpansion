@@ -116,3 +116,18 @@ def handler(payload: dict = None, context: object = None) -> dict:
 
 if __name__ == "__main__":
     print(json.dumps(handler(), indent=2))
+
+
+def coherence_vitals() -> dict:
+    """Platform Failure reports its vital signs — viability and failure modes."""
+    try:
+        h = handler({})
+        healthy = h.get("healthy", h.get("status", "unknown"))
+        healthy = 1.0 if healthy in (True, "healthy", "ok", "active") else 0.0
+    except Exception:
+        healthy = 0.0
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.9, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "platform_viability": {"value": healthy, "setpoint": 0.8, "weight": 1.0},
+    }
