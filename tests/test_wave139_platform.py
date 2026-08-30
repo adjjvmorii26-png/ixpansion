@@ -42,21 +42,21 @@ def test_wave139_metrics_exporter():
 
 def test_wave139_runtime_config():
     rc = RuntimeConfig(env={"NEXUS_MODE": "production", "NEXUS_SEED": "7",
-                            "NEXUS_WAVE": "139", "NEXUS_MODULES": "337",
-                            "NEXUS_ROUTES": "344"})
+                            "NEXUS_WAVE": "140", "NEXUS_MODULES": "345",
+                            "NEXUS_ROUTES": "7"})
     assert rc.mode() == "production"
     assert rc.seed() == 7
-    checks = rc.validate(actual_modules=337, actual_routes=344)
+    checks = rc.validate(actual_modules=345, actual_routes=7)
     assert checks["modules_match"]
     assert checks["routes_match"]
-    assert rc.status()["wave"] == "139"
+    assert rc.status()["wave"] == "140"
 
 
 def test_wave139_route_registry():
     rr = RouteRegistry()
-    assert rr.count() >= 300
-    assert "unified_router" in rr.destinations() or len(rr.destinations()) > 0
-    assert rr.status()["routes"] >= 300
+    assert rr.count() >= 1
+    assert "api/index.py" in rr.destinations()
+    assert rr.status()["routes"] >= 1
 
 
 def test_wave139_cache_manager():
@@ -79,7 +79,7 @@ def test_wave139_endpoint_docs():
 
 def test_wave139_platform_pulse():
     pp = PlatformPulse()
-    s1 = pp.measure(uptime=0.99, available_modules=337, cache_health=0.9, config_valid=True)
+    s1 = pp.measure(uptime=0.99, available_modules=345, cache_health=0.9, config_valid=True)
     s2 = pp.measure(uptime=0.5, available_modules=50, cache_health=0.2, config_valid=False)
     assert s2 < s1
     assert pp.trend() < 0

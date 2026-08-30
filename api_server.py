@@ -101,7 +101,7 @@ def call_handler(module_name: str, payload: Dict[str, Any]) -> Tuple[Dict[str, A
 def platform_health() -> Dict[str, Any]:
     """Live platform health payload."""
     api_dir = ROOT / "api"
-    module_count = len(list(api_dir.glob("*.py"))) if api_dir.exists() else 0
+    module_count = len([p for p in api_dir.glob("*.py") if p.stem not in ("__init__", "index")]) if api_dir.exists() else 0
     route_count = 0
     try:
         with open(ROOT / "vercel.json") as f:
@@ -115,7 +115,7 @@ def platform_health() -> Dict[str, Any]:
         "wave": WAVE,
         "layer": WAVE_NAME,
         "modules": module_count,
-        "routes": route_count,
+        "route_entries": route_count,
         "test_suites": test_count,
         "mode": os.environ.get("NEXUS_MODE", "development"),
         "seed": os.environ.get("NEXUS_SEED", "42"),

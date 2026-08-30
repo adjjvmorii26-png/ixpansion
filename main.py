@@ -65,7 +65,7 @@ def cmd_status():
 
     print()
     print(f"  Total API modules: 345")
-    print(f"  Total routes:      352")
+    print(f"  Total API entry points: 7")
     print(f"  Total regions:     3 (iad1, sfo1, lhr1)")
     print()
 

@@ -4,7 +4,7 @@
 
 [![Tests](https://img.shields.io/badge/tests-813%20passing-brightgreen)]()
 [![API](https://img.shields.io/badge/API-257%20modules-blue)]()
-[![Routes](https://img.shields.io/badge/routes-264-blue)]()
+[![Routes](https://img.shields.io/badge/routes-7-blue)]()
 [![Experiments](https://img.shields.io/badge/experiments-157-purple)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
 
@@ -60,7 +60,7 @@ ixpansion/
 ├── lab/                    # 70 lab modules + 157 experiments
 ├── dashboard/              # Observatory web UI (3 pages)
 ├── main.py                 # CLI entry point
-├── vercel.json             # Deployment config (352 routes, 3 regions)
+├── vercel.json             # Deployment config (single-function catch-all)
 ├── tests/                  # 39 test files, 926 test functions
 └── Dockerfile              # Python 3.12-slim container
 ```

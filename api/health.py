@@ -21,7 +21,7 @@ WAVE = "140"
 
 def collect_health() -> dict:
     api_dir = ROOT / "api"
-    module_count = len(list(api_dir.glob("*.py"))) if api_dir.exists() else 0
+    module_count = len([p for p in api_dir.glob("*.py") if p.stem not in ("__init__", "index")]) if api_dir.exists() else 0
 
     route_count = 0
     try:
@@ -37,7 +37,7 @@ def collect_health() -> dict:
         "version": VERSION,
         "wave": WAVE,
         "modules": module_count,
-        "routes": route_count,
+        "route_entries": route_count,
         "test_suites": len(test_files),
         "mode": os.environ.get("NEXUS_MODE", "development"),
         "seed": int(os.environ.get("NEXUS_SEED", "42")),
