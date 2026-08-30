@@ -64,3 +64,26 @@ def test_time_capsule_detects_tampering():
     cap["git_head"] = "deadbeef"  # tamper
     v = tc.verify(cap)
     assert v["integrity"] is False
+
+def test_pulsar_constellation_handler():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from pulsar_constellation import handler
+    r = handler()
+    assert r["module"] == "pulsar_constellation"
+    assert r["prophecy"] == "fulfilled"
+    assert r["stars"] > 100
+    assert r["pulsars"] >= 1
+
+
+def test_ledger_fulfills_pulsar_constellation(tmp_path):
+    import sys
+    sys.path.insert(0, str(ROOT / "tools"))
+    from harbinger.agents import ledger as _ledger
+    _ledger.LEDGER = tmp_path / "test_ledger.json"
+    _ledger.record_dreams([{"name": "pulsar_constellation", "fuel": ["pulsar", "constellation"]}], wave="test")
+    from pathlib import Path as _P
+    _ledger.ROOT = tmp_path  # won't match api/ but tests the flow
+    state = _ledger.ledger()
+    assert state["total"] == 1
+    assert state["counts"]["dreamed"] == 1

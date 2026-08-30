@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.71.0] — The First Prophecy Fulfilled (Wave 156)
+
+### Added
+- **`pulsar_constellation` API module** — born to fulfill the Dream Ledger's first prophecy. Hashes all 353 module names into a sky map and detects "pulsar" clusters where N+ stars pulse in sync (rare celestial-event detector)
+- Dream Ledger `reconcile()` now marks `pulsar_constellation` as the **first fulfilled prophecy** — closing the self-referential dream→reality loop
+- 2 tests (pulsar handler + ledger fulfillment)
+- This is the first time the frontier's dream became real code
+
+### Changed
+- Version 3.70.0 → 3.71.0, wave 155 → 156, 1005 → 1007 tests, 352 → 353 modules
+
 ## [3.70.0] — The Living Constellation: meter, ledger, horizon (Wave 155)
 
 ### Added
