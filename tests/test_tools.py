@@ -97,3 +97,13 @@ def test_gossip_uptime_propagates():
     assert r["prophecy"] == "fulfilled"
     assert r["reached_pct"] > 20
     assert r["total_modules"] > 300
+
+def test_oracle_guild_surveys_members():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from oracle_guild import handler
+    r = handler()
+    assert r["module"] == "oracle_guild"
+    assert r["prophecy"] == "fulfilled"
+    assert len(r["members"]) >= 5
+    assert r["guild"]["member_count"] >= 5

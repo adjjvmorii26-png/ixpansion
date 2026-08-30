@@ -15,8 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.72.0"
-WAVE = "157"
+VERSION = "3.73.0"
+WAVE = "158"
 
 
 def collect_health() -> dict:

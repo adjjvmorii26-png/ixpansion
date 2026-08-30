@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.73.0] — Third prophecy fulfilled: oracle_guild (Wave 158)
+
+### Added
+- **`oracle_guild` API module** — surveys all 6 oracle modules (compliance, emergence, fractal, integrity, prophecy, wisdom) and returns a unified guild reading: consensus, cohesion, fingerprints. Fulfills the `oracle_guild` prophecy from the Dream Ledger.
+- Third Dream Ledger prophecy fulfilled (3 of 8)
+- 1 test
+
+### Changed
+- Version 3.72.0 → 3.73.0, wave 157 → 158, 1008 → 1009 tests, 354 → 355 modules
+
 ## [3.72.0] — Second prophecy fulfilled: gossip_uptime (Wave 157)
 
 ### Added
