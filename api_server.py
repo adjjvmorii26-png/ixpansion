@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.59.0"
-WAVE = "143"
-WAVE_NAME = "Cognition Ritual Pipeline"
+VERSION = "3.60.0"
+WAVE = "144"
+WAVE_NAME = "Co-Conscious Console"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -188,6 +188,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._json(result, status)
         if path.startswith("/dashboard/"):
             return self._static(path)
+        if path == "/cons":
+            return self._static("dashboard/coconscious.html")
         if path == "/" or path in ("/index.html",):
             return self._redirect("/dashboard/")
         # fall back to static file
@@ -237,6 +239,7 @@ def serve(port: int = 3000, host: str = "0.0.0.0") -> None:
     print(f"  Modules:              http://localhost:{port}/modules")
     print(f"  API:                  http://localhost:{port}/api/workforce_orchestrator")
     print(f"  Dashboard:            http://localhost:{port}/dashboard/")
+    print(f"  Co-Conscious Console: http://localhost:{port}/cons")
     print(f"  ({VERSION} — Wave {WAVE} {WAVE_NAME})")
     try:
         server.serve_forever()

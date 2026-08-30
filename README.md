@@ -4,7 +4,7 @@
 
 [![Tests](https://img.shields.io/badge/tests-956%20passing-brightgreen)]()
 [![API](https://img.shields.io/badge/API-352%20modules-blue)]()
-[![Routes](https://img.shields.io/badge/routes-7-blue)]()
+[![Routes](https://img.shields.io/badge/routes-8-blue)]()
 [![Experiments](https://img.shields.io/badge/experiments-157-purple)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
 
@@ -158,11 +158,11 @@ The gateway key lives in the Vercel project env as `AI_GATEWAY_API_KEY` (never i
 
 ## Deployment
 
-Live at **https://ixpansion.vercel.app**
+Live at **https://ixpansion.vercel.app** (open the **Co-Conscious Console** at `/cons`)
 
 Single-function, catch-all serverless architecture:
 - `api/index.py` — universal WSGI/dict entrypoint routing `/health`, `/modules`, `/metrics`, `/api/<module>`, and `/dashboard`
-- `vercel.json` — 7 explicit routes forwarding to the single Python function + static dashboard
+- `vercel.json` — 8 explicit routes forwarding to the single Python function + static dashboard
 - Zero cold-start bottlenecks: 352 API modules resolved at runtime, not 352 lambdas
 
 ```bash
@@ -221,6 +221,7 @@ docker run -p 8000:8000 ixpansion
 | 141 | AI Gateway & Frontier Cognition | 1 | 7 |
 | 142 | Frontier Cognition Layer | 5 | 16 |
 | 143 | Cognition Ritual Pipeline | 1 | 7 |
+| 144 | Co-Conscious Console | 1 | — |
 
 ## License
 

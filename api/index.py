@@ -1,6 +1,6 @@
 """Universal Vercel serverless entrypoint (WSGI application).
 
-Dispatches the entire IXpansion API (345 modules / 7 entry points)
+Dispatches the entire IXpansion API (352 modules / 8 entry points)
 through a single WSGI application, reusing the same dispatch logic as
 the local `api_server.py`. Exposes both a WSGI `application` (the
 canonical @vercel/python build entrypoint) and a dict-style `handler`
@@ -36,7 +36,7 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return {"modules": names, "count": len(names)}
     if path == "/metrics":
         return {"up": 1, "modules": len(api_server.MODULE_REGISTRY) if api_server.MODULE_REGISTRY else 0}
-    if path == "/" or path == "/dashboard" or path.startswith("/dashboard/"):
+    if path == "/" or path == "/dashboard" or path.startswith("/dashboard/") or path == "/cons":
         return {"status": "active", "version": api_server.VERSION,
                 "dashboard": "served by static build"}
 

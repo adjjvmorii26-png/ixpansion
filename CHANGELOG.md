@@ -9,6 +9,16 @@
 - `.vercelignore` to slim deployment payloads
 - README deployment section rewritten to reflect the live architecture
 
+## [3.60.0] — Co-Conscious Console
+
+### Added
+- `dashboard/coconscious.html` — the shared interactive console: chat with ALEPH, persona modes, live pulse, HEX-bound exchange chronicle, star-field constellation canvas, optional voice input, session persistence
+- New `/cons` route (8 total) serving the console; landing page links to it
+- Local server serves `/cons` too
+
+### Changed
+- Version bumped to 3.60.0, wave 143 → 144, routes 7 → 8
+
 ## [3.59.0] — Wave 143 — Cognition Ritual Pipeline
 
 ### Added

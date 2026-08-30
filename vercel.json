@@ -38,14 +38,18 @@
     {
       "src": "/dashboard/(.*)",
       "dest": "/dashboard/$1"
+    },
+    {
+      "src": "/cons",
+      "dest": "/dashboard/coconscious.html"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "143",
+    "NEXUS_WAVE": "144",
     "NEXUS_MODULES": "352",
-    "NEXUS_ROUTES": "7"
+    "NEXUS_ROUTES": "8"
   },
   "headers": [
     {
