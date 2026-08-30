@@ -27,7 +27,8 @@ import api_server  # noqa: E402
 
 def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str, Any]:
     """Resolve a request to a JSON response payload."""
-    path = (request_path or "/").split("?")[0].rstrip("/") or "/"
+    raw_path = (request_path or "/")
+    path = raw_path.split("?")[0].rstrip("/") or "/"
 
     if path == "/health":
         return api_server.platform_health()
@@ -40,6 +41,21 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return {"status": "active", "version": api_server.VERSION,
                 "dashboard": "served by static build"}
 
+    if raw_path.split("?")[0].startswith("/echo"):
+        from urllib.parse import urlparse, parse_qs
+        qs = parse_qs(urlparse(raw_path).query)
+        q = (qs.get("q") or [""])[0].strip().lower()
+        if not q:
+            return {"error": "no query ?q="}
+        api_dir = ROOT / "api"
+        matches = [f.stem for f in api_dir.glob("*.py")
+                   if q in f.stem and f.stem not in ("__init__", "index", "unified_router")]
+        import sys as _sys
+        _sys.path.insert(0, str(ROOT))
+        from harbinger.agents.dreamer import dream
+        dreamscape = dream(salt=q, k=3, focus=q)
+        related = [d["name"] for d in dreamscape.get("dreams", [])]
+        return {"query": q, "modules": sorted(matches)[:20], "count": len(matches), "dreams": related}
     if path == "/revelations":
         rev = ROOT / "REVELATIONS.md"
         if rev.exists():

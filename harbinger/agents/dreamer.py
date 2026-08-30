@@ -44,12 +44,14 @@ def _pair_affinity(a: str, b: str, salt: str = "") -> int:
     return int(h[:4], 16)
 
 
-def dream(salt: str = "the frontier dreams onward", k: int = 6, tense: float = 0.0) -> Dict[str, Any]:
+def dream(salt: str = "the frontier dreams onward", k: int = 6, tense: float = 0.0,
+         focus: str = "") -> Dict[str, Any]:
     """Synthesize k new module concepts from existing module vocabulary.
 
     Each dream fuses two *affinity-matched* words from different modules
     to produce a never-written species name. `tense` raises how novel
-    (vs. conservative) fusions are.
+    (vs. conservative) fusions are. `focus` anchors every dream on a
+    single word the caller wants to echo (e.g. a user query).
     """
     names = module_names()
     if len(names) < 2:
@@ -73,8 +75,12 @@ def dream(salt: str = "the frontier dreams onward", k: int = 6, tense: float = 0
         ranked = sorted(pool, key=lambda w: _pair_affinity(w, salt, str(attempts)))
         # slide by `tense` to favor more-distant pairings
         idx = min(len(pool) - 1, int(tense * len(pool) / 2))
-        w1 = ranked[idx % len(pool)] if pool else None
-        w2 = ranked[(idx + 1 + int(tense * 3)) % len(pool)] if len(pool) > 1 else None
+        if focus and focus != "":  # anchor on the echoed word
+            w1 = focus if focus in pool else focus
+            w2 = ranked[(idx + 1 + int(tense * 3)) % len(pool)] if len(pool) > 1 else None
+        else:
+            w1 = ranked[idx % len(pool)] if pool else None
+            w2 = ranked[(idx + 1 + int(tense * 3)) % len(pool)] if len(pool) > 1 else None
         if not w1 or not w2 or w1 == w2:
             continue
         dream_name = f"{w1}_{w2}"
@@ -91,5 +97,5 @@ def dream(salt: str = "the frontier dreams onward", k: int = 6, tense: float = 0
             "dreams": dreams}
 
 
-def run(salt: str = "the frontier dreams onward", k: int = 6, tense: float = 0.0) -> Dict[str, Any]:
-    return dream(salt=salt, k=k, tense=tense)
+def run(salt: str = "the frontier dreams onward", k: int = 6, tense: float = 0.0, focus: str = "") -> Dict[str, Any]:
+    return dream(salt=salt, k=k, tense=tense, focus=focus)

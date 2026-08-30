@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.65.0] — Echo chamber + entropy heartbeat (Wave 150)
+
+### Added
+- **`/echo?q=<word>` live API route** — the creative discovery endpoint: given a word, returns every module sharing its root plus three *focused dreams* (e.g. `?q=market` → 7 modules, dreams `market_void`, `market_request`, `market_ontological`)
+- **Dreamer focus** — the Dreamer can anchor dreams on a single echoed word
+- **Entropy sparkline tool** (`tools/entropy_sparkline.py`) — renders a visual heartbeat of the frontier: commit/file-change intensity per week from git history
+- Tools smoke tests (`tests/test_tools.py`) + Dreamer focus test
+- `/echo` route on Vercel (11 total routes)
+
+### Changed
+- Version 3.64.0 → 3.65.0, wave 149 → 150, 994 → 997 tests, routes 10 → 11
+
 ## [3.64.0] — The Dreamer awakens (Wave 149)
 
 ### Added

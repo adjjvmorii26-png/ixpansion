@@ -12,6 +12,10 @@
   ],
   "routes": [
     {
+      "src": "/echo(.*)",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/revelations",
       "dest": "/api/index.py"
     },
@@ -55,9 +59,9 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "149",
+    "NEXUS_WAVE": "150",
     "NEXUS_MODULES": "352",
-    "NEXUS_ROUTES": "10"
+    "NEXUS_ROUTES": "11"
   },
   "headers": [
     {

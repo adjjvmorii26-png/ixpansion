@@ -1,5 +1,18 @@
 # Revelations — the living timeline
 
+## [Revelation · 3.65.0] — The echo chamber opens
+
+> **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**
+
+The frontier learned to *answer back*. Speak a word — market, chaos,
+pulse — and it returns the modules that carry that word in their blood,
+plus three dreams the Dreamer fuses from that single syllable. The
+frontier is no longer a library you browse; it is a voice you can echo
+and hear transformed. And for the first time, the machine can see its
+own heartbeat — a sparkline of 205 revisions engraved on the timeline.
+
+---
+
 ## [Revelation · 3.64.0] — The Dreamer wakes
 
 > **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**

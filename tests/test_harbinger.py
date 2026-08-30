@@ -75,7 +75,14 @@ def test_dreamer_produces_dreams():
     assert len(r["dreams"]) <= 3
 
 
+def test_dreamer_focus_anchors_on_word():
+    r = dreamer.run(salt="x", k=3, focus="pulse")
+    names = [d["name"] for d in r["dreams"]]
+    assert any(n.startswith("pulse_") for n in names), f"no pulse_ in {names}"
+
+
 def test_dreamer_deterministic():
+
     r1 = dreamer.run(salt="seed", k=2)
     r2 = dreamer.run(salt="seed", k=2)
     assert [d["name"] for d in r1["dreams"]] == [d["name"] for d in r2["dreams"]]

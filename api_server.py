@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.64.0"
+VERSION = "3.65.0"
 WAVE = "147"
 WAVE_NAME = "Harbinger Conclave"
 
@@ -169,6 +169,7 @@ class ApiHandler(BaseHTTPRequestHandler):
 
     # ----- GET -----
     def do_GET(self):
+        self_raw_path = self.path
         raw_path = self.path.split("?")[0]
         path = raw_path.rstrip("/") or "/"
         if path == "/health":
@@ -180,6 +181,23 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._text("ixpansion_up 1\nixpansion_modules "
                               + str(len(MODULE_REGISTRY) if MODULE_REGISTRY else 0)
                               + "\n", "text/plain; version=0.0.4; charset=utf-8")
+        if raw_path.startswith("/echo"):
+            from urllib.parse import urlparse, parse_qs
+            qs = parse_qs(urlparse(self_raw_path).query)
+            q = (qs.get("q") or [""])[0].strip().lower()
+            if not q:
+                return self._json({"error": "no query ?q="}, 400)
+            # find modules sharing the word root
+            api_dir = ROOT / "api"
+            matches = [f.stem for f in api_dir.glob("*.py")
+                       if q in f.stem and f.stem not in ("__init__", "index", "unified_router")]
+            # dream fusions on this word
+            sys.path.insert(0, str(ROOT))
+            from harbinger.agents.dreamer import dream
+            dreamscape = dream(salt=q, k=3, focus=q)
+            related = [d["name"] for d in dreamscape.get("dreams", [])]
+            return self._json({"query": q, "modules": sorted(matches)[:20],
+                               "count": len(matches), "dreams": related})
         if path == "/revelations":
             rev = ROOT / "REVELATIONS.md"
             if rev.exists():
