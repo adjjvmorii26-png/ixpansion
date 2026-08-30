@@ -21,7 +21,7 @@
 - `tests/test_wave142_cognition.py` — 16 offline-safe tests (no network required)
 
 ### Changed
-- Version bumped to 3.58.0, wave 141 → 142, modules 345 → 350
+- Version bumped to 3.58.0, wave 141 → 142, modules 345 → 351
 - All five modules degrade gracefully when the gateway is unconfigured
 
 ## [3.57.0] — Wave 141 — AI Gateway & Frontier Cognition
