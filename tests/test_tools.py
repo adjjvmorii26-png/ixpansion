@@ -380,8 +380,12 @@ def test_autonomous_germination_dry_run_and_chronicle():
     sys.path.insert(0, str(ROOT / "api"))
     import autonomous_bloom as ab
 
-    # dry-run must never touch disk but returns a valid blueprint
-    r = ab.germinate("worker_wellness", dry_run=True)
+    # dry-run must never touch disk but returns a valid blueprint.
+    # Pick a currently-dormant seed dynamically (the organism keeps growing,
+    # so hardcoding a name would rot as soon as it gets germinated).
+    dormant = [m for m, s in ab._dormant_candidates().items()]
+    assert dormant, "expected at least one dormant seed"
+    r = ab.germinate(dormant[0], dry_run=True)
     assert r.get("dry_run") is True
     assert r.get("valid") is True
     assert "def coherence_vitals" in r.get("would_write", "")
@@ -435,6 +439,23 @@ def test_germinated_organs_join_the_living_system():
     awakened = [e["module"] for e in ab.chronicle().get("awakened", [])]
     assert "analytics" in awakened
     assert "docs" in awakened
+
+
+def test_autonomous_bloom_reached_56_and_new_organs_dispatch():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import autonomous_bloom as ab, coherence_regulator as cr
+    from unified_router import UnifiedRouter
+    # fifth full bloom reached
+    assert ab.bloom_report()["state"]["living"] >= 56
+    # serverless manifest covers all living organs
+    assert len(cr.KNOWN_LIVING_MODULES) >= 56
+    # every newly-germinated organ dispatches via the unified router
+    u = UnifiedRouter()
+    for name in ("gossip_self", "worker_wellness", "auth", "agent_communication",
+                 "autonomous_dialogue", "cognitive_resonance", "narrative_generator"):
+        r = u.route(name, {})
+        assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
 
 
 def test_autonomous_bloom_reached_48_and_manifest_synced():

@@ -49,13 +49,19 @@ class NarrativeGenerator:
 
     def _load(self):
         path = ROOT / ".runtime" / "narratives.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         if path.exists():
             self.stories = json.loads(path.read_text()).get("stories", [])
 
     def _save(self):
         path = ROOT / ".runtime" / "narratives.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         path.write_text(json.dumps({"stories": self.stories[-200:]}, indent=2))
 
     def generate(self, theme: str = "discovery", events: List[str] = None) -> Dict:
