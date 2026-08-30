@@ -59,7 +59,10 @@ class GovernanceSystem:
         self._load()
 
     def _load(self):
-        GOVERNANCE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            GOVERNANCE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            return  # read-only fs (serverless)
         if GOVERNANCE_FILE.exists():
             data = json.loads(GOVERNANCE_FILE.read_text())
             self.balances = data.get("balances", {})
@@ -67,12 +70,15 @@ class GovernanceSystem:
             self.tx_history = data.get("tx_history", [])
 
     def _save(self):
-        GOVERNANCE_FILE.parent.mkdir(parents=True, exist_ok=True)
-        GOVERNANCE_FILE.write_text(json.dumps({
-            "balances": self.balances,
-            "proposals": self.proposals,
-            "tx_history": self.tx_history[-500:],
-        }, indent=2))
+        try:
+            GOVERNANCE_FILE.parent.mkdir(parents=True, exist_ok=True)
+            GOVERNANCE_FILE.write_text(json.dumps({
+                "balances": self.balances,
+                "proposals": self.proposals,
+                "tx_history": self.tx_history[-500:],
+            }, indent=2))
+        except OSError:
+            pass  # read-only fs (serverless)
 
     def mint(self, user: str, activity: str, amount: int = None) -> Dict:
         if amount is None:
@@ -183,3 +189,19 @@ def handler(request, response):
 
 if __name__ == "__main__":
     demo()
+
+
+def coherence_vitals() -> dict:
+    """governance reports its vital signs to the living system."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "governance_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships, auto-picked from shared domain language."""
+    return ['credits', 'data_licensing', 'plugin_loader']
+

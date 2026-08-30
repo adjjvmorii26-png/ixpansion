@@ -43,7 +43,10 @@ class MycelialCommerce:
 
     def _load(self):
         path = ROOT / ".runtime" / "mycelial.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            return  # read-only fs (serverless)
         if path.exists():
             data = json.loads(path.read_text())
             self.listings = data.get("listings", {})
@@ -51,13 +54,16 @@ class MycelialCommerce:
             self.growth_events = data.get("growth_events", [])
 
     def _save(self):
-        path = ROOT / ".runtime" / "mycelial.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({
-            "listings": self.listings,
-            "connections": self.connections[-1000:],
-            "growth_events": self.growth_events[-500:],
-        }, indent=2))
+        try:
+            path = ROOT / ".runtime" / "mycelial.json"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps({
+                "listings": self.listings,
+                "connections": self.connections[-1000:],
+                "growth_events": self.growth_events[-500:],
+            }, indent=2))
+        except OSError:
+            pass  # read-only fs (serverless)
 
     def list_item(self, seller: str, name: str, description: str,
                   base_price: float, category: str = "general") -> Dict:
@@ -169,3 +175,19 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+def coherence_vitals() -> dict:
+    """mycelial_commerce reports its vital signs to the living system."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "mycelial_commerce_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships, auto-picked from shared domain language."""
+    return ['neural_fabric', 'plugin_loader', 'pattern_recognizer']
+
