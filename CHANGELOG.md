@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.74.0] — Fourth prophecy fulfilled: data_complexity (Wave 159)
+
+### Added
+- **`data_complexity` API module** — measures the frontier's own structural complexity: module size, naming diversity, namespace coupling → single Complexity Index (0-100)
+- Fourth Dream Ledger prophecy fulfilled (4 of 8)
+- 1 test
+
+### Changed
+- Version 3.73.0 → 3.74.0, wave 158 → 159, 1009 → 1010 tests, 355 → 356 modules
+
 ## [3.73.0] — Third prophecy fulfilled: oracle_guild (Wave 158)
 
 ### Added

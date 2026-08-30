@@ -107,3 +107,13 @@ def test_oracle_guild_surveys_members():
     assert r["prophecy"] == "fulfilled"
     assert len(r["members"]) >= 5
     assert r["guild"]["member_count"] >= 5
+
+def test_data_complexity_index():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from data_complexity import handler
+    r = handler()
+    assert r["module"] == "data_complexity"
+    assert r["prophecy"] == "fulfilled"
+    assert r["modules"] > 300
+    assert 0 < r["complexity_index"] <= 100
