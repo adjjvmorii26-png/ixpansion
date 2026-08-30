@@ -1,5 +1,14 @@
 # Changelog
 
+## [Live] — Vercel Deployment
+
+### Added
+- Single-function catch-all deployment via `api/index.py` (WSGI + dict handler)
+- Live production URL: **https://ixpansion.vercel.app**
+- `vercel.json` reduced to 7 authorless catch-all routes + static dashboard
+- `.vercelignore` to slim deployment payloads
+- README deployment section rewritten to reflect the live architecture
+
 ## [3.56.0] — Wave 140 — Durable State & Streaming Layer
 
 ### Added

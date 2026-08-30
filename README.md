@@ -142,13 +142,15 @@ python -m pytest tests/test_core_modules.py  # core only
 
 ## Deployment
 
-Deployed to Vercel across 3 regions:
-- **US East** (iad1)
-- **US West** (sfo1)
-- **London** (lhr1)
+Live at **https://ixpansion.vercel.app**
+
+Single-function, catch-all serverless architecture:
+- `api/index.py` — universal WSGI/dict entrypoint routing `/health`, `/modules`, `/metrics`, `/api/<module>`, and `/dashboard`
+- `vercel.json` — 7 explicit routes forwarding to the single Python function + static dashboard
+- Zero cold-start bottlenecks: 344 API modules resolved at runtime, not 344 lambdas
 
 ```bash
-vercel deploy --prod
+vercel deploy --prod --yes
 ```
 
 Docker:
