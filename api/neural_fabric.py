@@ -23,6 +23,10 @@ from typing import Any, Dict, List
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+try:
+    from runtime_io import load_json as _rio_load, save_json as _rio_save
+except Exception:
+    _rio_load = _rio_save = None
 
 MODULES = [
     "agent_rental", "billing", "marketplace", "cognitive_resonance",
@@ -52,7 +56,10 @@ class NeuralFabric:
 
     def _load(self):
         path = ROOT / ".runtime" / "neural_fabric.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         if path.exists():
             data = json.loads(path.read_text())
             self.neurons = data.get("neurons", {})
@@ -61,7 +68,10 @@ class NeuralFabric:
 
     def _save(self):
         path = ROOT / ".runtime" / "neural_fabric.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         path.write_text(json.dumps({
             "neurons": self.neurons,
             "connections": self.connections,

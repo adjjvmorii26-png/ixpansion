@@ -21,6 +21,10 @@ from typing import Any, Dict, List
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+try:
+    from runtime_io import load_json as _rio_load, save_json as _rio_save
+except Exception:
+    _rio_load = _rio_save = None
 
 
 class DigitalTwinService:
@@ -30,13 +34,19 @@ class DigitalTwinService:
 
     def _load(self):
         path = ROOT / ".runtime" / "digital_twins.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         if path.exists():
             self.twins = json.loads(path.read_text())
 
     def _save(self):
         path = ROOT / ".runtime" / "digital_twins.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         path.write_text(json.dumps(self.twins, indent=2))
 
     def create(self, name: str, source_type: str, owner: str,

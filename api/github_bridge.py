@@ -19,6 +19,10 @@ Supported GitHub events:
   - fork             → frontier observed a fork
 """
 from __future__ import annotations
+try:
+    from runtime_io import load_json as _rio_load, save_json as _rio_save
+except Exception:
+    _rio_load = _rio_save = None
 
 import hashlib
 import hmac
@@ -65,8 +69,11 @@ def _load_journal() -> List[Dict[str, Any]]:
 
 
 def _save_journal(events: List[Dict[str, Any]]) -> None:
-    BRIDGE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    BRIDGE_FILE.write_text(json.dumps(events, indent=2))
+    try:
+        BRIDGE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        BRIDGE_FILE.write_text(json.dumps(events, indent=2))
+    except OSError:
+        pass  # read-only fs (serverless) — keep in-memory
 
 
 def _parse_payload(payload: Dict[str, Any]) -> Dict[str, Any]:

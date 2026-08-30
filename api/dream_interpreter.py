@@ -22,6 +22,10 @@ from typing import Any, Dict, List
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+try:
+    from runtime_io import load_json as _rio_load, save_json as _rio_save
+except Exception:
+    _rio_load = _rio_save = None
 
 INSIGHT_TYPES = {
     "opportunity": {"weight": 1.2, "color": "green"},
@@ -63,7 +67,10 @@ class DreamInterpreter:
 
     def _load(self):
         path = ROOT / ".runtime" / "dream_interpreter.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         if path.exists():
             data = json.loads(path.read_text())
             self.interpretations = data.get("interpretations", [])
@@ -71,7 +78,10 @@ class DreamInterpreter:
 
     def _save(self):
         path = ROOT / ".runtime" / "dream_interpreter.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         path.write_text(json.dumps({
             "interpretations": self.interpretations[-500:],
             "insights": self.all_insights[-2000:],

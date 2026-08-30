@@ -21,6 +21,11 @@ from typing import Any, Dict, List
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+try:
+    from runtime_io import load_json as _load_json, save_json as _save_json
+except Exception:
+    _load_json = None
+    _save_json = None
 
 DEFAULT_CHANNELS = [
     "agent.lifecycle", "agent.synthesis", "agent.resonance",
@@ -46,21 +51,32 @@ class EventStream:
 
     def _load(self):
         path = ROOT / ".runtime" / "event_stream.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        if path.exists():
-            data = json.loads(path.read_text())
-            self.events = data.get("events", [])
-            self.subscriptions = data.get("subscriptions", {})
-            self.filters = data.get("filters", {})
+        if _load_json is not None:
+            data = _load_json(path, {})
+        else:
+            try:
+                data = json.loads(path.read_text()) if path.exists() else {}
+            except (OSError, json.JSONDecodeError):
+                data = {}
+        self.events = data.get("events", [])
+        self.subscriptions = data.get("subscriptions", {})
+        self.filters = data.get("filters", {})
 
     def _save(self):
         path = ROOT / ".runtime" / "event_stream.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({
+        payload = {
             "events": self.events[-2000:],
             "subscriptions": self.subscriptions,
             "filters": self.filters,
-        }, indent=2))
+        }
+        if _save_json is not None:
+            _save_json(path, payload)
+        else:
+            try:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(json.dumps(payload, indent=2))
+            except OSError:
+                pass
 
     def publish(self, channel: str, data: Dict,
                 priority: str = "normal", source: str = "system") -> Dict:
