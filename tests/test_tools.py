@@ -117,3 +117,14 @@ def test_data_complexity_index():
     assert r["prophecy"] == "fulfilled"
     assert r["modules"] > 300
     assert 0 < r["complexity_index"] <= 100
+
+def test_frontier_intent_analyzes_themes():
+    import sys
+    sys.path.insert(0, str(ROOT / "tools"))
+    from frontier_intent import analyze
+    r = analyze()
+    assert r["modules"] > 300
+    assert len(r["themes"]) >= 5
+    assert len(r["focus_vector"]) >= 3
+    total_share = round(sum(t["share"] for t in r["themes"]), 0)
+    assert total_share >= 98  # shares roughly sum to 100

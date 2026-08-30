@@ -32,8 +32,8 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.74.0"
-WAVE = "159"
+VERSION = "3.75.0"
+WAVE = "160"
 WAVE_NAME = "Harbinger Conclave"
 
 try:
@@ -204,6 +204,11 @@ class ApiHandler(BaseHTTPRequestHandler):
                 return self._text(rev.read_text(encoding="utf-8"),
                                   "text/markdown; charset=utf-8")
             return self._json({"error": "no revelations yet"}, 404)
+        if path == "/intent":
+            import sys as _sys
+            _sys.path.insert(0, str(ROOT))
+            from tools.frontier_intent import analyze
+            return analyze()
         if path == "/meter":
             import sys as _sys
             _sys.path.insert(0, str(ROOT))

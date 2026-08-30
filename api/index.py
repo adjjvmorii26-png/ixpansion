@@ -63,6 +63,11 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         if rev.exists():
             return {"markdown": rev.read_text(encoding="utf-8")}
         return {"error": "no revelations yet"}
+    if path == "/intent":
+        import sys as _sys
+        _sys.path.insert(0, str(ROOT))
+        from tools.frontier_intent import analyze
+        return analyze()
     if path == "/meter":
         import sys as _sys
         _sys.path.insert(0, str(ROOT))

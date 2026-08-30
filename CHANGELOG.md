@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.75.0] — Frontier Intent Analyzer (Wave 160)
+
+### Added
+- **`/intent` live API route** — the frontier's self-knowledge: scans 356 module names, clusters into 13 theme families, reports the "focus vector" and emerging interests
+- **`tools/frontier_intent.py`** — renders a bar chart of what the codebase is *actually about* (dream 4.3%, time 6.5%, system 6.7%, chaos 3.7%, cosmos 3.7%...)
+- Intent section in Oracle page UI ("what is the frontier about?")
+- 1 test (1011 total)
+
+### Changed
+- Version 3.74.0 → 3.75.0, wave 159 → 160, 1010 → 1011 tests, routes 18 → 19
+
 ## [3.74.0] — Fourth prophecy fulfilled: data_complexity (Wave 159)
 
 ### Added

@@ -12,6 +12,10 @@
   ],
   "routes": [
     {
+      "src": "/intent",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/forecast",
       "dest": "/api/index.py"
     },
@@ -87,9 +91,9 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "159",
+    "NEXUS_WAVE": "160",
     "NEXUS_MODULES": "353",
-    "NEXUS_ROUTES": "18"
+    "NEXUS_ROUTES": "19"
   },
   "headers": [
     {
