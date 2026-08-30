@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.76.0"
-WAVE = "161"
-WAVE_NAME = "Harbinger Conclave"
+VERSION = "3.77.0"
+WAVE = "162"
+WAVE_NAME = "Gateway Ascension"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -204,6 +204,17 @@ class ApiHandler(BaseHTTPRequestHandler):
                 return self._text(rev.read_text(encoding="utf-8"),
                                   "text/markdown; charset=utf-8")
             return self._json({"error": "no revelations yet"}, 404)
+        if path == "/gateway":
+            sys.path.insert(0, str(ROOT))
+            from gateway.router import handle as gw_handle
+            import io
+            try:
+                raw_body = self.rfile.read(int(self.headers.get("Content-Length", 0) or 0))
+                payload = json.loads(raw_body) if raw_body else {}
+            except Exception:
+                payload = {}
+            result, status = gw_handle(payload)
+            return self._json(result, status)
         if path == "/intent":
             import sys as _sys
             _sys.path.insert(0, str(ROOT))

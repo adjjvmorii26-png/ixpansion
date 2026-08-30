@@ -12,6 +12,14 @@
   ],
   "routes": [
     {
+      "src": "/gateway/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/gateway",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/intent",
       "dest": "/api/index.py"
     },
@@ -86,6 +94,10 @@
     {
       "src": "/cons",
       "dest": "/dashboard/coconscious.html"
+    },
+    {
+      "src": "/gateway.html",
+      "dest": "/dashboard/gateway.html"
     }
   ],
   "env": {
@@ -93,7 +105,7 @@
     "NEXUS_SEED": "42",
     "NEXUS_WAVE": "161",
     "NEXUS_MODULES": "353",
-    "NEXUS_ROUTES": "19"
+    "NEXUS_ROUTES": "21"
   },
   "headers": [
     {

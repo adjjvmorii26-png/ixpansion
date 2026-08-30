@@ -63,6 +63,22 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         if rev.exists():
             return {"markdown": rev.read_text(encoding="utf-8")}
         return {"error": "no revelations yet"}
+    if path == "/gateway":
+        import sys as _sys
+        _sys.path.insert(0, str(ROOT))
+        from gateway.router import handle as gw_handle, render_public
+        payload = {}
+        if request_method == "POST" and body:
+            try:
+                payload = json.loads(body.decode("utf-8"))
+            except Exception:
+                payload = {}
+        elif "?" in raw_path:
+            from urllib.parse import urlparse, parse_qs
+            qs = parse_qs(urlparse(raw_path).query)
+            payload = {k: v[0] if v else "" for k, v in qs.items()}
+        result, status = gw_handle(payload)
+        return result
     if path == "/intent":
         import sys as _sys
         _sys.path.insert(0, str(ROOT))

@@ -43,10 +43,10 @@ def test_wave139_metrics_exporter():
 def test_wave139_runtime_config():
     rc = RuntimeConfig(env={"NEXUS_MODE": "production", "NEXUS_SEED": "7",
                             "NEXUS_WAVE": "161", "NEXUS_MODULES": "356",
-                            "NEXUS_ROUTES": "19"})
+                            "NEXUS_ROUTES": "21"})
     assert rc.mode() == "production"
     assert rc.seed() == 7
-    checks = rc.validate(actual_modules=356, actual_routes=19)
+    checks = rc.validate(actual_modules=356, actual_routes=21)
     assert checks["modules_match"]
     assert checks["routes_match"]
     assert rc.status()["wave"] == "161"

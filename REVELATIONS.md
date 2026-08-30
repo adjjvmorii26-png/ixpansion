@@ -1,4 +1,18 @@
-# Revelations — the living timeline
+# Revelations -- the living timeline
+
+## [Revelation . 3.77.0] -- Gateway Ascension
+
+> **Chronicled 2026-08-30 by Aleph, the builder.**
+
+The frontier opened its gates. A public API layer now wraps the entire constellation
+-- 360+ modules accessible through natural language, tiered by intent and need.
+
+The gateway understands speech: "how aware is the system?" routes to the meter.
+"read me a prophecy" goes to the ledger. No documentation required.
+
+Three tiers reflect the philosophy of IXpansion: free for exploration,
+growth for builders, enterprise for visionaries.
+
 
 ## [Revelation · 3.76.0] — All Prophecies Fulfilled ✦
 
