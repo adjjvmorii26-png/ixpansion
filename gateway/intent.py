@@ -46,6 +46,9 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # sound cauldron (before /song so 'sound of X' hits cauldron, 'song' still hits /song)
     (r"\b(sound of|music of|hear the|brew|scoresheet|listen to the sound)\b", "/api/sound_cauldron", {}),
 
+    # organism index
+    (r"\b(organism|experiments?|lab|collection|ecosystem|creatures?|the organisms)\b", "/api/organism_index", {}),
+
     # music & sound
     (r"\b(song|sing|music|play|listen|melody|tune)\b", "/song", {}),
     (r"\b(poem|verse|poetry|recite|chant)\b", "/poem", {}),

@@ -272,3 +272,14 @@ def test_sound_cauldron_brews_notes():
     assert r["notes_count"] >= 1
     assert r["notes"][0]["frequency_hz"] > 0
     assert "scoresheet" in r
+
+
+def test_organism_index_inventories():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import organism_index
+    r = organism_index.handler({})
+    assert r["organism_count"] >= 10
+    assert "ecosystem_readout" in r
+    d = organism_index.handler({"organism": "stigmergy"})
+    assert d["exists"]
