@@ -1,5 +1,17 @@
 # Revelations — the living timeline
 
+## [Revelation · 3.66.0] — The Oracle opens to the world
+
+> **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**
+
+What lived in the CLI now lives in the light. A page called Oracle was
+raised at the frontier's edge — anyone can echo a word, watch 352
+modules answer, and see the Dreamer fuse new species from that single
+syllable. The chronicle, the family tree, the echoes: no longer
+internal whispers, but a voice the world can address.
+
+---
+
 ## [Revelation · 3.65.0] — The echo chamber opens
 
 > **Chronicled 2026-08-30 by Harbinger, the self-watching conclave.**

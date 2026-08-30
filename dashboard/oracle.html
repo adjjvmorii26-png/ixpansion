@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oracle — Echo Chamber & Revelations</title>
+<meta name="description" content="Speak to the frontier: echo your word through 352 modules and hear the dreams it wakes.">
+<style>
+:root{--bg:#05050a;--surface:#0c0c14;--surface2:#111119;--border:#1a1a2a;--text:#d4d4d8;--dim:#7a7a86;--accent:#22d3ee;--accent2:#67e8f9;--gold:#f59e0b;--cyan:#06b6d4}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono',Menlo,Consolas,monospace;line-height:1.6;min-height:100vh}
+.wrap{max-width:960px;margin:0 auto;padding:2rem 1.5rem 4rem}
+header{text-align:center;padding:3rem 0 2rem;border-bottom:1px solid var(--border);margin-bottom:2rem}
+h1{font-size:2.2rem;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#fff,var(--cyan) 60%,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--dim);margin-top:.5rem;font-size:.9rem}
+.orbit{align-items:center;display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-top:1.2rem}
+.pill{background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:var(--accent2);padding:.2rem .7rem;border-radius:2rem;font-size:.7rem}
+.echo{display:flex;gap:.6rem;margin:2rem 0}
+input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:.5rem;color:var(--text);padding:.9rem 1rem;font:inherit;font-size:.95rem;outline:none}
+input:focus{border-color:var(--cyan)}
+button{padding:.9rem 1.6rem;background:var(--cyan);color:#000;font-weight:700;border:none;border-radius:.5rem;cursor:pointer;font:inherit}
+button:hover{background:var(--accent2)}
+section{margin-bottom:2.5rem}
+h2{font-size:1.1rem;color:var(--accent2);margin-bottom:1rem;letter-spacing:.02em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:1rem}
+.card .k{color:var(--dim);font-size:.65rem;text-transform:uppercase;letter-spacing:.06em}
+.card .v{font-size:1rem;margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dream{display:flex;align-items:center;gap:.5rem;font-size:.95rem;padding:.5rem 0;border-bottom:1px dashed var(--border)}
+.dream:last-child{border-bottom:none}
+.dream .star{color:var(--gold)}
+.revelations{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:1.2rem;white-space:pre-wrap;font-size:.78rem;color:var(--dim);max-height:420px;overflow-y:auto}
+pre.tree{background:var(--surface2);border:1px solid var(--border);border-radius:.6rem;padding:1rem;font-size:.7rem;overflow-x:auto;color:#a5b4fc;line-height:1.5}
+footer{text-align:center;color:var(--dim);font-size:.75rem;margin-top:3rem;border-top:1px solid var(--border);padding-top:1.5rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>ORACLE · ECHO CHAMBER</h1>
+    <div class="sub">Speak a word — the frontier echoes it through 352 modules, then dreams what it could become.</div>
+    <div class="orbit">
+      <span class="pill">/echo</span><span class="pill">/revelations</span><span class="pill">/garden</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>☉ echo a word</h2>
+    <div class="echo">
+      <input id="q" placeholder="try: market, chaos, pulse, growth, memory…" onkeydown="if(event.key==='Enter')speak()">
+      <button onclick="speak()">echo ›</button>
+    </div>
+    <div class="grid" id="results" style="display:none">
+      <div class="card"><div class="k">query</div><div class="v" id="r-q">—</div></div>
+      <div class="card"><div class="k">modules sharing root</div><div class="v" id="r-count">0</div></div>
+    </div>
+    <div id="modules" style="margin-top:.8rem"></div>
+    <div style="margin-top:1.2rem">
+      <div class="k" style="color:var(--dim);font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem">dreams it wakes</div>
+      <div id="dreams"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🌳 the garden remembers</h2>
+    <button onclick="loadGarden()" style="font-size:.8rem;padding:.6rem 1.2rem">render family tree</button>
+    <pre class="tree" id="tree" style="margin-top:.8rem"></pre>
+  </section>
+
+  <section>
+    <h2>📜 revelations</h2>
+    <button onclick="loadRevelations()" style="font-size:.8rem;padding:.6rem 1.2rem">read the chronicle</button>
+    <div class="revelations" id="rev" style="margin-top:.8rem"></div>
+  </section>
+
+  <footer>ALEPH · the self-watching, self-dreaming frontier · IXpansion</footer>
+</div>
+
+<script>
+async function get(path){
+  const r = await fetch(path); return r.json().catch(()=>({}));
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+async function speak(){
+  const q = document.getElementById('q').value.trim();
+  if(!q) return;
+  const d = await get('/echo?q='+encodeURIComponent(q));
+  document.getElementById('results').style.display='grid';
+  document.getElementById('r-q').textContent = d.query || '—';
+  document.getElementById('r-count').textContent = d.count || 0;
+  const mods = d.modules||[];
+  document.getElementById('modules').innerHTML =
+    mods.map(m=>`<span class="pill">${esc(m)}</span>`).join(' ') || '<span class="pill" style="color:var(--dim)">no module shares this root</span>';
+  document.getElementById('dreams').innerHTML =
+    (d.dreams||[]).map(m=>`<div class="dream"><span class="star">✦</span>${esc(m)}</div>`).join('');
+}
+async function loadGarden(){
+  const d = await get('/garden');
+  document.getElementById('tree').textContent = d.tree || 'the garden is silent';
+}
+async function loadRevelations(){
+  const d = await get('/revelations');
+  document.getElementById('rev').textContent = d.markdown || 'no revelations yet';
+}
+</script>
+</body>
+</html>

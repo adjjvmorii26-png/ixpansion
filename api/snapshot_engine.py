@@ -27,7 +27,7 @@ class SnapshotEngine:
             return []
         return sorted(SNAPSHOT_DIR.glob("snapshot-*.json"))
 
-    def capture(self, version: str = "3.65.0") -> Dict[str, Any]:
+    def capture(self, version: str = "3.66.0") -> Dict[str, Any]:
         data = {}
         if RUNTIME.exists():
             for path in RUNTIME.glob("*.json"):

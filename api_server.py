@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.65.0"
+VERSION = "3.66.0"
 WAVE = "147"
 WAVE_NAME = "Harbinger Conclave"
 
@@ -221,6 +221,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._json(result, status)
         if path.startswith("/dashboard/"):
             return self._static(path)
+        if path == "/oracle":
+            return self._static("dashboard/oracle.html")
         if path == "/cons":
             return self._static("dashboard/coconscious.html")
         if path == "/" or path in ("/index.html",):

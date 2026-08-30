@@ -41,6 +41,8 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return {"status": "active", "version": api_server.VERSION,
                 "dashboard": "served by static build"}
 
+    if path == "/oracle":
+        return {"status": "active", "page": "oracle", "version": api_server.VERSION}
     if raw_path.split("?")[0].startswith("/echo"):
         from urllib.parse import urlparse, parse_qs
         qs = parse_qs(urlparse(raw_path).query)

@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.66.0] — The Oracle: echo + revelations web UI (Wave 151)
+
+### Added
+- **Oracle page** (`dashboard/oracle.html`) — user-facing web UI for the creative layer: echo any word through the 352-module frontier and watch the Dreamer fuse new concepts; render the garden family tree; read the living REVELATIONS chronicle
+- `/oracle` live route (Vercel + local); nav + hero CTA links wired into the main dashboard
+- Echo endpoint finalized: `/echo?q=<word>` returns module matches + focused dreams
+
+### Changed
+- Version 3.65.0 → 3.66.0, wave 150 → 151, 12 routes
+
 ## [3.65.0] — Echo chamber + entropy heartbeat (Wave 150)
 
 ### Added
