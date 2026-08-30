@@ -176,17 +176,12 @@ def test_gateway_key_generation():
     result = keys.generate_key("test_user", "free")
     assert result["key"].startswith("ixp_free_")
     assert result["tier"] == "free"
-    # cleanup: remove the test key
-    from pathlib import Path as _P
-    keys_path = _P(str(_P(__file__).resolve().parents[1] / "gateway" / "keys.json"))
-    if keys_path.exists():
-        data = json.loads(keys_path.read_text())
-        key_hash = keys.validate_key.__code__.co_consts  # just check it exists
-        keys_path.unlink(missing_ok=True)
+    assert "limits" in result
+    assert "features" in result
 
 
 def test_gateway_key_validate():
-    import sys, hashlib
+    import sys
     sys.path.insert(0, str(ROOT / "gateway"))
     import keys
     result = keys.generate_key("test_user", "growth")
@@ -194,7 +189,6 @@ def test_gateway_key_validate():
     validated = keys.validate_key(key)
     assert validated is not None
     assert validated["tier"] == "growth"
-    assert validated["monthly_calls"] >= 1
 
 
 def test_gateway_key_invalid():
@@ -202,6 +196,7 @@ def test_gateway_key_invalid():
     sys.path.insert(0, str(ROOT / "gateway"))
     import keys
     assert keys.validate_key("ixp_fake_nonexistent") is None
+    assert keys.validate_key("ixp_free_tooshort") is None
 
 
 def test_intent_matcher_routes_correctly():

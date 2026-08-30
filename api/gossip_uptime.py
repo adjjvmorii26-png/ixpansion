@@ -90,11 +90,11 @@ def simulate(origin: str, target_pct: float = 0.5, hops: int = 8) -> Dict[str, A
 
 
 def handler(payload: dict = None, context: object = None) -> dict:
-    origin = (payload or {}).get("origin", "entropy_regulator")
+    origin = (payload or {}).get("origin", "gossip_network")
     return simulate(origin)
 
 
 if __name__ == "__main__":
     import json
-    r = simulate("entropy_regulator")
+    r = simulate("gossip_network")
     print(json.dumps(r, indent=2))
