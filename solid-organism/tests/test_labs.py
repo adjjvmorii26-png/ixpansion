@@ -5,6 +5,8 @@ import cordyceps
 import kintsugi
 import negative_space
 import mood_superposition
+import stigmergy
+import sympoiesis
 
 
 class TestKintsugi:
@@ -100,3 +102,45 @@ class TestMoodSuperposition:
 
         with pytest.raises(ValueError):
             mood_superposition.superpose([])
+
+
+
+class TestStigmergy:
+    def test_simulation_runs(self):
+        result = stigmergy.simulate(width=10, height=10, num_agents=6, steps=40, seed=42)
+        assert result["num_agents"] == 6
+        assert result["agents_reached"] >= 0
+        assert len(result["history"]) == 40
+        assert result["history"][-1]["trail_energy"] > 0
+
+    def test_philosophy_present(self):
+        result = stigmergy.simulate(seed=7)
+        assert "pheromone" in result["philosophy"]
+
+    def test_hot_path_cells_exist(self):
+        result = stigmergy.simulate(seed=42)
+        assert len(result["hot_path"]) > 0
+        assert all("cell" in c for c in result["hot_path"])
+
+
+class TestSympoiesis:
+    def test_simulation_runs(self):
+        result = sympoiesis.simulate(agents=8, rounds=10, seed=42)
+        assert result["total_spores"] == 80
+        assert "type_distribution" in result
+        assert len(result["ascii_constellation"]) == 20
+
+    def test_emergence_metrics(self):
+        result = sympoiesis.simulate(seed=1)
+        assert result["emergence"]["pattern_diversity"] > 0
+        assert result["spatial"]["max_density"] >= 1
+
+    def test_agent_contributions(self):
+        result = sympoiesis.simulate(agents=5, rounds=3, seed=9)
+        assert len(result["agent_contributions"]) == 5
+        assert all(a["spores"] == 3 for a in result["agent_contributions"])
+
+    def test_different_seeds_different_results(self):
+        r1 = sympoiesis.simulate(seed=1)
+        r2 = sympoiesis.simulate(seed=2)
+        assert r1["emergence"]["resonance_coherence"] != r2["emergence"]["resonance_coherence"]

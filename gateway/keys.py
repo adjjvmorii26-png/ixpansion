@@ -29,7 +29,7 @@ TIER_FEATURES = {
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",
                    "song", "service_numinous", "temperament_origin",
-                   "frontier_stream", "hex_tool"],
+                   "frontier_stream", "hex_tool", "constellation_cartographer"],
     "enterprise": ["*"],  # full access
 }
 

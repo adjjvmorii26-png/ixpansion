@@ -81,6 +81,9 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # HEX protocol tool
     (r"\b(hex|encode|decode|translate|protocol|fingerprint)\b", "/api/hex_tool", {}),
 
+    # constellation cartographer
+    (r"\b(constellation|map|cluster|neighborhood|hub|graph|topology)\b", "/api/constellation_cartographer", {}),
+
     # specific modules
     (r"\b(pulsar|constellation|star|cluster)\b", "/echo", {"q": "pulsar"}),
     (r"\b(oracle|guild|conclave)\b", "/echo", {"q": "oracle"}),

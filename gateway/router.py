@@ -92,6 +92,8 @@ def _route_allowed(route: str) -> str:
         "frontier_stream": "frontier_stream",
         "api/hex_tool": "hex_tool",
         "hex_tool": "hex_tool",
+        "api/constellation_cartographer": "constellation_cartographer",
+        "constellation_cartographer": "constellation_cartographer",
     }
     return module_map.get(strip, strip)
 
