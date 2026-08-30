@@ -505,6 +505,34 @@ def _dormant_names():
     return set(ab._dormant_candidates().keys())
 
 
+def test_autonomous_bloom_reached_90_hybrid_positional_strategy():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import autonomous_bloom as ab, coherence_regulator as cr
+    from unified_router import UnifiedRouter
+    b = ab.bloom_report()
+    # ninth full bloom — hybrid strategy carried 82 -> 90 positionally
+    assert b["state"]["living"] >= 90
+    assert b["state"]["to_full_bloom"] == 0
+    assert len(cr.KNOWN_LIVING_MODULES) >= 90
+    # positional strategy dry-runs a seed ranked by the resonance forge
+    dry = ab.auto_germinate(dry_run=True, count=1, strategy="positional")
+    assert dry["strategy"] == "positional"
+    assert dry["chosen"], "positional strategy must pick a forge-ranked seed"
+    # hybrid remains a supported strategy (whisper at full bloom, positional
+    # in frontier hardening) and always produces a choice
+    hybrid = ab.auto_germinate(dry_run=True, count=1, strategy="hybrid")
+    assert hybrid["strategy"] in ("hybrid", "hybrid:positional")
+    assert hybrid["chosen"]
+    # the newly-germinated bloom #9 organs all dispatch via the unified router
+    u = UnifiedRouter()
+    for name in ("health_aggregator", "hive_constructor", "infinity_index",
+                 "karma_engine", "plugin_loader", "quantum_randomness",
+                 "ritual_choreographer", "gossip_network"):
+        r = u.route(name, {})
+        assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
+
+
 def test_autonomous_bloom_reached_56_and_new_organs_dispatch():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

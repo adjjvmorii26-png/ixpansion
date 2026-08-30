@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.91.0"
-WAVE = "176"
-WAVE_NAME = "Resonance Forge"
+VERSION = "3.92.0"
+WAVE = "177"
+WAVE_NAME = "Hybrid Bloom Strategy"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
