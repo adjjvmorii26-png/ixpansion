@@ -11,6 +11,7 @@ import stochastic_resonance
 import liminal_space
 import phosphorescence
 import memory_fern
+import tessellation
 
 
 class TestKintsugi:
@@ -252,3 +253,21 @@ class TestMemoryFern:
     def test_fractal_dimension_positive(self):
         result = memory_fern.analyze_growth("F", "branching", 4)
         assert result["growth_curve"][-1]["fractal_dim"] > 0
+
+
+
+class TestTessellation:
+    def test_generation_runs(self):
+        result = tessellation.generate_tiling(depth=3, seed=42)
+        assert result["num_triangles"] > 0
+        assert result["is_aperiodic"]
+    
+    def test_thick_and_thin_both_present(self):
+        result = tessellation.generate_tiling(depth=4)
+        assert result["thick"] > 0
+        assert result["thin"] > 0
+    
+    def test_deeper_depth_more_triangles(self):
+        r3 = tessellation.generate_tiling(depth=2)
+        r5 = tessellation.generate_tiling(depth=5)
+        assert r5["num_triangles"] > r3["num_triangles"]
