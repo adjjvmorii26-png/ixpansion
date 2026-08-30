@@ -43,6 +43,9 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(capsule|seal|provenance|snapshot|time|record)\b", "/capsule", {}),
     (r"\b(version|wave|release)\b", "/capsule", {}),
 
+    # sound cauldron (before /song so 'sound of X' hits cauldron, 'song' still hits /song)
+    (r"\b(sound of|music of|hear the|brew|scoresheet|listen to the sound)\b", "/api/sound_cauldron", {}),
+
     # music & sound
     (r"\b(song|sing|music|play|listen|melody|tune)\b", "/song", {}),
     (r"\b(poem|verse|poetry|recite|chant)\b", "/poem", {}),
@@ -104,6 +107,7 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
 
     # thought meteorology
     (r"\b(weather|forecast.*ideas|idea weather|concept.*trend|trending|storm|temperature of ideas)\b", "/api/thought_meteorology", {}),
+
 
     # specific modules
     (r"\b(pulsar|constellation|star|cluster)\b", "/echo", {"q": "pulsar"}),

@@ -32,7 +32,7 @@ TIER_FEATURES = {
                    "frontier_stream", "hex_tool", "constellation_cartographer",
                    "reality_weaver", "synesthesia", "dream_sequencer",
                    "github_bridge", "reflection_pool", "chronicle_storyteller",
-                   "thought_meteorology"],
+                   "thought_meteorology", "sound_cauldron"],
     "enterprise": ["*"],  # full access
 }
 

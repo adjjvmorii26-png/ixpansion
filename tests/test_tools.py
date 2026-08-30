@@ -262,3 +262,13 @@ def test_thought_meteorology_forecasts():
     assert len(r["pressure_centers"]) > 0
     f = thought_meteorology.handler({"forecast": 2})
     assert len(f["forecast_periods"]) == 2
+
+
+def test_sound_cauldron_brews_notes():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import sound_cauldron
+    r = sound_cauldron.handler({"text": "the frontier dreams in code"})
+    assert r["notes_count"] >= 1
+    assert r["notes"][0]["frequency_hz"] > 0
+    assert "scoresheet" in r

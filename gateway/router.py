@@ -112,6 +112,8 @@ def _route_allowed(route: str) -> str:
         "chronicle_storyteller": "chronicle_storyteller",
         "api/thought_meteorology": "thought_meteorology",
         "thought_meteorology": "thought_meteorology",
+        "api/sound_cauldron": "sound_cauldron",
+        "sound_cauldron": "sound_cauldron",
     }
     return module_map.get(strip, strip)
 
