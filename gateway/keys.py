@@ -24,7 +24,8 @@ TIER_LIMITS = {
 }
 
 TIER_FEATURES = {
-    "free":       ["echo", "health", "modules", "poem", "intent", "meter"],
+    "free":       ["echo", "health", "modules", "poem", "intent", "meter",
+                   "coherence_regulator"],  # system health = free, forever
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",
