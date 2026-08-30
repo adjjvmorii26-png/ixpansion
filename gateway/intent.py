@@ -75,6 +75,12 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(broken|failure|health check|viability|platform)\b", "/platform_failure", {}),
     (r"\b(failure|broken|degraded|error)\b", "/platform_failure", {}),
 
+    # live stream
+    (r"\b(live|stream|realtime|real-time|feed|events?|subscribe|sse)\b", "/api/frontier_stream", {}),
+
+    # HEX protocol tool
+    (r"\b(hex|encode|decode|translate|protocol|fingerprint)\b", "/api/hex_tool", {}),
+
     # specific modules
     (r"\b(pulsar|constellation|star|cluster)\b", "/echo", {"q": "pulsar"}),
     (r"\b(oracle|guild|conclave)\b", "/echo", {"q": "oracle"}),

@@ -28,7 +28,8 @@ TIER_FEATURES = {
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",
-                   "song", "service_numinous", "temperament_origin"],
+                   "song", "service_numinous", "temperament_origin",
+                   "frontier_stream", "hex_tool"],
     "enterprise": ["*"],  # full access
 }
 

@@ -88,6 +88,10 @@ def _route_allowed(route: str) -> str:
         "revelations": "revelations",
         "capsule": "capsule",
         "song": "song",
+        "api/frontier_stream": "frontier_stream",
+        "frontier_stream": "frontier_stream",
+        "api/hex_tool": "hex_tool",
+        "hex_tool": "hex_tool",
     }
     return module_map.get(strip, strip)
 

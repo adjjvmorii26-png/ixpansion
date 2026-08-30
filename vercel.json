@@ -98,6 +98,14 @@
     {
       "src": "/gateway.html",
       "dest": "/dashboard/gateway.html"
+    },
+    {
+      "src": "/stream",
+      "dest": "/dashboard/stream.html"
+    },
+    {
+      "src": "/stream.html",
+      "dest": "/dashboard/stream.html"
     }
   ],
   "env": {
