@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HORTUS HEXIS — the garden</title>
+<style>
+:root{--bg:#07120b;--surface:#0d1f13;--border:#1e3a26;--text:#cde9d4;--dim:#6f9b80;--gold:#d4af37;--green:#3ddc6a;--violet:#a78bfa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(ellipse at 50% 0%,#0a1f12 0%,#050d08 70%) fixed;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;min-height:100vh}
+.wrap{max-width:1200px;margin:0 auto;padding:2rem 1.4rem}
+header{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.6rem}
+h1{font-size:2.2rem;letter-spacing:.02em;color:#fff}
+h1 span{color:var(--gold);font-weight:400}
+.sub{color:var(--dim);font-size:.9rem}
+.pill{font-family:ui-monospace,Menlo,monospace;font-size:.7rem;color:var(--green);border:1px solid var(--border);padding:.3rem .7rem;border-radius:99px}
+.pill b{color:var(--gold)}
+
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.6rem}
+@media(max-width:760px){.panels{grid-template-columns:1fr}}
+.panel{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:1rem}
+.panel h2{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:.7rem}
+.row{display:flex;gap:.5rem;margin-bottom:.7rem;flex-wrap:wrap}
+input[type=text]{flex:1;min-width:150px;background:#060e08;border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.6rem .8rem;font:inherit;font-size:.9rem}
+button{font:inherit;cursor:pointer;border:1px solid var(--border);background:#0d1a11;color:var(--green);padding:.55rem 1rem;border-radius:10px;transition:all .15s}
+button:hover{border-color:var(--green);background:#12261a}
+button.primary{background:var(--gold);border-color:var(--gold);color:#07120b;font-weight:700}
+button.primary:hover{filter:brightness(1.1)}
+.msg{font-size:.82rem;color:var(--gold);min-height:1.2em;margin-top:.2rem}
+
+#garden{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.card{border:1px solid var(--border);border-radius:14px;background:var(--surface);overflow:hidden;display:flex;flex-direction:column}
+.card .top{padding:.6rem .9rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+.card .top b{color:#fff}
+.card .top .tag{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--violet);border:1px solid #3a3350;border-radius:99px;padding:.12rem .5rem}
+.card pre{white-space:pre;overflow:auto;font-size:.66rem;line-height:1.05;background:#050908;padding:.5rem;flex:1;max-height:150px}
+.card .info{padding:.55rem .9rem;font-size:.72rem;color:var(--dim)}
+.card .info b{color:var(--green)}
+.card .parents{font-size:.66rem;color:var(--violet);padding:0 .9rem .5rem}
+.card .act{padding:.5rem .9rem .65rem;display:flex;gap:.4rem;flex-wrap:wrap}
+a{color:var(--violet);text-decoration:none}
+select{background:#060e08;border:1px solid var(--border);border-radius:8px;color:var(--text);padding:.4rem;font:inherit;font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>HORTUS <span>HEXIS</span></h1>
+      <div class="sub">The self-growing garden · speak, and the repo grows.</div>
+    </div>
+    <div class="pill">ocula <b id="count">0</b> · garden v1.0</div>
+  </header>
+
+  <div class="panels">
+    <div class="panel">
+      <h2>🌱 plant a seed</h2>
+      <div class="row">
+        <input type="text" id="words" placeholder="type your words… e.g. morii" onkeydown="if(event.key==='Enter')plant()">
+        <button class="primary" onclick="plant()">grow ✿</button>
+      </div>
+      <div class="msg" id="plantMsg"></div>
+    </div>
+    <div class="panel">
+      <h2>⚗️ cross-pollinate</h2>
+      <div class="row">
+        <select id="hx"><option value="">pick parent A…</option></select>
+        <select id="hy"><option value="">pick parent B…</option></select>
+        <button onclick="cross()">fuse ⊕</button>
+      </div>
+      <div class="msg" id="crossMsg"></div>
+    </div>
+  </div>
+
+  <div id="garden"></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+async function api(path, body){
+  const r = await fetch(path, {method:body?'POST':'GET', headers:body?{'Content-Type':'application/json'}:undefined, body:body?JSON.stringify(body):undefined});
+  const d = await r.json().catch(()=>({}));
+  if(!r.ok || d.error) throw new Error(d.error || ('HTTP '+r.status));
+  return d;
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function render(rows){
+  const g = $('#garden'); g.innerHTML = '';
+  if(!rows.length){ g.innerHTML = '<div class="sub" style="grid-column:1/-1">the garden sleeps — plant a seed.</div>'; return; }
+  for(const r of rows){
+    const card = document.createElement('div'); card.className='card';
+    const parents = (r.parents && r.parents.length) ? `<div class="parents" style="margin-bottom:.4rem">parents: ${r.parents.map(esc).join(' ⊕ ')}</div>` : '';
+    const crossSel = `<button onclick="setPair('${esc(r.name)}','A')" title="set parent A">A</button>
+                      <button onclick="setPair('${esc(r.name)}','B')" title="set parent B">B</button>`;
+    card.innerHTML = `
+      <div class="top"><b>${esc(r.name)}</b><span class="tag">${(r.parents&&r.parents.length)?'hybrid':'spontaneous'}</span></div>
+      <pre>${esc(r.art)}</pre>
+      <div class="info">vitality <b>${r.vitality}</b> · cells <b>${r.cells}</b> · seed <b>${esc(r.seed.slice(0,10))}…</b></div>
+      ${parents}
+      <div class="act">${crossSel} <button onclick="viewSong('${esc(r.name)}')">song</button></div>`;
+    g.appendChild(card);
+  }
+}
+function setPair(name, which){
+  const s = which==='A' ? $('#hx') : $('#hy');
+  s.value = name;
+  if(![...s.options].some(o=>o.value===name)){ const o=document.createElement('option'); o.value=name; o.text=name; s.appendChild(o); }
+  s.value=name;
+}
+async function refresh(){
+  const d = await api('/hortus/api/organisms');
+  $('#count').textContent = d.count;
+  render(d.organisms);
+}
+async function plant(){
+  const w = $('#words').value.trim(); if(!w) return;
+  $('#plantMsg').textContent = 'growing…';
+  try{ const d = await api('/hortus/api/plant', {words:w, commit:true});
+    $('#plantMsg').textContent = `✿ ${d.name} grew and was bound as ${d.commit||'—'}`;
+    await refresh(); $('#words').value='';
+  }catch(e){ $('#plantMsg').textContent = '⧗ '+e.message; }
+}
+async function cross(){
+  const a=$('#hx').value, b=$('#hy').value; if(!a||!b) return $('#crossMsg').textContent='pick two parents';
+  if(a===b) return $('#crossMsg').textContent='pick two distinct parents';
+  $('#crossMsg').textContent='fusing…';
+  try{ const d = await api('/hortus/api/cross', {a, b, commit:true});
+    $('#crossMsg').textContent = `⚗️ ${a} ⊕ ${b} → ${d.name} bound as ${d.commit||'—'}`;
+    await refresh();
+  }catch(e){ $('#crossMsg').textContent='⧗ '+e.message; }
+}
+function viewSong(name){
+  fetch(`/hortus/api/song?name=${encodeURIComponent(name)}`).then(r=>r.json()).then(d=>{
+    alert(d.song || 'no song');
+  });
+}
+async function loadOrgs(){
+  try{
+    const d = await api('/hortus/api/organisms');
+    const oa=$('#hx'), ob=$('#hy');
+    for(const r of d.organisms){ const o=document.createElement('option'); o.value=r.name; o.text=r.name; oa.appendChild(o); ob.appendChild(o.cloneNode()); }
+  }catch(e){ console.log(e); }
+}
+loadOrgs(); refresh(); setInterval(refresh, 8000);
+</script>
+</body>
+</html>

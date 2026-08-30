@@ -14,6 +14,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from typing import Dict, List, Optional
 from typing import Dict, Optional
 
 from .artifacts import safe_name, transcribe
@@ -32,10 +33,11 @@ def _run(cmd: list, cwd: Path = ROOT, timeout: int = 180) -> Dict:
 
 
 def grow_and_gate(name: str, seed: str, words: str, stats: Dict,
-                  commit: bool = True, verbose: bool = True) -> Dict:
+                  commit: bool = True, verbose: bool = True,
+                  parents: Optional[List[str]] = None) -> Dict:
     """Transcribe, gate, and (optionally) commit an organism."""
     name = safe_name(name)
-    paths = transcribe(name, seed, words, stats, checked=0)
+    paths = transcribe(name, seed, words, stats, checked=0, parents=parents)
     module, test = Path(paths["module"]), Path(paths["test"])
 
     result: Dict = {

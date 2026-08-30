@@ -9,6 +9,7 @@ Commands:
     bare words      grow a new organism from your words and bind it
     status          list the garden ledger
     water <name>    bind an already-grown organism into the repo
+    cross <a> <b>    cross two organisms into a hybrid
     lineage <name>  trace an organism's ancestors by seed
 """
 from __future__ import annotations
@@ -22,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from hortus_hexis.artifacts import safe_name, transcribe  # noqa: E402
 from hortus_hexis.autogenesis import grow_and_gate  # noqa: E402
+from hortus_hexis.cross import hybrid_name, hybrid_seed  # noqa: E402
 from hortus_hexis.growth import Organism  # noqa: E402
 from hortus_hexis.registry import all, lineage, record  # noqa: E402
 from hortus_hexis.seed import (  # noqa: E402
@@ -95,15 +97,40 @@ def cmd_plant(words: str, commit: bool = True) -> None:
         print(f"  ◈ {name} is now part of HORTUS HEXIS.")
 
 
+def cmd_cross(args) -> None:
+    a = safe_name(args.a)
+    b = safe_name(args.b)
+    rows = all()
+    def find(n):
+        return next((e for e in rows if e["name"] == n), None)
+    ea, eb = find(a), find(b)
+    if not ea or not eb:
+        print(f"  can't cross — unknown organism(s). planted names: {', '.join(e['name'] for e in rows)}")
+        return
+    seed = hybrid_seed(ea["seed"], eb["seed"])
+    name = hybrid_name(a, b)
+    o = Organism(name, seed, f"hybrid:{a}+{b}")
+    print(f"✿ hybrid {a} ⊕ {b} -> {name} (vitality {o.vitality}, {len(o.cells)} cells)")
+    result = grow_and_gate(name, seed, f"hybrid of {a} and {b}", o.to_dict(),
+                           commit=args.commit, verbose=True, parents=[a, b])
+    if result["gate"] == "open":
+        record(name, seed, o.box and "", 1, result["commit"] or "")
+        print(f"  ◈ {a} ⊕ {b} fused into the garden.")
+
+
 def main(argv=None):
     argv = argv or sys.argv
-    if len(argv) > 1 and argv[1] in ("status", "water", "lineage", "help"):
+    if len(argv) > 1 and argv[1] in ("status", "water", "lineage", "cross", "help"):
         if argv[1] == "status":
             cmd_status(argparse.Namespace())
         elif argv[1] == "water":
             cmd_water(argparse.Namespace(name=argv[2] if len(argv) > 2 else ""))
         elif argv[1] == "lineage":
             cmd_lineage(argparse.Namespace(name=argv[2] if len(argv) > 2 else ""))
+        elif argv[1] == "cross":
+            cmd_cross(argparse.Namespace(a=argv[2] if len(argv) > 2 else "",
+                                         b=argv[3] if len(argv) > 3 else "",
+                                         commit=True))
         return
     words = " ".join(argv[1:])
     if not words:

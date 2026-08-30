@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.60.2"
-WAVE = "144"
-WAVE_NAME = "Co-Conscious Console"
+VERSION = "3.61.0"
+WAVE = "146"
+WAVE_NAME = "Hortus Hexis Garden"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY

@@ -14,6 +14,24 @@ gate (pytest)                  ->  4 passed
 commit                         ->  hortus: grow orevurinys from seed 7468652076…
 ```
 
+## Web garden
+
+```bash
+python -m hortus_hexis.web        # open http://localhost:8090/hortus
+```
+
+Plant seeds from words, cross-pollinate two organisms into a hybrid, and
+watch every specimen grow as art.
+
+## Cross-pollination
+
+```bash
+python -m hortus_hexis.cli cross orevurinys draknysveln
+```
+
+Two seeds fuse into a deterministic hybrid; generated modules and specimens
+carry a `parents()` provenance list and a lineage newborn test.
+
 ## Run it
 
 ```bash

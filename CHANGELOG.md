@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.61.0] — Hortus Hexis: Web Garden + Cross-Pollination
+
+### Added
+- Cross-pollination engine (`hortus_hexis/cross.py`) — two organisms fuse into a deterministic hybrid (interleave-XOR + salt)
+- Generated modules now carry `parents()` provenance and a lineage newborn test
+- `hortus_hexis/web.py` — local stdlib web server with `/hortus` gallery UI + JSON API (plant / cross / organisms / song)
+- `dashboard/hortus.html` — garden UI: plant a seed from words, cross two organisms, render every specimen as art
+- CLI `cross <a> <b>` command; 7 new tests
+
+### Featured hybrids
+- `kalyndramar` (from "morii") ⊕ `syphexnysorev` → **kalyndnysorev** (b812ff0)
+- `orevurinys` ⊕ `draknysveln` → **orevurysveln** (c840d5d)
+
+### Changed
+- Version 3.60.2 → 3.61.0, wave 144 → 146, 973 tests
+
 ## [3.60.2] — Hortus Hexis (the self-growing garden app)
 
 ### Added
