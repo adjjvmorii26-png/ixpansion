@@ -18,7 +18,7 @@ from typing import Any, Dict, List
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from harbinger.agents import scout, overseer, archivist, chronicler, dreamer, poet
+from harbinger.agents import scout, overseer, archivist, chronicler, dreamer, poet, ledger
 from harbinger.agents import gardener as gardener_agent
 from harbinger import memory as conclave_memory
 
@@ -39,7 +39,12 @@ def ceremony(dry: bool = False, ideas: List[str] = None, commit: bool = True) ->
     dreamscape = dreamer.run(tense=0.6)
     report["agents"]["dreamer"] = dreamscape
 
-    # 2.5b poet — distill the moment into verse
+    # 2.5b ledger — record dreams and check fulfillment
+    ledger.record_dreams(dreamscape.get('dreams', []))
+    ledger_status = ledger.reconcile()
+    report['agents']['ledger'] = ledger_status
+
+    # 2.5c poet — distill the moment into verse
     poem = poet.run()
     report["agents"]["poet"] = poem
     report["verse"] = poem["verse"]

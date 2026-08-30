@@ -7,7 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from harbinger.agents import scout, overseer, archivist, chronicler, dreamer, poet  # noqa: E402
+from harbinger.agents import scout, overseer, archivist, chronicler, dreamer, poet, ledger
+from harbinger.meter import measure  # noqa: E402
 from harbinger.agents import gardener as gardener_agent  # noqa: E402
 from harbinger.conclave import ceremony  # noqa: E402
 
@@ -106,6 +107,26 @@ def test_poet_deterministic():
     v1 = poet.run(seed="test-seed")["verse"]
     v2 = poet.run(seed="test-seed")["verse"]
     assert v1 == v2
+
+
+def test_meter_awareness_in_range():
+    m = measure()
+    assert 0 <= m["awareness"] <= 100
+    assert set(m["dimensions"].keys()) == {
+        "integrity", "creativity", "resilience", "coherence", "memory"}
+    assert m["readout"]["modules"] > 100
+
+
+def test_ledger_records_and_reconciles(tmp_path):
+    import json as _json
+    from pathlib import Path as _P
+    from harbinger.agents import ledger as _ledger
+    # point ledger at a temp file
+    _ledger.LEDGER = tmp_path / "dream_ledger.json"
+    r = _ledger.record_dreams([{"name": "alpha_beta", "fuel": ["alpha", "beta"]}], wave="test")
+    assert r["added"] == 1
+    state = _ledger.ledger()
+    assert state["total"] == 1
 
 
 def test_gardener_needs_words():

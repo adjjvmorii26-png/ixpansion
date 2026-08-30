@@ -63,6 +63,21 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         if rev.exists():
             return {"markdown": rev.read_text(encoding="utf-8")}
         return {"error": "no revelations yet"}
+    if path == "/meter":
+        import sys as _sys
+        _sys.path.insert(0, str(ROOT))
+        from harbinger.meter import measure
+        return measure()
+    if path == "/ledger":
+        import sys as _sys
+        _sys.path.insert(0, str(ROOT))
+        from harbinger.agents.ledger import ledger
+        return ledger()
+    if path == "/forecast":
+        import sys as _sys
+        _sys.path.insert(0, str(ROOT))
+        from tools.frontier_forecast import forecast
+        return forecast()
     if path == "/capsule":
         import sys as _sys
         _sys.path.insert(0, str(ROOT))

@@ -32,8 +32,8 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.69.0"
-WAVE = "154"
+VERSION = "3.70.0"
+WAVE = "155"
 WAVE_NAME = "Harbinger Conclave"
 
 try:
@@ -204,6 +204,21 @@ class ApiHandler(BaseHTTPRequestHandler):
                 return self._text(rev.read_text(encoding="utf-8"),
                                   "text/markdown; charset=utf-8")
             return self._json({"error": "no revelations yet"}, 404)
+        if path == "/meter":
+            import sys as _sys
+            _sys.path.insert(0, str(ROOT))
+            from harbinger.meter import measure
+            return measure()
+        if path == "/ledger":
+            import sys as _sys
+            _sys.path.insert(0, str(ROOT))
+            from harbinger.agents.ledger import ledger
+            return ledger()
+        if path == "/forecast":
+            import sys as _sys
+            _sys.path.insert(0, str(ROOT))
+            from tools.frontier_forecast import forecast
+            return forecast()
         if path == "/capsule":
             sys.path.insert(0, str(ROOT))
             from tools.time_capsule import seal, verify

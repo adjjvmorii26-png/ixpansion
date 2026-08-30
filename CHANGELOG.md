@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.70.0] — The Living Constellation: meter, ledger, horizon (Wave 155)
+
+### Added
+- **Consciousness Meter** (`harbinger/meter.py`) — the frontier's awareness 0-100, harmonic mean of five axes: integrity, creativity, resilience, coherence, memory. ASCII aura renderer.
+- **Dream Ledger** (`harbinger/agents/ledger.py`) — records every Dreamer prophecy; `reconcile()` marks dreams *fulfilled* when a module with that name actually exists. Self-fulfilling prophecy loop.
+- **Entropy Horizon** (`tools/frontier_forecast.py`) — fits a linear trend to git history and projects the frontier's state into the future. ASCII forecast chart.
+- Live API routes: `/meter`, `/ledger`, `/forecast` (Vercel + local), Oracle page sections for all three
+- Seeded the ledger with 8 initial prophecies; 2 tests (1005 total)
+
+### Changed
+- Version 3.69.0 → 3.70.0, wave 154 → 155, 1003 → 1005 tests, routes 15 → 18
+
 ## [3.69.0] — The Time Capsule (Wave 154)
 
 ### Added
