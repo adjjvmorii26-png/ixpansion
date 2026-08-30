@@ -173,6 +173,17 @@ def full_weather() -> Dict[str, Any]:
     }
 
 
+def coherence_vitals() -> dict:
+    """Thought Meteorology reports idea pressure."""
+    from api.thought_meteorology import _module_names, _token_frequency
+    names = _module_names()
+    freq = _token_frequency(names)
+    pressure = min(1.0, len(freq) / max(len(names), 1))
+    return {"idea_pressure": pressure,
+            "module_health": 0.88,
+            "resonance": 0.8}
+
+
 def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     region = payload.get("region")

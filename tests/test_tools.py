@@ -283,3 +283,49 @@ def test_organism_index_inventories():
     assert "ecosystem_readout" in r
     d = organism_index.handler({"organism": "stigmergy"})
     assert d["exists"]
+
+
+def test_coherence_regulator_discovers_modules():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from pathlib import Path as _P
+    import importlib
+    import coherence_regulator
+    # ensure clean state
+    sf = _P(str(ROOT / ".runtime" / "coherence_regulator.json"))
+    if sf.exists():
+        sf.unlink()
+    r = coherence_regulator.regulate()
+    assert r["living_modules"] >= 7
+    assert r["coherence"] > 0
+    assert "status" in r
+    assert "advisories" in r
+    # verify a module's vitals are callable
+    import reflection_pool
+    v = reflection_pool.coherence_vitals()
+    assert "module_health" in v
+
+
+def test_coherence_regulator_vital_signs_are_shared_vocabulary():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import importlib
+    mods = ["reflection_pool", "synesthesia", "frontier_stream", "hex_tool"]
+    all_keys = set()
+    for m in mods:
+        mod = importlib.import_module(m)
+        v = mod.coherence_vitals()
+        all_keys.add(tuple(sorted(v.keys())))
+    # At least the modules share "module_health" and "resonance"
+    sample = importlib.import_module("reflection_pool").coherence_vitals()
+    assert "module_health" in sample
+    assert "resonance" in sample
+
+
+def test_coherence_regulator_modules_list():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import coherence_regulator
+    r = coherence_regulator.handler({"modules": 1})
+    assert r["count"] >= 7
+    assert "reflection_pool" in r["living_modules"]

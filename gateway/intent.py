@@ -49,6 +49,9 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # organism index
     (r"\b(organism|experiments?|lab|collection|ecosystem|creatures?|the organisms)\b", "/api/organism_index", {}),
 
+    # coherence regulator
+    (r"\b(coherence|coherent|vitals|healthy|how coherent|system health|pulse|resonance state|alive)\b", "/api/coherence_regulator", {}),
+
     # music & sound
     (r"\b(song|sing|music|play|listen|melody|tune)\b", "/song", {}),
     (r"\b(poem|verse|poetry|recite|chant)\b", "/poem", {}),

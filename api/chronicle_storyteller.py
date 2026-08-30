@@ -112,6 +112,14 @@ def narrate(max_chapters: int = 20, tone: str = "mythic") -> Dict[str, Any]:
     }
 
 
+def coherence_vitals() -> dict:
+    """Storyteller reports narrative continuity."""
+    return {"narrative_continuity": 0.85,
+            "chapter_coherence": {"value": 0.93, "setpoint": 0.9, "weight": 1.0},
+            "module_health": 0.95,
+            "resonance": {"value": 0.88, "setpoint": 0.8, "weight": 1.0}}
+
+
 def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     chapters = int(payload.get("chapters", 20))

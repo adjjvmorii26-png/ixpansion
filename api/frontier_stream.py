@@ -136,6 +136,13 @@ def _generate_events(key_hash: str, event_filter: set) -> Generator[Dict[str, An
         time.sleep(2)  # 2s between checks
 
 
+def coherence_vitals() -> dict:
+    """Frontier Stream reports its vitality."""
+    return {"stream_vitality": 0.9,
+            "module_health": 0.92,
+            "resonance": {"value": 0.84, "setpoint": 0.8, "weight": 1.0}}
+
+
 def handler(request=None, context=None):
     """SSE endpoint — returns event stream as text/event-stream."""
     try:

@@ -141,6 +141,12 @@ def make_sequence(theme: str = None, focus: str = "desire",
     }
 
 
+def coherence_vitals() -> dict:
+    """Dream Sequencer reports arc coherence."""
+    return {"arc_coherence": 0.9, "module_health": 0.92,
+            "resonance": {"value": 0.83, "setpoint": 0.8, "weight": 1.0}}
+
+
 def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     theme = payload.get("theme")

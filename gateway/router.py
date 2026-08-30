@@ -116,6 +116,8 @@ def _route_allowed(route: str) -> str:
         "sound_cauldron": "sound_cauldron",
         "api/organism_index": "organism_index",
         "organism_index": "organism_index",
+        "api/coherence_regulator": "coherence_regulator",
+        "coherence_regulator": "coherence_regulator",
     }
     return module_map.get(strip, strip)
 

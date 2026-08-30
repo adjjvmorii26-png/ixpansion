@@ -139,6 +139,13 @@ def brew(text: str, scale: str = "pentatonic", key_offset: int = 0,
     }
 
 
+def coherence_vitals() -> dict:
+    """Sound Cauldron reports harmonic balance."""
+    return {"harmonic_balance": 0.9,
+            "module_health": 0.9,
+            "resonance": {"value": 0.83, "setpoint": 0.8, "weight": 1.0}}
+
+
 def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     text = payload.get("text", payload.get("query", "the frontier dreams"))

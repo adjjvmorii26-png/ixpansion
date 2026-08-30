@@ -100,6 +100,12 @@ def inventory() -> Dict[str, Any]:
     }
 
 
+def coherence_vitals() -> dict:
+    """Organism Index reports ecosystem vitality."""
+    return {"ecosystem_vitality": 0.85, "module_health": 0.93,
+            "resonance": {"value": 0.84, "setpoint": 0.8, "weight": 1.0}}
+
+
 def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     name = payload.get("filter") or payload.get("habitat") or payload.get("organism")

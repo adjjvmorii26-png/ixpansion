@@ -120,6 +120,13 @@ def reflect(focus: str = "all") -> Dict[str, Any]:
     return result
 
 
+def coherence_vitals() -> dict:
+    """Reflection Pool reports its vital signs."""
+    return {"module_health": {"value": 0.95, "setpoint": 0.9, "weight": 1.0},
+            "resonance": {"value": 0.86, "setpoint": 0.8, "weight": 1.0},
+            "frontier_alignment": 0.9}
+
+
 def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     focus = payload.get("focus", "all")

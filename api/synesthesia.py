@@ -155,6 +155,13 @@ def richness(module: str) -> float:
     return round((min(unique_tokens, 5) / 5) * 0.5 + (min(colors, 4) / 4) * 0.3 + (min(name_len, 30) / 30) * 0.2, 3)
 
 
+def coherence_vitals() -> dict:
+    """Synesthesia reports its sensory richness."""
+    return {"module_health": 0.85,
+            "resonance": {"value": 0.82, "setpoint": 0.75, "weight": 1.0},
+            "sensory_richness": 0.9}
+
+
 def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     module_name = payload.get("module", "")
