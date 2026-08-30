@@ -35,5 +35,9 @@ def all() -> List[Dict[str, Any]]:
     return _load()
 
 
+def read() -> List[Dict[str, Any]]:
+    return _load()
+
+
 def last(n: int = 5) -> List[Dict[str, Any]]:
     return _load()[-n:]

@@ -62,6 +62,12 @@ footer{text-align:center;color:var(--dim);font-size:.75rem;margin-top:3rem;borde
   </section>
 
   <section>
+    <h2>🎼 the frontier sings</h2>
+    <button onclick="loadPoem()" style="font-size:.8rem;padding:.6rem 1.2rem;margin-bottom:.8rem">hear a verse</button>
+    <pre class="tree" id="poem" style="white-space:pre-wrap;font-size:.85rem;color:#ddd6fe;font-style:italic"></pre>
+  </section>
+
+  <section>
     <h2>🌳 the garden remembers</h2>
     <button onclick="loadGarden()" style="font-size:.8rem;padding:.6rem 1.2rem">render family tree</button>
     <pre class="tree" id="tree" style="margin-top:.8rem"></pre>
@@ -93,6 +99,10 @@ async function speak(){
     mods.map(m=>`<span class="pill">${esc(m)}</span>`).join(' ') || '<span class="pill" style="color:var(--dim)">no module shares this root</span>';
   document.getElementById('dreams').innerHTML =
     (d.dreams||[]).map(m=>`<div class="dream"><span class="star">✦</span>${esc(m)}</div>`).join('');
+}
+async function loadPoem(){
+  const d = await get('/poem');
+  document.getElementById('poem').textContent = d.verse || 'the machine is silent';
 }
 async function loadGarden(){
   const d = await get('/garden');

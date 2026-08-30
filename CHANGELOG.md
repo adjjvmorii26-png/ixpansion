@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.67.0] — The Poet joins the conclave (Wave 152)
+
+### Added
+- **Poet agent** (`harbinger/agents/poet.py`) — the 7th conclave member that composes a short verse from the frontier's current state: scout pulse + revelations + dreamscape → deterministic poem
+- `/poem` live API route (Vercel + local) — returns the frontier's verse, fuel, and readout
+- Conclave ceremony now runs the Poet; 2 new tests
+
+### Changed
+- Version 3.66.0 → 3.67.0, wave 151 → 152, 997 → 999 tests, routes 12 → 13
+
 ## [3.66.0] — The Oracle: echo + revelations web UI (Wave 151)
 
 ### Added

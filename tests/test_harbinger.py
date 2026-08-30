@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from harbinger.agents import scout, overseer, archivist, chronicler, dreamer  # noqa: E402
+from harbinger.agents import scout, overseer, archivist, chronicler, dreamer, poet  # noqa: E402
 from harbinger.agents import gardener as gardener_agent  # noqa: E402
 from harbinger.conclave import ceremony  # noqa: E402
 
@@ -94,7 +94,22 @@ def test_dreamer_empty_frontier():
     assert len(r["dreams"]) > 0  # frontier has modules
 
 
+def test_poet_composes_verse():
+    r = poet.run()
+    assert r["agent"] == "poet"
+    assert "verse" in r
+    assert len(r["verse"]) > 10
+    assert "fuel" in r
+
+
+def test_poet_deterministic():
+    v1 = poet.run(seed="test-seed")["verse"]
+    v2 = poet.run(seed="test-seed")["verse"]
+    assert v1 == v2
+
+
 def test_gardener_needs_words():
+
 
     r = gardener_agent.run(words=None)
     assert r["planted"] is False

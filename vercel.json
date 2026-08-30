@@ -12,6 +12,10 @@
   ],
   "routes": [
     {
+      "src": "/poem",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/oracle",
       "dest": "/dashboard/oracle.html"
     },
@@ -63,9 +67,9 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "151",
+    "NEXUS_WAVE": "152",
     "NEXUS_MODULES": "352",
-    "NEXUS_ROUTES": "12"
+    "NEXUS_ROUTES": "13"
   },
   "headers": [
     {
