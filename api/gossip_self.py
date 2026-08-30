@@ -71,3 +71,19 @@ def handler(payload: dict = None, context: object = None) -> dict:
 if __name__ == "__main__":
     import json
     print(json.dumps(handler(), indent=2))
+
+
+def coherence_vitals() -> dict:
+    """gossip_self reports its vital signs to the living system."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "gossip_self_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships, auto-picked from shared domain language."""
+    return ['organism_index', 'universal_compass', 'thought_meteorology']
+

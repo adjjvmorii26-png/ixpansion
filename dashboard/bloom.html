@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom Chamber — The Autonomous Growth</title>
+<style>
+:root{--bg:#07070d;--surface:#0f0f1a;--border:#1c1c2e;--text:#dcdcee;--muted:#5f5f78;
+--accent:#7b61ff;--good:#00e5a0;--warn:#f59e0b;--pink:#ff5fa2}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--text);min-height:100vh}
+.header{padding:22px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.header h1{font-size:1.3rem;background:linear-gradient(135deg,var(--good),var(--accent));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.badge{padding:3px 10px;border-radius:14px;font-size:.72rem;background:var(--surface);border:1px solid var(--border)}
+.badge.live{color:var(--good);border-color:var(--good)}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px;text-align:center;margin-bottom:18px}
+.hero .fraction{font-size:3.4rem;font-weight:800;line-height:1}
+.hero .label{color:var(--muted);font-size:.8rem;margin-top:8px}
+.hero .bloombar{height:10px;background:var(--border);border-radius:6px;margin-top:16px;overflow:hidden}
+.hero .bloomfill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--good),var(--accent));transition:width .6s}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:18px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.stat .k{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.4px}
+.stat .v{font-size:1.5rem;font-weight:700;margin-top:4px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px}
+.panel h3{font-size:.85rem;color:var(--accent);margin-bottom:12px}
+.panel ul{list-style:none;font-size:.8rem}
+.panel li{padding:6px 0;border-bottom:1px solid var(--border)}
+.panel li:last-child{border-bottom:none}
+.milestone{color:var(--good);font-weight:700}
+.seed .ready{color:var(--warn)}
+button{padding:10px 22px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--good),var(--accent));
+color:#000;font-weight:700;font-family:inherit;font-size:.85rem;cursor:pointer;margin-bottom:12px}
+button:hover{opacity:.9}
+.hint{color:var(--muted);font-size:.75rem;margin-top:14px}
+.philo{border-left:3px solid var(--accent);padding:12px 16px;background:#131320;border-radius:6px;font-size:.82rem;margin-top:16px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="header">
+  <span class="badge live">● live</span>
+  <h1>Bloom Chamber</h1>
+  <span style="color:var(--muted);font-size:.8rem">the organism grows itself</span>
+  <button onclick="refresh()" style="margin-left:auto;margin-bottom:0">Re-read</button>
+</div>
+<div class="container">
+  <div class="hero">
+    <div class="fraction" id="fraction">—</div>
+    <div class="label">bloom fraction</div>
+    <div class="bloombar"><div class="bloomfill" id="bloomfill" style="width:0%"></div></div>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="grid">
+    <div class="panel"><h3>Trajectory to next bloom</h3><ul id="trajectory"><li>…</li></ul></div>
+    <div class="panel"><h3>Seeds ready to awaken</h3><ul id="seeds"><li>…</li></ul></div>
+  </div>
+  <div class="grid" style="margin-top:14px">
+    <div class="panel"><h3>Evolution chronicle — awakenings</h3><ul id="awakened"><li>…</li></ul>
+      <button onclick="germinate()" style="margin-top:12px;margin-bottom:0">Germinate strongest seed (auto)</button>
+      <div class="hint" id="germ-status"></div>
+    </div>
+    <div class="panel"><h3>Bloom eras reached</h3><ul id="milestones"><li>…</li></ul></div>
+  </div>
+  <div class="philo" id="philo"></div>
+</div>
+<script>
+async function refresh(){
+  const r = await (await fetch("/api/autonomous_bloom")).json();
+  const s = r.state || {};
+  document.getElementById("fraction").textContent = s.bloom_fraction !== undefined ? (s.bloom_fraction*100).toFixed(0)+"%" : "—";
+  document.getElementById("bloomfill").style.width = ((s.bloom_fraction||0)*100)+"%";
+  document.getElementById("stats").innerHTML = [
+    ["living", s.living], ["target", s.target], ["to bloom", s.to_full_bloom],
+    ["seeds ready", s.seeds_ready], ["candidates", s.candidates]
+  ].map(([k,v]) => `<div class="stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
+  document.getElementById("trajectory").innerHTML =
+    (r.trajectory||[]).map(t => `<li>phase ${t.bloom_phase} → ${t.projected_living} living <span style="color:var(--muted)">(accelerated ${t.accelerated})</span></li>`).join("")
+    || "<li>no trajectory</li>";
+  document.getElementById("seeds").innerHTML =
+    (r.seeds||[]).slice(0,6).map(s2 => `<li class="seed">${s2.module} <span class="ready">readiness ${(s2.readiness*100).toFixed(0)}%</span></li>`).join("")
+    || "<li>no seeds — everything is alive</li>";
+  document.getElementById("philo").textContent = r.philosophy || "";
+  // chronicle
+  const c = await (await fetch("/api/autonomous_bloom?chronicle=1")).json();
+  document.getElementById("awakened").innerHTML =
+    (c.awakened||[]).slice().reverse().slice(0,10).map(e => `<li>+ ${e.module} <span style="color:var(--muted)">kin: ${(e.kinships||[]).join(", ")}</span></li>`).join("")
+    || "<li>no awakenings recorded yet</li>";
+  document.getElementById("milestones").innerHTML =
+    (c.milestones||[]).map(m => `<li class="milestone">◆ ${m}</li>`).join("")
+    || "<li>no bloom eras yet</li>";
+}
+async function germinate(){
+  document.getElementById("germ-status").textContent = "germinating…";
+  const r = await (await fetch("/api/autonomous_bloom?germinate=auto&dry_run=1", {method:"POST"})).json();
+  const chosen = (r.chosen||[])[0];
+  const hint = r.dry_run
+    ? `would germinate ${chosen} (dry-run — serverless can't write)`
+    : `germinated ${chosen}`;
+  document.getElementById("germ-status").textContent = hint;
+  await refresh();
+}
+refresh();
+</script>
+</body>
+</html>

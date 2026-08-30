@@ -34,7 +34,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
 EXCLUDE = {"__init__", "index", "unified_router", "coherence_regulator",
-           "resonance_graph", "autonomous_bloom"}
+           "resonance_graph", "autonomous_bloom", "runtime_io"}
 
 # Whispers of life — tokens that hint a dormant module is reaching for the
 # shared vital language. These are the seeds the bloom detects.
@@ -43,7 +43,7 @@ VITAL_WHISPERS = (
     "alive", "living", "awareness", "balance", "integrity", "signal",
 )
 
-DEFAULT_TARGET = 48  # full-bloom ecosystem size (mirrors the regulator)
+DEFAULT_TARGET = 56  # full-bloom ecosystem size (mirrors the regulator)
 
 _CACHE_TTL = 30.0
 _CANDIDATE_CACHE = {"t": 0.0, "scores": {}}

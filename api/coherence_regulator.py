@@ -63,7 +63,7 @@ SYSTEM_SETPOINTS = {
 COHERENCE_TOLERANCE = 0.7          # below this → advisories fire
 REGULATION_THRESHOLD = 0.5         # below this → strong regulation
 PULSE_INTERVAL = 60.0              # seconds between automatic pulses
-ECOSYSTEM_TARGET = 48            # living modules = a full bloom (organism outgrew 40)
+ECOSYSTEM_TARGET = 56            # living modules = a full bloom (organism outgrew 48)
 
 
 # ---------------------------------------------------------------------------
@@ -94,13 +94,17 @@ KNOWN_LIVING_MODULES: List[str] = [
     "event_stream",
     "frontier_stream",
     "github_bridge",
+    "gossip_self",
+    "hazard_warning",
     "hex_tool",
     "infrastructure_soul",
     "integrity_oracle",
     "module_analytics",
+    "narrative_generator",
     "neural_fabric",
     "neural_pathway",
     "omniscience_weaver",
+    "openapi_spec",
     "organism_index",
     "pattern_recognizer",
     "pattern_sprout",
@@ -111,6 +115,7 @@ KNOWN_LIVING_MODULES: List[str] = [
     "reflection_pool",
     "resonance_field",
     "resonance_graph",
+    "sentience_index",
     "signal_flora",
     "sound_cauldron",
     "stream_reactor",

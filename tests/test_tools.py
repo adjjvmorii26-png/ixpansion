@@ -437,6 +437,22 @@ def test_germinated_organs_join_the_living_system():
     assert "docs" in awakened
 
 
+def test_autonomous_bloom_reached_48_and_manifest_synced():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import autonomous_bloom as ab, coherence_regulator as cr
+    # the engine drove the organism to its fourth full bloom
+    b = ab.bloom_report()
+    assert b["state"]["living"] >= 48
+    # the embedded serverless manifest covers every living module
+    assert len(cr.KNOWN_LIVING_MODULES) >= 48
+    # new organs germinated by the engine are part of the web
+    from resonance_graph import build_graph
+    g = build_graph()
+    assert g["nodes"] >= 48
+    assert not any(len(members) == 1 for members in g["communities"].values())
+
+
 def test_manifest_stays_authoritative_for_serverless():
     import sys
     import pathlib

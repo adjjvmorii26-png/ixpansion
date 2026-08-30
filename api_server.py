@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.86.0"
-WAVE = "171"
-WAVE_NAME = "Serverless Resilience"
+VERSION = "3.87.0"
+WAVE = "172"
+WAVE_NAME = "Bloom Chamber"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
