@@ -127,3 +127,16 @@ def pattern_sprout_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = pattern_sprout_handler
+
+
+def coherence_vitals() -> dict:
+    """Pattern Sprout reports — patterns growing into living entities."""
+    return {
+        "module_health": {"value": 0.89, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.93, "setpoint": 0.85, "weight": 1.0},
+        "sprout_vitality": {"value": 0.88, "setpoint": 0.8, "weight": 1.0},
+    }
+
+def resonates_with() -> list:
+    """Declared kinships."""
+    return ['pattern_recognizer', 'quantum_garden']

@@ -110,3 +110,16 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+def coherence_vitals() -> dict:
+    """Pattern Recognizer reports — hidden correlations it can see."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.92, "setpoint": 0.85, "weight": 1.0},
+        "pattern_signal": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+    }
+
+def resonates_with() -> list:
+    """Declared kinships."""
+    return ['pattern_sprout', 'emergence_detector']

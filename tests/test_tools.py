@@ -375,6 +375,25 @@ def test_bloom_awakening_grows_the_organism():
     assert r["coherence"] > 0.95
 
 
+def test_manifest_stays_authoritative_for_serverless():
+    import sys
+    import pathlib
+    sys.path.insert(0, str(ROOT / "api"))
+    import coherence_regulator as cr
+    # the embedded manifest must cover every module the source scan finds
+    names = cr._candidate_modules()
+    assert len(names) >= 32
+    assert len(cr.KNOWN_LIVING_MODULES) >= len(names)
+    # serverless fallback (no filesystem) must still discover all living names
+    real = cr.ROOT
+    cr.ROOT = pathlib.Path("/nonexistent")
+    try:
+        cands = cr._candidate_modules()
+    finally:
+        cr.ROOT = real
+    assert len(cands) >= 32
+
+
 def test_second_bloom_32_and_target_cascade():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

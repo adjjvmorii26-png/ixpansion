@@ -76,19 +76,46 @@ ECOSYSTEM_TARGET = 40            # living modules = a full bloom (organism outgr
 # regulator attempts to import & pulse each one; modules that load get reported.
 # Keep this list in sync as new modules implement coherence_vitals().
 KNOWN_LIVING_MODULES: List[str] = [
+    "aesthetic_evaluator",
+    "autonomous_bloom",
+    "chronicle_of_chaos",
     "chronicle_storyteller",
+    "civilization_kernel",
+    "code_organism",
     "constellation_cartographer",
+    "digital_twin",
+    "dream_interpreter",
     "dream_sequencer",
+    "dream_synthesis",
+    "emergence_detector",
+    "event_stream",
     "frontier_stream",
+    "github_bridge",
     "hex_tool",
+    "infrastructure_soul",
+    "integrity_oracle",
+    "module_analytics",
+    "neural_fabric",
+    "neural_pathway",
+    "omniscience_weaver",
     "organism_index",
+    "pattern_recognizer",
+    "pattern_sprout",
+    "platform_failure",
+    "platform_pulse",
+    "quantum_garden",
     "reality_weaver",
     "reflection_pool",
-    "sound_cauldron",
-    "synesthesia",
-    "thought_meteorology",
+    "resonance_field",
     "resonance_graph",
-    "autonomous_bloom",
+    "signal_flora",
+    "sound_cauldron",
+    "stream_reactor",
+    "synesthesia",
+    "system_pulse",
+    "thought_meteorology",
+    "universal_compass",
+    "workforce_nexus",
 ]
 
 
@@ -121,6 +148,22 @@ def _save_state(state: Dict[str, Any]) -> bool:
 # ---------------------------------------------------------------------------
 # Discovery — the living-system plug-in
 # ---------------------------------------------------------------------------
+
+def _sync_manifest(known: List[str]) -> None:
+    """Keep the embedded serverless manifest in sync with reality.
+
+    When the filesystem scan is available (local dev / source present), the
+    authoritative list of living modules is whatever `_candidate_modules()`
+    finds. We refresh the in-memory module constant so that a later serverless
+    invocation (which may lose the filesystem) still knows every living name.
+    """
+    try:
+        fresh = _candidate_modules()
+    except Exception:
+        return
+    if fresh:
+        known[:] = sorted(set(known) | set(fresh))
+
 
 def _candidate_modules() -> List[str]:
     """Living candidates: modules whose *source* defines coherence_vitals().
@@ -209,6 +252,7 @@ def discover_modules(force_pulse: bool = False) -> Dict[str, Any]:
 
     modules.update(live)  # merge into living memory (empty on serverless)
     persisted = _save_state(state)
+    _sync_manifest(KNOWN_LIVING_MODULES)
     return {
         "living_modules": sorted(discovered),
         "count": len(discovered),

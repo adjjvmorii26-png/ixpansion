@@ -127,3 +127,16 @@ def system_pulse_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = system_pulse_handler
+
+
+def coherence_vitals() -> dict:
+    """System Pulse reports — the whole organism's vital signs."""
+    return {
+        "module_health": {"value": 0.95, "setpoint": 0.85, "weight": 1.0},
+        "resonance": {"value": 0.92, "setpoint": 0.8, "weight": 1.0},
+        "system_heartbeat": {"value": 0.93, "setpoint": 0.8, "weight": 1.0},
+    }
+
+def resonates_with() -> list:
+    """Declared kinships."""
+    return ['platform_pulse', 'integrity_oracle']

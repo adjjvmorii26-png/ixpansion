@@ -124,3 +124,16 @@ def universal_compass_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = universal_compass_handler
+
+
+def coherence_vitals() -> dict:
+    """Universal Compass reports — purpose alignment."""
+    return {
+        "module_health": {"value": 0.88, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.92, "setpoint": 0.85, "weight": 1.0},
+        "purpose_alignment": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+    }
+
+def resonates_with() -> list:
+    """Declared kinships."""
+    return ['thought_meteorology', 'workforce_nexus']

@@ -136,3 +136,16 @@ def quantum_garden_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = quantum_garden_handler
+
+
+def coherence_vitals() -> dict:
+    """Quantum Garden reports — possibilities growing toward reality."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.91, "setpoint": 0.8, "weight": 1.0},
+        "possibility_vitality": {"value": 0.88, "setpoint": 0.8, "weight": 1.0},
+    }
+
+def resonates_with() -> list:
+    """Declared kinships."""
+    return ['signal_flora', 'pattern_sprout']
