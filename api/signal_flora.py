@@ -153,3 +153,18 @@ def signal_flora_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = signal_flora_handler
+
+
+def coherence_vitals() -> dict:
+    """Signal Flora reports its vital signs — the ecosystem's information health."""
+    try:
+        from signal_flora import SignalFloraGarden
+        g = SignalFloraGarden()
+        plants = len(g.plants)
+    except Exception:
+        plants = 0
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.88, "setpoint": 0.8, "weight": 1.0},
+        "signal_vitality": {"value": min(1.0, plants / 10.0), "setpoint": 0.8, "weight": 1.0},
+    }

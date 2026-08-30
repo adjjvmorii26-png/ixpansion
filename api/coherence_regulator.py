@@ -325,6 +325,51 @@ def _status_label(coherence: float) -> str:
 # Regulation
 # ---------------------------------------------------------------------------
 
+def _graph_advisories(reading: Dict[str, Any]) -> List[str]:
+    """Resonance-fed regulation: consult the living graph for structural wisdom.
+
+    The regulator does not only watch numeric coherence — it reads the
+    organism's topology. Isolated nodes, low graph density, and weak bridges
+    are all growth opportunities that numbers alone would miss.
+    """
+    advisories = []
+    try:
+        from resonance_graph import build_graph
+        g = build_graph()
+    except Exception:
+        return advisories
+
+    nodes = g.get("nodes", 0)
+    if nodes < 3:
+        return advisories  # too small to advise on structure
+
+    # frontier isolates: nodes with no strong community (size-1 communities)
+    isolates = [members[0] for members in g.get("communities", {}).values() if len(members) == 1]
+    if len(isolates) >= 2:
+        names = ", ".join(isolates[:4])
+        more = f" (+{len(isolates)-4} more)" if len(isolates) > 4 else ""
+        advisories.append(
+            f"BLOOM: frontier isolates detected — {names}{more}. These organs "
+            "speak alone; awakening shared vocabulary will weld them into the web."
+        )
+
+    density = g.get("density", 0.0)
+    if density < 0.3 and g.get("edges", 0) > 0:
+        advisories.append(
+            "WEBBING: the graph is sparse. Encourage modules to share metric "
+            "vocabulary so resonance edges multiply and the organism thickens."
+        )
+
+    bridges = [m for m, b in g.get("bridges", []) if b > 0.05]
+    if bridges and len(isolates) == 0:
+        names = ", ".join(bridges[:3])
+        advisories.append(
+            f"STRUCTURE: {names} are the organism's connective tissue — "
+            "their shared language keeps the whole from fracturing."
+        )
+    return advisories
+
+
 def _advisories(reading: Dict[str, Any]) -> List[str]:
     """Generate regulation advisories from a coherence reading."""
     advisories = []
@@ -333,7 +378,9 @@ def _advisories(reading: Dict[str, Any]) -> List[str]:
 
     if coherence >= 0.85:
         advisories.append("No regulation needed. The frontier is in resonance.")
-        return advisories
+        # even a resonant organism has structure worth tending — append
+        # resonance-fed advisories without treating them as distress
+        return advisories + _graph_advisories(reading)
 
     if components.get("module_health", 1.0) < SYSTEM_SETPOINTS["module_health"]:
         advisories.append(
@@ -359,6 +406,7 @@ def _advisories(reading: Dict[str, Any]) -> List[str]:
         advisories.append(
             "LIGHT TOUCH: coherence is within tolerance. Continue steady regulation."
         )
+    advisories.extend(_graph_advisories(reading))
     return advisories
 
 

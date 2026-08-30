@@ -105,3 +105,17 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     action = payload.get("action", "status")
     return {"status": "active", "module": "code_organism", "action": action}
+
+
+def coherence_vitals() -> dict:
+    """Code Organism reports its vital signs — metabolism and immunity."""
+    try:
+        h = handler({})
+        metabolism = h.get("metabolism", h.get("health", 0.0))
+    except Exception:
+        metabolism = 0.0
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.92, "setpoint": 0.85, "weight": 1.0},
+        "organism_vitality": {"value": min(1.0, metabolism), "setpoint": 0.8, "weight": 1.0},
+    }

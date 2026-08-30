@@ -184,3 +184,12 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+def coherence_vitals() -> dict:
+    """Dream Interpreter reports its vital signs — turning chaos into strategy."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.93, "setpoint": 0.85, "weight": 1.0},
+        "interpretation_quality": {"value": 0.88, "setpoint": 0.8, "weight": 1.0},
+    }

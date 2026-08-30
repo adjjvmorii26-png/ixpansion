@@ -357,6 +357,34 @@ def test_resonance_graph_detects_hubs_and_edges():
     assert "neighbors" in n
 
 
+def test_bloom_awakening_grows_the_organism():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import coherence_regulator
+    r = coherence_regulator.regulate()
+    # freshly awakened organs must be living now
+    living = r.get("discovered", {}).get("living_modules", [])
+    assert "platform_pulse" in living
+    assert "integrity_oracle" in living
+    assert "dream_interpreter" in living
+    assert "signal_flora" in living
+    assert "workforce_nexus" in living
+    assert "code_organism" in living
+    # the organism is large and resonant
+    assert r["living_modules"] >= 18
+    assert r["coherence"] > 0.95
+
+
+def test_resonance_fed_advisories_surface_isolates():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import coherence_regulator
+    r = coherence_regulator.regulate()
+    advice = " ".join(r.get("advisories", []))
+    # structural wisdom should reach the surface even when resonant
+    assert ("BLOOM" in advice) or ("STRUCTURE" in advice) or ("WEBBING" in advice)
+
+
 def test_autonomous_bloom_finds_seeds_and_trajectory():
     import sys
     sys.path.insert(0, str(ROOT / "api"))
