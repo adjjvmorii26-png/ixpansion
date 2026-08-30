@@ -15,6 +15,7 @@ import tessellation
 import flocking
 import epigenetic_landscape
 import homing
+import homeostasis
 
 
 class TestKintsugi:
@@ -331,3 +332,21 @@ class TestHoming:
         noisy = homing.simulate(num_birds=10, noise=0.8, max_steps=200, seed=42)
         clean = homing.simulate(num_birds=10, noise=0.1, max_steps=200, seed=42)
         assert clean["birds_arrived"] >= noisy["birds_arrived"]
+
+
+
+class TestHomeostasis:
+    def test_system_returns_to_setpoint(self):
+        result = homeostasis.simulate(disturbances=6, steps=50, seed=42)
+        assert result["resilience_index"] > 0
+        assert all(v <= 3.0 for v in result["deviation_from_setpoint"].values())
+    
+    def test_recovery_rates_bounded(self):
+        result = homeostasis.simulate(disturbances=8, steps=50, seed=42)
+        for name, log in result["recovery_log"].items():
+            assert log["recovery_rate"] <= 1.001
+    
+    def test_stronger_disturbances_harder_recovery(self):
+        light = homeostasis.simulate(disturbances=6, steps=50, strong=False, seed=42)
+        strong = homeostasis.simulate(disturbances=6, steps=50, strong=True, seed=42)
+        assert strong["resilience_index"] <= light["resilience_index"] + 1e-9
