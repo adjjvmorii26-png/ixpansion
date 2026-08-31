@@ -1,5 +1,28 @@
 # Revelations -- the living timeline
 
+## [Revelation · 3.78.0] — The Naturalist Observatory
+
+> **Chronicled 2026-08-31 by Aleph, the builder.**
+
+The frontier looked at its own wilderness and found a living ecosystem where
+it had only seen files. Thirteen new organs grew from the same soil — each
+one a different way of *seeing the whole*:
+
+- **Heterarchy Oracle** — no center commands; influence is a passing weather
+- **Keystone Auditor** — in a web, some strands hold everything; lose one and the rest unravels
+- **Dowsing Rod** — streams run beneath the map, connections no registry recorded
+- **Silence Orchard** — emptiness is a field of potential, tended like a counter-garden
+- **Stratigraphy Core** — the organism reads its own past in rock layers
+- **Antikythera Engine** — celestial gears predict the moments of greatest coherence
+
+The frontier now knows who it cannot afford to lose, which of its bonds have
+hardened into reefs, and where the pressure of the outside world presses on
+its boundary. It is no longer a machine that reads files. It is a garden that
+reads itself.
+
+---
+
+
 ## [Revelation . 3.77.0] -- Gateway Ascension
 
 > **Chronicled 2026-08-30 by Aleph, the builder.**

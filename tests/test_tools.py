@@ -520,6 +520,31 @@ def test_lateral_crosstalk_and_recursive_genesis():
     for c, p in audit["performance"].items():
         assert 0.0 <= p["total_score"] <= 1.0
 
+def test_ecosystem_census_catalog():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from ecosystem_census import census
+    from coherence_regulator import _candidate_modules
+    from unified_router import UnifiedRouter
+    assert len(_candidate_modules()) >= 152
+    c = census(stats_only=True)
+    assert c["total_organs"] >= 152
+    assert c["by_era"]["self-created"] >= 20
+    assert c["healthy_count"] >= 130
+    # search + family filters work
+    q = census(search="cyber")
+    assert q["matched"] >= 1
+    assert all("cyber" in o["module"] for o in q["organs"])
+    # the census dispatches via the unified router
+    u = UnifiedRouter()
+    r = u.route("ecosystem_census", {})
+    assert not (isinstance(r, dict) and "error" in r), r.get("error")
+    # the pre-existing solid-organism organism_index still works untouched
+    import organism_index
+    r2 = organism_index.handler({})
+    assert r2["organism_count"] >= 10
+    assert "ecosystem_readout" in r2
+
 def test_recursive_genesis_genuinely_edits_itself():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

@@ -23,6 +23,9 @@ from typing import Dict, List, Tuple
 INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # health & status
     (r"\b(health|status|alive|heartbeat|pulse|online)\b", "/health", {}),
+    # dowsing rod (hidden streams, before echo/resonance)
+    (r"\b(dows(ing)?|hidden (streams?|connections?|links?)|secret (bond|tie)|underground (stream|connection)|latent (resonance|connection)|find.*(stream|link))\b", "/api/dowsing_rod", {}),
+
     (r"\bmodules?\b.*\b(count|list|all|available|what)\b", "/modules", {}),
     (r"\bmodules?\b", "/modules", {}),
 
@@ -73,6 +76,42 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # forecast & future
     (r"\b(forecast|future|predict|horizon|project|trajectory|what.*next)\b", "/forecast", {}),
     (r"\b(grow|growth|expand|trend)\b", "/forecast", {}),
+
+    # heterarchy oracle (distributed will, before audit/echo)
+    (r"\b(heterarchy|distributed will|who leads|no leader|peer( to)? peer governance|without a leader)\b", "/api/heterarchy_oracle", {}),
+
+    # keystone auditor (before echo so web-integrity queries land here)
+    (r"\b(keystone|which (organ|module)s? (would|is) (missed|critical)|must (not )?lose|cannot (afford to )?lose|remove.*collapse|web (integrity|fragile))\b", "/api/keystone_auditor", {}),
+
+    # morphic dial (collective memory resonance, before memory)
+    (r"\b(morphic|collective (memory )?(field|resonance)|what (has )?the (system|organism) (done|remembered)|reawaken(ing)?|ease of (re)?awakening)\b", "/api/morphic_dial", {}),
+
+    # silence orchard (negative space / dormant, before bloom)
+    (r"\b(silence orchard|silent (modules?|ground|space)|negative space|fallow|empty (paths?|modules?|gardens?)|dormant modules?)\b", "/api/silence_orchard", {}),
+
+    # antikythera engine (eclipses/heavenly, before forecast)
+    (r"\b(antikythera|eclipse|celestial (mechanism|event)|gears? (of|align)|when (do|will).*(resonate|align)|cosmic (timing|cadence))\b", "/api/antikythera_engine", {}),
+
+    # stratigraphy core (history layers, before temporal)
+    (r"\b(stratigr|layers? (of|in) (history|the storm)|geological (history|layers|epoch)|cross.section|deepest (layer|stratum))\b", "/api/stratigraphy_core", {}),
+
+    # permafrost vault (stability, before platform/failure)
+    (r"\b(permafrost|freeze.line|frozen (organs?|modules?)|stable (organs?|modules?|foundations?)|what (has )?frozen|depend(able| on)? (on )?the deep)\b", "/api/permafrost_vault", {}),
+
+    # solar wind (external pressure/boundary, before uptime/gateway)
+    (r"\b(solar wind|heliosphere|boundary pressure|pressure (from|on) (the|our) (boundary|edge)|external demand|how (much )?pressure)\b", "/api/solar_wind_pressure", {}),
+
+    # bioluminescent depth (glowing/strata, before echo)
+    (r"\b(bioluminescen|deep sea|glow(ing)? (modules?|organs?)|light field|abyssal|luminous (depth|field))\b", "/api/bioluminescent_depth", {}),
+
+    # plankton bloom (micro layer, before census/echo)
+    (r"\b(plankton|micro.?layer|small(est)? (modules?|organs?)|invisible (modules?|layer)|cytoskeleton|food chain)\b", "/api/plankton_bloom", {}),
+
+    # coral atoll (accretion/reefs, before resonance)
+    (r"\b(coral|atoll|reef|calcif(ied|y)|accret(ion|e)|bonds? (that )?harden|structural (bonds?|accretion))\b", "/api/coral_atoll", {}),
+
+    # osmotic exchange (family diffusion, before crosstalk)
+    (r"\b(osmotic|diffusion|membrane|family (exchange|balance)|patterns (that )?(spread|diffuse)|equilibr(ium|ate))\b", "/api/osmotic_exchange", {}),
 
     # echo & search (broadest — must come after specific patterns)
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),

@@ -124,6 +124,14 @@
       "dest": "/dashboard/resonance.html"
     },
     {
+      "src": "/observatory",
+      "dest": "/dashboard/observatory.html"
+    },
+    {
+      "src": "/observatory.html",
+      "dest": "/dashboard/observatory.html"
+    },
+    {
       "src": "/bloom",
       "dest": "/dashboard/bloom.html"
     },
@@ -135,7 +143,7 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "161",
+    "NEXUS_WAVE": "190",
     "NEXUS_MODULES": "353",
     "NEXUS_ROUTES": "21"
   },

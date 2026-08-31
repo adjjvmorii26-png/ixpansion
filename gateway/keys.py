@@ -26,7 +26,13 @@ TIER_LIMITS = {
 TIER_FEATURES = {
     "free":       ["echo", "health", "modules", "poem", "intent", "meter",
                    "coherence_regulator",  # system health = free, forever
-                   "resonance_graph", "autonomous_bloom"],  # introspection = free
+                   "resonance_graph", "autonomous_bloom",  # introspection = free
+                   # Wave 190 introspection organs — public self-knowledge, free
+                   "heterarchy_oracle", "keystone_auditor", "dowsing_rod",
+                   "morphic_dial", "silence_orchard", "antikythera_engine",
+                   "stratigraphy_core", "permafrost_vault", "solar_wind_pressure",
+                   "bioluminescent_depth", "plankton_bloom", "coral_atoll",
+                   "osmotic_exchange"],
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",

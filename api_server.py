@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.4.0"
-WAVE = "189"
-WAVE_NAME = "Genuine Self-Editing"
+VERSION = "4.5.0"
+WAVE = "190"
+WAVE_NAME = "Organism Index"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -271,6 +271,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._static(path)
         if path == "/oracle":
             return self._static("dashboard/oracle.html")
+        if path == "/observatory":
+            return self._static("dashboard/observatory.html")
         if path == "/cons":
             return self._static("dashboard/coconscious.html")
         if path == "/" or path in ("/index.html",):
