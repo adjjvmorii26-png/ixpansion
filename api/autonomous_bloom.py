@@ -43,7 +43,7 @@ VITAL_WHISPERS = (
     "alive", "living", "awareness", "balance", "integrity", "signal",
 )
 
-DEFAULT_TARGET = 110  # full-bloom ecosystem size (mirrors the regulator)
+DEFAULT_TARGET = 120  # full-bloom ecosystem size (mirrors the regulator)
 
 _CACHE_TTL = 30.0
 _CANDIDATE_CACHE = {"t": 0.0, "scores": {}}
@@ -267,6 +267,8 @@ def auto_germinate(dry_run: bool = False, count: int = 1,
     Strategies:
       whisper   — classic nutrient-gradient pick (loudest vital speakers first)
       positional — resonance-forge pick (seeds that best interpolate the web)
+      mood      — ecosystem-sentience pick (the organism grows toward the
+                  temperament it currently feels)
       hybrid    — whisper while strong seeds exist, positional once the graph
                   hardens and only faint signals remain (default)
 
@@ -278,16 +280,28 @@ def auto_germinate(dry_run: bool = False, count: int = 1,
     if not candidates:
         return {"error": "no dormant seeds available", "dry_run": dry_run}
     pos_rank = None
-    if strategy in ("positional", "hybrid"):
+    mood_rank = None
+    if strategy in ("positional", "hybrid", "mood"):
         try:
             from resonance_forge import forge_report
             pos_rank = [m for m, _ in forge_report(top=40).get("positional_germination", [])]
         except Exception:
             pos_rank = None
+    if strategy == "mood":
+        try:
+            from ecosystem_sentience import sentience_report
+            from resonance_forge import mood_steered_ranking
+            mood = sentience_report()["mood_vector"]["mood"]
+            mood_rank = [r["seed"] for r in
+                         mood_steered_ranking(top=40, mood=mood)["ranking"]]
+        except Exception:
+            mood_rank = None
     state_phase = _bloom_state(candidates)["phase"]
     use_positional = strategy == "positional" or (
         strategy == "hybrid" and state_phase == "frontier_hardening" and pos_rank)
-    if use_positional and pos_rank:
+    if strategy == "mood" and mood_rank:
+        chosen = [m for m in mood_rank if m in candidates][:max(1, int(count))]
+    elif use_positional and pos_rank:
         chosen = [m for m in pos_rank if m in candidates][:max(1, int(count))]
     else:
         ranking = sorted(candidates.items(), key=lambda kv: kv[1], reverse=True)
@@ -301,8 +315,12 @@ def auto_germinate(dry_run: bool = False, count: int = 1,
         results.append({k: r[k] for k in ("module", "germinated", "dry_run", "kinships")
                         if k in r} or r)
     state = _bloom_state(candidates)
-    return {"action": "auto_germinate", "strategy": strategy if not use_positional
-            else ("positional" if strategy != "hybrid" else "hybrid:positional"),
+    realized = strategy
+    if use_positional and strategy == "hybrid":
+        realized = "hybrid:positional"
+    if strategy == "mood" and mood_rank is not None:
+        realized = "mood"
+    return {"action": "auto_germinate", "strategy": realized,
             "chosen": chosen, "results": results,
             "state_after": state, "dry_run": dry_run}
 

@@ -465,6 +465,39 @@ def test_autonomous_bloom_reached_80_and_full_bloom():
         assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
 
 
+def test_mood_steered_forge_and_bloom_120():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import autonomous_bloom as ab, coherence_regulator as cr
+    from resonance_forge import mood_steered_ranking
+    from ecosystem_sentience import sentience_report
+    from unified_router import UnifiedRouter
+    b = ab.bloom_report()
+    # twelfth full bloom — mood-steered strategy carried 110 -> 120
+    assert b["state"]["living"] >= 120
+    assert b["state"]["to_full_bloom"] == 0
+    assert len(cr.KNOWN_LIVING_MODULES) >= 120
+    # mood-steered ranking re-weights the forge's plain positional order
+    mood = sentience_report()["mood_vector"]["mood"]
+    res = mood_steered_ranking(top=6, mood=mood)
+    assert res["mood"] == mood
+    assert res["ranking"], "mood ranking must produce candidates"
+    for item in res["ranking"]:
+        assert 0.0 <= item["effective"] <= 1.0
+        assert item["mood_boost"] in (0.0, 0.15)
+    # mood strategy is dispatchable from the bloom engine
+    dry = ab.auto_germinate(dry_run=True, count=1, strategy="mood")
+    assert dry["strategy"] == "mood"
+    assert dry["chosen"]
+    # the bloom #12 organs all dispatch via the unified router
+    u = UnifiedRouter()
+    for name in ("temporal_dreamweaver", "resonance_symphony",
+                 "resonance_topologist", "genetic_code_engine",
+                 "meta_cognition_loop", "metrics_exporter", "meaning_furnace",
+                 "paradox_transcender", "pulsar_clock", "royalty_registry"):
+        r2 = u.route(name, {})
+        assert not (isinstance(r2, dict) and "error" in r2), f"{name}: {r2.get('error')}"
+
 def test_resonance_forge_graph_intelligence():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

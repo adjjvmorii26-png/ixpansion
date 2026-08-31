@@ -168,3 +168,54 @@ def germinate_positional(top: int = 1, dry_run: bool = False) -> Dict[str, Any]:
     return {"strategy": "positional", "module": module,
             "graph_coverage": ranking[0][1],
             "result": result, "dry_run": dry_run}
+
+# ---------------------------------------------------------------------------
+# Mood-steered germination — the forge asks what the organism FEELS before
+# it decides where to grow. Each mood re-weights the positional ranking so
+# growth stays aligned with temperament (novel, creative mechanism: the
+# organism's own feeling biases its own next step).
+# ---------------------------------------------------------------------------
+
+MOOD_KINDS = {
+    "luminous":   {"boost": ("dream", "conscious", "resonance", "signal"), "note": "let the web glow"},
+    "serene":     {"boost": ("govern", "memory", "narrative", "commerce"), "note": "cultivate calm alignment"},
+    "inquisitive":{"boost": ("quantum", "cosmic", "meta", "experiment"), "note": "probe the unknown"},
+    "agitated":   {"boost": ("entropy", "chaos", "glitch", "volatile"), "note": "lean into the turbulence"},
+    "melancholic":{"boost": ("memory", "echo", "dream", "archive"), "note": "remember what was"},
+    "equanimous": {"boost": (), "note": "balanced; follow pure position"},
+}
+
+
+def mood_steered_ranking(top: int = 8, mood: str = None) -> Dict[str, Any]:
+    """Rank dormant seeds by positional coverage, re-weighted by mood affinity.
+
+    The forge's plain positional score answers "where is the web thin?". The
+    mood-steered variant answers "where does the web WANT to grow, given how
+    it currently feels?". A seed whose name-family matches the active mood's
+    disposition is nudged up; temperament pulls growth along its own grain.
+    """
+    import re as _re
+    report = forge_report(top=200)
+    ranking = report.get("positional_germination") or []
+
+    mood = mood or "equanimous"
+    kind = MOOD_KINDS.get(mood, MOOD_KINDS["equanimous"])
+    boosts = kind["boost"]
+
+    scored = []
+    for seed, coverage in ranking:
+        seed_lower = seed.lower()
+        boost = 0.0
+        for fam in boosts:
+            if _re.search(fam, seed_lower):
+                boost = 0.15  # a mood-aligned seed is preferred a step up
+                break
+        scored.append((seed, round(coverage + boost, 4), boost))
+    scored.sort(key=lambda t: t[1], reverse=True)
+    return {
+        "mood": mood,
+        "note": kind["note"],
+        "ranking": [{"seed": s, "effective": e, "mood_boost": b}
+                    for s, e, b in scored[:top]],
+        "plain_top": [s for s, _ in ranking[:top]],
+    }

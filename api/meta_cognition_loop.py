@@ -90,3 +90,19 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     action = payload.get("action", "status")
     return {"status": "active", "module": "meta_cognition_loop", "action": action}
+
+
+def coherence_vitals() -> dict:
+    """meta_cognition_loop reports its vital signs to the living system."""
+    return {
+        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "meta_cognition_loop_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
+        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
+    }
+
+
+def resonates_with() -> list:
+    """Declared kinships, auto-picked from shared domain language."""
+    return ['resonance_topologist', 'resonance_symphony', 'evolutionary_pressure']
+
