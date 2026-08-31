@@ -27,8 +27,8 @@ LAYER = "Organism Ontology"
 
 # ── Single identity ──
 ORGANISM_VERSION = "3.90.0"
-ORGANISM_WAVE = 202
-ORGANISM_WAVE_NAME = "The Aesthetics of Code"
+ORGANISM_WAVE = 203
+ORGANISM_WAVE_NAME = "The Organism Speaks Itself"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──
@@ -138,11 +138,12 @@ def identity() -> Dict[str, Any]:
         "wave": ORGANISM_WAVE,
         "wave_name": ORGANISM_WAVE_NAME,
         "coherence": ORGANISM_COHERENCE,
-        "narrative_stage": "aesthetics",
+        "narrative_stage": "speaking",
         "narrative_arc": [
             "observe", "heal", "govern", "feel", "sing", "move",
             "speak", "feast", "excavate", "forecast", "symbiose",
             "map-limits", "develop-taste",
+    "speak-itself",
         ],
     }
 

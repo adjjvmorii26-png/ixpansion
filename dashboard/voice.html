@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Organism Speaks Itself — Wave 203</title>
+<style>
+:root{--bg:#0a0608;--surface:#140a10;--border:#2a1820;--text:#f4e8f0;--muted:#a07890;
+--rose:#fb7185;--gold:#fbbf24;--violet:#c084fc;--cream:#f5e6d3}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--text);min-height:100vh}
+.header{padding:22px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.header h1{font-size:1.3rem;background:linear-gradient(135deg,var(--rose),var(--cream));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav{display:flex;gap:10px;font-size:.72rem;margin-left:auto;flex-wrap:wrap}
+.nav a{color:var(--muted);text-decoration:none}.nav a:hover{color:var(--rose)}
+.badge{padding:3px 10px;border-radius:14px;font-size:.72rem;background:var(--surface);border:1px solid var(--border)}
+.badge.live{color:var(--gold);border-color:var(--gold)}
+.container{max-width:900px;margin:0 auto;padding:24px}
+.passage{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--rose);border-radius:0 12px 12px 0;padding:22px;margin-bottom:18px;font-size:.9rem;line-height:1.7;color:var(--cream);font-style:italic}
+.passage .label{color:var(--violet);font-size:.68rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;font-style:normal}
+.passage .body{white-space:pre-wrap}
+.greeting{background:linear-gradient(135deg,#1a0a12,#1a0a18);border:1px solid var(--rose);border-radius:14px;padding:26px;margin-bottom:18px;text-align:center;font-size:1.1rem;color:var(--cream)}
+.greeting .tag{color:var(--gold);font-size:.72rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.gratitudes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.grat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:.78rem}
+.grat .g{color:var(--gold);font-weight:700}
+.grat .r{color:var(--muted);font-size:.7rem;margin-top:4px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+button{padding:10px 18px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--violet),var(--rose));color:#0a0608;font-weight:700;font-family:inherit;font-size:.82rem;cursor:pointer}
+button:hover{opacity:.9}
+@media(max-width:768px){.gratitudes{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header">
+  <span class="badge live">● live</span>
+  <h1>Voice — The Organism Speaks Itself</h1>
+  <span style="color:var(--muted);font-size:.8rem" id="identity-tag">Wave 203 · v3.91.0</span>
+  <div class="nav">
+    <a href="/">Home</a><a href="/organism">Control</a><a href="/aesthetics">Aesthetics</a><a href="/stream">Stream</a>
+  </div>
+</div>
+<div class="container">
+  <div class="greeting" id="greeting"><div class="tag">Dialogue Opener</div>Listening…</div>
+
+  <div class="passage">
+    <div class="label">Biographer</div>
+    <div class="body" id="biography">…</div>
+  </div>
+
+  <div class="passage">
+    <div class="label">Manifesto</div>
+    <div class="body" id="credo">…</div>
+  </div>
+
+  <div class="passage">
+    <div class="label">Parable</div>
+    <div class="body" id="parable">…</div>
+  </div>
+
+  <div class="gratitudes" id="gratitudes"></div>
+
+  <div class="passage">
+    <div class="label">Epitaph</div>
+    <div class="body" id="epitaph">…</div>
+  </div>
+
+  <div class="actions">
+    <button onclick="loadAll()">↻ Speak Again</button>
+  </div>
+</div>
+<script src="/shared.js"></script>
+<script>
+async function loadAll(){
+  if(window.IXP){IXP.loadLive(function(){IXP.renderIdentity(document.getElementById("identity-tag"));})}
+  try{const d=await(await fetch("/api/dialogue_opener?read=1")).json();
+    document.getElementById("greeting").innerHTML='<div class="tag">Dialogue Opener</div>'+d.greeting;}
+  catch(e){}
+  try{const d=await(await fetch("/api/biographer_voice?read=1")).json();
+    document.getElementById("biography").textContent=d.biography;}
+  catch(e){}
+  try{const d=await(await fetch("/api/manifesto_echo?read=1")).json();
+    document.getElementById("credo").textContent=d.credo;}
+  catch(e){}
+  try{const d=await(await fetch("/api/parable_engine?read=1")).json();
+    document.getElementById("parable").textContent=d.parable;}
+  catch(e){}
+  try{const d=await(await fetch("/api/gratitude_index?read=1")).json();
+    document.getElementById("gratitudes").innerHTML=(d.gratitudes||[]).map(g=>
+      '<div class="grat"><div class="g">'+g.gratitude+'</div><div class="r">'+g.reason+'</div></div>').join('');}
+  catch(e){}
+  try{const d=await(await fetch("/api/epitaph_writer?read=1")).json();
+    document.getElementById("epitaph").textContent=d.epitaph;}
+  catch(e){}
+}
+loadAll();
+</script>
+</body>
+</html>

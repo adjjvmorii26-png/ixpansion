@@ -72,6 +72,30 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/api/epitaph_writer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/gratitude_index",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/dialogue_opener",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/parable_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/manifesto_echo",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/biographer_voice",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/organism_ontology",
       "dest": "/api/index.py"
     },
@@ -284,6 +308,14 @@
       "dest": "/dashboard/premium.html"
     },
     {
+      "src": "/voice",
+      "dest": "/dashboard/voice.html"
+    },
+    {
+      "src": "/voice.html",
+      "dest": "/dashboard/voice.html"
+    },
+    {
       "src": "/bloom.html",
       "dest": "/dashboard/bloom.html"
     }
@@ -291,8 +323,8 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "202",
-    "NEXUS_MODULES": "3",
+    "NEXUS_WAVE": "203",
+    "NEXUS_MODULES": "497",
     "NEXUS_ROUTES": "66"
   },
   "headers": [

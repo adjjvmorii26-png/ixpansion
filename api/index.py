@@ -43,6 +43,18 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
     if path == "/organism_ontology":
         from api.organism_ontology import handler as ontology_handler
         return ontology_handler()
+    if path == "/biographer_voice":
+        from api.biographer_voice import handler as _h; return _h()
+    if path == "/manifesto_echo":
+        from api.manifesto_echo import handler as _h; return _h()
+    if path == "/parable_engine":
+        from api.parable_engine import handler as _h; return _h()
+    if path == "/dialogue_opener":
+        from api.dialogue_opener import handler as _h; return _h()
+    if path == "/gratitude_index":
+        from api.gratitude_index import handler as _h; return _h()
+    if path == "/epitaph_writer":
+        from api.epitaph_writer import handler as _h; return _h()
     if path == "/catalog":
         import api_server as _as
         names = sorted(_as.MODULE_REGISTRY.keys()) if _as.MODULE_REGISTRY else []

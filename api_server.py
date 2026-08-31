@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.90.0"
+VERSION = "3.91.0"
 WAVE = "202"
 WAVE_NAME = "The Aesthetics of Code"
 
@@ -297,6 +297,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._static("dashboard/impossibility.html")
         if path == "/aesthetics":
             return self._static("dashboard/aesthetics.html")
+        if path == "/voice":
+            return self._static("dashboard/voice.html")
         if path == "/organism":
             return self._static("dashboard/organism.html")
         if path == "/premium":

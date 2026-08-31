@@ -5,13 +5,14 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  version: "3.90.0",
-  wave: 202,
-  waveName: "The Aesthetics of Code",
+  version: "3.91.0",
+  wave: 203,
+  waveName: "The Organism Speaks Itself",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",
     "map-limits","develop-taste",
+    "speak-itself",
   ],
   statusVocabulary: [
     "resonant","coherent","drifting","fracturing",
