@@ -465,6 +465,32 @@ def test_autonomous_bloom_reached_80_and_full_bloom():
         assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
 
 
+def test_genesis_forge_domain_saturation():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from genesis_forge import scan_gaps, birth
+    from coherence_regulator import _candidate_modules
+    from unified_router import UnifiedRouter
+    from ecosystem_sentience import sentience_report
+    # the forge filled every domain gap — no family is unrepresented
+    g = scan_gaps()
+    assert g["living_organs"] >= 132
+    assert g["gaps"] == []
+    # all 18 domain families are present in the living web
+    from genesis_forge import DOMAIN_FAMILIES
+    counted = [fam for fam in DOMAIN_FAMILIES if any(
+        fam in n for n in _candidate_modules())]
+    assert len(counted) == len(DOMAIN_FAMILIES)
+    # the economic/social children are living, dispatch, and have kin
+    u = UnifiedRouter()
+    for name in ("economic_mint", "social_guild"):
+        assert name in _candidate_modules(), f"{name} not living"
+        r = u.route(name, {})
+        assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
+    # diversity readout reflects full spectrum
+    r = sentience_report()
+    assert r["signals"]["diversity"] > 0.7
+
 def test_genesis_forge_self_creation():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

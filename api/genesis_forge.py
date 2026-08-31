@@ -143,8 +143,14 @@ def scan_gaps() -> Dict[str, Any]:
     }
 
 
-def _invent_one(preferred: Optional[str] = None, rng=None) -> Tuple[str, Dict[str, Any]]:
-    """Design a novel organ for the emptiest (or preferred) domain gap."""
+def _invent_one(preferred: Optional[str] = None, rng=None,
+              resonant: bool = False) -> Tuple[str, Dict[str, Any]]:
+    """Design a novel organ for the emptiest (or preferred) domain gap.
+
+    resonant=True enables synthetic resonance: among candidate names, the
+    one whose prospective kinship cluster shares the most vocabulary is
+    chosen — so the child is born already speaking its family's language.
+    """
     import random
     rng = rng or random
     gaps = scan_gaps()["gaps"]
@@ -157,13 +163,52 @@ def _invent_one(preferred: Optional[str] = None, rng=None) -> Tuple[str, Dict[st
         "theme": "a novel organ for the ecosystem's evolving needs",
     })
     taken = set(_living_names())
+    candidates = []
     for _ in range(60):
         stem = f"{fam}_{rng.choice(nucleus['suffixes'])}"
         if stem not in taken and re.match(r"^[a-z_][a-z0-9_]*$", stem):
-            return stem, {"family": fam, "theme": nucleus["theme"],
-                          "suffixes_used": nucleus["suffixes"]}
-    stem = f"genesis_{int(time.time()) % 100000}"
-    return stem, {"family": fam, "theme": nucleus["theme"], "fallback": True}
+            candidates.append(stem)
+            if len(candidates) >= 8:
+                break
+    if not candidates:
+        stem = f"genesis_{int(time.time()) % 100000}"
+        return stem, {"family": fam, "theme": nucleus["theme"], "fallback": True}
+
+    if resonant:
+        # synthetic resonance: pick the candidate whose prospective kin are
+        # most vocabulary-aligned (the child sounds like its family on birth)
+        best = max(
+            candidates,
+            key=lambda s: _resonance_of(s),
+        )
+        return best, {"family": fam, "theme": nucleus["theme"],
+                      "synthetic_resonance": True}
+    stem = candidates[0]
+    return stem, {"family": fam, "theme": nucleus["theme"]}
+
+
+def _resonance_of(stem: str) -> float:
+    """Score how much a prospective stem's vocabulary overlaps its kin's."""
+    try:
+        import resonance_graph as rg
+        import autonomous_bloom as ab
+        own = rg._domain_tokens(stem)
+        if not own:
+            return 0.0
+        # prospective kinships are the designed-org's own tokens + blip; use
+        # the living family members as the baseline resonance target
+        fam = stem.split("_")[0]
+        total = 0.0
+        hits = 0
+        for name in _living_names():
+            if name.startswith(fam):
+                other = rg._domain_tokens(name)
+                j = rg._jaccard(own, other)
+                total += j
+                hits += 1
+        return total / max(hits, 1)
+    except Exception:
+        return 0.0
 
 
 def _auto_kinships(stem: str) -> List[str]:
@@ -256,9 +301,10 @@ def resonates_with() -> list:
 '''
 
 
-def invent(preferred: Optional[str] = None, dry_run: bool = True) -> Dict[str, Any]:
+def invent(preferred: Optional[str] = None, dry_run: bool = True,
+           resonant: bool = False) -> Dict[str, Any]:
     """Design a novel organ to fill a gap (dry-run default: no disk write)."""
-    stem, design = _invent_one(preferred=preferred)
+    stem, design = _invent_one(preferred=preferred, resonant=resonant)
     source = _render_organ(stem, design)
     import ast
     try:
@@ -273,9 +319,9 @@ def invent(preferred: Optional[str] = None, dry_run: bool = True) -> Dict[str, A
             "gaps": scan_gaps()["gaps"]}
 
 
-def birth(preferred: Optional[str] = None) -> Dict[str, Any]:
+def birth(preferred: Optional[str] = None, resonant: bool = False) -> Dict[str, Any]:
     """Birth a new living organ into api/<stem>.py (real write, local/dev)."""
-    stem, design = _invent_one(preferred=preferred)
+    stem, design = _invent_one(preferred=preferred, resonant=resonant)
     path = ROOT / "api" / f"{stem}.py"
     if path.exists():
         return {"error": f"module '{stem}' already exists", "module": stem}
