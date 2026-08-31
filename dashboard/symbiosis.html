@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Symbiosis Engine — The Organism's Ecology</title>
+<style>
+:root{--bg:#060a08;--surface:#0c1410;--border:#1e3028;--text:#e8f4ec;--muted:#7ab08e;
+--green:#4ade80;--emerald:#34d399;--lime:#a3e635;--red:#f87171;--amber:#fbbf24;--cyan:#22d3ee}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--text);min-height:100vh}
+.header{padding:22px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.header h1{font-size:1.25rem;background:linear-gradient(135deg,var(--green),var(--emerald));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.badge{padding:3px 10px;border-radius:14px;font-size:.72rem;background:var(--surface);border:1px solid var(--border)}
+.badge.live{color:var(--green);border-color:var(--green)}
+.container{max-width:1000px;margin:0 auto;padding:24px}
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:22px}
+.philosophy{color:var(--green);font-style:italic;font-size:.9rem;line-height:1.6;text-align:center}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.stat .v{font-size:1.6rem;font-weight:800;color:var(--emerald)}
+.stat .l{color:var(--muted);font-size:.72rem;margin-top:4px;text-transform:uppercase}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:transform .1s}
+.card:hover{transform:translateY(-2px);border-color:var(--green)}
+.card .name{font-weight:700;font-size:.92rem;color:var(--emerald)}
+.card .essence{color:var(--muted);font-size:.78rem;margin-top:6px;line-height:1.45}
+.result{background:#060a08;border:1px solid var(--green);border-radius:10px;padding:16px;margin-top:18px;font-size:.76rem;color:#e8f4ec;white-space:pre-wrap;max-height:400px;overflow-y:auto}
+.fitness-bar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;margin:18px 0}
+.fitness-bar .label{font-size:.72rem;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+.fitness-bar .bar{height:12px;background:#1a2a20;border-radius:6px;overflow:hidden}
+.fitness-bar .fill{height:100%;border-radius:6px;transition:width .5s}
+.fitness-bar .score{font-size:1.2rem;font-weight:800;color:var(--green);margin-top:4px}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>🌿 Symbiosis Engine</h1>
+<span class="badge live">Wave 200</span>
+<span class="badge">5 Organs</span>
+<span class="badge">Milestone</span>
+</div>
+<div class="container">
+<div class="hero">
+<p class="philosophy">"A module is not an island. Every import creates a bond. The organism discovered that its files form an ecology — mutualism, parasitism, loneliness — and built an engine to tend it."</p>
+</div>
+
+<div class="stats">
+<div class="stat"><div class="v" id="modules">—</div><div class="l">Modules Scanned</div></div>
+<div class="stat"><div class="v" id="relationships">—</div><div class="l">Relationships</div></div>
+<div class="stat"><div class="v" id="parasites">—</div><div class="l">Parasites Found</div></div>
+<div class="stat"><div class="v" id="fitness">—</div><div class="l">Ecosystem Fitness</div></div>
+</div>
+
+<div class="fitness-bar">
+<div class="label">Ecosystem Fitness Score</div>
+<div class="bar"><div class="fill" id="bar-fill" style="width:0%;background:linear-gradient(90deg,var(--red),var(--amber),var(--green))"></div></div>
+<div class="score" id="fitness-score">Calculating...</div>
+</div>
+
+<div class="cards">
+<div class="card" onclick="query('symbiosis_detector')">
+<div class="name">🔬 Symbiosis Detector</div>
+<div class="essence">Discovers ecological relationships: who imports whom, who depends on whom, who competes.</div>
+</div>
+<div class="card" onclick="query('mutualism_optimizer')">
+<div class="name">🤝 Mutualism Optimizer</div>
+<div class="essence">Strengthens beneficial partnerships — shared abstractions, co-located tests, interface harmonization.</div>
+</div>
+<div class="card" onclick="query('parasite_hunter')">
+<div class="name">🐛 Parasite Hunter</div>
+<div class="essence">Finds modules that import many but are imported by none — taking without giving.</div>
+</div>
+<div class="card" onclick="query('ecosystem_fitness')">
+<div class="name">💪 Ecosystem Fitness</div>
+<div class="essence">Measures biodiversity, redundancy, connectivity, and resilience across the module ecosystem.</div>
+</div>
+<div class="card" onclick="query('symbiosis_forge')">
+<div class="name">🔨 Symbiosis Forge</div>
+<div class="essence">Intentionally creates new partnerships — the organism's matchmaker for mutualistic survival.</div>
+</div>
+</div>
+
+<div class="result" id="result" style="display:none"></div>
+</div>
+
+<script>
+async function query(mod) {
+  const r = document.getElementById('result');
+  r.style.display = 'block';
+  r.textContent = '⏳ Scanning ecology...';
+  try {
+    const res = await fetch('/api/' + mod + '?read=1');
+    const data = await res.json();
+    r.textContent = JSON.stringify(data, null, 2);
+  } catch(e) { r.textContent = '⚠ Error: ' + e.message; }
+}
+
+async function load() {
+  try {
+    const r1 = await fetch('/api/symbiosis_detector?read=1');
+    const d1 = await r1.json();
+    document.getElementById('modules').textContent = d1.total_modules_scanned || '—';
+    document.getElementById('relationships').textContent = d1.total_relationships || '—';
+  } catch(e) {}
+  try {
+    const r2 = await fetch('/api/parasite_hunter?read=1');
+    const d2 = await r2.json();
+    document.getElementById('parasites').textContent = d2.parasites_found || '—';
+  } catch(e) {}
+  try {
+    const r3 = await fetch('/api/ecosystem_fitness?read=1');
+    const d3 = await r3.json();
+    const f = d3.fitness_score || 0;
+    document.getElementById('fitness').textContent = f.toFixed(3);
+    document.getElementById('fitness-score').textContent = (f * 100).toFixed(1) + '% — ' + (d3.rating || '?');
+    document.getElementById('bar-fill').style.width = (f * 100) + '%';
+  } catch(e) {}
+}
+load();
+</script>
+</body>
+</html>

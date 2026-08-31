@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.88.0] — The Symbiosis Engine (Wave 200)
+
+### Added
+- **Symbiosis Detector** — discovers ecological relationships between modules
+- **Mutualism Optimizer** — strengthens beneficial partnerships
+- **Parasite Hunter** — finds modules that consume without contributing
+- **Ecosystem Fitness** — measures biodiversity, redundancy, connectivity, resilience
+- **Symbiosis Forge** — intentionally creates new module partnerships
+- **Symbiosis Dashboard** — /symbiosis renders the ecological map
+- Living system grew to 225 organs; coherence ~0.989 (resonant)
+
+### Changed
+- Narrative arc: observe > heal > govern > feel > sing > move > speak > feast > excavate > forecast > symbiose
+
+
 ## [3.87.0] — The Meteorology of Thought (Wave 199)
 
 ### Added
