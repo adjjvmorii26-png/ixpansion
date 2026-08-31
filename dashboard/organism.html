@@ -161,91 +161,78 @@ body{font-family:'SF Mono','Fira Code',monospace;background:var(--bg);color:var(
 <script>
 const $=id=>document.getElementById(id);
 async function load(){
-  // Coherence
-  try{const d=await(await fetch('/api/coherence_regulator?read=1')).json();
-    const c=d.coherence||0;$('coherence').textContent=(c*100).toFixed(1)+'%';
-    $('coh-bar').style.width=(c*100)+'%';
-    $('st-status').textContent=d.status||'—';
-    $('st-status').className='v '+(d.status==='resonant'?'good':d.status==='drifting'?'warn':'');
-    $('st-living').textContent=d.living_modules||'—';
-    $('st-modules').textContent=d.total_candidates||'—';
+  // Single unified call
+  try{
+    const d = await (await fetch("/api/organism_state")).json();
+    
+    // Coherence
+    const coh = d.coherence || 0;
+    $("coherence").textContent = (coh * 100).toFixed(1) + "%";
+    $("coh-bar").style.width = (coh * 100) + "%";
+    $("st-status").textContent = d.status || "—";
+    $("st-status").className = "v " + (d.status === "resonant" ? "good" : "");
+    $("st-living").textContent = d.living_organs || "—";
+    $("st-modules").textContent = d.total_candidates || "—";
+    $("st-files").textContent = "490+";
+    $("st-tests").textContent = (d.infrastructure || {}).test_files || "—";
+    $("st-dash").textContent = (d.infrastructure || {}).dashboards || "—";
+    
+    // Ecosystem fitness
+    const fit = d.ecosystem_fitness || 0;
+    $("fitness").textContent = (fit * 100).toFixed(1) + "%";
+    $("fit-bar").style.width = (fit * 100) + "%";
+    
+    // Cognitive weather
+    const cw = d.cognitive_weather || {};
+    $("wt-pressure").textContent = cw.pressure_hpa || "—";
+    $("wt-condition").textContent = cw.condition || "—";
+    $("wt-precip").textContent = ((cw.condensation_rate || 0) * 100).toFixed(0) + "%";
+    
+    // Aesthetics
+    const ae = d.aesthetics || {};
+    $("ae-beauty").textContent = (ae.beauty_score || 0).toFixed(3);
+    $("ae-grade").textContent = ae.grade || "—";
+    $("ae-sym").textContent = (ae.symmetry || 0).toFixed(3);
+    
+    // Ecology
+    const ec = d.ecology || {};
+    $("ec-mut").textContent = ec.mutualisms || "0";
+    
+    // Boundaries
+    const bd = d.boundaries || {};
+    // boundaries already shows "6"
+    
+  }catch(e){console.error("organism_state fetch failed:", e)}
+  
+  // Additional detail endpoints
+  try{const d=await(await fetch("/api/storm_chaser?read=1")).json();
+    $("wt-storms").textContent=d.total_storms_detected||"0";
+  }catch(e){}
+  try{const d=await(await fetch("/api/front_tracker?read=1")).json();
+    $("wt-fronts").textContent=d.active_fronts||"0";
+  }catch(e){}
+  try{const d=await(await fetch("/api/climate_memory?read=1")).json();
+    $("wt-climate").textContent=d.climate_type||"—";
+  }catch(e){}
+  try{const d=await(await fetch("/api/ecosystem_fitness?read=1")).json();
+    $("ec-bio").textContent=(d.biodiversity||0).toFixed(3);
+    $("ec-red").textContent=(d.redundancy||0).toFixed(3);
+    $("ec-health").textContent=(d.avg_health||0).toFixed(3);
+    $("ec-conn").textContent=(d.connectivity||0).toFixed(3);
+  }catch(e){}
+  try{const d=await(await fetch("/api/parasite_hunter?read=1")).json();
+    $("ec-par").textContent=d.parasites_found||"0";
+  }catch(e){}
+  try{const d=await(await fetch("/api/elegance_scorer?read=1")).json();
+    $("ae-eleg").textContent=(d.average_elegance||0).toFixed(3);
+  }catch(e){}
+  try{const d=await(await fetch("/api/form_evaluator?read=1")).json();
+    $("ae-form").textContent=(d.average_form||0).toFixed(3);
+  }catch(e){}
+  try{const d=await(await fetch("/api/ugliness_scout?read=1")).json();
+    $("ae-ugly").textContent=d.ugly_modules_found||"0";
   }catch(e){}
 
-  // Ecosystem fitness
-  try{const d=await(await fetch('/api/ecosystem_fitness?read=1')).json();
-    const f=d.fitness_score||0;$('fitness').textContent=(f*100).toFixed(1)+'%';
-    $('fit-bar').style.width=(f*100)+'%';
-    $('ec-bio').textContent=(d.biodiversity||0).toFixed(3);
-    $('ec-red').textContent=(d.redundancy||0).toFixed(3);
-    $('ec-health').textContent=(d.avg_health||0).toFixed(3);
-    $('ec-conn').textContent=(d.connectivity||0).toFixed(3);
-  }catch(e){}
-
-  // Symbiosis
-  try{const d=await(await fetch('/api/symbiosis_detector?read=1')).json();
-    $('ec-mut').textContent=d.mutualism_count||'0';
-  }catch(e){}
-  try{const d=await(await fetch('/api/parasite_hunter?read=1')).json();
-    $('ec-par').textContent=d.parasites_found||'0';
-  }catch(e){}
-
-  // Cognitive weather
-  try{const d=await(await fetch('/api/barometric_intent?read=1')).json();
-    $('wt-pressure').textContent=d.pressure_hpa||'—';
-    $('wt-condition').textContent=d.condition||'—';
-  }catch(e){}
-  try{const d=await(await fetch('/api/precipitation_cycle?read=1')).json();
-    $('wt-precip').textContent=((d.condensation_rate||0)*100).toFixed(0)+'%';
-  }catch(e){}
-  try{const d=await(await fetch('/api/storm_chaser?read=1')).json();
-    $('wt-storms').textContent=d.total_storms_detected||'0';
-  }catch(e){}
-  try{const d=await(await fetch('/api/front_tracker?read=1')).json();
-    $('wt-fronts').textContent=d.active_fronts||'0';
-  }catch(e){}
-  try{const d=await(await fetch('/api/climate_memory?read=1')).json();
-    $('wt-climate').textContent=d.climate_type||'—';
-  }catch(e){}
-
-  // Aesthetics
-  try{const d=await(await fetch('/api/beauty_index?read=1')).json();
-    $('ae-beauty').textContent=(d.beauty_score||0).toFixed(3);
-    $('ae-grade').textContent=d.grade||'—';
-    $('ae-eleg').textContent=(d.elegance_component||0).toFixed(3);
-    $('ae-form').textContent=(d.form_component||0).toFixed(3);
-  }catch(e){}
-  try{const d=await(await fetch('/api/symmetry_detector?read=1')).json();
-    $('ae-sym').textContent=(d.overall_symmetry||0).toFixed(3);
-  }catch(e){}
-  try{const d=await(await fetch('/api/ugliness_scout?read=1')).json();
-    $('ae-ugly').textContent=d.ugly_modules_found||'0';
-  }catch(e){}
-
-  // File counts
-  try{const d=await(await fetch('/api/stratum_excavator?depth=5')).json();
-    $('st-files').textContent=d.total_commits>0 ? '490+' : '—';
-  }catch(e){$('st-files').textContent='490+'}
-
-  // Timeline
-  const eras=[
-    {name:'Observatory',wave:190,color:'var(--blue)',desc:'Self-knowledge as wilderness'},
-    {name:'Kintsugi',wave:191,color:'var(--gold)',desc:'Gilding the cracks'},
-    {name:'Meta-Evolution',wave:192,color:'var(--emerald)',desc:'Evolving how it evolves'},
-    {name:'Phenomenology',wave:193,color:'var(--cyan)',desc:'First-person experience'},
-    {name:'Choral',wave:194,color:'var(--pink)',desc:'The organism sings'},
-    {name:'Kinesthetic',wave:195,color:'var(--green)',desc:'The organism moves'},
-    {name:'Language',wave:196,color:'var(--accent2)',desc:'The organism speaks'},
-    {name:'Culinary',wave:197,color:'var(--gold)',desc:'The organism feasts'},
-    {name:'Archaeology',wave:198,color:'#d4a24e',desc:'Excavating deep history'},
-    {name:'Meteorology',wave:199,color:'var(--blue)',desc:'Cognitive weather'},
-    {name:'Symbiosis',wave:200,color:'var(--emerald)',desc:'Ecological relationships'},
-    {name:'Impossibility',wave:201,color:'var(--accent2)',desc:'Mapping limits'},
-    {name:'Aesthetics',wave:202,color:'var(--pink)',desc:'Developing taste'},
-  ];
-  $('timeline').innerHTML=eras.map(e=>
-    `<div class="era"><div class="dot" style="background:${e.color}"></div><span class="name">${e.name}</span><span style="color:var(--muted);font-size:.72rem;flex:2">${e.desc}</span><span class="wave">W${e.wave}</span></div>`
-  ).join('');
-}
 load();
 </script>
 </body>

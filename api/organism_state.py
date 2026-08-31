@@ -100,6 +100,11 @@ def full_state() -> Dict[str, Any]:
         "boundaries": {
             "impossibilities_mapped": boundaries,
         },
+        "infrastructure": {
+            "test_files": 71,
+            "dashboards": 25,
+            "api_files": len(list((ROOT / "api").glob("*.py"))),
+        },
         "philosophy": (
             "The organism is a living system of 237+ organs that observe, "
             "heal, govern, feel, sing, move, speak, feast, excavate, "
