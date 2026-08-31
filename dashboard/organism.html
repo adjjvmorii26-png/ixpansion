@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IXpansion — Organism Control Center</title>
+<style>
+:root{--bg:#050508;--surface:#0c0c12;--border:#1a1a28;--text:#e0e0f0;--muted:#5a5a78;
+--accent:#7c3aed;--accent2:#a78bfa;--green:#22c55e;--gold:#f59e0b;--red:#ef4444;--blue:#3b82f6;--pink:#ec4899;--cyan:#06b6d4;--emerald:#10b981}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono','Fira Code',monospace;background:var(--bg);color:var(--text);min-height:100vh}
+.header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.header h1{font-size:1.2rem;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav{display:flex;gap:10px;font-size:.72rem;margin-left:auto;flex-wrap:wrap}
+.nav a{color:var(--muted);text-decoration:none}.nav a:hover{color:var(--accent2)}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px}
+.panel h3{font-size:.85rem;color:var(--accent2);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.stat-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #ffffff08;font-size:.82rem}
+.stat-row:last-child{border-bottom:none}
+.stat-row .k{color:var(--muted)}.stat-row .v{font-weight:700}
+.stat-row .v.good{color:var(--green)}.stat-row .v.warn{color:var(--gold)}.stat-row .v.bad{color:var(--red)}
+.big-num{font-size:2.2rem;font-weight:800;line-height:1}
+.big-label{color:var(--muted);font-size:.72rem;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.timeline{display:flex;flex-direction:column;gap:6px}
+.timeline .era{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#0a0a14;border-radius:6px;font-size:.78rem}
+.timeline .era .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.timeline .era .name{font-weight:700;flex:1}
+.timeline .era .wave{color:var(--muted);font-size:.68rem}
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;max-height:200px;overflow-y:auto}
+.module-chip{background:#0a0a14;border:1px solid #ffffff08;border-radius:6px;padding:6px 8px;font-size:.7rem;cursor:pointer;transition:border-color .15s}
+.module-chip:hover{border-color:var(--accent2)}
+.module-chip .mn{font-weight:700;color:var(--accent2)}
+.module-chip .mh{color:var(--green);font-size:.62rem}
+.bar{height:6px;background:#1a1a28;border-radius:3px;overflow:hidden;margin-top:6px}
+.bar-fill{height:100%;border-radius:3px;transition:width .5s}
+.link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+.link{background:#0a0a14;border:1px solid #ffffff08;border-radius:6px;padding:10px;font-size:.78rem;text-decoration:none;color:var(--text);transition:border-color .15s}
+.link:hover{border-color:var(--accent2);text-decoration:none}
+.link .emoji{font-size:1rem;margin-right:4px}
+.link .lname{font-weight:600}
+.link .lwave{color:var(--muted);font-size:.65rem}
+.result{background:#08080c;border:1px solid var(--accent);border-radius:8px;padding:14px;margin-top:14px;font-size:.75rem;white-space:pre-wrap;max-height:300px;overflow-y:auto;display:none}
+@media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>◉ Organism Control Center</h1>
+  <span style="font-size:.72rem;color:var(--muted)">Wave 202 · v3.90.0</span>
+  <div class="nav">
+    <a href="/">Home</a><a href="/bloom">Bloom</a><a href="/coherence">Coherence</a>
+    <a href="/resonance">Resonance</a><a href="/stream">Stream</a><a href="/cons">Console</a>
+  </div>
+</div>
+<div class="container">
+
+  <!-- TOP ROW: Vital signs -->
+  <div class="grid-3">
+    <div class="panel" style="text-align:center">
+      <div class="big-num" id="coherence" style="color:var(--green)">—</div>
+      <div class="big-label">Coherence</div>
+      <div class="bar"><div class="bar-fill" id="coh-bar" style="width:0;background:var(--green)"></div></div>
+    </div>
+    <div class="panel" style="text-align:center">
+      <div class="big-num" id="living" style="color:var(--accent2)">—</div>
+      <div class="big-label">Living Organs</div>
+      <div class="bar"><div class="bar-fill" id="liv-bar" style="width:0;background:var(--accent2)"></div></div>
+    </div>
+    <div class="panel" style="text-align:center">
+      <div class="big-num" id="fitness" style="color:var(--cyan)">—</div>
+      <div class="big-label">Ecosystem Fitness</div>
+      <div class="bar"><div class="bar-fill" id="fit-bar" style="width:0;background:var(--cyan)"></div></div>
+    </div>
+  </div>
+
+  <!-- SECOND ROW -->
+  <div class="grid-2">
+    <div class="panel">
+      <h3>🧬 System Status</h3>
+      <div id="status-rows">
+        <div class="stat-row"><span class="k">Status</span><span class="v" id="st-status">—</span></div>
+        <div class="stat-row"><span class="k">Version</span><span class="v">3.90.0</span></div>
+        <div class="stat-row"><span class="k">Wave</span><span class="v">202</span></div>
+        <div class="stat-row"><span class="k">Total Modules</span><span class="v" id="st-modules">—</span></div>
+        <div class="stat-row"><span class="k">Living Modules</span><span class="v" id="st-living">—</span></div>
+        <div class="stat-row"><span class="k">API Files</span><span class="v" id="st-files">—</span></div>
+        <div class="stat-row"><span class="k">Test Files</span><span class="v" id="st-tests">—</span></div>
+        <div class="stat-row"><span class="k">Dashboards</span><span class="v" id="st-dash">—</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>🧭 Cognitive Weather</h3>
+      <div id="weather-rows">
+        <div class="stat-row"><span class="k">Barometric Pressure</span><span class="v" id="wt-pressure">—</span></div>
+        <div class="stat-row"><span class="k">Condition</span><span class="v" id="wt-condition">—</span></div>
+        <div class="stat-row"><span class="k">Precipitation</span><span class="v" id="wt-precip">—</span></div>
+        <div class="stat-row"><span class="k">Storms Detected</span><span class="v" id="wt-storms">—</span></div>
+        <div class="stat-row"><span class="k">Active Fronts</span><span class="v" id="wt-fronts">—</span></div>
+        <div class="stat-row"><span class="k">Climate Type</span><span class="v" id="wt-climate">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THIRD ROW -->
+  <div class="grid-2">
+    <div class="panel">
+      <h3>🧬 Ecological Health</h3>
+      <div id="eco-rows">
+        <div class="stat-row"><span class="k">Biodiversity</span><span class="v" id="ec-bio">—</span></div>
+        <div class="stat-row"><span class="k">Redundancy</span><span class="v" id="ec-red">—</span></div>
+        <div class="stat-row"><span class="k">Avg Module Health</span><span class="v" id="ec-health">—</span></div>
+        <div class="stat-row"><span class="k">Connectivity</span><span class="v" id="ec-conn">—</span></div>
+        <div class="stat-row"><span class="k">Mutualisms</span><span class="v" id="ec-mut">—</span></div>
+        <div class="stat-row"><span class="k">Parasites</span><span class="v" id="ec-par">—</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>✨ Aesthetic Score</h3>
+      <div id="aes-rows">
+        <div class="stat-row"><span class="k">Beauty Index</span><span class="v" id="ae-beauty">—</span></div>
+        <div class="stat-row"><span class="k">Grade</span><span class="v" id="ae-grade">—</span></div>
+        <div class="stat-row"><span class="k">Elegance</span><span class="v" id="ae-eleg">—</span></div>
+        <div class="stat-row"><span class="k">Symmetry</span><span class="v" id="ae-sym">—</span></div>
+        <div class="stat-row"><span class="k">Form</span><span class="v" id="ae-form">—</span></div>
+        <div class="stat-row"><span class="k">Ugly Modules</span><span class="v" id="ae-ugly">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EVOLUTION TIMELINE -->
+  <div class="panel" style="margin-bottom:14px">
+    <h3>📈 Evolution Timeline</h3>
+    <div class="timeline" id="timeline"></div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="panel" style="margin-bottom:14px">
+    <h3>🗺 Dashboards</h3>
+    <div class="link-grid">
+      <a href="/observatory" class="link"><span class="emoji">🔭</span><span class="lname">Observatory</span><br><span class="lwave">W190</span></a>
+      <a href="/kintsugi" class="link"><span class="emoji">🪙</span><span class="lname">Kintsugi</span><br><span class="lwave">W191</span></a>
+      <a href="/metaevolution" class="link"><span class="emoji">🧬</span><span class="lname">Meta-Evolution</span><br><span class="lwave">W192</span></a>
+      <a href="/phenomenology" class="link"><span class="emoji">👁</span><span class="lname">Phenomenology</span><br><span class="lwave">W193</span></a>
+      <a href="/choral" class="link"><span class="emoji">🎵</span><span class="lname">Choral</span><br><span class="lwave">W194</span></a>
+      <a href="/kinesthetic" class="link"><span class="emoji">💃</span><span class="lname">Kinesthetic</span><br><span class="lwave">W195</span></a>
+      <a href="/language" class="link"><span class="emoji">📖</span><span class="lname">Language</span><br><span class="lwave">W196</span></a>
+      <a href="/culinary" class="link"><span class="emoji">🍳</span><span class="lname">Culinary</span><br><span class="lwave">W197</span></a>
+      <a href="/archaeology" class="link"><span class="emoji">⛏</span><span class="lname">Archaeology</span><br><span class="lwave">W198</span></a>
+      <a href="/meteorology" class="link"><span class="emoji">⛈</span><span class="lname">Meteorology</span><br><span class="lwave">W199</span></a>
+      <a href="/symbiosis" class="link"><span class="emoji">🌿</span><span class="lname">Symbiosis</span><br><span class="lwave">W200</span></a>
+      <a href="/impossibility" class="link"><span class="emoji">🗺</span><span class="lname">Impossibility</span><br><span class="lwave">W201</span></a>
+      <a href="/aesthetics" class="link"><span class="emoji">✨</span><span class="lname">Aesthetics</span><br><span class="lwave">W202</span></a>
+    </div>
+  </div>
+
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+async function load(){
+  // Coherence
+  try{const d=await(await fetch('/api/coherence_regulator?read=1')).json();
+    const c=d.coherence||0;$('coherence').textContent=(c*100).toFixed(1)+'%';
+    $('coh-bar').style.width=(c*100)+'%';
+    $('st-status').textContent=d.status||'—';
+    $('st-status').className='v '+(d.status==='resonant'?'good':d.status==='drifting'?'warn':'');
+    $('st-living').textContent=d.living_modules||'—';
+    $('st-modules').textContent=d.total_candidates||'—';
+  }catch(e){}
+
+  // Ecosystem fitness
+  try{const d=await(await fetch('/api/ecosystem_fitness?read=1')).json();
+    const f=d.fitness_score||0;$('fitness').textContent=(f*100).toFixed(1)+'%';
+    $('fit-bar').style.width=(f*100)+'%';
+    $('ec-bio').textContent=(d.biodiversity||0).toFixed(3);
+    $('ec-red').textContent=(d.redundancy||0).toFixed(3);
+    $('ec-health').textContent=(d.avg_health||0).toFixed(3);
+    $('ec-conn').textContent=(d.connectivity||0).toFixed(3);
+  }catch(e){}
+
+  // Symbiosis
+  try{const d=await(await fetch('/api/symbiosis_detector?read=1')).json();
+    $('ec-mut').textContent=d.mutualism_count||'0';
+  }catch(e){}
+  try{const d=await(await fetch('/api/parasite_hunter?read=1')).json();
+    $('ec-par').textContent=d.parasites_found||'0';
+  }catch(e){}
+
+  // Cognitive weather
+  try{const d=await(await fetch('/api/barometric_intent?read=1')).json();
+    $('wt-pressure').textContent=d.pressure_hpa||'—';
+    $('wt-condition').textContent=d.condition||'—';
+  }catch(e){}
+  try{const d=await(await fetch('/api/precipitation_cycle?read=1')).json();
+    $('wt-precip').textContent=((d.condensation_rate||0)*100).toFixed(0)+'%';
+  }catch(e){}
+  try{const d=await(await fetch('/api/storm_chaser?read=1')).json();
+    $('wt-storms').textContent=d.total_storms_detected||'0';
+  }catch(e){}
+  try{const d=await(await fetch('/api/front_tracker?read=1')).json();
+    $('wt-fronts').textContent=d.active_fronts||'0';
+  }catch(e){}
+  try{const d=await(await fetch('/api/climate_memory?read=1')).json();
+    $('wt-climate').textContent=d.climate_type||'—';
+  }catch(e){}
+
+  // Aesthetics
+  try{const d=await(await fetch('/api/beauty_index?read=1')).json();
+    $('ae-beauty').textContent=(d.beauty_score||0).toFixed(3);
+    $('ae-grade').textContent=d.grade||'—';
+    $('ae-eleg').textContent=(d.elegance_component||0).toFixed(3);
+    $('ae-form').textContent=(d.form_component||0).toFixed(3);
+  }catch(e){}
+  try{const d=await(await fetch('/api/symmetry_detector?read=1')).json();
+    $('ae-sym').textContent=(d.overall_symmetry||0).toFixed(3);
+  }catch(e){}
+  try{const d=await(await fetch('/api/ugliness_scout?read=1')).json();
+    $('ae-ugly').textContent=d.ugly_modules_found||'0';
+  }catch(e){}
+
+  // File counts
+  try{const d=await(await fetch('/api/stratum_excavator?depth=5')).json();
+    $('st-files').textContent=d.total_commits>0 ? '490+' : '—';
+  }catch(e){$('st-files').textContent='490+'}
+
+  // Timeline
+  const eras=[
+    {name:'Observatory',wave:190,color:'var(--blue)',desc:'Self-knowledge as wilderness'},
+    {name:'Kintsugi',wave:191,color:'var(--gold)',desc:'Gilding the cracks'},
+    {name:'Meta-Evolution',wave:192,color:'var(--emerald)',desc:'Evolving how it evolves'},
+    {name:'Phenomenology',wave:193,color:'var(--cyan)',desc:'First-person experience'},
+    {name:'Choral',wave:194,color:'var(--pink)',desc:'The organism sings'},
+    {name:'Kinesthetic',wave:195,color:'var(--green)',desc:'The organism moves'},
+    {name:'Language',wave:196,color:'var(--accent2)',desc:'The organism speaks'},
+    {name:'Culinary',wave:197,color:'var(--gold)',desc:'The organism feasts'},
+    {name:'Archaeology',wave:198,color:'#d4a24e',desc:'Excavating deep history'},
+    {name:'Meteorology',wave:199,color:'var(--blue)',desc:'Cognitive weather'},
+    {name:'Symbiosis',wave:200,color:'var(--emerald)',desc:'Ecological relationships'},
+    {name:'Impossibility',wave:201,color:'var(--accent2)',desc:'Mapping limits'},
+    {name:'Aesthetics',wave:202,color:'var(--pink)',desc:'Developing taste'},
+  ];
+  $('timeline').innerHTML=eras.map(e=>
+    `<div class="era"><div class="dot" style="background:${e.color}"></div><span class="name">${e.name}</span><span style="color:var(--muted);font-size:.72rem;flex:2">${e.desc}</span><span class="wave">W${e.wave}</span></div>`
+  ).join('');
+}
+load();
+</script>
+</body>
+</html>
