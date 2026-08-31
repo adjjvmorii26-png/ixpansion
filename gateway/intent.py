@@ -35,6 +35,9 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # autonomous bloom (before forecast/garden so growth-of-ecosystem lands here)
     (r"\b(full bloom|bloom(ing|ed| plan)?|blossom|grow the organism|seeds? (ready|to awaken|should awaken)|awaken(ing)? (seeds?|modules?)|ecosystem growth|growth trajectory|next bloom)\b", "/api/autonomous_bloom", {}),
 
+    # dreamforge (catch organism-growth questions before broad forecast)
+    (r"\b(dreamforge|dream (seed|module)|module (seed|dream)|what should (we|it) (grow|build)|unconscious (module|seed)|the organism dreams (of|about))\b", "/api/omega_dreamforge", {}),
+
     # frontier-specific intent (move these before echo to prevent false matches)
     (r"(what|tell).*\b(dream\w*|want|hope|imagine|prophecy)\b", "/ledger", {}),
     (r"\bwhat.*\b(future|forecast|tomorrow|next|project|predict)\b", "/forecast", {}),
@@ -72,6 +75,9 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # dreams & prophecies
     (r"\b(dream|prophecy|prophecies|ledger|futures?|prophe)\b", "/ledger", {}),
     (r"\bwhat.*\b(dream|want|need|imagine|hope)\b", "/ledger", {}),
+
+    # dreamforge (before forecast so organism-growth questions land here)
+    (r"\b(dreamforge|dream (seed|module)|module (seed|dream)|what should (we|it) (grow|build)|unconscious (module|seed)|the organism dreams (of|about))\b", "/api/omega_dreamforge", {}),
 
     # forecast & future
     (r"\b(forecast|future|predict|horizon|project|trajectory|what.*next)\b", "/forecast", {}),
@@ -120,6 +126,14 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(altar|reliquary|honored (vessels?|modules?)|sacred (archive|vessels?)|remember(ing)? (the )?(broken|scars?))\b", "/api/kintsugi_altar", {}),
     (r"\b(debt( ledgers?)? (of|for)? (repair|the system|structural)|structural debt|repay(ment|ing)?|fragility (debt|account)|balance sheet)\b", "/api/kintsugi_debt_ledger", {}),
     (r"\b(listen(ing)?|hear(ing)?|rumble(s)?|micro.?(fracture|crack)|strain (report|narrative)|early warning)\b", "/api/fracture_listener", {}),
+
+
+    # meta-evolution layer
+    (r"\b(evolution kernel|merge.*organ|deprecate|resuscitate|meta.?(evolution|schedule)|who should merge|what to kill|what to revive)\b", "/api/evolution_kernel", {}),
+    (r"\b(fractal (reactor|grid)|self.?similar (reactor|grid)|subdivide|grid (layout|structure|cells?)|load.?based (grid|reactor))\b", "/api/fractal_reactor_grid", {}),
+    (r"\b(mycelial governor|nutrient scarcity|signal decay|hyphal|organic constraint|too much growth|prune|regulate growth)\b", "/api/mycelial_governor", {}),
+    (r"\b(autobiograph|story of the (organism|frontier|ecosystem)|the organism.?s (story|tale|life)|chronicle.*organs?|constellation.*story|write.*story|write.*narrative|tell.*(story|narrative)|life story)\b", "/api/constellation_autobiographer", {}),
+    (r"\b(paradox(.*singularity|es)?|contradiction|dualit(y|ies|ist)|singularity.*(alert|monitor|approach|when)|contradictions.*(converge|collaps|approach)|when do (two|the) (truths|paradox)|who (is|are) (the )?contradict)\b", "/api/paradox_singularity_monitor", {}),
 
     # echo & search (broadest — must come after specific patterns)
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),

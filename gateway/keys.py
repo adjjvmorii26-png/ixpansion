@@ -35,7 +35,11 @@ TIER_FEATURES = {
                    "osmotic_exchange",
                    # Wave 191 kintsugi repair lineage — public self-healing, free
                    "crack_mapper", "crack_seams", "fracture_listener",
-                   "kintsugi_altar", "kintsugi_debt_ledger", "repair_ritual"],
+                   "kintsugi_altar", "kintsugi_debt_ledger", "repair_ritual",
+                   # Wave 192 meta-evolution -- public self-evolution, free
+                   "evolution_kernel", "fractal_reactor_grid", "mycelial_governor",
+                   "constellation_autobiographer", "omega_dreamforge",
+                   "paradox_singularity_monitor"],
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",

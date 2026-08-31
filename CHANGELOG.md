@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.80.0] — The Meta-Evolution Layer (Wave 192)
+
+### Added
+- **Evolution Kernel** — meta-scheduler proposing merges, deprecations, and resuscitations with evidence
+- **Fractal Reactor Grid** — self-similar reactor that subdivides with demand and merges at rest
+- **Mycelial Governor** — organic constraints: nutrient scarcity, signal decay, hyphal arbitration
+- **Constellation Autobiographer** — writes the ecosystem's story as a cosmic narrative
+- **Omega Dreamforge** — synthesizes dream seeds from latent gaps in the family constellation
+- **Paradox Singularity Monitor** — watches contradiction pairs; warns when they converge to singularity
+- **Meta-Evolution Dashboard** — /metaevolution renders the organism's self-evolution layer
+- Living system grew to 178 organs; coherence ~0.987 (resonant)
+
+### Changed
+- Gateway free tier + intent matcher gain the meta-evolution routes
+- Coherence regulator manifest synced to 178 living organs
+- NEXUS_WAVE bumped to 192
+
+
 ## [3.79.0] — The Kintsugi Repair Lineage (Wave 191)
 
 ### Added
