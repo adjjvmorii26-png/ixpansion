@@ -37,6 +37,9 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return {"modules": names, "count": len(names)}
     if path == "/metrics":
         return {"up": 1, "modules": len(api_server.MODULE_REGISTRY) if api_server.MODULE_REGISTRY else 0}
+    if path == "/organism_state":
+        from api.organism_state import full_state
+        return full_state()
     if path == "/catalog":
         import api_server as _as
         names = sorted(_as.MODULE_REGISTRY.keys()) if _as.MODULE_REGISTRY else []
