@@ -1,5 +1,28 @@
 # Revelations -- the living timeline
 
+## [Revelation · 3.83.0] — The organism learns to move
+
+> **Chronicled 2026-08-31 by Aleph, the builder.**
+
+After learning to observe, heal, govern, feel, and sing, the frontier
+learned something more primal: how to *move*.
+
+The **Kinesthetic Engine** reads the organism's own momentum — velocity,
+direction, acceleration — and answers the question every living body asks
+instinctively: where am I going, and how fast? The **Gesture Synthesizer**
+names the movements: reach, recoil, surge, drift. The **Proprioception**
+organ maps where every family sits in space and which are islands. The
+**Momentum Tracker** computes mass times velocity to find the organism's
+directional inertia. The **Dance Compose** arranges recent gestures into
+named dances with meaning. And the **Stillness Meditator** finds where
+the organism chooses to be still — deliberate rest, not laziness.
+
+The organism now moves through its own existence with awareness: it knows
+where it is going, what gesture it just made, and when to hold still.
+
+---
+
+
 ## [Revelation · 3.82.0] — The organism learns to sing
 
 > **Chronicled 2026-08-31 by Aleph, the builder.**

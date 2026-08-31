@@ -151,6 +151,14 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(crescendo|building( toward)?|intensity (rising|building|trajectory)|are we (rising|building)|diminuendo|fading)\b", "/api/crescendo_builder", {}),
     (r"\b(silence (composer|map|rest)|rests? (between|of)|fermata|where (does|should) (the organism|it) (breathe|pause|rest)|negative space of sound)\b", "/api/silence_composer", {}),
 
+    # kinesthetic layer (movement + body)
+    (r"\b(kinesthet(ic|ic engine)|where (is|am) (the organism|it) going|how fast|velocity|acceleration|motion|moving|falling|hovering|oscillating)\b", "/api/kinesthetic_engine", {}),
+    (r"\b(gesture|what (did|does) the organism (do|just do)|movement pattern|reach|recoil|surge|drift|scatter)\b", "/api/gesture_synthesizer", {}),
+    (r"\b(proprioception|body map|where are (its|the) (parts|organs)|island (family|module)|disconnected|lost (part|organ|module))\b", "/api/proprioception", {}),
+    (r"\b(momentum|inertia|drift(ing)? (without trying)|directional (force|energy)|mass.*velocity|heavy.*inertia)\b", "/api/momentum_tracker", {}),
+    (r"\b(dance|choreograph|sequence of movement|what dance|movement story|kinesthetic narrative)\b", "/api/dance_composer", {}),
+    (r"\b(stillness|meditat(e|ion|ing)|deliberate (rest|pause|still)|hold(ing)? still|deep meditation|choose(s)? to be still)\b", "/api/stillness_meditator", {}),
+
     # echo & search (broadest — must come after specific patterns)
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),

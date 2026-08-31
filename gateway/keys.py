@@ -45,7 +45,10 @@ TIER_FEATURES = {
                    "embodied_knowledge", "phenomenal_record", "temporal_horizon",
                    # Wave 194 choral engine -- public music/sound layer, free
                    "choral_engine", "harmonic_series", "resonant_frequency",
-                   "dissonance_detector", "crescendo_builder", "silence_composer"],
+                   "dissonance_detector", "crescendo_builder", "silence_composer",
+                   # Wave 195 kinesthetic engine -- public movement layer, free
+                   "kinesthetic_engine", "gesture_synthesizer", "proprioception",
+                   "momentum_tracker", "dance_composer", "stillness_meditator"],
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",

@@ -168,6 +168,14 @@
       "dest": "/dashboard/choral.html"
     },
     {
+      "src": "/kinesthetic",
+      "dest": "/dashboard/kinesthetic.html"
+    },
+    {
+      "src": "/kinesthetic.html",
+      "dest": "/dashboard/kinesthetic.html"
+    },
+    {
       "src": "/bloom.html",
       "dest": "/dashboard/bloom.html"
     }
@@ -175,7 +183,7 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "194",
+    "NEXUS_WAVE": "195",
     "NEXUS_MODULES": "353",
     "NEXUS_ROUTES": "21"
   },

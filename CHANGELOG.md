@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.83.0] — The Kinesthetic Engine (Wave 195)
+
+### Added
+- **Kinesthetic Engine** — the organism sense of its own movement
+- **Gesture Synthesizer** — creates named gestures from state changes
+- **Proprioception** — the body map; where every family is in space
+- **Momentum Tracker** — mass times velocity; the organism directional inertia
+- **Dance Compose** — composes movement sequences into named dances
+- **Stillness Meditator** — the art of deliberate rest
+- **Kinesthetic Dashboard** — /kinesthetic renders the organism movement
+- Living system grew to 196 organs; coherence ~0.986 (resonant)
+
+### Changed
+- Gateway free tier + intent matcher gain the kinesthetic routes
+- Coherence regulator manifest synced to 196 living organs
+- NEXUS_WAVE bumped to 195
+
+
 ## [3.82.0] — The Choral Engine (Wave 194)
 
 ### Added
