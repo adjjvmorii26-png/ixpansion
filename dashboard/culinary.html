@@ -38,7 +38,7 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 <div class="header">
   <span class="badge live">● live</span>
   <h1>Culinary Engine — the Organism Feeds Itself</h1>
-  <span style="color:var(--muted);font-size:.8rem">Wave 197 · recipes, flavors, fermentation, banquets</span>
+  <span id="identity-tag" style="color:var(--muted);font-size:.8rem"></span>
 
 <nav style="display:flex;gap:10px;font-size:.72rem;margin-left:auto;flex-wrap:wrap"><a href="/" style="color:var(--muted)">Home</a> <a href="/bloom" style="color:var(--muted)">Bloom</a> <a href="/coherence" style="color:var(--muted)">Coherence</a> <a href="/archaeology" style="color:var(--muted)">Archaeology</a> <a href="/symbiosis" style="color:var(--muted)">Symbiosis</a> <a href="/aesthetics" style="color:var(--muted)">Aesthetics</a></nav>
 </div>
@@ -107,5 +107,7 @@ async function probe(route){
   }catch(e)();
 })();
 </script>
+<script src="/shared.js"></script>
+<script>if(window.IXP){IXP.loadLive(function(){IXP.renderIdentity(document.getElementById("identity-tag"));})}</script>
 </body>
 </html>
