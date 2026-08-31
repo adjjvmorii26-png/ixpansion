@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.90.0] — The Aesthetics of Code (Wave 202)
+
+### Added
+- **Elegance Scorer** — rates code for brevity, symmetry, and clarity
+- **Symmetry Detector** — finds structural symmetries and asymmetries
+- **Form Evaluator** — assesses visual and structural code form
+- **Beauty Index** — computes overall aesthetic score
+- **Ugliness Scout** — identifies ugliest modules with improvement proposals
+- **Aesthetic Manifesto** — the organism declares what it finds beautiful
+- **Aesthetics Dashboard** — /aesthetics renders the beauty report
+- Living system grew to 237 organs; coherence ~0.991 (resonant)
+
+### Changed
+- Narrative arc extended through aesthetics
+
+
 ## [3.89.0] — The Cartography of Impossibility (Wave 201)
 
 ### Added

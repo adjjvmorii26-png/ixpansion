@@ -198,6 +198,14 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\\b(horizon|almost (ready|achieve|possible)|near.future|approaching capability|what.*(coming|near))\\b", "/api/horizon_scanner", {}),
     (r"\\b(constraint (map|cartograph|terrain)|limitation|mountain|river|wall|crossable|impassable|landscape of constraints)\\b", "/api/constraint_cartographer", {}),
     (r"\\b(aspiration|compass|where.*(want|go|direction)|vector of becoming|desire|goal.*(organism|system)|what.*(want|become|aspire))\\b", "/api/aspiration_compass", {}),
+
+    # aesthetics of code (Wave 202)
+    (r"\\b(elegance|elegant|beautiful (code|module|system)|how (elegant|beautiful)|aesthetic (score|quality))\\b", "/api/elegance_scorer", {}),
+    (r"\\b(symmetr(y|ical|ic)|lopsided|balanced|asymmetric|mirror.*(code|module))\\b", "/api/symmetry_detector", {}),
+    (r"\\b(form (of code|evaluation)|well.form|line length|nesting|import (order|organization)|shape of code|code form)\\b", "/api/form_evaluator", {}),
+    (r"\\b(beauty (index|score)|how beautiful|grade.*(code|system)|aesthetic (rating|score|index)|self.rating)\\b", "/api/beauty_index", {}),
+    (r"\\b(ugly|ugliness|ugliest|rough edge|how ugly|offensive code|long lines|bad form)\\b", "/api/ugliness_scout", {}),
+    (r"\\b(manifesto|aesthetic (philosophy|creed)|what (does|is) (the organism|it) (find|consider) beautiful|code (as )?(art|art form)|our (aesthetic|values))\\b", "/api/aesthetic_manifesto", {}),
     # echo & search (broadest — must come after specific patterns)
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),

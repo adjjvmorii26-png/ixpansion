@@ -224,6 +224,14 @@
       "dest": "/dashboard/impossibility.html"
     },
     {
+      "src": "/aesthetics",
+      "dest": "/dashboard/aesthetics.html"
+    },
+    {
+      "src": "/aesthetics.html",
+      "dest": "/dashboard/aesthetics.html"
+    },
+    {
       "src": "/bloom.html",
       "dest": "/dashboard/bloom.html"
     }
@@ -231,7 +239,7 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "201",
+    "NEXUS_WAVE": "202",
     "NEXUS_MODULES": "353",
     "NEXUS_ROUTES": "21"
   },
