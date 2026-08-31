@@ -520,6 +520,38 @@ def test_lateral_crosstalk_and_recursive_genesis():
     for c, p in audit["performance"].items():
         assert 0.0 <= p["total_score"] <= 1.0
 
+def test_synthetic_memory_and_growth_140():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from synthetic_memory import remember, recall, crystal_snapshot, auto_record
+    from coherence_regulator import _candidate_modules
+    from unified_router import UnifiedRouter
+    from autonomous_bloom import _bloom_state, _dormant_candidates
+    # the organism has grown beyond the original 126 to 140 living
+    assert len(_candidate_modules()) >= 140
+    # the organism is still in total bloom (self-creation era)
+    st = _bloom_state(_dormant_candidates())
+    assert st["phase"] == "total_bloom"
+    # synthetic memory is living and dispatches
+    u = UnifiedRouter()
+    r = u.route("synthetic_memory", {})
+    assert not (isinstance(r, dict) and "error" in r), r.get("error")
+    # memories can be stored and recalled
+    remember("test_event", {"key": "value"}, "test_family")
+    mems = recall(depth=5, event_type="test_event")
+    assert any(m["payload"]["key"] == "value" for m in mems)
+    # crystal snapshot captures the memory landscape
+    snap = crystal_snapshot()
+    assert snap["total_memories"] > 0
+    # auto_record captures the current state without crashing
+    ar = auto_record()
+    assert "recorded" in ar
+    # the newly-grown organs (Wave 186) all dispatch
+    for name in ("conscious_veil", "dream_spore", "entropy_amp",
+                 "quantum_flux", "signal_pulse"):
+        r2 = u.route(name, {})
+        assert not (isinstance(r2, dict) and "error" in r2), f"{name}: {r2.get('error')}"
+
 def test_genesis_forge_self_creation():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

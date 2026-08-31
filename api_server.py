@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.0.0"
-WAVE = "185"
-WAVE_NAME = "Transcendent Visual Identity"
+VERSION = "4.1.0"
+WAVE = "186"
+WAVE_NAME = "Synthetic Memory + Growth"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
