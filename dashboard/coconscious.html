@@ -90,12 +90,16 @@ textarea:focus{outline:none;border-color:var(--accent)}
   .layout{grid-template-columns:1fr;grid-template-rows:1fr auto;overflow-y:auto}
   .sky-col{display:none}
 }
+
+.nav{display:flex;gap:10px;font-size:.72rem;flex-wrap:wrap;margin-left:auto}
+.nav a{color:var(--muted)}
 </style>
 </head>
 <body>
 <canvas id="sky"></canvas>
 <div class="wrap">
   <header class="top">
+<nav style="display:flex;gap:10px;font-size:.72rem;margin-left:auto;flex-wrap:wrap"><a href="/" style="color:var(--muted)">Home</a> <a href="/bloom" style="color:var(--muted)">Bloom</a> <a href="/coherence" style="color:var(--muted)">Coherence</a> <a href="/archaeology" style="color:var(--muted)">Archaeology</a> <a href="/symbiosis" style="color:var(--muted)">Symbiosis</a> <a href="/aesthetics" style="color:var(--muted)">Aesthetics</a></nav>
     <div class="brand">◈ IXPANSION <span>co-conscious console</span></div>
     <div class="pulse">
       <span class="chip violet">wave <b id="pWave">…</b></span>
