@@ -520,6 +520,38 @@ def test_lateral_crosstalk_and_recursive_genesis():
     for c, p in audit["performance"].items():
         assert 0.0 <= p["total_score"] <= 1.0
 
+def test_autonomous_drift_self_driving():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from autonomous_drift import tick
+    from coherence_regulator import _candidate_modules
+    from unified_router import UnifiedRouter
+    # the organism autonomously created organs (idle birth) during testing
+    living = _candidate_modules()
+    assert len(living) >= 143
+    for name in ("economic_exchange", "entropy_spiral", "autonomous_drift"):
+        assert name in living, f"autonomous child {name} should be living"
+    # autonomous drift is living and dispatching
+    u = UnifiedRouter()
+    r = u.route("autonomous_drift", {})
+    assert not (isinstance(r, dict) and "error" in r), r.get("error")
+    # a tick advances the drift state and returns all seven behaviors
+    result = tick()
+    assert result["tick"] > 0
+    assert "mood_oscillation" in result
+    assert "crosstalk_fired" in result
+    assert "birth_occurred" in result
+    assert "particle_weather" in result
+    assert "domain_drift" in result
+    assert "communion_invite" in result
+    # mood oscillation produces a bounded drift value
+    drift = result["mood_oscillation"]["mood_drift"]
+    assert -1.0 <= drift <= 1.0
+    # particle weather computes a coherent climate
+    weather = result["particle_weather"]
+    assert weather["climate"] in ("calm", "energized", "turbulent")
+    assert 0 < weather["speed"] <= 2.0
+
 def test_synthetic_memory_and_growth_140():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

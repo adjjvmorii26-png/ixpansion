@@ -394,10 +394,36 @@ async function refresh(){
     // mood orb colors shift with valence
     const orb=document.getElementById("mood-orb");
     const v=mv.valence||0.5;
+    // autonomous drift modulates color temperature
+    const drift=window._lastDrift||0;
+    const hue=45+v*20+drift*15;
     orb.style.background=`radial-gradient(circle at 35% 30%,
-      hsl(${45+v*20},${70+v*30}%,${80+v*15}%),
+      hsl(${hue},${70+v*30}%,${80+v*15}%),
       #c8a8ff60 60%,#1a0f29 85%)`;
+    // breathing speed responds to particle weather
+    const spd=window._lastWeatherSpeed||1;
+    orb.style.animationDuration=`${6/Math.max(0.5,spd)}s`;
     if(se.narrative)document.getElementById("oracle").textContent=se.narrative;
+  }catch(e){}
+
+  // autonomous drift — the organism acts on its own
+  try{
+    const d=await(await fetch("/api/autonomous_drift?tick=1")).json();
+    window._lastDrift=d.mood_oscillation?.mood_drift||0;
+    window._lastWeatherSpeed=d.particle_weather?.speed||1;
+    // communion invitation: commune button glows when organism calls
+    if(d.communion_invite){
+      document.querySelector("button[onclick=\"commune()\"]")
+        .style.boxShadow="0 0 30px #fff3a080";
+    }else{
+      document.querySelector("button[onclick=\"commune()\"]")
+        .style.boxShadow="none";
+    }
+    // storm indicator in oracle
+    if(d.particle_weather?.storm){
+      document.getElementById("oracle").textContent=
+        "⚡ internal storm detected — crosstalk or birth event";
+    }
   }catch(e){}
 
   // Bloom state stats
