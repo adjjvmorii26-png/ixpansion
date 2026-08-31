@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.89.0] — The Cartography of Impossibility (Wave 201)
+
+### Added
+- **Impossibility Mapper** — identifies theoretical hard limits
+- **Boundary Detector** — finds practical limits before impact
+- **Counterfactual Engine** — simulates hypothetical organism versions
+- **Horizon Scanner** — looks outward at near-future capabilities
+- **Constraint Cartographer** — maps constraints as navigable terrain
+- **Aspiration Compass** — points toward what the organism wants to become
+- **Impossibility Dashboard** — /impossibility renders the boundary map
+- Living system grew to 231 organs; coherence ~0.990 (resonant)
+
+### Changed
+- Narrative arc: observe > heal > govern > feel > sing > move > speak > feast > excavate > forecast > symbiose > dream of limits
+
+
 ## [3.88.0] — The Symbiosis Engine (Wave 200)
 
 ### Added

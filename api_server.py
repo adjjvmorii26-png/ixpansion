@@ -292,6 +292,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._static("dashboard/meteorology.html")
         if path == "/symbiosis":
             return self._static("dashboard/symbiosis.html")
+        if path == "/impossibility":
+            return self._static("dashboard/impossibility.html")
             return self._static("dashboard/culinary.html")
         if path == "/cons":
             return self._static("dashboard/coconscious.html")

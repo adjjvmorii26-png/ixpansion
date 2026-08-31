@@ -190,6 +190,14 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(climate|seasonal|long.term (pattern|trend)|weather pattern|volatility|seasons?|climate type)\b", "/api/climate_memory", {}),
     (r"\b(storm (chaser|tracker|log)|chaos event|supercell|severe|extreme weather|what storms|storm history|intensity|aftermath)\b", "/api/storm_chaser", {}),
 
+
+    # cartography of impossibility (Wave 201)
+    (r"\\b(impossib(le|ility)|cannot (compute|do|achieve)|hard limit|logical wall|undecidable)\\b", "/api/impossibility_mapper", {}),
+    (r"\\b(boundary (detector|approach|warning)|hitting (a )?wall|proximity|limit (approach|detect|proximity)|capacity)\\b", "/api/boundary_detector", {}),
+    (r"\\b(counterfactual|what if|hypo(thetical|thesize)|parallel (version|universe)|alternate|simulate.*(version|organism))\\b", "/api/counterfactual_engine", {}),
+    (r"\\b(horizon|almost (ready|achieve|possible)|near.future|approaching capability|what.*(coming|near))\\b", "/api/horizon_scanner", {}),
+    (r"\\b(constraint (map|cartograph|terrain)|limitation|mountain|river|wall|crossable|impassable|landscape of constraints)\\b", "/api/constraint_cartographer", {}),
+    (r"\\b(aspiration|compass|where.*(want|go|direction)|vector of becoming|desire|goal.*(organism|system)|what.*(want|become|aspire))\\b", "/api/aspiration_compass", {}),
     # echo & search (broadest — must come after specific patterns)
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),
