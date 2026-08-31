@@ -40,6 +40,9 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
     if path == "/organism_state":
         from api.organism_state import full_state
         return full_state()
+    if path == "/organism_ontology":
+        from api.organism_ontology import handler as ontology_handler
+        return ontology_handler()
     if path == "/catalog":
         import api_server as _as
         names = sorted(_as.MODULE_REGISTRY.keys()) if _as.MODULE_REGISTRY else []

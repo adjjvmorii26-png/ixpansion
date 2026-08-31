@@ -17,6 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
+import organism_ontology as ontology
+
 VERSION = "1.0.0"
 LAYER = "Organism State"
 
@@ -74,10 +76,12 @@ def full_state() -> Dict[str, Any]:
     impl_data = _safe_import("impossibility_mapper", "map_impossibilities") or {}
     boundaries = impl_data.get("total_boundaries", 0)
 
+    ident = ontology.identity()
     return {
-        "version": "3.90.0",
-        "wave": 202,
-        "status": status,
+        "version": ident["version"],
+        "wave": ident["wave"],
+        "wave_name": ident["wave_name"],
+        "status": ontology.canonical_status(status),
         "coherence": round(coherence, 4),
         "living_organs": living,
         "total_candidates": candidates,
@@ -116,9 +120,10 @@ def full_state() -> Dict[str, Any]:
 def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     if payload.get("core"):
+        ident = ontology.identity()
         return {
-            "version": "3.90.0",
-            "wave": 202,
+            "version": ident["version"],
+            "wave": ident["wave"],
             "coherence": round(full_state().get("coherence", 0), 4),
             "living_organs": full_state().get("living_organs", 0),
         }
