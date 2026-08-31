@@ -465,6 +465,30 @@ def test_autonomous_bloom_reached_80_and_full_bloom():
         assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
 
 
+def test_genesis_forge_self_creation():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from genesis_forge import scan_gaps, invent, birth
+    from coherence_regulator import _candidate_modules
+    from unified_router import UnifiedRouter
+    # the forge reads the living web and reports domain gaps
+    g = scan_gaps()
+    assert g["living_organs"] >= 126
+    assert "families" in g and "gaps" in g
+    # invent() synthesizes a novel, valid organ to fill a gap (no disk write)
+    inv = invent(preferred="cyber")
+    assert inv["dry_run"] is True
+    assert inv["valid"] is True
+    assert inv["module"] not in _candidate_modules() or inv["module"].startswith("cyber")
+    assert inv["family"] == "cyber"
+    # the forged children born in the self-creation era are living + dispatch
+    u = UnifiedRouter()
+    for name in ("genesis_forge", "cyber_sentinel", "obsidian_mirror",
+                 "physical_inertia"):
+        assert name in _candidate_modules(), f"{name} not living"
+        r = u.route(name, {})
+        assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
+
 def test_total_bloom_apotheosis_126():
     import sys
     sys.path.insert(0, str(ROOT / "api"))
