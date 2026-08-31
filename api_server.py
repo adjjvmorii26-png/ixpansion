@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.3.0"
-WAVE = "188"
-WAVE_NAME = "Genesis Pulse"
+VERSION = "4.4.0"
+WAVE = "189"
+WAVE_NAME = "Genuine Self-Editing"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY

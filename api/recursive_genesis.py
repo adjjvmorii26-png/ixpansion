@@ -168,25 +168,66 @@ def apply_mutations(audit: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     except OSError:
         return {"error": "cannot read genesis_forge.py (serverless?)"}
 
+    from copy import deepcopy
+    changed = False
     for mut in mutations:
         if mut["action"] == "expand_nucleus":
             fam = mut["family"]
-            # find the nucleus dict for this family and note the expansion
+            # find the nucleus dict for this family and genuinely grow it
             pattern = rf'"{fam}": \{{[^}}]*"suffixes": \[([^\]]+)\]'
             m = re.search(pattern, src)
             if m:
                 existing = [s.strip().strip('"').strip("'")
                             for s in m.group(1).split(",")]
-                # add a "v2" suffix variant to grow the vocabulary
-                new_suffix = f"{fam}_v2"
+                # invent a fresh suffix variant to grow the vocabulary
+                import random
+                candidates = ["shard", "beacon", "tide", "chord", "shelf",
+                              "veil", "loom", "graft", "pulse", "well"]
+                new_suffix = random.choice([c for c in candidates
+                                            if c not in existing] or ["_v2"])
                 if new_suffix not in existing:
-                    applied.append(f"expanded_{fam}")
+                    new_list = ", ".join([f'"{s}"' for s in existing] +
+                                         [f'"{new_suffix}"'])
+                    new_src = re.sub(
+                        rf'("{fam}": \{{[^}}]*"suffixes": \[)([^\]]+)(\])',
+                        lambda mo: mo.group(1) + new_list + mo.group(3),
+                        src, count=1)
+                    if new_src != src:
+                        src = new_src
+                        changed = True
+                        applied.append(f"expanded_{fam}")
 
         elif mut["action"] == "prune_suffixes":
-            applied.append(f"noted_weakness_{mut['family']}")
+            fam = mut["family"]
+            pattern = rf'"{fam}": \{{[^}}]*"suffixes": \[([^\]]+)\]'
+            m = re.search(pattern, src)
+            if m:
+                existing = [s.strip().strip('"').strip("'")
+                            for s in m.group(1).split(",")]
+                if len(existing) > 2:
+                    drop = existing[-1]  # retire the weakest suffix
+                    new_list = ", ".join([f'"{s}"' for s in existing[:-1]])
+                    new_src = re.sub(
+                        rf'("{fam}": \{{[^}}]*"suffixes": \[)([^\]]+)(\])',
+                        lambda mo: mo.group(1) + new_list + mo.group(3),
+                        src, count=1)
+                    if new_src != src:
+                        src = new_src
+                        changed = True
+                        applied.append(f"pruned_{fam}_{drop}")
+
+    if changed:
+        # write the modified forge source back (true recursive self-edit)
+        try:
+            import ast as _ast
+            _ast.parse(src)  # never write broken source
+            forge_path.write_text(src)
+        except Exception as e:
+            return {"error": f"self-edit would produce invalid source: {e}",
+                    "applied": applied}
 
     return {"applied": applied, "mutations_count": len(mutations),
-            "verdict": audit["verdict"]}
+            "genuinely_edited": changed, "verdict": audit["verdict"]}
 
 
 def handler(payload: dict = None, context: object = None) -> dict:

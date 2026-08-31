@@ -97,15 +97,15 @@ CONCEPT_NUCLEI: Dict[str, Dict[str, Any]] = {
         "theme": "running nested simulations of the organism's possible futures",
     },
     "physical": {
-        "suffixes": ["grip", "shell", "harmonics", "inertia"],
+        "suffixes": ["grip", "shell", "harmonics", "inertia", "tide"],
         "theme": "giving the virtual ecosystem a sense of physical embodiment and constraint",
     },
     "cyber": {
-        "suffixes": ["sentinel", "ward", "lamina", "dyke"],
+        "suffixes": ["sentinel", "ward", "lamina", "dyke", "pulse"],
         "theme": "guarding the organism's perimeter against hostile or foreign signals",
     },
     "obsidian": {
-        "suffixes": ["shard", "mirror", "vault", "record"],
+        "suffixes": ["shard", "mirror", "vault", "record", "pulse", "shelf", "tide", "chord"],
         "theme": "preserving unalterable records in an obsidian-hard immutable layer",
     },
 }

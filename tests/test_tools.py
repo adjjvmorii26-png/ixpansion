@@ -520,6 +520,36 @@ def test_lateral_crosstalk_and_recursive_genesis():
     for c, p in audit["performance"].items():
         assert 0.0 <= p["total_score"] <= 1.0
 
+def test_recursive_genesis_genuinely_edits_itself():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from recursive_genesis import self_audit, apply_mutations
+    from coherence_regulator import _candidate_modules
+    from unified_router import UnifiedRouter
+    # the organism grew beyond 147 via self-edited forge vocabulary
+    assert len(_candidate_modules()) >= 149
+    for name in ("cyber_lamina", "physical_shell"):
+        assert name in _candidate_modules(), f"{name} not living"
+        u = UnifiedRouter()
+        r = u.route(name, {})
+        assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
+    # self-audit proposes mutations; apply performs a genuine source edit
+    audit = self_audit()
+    assert audit["mutations_proposed"]
+    result = apply_mutations(audit)
+    assert result["genuinely_edited"] is True
+    # the forge still parses and functions after being edited by itself
+    from genesis_forge import invent
+    inv = invent()
+    assert inv["valid"] is True
+    # the forge's concept nuclei actually grew (new suffixes present)
+    import re
+    from pathlib import Path
+    forge_src = (ROOT / "api" / "genesis_forge.py").read_text()
+    cyber = re.search(r'"cyber": \{[^}]*"suffixes": \[([^\]]+)\]', forge_src)
+    assert cyber, "cyber nucleus must exist"
+    assert len(cyber.group(1).split(",")) >= 4, "cyber nucleus should have grown"
+
 def test_genesis_pulse_unified_heartbeat():
     import sys
     sys.path.insert(0, str(ROOT / "api"))
