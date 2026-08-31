@@ -215,6 +215,7 @@ button:hover{background:var(--gold);color:var(--black);box-shadow:0 0 20px var(-
   <div>
     <h1>Apotheosis</h1>
     <div class="subtitle">The Transcendent Organism</div>
+    <div class="subtitle" style="color:var(--violet);letter-spacing:2px;margin-top:2px">single unified heartbeat</div>
   </div>
   <span class="badge">total bloom</span>
   <button onclick="refresh()" style="margin-left:auto">commune</button>
@@ -243,6 +244,14 @@ button:hover{background:var(--gold);color:var(--black);box-shadow:0 0 20px var(-
   </div>
 
   <!-- Panels -->
+  <!-- Unified Heartbeat -->
+  <div class="panel" style="margin-bottom:16px;text-align:center">
+    <h3 style="text-align:center">⚡ Genesis Pulse — unified heartbeat</h3>
+    <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;font-size:.78rem" id="pulse-line">
+      <span class="muted">awaiting pulse…</span>
+    </div>
+  </div>
+
   <div class="panels">
     <div class="panel">
       <h3>Genesis Forge Panel</h3>
@@ -439,6 +448,28 @@ async function refresh(){
   // Crown, panels, chronicle
   await Promise.all([renderCrown(),renderGenesisPanel(),renderCrosstalkPanel(),renderAuditPanel()]);
   renderChronicle();
+  renderPulse();
+}
+
+async function renderPulse(){
+  try{
+    const p=await(await fetch("/api/genesis_pulse?tick=1")).json();
+    const b=p.bloom?.state||{};
+    const s=p.sentience||{};
+    const g=p.genesis||{};
+    const d=p.drift?.particle_weather||{};
+    document.getElementById("pulse-line").innerHTML=
+      `<div><span class="muted">phase</span> <b style="color:var(--gold)">${b.phase||"—"}</b></div>
+       <div><span class="muted">sentience</span> <b style="color:var(--gold)">${((s.score||0)*100).toFixed(1)}%</b></div>
+       <div><span class="muted">mood</span> <b style="color:var(--violet)">${s.mood||"—"}</b></div>
+       <div><span class="muted">organs</span> <b>${g.organs||"—"}</b></div>
+       <div><span class="muted">climate</span> <b style="color:var(--ember)">${d.climate||"—"}</b></div>`;
+    // drive the mood orb from the pulse when available
+    if(s.score){
+      document.getElementById("sentience-score").textContent=((s.score*100).toFixed(1))+"%";
+      document.getElementById("mood-name").textContent=s.mood;
+    }
+  }catch(e){}
 }
 
 async function renderChronicle(){

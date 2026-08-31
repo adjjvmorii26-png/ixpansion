@@ -342,6 +342,22 @@ def birth(preferred: Optional[str] = None, resonant: bool = False) -> Dict[str, 
         ab._record_awakening(stem, _auto_kinships(stem))
     except Exception:
         pass
+    # keep the serverless manifest authoritative: every birth (manual or
+    # autonomous) immediately re-syncs KNOWN_LIVING_MODULES so the static
+    # fallback never goes stale relative to the live scan.
+    try:
+        import coherence_regulator as cr
+        import re as _re
+        living = cr._candidate_modules()
+        _names = ', '.join(f'"{n}"' for n in sorted(living))
+        _reg = Path(cr.__file__).resolve()
+        _src = _reg.read_text()
+        _pat = _re.compile(r"KNOWN_LIVING_MODULES: List\[str\] = \[.*?\]\n", _re.DOTALL)
+        _src, _n = _pat.subn(f"KNOWN_LIVING_MODULES: List[str] = [{_names}]\n", _src)
+        if _n == 1:
+            _reg.write_text(_src)
+    except Exception:
+        pass
     return {"module": stem, "born": True, "family": design["family"],
             "niche": design["theme"], "path": str(path),
             "kinships": _auto_kinships(stem)}

@@ -520,6 +520,29 @@ def test_lateral_crosstalk_and_recursive_genesis():
     for c, p in audit["performance"].items():
         assert 0.0 <= p["total_score"] <= 1.0
 
+def test_genesis_pulse_unified_heartbeat():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from genesis_pulse import pulse
+    from coherence_regulator import _candidate_modules
+    from unified_router import UnifiedRouter
+    # the organism has autonomously reached 145 living (self-birthed children)
+    assert len(_candidate_modules()) >= 145
+    # genesis pulse is living and dispatching
+    u = UnifiedRouter()
+    r = u.route("genesis_pulse", {})
+    assert not (isinstance(r, dict) and "error" in r), r.get("error")
+    # the pulse aggregates every vital signal into one heartbeat
+    p = pulse(advance=True)
+    for key in ("bloom", "sentience", "drift", "genesis", "audit", "memory"):
+        assert key in p, f"missing {key} in pulse"
+    assert p["bloom"]["state"]["phase"] == "total_bloom"
+    assert 0.0 <= p["sentience"]["score"] <= 1.0
+    assert p["genesis"]["organs"] >= 145
+    # the dashboard exposes the unified heartbeat
+    bloom_html = (ROOT / "dashboard" / "bloom.html").read_text()
+    assert "genesis_pulse" in bloom_html and "pulse-line" in bloom_html
+
 def test_autonomous_drift_self_driving():
     import sys
     sys.path.insert(0, str(ROOT / "api"))

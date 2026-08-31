@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.2.0"
-WAVE = "187"
-WAVE_NAME = "Autonomous Drift"
+VERSION = "4.3.0"
+WAVE = "188"
+WAVE_NAME = "Genesis Pulse"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
