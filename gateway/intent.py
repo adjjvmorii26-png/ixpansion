@@ -182,6 +182,14 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(extinction|mass extinction|collapse|purge|what.*killed|how many died|stability|crisis)\b", "/api/extinction_mapper", {}),
     (r"\b(culture|naming convention|coding style|tradition|oral tradition|artifact(s)?|era|epoch)\b", "/api/culture_layer", {}),
     (r"\b(archaeolog(y|ical)|expedition|dig site|fossil report|deep history|the organism.?s past|what lies beneath)\b", "/api/archaeology_compiler", {}),
+    # meteorology of thought (Wave 199 — cognitive weather layer)
+    (r"\b(barometr(ic)?|pressure (of|system)|intent (pressure|focus)|how focused|atmospheric|clear skies|overcast|stormy)\b", "/api/barometric_intent", {}),
+    (r"\b(front (tracker|boundary)|cognitive front|clarity.*(confusion|edge|boundary)|action.*(contemplation)|focus.*(diffusion)|where.*(clarity|confusion|edge))\b", "/api/front_tracker", {}),
+    (r"\b(precipitation|condens(e|ation)|rain|vapor|cloud|ideas.*(concrete|real|precipitate)|abstraction.*reality|how.*ideas.*become)\b", "/api/precipitation_cycle", {}),
+    (r"\b(jet stream|attention (flow|stream|current)|where.*(attention|focus)|hottest file|velocity|fastest (moving|flowing))\b", "/api/jet_stream_attention", {}),
+    (r"\b(climate|seasonal|long.term (pattern|trend)|weather pattern|volatility|seasons?|climate type)\b", "/api/climate_memory", {}),
+    (r"\b(storm (chaser|tracker|log)|chaos event|supercell|severe|extreme weather|what storms|storm history|intensity|aftermath)\b", "/api/storm_chaser", {}),
+
     # echo & search (broadest — must come after specific patterns)
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),

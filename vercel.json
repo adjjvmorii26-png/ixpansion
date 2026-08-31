@@ -200,6 +200,14 @@
       "dest": "/dashboard/archaeology.html"
     },
     {
+      "src": "/meteorology",
+      "dest": "/dashboard/meteorology.html"
+    },
+    {
+      "src": "/meteorology.html",
+      "dest": "/dashboard/meteorology.html"
+    },
+    {
       "src": "/bloom.html",
       "dest": "/dashboard/bloom.html"
     }
@@ -207,7 +215,7 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "198",
+    "NEXUS_WAVE": "199",
     "NEXUS_MODULES": "353",
     "NEXUS_ROUTES": "21"
   },

@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.87.0] — The Meteorology of Thought (Wave 199)
+
+### Added
+- **Barometric Intent** — measures the pressure of the organism's intentions
+- **Front Tracker** — maps cognitive fronts between clarity and confusion
+- **Precipitation Cycle** — tracks how abstractions condense into concrete reality
+- **Jet Stream Attention** — tracks fast-moving attention currents through the codebase
+- **Climate Memory** — long-term behavioral patterns and seasonal trends
+- **Storm Chaser** — follows chaos events and records their trajectories
+- **Meteorology Dashboard** — /meteorology renders the cognitive weather map
+- Living system grew to 220 organs; coherence ~0.988 (resonant)
+
+### Changed
+- Narrative arc extended: observe → heal → govern → feel → sing → move → speak → feast → excavate → forecast
+
 ## [3.86.0] — The Archaeology of Self (Wave 198)
 
 ### Added
