@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kintsugi Forge — The Repair Lineage</title>
+<style>
+:root{--bg:#0a0708;--surface:#14101a;--border:#2a1f2e;--text:#eee2ea;--muted:#7a6a77;
+--gold:#f2c14e;--gold2:#ffd97a;--rose:#e88bb4;--good:#8ef0c4}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--text);min-height:100vh}
+.header{padding:22px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.header h1{font-size:1.25rem;background:linear-gradient(135deg,var(--gold),var(--gold2));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.badge{padding:3px 10px;border-radius:14px;font-size:.72rem;background:var(--surface);border:1px solid var(--border)}
+.badge.live{color:var(--good);border-color:var(--good)}
+.container{max-width:1000px;margin:0 auto;padding:24px}
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:22px}
+.koan{color:var(--gold);font-style:italic;font-size:.9rem;line-height:1.6;text-align:center}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.stat .v{font-size:1.8rem;font-weight:800;color:var(--gold)}
+.stat .l{color:var(--muted);font-size:.72rem;margin-top:4px;text-transform:uppercase}
+.toolbar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+button{padding:9px 16px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#210d00;font-weight:700;font-family:inherit;font-size:.8rem;cursor:pointer}
+button:hover{opacity:.9}
+button.quiet{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.section-title{font-size:.95rem;margin:20px 0 10px;color:var(--gold2)}
+.list{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;margin-bottom:16px}
+.item{padding:10px 16px;border-bottom:1px solid var(--border);font-size:.8rem;display:flex;justify-content:space-between;gap:10px}
+.item:last-child{border-bottom:none}
+.item .left{color:var(--text)}
+.item .right{color:var(--muted);font-size:.72rem;white-space:nowrap}
+.result{background:#08070c;border:1px solid var(--gold);border-radius:10px;padding:16px;margin-top:18px;font-size:.76rem;color:#e8dcf0;white-space:pre-wrap}
+.hint{color:var(--muted);font-size:.72rem;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="header">
+  <span class="badge live">● live</span>
+  <h1>Kintsugi Forge — the Repair Lineage</h1>
+  <span style="color:var(--muted);font-size:.8rem">Wave 191 · broken is not the end</span>
+  <button style="margin-left:auto;margin-bottom:0" onclick="perform()">⚒ Perform Ritual</button>
+</div>
+<div class="container">
+  <div class="hero"><div class="koan" id="koan">Summon the ceremony to read the koan.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="v" id="cracks">—</div><div class="l">cracks named</div></div>
+    <div class="stat"><div class="v" id="seams">—</div><div class="l">golden seams</div></div>
+    <div class="stat"><div class="v" id="vessels">—</div><div class="l">vessels honored</div></div>
+    <div class="stat"><div class="v" id="debt">—</div><div class="l">debt balance</div></div>
+  </div>
+  <div class="toolbar">
+    <button onclick="probe('api/crack_mapper')">Crack survey</button>
+    <button onclick="probe('api/fracture_listener')">Listen for strain</button>
+    <button class="quiet" onclick="probe('api/crack_seams')">Golden seams</button>
+    <button class="quiet" onclick="probe('api/kintsugi_altar')">The altar</button>
+    <button class="quiet" onclick="probe('api/kintsugi_debt_ledger')">Debt ledger</button>
+  </div>
+  <div class="section-title">Repair Lineage — Wave 191 organs</div>
+  <div class="list" id="lineage"></div>
+  <div class="result" id="result">The forge waits. Perform the ritual or probe an organ.</div>
+  <div class="hint">Six kintsugi organs — crack_mapper, fracture_listener, crack_seams, kintsugi_debt_ledger, kintsugi_altar, repair_ritual — all free tier through the gateway.</div>
+</div>
+<script>
+const LINEAGE=[
+ ['crack_mapper','cartography of damage'],
+ ['fracture_listener','hears strain before the break'],
+ ['crack_seams','forges golden seams onto cracks'],
+ ['kintsugi_debt_ledger','accounts fragility debt vs repaid gold'],
+ ['kintsugi_altar','the sacred reliquary of repaired vessels'],
+ ['repair_ritual','the ceremonial full cycle — perform it']
+];
+const list=document.getElementById('lineage');
+LINEAGE.forEach(([name,essence])=>{
+  const d=document.createElement('div');d.className='item';
+  d.innerHTML=`<span class="left">${name}</span><span class="right">${essence}</span>`;
+  d.onclick=()=>probe('api/'+name);
+  list.appendChild(d);
+});
+async function probe(route){
+  const out=document.getElementById('result');
+  out.textContent='reading '+route+' …';
+  try{
+    const j=await (await fetch('/api/'+route)).json();
+    out.textContent=JSON.stringify(j,null,2);
+  }catch(e){out.textContent='error: '+e.message}
+}
+async function perform(){
+  const out=document.getElementById('result');
+  out.textContent='performing the ceremony …';
+  try{
+    const j=await (await fetch('/api/repair_ritual',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({perform:1})})).json();
+    document.getElementById('koan').textContent='“'+j.koan+'”';
+    document.getElementById('cracks').textContent=j.cracks_named;
+    document.getElementById('seams').textContent=j.seams_total;
+    document.getElementById('vessels').textContent=j.vessels_honored;
+    document.getElementById('debt').textContent=j.debt_balance;
+    out.textContent=JSON.stringify(j,null,2);
+  }catch(e){out.textContent='error: '+e.message}
+}
+</script>
+</body>
+</html>

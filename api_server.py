@@ -273,6 +273,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._static("dashboard/oracle.html")
         if path == "/observatory":
             return self._static("dashboard/observatory.html")
+        if path == "/kintsugi":
+            return self._static("dashboard/kintsugi.html")
         if path == "/cons":
             return self._static("dashboard/coconscious.html")
         if path == "/" or path in ("/index.html",):

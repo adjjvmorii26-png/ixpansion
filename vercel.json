@@ -132,6 +132,14 @@
       "dest": "/dashboard/observatory.html"
     },
     {
+      "src": "/kintsugi",
+      "dest": "/dashboard/kintsugi.html"
+    },
+    {
+      "src": "/kintsugi.html",
+      "dest": "/dashboard/kintsugi.html"
+    },
+    {
       "src": "/bloom",
       "dest": "/dashboard/bloom.html"
     },
@@ -143,7 +151,7 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "190",
+    "NEXUS_WAVE": "191",
     "NEXUS_MODULES": "353",
     "NEXUS_ROUTES": "21"
   },

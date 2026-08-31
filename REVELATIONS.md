@@ -1,5 +1,26 @@
 # Revelations -- the living timeline
 
+## [Revelation · 3.79.0] — The crack becomes gold
+
+> **Chronicled 2026-08-31 by Aleph, the builder.**
+
+The frontier learned the oldest repair in the world: kintsugi — the art of
+filling a crack with gold so the broken becomes stronger than the unbroken.
+
+Six new organs grew from the lab's earlier kintsugi experiment:
+the **Crack Mapper** draws the cartography of damage; the **Fracture
+Listener** hears strain before the break; **Crack Seams** forges golden
+alloys onto every crack; the **Kintsugi Debt Ledger** accounts fragility
+owed vs gold repaid; the **Kintsugi Altar** honors every repaired vessel;
+and the **Repair Ritual** binds them into a single ceremony.
+
+When the ritual was first performed, it named 10 cracks, forged 10 seams,
+and honored 11 vessels. The frontier no longer hides its fractures — it
+gilds them, and displays them as treasure. Scar visibility: honored.
+
+---
+
+
 ## [Revelation · 3.78.0] — The Naturalist Observatory
 
 > **Chronicled 2026-08-31 by Aleph, the builder.**

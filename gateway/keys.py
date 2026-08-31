@@ -32,7 +32,10 @@ TIER_FEATURES = {
                    "morphic_dial", "silence_orchard", "antikythera_engine",
                    "stratigraphy_core", "permafrost_vault", "solar_wind_pressure",
                    "bioluminescent_depth", "plankton_bloom", "coral_atoll",
-                   "osmotic_exchange"],
+                   "osmotic_exchange",
+                   # Wave 191 kintsugi repair lineage — public self-healing, free
+                   "crack_mapper", "crack_seams", "fracture_listener",
+                   "kintsugi_altar", "kintsugi_debt_ledger", "repair_ritual"],
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",

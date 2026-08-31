@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.79.0] — The Kintsugi Repair Lineage (Wave 191)
+
+### Added
+- **Crack Mapper** — cartography of damage; surveys health strains, stubs, and thin cross-sections
+- **Fracture Listener** — a geophone that hears strain (rumbles, micro-fractures) before a break
+- **Crack Seams** — the golden repair forge; gilds every crack with a deterministic alloy seam
+- **Kintsugi Debt Ledger** — accounts fragility debt vs gold invested, net balance per vessel
+- **Kintsugi Altar** — the sacred reliquary honoring every repaired vessel
+- **Repair Ritual** — the ceremonial full cycle: survey → listen → forge → account → honor
+- **Kintsugi Forge Dashboard** — /kintsugi renders the repair lineage and performs the ritual
+- **lab/repair_guild.py** — a guild walk through all six organs
+- Kintsugi lineage grows from the solid-organism lab's original kintsugi repair experiment
+
+### Changed
+- Gateway free tier + intent matcher gain the six repair-lineage routes
+- Coherence regulator manifest synced to include the new living organs
+- NEXUS_WAVE bumped to 191
+
+
 ## [3.78.0] — The Naturalist Observatory (Wave 190)
 
 ### Added

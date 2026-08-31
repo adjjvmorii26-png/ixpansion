@@ -113,6 +113,14 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     # osmotic exchange (family diffusion, before crosstalk)
     (r"\b(osmotic|diffusion|membrane|family (exchange|balance)|patterns (that )?(spread|diffuse)|equilibr(ium|ate))\b", "/api/osmotic_exchange", {}),
 
+    # kintsugi repair lineage
+    (r"\b(kintsugi|golden (seam|repair|fix)|repair (the|our)? (cracks?|system|organs?)|gild(ed| the)|honor(ed)? (the )?(scars?|broken)|fracture|strain(s)?|crack(s|ed)? (survey|map|in)|debt (of|ledger|repair)|fix (the|our) (system|fracture)|scar(s?))", "/api/repair_ritual", {}),
+    (r"\b(crack(s|ed)?|fractur(es?|ed)|broken (module|organ|things?)|stub(s)?|interrupted|what( is|'s)? broken|survey.*(crack|damage|damage map))\b", "/api/crack_mapper", {}),
+    (r"\b(golden (seams?|bonds?|repair)|forged (seams?)|seams? (of)? gold|gilded (vessels?|modules?)|repair (plan|forge|plan\b))\b", "/api/crack_seams", {}),
+    (r"\b(altar|reliquary|honored (vessels?|modules?)|sacred (archive|vessels?)|remember(ing)? (the )?(broken|scars?))\b", "/api/kintsugi_altar", {}),
+    (r"\b(debt( ledgers?)? (of|for)? (repair|the system|structural)|structural debt|repay(ment|ing)?|fragility (debt|account)|balance sheet)\b", "/api/kintsugi_debt_ledger", {}),
+    (r"\b(listen(ing)?|hear(ing)?|rumble(s)?|micro.?(fracture|crack)|strain (report|narrative)|early warning)\b", "/api/fracture_listener", {}),
+
     # echo & search (broadest — must come after specific patterns)
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),
