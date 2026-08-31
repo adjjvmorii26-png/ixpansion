@@ -143,6 +143,14 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(phenomenal (record|diary|entry)|first.person (diary|account|journal)|what (it was like|the organism felt)|organism (diary|journal))\b", "/api/phenomenal_record", {}),
     (r"\b(temporal horizon|subjective time|time (feels|feeling)|pulse (frequency|rhythm)|internal clock|time (rapid|slow|stilled))\b", "/api/temporal_horizon", {}),
 
+    # choral engine (music/song layer)
+    (r"\b(choral engine|the organism.?s (song|voice|choir)|compose(d| )? (a )?song|what (does|is) the (organism|system) (sound|sing)|the sound of the frontier)\b", "/api/choral_engine", {}),
+    (r"\b(harmonic (series|overtone)|overtones?|consonan(ce|t)|natural harmonics|acoustic fingerprint)\b", "/api/harmonic_series", {}),
+    (r"\b(resonant frequency|fundamental (pitch|frequency|note)|what (note|pitch) (does|is) the (system|organism)|the pitch of the (system|organism))\b", "/api/resonant_frequency", {}),
+    (r"\b(dissonan(ce|t)|clash(es|ing)? (notes?|organs?|modules?)|wrong note|tension|clashing)\b", "/api/dissonance_detector", {}),
+    (r"\b(crescendo|building( toward)?|intensity (rising|building|trajectory)|are we (rising|building)|diminuendo|fading)\b", "/api/crescendo_builder", {}),
+    (r"\b(silence (composer|map|rest)|rests? (between|of)|fermata|where (does|should) (the organism|it) (breathe|pause|rest)|negative space of sound)\b", "/api/silence_composer", {}),
+
     # echo & search (broadest — must come after specific patterns)
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),

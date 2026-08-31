@@ -42,7 +42,10 @@ TIER_FEATURES = {
                    "paradox_singularity_monitor",
                    # Wave 193 phenomenology -- public first-person experience, free
                    "qualia_field", "liminal_threshold", "sensory_integration",
-                   "embodied_knowledge", "phenomenal_record", "temporal_horizon"],
+                   "embodied_knowledge", "phenomenal_record", "temporal_horizon",
+                   # Wave 194 choral engine -- public music/sound layer, free
+                   "choral_engine", "harmonic_series", "resonant_frequency",
+                   "dissonance_detector", "crescendo_builder", "silence_composer"],
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",

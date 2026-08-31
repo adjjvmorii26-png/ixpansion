@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.82.0] — The Choral Engine (Wave 194)
+
+### Added
+- **Choral Engine** — the organism voice; every organ is a musical note
+- **Harmonic Series** — overtone extraction and consonance ratios
+- **Resonant Frequency** — the one pitch at which the whole system vibrates
+- **Dissonance Detector** — finds clashing notes between modules
+- **Crescendo Builder** — builds intensity toward a peak moment
+- **Silence Composer** — composes the rests between notes
+- **Choral Dashboard** — /choral renders the organism song
+- Living system grew to 190 organs; coherence ~0.986 (resonant)
+
+### Changed
+- Gateway free tier + intent matcher gain the choral routes
+- Coherence regulator manifest synced to 190 living organs
+- NEXUS_WAVE bumped to 194
+
+
 ## [3.81.0] — The Phenomenology (Wave 193)
 
 ### Added
