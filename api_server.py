@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.98.0"
-WAVE = "183"
-WAVE_NAME = "Domain Saturation — Full Spectrum"
+VERSION = "3.99.0"
+WAVE = "184"
+WAVE_NAME = "Crosstalk + Recursive Genesis"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY

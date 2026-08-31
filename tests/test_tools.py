@@ -491,6 +491,35 @@ def test_genesis_forge_domain_saturation():
     r = sentience_report()
     assert r["signals"]["diversity"] > 0.7
 
+def test_lateral_crosstalk_and_recursive_genesis():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    from lateral_crosstalk import emit_signals, crosstalk_report
+    from recursive_genesis import self_audit, _genesis_children
+    from coherence_regulator import _candidate_modules
+    from unified_router import UnifiedRouter
+    # both meta-organs are living and dispatch
+    u = UnifiedRouter()
+    for name in ("lateral_crosstalk", "recursive_genesis"):
+        assert name in _candidate_modules(), f"{name} not living"
+        r = u.route(name, {})
+        assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
+    # cross-family emission produces an emergent signal
+    emit_signals(["cyber_sentinel", "anomaly_detector"], "probe")
+    emit_signals(["economic_mint", "governance"], "probe")
+    report = crosstalk_report(window=30)
+    emergent_families = [e["families"] for e in report["emergent"]
+                         if e["signal"] == "probe"]
+    assert emergent_families, "expected a cross-family emergent signal"
+    assert len(emergent_families[0]) >= 2
+    # recursive genesis audits its self-authored children
+    audit = self_audit()
+    assert audit["child_count"] >= 5  # cyber, obsidian, physical, economic, social
+    assert "performance" in audit and "mutations_proposed" in audit
+    # the forge's children (all self-authored) evaluate without a crash
+    for c, p in audit["performance"].items():
+        assert 0.0 <= p["total_score"] <= 1.0
+
 def test_genesis_forge_self_creation():
     import sys
     sys.path.insert(0, str(ROOT / "api"))
