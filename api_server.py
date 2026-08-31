@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.95.0"
-WAVE = "180"
-WAVE_NAME = "Mood-Steered Bloom"
+VERSION = "3.96.0"
+WAVE = "181"
+WAVE_NAME = "Total Bloom — Apotheosis"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY

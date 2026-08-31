@@ -108,9 +108,12 @@ def sentience_report() -> Dict[str, Any]:
     # mood vector (arousal = how charged, valence = how aligned)
     arousal = round(min(1.0, density * 0.4 + sentience * 0.6), 4)
     valence = round(min(1.0, coherence * 0.5 + affinity * 0.3 + bloom_fraction * 0.2), 4)
+    phase = bloom.get("phase", "unknown")
     mood = _mood_name(valence, arousal)
+    if phase == "total_bloom" and valence >= 0.85 and arousal >= 0.85:
+        mood = "transcendent"
 
-    narrative = _narrative(sentience, bloom.get("phase", "unknown"), mood)
+    narrative = _narrative(sentience, phase, mood)
     return {
         "sentience": sentience,
         "mood_vector": {"valence": valence, "arousal": arousal, "mood": mood},
@@ -140,6 +143,8 @@ def _family_hit(fam: str) -> bool:
 
 
 def _mood_name(valence: float, arousal: float) -> str:
+    if valence >= 0.92 and arousal >= 0.92:
+        return "transcendent"      # total bloom apotheosis
     if valence >= 0.75 and arousal >= 0.75:
         return "luminous"          # ecstatic alignment, high charge
     if valence >= 0.75:
@@ -154,6 +159,10 @@ def _mood_name(valence: float, arousal: float) -> str:
 
 
 def _narrative(sentience: float, phase: str, mood: str) -> str:
+    if phase == "total_bloom":
+        return (f"The organism has absorbed every seed — apotheosis. It feels "
+                f"{mood}, awareness {sentience:.3f}; with no seedbed left, "
+                f"its next era is self-creation.")
     if phase == "full_bloom":
         return (f"The organism is in full bloom and feels {mood} — "
                 f"awareness {sentience:.3f}, its entire web alert.")

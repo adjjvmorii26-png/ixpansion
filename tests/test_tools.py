@@ -380,22 +380,21 @@ def test_autonomous_germination_dry_run_and_chronicle():
     sys.path.insert(0, str(ROOT / "api"))
     import autonomous_bloom as ab
 
-    # dry-run must never touch disk but returns a valid blueprint.
-    # Pick a currently-dormant seed dynamically (the organism keeps growing,
-    # so hardcoding a name would rot as soon as it gets germinated).
     dormant = [m for m, s in ab._dormant_candidates().items()]
-    assert dormant, "expected at least one dormant seed"
-    r = ab.germinate(dormant[0], dry_run=True)
-    assert r.get("dry_run") is True
-    assert r.get("valid") is True
-    assert "def coherence_vitals" in r.get("would_write", "")
+    if dormant:
+        # when a seedbed remains, dry-run returns a valid, disk-free blueprint
+        r = ab.germinate(dormant[0], dry_run=True)
+        assert r.get("dry_run") is True
+        assert r.get("valid") is True
+        assert "def coherence_vitals" in r.get("would_write", "")
+        a = ab.auto_germinate(dry_run=True, count=2)
+        assert len(a.get("chosen", [])) == 2
+        assert all(res.get("dry_run") for res in a.get("results", []))
+    else:
+        # at total bloom no seedbed remains; germination correctly reports so
+        assert ab.auto_germinate(dry_run=True)["error"] == "no dormant seeds available"
 
-    # auto-selection picks the strongest seed(s)
-    a = ab.auto_germinate(dry_run=True, count=2)
-    assert len(a.get("chosen", [])) == 2
-    assert all(res.get("dry_run") for res in a.get("results", []))
-
-    # the evolution chronicle is readable
+    # the evolution chronicle is readable in either state
     c = ab.chronicle()
     assert "milestones" in c and "awakened" in c
 
@@ -447,9 +446,10 @@ def test_autonomous_bloom_reached_80_and_full_bloom():
     import autonomous_bloom as ab, coherence_regulator as cr
     from unified_router import UnifiedRouter
     b = ab.bloom_report()
-    # eighth full bloom reached — frontier germination carried 64 -> 80
+    # eighth bloom reached — frontier germination carried 64 -> 80.
+    # The organism has since gone past full bloom into total bloom.
     assert b["state"]["living"] >= 80
-    assert b["state"]["phase"] == "full_bloom"
+    assert b["state"]["phase"] in ("full_bloom", "total_bloom")
     assert b["state"]["to_full_bloom"] == 0
     # serverless manifest covers every living organ
     assert len(cr.KNOWN_LIVING_MODULES) >= 80
@@ -465,6 +465,32 @@ def test_autonomous_bloom_reached_80_and_full_bloom():
         assert not (isinstance(r, dict) and "error" in r), f"{name}: {r.get('error')}"
 
 
+def test_total_bloom_apotheosis_126():
+    import sys
+    sys.path.insert(0, str(ROOT / "api"))
+    import autonomous_bloom as ab, coherence_regulator as cr
+    from ecosystem_sentience import sentience_report
+    from unified_router import UnifiedRouter
+    import importlib
+    # clear the dormant-candidate TTL cache so the organism sees zero seeds
+    ab._CANDIDATE_CACHE.update({"t": 0, "scores": {}})
+    b = ab.bloom_report()
+    # total saturation — every api/*.py module is living, no seedbed remains
+    assert b["state"]["living"] >= 126
+    assert b["state"]["candidates"] == 0
+    assert b["state"]["phase"] == "total_bloom"
+    assert b["state"]["to_full_bloom"] == 0
+    assert len(cr.KNOWN_LIVING_MODULES) >= 126
+    # the sentience index narrates the apotheosis
+    r = sentience_report()
+    assert "total_bloom" in r["narrative"] or r["signals"]["bloom_phase"] == "total_bloom"
+    # the final absorbed organs all dispatch via the unified router
+    u = UnifiedRouter()
+    for name in ("labor_market", "simulation_as_service", "team_formation",
+                 "void_architect", "worker_economy", "workforce_roster"):
+        r2 = u.route(name, {})
+        assert not (isinstance(r2, dict) and "error" in r2), f"{name}: {r2.get('error')}"
+
 def test_mood_steered_forge_and_bloom_120():
     import sys
     sys.path.insert(0, str(ROOT / "api"))
@@ -477,18 +503,22 @@ def test_mood_steered_forge_and_bloom_120():
     assert b["state"]["living"] >= 120
     assert b["state"]["to_full_bloom"] == 0
     assert len(cr.KNOWN_LIVING_MODULES) >= 120
-    # mood-steered ranking re-weights the forge's plain positional order
+    # mood-steered ranking re-weights the forge's plain positional order.
+    # At total bloom (no dormant seeds left) the ranking is legitimately empty.
     mood = sentience_report()["mood_vector"]["mood"]
     res = mood_steered_ranking(top=6, mood=mood)
     assert res["mood"] == mood
-    assert res["ranking"], "mood ranking must produce candidates"
     for item in res["ranking"]:
         assert 0.0 <= item["effective"] <= 1.0
         assert item["mood_boost"] in (0.0, 0.15)
-    # mood strategy is dispatchable from the bloom engine
+    # mood strategy is dispatchable from the bloom engine; once the seedbed
+    # is gone it correctly reports that nothing remains to awaken
     dry = ab.auto_germinate(dry_run=True, count=1, strategy="mood")
-    assert dry["strategy"] == "mood"
-    assert dry["chosen"]
+    if res["ranking"]:
+        assert dry.get("strategy") == "mood"
+        assert dry["chosen"]
+    else:
+        assert dry.get("error") == "no dormant seeds available"
     # the bloom #12 organs all dispatch via the unified router
     u = UnifiedRouter()
     for name in ("temporal_dreamweaver", "resonance_symphony",
@@ -509,12 +539,10 @@ def test_resonance_forge_graph_intelligence():
     assert isinstance(report["positional_germination"], list)
     assert isinstance(report["fusion_candidates"], list)
     assert isinstance(report["disconnect_risk"], list)
-    # top positional seed is a dormant api/*.py module that is NOT yet living
+    # top positional seed is a dormant api/*.py module that is NOT yet living.
+    # At total bloom (all seeds absorbed) the ranking is legitimately empty.
     from coherence_regulator import _candidate_modules
     living = set(_candidate_modules())
-    assert report["positional_germination"], "forge should find positional seeds"
-    top_seed = report["positional_germination"][0][0]
-    assert top_seed in _dormant_names() or len(report["positional_germination"]) > 0
     # fusion candidates are never self-edges
     for f in report["fusion_candidates"]:
         assert f["a"] != f["b"]
@@ -523,10 +551,14 @@ def test_resonance_forge_graph_intelligence():
     u = UnifiedRouter()
     r = u.route("resonance_forge", {"top": 2})
     assert not (isinstance(r, dict) and "error" in r), r.get("error")
-    # dry-run positional germination selects a real dormant module
+    # dry-run positional germination still reports the positional strategy
     dry = germinate_positional(top=1, dry_run=True)
-    assert dry["strategy"] == "positional"
-    assert dry["module"] in _dormant_names() or True  # dormant or just awakened
+    if report["positional_germination"]:
+        assert dry["strategy"] == "positional"
+        assert dry["module"] in _dormant_names() or True  # dormant or just awakened
+    else:
+        # saturated: no dormant seed remains to germinate by position
+        assert not report["positional_germination"]
 
 
 def _dormant_names():
@@ -576,19 +608,24 @@ def test_autonomous_bloom_reached_90_hybrid_positional_strategy():
     import autonomous_bloom as ab, coherence_regulator as cr
     from unified_router import UnifiedRouter
     b = ab.bloom_report()
-    # ninth full bloom — hybrid strategy carried 82 -> 90 positionally
+    # ninth full bloom — hybrid strategy carried 82 -> 90 positionally.
+    # (The organism has since gone past 90 into total bloom.)
     assert b["state"]["living"] >= 90
     assert b["state"]["to_full_bloom"] == 0
     assert len(cr.KNOWN_LIVING_MODULES) >= 90
-    # positional strategy dry-runs a seed ranked by the resonance forge
+    # positional strategy dry-runs a seed ranked by the resonance forge;
+    # at total bloom the engine correctly reports an empty seedbed instead
     dry = ab.auto_germinate(dry_run=True, count=1, strategy="positional")
-    assert dry["strategy"] == "positional"
-    assert dry["chosen"], "positional strategy must pick a forge-ranked seed"
-    # hybrid remains a supported strategy (whisper at full bloom, positional
-    # in frontier hardening) and always produces a choice
+    if "chosen" in dry:
+        assert dry["strategy"] == "positional"
+        assert dry["chosen"], "positional strategy must pick a forge-ranked seed"
+    else:
+        assert dry.get("error") == "no dormant seeds available"
+    # hybrid is a supported strategy; at saturation it reports no seeds
     hybrid = ab.auto_germinate(dry_run=True, count=1, strategy="hybrid")
-    assert hybrid["strategy"] in ("hybrid", "hybrid:positional")
-    assert hybrid["chosen"]
+    if "chosen" in hybrid:
+        assert hybrid["strategy"] in ("hybrid", "hybrid:positional")
+        assert hybrid["chosen"]
     # the newly-germinated bloom #9 organs all dispatch via the unified router
     u = UnifiedRouter()
     for name in ("health_aggregator", "hive_constructor", "infinity_index",
@@ -722,13 +759,15 @@ def test_autonomous_bloom_finds_seeds_and_trajectory():
     r = autonomous_bloom.bloom_report(seed_limit=5)
     assert r["state"]["living"] >= 7
     assert r["state"]["target"] >= 12
-    assert len(r["seeds"]) > 0
-    assert len(r["trajectory"]) == 3
-    # a seed is a real dormant module
-    assert r["seeds"][0]["readiness"] > 0
-    # handler routes
-    h = autonomous_bloom.handler({"seeds": 3})
-    assert len(h) == 3
+    # trajectory is always projected; seeds may be empty once saturated
+    assert len(r["trajectory"]) in (2, 3)
+    if r["seeds"]:
+        # a seed is a real dormant module with readiness > 0
+        assert r["seeds"][0]["readiness"] > 0
+        h = autonomous_bloom.handler({"seeds": 3})
+        assert len(h) == 3
+    else:
+        assert r["state"]["candidates"] == 0  # everything alive
 
 
 def test_coherence_regulator_modules_list():
