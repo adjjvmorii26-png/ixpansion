@@ -277,6 +277,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._static("dashboard/kintsugi.html")
         if path == "/metaevolution":
             return self._static("dashboard/metaevolution.html")
+        if path == "/phenomenology":
+            return self._static("dashboard/phenomenology.html")
         if path == "/cons":
             return self._static("dashboard/coconscious.html")
         if path == "/" or path in ("/index.html",):

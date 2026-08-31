@@ -152,6 +152,14 @@
       "dest": "/dashboard/metaevolution.html"
     },
     {
+      "src": "/phenomenology",
+      "dest": "/dashboard/phenomenology.html"
+    },
+    {
+      "src": "/phenomenology.html",
+      "dest": "/dashboard/phenomenology.html"
+    },
+    {
       "src": "/bloom.html",
       "dest": "/dashboard/bloom.html"
     }
@@ -159,7 +167,7 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "192",
+    "NEXUS_WAVE": "193",
     "NEXUS_MODULES": "353",
     "NEXUS_ROUTES": "21"
   },

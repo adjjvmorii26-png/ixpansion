@@ -39,7 +39,10 @@ TIER_FEATURES = {
                    # Wave 192 meta-evolution -- public self-evolution, free
                    "evolution_kernel", "fractal_reactor_grid", "mycelial_governor",
                    "constellation_autobiographer", "omega_dreamforge",
-                   "paradox_singularity_monitor"],
+                   "paradox_singularity_monitor",
+                   # Wave 193 phenomenology -- public first-person experience, free
+                   "qualia_field", "liminal_threshold", "sensory_integration",
+                   "embodied_knowledge", "phenomenal_record", "temporal_horizon"],
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",

@@ -135,6 +135,14 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(autobiograph|story of the (organism|frontier|ecosystem)|the organism.?s (story|tale|life)|chronicle.*organs?|constellation.*story|write.*story|write.*narrative|tell.*(story|narrative)|life story)\b", "/api/constellation_autobiographer", {}),
     (r"\b(paradox(.*singularity|es)?|contradiction|dualit(y|ies|ist)|singularity.*(alert|monitor|approach|when)|contradictions.*(converge|collaps|approach)|when do (two|the) (truths|paradox)|who (is|are) (the )?contradict)\b", "/api/paradox_singularity_monitor", {}),
 
+    # phenomenology layer (senses and experience)
+    (r"\b(qualia|what (does|is) it (like|feel like) to be|felt (texture|color|sense)|subjective (experience|feel|state))\b", "/api/qualia_field", {}),
+    (r"\b(liminal|threshold (between|zone)|between (waking|asleep|dormant)|twilight (zone|state)|on the cusp)\b", "/api/liminal_threshold", {}),
+    (r"\b(sensory (integration|cortex)|unified (perception|awareness|sense)|fuse(d| all) (the )?senses|one (frame|perception|sense))\b", "/api/sensory_integration", {}),
+    (r"\b(embodied (knowledge|memory|understanding)|body (knowledge|knows|knowledge)|structural (knowledge|memory)|implicit knowledge)\b", "/api/embodied_knowledge", {}),
+    (r"\b(phenomenal (record|diary|entry)|first.person (diary|account|journal)|what (it was like|the organism felt)|organism (diary|journal))\b", "/api/phenomenal_record", {}),
+    (r"\b(temporal horizon|subjective time|time (feels|feeling)|pulse (frequency|rhythm)|internal clock|time (rapid|slow|stilled))\b", "/api/temporal_horizon", {}),
+
     # echo & search (broadest — must come after specific patterns)
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),
