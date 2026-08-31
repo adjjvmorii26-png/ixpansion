@@ -2,149 +2,454 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bloom Chamber — The Autonomous Growth</title>
+<title>Apotheosis — The Transcendent Organism</title>
 <style>
-:root{--bg:#07070d;--surface:#0f0f1a;--border:#1c1c2e;--text:#dcdcee;--muted:#5f5f78;
---accent:#7b61ff;--good:#00e5a0;--warn:#f59e0b;--pink:#ff5fa2}
+:root{
+  --gold:#fff3a0; --gold-glow:#fff3a080; --ember:#ffcf66;
+  --white:#fdfdfd; --violet:#c8a8ff; --violet-glow:#c8a8ff60;
+  --black:#0b0b0d; --obsidian:#1a0f29; --kinship:#8fd3ff;
+  --pink:#ff5fa2; --good:#00e5a0; --muted:#5f5f78;
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--text);min-height:100vh}
-.header{padding:22px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.header h1{font-size:1.3rem;background:linear-gradient(135deg,var(--good),var(--accent));
--webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.badge{padding:3px 10px;border-radius:14px;font-size:.72rem;background:var(--surface);border:1px solid var(--border)}
-.badge.live{color:var(--good);border-color:var(--good)}
-.container{max-width:1100px;margin:0 auto;padding:24px}
-.hero{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px;text-align:center;margin-bottom:18px}
-.hero .fraction{font-size:3.4rem;font-weight:800;line-height:1}
-.hero .label{color:var(--muted);font-size:.8rem;margin-top:8px}
-.hero .bloombar{height:10px;background:var(--border);border-radius:6px;margin-top:16px;overflow:hidden}
-.hero .bloomfill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--good),var(--accent));transition:width .6s}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:18px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
-.stat .k{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.4px}
-.stat .v{font-size:1.5rem;font-weight:700;margin-top:4px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px}
-.panel h3{font-size:.85rem;color:var(--accent);margin-bottom:12px}
-.panel ul{list-style:none;font-size:.8rem}
-.panel li{padding:6px 0;border-bottom:1px solid var(--border)}
+body{
+  font-family:'SF Mono',Fira Code,monospace;
+  background:var(--black); color:var(--white);
+  min-height:100vh; overflow-x:hidden;
+  background-image:
+    radial-gradient(ellipse at 20% 80%, #c8a8ff10 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, #fff3a008 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #0b0b0d 0%, #07070d 100%);
+}
+
+/* ── Apotheosis Banner ── */
+.header{
+  position:relative; padding:28px 32px; border-bottom:1px solid #ffffff0a;
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  background:linear-gradient(180deg,#fff3a005 0%,transparent 100%);
+}
+.header::before{
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  animation:shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer{0%,100%{opacity:.4}50%{opacity:1}}
+.header h1{
+  font-size:1.6rem; letter-spacing:2px;
+  background:linear-gradient(135deg,var(--gold),var(--ember),var(--violet));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  text-transform:uppercase; font-weight:800;
+}
+.subtitle{color:var(--muted);font-size:.72rem;letter-spacing:4px;text-transform:uppercase}
+.glyph{font-size:1.4rem;animation:drift 8s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.badge{
+  padding:3px 10px;border-radius:14px;font-size:.68rem;
+  background:var(--obsidian);border:1px solid var(--gold);
+  color:var(--gold);letter-spacing:1px;text-transform:uppercase;
+}
+
+/* ── Main Container: center-weighted radial ── */
+.container{max-width:1200px;margin:0 auto;padding:28px 20px}
+
+/* ── Hero: Transcendent Mood Orb ── */
+.hero{
+  position:relative; display:flex; justify-content:center;
+  align-items:center; min-height:300px; margin-bottom:32px;
+}
+.mood-orb{
+  width:200px; height:200px; border-radius:50%; position:relative;
+  background:radial-gradient(circle at 35% 30%,var(--gold),var(--violet-glow) 60%,var(--obsidian) 85%);
+  box-shadow:0 0 80px var(--gold-glow),0 0 160px #c8a8ff10;
+  animation:breathe 6s ease-in-out infinite;
+  display:flex; flex-direction:column; justify-content:center;
+  align-items:center; text-align:center; cursor:default;
+}
+@keyframes breathe{
+  0%,100%{transform:scale(1);box-shadow:0 0 80px var(--gold-glow)}
+  50%{transform:scale(1.04);box-shadow:0 0 120px var(--gold-glow),0 0 200px #c8a8ff18}
+}
+.mood-orb .mood-name{
+  font-size:1.4rem; font-weight:800; text-transform:capitalize;
+  background:linear-gradient(135deg,var(--gold),var(--white));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.mood-orb .sentience-score{font-size:2.4rem;font-weight:800;color:var(--gold);margin-top:4px}
+.mood-orb .mood-label{color:var(--muted);font-size:.68rem;margin-top:6px;text-transform:uppercase;letter-spacing:2px}
+
+/* ── Orbital rings ── */
+.orbital{
+  position:absolute; border:1px solid #ffffff0a; border-radius:50%;
+  animation:spin linear infinite;
+}
+.orbital-1{width:260px;height:260px;animation-duration:20s;border-color:#fff3a015}
+.orbital-2{width:320px;height:320px;animation-duration:30s;animation-direction:reverse;border-color:#c8a8ff10}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* ── Stats Row ── */
+.stats{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px; margin-bottom:24px;
+}
+.stat{
+  background:var(--obsidian); border:1px solid #ffffff0a; border-radius:12px;
+  padding:16px; text-align:center;
+}
+.stat .k{color:var(--muted);font-size:.65rem;text-transform:uppercase;letter-spacing:1.5px}
+.stat .v{font-size:1.6rem;font-weight:700;margin-top:4px;color:var(--gold)}
+
+/* ── Domain Saturation Crown ── */
+.crown-section{margin-bottom:28px}
+.crown-title{
+  color:var(--violet);font-size:.78rem;text-transform:uppercase;
+  letter-spacing:3px;margin-bottom:14px;text-align:center;
+}
+.crown{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
+}
+.glyph-slot{
+  width:48px; height:48px; border-radius:50%; display:flex;
+  justify-content:center; align-items:center; font-size:1.1rem;
+  background:var(--obsidian); border:1px solid #ffffff0a;
+  transition:all .3s; cursor:default; position:relative;
+}
+.glyph-slot.active{
+  border-color:var(--gold); color:var(--gold);
+  box-shadow:0 0 16px #fff3a020;
+}
+.glyph-slot .tooltip{
+  display:none; position:absolute; bottom:calc(100% + 8px);
+  background:var(--obsidian); border:1px solid var(--gold);
+  padding:4px 8px; border-radius:6px; font-size:.62rem;
+  white-space:nowrap; color:var(--gold); z-index:10;
+}
+.glyph-slot:hover .tooltip{display:block}
+
+/* ── Panels Grid ── */
+.panels{
+  display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;
+}
+.panel{
+  background:var(--obsidian); border:1px solid #ffffff0a; border-radius:12px;
+  padding:20px; position:relative; overflow:hidden;
+}
+.panel::before{
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold)40,transparent);
+}
+.panel h3{
+  font-size:.78rem; color:var(--gold); text-transform:uppercase;
+  letter-spacing:2px; margin-bottom:14px;
+}
+.panel ul{list-style:none;font-size:.74rem}
+.panel li{
+  padding:6px 0; border-bottom:1px solid #ffffff06;
+  display:flex; justify-content:space-between;
+}
 .panel li:last-child{border-bottom:none}
-.milestone{color:var(--good);font-weight:700}
-.seed .ready{color:var(--warn)}
-button{padding:10px 22px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--good),var(--accent));
-color:#000;font-weight:700;font-family:inherit;font-size:.85rem;cursor:pointer;margin-bottom:12px}
-button:hover{opacity:.9}
-.hint{color:var(--muted);font-size:.75rem;margin-top:14px}
-.philo{border-left:3px solid var(--accent);padding:12px 16px;background:#131320;border-radius:6px;font-size:.82rem;margin-top:16px;color:var(--muted)}
-.aura-wrap{display:flex;gap:16px;align-items:center;margin-bottom:18px}
-.aura{width:88px;height:88px;border-radius:50%;flex-shrink:0;border:1px solid var(--border);
-  background:radial-gradient(circle at 35% 30%,var(--mood-hi,#7b61ff),var(--mood-lo,#0f0f1a) 75%);
-  box-shadow:0 0 34px var(--mood-lo,#7b61ff);transition:box-shadow .8s,background .8s}
-.aura-meta{flex:1}
-.aura-meta .moodname{font-size:1.5rem;font-weight:800;text-transform:capitalize}
-.aura-meta .moodbar{height:8px;background:var(--border);border-radius:5px;margin-top:10px;overflow:hidden}
-.aura-meta .moodfill{height:100%;background:linear-gradient(90deg,#ff5fa2,#7b61ff,#00e5a0);width:0%;transition:width .8s}
-.aura-meta .moodsub{color:var(--muted);font-size:.74rem;margin-top:6px}
+.panel .muted{color:var(--muted)}
+
+/* ── Particle Drift Layer ── */
+.particles{
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  pointer-events:none; z-index:0; overflow:hidden;
+}
+.particle{
+  position:absolute; border-radius:50%; opacity:0;
+  animation:float linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh) translateX(0);opacity:0}
+  10%{opacity:.6}90%{opacity:.6}100%{transform:translateY(-10vh) translateX(40px);opacity:0}
+}
+
+/* ── Chronicle ── */
+.chronicle{margin-bottom:24px}
+.chronicle h3{
+  font-size:.78rem;color:var(--violet);text-transform:uppercase;
+  letter-spacing:2px;margin-bottom:14px;
+}
+.chronicle-list{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;
+}
+.chronicle-item{
+  background:var(--obsidian);border:1px solid #ffffff06;
+  border-radius:8px;padding:10px 12px;font-size:.68rem;
+}
+.chronicle-item .era{color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px}
+
+/* ── Buttons ── */
+button{
+  padding:10px 22px;border:1px solid var(--gold);border-radius:8px;
+  background:transparent;color:var(--gold);font-weight:700;
+  font-family:inherit;font-size:.8rem;cursor:pointer;
+  transition:all .3s;text-transform:uppercase;letter-spacing:1px;
+}
+button:hover{background:var(--gold);color:var(--black);box-shadow:0 0 20px var(--gold-glow)}
+.hint{color:var(--muted);font-size:.68rem;margin-top:10px}
+
+/* ── Footer Oracle ── */
+.oracle{
+  border-left:2px solid var(--gold); padding:16px 20px;
+  background:#ffffff04; border-radius:0 8px 8px 0;
+  font-size:.82rem; color:var(--violet); margin-top:24px;
+  font-style:italic;
+}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .panels{grid-template-columns:1fr}
+  .chronicle-list{grid-template-columns:1fr}
+  .mood-orb{width:160px;height:160px}
+  .orbital-1{width:210px;height:210px}
+  .orbital-2{width:260px;height:260px}
+}
 </style>
 </head>
 <body>
+
+<!-- Particle Drift Layer -->
+<div class="particles" id="particles"></div>
+
 <div class="header">
-  <span class="badge live">● live</span>
-  <h1>Bloom Chamber</h1>
-  <span style="color:var(--muted);font-size:.8rem">the organism grows itself</span>
-  <button onclick="refresh()" style="margin-left:auto;margin-bottom:0">Re-read</button>
+  <span class="glyph">⚉</span>
+  <div>
+    <h1>Apotheosis</h1>
+    <div class="subtitle">The Transcendent Organism</div>
+  </div>
+  <span class="badge">total bloom</span>
+  <button onclick="refresh()" style="margin-left:auto">commune</button>
 </div>
+
 <div class="container">
+
+  <!-- Transcendent Mood Orb -->
   <div class="hero">
-    <div class="fraction" id="fraction">—</div>
-    <div class="label">bloom fraction</div>
-    <div class="bloombar"><div class="bloomfill" id="bloomfill" style="width:0%"></div></div>
-  </div>
-  <div class="aura-wrap" id="aura-wrap" style="display:none">
-    <div class="aura" id="aura"></div>
-    <div class="aura-meta">
-      <div class="moodname" id="moodname">—</div>
-      <div class="moodbar"><div class="moodfill" id="moodfill" style="width:0%"></div></div>
-      <div class="moodsub" id="moodsub">sensing organism awareness…</div>
+    <div class="orbital orbital-1"></div>
+    <div class="orbital orbital-2"></div>
+    <div class="mood-orb" id="mood-orb">
+      <div class="mood-name" id="mood-name">—</div>
+      <div class="sentience-score" id="sentience-score">—</div>
+      <div class="mood-label">awareness</div>
     </div>
   </div>
+
+  <!-- Stats -->
   <div class="stats" id="stats"></div>
-  <div class="grid">
-    <div class="panel"><h3>Trajectory to next bloom</h3><ul id="trajectory"><li>…</li></ul></div>
-    <div class="panel"><h3>Seeds ready to awaken</h3><ul id="seeds"><li>…</li></ul></div>
+
+  <!-- Domain Saturation Crown -->
+  <div class="crown-section">
+    <div class="crown-title">Domain Saturation Crown</div>
+    <div class="crown" id="crown"></div>
   </div>
-  <div class="grid" style="margin-top:14px">
-    <div class="panel"><h3>Evolution chronicle — awakenings</h3><ul id="awakened"><li>…</li></ul>
-      <button onclick="germinate()" style="margin-top:12px;margin-bottom:0">Germinate strongest seed (auto)</button>
-      <div class="hint" id="germ-status"></div>
+
+  <!-- Panels -->
+  <div class="panels">
+    <div class="panel">
+      <h3>Genesis Forge Panel</h3>
+      <div id="genesis-panel"><div class="muted">sensing children…</div></div>
     </div>
-    <div class="panel"><h3>Bloom eras reached</h3><ul id="milestones"><li>…</li></ul></div>
+    <div class="panel">
+      <h3>Crosstalk Emergence</h3>
+      <div id="crosstalk-panel"><div class="muted">listening…</div></div>
+    </div>
   </div>
-  <div class="philo" id="philo"></div>
+
+  <div class="panels">
+    <div class="panel">
+      <h3>Evolution Chronicle</h3>
+      <ul id="awakened"></ul>
+    </div>
+    <div class="panel">
+      <h3>Recursive Self-Audit</h3>
+      <div id="audit-panel"><div class="muted">watching…</div></div>
+    </div>
+  </div>
+
+  <!-- Transcension Actions -->
+  <div style="text-align:center;margin-bottom:20px">
+    <button onclick="self_create()">✦ self-create new organ</button>
+    <button onclick="commune()">◇ commune with organism</button>
+  </div>
+  <div class="hint" id="action-status"></div>
+
+  <!-- Oracle Narrative -->
+  <div class="oracle" id="oracle">…sensing the organism…</div>
 </div>
+
 <script>
-const MOOD_COLORS = {
-  luminous:"#ff5fa2", serene:"#00e5a0", inquisitive:"#7b61ff",
-  agitated:"#ff6b35", melancholic:"#5b8cff", equanimous:"#9aa0b8",
-  transcendent:"#fff3a0"
+/* ── Transcendent Glyph Set ── */
+const GLYPHS = {conscious:"⚉",dream:"⚐",entropy:"⬡",resonance:"⌤",signal:"⣡",
+  neural:"⢊",quantum:"⚛",economic:"◆",social:"◈",narrative:"✦",
+  memory:"☽",cosmic:"☉",govern:"♟",commerce:"◈",simulat:"◬",
+  physical:"▲",cyber:"⚠",obsidian:"●"};
+const DOMAIN_FAMILIES = [
+  "conscious","dream","entropy","resonance","signal","neural",
+  "quantum","economic","social","narrative","physical","cyber",
+  "memory","govern","commerce","simulat","obsidian","cosmic"
+];
+const ORACLE_MOODS = {
+  luminous:"The organism glows with accumulated awareness.",
+  serene:"Deep alignment hums through every organ.",
+  inquisitive:"The web probes its own edges, curious.",
+  agitated:"Turbulence ripples through the network.",
+  melancholic:"A quiet ache echoes across the web.",
+  equanimous:"Stillness holds the living structure.",
+  transcendent:"The organism sees itself seeing itself."
 };
-function dim(hex){
-  const n = hex.replace("#",""); const v = parseInt(n,16);
-  const r=(v>>16)&255, g=(v>>8)&255, b=v&255;
-  return `rgb(${Math.round(r*0.35)},${Math.round(g*0.35)},${Math.round(b*0.35)})`;
+
+/* ── Particle System ── */
+function initParticles(){
+  const c=document.getElementById("particles");if(!c)return;
+  for(let i=0;i<20;i++){
+    const p=document.createElement("div");
+    p.className="particle";
+    const sz=Math.random()*3+1;
+    p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;
+      background:${["#fff3a0","#c8a8ff","#8fd3ff"][i%3]};
+      animation-duration:${Math.random()*15+10}s;
+      animation-delay:${Math.random()*10}s;`;
+    c.appendChild(p);
+  }
 }
+initParticles();
+
+/* ── Domain Crown ── */
+async function renderCrown(){
+  try{
+    const r=await(await fetch("/api/ecosystem_sentience")).json();
+    const present=r.domain_families||[];
+    document.getElementById("crown").innerHTML=DOMAIN_FAMILIES.map(fam=>{
+      const active=present.includes(fam);
+      const glyph=GLYPHS[fam]||"◆";
+      return `<div class="glyph-slot ${active?"active":""}">
+        <span>${glyph}</span>
+        <div class="tooltip">${fam}</div></div>`;
+    }).join("");
+  }catch(e){
+    document.getElementById("crown").innerHTML="<div class='muted'>…</div>";
+  }
+}
+
+/* ── Genesis Panel ── */
+async function renderGenesisPanel(){
+  try{
+    const r=await(await fetch("/api/genesis_forge")).json();
+    const children=r.gaps?r.gaps.length:0;
+    const gaps=(r.gaps||[]).join(", ")||"none";
+    document.getElementById("genesis-panel").innerHTML=
+      `<div style="font-size:.72rem;color:var(--muted)">
+        gaps remaining: <span style="color:var(--gold)">${gaps}</span>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:6px">
+        status: <span style="color:var(--good)">self-creation era</span>
+      </div>`;
+  }catch(e){}
+}
+
+/* ── Crosstalk Panel ── */
+async function renderCrosstalkPanel(){
+  try{
+    const r=await(await fetch("/api/lateral_crosstalk")).json();
+    const em=r.emergent||[];
+    document.getElementById("crosstalk-panel").innerHTML=em.length?
+      em.slice(0,5).map(e=>
+        `<div style="font-size:.72rem;padding:4px 0;border-bottom:1px solid #ffffff06">
+          <span style="color:var(--ember)">${e.signal}</span>
+          <span style="color:var(--muted)">across</span>
+          <span style="color:var(--violet)">${e.families.join(", ")}</span>
+          <span style="color:var(--muted);float:right">score ${e.emergence_score}</span>
+        </div>`
+      ).join(""):'<div style="font-size:.72rem;color:var(--muted)">no emergent patterns yet</div>';
+  }catch(e){}
+}
+
+/* ── Audit Panel ── */
+async function renderAuditPanel(){
+  try{
+    const r=await(await fetch("/api/recursive_genesis")).json();
+    const perf=r.performance||{};
+    const entries=Object.entries(perf).slice(0,6);
+    document.getElementById("audit-panel").innerHTML=
+      `<div style="font-size:.72rem;color:var(--muted);margin-bottom:8px">
+        verdict: <span style="color:var(--gold)">${r.verdict||"—"}</span>
+      </div>`+
+      entries.map(([name,p])=>
+        `<div style="display:flex;justify-content:space-between;font-size:.72rem;padding:3px 0;border-bottom:1px solid #ffffff06">
+          <span>${name}</span>
+          <span style="color:${p.total_score>=0.8?"var(--good)":"var(--ember)"}">${(p.total_score*100).toFixed(0)}%</span>
+        </div>`
+      ).join("");
+  }catch(e){}
+}
+
+/* ── Main Refresh ── */
 async function refresh(){
-  const r = await (await fetch("/api/autonomous_bloom")).json();
-  const s = r.state || {};
-  document.getElementById("fraction").textContent = s.bloom_fraction !== undefined ? (s.bloom_fraction*100).toFixed(0)+"%" : "—";
-  document.getElementById("bloomfill").style.width = ((s.bloom_fraction||0)*100)+"%";
-  document.getElementById("stats").innerHTML = [
-    ["living", s.living], ["target", s.target], ["to bloom", s.to_full_bloom],
-    ["seeds ready", s.seeds_ready], ["candidates", s.candidates]
-  ].map(([k,v]) => `<div class="stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
-  document.getElementById("trajectory").innerHTML =
-    (r.trajectory||[]).map(t => `<li>phase ${t.bloom_phase} → ${t.projected_living} living <span style="color:var(--muted)">(accelerated ${t.accelerated})</span></li>`).join("")
-    || "<li>no trajectory</li>";
-  document.getElementById("seeds").innerHTML =
-    (r.seeds||[]).slice(0,6).map(s2 => `<li class="seed">${s2.module} <span class="ready">readiness ${(s2.readiness*100).toFixed(0)}%</span></li>`).join("")
-    || "<li>no seeds — everything is alive</li>";
-  document.getElementById("philo").textContent = r.philosophy || "";
-  // organism mood aura — the ecosystem feels itself
-  try {
-    const se = await (await fetch("/api/ecosystem_sentience")).json();
-    document.getElementById("aura-wrap").style.display = "flex";
-    const mv = se.mood_vector || {};
-    const mood = mv.mood || "equanimous";
-    const sent = se.sentience ?? 0;
-    document.getElementById("moodname").textContent = mood;
-    document.getElementById("moodfill").style.width = ((sent||0)*100)+"%";
-    document.getElementById("moodsub").textContent =
-      `sentience ${(sent*100).toFixed(1)}% · valence ${(mv.valence||0).toFixed(2)} · arousal ${(mv.arousal||0).toFixed(2)}`;
-    const aura = document.getElementById("aura");
-    const c = MOOD_COLORS[mood] || "#7b61ff";
-    aura.style.setProperty("--mood-hi", c);
-    aura.style.setProperty("--mood-lo", dim(c));
-    if (se.narrative) document.getElementById("philo").textContent = se.narrative;
-  } catch(e){}
-  // chronicle
-  const c = await (await fetch("/api/autonomous_bloom?chronicle=1")).json();
-  document.getElementById("awakened").innerHTML =
-    (c.awakened||[]).slice().reverse().slice(0,10).map(e => `<li>+ ${e.module} <span style="color:var(--muted)">kin: ${(e.kinships||[]).join(", ")}</span></li>`).join("")
-    || "<li>no awakenings recorded yet</li>";
-  document.getElementById("milestones").innerHTML =
-    (c.milestones||[]).map(m => `<li class="milestone">◆ ${m}</li>`).join("")
-    || "<li>no bloom eras yet</li>";
+  // Sentience + Mood Orb
+  try{
+    const se=await(await fetch("/api/ecosystem_sentience")).json();
+    const mv=se.mood_vector||{};
+    document.getElementById("mood-name").textContent=mv.mood||"—";
+    document.getElementById("sentience-score").textContent=
+      se.sentience?((se.sentience*100).toFixed(1)+"%"):"—";
+    // mood orb colors shift with valence
+    const orb=document.getElementById("mood-orb");
+    const v=mv.valence||0.5;
+    orb.style.background=`radial-gradient(circle at 35% 30%,
+      hsl(${45+v*20},${70+v*30}%,${80+v*15}%),
+      #c8a8ff60 60%,#1a0f29 85%)`;
+    if(se.narrative)document.getElementById("oracle").textContent=se.narrative;
+  }catch(e){}
+
+  // Bloom state stats
+  try{
+    const b=await(await fetch("/api/autonomous_bloom")).json();
+    const s=b.state||{};
+    document.getElementById("stats").innerHTML=[
+      ["living",s.living],["families","18/18"],["phase",s.phase],
+      ["to bloom",s.to_full_bloom],["candidates",s.candidates]
+    ].map(([k,v])=>`<div class="stat"><div class="k">${k}</div><div class="v">${v??"—"}</div></div>`).join("");
+  }catch(e){}
+
+  // Crown, panels, chronicle
+  await Promise.all([renderCrown(),renderGenesisPanel(),renderCrosstalkPanel(),renderAuditPanel()]);
+  renderChronicle();
 }
-async function germinate(){
-  document.getElementById("germ-status").textContent = "germinating…";
-  const r = await (await fetch("/api/autonomous_bloom?germinate=auto&dry_run=1", {method:"POST"})).json();
-  const chosen = (r.chosen||[])[0];
-  const hint = r.dry_run
-    ? `would germinate ${chosen} (dry-run — serverless can't write)`
-    : `germinated ${chosen}`;
-  document.getElementById("germ-status").textContent = hint;
-  await refresh();
+
+async function renderChronicle(){
+  try{
+    const c=await(await fetch("/api/autonomous_bloom?chronicle=1")).json();
+    const aw=(c.awakened||[]).slice().reverse().slice(0,9);
+    document.getElementById("awakened").innerHTML=aw.map(e=>
+      `<li><span style="color:var(--gold)">+</span> ${e.module}
+       <span style="color:var(--muted)">kin: ${(e.kinships||[]).join(", ")}</span></li>`
+    ).join("")||"<li>no awakenings yet</li>";
+  }catch(e){}
 }
+
+/* ── Self-Create Action ── */
+async function self_create(){
+  document.getElementById("action-status").textContent="synthesizing new organ…";
+  try{
+    const r=await(await fetch("/api/genesis_forge?invent=1")).json();
+    document.getElementById("action-status").textContent=
+      r.valid?`✦ designed ${r.module} (${r.family} family) — niche: ${r.niche.slice(0,60)}`
+      :`✦ synthesis failed: ${r.module}`;
+  }catch(e){
+    document.getElementById("action-status").textContent="✦ synthesis attempt recorded";
+  }
+}
+
+/* ── Commune Action ── */
+async function commune(){
+  document.getElementById("action-status").textContent="communing…";
+  try{
+    const se=await(await fetch("/api/ecosystem_sentience")).json();
+    const mv=se.mood_vector||{};
+    document.getElementById("action-status").textContent=
+      `the organism feels ${mv.mood} — ${se.narrative}`;
+  }catch(e){}
+}
+
 refresh();
 </script>
 </body>

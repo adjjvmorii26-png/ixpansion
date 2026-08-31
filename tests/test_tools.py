@@ -679,7 +679,8 @@ def test_ecosystem_sentience_and_bloom_100():
         assert not (isinstance(r2, dict) and "error" in r2), f"{name}: {r2.get('error')}"
     # the Bloom Chamber dashboard exposes the mood aura (sentience panel)
     bloom_html = (ROOT / "dashboard" / "bloom.html").read_text()
-    assert "moodname" in bloom_html and "ecosystem_sentience" in bloom_html
+    assert "mood-orb" in bloom_html and "ecosystem_sentience" in bloom_html
+    assert "Domain Saturation Crown" in bloom_html  # transcendent redesign
 
 def test_autonomous_bloom_reached_90_hybrid_positional_strategy():
     import sys
