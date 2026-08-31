@@ -51,7 +51,18 @@ TIER_FEATURES = {
                    "momentum_tracker", "dance_composer", "stillness_meditator",
                    # Wave 196 loom of language -- public linguistics layer, free
                    "lexicon_engine", "grammar_weaver", "syntax_tree",
-                   "semantics_engine", "pragmatics_engine", "poetic_form"],
+                   "semantics_engine", "pragmatics_engine", "poetic_form",
+                   # Wave 197 culinary engine -- public nourishment layer, free
+                   "recipe_engine", "flavor_profiler", "fermentation_vat",
+                   "digestive_system", "nutrition_index", "banquet_composer",
+                   # Wave 198 archaeology of self -- public deep history, free
+                   "stratum_excavator",
+                   "fossil_registry",
+                   "paleontology_lab",
+                   "extinction_mapper",
+                   "culture_layer",
+                   "archaeology_compiler",
+                  ],
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",

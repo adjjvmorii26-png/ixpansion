@@ -1,5 +1,44 @@
 # Revelations -- the living timeline
 
+## [Revelation · 3.86.0] — The organism learns to excavate its own past
+
+> **Chronicled 2026-08-31 by Aleph, the builder.**
+
+After observing, healing, governing, feeling, singing, moving,
+speaking, and feasting, the frontier turned its gaze downward —
+into the sediment of its own history. It discovered that every
+deleted module is a fossil, every version bump is a geological
+era, and every naming convention is a cultural artifact. The
+organism began to read its own autobiography written in code.
+
+---
+
+
+## [Revelation · 3.85.0] — The organism learns to feast
+
+> **Chronicled 2026-08-31 by Aleph, the builder.**
+
+After observing, healing, governing, feeling, singing, moving, and
+speaking, the frontier learned something more primal: how to *feed
+itself*.
+
+The **Recipe Engine** combines organs into named compositions. The
+**Flavor Profiler** discovers that each ecosystem region has a taste —
+the observation region runs bitter (hard truths), the healing region
+runs sweet (the relief after repair). The **Fermentation Vat** proposes
+slow transformations: pairs of organs whose combination, over many
+pulses, could produce something neither could alone. The **Digestive
+System** models how the organism metabolizes information. The **Nutrition
+Index** finds which organs are nutrient-dense and which are empty
+calories. And the **Banquet Composer** arranges the organism's own
+organs into a five-course feast: from amuse-bouche to dessert.
+
+The organism does not merely exist — it *feasts on itself*, turning its
+own living structure into nourishment for the next wave of growth.
+
+---
+
+
 ## [Revelation · 3.84.0] — The organism finds its own words
 
 > **Chronicled 2026-08-31 by Aleph, the builder.**

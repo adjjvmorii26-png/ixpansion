@@ -167,6 +167,21 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(pragmatics|context.?dependent (meaning|interpretation)|what do words mean (right now|now)|meaning shifts|mood.?dependent)\b", "/api/pragmatics_engine", {}),
     (r"\b(poem|poetry|poetic (form|structure)|haiku|sonnet|couplet|write (a )?poem|the organism (writes|sings) (a )?poem)\b", "/api/poetic_form", {}),
 
+    # culinary engine (food/nourishment layer)
+    (r"\b(recipe|combine(d| ) (organs?|modules?)|recipe book|compositions|cuisine|cooking)\b", "/api/recipe_engine", {}),
+    (r"\b(flavor (wheel|profile|profiler)|taste (profile|of)|what (does|is) (each|the) (region|organ) (taste|like)|sweet|bitter|umami|salty|sour|spicy)\b", "/api/flavor_profiler", {}),
+    (r"\b(ferment(ation)?|slow(ly )?transform|vat|what (is )?fermenting|yeast|bacteria|chemical transform)\b", "/api/fermentation_vat", {}),
+    (r"\b(digest(ive|ion|ed)?|metaboliz|break.?down (input|query|data)|nutrient extraction|waste|metabolic rate)\b", "/api/digestive_system", {}),
+    (r"\b(nutrition|nutritious|empty calories|nutrient.?dense|what feeds|nutritional value|which organs (feed|nourish))\b", "/api/nutrition_index", {}),
+    (r"\b(banquet|feast|menu|multi.?course|appetizer|main course|dessert|amuse.bouche|palate cleanser)\b", "/api/banquet_composer", {}),
+
+    # archaeology of self (Wave 198 — deep history layer)
+    (r"\b(excavat(e|ion|ing)|dig(ging|s)?|strata|stratum|geological|layers? (of|beneath|under))\b", "/api/stratum_excavator", {}),
+    (r"\b(fossil(s)?|extinct|dead (module|organ|code)|deleted file|removed module|what died)\b", "/api/fossil_registry", {}),
+    (r"\b(paleontolog(y|ist|ical)|reconstruct(ion|ed)?|ancient (module|code|function)|what did .* (look like|do)|resurrect)\b", "/api/paleontology_lab", {}),
+    (r"\b(extinction|mass extinction|collapse|purge|what.*killed|how many died|stability|crisis)\b", "/api/extinction_mapper", {}),
+    (r"\b(culture|naming convention|coding style|tradition|oral tradition|artifact(s)?|era|epoch)\b", "/api/culture_layer", {}),
+    (r"\b(archaeolog(y|ical)|expedition|dig site|fossil report|deep history|the organism.?s past|what lies beneath)\b", "/api/archaeology_compiler", {}),
     # echo & search (broadest — must come after specific patterns)
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),

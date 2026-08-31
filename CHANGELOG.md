@@ -1,5 +1,39 @@
 # Changelog
 
+## [3.86.0] — The Archaeology of Self (Wave 198)
+
+### Added
+- **Stratum Excavator** — digs through geological layers of git history
+- **Fossil Registry** — catalogs extinct modules with provenance and era
+- **Paleontology Lab** — reconstructs ancient modules from git ghosts
+- **Extinction Mapper** — tracks patterns of extinction and stability
+- **Culture Layer** — discovers cultural artifacts across eras
+- **Archaeology Compiler** — orchestrates all archaeology organs into expedition reports
+- **Archaeology Dashboard** — /archaeology renders the dig site
+- Living system grew to 214 organs; coherence ~0.987 (resonant)
+
+### Changed
+- Narrative arc extended: observe → heal → govern → feel → sing → move → speak → feast → excavate
+
+
+## [3.85.0] — The Culinary Engine (Wave 197)
+
+### Added
+- **Recipe Engine** — combines modules into named compositions
+- **Flavor Profiler** — taste profiles for each ecosystem region
+- **Fermentation Vat** — slow transformation of ideas into hybrids
+- **Digestive System** — breaks down complex inputs into nutrients
+- **Nutrition Index** — measures which organs feed and which are empty
+- **Banquet Composer** — composes five-course feasts from available ingredients
+- **Culinary Dashboard** — /culinary renders the organism menu
+- Living system grew to 208 organs; coherence ~0.986 (resonant)
+
+### Changed
+- Gateway free tier + intent matcher gain the culinary routes
+- Coherence regulator manifest synced to 208 living organs
+- NEXUS_WAVE bumped to 197
+
+
 ## [3.84.0] — The Loom of Language (Wave 196)
 
 ### Added
