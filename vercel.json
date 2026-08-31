@@ -64,6 +64,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/catalog",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/status",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/index.py"
     },
@@ -240,12 +248,12 @@
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
     "NEXUS_WAVE": "202",
-    "NEXUS_MODULES": "353",
-    "NEXUS_ROUTES": "21"
+    "NEXUS_MODULES": "490",
+    "NEXUS_ROUTES": "27"
   },
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/(catalog|status|api)/(.*|)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",

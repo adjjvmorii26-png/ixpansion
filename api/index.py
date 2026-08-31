@@ -37,6 +37,31 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return {"modules": names, "count": len(names)}
     if path == "/metrics":
         return {"up": 1, "modules": len(api_server.MODULE_REGISTRY) if api_server.MODULE_REGISTRY else 0}
+    if path == "/catalog":
+        import api_server as _as
+        names = sorted(_as.MODULE_REGISTRY.keys()) if _as.MODULE_REGISTRY else []
+        living = []
+        for name in names[:100]:
+            try:
+                mod = __import__(name)
+                vitals = mod.coherence_vitals() if hasattr(mod, "coherence_vitals") else {}
+                kinships = mod.resonates_with() if hasattr(mod, "resonates_with") else []
+                living.append({"name": name, "vitals": vitals, "kinships": kinships})
+            except Exception:
+                living.append({"name": name, "vitals": {}, "kinships": []})
+        return {"count": len(names), "catalog": living}
+    if path == "/status":
+        import api_server as _as
+        names = sorted(_as.MODULE_REGISTRY.keys()) if _as.MODULE_REGISTRY else []
+        return {
+            "status": "active",
+            "version": _as.VERSION,
+            "modules": len(names),
+            "wave": _as.VERSION,
+            "engine": "ixpansion",
+            "coherence": "resonant",
+            "description": "A self-excavating, self-forecasting, self-beautifying agent ecosystem with 237+ living organs",
+        }
     if path == "/" or path == "/dashboard" or path.startswith("/dashboard/") or path == "/cons":
         return {"status": "active", "version": api_server.VERSION,
                 "dashboard": "served by static build"}
