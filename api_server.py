@@ -286,6 +286,7 @@ class ApiHandler(BaseHTTPRequestHandler):
         if path == "/language":
             return self._static("dashboard/language.html")
         if path == "/culinary":
+            return self._static("dashboard/culinary.html")
         if path == "/archaeology":
             return self._static("dashboard/archaeology.html")
         if path == "/meteorology":
