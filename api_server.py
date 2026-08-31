@@ -283,6 +283,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._static("dashboard/choral.html")
         if path == "/kinesthetic":
             return self._static("dashboard/kinesthetic.html")
+        if path == "/language":
+            return self._static("dashboard/language.html")
         if path == "/cons":
             return self._static("dashboard/coconscious.html")
         if path == "/" or path in ("/index.html",):

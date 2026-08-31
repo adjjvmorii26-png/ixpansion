@@ -159,6 +159,14 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(dance|choreograph|sequence of movement|what dance|movement story|kinesthetic narrative)\b", "/api/dance_composer", {}),
     (r"\b(stillness|meditat(e|ion|ing)|deliberate (rest|pause|still)|hold(ing)? still|deep meditation|choose(s)? to be still)\b", "/api/stillness_meditator", {}),
 
+    # loom of language (linguistics layer)
+    (r"\b(lexicon|vocabular(y|ies)|what words|the organism.?s (words|vocabulary)|most used words|invented words)\b", "/api/lexicon_engine", {}),
+    (r"\b(grammar|naming (rules|pattern|convention)|grammatical rules|how (do )?(modules|organs) name)\b", "/api/grammar_weaver", {}),
+    (r"\b(syntax tree|syntactic structure|tree (of|structure)|hierarchical (structure|thinking)|family tree)\b", "/api/syntax_tree", {}),
+    (r"\b(semantics|meaning (field|distribution|concentrat)|where does meaning|semantic (field|richness|density))\b", "/api/semantics_engine", {}),
+    (r"\b(pragmatics|context.?dependent (meaning|interpretation)|what do words mean (right now|now)|meaning shifts|mood.?dependent)\b", "/api/pragmatics_engine", {}),
+    (r"\b(poem|poetry|poetic (form|structure)|haiku|sonnet|couplet|write (a )?poem|the organism (writes|sings) (a )?poem)\b", "/api/poetic_form", {}),
+
     # echo & search (broadest — must come after specific patterns)
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),

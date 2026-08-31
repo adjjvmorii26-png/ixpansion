@@ -176,6 +176,14 @@
       "dest": "/dashboard/kinesthetic.html"
     },
     {
+      "src": "/language",
+      "dest": "/dashboard/language.html"
+    },
+    {
+      "src": "/language.html",
+      "dest": "/dashboard/language.html"
+    },
+    {
       "src": "/bloom.html",
       "dest": "/dashboard/bloom.html"
     }
@@ -183,7 +191,7 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "195",
+    "NEXUS_WAVE": "196",
     "NEXUS_MODULES": "353",
     "NEXUS_ROUTES": "21"
   },

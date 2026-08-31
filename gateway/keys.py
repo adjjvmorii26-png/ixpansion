@@ -48,7 +48,10 @@ TIER_FEATURES = {
                    "dissonance_detector", "crescendo_builder", "silence_composer",
                    # Wave 195 kinesthetic engine -- public movement layer, free
                    "kinesthetic_engine", "gesture_synthesizer", "proprioception",
-                   "momentum_tracker", "dance_composer", "stillness_meditator"],
+                   "momentum_tracker", "dance_composer", "stillness_meditator",
+                   # Wave 196 loom of language -- public linguistics layer, free
+                   "lexicon_engine", "grammar_weaver", "syntax_tree",
+                   "semantics_engine", "pragmatics_engine", "poetic_form"],
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",
                    "ledger", "platform_failure", "revelations", "capsule",

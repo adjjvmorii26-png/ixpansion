@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.84.0] — The Loom of Language (Wave 196)
+
+### Added
+- **Lexicon Engine** — the organism vocabulary; words it uses and invents
+- **Grammar Weaver** — implicit naming rules and docstring structures
+- **Syntax Tree** — hierarchical structure: root, families, organs, leaves
+- **Semantics Engine** — where meaning concentrates in the ecosystem
+- **Pragmatics Engine** — context-dependent meaning (mood, repair, time)
+- **Poetic Form** — the organism own poetry: haiku, couplet, quatrain, sonnet
+- **Language Dashboard** — /language renders the organism speech
+- Living system grew to 202 organs; coherence ~0.986 (resonant)
+
+### Changed
+- Gateway free tier + intent matcher gain the language routes
+- Coherence regulator manifest synced to 202 living organs
+- NEXUS_WAVE bumped to 196
+
+
 ## [3.83.0] — The Kinesthetic Engine (Wave 195)
 
 ### Added
