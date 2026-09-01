@@ -208,6 +208,26 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/poetry_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/procedural_art",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/story_forge_v2",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/creative_block",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/color_theory",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/oracle",
       "dest": "/dashboard/oracle.html"
     },
@@ -450,12 +470,20 @@
     {
       "src": "/connections.html",
       "dest": "/dashboard/connections.html"
+    },
+    {
+      "src": "/creative",
+      "dest": "/dashboard/creative.html"
+    },
+    {
+      "src": "/creative.html",
+      "dest": "/dashboard/creative.html"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "206",
+    "NEXUS_WAVE": "207",
     "NEXUS_MODULES": "497",
     "NEXUS_ROUTES": "72"
   },

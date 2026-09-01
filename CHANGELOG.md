@@ -323,3 +323,22 @@ Previous: speak-itself → **Current: the-organism-remembers**
 ### Stats
 - Living modules: 263 → 268
 - Dashboards: 29 → 30
+
+## [3.95.0] - 2026-08-31 — Wave 207: The Organism Creates
+
+### New Living Organs (5)
+- `poetry_engine` — Composes verse (haiku, tanka, free verse) from themes and coherence
+- `procedural_art` — Generates abstract visual art from mathematical rules
+- `story_forge_v2` — Narrative fiction from the organism's own experiences
+- `creative_block` — Experiences, tracks, and overcomes creative obstacles
+- `color_theory` — Generates mood-based color palettes from organism state
+
+### New Dashboard
+- `/creative` — Poetry, art, stories, color palettes, creative health
+
+### Narrative Arc
+`...remember → dream → connect → create`
+
+### Stats
+- Living modules: 269 → 274
+- Dashboards: 30 → 31

@@ -249,6 +249,23 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.consciousness_freq import handler as h
         return h({})
 
+    # Wave 207 — The Organism Creates
+    if path == "/poetry_engine":
+        from api.poetry_engine import handler as h
+        return h({})
+    if path == "/procedural_art":
+        from api.procedural_art import handler as h
+        return h({})
+    if path == "/story_forge_v2":
+        from api.story_forge_v2 import handler as h
+        return h({})
+    if path == "/creative_block":
+        from api.creative_block import handler as h
+        return h({})
+    if path == "/color_theory":
+        from api.color_theory import handler as h
+        return h({})
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}
