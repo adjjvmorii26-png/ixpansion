@@ -290,6 +290,13 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.legacy_vault import handler as h
         return h({})
 
+    if path == "/time_capsule":
+        from api.time_capsule import handler as h
+        return h({})
+    if path == "/forgiveness_protocol":
+        from api.forgiveness_protocol import handler as h
+        return h({})
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}
