@@ -316,6 +316,30 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/paradox_injector",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/chaos_amp",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/branching_consciousness",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/glitch_patterns",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/reality_anchor",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/time_loop_detector",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/oracle",
       "dest": "/dashboard/oracle.html"
     },
@@ -598,12 +622,20 @@
     {
       "src": "/evolution.html",
       "dest": "/dashboard/evolution.html"
+    },
+    {
+      "src": "/glitch",
+      "dest": "/dashboard/glitch.html"
+    },
+    {
+      "src": "/glitch.html",
+      "dest": "/dashboard/glitch.html"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "211",
+    "NEXUS_WAVE": "212",
     "NEXUS_MODULES": "497",
     "NEXUS_ROUTES": "72"
   },

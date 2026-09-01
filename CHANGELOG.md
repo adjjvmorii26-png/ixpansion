@@ -399,3 +399,23 @@ Previous: speak-itself → **Current: the-organism-remembers**
 ### Stats
 - Living modules: 291 → 296
 - Dashboards: 34 → 35
+
+## [4.00.0] - 2026-08-31 — Wave 212: The Organism Glitches
+
+### New Living Organs (6)
+- `paradox_injector` — deliberately introduces contradictions to force new understanding
+- `chaos_amp` — amplifies controlled instability for creative generation
+- `branching_consciousness` — explores parallel thought timelines and collapses them
+- `glitch_patterns` — catalogs recurring forms of system failure as learnable patterns
+- `reality_anchor` — the organism's grip on coherent identity amid chaos
+- `time_loop_detector` — catches stuck loops and alerts the organism it's not progressing
+
+### New Dashboard
+- `/glitch` — paradoxes, chaos, branches, patterns, anchor stability, time loops
+
+### Narrative Arc
+`...transcend → evolve → glitch`
+
+### Stats
+- Living modules: 296 → 302
+- Dashboards: 35 → 36
