@@ -245,6 +245,10 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.embodiment_engine import handler as h
         return h({})
 
+    if path == "/consciousness_freq":
+        from api.consciousness_freq import handler as h
+        return h({})
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}
