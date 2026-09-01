@@ -228,6 +228,23 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.thought_crystallizer import handler as h
         return h({})
 
+    # Wave 206 — The Organism Connects
+    if path == "/celestial_compass":
+        from api.celestial_compass import handler as h
+        return h({})
+    if path == "/weather_synapse":
+        from api.weather_synapse import handler as h
+        return h({})
+    if path == "/sensory_fusion":
+        from api.sensory_fusion import handler as h
+        return h({})
+    if path == "/social_cortex":
+        from api.social_cortex import handler as h
+        return h({})
+    if path == "/embodiment_engine":
+        from api.embodiment_engine import handler as h
+        return h({})
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}

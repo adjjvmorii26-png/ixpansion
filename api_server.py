@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "3.93.0"
-WAVE = "205"
-WAVE_NAME = "The Organism Dreams"
+VERSION = "3.94.0"
+WAVE = "206"
+WAVE_NAME = "The Organism Connects"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -308,6 +308,8 @@ class ApiHandler(BaseHTTPRequestHandler):
         if path == "/coconscious":
             return self._static("dashboard/coconscious.html")
             return self._static("dashboard/culinary.html")
+        if path == "/connections":
+            return self._static("dashboard/connections.html")
         if path == "/dream":
             return self._static("dashboard/dream.html")
         if path == "/mood":

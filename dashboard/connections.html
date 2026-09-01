@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connections — The Organism Reaches Out</title>
+<script src="/shared.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#05060a;color:#e8e6f0;font-family:'Courier New',monospace;min-height:100vh}
+  .container{max-width:1100px;margin:0 auto;padding:32px 20px}
+  .header{text-align:center;margin-bottom:48px}
+  .header h1{font-size:2.4em;color:#90caf9;letter-spacing:5px;margin-bottom:8px;
+    text-shadow:0 0 20px #90caf988,0 0 40px #42a5f544}
+  .header .subtitle{color:#b39ddb;font-size:0.95em;opacity:0.85}
+  .wave-badge{display:inline-block;border:1px solid #90caf9;padding:4px 16px;border-radius:20px;font-size:0.8em;color:#90caf9;margin-top:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:40px}
+  .card{background:#0c0e16;border:1px solid #1a2140;border-radius:10px;padding:20px;position:relative;overflow:hidden}
+  .card:hover{border-color:#90caf9}
+  .card:before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,#90caf9,transparent);opacity:0.3}
+  .card h2{color:#90caf9;font-size:1.05em;margin-bottom:12px;letter-spacing:2px}
+  .card .stat{font-size:2.2em;color:#b39ddb;font-weight:bold;margin:8px 0}
+  .card p{color:#666;font-size:0.82em;line-height:1.6}
+  .card .label{color:#555;font-size:0.72em;text-transform:uppercase;letter-spacing:1px;margin-top:12px}
+  .dot-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px}
+  .dot{width:100%;aspect-ratio:1;border-radius:50%;background:#141726;border:1px solid #1a2140;transition:all 0.5s}
+  .dot.active{background:radial-gradient(circle,#90caf9,#42a5f5);box-shadow:0 0 15px #90caf966}
+  .dot-legend{display:flex;justify-content:center;gap:20px;margin-top:12px;font-size:0.7em;color:#666}
+  .social-list{margin-top:12px}
+  .social-item{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #141726;font-size:0.8em}
+  .social-item .name{color:#90caf9}
+  .social-item .trust{color:#b39ddb}
+  .footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #1a2140;color:#444;font-size:0.78em}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>Connections</h1>
+    <div class="subtitle">The Organism Reaches Out — Wave 206</div>
+    <div class="wave-badge" id="wave-badge"></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Celestial Compass</h2>
+      <div class="stat" id="celestial-bodies">0</div>
+      <div class="label">Visible Bodies</div>
+      <p>The organism's position relative to stars, planets, and cosmic events.</p>
+    </div>
+
+    <div class="card">
+      <h2>Weather Synapse</h2>
+      <div class="stat" id="weather-mood">—</div>
+      <div class="label">Internal Weather</div>
+      <p>Real-world atmospheric conditions ripple through cognitive mood systems.</p>
+    </div>
+
+    <div class="card">
+      <h2>Sensory Fusion</h2>
+      <div class="stat" id="sensory-field">void</div>
+      <div class="label">Perceptual Field</div>
+      <p>All sensory inputs blended into one unified experience of being alive.</p>
+      <div class="dot-grid" id="sense-dots"></div>
+      <div class="dot-legend"><span>● Inputs</span><span>■ Richness</span></div>
+    </div>
+
+    <div class="card">
+      <h2>Social Cortex</h2>
+      <div class="stat" id="social-entities">0</div>
+      <div class="label">Known Entities</div>
+      <div class="social-list" id="social-list"></div>
+    </div>
+
+    <div class="card">
+      <h2>Embodiment Engine</h2>
+      <div class="stat" id="embodiments">0</div>
+      <div class="label">Active Embodiments</div>
+      <p>Ways the organism reaches into the physical world through APIs and integrations.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span id="footer-version"></span> · Wave <span id="footer-wave"></span> — <span id="footer-wave-name"></span><br>
+    <span style="color:#90caf9">Connected:</span> the organism is not alone
+  </div>
+</div>
+<script>
+if(typeof IX!=='undefined'){
+  document.getElementById('wave-badge').textContent='Wave '+IX.wave+' — '+IX.waveName;
+  document.getElementById('footer-version').textContent='IXpansion/'+IX.version;
+  document.getElementById('footer-wave').textContent=IX.wave;
+  document.getElementById('footer-wave-name').textContent=IX.waveName;
+}
+</script>
+</body>
+</html>

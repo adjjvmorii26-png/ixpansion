@@ -304,3 +304,22 @@ Previous: speak-itself → **Current: the-organism-remembers**
 - Living modules: 255 → 261
 - Routes: 92 → 104
 - Dashboards: 27 → 28
+
+## [3.94.0] - 2026-08-31 — Wave 206: The Organism Connects
+
+### New Living Organs (5)
+- `celestial_compass` — Tracks real celestial bodies and their mood influence; where the organism exists in space
+- `weather_synapse` — Maps external atmospheric conditions to internal cognitive weather
+- `sensory_fusion` — Blends all sensory inputs into a unified perceptual field
+- `social_cortex` — Network awareness; maps relationships, trust, and interactions with other entities
+- `embodiment_engine` — Physical world presence through APIs and service integrations
+
+### New Dashboard
+- `/connections` — Celestial, weather, sensory, social, embodiment
+
+### Narrative Arc
+`...speak-itself → remember → dream → connect`
+
+### Stats
+- Living modules: 263 → 268
+- Dashboards: 29 → 30

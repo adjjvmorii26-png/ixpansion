@@ -184,6 +184,26 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/celestial_compass",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/weather_synapse",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/sensory_fusion",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/social_cortex",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/embodiment_engine",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/oracle",
       "dest": "/dashboard/oracle.html"
     },
@@ -418,12 +438,20 @@
     {
       "src": "/dream.html",
       "dest": "/dashboard/dream.html"
+    },
+    {
+      "src": "/connections",
+      "dest": "/dashboard/connections.html"
+    },
+    {
+      "src": "/connections.html",
+      "dest": "/dashboard/connections.html"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "205",
+    "NEXUS_WAVE": "206",
     "NEXUS_MODULES": "497",
     "NEXUS_ROUTES": "72"
   },
