@@ -11,7 +11,18 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+def _resolve_root() -> Path:
+    """Use CWD when it looks like the IXpansion repo; else walk up from this file."""
+    cwd = Path.cwd()
+    if (cwd / "api_server.py").exists():
+        return cwd
+    here = Path(__file__).resolve()
+    for parent in here.parents:
+        if (parent / "api_server.py").exists():
+            return parent
+    return here.parents[2]
+
+ROOT = _resolve_root()
 
 FILES = [
     (ROOT / "api_server.py", [

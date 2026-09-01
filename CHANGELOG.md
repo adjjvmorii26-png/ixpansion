@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.03.0] — The Organism Teaches (Wave 215)
+
+### Added — teaching organs (scaffolded with ixpansion-wave-builder skill)
+- **Mentor Engine** — pairs senior organs with juniors; creates mentorship bonds + syllabi
+- **Lesson Vault** — archive of distilled lessons from waves; difficulty-rated curriculum units
+- **Apprentice Weaver** — enrolls learner organs with milestones; promotes on graduation
+- **Curriculum Forge** — builds learning paths across modules by track (foundations, creation, permanence, connection)
+- **Knowledge Transfer** — measures wisdom flow between organs; prescribes rehearsal when weak
+- **Exam Oracle** — tests organs on organism lore; grades APPRENTICE / ADEPT / MASTER
+- New dashboard: `/teacher`
+
+### Integration
+- First wave built with the new `ixpansion-wave-builder` skill + scaffolder + version bumper (end-to-end proof)
+- Version bumped to 4.03.0 via `bump_wave.py`; wave 215; all modules remain FREE
+
+
 ## [4.02.0] — The Organism Immortalizes (Wave 214)
 
 ### Added — permanence organs

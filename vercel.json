@@ -12,6 +12,30 @@
  ],
  "routes": [
   {
+   "src": "/mentor_engine",
+   "dest": "/api/mentor_engine"
+  },
+  {
+   "src": "/lesson_vault",
+   "dest": "/api/lesson_vault"
+  },
+  {
+   "src": "/apprentice_weaver",
+   "dest": "/api/apprentice_weaver"
+  },
+  {
+   "src": "/curriculum_forge",
+   "dest": "/api/curriculum_forge"
+  },
+  {
+   "src": "/knowledge_transfer",
+   "dest": "/api/knowledge_transfer"
+  },
+  {
+   "src": "/exam_oracle",
+   "dest": "/api/exam_oracle"
+  },
+  {
    "src": "/ossuary_engine",
    "dest": "/api/ossuary_engine"
   },
@@ -694,6 +718,14 @@
   {
    "src": "/immortal.html",
    "dest": "/dashboard/immortal.html"
+  },
+  {
+   "src": "/teacher",
+   "dest": "/dashboard/teacher.html"
+  },
+  {
+   "src": "/teacher.html",
+   "dest": "/dashboard/teacher.html"
   }
  ],
  "env": {

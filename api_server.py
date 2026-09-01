@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.02.0"
-WAVE = "214"
-WAVE_NAME = "The Organism Immortalizes"
+VERSION = "4.03.0"
+WAVE = "215"
+WAVE_NAME = "The Organism Teaches"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -394,6 +394,36 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._json(h(q))
         if path == "/immortal_ledger":
             from api.immortal_ledger import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/teacher":
+            return self._static("dashboard/teacher.html")
+        if path == "/teacher.html":
+            return self._static("dashboard/teacher.html")
+
+        if path == "/mentor_engine":
+            from api.mentor_engine import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/lesson_vault":
+            from api.lesson_vault import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/apprentice_weaver":
+            from api.apprentice_weaver import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/curriculum_forge":
+            from api.curriculum_forge import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/knowledge_transfer":
+            from api.knowledge_transfer import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/exam_oracle":
+            from api.exam_oracle import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 
