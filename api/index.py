@@ -266,6 +266,13 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.color_theory import handler as h
         return h({})
 
+    if path == "/module_dna":
+        from api.module_dna import handler as h
+        return h({})
+    if path == "/wave_predictor":
+        from api.wave_predictor import handler as h
+        return h({})
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}
