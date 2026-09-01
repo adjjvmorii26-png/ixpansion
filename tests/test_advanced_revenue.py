@@ -29,7 +29,7 @@ def test_rent_agent():
     result = sys_.rent("scout_alpha", "tester", 2)
     assert "rental_id" in result
     assert result["agent"] == "Scout Alpha"
-    assert result["total_cost"] == 10.0
+    assert result["total_cost"] == 0.0  # all FREE
     sys_.release(result["rental_id"])
 
 def test_rent_nonexistent_agent():
@@ -58,7 +58,7 @@ def test_rental_cost_calculation():
     from api.agent_rental import AgentRentalSystem
     sys_ = AgentRentalSystem()
     result = sys_.rent("kintsugi_zeta", "tester", 3)
-    assert result["total_cost"] == 60.0
+    assert result["total_cost"] == 0.0  # all FREE
     sys_.release(result["rental_id"])
 
 

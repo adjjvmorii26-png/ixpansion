@@ -48,7 +48,7 @@ def test_credits_buy():
     cs = CreditSystem()
     result = cs.buy_credits("user1", "explorer")
     assert result["purchased"]
-    assert result["credits_added"] == 550
+    assert result["credits_added"] == 999999  # all FREE
 
 def test_credits_spend():
     from api.credits import CreditSystem
@@ -116,7 +116,7 @@ def test_data_licensing_plans():
     dl = DataLicensing()
     plans = dl.subscription_plans()
     assert "monthly_all_access" in plans
-    assert plans["monthly_all_access"]["price_usd"] == 99
+    assert plans["monthly_all_access"]["free_access"] == 99  # all FREE (renamed key)
 
 def test_governance_mint():
     from api.governance import GovernanceSystem

@@ -117,7 +117,7 @@ def test_tier_limits():
     assert TIERS["pro"]["daily_limit"] == 10_000
     assert TIERS["enterprise"]["daily_limit"] == -1
     assert TIERS["free"]["monthly_price_usd"] == 0
-    assert TIERS["pro"]["monthly_price_usd"] == 29
+    assert TIERS["pro"]["monthly_price_usd"] == 0  # all FREE
 
 def test_marketplace_filtering():
     from api.marketplace import publish_experiment, list_experiments

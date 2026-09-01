@@ -50,12 +50,17 @@ def test_classify_layer_covers_codebase():
 
 
 def test_identity_is_single():
-    """Identity is the canonical version/wave source."""
+    """Identity is the canonical version/wave source (single source of truth)."""
+    import api_server as server
     ident = ont.identity()
-    assert ident["version"] == "3.90.0"
-    assert ident["wave"] == 202
-    assert len(ident["narrative_arc"]) == 13
-    assert ident["wave_name"] == "The Aesthetics of Code"
+    assert ident["version"] == server.VERSION
+    assert ident["version"] == ont.ORGANISM_VERSION
+    assert ident["wave"] == int(server.WAVE)
+    assert ident["wave"] == ont.ORGANISM_WAVE
+    assert ident["wave_name"] == server.WAVE_NAME
+    assert ident["wave_name"] == ont.ORGANISM_WAVE_NAME
+    assert len(ident["narrative_arc"]) >= 13
+    assert ident["version"].count(".") == 2  # semver shape X.Y.Z
 
 
 def test_layers_taxonomy_consistent():

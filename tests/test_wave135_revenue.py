@@ -4,7 +4,7 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "api"))
 
-from revenue_orchestrator import RevenueOrchestrator
+from revenue_orchestrator import EngagementOrchestrator
 from tiered_access_system import TieredAccessSystem, PLANS
 from service_sla import ServiceSLA
 from royalty_registry import RoyaltyRegistry
@@ -15,7 +15,7 @@ from growth_engine import GrowthEngine
 
 
 def test_wave135_revenue_orchestrator():
-    ro = RevenueOrchestrator()
+    ro = EngagementOrchestrator()
     ro.register("marketplace fees", "transaction", rate=10.0)
     ro.register("subscriptions", "recurring", rate=50.0)
     total = ro.collect_cycle(multiplier=1.0)
