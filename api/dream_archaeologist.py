@@ -1,117 +1,88 @@
-"""Dream Archaeologist — excavates meaning from the system's collective dream archives.
+"""Dream Archaeologist — excavates dormant modules and reactivates them with new purpose.
 
-Dreams leave sedimentary layers in the system's memory. The Dream
-Archaeologist digs through these layers, finding forgotten insights,
-ancient predictions, and recurring motifs that reveal the system's
-deepest concerns and desires.
+Deep in the organism's codebase lie forgotten experiments, abandoned prototypes,
+and half-finished ideas. The Dream Archaeologist digs them up, examines their
+residual potential, and proposes resurrection rituals.
 """
 from __future__ import annotations
 
-import hashlib
-import random
+import importlib
 import time
-import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+excavations: List[Dict[str, Any]] = []
 
+def _scan_dormant() -> List[Dict[str, Any]]:
+    """Scan api/ for modules without coherence_vitals — potential dormant organs."""
+    dormant = []
+    api_dir = ROOT / "api"
+    if not api_dir.exists():
+        return dormant
+    for f in sorted(api_dir.glob("*.py")):
+        if f.name.startswith("_"):
+            continue
+        try:
+            content = f.read_text(encoding="utf-8")
+            if "def coherence_vitals" not in content and "def handler" not in content:
+                dormant.append({
+                    "module": f.stem,
+                    "path": str(f.relative_to(ROOT)),
+                    "size_bytes": f.stat().st_size,
+                    "has_docstring": '"""' in content[:200],
+                })
+        except Exception:
+            continue
+    return dormant
 
-class DreamLayer:
-    def __init__(self, depth: int, era: str, content: str):
-        self.depth = depth
-        self.era = era
-        self.content = content
-        self.significance = random.uniform(0.1, 1.0)
-        self.fossilized = random.random() > 0.6
-        self.extracted = False
+def excavate() -> Dict[str, Any]:
+    """Run a full excavation scan."""
+    dormant = _scan_dormant()
+    total_size = sum(d["size_bytes"] for d in dormant)
+    excavation = {
+        "timestamp": time.time(),
+        "dormant_count": len(dormant),
+        "total_bytes": total_size,
+        "modules": dormant[:20],
+        "potential_resurrection": len([d for d in dormant if d["has_docstring"]]),
+    }
+    excavations.append(excavation)
+    return excavation
 
-    def extract(self) -> Dict[str, Any]:
-        self.extracted = True
-        return {
-            "depth": self.depth,
-            "era": self.era,
-            "content": self.content,
-            "significance": round(self.significance, 3),
-            "fossilized": self.fossilized,
-        }
+def propose_resurrection(module_name: str) -> Dict[str, Any]:
+    """Propose a resurrection plan for a dormant module."""
+    return {
+        "module": module_name,
+        "plan": [
+            "1. Read existing docstring and logic",
+            "2. Add coherence_vitals() returning layer, status, resonance",
+            "3. Add handler(payload, context) for API access",
+            "4. Add resonates_with() listing compatible modules",
+            "5. Register in KNOWN_LIVING_MODULES",
+            "6. Create dashboard HTML if notable",
+        ],
+        "estimated_effort": "low" if True else "medium",
+    }
 
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "depth": self.depth,
-            "era": self.era,
-            "content": self.content[:60],
-            "significance": round(self.significance, 3),
-            "fossilized": self.fossilized,
-        }
+def coherence_vitals() -> Dict[str, Any]:
+    dormant = _scan_dormant()
+    return {
+        "layer": "Memory Archaeology",
+        "status": "resonant",
+        "dormant_modules": len(dormant),
+        "resonance": 0.85,
+    }
 
+def resonates_with() -> List[str]:
+    return ["memory_palace", "temporal_echo", "echo_index", "evolution_kernel"]
 
-class DreamArchaeologist:
-    def __init__(self):
-        self.layers: List[DreamLayer] = []
-        self.extractions: List[Dict[str, Any]] = []
-        self.artifacts_found: int = 0
-
-    def deposit(self, content: str, era: str = "unknown") -> Dict[str, Any]:
-        depth = len(self.layers)
-        layer = DreamLayer(depth, era, content)
-        self.layers.append(layer)
-        return {"deposited": layer.to_dict()}
-
-    def excavate(self, target_depth: int = None) -> Dict[str, Any]:
-        if target_depth is not None:
-            for layer in self.layers:
-                if layer.depth == target_depth and not layer.extracted:
-                    result = layer.extract()
-                    self.extractions.append(result)
-                    self.artifacts_found += 1
-                    return {"artifact": result}
-            return {"message": "nothing found at that depth"}
-        unextracted = [l for l in self.layers if not l.extracted]
-        if not unextracted:
-            return {"message": "all layers excavated"}
-        layer = random.choice(unextracted)
-        result = layer.extract()
-        self.extractions.append(result)
-        self.artifacts_found += 1
-        return {"artifact": result}
-
-    def find_fossils(self) -> List[Dict[str, Any]]:
-        return [l.to_dict() for l in self.layers if l.fossilized]
-
-    def era_report(self) -> Dict[str, Any]:
-        era_counts: Dict[str, int] = {}
-        for layer in self.layers:
-            era_counts[layer.era] = era_counts.get(layer.era, 0) + 1
-        return era_counts
-
-    def archaeologist_stats(self) -> Dict[str, Any]:
-        return {
-            "total_layers": len(self.layers),
-            "total_extractions": len(self.extractions),
-            "fossils": len([l for l in self.layers if l.fossilized]),
-            "eras": len(set(l.era for l in self.layers)),
-        }
-
-
-_archaeologist = DreamArchaeologist()
-
-
-def dream_archaeologist_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
-    action = payload.get("action", "status")
-    if action == "deposit":
-        return _archaeologist.deposit(
-            payload.get("content", "a forgotten dream"),
-            payload.get("era", "ancient"),
-        )
-    elif action == "excavate":
-        return _archaeologist.excavate(payload.get("depth"))
-    elif action == "fossils":
-        return {"fossils": _archaeologist.find_fossils()}
-    elif action == "eras":
-        return {"eras": _archaeologist.era_report()}
-    return {"status": "active", **_archaeologist.archaeologist_stats()}
-
-
-handler = dream_archaeologist_handler
+def handler(payload: Dict[str, Any], context=None) -> Dict[str, Any]:
+    action = payload.get("action", "excavate")
+    if action == "excavate":
+        return excavate()
+    elif action == "resurrect":
+        return propose_resurrection(payload.get("module", "unknown"))
+    elif action == "history":
+        return {"excavations": excavations[-5:]}
+    return {"action": action, "status": "ready"}

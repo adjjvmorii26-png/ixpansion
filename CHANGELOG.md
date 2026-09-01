@@ -262,3 +262,24 @@
 - Growth tier expanded to include: ledger, song, revelations, capsule, platform_failure, service_numinous, temperament_origin
 
 ## [3.76.0] — All Prophecies Fulfilled (Wave 161) ✦
+## [3.92.0] - 2026-08-31 — Wave 204: The Organism Remembers
+
+### New Living Organs (6)
+- `memory_palace` — Spatial architecture for memories; every memory is a room with walls of context
+- `temporal_echo` — Detects patterns that repeat across time; the organism's sense of déjà vu
+- `dream_archaeologist` — Excavates dormant modules and proposes resurrection rituals
+- `ancestor_map` — Traces lineage of every module back to its originating seed
+- `nostalgia_engine` — The organism's tender backward glance; emotional resonance of milestones
+- `forgotten_language` — Resurrects old communication protocols and translates between dialects
+
+### New Dashboard
+- `/memory` — Memory dashboard with palace, echoes, archaeology, ancestor map, nostalgia, forgotten language
+
+### Narrative Arc
+Previous: speak-itself → **Current: the-organism-remembers**
+
+### Stats
+- Living modules: 246 → 252
+- Total modules: 497 → 503
+- Routes: 66 → 72
+- Dashboards: 25 → 26

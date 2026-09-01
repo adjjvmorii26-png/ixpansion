@@ -62,6 +62,25 @@ TIER_FEATURES = {
                    "extinction_mapper",
                    "culture_layer",
                    "archaeology_compiler",
+                   # Wave 199 meteorology of thought -- public cognitive weather, free
+                   "thought_meteorology", "cognitive_climate", "temporal_pressure",
+                   "solar_wind_pressure", "bioluminescent_depth", "plankton_bloom",
+                   # Wave 200 symbiosis engine -- public ecological layer, free
+                   "symbiosis_engine", "ecological_graph", "resource_exchange",
+                   "communication_web", "cooperative_protocol", "ecosystem_health",
+                   # Wave 201 cartography of impossibility -- public boundary layer, free
+                   "constraint_cartographer", "aspiration_compass", "impossibility_map",
+                   "boundary_conditions", "frontier_terrain", "aspiration_vectors",
+                   # Wave 202 aesthetics of code -- public beauty layer, free
+                   "elegance_scorer", "symmetry_detector", "form_evaluator",
+                   "beauty_index", "ugliness_scout", "aesthetic_manifesto",
+                   # Wave 203 the organism speaks -- public voice layer, free
+                   "voice_engine", "biography", "manifesto", "parable",
+                   "greeting", "gratitude", "epitaph",
+                   # Wave 204 the organism remembers -- public memory layer, free
+                   "memory_palace", "temporal_echo", "dream_archaeologist",
+                   "ancestor_map", "nostalgia_engine", "forgotten_language",
+                  ],
                   ],
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
                    "forecast", "garden", "gossip_uptime", "data_complexity",

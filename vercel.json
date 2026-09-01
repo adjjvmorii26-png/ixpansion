@@ -316,6 +316,14 @@
       "dest": "/dashboard/voice.html"
     },
     {
+      "src": "/memory.html",
+      "dest": "/dashboard/memory.html"
+    },
+    {
+      "src": "/memory",
+      "dest": "/dashboard/memory.html"
+    },
+    {
       "src": "/bloom.html",
       "dest": "/dashboard/bloom.html"
     }
@@ -323,9 +331,9 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "203",
+    "NEXUS_WAVE": "204",
     "NEXUS_MODULES": "497",
-    "NEXUS_ROUTES": "66"
+    "NEXUS_ROUTES": "68"
   },
   "headers": [
     {

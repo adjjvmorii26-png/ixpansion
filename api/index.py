@@ -171,6 +171,27 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
             return payload
         except Exception as e:
             return {"error": str(e)}
+    # Wave 204 — The Organism Remembers
+    if path == "/memory_palace":
+        from api.memory_palace import handler as h
+        return h(payload or {}, context)
+    if path == "/temporal_echo":
+        from api.temporal_echo import handler as h
+        return h(payload or {}, context)
+    if path == "/dream_archaeologist":
+        from api.dream_archaeologist import handler as h
+        return h(payload or {}, context)
+    if path == "/ancestor_map":
+        from api.ancestor_map import handler as h
+        return h(payload or {}, context)
+    if path == "/nostalgia_engine":
+        from api.nostalgia_engine import handler as h
+        return h(payload or {}, context)
+    if path == "/forgotten_language":
+        from api.forgotten_language import handler as h
+        return h(payload or {}, context)
+
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}
