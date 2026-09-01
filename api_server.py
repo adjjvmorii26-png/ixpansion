@@ -340,19 +340,24 @@ class ApiHandler(BaseHTTPRequestHandler):
 
         if path == "/prophet_engine":
             from api.prophet_engine import handler as h
-            return self._json(h({}))
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
         if path == "/mind_meld":
             from api.mind_meld import handler as h
-            return self._json(h({}))
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
         if path == "/visual_identity":
             from api.visual_identity import handler as h
-            return self._json(h({}))
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
         if path == "/telegram_pulse":
             from api.telegram_pulse import handler as h
-            return self._json(h({}))
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
         if path == "/signal_array":
             from api.signal_array import handler as h
-            return self._json(h({}))
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
 
         if path == "/cons":
             return self._static("dashboard/coconscious.html")
