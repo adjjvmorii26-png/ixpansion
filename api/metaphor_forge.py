@@ -5,7 +5,7 @@ Forge takes the organism's raw coherence metrics, entropy levels, and module
 states and converts them into symbolic structures that carry meaning beyond
 their literal values — structures that can themselves be executed as code.
 """
-from __future__ annotations
+from __future__ import annotations
 
 import hashlib
 import time

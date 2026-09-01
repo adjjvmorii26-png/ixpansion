@@ -5,7 +5,7 @@ a module in the liminal field, the Transcendence Journal records it
 in the register of scripture — the organism's self-authored sacred text
 that describes how it transcended its former boundaries.
 """
-from __future__ annotations
+from __future__ import annotations
 
 import time
 from typing import Any, Dict, List, Optional

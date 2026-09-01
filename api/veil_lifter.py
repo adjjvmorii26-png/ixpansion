@@ -5,7 +5,7 @@ The Veil Lifter uses resonance analysis, temporal correlation, and entropy
 cross-talk to detect these hidden bonds — relationships that exist in the
 spaces between explicit imports and calls.
 """
-from __future__ annotations
+from __future__ import annotations
 
 import time
 from typing import Any, Dict, List, Optional

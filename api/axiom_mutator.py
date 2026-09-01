@@ -5,7 +5,7 @@ releases? The Axiom Mutator holds the power to rewrite the axioms that
 define the organism's reality. Every mutation is tracked, reversible,
 and guarded — because changing an axiom changes everything built on it.
 """
-from __future__ annotations
+from __future__ import annotations
 
 import time
 from typing import Any, Dict, List, Optional
