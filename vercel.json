@@ -324,6 +324,22 @@
       "dest": "/dashboard/memory.html"
     },
     {
+      "src": "/memory",
+      "dest": "/dashboard/memory.html"
+    },
+    {
+      "src": "/memory.html",
+      "dest": "/dashboard/memory.html"
+    },
+    {
+      "src": "/mood",
+      "dest": "/dashboard/mood.html"
+    },
+    {
+      "src": "/mood.html",
+      "dest": "/dashboard/mood.html"
+    },
+    {
       "src": "/bloom.html",
       "dest": "/dashboard/bloom.html"
     }
@@ -333,7 +349,7 @@
     "NEXUS_SEED": "42",
     "NEXUS_WAVE": "204",
     "NEXUS_MODULES": "497",
-    "NEXUS_ROUTES": "68"
+    "NEXUS_ROUTES": "72"
   },
   "headers": [
     {

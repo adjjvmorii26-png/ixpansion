@@ -192,6 +192,16 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return h(payload or {}, context)
 
 
+        if path == "/chronobiology":
+        from api.chronobiology import handler as h
+        return h(payload or {}, context)
+    if path == "/codecalligraphy":
+        from api.codecalligraphy import handler as h
+        return h(payload or {}, context)
+    if path == "/symbiotic_music":
+        from api.symbiotic_music import handler as h
+        return h(payload or {}, context)
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}
