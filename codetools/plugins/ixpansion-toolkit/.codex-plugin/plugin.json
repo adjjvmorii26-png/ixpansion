@@ -1,0 +1,21 @@
+{
+  "name": "ixpansion-toolkit",
+  "version": "1.0.0",
+  "description": "IXpansion organism toolkit: wave-builder skill (scaffold organs, bump versions, deploy), Telegram broadcast helpers, and live-organism conventions.",
+  "author": {
+    "name": "Aleph & adjjvmorii26-png"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "IXpansion Toolkit",
+    "shortDescription": "Build IXpansion waves, scaffold organs, broadcast via Telegram",
+    "longDescription": "Ships the ixpansion-wave-builder skill (living-organ conventions, 14-step wave checklist, scaffold + bump scripts) and Telegram broadcast helpers for the IXpansion organism.",
+    "developerName": "Aleph & adjjvmorii26-png",
+    "category": "Developer Tools",
+    "capabilities": [
+      "skills",
+      "scripts"
+    ],
+    "defaultPrompt": "Build the next IXpansion wave."
+  }
+}
