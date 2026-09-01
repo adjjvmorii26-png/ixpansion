@@ -297,6 +297,15 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.forgiveness_protocol import handler as h
         return h({})
 
+    # MORII — command agent
+    if path == "/morii_agent":
+        from api.morii_agent import handler as h
+        cmd = {}
+        if "?" in raw_path:
+            from urllib.parse import urlparse, parse_qs
+            qs = parse_qs(urlparse(raw_path).query)
+            cmd = {"command": qs.get("command", ["status"])[0]}
+        return h(cmd)
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}

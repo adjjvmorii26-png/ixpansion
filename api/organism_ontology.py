@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "3.96.0"
-ORGANISM_WAVE = 208
-ORGANISM_WAVE_NAME = "The Organism Grieves"
+ORGANISM_VERSION = "3.97.0"
+ORGANISM_WAVE = 209
+ORGANISM_WAVE_NAME = "MORII Awakens"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

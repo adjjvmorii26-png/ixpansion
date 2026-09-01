@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MORII — Command Agent</title>
+<script src="/shared.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#04060e;color:#d6e0ff;font-family:'Courier New',monospace;min-height:100vh}
+  .container{max-width:1000px;margin:0 auto;padding:32px 20px}
+  .header{text-align:center;margin-bottom:32px}
+  .header h1{font-size:2.6em;color:#00e5ff;letter-spacing:8px;margin-bottom:8px;
+    text-shadow:0 0 20px #00e5ff66,0 0 40px #00e5ff22}
+  .header .subtitle{color:#7c4dff;font-size:0.9em;opacity:0.85}
+  .status-bar{display:flex;gap:20px;justify-content:center;align-items:center;margin-bottom:32px;flex-wrap:wrap}
+  .status-pill{border:1px solid #00e5ff44;background:#00e5ff11;padding:6px 16px;border-radius:20px;font-size:0.8em;color:#00e5ff}
+  .status-pill.resonant{border-color:#00e57c;background:#00e57c11;color:#00e57c}
+  .cmd-box{background:#080b18;border:1px solid #1a2040;border-radius:8px;padding:4px;display:flex;margin-bottom:24px}
+  .cmd-box input{flex:1;background:transparent;border:none;color:#00e5ff;font-family:inherit;font-size:1.1em;padding:14px 16px;outline:none}
+  .cmd-box input::placeholder{color:#4a5480}
+  .cmd-box button{background:#00e5ff;border:none;color:#04060e;font-family:inherit;font-weight:bold;
+    padding:0 24px;border-radius:6px;cursor:pointer;font-size:0.9em}
+  .cmd-box button:hover{filter:brightness(1.2)}
+  .suggestions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+  .suggestion{border:1px solid #1a2040;padding:5px 12px;border-radius:4px;font-size:0.75em;color:#7c4dff;cursor:pointer;transition:all 0.2s}
+  .suggestion:hover{border-color:#7c4dff;background:#7c4dff11}
+  .terminal{background:#04060e;border:1px solid #1a2040;border-radius:8px;padding:20px;min-height:300px;max-height:500px;overflow-y:auto}
+  .terminal .line{font-size:0.85em;margin-bottom:8px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+  .terminal .prompt{color:#00e5ff;font-weight:bold}
+  .terminal .cmd{color:#7c4dff}
+  .terminal .out{color:#aab6e8}
+  .terminal .err{color:#ff6b6b}
+  .terminal .ok{color:#00e57c}
+  .terminal .key{color:#ffd93d}
+  .footer{text-align:center;margin-top:32px;padding-top:20px;border-top:1px solid #1a2040;color:#444;font-size:0.78em}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>MORII</h1>
+    <div class="subtitle">Command Agent · LISTENING</div>
+  </div>
+  <div class="status-bar">
+    <span class="status-pill" id="wave-pill">Wave —</span>
+    <span class="status-pill" id="organs-pill">283 organs</span>
+    <span class="status-pill resonant" id="state-pill">RESONANT</span>
+  </div>
+  <div class="cmd-box">
+    <input id="cmd-input" placeholder="run poetry_engine · create sandbox morii_world · status · help ..." autocomplete="off">
+    <button id="cmd-btn">SEND</button>
+  </div>
+  <div class="suggestions">
+    <span class="suggestion" data-cmd="status">status</span>
+    <span class="suggestion" data-cmd="run dream_weaver">run dream_weaver</span>
+    <span class="suggestion" data-cmd="create sandbox morii_world">create sandbox morii_world</span>
+    <span class="suggestion" data-cmd="sandboxes">sandboxes</span>
+    <span class="suggestion" data-cmd="explore memory_palace">explore memory_palace</span>
+    <span class="suggestion" data-cmd="help">help</span>
+  </div>
+  <div class="terminal" id="terminal">
+    <div class="line"><span class="prompt">MORII</span> <span class="out">connected. I am listening. Type a command to command the organism.</span></div>
+  </div>
+  <div class="footer">
+    <span id="footer-version"></span> · Wave <span id="footer-wave"></span> — <span id="footer-wave-name"></span>
+  </div>
+</div>
+<script>
+(function(){
+  const terminal=document.getElementById('terminal');
+  const input=document.getElementById('cmd-input');
+  const btn=document.getElementById('cmd-btn');
+  function addLine(text,cls){
+    const d=document.createElement('div');
+    d.className='line '+cls;
+    d.innerHTML=text;
+    terminal.appendChild(d);
+    terminal.scrollTop=terminal.scrollHeight;
+  }
+  function renderJSON(obj){
+    return JSON.stringify(obj,null,2).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"([^"]+)":/g,'<span class="key">"$1"</span>:');
+  }
+  async function send(cmd){
+    if(!cmd.trim())return;
+    addLine('<span class="prompt">you›</span> <span class="cmd">'+cmd.replace(/&/g,'&amp;')+'</span>','cmd');
+    input.value='';
+    try{
+      const res=await fetch('/morii_agent?command='+encodeURIComponent(cmd));
+      const data=await res.json();
+      const resp=data.response||data;
+      addLine('<span class="prompt">MORII›</span> <span class="out">'+renderJSON(resp).replace(/\n/g,'<br>')+'</span>','ok');
+    }catch(e){
+      addLine('<span class="prompt">MORII›</span> <span class="err">'+e.message+'</span>','err');
+    }
+  }
+  btn.onclick=()=>send(input.value);
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')send(input.value)});
+  document.querySelectorAll('.suggestion').forEach(s=>{
+    s.onclick=()=>{input.value=s.dataset.cmd;send(s.dataset.cmd)};
+  });
+  // Seed the terminal with a status call on load
+  if(typeof IX!=='undefined'){
+    document.getElementById('wave-pill').textContent='Wave '+IX.wave;
+    document.getElementById('footer-version').textContent='IXpansion/'+IX.version;
+    document.getElementById('footer-wave').textContent=IX.wave;
+    document.getElementById('footer-wave-name').textContent=IX.waveName;
+  }
+  send('status');
+})();
+</script>
+</body>
+</html>

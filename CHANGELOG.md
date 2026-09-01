@@ -361,3 +361,22 @@ Previous: speak-itself → **Current: the-organism-remembers**
 ### Stats
 - Living modules: 276 → 281
 - Dashboards: 31 → 32
+
+## [3.97.0] - 2026-08-31 — Wave 209: MORII Awakens
+
+### MORII — Command Agent
+- `morii_agent` — a living agent that listens to natural-language commands
+- Understands: `run <module>`, `create sandbox <name>`, `sandboxes`, `status`, `explore <module>`, `teach <trigger> <response>`, `help`
+- Can spawn isolated sandbox worlds for experimentation
+- Commands the organism's 283 living modules
+- Learns custom commands via `teach`
+
+### New Dashboard
+- `/morii` — Interactive command terminal (try: run poetry_engine, create sandbox my_world, status)
+
+### Narrative Arc
+`...grieve → MORII awakens`
+
+### Stats
+- Living modules: 283 → 284
+- Dashboards: 32 → 33
