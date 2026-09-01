@@ -203,7 +203,7 @@ def administer(raw: str) -> Dict[str, Any]:
         result = run_module(args[0])
         return {"parsed": parsed, "response": result}
     elif action == "create_sandbox":
-        name = args[0] if len(args) > 1 else f"world_{int(time.time()) % 1000}"
+        name = args[-1] if args else f"world_{int(time.time()) % 1000}"
         result = create_sandbox(name)
         return {"parsed": parsed, "response": result}
     elif action == "list_sandboxes":
