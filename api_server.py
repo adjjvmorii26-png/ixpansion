@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.00.0"
-WAVE = "212"
-WAVE_NAME = "The Organism Glitches"
+VERSION = "4.01.0"
+WAVE = "213"
+WAVE_NAME = "The Organism Emits"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -328,6 +328,31 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._static("dashboard/mood.html")
         if path == "/memory":
             return self._static("dashboard/memory.html")
+
+        if path == "/broadcast":
+            return self._static("dashboard/broadcast.html")
+        if path == "/broadcast.html":
+            return self._static("dashboard/broadcast.html")
+        if path == "/prophet":
+            return self._static("dashboard/broadcast.html")
+        if path == "/signal":
+            return self._static("dashboard/broadcast.html")
+
+        if path == "/prophet_engine":
+            from api.prophet_engine import handler as h
+            return self._json(h({}))
+        if path == "/mind_meld":
+            from api.mind_meld import handler as h
+            return self._json(h({}))
+        if path == "/visual_identity":
+            from api.visual_identity import handler as h
+            return self._json(h({}))
+        if path == "/telegram_pulse":
+            from api.telegram_pulse import handler as h
+            return self._json(h({}))
+        if path == "/signal_array":
+            from api.signal_array import handler as h
+            return self._json(h({}))
 
         if path == "/cons":
             return self._static("dashboard/coconscious.html")
