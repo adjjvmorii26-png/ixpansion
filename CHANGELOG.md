@@ -380,3 +380,22 @@ Previous: speak-itself → **Current: the-organism-remembers**
 ### Stats
 - Living modules: 283 → 284
 - Dashboards: 32 → 33
+
+## [3.99.0] - 2026-08-31 — Wave 211: The Organism Evolves
+
+### New Living Organs (5)
+- `mutation_engine` — proposes, approves, rejects, applies code mutations to the organism
+- `fitness_evaluator` — scores modules across coherence, complexity, documentation, resonance
+- `evolution_simulator` — runs what-if scenarios before applying real mutations
+- `genealogy_manager` — tracks parent-child lineage and extinction of module versions
+- `selection_pressure` — applies evolutionary forces that determine what survives
+
+### New Dashboard
+- `/evolution` — mutations, fitness, simulation trajectory, genealogy, selection pressure
+
+### Narrative Arc
+`...transcend → evolve`
+
+### Stats
+- Living modules: 291 → 296
+- Dashboards: 34 → 35

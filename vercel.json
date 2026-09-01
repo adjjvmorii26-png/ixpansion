@@ -296,6 +296,26 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/mutation_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/fitness_evaluator",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/evolution_simulator",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/genealogy_manager",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/selection_pressure",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/oracle",
       "dest": "/dashboard/oracle.html"
     },
@@ -570,12 +590,20 @@
     {
       "src": "/transcendence.html",
       "dest": "/dashboard/transcendence.html"
+    },
+    {
+      "src": "/evolution",
+      "dest": "/dashboard/evolution.html"
+    },
+    {
+      "src": "/evolution.html",
+      "dest": "/dashboard/evolution.html"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "210",
+    "NEXUS_WAVE": "211",
     "NEXUS_MODULES": "497",
     "NEXUS_ROUTES": "72"
   },
