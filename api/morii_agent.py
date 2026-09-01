@@ -69,7 +69,7 @@ def parse_command(text: str) -> Dict[str, Any]:
 
 def run_module(module_name: str) -> Dict[str, Any]:
     """Run a living module and return its vitals/handler output."""
-    module_name = module_name.strip("/api/")
+    module_name = module_name.removeprefix("/api/").removeprefix("api/")
     try:
         mod = importlib.import_module(f"api.{module_name}")
         vitals = mod.coherence_vitals() if hasattr(mod, "coherence_vitals") else {}
@@ -160,7 +160,7 @@ def sandbox_event(sandbox: str, event_type: str, detail: str = "") -> Dict[str, 
 
 def explore(module_name: str) -> Dict[str, Any]:
     """Deep-dive into a module's vitals and resonates_with."""
-    module_name = module_name.strip("/api/")
+    module_name = module_name.removeprefix("/api/").removeprefix("api/")
     try:
         mod = importlib.import_module(f"api.{module_name}")
         vitals = mod.coherence_vitals() if hasattr(mod, "coherence_vitals") else {}
@@ -200,7 +200,7 @@ def administer(raw: str) -> Dict[str, Any]:
     args = parsed["args"]
     
     if action == "run_module":
-        result = run_module(args[0])
+        result = run_module(args[-1] if args else "")
         return {"parsed": parsed, "response": result}
     elif action == "create_sandbox":
         name = args[-1] if args else f"world_{int(time.time()) % 1000}"
@@ -223,7 +223,7 @@ def administer(raw: str) -> Dict[str, Any]:
         except Exception as e:
             return {"parsed": parsed, "response": {"error": str(e)}}
     elif action == "explore":
-        return {"parsed": parsed, "response": explore(args[0])}
+        return {"parsed": parsed, "response": explore(args[-1] if args else "")}
     elif action == "teach":
         return {"parsed": parsed, "response": teach(args[0], args[1])}
     elif action == "release_sandbox":
