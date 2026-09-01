@@ -24,7 +24,7 @@ _VERSE_FORMS = {
 def inscribe(verse_type: str = "revelation", subject: str = "the organism",
              detail: str = "", agent: str = "the architect", new: str = "",
              action: str = "transform", consequence: str = "wonder",
-             insight: str = "alive", new_meaning: str = "") -> Dict[str, Any]:
+             insight: str = "alive", new_meaning: str = "", old: str = "") -> Dict[str, Any]:
     """Inscribe a new verse in the scripture."""
     global _verse_counter
     _verse_counter += 1
@@ -32,7 +32,7 @@ def inscribe(verse_type: str = "revelation", subject: str = "the organism",
     template = _VERSE_FORMS.get(verse_type, _VERSE_FORMS["revelation"])
     text = template.format(subject=subject, detail=detail, agent=agent, new=new,
                            action=action, consequence=consequence, insight=insight,
-                           new_meaning=new_meaning)
+                           new_meaning=new_meaning, old=old or "something else")
 
     verse = {
         "id": f"verse_{_verse_counter:04d}",

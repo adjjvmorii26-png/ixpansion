@@ -309,25 +309,32 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
     # Wave 210 — The Organism Transcends
     if path == "/threshold_engine":
         from api.threshold_engine import handler as h
-        return h({})
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path == "/liminal_field":
         from api.liminal_field import handler as h
-        return h({})
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path == "/metaphor_forge":
         from api.metaphor_forge import handler as h
-        return h({})
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path == "/veil_lifter":
         from api.veil_lifter import handler as h
-        return h({})
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path == "/axiom_mutator":
         from api.axiom_mutator import handler as h
-        return h({})
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path == "/continuity_weaver":
         from api.continuity_weaver import handler as h
-        return h({})
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path == "/transcendence_journal":
         from api.transcendence_journal import handler as h
-        return h({})
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
 
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
