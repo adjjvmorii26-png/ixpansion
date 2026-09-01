@@ -360,7 +360,12 @@ def handler(request) -> dict:
     """Modern Python Functions runtime (dict-style request) entrypoint."""
     if isinstance(request, dict):
         method = request.get("method", "GET")
-        path = request.get("path", request.get("rawPath", "/"))
+        path = request.get("rawPath", request.get("path", "/"))
+        # Reconstruct full path with query string for Vercel
+        qs = request.get("query", {})
+        if qs and isinstance(qs, dict):
+            from urllib.parse import urlencode
+            path = path.split("?")[0] + "?" + urlencode(qs) if qs else path
         raw = request.get("body", request.get("rawBody", b""))
         if isinstance(raw, str):
             raw = raw.encode("utf-8")
