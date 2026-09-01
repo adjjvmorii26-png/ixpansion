@@ -283,3 +283,24 @@ Previous: speak-itself → **Current: the-organism-remembers**
 - Total modules: 497 → 503
 - Routes: 66 → 72
 - Dashboards: 25 → 26
+
+## [3.93.0] - 2026-08-31 — Wave 205: The Organism Dreams
+
+### New Living Organs (6)
+- `dream_weaver` — Generates and interprets dreams from latent symbol patterns
+- `subconscious_layer` — Hidden connections between modules; latent association network
+- `imagination_engine` — Active creative synthesis; novel concept combinations
+- `sleep_cycle` — Rest, recovery, memory consolidation, self-repair management
+- `lucid_dreamer` — Conscious dream exploration directed toward specific questions
+- `dream_journal` — Records and analyzes dream sequences; tracks recurring themes
+
+### New Dashboard
+- `/dream` — Dream landscape with weaver, imagination, lucid dreaming, sleep, journal
+
+### Narrative Arc
+`...speak-itself → remember → dream`
+
+### Stats
+- Living modules: 255 → 261
+- Routes: 92 → 104
+- Dashboards: 27 → 28

@@ -200,6 +200,26 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.symbiotic_music import handler as h
         return h({})
 
+    # Wave 205 — The Organism Dreams
+    if path == "/dream_weaver":
+        from api.dream_weaver import handler as h
+        return h({})
+    if path == "/subconscious_layer":
+        from api.subconscious_layer import handler as h
+        return h({})
+    if path == "/imagination_engine":
+        from api.imagination_engine import handler as h
+        return h({})
+    if path == "/sleep_cycle":
+        from api.sleep_cycle import handler as h
+        return h({})
+    if path == "/lucid_dreamer":
+        from api.lucid_dreamer import handler as h
+        return h({})
+    if path == "/dream_journal":
+        from api.dream_journal import handler as h
+        return h({})
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}

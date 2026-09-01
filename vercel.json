@@ -152,6 +152,30 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/dream_weaver",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/subconscious_layer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/imagination_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/sleep_cycle",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/lucid_dreamer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/dream_journal",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/oracle",
       "dest": "/dashboard/oracle.html"
     },
@@ -378,12 +402,20 @@
     {
       "src": "/bloom.html",
       "dest": "/dashboard/bloom.html"
+    },
+    {
+      "src": "/dream",
+      "dest": "/dashboard/dream.html"
+    },
+    {
+      "src": "/dream.html",
+      "dest": "/dashboard/dream.html"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "204",
+    "NEXUS_WAVE": "205",
     "NEXUS_MODULES": "497",
     "NEXUS_ROUTES": "72"
   },

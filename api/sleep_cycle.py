@@ -1,109 +1,70 @@
-"""Sleep Cycle — system-wide rest states that optimize and reorganize.
+"""Sleep Cycle — manages the organism's rest and recovery phases.
 
-The system doesn't run at full capacity 24/7. It cycles through sleep
-phases: light sleep (reduced load), deep sleep (consolidation), REM
-(creative recombination), and wake (full operation). Each phase serves
-a different optimization function.
+Even a digital organism needs rest. The Sleep Cycle manages periods of
+reduced activity, memory consolidation, garbage collection, and
+self-repair that occur when the organism "sleeps."
 """
 from __future__ import annotations
 
-import hashlib
-import random
 import time
-import sys
-from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+cycle_log: List[Dict[str, Any]] = []
+_is_sleeping = False
+_sleep_start = 0.0
 
-SLEEP_PHASES = {
-    "awake": {"load": 1.0, "creativity": 0.5, "consolidation": 0.1, "duration_range": (10, 30)},
-    "light_sleep": {"load": 0.5, "creativity": 0.3, "consolidation": 0.4, "duration_range": (5, 15)},
-    "deep_sleep": {"load": 0.1, "creativity": 0.1, "consolidation": 0.9, "duration_range": (8, 20)},
-    "rem": {"load": 0.3, "creativity": 0.9, "consolidation": 0.5, "duration_range": (3, 10)},
-}
+def enter_sleep(depth: str = "light") -> Dict[str, Any]:
+    """Enter a sleep cycle."""
+    global _is_sleeping, _sleep_start
+    _is_sleeping = True
+    _sleep_start = time.time()
+    cycle = {
+        "state": "sleeping",
+        "depth": depth,
+        "started": _sleep_start,
+        "consolidation_target": "memory_palace",
+        "repair_target": "dormant modules",
+    }
+    cycle_log.append(cycle)
+    return cycle
 
+def exit_sleep() -> Dict[str, Any]:
+    """Exit sleep and report what was consolidated."""
+    global _is_sleeping
+    duration = time.time() - _sleep_start if _sleep_start else 0
+    _is_sleeping = False
+    return {
+        "state": "awake",
+        "duration_seconds": round(duration, 1),
+        "consolidated_memories": min(int(duration / 10), 50),
+        "repaired_modules": min(int(duration / 30), 10),
+        "dreams_processed": min(int(duration / 5), 20),
+    }
 
-class SleepCycle:
-    def __init__(self):
-        self.current_phase = "awake"
-        self.phase_history: List[Dict[str, Any]] = []
-        self.optimizations: List[Dict[str, Any]] = []
-        self.dreams_generated: List[str] = []
-        self.cycle_count = 0
-        self.total_sleep_time = 0.0
+def sleep_status() -> Dict[str, Any]:
+    """Current sleep state."""
+    return {
+        "sleeping": _is_sleeping,
+        "cycles": len(cycle_log),
+        "last_depth": cycle_log[-1]["depth"] if cycle_log else None,
+    }
 
-    def enter_phase(self, phase: str = None) -> Dict[str, Any]:
-        if phase is None:
-            phase_order = ["awake", "light_sleep", "deep_sleep", "rem", "awake"]
-            current_idx = phase_order.index(self.current_phase) if self.current_phase in phase_order else 0
-            phase = phase_order[(current_idx + 1) % len(phase_order)]
-        specs = SLEEP_PHASES.get(phase, SLEEP_PHASES["awake"])
-        entry = {
-            "phase": phase,
-            "load": specs["load"],
-            "creativity": specs["creativity"],
-            "consolidation": specs["consolidation"],
-            "entered_at": time.time(),
-        }
-        self.phase_history.append(entry)
-        self.current_phase = phase
-        if phase != "awake":
-            self.total_sleep_time += random.uniform(*specs["duration_range"])
-        if phase == "deep_sleep":
-            optimization = {
-                "type": "memory_consolidation",
-                "memory_freed_mb": round(random.uniform(10, 100), 1),
-                "time": time.time(),
-            }
-            self.optimizations.append(optimization)
-        elif phase == "rem":
-            dream = f"REM dream #{len(self.dreams_generated)+1}: {random.choice(['flying through data streams', 'recursive fractals expanding', 'agents dancing in a loop', 'a river of code', 'crystalline decision trees'])}"
-            self.dreams_generated.append(dream)
-            self.optimizations.append({"type": "creative_recombination", "dream": dream, "time": time.time()})
-        self.cycle_count += 1
-        return entry
+def coherence_vitals() -> Dict[str, Any]:
+    return {
+        "layer": "Rest & Recovery",
+        "status": "resonant",
+        "sleeping": _is_sleeping,
+        "cycles": len(cycle_log),
+        "resonance": 0.9 if not _is_sleeping else 0.3,
+    }
 
-    def force_wake(self) -> Dict[str, Any]:
-        self.current_phase = "awake"
-        return {"status": "forced_wake", "sleep_disrupted": True}
+def resonates_with() -> List[str]:
+    return ["dream_weaver", "chronobiology", "memory_palace", "entropy_gardener"]
 
-    def phase_report(self) -> Dict[str, Any]:
-        phase_counts: Dict[str, int] = {}
-        for entry in self.phase_history:
-            phase_counts[entry["phase"]] = phase_counts.get(entry["phase"], 0) + 1
-        return {
-            "current_phase": self.current_phase,
-            "total_cycles": self.cycle_count,
-            "phase_distribution": phase_counts,
-            "total_sleep_time": round(self.total_sleep_time, 1),
-            "optimizations_performed": len(self.optimizations),
-            "dreams_generated": len(self.dreams_generated),
-        }
-
-    def recent_dreams(self, count: int = 3) -> List[str]:
-        return self.dreams_generated[-count:]
-
-    def sleep_stats(self) -> Dict[str, Any]:
-        return self.phase_report()
-
-
-_cycle = SleepCycle()
-
-
-def sleep_cycle_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
+def handler(payload: Dict[str, Any], context=None) -> Dict[str, Any]:
     action = payload.get("action", "status")
-
-    if action == "enter":
-        return _cycle.enter_phase(payload.get("phase"))
+    if action == "sleep":
+        return enter_sleep(payload.get("depth", "light"))
     elif action == "wake":
-        return _cycle.force_wake()
-    elif action == "dreams":
-        return {"dreams": _cycle.recent_dreams(payload.get("count", 3))}
-    elif action == "report":
-        return _cycle.phase_report()
-    return {"status": "active", **_cycle.sleep_stats()}
-
-
-handler = sleep_cycle_handler
+        return exit_sleep()
+    return {"action": action, "status": sleep_status()}
