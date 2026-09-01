@@ -174,33 +174,31 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
     # Wave 204 — The Organism Remembers
     if path == "/memory_palace":
         from api.memory_palace import handler as h
-        return h(payload or {}, context)
+        return h({})
     if path == "/temporal_echo":
         from api.temporal_echo import handler as h
-        return h(payload or {}, context)
+        return h({})
     if path == "/dream_archaeologist":
         from api.dream_archaeologist import handler as h
-        return h(payload or {}, context)
+        return h({})
     if path == "/ancestor_map":
         from api.ancestor_map import handler as h
-        return h(payload or {}, context)
+        return h({})
     if path == "/nostalgia_engine":
         from api.nostalgia_engine import handler as h
-        return h(payload or {}, context)
+        return h({})
     if path == "/forgotten_language":
         from api.forgotten_language import handler as h
-        return h(payload or {}, context)
-
-
-        if path == "/chronobiology":
+        return h({})
+    if path == "/chronobiology":
         from api.chronobiology import handler as h
-        return h(payload or {}, context)
+        return h({})
     if path == "/codecalligraphy":
         from api.codecalligraphy import handler as h
-        return h(payload or {}, context)
+        return h({})
     if path == "/symbiotic_music":
         from api.symbiotic_music import handler as h
-        return h(payload or {}, context)
+        return h({})
 
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
