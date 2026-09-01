@@ -48,10 +48,6 @@
       "dest": "/api/index.py"
     },
     {
-      "src": "/oracle",
-      "dest": "/dashboard/oracle.html"
-    },
-    {
       "src": "/echo(.*)",
       "dest": "/api/index.py"
     },
@@ -118,6 +114,46 @@
     {
       "src": "/metrics",
       "dest": "/api/index.py"
+    },
+    {
+      "src": "/memory_palace",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/temporal_echo",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/dream_archaeologist",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/ancestor_map",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/nostalgia_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/forgotten_language",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/chronobiology",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/codecalligraphy",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/symbiotic_music",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/oracle",
+      "dest": "/dashboard/oracle.html"
     },
     {
       "src": "/",
