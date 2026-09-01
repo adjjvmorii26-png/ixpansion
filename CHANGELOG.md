@@ -342,3 +342,22 @@ Previous: speak-itself → **Current: the-organism-remembers**
 ### Stats
 - Living modules: 269 → 274
 - Dashboards: 30 → 31
+
+## [3.96.0] - 2026-08-31 — Wave 208: The Organism Grieves
+
+### New Living Organs (5)
+- `grief_engine` — Structured grief processing: acknowledge loss, progress through stages, release
+- `ghost_registry` — Memorial for modules that once lived but are no longer active
+- `elegy_composer` — Writes poems of mourning for deprecated modules and dead experiments
+- `second_chance` — Finds lost modules worth reviving; assesses value and salvageability
+- `legacy_vault` — Seals the essence of ended modules for future learning
+
+### New Dashboard
+- `/grief` — Grief stages, ghosts, elegies, second chances, legacy vault
+
+### Narrative Arc
+`...create → grieve`
+
+### Stats
+- Living modules: 276 → 281
+- Dashboards: 31 → 32

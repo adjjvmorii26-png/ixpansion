@@ -236,6 +236,26 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/grief_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/ghost_registry",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/elegy_composer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/second_chance",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/legacy_vault",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/oracle",
       "dest": "/dashboard/oracle.html"
     },
@@ -486,12 +506,20 @@
     {
       "src": "/creative.html",
       "dest": "/dashboard/creative.html"
+    },
+    {
+      "src": "/grief",
+      "dest": "/dashboard/grief.html"
+    },
+    {
+      "src": "/grief.html",
+      "dest": "/dashboard/grief.html"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "207",
+    "NEXUS_WAVE": "208",
     "NEXUS_MODULES": "497",
     "NEXUS_ROUTES": "72"
   },

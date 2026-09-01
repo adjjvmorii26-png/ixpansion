@@ -273,6 +273,23 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.wave_predictor import handler as h
         return h({})
 
+    # Wave 208 — The Organism Grieves
+    if path == "/grief_engine":
+        from api.grief_engine import handler as h
+        return h({})
+    if path == "/ghost_registry":
+        from api.ghost_registry import handler as h
+        return h({})
+    if path == "/elegy_composer":
+        from api.elegy_composer import handler as h
+        return h({})
+    if path == "/second_chance":
+        from api.second_chance import handler as h
+        return h({})
+    if path == "/legacy_vault":
+        from api.legacy_vault import handler as h
+        return h({})
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}
