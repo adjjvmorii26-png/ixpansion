@@ -88,7 +88,7 @@ def call_handler(module_name: str, payload: Dict[str, Any]) -> Tuple[Dict[str, A
         except (TypeError, ValueError):
             nparams = 1
         if nparams >= 2:
-            result = handler({}, {})
+            result = handler(payload, {})
         else:
             result = handler(payload)
         return result, 200
@@ -265,7 +265,11 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._redirect("/dashboard/")
         if path.startswith("/api/"):
             module = route_name_to_module(path[len("/api/"):])
-            result, status = call_handler(module, {})
+            # Parse query string params for GET requests
+            payload = {}
+            if "?" in raw_path:
+                payload = dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            result, status = call_handler(module, payload)
             return self._json(result, status)
         if path.startswith("/dashboard/"):
             return self._static(path)
