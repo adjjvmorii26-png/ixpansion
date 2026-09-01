@@ -220,6 +220,14 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.dream_journal import handler as h
         return h({})
 
+    # Wave 205 enhancements
+    if path == "/coherence_cache":
+        from api.coherence_cache import handler as h
+        return h({})
+    if path == "/thought_crystallizer":
+        from api.thought_crystallizer import handler as h
+        return h({})
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}

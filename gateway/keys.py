@@ -79,7 +79,7 @@ TIER_FEATURES = {
                    "greeting", "gratitude", "epitaph",
                    # Wave 204 the organism remembers -- public memory layer, free
                    "memory_palace", "temporal_echo", "dream_archaeologist",
-                   "ancestor_map", "nostalgia_engine", "forgotten_language", "chronobiology", "codecalligraphy", "symbiotic_music", "dream_weaver", "subconscious_layer", "imagination_engine", "sleep_cycle", "lucid_dreamer", "dream_journal",
+                   "ancestor_map", "nostalgia_engine", "forgotten_language", "chronobiology", "codecalligraphy", "symbiotic_music", "dream_weaver", "subconscious_layer", "imagination_engine", "sleep_cycle", "lucid_dreamer", "dream_journal", "coherence_cache", "thought_crystallizer",
                   ],
                   ],
     "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
