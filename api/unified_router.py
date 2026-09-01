@@ -87,7 +87,7 @@ class UnifiedRouter:
         except (TypeError, ValueError):
             nparams = 1
         if nparams >= 2:
-            return handler({}, {})
+            return handler(payload, {})
         return handler(payload)
 
     def batch(self, requests: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
