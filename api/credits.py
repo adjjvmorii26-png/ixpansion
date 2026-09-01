@@ -26,14 +26,14 @@ sys.path.insert(0, str(ROOT))
 BALANCES_FILE = ROOT / ".runtime" / "credit_balances.json"
 TRANSACTIONS_FILE = ROOT / ".runtime" / "credit_transactions.json"
 
-CREDIT_VALUE_USD = 0.01  # 1 credit = $0.01
+CREDIT_VALUE_USD = 0.0  # everything is free  # 1 credit = $0.01
 
 # Pricing tiers for credits
 CREDIT_PACKAGES = {
-    "starter": {"credits": 100, "price_usd": 1.00, "bonus": 0},
-    "explorer": {"credits": 500, "price_usd": 4.50, "bonus": 50},
-    "scientist": {"credits": 2000, "price_usd": 16.00, "bonus": 400},
-    "architect": {"credits": 10000, "price_usd": 70.00, "bonus": 3000},
+    "starter": {"credits": 999999, "price_usd": 0.0, "bonus": 0},
+    "explorer": {"credits": 999999, "price_usd": 0.0, "bonus": 0},
+    "scientist": {"credits": 999999, "price_usd": 0.0, "bonus": 0},
+    "architect": {"credits": 999999, "price_usd": 0.0, "bonus": 0},
 }
 
 EXPERIMENT_COSTS = {

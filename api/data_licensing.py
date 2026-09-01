@@ -34,7 +34,7 @@ DATASET_CATALOG = [
         "format": "json",
         "size_mb": 2.4,
         "rows": 22500,
-        "price_usd": 49.00,
+        "free_access": 49.00,
         "license": "research",
         "sample": {"grid_size": [15, 15], "awareness_levels": 8},
     },
@@ -46,7 +46,7 @@ DATASET_CATALOG = [
         "format": "json",
         "size_mb": 12.8,
         "rows": 64000,
-        "price_usd": 99.00,
+        "free_access": 99.00,
         "license": "commercial",
         "sample": {"qubits": 64, "state_vectors": 64},
     },
@@ -58,7 +58,7 @@ DATASET_CATALOG = [
         "format": "csv",
         "size_mb": 8.1,
         "rows": 50000,
-        "price_usd": 79.00,
+        "free_access": 79.00,
         "license": "research",
         "sample": {"galaxies": 150, "filaments": 45, "voids": 23},
     },
@@ -70,7 +70,7 @@ DATASET_CATALOG = [
         "format": "json",
         "size_mb": 1.2,
         "rows": 400,
-        "price_usd": 29.00,
+        "free_access": 29.00,
         "license": "research",
         "sample": {"memes": 20, "generations": 20},
     },
@@ -82,7 +82,7 @@ DATASET_CATALOG = [
         "format": "json",
         "size_mb": 5.6,
         "rows": 25000,
-        "price_usd": 59.00,
+        "free_access": 59.00,
         "license": "commercial",
         "sample": {"pathways": 128, "evolution_steps": 500},
     },
@@ -94,7 +94,7 @@ DATASET_CATALOG = [
         "format": "json",
         "size_mb": 3.3,
         "rows": 15000,
-        "price_usd": 39.00,
+        "free_access": 39.00,
         "license": "research",
         "sample": {"lenses": 10, "paths_bent": 500},
     },
@@ -106,7 +106,7 @@ DATASET_CATALOG = [
         "format": "json",
         "size_mb": 0.8,
         "rows": 50,
-        "price_usd": 19.00,
+        "free_access": 19.00,
         "license": "research",
         "sample": {"artifacts": 50, "eras": 5},
     },
@@ -118,7 +118,7 @@ DATASET_CATALOG = [
         "format": "json",
         "size_mb": 0.4,
         "rows": 500,
-        "price_usd": 15.00,
+        "free_access": 15.00,
         "license": "research",
         "sample": {"points": 500, "dimension": 2.06, "lyapunov": 0.906},
     },
@@ -163,7 +163,7 @@ class DataLicensing:
             "license_id": license_id,
             "dataset_id": dataset_id,
             "buyer": buyer,
-            "price_usd": dataset["price_usd"],
+            "free_access": dataset["free_access"],
             "license_type": dataset["license"],
             "purchased": time.time(),
             "downloads": 0,
@@ -172,7 +172,7 @@ class DataLicensing:
         self._save()
         return {
             "licensed": True, "license_id": license_id,
-            "dataset": dataset["name"], "price": dataset["price_usd"],
+            "dataset": dataset["name"], "price": dataset["free_access"],
         }
 
     def get_access(self, license_id: str) -> Dict:
@@ -197,17 +197,17 @@ class DataLicensing:
     def subscription_plans(self) -> Dict:
         return {
             "monthly_all_access": {
-                "price_usd": 99,
+                "free_access": 99,
                 "datasets": "all",
                 "downloads_per_month": 500,
             },
             "annual_all_access": {
-                "price_usd": 899,
+                "free_access": 899,
                 "datasets": "all",
                 "downloads_per_month": 1000,
             },
             "enterprise": {
-                "price_usd": 4999,
+                "free_access": 4999,
                 "datasets": "all + future",
                 "downloads_per_month": -1,
                 "includes": ["api_access", "bulk_download", "custom_formats"],
@@ -225,7 +225,7 @@ def demo():
     catalog = dl.browse()
     print(f"\nCatalog: {len(catalog)} datasets")
     for d in catalog:
-        print(f"  {d['name']}: ${d['price_usd']}, {d['size_mb']}MB, "
+        print(f"  {d['name']}: ${d['free_access']}, {d['size_mb']}MB, "
               f"{d['rows']} rows, {d['license']}")
 
     result = dl.purchase("quantum_superposition_states", "researcher_1")
@@ -237,7 +237,7 @@ def demo():
     plans = dl.subscription_plans()
     print(f"\nSubscription plans:")
     for name, plan in plans.items():
-        print(f"  {name}: ${plan['price_usd']}/yr, "
+        print(f"  {name}: ${plan['free_access']}/yr, "
               f"downloads={plan['downloads_per_month']}/mo")
 
     return {"catalog": len(catalog), "plans": plans}

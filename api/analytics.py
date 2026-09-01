@@ -1,4 +1,4 @@
-"""Analytics & Usage Dashboard — premium analytics for subscribers.
+"""Analytics & Usage Dashboard — analytics for everyone — always free.
 
 Provides detailed usage analytics, experiment performance metrics,
 and system health insights. Premium feature for pro/enterprise tiers.

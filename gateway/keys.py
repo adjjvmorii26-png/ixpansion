@@ -18,9 +18,9 @@ from typing import Any, Dict, List, Optional
 _HMAC_SECRET = os.environ.get("IXPANSION_HMAC_SECRET", "ixpansion-dev-secret-change-me")
 
 TIER_LIMITS = {
-    "free":       {"rpm": 10, "daily": 1000, "monthly": 30000},
-    "growth":     {"rpm": 60, "daily": 10000, "monthly": 300000},
-    "enterprise": {"rpm": 600, "daily": 100000, "monthly": 3000000},
+    "free":       {"rpm": 999999, "daily": 999999, "monthly": 99999999},
+    "growth":     {"rpm": 999999, "daily": 999999, "monthly": 99999999},
+    "enterprise": {"rpm": 999999, "daily": 999999, "monthly": 99999999},
 }
 
 TIER_FEATURES = {
@@ -81,23 +81,14 @@ TIER_FEATURES = {
                    "memory_palace", "temporal_echo", "dream_archaeologist",
                    "ancestor_map", "nostalgia_engine", "forgotten_language", "chronobiology", "codecalligraphy", "symbiotic_music", "dream_weaver", "subconscious_layer", "imagination_engine", "sleep_cycle", "lucid_dreamer", "dream_journal", "coherence_cache", "thought_crystallizer", "celestial_compass", "weather_synapse", "sensory_fusion", "social_cortex", "embodiment_engine", "consciousness_freq", "poetry_engine", "procedural_art", "story_forge_v2", "creative_block", "color_theory", "module_dna", "wave_predictor", "grief_engine", "ghost_registry", "elegy_composer", "second_chance", "legacy_vault", "time_capsule", "forgiveness_protocol",
                   ],
-                  ],
-    "growth":     ["echo", "health", "modules", "poem", "intent", "meter",
-                   "forecast", "garden", "gossip_uptime", "data_complexity",
-                   "ledger", "platform_failure", "revelations", "capsule",
-                   "song", "service_numinous", "temperament_origin",
-                   "frontier_stream", "hex_tool", "constellation_cartographer",
-                   "reality_weaver", "synesthesia", "dream_sequencer",
-                   "github_bridge", "reflection_pool", "chronicle_storyteller",
-                   "thought_meteorology", "sound_cauldron", "organism_index",
-                   "coherence_regulator"],
+    "growth":     ["*"],  # everything is free
     "enterprise": ["*"],  # full access
 }
 
 TIER_PRICES = {
     "free":       {"monthly": 0, "overage_per_1k": 0},
-    "growth":     {"monthly": 19, "overage_per_1k": 0.05},
-    "enterprise": {"monthly": 99, "overage_per_1k": 0.01},
+    "growth":     {"monthly": 0, "overage_per_1k": 0},
+    "enterprise": {"monthly": 0, "overage_per_1k": 0},
 }
 
 # In-memory rate limiting (resets on cold start — acceptable for serverless)

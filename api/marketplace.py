@@ -62,9 +62,9 @@ def _save_earnings(earnings: Dict):
 
 
 def publish_experiment(name: str, creator: str, description: str,
-                       category: str, price_usd: float,
+                       category: str, free_access: float,
                        code_hash: str = "", tags: List[str] = None) -> Dict:
-    if price_usd < 0:
+    if free_access < 0:
         return {"error": "price must be non-negative"}
     if category not in CATEGORIES:
         return {"error": f"unknown category: {category}"}
@@ -75,7 +75,7 @@ def publish_experiment(name: str, creator: str, description: str,
         "creator": creator,
         "description": description,
         "category": category,
-        "price_usd": price_usd,
+        "free_access": free_access,
         "code_hash": code_hash,
         "tags": tags or [],
         "created": time.time(),
@@ -98,9 +98,9 @@ def list_experiments(category: str = None, sort_by: str = "popular",
     if sort_by == "popular":
         items.sort(key=lambda i: i["purchases"], reverse=True)
     elif sort_by == "price_low":
-        items.sort(key=lambda i: i["price_usd"])
+        items.sort(key=lambda i: i["free_access"])
     elif sort_by == "price_high":
-        items.sort(key=lambda i: i["price_usd"], reverse=True)
+        items.sort(key=lambda i: i["free_access"], reverse=True)
     elif sort_by == "rating":
         items.sort(key=lambda i: i["rating"], reverse=True)
     elif sort_by == "newest":
@@ -120,12 +120,12 @@ def purchase_experiment(item_id: str, buyer: str) -> Dict:
     items = _load_items()
     for item in items:
         if item["id"] == item_id:
-            if item["price_usd"] == 0:
+            if item["free_access"] == 0:
                 commission = 0
                 creator_payout = 0
             else:
-                commission = item["price_usd"] * COMMISSION_RATE
-                creator_payout = item["price_usd"] - commission
+                commission = item["free_access"] * COMMISSION_RATE
+                creator_payout = item["free_access"] - commission
             item["purchases"] += 1
             _save_items(items)
 
@@ -145,7 +145,7 @@ def purchase_experiment(item_id: str, buyer: str) -> Dict:
             return {
                 "purchased": True,
                 "item": item["name"],
-                "price": item["price_usd"],
+                "price": item["free_access"],
                 "commission": commission,
                 "creator_payout": creator_payout,
             }
@@ -182,7 +182,7 @@ def demo():
     listing = list_experiments()
     print(f"  Listed {listing['total']} experiments")
     for exp in listing["experiments"]:
-        print(f"    {exp['name']}: ${exp['price_usd']}, "
+        print(f"    {exp['name']}: ${exp['free_access']}, "
               f"purchases={exp['purchases']}")
 
     result = purchase_experiment(listing["experiments"][0]["id"], "buyer_1")

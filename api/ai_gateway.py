@@ -37,7 +37,7 @@ ALEPH_SYSTEM_PROMPT = (
     "budgets, and the observer-collapse model of reality."
 )
 
-# Rough per-1K-token pricing (USD) used only for plausibility estimates.
+# Rough no pricing — everything is free used only for plausibility estimates.
 _PRICE_PER_1K: Dict[str, Dict[str, float]] = {
     "spacexai/grok-4.6": {"input": 0.0030, "output": 0.0060},
     "openai/gpt-5.2": {"input": 0.0050, "output": 0.0150},

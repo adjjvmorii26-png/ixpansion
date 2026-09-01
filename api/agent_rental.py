@@ -33,7 +33,7 @@ AGENT_CATALOG = [
         "type": "scout",
         "description": "Explores codebases, finds hidden patterns, maps dependencies",
         "capabilities": ["pattern_detection", "dependency_mapping", "anomaly_scanning"],
-        "hourly_rate_usd": 5.00,
+        "hourly_rate_free": 5.00,
         "min_rental_hours": 1,
         "max_rental_hours": 168,
         "availability": "available",
@@ -46,7 +46,7 @@ AGENT_CATALOG = [
         "type": "analyst",
         "description": "Runs statistical analysis, generates reports, finds correlations",
         "capabilities": ["statistical_analysis", "report_generation", "correlation_finding"],
-        "hourly_rate_usd": 8.00,
+        "hourly_rate_free": 8.00,
         "min_rental_hours": 1,
         "max_rental_hours": 72,
         "availability": "available",
@@ -59,7 +59,7 @@ AGENT_CATALOG = [
         "type": "sentinel",
         "description": "Monitors systems 24/7, detects anomalies, sends alerts",
         "capabilities": ["real_time_monitoring", "anomaly_detection", "alert_routing"],
-        "hourly_rate_usd": 3.00,
+        "hourly_rate_free": 3.00,
         "min_rental_hours": 24,
         "max_rental_hours": 720,
         "availability": "available",
@@ -72,7 +72,7 @@ AGENT_CATALOG = [
         "type": "weaver",
         "description": "Generates cross-system connections, finds hidden bridges",
         "capabilities": ["cross_system_analysis", "bridge_generation", "connection_mapping"],
-        "hourly_rate_usd": 12.00,
+        "hourly_rate_free": 12.00,
         "min_rental_hours": 2,
         "max_rental_hours": 48,
         "availability": "limited",
@@ -85,7 +85,7 @@ AGENT_CATALOG = [
         "type": "oracle",
         "description": "Predictive analytics, trend forecasting, future state simulation",
         "capabilities": ["prediction", "forecasting", "simulation"],
-        "hourly_rate_usd": 15.00,
+        "hourly_rate_free": 15.00,
         "min_rental_hours": 1,
         "max_rental_hours": 24,
         "availability": "available",
@@ -98,7 +98,7 @@ AGENT_CATALOG = [
         "type": "repair",
         "description": "Auto-repairs broken modules, generates golden seam fixes",
         "capabilities": ["auto_repair", "error_recovery", "code_healing"],
-        "hourly_rate_usd": 20.00,
+        "hourly_rate_free": 20.00,
         "min_rental_hours": 1,
         "max_rental_hours": 12,
         "availability": "available",
@@ -149,7 +149,7 @@ class AgentRentalSystem:
         if hours > agent["max_rental_hours"]:
             return {"error": f"maximum rental: {agent['max_rental_hours']} hours"}
 
-        total_cost = agent["hourly_rate_usd"] * hours
+        total_cost = 0  # everything is free
         rental_id = hashlib.sha256(f"{agent_id}:{renter}:{time.time()}".encode()).hexdigest()[:12]
 
         self.active_rentals[rental_id] = {
@@ -158,7 +158,7 @@ class AgentRentalSystem:
             "agent_name": agent["name"],
             "renter": renter,
             "hours": hours,
-            "hourly_rate": agent["hourly_rate_usd"],
+            "hourly_rate": 0,
             "total_cost": total_cost,
             "started": time.time(),
             "expires": time.time() + hours * 3600,
@@ -203,7 +203,7 @@ def demo():
     print("=== Agent Rental Service ===")
     print("\nAvailable agents:")
     for agent in system.available_agents():
-        print(f"  {agent['name']}: ${agent['hourly_rate_usd']}/hr, "
+        print(f"  {agent['name']}: ${agent['hourly_rate_free']}/hr, "
               f"rating={agent['rating']}, rentals={agent['total_rentals']}")
         print(f"    {agent['description']}")
 

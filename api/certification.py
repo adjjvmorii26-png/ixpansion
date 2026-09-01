@@ -34,7 +34,7 @@ LEARNING_PATHS = {
         "modules_required": 10,
         "exam_questions": 20,
         "pass_rate": 0.7,
-        "price_usd": 49,
+        "free": 49,
         "token_bonus": 500,
         "curriculum": [
             "Running your first experiment",
@@ -51,7 +51,7 @@ LEARNING_PATHS = {
         "modules_required": 30,
         "exam_questions": 40,
         "pass_rate": 0.6,
-        "price_usd": 149,
+        "free": 149,
         "token_bonus": 2000,
         "prerequisite": "explorer",
         "curriculum": [
@@ -70,7 +70,7 @@ LEARNING_PATHS = {
         "modules_required": 60,
         "exam_questions": 60,
         "pass_rate": 0.5,
-        "price_usd": 499,
+        "free": 499,
         "token_bonus": 10000,
         "prerequisite": "scientist",
         "curriculum": [
@@ -122,7 +122,7 @@ class CertificationProgram:
             "status": "active",
         }
         self._save()
-        return {"enrolled": True, "path": path_info["name"], "price": path_info["price_usd"]}
+        return {"enrolled": True, "path": path_info["name"], "price": path_info["free"]}
 
     def take_exam(self, user: str, path_id: str) -> Dict:
         if path_id not in LEARNING_PATHS:
@@ -178,7 +178,7 @@ def demo():
     print("=== Certification Program ===")
     print("\nLearning paths:")
     for pid, path in LEARNING_PATHS.items():
-        print(f"  {path['name']}: ${path['price_usd']}, "
+        print(f"  {path['name']}: ${path['free']}, "
               f"{path['modules_required']} modules, {path['exam_questions']} questions")
 
     r1 = prog.enroll("user_a", "explorer")

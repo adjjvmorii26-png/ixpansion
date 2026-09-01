@@ -1,8 +1,8 @@
-"""Wave 135 — Revenue Orchestrator.
+"""Wave 135 — Engagement Orchestrator.
 
 The central ledger of the civilization's income: it aggregates every
-revenue stream — marketplace fees, guild commissions, subscriptions,
-royalties, sponsored experiments — into one consolidated revenue
+engagement stream — marketplace fees, guild commissions, subscriptions,
+royalties, sponsored experiments — into one consolidated engagement
 pipeline and projects future cash flow from pipeline velocity.
 """
 from __future__ import annotations
@@ -12,7 +12,7 @@ import time
 from typing import Any, Dict, List
 
 
-class RevenueStream:
+class EngagementStream:
     """A single tracked income channel."""
 
     def __init__(self, name: str, kind: str, rate: float):
@@ -33,16 +33,16 @@ class RevenueStream:
                 "rate": self.rate, "total": round(self.total, 4)}
 
 
-class RevenueOrchestrator:
+class EngagementOrchestrator:
     """Aggregates and projects all civilization income."""
 
     def __init__(self):
-        self._streams: Dict[str, RevenueStream] = {}
+        self._streams: Dict[str, EngagementStream] = {}
         self._pipeline_samples: List[float] = []
         self._collections = 0
 
-    def register(self, name: str, kind: str, rate: float) -> RevenueStream:
-        stream = RevenueStream(name, kind, rate)
+    def register(self, name: str, kind: str, rate: float) -> EngagementStream:
+        stream = EngagementStream(name, kind, rate)
         self._streams[stream.id] = stream
         return stream
 
@@ -61,7 +61,7 @@ class RevenueOrchestrator:
         avg = sum(self._pipeline_samples) / len(self._pipeline_samples)
         return round(avg * 365.0, 4)
 
-    def revenue_breakdown(self) -> List[Dict[str, Any]]:
+    def engagement_breakdown(self) -> List[Dict[str, Any]]:
         return [s.to_dict() for s in self._streams.values()]
 
     def status(self) -> Dict[str, Any]:
@@ -74,6 +74,6 @@ class RevenueOrchestrator:
 def handler(payload: dict = None, context: object = None) -> dict:
     """Vercel-compatible handler."""
     payload = payload or {}
-    orchestrator = RevenueOrchestrator()
-    return {"status": "active", "module": "revenue_orchestrator",
+    orchestrator = EngagementOrchestrator()
+    return {"status": "active", "module": "engagement_orchestrator",
             **orchestrator.status()}
