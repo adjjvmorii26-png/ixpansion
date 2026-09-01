@@ -37,14 +37,14 @@ except OSError:
 
 # ── Command vocabulary ──
 _ACTION_PATTERNS = [
-    (r"^(run|execute|call|invoke)\s+(\w+)", "run_module"),
-    (r"^(create|spawn|make|start)\s+(?:a\s+)?sandbox\s+(\w+)", "create_sandbox"),
-    (r"^(sandbox)\s+(\w+)", "create_sandbox"),
+    (r"^(run|execute|call|invoke)\s+([\w_-]+)", "run_module"),
+    (r"^(create|spawn|make|start)\s+(?:a\s+)?sandbox\s+([\w_-]+)", "create_sandbox"),
+    (r"^(sandbox)\s+([\w_-]+)", "create_sandbox"),
     (r"^(sandboxes|list.*sandbox)", "list_sandboxes"),
     (r"^(status|health|how are (you|we))", "status"),
-    (r"^(explore|inspect|deep.dive)\s+(\w+)", "explore"),
-    (r"^(teach|remember)\s+(\w+)\s+(.+)", "teach"),
-    (r"^(quit|leave|go away)\s+\w+", "release_sandbox"),
+    (r"^(explore|inspect|deep.dive)\s+([\w_-]+)", "explore"),
+    (r"^(teach|remember)\s+([\w_-]+)\s+(.+)", "teach"),
+    (r"^(quit|leave|go away)\s+[\w_-]+", "release_sandbox"),
     (r"^(help|what can you do)", "help"),
 ]
 
