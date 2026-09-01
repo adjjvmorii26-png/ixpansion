@@ -1,0 +1,9 @@
+{
+  "regions": [
+    {"id": "V1", "role": "perception", "dims": 128},
+    {"id": "PFC", "role": "planning", "dims": 256},
+    {"id": "HPC", "role": "episodic", "dims": 512},
+    {"id": "AMG", "role": "salience", "dims": 64}
+  ],
+  "version": "0.1-neuro"
+}
