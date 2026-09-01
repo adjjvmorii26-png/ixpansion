@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.01.0"
-WAVE = "213"
-WAVE_NAME = "The Organism Emits"
+VERSION = "4.02.0"
+WAVE = "214"
+WAVE_NAME = "The Organism Immortalizes"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -360,6 +360,40 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._json(h(q))
         if path == "/signal_array":
             from api.signal_array import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/immortal":
+            return self._static("dashboard/immortal.html")
+        if path == "/immortal.html":
+            return self._static("dashboard/immortal.html")
+
+        if path == "/ossuary_engine":
+            from api.ossuary_engine import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/amber_encasement":
+            from api.amber_encasement import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/ancestral_gallery":
+            from api.ancestral_gallery import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/monument_forge":
+            from api.monument_forge import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/succession_rite":
+            from api.succession_rite import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/eternal_flame":
+            from api.eternal_flame import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/immortal_ledger":
+            from api.immortal_ledger import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 

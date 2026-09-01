@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.01.0"
-ORGANISM_WAVE = 213
-ORGANISM_WAVE_NAME = "The Organism Emits"
+ORGANISM_VERSION = "4.02.0"
+ORGANISM_WAVE = 214
+ORGANISM_WAVE_NAME = "The Organism Immortalizes"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

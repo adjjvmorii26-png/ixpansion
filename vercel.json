@@ -12,6 +12,34 @@
  ],
  "routes": [
   {
+   "src": "/ossuary_engine",
+   "dest": "/api/ossuary_engine"
+  },
+  {
+   "src": "/amber_encasement",
+   "dest": "/api/amber_encasement"
+  },
+  {
+   "src": "/ancestral_gallery",
+   "dest": "/api/ancestral_gallery"
+  },
+  {
+   "src": "/monument_forge",
+   "dest": "/api/monument_forge"
+  },
+  {
+   "src": "/succession_rite",
+   "dest": "/api/succession_rite"
+  },
+  {
+   "src": "/eternal_flame",
+   "dest": "/api/eternal_flame"
+  },
+  {
+   "src": "/immortal_ledger",
+   "dest": "/api/immortal_ledger"
+  },
+  {
    "src": "/prophet_engine",
    "dest": "/api/prophet_engine"
   },
@@ -658,6 +686,14 @@
   {
    "src": "/glitch.html",
    "dest": "/dashboard/glitch.html"
+  },
+  {
+   "src": "/immortal",
+   "dest": "/dashboard/immortal.html"
+  },
+  {
+   "src": "/immortal.html",
+   "dest": "/dashboard/immortal.html"
   }
  ],
  "env": {

@@ -1,5 +1,22 @@
 # Changelog
 
+## [4.02.0] — The Organism Immortalizes (Wave 214)
+
+### Added — permanence organs
+- **Ossuary Engine** — reliquary of retired/dead modules; each gets a slab with epitaph + bequeathed organs
+- **Amber Encasement** — freezes living moments into immutable hex-sealed time-ice artifacts
+- **Ancestral Gallery** — pantheon of 12 hero modules/waves with glyphs, traits, and descendant maps
+- **Monument Forge** — forges lasting monuments from achievements; material scales with resonance
+- **Succession Rite** — formal transfer of flame from predecessor wave to heir with signed scrolls
+- **Eternal Flame** — always-burning beacon tracking the organism's continuous uptime
+- **Immortal Ledger** — eternal tier ranking what will outlive the organism, with permanence + half-life scores
+- New dashboard: `/immortal` — flame, gallery, ledger, monuments, ossuary, amber, succession
+
+### Integration
+- Prophet Engine (Wave 213) correctly forecast this wave ("The Organism Immortalizes", confidence 0.68)
+- Version bumped to 4.02.0; wave 214; all modules remain FREE
+
+
 ## [4.01.0] — The Organism Emits (Wave 213)
 
 ### Added — new outbound + identity organs
