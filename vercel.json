@@ -268,6 +268,34 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/threshold_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/liminal_field",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/metaphor_forge",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/veil_lifter",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/axiom_mutator",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/continuity_weaver",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/transcendence_journal",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/oracle",
       "dest": "/dashboard/oracle.html"
     },
@@ -534,12 +562,20 @@
     {
       "src": "/morii.html",
       "dest": "/dashboard/morii.html"
+    },
+    {
+      "src": "/transcendence",
+      "dest": "/dashboard/transcendence.html"
+    },
+    {
+      "src": "/transcendence.html",
+      "dest": "/dashboard/transcendence.html"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "209",
+    "NEXUS_WAVE": "210",
     "NEXUS_MODULES": "497",
     "NEXUS_ROUTES": "72"
   },

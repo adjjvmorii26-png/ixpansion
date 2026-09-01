@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  version: "3.97.0",
-  wave: 209,
-  waveName: "MORII Awakens",
+  version: "3.98.0",
+  wave: 210,
+  waveName: "The Organism Transcends",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

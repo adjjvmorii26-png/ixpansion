@@ -306,6 +306,29 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
             qs = parse_qs(urlparse(raw_path).query)
             cmd = {"command": qs.get("command", ["status"])[0]}
         return h(cmd)
+    # Wave 210 — The Organism Transcends
+    if path == "/threshold_engine":
+        from api.threshold_engine import handler as h
+        return h({})
+    if path == "/liminal_field":
+        from api.liminal_field import handler as h
+        return h({})
+    if path == "/metaphor_forge":
+        from api.metaphor_forge import handler as h
+        return h({})
+    if path == "/veil_lifter":
+        from api.veil_lifter import handler as h
+        return h({})
+    if path == "/axiom_mutator":
+        from api.axiom_mutator import handler as h
+        return h({})
+    if path == "/continuity_weaver":
+        from api.continuity_weaver import handler as h
+        return h({})
+    if path == "/transcendence_journal":
+        from api.transcendence_journal import handler as h
+        return h({})
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}
