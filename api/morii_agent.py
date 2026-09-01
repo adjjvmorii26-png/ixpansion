@@ -26,9 +26,14 @@ from typing import Any, Dict, List, Optional
 ROOT = Path(__file__).resolve().parents[1]
 COMMANDS: Dict[str, Dict[str, Any]] = {}
 _log: List[Dict[str, Any]] = []
+IN_MEMORY_SANDBOXES: Dict[str, Any] = {}
 
 _sandbox_dir = ROOT / ".runtime" / "sandboxes"
-_sandbox_dir.mkdir(parents=True, exist_ok=True)
+try:
+    _sandbox_dir.mkdir(parents=True, exist_ok=True)
+except OSError:
+    # Read-only filesystem (serverless) — fall back to in-memory sandboxes
+    _sandbox_dir = None
 
 # ── Command vocabulary ──
 _ACTION_PATTERNS = [
@@ -85,42 +90,62 @@ def run_module(module_name: str) -> Dict[str, Any]:
 def create_sandbox(name: str) -> Dict[str, Any]:
     """Create a new sandbox world — an isolated experimentation space."""
     safe_name = re.sub(r"[^\w-]", "_", name)
-    world_dir = _sandbox_dir / safe_name
-    world_dir.mkdir(parents=True, exist_ok=True)
-    state_file = world_dir / "world_state.json"
-    
     world = {
         "name": safe_name,
         "created": time.time(),
-        "modules": [],
+        "modules": ["dream_weaver", "imagination_engine", "memory_palace"],
         "rules": {
             "isolation": True,
             "entropy_cap": 0.7,
             "metamorphosis": "allowed",
         },
-        "events": [],
+        "events": [{"type": "birth", "detail": "created by MORII", "timestamp": time.time()}],
     }
-    state_file.write_text(json.dumps(world, indent=2))
-    _log_entry("create_sandbox", f"{safe_name} created")
-    return {"sandbox": safe_name, "path": str(world_dir), "world": world}
+    # Try to persist, fall back gracefully on read-only FS
+    if _sandbox_dir is not None:
+        try:
+            world_dir = _sandbox_dir / safe_name
+            world_dir.mkdir(parents=True, exist_ok=True)
+            state_file = world_dir / "world_state.json"
+            state_file.write_text(json.dumps(world, indent=2))
+            _log_entry("create_sandbox", f"{safe_name} created")
+            return {"sandbox": safe_name, "path": str(world_dir), "world": world}
+        except OSError:
+            pass
+    # In-memory sandbox
+    IN_MEMORY_SANDBOXES[safe_name] = world
+    _log_entry("create_sandbox", f"{safe_name} created (in-memory)")
+    return {"sandbox": safe_name, "path": "memory", "world": world}
 
 def list_sandboxes() -> Dict[str, Any]:
     """List all sandbox worlds."""
     worlds = []
-    for d in _sandbox_dir.iterdir():
-        if d.is_dir():
-            state_file = d / "world_state.json"
-            if state_file.exists():
-                try:
-                    state = json.loads(state_file.read_text())
-                    worlds.append({
-                        "name": state.get("name", d.name),
-                        "created": state.get("created", 0),
-                        "modules": len(state.get("modules", [])),
-                        "events": len(state.get("events", [])),
-                    })
-                except Exception:
-                    worlds.append({"name": d.name, "corrupted": True})
+    # In-memory sandboxes (always available)
+    for name, state in IN_MEMORY_SANDBOXES.items():
+        worlds.append({
+            "name": state.get("name", name),
+            "created": state.get("created", 0),
+            "modules": len(state.get("modules", [])),
+            "events": len(state.get("events", [])),
+            "mode": "memory",
+        })
+    # File-backed sandboxes (if writable)
+    if _sandbox_dir is not None and _sandbox_dir.exists():
+        for d in _sandbox_dir.iterdir():
+            if d.is_dir():
+                state_file = d / "world_state.json"
+                if state_file.exists():
+                    try:
+                        state = json.loads(state_file.read_text())
+                        worlds.append({
+                            "name": state.get("name", d.name),
+                            "created": state.get("created", 0),
+                            "modules": len(state.get("modules", [])),
+                            "events": len(state.get("events", [])),
+                            "mode": "file",
+                        })
+                    except Exception:
+                        worlds.append({"name": d.name, "corrupted": True})
     return {"sandboxes": worlds, "count": len(worlds)}
 
 def sandbox_event(sandbox: str, event_type: str, detail: str = "") -> Dict[str, Any]:
