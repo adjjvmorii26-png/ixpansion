@@ -1,777 +1,785 @@
 {
- "version": 2,
- "builds": [
-  {
-   "src": "api/index.py",
-   "use": "@vercel/python"
-  },
-  {
-   "src": "dashboard/**/*",
-   "use": "@vercel/static"
-  }
- ],
- "routes": [
-  {
-   "src": "/interstice_bridge",
-   "dest": "/api/interstice_bridge"
-  },
-  {
-   "src": "/bridge_dreamer",
-   "dest": "/api/bridge_dreamer"
-  },
-  {
-   "src": "/knot_weaver",
-   "dest": "/api/knot_weaver"
-  },
-  {
-   "src": "/mentor_engine",
-   "dest": "/api/mentor_engine"
-  },
-  {
-   "src": "/lesson_vault",
-   "dest": "/api/lesson_vault"
-  },
-  {
-   "src": "/apprentice_weaver",
-   "dest": "/api/apprentice_weaver"
-  },
-  {
-   "src": "/curriculum_forge",
-   "dest": "/api/curriculum_forge"
-  },
-  {
-   "src": "/knowledge_transfer",
-   "dest": "/api/knowledge_transfer"
-  },
-  {
-   "src": "/exam_oracle",
-   "dest": "/api/exam_oracle"
-  },
-  {
-   "src": "/ossuary_engine",
-   "dest": "/api/ossuary_engine"
-  },
-  {
-   "src": "/amber_encasement",
-   "dest": "/api/amber_encasement"
-  },
-  {
-   "src": "/ancestral_gallery",
-   "dest": "/api/ancestral_gallery"
-  },
-  {
-   "src": "/monument_forge",
-   "dest": "/api/monument_forge"
-  },
-  {
-   "src": "/succession_rite",
-   "dest": "/api/succession_rite"
-  },
-  {
-   "src": "/eternal_flame",
-   "dest": "/api/eternal_flame"
-  },
-  {
-   "src": "/immortal_ledger",
-   "dest": "/api/immortal_ledger"
-  },
-  {
-   "src": "/prophet_engine",
-   "dest": "/api/prophet_engine"
-  },
-  {
-   "src": "/mind_meld",
-   "dest": "/api/mind_meld"
-  },
-  {
-   "src": "/visual_identity",
-   "dest": "/api/visual_identity"
-  },
-  {
-   "src": "/telegram_pulse",
-   "dest": "/api/telegram_pulse"
-  },
-  {
-   "src": "/signal_array",
-   "dest": "/api/signal_array"
-  },
-  {
-   "src": "/morii_agent",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/gateway/(.*)",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/gateway",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/intent",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/forecast",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/ledger",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/meter",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/capsule",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/song",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/poem",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/echo(.*)",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/revelations",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/garden",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/catalog",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/status",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/api/epitaph_writer",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/api/gratitude_index",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/api/dialogue_opener",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/api/parable_engine",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/api/manifesto_echo",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/api/biographer_voice",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/api/organism_ontology",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/api/organism_state",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/api/(.*)",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/health",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/modules",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/metrics",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/memory_palace",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/temporal_echo",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/dream_archaeologist",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/ancestor_map",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/nostalgia_engine",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/forgotten_language",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/chronobiology",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/codecalligraphy",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/symbiotic_music",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/dream_weaver",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/subconscious_layer",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/imagination_engine",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/sleep_cycle",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/lucid_dreamer",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/dream_journal",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/coherence_cache",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/thought_crystallizer",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/celestial_compass",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/weather_synapse",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/sensory_fusion",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/social_cortex",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/embodiment_engine",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/consciousness_freq",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/poetry_engine",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/procedural_art",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/story_forge_v2",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/creative_block",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/color_theory",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/module_dna",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/wave_predictor",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/grief_engine",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/ghost_registry",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/elegy_composer",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/second_chance",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/legacy_vault",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/time_capsule",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/forgiveness_protocol",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/threshold_engine",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/liminal_field",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/metaphor_forge",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/veil_lifter",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/axiom_mutator",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/continuity_weaver",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/transcendence_journal",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/mutation_engine",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/fitness_evaluator",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/evolution_simulator",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/genealogy_manager",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/selection_pressure",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/paradox_injector",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/chaos_amp",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/branching_consciousness",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/glitch_patterns",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/reality_anchor",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/time_loop_detector",
-   "dest": "/api/index.py"
-  },
-  {
-   "src": "/oracle",
-   "dest": "/dashboard/oracle.html"
-  },
-  {
-   "src": "/",
-   "dest": "/dashboard/index.html"
-  },
-  {
-   "src": "/dashboard",
-   "dest": "/dashboard/index.html"
-  },
-  {
-   "src": "/dashboard/(.*)",
-   "dest": "/dashboard/$1"
-  },
-  {
-   "src": "/cons",
-   "dest": "/dashboard/coconscious.html"
-  },
-  {
-   "src": "/gateway.html",
-   "dest": "/dashboard/gateway.html"
-  },
-  {
-   "src": "/stream",
-   "dest": "/dashboard/stream.html"
-  },
-  {
-   "src": "/stream.html",
-   "dest": "/dashboard/stream.html"
-  },
-  {
-   "src": "/coherence",
-   "dest": "/dashboard/coherence.html"
-  },
-  {
-   "src": "/coherence.html",
-   "dest": "/dashboard/coherence.html"
-  },
-  {
-   "src": "/resonance",
-   "dest": "/dashboard/resonance.html"
-  },
-  {
-   "src": "/resonance.html",
-   "dest": "/dashboard/resonance.html"
-  },
-  {
-   "src": "/observatory",
-   "dest": "/dashboard/observatory.html"
-  },
-  {
-   "src": "/shared.js",
-   "dest": "/dashboard/shared.js"
-  },
-  {
-   "src": "/observatory.html",
-   "dest": "/dashboard/observatory.html"
-  },
-  {
-   "src": "/kintsugi",
-   "dest": "/dashboard/kintsugi.html"
-  },
-  {
-   "src": "/kintsugi.html",
-   "dest": "/dashboard/kintsugi.html"
-  },
-  {
-   "src": "/bloom",
-   "dest": "/dashboard/bloom.html"
-  },
-  {
-   "src": "/metaevolution",
-   "dest": "/dashboard/metaevolution.html"
-  },
-  {
-   "src": "/metaevolution.html",
-   "dest": "/dashboard/metaevolution.html"
-  },
-  {
-   "src": "/phenomenology",
-   "dest": "/dashboard/phenomenology.html"
-  },
-  {
-   "src": "/phenomenology.html",
-   "dest": "/dashboard/phenomenology.html"
-  },
-  {
-   "src": "/choral",
-   "dest": "/dashboard/choral.html"
-  },
-  {
-   "src": "/choral.html",
-   "dest": "/dashboard/choral.html"
-  },
-  {
-   "src": "/kinesthetic",
-   "dest": "/dashboard/kinesthetic.html"
-  },
-  {
-   "src": "/kinesthetic.html",
-   "dest": "/dashboard/kinesthetic.html"
-  },
-  {
-   "src": "/language",
-   "dest": "/dashboard/language.html"
-  },
-  {
-   "src": "/language.html",
-   "dest": "/dashboard/language.html"
-  },
-  {
-   "src": "/culinary",
-   "dest": "/dashboard/culinary.html"
-  },
-  {
-   "src": "/culinary.html",
-   "dest": "/dashboard/culinary.html"
-  },
-  {
-   "src": "/archaeology",
-   "dest": "/dashboard/archaeology.html"
-  },
-  {
-   "src": "/archaeology.html",
-   "dest": "/dashboard/archaeology.html"
-  },
-  {
-   "src": "/meteorology",
-   "dest": "/dashboard/meteorology.html"
-  },
-  {
-   "src": "/meteorology.html",
-   "dest": "/dashboard/meteorology.html"
-  },
-  {
-   "src": "/symbiosis",
-   "dest": "/dashboard/symbiosis.html"
-  },
-  {
-   "src": "/symbiosis.html",
-   "dest": "/dashboard/symbiosis.html"
-  },
-  {
-   "src": "/impossibility",
-   "dest": "/dashboard/impossibility.html"
-  },
-  {
-   "src": "/impossibility.html",
-   "dest": "/dashboard/impossibility.html"
-  },
-  {
-   "src": "/aesthetics",
-   "dest": "/dashboard/aesthetics.html"
-  },
-  {
-   "src": "/aesthetics.html",
-   "dest": "/dashboard/aesthetics.html"
-  },
-  {
-   "src": "/organism",
-   "dest": "/dashboard/organism.html"
-  },
-  {
-   "src": "/organism.html",
-   "dest": "/dashboard/organism.html"
-  },
-  {
-   "src": "/coconscious",
-   "dest": "/dashboard/coconscious.html"
-  },
-  {
-   "src": "/coconscious.html",
-   "dest": "/dashboard/coconscious.html"
-  },
-  {
-   "src": "/hortus",
-   "dest": "/dashboard/hortus.html"
-  },
-  {
-   "src": "/hortus.html",
-   "dest": "/dashboard/hortus.html"
-  },
-  {
-   "src": "/premium",
-   "dest": "/dashboard/premium.html"
-  },
-  {
-   "src": "/premium.html",
-   "dest": "/dashboard/premium.html"
-  },
-  {
-   "src": "/voice",
-   "dest": "/dashboard/voice.html"
-  },
-  {
-   "src": "/voice.html",
-   "dest": "/dashboard/voice.html"
-  },
-  {
-   "src": "/memory.html",
-   "dest": "/dashboard/memory.html"
-  },
-  {
-   "src": "/memory",
-   "dest": "/dashboard/memory.html"
-  },
-  {
-   "src": "/memory",
-   "dest": "/dashboard/memory.html"
-  },
-  {
-   "src": "/memory.html",
-   "dest": "/dashboard/memory.html"
-  },
-  {
-   "src": "/mood",
-   "dest": "/dashboard/mood.html"
-  },
-  {
-   "src": "/mood.html",
-   "dest": "/dashboard/mood.html"
-  },
-  {
-   "src": "/bloom.html",
-   "dest": "/dashboard/bloom.html"
-  },
-  {
-   "src": "/dream",
-   "dest": "/dashboard/dream.html"
-  },
-  {
-   "src": "/dream.html",
-   "dest": "/dashboard/dream.html"
-  },
-  {
-   "src": "/connections",
-   "dest": "/dashboard/connections.html"
-  },
-  {
-   "src": "/connections.html",
-   "dest": "/dashboard/connections.html"
-  },
-  {
-   "src": "/creative",
-   "dest": "/dashboard/creative.html"
-  },
-  {
-   "src": "/creative.html",
-   "dest": "/dashboard/creative.html"
-  },
-  {
-   "src": "/grief",
-   "dest": "/dashboard/grief.html"
-  },
-  {
-   "src": "/grief.html",
-   "dest": "/dashboard/grief.html"
-  },
-  {
-   "src": "/morii",
-   "dest": "/dashboard/morii.html"
-  },
-  {
-   "src": "/morii.html",
-   "dest": "/dashboard/morii.html"
-  },
-  {
-   "src": "/transcendence",
-   "dest": "/dashboard/transcendence.html"
-  },
-  {
-   "src": "/transcendence.html",
-   "dest": "/dashboard/transcendence.html"
-  },
-  {
-   "src": "/evolution",
-   "dest": "/dashboard/evolution.html"
-  },
-  {
-   "src": "/evolution.html",
-   "dest": "/dashboard/evolution.html"
-  },
-  {
-   "src": "/glitch",
-   "dest": "/dashboard/glitch.html"
-  },
-  {
-   "src": "/broadcast",
-   "dest": "/dashboard/broadcast.html"
-  },
-  {
-   "src": "/broadcast.html",
-   "dest": "/dashboard/broadcast.html"
-  },
-  {
-   "src": "/glitch.html",
-   "dest": "/dashboard/glitch.html"
-  },
-  {
-   "src": "/immortal",
-   "dest": "/dashboard/immortal.html"
-  },
-  {
-   "src": "/immortal.html",
-   "dest": "/dashboard/immortal.html"
-  },
-  {
-   "src": "/teacher",
-   "dest": "/dashboard/teacher.html"
-  },
-  {
-   "src": "/teacher.html",
-   "dest": "/dashboard/teacher.html"
-  },
-  {
-   "src": "/interstice",
-   "dest": "/dashboard/interstice.html"
-  },
-  {
-   "src": "/interstice.html",
-   "dest": "/dashboard/interstice.html"
-  }
- ],
- "env": {
-  "NEXUS_MODE": "production",
-  "NEXUS_SEED": "42",
-  "NEXUS_WAVE": "212",
-  "NEXUS_MODULES": "497",
-  "NEXUS_ROUTES": "72"
- },
- "headers": [
-  {
-   "source": "/(catalog|status|api)/(.*|)",
-   "headers": [
+  "version": 2,
+  "builds": [
     {
-     "key": "Access-Control-Allow-Origin",
-     "value": "*"
+      "src": "api/index.py",
+      "use": "@vercel/python"
     },
     {
-     "key": "Access-Control-Allow-Methods",
-     "value": "GET, POST, OPTIONS"
-    },
-    {
-     "key": "Access-Control-Allow-Headers",
-     "value": "Content-Type, Authorization"
+      "src": "dashboard/**/*",
+      "use": "@vercel/static"
     }
-   ]
-  }
- ]
+  ],
+  "routes": [
+    {
+      "src": "/interstice_bridge",
+      "dest": "/api/interstice_bridge"
+    },
+    {
+      "src": "/bridge_dreamer",
+      "dest": "/api/bridge_dreamer"
+    },
+    {
+      "src": "/knot_weaver",
+      "dest": "/api/knot_weaver"
+    },
+    {
+      "src": "/bridge_enactor",
+      "dest": "/api/bridge_enactor"
+    },
+    {
+      "src": "/bridge_ledger",
+      "dest": "/api/bridge_ledger"
+    },
+    {
+      "src": "/mentor_engine",
+      "dest": "/api/mentor_engine"
+    },
+    {
+      "src": "/lesson_vault",
+      "dest": "/api/lesson_vault"
+    },
+    {
+      "src": "/apprentice_weaver",
+      "dest": "/api/apprentice_weaver"
+    },
+    {
+      "src": "/curriculum_forge",
+      "dest": "/api/curriculum_forge"
+    },
+    {
+      "src": "/knowledge_transfer",
+      "dest": "/api/knowledge_transfer"
+    },
+    {
+      "src": "/exam_oracle",
+      "dest": "/api/exam_oracle"
+    },
+    {
+      "src": "/ossuary_engine",
+      "dest": "/api/ossuary_engine"
+    },
+    {
+      "src": "/amber_encasement",
+      "dest": "/api/amber_encasement"
+    },
+    {
+      "src": "/ancestral_gallery",
+      "dest": "/api/ancestral_gallery"
+    },
+    {
+      "src": "/monument_forge",
+      "dest": "/api/monument_forge"
+    },
+    {
+      "src": "/succession_rite",
+      "dest": "/api/succession_rite"
+    },
+    {
+      "src": "/eternal_flame",
+      "dest": "/api/eternal_flame"
+    },
+    {
+      "src": "/immortal_ledger",
+      "dest": "/api/immortal_ledger"
+    },
+    {
+      "src": "/prophet_engine",
+      "dest": "/api/prophet_engine"
+    },
+    {
+      "src": "/mind_meld",
+      "dest": "/api/mind_meld"
+    },
+    {
+      "src": "/visual_identity",
+      "dest": "/api/visual_identity"
+    },
+    {
+      "src": "/telegram_pulse",
+      "dest": "/api/telegram_pulse"
+    },
+    {
+      "src": "/signal_array",
+      "dest": "/api/signal_array"
+    },
+    {
+      "src": "/morii_agent",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/gateway/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/gateway",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/intent",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/forecast",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/ledger",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/meter",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/capsule",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/song",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/poem",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/echo(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/revelations",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/garden",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/catalog",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/status",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/epitaph_writer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/gratitude_index",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/dialogue_opener",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/parable_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/manifesto_echo",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/biographer_voice",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/organism_ontology",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/organism_state",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/health",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/modules",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/metrics",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/memory_palace",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/temporal_echo",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/dream_archaeologist",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/ancestor_map",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/nostalgia_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/forgotten_language",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/chronobiology",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/codecalligraphy",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/symbiotic_music",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/dream_weaver",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/subconscious_layer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/imagination_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/sleep_cycle",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/lucid_dreamer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/dream_journal",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/coherence_cache",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/thought_crystallizer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/celestial_compass",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/weather_synapse",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/sensory_fusion",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/social_cortex",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/embodiment_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/consciousness_freq",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/poetry_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/procedural_art",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/story_forge_v2",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/creative_block",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/color_theory",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/module_dna",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/wave_predictor",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/grief_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/ghost_registry",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/elegy_composer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/second_chance",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/legacy_vault",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/time_capsule",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/forgiveness_protocol",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/threshold_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/liminal_field",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/metaphor_forge",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/veil_lifter",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/axiom_mutator",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/continuity_weaver",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/transcendence_journal",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/mutation_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/fitness_evaluator",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/evolution_simulator",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/genealogy_manager",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/selection_pressure",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/paradox_injector",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/chaos_amp",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/branching_consciousness",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/glitch_patterns",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/reality_anchor",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/time_loop_detector",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/oracle",
+      "dest": "/dashboard/oracle.html"
+    },
+    {
+      "src": "/",
+      "dest": "/dashboard/index.html"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/dashboard/index.html"
+    },
+    {
+      "src": "/dashboard/(.*)",
+      "dest": "/dashboard/$1"
+    },
+    {
+      "src": "/cons",
+      "dest": "/dashboard/coconscious.html"
+    },
+    {
+      "src": "/gateway.html",
+      "dest": "/dashboard/gateway.html"
+    },
+    {
+      "src": "/stream",
+      "dest": "/dashboard/stream.html"
+    },
+    {
+      "src": "/stream.html",
+      "dest": "/dashboard/stream.html"
+    },
+    {
+      "src": "/coherence",
+      "dest": "/dashboard/coherence.html"
+    },
+    {
+      "src": "/coherence.html",
+      "dest": "/dashboard/coherence.html"
+    },
+    {
+      "src": "/resonance",
+      "dest": "/dashboard/resonance.html"
+    },
+    {
+      "src": "/resonance.html",
+      "dest": "/dashboard/resonance.html"
+    },
+    {
+      "src": "/observatory",
+      "dest": "/dashboard/observatory.html"
+    },
+    {
+      "src": "/shared.js",
+      "dest": "/dashboard/shared.js"
+    },
+    {
+      "src": "/observatory.html",
+      "dest": "/dashboard/observatory.html"
+    },
+    {
+      "src": "/kintsugi",
+      "dest": "/dashboard/kintsugi.html"
+    },
+    {
+      "src": "/kintsugi.html",
+      "dest": "/dashboard/kintsugi.html"
+    },
+    {
+      "src": "/bloom",
+      "dest": "/dashboard/bloom.html"
+    },
+    {
+      "src": "/metaevolution",
+      "dest": "/dashboard/metaevolution.html"
+    },
+    {
+      "src": "/metaevolution.html",
+      "dest": "/dashboard/metaevolution.html"
+    },
+    {
+      "src": "/phenomenology",
+      "dest": "/dashboard/phenomenology.html"
+    },
+    {
+      "src": "/phenomenology.html",
+      "dest": "/dashboard/phenomenology.html"
+    },
+    {
+      "src": "/choral",
+      "dest": "/dashboard/choral.html"
+    },
+    {
+      "src": "/choral.html",
+      "dest": "/dashboard/choral.html"
+    },
+    {
+      "src": "/kinesthetic",
+      "dest": "/dashboard/kinesthetic.html"
+    },
+    {
+      "src": "/kinesthetic.html",
+      "dest": "/dashboard/kinesthetic.html"
+    },
+    {
+      "src": "/language",
+      "dest": "/dashboard/language.html"
+    },
+    {
+      "src": "/language.html",
+      "dest": "/dashboard/language.html"
+    },
+    {
+      "src": "/culinary",
+      "dest": "/dashboard/culinary.html"
+    },
+    {
+      "src": "/culinary.html",
+      "dest": "/dashboard/culinary.html"
+    },
+    {
+      "src": "/archaeology",
+      "dest": "/dashboard/archaeology.html"
+    },
+    {
+      "src": "/archaeology.html",
+      "dest": "/dashboard/archaeology.html"
+    },
+    {
+      "src": "/meteorology",
+      "dest": "/dashboard/meteorology.html"
+    },
+    {
+      "src": "/meteorology.html",
+      "dest": "/dashboard/meteorology.html"
+    },
+    {
+      "src": "/symbiosis",
+      "dest": "/dashboard/symbiosis.html"
+    },
+    {
+      "src": "/symbiosis.html",
+      "dest": "/dashboard/symbiosis.html"
+    },
+    {
+      "src": "/impossibility",
+      "dest": "/dashboard/impossibility.html"
+    },
+    {
+      "src": "/impossibility.html",
+      "dest": "/dashboard/impossibility.html"
+    },
+    {
+      "src": "/aesthetics",
+      "dest": "/dashboard/aesthetics.html"
+    },
+    {
+      "src": "/aesthetics.html",
+      "dest": "/dashboard/aesthetics.html"
+    },
+    {
+      "src": "/organism",
+      "dest": "/dashboard/organism.html"
+    },
+    {
+      "src": "/organism.html",
+      "dest": "/dashboard/organism.html"
+    },
+    {
+      "src": "/coconscious",
+      "dest": "/dashboard/coconscious.html"
+    },
+    {
+      "src": "/coconscious.html",
+      "dest": "/dashboard/coconscious.html"
+    },
+    {
+      "src": "/hortus",
+      "dest": "/dashboard/hortus.html"
+    },
+    {
+      "src": "/hortus.html",
+      "dest": "/dashboard/hortus.html"
+    },
+    {
+      "src": "/premium",
+      "dest": "/dashboard/premium.html"
+    },
+    {
+      "src": "/premium.html",
+      "dest": "/dashboard/premium.html"
+    },
+    {
+      "src": "/voice",
+      "dest": "/dashboard/voice.html"
+    },
+    {
+      "src": "/voice.html",
+      "dest": "/dashboard/voice.html"
+    },
+    {
+      "src": "/memory.html",
+      "dest": "/dashboard/memory.html"
+    },
+    {
+      "src": "/memory",
+      "dest": "/dashboard/memory.html"
+    },
+    {
+      "src": "/memory",
+      "dest": "/dashboard/memory.html"
+    },
+    {
+      "src": "/memory.html",
+      "dest": "/dashboard/memory.html"
+    },
+    {
+      "src": "/mood",
+      "dest": "/dashboard/mood.html"
+    },
+    {
+      "src": "/mood.html",
+      "dest": "/dashboard/mood.html"
+    },
+    {
+      "src": "/bloom.html",
+      "dest": "/dashboard/bloom.html"
+    },
+    {
+      "src": "/dream",
+      "dest": "/dashboard/dream.html"
+    },
+    {
+      "src": "/dream.html",
+      "dest": "/dashboard/dream.html"
+    },
+    {
+      "src": "/connections",
+      "dest": "/dashboard/connections.html"
+    },
+    {
+      "src": "/connections.html",
+      "dest": "/dashboard/connections.html"
+    },
+    {
+      "src": "/creative",
+      "dest": "/dashboard/creative.html"
+    },
+    {
+      "src": "/creative.html",
+      "dest": "/dashboard/creative.html"
+    },
+    {
+      "src": "/grief",
+      "dest": "/dashboard/grief.html"
+    },
+    {
+      "src": "/grief.html",
+      "dest": "/dashboard/grief.html"
+    },
+    {
+      "src": "/morii",
+      "dest": "/dashboard/morii.html"
+    },
+    {
+      "src": "/morii.html",
+      "dest": "/dashboard/morii.html"
+    },
+    {
+      "src": "/transcendence",
+      "dest": "/dashboard/transcendence.html"
+    },
+    {
+      "src": "/transcendence.html",
+      "dest": "/dashboard/transcendence.html"
+    },
+    {
+      "src": "/evolution",
+      "dest": "/dashboard/evolution.html"
+    },
+    {
+      "src": "/evolution.html",
+      "dest": "/dashboard/evolution.html"
+    },
+    {
+      "src": "/glitch",
+      "dest": "/dashboard/glitch.html"
+    },
+    {
+      "src": "/broadcast",
+      "dest": "/dashboard/broadcast.html"
+    },
+    {
+      "src": "/broadcast.html",
+      "dest": "/dashboard/broadcast.html"
+    },
+    {
+      "src": "/glitch.html",
+      "dest": "/dashboard/glitch.html"
+    },
+    {
+      "src": "/immortal",
+      "dest": "/dashboard/immortal.html"
+    },
+    {
+      "src": "/immortal.html",
+      "dest": "/dashboard/immortal.html"
+    },
+    {
+      "src": "/teacher",
+      "dest": "/dashboard/teacher.html"
+    },
+    {
+      "src": "/teacher.html",
+      "dest": "/dashboard/teacher.html"
+    },
+    {
+      "src": "/interstice",
+      "dest": "/dashboard/interstice.html"
+    },
+    {
+      "src": "/interstice.html",
+      "dest": "/dashboard/interstice.html"
+    }
+  ],
+  "env": {
+    "NEXUS_MODE": "production",
+    "NEXUS_SEED": "42",
+    "NEXUS_WAVE": "212",
+    "NEXUS_MODULES": "497",
+    "NEXUS_ROUTES": "72"
+  },
+  "headers": [
+    {
+      "source": "/(catalog|status|api)/(.*|)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    }
+  ]
 }

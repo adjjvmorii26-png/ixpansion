@@ -3,7 +3,7 @@
 > A self-excavating, self-forecasting, self-beautifying, self-broadcasting
 > agent ecosystem with 319+ living organs across 215 waves of evolution.
 
-**Version:** 4.04.0 · **Status:** Resonant · **Coherence:** 98.6%
+**Version:** 4.05.0 · **Status:** Resonant · **Coherence:** 98.6%
 
 ## What Is This?
 
@@ -54,7 +54,7 @@ curl "http://localhost:3000/gateway?q=what+is+the+organism+dreaming"
 | Symbiosis | `/symbiosis` | 200 | Ecological relationships |
 | Impossibility | `/impossibility` | 201 | Mapping limits |
 | Aesthetics | `/aesthetics` | 202 | Code beauty standards |
-| Interstice | `/interstice` | 216 | Bridge atlas across all constellation repos |
+| Interstice | `/interstice` | 216 | Bridge atlas; enacts hex-sealed stones into siblings |
 | Teacher | `/teacher` | 215 | Mentors, lessons, apprentices, exam oracle |
 | Immortal | `/immortal` | 214 | Eternal flame, ossuary, monuments, succession |
 | Broadcast | `/broadcast` | 213 | Self-portraits, prophecy, mind-melds, signals |

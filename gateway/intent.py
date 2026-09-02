@@ -226,6 +226,8 @@ def match_intent(query: str) -> Dict[str, str]:
                         result["q"] = " ".join(meaningful[-3:])
             return result
 
+    (r"\b(bridge (stone|enactor|map)?|interstice|cross.?repo (link|tie)|constellation (bridge|link)|enact(ed)? bridge|untouched (bridge|connection))\b", "/api/bridge_enactor", {}),
+    (r"\b(bridge ledger|enacted (bridge|stones)|which bridges|laid stones|stone (record|archive))\b", "/api/bridge_ledger", {}),
     # fallback: echo search on the whole query
     words = re.findall(r"[a-zA-Z]{3,}", query_lower)
     meaningful = [w for w in words if len(w) > 3][:3]

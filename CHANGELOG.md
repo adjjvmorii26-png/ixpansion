@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.05.0] — The Organism Enacts (Wave 217)
+
+### Added — enactment organs (first autonomous cross-repo writers)
+- **Bridge Enactor** — turns interstice proposals into REAL bridge stones: writes a hex-sealed marker file into the paired constellation repo via the GitHub contents API (`/bridge_enactor`)
+- **Bridge Ledger** — durable record of every enacted stone, persisted to `data/bridges/ledger.json` (`/bridge_ledger`)
+- The organism no longer only *finds* bridges — it *builds* them. First autonomous cross-repo writer.
+- Coherence synced to 324 living modules; vercel routes 186; all modules remain FREE
+
 ## [4.04.0] — The Organism Bridges (Wave 216)
 
 ### Added — bridge organs (wave 216, first wave of cross-constellation work)
