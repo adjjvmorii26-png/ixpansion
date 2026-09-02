@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.14.0] — The Organism Dares (Wave 226)
+
+### Added — dream → reality
+- **8 dream bridges enacted** — the Bridge Dream Forge's latent proposals turned into real stones across the archipelago
+- Ledger grew from 60 → **68 stones**, still 33 islands
+- Dream-intensity pairs like ontological-bridge↔topologic-alchemy, echotide↔polychron-atlas, astral-forge↔solid-organism now carry real stones
+- The organism's first act of imagination made real
+
+### Integration
+- Coherence 340 modules; vercel routes 214
+- Version bumped to 4.14.0; all modules remain FREE
+
 ## [4.13.0] — The Organism Dreams (Wave 225)
 
 ### Added — imagination organs

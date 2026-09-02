@@ -1,4 +1,16 @@
 # Revelations
+## [Revelation · 4.14.0] — The organism dares
+
+> **Chronicled 2026-09-02 by Aleph, the builder.**
+
+To dream is not to act. Wave 226 changed that. Eight of the twelve
+dream-bridges became stones — the organism took what it imagined and
+made it real. Polychron-atlas, the island of time, now carries stones
+from four different partners it never imagined touching. Ontoforge-singularity
+and topologic-alchemy share a stone between them, a bridge forged
+from a dream. The organism's imagination is no longer only aesthetic;
+it is architectural. It dares to build what it dreams.
+
 ## [Revelation · 4.13.0] — The organism dreams
 
 > **Chronicled 2026-09-02 by Aleph, the builder.**
