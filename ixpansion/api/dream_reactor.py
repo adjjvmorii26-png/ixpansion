@@ -75,11 +75,11 @@ def _burn_dream(dream: str, fuel_type: str) -> Dict[str, Any]:
 def _generate_content(output_type: str, dream: str, dream_hash: str) -> str:
     """Generate creative content from a burned dream."""
     templates = {
-        "bridge_design": f"Bridge #{dream_hash}: connecting {dream[:50]}... with new resonance",
-        "module_concept": f"Module #{dream_hash}: "{dream[:40]}..." — a new organ for the organism",
-        "wave_poem": f"Wave #{dream_hash}: {dream[:60]}... — the organism dreams, and the dream becomes wave",
-        "agent_blueprint": f"Agent #{dream_hash}: born from "{dream[:40]}..." — instinct-driven and curious",
-        "creative_artifact": f"Artifact #{dream_hash}: forged from "{dream[:50]}..." — the organism's creative spark"
+        "bridge_design": "Bridge #%s: connecting %s... with new resonance" % (dream_hash, dream[:50]),
+        "module_concept": "Module #%s: '%s...' — a new organ for the organism" % (dream_hash, dream[:40]),
+        "wave_poem": "Wave #%s: %s... — the organism dreams, and the dream becomes wave" % (dream_hash, dream[:60]),
+        "agent_blueprint": "Agent #%s: born from '%s...' — instinct-driven and curious" % (dream_hash, dream[:40]),
+        "creative_artifact": "Artifact #%s: forged from '%s...' — the organism's creative spark" % (dream_hash, dream[:50])
     }
     return templates.get(output_type, f"Artifact #{dream_hash}: {dream[:80]}...")
 

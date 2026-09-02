@@ -98,7 +98,7 @@ def _deliberate(topic: str, active_delegates: List[str]) -> Dict[str, Any]:
     }
 
 def _vote_position(domain: str, motion: str) -> str:
-    """Determine a delegate's voting position."""$ 
+    """Determine a delegate's voting position."""
     # Each domain votes based on its priority
     priorities = {
         "growth": "for" if "expand" in motion.lower() or "grow" in motion.lower() else "abstain",

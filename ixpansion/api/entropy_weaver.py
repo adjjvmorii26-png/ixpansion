@@ -31,7 +31,7 @@ def handler(payload: Dict[str, Any] = None, context: Dict[str, Any] = None) -> D
     return {"current_entropy": navigation.get("current_entropy", 0.2), "path": navigation.get("last_path")}
 
 def _calculate_entropy_path(current: float, target: float) -> Dict[str, Any]:
-    """Calculate the entropy navigation path."""$
+    """Calculate the entropy navigation path."""
     distance = abs(target - current)
     direction = "decreasing" if target < current else "increasing"
     steps = min(int(distance * 10), 20)  # Cap at 20 steps

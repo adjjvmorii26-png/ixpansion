@@ -54,7 +54,7 @@ def handler(payload: Dict[str, Any] = None, context: Dict[str, Any] = None) -> D
     }
 
 def _calculate_rhythm(timestamp: float) -> str:
-    """Calculate the organism's current rhythm phase."""$
+    """Calculate the organism's current rhythm phase."""
     # 24-hour cycle mapped to sine wave
     hour_of_day = (timestamp % 86400) / 86400
     phase = math.sin(hour_of_day * 2 * math.pi)

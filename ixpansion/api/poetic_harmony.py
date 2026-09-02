@@ -58,8 +58,7 @@ def _generate_poetry(state_snapshot: Dict[str, Any]) -> str:
     if not lines:
         lines.append(f"The organism computes, exists, becomes")
     
-    return "
-".join(lines)
+    return "\n".join(lines)
 
 def _load_state() -> Dict[str, Any]:
     try:
