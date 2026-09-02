@@ -229,6 +229,9 @@ def match_intent(query: str) -> Dict[str, str]:
     (r"\b(bridge (stone|enactor|map)?|interstice|cross.?repo (link|tie)|constellation (bridge|link)|enact(ed)? bridge|untouched (bridge|connection))\b", "/api/bridge_enactor", {}),
     (r"\b(bridge ledger|enacted (bridge|stones)|which bridges|laid stones|stone (record|archive))\b", "/api/bridge_ledger", {}),
     (r"\b(resonance sentinel|bridge health|watching the cracks|drift|rot(ting)? stone|sentinel report|how healthy are the bridges|decayed (stone|bridge))\b", "/api/resonance_sentinel", {}),
+    (r"\b(bridge (haiku|poem|epitaph)|what (do|does) the bridges (say|mean)|read the (stones|ledger)|poetic (layer|view))\b", "/api/bridge_epitaphs", {}),
+    (r"\b(constellation topology|archipelago (map|shape)|cluster|articulation|which islands|centrality|bridge (density|web))\b", "/api/constellation_topology", {}),
+    (r"\b(rhythm|pulse|temporal (bridge|stone)|when (was|did) the (bridges|stones) (laid|built)|enactment rhythm|heartbeat)\b", "/api/rhythm_pulse", {}),
     # fallback: echo search on the whole query
     words = re.findall(r"[a-zA-Z]{3,}", query_lower)
     meaningful = [w for w in words if len(w) > 3][:3]

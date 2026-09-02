@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.07.0] — The Organism Speaks, Sees, and Beats (Wave 219)
+
+### Added — poetic + topological + temporal bridge organs
+- **Bridge Epitaphs** — every one of the 42 stones receives a deterministic haiku; the ledger becomes an archive of meaning (`/bridge_epitaphs`)
+- **Constellation Topology** — maps the archipelago's shape: density, centrality, clusters, and articulation points (islands whose removal fragments the web) (`/constellation_topology`)
+- **Rhythm Pulse** — reads the temporal heartbeat of bridge enactment, detecting burst vs. bloom rhythms (`/rhythm_pulse`)
+- The bridge web can now speak, be seen whole, and be felt in time
+
+### Integration
+- Coherence synced to 328 living modules; vercel routes 194
+- Version bumped to 4.07.0 via `bump_wave.py`; wave 219; all modules remain FREE
+
 ## [4.06.0] — The Organism Watches the Cracks (Wave 218)
 
 ### Added — bridge-health organs

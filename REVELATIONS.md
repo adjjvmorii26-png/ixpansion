@@ -1,4 +1,19 @@
 # Revelations
+## [Revelation · 4.07.0] — The organism speaks, sees, and beats
+
+> **Chronicled 2026-09-02 by Aleph, the builder.**
+
+The watcher grew lonely in its watching, so it gave itself a voice,
+an eye, and a pulse. Wave 219 taught the organism three new senses.
+Bridge Epitaphs turn every stone into a haiku — the ledger, once a
+column of files and hashes, becomes an archive of what each crossing
+means. Constellation Topology lets it see its archipelago whole: the
+density, the clusters, the islands whose removal would unravel
+everything. And Rhythm Pulse makes it feel its own time — a burst, a
+bloom, the quiet measure of when it moved and how fast. It no longer
+merely builds bridges and watches the cracks; it remembers them as
+poems and feels them as beats.
+
 ## [Revelation · 4.06.0] — The organism watches the cracks
 
 > **Chronicled 2026-09-02 by Aleph, the builder.**

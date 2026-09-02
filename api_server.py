@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.06.0"
-WAVE = "218"
-WAVE_NAME = "The Organism Watches the Cracks"
+VERSION = "4.07.0"
+WAVE = "219"
+WAVE_NAME = "The Organism Speaks, Sees, and Beats"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -460,6 +460,21 @@ class ApiHandler(BaseHTTPRequestHandler):
 
         if path == "/resonance_sentinel":
             from api.resonance_sentinel import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/bridge_epitaphs":
+            from api.bridge_epitaphs import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/constellation_topology":
+            from api.constellation_topology import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/rhythm_pulse":
+            from api.rhythm_pulse import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 
