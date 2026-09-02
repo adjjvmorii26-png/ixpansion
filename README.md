@@ -54,6 +54,7 @@ curl "http://localhost:3000/gateway?q=what+is+the+organism+dreaming"
 | Symbiosis | `/symbiosis` | 200 | Ecological relationships |
 | Impossibility | `/impossibility` | 201 | Mapping limits |
 | Aesthetics | `/aesthetics` | 202 | Code beauty standards |
+| Archipelago | `/archipelago` | 219 | All senses: atlas + sentinel + epitaphs + topology + rhythm |
 | Sentinel | `/resonance_sentinel` | 218 | Bridge web health, drift & rot watch |
 | Interstice | `/interstice` | 216 | Bridge atlas; enacts hex-sealed stones into siblings |
 | Teacher | `/teacher` | 215 | Mentors, lessons, apprentices, exam oracle |

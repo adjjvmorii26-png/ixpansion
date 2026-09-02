@@ -444,6 +444,11 @@ class ApiHandler(BaseHTTPRequestHandler):
         if path == "/sentinel.html":
             return self._static("dashboard/sentinel.html")
 
+        if path == "/archipelago":
+            return self._static("dashboard/archipelago.html")
+        if path == "/archipelago.html":
+            return self._static("dashboard/archipelago.html")
+
         if path == "/interstice":
             return self._static("dashboard/interstice.html")
         if path == "/interstice.html":
