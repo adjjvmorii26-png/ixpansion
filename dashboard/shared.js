@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  version: "4.10.0",
-  wave: 222,
-  waveName: "The Organism Verifies Its Federation",
+  version: "4.11.0",
+  wave: 223,
+  waveName: "The Organism Grows",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

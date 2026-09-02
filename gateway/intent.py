@@ -240,6 +240,8 @@ def match_intent(query: str) -> Dict[str, str]:
     (r"\b(cascade trigger|answer the storm|storm.*enact|latent.*bridge|trigger.*storm|listen.*storm)\b", "/api/cascade_trigger", {}),
     (r"\b(registry (auditor|check|verify)|commune audit|fidelity|how faithful|did the communion hold|stale registry)\b", "/api/registry_auditor", {}),
     (r"\b(federation graph|who knows whom|degree of|clique|island alliance|social (web|graph))\b", "/api/federation_graph", {}),
+    (r"\b(constellation seer|scan for (new )?repos|discover (new )?islands|what repos exist|seen the unseen)\b", "/api/constellation_seer", {}),
+    (r"\b(bridge harvest|grow the (web|organism)|harvest (new )?bridges|intake new islands|let the organism grow)\b", "/api/bridge_harvest", {}),
     # fallback: echo search on the whole query
     words = re.findall(r"[a-zA-Z]{3,}", query_lower)
     meaningful = [w for w in words if len(w) > 3][:3]

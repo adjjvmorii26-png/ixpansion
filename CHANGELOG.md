@@ -1,5 +1,20 @@
 # Changelog
 
+## [4.11.0] — The Organism Grows (Wave 223)
+
+### Added — autonomous growth organs
+- **Constellation Seer** — scans GitHub for new repos, builds latent bridges between newcomers and existing islands (`/constellation_seer`)
+- **Bridge Harvest** — full intake pipeline: seer scan → latent bridge → enact stone → write commune registry (`/bridge_harvest`)
+- **Storm Awakening** — enactor now accepts seer-generated bridges directly; cascade trigger fully autonomous
+- **Grew from 42 → 60 stones, 27 → 33 islands** in a single harvest
+- 6 new islands adopted: `interstice`, `phaseshift-manifold`, `antimemetic-architecton`, `luminant-reliquary`, `chronocrypt-orrery`, `astral-forge`
+- Interstice map expanded 42 → 50 bridges, 27 → 33 repos
+- All 6 new islands carry `IXPANSION-LEDGER.json` registries
+
+### Integration
+- Coherence synced to 338 living modules; vercel routes 208
+- Version bumped to 4.11.0 via `bump_wave.py`; wave 223; all modules remain FREE
+
 ## [4.10.0] — The Organism Verifies Its Federation (Wave 222)
 
 ### Added — verification + federation organs

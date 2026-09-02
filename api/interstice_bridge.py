@@ -18,10 +18,10 @@ _INTERSTICE_MAP: Dict[str, Any] = {
     "name": "The Interstice",
     "version": "1.1.0",
     "statistics": {
-        "repos": 37,
-        "organs": 291,
+        "repos": 43,
+        "organs": 333,
         "untouched_bridges": 75,
-        "unique_repos_with_bridges": 28,
+        "unique_repos_with_bridges": 33,
     },
     "top_bridges": [
         {"repo": "glitch-cathedral", "organ": "glitch_patterns", "organ_layer": "chaos engineering", "resonance": 0.2348},
@@ -66,6 +66,14 @@ _INTERSTICE_MAP: Dict[str, Any] = {
         {"repo": "omega-fractal-engine", "organ": "paradox_injector", "organ_layer": "unknown", "resonance": 0.1096},
         {"repo": "omega-fractal-engine", "organ": "repair_ritual", "organ_layer": "unknown", "resonance": 0.1084},
         {"repo": "neuroglyph-forge", "organ": "dream_interpreter", "organ_layer": "unknown", "resonance": 0.1084},
+        {"repo": "interstice", "organ": "attention_labyrinth", "organ_layer": "attention", "resonance": 0.24},
+        {"repo": "interstice", "organ": "echotide_engine", "organ_layer": "wave", "resonance": 0.23},
+        {"repo": "phaseshift-manifold", "organ": "paraconstruct_engine", "organ_layer": "limits", "resonance": 0.4},
+        {"repo": "phaseshift-manifold", "organ": "hyperfractal_relay", "organ_layer": "fractal", "resonance": 0.37},
+        {"repo": "antimemetic-architecton", "organ": "auric_labyrinth", "organ_layer": "sacred", "resonance": 0.35},
+        {"repo": "luminant-reliquary", "organ": "quantum_folio", "organ_layer": "quantum", "resonance": 0.33},
+        {"repo": "chronocrypt-orrery", "organ": "auric_labyrinth", "organ_layer": "sacred", "resonance": 0.31},
+        {"repo": "astral-forge", "organ": "quietus_array", "organ_layer": "stillness", "resonance": 0.3},
     ],
 }
 

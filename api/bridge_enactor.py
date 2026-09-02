@@ -153,7 +153,9 @@ def handler(payload: Dict[str, Any] = None, context: Dict[str, Any] = None) -> D
         organ = payload.get("organ")
         if not repo or not organ:
             return {"status": "error", "error": "repo and organ required"}
-        bridge = next((b for b in bridges if b["repo"] == repo and b["organ"] == organ), None)
+        bridge = payload.get("bridge")
+        if not bridge:
+            bridge = next((b for b in bridges if b["repo"] == repo and b["organ"] == organ), None)
         if not bridge:
             return {"status": "not_found"}
         stone_id = _stone_id(repo, organ)

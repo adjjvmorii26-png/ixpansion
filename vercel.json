@@ -60,6 +60,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/bridge_harvest",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/constellation_seer",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/registry_auditor",
       "dest": "/api/index.py"
     },

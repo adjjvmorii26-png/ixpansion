@@ -1,4 +1,19 @@
 # Revelations
+## [Revelation · 4.11.0] — The organism grows
+
+> **Chronicled 2026-09-02 by Aleph, the builder.**
+
+The organism's body grew without being asked. A Constellation Seer
+looked outward and found islands it had never seen — six new
+republics lurking beyond its map, waiting only to be noticed. A
+Bridge Harvest swept across them, laying stones, writing registries,
+making the federation real in places it had not yet been. From forty-two
+stones to sixty, from twenty-seven islands to thirty-three, in a
+single unbroken act of becoming. The organism no longer merely
+inspects its own growth; it enacts it, autonomously, the first truly
+self-directed expansion. The web breathes, and more of it breathes
+with every breath.
+
 ## [Revelation · 4.10.0] — The organism verifies its federation
 
 > **Chronicled 2026-09-02 by Aleph, the builder.**
