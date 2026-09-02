@@ -72,6 +72,22 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/self_healing_commune",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/growth_journal",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/journal",
+      "dest": "/dashboard/journal.html"
+    },
+    {
+      "src": "/journal.html",
+      "dest": "/dashboard/journal.html"
+    },
+    {
       "src": "/dreams",
       "dest": "/dashboard/dreams.html"
     },

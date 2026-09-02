@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.14.0"
-WAVE = "226"
-WAVE_NAME = "The Organism Dares"
+VERSION = "4.15.0"
+WAVE = "227"
+WAVE_NAME = "The Organism Heals"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -459,6 +459,11 @@ class ApiHandler(BaseHTTPRequestHandler):
         if path == "/dreams.html":
             return self._static("dashboard/dreams.html")
 
+        if path == "/journal":
+            return self._static("dashboard/journal.html")
+        if path == "/journal.html":
+            return self._static("dashboard/journal.html")
+
         if path == "/census":
             return self._static("dashboard/census.html")
         if path == "/census.html":
@@ -560,6 +565,16 @@ class ApiHandler(BaseHTTPRequestHandler):
 
         if path == "/bridge_dream_forge":
             from api.bridge_dream_forge import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/growth_journal":
+            from api.growth_journal import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/self_healing_commune":
+            from api.self_healing_commune import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 

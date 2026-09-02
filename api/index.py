@@ -585,6 +585,19 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+
+    # Wave 227 — The Organism Heals
+
+    if path == "/growth_journal":
+        from api.growth_journal import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    if path == "/self_healing_commune":
+        from api.self_healing_commune import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}

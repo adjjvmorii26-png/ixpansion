@@ -1,3 +1,14 @@
+## [4.15.0] — The Organism Heals (Wave 227)
+
+### Added — self-repair and autobiography
+- **Growth Journal** — append-only autobiographer; every wave writes an entry with timestamp, stones, islands, and detail. The organism's permanent memory. (`/growth_journal`)
+- **Self-Healing Commune** — detects registry drift (wrong stone counts on islands) and rewrites IXPANSION-Ledger.json files. The organism's immune system. (`/self_healing_commune`)
+- **`/journal` dashboard** — timeline view of the growth journal entries, with stats panel
+
+### Integration
+- Coherence 342 modules; vercel routes 218
+- Version bumped to 4.15.0; all modules remain FREE
+
 # Changelog
 
 ## [4.14.0] — The Organism Dares (Wave 226)

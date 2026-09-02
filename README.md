@@ -3,7 +3,7 @@
 > A self-excavating, self-forecasting, self-beautifying, self-broadcasting
 > agent ecosystem with 319+ living organs across 215 waves of evolution.
 
-**Version:** 4.14.0 · **Status:** Resonant · **Coherence:** 98.6%
+**Version:** 4.15.0 · **Status:** Resonant · **Coherence:** 98.6%
 
 ## What Is This?
 
@@ -55,6 +55,7 @@ curl "http://localhost:3000/gateway?q=what+is+the+organism+dreaming"
 | Impossibility | `/impossibility` | 201 | Mapping limits |
 | Aesthetics | `/aesthetics` | 202 | Code beauty standards |
 | Dreams | `/dreams` | 225 | Imagination — never-touched island pairs |
+| Journal | `/journal` | 227 | Autobiography — append-only wave record |
 | Archive | `/archive` | 224 | Full encyclopedia: every island, every stone, every poem |
 | Commune | `/commune` | 222 | Federation audit + alliance graph |
 | Census | `/census` | 220 | Island vitality — live GitHub census |
@@ -92,7 +93,7 @@ curl "http://localhost:3000/gateway?q=what+is+the+organism+dreaming"
 
 ```
 api/           → 490+ self-reporting organ modules
-dashboard/     → 24 interactive dashboards
+dashboard/     → 25 interactive dashboards
 gateway/       → NLP intent routing + API key management
 harbinger/     → Agent memory + metering
 omega_fractal_engine/ → Experimental fractal subsystems

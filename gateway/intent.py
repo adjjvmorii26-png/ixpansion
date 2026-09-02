@@ -244,6 +244,8 @@ def match_intent(query: str) -> Dict[str, str]:
     (r"\b(bridge harvest|grow the (web|organism)|harvest (new )?bridges|intake new islands|let the organism grow)\b", "/api/bridge_harvest", {}),
     (r"\b(constellation archive|archipelago archive|full archive|state of the web|encyclopedia|the story of)\b", "/api/constellation_archive", {}),
     (r"\\b(bridge dream|dream forge|dream of bridges|unbuilt bridge|dream of the web|untouched bridges)\\b", "/api/bridge_dream_forge", {}),
+    (r"\b(growth journal|organism story|autobiography|timeline|record of waves|what happened)\b", "/api/growth_journal", {}),
+    (r"\b(self.?heal|heal commune|fix registries|repair communion|sync islands|mend the records)\b", "/api/self_healing_commune", {}),
     # fallback: echo search on the whole query
     words = re.findall(r"[a-zA-Z]{3,}", query_lower)
     meaningful = [w for w in words if len(w) > 3][:3]
