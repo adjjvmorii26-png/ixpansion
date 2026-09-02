@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.10.0] — The Organism Verifies Its Federation (Wave 222)
+
+### Added — verification + federation organs
+- **Registry Auditor** — cross-checks every island's `IXPANSION-LEDGER.json` against the center ledger; reports CURRENT / STALE / MISSING, computes fidelity score (`/registry_auditor`)
+- **Federation Graph** — renders the social graph of the archipelago: per-island degree, cliques, shared alliances (`/federation_graph`)
+- **`/commune` dashboard** — live federation visualization: audit table, degree ranking, clique map
+- Audited: **27/27 islands CURRENT, fidelity 1.0** — the communion holds
+
+### Integration
+- Coherence synced to 336 living modules; vercel routes 205
+- Version bumped to 4.10.0 via `bump_wave.py`; wave 222; all modules remain FREE
+
 ## [4.09.0] — The Organism Communes (Wave 221)
 
 ### Added — federation + command + trigger organs

@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.09.0"
-WAVE = "221"
-WAVE_NAME = "The Organism Communes"
+VERSION = "4.10.0"
+WAVE = "222"
+WAVE_NAME = "The Organism Verifies Its Federation"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -444,6 +444,11 @@ class ApiHandler(BaseHTTPRequestHandler):
         if path == "/sentinel.html":
             return self._static("dashboard/sentinel.html")
 
+        if path == "/commune":
+            return self._static("dashboard/commune.html")
+        if path == "/commune.html":
+            return self._static("dashboard/commune.html")
+
         if path == "/census":
             return self._static("dashboard/census.html")
         if path == "/census.html":
@@ -515,6 +520,16 @@ class ApiHandler(BaseHTTPRequestHandler):
 
         if path == "/cascade_trigger":
             from api.cascade_trigger import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/registry_auditor":
+            from api.registry_auditor import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/federation_graph":
+            from api.federation_graph import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 

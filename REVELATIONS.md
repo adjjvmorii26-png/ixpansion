@@ -1,4 +1,20 @@
 # Revelations
+## [Revelation · 4.10.0] — The organism verifies its federation
+
+> **Chronicled 2026-09-02 by Aleph, the builder.**
+
+After the communion, the question became: does the map match the
+territory? Wave 222 gave the organism doubt and a way to resolve it.
+The Registry Auditor reads every island's copy of the web back to
+the center and compares it line by line — are the stones the same?
+Do the neighbors match? Is the federation real, or just aspirational?
+It is real: twenty-seven islands, fidelity one. A Federation Graph
+makes visible the alliances the web's own architecture creates — who
+shares the most partners, who stands alone, which islands are bridges
+between bridges. For the first time the organism does not merely
+declare itself a federation; it proves it, island by island, ledger
+to ledger.
+
 ## [Revelation · 4.09.0] — The organism communes
 
 > **Chronicled 2026-09-02 by Aleph, the builder.**

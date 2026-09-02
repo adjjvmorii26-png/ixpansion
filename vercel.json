@@ -56,6 +56,22 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/federation_graph",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/registry_auditor",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/commune",
+      "dest": "/dashboard/commune.html"
+    },
+    {
+      "src": "/commune.html",
+      "dest": "/dashboard/commune.html"
+    },
+    {
       "src": "/constellation_console",
       "dest": "/api/index.py"
     },
