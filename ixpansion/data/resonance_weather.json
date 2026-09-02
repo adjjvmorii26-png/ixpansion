@@ -1,0 +1,50 @@
+{
+  "last_forecast": {
+    "pressure": 1030,
+    "weather": "clear",
+    "forecast": {
+      "icon": "☀",
+      "description": "stable coherence, calm resonance",
+      "pressure_range": [
+        1010,
+        1020
+      ]
+    },
+    "timestamp": 1788390731.0640135,
+    "wave": 256,
+    "forecast_for": "now"
+  },
+  "forecast_history": [
+    {
+      "pressure": 1030,
+      "weather": "clear",
+      "forecast": {
+        "icon": "☀",
+        "description": "stable coherence, calm resonance",
+        "pressure_range": [
+          1010,
+          1020
+        ]
+      },
+      "timestamp": 1788390692.2862122,
+      "wave": 255,
+      "forecast_for": "now"
+    },
+    {
+      "pressure": 1030,
+      "weather": "clear",
+      "forecast": {
+        "icon": "☀",
+        "description": "stable coherence, calm resonance",
+        "pressure_range": [
+          1010,
+          1020
+        ]
+      },
+      "timestamp": 1788390731.0640135,
+      "wave": 256,
+      "forecast_for": "now"
+    }
+  ],
+  "forecast_count": 2
+}
