@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.05.0"
-ORGANISM_WAVE = 217
-ORGANISM_WAVE_NAME = "The Organism Enacts"
+ORGANISM_VERSION = "4.06.0"
+ORGANISM_WAVE = 218
+ORGANISM_WAVE_NAME = "The Organism Watches the Cracks"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

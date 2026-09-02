@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.06.0] — The Organism Watches the Cracks (Wave 218)
+
+### Added — bridge-health organs
+- **Resonance Sentinel** — watches the bridge network for DRIFT (unenacted bridges), ROT (decayed stones), and HOLLOW (dormant repos); reports a health index (`/resonance_sentinel`)
+- **Auto-Enact** (`tools/auto_enact.py`) — discovers and lays new bridge stones autonomously; used as a maintenance cron
+- First maintenance-focused wave: the organism learns to watch its own cross-project architecture
+
+### Integration
+- Coherence synced to 325 living modules; vercel routes 189
+- Version bumped to 4.06.0 via `bump_wave.py`; wave 218; all modules remain FREE
+
 ## [4.05.0] — The Organism Enacts (Wave 217)
 
 ### Added — enactment organs (first autonomous cross-repo writers)

@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.05.0"
-WAVE = "217"
-WAVE_NAME = "The Organism Enacts"
+VERSION = "4.06.0"
+WAVE = "218"
+WAVE_NAME = "The Organism Watches the Cracks"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -439,6 +439,11 @@ class ApiHandler(BaseHTTPRequestHandler):
             from api.knot_weaver import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
+        if path == "/sentinel":
+            return self._static("dashboard/sentinel.html")
+        if path == "/sentinel.html":
+            return self._static("dashboard/sentinel.html")
+
         if path == "/interstice":
             return self._static("dashboard/interstice.html")
         if path == "/interstice.html":
@@ -450,6 +455,11 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._json(h(q))
         if path == "/bridge_ledger":
             from api.bridge_ledger import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/resonance_sentinel":
+            from api.resonance_sentinel import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 

@@ -32,6 +32,10 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/resonance_sentinel",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/mentor_engine",
       "dest": "/api/index.py"
     },
@@ -746,6 +750,14 @@
     {
       "src": "/teacher.html",
       "dest": "/dashboard/teacher.html"
+    },
+    {
+      "src": "/sentinel",
+      "dest": "/dashboard/sentinel.html"
+    },
+    {
+      "src": "/sentinel.html",
+      "dest": "/dashboard/sentinel.html"
     },
     {
       "src": "/interstice",
