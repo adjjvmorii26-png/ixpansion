@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.07.0"
-WAVE = "219"
-WAVE_NAME = "The Organism Speaks, Sees, and Beats"
+VERSION = "4.08.0"
+WAVE = "220"
+WAVE_NAME = "The Organism Takes a Census"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -444,6 +444,11 @@ class ApiHandler(BaseHTTPRequestHandler):
         if path == "/sentinel.html":
             return self._static("dashboard/sentinel.html")
 
+        if path == "/census":
+            return self._static("dashboard/census.html")
+        if path == "/census.html":
+            return self._static("dashboard/census.html")
+
         if path == "/archipelago":
             return self._static("dashboard/archipelago.html")
         if path == "/archipelago.html":
@@ -480,6 +485,21 @@ class ApiHandler(BaseHTTPRequestHandler):
 
         if path == "/rhythm_pulse":
             from api.rhythm_pulse import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/island_census":
+            from api.island_census import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/resonance_cascade":
+            from api.resonance_cascade import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/bridge_lifecycle":
+            from api.bridge_lifecycle import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 

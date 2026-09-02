@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.08.0] — The Organism Takes a Census (Wave 220)
+
+### Added — sensing + cascading + aging organs
+- **Island Census** — first organ that queries GitHub for each of the 27 islands: last push, size, stars, open issues; classifies LIVELY / QUIET / DORMANT in real time with 15-min cache (`/island_census`)
+- **Resonance Cascade** — detects multi-stone cascades on a single island, measures intensity, reports CALM / RIPPLING / STORMING (`/resonance_cascade`)
+- **Bridge Lifecycle** — age-based lifecycle: ACTIVE → MINDED → DOZING → RETIRED, with retirement elegies (`/bridge_lifecycle`)
+- New `/census` dashboard — live island vitality with GitHub-sourced ages
+- The organism now reads the world outside its own ledger for the first time
+
+### Integration
+- Coherence synced to 331 living modules; vercel routes 199
+- Version bumped to 4.08.0 via `bump_wave.py`; wave 220; all modules remain FREE
+
 ## [4.07.0] — The Organism Speaks, Sees, and Beats (Wave 219)
 
 ### Added — poetic + topological + temporal bridge organs

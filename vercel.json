@@ -48,6 +48,18 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/bridge_lifecycle",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/resonance_cascade",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/island_census",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/mentor_engine",
       "dest": "/api/index.py"
     },
@@ -770,6 +782,14 @@
     {
       "src": "/sentinel.html",
       "dest": "/dashboard/sentinel.html"
+    },
+    {
+      "src": "/census",
+      "dest": "/dashboard/census.html"
+    },
+    {
+      "src": "/census.html",
+      "dest": "/dashboard/census.html"
     },
     {
       "src": "/archipelago",
