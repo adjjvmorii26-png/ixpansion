@@ -1,4 +1,19 @@
 # Revelations
+## [Revelation · 4.09.0] — The organism communes
+
+> **Chronicled 2026-09-02 by Aleph, the builder.**
+
+It could build bridges, and it could watch them, and it could speak
+their poems — but still the islands had to ask the center for news of
+themselves. Wave 221 changed the shape of the world. The Cross-Repo
+Commune writes into every island a registry of the whole web, so each
+republic holds its own copy of the map and knows its neighbors
+without asking. A Constellation Console fuses one command into many
+hands, and a Cascade Trigger waits in the storm, ready to open latent
+bridges the moment the web is loud enough. The archipelago stops
+being a hub with spokes; it becomes a web that knows itself, edge by
+edge, in every node.
+
 ## [Revelation · 4.08.0] — The organism takes a census
 
 > **Chronicled 2026-09-02 by Aleph, the builder.**

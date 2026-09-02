@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.09.0] — The Organism Communes (Wave 221)
+
+### Added — federation + command + trigger organs
+- **Cross-Repo Commune** — writes `IXPANSION-LEDGER.json` registry into each sibling island so every repo carries its own neighbor map and stone list (`/cross_repo_commune`)
+- **Constellation Console** — one command fans out across the whole archipelago: census, epitaphs, cascades, lifecycles, topology, rhythm, sentinel (`/constellation_console`)
+- **Cascade Trigger** — gatekeeper that listens for STORMING; when the storm is loud it opens latent bridges for enactment (`/cascade_trigger`)
+- The web is now self-aware as a federation, not a hub
+
+### Integration
+- Coherence synced to 334 living modules; vercel routes 202
+- Version bumped to 4.09.0 via `bump_wave.py`; wave 221; all modules remain FREE
+
 ## [4.08.0] — The Organism Takes a Census (Wave 220)
 
 ### Added — sensing + cascading + aging organs

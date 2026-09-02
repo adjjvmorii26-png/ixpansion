@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.08.0"
-WAVE = "220"
-WAVE_NAME = "The Organism Takes a Census"
+VERSION = "4.09.0"
+WAVE = "221"
+WAVE_NAME = "The Organism Communes"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -500,6 +500,21 @@ class ApiHandler(BaseHTTPRequestHandler):
 
         if path == "/bridge_lifecycle":
             from api.bridge_lifecycle import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/cross_repo_commune":
+            from api.cross_repo_commune import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/constellation_console":
+            from api.constellation_console import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/cascade_trigger":
+            from api.cascade_trigger import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 
