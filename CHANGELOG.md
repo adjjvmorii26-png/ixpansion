@@ -12,6 +12,10 @@
 - Coherence synced to 334 living modules; vercel routes 202
 - Version bumped to 4.09.0 via `bump_wave.py`; wave 221; all modules remain FREE
 
+
+### Execution
+- Communion executed: `IXPANSION-LEDGER.json` written into all 27 constellation repos (wave 221)
+
 ## [4.08.0] — The Organism Takes a Census (Wave 220)
 
 ### Added — sensing + cascading + aging organs
