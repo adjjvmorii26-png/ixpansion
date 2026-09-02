@@ -12,6 +12,18 @@
  ],
  "routes": [
   {
+   "src": "/interstice_bridge",
+   "dest": "/api/interstice_bridge"
+  },
+  {
+   "src": "/bridge_dreamer",
+   "dest": "/api/bridge_dreamer"
+  },
+  {
+   "src": "/knot_weaver",
+   "dest": "/api/knot_weaver"
+  },
+  {
    "src": "/mentor_engine",
    "dest": "/api/mentor_engine"
   },
@@ -726,6 +738,14 @@
   {
    "src": "/teacher.html",
    "dest": "/dashboard/teacher.html"
+  },
+  {
+   "src": "/interstice",
+   "dest": "/dashboard/interstice.html"
+  },
+  {
+   "src": "/interstice.html",
+   "dest": "/dashboard/interstice.html"
   }
  ],
  "env": {

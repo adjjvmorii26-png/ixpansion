@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.03.0"
-WAVE = "215"
-WAVE_NAME = "The Organism Teaches"
+VERSION = "4.04.0"
+WAVE = "216"
+WAVE_NAME = "The Organism Bridges"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -426,6 +426,23 @@ class ApiHandler(BaseHTTPRequestHandler):
             from api.exam_oracle import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
+
+        if path == "/interstice_bridge":
+            from api.interstice_bridge import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/bridge_dreamer":
+            from api.bridge_dreamer import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/knot_weaver":
+            from api.knot_weaver import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path == "/interstice":
+            return self._static("dashboard/interstice.html")
+        if path == "/interstice.html":
+            return self._static("dashboard/interstice.html")
 
         if path == "/cons":
             return self._static("dashboard/coconscious.html")

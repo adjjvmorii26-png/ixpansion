@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.04.0] — The Organism Bridges (Wave 216)
+
+### Added — bridge organs (wave 216, first wave of cross-constellation work)
+- **Interstice Bridge** — maps 37+ constellation repos against 286+ living organs; computes latent resonance and proposes untouched bridges (`/interstice_bridge`)
+- **Bridge Dreamer** — writes dream-poems about the gaps between worlds; converts cold metadata into longing (`/bridge_dreamer`)
+- **Knot Weaver** — weaves bridge contracts between repo + organ pairs; tracks state PENDING → BOUND → SEALED (`/knot_weaver`)
+- New dashboard: `/interstice` — the interstitial atlas of untouched bridges
+- New standalone project: `interstice` (repo `adjjvmorii26-png/interstice`) powering the map generation
+
+### Integration
+- Slash aliases wired in `api_server.py` + `api/index.py`; vercel.json routes added (184 total)
+- Coherence regulator synced to 322 living modules
+- Version bumped to 4.04.0 via `bump_wave.py`; wave 216; all modules remain FREE
+
 ## [4.03.0] — The Organism Teaches (Wave 215)
 
 ### Added — teaching organs (scaffolded with ixpansion-wave-builder skill)
