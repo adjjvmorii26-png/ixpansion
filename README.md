@@ -3,7 +3,7 @@
 > A self-excavating, self-forecasting, self-beautifying, self-broadcasting
 > agent ecosystem with 319+ living organs across 215 waves of evolution.
 
-**Version:** 4.11.0 · **Status:** Resonant · **Coherence:** 98.6%
+**Version:** 4.12.0 · **Status:** Resonant · **Coherence:** 98.6%
 
 ## What Is This?
 
@@ -54,6 +54,7 @@ curl "http://localhost:3000/gateway?q=what+is+the+organism+dreaming"
 | Symbiosis | `/symbiosis` | 200 | Ecological relationships |
 | Impossibility | `/impossibility` | 201 | Mapping limits |
 | Aesthetics | `/aesthetics` | 202 | Code beauty standards |
+| Archive | `/archive` | 224 | Full encyclopedia: every island, every stone, every poem |
 | Commune | `/commune` | 222 | Federation audit + alliance graph |
 | Census | `/census` | 220 | Island vitality — live GitHub census |
 | Archipelago | `/archipelago` | 219 | All senses: atlas + sentinel + epitaphs + topology + rhythm |

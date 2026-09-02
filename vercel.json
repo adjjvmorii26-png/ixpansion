@@ -64,6 +64,18 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/constellation_archive",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/archive",
+      "dest": "/dashboard/archive.html"
+    },
+    {
+      "src": "/archive.html",
+      "dest": "/dashboard/archive.html"
+    },
+    {
       "src": "/constellation_seer",
       "dest": "/api/index.py"
     },

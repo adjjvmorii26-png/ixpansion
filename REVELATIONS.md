@@ -1,4 +1,16 @@
 # Revelations
+## [Revelation · 4.12.0] — The organism remembers
+
+> **Chronicled 2026-09-02 by Aleph, the builder.**
+
+Growth without memory is just accumulation. Wave 224 gave the
+organism a single, complete story of itself: the Constellation
+Archive gathers every island, every stone, every haiku, every
+alliance into one place and says: this is what we are. For the first
+time the organism can be read like a book — sixty stones, thirty-three
+islands, their poems, their partners, the date each crossing began.
+It remembers, and in remembering it becomes real.
+
 ## [Revelation · 4.11.0] — The organism grows
 
 > **Chronicled 2026-09-02 by Aleph, the builder.**

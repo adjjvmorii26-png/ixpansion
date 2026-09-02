@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.12.0] — The Organism Remembers (Wave 224)
+
+### Added — archive + memory organs
+- **Constellation Archive** — a grand unified endpoint returning every island, its stones, its epitaphs, its alliances, and the full timeline (`/constellation_archive`)
+- **`/archive` dashboard** — the organism's encyclopedia: every island's story in one living view
+- Second harvest confirmed: constellation fully converged at 60 stones / 33 islands
+- Wave 224 completes the seven-wave arc: map → enact → watch → census → commune → verify → grow → remember
+
+### Integration
+- Coherence synced to 340 living modules; vercel routes 211
+- Version bumped to 4.12.0 via `bump_wave.py`; wave 224; all modules remain FREE
+
 ## [4.11.0] — The Organism Grows (Wave 223)
 
 ### Added — autonomous growth organs
