@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.12.0"
-WAVE = "224"
-WAVE_NAME = "The Organism Remembers"
+VERSION = "4.13.0"
+WAVE = "225"
+WAVE_NAME = "The Organism Dreams"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -454,6 +454,11 @@ class ApiHandler(BaseHTTPRequestHandler):
         if path == "/archive.html":
             return self._static("dashboard/archive.html")
 
+        if path == "/dreams":
+            return self._static("dashboard/dreams.html")
+        if path == "/dreams.html":
+            return self._static("dashboard/dreams.html")
+
         if path == "/census":
             return self._static("dashboard/census.html")
         if path == "/census.html":
@@ -550,6 +555,11 @@ class ApiHandler(BaseHTTPRequestHandler):
 
         if path == "/constellation_archive":
             from api.constellation_archive import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/bridge_dream_forge":
+            from api.bridge_dream_forge import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 

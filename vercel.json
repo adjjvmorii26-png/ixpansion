@@ -68,6 +68,18 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/bridge_dream_forge",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/dreams",
+      "dest": "/dashboard/dreams.html"
+    },
+    {
+      "src": "/dreams.html",
+      "dest": "/dashboard/dreams.html"
+    },
+    {
       "src": "/archive",
       "dest": "/dashboard/archive.html"
     },

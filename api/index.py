@@ -579,6 +579,12 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return h(q)
 
     # Wave 224 — The Organism Remembers
+
+    if path == "/bridge_dream_forge":
+        from api.bridge_dream_forge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     if path.startswith("/api/"):
         module = api_server.route_name_to_module(path[len("/api/"):])
         payload = {}

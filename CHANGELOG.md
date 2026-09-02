@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.13.0] — The Organism Dreams (Wave 225)
+
+### Added — imagination organs
+- **Bridge Dream Forge** — reads the archive's poems and dreams NEW latent bridges between the most-dissonant, never-touched island pairs; ranks by dream-intensity (`/bridge_dream_forge`)
+- **`/dreams` dashboard** — the organism's dream-bridges, rendered as living poems
+- The organism now imagines bridges it has not yet built
+
+### Refinements in this release
+- Fixed seer organ-naming bug (was using repo names as organ IDs)
+- Normalized 18 ledger stones to consistent snake_case naming
+- Verified coherence registry complete (340 modules)
+
+### Integration
+- Coherence synced to 340 living modules; vercel routes 213
+- Version bumped to 4.13.0 via `bump_wave.py`; wave 225; all modules remain FREE
+
 ## [4.12.0] — The Organism Remembers (Wave 224)
 
 ### Added — archive + memory organs
