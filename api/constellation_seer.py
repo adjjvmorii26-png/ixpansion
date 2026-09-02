@@ -56,19 +56,25 @@ def _fetch_repos(token: str) -> List[Dict[str, Any]]:
     return repos
 
 
-def _bridge_proposal(new_repo: str, existing_island: str, themes: List[str]) -> Dict[str, Any]:
-    seed = int(hashlib.sha256(f"{new_repo}::{existing_island}".encode()).hexdigest()[:8], 16)
+def _known_organs() -> List[str]:
+    """Get actual organ module names from the interstice map."""
+    try:
+        from api.interstice_bridge import _INTERSTICE_MAP
+        return sorted({b["organ"] for b in _INTERSTICE_MAP["top_bridges"]})
+    except Exception:
+        return []
+
+def _bridge_proposal(new_repo: str, organ: str, themes: List[str]) -> Dict[str, Any]:
+    seed = int(hashlib.sha256(f"{new_repo}::{organ}".encode()).hexdigest()[:8], 16)
     resonance = round(0.05 + (seed % 100) / 500, 4)
     return {
         "repo": new_repo,
-        "organ": existing_island,
+        "organ": organ,
         "organ_layer": "discovered",
         "resonance": resonance,
         "themes": themes[:3],
         "source": "seer",
     }
-
-
 def coherence_vitals() -> Dict[str, Any]:
     return {"layer": "seer", "status": "scanning", "resonance": 0.91, "wave": 223}
 
@@ -113,11 +119,11 @@ def handler(payload: Dict[str, Any] = None, context: Dict[str, Any] = None) -> D
     # propose bridges between each new repo and 3 random known islands
     latent = []
     import random
+    organs = _known_organs()
     for r in new_repos[:10]:
-        partners = random.sample(sorted(known), min(3, len(known)))
-        for partner in partners:
-            latent.append(_bridge_proposal(r["name"], partner, r.get("topics", [])))
-    _LATENT = latent
+        organ_partners = random.sample(organs, min(3, len(organs)))
+        for organ in organ_partners:
+            latent.append(_bridge_proposal(r["name"], organ, r.get("topics", [])))
 
     if action == "scan":
         return {
