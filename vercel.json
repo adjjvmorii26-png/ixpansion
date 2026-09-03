@@ -12,6 +12,18 @@
   ],
   "routes": [
     {
+      "src": "/underworld",
+      "dest": "/dashboard/underworld.html"
+    },
+    {
+      "src": "/underworld.html",
+      "dest": "/dashboard/underworld.html"
+    },
+    {
+      "src": "/play",
+      "dest": "/dashboard/underworld.html"
+    },
+    {
       "src": "/interstice_bridge",
       "dest": "/api/index.py"
     },
