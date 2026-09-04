@@ -159,7 +159,14 @@
 </div>
 
 <script>
-let G = {session:null, dungeon:null, npc:null, physics:null, lore:null, selectedRealm:'entropy_desert', roomIdx:0};
+let G = {session:null, blob:null, dungeon:null, npc:null, physics:null, lore:null, selectedRealm:'entropy_desert', roomIdx:0};
+function encodeBlob(obj){
+  try {
+    let s = JSON.stringify(obj);
+    let enc = btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    return enc;
+  } catch(e){ return ''; }
+}
 const REALM_ICONS = {entropy_desert:'🏜',dream_gravity_zone:'🌀',paradox_garden:'🌺',coherence_cathedral:'🏰',void_abyss:'🕳',temporal_rift:'⏰',mythic_realm:'📖',resonance_depths:'💎',fracture_field:'⚡',synchronicity_meadow:'🌸'};
 const ROOM_ICONS = {entrance:'🚪',corridor:'🕳',hazard:'⚡',treasure:'🎁',boss:'👹',shrine:'🔮',void_gate:'🌀',puzzle:'🧩'};
 const api = async(p)=>{try{return await(await fetch(p)).json()}catch(e){return{error:e.message}}};
@@ -188,6 +195,7 @@ async function startGame(){
     api('/api/lucid_lore/generate'),
   ]);
   G.session = session.session;
+  G.blob = session.blob || encodeBlob(G.session);
   G.dungeon = dungeon.dungeon;
   G.npc = npc.npc;
   G.physics = physics.ruleset;
@@ -254,9 +262,10 @@ function addLog(type, msg){
 
 async function doAction(act){
   if(!G.session || G.session.status !== 'active') return;
-  const d = await api(`/api/lucid_session/action?session_id=${G.session.id}&act=${act}`);
+  const d = await api(`/api/lucid_session/action?blob=${encodeURIComponent(G.blob||'')}&act=${act}`);
   if(d.error){addLog('enemy', d.error); return}
-  G.session = d.session;
+  G.session = d.session || G.session;
+  G.blob = d.blob || encodeBlob(G.session);
   addLog('msg', d.outcome);
   if(act === 'explore') G.roomIdx++;
   if(act === 'attack'){
@@ -264,6 +273,7 @@ async function doAction(act){
     if(combat.result){
       G.session.player_hp = combat.result.player_hp_after;
       G.session.player_xp += combat.result.xp_gained;
+      G.blob = encodeBlob(G.session);
       addLog('msg', combat.result.narrative);
       if(combat.result.victory) addLog('levelup', combat.result.victory_text);
       else addLog('enemy', combat.result.victory_text);

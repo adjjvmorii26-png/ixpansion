@@ -90,10 +90,75 @@ def coherence_vitals() -> dict:
 def resonates_with() -> list:
     return ["lucid_dungeon", "lucid_npc", "lucid_physics_rules", "lucid_lore", "lucid_combat"]
 
+def _encode_session(session):
+    import base64
+    return base64.urlsafe_b64encode(json.dumps(session).encode()).decode()
+
+def _decode_session(blob):
+    import base64
+    try:
+        padded = blob + "=" * (-len(blob) % 4)
+        return json.loads(base64.urlsafe_b64decode(padded.encode()).decode())
+    except Exception:
+        return None
+
+def action_stateless(blob: str, act: str = "explore") -> dict:
+    session = _decode_session(blob)
+    if not session:
+        return {"action": "action", "error": "invalid session blob"}
+    result = _apply_action(session, act)
+    session = result["session"]
+    return {"action": "action", "outcome": result["outcome"], "session": session, "blob": _encode_session(session)}
+
+def _apply_action(session, act):
+    outcomes = {
+        "explore": {"msg": "You move deeper into the realm.", "xp": 20},
+        "attack": {"msg": "You strike at the darkness!", "xp": 35, "hp_change": -6},
+        "defend": {"msg": "You raise your coherence shield.", "xp": 10, "hp_change": 2},
+        "rest": {"msg": "You rest in the resonance.", "hp_change": 18, "xp": 5},
+        "use_treasure": {"msg": "The treasure resonates with your soul.", "coherence_change": 0.1},
+        "paradox_resist": {"msg": "You resist the paradox... but it takes its toll.", "paradox_change": -1, "hp_change": -3, "xp": 30},
+        "paradox_embrace": {"msg": "You embrace the paradox. Power floods through you.", "paradox_change": 1, "xp": 60, "coherence_change": -0.1},
+        "flee": {"msg": "You retreat to the entrance, breathing hard.", "xp": 5},
+    }
+    o = outcomes.get(act, outcomes["explore"])
+    session["wave"] += 1
+    session["actions_taken"] += 1
+    session["player_xp"] += o.get("xp", 0)
+    if "hp_change" in o: session["player_hp"] = max(1, min(session["player_max_hp"], session["player_hp"] + o["hp_change"]))
+    if "paradox_change" in o: session["paradox_debt"] = max(0, session["paradox_debt"] + o["paradox_change"])
+    if "coherence_change" in o: session["coherence"] = round(max(0, min(1, session["coherence"] + o["coherence_change"])), 3)
+    if session["player_xp"] >= session["player_xp_next"]:
+        session["player_level"] += 1
+        session["player_xp_next"] = int(session["player_xp_next"] * 1.5)
+        session["player_max_hp"] += 10
+        session["player_hp"] = session["player_max_hp"]
+        o["msg"] += f" LEVEL UP! Now level {session['player_level']}!"
+    if session["player_hp"] <= 0:
+        session["status"] = "defeated"
+        o["msg"] += " You have fallen..."
+    if random.random() > 0.8:
+        session["treasures_found"] += 1
+        session["inventory"].append(random.choice(["probability_lens","dream_seed","paradox_compass","coherence_mirror","void_anchor","temporal_crystal","myth_tablet","resonance_key","repair_salve","synchronicity_beacon"]))
+        o["msg"] += " [Found: " + session["inventory"][-1] + "]"
+    o["msg"] = f"W{session['wave']}: {o['msg']}"
+    return {"outcome": o["msg"], "session": session}
+
 def handler(payload=None, context=None):
     payload = payload or {}
     path = payload.get("path", "/start")
-    if path == "/start": return start()
-    elif path == "/action": return action(payload.get("session_id", ""), payload.get("act", "explore"))
-    elif path == "/status": return status(payload.get("session_id", ""))
+    if path == "/start":
+        s = start()
+        session = s["session"]
+        s["blob"] = _encode_session(session)
+        return s
+    elif path == "/action":
+        if payload.get("blob"):
+            return action_stateless(payload.get("blob"), payload.get("act", "explore"))
+        return action(payload.get("session_id", ""), payload.get("act", "explore"))
+    elif path == "/status":
+        if payload.get("blob"):
+            session = _decode_session(payload.get("blob"))
+            if session: return {"action": "status", "session": session}
+        return status(payload.get("session_id", ""))
     return {"error": "unknown", "available": ["/start", "/action", "/status"]}
