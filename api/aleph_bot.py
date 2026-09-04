@@ -43,6 +43,48 @@ def _save(p, d):
     except OSError:
         with open(os.path.join("/tmp", os.path.basename(p)), "w") as f: json.dump(d, f, indent=2)
 
+
+def _telegram(method: str, params: dict) -> dict:
+    """Call the Telegram Bot API using stdlib only (serverless-safe)."""
+    import urllib.parse, urllib.request
+    url = "https://api.telegram.org/bot" + BOT_TOKEN + "/" + method
+    data = urllib.parse.urlencode(params).encode()
+    try:
+        req = urllib.request.Request(url, data=data, method="POST")
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            return json.loads(resp.read().decode() or "{}")
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+def set_webhook(url: str = None) -> dict:
+    """Register this serverless endpoint as the bot's webhook."""
+    target = url or "https://alexalex.info/api/aleph_bot/telegram"
+    info = _telegram("getMe", {})
+    result = _telegram("setWebhook", {"url": target})
+    return {
+        "action": "set_webhook",
+        "bot": (info.get("result") or {}).get("username", "aleph_bot"),
+        "webhook_url": target,
+        "ok": result.get("ok", False),
+        "detail": result.get("description", result.get("error", "")),
+    }
+
+
+def webhook(update: dict) -> dict:
+    """Telegram webhook entry — process update and reply via Bot API."""
+    try:
+        result = handle_update(update)
+        response = result.get("response", "")
+        chat_id = result.get("chat_id", 0)
+        replied = False
+        if chat_id and response:
+            sent = _telegram("sendMessage", {"chat_id": chat_id, "text": response[:4000]})
+            replied = bool(sent.get("ok"))
+        return {"action": "webhook", "handled": True, "replied": replied}
+    except Exception as exc:
+        return {"action": "webhook", "handled": False, "error": str(exc)}
+
 def handle_update(update: dict) -> dict:
     log = _load(BOT_LOG, {"messages": [], "commands": [], "total": 0})
     msg = update.get("message", {})
@@ -67,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX"
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/play — open Lucid Machines"
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -142,6 +184,24 @@ def _process_command(command: str, args: list, user: str) -> str:
             return f"⚖ Case {c.get('id', '?')}:\n{c.get('plaintiff_module', '?')} vs {c.get('defendant_module', '?')}\nRuling: {c.get('ruling', '?')}\n\"{c.get('ruling_text', '?')}\""
         except Exception as e:
             return f"⚖ {str(e)}"
+    elif command == "/prophecy":
+        import sys; sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from wave_prophecy import handler
+            r = handler({"path": "/next"}).get("reading", {})
+            return f"🜁 Prophecy — Wave {r.get('wave', '?')}:\n{r.get('prophecy', '?')}\nomen: {r.get('omen', '?')} · confidence {round((r.get('confidence') or 0) * 100)}%\nseal {r.get('seal', '?')}"
+        except Exception as e:
+            return f"🜁 Prophecy: {str(e)}"
+    elif command == "/gallery":
+        import sys; sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from resonance_gallery import handler
+            r = handler({"path": "/generate", "module": args[0] if args else "organism", "palette": args[1] if len(args) > 1 else "hex_dark"}).get("art", {})
+            return f"🖼 Resonance Gallery — {r.get('title', '?')}:\nshape {r.get('shape', '?')} · palette {r.get('palette', '?')}\nView it live: https://alexalex.info/gallery"
+        except Exception as e:
+            return f"🖼 Gallery: {str(e)}"
+    elif command == "/play":
+        return "🎮 Lucid Machines awaits:\nhttps://alexalex.info/lucid-game\nSummon realms, fight paradoxes, evolve with the organism."
     elif command == "/hex":
         import sys; sys.path.insert(0, os.path.dirname(__file__))
         try:
@@ -171,6 +231,8 @@ def handler(payload=None, context=None):
     payload = payload or {}
     path = payload.get("path", "/handle_update")
     if path == "/handle_update": return handle_update(payload.get("update", {}))
+    elif path == "/telegram" or path == "/webhook": return webhook(payload)
+    elif path == "/set_webhook": return set_webhook(payload.get("url"))
     elif path == "/bot_info": return get_bot_info()
     elif path == "/stats": return stats()
-    return {"error": "unknown", "available": ["/handle_update", "/bot_info", "/stats"]}
+    return {"error": "unknown", "available": ["/handle_update", "/telegram", "/set_webhook", "/bot_info", "/stats"]}
