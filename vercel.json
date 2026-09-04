@@ -12,6 +12,14 @@
   ],
   "routes": [
     {
+      "src": "/lucid",
+      "dest": "/dashboard/lucid-prototype.html"
+    },
+    {
+      "src": "/lucid-prototype",
+      "dest": "/dashboard/lucid-prototype.html"
+    },
+    {
       "src": "/underworld",
       "dest": "/dashboard/underworld.html"
     },
