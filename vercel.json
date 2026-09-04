@@ -12,6 +12,18 @@
   ],
   "routes": [
     {
+      "src": "/garden",
+      "dest": "/dashboard/garden_live.html"
+    },
+    {
+      "src": "/garden.html",
+      "dest": "/dashboard/garden_live.html"
+    },
+    {
+      "src": "/garden-live",
+      "dest": "/dashboard/garden_live.html"
+    },
+    {
       "src": "/lucid",
       "dest": "/dashboard/lucid-prototype.html"
     },
