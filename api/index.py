@@ -599,13 +599,20 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return h(q)
 
     if path.startswith("/api/"):
-        module = api_server.route_name_to_module(path[len("/api/"):])
+        raw_module = path[len("/api/"):].split("?")[0].strip("/")
+        parts = raw_module.split("/")
+        module = api_server.route_name_to_module(parts[0])
+        sub_path = "/" + "/".join(parts[1:]) if len(parts) > 1 else ""
         payload = {}
+        if sub_path:
+            payload["path"] = sub_path
         # Parse query string params into payload (GET /api/<module>?key=val)
         if "?" in raw_path:
             from urllib.parse import urlparse, parse_qs
             qs = parse_qs(urlparse(raw_path).query)
             payload = {k: (v[0] if v else "") for k, v in qs.items()}
+            if "path" not in payload and sub_path:
+                payload["path"] = sub_path
         if request_method == "POST" and body:
             try:
                 text = body.decode("utf-8", errors="replace")
@@ -616,6 +623,8 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
                 payload = json.loads(text or "{}")
                 if not isinstance(payload, dict):
                     payload = {"value": payload}
+                if sub_path and "path" not in payload:
+                    payload["path"] = sub_path
             except json.JSONDecodeError:
                 payload = {"error": "invalid JSON body"}
         result, _status = api_server.call_handler(module, payload)

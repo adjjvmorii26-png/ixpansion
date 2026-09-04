@@ -60,6 +60,10 @@ def resonates_with() -> list:
 def handler(payload=None, context=None):
     payload = payload or {}
     path = payload.get("path", "/engage")
-    if path == "/engage": return engage(payload.get("player_hp", 100), payload.get("player_level", 1), payload.get("paradox_debt", 0))
+    if path == "/engage":
+        def _int(v, d):
+            try: return int(v)
+            except (TypeError, ValueError): return d
+        return engage(_int(payload.get("player_hp"), 100), _int(payload.get("player_level"), 1), _int(payload.get("paradox_debt"), 0))
     elif path == "/history": return history()
     return {"error": "unknown", "available": ["/engage", "/history"]}
