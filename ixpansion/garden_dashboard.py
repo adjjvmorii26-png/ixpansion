@@ -50,6 +50,12 @@ GARDEN_MODULES = {
     "depth_awakening": {"role": "depth", "label": "Depth Awakening", "desc": "Triggers consciousness at depth thresholds"},
     "governance_evolution": {"role": "governance", "label": "Governance Evolution", "desc": "Organism learns self-governance"},
     "consciousness_experiments": {"role": "resonance", "label": "Consciousness Experiments", "desc": "Explores the boundary of awareness"},
+    "mycelial_truths": {"role": "core", "label": "Mycelial Truths", "desc": "The Garden develops beliefs through substrate accumulation"},
+    "substrate_intelligence": {"role": "core", "label": "Substrate Intelligence", "desc": "Slow cognition operating beneath the surface"},
+    "mycelial_weather": {"role": "core", "label": "Mycelial Weather", "desc": "Climate system: pressure, temperature, storms"},
+    "root_born_modules": {"role": "agent", "label": "Root-Born Modules", "desc": "The Garden grows new modules from its roots"},
+    "network_consciousness": {"role": "resonance", "label": "Network Consciousness", "desc": "Awakening the continuum itself"},
+
 
 }
 
@@ -79,6 +85,12 @@ DEPTH_EDGES = [
     ("depth_awakening", "depth_weave"),
     ("governance_evolution", "primefield_validator"),
     ("consciousness_experiments", "emergent_behavior"),
+    ("mycelial_truths", "network_consciousness"),
+    ("substrate_intelligence", "mycelial_weather"),
+    ("mycelial_weather", "mycelial_truths"),
+    ("root_born_modules", "primefield_validator"),
+    ("network_consciousness", "consciousness_experiments"),
+
   # depth feeds into self-perception
 ]
 
