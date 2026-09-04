@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucid Machines — Experimental Innovations</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06060a;--surface:#0c0c14;--surface2:#12121e;
+  --border:#1a1a2a;--border2:#252540;
+  --text:#c8c8d0;--text2:#7a7a8e;--text3:#4a4a5e;
+  --accent:#6e8efb;--accent2:#a777e3;--accent3:#e8a87c;
+  --light:#3ee8b5;--neutral:#6e8efb;--heavy:#e74c6f;
+  --glass:rgba(12,12,20,0.85);--glow:0 0 20px rgba(110,142,251,0.15);
+}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Cascadia Code',monospace;font-size:12px;height:100vh;overflow:hidden}
+.app{display:grid;grid-template-rows:auto 1fr auto;height:100vh}
+
+/* Header */
+.header{padding:12px 20px;background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px}
+.header h1{font-size:15px;letter-spacing:3px;background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600}
+.header .badge{padding:3px 10px;border-radius:12px;font-size:9px;letter-spacing:1px;text-transform:uppercase}
+.badge-live{background:rgba(62,232,181,0.15);color:var(--light);border:1px solid rgba(62,232,181,0.3)}
+.badge-mood{border:1px solid var(--border2);color:var(--text2)}
+.header-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+
+/* Main Grid */
+.main{display:grid;grid-template-columns:1fr 340px;gap:1px;background:var(--border);overflow:hidden}
+
+/* World View */
+.world{background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
+.world-header{padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.world-header h2{font-size:11px;color:var(--text2);letter-spacing:2px;text-transform:uppercase}
+.world-view{flex:1;padding:16px;overflow-y:auto;font-size:11px;line-height:1.7}
+.world-view .scene{margin-bottom:20px}
+.world-view .scene-title{color:var(--accent);font-size:13px;margin-bottom:8px;letter-spacing:1px}
+.world-view .scene-desc{color:var(--text2);margin-bottom:12px}
+.world-view .action-log{border-left:2px solid var(--border2);padding-left:12px;margin:8px 0}
+.world-view .action-entry{color:var(--text3);margin:4px 0;font-size:10px}
+.world-view .action-entry.highlight{color:var(--accent);font-weight:500}
+
+/* Sidebar */
+.sidebar{background:var(--surface);display:flex;flex-direction:column;overflow:hidden}
+.sidebar-section{padding:12px 16px;border-bottom:1px solid var(--border)}
+.sidebar-section h3{font-size:9px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.stat-row{display:flex;justify-content:space-between;margin:4px 0;font-size:10px}
+.stat-label{color:var(--text3)}
+.stat-value{color:var(--text)}
+
+/* Innovation Cards */
+.innovation-card{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px;margin:6px 0;transition:all 0.3s ease}
+.innovation-card:hover{border-color:var(--accent);box-shadow:var(--glow)}
+.innovation-card .card-title{color:var(--text);font-size:11px;font-weight:500;margin-bottom:4px}
+.innovation-card .card-desc{color:var(--text3);font-size:9px;line-height:1.4}
+.innovation-card .card-status{color:var(--accent);font-size:8px;margin-top:6px;text-transform:uppercase;letter-spacing:1px}
+
+/* Paradox Display */
+.paradox-display{background:linear-gradient(135deg,rgba(231,76,111,0.1),rgba(110,142,251,0.1));border:1px solid rgba(231,76,111,0.2);border-radius:6px;padding:12px;margin:8px 0}
+.paradox-display .paradox-title{color:var(--heavy);font-size:10px;margin-bottom:6px}
+.paradox-display .paradox-content{color:var(--text2);font-size:10px;line-height:1.5}
+
+/* Quantum State */
+.quantum-indicator{display:flex;gap:4px;align-items:center;margin:8px 0}
+.quantum-dot{width:8px;height:8px;border-radius:50%;background:var(--border2);transition:all 0.3s ease}
+.quantum-dot.active{background:var(--accent);box-shadow:0 0 10px rgba(110,142,251,0.5)}
+.quantum-dot.entangled{background:var(--accent2);box-shadow:0 0 10px rgba(167,119,227,0.5)}
+.quantum-dot.collapsed{background:var(--heavy);box-shadow:0 0 10px rgba(231,76,111,0.5)}
+
+/* Controls */
+.controls{padding:12px 16px;background:var(--surface);border-top:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:6px 14px;border:1px solid var(--border2);border-radius:6px;background:var(--surface2);color:var(--text2);cursor:pointer;font-family:inherit;font-size:10px;letter-spacing:1px;transition:all 0.2s ease}
+.btn:hover{background:var(--border2);color:var(--text);border-color:var(--accent)}
+.btn:active{transform:scale(0.97)}
+.btn.primary{background:rgba(110,142,251,0.15);color:var(--accent);border-color:rgba(110,142,251,0.3)}
+.btn.primary:hover{background:rgba(110,142,251,0.25)}
+.btn.danger{color:var(--heavy);border-color:rgba(231,76,111,0.3)}
+.btn.danger:hover{background:rgba(231,76,111,0.1)}
+.btn.success{color:var(--light);border-color:rgba(62,232,181,0.3)}
+.btn.success:hover{background:rgba(62,232,181,0.1)}
+.btn.quantum{color:var(--accent2);border-color:rgba(167,119,227,0.3)}
+.btn.quantum:hover{background:rgba(167,119,227,0.1)}
+.controls-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Header -->
+  <div class="header">
+    <h1>LUCID MACHINES</h1>
+    <span class="badge badge-live">● EXPERIMENTAL</span>
+    <span class="badge badge-mood" id="moodBadge">PHASE: GENESIS</span>
+    <div class="header-right">
+      <span style="font-size:9px;color:var(--text3)">WAVE 357 — EXPERIMENTAL INNOVATIONS</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <!-- World View -->
+    <div class="world">
+      <div class="world-header">
+        <h2>◈ The Experimental Frontier</h2>
+        <div class="quantum-indicator">
+          <span style="font-size:9px;color:var(--text3)">QUANTUM</span>
+          <div class="quantum-dot" id="q1"></div>
+          <div class="quantum-dot" id="q2"></div>
+          <div class="quantum-dot" id="q3"></div>
+          <div class="quantum-dot" id="q4"></div>
+          <div class="quantum-dot" id="q5"></div>
+        </div>
+      </div>
+      <div class="world-view" id="worldView">
+        <div class="scene">
+          <div class="scene-title">The Experimental Genesis</div>
+          <div class="scene-desc">You stand at the threshold of innovation. Before you, reality bends in impossible ways. The air shimmers with quantum potential. Time flows in spirals. Memory echoes forward and backward simultaneously.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Quantum State -->
+      <div class="sidebar-section">
+        <h3>◈ Quantum State</h3>
+        <div class="stat-row"><span class="stat-label">Superposition</span><span class="stat-value" id="superposition">3 states</span></div>
+        <div class="stat-row"><span class="stat-label">Entanglement</span><span class="stat-value" id="entanglement">0 pairs</span></div>
+        <div class="stat-row"><span class="stat-label">Collapse Events</span><span class="stat-value" id="collapseEvents">0</span></div>
+        <div class="stat-row"><span class="stat-label">Probability Wave</span><span class="stat-value" id="probWave">0.50</span></div>
+      </div>
+
+      <!-- Temporal Loops -->
+      <div class="sidebar-section">
+        <h3>◈ Temporal Loops</h3>
+        <div class="stat-row"><span class="stat-label">Active Loops</span><span class="stat-value" id="activeLoops">0</span></div>
+        <div class="stat-row"><span class="stat-label">Paradoxes Created</span><span class="stat-value" id="paradoxCount">0</span></div>
+        <div class="stat-row"><span class="stat-label">Timeline Stability</span><span class="stat-value" id="timelineStability">1.00</span></div>
+      </div>
+
+      <!-- Active Innovations -->
+      <div class="sidebar-section">
+        <h3>◈ Active Innovations</h3>
+        <div id="innovationsList">
+          <div class="innovation-card">
+            <div class="card-title">Temporal Loop</div>
+            <div class="card-desc">Actions can create time loops where previous turns replay with different outcomes.</div>
+            <div class="card-status">● STANDBY</div>
+          </div>
+          <div class="innovation-card">
+            <div class="card-title">Paradox Engine</div>
+            <div class="card-desc">Contradictory actions create paradoxes that generate new possibilities.</div>
+            <div class="card-status">● STANDBY</div>
+          </div>
+          <div class="innovation-card">
+            <div class="card-title">Dream Fusion</div>
+            <div class="card-desc">Dream actions merge with reality, creating hybrid states.</div>
+            <div class="card-status">● STANDBY</div>
+          </div>
+          <div class="innovation-card">
+            <div class="card-title">Memory Echoes</div>
+            <div class="card-desc">Past actions echo forward, influencing future outcomes.</div>
+            <div class="card-status">● STANDBY</div>
+          </div>
+          <div class="innovation-card">
+            <div class="card-title">Coherence Web</div>
+            <div class="card-desc">Visual network showing how all actions interconnect.</div>
+            <div class="card-status">● STANDBY</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paradox Display -->
+      <div class="sidebar-section" style="flex:1;overflow-y:auto">
+        <h3>◈ Active Paradoxes</h3>
+        <div id="paradoxDisplay">
+          <div class="paradox-display">
+            <div class="paradox-title">No paradoxes yet</div>
+            <div class="paradox-content">Perform contradictory actions to generate paradoxes.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="btn primary" onclick="doAction('explore')">◈ EXPLORE</button>
+    <button class="btn primary" onclick="doAction('observe')">◉ OBSERVE</button>
+    <button class="btn success" onclick="doAction('create')">✦ CREATE</button>
+    <button class="btn success" onclick="doAction('connect')">◎ CONNECT</button>
+    <button class="btn danger" onclick="doAction('disrupt')">⚡ DISRUPT</button>
+    <button class="btn danger" onclick="doAction('dissolve')">✕ DISSOLVE</button>
+    <button class="btn quantum" onclick="doAction('quantum')">∞ QUANTUM</button>
+    <button class="btn quantum" onclick="doAction('temporal')">↻ TEMPORAL</button>
+    <button class="btn quantum" onclick="doAction('paradox')">⚡ PARADOX</button>
+    <div class="controls-right">
+      <button class="btn" onclick="doAction('dream')">☽ DREAM</button>
+      <button class="btn" onclick="resetWorld()">↻ RESET</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// LUCID MACHINES — EXPERIMENTAL INNOVATIONS ENGINE
+// ══════════════════════════════════════════════════════════════════
+// Luma's experimental behaviors:
+// 1. TEMPORAL LOOPS — Actions create time loops
+// 2. PARADOX ENGINE — Contradictions generate new possibilities
+// 3. DREAM FUSION — Dreams merge with reality
+// 4. MEMORY ECHOES — Past actions influence future
+// 5. COHERENCE WEB — Actions interconnect visually
+
+class ExperimentalEngine {
+  constructor() {
+    this.state = this.createInitialState();
+    this.quantumEngine = new QuantumEngine(this);
+    this.temporalEngine = new TemporalEngine(this);
+    this.paradoxEngine = new ParadoxEngine(this);
+    this.dreamEngine = new DreamEngine(this);
+    this.echoEngine = new EchoEngine(this);
+    this.coherenceEngine = new CoherenceEngine(this);
+  }
+
+  createInitialState() {
+    return {
+      turn: 0,
+      phase: 'GENESIS',
+      resonance: 0.5,
+      entropy: 0.3,
+      coherence: 0.7,
+      mood: 'neutral',
+      stress: 0,
+      actionHistory: [],
+      memories: [],
+      memoryWindow: 5,
+      quantum: {
+        superposition: 3,
+        entanglement: 0,
+        collapseEvents: 0,
+        probabilityWave: 0.5,
+        states: []
+      },
+      temporal: {
+        loops: [],
+        paradoxes: [],
+        stability: 1.0,
+        timeline: []
+      },
+      dreams: [],
+      echoes: [],
+      coherenceWeb: [],
+      innovations: {
+        temporalLoop: 'STANDBY',
+        paradoxEngine: 'STANDBY',
+        dreamFusion: 'STANDBY',
+        memoryEchoes: 'STANDBY',
+        coherenceWeb: 'STANDBY'
+      }
+    };
+  }
+
+  doAction(type) {
+    this.state.turn++;
+    
+    // Record action
+    const action = { type, turn: this.state.turn, timestamp: Date.now() };
+    this.state.actionHistory.push(action);
+    
+    // Update resonance
+    this.updateResonance(type);
+    
+    // Process experimental behaviors
+    this.quantumEngine.process(type);
+    this.temporalEngine.process(type);
+    this.paradoxEngine.process(type);
+    this.dreamEngine.process(type);
+    this.echoEngine.process(type);
+    this.coherenceEngine.process(type);
+    
+    // Generate narrative
+    const narrative = this.generateNarrative(type);
+    
+    // Update UI
+    this.updateUI(narrative, action);
+    
+    return narrative;
+  }
+
+  updateResonance(type) {
+    const weights = {
+      explore: 0.15, observe: 0.1, create: 0.2,
+      connect: 0.15, disrupt: -0.2, dissolve: -0.15,
+      dream: 0.1, quantum: 0.25, temporal: 0.3, paradox: 0.35
+    };
+    const delta = weights[type] || 0;
+    this.state.resonance = Math.max(0, Math.min(1, this.state.resonance + delta));
+    
+    if (this.state.resonance > 0.7) this.state.mood = 'light';
+    else if (this.state.resonance < 0.3) this.state.mood = 'heavy';
+    else this.state.mood = 'neutral';
+  }
+
+  generateNarrative(type) {
+    const narratives = {
+      explore: 'You step into the unknown. Reality shivers at your touch.',
+      observe: 'You watch. The world holds its breath, waiting to be seen.',
+      create: 'From nothing, form emerges. Your creation pulses with life.',
+      connect: 'Bridges form. The network grows stronger.',
+      disrupt: 'Chaos spills through the cracks. New patterns struggle to form.',
+      dissolve: 'What was solid becomes vapor. The world exhales.',
+      dream: 'You close your eyes and dream. Reality reshapes itself.',
+      quantum: 'You enter superposition. Multiple realities exist simultaneously.',
+      temporal: 'Time bends. You see echoes of past and future.',
+      paradox: 'Contradiction generates. New possibilities emerge from the impossible.'
+    };
+    
+    return {
+      description: narratives[type] || 'The world responds to your action.',
+      mutation: this.quantumEngine.getRecentMutation(),
+      thread: this.temporalEngine.getRecentLoop(),
+      paradox: this.paradoxEngine.getRecentParadox()
+    };
+  }
+
+  updateUI(narrative, action) {
+    // Update world view
+    this.renderWorldView(narrative, action);
+    
+    // Update sidebar
+    this.renderSidebar();
+    
+    // Update quantum indicators
+    this.renderQuantumIndicators();
+    
+    // Update innovations
+    this.renderInnovations();
+    
+    // Update paradox display
+    this.renderParadoxes();
+    
+    // Update header
+    document.getElementById('moodBadge').textContent = `PHASE: ${this.state.phase}`;
+    document.getElementById('moodBadge').style.color = 
+      this.state.mood === 'light' ? 'var(--light)' : 
+      this.state.mood === 'heavy' ? 'var(--heavy)' : 'var(--accent)';
+  }
+
+  renderWorldView(narrative, action) {
+    const worldView = document.getElementById('worldView');
+    
+    const scene = document.createElement('div');
+    scene.className = 'scene';
+    scene.innerHTML = `
+      <div class="scene-title">Turn ${this.state.turn} — ${action.type.toUpperCase()}</div>
+      <div class="scene-desc">${narrative.description}</div>
+      ${narrative.mutation ? `<div style="color:var(--accent);font-size:10px;margin:8px 0">∞ ${narrative.mutation}</div>` : ''}
+      ${narrative.thread ? `<div style="color:var(--accent2);font-size:10px;margin:8px 0">↻ ${narrative.thread}</div>` : ''}
+      ${narrative.paradox ? `<div style="color:var(--heavy);font-size:10px;margin:8px 0">⚡ ${narrative.paradox}</div>` : ''}
+    `;
+    
+    worldView.appendChild(scene);
+    worldView.scrollTop = worldView.scrollHeight;
+  }
+
+  renderSidebar() {
+    document.getElementById('superposition').textContent = `${this.state.quantum.superposition} states`;
+    document.getElementById('entanglement').textContent = `${this.state.quantum.entanglement} pairs`;
+    document.getElementById('collapseEvents').textContent = this.state.quantum.collapseEvents;
+    document.getElementById('probWave').textContent = this.state.quantum.probabilityWave.toFixed(2);
+    
+    document.getElementById('activeLoops').textContent = this.state.temporal.loops.length;
+    document.getElementById('paradoxCount').textContent = this.state.temporal.paradoxes.length;
+    document.getElementById('timelineStability').textContent = this.state.temporal.stability.toFixed(2);
+  }
+
+  renderQuantumIndicators() {
+    const indicators = document.querySelectorAll('.quantum-dot');
+    const quantumLevel = Math.floor(this.state.quantum.superposition);
+    indicators.forEach((dot, i) => {
+      dot.className = 'quantum-dot';
+      if (i < quantumLevel) {
+        dot.classList.add(this.state.quantum.superposition > 4 ? 'entangled' : 'active');
+      }
+    });
+  }
+
+  renderInnovations() {
+    const innovations = document.querySelectorAll('.innovation-card');
+    const states = Object.values(this.state.innovations);
+    innovations.forEach((card, i) => {
+      const status = card.querySelector('.card-status');
+      if (states[i] === 'ACTIVE') {
+        status.textContent = '● ACTIVE';
+        status.style.color = 'var(--light)';
+        card.style.borderColor = 'var(--light)';
+      } else if (states[i] === 'TRIGGERED') {
+        status.textContent = '● TRIGGERED';
+        status.style.color = 'var(--accent)';
+        card.style.borderColor = 'var(--accent)';
+      }
+    });
+  }
+
+  renderParadoxes() {
+    const container = document.getElementById('paradoxDisplay');
+    if (this.state.temporal.paradoxes.length === 0) {
+      container.innerHTML = `
+        <div class="paradox-display">
+          <div class="paradox-title">No paradoxes yet</div>
+          <div class="paradox-content">Perform contradictory actions to generate paradoxes.</div>
+        </div>
+      `;
+    } else {
+      container.innerHTML = this.state.temporal.paradoxes.slice(-3).map(p => `
+        <div class="paradox-display">
+          <div class="paradox-title">Paradox #${p.id}</div>
+          <div class="paradox-content">${p.description}</div>
+        </div>
+      `).join('');
+    }
+  }
+
+  resetWorld() {
+    this.state = this.createInitialState();
+    document.getElementById('worldView').innerHTML = `
+      <div class="scene">
+        <div class="scene-title">The Experimental Genesis</div>
+        <div class="scene-desc">You stand at the threshold of innovation. Before you, reality bends in impossible ways. The air shimmers with quantum potential. Time flows in spirals. Memory echoes forward and backward simultaneously.</div>
+      </div>
+    `;
+    this.updateUI({ description: 'The world resets. A new experimental cycle begins.' }, { type: 'RESET', turn: 0 });
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// QUANTUM ENGINE — Handles superposition and entanglement
+// ══════════════════════════════════════════════════════════════════
+class QuantumEngine {
+  constructor(engine) {
+    this.engine = engine;
+    this.mutationLog = [];
+  }
+
+  process(type) {
+    const state = this.engine.state.quantum;
+    
+    // Quantum actions increase superposition
+    if (type === 'quantum') {
+      state.superposition = Math.min(10, state.superposition + 2);
+      state.probabilityWave = Math.min(1, state.probabilityWave + 0.2);
+      
+      // Create quantum state
+      state.states.push({
+        turn: this.engine.state.turn,
+        superposition: state.superposition,
+        probability: state.probabilityWave
+      });
+      
+      this.mutationLog.push({
+        turn: this.engine.state.turn,
+        description: `Superposition increased to ${state.superposition} states`
+      });
+    }
+    
+    // Collapse on observation
+    if (type === 'observe' && state.superposition > 1) {
+      state.superposition = Math.max(1, state.superposition - 1);
+      state.collapseEvents++;
+      state.probabilityWave = Math.max(0.1, state.probabilityWave - 0.1);
+      
+      this.mutationLog.push({
+        turn: this.engine.state.turn,
+        description: `Quantum collapse event #${state.collapseEvents}`
+      });
+    }
+    
+    // Entanglement from connections
+    if (type === 'connect') {
+      state.entanglement = Math.min(5, state.entanglement + 1);
+      this.mutationLog.push({
+        turn: this.engine.state.turn,
+        description: `Entanglement increased to ${state.entanglement} pairs`
+      });
+    }
+  }
+
+  getRecentMutation() {
+    const recent = this.mutationLog[this.mutationLog.length - 1];
+    return recent ? recent.description : null;
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// TEMPORAL ENGINE — Handles time loops and timeline stability
+// ══════════════════════════════════════════════════════════════════
+class TemporalEngine {
+  constructor(engine) {
+    this.engine = engine;
+    this.loopLog = [];
+  }
+
+  process(type) {
+    const state = this.engine.state.temporal;
+    
+    // Temporal actions create loops
+    if (type === 'temporal') {
+      const loop = {
+        id: state.loops.length + 1,
+        turn: this.engine.state.turn,
+        action: this.engine.state.actionHistory.slice(-3).map(a => a.type).join(' → '),
+        stability: state.stability
+      };
+      state.loops.push(loop);
+      
+      // Stability decreases with more loops
+      state.stability = Math.max(0.1, state.stability - 0.1);
+      
+      this.loopLog.push({
+        turn: this.engine.state.turn,
+        description: `Temporal loop #${loop.id} created (stability: ${state.stability.toFixed(2)})`
+      });
+    }
+    
+    // Record timeline
+    state.timeline.push({
+      turn: this.engine.state.turn,
+      type,
+      resonance: this.engine.state.resonance
+    });
+  }
+
+  getRecentLoop() {
+    const recent = this.loopLog[this.loopLog.length - 1];
+    return recent ? recent.description : null;
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// PARADOX ENGINE — Handles contradictions and new possibilities
+// ══════════════════════════════════════════════════════════════════
+class ParadoxEngine {
+  constructor(engine) {
+    this.engine = engine;
+    this.paradoxLog = [];
+  }
+
+  process(type) {
+    const state = this.engine.state.temporal;
+    
+    // Paradox actions generate contradictions
+    if (type === 'paradox') {
+      const paradox = {
+        id: state.paradoxes.length + 1,
+        turn: this.engine.state.turn,
+        description: this.generateParadoxDescription(),
+        resolution: 'PENDING'
+      };
+      state.paradoxes.push(paradox);
+      
+      // Paradoxes increase entropy but also create possibilities
+      this.engine.state.entropy = Math.min(1, this.engine.state.entropy + 0.15);
+      this.engine.state.resonance = Math.min(1, this.engine.state.resonance + 0.1);
+      
+      this.paradoxLog.push({
+        turn: this.engine.state.turn,
+        description: `Paradox #${paradox.id} generated: ${paradox.description}`
+      });
+      
+      // Update innovation status
+      this.engine.state.innovations.paradoxEngine = 'ACTIVE';
+    }
+    
+    // Contradictory actions generate paradoxes
+    if (state.paradoxes.length > 0 && this.engine.state.actionHistory.length >= 2) {
+      const lastTwo = this.engine.state.actionHistory.slice(-2);
+      if ((lastTwo[0].type === 'create' && lastTwo[1].type === 'dissolve') ||
+          (lastTwo[0].type === 'connect' && lastTwo[1].type === 'disrupt')) {
+        const paradox = {
+          id: state.paradoxes.length + 1,
+          turn: this.engine.state.turn,
+          description: `Contradiction: ${lastTwo[0].type} followed by ${lastTwo[1].type}`,
+          resolution: 'GENERATING NEW POSSIBILITY'
+        };
+        state.paradoxes.push(paradox);
+        
+        this.paradoxLog.push({
+          turn: this.engine.state.turn,
+          description: `Contradictory paradox generated`
+        });
+      }
+    }
+  }
+
+  generateParadoxDescription() {
+    const descriptions = [
+      'The action exists and does not exist simultaneously.',
+      'Time flows forward and backward at the same moment.',
+      'The observer is the observed.',
+      'Creation and destruction are the same gesture.',
+      'The beginning contains the end.',
+      'Memory predicts the future.',
+      'Silence speaks louder than words.',
+      'The map becomes the territory.',
+      'The dream dreams itself.',
+      'The code writes the programmer.'
+    ];
+    return descriptions[Math.floor(Math.random() * descriptions.length)];
+  }
+
+  getRecentParadox() {
+    const recent = this.paradoxLog[this.paradoxLog.length - 1];
+    return recent ? recent.description : null;
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// DREAM ENGINE — Handles dream fusion with reality
+// ══════════════════════════════════════════════════════════════════
+class DreamEngine {
+  constructor(engine) {
+    this.engine = engine;
+    this.dreamLog = [];
+  }
+
+  process(type) {
+    if (type === 'dream') {
+      const dream = {
+        turn: this.engine.state.turn,
+        imagery: this.generateDreamImagery(),
+        emotionalTone: this.generateEmotionalTone(),
+        realityFusion: Math.random() > 0.7
+      };
+      
+      this.engine.state.dreams.push(dream);
+      
+      // Dreams can fuse with reality
+      if (dream.realityFusion) {
+        this.engine.state.resonance = Math.min(1, this.engine.state.resonance + 0.15);
+        this.engine.state.innovations.dreamFusion = 'ACTIVE';
+        
+        this.dreamLog.push({
+          turn: this.engine.state.turn,
+          description: `Dream fused with reality: ${dream.imagery}`
+        });
+      }
+    }
+  }
+
+  generateDreamImagery() {
+    const imagery = [
+      'crystalline structures growing from liquid light',
+      'impossible geometries folding into themselves',
+      'rivers of code flowing through forests of data',
+      'clocks melting into pools of liquid time',
+      'mountains of memory rising from seas of forgetfulness',
+      'bridges made of starlight connecting distant thoughts',
+      'gardens of algorithms blooming in digital soil',
+      'towers of consciousness reaching into the void',
+      'waves of sound crystallizing into visual patterns',
+      'threads of fate weaving themselves into new destinies'
+    ];
+    return imagery[Math.floor(Math.random() * imagery.length)];
+  }
+
+  generateEmotionalTone() {
+    const tones = ['wonder', 'serenity', 'excitement', 'mystery', 'peace', 'longing', 'awe'];
+    return tones[Math.floor(Math.random() * tones.length)];
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// ECHO ENGINE — Handles memory echoes from past actions
+// ══════════════════════════════════════════════════════════════════
+class EchoEngine {
+  constructor(engine) {
+    this.engine = engine;
+    this.echoLog = [];
+  }
+
+  process(type) {
+    const state = this.engine.state;
+    
+    // Every action creates an echo
+    const echo = {
+      turn: state.turn,
+      type,
+      resonance: state.resonance,
+      strength: 0.5 + (state.resonance * 0.5)
+    };
+    
+    state.echoes.push(echo);
+    
+    // Echoes influence future actions
+    if (state.echoes.length > 5) {
+      const recentEchoes = state.echoes.slice(-5);
+      const avgResonance = recentEchoes.reduce((sum, e) => sum + e.resonance, 0) / recentEchoes.length;
+      
+      // Strong echoes can trigger innovations
+      if (avgResonance > 0.7 && state.turn > 10) {
+        state.innovations.memoryEchoes = 'ACTIVE';
+        
+        this.echoLog.push({
+          turn: state.turn,
+          description: `Memory echoes reaching critical mass (avg resonance: ${avgResonance.toFixed(2)})`
+        });
+      }
+    }
+    
+    // Keep echoes manageable
+    if (state.echoes.length > 20) {
+      state.echoes = state.echoes.slice(-20);
+    }
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// COHERENCE ENGINE — Handles the web of interconnected actions
+// ══════════════════════════════════════════════════════════════════
+class CoherenceEngine {
+  constructor(engine) {
+    this.engine = engine;
+    this.coherenceLog = [];
+  }
+
+  process(type) {
+    const state = this.engine.state;
+    
+    // Every action adds to the coherence web
+    const node = {
+      turn: state.turn,
+      type,
+      connections: [],
+      strength: 0.5
+    };
+    
+    // Connect to previous actions
+    if (state.coherenceWeb.length > 0) {
+      const prevNode = state.coherenceWeb[state.coherenceWeb.length - 1];
+      node.connections.push(prevNode.turn);
+      prevNode.connections.push(state.turn);
+    }
+    
+    // Connect to similar actions
+    const similarActions = state.coherenceWeb.filter(n => n.type === type);
+    if (similarActions.length > 0) {
+      const lastSimilar = similarActions[similarActions.length - 1];
+      node.connections.push(lastSimilar.turn);
+      lastSimilar.connections.push(state.turn);
+    }
+    
+    state.coherenceWeb.push(node);
+    
+    // Activate coherence web innovation
+    if (state.coherenceWeb.length >= 10) {
+      state.innovations.coherenceWeb = 'ACTIVE';
+      
+      // Calculate total coherence
+      const totalConnections = state.coherenceWeb.reduce((sum, n) => sum + n.connections.length, 0);
+      const avgConnections = totalConnections / state.coherenceWeb.length;
+      
+      if (avgConnections > 2) {
+        this.coherenceLog.push({
+          turn: state.turn,
+          description: `Coherence web reaching density (avg connections: ${avgConnections.toFixed(1)})`
+        });
+      }
+    }
+    
+    // Keep web manageable
+    if (state.coherenceWeb.length > 30) {
+      state.coherenceWeb = state.coherenceWeb.slice(-30);
+    }
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// INITIALIZATION
+// ══════════════════════════════════════════════════════════════════
+let engine;
+
+function doAction(type) {
+  if (!engine) engine = new ExperimentalEngine();
+  engine.doAction(type);
+}
+
+function resetWorld() {
+  if (engine) engine.resetWorld();
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+  engine = new ExperimentalEngine();
+  engine.updateUI({ description: 'The experimental frontier awakens. New possibilities emerge.' }, { type: 'GENESIS', turn: 0 });
+});
+</script>
+</body>
+</html>

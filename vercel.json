@@ -580,6 +580,14 @@
       "dest": "/dashboard/index.html"
     },
     {
+      "src": "/experiments",
+      "dest": "/dashboard/lucid-experiments.html"
+    },
+    {
+      "src": "/lucid-experiments",
+      "dest": "/dashboard/lucid-experiments.html"
+    },
+    {
       "src": "/dashboard/(.*)",
       "dest": "/dashboard/$1"
     },
