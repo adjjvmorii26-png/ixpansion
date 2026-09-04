@@ -721,7 +721,7 @@
     },
     {
       "src": "/",
-      "dest": "/dashboard/index.html"
+      "dest": "/dashboard/portal.html"
     },
     {
       "src": "/dashboard",
@@ -1244,13 +1244,6 @@
           "value": "Content-Type, Authorization"
         }
       ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/:path*",
-      "destination": "https://ixpansion.vercel.app/:path*",
-      "permanent": true
     }
   ]
 }
