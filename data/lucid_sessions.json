@@ -1,0 +1,43 @@
+{
+  "sessions": [
+    {
+      "id": "2eb56a1e10",
+      "player_hp": 100,
+      "player_max_hp": 100,
+      "player_level": 1,
+      "player_xp": 10,
+      "player_xp_next": 200,
+      "paradox_debt": 0,
+      "coherence": 0.8,
+      "wave": 1,
+      "status": "active",
+      "realm": "entropy_desert",
+      "current_room": "room_0",
+      "inventory": [
+        "dream_seed"
+      ],
+      "abilities": [
+        "basic_attack",
+        "coherence_shield"
+      ],
+      "log": [
+        {
+          "event": "session_started",
+          "realm": "entropy_desert",
+          "time": 1788544929.06418
+        },
+        {
+          "event": "explore",
+          "wave": 1,
+          "msg": "You move deeper into the realm. [Found: dream_seed]",
+          "time": 1788544929.0697017
+        }
+      ],
+      "actions_taken": 1,
+      "enemies_defeated": 0,
+      "treasures_found": 1,
+      "timestamp": 1788544929.0641823
+    }
+  ],
+  "total": 1
+}

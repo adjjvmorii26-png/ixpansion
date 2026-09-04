@@ -12,6 +12,102 @@
   ],
   "routes": [
     {
+      "src": "/api/organism_token",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/organism_token",
+      "dest": "/api/organism_token"
+    },
+    {
+      "src": "/api/module_market",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/module_market",
+      "dest": "/api/module_market"
+    },
+    {
+      "src": "/api/hex_language",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/hex_language",
+      "dest": "/api/hex_language"
+    },
+    {
+      "src": "/hex-language.html",
+      "dest": "/api/hex_language"
+    },
+    {
+      "src": "/hex-language",
+      "dest": "/api/hex_language"
+    },
+    {
+      "src": "/monetization.html",
+      "dest": "/dashboard/monetization.html"
+    },
+    {
+      "src": "/monetization",
+      "dest": "/dashboard/monetization.html"
+    },
+    {
+      "src": "/api/lucid_combat",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/lucid_combat",
+      "dest": "/api/lucid_combat"
+    },
+    {
+      "src": "/api/lucid_session",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/lucid_session",
+      "dest": "/api/lucid_session"
+    },
+    {
+      "src": "/api/lucid_lore",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/lucid_lore",
+      "dest": "/api/lucid_lore"
+    },
+    {
+      "src": "/api/lucid_physics_rules",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/lucid_physics_rules",
+      "dest": "/api/lucid_physics_rules"
+    },
+    {
+      "src": "/api/lucid_npc",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/lucid_npc",
+      "dest": "/api/lucid_npc"
+    },
+    {
+      "src": "/api/lucid_dungeon",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/lucid_dungeon",
+      "dest": "/api/lucid_dungeon"
+    },
+    {
+      "src": "/lucid-game.html",
+      "dest": "/dashboard/lucid_game.html"
+    },
+    {
+      "src": "/lucid-game",
+      "dest": "/dashboard/lucid_game.html"
+    },
+    {
       "src": "/garden",
       "dest": "/dashboard/garden_live.html"
     },

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucid Machines — The Game</title>
+<style>
+  :root{--bg:#05050f;--s:rgba(10,10,24,0.97);--b:rgba(255,255,255,0.06);--t:#a0a0b8;--m:#4a4a64;--ac:#7c7cf8;--te:#2dd4bf;--am:#fbbf24;--ro:#fb7185;--cy:#22d3ee;--gn:#4ade80;--gd:#f59e0b;--dn:#ef4444;--vi:#a78bfa;--bg2:rgba(0,0,0,0.4)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--t);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+  .hd{text-align:center;padding:18px 20px 10px;border-bottom:1px solid var(--b);background:linear-gradient(180deg,rgba(124,124,248,0.06)0%,transparent 100%)}
+  .hd h1{font-size:1.5em;color:#fff;letter-spacing:3px;text-transform:uppercase}
+  .hd h1 span{color:var(--vi);text-shadow:0 0 20px rgba(167,139,250,0.3)}
+  .sub{color:var(--m);font-size:0.7em;letter-spacing:1px;margin-top:3px}
+  .game-layout{display:grid;grid-template-columns:1fr 280px 1fr;gap:12px;padding:12px;max-width:1400px;margin:0 auto;height:calc(100vh - 80px)}
+  @media(max-width:900px){.game-layout{grid-template-columns:1fr;height:auto}}
+  .panel{background:var(--s);border:1px solid var(--b);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+  .panel-hd{padding:8px 12px;border-bottom:1px solid var(--b);font-size:0.75em;font-weight:600;color:#fff;display:flex;align-items:center;gap:6px}
+  .panel-bd{padding:8px 12px;flex:1;overflow-y:auto;font-size:0.65em}
+  .hp-bar-bg{width:100%;height:8px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden;margin:4px 0}
+  .hp-bar{height:100%;border-radius:4px;transition:width .4s}
+  .stat-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
+  .stat-label{color:var(--m)}
+  .stat-val{color:#fff;font-weight:600}
+  .log-entry{padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.02);font-size:0.95em}
+  .log-entry .wave{color:var(--vi);font-weight:600}
+  .log-entry .msg{color:var(--t)}
+  .log-entry .enemy{color:var(--dn)}
+  .log-entry .loot{color:var(--gd)}
+  .log-entry .levelup{color:var(--gn);font-weight:700}
+  .room-display{padding:12px;margin:6px 0;border-radius:6px;text-align:center;font-size:0.75em;border:1px solid var(--b)}
+  .room-entrance{background:rgba(74,222,128,0.08);border-color:rgba(74,222,128,0.2)}
+  .room-hazard{background:rgba(251,113,133,0.08);border-color:rgba(251,113,133,0.2)}
+  .room-treasure{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.2)}
+  .room-boss{background:rgba(124,124,248,0.08);border-color:rgba(124,124,248,0.2)}
+  .room-corridor{background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.08)}
+  .room-shrine{background:rgba(34,211,238,0.08);border-color:rgba(34,211,238,0.2)}
+  .room-void_gate{background:rgba(124,124,248,0.08);border-color:rgba(124,124,248,0.2)}
+  .room-puzzle{background:rgba(45,212,191,0.08);border-color:rgba(45,212,191,0.2)}
+  .room-icon{font-size:2em;margin-bottom:4px}
+  .action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+  .action-btn{background:var(--bg2);border:1px solid var(--b);color:var(--t);padding:8px 4px;border-radius:5px;font-size:0.85em;font-family:inherit;cursor:pointer;transition:all .15s;text-align:center}
+  .action-btn:hover{background:rgba(124,124,248,0.15);border-color:var(--ac);color:#fff;transform:scale(1.02)}
+  .action-btn.attack{border-color:rgba(251,113,133,0.3);color:var(--ro)}
+  .action-btn.defend{border-color:rgba(45,212,191,0.3);color:var(--te)}
+  .action-btn.rest{border-color:rgba(74,222,128,0.3);color:var(--gn)}
+  .action-btn.explore{border-color:rgba(124,124,248,0.3);color:var(--ac)}
+  .action-btn.paradox{border-color:rgba(245,158,11,0.3);color:var(--gd)}
+  .action-btn.treasure{border-color:rgba(245,158,11,0.3);color:var(--gd)}
+  .npc-card{background:rgba(124,124,248,0.05);border:1px solid rgba(124,124,248,0.1);border-radius:6px;padding:8px;margin:6px 0}
+  .npc-name{color:var(--vi);font-weight:600;font-size:1.05em}
+  .npc-type{color:var(--m);font-size:0.85em}
+  .npc-dialogue{color:var(--t);font-style:italic;margin-top:4px;font-size:0.9em}
+  .lore-card{background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.1);border-radius:6px;padding:8px;margin:6px 0}
+  .lore-title{color:var(--gd);font-weight:600}
+  .lore-acts{color:var(--t);margin-top:4px;font-size:0.9em;line-height:1.5}
+  .physics-card{background:rgba(45,212,191,0.05);border:1px solid rgba(45,212,191,0.1);border-radius:6px;padding:8px;margin:6px 0}
+  .physics-rule{display:flex;justify-content:space-between;padding:2px 0;font-size:0.9em}
+  .physics-rule .key{color:var(--te)}
+  .physics-rule .val{color:#fff;font-weight:600}
+  .start-screen{text-align:center;padding:40px 20px}
+  .start-screen h2{color:var(--vi);font-size:1.8em;margin-bottom:10px;text-shadow:0 0 30px rgba(167,139,250,0.3)}
+  .start-screen p{color:var(--m);margin-bottom:20px;line-height:1.6}
+  .realm-select{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:20px 0;max-width:600px;margin-left:auto;margin-right:auto}
+  .realm-btn{background:var(--bg2);border:1px solid var(--b);color:var(--t);padding:12px;border-radius:8px;cursor:pointer;transition:all .2s;text-align:center}
+  .realm-btn:hover{border-color:var(--vi);color:#fff;background:rgba(124,124,248,0.1)}
+  .realm-btn.selected{border-color:var(--vi);color:var(--vi);background:rgba(124,124,248,0.12)}
+  .realm-name{font-weight:600;font-size:0.8em}
+  .realm-info{font-size:0.6em;color:var(--m);margin-top:3px}
+  .realm-icon{font-size:1.5em;margin-bottom:4px}
+  .start-btn{background:linear-gradient(135deg,var(--vi),var(--ac));color:#fff;border:none;padding:12px 32px;border-radius:8px;font-size:1em;font-family:inherit;cursor:pointer;margin-top:16px;letter-spacing:1px;transition:all .2s}
+  .start-btn:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(124,124,248,0.3)}
+  .hidden{display:none!important}
+  .pulse-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gn);margin-right:4px;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .sb{display:flex;justify-content:center;gap:16px;padding:8px;border-top:1px solid var(--b);font-size:0.55em;color:var(--m);position:fixed;bottom:0;left:0;right:0;background:var(--bg)}
+</style>
+</head>
+<body>
+<div class="hd">
+  <h1>Lucid <span>Machines</span></h1>
+  <div class="sub">A game generated by the organism</div>
+</div>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="start-screen">
+  <h2>☽ Lucid Machines</h2>
+  <p>The organism generates worlds. You navigate them.<br>Each turn is a wave. Each wave changes everything.</p>
+  <div class="realm-select" id="realmSelect"></div>
+  <button class="start-btn" onclick="startGame()">☽ Enter the Lucid</button>
+  <p style="color:var(--m);font-size:0.7em;margin-top:16px">The organism will generate your dungeon, NPCs, physics, lore, and combat.</p>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="gameScreen" class="game-layout hidden">
+  <!-- LEFT: Player + Inventory -->
+  <div class="panel">
+    <div class="panel-hd"><span class="pulse-dot"></span>Player</div>
+    <div class="panel-bd">
+      <div class="stat-row"><span class="stat-label">Level</span><span class="stat-val" id="pLevel">1</span></div>
+      <div class="stat-row"><span class="stat-label">HP</span><span class="stat-val" id="pHP">100/100</span></div>
+      <div class="hp-bar-bg"><div class="hp-bar" id="pHPBar" style="width:100%;background:var(--gn)"></div></div>
+      <div class="stat-row"><span class="stat-label">XP</span><span class="stat-val" id="pXP">0/200</span></div>
+      <div class="stat-row"><span class="stat-label">Paradox Debt</span><span class="stat-val" id="pParadox">0</span></div>
+      <div class="stat-row"><span class="stat-label">Coherence</span><span class="stat-val" id="pCoherence">0.80</span></div>
+      <div class="stat-row"><span class="stat-label">Wave</span><span class="stat-val" id="pWave">0</span></div>
+      <div style="margin-top:10px;font-size:0.7em;color:var(--m);border-top:1px solid var(--b);padding-top:8px">
+        <div style="margin-bottom:4px;color:#fff;font-weight:600">Inventory</div>
+        <div id="inventory" style="color:var(--t)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER: Game View + Actions -->
+  <div class="panel">
+    <div class="panel-hd"><span style="color:var(--vi)">◈</span> Realm: <span id="realmName" style="color:var(--vi)">—</span></div>
+    <div class="panel-bd">
+      <div id="roomDisplay" class="room-display room-entrance">
+        <div class="room-icon">🚪</div>
+        <div style="font-weight:600;color:#fff">Entrance</div>
+        <div style="color:var(--m);font-size:0.85em">The dungeon awaits...</div>
+      </div>
+      <div id="npcArea"></div>
+      <div id="loreArea"></div>
+      <div class="action-grid">
+        <button class="action-btn explore" onclick="doAction('explore')">🧭 Explore</button>
+        <button class="action-btn attack" onclick="doAction('attack')">⚔ Attack</button>
+        <button class="action-btn defend" onclick="doAction('defend')">🛡 Defend</button>
+        <button class="action-btn rest" onclick="doAction('rest')">💤 Rest</button>
+        <button class="action-btn treasure" onclick="doAction('use_treasure')">🎁 Use Loot</button>
+        <button class="action-btn paradox" onclick="doAction('paradox_embrace')">🔮 Embrace Paradox</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Lore + Physics + Combat Log -->
+  <div class="panel">
+    <div class="panel-hd"><span style="color:var(--gd)">✦</span> World</div>
+    <div class="panel-bd">
+      <div id="physicsArea" class="physics-card">
+        <div style="font-weight:600;color:var(--te);margin-bottom:4px">Physics Rules</div>
+        <div id="physicsRules"></div>
+      </div>
+      <div id="lorePanel" class="lore-card">
+        <div class="lore-title">Loading lore...</div>
+      </div>
+      <div style="margin-top:8px;border-top:1px solid var(--b);padding-top:6px">
+        <div style="color:#fff;font-weight:600;margin-bottom:4px">Combat Log</div>
+        <div id="combatLog"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sb">
+  <span><span class="pulse-dot"></span>LUCID MACHINES v1.0</span>
+  <span id="clock"></span>
+  <span>IXPANSION ORGANISM</span>
+</div>
+
+<script>
+let G = {session:null, dungeon:null, npc:null, physics:null, lore:null, selectedRealm:'entropy_desert', roomIdx:0};
+const REALM_ICONS = {entropy_desert:'🏜',dream_gravity_zone:'🌀',paradox_garden:'🌺',coherence_cathedral:'🏰',void_abyss:'🕳',temporal_rift:'⏰',mythic_realm:'📖',resonance_depths:'💎',fracture_field:'⚡',synchronicity_meadow:'🌸'};
+const ROOM_ICONS = {entrance:'🚪',corridor:'🕳',hazard:'⚡',treasure:'🎁',boss:'👹',shrine:'🔮',void_gate:'🌀',puzzle:'🧩'};
+const api = async(p)=>{try{return await(await fetch(p)).json()}catch(e){return{error:e.message}}};
+
+async function initRealms(){
+  const d = await api('/api/lucid_dungeon/realms');
+  const sel = document.getElementById('realmSelect');
+  sel.innerHTML = '';
+  Object.entries(d.realms||{}).forEach(([name,r])=>{
+    const btn = document.createElement('div');
+    btn.className = 'realm-btn' + (name===G.selectedRealm?' selected':'');
+    btn.onclick = ()=>{G.selectedRealm=name; document.querySelectorAll('.realm-btn').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected')};
+    btn.innerHTML = `<div class="realm-icon">${REALM_ICONS[name]||'?'}</div><div class="realm-name">${name.replace(/_/g,' ')}</div><div class="realm-info">diff: ${r.difficulty} | biome: ${r.biome.replace(/_/g,' ')}</div>`;
+    sel.appendChild(btn);
+  });
+}
+
+async function startGame(){
+  document.getElementById('startScreen').classList.add('hidden');
+  document.getElementById('gameScreen').classList.remove('hidden');
+  const [session, dungeon, npc, physics, lore] = await Promise.all([
+    api(`/api/lucid_session/start?realm=${G.selectedRealm}`),
+    api(`/api/lucid_dungeon/generate?realm=${G.selectedRealm}`),
+    api('/api/lucid_npc/generate'),
+    api('/api/lucid_physics_rules/generate'),
+    api('/api/lucid_lore/generate'),
+  ]);
+  G.session = session.session;
+  G.dungeon = dungeon.dungeon;
+  G.npc = npc.npc;
+  G.physics = physics.ruleset;
+  G.lore = lore.arc;
+  G.roomIdx = 0;
+  renderAll();
+  addLog('wave', 'A new lucid cycle begins in ' + G.dungeon.realm.replace(/_/g,' '));
+}
+
+function renderAll(){
+  if(!G.session) return;
+  const s = G.session;
+  document.getElementById('pLevel').textContent = s.player_level;
+  document.getElementById('pHP').textContent = `${s.player_hp}/${s.player_max_hp}`;
+  document.getElementById('pHPBar').style.width = `${(s.player_hp/s.player_max_hp)*100}%`;
+  document.getElementById('pHPBar').style.background = s.player_hp > s.player_max_hp*0.5 ? 'var(--gn)' : s.player_hp > s.player_max_hp*0.25 ? 'var(--am)' : 'var(--dn)';
+  document.getElementById('pXP').textContent = `${s.player_xp}/${s.player_xp_next}`;
+  document.getElementById('pParadox').textContent = s.paradox_debt;
+  document.getElementById('pCoherence').textContent = s.coherence;
+  document.getElementById('pWave').textContent = s.wave;
+  document.getElementById('realmName').textContent = s.realm.replace(/_/g,' ');
+  document.getElementById('inventory').innerHTML = s.inventory.map(i=>`<div>• ${i.replace(/_/g,' ')}</div>`).join('') || '<div style="color:var(--m)">Empty</div>';
+  renderRoom();
+  renderPhysics();
+  renderNPC();
+  renderLore();
+}
+
+function renderRoom(){
+  if(!G.dungeon) return;
+  const room = G.dungeon.rooms[G.roomIdx % G.dungeon.rooms.length];
+  const rd = document.getElementById('roomDisplay');
+  const icon = ROOM_ICONS[room.type]||'❓';
+  rd.className = `room-display room-${room.type}`;
+  rd.innerHTML = `<div class="room-icon">${icon}</div><div style="font-weight:600;color:#fff">${room.type.replace(/_/g,' ').toUpperCase()}</div><div style="color:var(--m);font-size:0.85em">${room.biome.replace(/_/g,' ')}${room.hazard?' ⚠ '+room.hazard.replace(/_/g,' '):''}${room.loot?' 💰 '+room.loot.replace(/_/g,' '):''}</div>`;
+}
+
+function renderPhysics(){
+  if(!G.physics) return;
+  const pr = document.getElementById('physicsRules');
+  pr.innerHTML = Object.entries(G.physics.rules||{}).filter(([k])=>k!=='dream_override').map(([k,v])=>`<div class="physics-rule"><span class="key">${k}</span><span class="val">${v}</span></div>`).join('');
+}
+
+function renderNPC(){
+  if(!G.npc) return;
+  const area = document.getElementById('npcArea');
+  area.innerHTML = `<div class="npc-card"><div class="npc-name">${G.npc.species} ${G.npc.archetype}</div><div class="npc-type">Lv${G.npc.level} | ${G.npc.mood} | HP: ${G.npc.hp}</div><div class="npc-dialogue">"${G.npc.dialogue}"</div></div>`;
+}
+
+function renderLore(){
+  if(!G.lore) return;
+  const lp = document.getElementById('lorePanel');
+  lp.innerHTML = `<div class="lore-title">✦ ${G.lore.title}</div><div class="lore-acts">${G.lore.acts.map((a,i)=>`<div>${i+1}. ${a}</div>`).join('')}</div><div style="margin-top:6px;color:var(--gd);font-style:italic">"${G.lore.moral}"</div>`;
+}
+
+function addLog(type, msg){
+  const cl = document.getElementById('combatLog');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.innerHTML = `<span class="wave">W${G.session?.wave||0}</span> <span class="${type}">${msg}</span>`;
+  cl.prepend(entry);
+  while(cl.children.length > 20) cl.removeChild(cl.lastChild);
+}
+
+async function doAction(act){
+  if(!G.session || G.session.status !== 'active') return;
+  const d = await api(`/api/lucid_session/action?session_id=${G.session.id}&act=${act}`);
+  if(d.error){addLog('enemy', d.error); return}
+  G.session = d.session;
+  addLog('msg', d.outcome);
+  if(act === 'explore') G.roomIdx++;
+  if(act === 'attack'){
+    const combat = await api(`/api/lucid_combat/engage?player_hp=${G.session.player_hp}&player_level=${G.session.player_level}&paradox_debt=${G.session.paradox_debt}`);
+    if(combat.result){
+      G.session.player_hp = combat.result.player_hp_after;
+      G.session.player_xp += combat.result.xp_gained;
+      addLog('msg', combat.result.narrative);
+      if(combat.result.victory) addLog('levelup', combat.result.victory_text);
+      else addLog('enemy', combat.result.victory_text);
+      G.npc.hp = combat.result.npc_hp_after;
+      if(G.npc.hp <= 0){
+        addLog('levelup', `${G.npc.species} defeated! Generating new encounter...`);
+        const newNpc = await api('/api/lucid_npc/generate');
+        G.npc = newNpc.npc;
+      }
+    }
+  }
+  renderAll();
+  if(G.session.status !== 'active') addLog('enemy', 'GAME OVER — The organism speaks: "Every end is a new wave."');
+}
+
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toISOString().slice(11,19)},1000);
+initRealms();
+</script>
+</body>
+</html>
