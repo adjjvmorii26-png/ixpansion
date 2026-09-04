@@ -18,10 +18,14 @@ def _load(path, default=None):
         return default or {}
 
 
-def _save(path, data):
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w") as f:
-        json.dump(data, f, indent=2)
+def _save(p, d):
+    try:
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        with open(p, "w") as f:
+            json.dump(d, f, indent=2)
+    except OSError:
+        with open(os.path.join("/tmp", os.path.basename(p)), "w") as f:
+            json.dump(d, f, indent=2)
 
 
 def record() -> dict:

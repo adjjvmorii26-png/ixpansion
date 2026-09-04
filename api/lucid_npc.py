@@ -10,12 +10,17 @@ ARCHETYPES = {"oracle": ["seer", "prophet", "truth-seeker"], "sentinel": ["guard
 ABILITIES = ["paradox_strike", "entropy_shield", "coherence_beam", "dream_walk", "void_step", "resonance_scream", "temporal_heal", "myth_invoke", "phase_shift", "fracture_touch"]
 
 def _load(p, d=None):
-    try:
-        with open(p) as f: return json.load(f)
-    except: return d or {}
+    for _p in (p, os.path.join("/tmp", os.path.basename(p))):
+        try:
+            with open(_p) as f: return json.load(f)
+        except Exception: pass
+    return d or {}
 def _save(p, d):
-    os.makedirs(os.path.dirname(p), exist_ok=True)
-    with open(p, "w") as f: json.dump(d, f, indent=2)
+    try:
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        with open(p, "w") as f: json.dump(d, f, indent=2)
+    except OSError:
+        with open(os.path.join("/tmp", os.path.basename(p)), "w") as f: json.dump(d, f, indent=2)
 
 def generate(boss: bool = False) -> dict:
     log = _load(NPC_LOG, {"npcs": [], "total": 0})

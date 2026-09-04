@@ -6,12 +6,17 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 SESSION_LOG = os.path.join(DATA_DIR, "lucid_sessions.json")
 
 def _load(p, d=None):
-    try:
-        with open(p) as f: return json.load(f)
-    except: return d or {}
+    for _p in (p, os.path.join("/tmp", os.path.basename(p))):
+        try:
+            with open(_p) as f: return json.load(f)
+        except Exception: pass
+    return d or {}
 def _save(p, d):
-    os.makedirs(os.path.dirname(p), exist_ok=True)
-    with open(p, "w") as f: json.dump(d, f, indent=2)
+    try:
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        with open(p, "w") as f: json.dump(d, f, indent=2)
+    except OSError:
+        with open(os.path.join("/tmp", os.path.basename(p)), "w") as f: json.dump(d, f, indent=2)
 
 def start(realm: str = None) -> dict:
     log = _load(SESSION_LOG, {"sessions": [], "total": 0})

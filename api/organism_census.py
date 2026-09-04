@@ -8,12 +8,17 @@ CENSUS_LOG = os.path.join(DATA_DIR, "organism_census.json")
 LAYERS = ["core", "depth", "temporal", "pulse", "creative", "dream", "expansion", "game", "economy", "experimental", "governance", "mesh"]
 
 def _load(p, d=None):
-    try:
-        with open(p) as f: return json.load(f)
-    except: return d or {}
+    for _p in (p, os.path.join("/tmp", os.path.basename(p))):
+        try:
+            with open(_p) as f: return json.load(f)
+        except Exception: pass
+    return d or {}
 def _save(p, d):
-    os.makedirs(os.path.dirname(p), exist_ok=True)
-    with open(p, "w") as f: json.dump(d, f, indent=2)
+    try:
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        with open(p, "w") as f: json.dump(d, f, indent=2)
+    except OSError:
+        with open(os.path.join("/tmp", os.path.basename(p)), "w") as f: json.dump(d, f, indent=2)
 
 import api_server
 def take_census() -> dict:
