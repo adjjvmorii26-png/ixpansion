@@ -216,6 +216,22 @@
       "dest": "/dashboard/gallery.html"
     },
     {
+      "src": "/api/organism_voice",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/paradox_echo",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/echo.html",
+      "dest": "/dashboard/echo.html"
+    },
+    {
+      "src": "/echo",
+      "dest": "/dashboard/echo.html"
+    },
+    {
       "src": "/garden",
       "dest": "/dashboard/garden_live.html"
     },
