@@ -12,6 +12,22 @@
   ],
   "routes": [
     {
+      "src": "/api/lucid_progression",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/lucid_equipment",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/lucid-progression",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/lucid-equipment",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/aleph_bot",
       "dest": "/api/index.py"
     },

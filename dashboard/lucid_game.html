@@ -105,8 +105,17 @@
       <div class="stat-row"><span class="stat-label">Coherence</span><span class="stat-val" id="pCoherence">0.80</span></div>
       <div class="stat-row"><span class="stat-label">Wave</span><span class="stat-val" id="pWave">0</span></div>
       <div style="margin-top:10px;font-size:0.7em;color:var(--m);border-top:1px solid var(--b);padding-top:8px">
-        <div style="margin-bottom:4px;color:#fff;font-weight:600">Inventory</div>
+        <div style="margin-bottom:4px;color:#fff;font-weight:600">Equipment</div>
+        <div id="equipment" style="color:var(--t)"></div>
+        <div style="margin-top:6px;color:#fff;font-weight:600">Inventory</div>
         <div id="inventory" style="color:var(--t)"></div>
+        <div style="margin-top:6px;margin-bottom:4px;color:#fff;font-weight:600">Save Code</div>
+        <input id="saveCode" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--b);color:var(--vi);padding:5px;border-radius:4px;font-size:0.8em;font-family:inherit" placeholder="Your save code appears here">
+        <div style="display:flex;gap:4px;margin-top:5px">
+          <button class="action-btn" style="font-size:0.7em;padding:4px" onclick="copySave()">Copy</button>
+          <button class="action-btn" style="font-size:0.7em;padding:4px" onclick="loadSave()">Load</button>
+          <button class="action-btn" style="font-size:0.7em;padding:4px" onclick="rollEquipment()">Roll Gear</button>
+        </div>
       </div>
     </div>
   </div>
@@ -159,10 +168,11 @@
 </div>
 
 <script>
-let G = {session:null, blob:null, dungeon:null, npc:null, physics:null, lore:null, selectedRealm:'entropy_desert', roomIdx:0};
+let G = {session:null, blob:null, dungeon:null, npc:null, physics:null, lore:null, selectedRealm:'entropy_desert', roomIdx:0, equipment:{weapon:null,armor:null,focus:null,token:null,relic:null}, realmClears:{}};
 function encodeBlob(obj){
   try {
     let s = JSON.stringify(obj);
+    // (existing base64url logic below)
     let enc = btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
     return enc;
   } catch(e){ return ''; }
@@ -218,6 +228,8 @@ function renderAll(){
   document.getElementById('pWave').textContent = s.wave;
   document.getElementById('realmName').textContent = s.realm.replace(/_/g,' ');
   document.getElementById('inventory').innerHTML = s.inventory.map(i=>`<div>• ${i.replace(/_/g,' ')}</div>`).join('') || '<div style="color:var(--m)">Empty</div>';
+  renderEquipment();
+  document.getElementById('saveCode').value = (G.blob||'').slice(0, 60);
   renderRoom();
   renderPhysics();
   renderNPC();
@@ -287,6 +299,43 @@ async function doAction(act){
   }
   renderAll();
   if(G.session.status !== 'active') addLog('enemy', 'GAME OVER — The organism speaks: "Every end is a new wave."');
+}
+
+function renderEquipment(){
+  const eq = document.getElementById('equipment');
+  const slots = ['weapon','armor','focus','token','relic'];
+  eq.innerHTML = slots.map(sl=>{
+    const it = G.equipment[sl];
+    if(!it) return `<div style="display:flex;justify-content:space-between;padding:2px 0"><span style="color:var(--m)">${sl}</span><span style="color:var(--m)">— empty —</span></div>`;
+    return `<div style="display:flex;justify-content:space-between;padding:2px 0"><span style="color:var(--m)">${sl}</span><span style="color:${it.color||'var(--t)'}">${it.name} (${it.power})</span></div>`;
+  }).join('');
+}
+async function rollEquipment(){
+  if(!G.session) return;
+  const d = await api(`/api/lucid_equipment/generate?level=${G.session.player_level}`);
+  const item = d.item;
+  const slot = item.slot;
+  G.equipment[slot] = item;
+  renderAll();
+  addLog('loot', `Equipped ${item.name} (${slot}, power ${item.power})`);
+}
+function copySave(){
+  const code = document.getElementById('saveCode').value;
+  if(navigator.clipboard){ navigator.clipboard.writeText(code); }
+  addLog('msg', 'Save code copied!');
+}
+async function loadSave(){
+  const code = document.getElementById('saveCode').value.trim();
+  if(!code) return;
+  try{
+    let pad = code.replace(/-/g,'+').replace(/_/g,'/');
+    while(pad.length % 4) pad += '=';
+    const json = decodeURIComponent(escape(atob(pad)));
+    G.session = JSON.parse(json);
+    G.blob = code;
+    renderAll();
+    addLog('msg', 'Save loaded. Welcome back.');
+  }catch(e){ addLog('enemy', 'Invalid save code.'); }
 }
 
 setInterval(()=>{document.getElementById('clock').textContent=new Date().toISOString().slice(11,19)},1000);
