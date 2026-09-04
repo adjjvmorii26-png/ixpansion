@@ -200,6 +200,22 @@
       "dest": "/dashboard/lucid_game.html"
     },
     {
+      "src": "/api/resonance_gallery",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/wave_prophecy",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/gallery.html",
+      "dest": "/dashboard/gallery.html"
+    },
+    {
+      "src": "/gallery",
+      "dest": "/dashboard/gallery.html"
+    },
+    {
       "src": "/garden",
       "dest": "/dashboard/garden_live.html"
     },

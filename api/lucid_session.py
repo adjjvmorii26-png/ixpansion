@@ -148,7 +148,7 @@ def handler(payload=None, context=None):
     payload = payload or {}
     path = payload.get("path", "/start")
     if path == "/start":
-        s = start()
+        s = start(payload.get("realm") or payload.get("realm_name"))
         session = s["session"]
         s["blob"] = _encode_session(session)
         return s
