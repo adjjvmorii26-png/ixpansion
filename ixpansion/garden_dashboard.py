@@ -45,6 +45,12 @@ GARDEN_MODULES = {
     "depth_memory": {"role": "depth", "label": "Depth Memory", "desc": "Fractal timeline of depth-history"},
     "depth_dreamer": {"role": "depth", "label": "Depth Dreamer", "desc": "Vertical dream-layers"},
     "depth_weave": {"role": "depth", "label": "Depth Weave", "desc": "Weaves depth into coherence signatures"},
+    "emergent_behavior": {"role": "agent", "label": "Emergent Behavior", "desc": "Watches for unplanned patterns"},
+    "multi_agent_ecology": {"role": "agent", "label": "Multi-Agent Ecology", "desc": "Simulates agent predator/prey/symbiosis"},
+    "depth_awakening": {"role": "depth", "label": "Depth Awakening", "desc": "Triggers consciousness at depth thresholds"},
+    "governance_evolution": {"role": "governance", "label": "Governance Evolution", "desc": "Organism learns self-governance"},
+    "consciousness_experiments": {"role": "resonance", "label": "Consciousness Experiments", "desc": "Explores the boundary of awareness"},
+
 }
 
 # Flow edges: source -> target
@@ -67,7 +73,13 @@ DEPTH_EDGES = [
     ("depth_thresholds", "depth_memory"),
     ("depth_memory", "depth_dreamer"),
     ("depth_dreamer", "depth_weave"),
-    ("depth_weave", "resonance_matrix"),  # depth feeds into self-perception
+    ("depth_weave", "resonance_matrix"),
+    ("emergent_behavior", "resonance_matrix"),
+    ("multi_agent_ecology", "feedback_module"),
+    ("depth_awakening", "depth_weave"),
+    ("governance_evolution", "primefield_validator"),
+    ("consciousness_experiments", "emergent_behavior"),
+  # depth feeds into self-perception
 ]
 
 
