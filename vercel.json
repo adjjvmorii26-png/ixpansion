@@ -972,6 +972,26 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/pulse",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/wave361",
+      "dest": "/dashboard/wave361.html"
+    },
+    {
+      "src": "/wave361.html",
+      "dest": "/dashboard/wave361.html"
+    },
+    {
+      "src": "/api/phase_transition",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/resonance_graph",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/interstice",
       "dest": "/dashboard/interstice.html"
     },
