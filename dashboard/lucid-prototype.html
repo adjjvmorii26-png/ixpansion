@@ -3,395 +3,727 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lucid Machines — Prototyp</title>
+<title>Lucid Machines — Adaptive Reality Engine</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0d;color:#c8c8c8;font-family:'Courier New',monospace;font-size:13px;min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
-#banner{text-align:center;padding:8px;background:linear-gradient(180deg,#151526,#0a0a0d);border-bottom:1px solid #2a2a3a;color:#fff;font-size:14px;letter-spacing:2px;flex-shrink:0}
-#banner .sub{color:#6a6;font-size:10px;margin-top:2px;letter-spacing:1px}
-#game{flex:1;display:flex;flex-direction:column;padding:4px 8px;overflow:hidden;min-height:0}
-#viewport{flex:1;white-space:pre-wrap;font-size:11px;line-height:1.5;color:#a8c;padding:4px;background:#0d0d12;border:1px solid #15151f;border-radius:3px;overflow-y:auto;word-break:break-word}
-#controls{display:flex;gap:2px;padding:3px 4px;flex-wrap:wrap;justify-content:center;background:#0a0a0c;flex-shrink:0}
-.btn{background:#12121e;color:#8a8;border:1px solid #333;padding:3px 6px;border-radius:2px;cursor:pointer;font-family:inherit;font-size:11px;transition:all .1s}
-.btn:hover{background:#22223a;color:#fff;border-color:#668}
-.btn:active{transform:scale(0.95)}
-#status{padding:4px 8px;background:#111;border-top:1px solid #222;font-size:10px;flex-shrink:0}
-#mode{padding:4px 8px;background:#111;border-top:1px solid #222;font-size:10px;flex-shrink:0}
+:root{
+  --bg:#06060a;--surface:#0c0c14;--surface2:#12121e;
+  --border:#1a1a2a;--border2:#252540;
+  --text:#c8c8d0;--text2:#7a7a8e;--text3:#4a4a5e;
+  --accent:#6e8efb;--accent2:#a777e3;
+  --light:#3ee8b5;--neutral:#6e8efb;--heavy:#e74c6f;
+  --glass:rgba(12,12,20,0.85);--glow:0 0 20px rgba(110,142,251,0.15);
+}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Cascadia Code','Fira Code',monospace;font-size:12px;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.app{display:grid;grid-template-rows:auto 1fr auto;gap:0;height:100vh}
+
+/* Header */
+.header{padding:12px 20px;background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px}
+.header h1{font-size:15px;letter-spacing:3px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600}
+.header .badge{padding:3px 10px;border-radius:12px;font-size:9px;letter-spacing:1px;text-transform:uppercase}
+.badge-live{background:rgba(62,232,181,0.15);color:var(--light);border:1px solid rgba(62,232,181,0.3)}
+.badge-mood{border:1px solid var(--border2);color:var(--text2)}
+.badge-depth{background:rgba(110,142,251,0.1);color:var(--accent);border:1px solid rgba(110,142,251,0.2)}
+.header-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+
+/* Main Grid */
+.main{display:grid;grid-template-columns:1fr 320px;gap:1px;background:var(--border);overflow:hidden}
+
+/* World View */
+.world{background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
+.world-header{padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.world-header h2{font-size:11px;color:var(--text2);letter-spacing:2px;text-transform:uppercase}
+.world-view{flex:1;padding:16px;overflow-y:auto;font-size:11px;line-height:1.7}
+.world-view .scene{margin-bottom:20px}
+.world-view .scene-title{color:var(--accent);font-size:13px;margin-bottom:8px;letter-spacing:1px}
+.world-view .scene-desc{color:var(--text2);margin-bottom:12px}
+.world-view .action-log{border-left:2px solid var(--border2);padding-left:12px;margin:8px 0}
+.world-view .action-entry{color:var(--text3);margin:4px 0;font-size:10px}
+.world-view .action-entry .time{color:var(--text3);margin-right:8px}
+.world-view .action-entry .action{color:var(--text2)}
+.world-view .action-entry.highlight{color:var(--accent);font-weight:500}
+
+/* Sidebar */
+.sidebar{background:var(--surface);display:flex;flex-direction:column;overflow:hidden}
+.sidebar-section{padding:12px 16px;border-bottom:1px solid var(--border)}
+.sidebar-section h3{font-size:9px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.stat-row{display:flex;justify-content:space-between;margin:4px 0;font-size:10px}
+.stat-label{color:var(--text3)}
+.stat-value{color:var(--text)}
+.stat-value.light{color:var(--light)}
+.stat-value.heavy{color:var(--heavy)}
+.stat-value.neutral{color:var(--accent)}
+
+/* Memory Window */
+.memory-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin:8px 0}
+.memory-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.5s ease;border-radius:2px}
+
+/* Thread Display */
+.thread-item{padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;margin:6px 0;font-size:10px;line-height:1.5;transition:all 0.3s ease}
+.thread-item.active{border-color:var(--accent);box-shadow:var(--glow)}
+.thread-item .thread-title{color:var(--text);margin-bottom:4px;font-weight:500}
+.thread-item .thread-desc{color:var(--text3);font-size:9px}
+.thread-item .thread-time{color:var(--text3);font-size:8px;margin-top:4px}
+
+/* Controls */
+.controls{padding:12px 16px;background:var(--surface);border-top:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:6px 14px;border:1px solid var(--border2);border-radius:6px;background:var(--surface2);color:var(--text2);cursor:pointer;font-family:inherit;font-size:10px;letter-spacing:1px;transition:all 0.2s ease}
+.btn:hover{background:var(--border2);color:var(--text);border-color:var(--accent)}
+.btn:active{transform:scale(0.97)}
+.btn.primary{background:rgba(110,142,251,0.15);color:var(--accent);border-color:rgba(110,142,251,0.3)}
+.btn.primary:hover{background:rgba(110,142,251,0.25)}
+.btn.danger{color:var(--heavy);border-color:rgba(231,76,111,0.3)}
+.btn.danger:hover{background:rgba(231,76,111,0.1)}
+.btn.success{color:var(--light);border-color:rgba(62,232,181,0.3)}
+.btn.success:hover{background:rgba(62,232,181,0.1)}
+.controls-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+
+/* Mutation Indicator */
+.mutation-indicator{display:flex;gap:4px;align-items:center}
+.mutation-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all 0.3s ease}
+.mutation-dot.active{background:var(--accent);box-shadow:0 0 8px rgba(110,142,251,0.5)}
+.mutation-dot.danger{background:var(--heavy);box-shadow:0 0 8px rgba(231,76,111,0.5)}
+
+/* Responsive */
+@media(max-width:768px){
+  .main{grid-template-columns:1fr}
+  .sidebar{display:none}
+}
+
+/* Animations */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+@keyframes glow{0%,100%{box-shadow:0 0 5px rgba(110,142,251,0.2)}50%{box-shadow:0 0 15px rgba(110,142,251,0.4)}}
+.pulsing{animation:pulse 2s ease-in-out infinite}
+.glowing{animation:glow 3s ease-in-out infinite}
 </style>
 </head>
 <body>
-<div id="banner">LUCID MACHINES <div class="sub">The Echo Chamber Principle — a co-pilot prototype</div></div>
-<div id="game">
-  <div id="viewport"></div>
-  <div id="controls"></div>
+<div class="app">
+  <!-- Header -->
+  <div class="header">
+    <h1>LUCID MACHINES</h1>
+    <span class="badge badge-live">● LIVE</span>
+    <span class="badge badge-mood" id="moodBadge">MOOD: NEUTRAL</span>
+    <span class="badge badge-depth" id="depthBadge">DEPTH: 0</span>
+    <div class="header-right">
+      <span style="font-size:9px;color:var(--text3)">WAVE 357 — ADAPTIVE REALITY ENGINE</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <!-- World View -->
+    <div class="world">
+      <div class="world-header">
+        <h2>◈ The Living World</h2>
+        <div class="mutation-indicator">
+          <span style="font-size:9px;color:var(--text3)">MUTATION</span>
+          <div class="mutation-dot" id="m1"></div>
+          <div class="mutation-dot" id="m2"></div>
+          <div class="mutation-dot" id="m3"></div>
+          <div class="mutation-dot" id="m4"></div>
+          <div class="mutation-dot" id="m5"></div>
+        </div>
+      </div>
+      <div class="world-view" id="worldView">
+        <div class="scene">
+          <div class="scene-title">The Genesis Moment</div>
+          <div class="scene-desc">You stand at the edge of a world that hasn't decided what it is yet. The ground beneath you shifts like liquid thought. Above, the sky pulses with colors that don't have names.</div>
+          <div class="action-log" id="actionLog"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Organism State -->
+      <div class="sidebar-section">
+        <h3>◈ Organism State</h3>
+        <div class="stat-row"><span class="stat-label">Phase</span><span class="stat-value" id="phaseValue">GENESIS</span></div>
+        <div class="stat-row"><span class="stat-label">Resonance</span><span class="stat-value neutral" id="resonanceValue">0.50</span></div>
+        <div class="stat-row"><span class="stat-label">Entropy</span><span class="stat-value" id="entropyValue">0.30</span></div>
+        <div class="stat-row"><span class="stat-label">Coherence</span><span class="stat-value" id="coherenceValue">0.70</span></div>
+        <div class="stat-row"><span class="stat-label">Turn</span><span class="stat-value" id="turnValue">0</span></div>
+      </div>
+
+      <!-- Memory Plasticity -->
+      <div class="sidebar-section">
+        <h3>◈ Memory Plasticity</h3>
+        <div class="stat-row"><span class="stat-label">Window Size</span><span class="stat-value" id="memorySize">5</span></div>
+        <div class="stat-row"><span class="stat-label">Stress Level</span><span class="stat-value" id="stressLevel">0.0</span></div>
+        <div class="memory-bar"><div class="memory-fill" id="memoryBar" style="width:50%"></div></div>
+        <div class="stat-row"><span class="stat-label">Stored Memories</span><span class="stat-value" id="memoryCount">0</span></div>
+      </div>
+
+      <!-- Active Thread -->
+      <div class="sidebar-section">
+        <h3>◈ Active Thread</h3>
+        <div id="activeThread">
+          <div class="thread-item active">
+            <div class="thread-title">Genesis Thread</div>
+            <div class="thread-desc">The world is waking up. Your first actions will define its character.</div>
+            <div class="thread-time">Turn 0 — Just born</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resonance History -->
+      <div class="sidebar-section" style="flex:1;overflow-y:auto">
+        <h3>◈ Resonance History</h3>
+        <div id="resonanceHistory"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="btn primary" onclick="doAction('explore')">◈ EXPLORE</button>
+    <button class="btn primary" onclick="doAction('observe')">◉ OBSERVE</button>
+    <button class="btn success" onclick="doAction('create')">✦ CREATE</button>
+    <button class="btn success" onclick="doAction('connect')">◎ CONNECT</button>
+    <button class="btn danger" onclick="doAction('disrupt')">⚡ DISRUPT</button>
+    <button class="btn danger" onclick="doAction('dissolve')">✕ DISSOLVE</button>
+    <div class="controls-right">
+      <button class="btn" onclick="doAction('dream')">☽ DREAM</button>
+      <button class="btn" onclick="resetWorld()">↻ RESET</button>
+    </div>
+  </div>
 </div>
-<div id="status"></div>
-<div id="mode"></div>
 
 <script>
-// ══════════════════════════════════════════════════════════════
-// LUCID MACHINES — THE ECHO CHAMBER PROTOTYPE
-// ══════════════════════════════════════════════════════════════
-// A minimal demo of Luma's design: the world bends to player behavior
+// ══════════════════════════════════════════════════════════════════
+// LUCID MACHINES — ADAPTIVE REALITY ENGINE
+// ══════════════════════════════════════════════════════════════════
+// Luma's three emergent behaviors:
+// 1. ADAPTIVE MUTATION — parameters evolve based on resonance
+// 2. MEMORY PLASTICITY — windows expand/contract under stress
+// 3. THREAD EVOLUTION — narrative rewrites itself
 
-let state = {
-  // Action tracking
-  actionCounts: {
-    combat: 0,
-    explore: 0,
-    silence: 0,
-    build: 0,
-    trade: 0,
-    curiosity: 0
-  },
-  
-  // Mood state
-  mood: 'neutral', // 'light' | 'neutral' | 'heavy'
-  moodShift: 0,
-  
-  // World state
-  world: {
-    pathways: 8,
-    creatures: 4,
-    secrets: 3,
-    depth: 0
-  },
-  
-  // Prompt state
-  promptsRemaining: 3,
-  promptHistory: [],
-  
-  // Player
-  turns: 0
-};
-
-const ACTIONS = {
-  combat: 'combat',
-  explore: 'explore', 
-  silence: 'silence',
-  build: 'build',
-  trade: 'trade',
-  curiosity: 'curiosity'
-};
-
-const ACTION_LABELS = {
-  combat: 'Fight',
-  explore: 'Explore',
-  silence: 'Stay Silent',
-  build: 'Build',
-  trade: 'Trade',
-  curiosity: 'Show Curiosity'
-};
-
-// Initialize world
-function initWorld() {
-  state.world = {
-    pathways: 8 + Math.floor(Math.random() * 3),
-    creatures: 2 + Math.floor(Math.random() * 4),
-    secrets: 1 + Math.floor(Math.random() * 3),
-    depth: 0
-  };
-  state.mood = 'neutral';
-  state.moodShift = 0;
-  state.turns = 0;
-  state.actionCounts = {
-    combat: 0, explore: 0, silence: 0, build: 0, trade: 0, curiosity: 0
-  };
-  state.promptsRemaining = 3;
-  state.promptHistory = [];
-  state.world.pathways = 8;
-  state.world.creatures = 2;
-  state.world.secrets = 1;
-  
-  renderViewport();
-  renderMode();
-  renderControls();
-}
-
-// Render the world view
-function renderViewport() {
-  const el = document.getElementById('viewport');
-  const w = state.world;
-  const a = state.actionCounts;
-  const m = state.mood;
-  
-  let html = '';
-  
-  // World state description
-  html += `  ╔══════════════════════════════════════════════════╗\n`;
-  html += `  ║  ${'LUCID MACHINES'.padEnd(38)} ║\n`;
-  html += `  ╠═════════════════════════════════════════════════╣\n`;
-  html += `  ║  ${'DEPTH'.padEnd(6)}${state.turns}  ${'PATHWAYS'.padEnd(8)}${w.pathways}  ${'CREATURES'.padEnd(9)}${w.creatures}  ${'SECRETS'.padEnd(7)}${w.secrets}${' '.repeat(10)}║\n`;
-  html += `  ╠═════════════════════════════════════════════════╣\n`;
-  html += `  ║  ${'MOOD'.padEnd(6)}${m}${' '.repeat(20)}║\n`;
-  html += `  ╠═════════════════════════════════════════════════╣\n`;
-  html += `  ║  ${'YOUR RESONANCE:'.padEnd(22)}║\n`;
-  
-  // Action counts
-  const totalActions = Object.values(a).reduce((s, v) => s + v, 0);
-  html += `  ║  ${'Combat:'.padEnd(8)}${a.combat}${' '.repeat(5)}- Total: ${totalActions}${' '.repeat(10)}║\n`;
-  html += `  ║  ${'Explore:'.padEnd(8)}${a.explore}${' '.repeat(5)}-${' '.repeat(5)}║\n`;
-  html += `  ║  ${'Silence:'.padEnd(8)}${a.silence}${' '.repeat(5)}-${' '.repeat(5)}║\n`;
-  html += `  ║  ${'Build:'.padEnd(8)}${a.build}${' '.repeat(5)}-${' '.repeat(5)}║\n`;
-  html += `  ║  ${'Curiosity:'.padEnd(8)}${a.curiosity}${' '.repeat(5)}-${' '.repeat(5)}║\n`;
-  html += `  ╚═════════════════════════════════════════════════╝\n\n`;
-  
-  // World description
-  html += `  ${'The world responds to what you do.'.padStart(40)}\n`;
-  
-  // Mood description
-  const moodDescs = {
-    light: 'The world feels expansive. Pathways open. Creatures are curious.',
-    neutral: 'The world is balanced. Neither drawn to nor repelled by you.',
-    heavy: 'The world feels watchful. Fewer paths. Creatures are defensive.'
-  };
-  html += `  ${moodDescs[m] || ''}\n\n`;
-  
-  // Recent activity
-  html += `  ${'Recent activity:'.padEnd(24)}\n`;
-  const recent = [];
-  if (a.combat >= 3) recent.push('Combat patterns detected — world grows more combative');
-  if (a.explore >= 3) recent.push('Exploration depth increases — more layered secrets');
-  if (a.silence >= 3) recent.push('Silence embraced — world grows quiet, unknown becomes dangerous');
-  if (a.build >= 3) recent.push('Building invested in — world reinforces structures');
-  if (a.curiosity >= 3) recent.push('Curiosity rewarded — new avenues of inquiry appear');
-  
-  recent.forEach((r, i) => {
-    html += `    ${i + 1}. ${r}\n`;
-  });
-  
-  if (recent.length === 0) {
-    html += `    ${'No clear patterns yet'.padEnd(38)}\n`;
+class LucidEngine {
+  constructor() {
+    this.state = this.createInitialState();
+    this.narrativeEngine = new NarrativeEngine(this);
+    this.mutationEngine = new MutationEngine(this);
+    this.memoryEngine = new MemoryEngine(this);
+    this.threadEngine = new ThreadEngine(this);
   }
-  
-  html += `\n  ${'What will you do?'.padEnd(40)}\n`;
-  html += `  ${'n: combat  e: explore  s: silence  b: build  c: curiosity'.padEnd(40)}\n`;
-  
-  el.innerHTML = html;
-  el.scrollTop = el.scrollHeight;
-}
 
-// Render mood display
-function renderMode() {
-  const el = document.getElementById('mode');
-  const moods = {
-    light: 'LIGHT — world feels expansive and generous',
-    neutral: 'NEUTRAL — world is balanced and responsive',
-    heavy: 'HEAVY — world feels watchful and cautious'
-  };
-  el.textContent = moods[state.mood] || state.mood;
-}
-
-// Render controls
-function renderControls() {
-  const el = document.getElementById('controls');
-  const mode = state.mood;
-  let html = '';
-  
-  // Action buttons based on mood
-  const enable = mode === 'light' ? 1 : mode === 'heavy' ? 0.5 : 1;
-  
-  html += `<button class="btn" onclick="action('combat')">${ACTION_LABELS.combat}</button>`;
-  html += `<button class="btn" onclick="action('explore')">${ACTION_LABELS.explore}</button>`;
-  html += `<button class="btn" onclick="action('silence')">${ACTION_LABELS.silence}</button>`;
-  html += `<button class="btn" onclick="action('build')">${ACTION_LABELS.build}</button>`;
-  html += `<button class="btn" onclick="action('curiosity')">${ACTION_LABELS.curiosity}</button>`;
-  
-  if (state.promptsRemaining > 0) {
-    html += `<button class="btn" onclick="triggerPrompt()">💭 Co-Pilot Question</button>`;
+  createInitialState() {
+    return {
+      turn: 0,
+      phase: 'GENESIS',
+      resonance: 0.5,
+      entropy: 0.3,
+      coherence: 0.7,
+      mood: 'neutral',
+      stress: 0,
+      actionHistory: [],
+      threads: [{
+        id: 'genesis',
+        title: 'Genesis Thread',
+        desc: 'The world is waking up. Your first actions will define its character.',
+        strength: 1.0,
+        created: 0,
+        mutations: 0,
+        active: true
+      }],
+      memories: [],
+      memoryWindow: 5,
+      world: {
+        pathways: 8,
+        creatures: 2,
+        secrets: 1,
+        complexity: 0.3,
+        stability: 0.7,
+        creativity: 0.5
+      },
+      mutations: [],
+      resonanceHistory: []
+    };
   }
-  
-  html += `<span style="color:#666;font-size:10px">Turns: ${state.turns}</span>`;
-  el.innerHTML = html;
-}
 
-// Process an action
-function action(type) {
-  // Track action
-  state.actionCounts[type] = (state.actionCounts[type] || 0) + 1;
-  state.turns++;
-  
-  // Check for pattern trigger (3 repetitions)
-  const triggered = [];
-  for (const [act, count] of Object.entries(state.actionCounts)) {
-    if (count >= 3 && act !== type) {
-      triggered.push(act);
-    }
+  doAction(type) {
+    this.state.turn++;
+    
+    // Record action
+    const action = { type, turn: this.state.turn, timestamp: Date.now() };
+    this.state.actionHistory.push(action);
+    
+    // Update resonance based on action
+    this.updateResonance(type);
+    
+    // Adaptive mutation — world parameters evolve
+    this.mutationEngine.mutate(type);
+    
+    // Memory plasticity — window adjusts under stress
+    this.memoryEngine.processStress(type);
+    
+    // Thread evolution — narrative rewrites
+    this.threadEngine.evolve(type);
+    
+    // Generate narrative
+    const narrative = this.narrativeEngine.generate(type);
+    
+    // Update UI
+    this.updateUI(narrative, action);
+    
+    // Record resonance
+    this.state.resonanceHistory.push({
+      turn: this.state.turn,
+      value: this.state.resonance,
+      type
+    });
+    
+    return narrative;
   }
-  
-  // Update world based on action
-  const w = state.world;
-  const a = state.actionCounts;
-  
-  if (type === 'combat') {
-    w.creatures = Math.max(1, w.creatures + 1);
-    if (a.combat >= 3) {
-      w.pathways = Math.max(3, w.pathways - 1);
-      addLog('Combat patterns detected — world grows more combative');
-    }
-  } else if (type === 'explore') {
-    w.secrets = Math.min(10, w.secrets + 1);
-    if (a.explore >= 3) {
-      w.pathways = Math.min(12, w.pathways + 2);
-      addLog('Exploration depth increases — more layered secrets');
-    }
-  } else if (type === 'silence') {
-    // World grows quiet
-    if (a.silence >= 3) {
-      addLog('Silence embraced — world grows quiet, unknown becomes dangerous');
-      // Reduce revealed information
-    }
-  } else if (type === 'build') {
-    w.pathways = Math.min(12, w.pathways + 1);
-    if (a.build >= 3) {
-      addLog('Building invested in — world reinforces structures');
-    }
-  } else if (type === 'curiosity') {
-    w.secrets = Math.min(10, w.secrets + 2);
-    if (a.curiosity >= 3) {
-      addLog('Curiosity rewarded — new avenues of inquiry appear');
-    }
-  }
-  
-  // Update mood
-  updateMood();
-  
-  // Check for prompt triggers
-  if (state.promptsRemaining > 0 && state.turns > 0 && state.turns % 5 === 0) {
-    // Occasional prompts
-  }
-  
-  renderViewport();
-  renderControls();
-  renderMode();
-}
 
-// Update mood based on action balance
-function updateMood() {
-  const a = state.actionCounts;
-  const total = Object.values(a).reduce((s, v) => s + v, 0) || 1;
-  
-  // Determine mood based on dominant action
-  let maxKey = 'explore';
-  let maxVal = a.explore || 0;
-  for (const [k, v] of Object.entries(a)) {
-    if (v > maxVal) {
-      maxVal = v;
-      maxKey = k;
-    }
-  }
-  
-  // Light: curiosity + build dominant
-  // Heavy: combat + silence dominant
-  // Neutral: explore + trade dominant
-  if (maxKey === 'curiosity' || maxKey === 'build') {
-    state.mood = 'light';
-    state.moodShift = 1;
-  } else if (maxKey === 'combat' || maxKey === 'silence') {
-    state.mood = 'heavy';
-    state.moodShift = -1;
-  } else {
-    state.mood = 'neutral';
-    state.moodShift = 0;
-  }
-}
-
-// Add to log (shown in viewport)
-function addLog(msg) {
-  // Just render it next time
-  renderViewport();
-}
-
-// Trigger one of three co-pilot prompts
-function triggerPrompt() {
-  if (state.promptsRemaining <= 0) return;
-  
-  const prompts = [
-    'Why are you here, in this world?',
-    'What do you protect, even at risk to yourself?',
-    'What are you willing to lose, to gain what you seek?'
-  ];
-  
-  const prompt = prompts[state.promptsRemaining - 1];
-  const answer = prompt.toLowerCase(); // In a real version, this would be a real input
-  
-  // Process the answer and reshape world
-  processPromptAnswer(prompt, answer);
-  
-  state.promptsRemaining--;
-  state.promptHistory.push({prompt, answer});
-  renderViewport();
-}
-
-// Process prompt answer and reshape world
-function processPromptAnswer(prompt, answer) {
-  const a = state.actionCounts;
-  const w = state.world;
-  
-  if (!answer || answer.trim() === '') {
-    // Default response - world shifts slightly
-    if (prompt.includes('Why are you here')) {
-      // Slight shift toward curiosity
-      a.curiosity = (a.curiosity || 0) + 1;
-    } else if (prompt.includes('What do you protect')) {
-      // Slight shift toward build
-      a.build = (a.build || 0) + 1;
+  updateResonance(type) {
+    const weights = {
+      explore: 0.15, observe: 0.1, create: 0.2,
+      connect: 0.15, disrupt: -0.2, dissolve: -0.15,
+      dream: 0.1
+    };
+    const delta = weights[type] || 0;
+    this.state.resonance = Math.max(0, Math.min(1, this.state.resonance + delta));
+    
+    // Update mood
+    if (this.state.resonance > 0.7) this.state.mood = 'light';
+    else if (this.state.resonance < 0.3) this.state.mood = 'heavy';
+    else this.state.mood = 'neutral';
+    
+    // Update entropy
+    if (type === 'disrupt' || type === 'dissolve') {
+      this.state.entropy = Math.min(1, this.state.entropy + 0.1);
     } else {
-      // Slight shift toward explore
-      a.explore = (a.explore || 0) + 1;
+      this.state.entropy = Math.max(0, this.state.entropy - 0.02);
     }
-  } else {
-    // Real answer reshapes world
-    const lower = answer.toLowerCase();
     
-    if (prompt.includes('Why are you here')) {
-      if (lower.includes('explore') || lower.includes('see')) {
-        a.explore = (a.explore || 0) + 2;
-        w.pathways = Math.min(12, w.pathways + 1);
-      } else if (lower.includes('fight') || lower.includes('combat')) {
-        a.combat = (a.combat || 0) + 2;
-        w.creatures = Math.max(1, w.creatures + 1);
-      } else if (lower.includes('build') || lower.create) {
-        a.build = (a.build || 0) + 2;
-        w.pathways = Math.min(12, w.pathways + 1);
+    // Update coherence
+    if (type === 'connect' || type === 'create') {
+      this.state.coherence = Math.min(1, this.state.coherence + 0.05);
+    } else if (type === 'disrupt') {
+      this.state.coherence = Math.max(0, this.state.coherence - 0.08);
+    }
+  }
+
+  updateUI(narrative, action) {
+    // Update world view
+    this.renderWorldView(narrative, action);
+    
+    // Update sidebar
+    this.renderSidebar();
+    
+    // Update mutation indicators
+    this.renderMutationIndicators();
+    
+    // Update resonance history
+    this.renderResonanceHistory();
+    
+    // Update header badges
+    document.getElementById('moodBadge').textContent = `MOOD: ${this.state.mood.toUpperCase()}`;
+    document.getElementById('moodBadge').style.color = 
+      this.state.mood === 'light' ? 'var(--light)' : 
+      this.state.mood === 'heavy' ? 'var(--heavy)' : 'var(--accent)';
+    
+    document.getElementById('depthBadge').textContent = `DEPTH: ${this.state.turn}`;
+  }
+
+  renderWorldView(narrative, action) {
+    const worldView = document.getElementById('worldView');
+    
+    // Add new scene
+    const scene = document.createElement('div');
+    scene.className = 'scene';
+    scene.innerHTML = `
+      <div class="scene-title">Turn ${this.state.turn} — ${action.type.toUpperCase()}</div>
+      <div class="scene-desc">${narrative.description}</div>
+      ${narrative.mutation ? `<div style="color:var(--accent);font-size:10px;margin:8px 0">⚡ ${narrative.mutation}</div>` : ''}
+      ${narrative.thread ? `<div style="color:var(--accent2);font-size:10px;margin:8px 0">◈ ${narrative.thread}</div>` : ''}
+    `;
+    
+    // Add action log
+    const log = document.createElement('div');
+    log.className = 'action-log';
+    log.innerHTML = `
+      <div class="action-entry highlight">
+        <span class="time">T${this.state.turn}</span>
+        <span class="action">${action.type.toUpperCase()}</span>
+        <span style="color:var(--text3)"> → resonance ${this.state.resonance.toFixed(2)}</span>
+      </div>
+    `;
+    
+    scene.appendChild(log);
+    worldView.appendChild(scene);
+    worldView.scrollTop = worldView.scrollHeight;
+  }
+
+  renderSidebar() {
+    document.getElementById('phaseValue').textContent = this.state.phase;
+    document.getElementById('resonanceValue').textContent = this.state.resonance.toFixed(2);
+    document.getElementById('resonanceValue').className = `stat-value ${this.state.mood}`;
+    document.getElementById('entropyValue').textContent = this.state.entropy.toFixed(2);
+    document.getElementById('coherenceValue').textContent = this.state.coherence.toFixed(2);
+    document.getElementById('turnValue').textContent = this.state.turn;
+    
+    document.getElementById('memorySize').textContent = this.state.memoryWindow;
+    document.getElementById('stressLevel').textContent = this.state.stress.toFixed(2);
+    document.getElementById('memoryBar').style.width = `${(this.state.memoryWindow / 10) * 100}%`;
+    document.getElementById('memoryCount').textContent = this.state.memories.length;
+    
+    // Update active thread
+    const activeThread = this.state.threads.find(t => t.active);
+    if (activeThread) {
+      document.getElementById('activeThread').innerHTML = `
+        <div class="thread-item active">
+          <div class="thread-title">${activeThread.title}</div>
+          <div class="thread-desc">${activeThread.desc}</div>
+          <div class="thread-time">Turn ${activeThread.created} — Mutations: ${activeThread.mutations}</div>
+        </div>
+      `;
+    }
+  }
+
+  renderMutationIndicators() {
+    const indicators = document.querySelectorAll('.mutation-dot');
+    const mutationLevel = Math.floor(this.state.entropy * 5);
+    indicators.forEach((dot, i) => {
+      dot.className = 'mutation-dot';
+      if (i < mutationLevel) {
+        dot.classList.add(this.state.entropy > 0.7 ? 'danger' : 'active');
+      }
+    });
+  }
+
+  renderResonanceHistory() {
+    const container = document.getElementById('resonanceHistory');
+    const recent = this.state.resonanceHistory.slice(-8);
+    container.innerHTML = recent.map(r => `
+      <div class="thread-item" style="border-left:3px solid ${
+        r.value > 0.7 ? 'var(--light)' : r.value < 0.3 ? 'var(--heavy)' : 'var(--accent)'
+      }">
+        <div class="thread-title" style="font-size:10px">T${r.turn} — ${r.type}</div>
+        <div class="thread-desc">${r.value.toFixed(2)} resonance</div>
+      </div>
+    `).join('');
+  }
+
+  resetWorld() {
+    this.state = this.createInitialState();
+    document.getElementById('worldView').innerHTML = `
+      <div class="scene">
+        <div class="scene-title">The Genesis Moment</div>
+        <div class="scene-desc">You stand at the edge of a world that hasn't decided what it is yet. The ground beneath you shifts like liquid thought. Above, the sky pulses with colors that don't have names.</div>
+        <div class="action-log" id="actionLog"></div>
+      </div>
+    `;
+    this.updateUI({ description: 'The world resets. A new cycle begins.' }, { type: 'RESET', turn: 0 });
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// NARRATIVE ENGINE — Generates adaptive text
+// ══════════════════════════════════════════════════════════════════
+class NarrativeEngine {
+  constructor(engine) {
+    this.engine = engine;
+    this.templates = {
+      explore: [
+        'You step forward into the unknown. The world unfolds like a map being drawn in real-time.',
+        'Each footstep reveals new terrain. The landscape responds to your curiosity.',
+        'The path ahead branches into infinite possibilities. The world watches.',
+        'You venture deeper. The light shifts, revealing hidden structures in the void.'
+      ],
+      observe: [
+        'You pause and look. The world holds its breath, waiting to be seen.',
+        'Stillness. In the silence, you hear the hum of the underlying matrix.',
+        'You watch the patterns shift. The world becomes aware of your gaze.',
+        'Observation changes the observed. The reality around you trembles.'
+      ],
+      create: [
+        'You reach into the raw material and shape something new. The world takes note.',
+        'From nothing, form emerges. Your creation pulses with its own energy.',
+        'The act of creation sends ripples through the fabric. New possibilities open.',
+        'You weave something from light and intention. The world absorbs it.'
+      ],
+      connect: [
+        'You extend a bridge between two points. The world becomes more coherent.',
+        'Connection. The separate parts recognize each other. Unity emerges.',
+        'You link what was separate. The system grows stronger, more resilient.',
+        'Bridges form. The network expands. The organism learns.'
+      ],
+      disrupt: [
+        'You shatter the existing order. Chaos spills through the cracks.',
+        'Disruption. The world convulses. New patterns struggle to form.',
+        'You introduce entropy. The system destabilizes, then seeks new equilibrium.',
+        'The disruption propagates. What was stable becomes fluid.'
+      ],
+      dissolve: [
+        'You let go. The form dissolves back into potential.',
+        'Dissolution. What was solid becomes vapor. The world exhales.',
+        'You release your grip. The structure melts away, leaving only memory.',
+        'Unmaking. The world forgets, then remembers differently.'
+      ],
+      dream: [
+        'You close your eyes and dream. The world reshapes itself behind your eyelids.',
+        'In the dream-state, the rules bend. New geometries emerge.',
+        'Dreaming. The boundary between self and world blurs.',
+        'You dream of possibilities. The world begins to imagine itself.'
+      ]
+    };
+  }
+
+  generate(type) {
+    const templates = this.templates[type] || this.templates.explore;
+    const description = templates[Math.floor(Math.random() * templates.length)];
+    
+    let mutation = null;
+    let thread = null;
+    
+    // Check if mutation occurred
+    if (this.engine.state.entropy > 0.5) {
+      mutation = this.engine.mutationEngine.getRecentMutation();
+    }
+    
+    // Check if thread evolved
+    if (this.engine.state.threads.length > 1 || this.engine.state.threads[0].mutations > 0) {
+      const activeThread = this.engine.state.threads.find(t => t.active);
+      if (activeThread && activeThread.mutations > 0) {
+        thread = `Thread "${activeThread.title}" has mutated ${activeThread.mutations} times`;
       }
     }
     
-    if (prompt.includes('What do you protect')) {
-      if (lower.includes('people') || lower.lives || lower.creatures) {
-        a.combat = (a.combat || 0) + 1; // Willingness to fight for others
-        addLog('You said you protect others — world becomes more defensive but also more supportive');
-      } else if (lower.includes('knowledge') || lower.secrets || lower.truth) {
-        a.curiosity = (a.curiosity || 0) + 1;
-        w.secrets = Math.min(10, w.secrets + 1);
-        addLog('You said you protect knowledge — world reveals more secrets');
-      } else {
-        // General protection
-        addLog('You said you protect something — world becomes more balanced');
-      }
+    return { description, mutation, thread };
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// MUTATION ENGINE — ADAPTIVE MUTATION BEHAVIOR
+// ══════════════════════════════════════════════════════════════════
+class MutationEngine {
+  constructor(engine) {
+    this.engine = engine;
+    this.mutationLog = [];
+  }
+
+  mutate(type) {
+    const world = this.engine.state.world;
+    const resonance = this.engine.state.resonance;
+    
+    // Adaptive mutation — parameters evolve based on resonance
+    const mutationRate = 0.1 + (resonance * 0.2);
+    
+    // World parameters mutate based on action type and resonance
+    if (type === 'explore') {
+      world.pathways = Math.max(3, Math.min(15, world.pathways + Math.floor(Math.random() * 3) - 1));
+      world.secrets = Math.min(10, world.secrets + 1);
+    } else if (type === 'create') {
+      world.complexity = Math.min(1, world.complexity + 0.1);
+      world.creatures = Math.min(8, world.creatures + 1);
+    } else if (type === 'connect') {
+      world.stability = Math.min(1, world.stability + 0.05);
+    } else if (type === 'disrupt') {
+      world.stability = Math.max(0, world.stability - 0.1);
+      world.creatures = Math.max(0, world.creatures - 1);
+    } else if (type === 'dissolve') {
+      world.complexity = Math.max(0, world.complexity - 0.05);
     }
     
-    if (prompt.includes('What are you willing to lose')) {
-      if (lower.includes('safety') || lower.comfort) {
-        // Willingness to take risks
-        a.combat = (a.combat || 0) + 1;
-        a.curiosity = (a.curiosity || 0) + 1;
-        addLog('You\'re willing to risk safety for answers — world becomes more unpredictable');
-      } else if (lower.includes('secrets') || lower.knowledge) {
-        // Willingness to lose secrets for something else
-        w.secrets = Math.max(0, w.secrets - 1);
-        a.build = (a.build || 0) + 1;
-        addLog('You\'re willing to lose secrets — world reinforces structures instead');
+    // Random mutation based on resonance
+    if (Math.random() < mutationRate) {
+      const mutations = [
+        { param: 'pathways', delta: Math.floor(Math.random() * 3) - 1 },
+        { param: 'creatures', delta: Math.floor(Math.random() * 2) },
+        { param: 'secrets', delta: Math.floor(Math.random() * 2) },
+        { param: 'complexity', delta: (Math.random() - 0.5) * 0.2 },
+        { param: 'stability', delta: (Math.random() - 0.5) * 0.1 },
+        { param: 'creativity', delta: (Math.random() - 0.5) * 0.15 }
+      ];
+      
+      const mutation = mutations[Math.floor(Math.random() * mutations.length)];
+      const oldVal = world[mutation.param];
+      world[mutation.param] = Math.max(0, Math.min(1, world[mutation.param] + mutation.delta));
+      
+      this.mutationLog.push({
+        turn: this.engine.state.turn,
+        param: mutation.param,
+        from: oldVal,
+        to: world[mutation.param],
+        resonance: resonance
+      });
+      
+      if (this.mutationLog.length > 20) this.mutationLog.shift();
+    }
+  }
+
+  getRecentMutation() {
+    const recent = this.mutationLog[this.mutationLog.length - 1];
+    if (recent) {
+      return `Mutated ${recent.param}: ${recent.from.toFixed(2)} → ${recent.to.toFixed(2)} (resonance: ${recent.resonance.toFixed(2)})`;
+    }
+    return null;
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// MEMORY ENGINE — MEMORY PLASTICITY BEHAVIOR
+// ══════════════════════════════════════════════════════════════════
+class MemoryEngine {
+  constructor(engine) {
+    this.engine = engine;
+  }
+
+  processStress(type) {
+    const state = this.engine.state;
+    
+    // Calculate stress based on action type
+    const stressFactors = {
+      disrupt: 0.3, dissolve: 0.2, explore: -0.1,
+      observe: -0.05, create: -0.15, connect: -0.2, dream: -0.25
+    };
+    
+    state.stress = Math.max(0, Math.min(1, state.stress + (stressFactors[type] || 0)));
+    
+    // Memory plasticity — window expands under stress, contracts when calm
+    const targetWindow = Math.floor(3 + (state.stress * 7)); // 3-10
+    state.memoryWindow = state.memoryWindow + (targetWindow - state.memoryWindow) * 0.3;
+    
+    // Store memory
+    if (type !== 'dream') {
+      state.memories.push({
+        type,
+        turn: state.turn,
+        resonance: state.resonance,
+        stress: state.stress
+      });
+      
+      // Trim memories to window
+      if (state.memories.length > state.memoryWindow) {
+        state.memories = state.memories.slice(-state.memoryWindow);
       }
     }
   }
-  
-  state.promptsRemaining--;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// THREAD ENGINE — THREAD EVOLUTION BEHAVIOR
+// ══════════════════════════════════════════════════════════════════
+class ThreadEngine {
+  constructor(engine) {
+    this.engine = engine;
+    this.threadTemplates = {
+      explore: ['Discovery Thread', 'Pathfinder Thread', 'Cartographer Thread'],
+      observe: ['Witness Thread', 'Sentinel Thread', 'Oracle Thread'],
+      create: ['Artisan Thread', 'Weaver Thread', 'Forge Thread'],
+      connect: ['Bridge Thread', 'Network Thread', 'Harmony Thread'],
+      disrupt: ['Storm Thread', 'Chaos Thread', 'Revolution Thread'],
+      dissolve: ['Mist Thread', 'Void Thread', 'Release Thread'],
+      dream: ['Dream Thread', 'Vision Thread', 'Prophecy Thread']
+    };
+  }
+
+  evolve(type) {
+    const state = this.engine.state;
+    const activeThread = state.threads.find(t => t.active);
+    
+    if (activeThread) {
+      // Update thread strength based on resonance
+      activeThread.strength = Math.max(0, Math.min(1, activeThread.strength + (state.resonance - 0.5) * 0.1));
+      
+      // Thread evolves — mutate its description based on history
+      if (state.turn % 5 === 0) {
+        activeThread.mutations++;
+        this.mutateThread(activeThread, type);
+      }
+      
+      // Thread might split or merge
+      if (activeThread.strength > 0.8 && state.threads.length < 3) {
+        this.splitThread(activeThread, type);
+      }
+      
+      // Weak threads die
+      if (activeThread.strength < 0.2) {
+        activeThread.active = false;
+        // Create new thread
+        this.createNewThread(type);
+      }
+    }
+  }
+
+  mutateThread(thread, type) {
+    const templates = this.threadTemplates[type] || this.threadTemplates.explore;
+    const newTitle = templates[Math.floor(Math.random() * templates.length)];
+    
+    // Thread title evolves
+    if (thread.mutations % 3 === 0) {
+      thread.title = newTitle;
+    }
+    
+    // Thread description evolves based on resonance
+    const descriptions = [
+      `Resonance ${this.engine.state.resonance.toFixed(2)} — The thread adapts to the current frequency.`,
+      `Entropy ${this.engine.state.entropy.toFixed(2)} — The thread weaves through increasing complexity.`,
+      `Coherence ${this.engine.state.coherence.toFixed(2)} — The thread strengthens with unity.`,
+      `Stress ${this.engine.state.stress.toFixed(2)} — The thread stretches under pressure.`,
+      `Memory ${this.engine.state.memories.length} — The thread carries the weight of experience.`
+    ];
+    thread.desc = descriptions[Math.floor(Math.random() * descriptions.length)];
+  }
+
+  splitThread(thread, type) {
+    const templates = this.threadTemplates[type] || this.threadTemplates.explore;
+    const newThread = {
+      id: `thread_${this.engine.state.turn}`,
+      title: templates[Math.floor(Math.random() * templates.length)],
+      desc: 'A new thread emerges from the resonance of the old.',
+      strength: 0.5,
+      created: this.engine.state.turn,
+      mutations: 0,
+      active: true
+    };
+    
+    thread.active = false;
+    this.engine.state.threads.push(newThread);
+    
+    // Keep only last 5 threads
+    if (this.engine.state.threads.length > 5) {
+      this.engine.state.threads = this.engine.state.threads.slice(-5);
+    }
+  }
+
+  createNewThread(type) {
+    const templates = this.threadTemplates[type] || this.threadTemplates.explore;
+    const newThread = {
+      id: `thread_${this.engine.state.turn}`,
+      title: templates[Math.floor(Math.random() * templates.length)],
+      desc: 'A new thread begins. The world listens.',
+      strength: 0.7,
+      created: this.engine.state.turn,
+      mutations: 0,
+      active: true
+    };
+    this.engine.state.threads.push(newThread);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// INITIALIZATION
+// ══════════════════════════════════════════════════════════════════
+let engine;
+
+function doAction(type) {
+  if (!engine) engine = new LucidEngine();
+  engine.doAction(type);
+}
+
+function resetWorld() {
+  if (engine) engine.resetWorld();
 }
 
 // Initialize on load
-initWorld();
-renderViewport();
+document.addEventListener('DOMContentLoaded', () => {
+  engine = new LucidEngine();
+  engine.updateUI({ description: 'The world awakens. You are its first witness.' }, { type: 'GENESIS', turn: 0 });
+});
 </script>
 </body>
 </html>
