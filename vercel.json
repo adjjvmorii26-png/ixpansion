@@ -12,6 +12,26 @@
   ],
   "routes": [
     {
+      "src": "/api/aleph_bot",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/bot",
+      "dest": "/api/aleph_bot"
+    },
+    {
+      "src": "/aleph",
+      "dest": "/dashboard/portal.html"
+    },
+    {
+      "src": "/portal.html",
+      "dest": "/dashboard/portal.html"
+    },
+    {
+      "src": "/portal",
+      "dest": "/dashboard/portal.html"
+    },
+    {
       "src": "/api/organism_bootstrap",
       "dest": "/api/index.py"
     },

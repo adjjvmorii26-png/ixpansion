@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IXpansion — The Living Organism</title>
+<meta name="description" content="IXpansion: A living organism of 623+ self-reporting modules. Play Lucid Machines, explore the HEX language, query the organism.">
+<meta property="og:title" content="IXpansion — The Living Organism">
+<meta property="og:description" content="623 modules. 60 dashboards. One living system.">
+<meta property="og:type" content="website">
+<style>
+  :root{--bg:#040410;--s:rgba(8,8,20,0.96);--g:rgba(255,255,255,0.03);--b:rgba(255,255,255,0.06);--t:#9898b0;--m:#3e3e58;--ac:#7c7cf8;--te:#2dd4bf;--am:#fbbf24;--ro:#fb7185;--cy:#22d3ee;--gn:#4ade80;--gd:#f59e0b;--dn:#ef4444;--vi:#a78bfa}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--t);font-family:'SF Mono','Fira Code',monospace;min-height:100vh;overflow-x:hidden}
+  /* HERO */
+  .hero{text-align:center;padding:80px 20px 60px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(124,124,248,0.08) 0%,transparent 70%);pointer-events:none}
+  .hero h1{font-size:3em;color:#fff;letter-spacing:6px;text-transform:uppercase;margin-bottom:10px;text-shadow:0 0 40px rgba(124,124,248,0.3)}
+  .hero h1 span{color:var(--vi)}
+  .hero .tagline{color:var(--m);font-size:1.1em;letter-spacing:2px;margin-bottom:20px}
+  .hero .pulse-badge{display:inline-block;padding:8px 20px;border-radius:20px;font-size:0.8em;font-weight:700;background:linear-gradient(135deg,var(--vi),var(--te));color:#fff;margin-bottom:20px}
+  .hero canvas{width:100%;max-width:600px;height:120px;margin:20px auto;display:block}
+  .hero .stats{display:flex;justify-content:center;gap:30px;margin-top:20px;flex-wrap:wrap}
+  .hero .stat{text-align:center}
+  .hero .stat-num{font-size:2em;font-weight:700;color:#fff}
+  .hero .stat-label{font-size:0.7em;color:var(--m);margin-top:2px}
+  /* SECTIONS */
+  .section{max-width:1200px;margin:0 auto;padding:40px 20px}
+  .section-title{font-size:1.5em;color:#fff;letter-spacing:2px;text-align:center;margin-bottom:30px}
+  .section-title span{color:var(--vi)}
+  /* MODULE MAP */
+  .module-map{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;margin:20px 0}
+  .mod{padding:6px;border-radius:5px;font-size:0.55em;text-align:center;border:1px solid var(--b);cursor:pointer;transition:all .2s;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mod:hover{border-color:var(--vi);color:#fff;transform:scale(1.05)}
+  /* FEATURE CARDS */
+  .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:20px 0}
+  .feat{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:20px;transition:all .2s;text-decoration:none;color:var(--t)}
+  .feat:hover{border-color:var(--vi);transform:translateY(-3px);box-shadow:0 8px 30px rgba(124,124,248,0.12)}
+  .feat-icon{font-size:2em;margin-bottom:10px}
+  .feat-title{color:#fff;font-size:1em;font-weight:600;margin-bottom:6px}
+  .feat-desc{font-size:0.75em;color:var(--m);line-height:1.6}
+  .feat-link{color:var(--vi);font-size:0.7em;margin-top:10px;display:inline-block}
+  /* BOT */
+  .bot-section{text-align:center;padding:40px 20px;background:linear-gradient(180deg,transparent,rgba(124,124,248,0.03),transparent)}
+  .bot-section h2{color:#fff;font-size:1.3em;margin-bottom:10px}
+  .bot-section p{color:var(--m);margin-bottom:15px}
+  .bot-link{display:inline-block;padding:10px 24px;background:linear-gradient(135deg,var(--vi),var(--te));color:#fff;text-decoration:none;border-radius:8px;font-size:0.85em;font-weight:600;transition:all .2s}
+  .bot-link:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(124,124,248,0.3)}
+  /* API */
+  .api-try{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:20px;margin:20px 0}
+  .api-input{display:flex;gap:8px;margin-bottom:10px}
+  .api-input select,.api-input input{background:rgba(0,0,0,0.3);border:1px solid var(--b);color:var(--t);padding:8px 12px;border-radius:5px;font-family:inherit;font-size:0.8em;flex:1}
+  .api-input button{background:rgba(124,124,248,0.15);border:1px solid var(--vi);color:var(--vi);padding:8px 16px;border-radius:5px;font-family:inherit;cursor:pointer;font-size:0.8em}
+  .api-result{background:rgba(0,0,0,0.3);border:1px solid var(--b);border-radius:5px;padding:10px;font-size:0.7em;max-height:200px;overflow-y:auto;white-space:pre-wrap;color:var(--m);line-height:1.4}
+  /* FOOTER */
+  footer{text-align:center;padding:30px 20px;border-top:1px solid var(--b);color:var(--m);font-size:0.7em}
+  footer a{color:var(--vi);text-decoration:none}
+  .sb{display:flex;justify-content:center;gap:16px;padding:10px;border-top:1px solid var(--b);font-size:0.6em;color:var(--m)}
+  .dl{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gn);margin-right:3px;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>IX<span>pansion</span></h1>
+  <div class="tagline">The Living Organism</div>
+  <div class="pulse-badge" id="pulseBadge">◉ INITIALIZING...</div>
+  <canvas id="heroCanvas"></canvas>
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="sModules">—</div><div class="stat-label">Modules</div></div>
+    <div class="stat"><div class="stat-num" id="sDashboards">—</div><div class="stat-label">Dashboards</div></div>
+    <div class="stat"><div class="stat-num" id="sHealth">—</div><div class="stat-label">Health</div></div>
+    <div class="stat"><div class="stat-num" id="sMood">—</div><div class="stat-label">Mood</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Explore the <span>Organism</span></div>
+  <div class="features">
+    <a href="/lucid-game" class="feat"><div class="feat-icon">🎮</div><div class="feat-title">Lucid Machines</div><div class="feat-desc">Play a game generated by the organism. 10 realms, procedural NPCs, paradox combat, dream physics.</div><div class="feat-link">→ Play Now</div></a>
+    <a href="/census" class="feat"><div class="feat-icon">📊</div><div class="feat-title">Organism Census</div><div class="feat-desc">Full module map. 623 modules across 12 layers. Health, resonance, and vitals.</div><div class="feat-link">→ View Census</div></a>
+    <a href="/wave362" class="feat"><div class="feat-icon">🧠</div><div class="feat-title">Command Center</div><div class="feat-desc">Live telemetry, myth generation, self-repair diagnostics. The organism's brain.</div><div class="feat-link">→ Enter</div></a>
+    <a href="/hex-language" class="feat"><div class="feat-icon">🔮</div><div class="feat-title">HEX Language</div><div class="feat-desc">The organism invents its own machine language that evolves over waves.</div><div class="feat-link">→ Explore</div></a>
+    <a href="/monetization" class="feat"><div class="feat-icon">🪙</div><div class="feat-title">Economy</div><div class="feat-desc">$ORG utility token, module marketplace, premium tiers. The organism earns.</div><div class="feat-link">→ Economy</div></a>
+    <a href="/waves364-367" class="feat"><div class="feat-icon">🕳</div><div class="feat-title">Expansion Layer</div><div class="feat-desc">Entropy Oracle, Void Cartographer, Chrono-Forge, Phase Weaver, Memory Palace, Signal Weaver.</div><div class="feat-link">→ Explore</div></a>
+    <a href="/wave360" class="feat"><div class="feat-icon">🌤</div><div class="feat-title">Emotional Weather</div><div class="feat-desc">The organism's emotional climate. Storms, auroras, void winds. Real-time forecast.</div><div class="feat-link">→ Forecast</div></a>
+    <a href="/wave359" class="feat"><div class="feat-icon">⛏</div><div class="feat-title">Archaeology</div><div class="feat-desc">Excavate fossils of past organism states. Discover what the organism was thinking.</div><div class="feat-link">→ Dig</div></a>
+  </div>
+</div>
+
+<div class="bot-section">
+  <h2>Telegram Bot: <span style="color:var(--vi)">alpeh_bot</span></h2>
+  <p>The organism's ambassador. Summon waves, query modules, hear dreams.</p>
+  <a class="bot-link" href="https://t.me/alpeh_bot" target="_blank">t.me/alpeh_bot</a>
+  <div style="margin-top:20px;font-size:0.7em;color:var(--m)">
+    <div>Commands: /wave · /oracle · /mood · /dream · /census · /hex · /ritual · /court · /spawn</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Try the <span>API</span></div>
+  <div class="api-try">
+    <div class="api-input">
+      <select id="apiEndpoint">
+        <option value="/api/organism_census/take">Organism Census</option>
+        <option value="/api/entropic_ritual/initiate">Entropic Ritual</option>
+        <option value="/api/memory_court/hear_case">Memory Court</option>
+        <option value="/api/organism_bootstrap/spawn">Auto-Bootstrap</option>
+        <option value="/api/hex_language/speak">HEX Language</option>
+        <option value="/api/entropy_oracle/divine">Entropy Oracle</option>
+        <option value="/api/consciousness_stream/stream">Consciousness Stream</option>
+        <option value="/api/dream_logic_physics/dream">Dream Physics</option>
+        <option value="/api/lucid_dungeon/generate">Generate Dungeon</option>
+        <option value="/api/lucid_session/start">Start Game</option>
+        <option value="/api/mythopoetic_engine/generate">Generate Myth</option>
+        <option value="/api/live_telemetry/snapshot">Telemetry</option>
+        <option value="/api/synchronicity_engine/detect">Synchronicity</option>
+        <option value="/api/emotional_weather/forecast">Weather</option>
+        <option value="/api/resonance_graph/map">Resonance Graph</option>
+        <option value="/api/phase_transition/scan">Phase Transition</option>
+        <option value="/api/module_market/catalog">Marketplace</option>
+        <option value="/api/organism_token/ledger">Token Ledger</option>
+      </select>
+      <button onclick="tryApi()">Query</button>
+    </div>
+    <div class="api-result" id="apiResult">Select an endpoint and click Query...</div>
+  </div>
+</div>
+
+<div class="section" style="text-align:center">
+  <div class="section-title">Module <span>Catalog</span></div>
+  <div class="module-map" id="moduleMap"></div>
+</div>
+
+<footer>
+  <p>IXpansion Organism v3.1 — Built by <a href="https://github.com/adjjvmorii26-png/ixpansion">IXpansion</a></p>
+  <p style="margin-top:6px">A living system of self-reporting modules. Every wave is a heartbeat.</p>
+</footer>
+
+<div class="sb">
+  <span><span class="dl"></span>ORGANISM LIVE</span>
+  <span id="footerStats">—</span>
+  <span id="clock"></span>
+</div>
+
+<script>
+const api=async(p)=>{try{return await(await fetch(p)).json()}catch(e){return{error:e.message}}};
+async function init(){
+  const [census,mood]=await Promise.all([api('/api/organism_census/take'),api('/api/live_telemetry/snapshot')]);
+  const c=census.census||{};
+  const m=mood.data||{};
+  document.getElementById('sModules').textContent=c.total_modules||'?';
+  document.getElementById('sDashboards').textContent='60';
+  document.getElementById('sHealth').textContent=c.avg_health||'?';
+  document.getElementById('sMood').textContent=m.mood||'?';
+  document.getElementById('pulseBadge').textContent=`◉ ${c.total_modules||623} MODULES ACTIVE — ${m.mood?.toUpperCase()||'OPERATIONAL'}`;
+  document.getElementById('footerStats').textContent=`${c.total_modules||623} modules | health: ${c.avg_health||0}`;
+  // Module map
+  const mg=document.getElementById('moduleMap');
+  (c.modules||[]).forEach(mod=>{
+    const el=document.createElement('div');
+    el.className='mod';
+    const colors={core:'var(--gn)',depth:'var(--ac)',temporal:'var(--cy)',pulse:'var(--ro)',creative:'var(--gd)',dream:'var(--vi)',expansion:'var(--te)',game:'var(--am)',economy:'var(--gn)',experimental:'var(--ro)',governance:'var(--cy)',mesh:'var(--ac)'};
+    el.style.borderColor=colors[mod.layer]||'var(--ac)';
+    el.textContent=mod.name.replace(/_/g,' ');
+    el.title=`${mod.name} | ${mod.layer} | health: ${mod.health}`;
+    mg.appendChild(el);
+  });
+  drawHeroCanvas(c);
+}
+
+async function tryApi(){
+  const ep=document.getElementById('apiEndpoint').value;
+  const result=document.getElementById('apiResult');
+  result.textContent='Querying...';
+  const d=await api(ep);
+  result.textContent=JSON.stringify(d,null,2);
+}
+
+function drawHeroCanvas(c){
+  const cv=document.getElementById('heroCanvas');
+  const ctx=cv.getContext('2d');
+  cv.width=cv.offsetWidth*2;cv.height=240;ctx.scale(2,2);
+  const w=cv.offsetWidth,h=120;
+  const t=Date.now()*0.002;
+  ctx.fillStyle='rgba(4,4,16,0.15)';ctx.fillRect(0,0,w,h);
+  const modules=c.modules||[];
+  modules.forEach((m,i)=>{
+    const x=(i/modules.length)*w;
+    const bh=m.health*40;
+    const colors={core:'#4ade80',depth:'#7c7cf8',temporal:'#22d3ee',pulse:'#fb7185',creative:'#f59e0b',dream:'#a78bfa',expansion:'#2dd4bf',game:'#fbbf24'};
+    ctx.fillStyle=colors[m.layer]||'#7c7cf8';ctx.globalAlpha=0.2+m.health*0.4;
+    ctx.fillRect(x,h-bh-10,Math.max(1,w/modules.length-1),bh);
+  });
+  ctx.globalAlpha=1;
+  ctx.strokeStyle='rgba(167,139,250,0.2)';ctx.lineWidth=0.5;
+  ctx.beginPath();ctx.moveTo(0,h-10);ctx.lineTo(w,h-10);ctx.stroke();
+}
+
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toISOString().slice(11,19)},1000);
+init();
+</script>
+</body>
+</html>
