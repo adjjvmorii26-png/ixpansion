@@ -12,6 +12,38 @@
   ],
   "routes": [
     {
+      "src": "/api/organism_bootstrap",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/organism_bootstrap",
+      "dest": "/api/organism_bootstrap"
+    },
+    {
+      "src": "/api/organism_census",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/organism_census",
+      "dest": "/api/organism_census"
+    },
+    {
+      "src": "/api/memory_court",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/memory_court",
+      "dest": "/api/memory_court"
+    },
+    {
+      "src": "/api/entropic_ritual",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/entropic_ritual",
+      "dest": "/api/entropic_ritual"
+    },
+    {
       "src": "/api/organism_token",
       "dest": "/api/index.py"
     },
