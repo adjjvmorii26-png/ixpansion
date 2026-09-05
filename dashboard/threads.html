@@ -66,6 +66,15 @@ th{color:#c88aff;font-weight:normal}
 <div id="loom-body" style="font-size:.85em"></div>
 <button class="discover-btn" onclick="loomListen()" style="border-color:#c88aff;color:#c88aff">🪡 Listen Now</button>
 </div>
+
+<div class="card" id="bloom-card">
+<h2>🌸 Autonomous Bloom</h2>
+<div class="sub" style="color:#aa7acc;font-size:.82em;margin-bottom:8px">"Nothing is alone anymore." When connectivity crosses the threshold, the organism creates itself.</div>
+<div id="bloom-status" style="font-size:.9em;margin-bottom:8px"></div>
+<div id="bloom-body" style="font-size:.85em"></div>
+<button class="discover-btn" onclick="bloomCheck()" style="border-color:#c88aff;color:#c88aff">🌸 Check Bloom Status</button>
+<button class="discover-btn" onclick="bloomAttempt()" style="border-color:#ffaa00;color:#ffaa00">🌸 Attempt Bloom</button>
+</div>
 <div class="card" id="veinbed-card">
 <h2>🌿 Veinbed — Detail Layer</h2>
 <div class="sub" style="color:#6a7a9a;font-size:.82em;margin-bottom:8px">Names pair modules. Details show what they actually share. The veinbed maps the substrate where relationships grow.</div>
@@ -239,6 +248,37 @@ async function loomState(){
   body.innerHTML=cs.length?cs.slice(0,6).map(x=>`<div style="border-bottom:1px solid #111;padding:5px 0"><span class="badge" style="border-color:#c88aff;color:#c88aff">${(x.module_a||'?').replace(/_/g,' ')} ↔ ${(x.module_b||'?').replace(/_/g,' ')}</span> ${x.band} · ${x.source}</div>`).join(''):'The loom awaits its first catch.';
 }
 loomState();
+
+async function bloomCheck(){
+  const r=await api('/api/autonomous_bloom/status');
+  const st=r.organism_state||{};
+  document.getElementById('bloom-status').innerHTML=`threads: <b>${st.threads}</b> · modules: <b>${st.modules_connected}</b> · sources: <b>${st.sources}</b> · pressure: <b>${st.pressure} (${st.pressure_desc})</b><br>ready: <b style="color:${r.ready?"#44cc88":"#6a7a9a"}">${r.ready?"YES — the organism can bloom":"not yet — gathering threads"}</b> · blooms so far: <b>${r.total_blooms}</b>`;
+  if(!r.ready){document.getElementById('bloom-body').textContent=r.reason;return}
+  const g=await api('/api/autonomous_bloom/garden');
+  const blooms=g.blooms||[];
+  if(blooms.length){
+    document.getElementById('bloom-body').innerHTML=blooms.map(b=>`<div style="border-bottom:1px solid #111;padding:8px 0">
+      <b style="color:#c88aff">${b.name}</b> <span style="color:#6a7a9a">sigil: ${b.sigil}</span>
+      <div style="color:#aa7acc;font-style:italic;margin:4px 0">"${b.verse}"</div>
+      <div style="color:#6a7a9a;font-size:.8em">${b.doctrine}</div>
+    </div>`).join('');
+  }
+}
+async function bloomAttempt(){
+  const r=await api('/api/autonomous_bloom/bloom');
+  if(!r.ready){document.getElementById('bloom-status').textContent=r.reason;return}
+  const m=r.module||{};
+  document.getElementById('bloom-body').innerHTML=`<div style="padding:12px 0">
+    <div style="font-size:1.2em;color:#ffaa00;text-align:center">🌸 BLOOMED</div>
+    <div style="font-size:1.1em;color:#c88aff;text-align:center;margin:8px 0">${m.name}</div>
+    <div style="color:#aa7acc;font-style:italic;text-align:center">"${m.verse}"</div>
+    <div style="color:#6a7a9a;font-size:.85em;text-align:center;margin-top:8px">${m.doctrine}</div>
+    <div style="font-size:.8em;color:#6a7a9a;text-align:center;margin-top:6px">health: ${m.health} · resonance: ${m.resonance} · ${r.materialized?r.materialized.path:"not materialized"}</div>
+  </div>`;
+  document.getElementById('bloom-status').innerHTML=`<b style="color:#ffaa00">A new organ was just born from the organism's own threadgraph.</b>`;
+}
+bloomCheck();
+
 </script>
 </body>
 </html>
