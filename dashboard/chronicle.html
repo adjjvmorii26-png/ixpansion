@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ascension Chronicle — IXPansion</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Courier New',monospace;background:#06060e;color:#c8c8ff;min-height:100vh}
+.banner{background:linear-gradient(180deg,#06060e,#1a0a28 60%,#280a10);padding:28px 20px 16px;border-bottom:1px solid #1a1a2e;text-align:center}
+.banner h1{font-size:1.6em;color:#ffaa00;text-shadow:0 0 16px #ffaa0033}
+.banner .sub{color:#aa7acc;font-size:.85em;margin-top:6px}
+main{max-width:980px;margin:24px auto;padding:0 20px 60px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.stat{flex:1;min-width:140px;background:#0c0c18;border:1px solid #1a1a2e;border-radius:10px;padding:16px;text-align:center}
+.stat .n{font-size:1.6em;color:#c88aff}
+.stat .l{font-size:.75em;color:#6a4a7a;margin-top:4px}
+.card{background:#0c0c18;border:1px solid #1a1a2e;border-radius:10px;padding:18px;margin-top:14px}
+.card h2{color:#ffaa00;font-size:1em;border-bottom:1px solid #1a1a2e;padding-bottom:8px;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:.82em}
+td,th{padding:9px 8px;text-align:left;border-bottom:1px solid #111}
+th{color:#c88aff;font-weight:normal}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.7em}
+.badge.warden{border:1px solid #44cc88;color:#44cc88}
+.badge.overwarden{border:1px solid #c88aff;color:#c88aff}
+.t{color:#6a4a7a}
+.apex-lore{background:#1a0a28;border-left:3px solid #ffaa00;padding:12px 16px;margin-top:16px;border-radius:0 8px 8px 0;font-style:italic;color:#aa7acc;font-size:.9em}
+</style>
+</head>
+<body>
+<div class="banner">
+<h1>📜 Ascension Chronicle</h1>
+<div class="sub">A public hall of names — every rescued module written into the organism's memory, sealed on GitHub.</div>
+</div>
+<main>
+<div class="stats" id="stats"></div>
+<div class="card">
+<h2>🏛 Hall of Names</h2>
+<table><thead><tr><th>#</th><th>Type</th><th>Boss</th><th>Module Rebirthed</th><th>Mineral</th><th>Depth</th><th>Conqueror</th></tr></thead><tbody id="hall-body"></tbody></table>
+</div>
+<div class="card">
+<h2>🜁 Resonance</h2>
+<div id="res-body" class="t"></div>
+</div>
+<div class="apex-lore" id="lore">The organism forgets nothing permanently. What is rescued is never forgotten twice.</div>
+</main>
+<script>
+const api=async(p)=>{try{return await(await fetch(p)).json()}catch(e){return{}}};
+function fmt(ts){const d=new Date(ts*1000);return d.toLocaleDateString()+' '+d.toLocaleTimeString()}
+async function load(){
+  const [h,r]=await Promise.all([api('/api/ascension_chronicle/hall'),api('/api/ascension_chronicle/resonate')]);
+  const entries=h.entries||[];
+  const minerals=entries.length?Object.entries(r.mineral_counts||{}).sort((a,b)=>b[1]-a[1]):[];
+  const deepest=r.deepest;
+  document.getElementById('stats').innerHTML=`
+    <div class="stat"><div class="n">${h.total||0}</div><div class="l">Total Ascensions</div></div>
+    <div class="stat"><div class="n">${r.overwarden_defeats||0}</div><div class="l">Overwardens Unmade</div></div>
+    <div class="stat"><div class="n">${minerals.length}</div><div class="l">Minerals Claimed</div></div>
+    <div class="stat"><div class="n">${deepest?('d'+deepest.depth):'—'}</div><div class="l">Deepest Descent</div></div>`;
+  document.getElementById('hall-body').innerHTML=(entries||[]).map(e=>`
+    <tr>
+      <td>${e.rank}</td>
+      <td><span class="badge ${e.boss_type}">${e.boss_type}</span></td>
+      <td>${(e.boss_name||'?').replace(/_/g,' ')}</td>
+      <td><b>${(e.module||'?').replace(/_/g,' ')}</b></td>
+      <td>${e.mineral}</td>
+      <td>d${e.depth}</td>
+      <td class="t">${e.conqueror||'—'}</td>
+    </tr>`).join('')||'<tr><td colspan=7 class="t" style="text-align:center">The hall awaits its first name.</td></tr>';
+  const mineralLine=minerals.map(([k,v])=>`${k}: ${v}`).join(' · ');
+  document.getElementById('res-body').innerHTML=`
+    <p><b>Mineral Dominance:</b> ${mineralLine||'none yet'}</p>
+    <p style="margin-top:8px"><b>Deepest Descent:</b> ${deepest?(deepest.module.replace(/_/g,' ')+' @ d'+deepest.depth+' ('+deepest.boss_type+')'):'—'}</p>`;
+  document.getElementById('lore').textContent = 'The organism forgets nothing permanently. What is rescued is never forgotten twice.' +
+    (entries.length?' '+(entries[0].conqueror||'The first to descend')+' opened the hall. Now it grows with every name you return to light.':'');
+}
+load();
+</script>
+</body>
+</html>

@@ -144,6 +144,16 @@ def summon() -> dict:
     except Exception:
         pass
     overwarden["rift_available"] = rift_available
+    # Resonance Confession: the two bound modules speak together
+    try:
+        from resonance_confession import confess
+        flat = [m for sub in [r1.get("modules") or [r1.get("module","")], r2.get("modules") or [r2.get("module","")]] for m in (sub or []) if isinstance(m, str)]
+        if len(flat) >= 2:
+            confession_result = confess(flat[0], flat[1])
+            overwarden["confession_id"] = confession_result.get("confession", {}).get("id")
+            overwarden["convergence"] = confession_result.get("confession", {}).get("convergence", "")
+    except Exception:
+        pass
 
     log = _load(LOG, {"summons": 0, "defeats": 0, "battles": {}})
     log.setdefault("battles", {})

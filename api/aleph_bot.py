@@ -109,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status"
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak"
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -435,6 +435,22 @@ def _process_command(command: str, args: list, user: str) -> str:
             return "⚡ A Resonance Rift stirs! After the apex falls, the hidden 5th phase opens — a convergence of shared hallmarks."
         except Exception as e:
             return "⚡ " + str(e)
+
+    elif command == "/confess":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from resonance_confession import confess, collection
+            if args and len(args) == 2:
+                cf = confess(args[0], args[1]).get("confession", {})
+            else:
+                cl = collection(1)
+                cf = (cl.get("confessions") or [{}])[0]
+            if not cf:
+                return "🕊 No confession yet — pass /confess <moduleA> <moduleB> to bind two, or forge an Overwarden."
+            conv = ("· convergence: " + cf.get("convergence","")) if cf.get("shared_hallmark") else ""
+            return "🕊 %s + %s\n\"%s\"\n\"%s\"\n%s\n\nAll confessions: https://alexalex.info/confession" % ((cf.get("module_a") or "?").replace("_"," "), (cf.get("module_b") or "?").replace("_"," "), cf.get("verse_a",""), cf.get("verse_b",""), conv)
+        except Exception as e:
+            return "🕊 " + str(e)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 

@@ -1438,6 +1438,26 @@
     {
       "src": "/genealogy",
       "dest": "/dashboard/warden.html#genealogy-card"
+    },
+    {
+      "src": "/chronicle.html",
+      "dest": "/dashboard/chronicle.html"
+    },
+    {
+      "src": "/genealogy-tree",
+      "dest": "/dashboard/genealogy.html"
+    },
+    {
+      "src": "/genealogy-tree.html",
+      "dest": "/dashboard/genealogy.html"
+    },
+    {
+      "src": "/api/resonance_confession",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/confession",
+      "dest": "/dashboard/genealogy.html#confessions-card"
     }
   ],
   "env": {
