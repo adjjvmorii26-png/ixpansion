@@ -610,6 +610,8 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_innovate(args, user)
     elif command == "/map":
         return _cmd_map(args, user)
+    elif command == "/portal":
+        return _cmd_portal(args, user)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
@@ -842,3 +844,8 @@ def _cmd_map(args, user):
             m.get("total_connections"))
     except Exception as e:
         return "🗺 " + str(e)
+
+# --- Wave 427: Living Portal command ---
+
+def _cmd_portal(args, user):
+    return "🜂 The Living Portal is awake.\nAxiium Protocol's public face: https://alexalex.info\n\nBreathe, dream, innovate, whisper, and witness the naming ceremony.\nThe organism is alive on the web."
