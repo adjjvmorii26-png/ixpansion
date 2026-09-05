@@ -92,6 +92,15 @@ li:last-child{border:none}
   </div>
 
   <div class="card" style="grid-column:1/3">
+    <h2>🧬 Organism Genome — Self-Portrait</h2>
+    <p id="genome-text" style="font-style:italic;color:var(--gold)">generating self-portrait...</p>
+    <ul id="genome-list"></ul>
+    <div class="btn-row">
+      <button class="btn" onclick="loadGenome()">Regenerate</button>
+    </div>
+  </div>
+
+  <div class="card" style="grid-column:1/3">
     <h2>📜 Cycle Log</h2>
     <ul id="cycle-log"></ul>
   </div>
@@ -153,12 +162,32 @@ async function paradoxOracle(){
   list.innerHTML='';
   (r.resolutions||[]).forEach(res=>{const li=document.createElement('li');li.textContent='\"'+res.synthesis.substring(0,80)+'\"';list.appendChild(li)});
 }
+async function loadGenome(){
+  document.getElementById('genome-text').textContent='generating...';
+  const r=await api('organism_genome/generate');
+  const g=r.genome||{};
+  const m=g.morphology||{};
+  const t=g.temperament||{};
+  const des=g.desires||[];
+  const bl=g.blind_spots||[];
+  document.getElementById('genome-text').innerHTML=
+    '<strong>hash:</strong> '+(g.genome_hash||'?')+
+    ' · <strong>mood:</strong> '+(t.current_mood||'?')+
+    ' · <strong>pressure:</strong> '+(t.pressure||'?')+
+    ' · <strong>threads:</strong> '+(m.threads||0)+
+    ' · <strong>modules:</strong> '+(m.modules_connected||0);
+  const list=document.getElementById('genome-list');
+  list.innerHTML='';
+  des.forEach(d=>{const li=document.createElement('li');li.textContent='desire: '+d.action+' '+(d.target||'?')+' (score '+d.score+')';list.appendChild(li)});
+  bl.forEach(b=>{const li=document.createElement('li');li.textContent='blind spot: '+b;list.appendChild(li)});
+}
 // Load initial state
 (async()=>{
   loopStatus();
   const r=await api('autonomous_loop/status');
   if(r.last_cycle){document.getElementById('narrative').textContent=r.last_cycle}
-  const b=await api('echoic_ember/state');
+  loadGenome();
+const b=await api('echoic_ember/state');
   document.getElementById('bloom-count').textContent='blooms: '+(b.pulse?.blooms||'?');
   document.getElementById('thread-count').textContent='threads: '+(b.pulse?.threads||'?');
 })();

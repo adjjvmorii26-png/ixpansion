@@ -578,6 +578,8 @@ def _process_command(command: str, args: list, user: str) -> str:
             return "🧭 " + str(e)
 
 
+    elif command == "/genome":
+        return _cmd_genome(args, user)
     elif command == "/loop":
         return _cmd_loop(args, user)
     elif command == "/mycelial":
@@ -616,6 +618,23 @@ def handler(payload=None, context=None):
 
 # --- Wave 411-414: Autonomous Nervous System commands ---
 
+
+def _cmd_genome(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from organism_genome import generate
+        g = generate()
+        m = g.get("morphology", {})
+        t = g.get("temperament", {})
+        d = g.get("desires", [])
+        des = "\n".join("  %s %s (score %s)" % (x["action"], (x.get("target") or "?").replace("_", " "), x.get("score", 0)) for x in d[:3])
+        bl = "\n".join("  " + x for x in g.get("blind_spots", []))
+        return "🧬 Organism Genome %s\nMood: %s · Pressure: %s\nThreads: %s · Modules: %s\nDesires:\n%s\nBlind spots:\n%s" % (
+            g.get("genome_hash", "?")[:8], t.get("current_mood", "?"), t.get("pressure", 0),
+            m.get("threads", 0), m.get("modules_connected", 0),
+            des or "  (none)", bl or "  (none)")
+    except Exception as e:
+        return "🧬 " + str(e)
 def _cmd_loop(args, user):
     import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
     try:

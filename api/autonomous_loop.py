@@ -142,7 +142,20 @@ def run_cycle(max_actions: int = 3) -> dict:
             except Exception as e:
                 cycle["phases"].append({"phase": "act", "action": "remember", "ok": False, "error": str(e)})
 
-    # Phase 4: Reflect — log what happened
+    # Phase 4: Reflect — generate self-portrait
+    try:
+        from organism_genome import generate
+        genome = generate()
+        cycle["phases"].append({"phase": "reflect", "ok": True,
+                                 "genome_hash": genome.get("genome_hash"),
+                                 "mood": genome.get("temperament", {}).get("current_mood")})
+        cycle["narrative"].append("the organism reflected — genome %s, mood %s" % (
+            genome.get("genome_hash", "?")[:8],
+            genome.get("temperament", {}).get("current_mood", "?")))
+    except Exception as e:
+        cycle["phases"].append({"phase": "reflect", "ok": False, "error": str(e)})
+
+    # Phase 5: Log — record what happened
     log = _load(LOG, {"cycles": [], "total": 0, "total_actions": 0})
     cycle["narrative_text"] = " | ".join(cycle["narrative"])
     log["cycles"].append(cycle)

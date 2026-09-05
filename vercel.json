@@ -1540,6 +1540,10 @@
       "dest": "/dashboard/autonomous.html"
     },
     {
+      "src": "/api/organism_genome",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/will",
       "dest": "/dashboard/threads.html#will-card"
     }

@@ -74,6 +74,42 @@ def _breeze():
     except Exception as e:
         breath["actions"].append({"action": "check_bloom", "error": str(e), "ok": False})
 
+    # 4.5 Auto-act — execute the Will's top safe proposal (if enable_act)
+    try:
+        act_enabled = os.environ.get('BREEZE_AUTO_ACT', 'false') == 'true'
+        if act_enabled:
+            from organism_will import decide
+            decision = decide()
+            proposals = decision.get("proposals", [])
+            acted = False
+            for prop in proposals[:2]:
+                action = prop.get("action")
+                if action == "confess" and not acted:
+                    from resonance_confession import confess
+                    a = prop.get("module_a", "")
+                    b = prop.get("module_b", "")
+                    result = confess(a, b)
+                    breath["actions"].append({"action": "auto_confess",
+                                              "modules": [a, b],
+                                              "title": result.get("title", ""),
+                                              "ok": True})
+                    acted = True
+                elif action == "remember" and not acted:
+                    mod = prop.get("module", "")
+                    breath["actions"].append({"action": "auto_remember",
+                                              "module": mod,
+                                              "ok": True})
+                    acted = True
+                if acted: break
+            if not acted:
+                breath["actions"].append({"action": "auto_act", "ok": True,
+                                          "note": "no safe action proposed"})
+        else:
+            breath["actions"].append({"action": "auto_act", "ok": True,
+                                      "note": "disabled"})
+    except Exception as e:
+        breath["actions"].append({"action": "auto_act", "error": str(e), "ok": False})
+
     # 5. Log heartbeat
     try:
         hb = _fetch_json(base + "/api/echoic_ember/log", 12)
