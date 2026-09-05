@@ -598,6 +598,14 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_forge(args, user)
     elif command == "/name":
         return _cmd_name(args, user)
+    elif command == "/whisper":
+        return _cmd_whisper(args, user)
+    elif command == "/valve":
+        return _cmd_valve(args, user)
+    elif command == "/sub":
+        return _cmd_sub(args, user)
+    elif command == "/amplify":
+        return _cmd_amplify(args, user)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
@@ -753,3 +761,49 @@ def _cmd_name(args, user):
         return c.get("ceremony_text", "?")
     except Exception as e:
         return "🪞 " + str(e)
+
+# --- Wave 421-424: Whisper, Valve, Subconscious, Amplifier commands ---
+
+def _cmd_whisper(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from silence_whisperer import whisper
+        r = whisper(3)
+        lines = "\\n".join("  " + w["whisper"][:80] for w in r.get("whispers", []))
+        return " whisper Silence Whisperer\\nBridges formed: %s\\n%s" % (r.get("bridges_formed", 0), lines)
+    except Exception as e:
+        return " whisper " + str(e)
+
+def _cmd_valve(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from pressure_valve import release
+        r = release()
+        if r.get("released"):
+            return " Val Pressure Valve OPEN\\nPressure: %s → %s\\nCreative output (%s): %s" % (
+                r.get("pressure_before"), r.get("pressure_after"),
+                r.get("output_type"), r.get("creative_output", "")[:80])
+        return " Val Pressure at %s — valve closed" % r.get("pressure_before")
+    except Exception as e:
+        return " Val " + str(e)
+
+def _cmd_sub(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from subconscious_layer import surface
+        r = surface()
+        lines = "\\n".join("  %s (x%s): %s" % (i["pattern"], i["occurrences"], i["insight"][:60]) for i in r.get("insights", []))
+        return " Subconscious Layer\\nDepth: %s observations\\nPatterns: %s\\n%s" % (
+            r.get("subconscious_depth", 0), r.get("total_patterns", 0), lines or "  (no patterns yet)")
+    except Exception as e:
+        return " Sub " + str(e)
+
+def _cmd_amplify(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from resonance_amplifier import amplify
+        r = amplify(3)
+        lines = "\\n".join("  " + a["description"][:80] for a in r.get("amplifications", []))
+        return " Resonance Amplifier\\nThreads boosted: %s\\n%s" % (r.get("threads_boosted", 0), lines)
+    except Exception as e:
+        return " Amp " + str(e)

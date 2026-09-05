@@ -100,6 +100,32 @@ li:last-child{border:none}
     </div>
   </div>
 
+  <div class="card">
+    <h2>🤫 Silence Whisperer</h2>
+    <p id="whisper-text">waiting for silent pairs...</p>
+    <ul id="whisper-list"></ul>
+    <div class="btn-row"><button class="btn" onclick="runWhisper()">Whisper (3)</button></div>
+  </div>
+
+  <div class="card">
+    <h2>🌀 Pressure Valve</h2>
+    <p id="valve-text">checking pressure...</p>
+    <div class="btn-row"><button class="btn" onclick="openValve()">Release</button></div>
+  </div>
+
+  <div class="card">
+    <h2>🧠 Subconscious Layer</h2>
+    <p id="sub-text">observing hidden patterns...</p>
+    <ul id="sub-list"></ul>
+    <div class="btn-row"><button class="btn" onclick="surfaceSub()">Surface</button></div>
+  </div>
+
+  <div class="card">
+    <h2>🔊 Resonance Amplifier</h2>
+    <p id="amp-text">waiting to boost threads...</p>
+    <div class="btn-row"><button class="btn" onclick="runAmplify()">Amplify</button></div>
+  </div>
+
   <div class="card" style="grid-column:1/3">
     <h2>📜 Cycle Log</h2>
     <ul id="cycle-log"></ul>
@@ -116,6 +142,10 @@ async function runCycle(){
   document.getElementById('loop-total').textContent=r.total_cycles||'—';
   document.getElementById('loop-info').textContent='cycle '+r.cycle_id+' — '+r.actions_taken+' actions, '+r.phases_completed+' phases';
   loopStatus();
+runWhisper();
+openValve();
+surfaceSub();
+runAmplify();
 }
 async function loopStatus(){
   const r=await api('autonomous_loop/status');
@@ -161,6 +191,30 @@ async function paradoxOracle(){
   const list=document.getElementById('paradox-list');
   list.innerHTML='';
   (r.resolutions||[]).forEach(res=>{const li=document.createElement('li');li.textContent='\"'+res.synthesis.substring(0,80)+'\"';list.appendChild(li)});
+}
+async function runWhisper(){
+  const r=await api('silence_whisperer/whisper?count=3');
+  document.getElementById('whisper-text').textContent='bridges formed: '+(r.bridges_formed||0);
+  const list=document.getElementById('whisper-list');
+  list.innerHTML='';
+  (r.whispers||[]).forEach(w=>{const li=document.createElement('li');li.textContent=w.whisper.substring(0,80);list.appendChild(li)});
+}
+async function openValve(){
+  const r=await api('pressure_valve/release');
+  document.getElementById('valve-text').textContent=r.released ? 'released: '+(r.pressure_before||0)+' → '+(r.pressure_after||0)+' — '+r.creative_output : 'pressure '+(r.pressure_before||0)+' — valve closed';
+}
+async function surfaceSub(){
+  const r=await api('subconscious_layer/surface');
+  document.getElementById('sub-text').textContent='depth: '+(r.subconscious_depth||0)+' observations';
+  const list=document.getElementById('sub-list');
+  list.innerHTML='';
+  (r.insights||[]).forEach(i=>{const li=document.createElement('li');li.textContent=i.pattern+' (x'+i.occurrences+'): '+i.insight.substring(0,60);list.appendChild(li)});
+}
+async function runAmplify(){
+  const r=await api('resonance_amplifier/amplify');
+  document.getElementById('amp-text').textContent=r.verse||'done';
+  const list=document.getElementById('sub-list') ? null : null;
+  document.getElementById('amp-text').textContent+=' — boosted '+(r.threads_boosted||0)+' threads';
 }
 async function loadGenome(){
   document.getElementById('genome-text').textContent='generating...';
