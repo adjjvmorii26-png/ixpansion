@@ -8,9 +8,29 @@
     {
       "src": "dashboard/**/*",
       "use": "@vercel/static"
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "/theater",
+      "dest": "/public/theater.html"
+    },
+    {
+      "src": "/radio",
+      "dest": "/public/radio.html"
+    },
+    {
+      "src": "/theater.html",
+      "dest": "/public/theater.html"
+    },
+    {
+      "src": "/radio.html",
+      "dest": "/public/radio.html"
+    },
     {
       "src": "/api/lucid_progression",
       "dest": "/api/index.py"
