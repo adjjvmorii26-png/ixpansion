@@ -74,12 +74,14 @@ def whisper(count: int = 5) -> dict:
             "%s and %s discover they are two halves of the same organ.",
         ]
         tmpl = random.choice(templates)
-        if tmpl.count('%s') == 3:
-            whisper_text = tmpl % (a, b, round(sim*100))
-        elif tmpl.count('%s') == 2:
-            whisper_text = tmpl % (a, b)
-        else:
-            whisper_text = tmpl % a
+        sim_pct = round(sim * 100)
+        try:
+            whisper_text = tmpl % (a, b, sim_pct)
+        except (TypeError, IndexError):
+            try:
+                whisper_text = tmpl % (a, b)
+            except (TypeError, IndexError):
+                whisper_text = tmpl % a
 
         whispers.append({
             "module_a": a, "module_b": b,

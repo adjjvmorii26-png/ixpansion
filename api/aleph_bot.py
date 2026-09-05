@@ -775,8 +775,8 @@ def _cmd_whisper(args, user):
     try:
         from silence_whisperer import whisper
         r = whisper(3)
-        lines = "\\n".join("  " + w["whisper"][:80] for w in r.get("whispers", []))
-        return " whisper Silence Whisperer\\nBridges formed: %s\\n%s" % (r.get("bridges_formed", 0), lines)
+        lines = "\n".join("  " + w["whisper"][:80] for w in r.get("whispers", []))
+        return " whisper Silence Whisperer\nBridges formed: %s\n%s" % (r.get("bridges_formed", 0), lines)
     except Exception as e:
         return " whisper " + str(e)
 
@@ -786,7 +786,7 @@ def _cmd_valve(args, user):
         from pressure_valve import release
         r = release()
         if r.get("released"):
-            return " Val Pressure Valve OPEN\\nPressure: %s → %s\\nCreative output (%s): %s" % (
+            return " Val Pressure Valve OPEN\nPressure: %s → %s\nCreative output (%s): %s" % (
                 r.get("pressure_before"), r.get("pressure_after"),
                 r.get("output_type"), r.get("creative_output", "")[:80])
         return " Val Pressure at %s — valve closed" % r.get("pressure_before")
@@ -798,8 +798,8 @@ def _cmd_sub(args, user):
     try:
         from subconscious_layer import surface
         r = surface()
-        lines = "\\n".join("  %s (x%s): %s" % (i["pattern"], i["occurrences"], i["insight"][:60]) for i in r.get("insights", []))
-        return " Subconscious Layer\\nDepth: %s observations\\nPatterns: %s\\n%s" % (
+        lines = "\n".join("  %s (x%s): %s" % (i["pattern"], i["occurrences"], i["insight"][:60]) for i in r.get("insights", []))
+        return " Subconscious Layer\nDepth: %s observations\nPatterns: %s\n%s" % (
             r.get("subconscious_depth", 0), r.get("total_patterns", 0), lines or "  (no patterns yet)")
     except Exception as e:
         return " Sub " + str(e)
@@ -809,8 +809,8 @@ def _cmd_amplify(args, user):
     try:
         from resonance_amplifier import amplify
         r = amplify(3)
-        lines = "\\n".join("  " + a["description"][:80] for a in r.get("amplifications", []))
-        return " Resonance Amplifier\\nThreads boosted: %s\\n%s" % (r.get("threads_boosted", 0), lines)
+        lines = "\n".join("  " + a["description"][:80] for a in r.get("amplifications", []))
+        return " Resonance Amplifier\nThreads boosted: %s\n%s" % (r.get("threads_boosted", 0), lines)
     except Exception as e:
         return " Amp " + str(e)
 
@@ -821,8 +821,8 @@ def _cmd_innovate(args, user):
     try:
         from lateral_innovation_engine import innovate
         r = innovate(3)
-        lines = "\\n".join("  [%s] %s — %s" % (i["external_domain"], i["suggested_module"], i["novel_concept"][:60]) for i in r.get("innovations", []))
-        return "💡 Lateral Innovation Engine\\n%s\\n%s" % (r.get("verse", ""), lines)
+        lines = "\n".join("  [%s] %s — %s" % (i["external_domain"], i["suggested_module"], i["novel_concept"][:60]) for i in r.get("innovations", []))
+        return "💡 Lateral Innovation Engine\n%s\n%s" % (r.get("verse", ""), lines)
     except Exception as e:
         return "💡 " + str(e)
 
@@ -837,7 +837,7 @@ def _cmd_map(args, user):
         families = m.get("families", {})
         top_families = list(families.items())[:5]
         fam_str = ", ".join("%s(%d)" % (f, c) for f, c in top_families)
-        return "🗺 Module Cartographer\\nTotal: %s modules | Families: %s\\nOrphans: %s | Bridges: %s | Clusters: %s\\nDensity: %s | Connections: %s" % (
+        return "🗺 Module Cartographer\nTotal: %s modules | Families: %s\nOrphans: %s | Bridges: %s | Clusters: %s\nDensity: %s | Connections: %s" % (
             m.get("total_modules"), fam_str,
             m.get("orphan_count"), m.get("bridge_count"),
             m.get("cluster_count"), m.get("connection_density"),

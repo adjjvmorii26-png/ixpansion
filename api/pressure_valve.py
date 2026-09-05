@@ -81,9 +81,13 @@ def release() -> dict:
         nouns = ["whisper", "gardener", "oracle", "weaver", "messenger"]
         verse = random.choice(templates) % (random.choice(adjectives), random.choice(nouns))
     elif output_type == "pattern":
-        verse = random.choice(templates) % (
-            random.choice(["crystalline", "dendritic", "spiral", "lattice"]),
-            random.randint(10, 50))
+        tmpl = random.choice(templates)
+        if "%s" in tmpl:
+            verse = tmpl % (
+                random.choice(["crystalline", "dendritic", "spiral", "lattice"]),
+                random.randint(10, 50))
+        else:
+            verse = tmpl % random.randint(10, 50)
     else:
         verse = random.choice(templates) % random.randint(50, 200)
 
