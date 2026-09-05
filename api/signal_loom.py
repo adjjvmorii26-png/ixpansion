@@ -13,7 +13,7 @@ thread graph, and tracks the rising pressure as a living pulse.
 A loom does not hunt for threads. It stands where they are made.
 """
 from __future__ import annotations
-import json, time, hashlib, os, random, urllib.parse, urllib.request, urllib.error
+import json, time, hashlib, os, random, base64, urllib.parse, urllib.request, urllib.error
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 LOG = os.path.join(DATA_DIR, "signal_loom.json")
