@@ -515,6 +515,26 @@ def _process_command(command: str, args: list, user: str) -> str:
         except Exception as e:
             return "🌿 " + str(e)
 
+    elif command == "/loom":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from signal_loom import cancel  # noqa - placeholder
+        except Exception:
+            pass
+        try:
+            from signal_loom import listen, pressure, catches
+            if args and args[0] == "listen":
+                r = listen()
+                newc = r.get("new_catches", [])
+                lines = "\n".join(" %s ↔ %s (%s band, %s)" % ((c.get("module_a") or "?").replace("_"," "), (c.get("module_b") or "?").replace("_"," "), c.get("band","?"), c.get("source","?")) for c in newc[:5]) if newc else "nothing new — the loom still stands"
+                return "🪡 Loom listened: pressure %s (%s) · band %s\n%s" % (r.get("pressure"), r.get("pressure_desc"), r.get("band"), lines)
+            p = pressure()
+            c = catches(6)
+            lines = "\n".join(" %s ↔ %s (%s)" % ((x.get("module_a") or "?").replace("_"," "), (x.get("module_b") or "?").replace("_"," "), x.get("band","?")) for x in c.get("catches", []))
+            return "🪡 Signal Loom — pressure %s (%s) · %s catches/hour · %s total\n%s\n\nView: https://alexalex.info/loom" % (p.get("pressure"), p.get("pressure_desc"), p.get("catches_this_hour"), p.get("total_catches"), lines)
+        except Exception as e:
+            return "🪡 " + str(e)
+
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:

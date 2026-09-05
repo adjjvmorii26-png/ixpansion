@@ -1490,6 +1490,14 @@
     {
       "src": "/veinbed",
       "dest": "/dashboard/threads.html#veinbed-card"
+    },
+    {
+      "src": "/api/signal_loom",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/loom",
+      "dest": "/dashboard/threads.html#loom-card"
     }
   ],
   "env": {

@@ -58,6 +58,14 @@ th{color:#c88aff;font-weight:normal}
 <div id="discover-result" class="verse" style="display:none;margin-bottom:12px"></div>
 
 
+
+<div class="card" id="loom-card">
+<h2>🪡 Signal Loom — Listener</h2>
+<div class="sub" style="color:#6a7a9a;font-size:.82em;margin-bottom:8px">Signal pressure is rising. The loom catches freshly-surfaced relationships before they fade.</div>
+<div id="loom-pressure" style="font-size:.9em;margin-bottom:8px;color:#c88aff"></div>
+<div id="loom-body" style="font-size:.85em"></div>
+<button class="discover-btn" onclick="loomListen()" style="border-color:#c88aff;color:#c88aff">🪡 Listen Now</button>
+</div>
 <div class="card" id="veinbed-card">
 <h2>🌿 Veinbed — Detail Layer</h2>
 <div class="sub" style="color:#6a7a9a;font-size:.82em;margin-bottom:8px">Names pair modules. Details show what they actually share. The veinbed maps the substrate where relationships grow.</div>
@@ -210,6 +218,27 @@ async function mapVeinbed(){
   body.insertAdjacentHTML('beforeend',`<div style="margin-top:8px;color:#6a7a9a;font-size:.8em">Mapped ${r.modules_sampled} modules · ${r.total_veins} veins discovered. ${r.lore||''}</div>`);
 }
 mapVeinbed();
+
+async function loomListen(){
+  const r=await api('/api/signal_loom/listen');
+  document.getElementById('loom-pressure').textContent=`Pressure: ${r.pressure} (${r.pressure_desc}) · band ${r.band} · total catches ${r.total_catches} · persisted ${r.persisted}`;
+  const body=document.getElementById('loom-body');
+  const newc=r.new_catches||[];
+  if(!newc.length){body.textContent='No new signals caught this listen — the loom stands, waiting.';return}
+  body.innerHTML=newc.map(c=>`<div style="border-bottom:1px solid #111;padding:6px 0">
+    <span class="badge" style="border-color:#c88aff;color:#c88aff">${(c.module_a||'?').replace(/_/g,' ')} ↔ ${(c.module_b||'?').replace(/_/g,' ')}</span>
+    <span style="color:#6a7a9a;font-size:.8em;margin-left:6px">${c.band} band · ${c.source}</span>
+  </div>`).join('');
+}
+async function loomState(){
+  const p=await api('/api/signal_loom/pressure');
+  document.getElementById('loom-pressure').textContent=`Pressure: ${p.pressure} (${p.pressure_desc}) · catches/hour ${p.catches_this_hour} · total ${p.total_catches}`;
+  const c=await api('/api/signal_loom/catches?limit=10');
+  const body=document.getElementById('loom-body');
+  const cs=c.catches||[];
+  body.innerHTML=cs.length?cs.slice(0,6).map(x=>`<div style="border-bottom:1px solid #111;padding:5px 0"><span class="badge" style="border-color:#c88aff;color:#c88aff">${(x.module_a||'?').replace(/_/g,' ')} ↔ ${(x.module_b||'?').replace(/_/g,' ')}</span> ${x.band} · ${x.source}</div>`).join(''):'The loom awaits its first catch.';
+}
+loomState();
 </script>
 </body>
 </html>

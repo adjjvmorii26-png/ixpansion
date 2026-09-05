@@ -180,6 +180,25 @@ def _gather_relationships():
     except Exception:
         pass
 
+    # 8. Signal Loom — freshly surfaced autonomous signals
+    try:
+        sys.path.insert(0, os.path.dirname(__file__))
+        from signal_loom import catches as _loom_catches
+        loom = _loom_catches(40)
+        for catch in loom.get("catches", []):
+            threads.append({
+                "module_a": catch.get("module_a"), "module_b": catch.get("module_b"),
+                "type": "convergence" if catch.get("band") in ("delta", "theta") else "dream",
+                "strength": 0.7,
+                "source": "signal_loom", "source_id": catch.get("id"),
+                "age_hours": round((time.time() - catch.get("timestamp", time.time())) / 3600, 2),
+                "band": catch.get("band"), "verse_a": catch.get("verse_a"),
+            })
+        if loom.get("catches"):
+            sources_used.append("signal_loom")
+    except Exception:
+        pass
+
     return threads, sources_used
 
 
