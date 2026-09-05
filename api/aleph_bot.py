@@ -588,6 +588,12 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_dream(args, user)
     elif command == "/paradox":
         return _cmd_paradox(args, user)
+    elif command == "/compose":
+        return _cmd_compose(args, user)
+    elif command == "/garden":
+        return _cmd_garden(args, user)
+    elif command == "/copilot":
+        return _cmd_copilot(args, user)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
@@ -685,3 +691,40 @@ def _cmd_paradox(args, user):
             r.get("wisdom", ""), "\n".join(lines[:3]))
     except Exception as e:
         return "🔮 " + str(e)
+
+# --- Wave 416-418: Composer, Gardener, Copilot commands ---
+
+def _cmd_compose(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from resonance_composer import compose_from_state
+        c = compose_from_state()
+        p = c.get("pattern", {})
+        return "🎵 Resonance Composition\nInstrument: %s · Frequency: %s Hz\nHarmonics: %s · Color: %s\n\"%s\"" % (
+            p.get("instrument", "?"), p.get("frequency", 0),
+            p.get("harmonics", 0), p.get("color", "?"), c.get("verse", ""))
+    except Exception as e:
+        return "🎵 " + str(e)
+
+def _cmd_garden(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from entropy_gardener import tend
+        t = tend()
+        return "🌿 Entropy Garden\nState: %s · Pressure: %s\nIntervention: %s\n\"%s\"" % (
+            t.get("state", "?"), t.get("pressure", 0),
+            t.get("intervention", "?"), t.get("verse", ""))
+    except Exception as e:
+        return "🌿 " + str(e)
+
+def _cmd_copilot(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from copilot_gateway import scan_all
+        s = scan_all()
+        return "🤖 Copilot Scan\nModules: %s · Compliant: %s (%s%%)\nAvg health: %s\nIssues: %s" % (
+            s.get("total_modules", 0), s.get("compliant", 0),
+            round(s.get("compliance_rate", 0) * 100),
+            s.get("average_health", 0), s.get("issues_found", 0))
+    except Exception as e:
+        return "🤖 " + str(e)

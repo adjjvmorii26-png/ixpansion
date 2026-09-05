@@ -1544,6 +1544,18 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/api/entropy_gardener",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/resonance_composer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/copilot_gateway",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/will",
       "dest": "/dashboard/threads.html#will-card"
     }

@@ -1,162 +1,192 @@
-"""Entropy Gardener — cultivates productive disorder in the system.
+"""
+entropy_gardener — Wave 417: Active Entropy Management
+ALEph: The organism doesn't just passively experience entropy — it gardens it.
+The gardener can increase chaos (when the organism is too rigid) or decrease it
+(when the organism is too chaotic), maintaining the creative edge between
+order and disorder.
 
-Not all entropy is bad. The gardener selectively prunes chaos into
-creative disorder — removing harmful randomness while preserving the
-useful kind. The gardener knows when to let weeds grow and when to
-pull them, maintaining the optimal edge between order and chaos.
+Not a thermostat. A gardener — it shapes entropy into fertile ground.
+
+Doctrine: The organism thrives at the edge of chaos. Too much order is death.
+Too much chaos is death. The gardener tends the garden.
 """
 from __future__ import annotations
+import json, time, os, random
 
-import random
-import time
-import sys
-from pathlib import Path
-from typing import Any, Dict, List
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
+GARDEN_LOG = os.path.join(DATA_DIR, "entropy_garden.json")
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+NAME = "entropy_gardener"
+SIGIL = "b4c9d1e3a7f2"
 
-ENTROPY_TYPES = {
-    "creative_chaos": {"benefit": 0.8, "harm": 0.1, "natural_rate": 0.05},
-    "destructive_noise": {"benefit": 0.0, "harm": 0.9, "natural_rate": 0.08},
-    "exploratory_spread": {"benefit": 0.6, "harm": 0.2, "natural_rate": 0.03},
-    "systemic_drift": {"benefit": 0.3, "harm": 0.5, "natural_rate": 0.04},
-    "serendipity_seeds": {"benefit": 0.9, "harm": 0.05, "natural_rate": 0.02},
-    "resource_decay": {"benefit": 0.1, "harm": 0.7, "natural_rate": 0.06},
-}
+# The organism's target entropy range (the "fertile zone")
+TARGET_MIN = 0.35
+TARGET_MAX = 0.65
 
 
-class EntropyPlant:
-    def __init__(self, entropy_type: str, zone: str = "default"):
-        self.entropy_type = entropy_type
-        self.zone = zone
-        self.specs = ENTROPY_TYPES.get(entropy_type, ENTROPY_TYPES["creative_chaos"])
-        self.health = 1.0
-        self.growth = 0.0
-        self.age = 0
-        self.pruned = False
-
-    def grow(self) -> Dict[str, Any]:
-        if self.pruned:
-            return {"status": "pruned"}
-        self.age += 1
-        self.growth += self.specs["natural_rate"]
-        self.health *= random.uniform(0.95, 1.05)
-        self.health = max(0, min(2.0, self.health))
-        return {
-            "type": self.entropy_type,
-            "growth": round(self.growth, 4),
-            "health": round(self.health, 3),
-            "net_value": round(self.specs["benefit"] - self.specs["harm"], 3),
-        }
-
-    def prune(self) -> Dict[str, Any]:
-        self.pruned = True
-        return {"pruned": self.entropy_type, "zone": self.zone}
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "type": self.entropy_type,
-            "zone": self.zone,
-            "growth": round(self.growth, 4),
-            "health": round(self.health, 3),
-            "age": self.age,
-            "pruned": self.pruned,
-            "net_value": round(self.specs["benefit"] - self.specs["harm"], 3),
-        }
+def _load(p, d=None):
+    for _p in (p, os.path.join("/tmp", os.path.basename(p))):
+        try:
+            with open(_p) as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return d or {}
 
 
-class EntropyGardener:
-    def __init__(self):
-        self.plants: List[EntropyPlant] = []
-        self.harvest_log: List[Dict[str, Any]] = []
-        self.prune_log: List[Dict[str, Any]] = []
-
-    def seed(self, entropy_type: str, zone: str = "default") -> Dict[str, Any]:
-        plant = EntropyPlant(entropy_type, zone)
-        self.plants.append(plant)
-        return {"seeded": plant.to_dict()}
-
-    def tend_garden(self) -> List[Dict[str, Any]]:
-        results = []
-        for plant in self.plants:
-            result = plant.grow()
-            results.append(result)
-        return results
-
-    def selective_prune(self, max_harm: float = 0.5) -> List[Dict[str, Any]]:
-        pruned = []
-        for plant in self.plants:
-            if not plant.pruned and plant.specs["harm"] > max_harm:
-                result = plant.prune()
-                self.prune_log.append({**result, "time": time.time()})
-                pruned.append(result)
-        return pruned
-
-    def harvest_benefits(self) -> Dict[str, Any]:
-        total_benefit = sum(p.specs["benefit"] * p.growth for p in self.plants if not p.pruned)
-        total_harm = sum(p.specs["harm"] * p.growth for p in self.plants if not p.pruned)
-        self.harvest_log.append({
-            "benefit": round(total_benefit, 4),
-            "harm": round(total_harm, 4),
-            "net": round(total_benefit - total_harm, 4),
-            "time": time.time(),
-        })
-        return {
-            "total_benefit": round(total_benefit, 4),
-            "total_harm": round(total_harm, 4),
-            "net_value": round(total_benefit - total_harm, 4),
-        }
-
-    def garden_stats(self) -> Dict[str, Any]:
-        active = [p for p in self.plants if not p.pruned]
-        pruned = [p for p in self.plants if p.pruned]
-        type_counts: Dict[str, int] = {}
-        for p in active:
-            type_counts[p.entropy_type] = type_counts.get(p.entropy_type, 0) + 1
-        return {
-            "total_plants": len(self.plants),
-            "active": len(active),
-            "pruned": len(pruned),
-            "type_distribution": type_counts,
-            "total_harvests": len(self.harvest_log),
-        }
+def _save(p, data):
+    try:
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        with open(p, "w") as f:
+            json.dump(data, f, indent=2, default=str)
+    except Exception:
+        try:
+            with open(os.path.join("/tmp", os.path.basename(p)), "w") as f:
+                json.dump(data, f, indent=2, default=str)
+        except Exception:
+            pass
 
 
-_gardener = EntropyGardener()
+def _fetch_json(url, timeout=10):
+    try:
+        import urllib.request
+        with urllib.request.urlopen(url, timeout=timeout) as resp:
+            return json.loads(resp.read().decode())
+    except Exception:
+        return {}
 
 
-def entropy_gardener_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
-    action = payload.get("action", "status")
+def sense() -> dict:
+    """Sense the current entropy state of the organism."""
+    base = "https://alexalex.info"
+    pressure = _fetch_json(base + "/api/signal_loom/pressure")
+    p = pressure.get("pressure", 0.5)
 
-    if action == "seed":
-        return _gardener.seed(
-            payload.get("entropy_type", "creative_chaos"),
-            payload.get("zone", "default"),
-        )
-    elif action == "tend":
-        return {"garden": _gardener.tend_garden()}
-    elif action == "prune":
-        return {"pruned": _gardener.selective_prune(payload.get("max_harm", 0.5))}
-    elif action == "harvest":
-        return _gardener.harvest_benefits()
-    return {"status": "active", **_gardener.garden_stats()}
+    weave = _fetch_json(base + "/api/threadweaver/weave")
+    types = weave.get("by_type", {})
+    tension = types.get("tension", 0)
+    convergence = types.get("convergence", 0)
+    fusion = types.get("fusion", 0)
 
+    # Calculate entropy metrics
+    total = max(1, tension + convergence + fusion)
+    entropy_ratio = tension / total if total else 0.5
+    convergence_ratio = convergence / total if total else 0.5
 
-handler = entropy_gardener_handler
+    # Determine state
+    if p > TARGET_MAX:
+        state = "overheating"
+        action_needed = "cool_down"
+        suggestion = "the organism is too chaotic — introduce structure"
+    elif p < TARGET_MIN:
+        state = "stagnant"
+        action_needed = "heat_up"
+        suggestion = "the organism is too rigid — inject chaos"
+    elif abs(p - 0.5) < 0.05:
+        state = "fertile"
+        action_needed = "maintain"
+        suggestion = "the organism is in the fertile zone — tend gently"
+    else:
+        state = "drifting"
+        action_needed = "nudge"
+        suggestion = "the organism is drifting — a small nudge is needed"
 
-
-def coherence_vitals() -> dict:
-    """entropy_gardener reports its vital signs to the living system."""
     return {
-        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
-        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
-        "entropy_gardener_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
-        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
+        "action": "sense",
+        "pressure": p,
+        "entropy_ratio": round(entropy_ratio, 3),
+        "convergence_ratio": round(convergence_ratio, 3),
+        "state": state,
+        "action_needed": action_needed,
+        "suggestion": suggestion,
+        "target_range": [TARGET_MIN, TARGET_MAX],
     }
 
 
-def resonates_with() -> list:
-    """Declared kinships, auto-picked from shared domain language."""
-    return ['signal_flora', 'quantum_garden', 'neural_fabric']
+def tend() -> dict:
+    """Tend the entropy garden — take an action to restore balance."""
+    s = sense()
+    p = s["pressure"]
+    state = s["state"]
+    action = s["action_needed"]
 
+    log = _load(GARDEN_LOG, {"tendings": [], "total": 0})
+
+    tending = {
+        "timestamp": time.time(),
+        "before_pressure": p,
+        "state": state,
+        "action": action,
+    }
+
+    if action == "cool_down":
+        # Inject order: suggest consolidation, reflection, simplification
+        tending["intervention"] = "consolidation"
+        tending["verse"] = "the gardener prunes — too much growth without roots"
+        tending["effects"] = [
+            "suggest thread consolidation",
+            "increase convergence-seeking behavior",
+            "slow down new module creation",
+        ]
+    elif action == "heat_up":
+        # Inject chaos: suggest experiments, mutations, new connections
+        tending["intervention"] = "inoculation"
+        tending["verse"] = "the gardener plants seeds of chaos in sterile soil"
+        tending["effects"] = [
+            "trigger experimental modules",
+            "increase tension-seeking behavior",
+            "allow contradictory connections",
+        ]
+    elif action == "nudge":
+        # Gentle adjustment
+        tending["intervention"] = "nudge"
+        tending["verse"] = "the gardener adjusts a single vine"
+        tending["effects"] = ["minor course correction"]
+    else:
+        # Fertile zone — maintain with observation
+        tending["intervention"] = "observe"
+        tending["verse"] = "the garden is fertile — the gardener watches"
+        tending["effects"] = ["continue monitoring"]
+
+    log["tendings"].append(tending)
+    log["tendings"] = log["tendings"][-200:]
+    log["total"] = len(log["tendings"])
+    log["last_pressure"] = p
+    log["last_state"] = state
+    _save(GARDEN_LOG, log)
+
+    return {
+        "action": "tend",
+        "state": state,
+        "pressure": round(p, 3),
+        "intervention": tending["intervention"],
+        "verse": tending["verse"],
+        "effects": tending["effects"],
+        "total_tendings": log["total"],
+    }
+
+
+def history(limit: int = 10) -> dict:
+    log = _load(GARDEN_LOG, {"tendings": [], "total": 0})
+    return {"action": "history", "total": log["total"],
+            "tendings": log["tendings"][-limit:][::-1]}
+
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/sense")
+    if path == "/sense": return sense()
+    if path == "/tend": return tend()
+    if path == "/history":
+        return history(int(payload.get("limit", 10)) if str(payload.get("limit", "10")).isdigit() else 10)
+    return {"error": "unknown", "available": ["/sense", "/tend", "/history"]}
+
+
+def coherence_vitals() -> dict:
+    return {"layer": "regulatory", "status": "active", "wave": "417",
+            "gardener": "tending"}
+
+
+def resonates_with() -> list:
+    return ["signal_loom", "threadweaver", "organism_genome",
+            "organism_will", "breeze"]
