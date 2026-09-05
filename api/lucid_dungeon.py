@@ -33,9 +33,10 @@ def _save(p, d):
         with open(os.path.join("/tmp", os.path.basename(p)), "w") as f:
             json.dump(d, f, indent=2)
 
-def _gen_rooms(realm_name: str, realm: dict) -> list:
+def _gen_rooms(realm_name: str, realm: dict, seed: str = None) -> list:
+    rng = random.Random(seed) if seed else random
     rooms = []
-    num = random.randint(4, 8)
+    num = rng.randint(4, 8)
     room_types = ["entrance", "corridor", "hazard", "treasure", "puzzle", "boss", "shrine", "void_gate"]
     for i in range(num):
         rtype = room_types[min(i, len(room_types)-1)]
@@ -46,20 +47,21 @@ def _gen_rooms(realm_name: str, realm: dict) -> list:
             "realm": realm_name, "biome": realm["biome"],
             "hazard": realm["hazard"] if rtype in ("hazard","boss") else None,
             "loot": realm["loot"] if rtype == "treasure" else None,
-            "enemies": random.randint(0, 3) if rtype in ("hazard","boss") else 0,
+            "enemies": rng.randint(0, 3) if rtype in ("hazard","boss") else 0,
             "hp_required": realm["difficulty"] * (2 if rtype == "boss" else 1),
         })
     return rooms
 
-def generate(realm: str = None) -> dict:
+def generate(realm: str = None, seed: str = None) -> dict:
     log = _load(DUNGEON_LOG, {"dungeons": [], "total": 0})
+    rng = random.Random(seed) if seed else random
     if realm and realm in REALMS:
         realm_name, realm_data = realm, REALMS[realm]
     else:
-        realm_name = random.choice(list(REALMS.keys()))
+        realm_name = rng.choice(list(REALMS.keys()))
         realm_data = REALMS[realm_name]
 
-    rooms = _gen_rooms(realm_name, realm_data)
+    rooms = _gen_rooms(realm_name, realm_data, seed)
     dungeon = {
         "id": hashlib.sha256(f"dungeon:{realm_name}:{time.time()}".encode()).hexdigest()[:10],
         "realm": realm_name,

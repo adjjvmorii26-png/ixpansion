@@ -22,15 +22,16 @@ def _save(p, d):
     except OSError:
         with open(os.path.join("/tmp", os.path.basename(p)), "w") as f: json.dump(d, f, indent=2)
 
-def generate(boss: bool = False) -> dict:
+def generate(boss: bool = False, seed: str = None) -> dict:
     log = _load(NPC_LOG, {"npcs": [], "total": 0})
-    species = random.choice(SPECIES)
-    archetype = random.choice(ARCHETYPES[species])
-    level = random.randint(1, 10) if not boss else random.randint(8, 15)
-    hp = (level * 10 + random.randint(5, 20)) if not boss else (level * 8 + random.randint(5, 15))
-    abilities = random.sample(ABILITIES, min(3, level // 2 + 1))
-    mood = random.choice(["hostile", "neutral", "friendly", "enigmatic", "volatile"])
-    dialogue = random.choice([
+    rng = random.Random(seed) if seed else random
+    species = rng.choice(SPECIES)
+    archetype = rng.choice(ARCHETYPES[species])
+    level = rng.randint(1, 10) if not boss else rng.randint(8, 15)
+    hp = (level * 10 + rng.randint(5, 20)) if not boss else (level * 8 + rng.randint(5, 15))
+    abilities = rng.sample(ABILITIES, min(3, level // 2 + 1))
+    mood = rng.choice(["hostile", "neutral", "friendly", "enigmatic", "volatile"])
+    dialogue = rng.choice([
         "The void speaks, but only to those who listen.",
         "I have seen the paradox — it wept.",
         "Your resonance is... unfamiliar.",

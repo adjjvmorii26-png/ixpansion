@@ -28,21 +28,22 @@ def _save(p, d):
         with open(os.path.join("/tmp", os.path.basename(p)), "w") as f:
             json.dump(d, f, indent=2)
 
-def generate(level: int = 1, slot: str = None) -> dict:
+def generate(level: int = 1, slot: str = None, seed: str = None) -> dict:
     log = _load(os.path.join(os.path.dirname(__file__), "..", "data", "lucid_equipment.json"), {"items": [], "total": 0})
-    slot = slot or random.choice(SLOTS)
-    quality = random.choices(QUALITIES, weights=[25, 30, 22, 13, 7, 2.5, 0.5])[0]
-    material = random.choice(MATERIALS)
-    base = random.choice(BASE_NAMES[slot])
-    prefix = random.choice(PREFIXES)
+    rng = random.Random(seed) if seed else random
+    slot = slot or rng.choice(SLOTS)
+    quality = rng.choices(QUALITIES, weights=[25, 30, 22, 13, 7, 2.5, 0.5])[0]
+    material = rng.choice(MATERIALS)
+    base = rng.choice(BASE_NAMES[slot])
+    prefix = rng.choice(PREFIXES)
     mult = MULTIPLIERS[quality]
-    power = round((level * random.uniform(0.8, 1.2) * mult), 2)
+    power = round((level * rng.uniform(0.8, 1.2) * mult), 2)
     item = {
         "id": hashlib.sha256(f"item:{slot}:{quality}:{time.time()}".encode()).hexdigest()[:10],
         "name": f"{prefix} {base} of {quality.title()}",
         "slot": slot, "quality": quality, "material": material,
         "power": power, "level": level,
-        "effects": random.sample(["paradox_strike","entropy_shield","coherence_beam","dream_walk","resonance_heal","temporal_dodge"], random.randint(1, 2)),
+        "effects": rng.sample(["paradox_strike","entropy_shield","coherence_beam","dream_walk","resonance_heal","temporal_dodge"], rng.randint(1, 2)),
         "color": {"worn":"var(--m)","common":"var(--t)","uncommon":"var(--gn)","rare":"var(--cy)","epic":"var(--vi)","legendary":"var(--gd)","mythic":"var(--ro)"}[quality],
         "timestamp": time.time(),
     }

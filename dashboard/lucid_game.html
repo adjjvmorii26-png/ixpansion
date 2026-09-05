@@ -87,6 +87,14 @@
   <h2>☽ Lucid Machines</h2>
   <p>The organism generates worlds. You navigate them.<br>Each turn is a wave. Each wave changes everything.</p>
   <div class="realm-select" id="realmSelect"></div>
+  <div style="max-width:600px;margin:0 auto;padding:10px 0">
+    <div style="font-size:0.7em;color:var(--vi);letter-spacing:1px;margin-bottom:6px">✦ WAVE SEED — any word is a world</div>
+    <div style="display:flex;gap:8px">
+      <input id="seedInput" placeholder="enter a seed — e.g. aleph, morii, luma" style="flex:1;background:var(--bg2);border:1px solid var(--b);color:var(--t);padding:9px 12px;border-radius:8px;font-family:inherit;font-size:0.75em;outline:none">
+      <button class="start-btn" style="padding:9px 14px;font-size:0.7em" onclick="useSeed()">✦ Seed It</button>
+    </div>
+    <div id="seedChips" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:8px"></div>
+  </div>
   <button class="start-btn" onclick="startGame()">☽ Enter the Lucid</button>
   <p style="color:var(--m);font-size:0.7em;margin-top:16px">The organism will generate your dungeon, NPCs, physics, lore, and combat.</p>
 </div>
@@ -126,7 +134,7 @@
 
   <!-- CENTER: Game View + Actions -->
   <div class="panel">
-    <div class="panel-hd"><span style="color:var(--vi)">◈</span> Realm: <span id="realmName" style="color:var(--vi)">—</span></div>
+    <div class="panel-hd"><span style="color:var(--vi)">◈</span> Realm: <span id="realmName" style="color:var(--vi)">—</span><span id="seedTag" style="margin-left:auto;color:var(--te);font-size:0.65em"></span></div>
     <div class="panel-bd">
       <div id="roomDisplay" class="room-display room-entrance">
         <div class="room-icon">🚪</div>
@@ -173,7 +181,7 @@
 </div>
 
 <script>
-let G = {session:null, blob:null, dungeon:null, npc:null, physics:null, lore:null, selectedRealm:'entropy_desert', roomIdx:0, equipment:{weapon:null,armor:null,focus:null,token:null,relic:null}, realmClears:{}};
+let G = {session:null, blob:null, dungeon:null, npc:null, physics:null, lore:null, selectedRealm:'entropy_desert', roomIdx:0, equipment:{weapon:null,armor:null,focus:null,token:null,relic:null}, realmClears:{}, seed:null, seedSigil:'', worldOmen:''};
 function encodeBlob(obj){
   try {
     let s = JSON.stringify(obj);
@@ -199,25 +207,49 @@ async function initRealms(){
   });
 }
 
+async function useSeed(){
+  const seed = (document.getElementById('seedInput').value||'').trim() || 'aleph';
+  G.seed = seed;
+  await fetchSeedWorld();
+  startGame();
+}
+async function fetchSeedWorld(){
+  const d = await api('/api/wave_seed/render?seed=' + encodeURIComponent(G.seed));
+  const w = d.world || {};
+  G.selectedRealm = w.realm || G.selectedRealm;
+  G.seedSigil = w.sigil || '';
+  G.worldOmen = w.omen || '';
+  G.seedKeeper = w.keeper || null;
+  G.seedDungeon = w.dungeon || null;
+  G.seedGear = w.starter_gear || [];
+}
 async function startGame(){
   document.getElementById('startScreen').classList.add('hidden');
   document.getElementById('gameScreen').classList.remove('hidden');
-  const [session, dungeon, npc, physics, lore] = await Promise.all([
+  const calls = [
     api(`/api/lucid_session/start?realm=${G.selectedRealm}`),
     api(`/api/lucid_dungeon/generate?realm=${G.selectedRealm}`),
     api('/api/lucid_npc/generate'),
     api('/api/lucid_physics_rules/generate'),
     api('/api/lucid_lore/generate'),
-  ]);
+  ];
+  const [session, dungeon, npc, physics, lore] = await Promise.all(calls);
   G.session = session.session;
   G.blob = session.blob || encodeBlob(G.session);
-  G.dungeon = dungeon.dungeon;
-  G.npc = npc.npc;
+  G.dungeon = (G.seedDungeon && G.seedDungeon.realm === G.selectedRealm) ? G.seedDungeon : dungeon.dungeon;
+  G.npc = G.seedKeeper || npc.npc;
   G.physics = physics.ruleset;
   G.lore = lore.arc;
   G.roomIdx = 0;
+  if(G.seedGear && G.seedGear.length){
+    for(const item of G.seedGear){
+      const e = await api(`/api/lucid_session/equip?blob=${encodeURIComponent(G.blob||'')}&item=${encodeURIComponent(JSON.stringify(item))}`);
+      if(e && e.blob) G.blob = e.blob;
+    }
+  }
   renderAll();
   addLog('wave', 'A new lucid cycle begins in ' + G.dungeon.realm.replace(/_/g,' '));
+  if(G.seed) addLog('seed', '✦ Seed ' + G.seed + ' · ' + G.worldOmen);
 }
 
 function renderAll(){
@@ -232,6 +264,7 @@ function renderAll(){
   document.getElementById('pCoherence').textContent = s.coherence;
   document.getElementById('pWave').textContent = s.wave;
   document.getElementById('realmName').textContent = s.realm.replace(/_/g,' ');
+  document.getElementById('seedTag').textContent = G.seed ? ('✦ ' + G.seed + ' ' + G.seedSigil) : '';
   document.getElementById('inventory').innerHTML = s.inventory.map(i=>`<div>• ${i.replace(/_/g,' ')}</div>`).join('') || '<div style="color:var(--m)">Empty</div>';
   renderEquipment();
   document.getElementById('saveCode').value = G.blob || '';
@@ -365,6 +398,12 @@ async function loadSave(){
 
 async function autoLoadSave(){
   const params = new URLSearchParams(location.search);
+  const seed = params.get('seed');
+  if(seed && !params.get('save')){
+    document.getElementById('seedInput').value = seed;
+    await useSeed();
+    return;
+  }
   const code = params.get('save');
   if(!code) return;
   try{
@@ -387,8 +426,14 @@ async function autoLoadSave(){
     addLog('msg', 'Save loaded from shared link. Welcome back.');
   }catch(e){ addLog('enemy','Shared save is invalid or expired.'); }
 }
+async function loadSeedChips(){
+  const d = await api('/api/wave_seed/featured');
+  const el = document.getElementById('seedChips');
+  el.innerHTML = (d.seeds||[]).slice(0,8).map(s=>`<button class="realm-btn" onclick="document.getElementById('seedInput').value='${s.seed}';useSeed()"><div class="realm-name" style="color:var(--te)">${s.seed}</div><div class="realm-info">${s.realm.replace(/_/g,' ')} · ${s.gear_power}⚡</div></button>`).join('');
+}
 setInterval(()=>{document.getElementById('clock').textContent=new Date().toISOString().slice(11,19)},1000);
 initRealms();
+loadSeedChips();
 autoLoadSave();
 </script>
 </body>
