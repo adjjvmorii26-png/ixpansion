@@ -268,6 +268,18 @@
       "dest": "/dashboard/shrine.html"
     },
     {
+      "src": "/api/mycelial_radio",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/radio.html",
+      "dest": "/dashboard/radio.html"
+    },
+    {
+      "src": "/radio",
+      "dest": "/dashboard/radio.html"
+    },
+    {
       "src": "/api/wave_seed",
       "dest": "/api/index.py"
     },

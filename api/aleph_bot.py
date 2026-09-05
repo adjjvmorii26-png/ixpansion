@@ -109,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/play — open Lucid Machines"
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/play — open Lucid Machines"
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -211,6 +211,14 @@ def _process_command(command: str, args: list, user: str) -> str:
             return f"🖼 Resonance Gallery — {r.get('title', '?')}:\nshape {r.get('shape', '?')} · palette {r.get('palette', '?')}\nView it live: https://alexalex.info/gallery"
         except Exception as e:
             return f"🖼 Gallery: {str(e)}"
+    elif command == "/radio":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from mycelial_radio import broadcast
+            b = broadcast().get("bulletin", {})
+            return f"≋ Mycelial Radio:\n{b.get('headline','')}\n☂ {b.get('weather','')}\n\ntop signals:\n" + "\n".join("· " + x for x in (b.get('top_signals') or [])[:3]) + f"\n\nomen: {b.get('omen','')}"
+        except Exception as e:
+            return f"≋ Radio: {str(e)}"
     elif command == "/verse":
         import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
         try:
