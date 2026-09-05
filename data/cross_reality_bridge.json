@@ -1,0 +1,146 @@
+{
+  "bridges": [
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 680,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "be89cd2 resolve: undernet archive merge conflict",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": true
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 4,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "vercel_cloud",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "vercel_cloud",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "vercel_cloud",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 4 realities",
+      "timestamp": 1788633462.1026545
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 680,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "be89cd2 resolve: undernet archive merge conflict",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": true
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 4,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "vercel_cloud",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "vercel_cloud",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "vercel_cloud",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 4 realities",
+      "timestamp": 1788633518.3019073
+    }
+  ]
+}
