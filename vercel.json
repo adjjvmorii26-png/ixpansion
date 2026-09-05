@@ -280,6 +280,18 @@
       "dest": "/dashboard/radio.html"
     },
     {
+      "src": "/api/signal_journal",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/journal.html",
+      "dest": "/dashboard/journal.html"
+    },
+    {
+      "src": "/journal",
+      "dest": "/dashboard/journal.html"
+    },
+    {
       "src": "/api/wave_seed",
       "dest": "/api/index.py"
     },
