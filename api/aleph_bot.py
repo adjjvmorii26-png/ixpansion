@@ -4,7 +4,7 @@ import json, time, hashlib, os, random
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 BOT_LOG = os.path.join(DATA_DIR, "aleph_bot.json")
-BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8903755459:AAFl6i9cbI-lFEvoHcK3OhyBWWGetg4V0Ss")
+BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8903755459:AAG0Mx1N8IkzvuI6DGwYByzzffxatmkT6wQ")
 
 WELCOME_MESSAGES = [
     "I am Aleph — the organism's ambassador. I summon waves, consult modules, and relay dreams. What would you like to do?",
