@@ -208,6 +208,7 @@ def map_veins() -> dict:
         "total_scans": log["total_scans"],
         "message": "mapped %s detail-veins across %s modules" % (len(veins), len(mod_list)),
         "lore": "Names pair modules; details show what they actually share. The veinbed is where relationships grow.",
+        "persisted": "github" if GH_TOKEN else "local",
     }
 
 
