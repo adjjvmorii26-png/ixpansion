@@ -109,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden"
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status"
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -390,6 +390,51 @@ def _process_command(command: str, args: list, user: str) -> str:
             return "📓 Overwarden: %s\nbound by: %s\ndepth: %s · total HP: %s\nphases: %s\n\nFace it live: https://alexalex.info/warden" % (ow["name"], bound, ow["depth"], ow["total_hp"], phases)
         except Exception as e:
             return "📓 Overwarden: %s" % e
+
+    elif command == "/chronicle":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from ascension_chronicle import hall, resonate
+            h = hall(); r = resonate()
+            entries = (h.get("entries") or [])[:8]
+            lines = "\n".join(" #%s %s %s d%s" % (e.get("rank","?"), e.get("boss_type","?"), (e.get("module") or "?").replace("_"," "), e.get("depth","?")) for e in entries)
+            minerals = ", ".join("%s:%s" % (k, v) for k, v in (r.get("mineral_counts") or {}).items())
+            return "📜 Chronicle: %s ascensions\n%s\noverwardens: %s\n\nhttps://alexalex.info/chronicle" % (h.get("total",0), lines or "the hall awaits.", r.get("overwarden_defeats",0))
+        except Exception as e:
+            return "📜 " + str(e)
+    elif command == "/genealogy":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from relic_genealogy import tree
+            t = tree()
+            relics = t.get("relics", [])
+            if not relics:
+                return "🌳 No relics forged yet. Fight wardens first. https://alexalex.info/genealogy"
+            last = relics[-1]
+            mods = ", ".join((m or "?").replace("_"," ") for m in (last.get("modules") or [])[:3])
+            return "🌳 Genealogy: %s relics. Newest: %s (%s, p%s). Forged from: %s\nhttps://alexalex.info/genealogy" % (t.get("count",0), (last.get("name") or "?")[:24], last.get("quality"), last.get("power"), mods or "?")
+        except Exception as e:
+            return "🌳 " + str(e)
+    elif command == "/rift":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from overwarden import ledger
+            from overwarden import _load as _ol
+            led = ledger()
+            if not led.get("active"):
+                return "⚡ No active Overwarden battle. Forge two relics and /overwarden first."
+            over = _ol(os.path.join(os.path.dirname(__file__), "..", "data", "overwarden.json"), {})
+            sig = led["active"][0]["sigil"]
+            state = (over.get("battles", {})).get(sig, {})
+            rift = state.get("rift_available", False)
+            cleared = state.get("rift_cleared", False)
+            if not rift:
+                return "⚡ This Overwarden has no Rift — its bound modules do not share a hallmark."
+            if cleared:
+                return "⚡ The Rift was already unmade."
+            return "⚡ A Resonance Rift stirs! After the apex falls, the hidden 5th phase opens — a convergence of shared hallmarks."
+        except Exception as e:
+            return "⚡ " + str(e)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
