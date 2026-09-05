@@ -51,6 +51,8 @@
   <div class="panel">
     <h2>⟡ Echo-Economy — Resonances Priced in the Dark</h2>
     <div id="economy"></div>
+    <h2 style="margin-top:12px">🜄 Upwellings — Silence That Breached the Surface</h2>
+    <div id="upwellings"></div>
     <h2 style="margin-top:12px">↟ Underworld Migrations</h2>
     <div id="migrations"></div>
   </div>
@@ -60,11 +62,12 @@
 <script>
 async function get(url){ const r = await fetch(url); return r.json(); }
 async function load(){
-  const [m, c, e, mg] = await Promise.all([
+  const [m, c, e, mg, u] = await Promise.all([
     get('/api/underworld/mirror?limit=6'),
     get('/api/underworld/clock'),
     get('/api/underworld/economy'),
     get('/api/underworld/migrations'),
+    get('/api/upwelling/state'),
   ]);
   document.getElementById('deepClock').textContent = '⌁ deep hour ' + c.deep_hour + ' — ' + c.phase.replace(/_/g,' ');
   document.getElementById('deepPhase').textContent = c.note + ' · progress ' + (c.phase_progress*100).toFixed(0) + '%';
@@ -75,6 +78,9 @@ async function load(){
   document.getElementById('economy').innerHTML =
     '<div class="trade"><b>substrate total:</b> ' + e.substrate_total + ' echo · currency: ' + e.currency + '</div>' +
     (e.trades||[]).map(t=>`<div class="trade"><b>${t.from.replace(/_/g,' ')}</b> ↔ <b>${t.to.replace(/_/g,' ')}</b> · ${t.volume} ${t.commodity} @ ${t.price} echo</div>`).join('');
+  document.getElementById('upwellings').innerHTML =
+    (u.upwellings||[]).map(x=>`<div class="trade"><b>${x.module.replace(/_/g,' ')}</b> · ${x.verse||''} — ${x.band} band · ${x.surface_price} echo (${u.total||0} total)</div>`).join('') ||
+    '<div class="trade" style="color:var(--m)">no upwellings yet — silence is still accumulating below.</div>';
   document.getElementById('migrations').innerHTML =
     (mg.migrants||[]).map(x=>`<div class="mig">↟ ${x.module.replace(/_/g,' ')} ascended ${x.depth_shed} strata ${x.sigil}</div>`).join('') ||
     '<div class="mig" style="color:var(--m)">no migrations yet — nothing has returned from the surface.</div>';

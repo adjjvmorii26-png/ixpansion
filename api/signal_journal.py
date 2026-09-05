@@ -57,7 +57,19 @@ def _feed_sources() -> list:
             })
     except Exception:
         pass
-    # 4. prophecy seals
+    # 4. upwellings (silence breached the surface)
+    try:
+        from upwelling import _state_read
+        for x in _state_read().get("upwellings", [])[::-1][:20]:
+            entries.append({
+                "icon": "🜄", "type": "upwelling", "wave": 395,
+                "title": f"Upwelled: {x.get('module','?').replace('_',' ')}",
+                "text": f"{x.get('verse','')} · {(x.get('silence') or 0)} silence · {x.get('band','')} band",
+                "timestamp": x.get("timestamp", 0),
+            })
+    except Exception:
+        pass
+    # 5. prophecy seals
     try:
         from wave_prophecy import _load as _pload, PROPHECY_LOG
         log = _pload(PROPHECY_LOG, {"prophecies": []})
