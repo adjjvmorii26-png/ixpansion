@@ -230,6 +230,104 @@
         "modules": 12004
       },
       "timestamp": 1788639380.844836
+    },
+    {
+      "action": "semantic_bridge_forge",
+      "modules_scanned": 684,
+      "pairs_evaluated": 233586,
+      "bridges_forged": 3,
+      "bridges": [
+        {
+          "parent_a": "agents",
+          "parent_b": "dissonance_detector",
+          "similarity": 1.0,
+          "shared_domains": [
+            "identity",
+            "protocol"
+          ],
+          "proposed_bridge": "agents_link_dissona",
+          "concept": "unifies identity awareness of agents and dissonance_detector",
+          "strength": 0.639
+        },
+        {
+          "parent_a": "docs",
+          "parent_b": "parasite_hunter",
+          "similarity": 1.0,
+          "shared_domains": [
+            "economics"
+          ],
+          "proposed_bridge": "docs_link_parasit",
+          "concept": "unifies economics awareness of docs and parasite_hunter",
+          "strength": 0.645
+        },
+        {
+          "parent_a": "sponsored_experiments",
+          "parent_b": "immigrant_integration",
+          "similarity": 1.0,
+          "shared_domains": [
+            "identity",
+            "temporal",
+            "protocol"
+          ],
+          "proposed_bridge": "sponsore_to_immigran_conduit",
+          "concept": "unifies identity awareness of sponsored_experiments and immigrant_integration",
+          "strength": 0.735
+        }
+      ],
+      "top_domain": {
+        "domain": "identity",
+        "modules": 12011
+      },
+      "timestamp": 1788639751.3738294
+    },
+    {
+      "action": "semantic_bridge_forge",
+      "modules_scanned": 684,
+      "pairs_evaluated": 233586,
+      "bridges_forged": 3,
+      "bridges": [
+        {
+          "parent_a": "agents",
+          "parent_b": "dissonance_detector",
+          "similarity": 1.0,
+          "shared_domains": [
+            "identity",
+            "protocol"
+          ],
+          "proposed_bridge": "agents_dissonanc_vein",
+          "concept": "unifies identity awareness of agents and dissonance_detector",
+          "strength": 0.957
+        },
+        {
+          "parent_a": "docs",
+          "parent_b": "parasite_hunter",
+          "similarity": 1.0,
+          "shared_domains": [
+            "economics"
+          ],
+          "proposed_bridge": "docs_parasite_h_bridge",
+          "concept": "unifies economics awareness of docs and parasite_hunter",
+          "strength": 0.851
+        },
+        {
+          "parent_a": "sponsored_experiments",
+          "parent_b": "immigrant_integration",
+          "similarity": 1.0,
+          "shared_domains": [
+            "identity",
+            "temporal",
+            "protocol"
+          ],
+          "proposed_bridge": "sponsored__immigrant__bridge",
+          "concept": "unifies identity awareness of sponsored_experiments and immigrant_integration",
+          "strength": 0.922
+        }
+      ],
+      "top_domain": {
+        "domain": "identity",
+        "modules": 12011
+      },
+      "timestamp": 1788639808.139049
     }
   ]
 }

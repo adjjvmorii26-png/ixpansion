@@ -1,5 +1,5 @@
 {
-  "timestamp": 1788632777.8683865,
+  "timestamp": 1788639366.2849898,
   "version": "1.0",
   "identity": {
     "name": "IXpansion",
@@ -8,8 +8,8 @@
     "current_wave": 415
   },
   "morphology": {
-    "threads": 168,
-    "modules_connected": 108,
+    "threads": 170,
+    "modules_connected": 125,
     "sources": [
       "confessions",
       "paradox_echo",
@@ -18,9 +18,9 @@
       "signal_loom"
     ],
     "thread_types": {
-      "tension": 65,
+      "tension": 77,
       "dream": 12,
-      "convergence": 31,
+      "convergence": 21,
       "fusion": 60
     }
   },
@@ -34,13 +34,7 @@
       "action": "bloom",
       "target": "new_organ",
       "score": 2.5,
-      "reason": "bloom threshold met (168 threads, 5 sources) \u2014 the organism is ready to create"
-    },
-    {
-      "action": "remember",
-      "target": "ego_dissolution",
-      "score": 1.56,
-      "reason": "highest-value forgotten module (0.78 staleness, score 1.56)"
+      "reason": "bloom threshold met (170 threads, 5 sources) \u2014 the organism is ready to create"
     },
     {
       "action": "confess",
@@ -59,6 +53,12 @@
       "target": "dream_physics_sandbox",
       "score": 1.0,
       "reason": "strong silent pair (similarity 1.0) \u2014 these modules want to speak"
+    },
+    {
+      "action": "remember",
+      "target": "cognitive_heatmap",
+      "score": 0.94,
+      "reason": "highest-value forgotten module (0.47 staleness, score 0.94)"
     }
   ],
   "blind_spots": [
@@ -67,9 +67,9 @@
   ],
   "evolutionary_pressure": {
     "entropy_pressure": 1.0,
-    "thread_density": 1.5555555555555556,
-    "silence_ratio": 0.47619047619047616,
-    "desire_intention": 1.4120000000000001
+    "thread_density": 1.36,
+    "silence_ratio": 0.47058823529411764,
+    "desire_intention": 1.2879999999999998
   },
-  "genome_hash": "57d6c169fdf2ca23"
+  "genome_hash": "b95fcfa4d7cc5092"
 }
