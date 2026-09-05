@@ -279,6 +279,27 @@ async function bloomAttempt(){
 }
 bloomCheck();
 
+
+async function willDecide(){
+  document.getElementById('will-body').textContent='The organism weighs its threads...';
+  const r=await api('/api/organism_will/decide');
+  const body=document.getElementById('will-body');
+  const org=r.organism_state||{};
+  const props=r.proposals||[];
+  body.innerHTML=`<div style="margin-bottom:10px;color:#6a7a9a;font-size:.85em">
+    State: ${org.threads} threads · ${org.modules_connected} modules · pressure ${org.pressure} (${org.pressure_desc}) · ${r.total_forgotten} forgotten
+  </div>
+  <div style="font-size:.95em;margin-bottom:8px;color:#c88aff">"${r.verse}"</div>
+  <div style="font-size:.85em">${props.map((p,i)=>`<div style="border-bottom:1px solid #111;padding:6px 0">
+    <span class="badge" style="border-color:${i===0?"#c88aff":"#6a7a9a"};color:${i===0?"#c88aff":"#6a7a9a"}">${p.action}</span>
+    <b>${(p.module||p.module_a||"?").replace(/_/g," ")}</b>
+    <span style="color:#6a7a9a">score ${p.score}</span>
+    <div style="color:#8a9aaa;font-size:.85em;margin-top:2px">${p.reason}</div>
+    <div style="color:#44ddff;font-size:.8em">${p.telegram||""}</div>
+  </div>`).join('')}</div>`;
+}
+willDecide();
+
 </script>
 </body>
 </html>

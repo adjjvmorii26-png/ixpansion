@@ -564,6 +564,19 @@ def _process_command(command: str, args: list, user: str) -> str:
         except Exception as e:
             return "🌬️ " + str(e)
 
+    elif command == "/will":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from organism_will import decide
+            d = decide()
+            org = d.get("organism_state", {})
+            top = d.get("top_proposal")
+            props = d.get("proposals", [])[:4]
+            lines = "\n".join(" %s %s (score %s) — %s" % (p["action"], (p.get("module") or p.get("module_a","?")).replace("_"," "), p.get("score",0), p.get("reason","")[:60]) for p in props)
+            return "🧭 The Organism's Will — %s threads · %s modules · pressure %s\n\"%s\"\n\nTop proposals:\n%s\n\nView: https://alexalex.info/will" % (org.get("threads",0), org.get("modules_connected",0), org.get("pressure"), d.get("verse",""), lines)
+        except Exception as e:
+            return "🧭 " + str(e)
+
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:
