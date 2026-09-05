@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interstitial Verse — Poems Between Modules</title>
+<style>
+  :root{--bg:#05050f;--s:rgba(10,10,24,0.97);--b:rgba(255,255,255,0.08);--t:#a0a0b8;--m:#4a4a64;--ac:#7c7cf8;--te:#2dd4bf;--am:#fbbf24;--vi:#a78bfa;--cy:#22d3ee}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--t);font-family:'SF Mono','Fira Code',monospace;min-height:100vh;padding:20px}
+  .hd{text-align:center;padding:14px 20px;border:1px solid var(--b);border-radius:12px;background:linear-gradient(180deg,rgba(167,139,250,0.07),transparent);margin-bottom:18px}
+  .hd h1{font-size:1.4em;color:#fff;letter-spacing:2px;text-transform:uppercase}
+  .hd h1 span{color:var(--vi);text-shadow:0 0 18px rgba(167,139,250,0.35)}
+  .sub{color:var(--m);font-size:0.75em;margin-top:5px;letter-spacing:1px}
+  .tools{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+  input,button{background:var(--s);border:1px solid var(--b);color:#fff;padding:8px 12px;border-radius:8px;font-family:inherit;font-size:0.75em;outline:none}
+  button{cursor:pointer;background:rgba(167,139,250,0.12);border-color:rgba(167,139,250,0.4)}
+  button:hover{background:rgba(167,139,250,0.25)}
+  .verse-card{background:var(--s);border:1px solid rgba(167,139,250,0.3);border-radius:12px;padding:22px;max-width:640px;margin:0 auto 16px;text-align:center}
+  .verse-card .vtitle{color:#fff;font-size:0.9em;letter-spacing:1px;margin-bottom:14px;text-transform:uppercase}
+  .verse-card .poem{font-size:1.0em;line-height:2.1;color:var(--t);white-space:pre-line}
+  .reading{color:var(--m);font-size:0.68em;margin-top:14px;font-style:italic}
+  .badge{display:inline-block;background:rgba(45,212,191,0.12);color:var(--te);border:1px solid rgba(45,212,191,0.3);padding:2px 8px;border-radius:20px;font-size:0.62em;margin-left:8px}
+  .history{margin-top:20px}
+  .history h3{color:var(--m);font-size:0.7em;letter-spacing:1px;text-align:center;margin-bottom:10px;text-transform:uppercase}
+  .hist-item{font-size:0.7em;color:var(--m);text-align:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+  .hist-item span{color:var(--vi)}
+  .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:24px;letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="hd">
+  <h1>🕊 Interstitial <span>Verse</span></h1>
+  <div class="sub">THE SPACE BETWEEN TWO MODULES IS A POEM · WAVE 383</div>
+</div>
+
+<div class="tools">
+  <input id="a" placeholder="parent A (e.g. dream_logic_physics)">
+  <span style="color:var(--vi)">+</span>
+  <input id="b" placeholder="parent B (e.g. paradox_ledger)">
+  <button onclick="writeVerse()">✍ Write</button>
+  <button onclick="randomVerse()">🎲 Random</button>
+</div>
+
+<div id="verse" class="verse-card" style="display:none"></div>
+<div class="history"><h3>Recent Verses</h3><div id="history"></div></div>
+<div class="foot">WAVE 383 · INTERSTITIAL VERSE · READ SLOWLY, THREE TIMES</div>
+
+<script>
+async function get(url){ const r = await fetch(url); return r.json(); }
+async function writeVerse(){
+  const a = document.getElementById('a').value.trim() || 'entropy_oracle';
+  const b = document.getElementById('b').value.trim() || 'resonance_graph';
+  const d = await get(`/api/interstitial_verse/write?a=${encodeURIComponent(a)}&b=${encodeURIComponent(b)}`);
+  const v = d.verse;
+  const el = document.getElementById('verse');
+  el.style.display = 'block';
+  el.innerHTML = '<div class="vtitle">' + v.title + ' <span class="badge">'+d.total_verses+' written</span></div>' +
+    '<div class="poem">' + v.poem + '</div>' +
+    '<div class="reading">' + v.reading + '</div>';
+  loadHistory();
+}
+async function randomVerse(){
+  const names = ['entropy_oracle','resonance_graph','dream_logic_physics','paradox_ledger','consciousness_stream','mythopoetic_engine','void_cartographer','memory_palace_gen','lucid_dungeon','synchronicity_engine'];
+  const a = names[Math.floor(Math.random()*names.length)];
+  let b = names[Math.floor(Math.random()*names.length)];
+  while(b===a) b = names[Math.floor(Math.random()*names.length)];
+  document.getElementById('a').value = a;
+  document.getElementById('b').value = b;
+  writeVerse();
+}
+async function loadHistory(){
+  const d = await get('/api/interstitial_verse/history');
+  const h = document.getElementById('history');
+  h.innerHTML = (d.verses||[]).slice(0,8).map(v=>'<div class="hist-item">'+v.title.replace('Interstice of ','').replace(' & ','<span> & </span>')+'</div>').join('') || h.innerHTML;
+}
+writeVerse();
+</script>
+</body>
+</html>

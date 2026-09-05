@@ -244,6 +244,18 @@
       "dest": "/dashboard/forge.html"
     },
     {
+      "src": "/api/interstitial_verse",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/verse.html",
+      "dest": "/dashboard/verse.html"
+    },
+    {
+      "src": "/verse",
+      "dest": "/dashboard/verse.html"
+    },
+    {
       "src": "/garden",
       "dest": "/dashboard/garden_live.html"
     },

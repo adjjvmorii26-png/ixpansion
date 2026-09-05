@@ -109,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/play — open Lucid Machines"
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/play — open Lucid Machines"
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -156,7 +156,18 @@ def _process_command(command: str, args: list, user: str) -> str:
             return "📋 Module list unavailable"
     elif command == "/realm":
         realm = args[0] if args else "entropy_desert"
-        return f"🗺 Generating dungeon in {realm}...\nUse /wave to see the realm's current state, or visit https://ixpansion.vercel.app/lucid-game to play!"
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from lucid_dungeon import handler as _dh
+            d = _dh({"path": "/generate", "realm": realm}).get("dungeon", {})
+            rooms = d.get("rooms", [])[:6]
+            room_lines = "\n".join(
+                f"  {r['type'].upper()} — {r['biome'].replace('_',' ')}" + (f" ⚠ {r['hazard']}" if r.get("hazard") else "") + (f" 💰 {r['loot']}" if r.get("loot") else "")
+                for r in rooms
+            )
+            return f"🗺 Realm: {d.get('realm','?').replace('_',' ')} ({d.get('biome','?').replace('_',' ')}) — {len(rooms)} rooms\n{room_lines}\n\nPlay it live: https://alexalex.info/lucid-game"
+        except Exception as e:
+            return f"🗺 Realm generation failed: {e}"
     elif command == "/spawn":
         import sys; sys.path.insert(0, os.path.dirname(__file__))
         try:
@@ -200,6 +211,16 @@ def _process_command(command: str, args: list, user: str) -> str:
             return f"🖼 Resonance Gallery — {r.get('title', '?')}:\nshape {r.get('shape', '?')} · palette {r.get('palette', '?')}\nView it live: https://alexalex.info/gallery"
         except Exception as e:
             return f"🖼 Gallery: {str(e)}"
+    elif command == "/verse":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from interstitial_verse import handler as _vh
+            a = args[0] if args else "entropy_oracle"
+            b = args[1] if len(args) > 1 else "resonance_graph"
+            v = _vh({"path": "/write", "a": a, "b": b}).get("verse", {})
+            return f"🕊 Interstitial Verse — {v.get('title','?')}:\n{v.get('poem','?')}"
+        except Exception as e:
+            return f"🕊 Verse: {str(e)}"
     elif command == "/play":
         return "🎮 Lucid Machines awaits:\nhttps://alexalex.info/lucid-game\nSummon realms, fight paradoxes, evolve with the organism."
     elif command == "/hex":
