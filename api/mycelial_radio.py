@@ -197,6 +197,47 @@ def graph(limit: int = 36, seed: str = None) -> dict:
             "seed": seed, "wave": 386}
 
 
+BAND_NOTES = {
+    "alpha": 220.0, "beta": 246.94, "gamma": 277.18, "delta": 329.63,
+    "theta": 369.99, "mycelial": 440.0, "dream": 493.88, "void": 110.0,
+    "census": 293.66, "lattice": 196.0,
+}
+WAVEFORMS = {"alpha": "triangle", "beta": "sine", "gamma": "square", "delta": "triangle",
+             "theta": "sine", "mycelial": "sawtooth", "dream": "sine", "void": "sine",
+             "census": "square", "lattice": "triangle"}
+
+
+def melody(seed: str = None) -> dict:
+    """The Undernet Concerto — 16 steps; each step is a resonance pair singing in its band."""
+    sc = scan(64, seed)
+    pairs = sc["resonance_pairs"] or [{
+        "a": "entropy_oracle", "b": "resonance_graph", "strength": 0.8,
+        "band": "theta", "aphorism": "the undernet hums"}] * 3
+    steps, rng = [], random.Random(hashlib.sha256(f"melody:{seed or 'organism'}".encode()).hexdigest())
+    for i in range(16):
+        pair = pairs[rng.randrange(len(pairs))]
+        band = pair["band"]
+        base = BAND_NOTES.get(band, 220.0)
+        octave = rng.choice([0.5, 0.5, 1, 1, 1, 2])
+        freq = round(base * octave, 2)
+        steps.append({
+            "step": i,
+            "a": pair["a"], "b": pair["b"],
+            "band": band, "freq": freq,
+            "waveform": WAVEFORMS.get(band, "sine"),
+            "gain": round(0.25 + pair["strength"] * 0.5, 3),
+        })
+    return {
+        "action": "melody",
+        "title": f"Undernet Concerto {seed or 'of the Organism'}",
+        "tempo": 96,
+        "note_map": BAND_NOTES,
+        "waveform_map": WAVEFORMS,
+        "steps": steps,
+        "seed": seed,
+    }
+
+
 def handler(payload=None, context=None):
     payload = payload or {}
     path = payload.get("path", "/scan")
@@ -208,4 +249,6 @@ def handler(payload=None, context=None):
         return broadcast(payload.get("seed"))
     if path == "/map":
         return graph(int(payload.get("limit", 36)) if str(payload.get("limit", "36")).isdigit() else 36, payload.get("seed"))
-    return {"error": "unknown", "available": ["/scan", "/tune", "/broadcast", "/map"]}
+    if path == "/melody":
+        return melody(payload.get("seed"))
+    return {"error": "unknown", "available": ["/scan", "/tune", "/broadcast", "/map", "/melody"]}
