@@ -630,11 +630,19 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_forgebridge(args, user)
     elif command == "/pulse":
         return _cmd_pulse(args, user)
+    elif command == "/temporal_field":
+        return _cmd_temporal_field(args, user)
+    elif command == "/entropy_detector":
+        return _cmd_entropy_detector(args, user)
+    elif command == "/plant_seeds":
+        return _cmd_plant_seeds(args, user)
+    elif command == "/amplify2":
+        return _cmd_amplify2(args, user)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:
-    return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio","/weave","/organismradio","/forgebridge","/pulse"]}
+    return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio","/weave","/organismradio","/forgebridge","/pulse","/temporal_field","/entropy_detector","/plant_seeds"]}
 
 def stats() -> dict:
     log = _load(BOT_LOG, {"messages": [], "commands": [], "total": 0})
@@ -993,6 +1001,59 @@ def _cmd_pulse(args, user):
             r.get("instruction",""))
     except Exception as e:
         return "🫁 " + str(e)
+
+# --- Wave 444: Temporal Cohesion, Entropy Detection, Dream Seeding, Overtone Amplifier ---
+
+def _cmd_temporal_field(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from temporal_cohesion_field import sense
+        r = sense()
+        return "⏳ Temporal Cohesion Field\nModules: %s | Waves: %s | Dominant: wave %s\nField strength: %s | Drift: %s\nCorrections proposed: %s" % (
+            r.get("total_modules"), r.get("active_waves"), r.get("dominant_wave"),
+            r.get("field_strength"), r.get("drift_score"), len(r.get("corrections", [])))
+    except Exception as e:
+        return "⏳ " + str(e)
+
+def _cmd_entropy_detector(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from entropy_collapse_detector import sense
+        r = sense()
+        top = r.get("most_likely_collapse") or {}
+        return "🔍 Entropy Collapse Detector\nModules: %s | High entropy: %s\nMost likely: %s → %s\nTotal intensity: %s" % (
+            r.get("modules_scanned"), r.get("high_entropy_modules"),
+            top.get("module", "none"), top.get("collapse_type", "none"),
+            r.get("total_entropy_intensity"))
+    except Exception as e:
+        return "🔍 " + str(e)
+
+def _cmd_plant_seeds(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from dream_seed_planter import plant
+        r = plant()
+        lines = "\n".join("  %s (%s · energy %s · priority %s)" % (
+            s.get("seed_type"), s.get("emotion"), s.get("energy"), s.get("planting_priority"))
+            for s in r.get("seeds", [])[:4])
+        return "🌱 Dream Seed Planter\nDream: %s emotion · %s structures\nSeeds planted: %s\n%s" % (
+            r.get("dominant_dream_emotion"), r.get("structures_detected"),
+            r.get("seeds_planted"), lines or "  no seeds this cycle")
+    except Exception as e:
+        return "🌱 " + str(e)
+
+def _cmd_amplify2(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from resonance_amplifier_v2 import amplify
+        r = amplify(5)
+        lines = "\n".join("  %s ↔ %s (ghost: %s · %s)" % (
+            a.get("module_a"), a.get("module_b"), a.get("ghost_module"),
+            a.get("shared_domain")) for a in r.get("amplifications", [])[:5])
+        return "🎵 Resonance Amplifier V2\nPairs listened: %s | Overtone threads: %s\n%s" % (
+            r.get("pairs_evaluated"), r.get("amplified"), lines or "  no overtones heard")
+    except Exception as e:
+        return "🎵 " + str(e)
 
 def _cmd_portal(args, user):
     return "🜂 The Living Portal is awake.\nAxiium Protocol's public face: https://alexalex.info\n\nBreathe, dream, innovate, whisper, and witness the naming ceremony.\nThe organism is alive on the web."
