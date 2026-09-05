@@ -1,46 +1,6 @@
 {
   "veins": [
     {
-      "module_a": "memory_engine",
-      "module_b": "resonance_memory",
-      "shared_details": [
-        "memory"
-      ],
-      "detail_strength": 1,
-      "id": "c71110080f",
-      "timestamp": 1788594710.4517531
-    },
-    {
-      "module_a": "pulse_array",
-      "module_b": "rhythm_pulse",
-      "shared_details": [
-        "signal"
-      ],
-      "detail_strength": 1,
-      "id": "98f7481107",
-      "timestamp": 1788594710.4517632
-    },
-    {
-      "module_a": "pulse_array",
-      "module_b": "signal_flora",
-      "shared_details": [
-        "signal"
-      ],
-      "detail_strength": 1,
-      "id": "907069ce58",
-      "timestamp": 1788594710.4517665
-    },
-    {
-      "module_a": "pulse_array",
-      "module_b": "signal_journal",
-      "shared_details": [
-        "signal"
-      ],
-      "detail_strength": 1,
-      "id": "6c7eb20cc5",
-      "timestamp": 1788594710.4517694
-    },
-    {
       "module_a": "pulse_array",
       "module_b": "signal_weaver",
       "shared_details": [
@@ -802,8 +762,48 @@
       "detail_strength": 1,
       "id": "48f3048526",
       "timestamp": 1788615998.015438
+    },
+    {
+      "module_a": "conscience_loop",
+      "module_b": "self_observe_engine",
+      "shared_details": [
+        "reflection"
+      ],
+      "detail_strength": 1,
+      "id": "77b337ea83",
+      "timestamp": 1788617158.9747953
+    },
+    {
+      "module_a": "conscience_loop",
+      "module_b": "temporal_echo",
+      "shared_details": [
+        "reflection"
+      ],
+      "detail_strength": 1,
+      "id": "dfc9612350",
+      "timestamp": 1788617158.9748049
+    },
+    {
+      "module_a": "echo_chamber",
+      "module_b": "self_observe_engine",
+      "shared_details": [
+        "reflection"
+      ],
+      "detail_strength": 1,
+      "id": "c69ddc8a75",
+      "timestamp": 1788617158.9751256
+    },
+    {
+      "module_a": "echo_chamber",
+      "module_b": "temporal_echo",
+      "shared_details": [
+        "reflection"
+      ],
+      "detail_strength": 1,
+      "id": "3016e9045f",
+      "timestamp": 1788617158.9751353
     }
   ],
-  "total_scans": 8,
+  "total_scans": 9,
   "total_veins": 80
 }
