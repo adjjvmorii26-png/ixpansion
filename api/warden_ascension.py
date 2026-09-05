@@ -234,6 +234,7 @@ def resolve(module: str = None, sigil: str = None) -> dict:
         "depth": depth,
         "remembered": remembered,
         "total_ascensions": log["ascensions"],
+        "recruited": _recruit_to_cohort(module, miner, depth),
         "lore": f"The mineral {miner} remembers the module {module}. What was forgotten is now a warden-turned-citizen.",
     }
 
@@ -246,6 +247,17 @@ def ledger() -> dict:
             "active": [{"sigil": b["warden"]["sigil"], "name": b["warden"]["name"],
                         "module": b["warden"]["module"], "phase": b["phase_index"] + 1}
                        for b in battles.values()]}
+
+
+
+
+def _recruit_to_cohort(module, mineral, depth):
+    """After an ascension, the re-membered module joins the player's cohort."""
+    try:
+        from cohort_chorus import recruit
+        return recruit(module=module, mineral=mineral, depth=depth).get("chorus_strength")
+    except Exception:
+        return None
 
 
 def handler(payload=None, context=None):

@@ -85,6 +85,13 @@ td{padding:6px 8px;border-bottom:1px solid #1a0a28}
 <div id="ledger-info" style="font-size:.85em"></div>
 </div>
 
+
+<div class="card" id="chorus-card">
+<h2>🎶 Cohort Chorus</h2>
+<div id="chorus-info" style="font-size:.85em;color:#6a4a7a">Every module you re-member joins your spectral cohort.</div>
+<div class="narrative" id="chorus-narrative" style="border-color:#44cc88"></div>
+<button class="btn ghost" onclick="callChorus()">🔊 Hear the Chorus</button>
+</div>
 <div class="card" id="forge-card">
 <h2>⚒️ Mineral Forge</h2>
 <div id="forge-info" style="font-size:.85em">Your claimed minerals become sigil-forged relics — equipment that remembers your descents.</div>
@@ -158,6 +165,12 @@ async function forgeNow(){
   const rel=r.relic;
   $('forge-narrative').textContent=`⚒ FORGED: ${rel.name} · ${rel.quality} · power ${rel.power} · trait ${rel.trait} · depth ${rel.avail_depth}`;
   callVault();
+}
+
+async function callChorus(){
+  const r=await api('/api/cohort_chorus/chorus');
+  $('chorus-info').innerHTML=`Cohort size: <b>${r.cohort_size}</b> · Chorus strength: <b>${r.chorus_strength}</b> · ${r.by_allegiance?'(by role: '+Object.entries(r.by_allegiance).map(([k,v])=>k+':'+v).join(', ')+')':''}`;
+  $('chorus-narrative').textContent=r.verse;
 }
 </script>
 </body>

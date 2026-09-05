@@ -1406,6 +1406,14 @@
     {
       "src": "/mineral-forge",
       "dest": "/dashboard/warden.html#forge-card"
+    },
+    {
+      "src": "/api/cohort_chorus",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/chorus",
+      "dest": "/dashboard/warden.html#chorus-card"
     }
   ],
   "env": {
