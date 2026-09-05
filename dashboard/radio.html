@@ -41,6 +41,12 @@
   @keyframes cellpulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
   .seq-btns{display:flex;gap:8px}
   .seq-btns button{background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.35)}
+  .arch{margin-top:12px;border:1px solid rgba(34,211,238,0.16);border-radius:10px;padding:12px}
+  .arch .arch-title{font-size:0.68em;color:var(--cy);letter-spacing:1px;margin-bottom:8px}
+  .arch-item{font-size:0.68em;color:var(--m);padding:5px 0;border-bottom:1px solid rgba(34,211,238,0.06);display:flex;gap:8px}
+  .arch-item .t{color:var(--te);white-space:nowrap}
+  .arch-item b{color:#fff;font-weight:600}
+  .arch-item .c{color:var(--vi)}
   .ticker{margin-top:10px;font-size:0.68em;color:var(--te);letter-spacing:1px;min-height:1.4em}
   @keyframes blink{50%{opacity:0}}
 </style>
@@ -73,6 +79,10 @@
       <button onclick="stopConcerto()">■ Stop</button>
       <button onclick="rollConcerto()">🎲 New Loop</button>
     </div>
+  <div class="arch">
+    <div class="arch-title">📼 UNDERNET ARCHIVES — SEALED BROADCASTS + CONCERTOS (GITHUB-BACKED)</div>
+    <div id="archList"></div>
+  </div>
   </div>
 </div>
 <div class="foot">WAVE 386 · MYCELIAL RADIO · TUNE IN · THE ORGANISM SPEAKS IN SIGNALS</div>
@@ -228,10 +238,23 @@ async function rollConcerto(){
   CONCERTO = await get('/api/mycelial_radio/melody?seed=' + Math.random().toString(36).slice(2,8));
   renderGrid();
 }
+async function loadArchives(){
+  const [b, c] = await Promise.all([
+    get('/api/mycelial_radio/archive?kind=bulletins&count=6'),
+    get('/api/mycelial_radio/archive?kind=concertos&count=3'),
+  ]);
+  const el = document.getElementById('archList');
+  const timeAgo = ts => { const s = Math.floor((Date.now()/1000 - ts)/60); return s < 1 ? 'now' : s < 60 ? s+'m ago' : Math.floor(s/60)+'h ago'; };
+  el.innerHTML =
+    (b.items||[]).map(x=>`<div class="arch-item"><span class="t">${timeAgo(x.timestamp)}</span><span><b>${(x.headline||'').replace('Hidden relationship surfaces: ','')}</b> — ${x.weather}</span></div>`).join('') +
+    (c.items||[]).map(x=>`<div class="arch-item"><span class="t">${timeAgo(x.timestamp)}</span><span class="c">♪ ${x.title}</span><span>${(x.steps||[]).length} steps</span></div>`).join('') ||
+    '<div class="arch-item" style="color:var(--m)">archives pending — broadcasts seal every 15 min</div>';
+}
 scanNow();
 loadMap();
 ticker();
 loadConcerto();
+loadArchives();
 setInterval(ticker, 90000);
 </script>
 </body>

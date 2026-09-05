@@ -11,6 +11,9 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 RADIO_LOG = os.path.join(DATA_DIR, "mycelial_radio.json")
 
 BANDS = ["alpha", "beta", "gamma", "delta", "theta", "mycelial", "dream", "void", "census", "lattice"]
+ARCHIVE_PATH = "data/undernet_archive.json"
+ARCHIVE_THROTTLE = 900  # seconds between archive seals
+GH_TOKEN = os.environ.get("IXP_GH_TOKEN", "")
 WEATHER_LINES = [
     "signal pressure: rising", "entropy front passes overhead", "coherence drizzle",
     "paradox lightning on the far lattice", "dream fog over realm three",
@@ -36,6 +39,90 @@ def _save(p, d):
     except OSError:
         with open(os.path.join("/tmp", os.path.basename(p)), "w") as f:
             json.dump(d, f, indent=2)
+
+
+def _gh_archive_api(method: str, url: str, payload: dict = None) -> dict:
+    if not GH_TOKEN:
+        return {"ok": False}
+    import urllib.parse as _up, urllib.request as _ur, urllib.error as _ue
+    req = _ur.Request(url, method=method)
+    req.add_header("Authorization", "Bearer " + GH_TOKEN)
+    req.add_header("Accept", "application/vnd.github+json")
+    req.add_header("X-GitHub-Api-Version", "2022-11-28")
+    data = json.dumps(payload).encode() if payload is not None else None
+    try:
+        with _ur.urlopen(req, data=data, timeout=15) as resp:
+            return {"ok": True, "status": resp.status, "body": json.loads(resp.read().decode() or "{}")}
+    except _ue.HTTPError as e:
+        try:
+            return {"ok": False, "status": e.code, "body": json.loads(e.read().decode() or "{}")}
+        except Exception:
+            return {"ok": False, "status": e.code, "body": {}}
+
+
+def _archive_read() -> dict:
+    fallback = {"bulletins": [], "concertos": []}
+    if GH_TOKEN:
+        r = _gh_archive_api("GET", "https://api.github.com/repos/adjjvmorii26-png/ixpansion/contents/" + ARCHIVE_PATH + "?ref=main")
+        if r["ok"]:
+            try:
+                import base64 as _b64
+                return json.loads(_b64.b64decode(r["body"]["content"]).decode())
+            except Exception:
+                return fallback
+    f = os.path.join(DATA_DIR, "undernet_archive.json")
+    for _p in (f, os.path.join("/tmp", "undernet_archive.json")):
+        try:
+            with open(_p) as fh:
+                return json.load(fh)
+        except Exception:
+            pass
+    return fallback
+
+
+def _archive_write(data: dict) -> bool:
+    if GH_TOKEN:
+        import base64 as _b64
+        import urllib.parse as _up
+        r = _gh_archive_api("GET", "https://api.github.com/repos/adjjvmorii26-png/ixpansion/contents/" + ARCHIVE_PATH + "?ref=main")
+        sha = r["body"].get("sha") if r["ok"] else None
+        payload = {
+            "message": "UNDERNET ARCHIVE — a signal preserved",
+            "content": _b64.b64encode(json.dumps(data, indent=2).encode()).decode(),
+            "branch": "main",
+        }
+        if sha:
+            payload["sha"] = sha
+        w = _gh_archive_api("PUT", "https://api.github.com/repos/adjjvmorii26-png/ixpansion/contents/" + ARCHIVE_PATH, payload)
+        return w["ok"]
+    try:
+        with open(os.path.join(DATA_DIR, "undernet_archive.json"), "w") as fh:
+            json.dump(data, fh, indent=2)
+    except OSError:
+        with open(os.path.join("/tmp", "undernet_archive.json"), "w") as fh:
+            json.dump(data, fh, indent=2)
+    return True
+
+
+def _archive_add(kind: str, entry: dict) -> bool:
+    """Seal an entry into the archive; throttled to ARCHIVE_THROTTLE seconds."""
+    data = _archive_read()
+    now = time.time()
+    key = f"last_{kind}"
+    if data.get(key) and now - float(data.get(key, 0)) < ARCHIVE_THROTTLE:
+        return False
+    lst = data.setdefault(kind + "s", [])
+    lst.append(entry)
+    data[kind + "s"] = lst[-200:]
+    data[key] = now
+    return _archive_write(data)
+
+
+def archive(kind: str = "bulletins", count: int = 10) -> dict:
+    data = _archive_read()
+    items = data.get(kind, [])[::-1][:count]
+    return {"action": "archive", "kind": kind, "items": items,
+            "total": len(data.get(kind, [])), "persisted": "github" if GH_TOKEN else "local"}
 
 
 def _module_names(limit=64):
@@ -162,7 +249,13 @@ def broadcast(seed: str = None) -> dict:
         "wave": 386,
         "timestamp": time.time(),
     }
-    return {"action": "broadcast", "bulletin": bulletin}
+    sealed = _archive_add("bulletin", {
+        "id": hashlib.sha256(f"{time.time():.0f}".encode()).hexdigest()[:10],
+        "headline": bulletin["headline"], "weather": bulletin["weather"],
+        "omen": bulletin["omen"], "verse": bulletin["verse"][:200],
+        "top_signals": bulletin["top_signals"], "wave": 386, "timestamp": time.time(),
+    })
+    return {"action": "broadcast", "bulletin": bulletin, "archived": sealed}
 
 
 def graph(limit: int = 36, seed: str = None) -> dict:
@@ -227,7 +320,7 @@ def melody(seed: str = None) -> dict:
             "waveform": WAVEFORMS.get(band, "sine"),
             "gain": round(0.25 + pair["strength"] * 0.5, 3),
         })
-    return {
+    result = {
         "action": "melody",
         "title": f"Undernet Concerto {seed or 'of the Organism'}",
         "tempo": 96,
@@ -236,6 +329,14 @@ def melody(seed: str = None) -> dict:
         "steps": steps,
         "seed": seed,
     }
+    result["archived"] = _archive_add("concerto", {
+        "id": hashlib.sha256(f"c:{time.time():.0f}".encode()).hexdigest()[:10],
+        "title": result["title"], "tempo": result["tempo"],
+        "steps": [{"step": st["step"], "band": st["band"], "freq": st["freq"],
+                   "a": st["a"], "b": st["b"]} for st in steps],
+        "timestamp": time.time(),
+    })
+    return result
 
 
 def handler(payload=None, context=None):
@@ -251,4 +352,7 @@ def handler(payload=None, context=None):
         return graph(int(payload.get("limit", 36)) if str(payload.get("limit", "36")).isdigit() else 36, payload.get("seed"))
     if path == "/melody":
         return melody(payload.get("seed"))
-    return {"error": "unknown", "available": ["/scan", "/tune", "/broadcast", "/map", "/melody"]}
+    if path == "/archive":
+        return archive(payload.get("kind") or "bulletins",
+                       int(payload.get("count", 10)) if str(payload.get("count", "10")).isdigit() else 10)
+    return {"error": "unknown", "available": ["/scan", "/tune", "/broadcast", "/map", "/melody", "/archive"]}
