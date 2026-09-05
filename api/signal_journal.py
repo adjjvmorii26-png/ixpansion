@@ -44,7 +44,20 @@ def _feed_sources() -> list:
             })
     except Exception:
         pass
-    # 3. prophecy seals
+    # 3. remembrances (Organurna Loop)
+    try:
+        from organurna_loop import _remembrances_read
+        rem = _remembrances_read().get("remembrances", [])
+        for x in rem[::-1][:20]:
+            entries.append({
+                "icon": "🏝", "type": "remembrance", "wave": 393,
+                "title": f"Re-membered: {x.get('module','?').replace('_',' ')}",
+                "text": f"{x.get('verse','')} · sigil {x.get('sigil','')}",
+                "timestamp": x.get("timestamp", 0),
+            })
+    except Exception:
+        pass
+    # 4. prophecy seals
     try:
         from wave_prophecy import _load as _pload, PROPHECY_LOG
         log = _pload(PROPHECY_LOG, {"prophecies": []})
