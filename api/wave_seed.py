@@ -40,9 +40,7 @@ def _put(path, data):
 def translate(seed: str) -> str:
     """A seed becomes a sigil — its HEX-glyph name."""
     sig = _sig(seed or "")
-    out = []
-    for i in range(10):
-        out.append(GLYPHS[(sig >> (i * 4)) & 0xF])
+    out = "".join(GLYPHS[(sig >> (i * 4)) & 0xF] for i in range(10))
     sigil = "".join(SIGIL_GLYPHS[(sig >> (i * 3)) % len(SIGIL_GLYPHS)] for i in range(6))
     return f"{out}{sigil}"
 
