@@ -1370,6 +1370,34 @@
     {
       "src": "/interstice.html",
       "dest": "/dashboard/interstice.html"
+    },
+    {
+      "src": "/api/warden_ascension",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/warden",
+      "dest": "/dashboard/warden.html"
+    },
+    {
+      "src": "/warden.html",
+      "dest": "/dashboard/warden.html"
+    },
+    {
+      "src": "/api/pitch_dark_realm",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/pitch_dark",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/pitch-dark",
+      "dest": "/dashboard/lucid_game.html"
+    },
+    {
+      "src": "/pitch_dark",
+      "dest": "/dashboard/lucid_game.html"
     }
   ],
   "env": {
