@@ -1,46 +1,6 @@
 {
   "veins": [
     {
-      "module_a": "pulse_array",
-      "module_b": "signal_weaver",
-      "shared_details": [
-        "signal"
-      ],
-      "detail_strength": 1,
-      "id": "ec39cd2483",
-      "timestamp": 1788594710.4517722
-    },
-    {
-      "module_a": "pulse_array",
-      "module_b": "wave_prophecy",
-      "shared_details": [
-        "signal"
-      ],
-      "detail_strength": 1,
-      "id": "3d794cce16",
-      "timestamp": 1788594710.4517775
-    },
-    {
-      "module_a": "rhythm_pulse",
-      "module_b": "signal_flora",
-      "shared_details": [
-        "signal"
-      ],
-      "detail_strength": 1,
-      "id": "b6c77d3f19",
-      "timestamp": 1788594710.4517927
-    },
-    {
-      "module_a": "rhythm_pulse",
-      "module_b": "signal_journal",
-      "shared_details": [
-        "signal"
-      ],
-      "detail_strength": 1,
-      "id": "dbb0643151",
-      "timestamp": 1788594710.4517953
-    },
-    {
       "module_a": "rhythm_pulse",
       "module_b": "signal_weaver",
       "shared_details": [
@@ -802,8 +762,48 @@
       "detail_strength": 1,
       "id": "3016e9045f",
       "timestamp": 1788617158.9751353
+    },
+    {
+      "module_a": "memory_engine",
+      "module_b": "resonance_memory",
+      "shared_details": [
+        "memory"
+      ],
+      "detail_strength": 1,
+      "id": "c71110080f",
+      "timestamp": 1788632738.2026145
+    },
+    {
+      "module_a": "pulse_array",
+      "module_b": "rhythm_pulse",
+      "shared_details": [
+        "signal"
+      ],
+      "detail_strength": 1,
+      "id": "98f7481107",
+      "timestamp": 1788632738.2026362
+    },
+    {
+      "module_a": "pulse_array",
+      "module_b": "signal_flora",
+      "shared_details": [
+        "signal"
+      ],
+      "detail_strength": 1,
+      "id": "907069ce58",
+      "timestamp": 1788632738.2026403
+    },
+    {
+      "module_a": "pulse_array",
+      "module_b": "signal_journal",
+      "shared_details": [
+        "signal"
+      ],
+      "detail_strength": 1,
+      "id": "6c7eb20cc5",
+      "timestamp": 1788632738.2026439
     }
   ],
-  "total_scans": 9,
+  "total_scans": 10,
   "total_veins": 80
 }
