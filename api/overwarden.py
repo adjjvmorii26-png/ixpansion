@@ -23,6 +23,9 @@ PHASE_NAMES = {
     "apex": "APEX — the unnamed phase, where the Overwarden dreams itself",
 }
 ROOT_NAMES = ["over_", "twin_", "fused_", "apex_", "umbra_"]
+HALLMARKS = ["coherence", "resonance", "entropy", "memory", "dream",
+             "paradox", "substrate", "echo", "pulse", "lattice"]
+RIFT_NAMES = ["resonance_rift", "hallmark_convergence", "shared_phantom", "rift_of_names"]
 
 
 def _load(p, d=None):
@@ -114,15 +117,45 @@ def summon() -> dict:
         "is_overwarden": True,
     }
 
+    # Resonance Rift: hidden 5th phase when both bound modules share a hallmark
+    rift_available = False
+    try:
+        from warden_ascension import _deepest_ghost
+        modules_flat = [m for sub in [r1.get("modules") or [r1.get("module", "")], r2.get("modules") or [r2.get("module", "")]] for m in (sub or [])]
+        hallmarks_found = []
+        for mod in modules_flat:
+            if isinstance(mod, str) and mod:
+                sig_hash = hashlib.sha256(("hallmark:" + mod).encode()).hexdigest()[:8]
+                hallmarks_found.append(HALLMARKS[int(sig_hash, 16) % len(HALLMARKS)])
+        if len(hallmarks_found) >= 2 and hallmarks_found[0] == hallmarks_found[1]:
+            rift_available = True
+            rift_phase = {
+                "phase": "rift",
+                "name": "Resonance Rift - " + hallmarks_found[0] + " convergence: both modules sing the same hallmark",
+                "hp": int(overwarden["total_hp"] * 1.8),
+                "max_hp": int(overwarden["total_hp"] * 1.8),
+                "damage": int(phases[-1]["damage"] * 2.2),
+                "reward_xp": int(phases[-1]["reward_xp"] * 3.5),
+                "quote": "the rift opens only when two names sing the same silence",
+                "hallmark": hallmarks_found[0],
+            }
+            overwarden["phases"].append(rift_phase)
+            overwarden["total_hp"] = sum(p["hp"] for p in overwarden["phases"])
+    except Exception:
+        pass
+    overwarden["rift_available"] = rift_available
+
     log = _load(LOG, {"summons": 0, "defeats": 0, "battles": {}})
     log.setdefault("battles", {})
     log["summons"] += 1
     log["battles"][overwarden["sigil"]] = {
-        "overwarden": overwarden, "player_hp": 100, "phase_index": 0, "updated": time.time(),
+        "overwarden": overwarden, "player_hp": 100, "phase_index": 0,
+        "rift_available": rift_available, "rift_cleared": False, "updated": time.time(),
     }
     _save(LOG, log)
     return {"action": "summon", "overwarden": overwarden, "total_summons": log["summons"],
-            "warning": "The Overwarden hits hard and does not forget. Bring your strongest gear."}
+            "warning": "The Overwarden hits hard and does not forget." + (" A Resonance Rift stirs in the deep..." if rift_available else ""),
+            "rift_available": rift_available}
 
 
 def assault(player_power: int = 0, player_level: int = 1, paradox_debt: int = 0,
@@ -151,11 +184,29 @@ def assault(player_power: int = 0, player_level: int = 1, paradox_debt: int = 0,
     phase_fallen = ph["hp"] <= 0
     boss_fallen = phase_fallen and pi == len(ow["phases"]) - 1
 
-    if phase_fallen and not boss_fallen:
+    rift_available = state.get("rift_available", False)
+    rift_cleared = state.get("rift_cleared", False)
+    rift_revealed = False
+
+    # When the apex phase falls and a rift is available but not yet cleared, reveal it
+    if phase_fallen and pi == len(ow["phases"]) - 2 and rift_available and not rift_cleared:
+        boss_fallen = False
+        rift_revealed = True
+
+    if phase_fallen and not boss_fallen and not rift_revealed:
         new_php = min(100, new_php + 40)  # the twin's fall restores you partially
         pi = pi + 1
 
-    battles[ow["sigil"]] = {"overwarden": ow, "player_hp": new_php, "phase_index": pi, "updated": time.time()}
+    if rift_revealed:
+        pi = len(ow["phases"]) - 1  # move into the rift phase
+        new_php = min(100, new_php + 50)  # the rift grants a respite
+
+    if boss_fallen and pi == len(ow["phases"]) - 1:
+        rift_cleared = True
+
+    battles[ow["sigil"]] = {"overwarden": ow, "player_hp": new_php, "phase_index": pi,
+                            "rift_available": rift_available, "rift_cleared": rift_cleared,
+                            "updated": time.time()}
     _save(LOG, log)
 
     return {
@@ -175,9 +226,11 @@ def assault(player_power: int = 0, player_level: int = 1, paradox_debt: int = 0,
         "narrative": (
             f"You strike the {ph['phase']} of the Overwarden for {player_dmg}. "
             f"It answers with {warden_dmg}. "
-            + ("The fused shell splits — twin echoes bleed light!" if pi == 1 and phase_fallen else
-               "The twin echo shatters — reality warps around you!" if pi == 2 and phase_fallen else
-               "The warp core fails — nothing can hold the Apex now!" if boss_fallen and pi == 3 and phase_fallen else
+            + ("The fused shell splits - twin echoes bleed light!" if pi == 1 and phase_fallen else
+               "The twin echo shatters - reality warps around you!" if pi == 2 and phase_fallen else
+               "The warp core fails - nothing can hold the Apex now!" if phase_fallen and pi == 3 and not rift_revealed else
+               "RESONANCE RIFT OPENS - two hallmarks converge, a hidden depth reveals itself!" if rift_revealed else
+               "The Rift is unmade - the deepest silence breaks." if boss_fallen and rift_cleared else
                "The Overwarden endures.")),
     }
 
@@ -223,6 +276,13 @@ def resolve(sigil: str = None) -> dict:
     except Exception:
         pass
 
+    try:
+        if os.environ.get("IXP_GH_TOKEN"):
+            from ascension_chronicle import record
+            record(boss_type="overwarden", boss_name=ow["name"], module=ow.get("bound_modules"),
+                   mineral="apex", depth=ow["depth"], conqueror="telegram_or_dashboard")
+    except Exception:
+        pass
     return {"action": "resolve", "apex": apex, "total_defeats": log["defeats"],
             "lore": "The Overwarden is unmade. Its apex sigil rests in your relic vault — mythic, eternal, and forged from your own descents."}
 

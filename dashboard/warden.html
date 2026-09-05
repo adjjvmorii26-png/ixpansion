@@ -87,6 +87,22 @@ td{padding:6px 8px;border-bottom:1px solid #1a0a28}
 
 
 
+
+<div class="card" id="chronicle-card">
+<h2>📜 Ascension Chronicle</h2>
+<div id="chronicle-info" style="font-size:.85em;color:#6a4a7a">The public hall of names — every rescued module chronicled.</div>
+<div id="chronicle-body" style="margin:10px 0;font-size:.8em"></div>
+<button class="btn ghost" onclick="callChronicle()">📜 Read the Chronicle</button>
+<button class="btn ghost" onclick="callResonate()">🔮 Resonate</button>
+</div>
+
+<div class="card" id="genealogy-card">
+<h2>🌳 Relic Genealogy</h2>
+<div id="genealogy-info" style="font-size:.85em;color:#6a4a7a">Trace every relic's full ancestry back to the forgotten modules.</div>
+<div id="genealogy-body" style="margin:10px 0;font-size:.8em"></div>
+<button class="btn ghost" onclick="callGenealogy()">🌳 View Genealogy</button>
+</div>
+
 <div class="card" id="overwarden-card">
 <h2>📓 The Overwarden</h2>
 <div id="ow-info" style="font-size:.85em;color:#6a4a7a">When two sigil relics are forged, the Overwarden can be summoned — a four-phase apex guard of the depths.</div>
@@ -194,11 +210,11 @@ async function owSummon(){
   owNarrate('Binding the Overwarden...');
   const r=await owapi('/api/overwarden/summon');
   if(r.error){owNarrate(r.error);return}
-  OW=r.overwarden;OW_PI=0;OW_SIG=OW.sigil;OW_OVER=false;
+  OW=r.overwarden;OW_PI=0;OW_SIG=OW.sigil;OW_OVER=false; let riftBadge=r.rift_available?'<span class=mineral claim style=margin-left:8px>⚡ Rift Stirs</span>':'';
   $('ow-fight-btn').disabled=false;
   const phases=OW.phases.map((p,i)=>`<span class="phase-tab${i===OW_PI?' active':''}">P${i+1}:${p.phase}</span>`).join('');
   $('ow-info').innerHTML=`<b>${OW.name}</b> · bound by: <span class="mineral">${(OW.bound_by||[]).join(', ')}</span><br>depth: ${OW.depth} · total HP: <b>${OW.total_hp}</b><br>phases: <div class="phase-bar" style="display:flex;gap:6px">${phases}</div>`;
-  owNarrate(`${OW.phases[0].quote}`);
+  owNarrate(`${OW.phases[0].quote}${r.rift_available?' — a rift waits after the apex...':''}`);
 }
 async function owStrike(){
   if(!OW||OW_OVER)return;
@@ -211,6 +227,23 @@ async function owStrike(){
   if(r.boss_fallen){OW_OVER=true;$('ow-fight-btn').disabled=true;owNarrate(r.narrative+`\n\n⭐ THE OVERWARDEN IS UNMADE — claim the Apex Sigil: /api/overwarden/resolve?sigil=${OW_SIG}`)}
   if(r.phase_fallen&&!r.boss_fallen){OW_PI=r.phase_index;const phs=OW.phases.map((p,i)=>`<span class="phase-tab${i===OW_PI?' active':''}">P${i+1}:${p.phase}</span>`).join('');$('ow-info').innerHTML=$('ow-info').innerHTML.replace(/<div class="phase-bar".*?>.*?<\/div>/s,`<div class="phase-bar" style="display:flex;gap:6px">${phs}</div>`)}
   if(r.player_hp_after<=0&&!r.boss_fallen){owNarrate(r.narrative+`\n\nDEFEAT — you retreat. Resummon when ready.`)}
+}
+
+async function callChronicle(){
+  const r=await owapi('/api/ascension_chronicle/hall');
+  const entries= (r.entries||[]).slice(0,10).map(e=>`<tr><td>${e.rank}</td><td>${e.boss_type}</td><td>${(e.module||'?').replace(/_/g,' ')}</td><td>${e.mineral}</td><td>d${e.depth}</td></tr>`).join('');
+  $('chronicle-body').innerHTML=`<table><tr><th>#</th><th>Type</th><th>Module</th><th>Mineral</th><th>Depth</th></tr>${entries||'<tr><td colspan=5 style="color:#6a4a7a">The hall is awaiting its first ascension.</td></tr>'}</table>`;
+  $('chronicle-info').innerHTML=`Ascensions chronicled: <b>${r.total||0}</b> — a GitHub-backed hall of names.`;
+}
+async function callResonate(){
+  const r=await owapi('/api/ascension_chronicle/resonate');
+  let m=Object.entries(r.mineral_counts||{}).map(([k,v])=>`${k}:${v}`).join(', ');
+  $('chronicle-info').innerHTML=`Mineral counts: ${m||'none'} · Overwarden defeats: <b>${r.overwarden_defeats||0}</b> · Deepest: ${(r.deepest?r.deepest.module.replace(/_/g,' ')+'@d'+r.deepest.depth:'—')}`;
+}
+async function callGenealogy(){
+  const r=await owapi('/api/relic_genealogy/tree');
+  const rows=(r.relics||[]).slice().reverse().slice(0,12).map(x=>`<tr><td>${(x.name||'?').slice(0,28)}</td><td>${x.quality}</td><td>${x.power}</td><td>${(x.modules||[]).join(', ').slice(0,28)}</td><td>${(x.minerals||[]).join('/')}</td></tr>`).join('');
+  $('genealogy-body').innerHTML=`<table><tr><th>Relic</th><th>Quality</th><th>Power</th><th>Forged From</th><th>Minerals</th></tr>${rows||'<tr><td colspan=5 style="color:#6a4a7a">No relics forged yet — fight wardens and forge! <button class="btn ghost" onclick="forgeNow()">Forge</button></td></tr>'}</table>`;
 }
 </script>
 </body>

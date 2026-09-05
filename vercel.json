@@ -1422,6 +1422,22 @@
     {
       "src": "/overwarden",
       "dest": "/dashboard/warden.html#overwarden-card"
+    },
+    {
+      "src": "/api/ascension_chronicle",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/relic_genealogy",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/chronicle",
+      "dest": "/dashboard/warden.html#chronicle-card"
+    },
+    {
+      "src": "/genealogy",
+      "dest": "/dashboard/warden.html#genealogy-card"
     }
   ],
   "env": {

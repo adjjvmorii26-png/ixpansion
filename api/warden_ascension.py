@@ -235,6 +235,7 @@ def resolve(module: str = None, sigil: str = None) -> dict:
         "remembered": remembered,
         "total_ascensions": log["ascensions"],
         "recruited": _recruit_to_cohort(module, miner, depth),
+        "chronicled": _chronicle(module, miner, depth),
         "lore": f"The mineral {miner} remembers the module {module}. What was forgotten is now a warden-turned-citizen.",
     }
 
@@ -256,6 +257,18 @@ def _recruit_to_cohort(module, mineral, depth):
     try:
         from cohort_chorus import recruit
         return recruit(module=module, mineral=mineral, depth=depth).get("chorus_strength")
+    except Exception:
+        return None
+
+
+
+def _chronicle(module, mineral, depth):
+    """Write this ascension into the public hall of names."""
+    try:
+        if not os.environ.get("IXP_GH_TOKEN"):
+            return None
+        from ascension_chronicle import record
+        return record(boss_type="warden", module=module, mineral=mineral, depth=depth, conqueror="telegram_or_dashboard")
     except Exception:
         return None
 
