@@ -109,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak"
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak\n/loop — run an autonomous cycle\n/mycelial — sense the mycelial network\n/dreamweave {seed} — the organism dreams\n/paradox — resolve a contradiction\n\nWave 411-414: The organism now breathes, dreams, believes, and resolves paradoxes on its own."
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -577,10 +577,20 @@ def _process_command(command: str, args: list, user: str) -> str:
         except Exception as e:
             return "🧭 " + str(e)
 
+
+    elif command == "/loop":
+        return _cmd_loop(args, user)
+    elif command == "/mycelial":
+        return _cmd_mycelial(args, user)
+    elif command == "/dreamweave":
+        return _cmd_dream(args, user)
+    elif command == "/paradox":
+        return _cmd_paradox(args, user)
+
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:
-    return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/realm","/spawn","/ritual","/court","/hex"]}
+    return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox"]}
 
 def stats() -> dict:
     log = _load(BOT_LOG, {"messages": [], "commands": [], "total": 0})
@@ -603,3 +613,56 @@ def handler(payload=None, context=None):
     elif path == "/bot_info": return get_bot_info()
     elif path == "/stats": return stats()
     return {"error": "unknown", "available": ["/handle_update", "/telegram", "/set_webhook", "/bot_info", "/stats"]}
+
+# --- Wave 411-414: Autonomous Nervous System commands ---
+
+def _cmd_loop(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from autonomous_loop import run_cycle
+        r = run_cycle()
+        return "🔄 Autonomous Cycle %s\nPhases: %s · Actions: %s\n\"%s\"\n\nTotal cycles: %s" % (
+            r.get("cycle_id", "?"), r.get("phases_completed", 0),
+            r.get("actions_taken", 0), r.get("narrative", ""), r.get("total_cycles", 0))
+    except Exception as e:
+        return "🔄 " + str(e)
+
+def _cmd_mycelial(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from mycelial_network import sense, propagate
+        s = sense()
+        p = propagate()
+        return "🍄 Mycelial Network\nSensed: %s\nConsensus: %s · Schisms: %s\n\"%s\"" % (
+            ", ".join(s.get("beliefs_generated", [])),
+            len(p.get("consensus", [])), len(p.get("schisms", [])),
+            p.get("wisdom", ""))
+    except Exception as e:
+        return "🍄 " + str(e)
+
+def _cmd_dream(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from dream_weaver import dream
+        seed = args[0] if args else None
+        d = dream(seed)
+        return "🌙 Dream #%s\n\"%s\"\nDomain: %s · Lucidity: %s%%\nModule: %s\n\"%s\"" % (
+            d.get("total_dreamed", "?"), d.get("concept", ""),
+            d.get("domain", "?"), round(d.get("lucidity", 0) * 100),
+            d.get("potential_module", "?"), d.get("verse", ""))
+    except Exception as e:
+        return "🌙 " + str(e)
+
+def _cmd_paradox(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from paradox_oracle import oracle
+        r = oracle()
+        lines = []
+        for res in r.get("resolutions", []):
+            lines.append(" \"%s\"" % res.get("synthesis", ""))
+        return "🔮 Paradox Oracle\nContradictions: %s · Resolved: %s\n\"%s\"\n%s" % (
+            r.get("contradictions_found", 0), len(r.get("resolutions", [])),
+            r.get("wisdom", ""), "\n".join(lines[:3]))
+    except Exception as e:
+        return "🔮 " + str(e)

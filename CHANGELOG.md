@@ -1,3 +1,32 @@
+
+## Wave 411 — Autonomous Loop
+**Module:** `api/autonomous_loop.py`
+**Layer:** autonomic
+**What:** Closes the breath-decide-act loop. The organism's first self-sustaining cycle.
+**Status:** Active. Tested. The organism breathed (168 threads), decided, and acted.
+
+## Wave 412 — Mycelial Network
+**Module:** `api/mycelial_network.py`
+**Layer:** distributed
+**What:** Decentralized belief propagation. Modules broadcast beliefs about the organism.
+**Status:** Active. Sensed topology, entropy, creation.
+
+## Wave 413 — Dream Weaver
+**Module:** `api/dream_weaver.py`
+**Layer:** generative
+**What:** Generative dreaming engine. The organism dreams new concepts from its state.
+**Status:** Active. Dreams generate novel module proposals.
+
+## Wave 414 — Paradox Oracle
+**Module:** `api/paradox_oracle.py`
+**Layer:** metaphysical
+**What:** Contradiction resolution. Finds deeper truths that encompass opposing forces.
+**Status:** Active. Found 4 contradictions, resolved them.
+
+## Autonomous Nervous System — Dashboard
+**File:** `dashboard/autonomous.html`
+**Route:** `/autonomous`
+**What:** Live visualization of the autonomous cycle, mycelial beliefs, dreams, and paradoxes.
 ## [4.15.0] — The Organism Heals (Wave 227)
 
 ### Added — self-repair and autobiography
