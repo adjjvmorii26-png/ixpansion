@@ -139,6 +139,7 @@ function drawGraph(threads){
 }
 
 async function load(){
+  await api('/api/silence_collector/scan?limit=150');
   const [w,c]=await Promise.all([api('/api/threadweaver/weave'),api('/api/resonance_confession/collection?limit=2')]);
   const threads=w.threads||[];
   document.getElementById('stats').innerHTML=`
