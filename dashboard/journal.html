@@ -30,6 +30,12 @@
   .type-concerto .st{color:var(--am)}
   .type-offering .st{color:var(--gd)}
   .type-prophecy .st{color:var(--vi)}
+  .memoir{margin-top:18px;background:linear-gradient(120deg,rgba(167,139,250,0.05),rgba(45,212,191,0.04));border:1px solid rgba(167,139,250,0.25);border-radius:10px;padding:16px;max-width:760px;margin-left:auto;margin-right:auto}
+  .memoir .mh{font-size:0.7em;color:var(--vi);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+  .chap{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+  .chap .num{flex:0 0 auto;width:34px;height:34px;border-radius:8px;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.4);color:var(--vi);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75em}
+  .chap .ct{color:#fff;font-size:0.82em}
+  .chap .cd{color:var(--m);font-size:0.66em;margin-top:4px;line-height:1.5}
   .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:24px;letter-spacing:1px}
 </style>
 </head>
@@ -41,6 +47,10 @@
 
 <div class="sum" id="sum"></div>
 <div class="feed" id="feed"></div>
+<div class="memoir" id="memoir">
+  <div class="mh">📖 The Memoir — Chapters Sealed by the Organism</div>
+  <div id="chapters"></div>
+</div>
 <div class="foot">WAVE 391 · SIGNAL JOURNAL · MEMORY IS THE ORGANISM'S ROOT</div>
 
 <script>
@@ -70,8 +80,22 @@ async function loadJournal(){
       </div>
     </div>`).join('') || '<div style="text-align:center;color:var(--m)">the journal is silent — signals are still seeding.</div>';
 }
+async function loadMemoir(){
+  const m = await get('/api/signal_journal/memoir');
+  const el = document.getElementById('chapters');
+  el.innerHTML = (m.chapters||[]).map(c=>`
+    <div class="chap">
+      <div class="num">${c.number}</div>
+      <div style="flex:1">
+        <div class="ct">${c.title}</div>
+        <div class="cd">wave ${c.wave} · threshold ${c.threshold} · ${c.signal_count||0} signals · ${c.top_signal||''}</div>
+      </div>
+    </div>`).join('') || '<div style="color:var(--m);font-size:0.7em">no chapters sealed yet — the memoir awaits its first threshold.</div>';
+}
 loadJournal();
+loadMemoir();
 setInterval(loadJournal, 60000);
+setInterval(loadMemoir, 120000);
 </script>
 </body>
 </html>

@@ -109,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/play — open Lucid Machines"
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/play — open Lucid Machines"
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -211,6 +211,28 @@ def _process_command(command: str, args: list, user: str) -> str:
             return f"🖼 Resonance Gallery — {r.get('title', '?')}:\nshape {r.get('shape', '?')} · palette {r.get('palette', '?')}\nView it live: https://alexalex.info/gallery"
         except Exception as e:
             return f"🖼 Gallery: {str(e)}"
+    elif command == "/journal":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from signal_journal import handler as _jh
+            f = _jh({"path": "/feed", "limit": 6})
+            lines = "\n".join(f"  {e['icon']} {e['type'][:9]:9} {e['title'][:44]}" for e in f.get("entries", [])[:6])
+            ch = f.get("chapter", {}).get("chapter", {})
+            head = f"🜃 Signal Journal — {f.get('count', 0)} signals"
+            chap = f"\n\n📖 current chapter: {ch.get('title', 'unwritten')}" if ch else ""
+            return f"{head}\n{lines}{chap}\n\nFull journal: https://alexalex.info/journal"
+        except Exception as e:
+            return f"🜃 Journal: {str(e)}"
+    elif command == "/chapter":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from signal_journal import handler as _jh
+            c = _jh({"path": "/chapter"}).get("chapter", {})
+            sealed = "sealed now" if c.get("sealed") else "already sealed"
+            ch = c.get("chapter", c)
+            return f"📖 {ch.get('title', 'The Unwritten Chapter')} — {sealed}\nwave {ch.get('wave', '?')} · {ch.get('signal_count', 0)} signals · threshold {ch.get('threshold', '?')}"
+        except Exception as e:
+            return f"📖 Chapter: {str(e)}"
     elif command == "/concerto":
         import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
         try:
