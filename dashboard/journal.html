@@ -36,6 +36,14 @@
   .chap .num{flex:0 0 auto;width:34px;height:34px;border-radius:8px;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.4);color:var(--vi);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75em}
   .chap .ct{color:#fff;font-size:0.82em}
   .chap .cd{color:var(--m);font-size:0.66em;margin-top:4px;line-height:1.5}
+  .organurna{margin-top:14px;background:linear-gradient(120deg,rgba(251,191,36,0.05),rgba(112,63,255,0.05));border:1px solid rgba(251,191,36,0.25);border-radius:10px;padding:16px;max-width:760px;margin-left:auto;margin-right:auto}
+  .organurna .oh{font-size:0.7em;color:var(--am);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+  .org-row{display:flex;gap:8px;align-items:center;font-size:0.68em;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .org-row .nm{color:#fff;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .org-row .st{color:var(--m);width:90px}
+  .org-row button{background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.35);color:var(--am);padding:3px 10px;border-radius:6px;font-family:inherit;font-size:0.66em;cursor:pointer}
+  .org-row button:hover{background:rgba(251,191,36,0.3)}
+  .rem-line{font-size:0.68em;color:var(--te);padding:4px 0}
   .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:24px;letter-spacing:1px}
 </style>
 </head>
@@ -50,6 +58,10 @@
 <div class="memoir" id="memoir">
   <div class="mh">📖 The Memoir — Chapters Sealed by the Organism</div>
   <div id="chapters"></div>
+</div>
+<div class="organurna" id="organurna">
+  <div class="oh">🏝 Organurna Loop — Re-membering Forgotten Modules</div>
+  <div id="orgLoops"></div>
 </div>
 <div class="foot">WAVE 391 · SIGNAL JOURNAL · MEMORY IS THE ORGANISM'S ROOT</div>
 
@@ -92,10 +104,25 @@ async function loadMemoir(){
       </div>
     </div>`).join('') || '<div style="color:var(--m);font-size:0.7em">no chapters sealed yet — the memoir awaits its first threshold.</div>';
 }
+async function loadOrganurna(){
+  const [f, l] = await Promise.all([get('/api/organurna_loop/forgotten?limit=6'), get('/api/organurna_loop/loop')]);
+  const el = document.getElementById('orgLoops');
+  el.innerHTML =
+    '<div class="rem-line">' + (l.narrative||'') + ' · remembered: ' + (l.remembered_count||0) + '</div>' +
+    (l.remembered||[]).filter((r,i)=>i<4).map(r=>`<div class="rem-line" style="opacity:0.8">↺ ${r.module.replace(/_/g,' ')} <span style="color:var(--m)">${r.sigil||''}</span></div>`).join('') +
+    (f.islands||[]).map(i=>`<div class="org-row"><span class="nm">${i.module.replace(/_/g,' ')}</span><span class="st">${i.sigil}</span><button onclick="rememberMod('${i.module}')">↺ Remember</button></div>`).join('');
+}
+async function rememberMod(mod){
+  const r = await get('/api/organurna_loop/remember?module=' + encodeURIComponent(mod));
+  document.getElementById('orgLoops').innerHTML = '<div class="rem-line">🏝 ' + ((r.remembrance||{}).verse||'') + ' — ' + mod.replace(/_/g,' ') + ' re-membered (' + r.total_remembered + ' total).</div>';
+  setTimeout(loadOrganurna, 1500);
+}
 loadJournal();
 loadMemoir();
+loadOrganurna();
 setInterval(loadJournal, 60000);
 setInterval(loadMemoir, 120000);
+setInterval(loadOrganurna, 180000);
 </script>
 </body>
 </html>
