@@ -487,6 +487,20 @@ def _process_command(command: str, args: list, user: str) -> str:
         except Exception as e:
             return "🔮 " + str(e)
 
+    elif command == "/silence":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from silence_collector import scan, strongest
+            s = scan(150)
+            top = strongest(3).get("pairs", [])
+            lines = "\n".join(" %s ↔ %s (%.2f)" % ((p.get("module_a") or "?").replace("_"," "), (p.get("module_b") or "?").replace("_"," "), p.get("similarity",0)) for p in s.get("pairs", [])[:5])
+            verse = ""
+            if top:
+                verse = "\n\n\"" + top[0].get("verse","") + "\""
+            return "🌑 Silence Collector — scanned %s modules, found %s silent pairs\n%s%s\n\nView: https://alexalex.info/silence" % (s.get("scanned",0), s.get("new_pairs",0), lines or "the silence is clean", verse)
+        except Exception as e:
+            return "🌑 " + str(e)
+
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:

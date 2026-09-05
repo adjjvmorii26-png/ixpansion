@@ -1474,6 +1474,14 @@
     {
       "src": "/threadweaver",
       "dest": "/dashboard/threads.html"
+    },
+    {
+      "src": "/api/silence_collector",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/silence",
+      "dest": "/dashboard/threads.html#silence-card"
     }
   ],
   "env": {

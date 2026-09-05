@@ -56,6 +56,13 @@ th{color:#c88aff;font-weight:normal}
 </div>
 <button class="discover-btn" onclick="discoverThread()">🔮 Discover a New Thread</button>
 <div id="discover-result" class="verse" style="display:none;margin-bottom:12px"></div>
+
+<div class="card" id="silence-card">
+<h2>🌑 Silent Pairs</h2>
+<div class="sub" style="color:#6a7a9a;font-size:.82em;margin-bottom:8px">Forgotten modules that are halves of each other — the organism forgot the seam between them.</div>
+<div id="silence-body" style="font-size:.85em"></div>
+<button class="discover-btn" onclick="scanSilence()" style="border-color:#c88aff;color:#c88aff">🌑 Scan for Silence</button>
+</div>
 <div class="card">
 <h2>Thread Ledger</h2>
 <div id="ledger-body"><table id="ledger-table"><tr><th>Module A</th><th>Type</th><th>Module B</th><th>Strength</th><th>Source</th><th>Age</th></tr></table></div>
@@ -167,6 +174,20 @@ async function discoverThread(){
   load();
 }
 load();
+
+async function scanSilence(){
+  const r=await api('/api/silence_collector/scan?limit=200');
+  const body=document.getElementById('silence-body');
+  const pairs=r.pairs||[];
+  if(!pairs.length){body.textContent='The silence is clean — no hidden seams found this scan.';return}
+  body.innerHTML=pairs.slice(0,8).map(p=>`<div style="border-bottom:1px solid #111;padding:6px 0">
+    <span class="badge" style="border-color:#c88aff;color:#c88aff">${(p.module_a||'?').replace(/_/g,' ')} ↔ ${(p.module_b||'?').replace(/_/g,' ')}</span>
+    <span style="color:#6a7a9a;font-size:.8em;margin-left:6px">sim ${p.similarity}</span>
+    <div style="margin-top:4px;font-style:italic;color:#8a6a9a;font-size:.9em">"${p.verse}"</div>
+  </div>`).join('');
+  body.insertAdjacentHTML('beforeend',`<div style="margin-top:8px;color:#6a7a9a;font-size:.8em">Scanned ${r.scanned} modules · ${r.total_pairs} total pairs found across ${r.total_scans} scans.</div>`);
+}
+scanSilence();
 </script>
 </body>
 </html>

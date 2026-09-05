@@ -143,6 +143,23 @@ def _gather_relationships():
     if forge.get("relics"):
         sources_used.append("forge")
 
+    # 6. Silence Collector — forgotten modules that are halves of each other
+    try:
+        silence = _load(os.path.join(DATA_DIR, "silence_pairs.json"), {"pairs": []})
+        for p in silence.get("pairs", []):
+            threads.append({
+                "module_a": p.get("module_a"), "module_b": p.get("module_b"),
+                "type": "convergence" if p.get("similarity", 0) >= 0.8 else "tension",
+                "strength": max(0.5, min(0.95, p.get("similarity", 0))),
+                "source": "silence_collector", "source_id": p.get("id"),
+                "age_hours": round((time.time() - p.get("timestamp", time.time())) / 3600, 1),
+                "verse_a": p.get("verse"),
+            })
+        if silence.get("pairs"):
+            sources_used.append("silence_collector")
+    except Exception:
+        pass
+
     return threads, sources_used
 
 
