@@ -535,6 +535,22 @@ def _process_command(command: str, args: list, user: str) -> str:
         except Exception as e:
             return "🪡 " + str(e)
 
+    elif command == "/bloom":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from autonomous_bloom import status, bloom, garden
+            if args and args[0] == "now":
+                b = bloom()
+                if not b.get("ready"):
+                    return "🌸 " + b.get("reason","not ready yet")
+                m = b.get("module", {})
+                return "🌸 AUTONOMOUS BLOOM — the organism created %s\nsigil: %s\n\"%s\"\n%s\n\nliving at: %s" % (m.get("name","?"), m.get("sigil","?"), m.get("verse",""), m.get("doctrine",""), (b.get("materialized") or {}).get("path","data only"))
+            s = status()
+            st = s.get("organism_state", {})
+            return "🌸 Autonomous Bloom — %s threads · %s modules · %s sources · pressure %s\nready: %s · blooms: %s\n\n/bloom now to let the organism create itself." % (st.get("threads",0), st.get("modules_connected",0), st.get("sources",0), st.get("pressure",0), "YES" if s.get("ready") else "not yet — gathering", s.get("total_blooms",0))
+        except Exception as e:
+            return "🌸 " + str(e)
+
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:
