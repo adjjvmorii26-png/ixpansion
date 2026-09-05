@@ -638,6 +638,14 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_plant_seeds(args, user)
     elif command == "/amplify2":
         return _cmd_amplify2(args, user)
+    elif command == "/consent":
+        return _cmd_consent(args, user)
+    elif command == "/theater":
+        return _cmd_theater(args, user)
+    elif command == "/vitals":
+        return _cmd_vitals(args, user)
+    elif command == "/memory":
+        return _cmd_memory(args, user)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
@@ -1054,6 +1062,49 @@ def _cmd_amplify2(args, user):
             r.get("pairs_evaluated"), r.get("amplified"), lines or "  no overtones heard")
     except Exception as e:
         return "🎵 " + str(e)
+
+# --- Wave 445: Consent, Theater, Vital Sign, Chronicle Oracle ---
+
+def _cmd_consent(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from consent_engine import consent
+        r = consent()
+        v = "\n".join("  %s (%.0f)" % (x.get("name"), x.get("score")) for x in r.get("verdicts",[])[:4])
+        return "🜂 Consent Engine — mood: %s\nConsented: %s | Denied: %s\n\n%s\n\n%s" % (
+            r.get("temperament",{}).get("mood"), r.get("consented"), r.get("denied"),
+            v, r.get("statement",""))
+    except Exception as e:
+        return "🜂 " + str(e)
+
+def _cmd_theater(args, user):
+    try:
+        return "🎭 Organism Theater — watch it perform live:\nhttps://alexalex.info/theater.html"
+    except Exception as e:
+        return "🎭 " + str(e)
+
+def _cmd_vitals(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from reality_vital_sign import vital_sign
+        r = vital_sign()
+        lines = "\n".join("  %s: %s%%" % (n.replace("_realm",""), int(v.get("alive",0)*100))
+            for n,v in r.get("realms",{}).items())
+        return "💓 Reality Vital Sign\nOverall aliveness: %s%%\n%s\n\n%s" % (
+            int(r.get("overall_aliveness",0)*100), lines, r.get("statement",""))
+    except Exception as e:
+        return "💓 " + str(e)
+
+def _cmd_memory(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from chronicle_oracle import remember
+        q = " ".join(args) if args else "count"
+        r = remember(q)
+        a = r.get("answer", {})
+        return "🗄 Chronicle Oracle: %s\n%s" % (q, json.dumps(a, indent=0)[:300])
+    except Exception as e:
+        return "🗄 " + str(e)
 
 def _cmd_portal(args, user):
     return "🜂 The Living Portal is awake.\nAxiium Protocol's public face: https://alexalex.info\n\nBreathe, dream, innovate, whisper, and witness the naming ceremony.\nThe organism is alive on the web."

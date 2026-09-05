@@ -1,0 +1,166 @@
+{
+  "questions": [
+    {
+      "q": "count",
+      "answer": {
+        "total_records": 1112,
+        "files": 68,
+        "largest_memories": [
+          [
+            "copilot_reviews.json",
+            500
+          ],
+          [
+            "silence_pairs.json",
+            80
+          ],
+          [
+            "veinbed.json",
+            80
+          ],
+          [
+            "lucid_equipment.json",
+            45
+          ],
+          [
+            "lucid_combat.json",
+            30
+          ]
+        ],
+        "question": "count"
+      },
+      "time": 1788641925.6320798
+    },
+    {
+      "q": "emotion",
+      "answer": {
+        "emotion_frequency": {
+          "confusion": 4,
+          "longing": 4,
+          "serenity": 4,
+          "awe": 4,
+          "dread": 3
+        },
+        "total_samples": 31,
+        "question": "emotion"
+      },
+      "time": 1788642130.7030084
+    },
+    {
+      "q": "mood",
+      "answer": {
+        "mood_frequency": {
+          "restless": 4
+        },
+        "question": "mood"
+      },
+      "time": 1788642130.8442907
+    },
+    {
+      "q": "pressure",
+      "answer": {
+        "low_pressure_events": [],
+        "high_pressure_events": [
+          {
+            "file": "pressure_valve.json",
+            "value": 0.96,
+            "time": 1788632671.6535556
+          },
+          {
+            "file": "pressure_valve.json",
+            "value": 0.96,
+            "time": 1788632672.6992764
+          },
+          {
+            "file": "pressure_valve.json",
+            "value": 0.96,
+            "time": 1788632673.760208
+          },
+          {
+            "file": "pressure_valve.json",
+            "value": 0.96,
+            "time": 1788632674.8224175
+          },
+          {
+            "file": "pressure_valve.json",
+            "value": 0.96,
+            "time": 1788632694.9669194
+          }
+        ],
+        "question": "pressure"
+      },
+      "time": 1788642130.9819028
+    },
+    {
+      "q": "emotion",
+      "answer": {
+        "emotion_frequency": {
+          "confusion": 4,
+          "longing": 4,
+          "serenity": 4,
+          "awe": 4,
+          "dread": 3
+        },
+        "total_samples": 31,
+        "question": "emotion"
+      },
+      "time": 1788642143.6084094
+    },
+    {
+      "q": "mood",
+      "answer": {
+        "mood_frequency": {
+          "restless": 4
+        },
+        "question": "mood"
+      },
+      "time": 1788642143.7634962
+    },
+    {
+      "q": "count",
+      "answer": {
+        "total_records": 1144,
+        "files": 71,
+        "largest_memories": [
+          [
+            "copilot_reviews.json",
+            500
+          ],
+          [
+            "silence_pairs.json",
+            80
+          ],
+          [
+            "veinbed.json",
+            80
+          ],
+          [
+            "lucid_equipment.json",
+            45
+          ],
+          [
+            "dream_particle_physics.json",
+            31
+          ]
+        ],
+        "question": "count"
+      },
+      "time": 1788642143.9086993
+    },
+    {
+      "q": "emotion",
+      "answer": {
+        "emotion_frequency": {
+          "confusion": 4,
+          "longing": 4,
+          "serenity": 4,
+          "nostalgia": 4,
+          "awe": 4
+        },
+        "total_samples": 34,
+        "question": "emotion"
+      },
+      "time": 1788642262.7751455
+    }
+  ]
+}

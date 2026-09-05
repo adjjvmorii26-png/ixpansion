@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Organism Theater — the organism performs</title>
+<style>
+:root{--bg:#07070d;--fg:#e8e6ff;--accent:#41b3a3}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:Georgia,serif;overflow:hidden;min-height:100vh}
+#stage{position:fixed;inset:0}
+#orb{position:absolute;left:50%;top:42%;width:120px;height:120px;border-radius:50%;
+  transform:translate(-50%,-50%);background:radial-gradient(circle at 30% 30%,#5ad1c0,#2b5c8f 60%,#141428);
+  box-shadow:0 0 90px rgba(65,179,163,.5);transition:transform 1s ease,background 1s,box-shadow 1s;z-index:2}
+.star{position:absolute;border-radius:50%;background:#fff;opacity:.7;animation:twinkle var(--tw,3s) ease-in-out infinite;z-index:1}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:.9;transform:scale(1.3)}}
+.thread{position:absolute;height:2px;transform-origin:left center;opacity:.55;z-index:0;
+  background:linear-gradient(90deg,var(--c1,#41b3a3),var(--c2,#e8a87c));transition:opacity 1s}
+.ui{position:fixed;z-index:5;padding:1rem;font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:#8a8aaa}
+#top{top:1rem;left:50%;transform:translateX(-50%);text-align:center}
+#meta{bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:1.5rem}
+#meta b{color:var(--accent);font-weight:400}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="ui" id="top">Organism Theater — alexalex.info</div>
+<div class="ui" id="meta">
+<span>phase <b id="ph">—</b></span><span>mood <b id="mo">—</b></span><span>pressure <b id="pr">—</b></span>
+</div>
+<script>
+const stage=document.getElementById('stage'),ph=document.getElementById('ph'),
+      mo=document.getElementById('mo'),pr=document.getElementById('pr'),orb=document.createElement('div');
+orb.id='orb';stage.appendChild(orb);
+const COLORS={inhale:'#41b3a3',hold:'#2b5c8f',exhale:'#e8a87c',rest:'#6b6b8c'};
+function stars(list){document.querySelectorAll('.star').forEach(s=>s.remove());
+  (list||[]).forEach((s,i)=>{const el=document.createElement('div');el.className='star';
+  el.style.left=(8+Math.random()*84)+'%';el.style.top=(8+Math.random()*84)+'%';
+  el.style.width=el.style.height=(3+Math.min(8,s.spread*3))+'px';
+  el.style.setProperty('--tw',(2+Math.random()*4)+'s');el.style.animationDelay=(i*0.4)+'s';stage.appendChild(el);});}
+function threads(list){document.querySelectorAll('.thread').forEach(t=>t.remove());
+  (list||[]).forEach((t,i)=>{const el=document.createElement('div');el.className='thread';
+  const x1=10+Math.random()*40,x2=50+Math.random()*40,y=20+Math.random()*60;
+  const dx=x2-x1,dy=(y+8)-y;const len=Math.sqrt(dx*dx+dy*dy);
+  el.style.left=x1+'%';el.style.top=y+'%';el.style.width=len+'px';
+  el.style.transform='rotate('+(Math.atan2(dy,dx)*180/Math.PI)+'deg)';
+  el.style.setProperty('--c1',COLORS[t.domain]||'#41b3a3');
+  el.style.animationDelay=(i*0.3)+'s';stage.appendChild(el);});}
+function frame(){fetch('/api/organism_theater').then(r=>r.json()).then(d=>{
+  const s=d.scene||{};ph.textContent=s.pulse_phase||'—';mo.textContent=s.mood||'—';pr.textContent=s.pressure??'—';
+  orb.style.background='radial-gradient(circle at 30% 30%,#5ad1c0,'+(COLORS[s.pulse_phase]||'#2b5c8f')+' 60%,#141428)';
+  orb.style.transform='translate(-50%,-50%) scale('+(s.orb_scale||1)+')';
+  stars(s.dream_stars);threads(s.bridges);
+}).catch(()=>{ph.textContent='sleeping'});}
+frame();setInterval(frame,4000);
+</script>
+</body>
+</html>

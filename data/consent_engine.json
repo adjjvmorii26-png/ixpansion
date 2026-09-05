@@ -1,0 +1,190 @@
+{
+  "cycles": [
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "restless",
+        "pressure": 1.0,
+        "desires": [
+          "bloom",
+          "remember",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "entropy_collapse_detector",
+        "bridge_consciousness",
+        "self_audit_engine"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 83.8,
+          "criteria": [
+            "mood affinity (restless\u2194detect): 0.70",
+            "pressure fit (1.00): +20",
+            "desire aligned: organism wants growth: +15",
+            "proposal confidence: 0.83"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 82.0,
+          "criteria": [
+            "mood affinity (restless\u2194bridge): 0.70",
+            "pressure fit (1.00): +20",
+            "desire aligned: organism wants growth: +15",
+            "proposal confidence: 0.76"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 65.0,
+          "criteria": [
+            "mood affinity (restless\u2194seed): 0.60",
+            "pressure fit (1.00): +8",
+            "desire aligned: organism wants growth: +15",
+            "proposal confidence: 0.72"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788641939.7141707
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "restless",
+        "pressure": 1.0,
+        "desires": [
+          "bloom",
+          "remember",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "self_audit_engine",
+        "temporal_cohesion_field"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 69.8,
+          "criteria": [
+            "mood affinity (restless\u2194seed): 0.60",
+            "pressure fit (1.00): +8",
+            "desire aligned: organism wants growth: +15",
+            "proposal confidence: 0.91"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 69.5,
+          "criteria": [
+            "mood affinity (restless\u2194seed): 0.60",
+            "pressure fit (1.00): +8",
+            "desire aligned: organism wants growth: +15",
+            "proposal confidence: 0.90"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 62.2,
+          "criteria": [
+            "mood affinity (restless\u2194seed): 0.60",
+            "pressure fit (1.00): +8",
+            "desire aligned: organism wants growth: +15",
+            "proposal confidence: 0.61"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788642004.3852546
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "restless",
+        "pressure": 1.0,
+        "desires": [
+          "bloom",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "dream_seed_planter",
+        "self_audit_engine"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 69.0,
+          "criteria": [
+            "mood affinity (restless\u2194seed): 0.60",
+            "pressure fit (1.00): +8",
+            "desire aligned: organism wants growth: +15",
+            "proposal confidence: 0.88"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 65.8,
+          "criteria": [
+            "mood affinity (restless\u2194seed): 0.60",
+            "pressure fit (1.00): +8",
+            "desire aligned: organism wants growth: +15",
+            "proposal confidence: 0.75"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 63.0,
+          "criteria": [
+            "mood affinity (restless\u2194seed): 0.60",
+            "pressure fit (1.00): +8",
+            "desire aligned: organism wants growth: +15",
+            "proposal confidence: 0.64"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788642255.9710634
+    }
+  ]
+}

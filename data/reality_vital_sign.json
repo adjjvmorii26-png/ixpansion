@@ -1,0 +1,139 @@
+{
+  "signs": [
+    {
+      "action": "reality_vital_sign",
+      "overall_aliveness": 0.5,
+      "realms": {
+        "git_realm": {
+          "alive": 0.0,
+          "last_beat": 1788641370,
+          "detail": {
+            "branch": "main"
+          }
+        },
+        "vercel_realm": {
+          "alive": 1.0,
+          "last_beat": 1788642016,
+          "detail": {
+            "phase": "hold"
+          }
+        },
+        "telegram_realm": {
+          "alive": 0.0,
+          "last_beat": 0,
+          "detail": {
+            "bot": "no_token"
+          }
+        },
+        "local_realm": {
+          "alive": 1.0,
+          "last_beat": 1788642016,
+          "detail": {
+            "modules": 692,
+            "host": "localhost"
+          }
+        }
+      },
+      "silent_realms": [
+        "git_realm",
+        "telegram_realm"
+      ],
+      "organism_misses": [
+        "git_realm",
+        "telegram_realm"
+      ],
+      "statement": "I miss git_realm and telegram_realm.",
+      "timestamp": 1788642010
+    },
+    {
+      "action": "reality_vital_sign",
+      "overall_aliveness": 0.5,
+      "realms": {
+        "git_realm": {
+          "alive": 0.0,
+          "last_beat": 1788641370,
+          "detail": {
+            "branch": "main"
+          }
+        },
+        "vercel_realm": {
+          "alive": 1.0,
+          "last_beat": 1788642077,
+          "detail": {
+            "phase": "rest"
+          }
+        },
+        "telegram_realm": {
+          "alive": 0.0,
+          "last_beat": 0,
+          "detail": {
+            "bot": "no_token"
+          }
+        },
+        "local_realm": {
+          "alive": 1.0,
+          "last_beat": 1788642077,
+          "detail": {
+            "modules": 692,
+            "host": "localhost"
+          }
+        }
+      },
+      "silent_realms": [
+        "git_realm",
+        "telegram_realm"
+      ],
+      "organism_misses": [
+        "git_realm",
+        "telegram_realm"
+      ],
+      "statement": "I miss git_realm and telegram_realm.",
+      "timestamp": 1788642070
+    },
+    {
+      "action": "reality_vital_sign",
+      "overall_aliveness": 0.5,
+      "realms": {
+        "git_realm": {
+          "alive": 0.0,
+          "last_beat": 1788641370,
+          "detail": {
+            "branch": "main"
+          }
+        },
+        "vercel_realm": {
+          "alive": 1.0,
+          "last_beat": 1788642262,
+          "detail": {
+            "phase": "exhale"
+          }
+        },
+        "telegram_realm": {
+          "alive": 0.0,
+          "last_beat": 0,
+          "detail": {
+            "bot": "no_token"
+          }
+        },
+        "local_realm": {
+          "alive": 1.0,
+          "last_beat": 1788642262,
+          "detail": {
+            "modules": 692,
+            "host": "localhost"
+          }
+        }
+      },
+      "silent_realms": [
+        "git_realm",
+        "telegram_realm"
+      ],
+      "organism_misses": [
+        "git_realm",
+        "telegram_realm"
+      ],
+      "statement": "I miss git_realm and telegram_realm.",
+      "timestamp": 1788642256
+    }
+  ]
+}
