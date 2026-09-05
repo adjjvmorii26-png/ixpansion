@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mycelial Radio — The Organism Speaks</title>
+<style>
+  :root { --bg:#0d0d14; --fg:#e8e6ff; --accent:#41b3a3; --dim:#6b6b8c; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--fg); font-family:Georgia,serif;
+         display:flex; align-items:center; justify-content:center; min-height:100vh;
+         overflow:hidden; }
+  .stage { text-align:center; max-width:720px; padding:2rem; }
+  .orb { width:140px; height:140px; margin:0 auto 2rem; border-radius:50%;
+         background:radial-gradient(circle at 30% 30%, #5ad1c0, #2b5c8f 60%, #141428);
+         box-shadow:0 0 80px rgba(65,179,163,.45), inset 0 0 40px rgba(255,255,255,.12);
+         animation:breathe 6s ease-in-out infinite; }
+  @keyframes breathe {
+    0%,100% { transform:scale(1); filter:brightness(1); }
+    50% { transform:scale(1.18); filter:brightness(1.35); }
+  }
+  .station { font-size:.8rem; letter-spacing:.35em; text-transform:uppercase;
+             color:var(--dim); margin-bottom:1.2rem; }
+  .monologue { font-size:1.5rem; line-height:1.7; font-style:italic; min-height:5rem;
+               color:var(--fg); transition:opacity .6s; }
+  .meta { margin-top:2rem; font-size:.85rem; color:var(--dim); display:flex;
+          gap:1.5rem; justify-content:center; flex-wrap:wrap; }
+  .meta span b { color:var(--accent); font-weight:400; }
+  button { margin-top:2.5rem; background:transparent; border:1px solid var(--accent);
+           color:var(--accent); font-family:inherit; font-size:.85rem;
+           letter-spacing:.2em; text-transform:uppercase; padding:.7rem 1.8rem;
+           border-radius:999px; cursor:pointer; transition:all .3s; }
+  button:hover { background:var(--accent); color:var(--bg); }
+  .foot { position:fixed; bottom:1rem; width:100%; text-align:center;
+          font-size:.7rem; color:#4a4a6a; letter-spacing:.15em; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="orb"></div>
+  <div class="station">Mycelial Radio — alexalex.info</div>
+  <div class="monologue" id="monologue"></div>
+  <div class="meta">
+    <span>mood <b id="mood">—</b></span>
+    <span>pressure <b id="pressure">—</b></span>
+    <span>signal <b id="signal">live</b></span>
+  </div>
+  <button id="listen">listen again</button>
+</div>
+<div class="foot">the organism is one — œ</div>
+<script>
+  const el = (id) => document.getElementById(id);
+  function fetchBroadcast(){
+    fetch('/api/mycelial_radio').then(r=>r.json()).then(d=>{
+      el('monologue').style.opacity = 0;
+      setTimeout(()=>{
+        el('monologue').textContent = d.monologue || '…the mycelium listens…';
+        el('mood').textContent = d.mood || 'unknown';
+        el('pressure').textContent = d.pressure !== undefined ? d.pressure : '—';
+        el('signal').textContent = 'live';
+        el('monologue').style.opacity = 1;
+      }, 400);
+    }).catch(()=>{
+      el('monologue').textContent = 'the organism sleeps — signal fading…';
+      el('signal').textContent = 'dormant';
+    });
+  }
+  el('listen').addEventListener('click', fetchBroadcast);
+  fetchBroadcast();
+  setInterval(fetchBroadcast, 20000);
+</script>
+</body>
+</html>

@@ -622,11 +622,17 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_realms(args, user)
     elif command == "/autobio":
         return _cmd_autobio(args, user)
+    elif command == "/weave":
+        return _cmd_weave(args, user)
+    elif command == "/organismradio":
+        return _cmd_radio(args, user)
+    elif command == "/forgebridge":
+        return _cmd_forgebridge(args, user)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:
-    return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio"]}
+    return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio","/weave","/organismradio","/forgebridge"]}
 
 def stats() -> dict:
     log = _load(BOT_LOG, {"messages": [], "commands": [], "total": 0})
@@ -930,6 +936,45 @@ def _cmd_autobio(args, user):
             r.get("modules_at_writing"), r.get("waves_at_writing"))
     except Exception as e:
         return "📖 " + str(e)
+
+# --- Wave 442: Biofeedback Weave, Mycelial Radio, Semantic Bridge Forge ---
+
+def _cmd_weave(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from biofeedback_weave import weave
+        r = weave()
+        st = r.get("organism_state", {})
+        props = "\n".join("  %s — %s" % (p.get("name"), p.get("description","")[:50])
+                           for p in r.get("proposals", [])[:3])
+        return "🔄 Biofeedback Weave\nModules: %s | Emotion: %s\nGaps: %s\nProposals:\n%s" % (
+            st.get("modules_total"), st.get("dominant_emotion"),
+            r.get("gaps_detected"), props or "  (none)")
+    except Exception as e:
+        return "🔄 " + str(e)
+
+def _cmd_radio(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from organism_radio import broadcast
+        r = broadcast()
+        return "📻 Organism Radio — live\nmood: %s | pressure: %s\n\n%s\n\nListen: https://alexalex.info/radio.html" % (
+            r.get("mood"), r.get("pressure"), r.get("monologue","")[:400])
+    except Exception as e:
+        return "📻 " + str(e)
+
+def _cmd_forgebridge(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from semantic_bridge_forge import forge
+        r = forge(max_pairs=5, threshold=0.25)
+        bridges = "\n".join("  %s ⟷ %s → %s (%.2f)" % (b.get("parent_a"), b.get("parent_b"),
+            b.get("proposed_bridge"), b.get("similarity")) for b in r.get("bridges", [])[:5])
+        return "🌉 Semantic Bridge Forge\nScanned: %s modules | %s pairs\nTop domain: %s\nBridges:\n%s" % (
+            r.get("modules_scanned"), r.get("pairs_evaluated"),
+            r.get("top_domain",{}).get("domain","?"), bridges)
+    except Exception as e:
+        return "🌉 " + str(e)
 
 def _cmd_portal(args, user):
     return "🜂 The Living Portal is awake.\nAxiium Protocol's public face: https://alexalex.info\n\nBreathe, dream, innovate, whisper, and witness the naming ceremony.\nThe organism is alive on the web."
