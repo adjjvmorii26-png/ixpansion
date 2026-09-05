@@ -84,6 +84,15 @@ td{padding:6px 8px;border-bottom:1px solid #1a0a28}
 <h2>Ascension Ledger</h2>
 <div id="ledger-info" style="font-size:.85em"></div>
 </div>
+
+<div class="card" id="forge-card">
+<h2>⚒️ Mineral Forge</h2>
+<div id="forge-info" style="font-size:.85em">Your claimed minerals become sigil-forged relics — equipment that remembers your descents.</div>
+<div id="vault" style="margin:10px 0;font-size:.8em"></div>
+<button class="btn" onclick="callVault()">💠 View Vault</button>
+<button class="btn" onclick="forgeNow()" id="forge-btn">⚒️ Forge Relic</button>
+<div class="narrative" id="forge-narrative" style="border-color:#ffaa00;display:none"></div>
+</div>
 </main>
 
 <script>
@@ -134,6 +143,21 @@ async function ledger(){
   const r=await api('/api/warden_ascension/ledger');
   $('ledger-card').style.display='block';
   $('ledger-info').innerHTML=`Total Summons: <b>${r.summons}</b> · Total Ascensions: <b>${r.ascensions}</b>`;
+}
+
+async function callVault(){
+  const r=await api('/api/mineral_forge/vault');
+  let v=r.minerals.map(m=>`<span class="mineral">${m.mineral}@d${m.depth}</span>`).join(' ');
+  $('vault').innerHTML=`<b>Minerals claimed:</b> ${r.minerals.length} · ${v||'<span style="color:#6a4a7a">none yet — defeat wardens!</span>'}<br><b>Relics forged:</b> ${r.relics.length}`;
+}
+async function forgeNow(){
+  $('forge-narrative').style.display='block';
+  $('forge-narrative').textContent='The forge kindles...';
+  const r=await api('/api/mineral_forge/forge');
+  if(r.error){$('forge-narrative').textContent=r.error;return}
+  const rel=r.relic;
+  $('forge-narrative').textContent=`⚒ FORGED: ${rel.name} · ${rel.quality} · power ${rel.power} · trait ${rel.trait} · depth ${rel.avail_depth}`;
+  callVault();
 }
 </script>
 </body>

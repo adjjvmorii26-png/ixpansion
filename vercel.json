@@ -1398,6 +1398,14 @@
     {
       "src": "/pitch_dark",
       "dest": "/dashboard/lucid_game.html"
+    },
+    {
+      "src": "/api/mineral_forge",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/mineral-forge",
+      "dest": "/dashboard/warden.html#forge-card"
     }
   ],
   "env": {
