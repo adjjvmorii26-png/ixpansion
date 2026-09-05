@@ -1458,6 +1458,22 @@
     {
       "src": "/confession",
       "dest": "/dashboard/genealogy.html#confessions-card"
+    },
+    {
+      "src": "/api/threadweaver",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/threads",
+      "dest": "/dashboard/threads.html"
+    },
+    {
+      "src": "/threads.html",
+      "dest": "/dashboard/threads.html"
+    },
+    {
+      "src": "/threadweaver",
+      "dest": "/dashboard/threads.html"
     }
   ],
   "env": {

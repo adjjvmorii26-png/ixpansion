@@ -452,6 +452,41 @@ def _process_command(command: str, args: list, user: str) -> str:
         except Exception as e:
             return "🕊 " + str(e)
 
+    elif command == "/threads":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from threadweaver import weave
+            w = weave()
+            threads = w.get("threads", [])[:8]
+            sym = {"fusion":"↔","tension":"⇄","dream":"~","convergence":"◈","catalyst":"→","echo":"≈"}
+            lines = "\n".join(" %s %s %s (%s)" % ((t.get("module_a") or "?").replace("_"," "), sym.get(t.get("type"),"·"), (t.get("module_b") or "?").replace("_"," "), t.get("source","?")) for t in threads) if threads else "the weave is empty"
+            return "🧵 Threadweaver — %s threads · %s modules\n%s\n\nView: https://alexalex.info/threads" % (w.get("total_threads",0), w.get("modules_connected",0), lines)
+        except Exception as e:
+            return "🧵 " + str(e)
+    elif command == "/thread":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from threadweaver import thread
+            q = args[0] if args else "organism"
+            t = thread(module_a=q)
+            threads = t.get("threads", [])[:8]
+            sym = {"fusion":"↔","tension":"⇄","dream":"~","convergence":"◈","catalyst":"→","echo":"≈"}
+            lines = "\n".join(" %s %s %s" % ((x.get("module_a") or "?").replace("_"," "), sym.get(x.get("type"),"·"), (x.get("module_b") or "?").replace("_"," ")) for x in threads) if threads else "silence"
+            return "🧵 Threads for %s (%s):\n%s\n\nView graph: https://alexalex.info/threads" % (q, t.get("count",0), lines)
+        except Exception as e:
+            return "🧵 " + str(e)
+    elif command == "/discover":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from threadweaver import discover
+            d = discover()
+            msg = d.get("sentence") or d.get("message","")
+            total = d.get("total_discovered")
+            suffix = ("  total discovered: %s" % total) if total is not None else ""
+            return "🔮 Discovery: %s%s" % (msg, suffix)
+        except Exception as e:
+            return "🔮 " + str(e)
+
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:
