@@ -48,3 +48,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     docs = EndpointDocs()
     return {"status": "active", "module": "endpoint_docs",
             **docs.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "139", "module": "endpoint_docs"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

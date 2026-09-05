@@ -65,3 +65,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     ladder = CareerLadder()
     return {"status": "active", "module": "career_ladder",
             **ladder.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "organ", "status": "active", "wave": "132", "module": "career_ladder"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

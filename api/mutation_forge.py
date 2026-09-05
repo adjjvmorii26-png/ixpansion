@@ -152,3 +152,11 @@ def handler(payload=None, context=None):
     if path == "/history":
         return history()
     return {"error": "unknown", "available": ["/forge", "/catalog", "/history"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "380", "module": "mutation_forge"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

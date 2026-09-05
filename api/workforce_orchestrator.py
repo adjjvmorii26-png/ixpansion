@@ -131,3 +131,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     return {"status": "active", "module": "workforce_orchestrator",
             "workers": 0}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "agent", "status": "active", "wave": "131", "module": "workforce_orchestrator"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

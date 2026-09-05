@@ -140,3 +140,12 @@ def coherence_vitals() -> dict:
 def resonates_with() -> list:
     """Declared kinships."""
     return ['pattern_recognizer', 'quantum_garden']
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "pattern_sprout", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

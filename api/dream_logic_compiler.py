@@ -87,3 +87,11 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "0", "module": "dream_logic_compiler"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

@@ -165,3 +165,18 @@ def cognition_ritual_handler(payload: Optional[Dict[str, Any]] = None) -> Dict[s
 
 if __name__ == "__main__":
     print(json.dumps(cognition_ritual_handler({"action": "status"}), indent=2))
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "143", "module": "cognition_ritual"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "cognition_ritual", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

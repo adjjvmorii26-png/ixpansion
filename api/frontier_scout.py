@@ -67,3 +67,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     scout = FrontierScout()
     return {"status": "active", "module": "frontier_scout",
             **scout.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "sandbox", "status": "active", "wave": "138", "module": "frontier_scout"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

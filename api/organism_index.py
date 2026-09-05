@@ -116,3 +116,8 @@ def handler(payload: dict = None, context: object = None) -> dict:
     result = inventory()
     result["action"] = "inventory"
     return result
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

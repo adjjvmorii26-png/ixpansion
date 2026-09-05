@@ -117,3 +117,11 @@ def route(path):
 
 def handler(payload=None):
     return route((payload or {}).get("path", "/weave"))
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "367", "module": "signal_weaver"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

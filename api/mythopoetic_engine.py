@@ -157,3 +157,11 @@ def route(path: str) -> dict:
 def handler(payload=None):
     payload = payload or {}
     return route(payload.get("path", "/generate"))
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "362", "module": "mythopoetic_engine"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

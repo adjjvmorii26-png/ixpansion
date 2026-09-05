@@ -94,3 +94,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     action = payload.get("action", "status")
     return {"status": "active", "module": "recursive_cathedral", "action": action}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "data", "status": "active", "wave": "121", "module": "recursive_cathedral"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

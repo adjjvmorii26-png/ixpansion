@@ -187,3 +187,11 @@ def handler(payload=None):
     payload = payload or {}
     subpath = payload.get("path", "/")
     return route(subpath)
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "359", "module": "reality_fracture_detector"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

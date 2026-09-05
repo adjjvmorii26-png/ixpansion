@@ -72,3 +72,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     simulator = StressSimulator()
     return {"status": "active", "module": "stress_simulator",
             **simulator.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "137", "module": "stress_simulator"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

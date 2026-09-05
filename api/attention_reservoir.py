@@ -55,3 +55,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     reservoir = AttentionReservoir()
     return {"status": "active", "module": "attention_reservoir",
             **reservoir.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "132", "module": "attention_reservoir"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

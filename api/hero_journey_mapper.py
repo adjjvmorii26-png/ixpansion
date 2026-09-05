@@ -68,3 +68,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     action = payload.get("action", "status")
     return {"status": "active", "module": "hero_journey_mapper", "action": action}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "sandbox", "status": "active", "wave": "126", "module": "hero_journey_mapper"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

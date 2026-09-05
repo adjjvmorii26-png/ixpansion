@@ -62,3 +62,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     runner = MigrationRunner()
     return {"status": "active", "module": "migration_runner", **runner.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "data", "status": "active", "wave": "140", "module": "migration_runner"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

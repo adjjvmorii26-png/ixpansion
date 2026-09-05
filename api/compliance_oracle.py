@@ -53,3 +53,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     oracle = ComplianceOracle()
     return {"status": "active", "module": "compliance_oracle",
             **oracle.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "data", "status": "active", "wave": "136", "module": "compliance_oracle"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

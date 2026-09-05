@@ -87,3 +87,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     guilds = CraftGuilds()
     return {"status": "active", "module": "craft_guilds",
             **guilds.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "133", "module": "craft_guilds"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

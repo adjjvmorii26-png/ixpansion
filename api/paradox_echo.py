@@ -107,3 +107,11 @@ def handler(payload=None, context=None):
     if path == "/pairs":
         return pairs_list()
     return {"error": "unknown", "available": ["/send", "/history", "/pairs"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "agent", "status": "active", "wave": "377", "module": "paradox_echo"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

@@ -69,3 +69,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     learner = AdaptationLearner()
     return {"status": "active", "module": "adaptation_learner",
             **learner.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "137", "module": "adaptation_learner"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

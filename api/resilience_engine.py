@@ -76,3 +76,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     engine = ResilienceEngine()
     return {"status": "active", "module": "resilience_engine",
             **engine.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "137", "module": "resilience_engine"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

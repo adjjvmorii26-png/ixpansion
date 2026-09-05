@@ -121,3 +121,18 @@ def shadow_ledger_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = shadow_ledger_handler
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "0", "module": "shadow_ledger"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "shadow_ledger", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

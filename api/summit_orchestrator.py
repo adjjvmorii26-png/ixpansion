@@ -88,3 +88,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     summit = SummitOrchestrator()
     return {"status": "active", "module": "summit_orchestrator",
             **summit.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "sandbox", "status": "active", "wave": "138", "module": "summit_orchestrator"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

@@ -197,3 +197,8 @@ def handler(payload: dict = None, context: object = None) -> dict:
     result["action"] = "translate"
     result["richness"] = richness(module_name)
     return result
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

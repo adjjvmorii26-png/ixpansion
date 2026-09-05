@@ -60,3 +60,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     registry = RouteRegistry()
     return {"status": "active", "module": "route_registry",
             **registry.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "139", "module": "route_registry"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

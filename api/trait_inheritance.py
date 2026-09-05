@@ -155,3 +155,18 @@ def trait_inheritance_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = trait_inheritance_handler
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "agent", "status": "active", "wave": "0", "module": "trait_inheritance"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "trait_inheritance", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

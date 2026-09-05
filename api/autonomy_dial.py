@@ -50,3 +50,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     dial = AutonomyDial()
     return {"status": "active", "module": "autonomy_dial",
             **dial.summary()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "data", "status": "active", "wave": "134", "module": "autonomy_dial"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

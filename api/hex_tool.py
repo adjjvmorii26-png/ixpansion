@@ -174,3 +174,8 @@ def handler(payload: dict = None, context: object = None) -> dict:
         return {"action": "dialects", **DIALECT_INFO}
 
     return {"error": f"unknown action: {action}", "valid_actions": ["encode", "decode", "fingerprint", "parse", "dialects"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

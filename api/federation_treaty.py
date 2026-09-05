@@ -74,3 +74,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     federation = FederationTreaty()
     return {"status": "active", "module": "federation_treaty",
             **federation.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "sandbox", "status": "active", "wave": "138", "module": "federation_treaty"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

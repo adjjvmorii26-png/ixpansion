@@ -46,3 +46,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     core = AntifragilityCore()
     return {"status": "active", "module": "antifragility_core",
             **core.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "organ", "status": "active", "wave": "137", "module": "antifragility_core"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

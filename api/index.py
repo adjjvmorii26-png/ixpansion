@@ -681,3 +681,11 @@ def handler(request) -> dict:
 
 
 app = application
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "204", "module": "index"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

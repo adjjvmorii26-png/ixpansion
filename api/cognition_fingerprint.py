@@ -70,3 +70,18 @@ def cognition_fingerprint_handler(payload: Optional[Dict[str, Any]] = None) -> D
 
     return {"status": "active", "error": f"unknown action '{action}'",
             "available": ["status", "sample", "get", "drift"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "agent", "status": "active", "wave": "142", "module": "cognition_fingerprint"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "cognition_fingerprint", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

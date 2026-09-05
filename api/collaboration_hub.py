@@ -112,3 +112,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     hub = CollaborationHub()
     return {"status": "active", "module": "collaboration_hub",
             **hub.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "131", "module": "collaboration_hub"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

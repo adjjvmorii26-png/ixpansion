@@ -80,3 +80,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     heritage = HeritageSystem()
     return {"status": "active", "module": "heritage_system",
             **heritage.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "133", "module": "heritage_system"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

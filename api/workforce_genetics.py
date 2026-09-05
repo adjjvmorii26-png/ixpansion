@@ -76,3 +76,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     genetics = WorkforceGenetics()
     return {"status": "active", "module": "workforce_genetics",
             **genetics.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "organ", "status": "active", "wave": "132", "module": "workforce_genetics"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

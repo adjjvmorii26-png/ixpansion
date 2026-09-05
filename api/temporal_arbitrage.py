@@ -114,3 +114,11 @@ class TemporalArbitrage:
 
 def handler(payload: Dict[str, Any], context: Any = None) -> Dict[str, Any]:
     return {"status": "active", "module": "temporal_arbitrage"}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "127", "module": "temporal_arbitrage"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

@@ -91,3 +91,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     contracts = AutonomousContracts()
     return {"status": "active", "module": "autonomous_contracts",
             **contracts.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "134", "module": "autonomous_contracts"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

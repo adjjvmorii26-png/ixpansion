@@ -160,3 +160,11 @@ def handler(payload=None, context=None):
     if path == "/state":
         return state()
     return {"error": "unknown", "available": ["/candidates", "/surface", "/state"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "395", "module": "upwelling"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

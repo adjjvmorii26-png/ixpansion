@@ -192,3 +192,8 @@ def handler(request=None, context=None):
         "subscribe": "GET /api/frontier_stream?key=ixp_...&events=dream_cycle,consciousness",
         "available_events": sorted(ALL_EVENTS),
     }
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

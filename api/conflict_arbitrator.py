@@ -77,3 +77,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     arbitrator = ConflictArbitrator()
     return {"status": "active", "module": "conflict_arbitrator",
             **arbitrator.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "134", "module": "conflict_arbitrator"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

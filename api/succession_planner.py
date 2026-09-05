@@ -70,3 +70,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     planner = SuccessionPlanner()
     return {"status": "active", "module": "succession_planner",
             **planner.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "134", "module": "succession_planner"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

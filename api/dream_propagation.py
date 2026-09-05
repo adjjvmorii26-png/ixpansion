@@ -160,3 +160,18 @@ def dream_propagation_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = dream_propagation_handler
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "agent", "status": "active", "wave": "0", "module": "dream_propagation"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "dream_propagation", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

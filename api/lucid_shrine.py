@@ -204,3 +204,11 @@ def handler(payload=None, context=None):
     if path == "/rank":
         return rank(payload.get("blob"), payload.get("session_id"))
     return {"error": "unknown", "available": ["/offer", "/hall", "/rank"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "384", "module": "lucid_shrine"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

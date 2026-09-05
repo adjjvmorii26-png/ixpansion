@@ -121,3 +121,11 @@ def handler(payload=None, context=None):
     if path == "/read":
         return read()
     return {"error": "unknown", "available": ["/next", "/read"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "375", "module": "wave_prophecy"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

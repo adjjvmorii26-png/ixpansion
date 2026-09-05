@@ -83,3 +83,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     portal = ClientPortal()
     return {"status": "active", "module": "client_portal",
             **portal.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "135", "module": "client_portal"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

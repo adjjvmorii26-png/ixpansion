@@ -59,3 +59,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     system = ReputationSystem()
     return {"status": "active", "module": "reputation_system",
             **system.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "organ", "status": "active", "wave": "132", "module": "reputation_system"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

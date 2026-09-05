@@ -153,3 +153,8 @@ def handler(payload: dict = None, context: object = None) -> dict:
             'POST {"module": "gossip_uptime"}',
         ],
     }
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

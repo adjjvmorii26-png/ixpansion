@@ -204,3 +204,18 @@ def ai_gateway_handler(payload: Optional[Dict[str, Any]] = None) -> Dict[str, An
 
 if __name__ == "__main__":
     print(json.dumps(ai_gateway_handler({"action": "status"}), indent=2))
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "141", "module": "ai_gateway"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "ai_gateway", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

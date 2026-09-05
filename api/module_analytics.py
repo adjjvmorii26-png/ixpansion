@@ -120,3 +120,15 @@ def coherence_vitals() -> dict:
         "resonance": {"value": 0.93, "setpoint": 0.85, "weight": 1.0},
         "insight_depth": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
     }
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "module_analytics", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

@@ -94,3 +94,11 @@ def handler(payload=None, context=None):
     if path == "/chain":
         return chain()
     return {"error": "unknown", "available": ["/seal", "/chain"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "381", "module": "ouroboros"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

@@ -594,6 +594,10 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_garden(args, user)
     elif command == "/copilot":
         return _cmd_copilot(args, user)
+    elif command == "/forge":
+        return _cmd_forge(args, user)
+    elif command == "/name":
+        return _cmd_name(args, user)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
@@ -728,3 +732,24 @@ def _cmd_copilot(args, user):
             s.get("average_health", 0), s.get("issues_found", 0))
     except Exception as e:
         return "🤖 " + str(e)
+
+# --- Wave 419-420: Forge + Naming commands ---
+
+def _cmd_forge(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from compliance_forge import forge_all
+        r = forge_all(dry_run=True, limit=50)
+        return "🔧 Compliance Forge\nModules needing patches: %s\nErrors: %s\nRun /forge_apply to apply" % (
+            r.get("modules_found", 0), r.get("errors", 0))
+    except Exception as e:
+        return "🔧 " + str(e)
+
+def _cmd_name(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from self_naming import ceremony
+        c = ceremony()
+        return c.get("ceremony_text", "?")
+    except Exception as e:
+        return "🪞 " + str(e)

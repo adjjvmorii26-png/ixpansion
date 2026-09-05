@@ -85,3 +85,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     reviewer = PerformanceReviewer()
     return {"status": "active", "module": "performance_reviewer",
             **reviewer.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "organ", "status": "active", "wave": "131", "module": "performance_reviewer"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

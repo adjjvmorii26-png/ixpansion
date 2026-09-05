@@ -113,3 +113,8 @@ def coherence_vitals() -> dict:
         "resonance": {"value": 0.92, "setpoint": 0.85, "weight": 1.0},
         "infra_purpose": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
     }
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

@@ -100,3 +100,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     protocol = RecoveryProtocol()
     return {"status": "active", "module": "recovery_protocol",
             **protocol.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "137", "module": "recovery_protocol"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

@@ -55,3 +55,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     fees = MarketplaceFees()
     return {"status": "active", "module": "marketplace_fees",
             **fees.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "organ", "status": "active", "wave": "135", "module": "marketplace_fees"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

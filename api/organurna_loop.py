@@ -209,3 +209,11 @@ def handler(payload=None, context=None):
     if path == "/loop":
         return loop()
     return {"error": "unknown", "available": ["/forgotten", "/remember", "/loop"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "393", "module": "organurna_loop"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

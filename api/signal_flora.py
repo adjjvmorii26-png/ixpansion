@@ -168,3 +168,15 @@ def coherence_vitals() -> dict:
         "resonance": {"value": 0.88, "setpoint": 0.8, "weight": 1.0},
         "signal_vitality": {"value": min(1.0, plants / 10.0), "setpoint": 0.8, "weight": 1.0},
     }
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "signal_flora", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

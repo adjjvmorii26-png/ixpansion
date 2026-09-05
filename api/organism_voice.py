@@ -88,3 +88,11 @@ def handler(payload=None, context=None):
     if path == "/sing":
         return sing(payload.get("module"), payload.get("seed"))
     return {"error": "unknown", "available": ["/speak", "/alphabet", "/sing"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "377", "module": "organism_voice"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

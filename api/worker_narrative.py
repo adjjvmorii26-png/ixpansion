@@ -63,3 +63,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     narrative = WorkerNarrative()
     return {"status": "active", "module": "worker_narrative",
             **narrative.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "132", "module": "worker_narrative"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

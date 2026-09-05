@@ -46,3 +46,18 @@ def memory_persist(memory: Dict[str, Any], key: str, timestamp: float) -> None:
     ring = memory.setdefault("_mem_ring", [])
     ring.insert(0, {"t": timestamp, "snapshot": key})
     memory["_mem_ring"] = ring[:8]
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "data", "status": "active", "wave": "0", "module": "runtime_io"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "runtime_io", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

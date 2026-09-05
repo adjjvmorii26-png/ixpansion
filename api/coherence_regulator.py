@@ -546,3 +546,11 @@ if __name__ == "__main__":
         print(json.dumps(handler({"history": args.history}), indent=2, default=str))
     else:
         print(json.dumps(handler({"read": 1}), indent=2, default=str))
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "0", "module": "coherence_regulator"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

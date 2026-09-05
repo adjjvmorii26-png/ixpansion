@@ -63,3 +63,8 @@ def coherence_vitals() -> dict:
         "platform_vitality": {"value": min(1.0, uptime), "setpoint": 0.8, "weight": 1.0},
         "route_health": {"value": min(1.0, routes_ok), "setpoint": 0.8, "weight": 1.0},
     }
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

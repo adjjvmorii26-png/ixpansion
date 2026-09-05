@@ -125,3 +125,18 @@ def dimensional_fold_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = dimensional_fold_handler
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "agent", "status": "active", "wave": "0", "module": "dimensional_fold"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "dimensional_fold", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

@@ -83,3 +83,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     sla = ServiceSLA()
     return {"status": "active", "module": "service_sla",
             **sla.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "135", "module": "service_sla"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

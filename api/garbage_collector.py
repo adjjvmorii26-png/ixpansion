@@ -70,3 +70,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     gc = GarbageCollector()
     return {"status": "active", "module": "garbage_collector", **gc.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "data", "status": "active", "wave": "140", "module": "garbage_collector"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

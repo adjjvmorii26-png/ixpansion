@@ -54,3 +54,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     config = RuntimeConfig()
     return {"status": "active", "module": "runtime_config",
             **config.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "139", "module": "runtime_config"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

@@ -50,3 +50,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     planner = ContinuityPlanner()
     return {"status": "active", "module": "continuity_planner",
             **planner.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "organ", "status": "active", "wave": "137", "module": "continuity_planner"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

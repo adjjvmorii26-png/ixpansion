@@ -44,3 +44,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     replay = EventReplay()
     return {"status": "active", "module": "event_replay", **replay.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "organ", "status": "active", "wave": "140", "module": "event_replay"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

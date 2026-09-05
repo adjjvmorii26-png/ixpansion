@@ -356,3 +356,11 @@ def handler(payload=None, context=None):
         return archive(payload.get("kind") or "bulletins",
                        int(payload.get("count", 10)) if str(payload.get("count", "10")).isdigit() else 10)
     return {"error": "unknown", "available": ["/scan", "/tune", "/broadcast", "/map", "/melody", "/archive"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "386", "module": "mycelial_radio"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

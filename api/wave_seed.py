@@ -120,3 +120,11 @@ def handler(payload=None, context=None):
     if path == "/featured":
         return featured()
     return {"error": "unknown", "available": ["/render", "/translate", "/featured"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "sandbox", "status": "active", "wave": "385", "module": "wave_seed"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

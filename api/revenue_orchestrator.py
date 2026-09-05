@@ -77,3 +77,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     orchestrator = EngagementOrchestrator()
     return {"status": "active", "module": "engagement_orchestrator",
             **orchestrator.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "135", "module": "revenue_orchestrator"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

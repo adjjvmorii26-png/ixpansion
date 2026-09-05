@@ -191,3 +191,12 @@ def resonates_with() -> list:
     """Declared kinships, auto-picked from shared domain language."""
     return ['attention_economy', 'system_pulse', 'universal_compass']
 
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "entropy_currency", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

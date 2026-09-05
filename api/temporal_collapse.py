@@ -153,3 +153,18 @@ def temporal_collapse_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = temporal_collapse_handler
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "0", "module": "temporal_collapse"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "temporal_collapse", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

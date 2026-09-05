@@ -49,3 +49,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     monitor = UptimeMonitor()
     return {"status": "active", "module": "uptime_monitor",
             **monitor.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "organ", "status": "active", "wave": "139", "module": "uptime_monitor"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

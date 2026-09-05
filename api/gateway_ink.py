@@ -92,3 +92,18 @@ def estimate_cost(model: str, input_text: str, output_text: str = "") -> Dict[st
 
 
 gateway_ink_handler = None  # ink is a medium, not a destination — no public route surface
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "142", "module": "gateway_ink"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "gateway_ink", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

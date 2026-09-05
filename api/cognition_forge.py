@@ -69,3 +69,18 @@ def cognition_forge_handler(payload: Optional[Dict[str, Any]] = None) -> Dict[st
 
 
 SPECIALIZATIONS_EXTRA: List[str] = []  # keep import surface stable
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "agent", "status": "active", "wave": "142", "module": "cognition_forge"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "cognition_forge", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

@@ -56,3 +56,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     border = BorderDiplomacy()
     return {"status": "active", "module": "border_diplomacy",
             **border.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "sandbox", "status": "active", "wave": "138", "module": "border_diplomacy"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

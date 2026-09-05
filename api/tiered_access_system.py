@@ -87,3 +87,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     system = TieredAccessSystem()
     return {"status": "active", "module": "tiered_access_system",
             **system.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "135", "module": "tiered_access_system"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

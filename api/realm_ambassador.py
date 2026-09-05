@@ -80,3 +80,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     ambassador = RealmAmbassador()
     return {"status": "active", "module": "realm_ambassador",
             **ambassador.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "sandbox", "status": "active", "wave": "138", "module": "realm_ambassador"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

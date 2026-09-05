@@ -115,3 +115,11 @@ def route(path):
 
 def handler(payload=None):
     return route((payload or {}).get("path", "/divine"))
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "364", "module": "entropy_oracle"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

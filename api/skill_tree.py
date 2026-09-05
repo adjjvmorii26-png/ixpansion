@@ -137,3 +137,18 @@ def skill_tree_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 handler = skill_tree_handler
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "agent", "status": "active", "wave": "0", "module": "skill_tree"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "skill_tree", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

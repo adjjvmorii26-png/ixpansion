@@ -58,3 +58,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     log = DeploymentLog()
     return {"status": "active", "module": "deployment_log",
             **log.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "139", "module": "deployment_log"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

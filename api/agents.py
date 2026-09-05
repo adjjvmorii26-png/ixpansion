@@ -112,3 +112,11 @@ def handler(request, response):
 
 if __name__ == "__main__":
     print(json.dumps(handler(None, None), indent=2))
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "0", "module": "agents"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

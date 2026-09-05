@@ -59,3 +59,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     trail = AuditTrail()
     return {"status": "active", "module": "audit_trail",
             **trail.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "protocol", "status": "active", "wave": "136", "module": "audit_trail"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

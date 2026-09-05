@@ -145,3 +145,11 @@ def handler(payload=None, context=None):
     if path == "/palettes":
         return palettes()
     return {"error": "unknown", "available": ["/generate", "/collection", "/palettes"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "agent", "status": "active", "wave": "375", "module": "resonance_gallery"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

@@ -54,3 +54,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     compass = ValuesCompass()
     return {"status": "active", "module": "values_compass",
             **compass.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "organ", "status": "active", "wave": "133", "module": "values_compass"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

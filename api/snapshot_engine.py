@@ -70,3 +70,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     engine = SnapshotEngine()
     return {"status": "active", "module": "snapshot_engine", **engine.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "data", "status": "active", "wave": "140", "module": "snapshot_engine"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

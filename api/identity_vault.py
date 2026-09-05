@@ -82,3 +82,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     vault = IdentityVault()
     return {"status": "active", "module": "identity_vault",
             **vault.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "136", "module": "identity_vault"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

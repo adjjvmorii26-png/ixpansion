@@ -121,3 +121,11 @@ class GravitationalPricing:
 
 def handler(payload: Dict[str, Any], context: Any = None) -> Dict[str, Any]:
     return {"status": "active", "module": "gravitational_pricing"}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "127", "module": "gravitational_pricing"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

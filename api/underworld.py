@@ -156,3 +156,11 @@ def handler(payload=None, context=None):
     if path == "/migrations":
         return migrations()
     return {"error": "unknown", "available": ["/mirror", "/clock", "/economy", "/migrations"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "sandbox", "status": "active", "wave": "394", "module": "underworld"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

@@ -156,3 +156,12 @@ def resonates_with() -> list:
     """Declared kinships, auto-picked from shared domain language."""
     return ['dream_synthesis', 'dream_interpreter', 'collective_subconscious']
 
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "dream_interpreter_api", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

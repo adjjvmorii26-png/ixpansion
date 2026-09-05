@@ -99,3 +99,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     engine = InvoiceEngine()
     return {"status": "active", "module": "invoice_engine",
             **engine.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "135", "module": "invoice_engine"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

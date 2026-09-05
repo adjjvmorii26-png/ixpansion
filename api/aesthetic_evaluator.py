@@ -124,3 +124,12 @@ def coherence_vitals() -> dict:
 def resonates_with() -> list:
     """Declared kinships."""
     return ['synesthesia', 'sound_cauldron']
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "aesthetic_evaluator", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

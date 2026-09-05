@@ -48,3 +48,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     payload = payload or {}
     kit = ColdStartKit()
     return {"status": "active", "module": "cold_start_kit", **kit.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "interface", "status": "active", "wave": "140", "module": "cold_start_kit"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

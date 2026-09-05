@@ -86,3 +86,18 @@ def oracle_meter_handler(payload: Optional[Dict[str, Any]] = None) -> Dict[str, 
 
     return {"status": "active", "error": f"unknown action '{action}'",
             "available": ["status", "ledger", "spend", "consult", "record"]}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "agent", "status": "active", "wave": "142", "module": "oracle_meter"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
+
+def handler(payload=None, context=None):
+    payload = payload or {}
+    path = payload.get("path", "/status")
+    if path == "/status":
+        return {"action": "status", "module": "oracle_meter", "status": "active"}
+    return {"error": "unknown", "available": ["/status"]}

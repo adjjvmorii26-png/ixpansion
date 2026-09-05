@@ -160,3 +160,8 @@ def handler(payload: dict = None, context: object = None) -> dict:
     reality["action"] = "weave"
     reality["message"] = f"Reality woven from: \"{seed}\""
     return reality
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

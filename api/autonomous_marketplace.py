@@ -72,3 +72,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     market = AutonomousMarketplace()
     return {"status": "active", "module": "autonomous_marketplace",
             **market.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "agent", "status": "active", "wave": "132", "module": "autonomous_marketplace"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]

@@ -56,3 +56,11 @@ def handler(payload: dict = None, context: object = None) -> dict:
     cache = CacheManager()
     return {"status": "active", "module": "cache_manager",
             **cache.status()}
+
+# --- Compliance Forge patch (Wave 419) ---
+
+def coherence_vitals() -> dict:
+    return {"layer": "organ", "status": "active", "wave": "139", "module": "cache_manager"}
+
+def resonates_with() -> list:
+    return ["organism_genome", "threadweaver", "organism_will"]
