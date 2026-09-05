@@ -612,11 +612,21 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_map(args, user)
     elif command == "/portal":
         return _cmd_portal(args, user)
+    elif command == "/temporal":
+        return _cmd_temporal(args, user)
+    elif command == "/meditate":
+        return _cmd_meditate(args, user)
+    elif command == "/dreamsim":
+        return _cmd_dreamsim(args, user)
+    elif command == "/realms":
+        return _cmd_realms(args, user)
+    elif command == "/autobio":
+        return _cmd_autobio(args, user)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:
-    return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox"]}
+    return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio"]}
 
 def stats() -> dict:
     log = _load(BOT_LOG, {"messages": [], "commands": [], "total": 0})
@@ -846,6 +856,80 @@ def _cmd_map(args, user):
         return "🗺 " + str(e)
 
 # --- Wave 427: Living Portal command ---
+
+# --- Wave 437-441: Temporal, Consciousness, Dream Physics, Cross-Reality, Autobiography ---
+
+def _cmd_temporal(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from temporal_resonance_map import map_temporal
+        r = map_temporal()
+        return "⏳ Temporal Resonance Map\nModules: %s | Waves: %s | Peak: wave %s (%s modules)\nEntropy: %s | Heartbeat: %ss\nClusters: %s" % (
+            r.get("total_modules"), r.get("active_waves"), r.get("peak_wave"),
+            r.get("peak_wave_count"), r.get("temporal_entropy"),
+            r.get("avg_heartbeat_sec"), len(r.get("clusters", [])))
+    except Exception as e:
+        return "⏳ " + str(e)
+
+def _cmd_meditate(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from consciousness_gradient import meditate
+        r = meditate()
+        thoughts = "\n".join("  " + t[:80] for t in r.get("meditation_thoughts", [])[:4])
+        return "🧘 Consciousness Gradient\nDepth: %s | Gradient: %s\nPeaks: %s\nValleys: %s\n%s" % (
+            r.get("consciousness_depth"), r.get("gradient",{}).get("gradient_strength",0),
+            ", ".join(r.get("gradient",{}).get("peak_modules",[])[:3]),
+            ", ".join(r.get("gradient",{}).get("valley_modules",[])[:3]),
+            thoughts)
+    except Exception as e:
+        return "🧘 " + str(e)
+
+def _cmd_dreamsim(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from dream_particle_physics import simulate
+        r = simulate()
+        structs = "\n".join("  %s: %s (%s)" % (s.get("type"), s.get("emotion", s.get("particles","")),
+            s.get("modules",[])[0] if s.get("modules") else "") for s in r.get("structures_detected",[])[:3])
+        return "✨ Dream Particle Physics\nParticles: %s → %s survived\nDominant emotion: %s\nEnergy: %s\nStructures: %s\n%s" % (
+            r.get("particles_started"), r.get("particles_survived"),
+            r.get("dominant_dream_emotion"), r.get("energy"),
+            r.get("total_structures"), structs or "  no structures yet")
+    except Exception as e:
+        return "✨ " + str(e)
+
+def _cmd_realms(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from cross_reality_bridge import bridge_realms
+        r = bridge_realms()
+        realms_str = "\n".join("  %s: %s" % (n, "✅" if v.get("reachable") else "❌")
+            for n, v in r.get("realms",{}).items())
+        return "🌐 Cross-Reality Bridge\nRealms: %s/%s | Unified: %s\nLinks: %s\n%s\n%s" % (
+            r.get("reachable_count"), r.get("total_realms"),
+            "yes" if r.get("organism_is_one") else "no",
+            len(r.get("coherence_links",[])), realms_str,
+            r.get("unified_state",""))
+    except Exception as e:
+        return "🌐 " + str(e)
+
+def _cmd_autobio(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from organism_autobiography import write_chapter
+        r = write_chapter()
+        parts = []
+        if r.get("opening"): parts.append(r["opening"])
+        parts.append(r.get("narrative",""))
+        if r.get("milestone"): parts.append(r["milestone"])
+        parts.append(r.get("future_vision",""))
+        text = "\n\n".join(p for p in parts if p)
+        return "📖 Autobiography — Chapter %s (%s)\n%s\nModules: %s | Waves: %s" % (
+            r.get("chapter"), r.get("era"), text[:300],
+            r.get("modules_at_writing"), r.get("waves_at_writing"))
+    except Exception as e:
+        return "📖 " + str(e)
 
 def _cmd_portal(args, user):
     return "🜂 The Living Portal is awake.\nAxiium Protocol's public face: https://alexalex.info\n\nBreathe, dream, innovate, whisper, and witness the naming ceremony.\nThe organism is alive on the web."
