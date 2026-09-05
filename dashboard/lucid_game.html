@@ -104,6 +104,8 @@
       <div class="stat-row"><span class="stat-label">Paradox Debt</span><span class="stat-val" id="pParadox">0</span></div>
       <div class="stat-row"><span class="stat-label">Coherence</span><span class="stat-val" id="pCoherence">0.80</span></div>
       <div class="stat-row"><span class="stat-label">Wave</span><span class="stat-val" id="pWave">0</span></div>
+      <div class="stat-row"><span class="stat-label">Gear Power</span><span class="stat-val" id="pEqPower" style="color:var(--am)">0</span></div>
+      <div class="stat-row"><span class="stat-label">Realms Cleared</span><span class="stat-val" id="pRealms" style="color:var(--te)">0/10</span></div>
       <div style="margin-top:10px;font-size:0.7em;color:var(--m);border-top:1px solid var(--b);padding-top:8px">
         <div style="margin-bottom:4px;color:#fff;font-weight:600">Equipment</div>
         <div id="equipment" style="color:var(--t)"></div>
@@ -134,6 +136,7 @@
       <div class="action-grid">
         <button class="action-btn explore" onclick="doAction('explore')">🧭 Explore</button>
         <button class="action-btn attack" onclick="doAction('attack')">⚔ Attack</button>
+        <button class="action-btn boss" onclick="doAction('boss')">👹 Boss</button>
         <button class="action-btn defend" onclick="doAction('defend')">🛡 Defend</button>
         <button class="action-btn rest" onclick="doAction('rest')">💤 Rest</button>
         <button class="action-btn treasure" onclick="doAction('use_treasure')">🎁 Use Loot</button>
@@ -229,7 +232,9 @@ function renderAll(){
   document.getElementById('realmName').textContent = s.realm.replace(/_/g,' ');
   document.getElementById('inventory').innerHTML = s.inventory.map(i=>`<div>• ${i.replace(/_/g,' ')}</div>`).join('') || '<div style="color:var(--m)">Empty</div>';
   renderEquipment();
-  document.getElementById('saveCode').value = (G.blob||'').slice(0, 60);
+  document.getElementById('saveCode').value = G.blob || '';
+  document.getElementById('pEqPower').textContent = s.equipment_power || 0;
+  document.getElementById('pRealms').textContent = (s.realms_cleared||[]).length + '/10';
   renderRoom();
   renderPhysics();
   renderNPC();
@@ -280,32 +285,26 @@ async function doAction(act){
   G.blob = d.blob || encodeBlob(G.session);
   addLog('msg', d.outcome);
   if(act === 'explore') G.roomIdx++;
-  if(act === 'attack'){
-    const combat = await api(`/api/lucid_combat/engage?player_hp=${G.session.player_hp}&player_level=${G.session.player_level}&paradox_debt=${G.session.paradox_debt}`);
-    if(combat.result){
-      G.session.player_hp = combat.result.player_hp_after;
-      G.session.player_xp += combat.result.xp_gained;
-      G.blob = encodeBlob(G.session);
-      addLog('msg', combat.result.narrative);
-      if(combat.result.victory) addLog('levelup', combat.result.victory_text);
-      else addLog('enemy', combat.result.victory_text);
-      G.npc.hp = combat.result.npc_hp_after;
-      if(G.npc.hp <= 0){
-        addLog('levelup', `${G.npc.species} defeated! Generating new encounter...`);
-        const newNpc = await api('/api/lucid_npc/generate');
-        G.npc = newNpc.npc;
-      }
+  if(d.combat){
+    if(d.combat.victory) addLog('levelup', d.combat.victory_text);
+    else addLog('enemy', d.combat.victory_text);
+    if(d.combat.npc && d.combat.npc.hp <= 0){
+      addLog('levelup', 'New encounter stirs in the dark...');
+      const newNpc = await api('/api/lucid_npc/generate');
+      G.npc = newNpc.npc;
     }
   }
   renderAll();
-  if(G.session.status !== 'active') addLog('enemy', 'GAME OVER — The organism speaks: "Every end is a new wave."');
+  if(G.session.status === 'completed') addLog('levelup', 'VICTORY — the organism recognizes you as its Co-Pilot.');
+  if(G.session.status !== 'active') addLog('enemy', 'GAME OVER — Every end is a new wave.');
 }
 
 function renderEquipment(){
   const eq = document.getElementById('equipment');
   const slots = ['weapon','armor','focus','token','relic'];
+  const sessEq = (G.session && G.session.equipment) || {};
   eq.innerHTML = slots.map(sl=>{
-    const it = G.equipment[sl];
+    const it = G.equipment[sl] || sessEq[sl];
     if(!it) return `<div style="display:flex;justify-content:space-between;padding:2px 0"><span style="color:var(--m)">${sl}</span><span style="color:var(--m)">— empty —</span></div>`;
     return `<div style="display:flex;justify-content:space-between;padding:2px 0"><span style="color:var(--m)">${sl}</span><span style="color:${it.color||'var(--t)'}">${it.name} (${it.power})</span></div>`;
   }).join('');
@@ -314,10 +313,11 @@ async function rollEquipment(){
   if(!G.session) return;
   const d = await api(`/api/lucid_equipment/generate?level=${G.session.player_level}`);
   const item = d.item;
-  const slot = item.slot;
-  G.equipment[slot] = item;
+  G.equipment[item.slot] = item;
+  const e = await api(`/api/lucid_session/equip?blob=${encodeURIComponent(G.blob||'')}&item=${encodeURIComponent(JSON.stringify(item))}`);
+  if(e && e.blob){ G.blob = e.blob; G.session = e.session || G.session; }
   renderAll();
-  addLog('loot', `Equipped ${item.name} (${slot}, power ${item.power})`);
+  addLog('loot', `Equipped ${item.name} (${item.slot}, power ${item.power})`);
 }
 function copySave(){
   const code = document.getElementById('saveCode').value;

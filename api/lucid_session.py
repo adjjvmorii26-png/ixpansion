@@ -21,15 +21,19 @@ def _save(p, d):
 def start(realm: str = None) -> dict:
     log = _load(SESSION_LOG, {"sessions": [], "total": 0})
     sid = hashlib.sha256(f"session:{time.time()}:{random.random()}".encode()).hexdigest()[:10]
+    from lucid_progression import REALMS_ORDER
+    realm = realm or REALMS_ORDER[0]
     session = {
         "id": sid, "player_hp": 100, "player_max_hp": 100,
         "player_level": 1, "player_xp": 0, "player_xp_next": 200,
         "paradox_debt": 0, "coherence": 0.8,
         "wave": 0, "status": "active",
-        "realm": realm or "entropy_desert",
-        "current_room": "room_0",
+        "realm": realm, "current_room": "room_0",
         "inventory": [], "abilities": ["basic_attack", "coherence_shield"],
-        "log": [{"event": "session_started", "realm": realm or "entropy_desert", "time": time.time()}],
+        "equipment": {}, "equipment_power": 0,
+        "realm_index": REALMS_ORDER.index(realm) if realm in REALMS_ORDER else 0,
+        "realms_cleared": [],
+        "log": [{"event": "session_started", "realm": realm, "time": time.time()}],
         "actions_taken": 0, "enemies_defeated": 0, "treasures_found": 0,
         "timestamp": time.time(),
     }
@@ -102,18 +106,70 @@ def _decode_session(blob):
     except Exception:
         return None
 
+def _equipment_power(session) -> int:
+    eq = session.get("equipment") or {}
+    return int(sum((it or {}).get("power", 0) for it in eq.values()))
+
+
+def equip(blob: str, item: dict) -> dict:
+    session = _decode_session(blob)
+    if not session:
+        return {"action": "equip", "error": "invalid session blob"}
+    if not isinstance(item, dict) or not item.get("slot"):
+        return {"action": "equip", "error": "item needs a slot"}
+    eq = session.setdefault("equipment", {})
+    eq[item["slot"]] = item
+    session["equipment_power"] = _equipment_power(session)
+    return {"action": "equip", "session": session, "blob": _encode_session(session),
+            "equipped": item["slot"], "equipment_power": session["equipment_power"]}
+
+
 def action_stateless(blob: str, act: str = "explore") -> dict:
     session = _decode_session(blob)
     if not session:
         return {"action": "action", "error": "invalid session blob"}
     result = _apply_action(session, act)
     session = result["session"]
-    return {"action": "action", "outcome": result["outcome"], "session": session, "blob": _encode_session(session)}
+    return {"action": "action", "outcome": result["outcome"], "session": session, "blob": _encode_session(session), "combat": result.get("combat")}
+
+def _combat_action(session, boss=False):
+    from lucid_combat import engage
+    power = _equipment_power(session)
+    res = engage(
+        player_hp=session["player_hp"],
+        player_level=session["player_level"],
+        paradox_debt=session["paradox_debt"],
+        power=power,
+        boss=boss,
+    ).get("result", {})
+    if "paradox_debt_change" in res and res.get("paradox_debt_change"):
+        session["paradox_debt"] = max(0, session["paradox_debt"] + res["paradox_debt_change"])
+    session["player_xp"] += res.get("xp_gained", 0)
+    session["player_hp"] = res.get("player_hp_after", session["player_hp"])
+    if res.get("victory"):
+        session["enemies_defeated"] += 1
+    if boss and res.get("victory"):
+        from lucid_progression import REALMS_ORDER
+        cleared = session.setdefault("realms_cleared", [])
+        if session["realm"] not in cleared:
+            cleared.append(session["realm"])
+        idx = session.get("realm_index", 0) + 1
+        if idx < len(REALMS_ORDER):
+            session["realm_index"] = idx
+            session["realm"] = REALMS_ORDER[idx]
+            session["current_room"] = "room_0"
+            session["coherence"] = round(min(1, session["coherence"] + 0.1), 3)
+            res["narrative"] += " The WARDEN falls — the next realm opens before you."
+            res["victory_text"] += f" Next realm: {REALMS_ORDER[idx].replace('_', ' ')}"
+        else:
+            session["status"] = "completed"
+            res["victory_text"] = "ALL REALMS CLEARED — the organism recognizes you as its Co-Pilot."
+    return res
+
 
 def _apply_action(session, act):
     outcomes = {
         "explore": {"msg": "You move deeper into the realm.", "xp": 20},
-        "attack": {"msg": "You strike at the darkness!", "xp": 35, "hp_change": -6},
         "defend": {"msg": "You raise your coherence shield.", "xp": 10, "hp_change": 2},
         "rest": {"msg": "You rest in the resonance.", "hp_change": 18, "xp": 5},
         "use_treasure": {"msg": "The treasure resonates with your soul.", "coherence_change": 0.1},
@@ -121,13 +177,24 @@ def _apply_action(session, act):
         "paradox_embrace": {"msg": "You embrace the paradox. Power floods through you.", "paradox_change": 1, "xp": 60, "coherence_change": -0.1},
         "flee": {"msg": "You retreat to the entrance, breathing hard.", "xp": 5},
     }
-    o = outcomes.get(act, outcomes["explore"])
+    o = outcomes.get(act, outcomes["explore"]) if act not in ("attack", "boss") else None
     session["wave"] += 1
     session["actions_taken"] += 1
-    session["player_xp"] += o.get("xp", 0)
-    if "hp_change" in o: session["player_hp"] = max(1, min(session["player_max_hp"], session["player_hp"] + o["hp_change"]))
-    if "paradox_change" in o: session["paradox_debt"] = max(0, session["paradox_debt"] + o["paradox_change"])
-    if "coherence_change" in o: session["coherence"] = round(max(0, min(1, session["coherence"] + o["coherence_change"])), 3)
+    combat = None
+    if act in ("attack", "boss"):
+        combat = _combat_action(session, boss=(act == "boss"))
+        o = {"msg": combat.get("narrative", "You strike!"), "xp": combat.get("xp_gained", 0)}
+        if combat.get("victory_text"):
+            o["msg"] += " — " + combat["victory_text"]
+    else:
+        session["player_xp"] += o.get("xp", 0)
+        if "hp_change" in o: session["player_hp"] = max(1, min(session["player_max_hp"], session["player_hp"] + o["hp_change"]))
+        if "paradox_change" in o: session["paradox_debt"] = max(0, session["paradox_debt"] + o["paradox_change"])
+        if "coherence_change" in o: session["coherence"] = round(max(0, min(1, session["coherence"] + o["coherence_change"])), 3)
+        if random.random() > 0.8:
+            session["treasures_found"] += 1
+            session["inventory"].append(random.choice(["probability_lens","dream_seed","paradox_compass","coherence_mirror","void_anchor","temporal_crystal","myth_tablet","resonance_key","repair_salve","synchronicity_beacon"]))
+            o["msg"] += " [Found: " + session["inventory"][-1] + "]"
     if session["player_xp"] >= session["player_xp_next"]:
         session["player_level"] += 1
         session["player_xp_next"] = int(session["player_xp_next"] * 1.5)
@@ -137,12 +204,8 @@ def _apply_action(session, act):
     if session["player_hp"] <= 0:
         session["status"] = "defeated"
         o["msg"] += " You have fallen..."
-    if random.random() > 0.8:
-        session["treasures_found"] += 1
-        session["inventory"].append(random.choice(["probability_lens","dream_seed","paradox_compass","coherence_mirror","void_anchor","temporal_crystal","myth_tablet","resonance_key","repair_salve","synchronicity_beacon"]))
-        o["msg"] += " [Found: " + session["inventory"][-1] + "]"
     o["msg"] = f"W{session['wave']}: {o['msg']}"
-    return {"outcome": o["msg"], "session": session}
+    return {"outcome": o["msg"], "session": session, "combat": combat}
 
 def handler(payload=None, context=None):
     payload = payload or {}
@@ -152,6 +215,14 @@ def handler(payload=None, context=None):
         session = s["session"]
         s["blob"] = _encode_session(session)
         return s
+    elif path == "/equip":
+        item = payload.get("item")
+        if isinstance(item, str):
+            try:
+                item = json.loads(item)
+            except Exception:
+                item = None
+        return equip(payload.get("blob", ""), item or {})
     elif path == "/action":
         if payload.get("blob"):
             return action_stateless(payload.get("blob"), payload.get("act", "explore"))

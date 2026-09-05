@@ -1,5 +1,5 @@
 from __future__ import annotations
-"""Lucid Combat — combat system using paradox debt + phase transitions."""
+"""Lucid Combat — combat system using paradox debt, phase transitions, equipment power, and realm wardens."""
 import json, time, hashlib, os, random
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
@@ -18,31 +18,33 @@ def _save(p, d):
     except OSError:
         with open(os.path.join("/tmp", os.path.basename(p)), "w") as f: json.dump(d, f, indent=2)
 
-def engage(player_hp: int = 100, player_level: int = 1, paradox_debt: int = 0) -> dict:
+def engage(player_hp: int = 100, player_level: int = 1, paradox_debt: int = 0, power: int = 0, boss: bool = False) -> dict:
     log = _load(COMBAT_LOG, {"battles": [], "total": 0})
     from lucid_npc import generate as npc_gen
-    npc_result = npc_gen()
+    npc_result = npc_gen(boss=boss)
     npc = npc_result["npc"]
-    player_dmg = random.randint(5 + player_level * 2, 15 + player_level * 3)
+    player_dmg = random.randint(5 + player_level * 2, 15 + player_level * 3) + int(power or 0)
     npc_dmg = random.randint(3 + npc["level"] * 2, 10 + npc["level"] * 3)
     if paradox_debt > 2: player_dmg = int(player_dmg * 1.5)
     if paradox_debt > 5: npc_dmg = int(npc_dmg * 1.5)
     npc["hp"] = max(0, npc["hp"] - player_dmg)
     new_player_hp = max(0, player_hp - npc_dmg)
     victory = npc["hp"] <= 0
-    xp_gained = npc["xp_reward"] if victory else npc["xp_reward"] // 4
+    xp_gained = (npc["xp_reward"] * 3) if victory else npc["xp_reward"] // 4
+    kind = "WARDEN" if boss else "FOE"
     result = {
         "battle_id": hashlib.sha256(f"battle:{time.time()}".encode()).hexdigest()[:10],
         "npc": npc, "player_attacked": True,
         "damage_dealt": player_dmg, "damage_taken": npc_dmg,
         "npc_hp_after": npc["hp"], "player_hp_after": new_player_hp,
         "victory": victory, "xp_gained": xp_gained,
+        "boss": boss,
         "narrative": random.choice([
-            f"The {npc['species']} {npc['archetype']} lunges! You strike first, dealing {player_dmg} damage.",
-            f"A clash of wills. Your blade meets {npc['species']}'s resistance. {player_dmg} vs {npc_dmg}.",
-            f"The battle rages — paradox energy crackles. You land a {player_dmg}-point blow.",
+            f"The {kind} {npc['species']} {npc['archetype']} lunges! Your gear hums — {player_dmg} damage ({int(power or 0)} from equipment).",
+            f"A clash of wills. Your blade and equipment meet {npc['species']}'s resistance. {player_dmg} vs {npc_dmg}.",
+            f"The battle rages — paradox energy crackles. You land a {player_dmg}-point blow, {int(power or 0)} amplified by gear.",
         ]),
-        "victory_text": f"The {npc['species']} falls! +{xp_gained} XP. The realm trembles." if victory else f"The {npc['species']} endures. You retreat, wounded but alive.",
+        "victory_text": f"{'WARDEN' if boss else 'The ' + npc['species']} {'falls! The realm shatters before you. +' + str(xp_gained) + ' XP. A new realm opens.' if boss else 'falls! +' + str(xp_gained) + ' XP. The realm trembles.'}" if victory else f"{'WARDEN' if boss else 'The ' + npc['species']} endures. You retreat, wounded but alive.",
         "paradox_debt_change": 1 if random.random() > 0.7 else 0,
         "timestamp": time.time(),
     }
