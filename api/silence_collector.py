@@ -12,10 +12,12 @@ Each pair produces a verse — the silence between them given voice — and
 becomes a candidate for the Threadweaver to weave into the living graph.
 """
 from __future__ import annotations
-import json, time, hashlib, os, random, re
+import json, time, hashlib, os, random, re, base64, urllib.parse, urllib.request, urllib.error
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 LOG = os.path.join(DATA_DIR, "silence_pairs.json")
+GH_TOKEN = os.environ.get("IXP_GH_TOKEN", "")
+PAIRS_PATH = "data/silence_pairs.json"
 
 # Semantic echoes — words whose presence signals overlap
 SEMANTIC_ROOTS = {
@@ -62,6 +64,57 @@ def _save(p, d):
 
 def _sig(text):
     return int(hashlib.sha256(f"silence:{text}".encode()).hexdigest()[:12], 16)
+
+
+def _gh_call(method, url, payload=None):
+    if not GH_TOKEN:
+        return {"ok": False}
+    req = urllib.request.Request(url, method=method)
+    req.add_header("Authorization", "Bearer " + GH_TOKEN)
+    req.add_header("Accept", "application/vnd.github+json")
+    req.add_header("X-GitHub-Api-Version", "2022-11-28")
+    body = json.dumps(payload).encode() if payload is not None else None
+    try:
+        with urllib.request.urlopen(req, data=body, timeout=15) as resp:
+            return {"ok": True, "status": resp.status, "body": json.loads(resp.read().decode() or "{}")}
+    except urllib.error.HTTPError as e:
+        try:
+            return {"ok": False, "status": e.code, "body": json.loads(e.read().decode() or "{}")}
+        except Exception:
+            return {"ok": False, "status": e.code, "body": {}}
+
+
+def _state_read():
+    fallback = {"pairs": [], "total_scans": 0, "total_pairs": 0}
+    if GH_TOKEN:
+        r = _gh_call("GET", "https://api.github.com/repos/adjjvmorii26-png/ixpansion/contents/" + PAIRS_PATH + "?ref=main")
+        if r["ok"]:
+            try:
+                return json.loads(base64.b64decode(r["body"]["content"]).decode())
+            except Exception:
+                return fallback
+    return _load(LOG, fallback)
+
+
+def _state_write(data):
+    if GH_TOKEN:
+        r = _gh_call("GET", "https://api.github.com/repos/adjjvmorii26-png/ixpansion/contents/" + PAIRS_PATH + "?ref=main")
+        sha = r["body"].get("sha") if r["ok"] else None
+        payload = {
+            "message": "SILENCE — a vein of hidden pairs mined",
+            "content": base64.b64encode(json.dumps(data, indent=2).encode()).decode(),
+            "branch": "main",
+        }
+        if sha:
+            payload["sha"] = sha
+        return _gh_call("PUT", "https://api.github.com/repos/adjjvmorii26-png/ixpansion/contents/" + PAIRS_PATH, payload)["ok"]
+    try:
+        with open(LOG, "w") as fh:
+            json.dump(data, fh, indent=2)
+    except OSError:
+        with open(os.path.join("/tmp", "silence_pairs.json"), "w") as fh:
+            json.dump(data, fh, indent=2)
+    return True
 
 
 def _word_parts(name):
@@ -134,7 +187,7 @@ def scan(limit: int = 100) -> dict:
     pairs.sort(key=lambda p: -p["similarity"])
     pairs = pairs[:20]
 
-    log = _load(LOG, {"pairs": [], "total_scans": 0, "total_pairs": 0})
+    log = _state_read()
     log.setdefault("pairs", [])
     if pairs:
         existing_ids = {p["id"] for p in log["pairs"]}
@@ -144,20 +197,21 @@ def scan(limit: int = 100) -> dict:
         log["pairs"] = log["pairs"][-80:]
     log["total_scans"] += 1
     log["total_pairs"] = len(log["pairs"])
-    _save(LOG, log)
+    _state_write(log)
 
     return {
         "action": "scan", "pairs": pairs,
         "scanned": len(modules), "new_pairs": len(pairs),
         "total_pairs": log["total_pairs"],
         "total_scans": log["total_scans"],
+        "persisted": "github" if GH_TOKEN else "local",
         "message": "found %s silent pairs among %s forgotten modules" % (len(pairs), len(modules)),
     }
 
 
 def pairs(limit: int = 20) -> dict:
     """All accumulated silent pairs."""
-    log = _load(LOG, {"pairs": [], "total_scans": 0, "total_pairs": 0})
+    log = _state_read()
     return {"action": "pairs", "total": log["total_pairs"],
             "total_scans": log["total_scans"],
             "pairs": log.get("pairs", [])[:limit]}
@@ -165,7 +219,7 @@ def pairs(limit: int = 20) -> dict:
 
 def strongest(limit: int = 5) -> dict:
     """The strongest silent pairs — most likely to be convergences."""
-    log = _load(LOG, {"pairs": [], "total_scans": 0, "total_pairs": 0})
+    log = _state_read()
     ranked = sorted(log.get("pairs", []), key=lambda p: -p.get("similarity", 0))
     return {"action": "strongest", "pairs": ranked[:limit],
             "total": log["total_pairs"]}
