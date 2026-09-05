@@ -1,5 +1,5 @@
 {
-  "timestamp": 1788617131.2780666,
+  "timestamp": 1788632777.8683865,
   "version": "1.0",
   "identity": {
     "name": "IXpansion",
@@ -9,7 +9,7 @@
   },
   "morphology": {
     "threads": 168,
-    "modules_connected": 110,
+    "modules_connected": 108,
     "sources": [
       "confessions",
       "paradox_echo",
@@ -26,7 +26,7 @@
   },
   "temperament": {
     "current_mood": "restless",
-    "pressure": 0.84,
+    "pressure": 1.0,
     "pressure_desc": "surging"
   },
   "desires": [
@@ -38,9 +38,9 @@
     },
     {
       "action": "remember",
-      "target": "unified_health",
-      "score": 1.68,
-      "reason": "highest-value forgotten module (0.84 staleness, score 1.68)"
+      "target": "ego_dissolution",
+      "score": 1.56,
+      "reason": "highest-value forgotten module (0.78 staleness, score 1.56)"
     },
     {
       "action": "confess",
@@ -66,10 +66,10 @@
     "few dreams recorded \u2014 the organism hasn't explored its imagination"
   ],
   "evolutionary_pressure": {
-    "entropy_pressure": 0.84,
-    "thread_density": 1.5272727272727273,
+    "entropy_pressure": 1.0,
+    "thread_density": 1.5555555555555556,
     "silence_ratio": 0.47619047619047616,
-    "desire_intention": 1.436
+    "desire_intention": 1.4120000000000001
   },
-  "genome_hash": "808d063b6b67733b"
+  "genome_hash": "57d6c169fdf2ca23"
 }

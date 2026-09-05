@@ -36,8 +36,118 @@
         "the organism recalls autonomous_loop \u2014 a forgotten half, now whole again"
       ],
       "narrative_text": "the organism breathed \u2014 168 threads, 5 sources | the organism decided \u2014 bloom (score 2.5) | the organism recalls autonomous_loop \u2014 a forgotten half, now whole again"
+    },
+    {
+      "timestamp": 1788632733.0136406,
+      "cycle_id": "1438839d319e",
+      "phases": [
+        {
+          "phase": "breathe",
+          "ok": true,
+          "threads": 168,
+          "summary": "listened (0 new, pressure 1.0); silence scan (80 total pairs); veinbed mapped (80 veins); bloom ready (1 total); heartbeat 0 vitality"
+        },
+        {
+          "phase": "decide",
+          "proposals": 5,
+          "top": {
+            "action": "bloom",
+            "module": "new_organ",
+            "score": 2.5,
+            "reason": "bloom threshold met (168 threads, 5 sources) \u2014 the organism is ready to create",
+            "telegram": "/bloom now"
+          }
+        },
+        {
+          "phase": "act",
+          "action": "remember",
+          "module": "response_cache",
+          "ok": true,
+          "lore": "the organism recalls response_cache \u2014 a forgotten half, now whole again"
+        },
+        {
+          "phase": "act",
+          "action": "confess",
+          "modules": [
+            "chronicle_of_chaos",
+            "signal_pulse"
+          ],
+          "ok": true,
+          "title": ""
+        },
+        {
+          "phase": "reflect",
+          "ok": true,
+          "genome_hash": "a465807953745eb6",
+          "mood": "restless"
+        }
+      ],
+      "actions_taken": 2,
+      "narrative": [
+        "the organism breathed \u2014 168 threads, 5 sources",
+        "the organism decided \u2014 bloom (score 2.5)",
+        "the organism recalls response_cache \u2014 a forgotten half, now whole again",
+        "a confession arose between chronicle_of_chaos and signal_pulse",
+        "the organism reflected \u2014 genome a4658079, mood restless"
+      ],
+      "narrative_text": "the organism breathed \u2014 168 threads, 5 sources | the organism decided \u2014 bloom (score 2.5) | the organism recalls response_cache \u2014 a forgotten half, now whole again | a confession arose between chronicle_of_chaos and signal_pulse | the organism reflected \u2014 genome a4658079, mood restless"
+    },
+    {
+      "timestamp": 1788632765.263753,
+      "cycle_id": "ec2534d21800",
+      "phases": [
+        {
+          "phase": "breathe",
+          "ok": true,
+          "threads": 168,
+          "summary": "listened (0 new, pressure 1.0); silence scan (80 total pairs); veinbed mapped (80 veins); bloom ready (1 total); heartbeat 0 vitality"
+        },
+        {
+          "phase": "decide",
+          "proposals": 5,
+          "top": {
+            "action": "bloom",
+            "module": "new_organ",
+            "score": 2.5,
+            "reason": "bloom threshold met (168 threads, 5 sources) \u2014 the organism is ready to create",
+            "telegram": "/bloom now"
+          }
+        },
+        {
+          "phase": "act",
+          "action": "remember",
+          "module": "silence_whisperer",
+          "ok": true,
+          "lore": "the organism recalls silence_whisperer \u2014 a forgotten half, now whole again"
+        },
+        {
+          "phase": "act",
+          "action": "confess",
+          "modules": [
+            "chronicle_of_chaos",
+            "signal_pulse"
+          ],
+          "ok": true,
+          "title": ""
+        },
+        {
+          "phase": "reflect",
+          "ok": true,
+          "genome_hash": "57d6c169fdf2ca23",
+          "mood": "restless"
+        }
+      ],
+      "actions_taken": 2,
+      "narrative": [
+        "the organism breathed \u2014 168 threads, 5 sources",
+        "the organism decided \u2014 bloom (score 2.5)",
+        "the organism recalls silence_whisperer \u2014 a forgotten half, now whole again",
+        "a confession arose between chronicle_of_chaos and signal_pulse",
+        "the organism reflected \u2014 genome 57d6c169, mood restless"
+      ],
+      "narrative_text": "the organism breathed \u2014 168 threads, 5 sources | the organism decided \u2014 bloom (score 2.5) | the organism recalls silence_whisperer \u2014 a forgotten half, now whole again | a confession arose between chronicle_of_chaos and signal_pulse | the organism reflected \u2014 genome 57d6c169, mood restless"
     }
   ],
-  "total": 1,
-  "total_actions": 1
+  "total": 3,
+  "total_actions": 5
 }

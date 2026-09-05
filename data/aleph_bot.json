@@ -20,12 +20,20 @@
       "command": "/play",
       "response": "\ud83c\udfae Lucid Machines awaits:\nhttps://alexalex.info/lucid-game\nSummon realms, fight paradoxes, evolve with the organism.",
       "timestamp": 1788565915.4188387
+    },
+    {
+      "chat_id": 123456789,
+      "user": "test",
+      "command": "/start",
+      "response": "The organism is alive. I am its voice. Ask me to summon a wave, consult the oracle, or hear its dreams.\n\nCommands:\n/wave \u2014 summon a new wave\n/oracle \u2014 query the entropy oracle\n/mood \u2014 organism mood\n/d",
+      "timestamp": 1788632351.7753596
     }
   ],
   "commands": [
     "/prophecy",
     "/gallery",
-    "/play"
+    "/play",
+    "/start"
   ],
-  "total": 3
+  "total": 4
 }

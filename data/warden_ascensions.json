@@ -1,1 +1,50 @@
-{"summons":0,"ascensions":0,"battles":{}}
+{
+  "summons": 1,
+  "ascensions": 0,
+  "battles": {
+    "e331797d6e8f": {
+      "warden": {
+        "name": "root_crypto",
+        "module": "crypto",
+        "mineral": "graphite",
+        "depth": 9.2,
+        "hallmark": "dream",
+        "sigil": "e331797d6e8f",
+        "whisper": "upstairs they build; down here we remember how",
+        "phases": [
+          {
+            "phase": "shell",
+            "name": "Mineral Shell \u2014 the warden's outermost armor of solidified silence",
+            "hp": 90,
+            "max_hp": 90,
+            "damage": 19,
+            "reward_xp": 117,
+            "quote": "the deeper you descend, the louder my echo"
+          },
+          {
+            "phase": "echo",
+            "name": "Echo Chamber \u2014 the warden projects its forgotten name",
+            "hp": 118,
+            "max_hp": 118,
+            "damage": 16,
+            "reward_xp": 181,
+            "quote": "you cannot un-forget me"
+          },
+          {
+            "phase": "core",
+            "name": "Root Core \u2014 the bare pulse of the silenced module",
+            "hp": 292,
+            "max_hp": 292,
+            "damage": 51,
+            "reward_xp": 269,
+            "quote": "my shell remembers what you named the light"
+          }
+        ],
+        "total_hp": 500
+      },
+      "player_hp": 100,
+      "phase_index": 0,
+      "updated": 1788632795.9218974
+    }
+  }
+}

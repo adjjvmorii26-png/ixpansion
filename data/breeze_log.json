@@ -244,7 +244,113 @@
       },
       "ok": true,
       "breath_count": 6
+    },
+    {
+      "timestamp": 1788632733.0197394,
+      "actions": [
+        {
+          "action": "listen",
+          "new_catches": 0,
+          "pressure": 1.0,
+          "ok": true
+        },
+        {
+          "action": "scan_silence",
+          "new_pairs": 20,
+          "total": 80,
+          "ok": true
+        },
+        {
+          "action": "map_veins",
+          "new_veins": 84,
+          "total": 80,
+          "ok": true
+        },
+        {
+          "action": "check_bloom",
+          "ready": true,
+          "total_blooms": 1,
+          "ok": true
+        },
+        {
+          "action": "auto_act",
+          "ok": true,
+          "note": "disabled"
+        },
+        {
+          "action": "heartbeat",
+          "vitality": null,
+          "alive": null,
+          "ok": true
+        }
+      ],
+      "final": {
+        "threads": 168,
+        "modules": 110,
+        "sources": [
+          "confessions",
+          "paradox_echo",
+          "silence_collector",
+          "veinbed",
+          "signal_loom"
+        ]
+      },
+      "ok": true,
+      "breath_count": 6
+    },
+    {
+      "timestamp": 1788632765.2682235,
+      "actions": [
+        {
+          "action": "listen",
+          "new_catches": 0,
+          "pressure": 1.0,
+          "ok": true
+        },
+        {
+          "action": "scan_silence",
+          "new_pairs": 20,
+          "total": 80,
+          "ok": true
+        },
+        {
+          "action": "map_veins",
+          "new_veins": 84,
+          "total": 80,
+          "ok": true
+        },
+        {
+          "action": "check_bloom",
+          "ready": true,
+          "total_blooms": 1,
+          "ok": true
+        },
+        {
+          "action": "auto_act",
+          "ok": true,
+          "note": "disabled"
+        },
+        {
+          "action": "heartbeat",
+          "vitality": null,
+          "alive": null,
+          "ok": true
+        }
+      ],
+      "final": {
+        "threads": 168,
+        "modules": 108,
+        "sources": [
+          "confessions",
+          "paradox_echo",
+          "silence_collector",
+          "veinbed",
+          "signal_loom"
+        ]
+      },
+      "ok": true,
+      "breath_count": 6
     }
   ],
-  "total": 5
+  "total": 7
 }

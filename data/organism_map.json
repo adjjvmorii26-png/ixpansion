@@ -1,20 +1,20 @@
 {
-  "timestamp": 1788619910.172998,
-  "total_modules": 672,
+  "timestamp": 1788632706.087199,
+  "total_modules": 675,
   "families": {
     "interface": 104,
     "generator": 103,
     "identity": 99,
     "memory": 92,
-    "regulator": 62,
+    "regulator": 64,
     "resolver": 41,
+    "connector": 41,
     "observer": 41,
-    "connector": 40,
     "unclassified": 37,
     "economy": 30,
     "world": 23
   },
-  "orphan_count": 17,
+  "orphan_count": 19,
   "orphan_samples": [
     "commerce_barter",
     "commerce_escrow",
@@ -27,7 +27,7 @@
     "entropy_amp",
     "entropy_spiral"
   ],
-  "bridge_count": 496,
+  "bridge_count": 497,
   "top_bridges": [
     {
       "module": "aleph_bot",
@@ -214,7 +214,7 @@
       "primary_family": "memory"
     }
   ],
-  "connection_density": 0.004983,
-  "total_connections": 1123,
-  "modules_with_no_resonates": 17
+  "connection_density": 0.00495,
+  "total_connections": 1126,
+  "modules_with_no_resonates": 19
 }
