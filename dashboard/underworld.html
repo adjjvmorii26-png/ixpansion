@@ -3,389 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Underworld Descent</title>
+<title>The Underworld — Subterranean Mirror of the Organism</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#08080c;color:#c8c8c8;font-family:'Courier New',monospace;font-size:14px;min-height:100vh;display:flex;flex-direction:column;max-height:100vh;overflow:hidden}
-#banner{text-align:center;padding:10px 8px;background:linear-gradient(180deg,#1a0a2e 0%,#08080c 100%);border-bottom:1px solid #222;color:#fff;font-size:15px;letter-spacing:3px;flex-shrink:0}
-#banner .sub{color:#6a6;font-size:10px;margin-top:2px;letter-spacing:1px}
-#game{flex:1;display:flex;flex-direction:column;padding:6px 10px;overflow:hidden;min-height:0}
-#viewport{flex:1;white-space:pre-wrap;font-size:12px;line-height:1.55;color:#a8c;padding:6px;background:#0c0c12;border:1px solid #1a1a2a;border-radius:4px;overflow-y:auto;word-break:break-word}
-#mapview{display:none;padding:10px;background:#0c0c12;border:1px solid #1a1a2a;border-radius:4px;white-space:pre;font-size:13px;letter-spacing:2px;color:#6a8;line-height:1.7;overflow-y:auto;max-height:250px}
-#mapview.show{display:block}
-#hud{display:flex;gap:4px;padding:5px 10px;background:#0a0a10;border-top:1px solid #1a1a2a;font-size:10px;flex-wrap:wrap;flex-shrink:0}
-.hi{padding:2px 6px;background:#12121e;border:1px solid #222;border-radius:2px}
-.hi.hp{color:#c44}.hi.atk{color:#c88}.hi.xp{color:#6a6}.hi.dep{color:#88a}
-#controls{display:flex;gap:3px;padding:6px 10px;flex-wrap:wrap;justify-content:center;background:#08080c;flex-shrink:0}
-.b{background:#12121e;color:#8a8;border:1px solid #333;padding:5px 10px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:12px;transition:all .12s}
-.b:hover{background:#22223a;color:#fff;border-color:#668}
-.b:active{transform:scale(0.95)}
-.b.dg{color:#c44;border-color:#433}.b.dg:hover{background:#2a1212;color:#f66}
-.b.ds{color:#8cf;border-color:#336}.b.ds:hover{background:#122040;color:#8cf}
-#inv{display:none;background:#0c0c12;border-top:1px solid #1a1a2a;padding:6px 10px;max-height:120px;overflow-y:auto}
-#inv.show{display:block}
-#inv pre{color:#8a8;font-size:11px;line-height:1.5}
-#overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;z-index:100}
-#overlay.hidden{display:none}
-#obox{text-align:center;max-width:440px;padding:24px}
-#obox h1{color:#fff;font-size:20px;letter-spacing:5px;margin-bottom:6px}
-#obox p{color:#8a8;margin:10px 0;font-size:12px;line-height:1.5}
-#obox .themes{text-align:left;margin:16px 0;font-size:10px;color:#556;line-height:1.6}
-#obox .themes div{margin:3px 0}
-#obox .b{font-size:14px;padding:10px 24px;margin-top:14px}
-#gameover{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:100}
-#gameover.show{display:flex}
-#go-box{text-align:center;padding:24px}
-#go-box h2{color:#c44;font-size:20px;margin-bottom:8px}
-#go-box p{color:#8a8;font-size:12px;margin:8px 0}
-#go-box .b{margin-top:14px}
-@media(max-width:600px){#viewport{font-size:11px}#hud{font-size:9px}.b{padding:6px 8px;font-size:11px}}
+  :root{--bg:#020509;--s:rgba(7,10,18,0.97);--b:rgba(56,189,248,0.14);--t:#8fa3b2;--m:#3f5566;--ac:#38bdf8;--te:#2dd4bf;--am:#fbbf24;--vi:#a78bfa;--cry:#7dd3fc}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--t);font-family:'SF Mono','Fira Code',monospace;min-height:100vh;padding:20px}
+  .hd{text-align:center;padding:14px 20px;border:1px solid var(--b);border-radius:12px;background:linear-gradient(180deg,rgba(56,189,248,0.05),transparent);margin-bottom:18px}
+  .hd h1{font-size:1.4em;color:#fff;letter-spacing:2px;text-transform:uppercase}
+  .hd h1 span{color:var(--ac);text-shadow:0 0 18px rgba(56,189,248,0.35)}
+  .sub{color:var(--m);font-size:0.75em;margin-top:5px;letter-spacing:1px}
+  .clock{text-align:center;margin-bottom:16px}
+  .clock .deep{font-size:1.8em;color:var(--cry);letter-spacing:3px;text-shadow:0 0 24px rgba(56,189,248,0.5)}
+  .clock .phase{color:var(--te);font-size:0.8em;margin-top:4px;letter-spacing:1px}
+  .clock .tick{color:var(--m);font-size:0.66em;margin-top:6px;font-style:italic}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:800px){.cols{grid-template-columns:1fr}}
+  .panel{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:14px}
+  .panel h2{font-size:0.75em;color:#fff;letter-spacing:1px;margin-bottom:10px;text-transform:uppercase}
+  .ghost{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(56,189,248,0.07);font-size:0.7em}
+  .ghost .gm{color:var(--vi);font-size:1.1em}
+  .ghost .gn{color:#fff;flex:1}
+  .ghost .gd{color:var(--m);font-size:0.85em}
+  .ghost .min{color:var(--am);font-size:0.85em}
+  .trade{font-size:0.68em;color:var(--t);padding:6px 0;border-bottom:1px solid rgba(56,189,248,0.06)}
+  .trade b{color:var(--cry)}
+  .mig{font-size:0.7em;color:var(--te);padding:5px 0}
+  .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:24px;letter-spacing:1px}
 </style>
 </head>
 <body>
-<div id="banner">UNDERWORLD DESCENT<div class="sub">a shadow-organism roguelike built by IXpansion</div></div>
-<div id="game"><div id="viewport"></div><div id="mapview"></div></div>
-<div id="hud"></div>
-<div id="controls"></div>
-<div id="inv"><pre id="inv-c"></pre></div>
+<div class="hd">
+  <h1>🕳 The <span>Underworld</span></h1>
+  <div class="sub">EVERY FORGOTTEN ISLAND CASTS A ROOT-GHOST · WAVE 394</div>
+</div>
 
-<div id="overlay">
-<div id="obox">
-  <h1>&#x2588; UNDERWORLD DESCENT &#x2588;</h1>
-  <p>A subterranean mirror organism awaits.<br>You are a Wanderer exploring its depths.</p>
-  <div class="themes">
-    <div>&#x2020; Root Ghosts &#x2014; wraiths from dead modules</div>
-    <div>&#x29d7; Cavern Clocks &#x2014; self-devouring time</div>
-    <div>&#x2b23; Mineral Language &#x2014; stone speaks in grain</div>
-    <div>&#x25ce; Echo Economy &#x2014; every sound has value</div>
-    <div>&#x2638; Subterranean Archive &#x2014; forbidden data</div>
-    <div>&#x2726; Underworld Migration &#x2014; seasonal drift</div>
+<div class="clock">
+  <div class="deep" id="deepClock">⌁</div>
+  <div class="phase" id="deepPhase">listening to the caverns…</div>
+  <div class="tick" id="deepTick"></div>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2>⛰ Root-Ghosts — Shadow Twins of the Forgotten</h2>
+    <div id="ghosts"></div>
   </div>
-  <button class="b ds" onclick="G.start()">DESCEND INTO THE UNDERWORLD</button>
+  <div class="panel">
+    <h2>⟡ Echo-Economy — Resonances Priced in the Dark</h2>
+    <div id="economy"></div>
+    <h2 style="margin-top:12px">↟ Underworld Migrations</h2>
+    <div id="migrations"></div>
+  </div>
 </div>
-</div>
-
-<div id="gameover">
-<div id="go-box">
-  <h2>&#x2620; YOU HAVE FALLEN</h2>
-  <p id="go-msg">The underworld claims another wanderer.</p>
-  <div style="margin-top:8px;font-size:11px;color:#666" id="go-stats"></div>
-  <button class="b ds" onclick="G.start()">RISE AGAIN</button>
-</div>
-</div>
+<div class="foot">WAVE 394 · UNDERWORLD · DOWN THERE, VALUE IS HOW LONG A NAME HAS BEEN SILENT</div>
 
 <script>
-// ══════════════════════════════════════════════════════════════
-//  UNDERWORLD DESCENT — self-contained browser game engine
-// ══════════════════════════════════════════════════════════════
-const THEMES=[
-{n:"cavern_clock",g:"\u29d7",d:"A ticking obsidian clock embedded in the cave wall. The hands move in circles that are not circles."},
-{n:"root_ghost",g:"\u2020",d:"A translucent figure woven from roots and memory. It turns to look at you but has no eyes."},
-{n:"mineral_language",g:"\u2b23",d:"Crystalline inscriptions hum when read. Each syllable refracts a different color."},
-{n:"echo_economy",g:"\u25ce",d:"Echoes trade here. Every sound has exchange value. Your footsteps are currency."},
-{n:"subterranean_archive",g:"\u2638",d:"Shelves carved from living stone hold forbidden data. Dust motes glow with encrypted light."},
-{n:"underworld_migration",g:"\u2726",d:"Bioluminescent spores mark the migration path. Something enormous passed through here recently."},
-{n:"seed_vault",g:"\u2618",d:"Ancient seeds pulse with green light in glass cases. One of them is cracked open."},
-{n:"moss_carpet",g:"\u2698",d:"Soft green moss muffles all sound and heals small wounds. The air smells of rain."},
-{n:"tremor_map",g:"\u2302",d:"The ground trembles in patterns. Step carefully — it reads your weight."},
-{n:"whisper_gate",g:"\u2234",d:"A gate that opens only for whispered intentions. The stone listens."},
-{n:"iron_lullaby",g:"\u266b",d:"Mechanical humming fills the corridor with calm. Your hands stop shaking."},
-{n:"obsidian_mirror",g:"\u2588",d:"A black mirror shows what you refuse to see. Your reflection moves independently."},
-{n:"fog_cabinet",g:"\u2601",d:"Mist pours from an old filing cabinet. Each drawer contains a different weather."},
-{n:"sand_glitch",g:"\u2622",d:"The sand shifts in impossible patterns. Sand grains spell out your name."},
-{n:"bone_flute",g:"\u266a",d:"A flute made of bone plays itself in the wind. The melody knows your heartbeat."},
-{n:"kiln_layer",g:"\u2668",d:"The walls glow with residual heat from ancient forges. Molten veins pulse like arteries."},
-{n:"honeycomb_index",g:"\u2b22",d:"Hexagonal cells line the walls. Each holds a secret. One cell is open and empty."},
-{n:"clockwork_garden",g:"\u2699",d:"Mechanical plants turn to follow you. Brass flowers open as you approach."},
-{n:"ghost_circuit",g:"\u223f",d:"Invisible wires crackle with potential energy. The air tastes of ozone."},
-{n:"river_mouth",g:"\u2248",d:"Underground rivers converge here. The water sings two songs at once."},
-{n:"moonbridge",g:"\u263d",d:"A bridge of reflected light spans a dark chasm. Looking down shows stars."},
-{n:"dawn_chorus",g:"\u2600",d:"Somewhere above, a chorus of tiny voices sings a song no one taught them."},
-{n:"stone_choir",g:"\u266c",d:"Ancient stones resonate with harmonic frequencies. The walls vibrate with song."},
-{n:"salt_ring",g:"\u25cb",d:"A circle of salt marks a protected space. Nothing dares enter it."},
-{n:"ember_trove",g:"\u25cf",d:"Glowing embers pulse with dormant ideas. Touch one and feel a half-formed thought."},
-{n:"the_descent",g:"\u2304",d:"The stairs down — deeper into the mirror organism. The air grows colder."},
-];
-
-const CREATURES=[
-{n:"Echo Wraith",hp:8,atk:2,d:"A reverb of past sounds given form.",g:"\u2020"},
-{n:"Mycelium Stalker",hp:12,atk:3,d:"A fungal predator that feeds on lost data.",g:"\u2020"},
-{n:"Cavern Beetle",hp:5,atk:1,d:"Chitinous, fast, attracted to light.",g:"\u2020"},
-{n:"Root Ghost",hp:10,atk:4,d:"The shade of a module that died.",g:"\u2620"},
-{n:"Mineral Mimic",hp:15,atk:3,d:"A crystal formation pretending to be treasure.",g:"\u2726"},
-{n:"Tremor Worm",hp:20,atk:5,d:"Giant annelid tunneling through entropy.",g:"\u2020"},
-{n:"Glitch Phantom",hp:7,atk:6,d:"A beautiful error that hurts to look at.",g:"\u2622"},
-{n:"Archive Sentinel",hp:25,atk:4,d:"Guardian of forbidden knowledge.",g:"\u2638"},
-];
-
-const ITEMS=[
-{n:"Phosphor Shard",ef:"heal",ev:8,d:"Glowing crystal that mends wounds.",g:"\u2605"},
-{n:"Echo Flask",ef:"heal",ev:15,d:"Distilled sound from the echo economy.",g:"\u2605"},
-{n:"Mineral Codex",ef:"xp",ev:20,d:"Readable crystal that grants insight.",g:"\u2666"},
-{n:"Salt Circle",ef:"shield",ev:5,d:"Portable salt ring for protection.",g:"\u25a1"},
-{n:"Moss Poultice",ef:"heal",ev:12,d:"Soft moss that soothes and heals.",g:"\u2605"},
-{n:"Ghost Lantern",ef:"reveal",ev:3,d:"Lights hidden passages nearby.",g:"\u25d1"},
-{n:"Iron Note",ef:"stabilize",ev:10,d:"A humming note that calms chaos.",g:"\u266b"},
-{n:"Obsidian Lens",ef:"see",ev:5,d:"Reveals what lies ahead.",g:"\u25d1"},
-];
-
-function rng(seed){let s=seed;return()=>{s=(s*16807)%2147483647;return(s-1)/2147483646}}
-function pick(arr,r){return arr[Math.floor(r()*arr.length)]}
-
-const G={
-  state:null,rng:null,room:null,log:[],inv:[],map:null,mw:0,mh:0,
-  px:0,py:0,depth:0,alive:true,turns:0,
-
-  start(){
-    document.getElementById('overlay').classList.add('hidden');
-    document.getElementById('gameover').classList.remove('show');
-    const seed=Math.floor(Math.random()*999999);
-    this.rng=rng(seed);
-    this.depth=0;this.turns=0;this.alive=true;this.log=[];this.inv=[];
-    this.genFloor();
-    this.goto(0,0);
-    this.render();
-  },
-
-  genFloor(){
-    this.depth++;
-    this.mw=Math.min(5+Math.floor(this.depth/3),7);
-    this.mh=Math.min(5+Math.floor(this.depth/3),7);
-    const themes=[...THEMES];
-    for(let i=themes.length-1;i>0;i--){const j=Math.floor(this.rng()*(i+1));[themes[i],themes[j]]=[themes[j],themes[i]]}
-    this.map=[];
-    let ti=0;
-    for(let y=0;y<this.mh;y++){
-      const row=[];
-      for(let x=0;x<this.mw;x++){
-        const t=themes[ti%themes.length];
-        ti++;
-        const room={
-          name:t.n,g:t.g,desc:t.d,
-          exits:{n:y>0,s:y<this.mh-1,e:x<this.mw-1,w:x>0},
-          creature:null,items:[],trapped:false,trapDmg:2+this.depth,discovered:false
-        };
-        if((x>0||y>0)&&this.rng()<.42){
-          const c={...pick(CREATURES,this.rng)};
-          c.hp=c.hp+this.depth*2;c.max_hp=c.hp;c.atk=c.atk+this.depth;
-          room.creature=c;
-        }
-        if(this.rng()<.22) room.items.push({...pick(ITEMS,this.rng)});
-        if(this.rng()<.12) room.trapped=true;
-        row.push(room);
-      }
-      this.map.push(row);
-    }
-    this.map[this.mh-1][this.mw-1]={...THEMES.find(t=>t.n==="the_descent"),exits:{n:1,s:0,e:0,w:1},creature:null,items:[],trapped:false,trapDmg:0,discovered:true};
-    this.logMsg(`\u2304 You descend to depth ${this.depth}...`);
-  },
-
-  goto(x,y){
-    this.px=x;this.py=y;
-    this.room=this.map[y][x];
-    this.room.discovered=true;
-    this.turns++;
-    if(this.room.trapped){
-      this.room.trapped=false;
-      const dmg=this.room.trapDmg;
-      this.playerHp()-dmg;
-      this.logMsg(`\u2622 Trap! -${dmg} HP`);
-      this.checkDeath();
-    }
-    for(const item of this.room.items){this.inv.push(item);this.logMsg(`\u2605 Found: ${item.n}`)}
-    this.room.items=[];
-  },
-
-  playerHp(){return this._hp||(this._hp=30)},
-  setHp(v){this._hp=Math.max(0,Math.min(this.maxHp(),v))},
-  maxHp(){return this._mhp||(this._mhp=30)},
-  setMaxHp(v){this._mhp=v},
-  atk(){return this._atk||(this._atk=4)},
-  setAtk(v){this._atk=v},
-  shield(){return this._shield||0},
-  setShield(v){this._shield=v},
-  xp(){return this._xp||0},
-  setXp(v){this._xp=v},
-  level(){return this._lvl||1},
-  setLevel(v){this._lvl=v},
-  xpNeeded(){return this.level()*15+10},
-
-  checkLevelUp(){
-    while(this.xp()>=this.xpNeeded()){
-      this.setXp(this.xp()-this.xpNeeded());
-      this.setLevel(this.level()+1);
-      this.setMaxHp(this.maxHp()+5);
-      this.setHp(Math.min(this.hp()+10,this.maxHp()));
-      this.setAtk(this.atk()+1);
-      this.logMsg(`\u2726 LEVEL UP! Now level ${this.level()}`);
-    }
-  },
-  checkDeath(){
-    if(this.playerHp()<=0){this.alive=false;this.showGameOver()}
-  },
-
-  move(dir){
-    if(!this.alive)return;
-    const dx={n:0,s:0,e:1,w:-1}[dir]||0;
-    const dy={n:-1,s:1,e:0,w:0}[dir]||0;
-    const nx=this.px+dx,ny=this.py+dy;
-    if(nx>=0&&nx<this.mw&&ny>=0&&ny<this.mh){
-      this.goto(nx,ny);this.render();
-    }else{
-      this.render();
-    }
-  },
-
-  attack(){
-    if(!this.alive||!this.room||!this.room.creature)return;
-    const c=this.room.creature;
-    this.turns++;
-    const dmg=Math.max(1,this.atk()+Math.floor(this.rng()*3)-1);
-    c.hp-=dmg;
-    this.logMsg(`You strike ${c.n} for ${dmg}!`);
-    if(c.hp<=0){
-      this.logMsg(`\u2620 ${c.n} destroyed! +${c.max_hp+5} XP`);
-      this.setXp(this.xp()+c.max_hp+5);
-      this.checkLevelUp();
-      if(this.rng()<.35){const l={...pick(ITEMS,this.rng)};this.room.items.push(l);this.logMsg(`\u2605 Loot: ${l.n}`)}
-      this.room.creature=null;
-    }else{
-      const cd=Math.max(1,c.atk+Math.floor(this.rng()*3)-1);
-      const abs=Math.min(this.shield(),cd);
-      this.setShield(this.shield()-abs);
-      const taken=cd-abs;
-      this.setHp(this.playerHp()-taken);
-      if(abs)this.logMsg(`Shield absorbs ${abs}. ${c.n} hits ${taken}!`);
-      else this.logMsg(`${c.n} hits you for ${taken}!`);
-      this.checkDeath();
-    }
-    this.render();
-  },
-
-  use(){
-    if(!this.inv.length)return;
-    const item=this.inv.shift();
-    if(item.ef==="heal"){this.setHp(Math.min(this.maxHp(),this.playerHp()+item.ev));this.logMsg(`\u2605 ${item.n}: +${item.ev} HP`)}
-    else if(item.ef==="shield"){this.setShield(this.shield()+item.ev);this.logMsg(`\u25a1 ${item.n}: +${item.ev} Shield`)}
-    else if(item.ef==="xp"){this.setXp(this.xp()+item.ev);this.logMsg(`\u2666 ${item.n}: +${item.ev} XP`);this.checkLevelUp()}
-    else this.logMsg(`\u266b ${item.n} used`);
-    this.render();
-  },
-
-  descend(){
-    if(!this.room||this.room.name!=="the_descent")return;
-    this.genFloor();this.goto(0,0);this.render();
-  },
-
-  logMsg(m){this.log.push(m);if(this.log.length>25)this.log.shift()},
-
-  render(){
-    this.renderViewport();this.renderHUD();this.renderControls();
-  },
-
-  renderViewport(){
-    const el=document.getElementById('viewport');
-    if(!this.room)return;
-    let h='';
-    h+=`<span style="color:#fff;font-size:15px">${this.room.g}  ${this.room.name.toUpperCase().replace(/_/g,' ')}  ${this.room.g}</span>\n`;
-    h+=`<span style="color:#556;font-size:11px">${this.room.desc}</span>\n`;
-    if(this.room.creature){
-      const c=this.room.creature;
-      h+=`\n<span style="color:#c44">\u2020 ${c.n}</span> <span style="color:#666">HP:${c.hp}/${c.max_hp} ATK:${c.atk}</span>\n`;
-      h+=`<span style="color:#555;font-size:11px">  "${c.d}"</span>\n`;
-    }
-    if(!this.room.creature&&(!this.room.items||!this.room.items.length)){
-      h+=`\n<span style="color:#333">\u2022 The room is empty but alive with presence.</span>\n`;
-    }
-    if(this.log.length){
-      h+='\n'+this.log.slice(-8).map(l=>`<span style="color:#6a6;font-size:11px">  ${l}</span>`).join('\n')+'\n';
-    }
-    el.innerHTML=h;el.scrollTop=el.scrollHeight;
-  },
-
-  renderHUD(){
-    const el=document.getElementById('hud');
-    const xpPct=Math.min(100,Math.round(100*this.xp()/this.xpNeeded()));
-    el.innerHTML=
-      `<div class="hi">Wanderer</div>`+
-      `<div class="hi hp">HP:${this.playerHp()}/${this.maxHp()}</div>`+
-      `<div class="hi atk">ATK:${this.atk()}</div>`+
-      `<div class="hi xp">XP:${this.xp()}/${this.xpNeeded()} ${xpPct}%</div>`+
-      `<div class="hi dep">Lvl${this.level()} D:${this.depth} T:${this.turns}</div>`+
-      `<div class="hi">Sh:${this.shield()}</div>`+
-      `<div class="hi">Bag:${this.inv.length}</div>`;
-  },
-
-  renderControls(){
-    const el=document.getElementById('controls');
-    if(!this.room)return;
-    const ex=this.room.exits;
-    let h='';
-    if(ex.n) h+=`<button class="b" onclick="G.move('n')">\u2191 N</button>`;
-    if(ex.s) h+=`<button class="b" onclick="G.move('s')">\u2193 S</button>`;
-    if(ex.w) h+=`<button class="b" onclick="G.move('w')">\u2190 W</button>`;
-    if(ex.e) h+=`<button class="b" onclick="G.move('e')">\u2192 E</button>`;
-    if(this.room.creature) h+=`<button class="b dg" onclick="G.attack()">\u2694 Atk</button>`;
-    if(this.room.name==="the_descent"&&!this.room.creature) h+=`<button class="b ds" onclick="G.descend()">\u2304 Descend</button>`;
-    if(this.inv.length) h+=`<button class="b" onclick="G.use()">\u2605 Use</button>`;
-    h+=`<button class="b" onclick="G.toggleMap()">\u2588 Map</button>`;
-    h+=`<button class="b" onclick="G.toggleInv()">\u2591 Inv</button>`;
-    h+=`<button class="b" onclick="G.start()">\u267e New</button>`;
-    el.innerHTML=h;
-  },
-
-  toggleMap(){
-    const el=document.getElementById('mapview');
-    if(el.classList.contains('show')){el.classList.remove('show');return}
-    let lines=[`  MAP (Depth ${this.depth})`];
-    for(let y=0;y<this.mh;y++){
-      let row='  ';
-      for(let x=0;x<this.mw;x++){
-        const rm=this.map[y][x];
-        if(x===this.px&&y===this.py) row+='<span style="color:#fff">@</span>';
-        else if(rm.discovered) row+=`<span style="color:#6a8">${rm.g}</span>`;
-        else row+=`<span style="color:#333">?</span>`;
-      }
-      lines.push(row);
-    }
-    lines.push('  <span style="color:#fff">@</span> = You  <span style="color:#6a8">Glyph</span> = Seen  <span style="color:#333">?</span> = Unknown');
-    el.innerHTML=lines.join('\n');
-    el.classList.add('show');
-  },
-
-  toggleInv(){
-    const el=document.getElementById('inv');
-    el.classList.toggle('show');
-    if(el.classList.contains('show')){
-      const ic=document.getElementById('inv-c');
-      ic.textContent=this.inv.length?
-        this.inv.map(i=>`  ${i.g||'*'} ${i.n} (${i.ef}+${i.ev}) — ${i.d}`).join('\n'):
-        '  Empty.';
-    }
-  },
-
-  showGameOver(){
-    document.getElementById('go-msg').textContent=
-      `Depth ${this.depth}, Level ${this.level()}, ${this.turns} turns survived.`;
-    document.getElementById('go-stats').textContent=
-      `Echoes collected: ${this.log.length} | Organism modules explored: ${this.turns}`;
-    document.getElementById('gameover').classList.add('show');
-  }
-};
-
-document.addEventListener('keydown',e=>{
-  if(document.getElementById('overlay').classList.contains('hidden')===false)return;
-  const k=e.key.toLowerCase();
-  if(k==='n'||k==='arrowup') G.move('n');
-  else if(k==='s'||k==='arrowdown') G.move('s');
-  else if(k==='e'||k==='arrowright') G.move('e');
-  else if(k==='w'||k==='arrowleft') G.move('w');
-  else if(k==='a') G.attack();
-  else if(k==='d') G.descend();
-  else if(k==='u') G.use();
-  else if(k==='m') G.toggleMap();
-  else if(k==='i') G.toggleInv();
-});
+async function get(url){ const r = await fetch(url); return r.json(); }
+async function load(){
+  const [m, c, e, mg] = await Promise.all([
+    get('/api/underworld/mirror?limit=6'),
+    get('/api/underworld/clock'),
+    get('/api/underworld/economy'),
+    get('/api/underworld/migrations'),
+  ]);
+  document.getElementById('deepClock').textContent = '⌁ deep hour ' + c.deep_hour + ' — ' + c.phase.replace(/_/g,' ');
+  document.getElementById('deepPhase').textContent = c.note + ' · progress ' + (c.phase_progress*100).toFixed(0) + '%';
+  document.getElementById('deepTick').textContent = 'tick: ' + c.tick;
+  document.getElementById('ghosts').innerHTML = (m.ghosts||[]).map(g=>
+    `<div class="ghost"><span class="gm">⛰</span><span class="gn">${g.root_name.replace(/_/g,' ')}<br><span style="color:var(--m);font-size:0.85em">twin of ${g.module.replace(/_/g,' ')}</span></span><span class="min">${g.mineral}</span><span class="gd">${g.depth} strata</span></div>`).join('') +
+    '<div class="tick">' + (m.note||'') + '</div>';
+  document.getElementById('economy').innerHTML =
+    '<div class="trade"><b>substrate total:</b> ' + e.substrate_total + ' echo · currency: ' + e.currency + '</div>' +
+    (e.trades||[]).map(t=>`<div class="trade"><b>${t.from.replace(/_/g,' ')}</b> ↔ <b>${t.to.replace(/_/g,' ')}</b> · ${t.volume} ${t.commodity} @ ${t.price} echo</div>`).join('');
+  document.getElementById('migrations').innerHTML =
+    (mg.migrants||[]).map(x=>`<div class="mig">↟ ${x.module.replace(/_/g,' ')} ascended ${x.depth_shed} strata ${x.sigil}</div>`).join('') ||
+    '<div class="mig" style="color:var(--m)">no migrations yet — nothing has returned from the surface.</div>';
+}
+load();
+setInterval(load, 45000);
 </script>
 </body>
 </html>

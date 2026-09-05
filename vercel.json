@@ -292,6 +292,18 @@
       "dest": "/dashboard/journal.html"
     },
     {
+      "src": "/api/underworld",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/underworld.html",
+      "dest": "/dashboard/underworld.html"
+    },
+    {
+      "src": "/underworld",
+      "dest": "/dashboard/underworld.html"
+    },
+    {
       "src": "/api/organurna_loop",
       "dest": "/api/index.py"
     },
