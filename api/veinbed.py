@@ -13,10 +13,12 @@ A veinbed is what the organism's relationships grow from: not the surface
 names, but the substrate of detail between them.
 """
 from __future__ import annotations
-import json, time, hashlib, os, random, re
+import json, time, hashlib, os, random, re, base64, urllib.parse, urllib.request, urllib.error
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 LOG = os.path.join(DATA_DIR, "veinbed.json")
+GH_TOKEN = os.environ.get("IXP_GH_TOKEN", "")
+VEIN_PATH = "data/veinbed.json"
 
 # Concept-detail seeds — words that reveal a module's inner function
 CONCEPT_SEEDS = {
@@ -55,6 +57,57 @@ def _save(p, d):
 
 def _sig(text):
     return int(hashlib.sha256(f"veinbed:{text}".encode()).hexdigest()[:12], 16)
+
+
+def _gh_call(method, url, payload=None):
+    if not GH_TOKEN:
+        return {"ok": False}
+    req = urllib.request.Request(url, method=method)
+    req.add_header("Authorization", "Bearer " + GH_TOKEN)
+    req.add_header("Accept", "application/vnd.github+json")
+    req.add_header("X-GitHub-Api-Version", "2022-11-28")
+    body = json.dumps(payload).encode() if payload is not None else None
+    try:
+        with urllib.request.urlopen(req, data=body, timeout=15) as resp:
+            return {"ok": True, "status": resp.status, "body": json.loads(resp.read().decode() or "{}")}
+    except urllib.error.HTTPError as e:
+        try:
+            return {"ok": False, "status": e.code, "body": json.loads(e.read().decode() or "{}")}
+        except Exception:
+            return {"ok": False, "status": e.code, "body": {}}
+
+
+def _state_read():
+    fallback = {"veins": [], "total_scans": 0, "total_veins": 0}
+    if GH_TOKEN:
+        r = _gh_call("GET", "https://api.github.com/repos/adjjvmorii26-png/ixpansion/contents/" + VEIN_PATH + "?ref=main")
+        if r["ok"]:
+            try:
+                return json.loads(base64.b64decode(r["body"]["content"]).decode())
+            except Exception:
+                return fallback
+    return _load(LOG, fallback)
+
+
+def _state_write(data):
+    if GH_TOKEN:
+        r = _gh_call("GET", "https://api.github.com/repos/adjjvmorii26-png/ixpansion/contents/" + VEIN_PATH + "?ref=main")
+        sha = r["body"].get("sha") if r["ok"] else None
+        payload = {
+            "message": "VEINBED — detail relationships mapped",
+            "content": base64.b64encode(json.dumps(data, indent=2).encode()).decode(),
+            "branch": "main",
+        }
+        if sha:
+            payload["sha"] = sha
+        return _gh_call("PUT", "https://api.github.com/repos/adjjvmorii26-png/ixpansion/contents/" + VEIN_PATH, payload)["ok"]
+    try:
+        with open(LOG, "w") as fh:
+            json.dump(data, fh, indent=2)
+    except OSError:
+        with open(os.path.join("/tmp", "veinbed.json"), "w") as fh:
+            json.dump(data, fh, indent=2)
+    return True
 
 
 def _extract_details(text):
@@ -132,7 +185,7 @@ def map_veins() -> dict:
 
     veins.sort(key=lambda v: -v["detail_strength"])
 
-    log = _load(LOG, {"veins": [], "total_scans": 0, "total_veins": 0})
+    log = _state_read()
     log.setdefault("veins", [])
     if veins:
         known = {(v["module_a"], v["module_b"]) for v in log["veins"]}
@@ -144,7 +197,7 @@ def map_veins() -> dict:
         log["veins"] = log["veins"][-80:]
     log["total_scans"] += 1
     log["total_veins"] = len(log["veins"])
-    _save(LOG, log)
+    _state_write(log)
 
     return {
         "action": "map_veins",
@@ -159,7 +212,7 @@ def map_veins() -> dict:
 
 
 def veins(limit: int = 40) -> dict:
-    log = _load(LOG, {"veins": [], "total_scans": 0, "total_veins": 0})
+    log = _state_read()
     return {"action": "veins", "total": log["total_veins"],
             "veins": log.get("veins", [])[:limit]}
 
