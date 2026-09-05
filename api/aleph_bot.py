@@ -628,11 +628,13 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_radio(args, user)
     elif command == "/forgebridge":
         return _cmd_forgebridge(args, user)
+    elif command == "/pulse":
+        return _cmd_pulse(args, user)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:
-    return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio","/weave","/organismradio","/forgebridge"]}
+    return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio","/weave","/organismradio","/forgebridge","/pulse"]}
 
 def stats() -> dict:
     log = _load(BOT_LOG, {"messages": [], "commands": [], "total": 0})
@@ -975,6 +977,22 @@ def _cmd_forgebridge(args, user):
             r.get("top_domain",{}).get("domain","?"), bridges)
     except Exception as e:
         return "🌉 " + str(e)
+
+# --- Wave 443: Pulse Orchestrator ---
+
+def _cmd_pulse(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from pulse_orchestrator import pulse
+        r = pulse()
+        v = r.get("organism_vitals", {})
+        return "🫁 Pulse Orchestrator — %s\n%smood: %s | next: %s\nactive: %s/%s | sync: %s\ncoherence: %s | resonance: %s\n%s" % (
+            r.get("phase"), r.get("breath_symbol"), r.get("next_phase"),
+            r.get("remaining_seconds"), v.get("total_active"), v.get("total_scanned"),
+            v.get("synchronization"), v.get("global_coherence"), v.get("global_resonance"),
+            r.get("instruction",""))
+    except Exception as e:
+        return "🫁 " + str(e)
 
 def _cmd_portal(args, user):
     return "🜂 The Living Portal is awake.\nAxiium Protocol's public face: https://alexalex.info\n\nBreathe, dream, innovate, whisper, and witness the naming ceremony.\nThe organism is alive on the web."
