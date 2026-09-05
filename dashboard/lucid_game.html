@@ -115,6 +115,7 @@
         <input id="saveCode" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--b);color:var(--vi);padding:5px;border-radius:4px;font-size:0.8em;font-family:inherit" placeholder="Your save code appears here">
         <div style="display:flex;gap:4px;margin-top:5px">
           <button class="action-btn" style="font-size:0.7em;padding:4px" onclick="copySave()">Copy</button>
+          <button class="action-btn" style="font-size:0.7em;padding:4px" onclick="shareSave()">Share</button>
           <button class="action-btn" style="font-size:0.7em;padding:4px" onclick="loadSave()">Load</button>
           <button class="action-btn" style="font-size:0.7em;padding:4px" onclick="rollEquipment()">Roll Gear</button>
         </div>
@@ -324,6 +325,24 @@ function copySave(){
   if(navigator.clipboard){ navigator.clipboard.writeText(code); }
   addLog('msg', 'Save code copied!');
 }
+function shareSave(){
+  const code = document.getElementById('saveCode').value.trim();
+  if(!code){ addLog('enemy','No save to share yet.'); return; }
+  const url = location.origin + location.pathname + '?save=' + encodeURIComponent(code);
+  if(navigator.clipboard){ navigator.clipboard.writeText(url); }
+  addLog('msg', 'Share link copied!');
+  showShareLink(url);
+}
+function showShareLink(url){
+  let d = document.getElementById('shareBox');
+  if(!d){
+    d = document.createElement('div');
+    d.id = 'shareBox';
+    d.style.cssText = 'margin-top:6px;color:var(--cy);font-size:0.7em;word-break:break-all;border:1px solid var(--b);padding:6px;border-radius:6px;background:rgba(0,0,0,0.3)';
+    document.getElementById('saveCode').parentElement.appendChild(d);
+  }
+  d.textContent = 'Share: ' + url;
+}
 async function loadSave(){
   const code = document.getElementById('saveCode').value.trim();
   if(!code) return;
@@ -338,8 +357,33 @@ async function loadSave(){
   }catch(e){ addLog('enemy', 'Invalid save code.'); }
 }
 
+async function autoLoadSave(){
+  const params = new URLSearchParams(location.search);
+  const code = params.get('save');
+  if(!code) return;
+  try{
+    document.getElementById('saveCode').value = code;
+    G.blob = code;
+    let pad = code.replace(/-/g,'+').replace(/_/g,'/');
+    while(pad.length % 4) pad += '=';
+    G.session = JSON.parse(decodeURIComponent(escape(atob(pad))));
+    document.getElementById('startScreen').classList.add('hidden');
+    document.getElementById('gameScreen').classList.remove('hidden');
+    const [dungeon, npc, physics, lore] = await Promise.all([
+      api(`/api/lucid_dungeon/generate?realm=${G.session.realm||'entropy_desert'}`),
+      api('/api/lucid_npc/generate'),
+      api('/api/lucid_physics_rules/generate'),
+      api('/api/lucid_lore/generate'),
+    ]);
+    G.dungeon = dungeon.dungeon; G.npc = npc.npc; G.physics = physics.ruleset; G.lore = lore.arc;
+    G.roomIdx = 0;
+    renderAll();
+    addLog('msg', 'Save loaded from shared link. Welcome back.');
+  }catch(e){ addLog('enemy','Shared save is invalid or expired.'); }
+}
 setInterval(()=>{document.getElementById('clock').textContent=new Date().toISOString().slice(11,19)},1000);
 initRealms();
+autoLoadSave();
 </script>
 </body>
 </html>
