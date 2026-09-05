@@ -126,6 +126,13 @@ li:last-child{border:none}
     <div class="btn-row"><button class="btn" onclick="runAmplify()">Amplify</button></div>
   </div>
 
+  <div class="card" style="grid-column:1/3" id="innovate-card">
+    <h2>💡 Lateral Innovation Engine — Cross-Domain Creativity</h2>
+    <p id="innovate-text" style="font-style:italic;color:var(--blue)">reaching outside the organism...</p>
+    <ul id="innovate-list"></ul>
+    <div class="btn-row"><button class="btn" onclick="runInnovate()">Innovate (3)</button></div>
+  </div>
+
   <div class="card" style="grid-column:1/3">
     <h2>📜 Cycle Log</h2>
     <ul id="cycle-log"></ul>
@@ -142,7 +149,7 @@ async function runCycle(){
   document.getElementById('loop-total').textContent=r.total_cycles||'—';
   document.getElementById('loop-info').textContent='cycle '+r.cycle_id+' — '+r.actions_taken+' actions, '+r.phases_completed+' phases';
   loopStatus();
-runWhisper();
+runWhisper(); runInnovate();
 openValve();
 surfaceSub();
 runAmplify();
@@ -191,6 +198,18 @@ async function paradoxOracle(){
   const list=document.getElementById('paradox-list');
   list.innerHTML='';
   (r.resolutions||[]).forEach(res=>{const li=document.createElement('li');li.textContent='\"'+res.synthesis.substring(0,80)+'\"';list.appendChild(li)});
+}
+async function runInnovate(){
+  document.getElementById('innovate-text').textContent='reaching outside...';
+  const r=await api('lateral_innovation_engine/innovate?count=3');
+  document.getElementById('innovate-text').textContent=r.verse||'silence';
+  const list=document.getElementById('innovate-list');
+  list.innerHTML='';
+  (r.innovations||[]).forEach(i=>{
+    const li=document.createElement('li');
+    li.textContent='['+i.external_domain+'] novelty '+Math.round(i.novelty_score*100)+'% — '+i.novel_concept.substring(0,80);
+    list.appendChild(li);
+  });
 }
 async function runWhisper(){
   const r=await api('silence_whisperer/whisper?count=3');

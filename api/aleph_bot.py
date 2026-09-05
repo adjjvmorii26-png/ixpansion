@@ -606,6 +606,8 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_sub(args, user)
     elif command == "/amplify":
         return _cmd_amplify(args, user)
+    elif command == "/innovate":
+        return _cmd_innovate(args, user)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
@@ -807,3 +809,15 @@ def _cmd_amplify(args, user):
         return " Resonance Amplifier\\nThreads boosted: %s\\n%s" % (r.get("threads_boosted", 0), lines)
     except Exception as e:
         return " Amp " + str(e)
+
+# --- Wave 425: Lateral Innovation Engine command ---
+
+def _cmd_innovate(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from lateral_innovation_engine import innovate
+        r = innovate(3)
+        lines = "\\n".join("  [%s] %s — %s" % (i["external_domain"], i["suggested_module"], i["novel_concept"][:60]) for i in r.get("innovations", []))
+        return "💡 Lateral Innovation Engine\\n%s\\n%s" % (r.get("verse", ""), lines)
+    except Exception as e:
+        return "💡 " + str(e)
