@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shrine of Runs — Offer Your Lucid Save</title>
+<style>
+  :root{--bg:#05050f;--s:rgba(10,10,24,0.97);--b:rgba(255,255,255,0.08);--t:#a0a0b8;--m:#4a4a64;--ac:#7c7cf8;--te:#2dd4bf;--am:#fbbf24;--vi:#a78bfa;--cy:#22d3ee;--gn:#4ade80;--gd:#f59e0b}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--t);font-family:'SF Mono','Fira Code',monospace;min-height:100vh;padding:20px}
+  .hd{text-align:center;padding:14px 20px;border:1px solid var(--b);border-radius:12px;background:linear-gradient(180deg,rgba(245,158,11,0.06),transparent);margin-bottom:18px}
+  .hd h1{font-size:1.4em;color:#fff;letter-spacing:2px;text-transform:uppercase}
+  .hd h1 span{color:var(--gd);text-shadow:0 0 18px rgba(245,158,11,0.35)}
+  .sub{color:var(--m);font-size:0.75em;margin-top:5px;letter-spacing:1px}
+  .offer{background:var(--s);border:1px solid rgba(245,158,11,0.35);border-radius:12px;padding:16px;max-width:640px;margin:0 auto 18px}
+  .offer label{font-size:0.68em;color:var(--m);letter-spacing:1px;display:block;margin:8px 0 4px}
+  input{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--b);color:#fff;padding:8px 10px;border-radius:8px;font-family:inherit;font-size:0.72em;outline:none;box-sizing:border-box}
+  button{width:100%;background:rgba(245,158,11,0.14);border:1px solid rgba(245,158,11,0.4);color:#fff;padding:9px;border-radius:8px;font-family:inherit;font-size:0.75em;cursor:pointer;margin-top:10px}
+  button:hover{background:rgba(245,158,11,0.28)}
+  .verdict{margin-top:12px;font-size:0.75em;color:var(--te);display:none}
+  .hall h2{color:#fff;font-size:0.85em;letter-spacing:1px;margin-bottom:10px;text-transform:uppercase}
+  .row{display:flex;gap:10px;align-items:center;padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.72em}
+  .row.top{background:rgba(245,158,11,0.08);border-radius:8px}
+  .rank{color:var(--gd);width:28px;font-weight:700}
+  .rname{color:#fff;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rtitle{color:var(--vi);font-size:0.64em;width:130px}
+  .rscore{color:var(--am);font-weight:700;width:60px;text-align:right}
+  .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:24px;letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="hd">
+  <h1>🏛 Shrine of <span>Runs</span></h1>
+  <div class="sub">OFFER YOUR SAVE · JOIN THE HALL OF RUNS · WAVE 384</div>
+</div>
+
+<div class="offer">
+  <label>YOUR NAME (TITLE GRANTED BY SCORE)</label>
+  <input id="name" placeholder="Wanderer" maxlength="20">
+  <label>SAVE CODE — COPY IT FROM THE LUCID GAME</label>
+  <input id="blob" placeholder="paste your save code here">
+  <button onclick="offerRun()">🏛 OFFER THIS RUN TO THE SHRINE</button>
+  <div class="verdict" id="verdict"></div>
+</div>
+
+<div class="hall">
+  <h2>Hall of Runs</h2>
+  <div id="hall"></div>
+</div>
+<div class="foot">WAVE 384 · SHRINE OF RUNS · PLAY BECOMES LEGACY</div>
+
+<script>
+async function get(url){ const r = await fetch(url); return r.json(); }
+async function offerRun(){
+  const name = document.getElementById('name').value.trim() || 'Wanderer';
+  const blob = document.getElementById('blob').value.trim();
+  if(!blob){ alert('Paste a save code first.'); return; }
+  const d = await get(`/api/lucid_shrine/offer?name=${encodeURIComponent(name)}&blob=${encodeURIComponent(blob)}`);
+  const v = document.getElementById('verdict');
+  v.style.display = 'block';
+  if(d.error){ v.style.color = '#fb7185'; v.textContent = 'The Shrine rejects this code: ' + d.error; }
+  else {
+    v.style.color = 'var(--te)';
+    v.textContent = `Inscribed. ${d.run.name} the ${d.title} — score ${d.run.score}, rank #${d.rank} of ${d.total_inscribed}.`;
+    loadHall();
+  }
+}
+async function loadHall(){
+  const d = await get('/api/lucid_shrine/hall');
+  const el = document.getElementById('hall');
+  if(!(d.runs||[]).length){ el.innerHTML = '<div style="color:var(--m)">The hall is empty. Be the first offering.</div>'; return; }
+  el.innerHTML = (d.runs||[]).map((r,i)=>`<div class="row ${i<3?'top':''}"><span class="rank">#${i+1}</span><span class="rname">${r.name}</span><span class="rtitle">${r.title}</span><span style="color:var(--m)">${r.realms_cleared}/10</span><span class="rscore">${r.score}</span></div>`).join('');
+}
+(async function(){
+  loadHall();
+  const params = new URLSearchParams(location.search);
+  if(params.get('save')){ document.getElementById('blob').value = params.get('save'); offerRun(); }
+})();
+</script>
+</body>
+</html>

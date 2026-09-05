@@ -256,6 +256,18 @@
       "dest": "/dashboard/verse.html"
     },
     {
+      "src": "/api/lucid_shrine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/shrine.html",
+      "dest": "/dashboard/shrine.html"
+    },
+    {
+      "src": "/shrine",
+      "dest": "/dashboard/shrine.html"
+    },
+    {
       "src": "/garden",
       "dest": "/dashboard/garden_live.html"
     },

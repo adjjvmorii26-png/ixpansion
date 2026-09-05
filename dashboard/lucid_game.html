@@ -118,6 +118,7 @@
           <button class="action-btn" style="font-size:0.7em;padding:4px" onclick="shareSave()">Share</button>
           <button class="action-btn" style="font-size:0.7em;padding:4px" onclick="loadSave()">Load</button>
           <button class="action-btn" style="font-size:0.7em;padding:4px" onclick="rollEquipment()">Roll Gear</button>
+          <button class="action-btn" style="font-size:0.7em;padding:4px" onclick="offerToShrine()">🏛 Shrine</button>
         </div>
       </div>
     </div>
@@ -324,6 +325,11 @@ function copySave(){
   const code = document.getElementById('saveCode').value;
   if(navigator.clipboard){ navigator.clipboard.writeText(code); }
   addLog('msg', 'Save code copied!');
+}
+function offerToShrine(){
+  const code = document.getElementById('saveCode').value.trim();
+  if(!code){ addLog('enemy','Play a little first, then offer your run.'); return; }
+  window.open(location.origin + '/shrine?save=' + encodeURIComponent(code), '_blank');
 }
 function shareSave(){
   const code = document.getElementById('saveCode').value.trim();
