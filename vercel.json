@@ -1502,6 +1502,18 @@
     {
       "src": "/api/autonomous_bloom",
       "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/breeze",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/echoic_ember",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/breeze",
+      "dest": "/dashboard/threads.html#breeze-card"
     }
   ],
   "env": {

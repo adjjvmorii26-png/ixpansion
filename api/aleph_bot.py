@@ -551,6 +551,19 @@ def _process_command(command: str, args: list, user: str) -> str:
         except Exception as e:
             return "🌸 " + str(e)
 
+    elif command == "/breeze":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from breeze import run, history
+            if args and args[0] == "history":
+                h = history(5)
+                lines = "\n".join(" breath %s: %s ok · %s threads" % (b.get("total_breaths","?"), b.get("breath_count",0), b.get("threads",0)) for b in (h.get("breaths") or []))
+                return "🌬️ Breeze History — %s total breaths\n%s" % (h.get("total",0), lines or "no breaths yet")
+            r = run()
+            return "🌬️ Breeze — %s/%s systems fired · ok: %s\nthreads: %s · modules: %s\n%s\n\"%s\"\n\nView: https://alexalex.info/threads" % (r['breath_count'], r['total_actions'], r['ok'], r['threads'], r['modules'], r['summary'].replace('; ','\n'), r['lore'])
+        except Exception as e:
+            return "🌬️ " + str(e)
+
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:
