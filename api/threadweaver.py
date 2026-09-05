@@ -12,7 +12,7 @@ strength, age, and a confession verse when the modules have spoken together.
 The Threadweaver does not create relationships. It reveals the ones already there.
 """
 from __future__ import annotations
-import json, time, hashlib, os, random
+import json, time, hashlib, os, random, sys
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 LOG = os.path.join(DATA_DIR, "threadweaver.json")
@@ -143,9 +143,11 @@ def _gather_relationships():
     if forge.get("relics"):
         sources_used.append("forge")
 
-    # 6. Silence Collector — forgotten modules that are halves of each other
+    # 6. Silence Collector — GitHub-backed forgotten module pairs
     try:
-        silence = _load(os.path.join(DATA_DIR, "silence_pairs.json"), {"pairs": []})
+        sys.path.insert(0, os.path.dirname(__file__))
+        from silence_collector import pairs as _silence_pairs
+        silence = _silence_pairs(80)
         for p in silence.get("pairs", []):
             threads.append({
                 "module_a": p.get("module_a"), "module_b": p.get("module_b"),
