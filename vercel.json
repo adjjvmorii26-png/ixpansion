@@ -232,6 +232,18 @@
       "dest": "/dashboard/echo.html"
     },
     {
+      "src": "/api/mutation_forge",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/forge.html",
+      "dest": "/dashboard/forge.html"
+    },
+    {
+      "src": "/forge",
+      "dest": "/dashboard/forge.html"
+    },
+    {
       "src": "/garden",
       "dest": "/dashboard/garden_live.html"
     },

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mutation Forge — New Modules Born of Two</title>
+<style>
+  :root{--bg:#05050f;--s:rgba(10,10,24,0.97);--b:rgba(255,255,255,0.08);--t:#a0a0b8;--m:#4a4a64;--ac:#7c7cf8;--te:#2dd4bf;--am:#fbbf24;--vi:#a78bfa;--cy:#22d3ee;--gn:#4ade80}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--t);font-family:'SF Mono','Fira Code',monospace;min-height:100vh;padding:20px}
+  .hd{text-align:center;padding:14px 20px;border:1px solid var(--b);border-radius:12px;background:linear-gradient(180deg,rgba(251,191,36,0.06),transparent);margin-bottom:18px}
+  .hd h1{font-size:1.4em;color:#fff;letter-spacing:2px;text-transform:uppercase}
+  .hd h1 span{color:var(--am);text-shadow:0 0 18px rgba(251,191,36,0.35)}
+  .sub{color:var(--m);font-size:0.75em;margin-top:5px;letter-spacing:1px}
+  .tools{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+  input,button{background:var(--s);border:1px solid var(--b);color:#fff;padding:8px 12px;border-radius:8px;font-family:inherit;font-size:0.75em;outline:none}
+  button{cursor:pointer;background:rgba(251,191,36,0.12);border-color:rgba(251,191,36,0.4)}
+  button:hover{background:rgba(251,191,36,0.25)}
+  .badge{display:inline-block;background:rgba(167,139,250,0.12);color:var(--vi);border:1px solid rgba(167,139,250,0.35);padding:2px 8px;border-radius:20px;font-size:0.62em;margin-left:6px}
+  .chip{display:inline-block;background:rgba(45,212,191,0.1);color:var(--te);border:1px solid rgba(45,212,191,0.3);padding:2px 8px;border-radius:20px;font-size:0.64em;margin:2px}
+  .result{background:var(--s);border:1px solid rgba(251,191,36,0.35);border-radius:10px;padding:16px;margin-top:8px}
+  .result h2{font-size:1.1em;color:#fff;letter-spacing:1px}
+  .doctrine{color:var(--t);font-size:0.8em;line-height:1.6;margin:10px 0;border-left:3px solid var(--am);padding-left:12px}
+  .traits{display:flex;gap:14px;flex-wrap:wrap;margin:8px 0;font-size:0.7em}
+  .trait{background:rgba(0,0,0,0.3);border:1px solid var(--b);padding:6px 10px;border-radius:6px}
+  .trait b{color:#fff}
+  pre{background:rgba(0,0,0,0.45);border:1px solid var(--b);border-radius:8px;padding:14px;font-size:0.66em;line-height:1.6;overflow:auto;color:var(--cy);max-height:420px;margin-top:10px}
+  .actions{display:flex;gap:8px;margin-top:10px}
+  .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:24px;letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="hd">
+  <h1>⚒ Mutation <span>Forge</span></h1>
+  <div class="sub">FUSE TWO MODULES · FORGE A NEW BLUEPRINT · WAVE 380</div>
+</div>
+
+<div class="tools">
+  <input id="a" list="mods" placeholder="parent A (e.g. entropy_oracle)">
+  <span style="color:var(--am)">+</span>
+  <input id="b" list="mods" placeholder="parent B">
+  <datalist id="mods"></datalist>
+  <button onclick="doForge()">⚒ Forge</button>
+  <button onclick="randomPair()">🎲 Random Pair</button>
+</div>
+
+<div id="result" class="result" style="display:none"></div>
+<div class="foot">WAVE 380 · MUTATION FORGE · NOTHING IS BORN ALONE</div>
+
+<script>
+async function get(url){ const r = await fetch(url); return r.json(); }
+async function fillCatalog(){
+  const d = await get('/api/mutation_forge/catalog');
+  document.getElementById('mods').innerHTML = (d.sample||[]).map(n=>`<option value="${n}">`).join('');
+}
+function randomPair(){
+  const names = Array.from(document.querySelectorAll('#mods option')).map(o=>o.value);
+  if(names.length < 2) return;
+  const pick = () => names[Math.floor(Math.random()*names.length)];
+  const a = pick(); let b = pick();
+  while(b === a) b = pick();
+  document.getElementById('a').value = a;
+  document.getElementById('b').value = b;
+  doForge();
+}
+async function doForge(){
+  const a = document.getElementById('a').value.trim();
+  const b = document.getElementById('b').value.trim();
+  if(!a && !b){ alert('give at least one parent module'); return; }
+  const d = await get(`/api/mutation_forge/forge?${a?`a=${encodeURIComponent(a)}`:''}${a&&b?'&':''}${b?`b=${encodeURIComponent(b)}`:''}`);
+  const bp = d.blueprint;
+  if(!bp){ document.getElementById('result').innerHTML = '<div style="color:#fb7185">' + (d.error||'forge failed') + '</div>'; document.getElementById('result').style.display='block'; return; }
+  const el = document.getElementById('result');
+  el.style.display = 'block';
+  el.innerHTML =
+    '<h2>' + bp.child.replace(/_/g,' ') + ' <span class="badge">BLUEPRINT</span></h2>' +
+    '<div class="doctrine">' + bp.doctrine + '</div>' +
+    '<div class="traits">' + Object.entries(bp.traits||{}).map(([k,v])=>`<div class="trait"><b>${k}</b>: ${typeof v==='number'?v.toFixed(2):v}</div>`).join('') + '</div>' +
+    '<div style="font-size:0.7em;color:var(--m)">parents: ' + (bp.parents||[]).map(p=>`<span class="chip">${p}</span>`).join(' ') + '</div>' +
+    '<pre id="skeleton">' + (bp.skeleton||'').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</pre>' +
+    '<div class="actions"><button onclick="copySkeleton()">📋 Copy Skeleton</button><button onclick="doForge()">⚒ Forge Again</button></div>';
+}
+function copySkeleton(){
+  const t = document.getElementById('skeleton');
+  if(navigator.clipboard && t) navigator.clipboard.writeText(t.textContent).then(()=>alert('Blueprint copied.'));
+}
+fillCatalog();
+</script>
+</body>
+</html>
