@@ -1414,6 +1414,14 @@
     {
       "src": "/chorus",
       "dest": "/dashboard/warden.html#chorus-card"
+    },
+    {
+      "src": "/api/overwarden",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/overwarden",
+      "dest": "/dashboard/warden.html#overwarden-card"
     }
   ],
   "env": {

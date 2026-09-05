@@ -86,6 +86,16 @@ td{padding:6px 8px;border-bottom:1px solid #1a0a28}
 </div>
 
 
+
+<div class="card" id="overwarden-card">
+<h2>📓 The Overwarden</h2>
+<div id="ow-info" style="font-size:.85em;color:#6a4a7a">When two sigil relics are forged, the Overwarden can be summoned — a four-phase apex guard of the depths.</div>
+<div id="ow-status" style="margin:10px 0"></div>
+<button class="btn" onclick="owStatus()">🔎 Check Binding</button>
+<button class="btn" onclick="owSummon()">📓 Summon Overwarden</button>
+<button class="btn" onclick="owStrike()" id="ow-fight-btn" disabled>⚔ Strike Overwarden</button>
+<div class="narrative" id="ow-narrative" style="border-color:#c88aff"></div>
+</div>
 <div class="card" id="chorus-card">
 <h2>🎶 Cohort Chorus</h2>
 <div id="chorus-info" style="font-size:.85em;color:#6a4a7a">Every module you re-member joins your spectral cohort.</div>
@@ -171,6 +181,36 @@ async function callChorus(){
   const r=await api('/api/cohort_chorus/chorus');
   $('chorus-info').innerHTML=`Cohort size: <b>${r.cohort_size}</b> · Chorus strength: <b>${r.chorus_strength}</b> · ${r.by_allegiance?'(by role: '+Object.entries(r.by_allegiance).map(([k,v])=>k+':'+v).join(', ')+')':''}`;
   $('chorus-narrative').textContent=r.verse;
+}
+
+let OW=null,OW_PI=0,OW_SIG=null,OW_OVER=false;
+const owapi=async(p)=>{try{return await(await fetch(p)).json()}catch(e){return{error:e.message}}};
+function owNarrate(t){$('ow-narrative').textContent=t}
+async function owStatus(){
+  const r=await owapi('/api/overwarden/can_summon');
+  $('ow-status').innerHTML=`Relics held: <b>${r.relics_held}</b>/${r.relics_required} · ${r.lore}`;
+}
+async function owSummon(){
+  owNarrate('Binding the Overwarden...');
+  const r=await owapi('/api/overwarden/summon');
+  if(r.error){owNarrate(r.error);return}
+  OW=r.overwarden;OW_PI=0;OW_SIG=OW.sigil;OW_OVER=false;
+  $('ow-fight-btn').disabled=false;
+  const phases=OW.phases.map((p,i)=>`<span class="phase-tab${i===OW_PI?' active':''}">P${i+1}:${p.phase}</span>`).join('');
+  $('ow-info').innerHTML=`<b>${OW.name}</b> · bound by: <span class="mineral">${(OW.bound_by||[]).join(', ')}</span><br>depth: ${OW.depth} · total HP: <b>${OW.total_hp}</b><br>phases: <div class="phase-bar" style="display:flex;gap:6px">${phases}</div>`;
+  owNarrate(`${OW.phases[0].quote}`);
+}
+async function owStrike(){
+  if(!OW||OW_OVER)return;
+  const pl=$('player-level').value|0,gp=$('gear-power').value|0,pd=$('paradox-debt').value|0,hp=$('player-hp').textContent|0;
+  owNarrate('You strike the Overwarden...');
+  const r=await owapi(`/api/overwarden/assault?player_level=${pl}&player_power=${gp}&paradox_debt=${pd}&sigil=${OW_SIG}&player_hp=${hp}`);
+  $('player-hp').textContent=r.player_hp_after;
+  OW.phases[r.phase_index].hp=r.phase_hp_after;
+  owNarrate(r.narrative);
+  if(r.boss_fallen){OW_OVER=true;$('ow-fight-btn').disabled=true;owNarrate(r.narrative+`\n\n⭐ THE OVERWARDEN IS UNMADE — claim the Apex Sigil: /api/overwarden/resolve?sigil=${OW_SIG}`)}
+  if(r.phase_fallen&&!r.boss_fallen){OW_PI=r.phase_index;const phs=OW.phases.map((p,i)=>`<span class="phase-tab${i===OW_PI?' active':''}">P${i+1}:${p.phase}</span>`).join('');$('ow-info').innerHTML=$('ow-info').innerHTML.replace(/<div class="phase-bar".*?>.*?<\/div>/s,`<div class="phase-bar" style="display:flex;gap:6px">${phs}</div>`)}
+  if(r.player_hp_after<=0&&!r.boss_fallen){owNarrate(r.narrative+`\n\nDEFEAT — you retreat. Resummon when ready.`)}
 }
 </script>
 </body>

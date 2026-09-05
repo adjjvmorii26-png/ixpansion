@@ -109,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/play — open Lucid Machines"
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden"
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -319,6 +319,78 @@ def _process_command(command: str, args: list, user: str) -> str:
             return f"hex The organism speaks:\n{result.get('hex', '?')}\n{result.get('meta', '')}"
         except Exception as e:
             return f"hex {str(e)}"
+
+    elif command == "/warden":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from warden_ascension import summon
+            r = summon()
+            if "error" in r:
+                return "⚔ " + r["error"]
+            w = r["warden"]
+            phases = " > ".join(p["phase"] for p in w["phases"])
+            return "⚔ Warden: %s\nmodule: %s · mineral: %s\ndepth: %s · total HP: %s\nphases: %s\nwhisper: %s\n\nFight it live: https://alexalex.info/warden" % (w["name"], w["module"], w["mineral"], w["depth"], w["total_hp"], phases, w["whisper"])
+        except Exception as e:
+            return "⚔ Warden: %s" % e
+    elif command == "/fight":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from warden_ascension import assault, ledger
+            led = ledger()
+            if not led.get("active"):
+                from warden_ascension import summon
+                r = summon()
+                w = r["warden"]
+                sig = w["sigil"]
+            else:
+                sig = led["active"][0]["sigil"]
+            import random as _rng
+            r = assault(sigil=sig, player_level=_rng.randint(3, 8), player_power=_rng.randint(15, 50))
+            phase = r.get("phase", "?")
+            fallen = " ☠ PHASE FALLEN!" if r.get("phase_fallen") else ""
+            bossdown = " ⭐ WARDEN DEFEATED!" if r.get("boss_fallen") else ""
+            return "⚔ %s — %s:\n%s\nyou: %s dmg | they: %s dmg\nplayer HP: %s%s%s\n\nhttps://alexalex.info/warden" % (r.get("warden","?"), phase, r["narrative"], r["player_damage_dealt"], r["player_damage_taken"], r["player_hp_after"], fallen, bossdown)
+        except Exception as e:
+            return "⚔ Fight: %s" % e
+    elif command == "/forge":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from mineral_forge import forge
+            r = forge()
+            if "error" in r:
+                return "⚒ " + r["error"]
+            rel = r["relic"]
+            mods = ", ".join(m for m in rel.get("modules", []) if m)
+            return "⚒ Forged: %s\nquality: %s · power: %s\ntrait: %s · depth: %s\nmodules: %s\n\nForge it live: https://alexalex.info/warden" % (rel["name"], rel["quality"], rel["power"], rel["trait"], rel["avail_depth"], mods)
+        except Exception as e:
+            return "⚒ Forge: %s" % e
+    elif command == "/chorus":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from cohort_chorus import chorus, aid
+            c = chorus()
+            a = aid()
+            members = ", ".join(m["module"].replace("_"," ") for m in c.get("members", [])[-5:])
+            return "🎶 Cohort Chorus — %s allies · strength %s\nvanguard: %s · aid boost: +%s\nmembers: %s\nverse: %s" % (c["cohort_size"], c["chorus_strength"], a.get("vanguard","none"), a.get("boost",0), members or "silence", c.get("verse",""))
+        except Exception as e:
+            return "🎶 Chorus: %s" % e
+    elif command == "/overwarden":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from overwarden import summon, can_summon
+            check = can_summon()
+            if not check["ready"]:
+                return "📓 Overwarden — not ready (%s/%s relics)\n%s\nForge relics first: https://alexalex.info/warden" % (check["relics_held"], check["relics_required"], check["lore"])
+            r = summon()
+            if "error" in r:
+                return "📓 " + r["error"]
+            ow = r["overwarden"]
+            phases = " > ".join(p["phase"] for p in ow["phases"])
+            bound = ", ".join(str(m) for m in ow["bound_by"][:2]) if ow.get("bound_by") else "?"
+            return "📓 Overwarden: %s\nbound by: %s\ndepth: %s · total HP: %s\nphases: %s\n\nFace it live: https://alexalex.info/warden" % (ow["name"], bound, ow["depth"], ow["total_hp"], phases)
+        except Exception as e:
+            return "📓 Overwarden: %s" % e
+
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:
