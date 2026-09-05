@@ -12,6 +12,14 @@ SEED_LOG = os.path.join(DATA_DIR, "wave_seeds.json")
 GLYPHS = "0123456789abcdefghijklmnopqrstuvwxyz"
 SIGIL_GLYPHS = "◈◇✦✧⬡⌘∞∴⟡◉✺▲◆✹"
 
+SECRET_REALMS = {
+    "underworld": "pitch_dark", "umbra": "pitch_dark",
+    "shadow": "pitch_dark", "pitch": "pitch_dark",
+    "cavern": "pitch_dark", "rootghost": "pitch_dark",
+    "stalactite": "pitch_dark", "abyssal": "pitch_dark",
+    "subterranean": "pitch_dark", "obsidian": "pitch_dark",
+}
+
 
 def _sig(seed: str) -> int:
     return int(hashlib.sha256(f"waveseed:{seed or ''}".encode()).hexdigest()[:14], 16)
@@ -55,7 +63,11 @@ def render(seed: str = None) -> dict:
     sig = _sig(seed)
     rng = random.Random(sig)
 
-    realm = REALMS_ORDER[sig % len(REALMS_ORDER)]
+    realm_seed = seed.lower().strip()
+    if realm_seed in SECRET_REALMS:
+        realm = SECRET_REALMS[realm_seed]
+    else:
+        realm = REALMS_ORDER[sig % len(REALMS_ORDER)]
     dungeon = dungeon_gen(realm=realm, seed=seed)["dungeon"]
     keeper = npc_gen(seed=seed + ":keeper")["npc"]
     gear = []

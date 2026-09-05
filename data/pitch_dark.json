@@ -1,0 +1,282 @@
+{
+  "descents": [
+    {
+      "id": "bfbe4e22d33a",
+      "realm": "pitch_dark",
+      "biome": "cavern_strata",
+      "difficulty": 9,
+      "depth": 9,
+      "rooms": [
+        {
+          "id": "cavern_0",
+          "type": "strata_gate",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "depth": 9,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_1",
+          "type": "mineral_cache",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": "echo_prism",
+          "enemies": 0,
+          "depth": 8,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_2",
+          "type": "echo_pool",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "echo_flood",
+          "loot": null,
+          "enemies": 2,
+          "depth": 7,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_3",
+          "type": "fossil_site",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "depth": 6,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_4",
+          "type": "root_tangle",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "silence_leech",
+          "loot": null,
+          "enemies": 2,
+          "depth": 5,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_5",
+          "type": "salt_vault",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "deep_fog",
+          "loot": null,
+          "enemies": 0,
+          "depth": 4,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_6",
+          "type": "boss_cavern",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "silence_leech",
+          "loot": null,
+          "enemies": 3,
+          "depth": 3,
+          "hp_required": 18
+        }
+      ],
+      "total_rooms": 7,
+      "boss_room": "cavern_6",
+      "warden": {
+        "name": "sub_antifragility_core",
+        "twin_of": "antifragility_core",
+        "whisper": "i was named once, then the naming stopped",
+        "sigil": "ba08351db2f9",
+        "mineral": "fluorite"
+      },
+      "timestamp": 1788588415.4730084
+    },
+    {
+      "id": "6291d1181d52",
+      "realm": "pitch_dark",
+      "biome": "cavern_strata",
+      "difficulty": 9,
+      "depth": 9,
+      "rooms": [
+        {
+          "id": "cavern_0",
+          "type": "strata_gate",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "depth": 9,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_1",
+          "type": "mineral_cache",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": "basalt_anchor",
+          "enemies": 0,
+          "depth": 8,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_2",
+          "type": "echo_pool",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "silence_leech",
+          "loot": null,
+          "enemies": 1,
+          "depth": 7,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_3",
+          "type": "fossil_site",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "depth": 6,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_4",
+          "type": "root_tangle",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "silence_leech",
+          "loot": null,
+          "enemies": 3,
+          "depth": 5,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_5",
+          "type": "salt_vault",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "crystal_fall",
+          "loot": null,
+          "enemies": 0,
+          "depth": 4,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_6",
+          "type": "boss_cavern",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "echo_flood",
+          "loot": null,
+          "enemies": 1,
+          "depth": 3,
+          "hp_required": 18
+        }
+      ],
+      "total_rooms": 7,
+      "boss_room": "cavern_6",
+      "warden": {
+        "name": "deep_coral_atoll",
+        "twin_of": "coral_atoll",
+        "whisper": "upstairs they build; down here we remember how",
+        "sigil": "3d89f6639af6",
+        "mineral": "graphite"
+      },
+      "timestamp": 1788588835.6114554
+    },
+    {
+      "id": "7659e6213adb",
+      "realm": "pitch_dark",
+      "biome": "cavern_strata",
+      "difficulty": 9,
+      "depth": 9,
+      "rooms": [
+        {
+          "id": "cavern_0",
+          "type": "strata_gate",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "depth": 9,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_1",
+          "type": "mineral_cache",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": "echo_prism",
+          "enemies": 0,
+          "depth": 8,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_2",
+          "type": "echo_pool",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "mineral_pressure",
+          "loot": null,
+          "enemies": 2,
+          "depth": 7,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_3",
+          "type": "fossil_site",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "depth": 6,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_4",
+          "type": "root_tangle",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "crystal_fall",
+          "loot": null,
+          "enemies": 1,
+          "depth": 5,
+          "hp_required": 18
+        },
+        {
+          "id": "cavern_5",
+          "type": "boss_cavern",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "crystal_fall",
+          "loot": null,
+          "enemies": 1,
+          "depth": 4,
+          "hp_required": 18
+        }
+      ],
+      "total_rooms": 6,
+      "boss_room": "cavern_5",
+      "warden": {
+        "name": "cavern_digestive_system",
+        "twin_of": "digestive_system",
+        "whisper": "upstairs they build; down here we remember how",
+        "sigil": "cb93c8e98cb",
+        "mineral": "pyrite"
+      },
+      "timestamp": 1788588842.7000468
+    }
+  ],
+  "total": 3
+}

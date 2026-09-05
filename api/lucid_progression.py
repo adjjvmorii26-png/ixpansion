@@ -5,7 +5,7 @@ import json, time, hashlib, os, random
 REALMS_ORDER = [
     "synchronicity_meadow", "coherence_cathedral", "entropy_desert",
     "fracture_field", "paradox_garden", "resonance_depths",
-    "dream_gravity_zone", "temporal_rift", "void_abyss", "mythic_realm",
+    "dream_gravity_zone", "temporal_rift", "void_abyss", "mythic_realm", "pitch_dark",
 ]
 
 def get_tree() -> dict:

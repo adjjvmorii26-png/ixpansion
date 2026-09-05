@@ -190,7 +190,7 @@ function encodeBlob(obj){
     return enc;
   } catch(e){ return ''; }
 }
-const REALM_ICONS = {entropy_desert:'🏜',dream_gravity_zone:'🌀',paradox_garden:'🌺',coherence_cathedral:'🏰',void_abyss:'🕳',temporal_rift:'⏰',mythic_realm:'📖',resonance_depths:'💎',fracture_field:'⚡',synchronicity_meadow:'🌸'};
+const REALM_ICONS = {entropy_desert:'🏜',dream_gravity_zone:'🌀',paradox_garden:'🌺',coherence_cathedral:'🏰',void_abyss:'🕳',temporal_rift:'⏰',mythic_realm:'📖',resonance_depths:'💎',fracture_field:'⚡',synchronicity_meadow:'🌸',pitch_dark:'🕳'}
 const ROOM_ICONS = {entrance:'🚪',corridor:'🕳',hazard:'⚡',treasure:'🎁',boss:'👹',shrine:'🔮',void_gate:'🌀',puzzle:'🧩'};
 const api = async(p)=>{try{return await(await fetch(p)).json()}catch(e){return{error:e.message}}};
 

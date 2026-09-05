@@ -61,7 +61,233 @@
       "boss_room": "room_4",
       "estimated_waves": 16,
       "timestamp": 1788544929.0431948
+    },
+    {
+      "id": "6d87c1c107",
+      "realm": "pitch_dark",
+      "biome": "cavern_strata",
+      "difficulty": 9,
+      "rooms": [
+        {
+          "id": "room_0",
+          "type": "entrance",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 9
+        },
+        {
+          "id": "room_1",
+          "type": "corridor",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 9
+        },
+        {
+          "id": "room_2",
+          "type": "hazard",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "echo_flood",
+          "loot": null,
+          "enemies": 3,
+          "hp_required": 9
+        },
+        {
+          "id": "room_3",
+          "type": "treasure",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": "basalt_anchor",
+          "enemies": 0,
+          "hp_required": 9
+        },
+        {
+          "id": "room_4",
+          "type": "boss",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "echo_flood",
+          "loot": null,
+          "enemies": 1,
+          "hp_required": 18
+        }
+      ],
+      "total_rooms": 5,
+      "boss_room": "room_4",
+      "estimated_waves": 18,
+      "timestamp": 1788588835.0651522
+    },
+    {
+      "id": "4a2b2b03ce",
+      "realm": "pitch_dark",
+      "biome": "cavern_strata",
+      "difficulty": 9,
+      "rooms": [
+        {
+          "id": "room_0",
+          "type": "entrance",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 9
+        },
+        {
+          "id": "room_1",
+          "type": "corridor",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 9
+        },
+        {
+          "id": "room_2",
+          "type": "hazard",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "echo_flood",
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 9
+        },
+        {
+          "id": "room_3",
+          "type": "treasure",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": "basalt_anchor",
+          "enemies": 0,
+          "hp_required": 9
+        },
+        {
+          "id": "room_4",
+          "type": "puzzle",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 9
+        },
+        {
+          "id": "room_5",
+          "type": "boss",
+          "realm": "pitch_dark",
+          "biome": "cavern_strata",
+          "hazard": "echo_flood",
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 18
+        }
+      ],
+      "total_rooms": 6,
+      "boss_room": "room_5",
+      "estimated_waves": 18,
+      "timestamp": 1788588835.0739443
+    },
+    {
+      "id": "144ad84f59",
+      "realm": "mythic_realm",
+      "biome": "living_stories",
+      "difficulty": 8,
+      "rooms": [
+        {
+          "id": "room_0",
+          "type": "entrance",
+          "realm": "mythic_realm",
+          "biome": "living_stories",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 8
+        },
+        {
+          "id": "room_1",
+          "type": "corridor",
+          "realm": "mythic_realm",
+          "biome": "living_stories",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 8
+        },
+        {
+          "id": "room_2",
+          "type": "hazard",
+          "realm": "mythic_realm",
+          "biome": "living_stories",
+          "hazard": "narrative_overflow",
+          "loot": null,
+          "enemies": 3,
+          "hp_required": 8
+        },
+        {
+          "id": "room_3",
+          "type": "treasure",
+          "realm": "mythic_realm",
+          "biome": "living_stories",
+          "hazard": null,
+          "loot": "myth_tablet",
+          "enemies": 0,
+          "hp_required": 8
+        },
+        {
+          "id": "room_4",
+          "type": "puzzle",
+          "realm": "mythic_realm",
+          "biome": "living_stories",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 8
+        },
+        {
+          "id": "room_5",
+          "type": "boss",
+          "realm": "mythic_realm",
+          "biome": "living_stories",
+          "hazard": "narrative_overflow",
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 16
+        },
+        {
+          "id": "room_6",
+          "type": "shrine",
+          "realm": "mythic_realm",
+          "biome": "living_stories",
+          "hazard": null,
+          "loot": null,
+          "enemies": 0,
+          "hp_required": 8
+        },
+        {
+          "id": "room_7",
+          "type": "boss",
+          "realm": "mythic_realm",
+          "biome": "living_stories",
+          "hazard": "narrative_overflow",
+          "loot": null,
+          "enemies": 3,
+          "hp_required": 16
+        }
+      ],
+      "total_rooms": 8,
+      "boss_room": "room_7",
+      "estimated_waves": 16,
+      "timestamp": 1788588835.130621
     }
   ],
-  "total": 1
+  "total": 4
 }

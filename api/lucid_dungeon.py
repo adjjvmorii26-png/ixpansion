@@ -16,6 +16,7 @@ REALMS = {
     "resonance_depths": {"biome": "harmonic_caves", "hazard": "frequency_shatter", "loot": "resonance_key", "difficulty": 4},
     "fracture_field": {"biome": "broken_ground", "hazard": "reality_gap", "loot": "repair_salve", "difficulty": 3},
     "synchronicity_meadow": {"biome": "coincidence_flowers", "hazard": "meaning_flood", "loot": "synchronicity_beacon", "difficulty": 2},
+    "pitch_dark": {"biome": "cavern_strata", "hazard": "echo_flood", "loot": "basalt_anchor", "difficulty": 9},
 }
 
 def _load(path, default=None):

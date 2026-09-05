@@ -18,7 +18,45 @@
       "realm_affinity": "void_abyss",
       "xp_reward": 450,
       "timestamp": 1788544929.05293
+    },
+    {
+      "id": "87c0adabf0",
+      "species": "sentinel",
+      "archetype": "warden",
+      "level": 9,
+      "hp": 100,
+      "max_hp": 100,
+      "abilities": [
+        "fracture_touch",
+        "void_step",
+        "coherence_beam"
+      ],
+      "mood": "enigmatic",
+      "dialogue": "Touch the fracture. Feel the truth.",
+      "is_boss": false,
+      "realm_affinity": "resonance_depths",
+      "xp_reward": 450,
+      "timestamp": 1788588835.076835
+    },
+    {
+      "id": "8595b6db51",
+      "species": "architect",
+      "archetype": "forge-master",
+      "level": 4,
+      "hp": 57,
+      "max_hp": 57,
+      "abilities": [
+        "temporal_heal",
+        "coherence_beam",
+        "paradox_strike"
+      ],
+      "mood": "enigmatic",
+      "dialogue": "The entropy moves through me. I am its vessel.",
+      "is_boss": false,
+      "realm_affinity": "paradox_garden",
+      "xp_reward": 200,
+      "timestamp": 1788588835.135586
     }
   ],
-  "total": 1
+  "total": 3
 }

@@ -1,0 +1,1930 @@
+{
+  "seeds": [
+    {
+      "seed": "aleph",
+      "sigil": "['5', '8', 'b', '5', 'b', 'e', '0', 'b', '3', '8']\u25c7\u273a\u273a\u25b2\u2739\u27e1",
+      "realm": "resonance_depths",
+      "dungeon": {
+        "id": "95be53c394",
+        "realm": "resonance_depths",
+        "biome": "harmonic_caves",
+        "difficulty": 4,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": "frequency_shatter",
+            "loot": null,
+            "enemies": 2,
+            "hp_required": 4
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": "resonance_key",
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_4",
+            "type": "puzzle",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_5",
+            "type": "boss",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": "frequency_shatter",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_6",
+            "type": "boss",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": "frequency_shatter",
+            "loot": null,
+            "enemies": 1,
+            "hp_required": 8
+          }
+        ],
+        "total_rooms": 7,
+        "boss_room": "room_6",
+        "estimated_waves": 8,
+        "timestamp": 1788581540.3452272
+      },
+      "keeper": {
+        "id": "43ebef5cc5",
+        "species": "mythborn",
+        "archetype": "tale-walker",
+        "level": 2,
+        "hp": 26,
+        "max_hp": 26,
+        "abilities": [
+          "dream_walk",
+          "coherence_beam"
+        ],
+        "mood": "neutral",
+        "dialogue": "I am the echo of a module that no longer exists.",
+        "is_boss": false,
+        "realm_affinity": "entropy_desert",
+        "xp_reward": 100,
+        "timestamp": 1788581540.3522635
+      },
+      "starter_gear": [
+        {
+          "id": "297499f221",
+          "name": "Resonance Fang of Common",
+          "slot": "weapon",
+          "quality": "common",
+          "material": "void_steel",
+          "power": 1.14,
+          "level": 1,
+          "effects": [
+            "resonance_heal",
+            "coherence_beam"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788581540.357659
+        },
+        {
+          "id": "613273aab8",
+          "name": "Spectral Mantle of Uncommon",
+          "slot": "armor",
+          "quality": "uncommon",
+          "material": "void_steel",
+          "power": 1.24,
+          "level": 1,
+          "effects": [
+            "dream_walk",
+            "temporal_dodge"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788581540.3633358
+        },
+        {
+          "id": "569e1c7af7",
+          "name": "Void Lens of Uncommon",
+          "slot": "focus",
+          "quality": "uncommon",
+          "material": "myth_ivory",
+          "power": 1.36,
+          "level": 1,
+          "effects": [
+            "coherence_beam",
+            "paradox_strike"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788581540.3693337
+        }
+      ],
+      "omen": "a treasure waits for a specific wound",
+      "total_gear_power": 3.74,
+      "timestamp": 1788581540.373385
+    },
+    {
+      "seed": "aleph",
+      "sigil": "['5', '8', 'b', '5', 'b', 'e', '0', 'b', '3', '8']\u25c7\u273a\u273a\u25b2\u2739\u27e1",
+      "realm": "resonance_depths",
+      "dungeon": {
+        "id": "0448780c15",
+        "realm": "resonance_depths",
+        "biome": "harmonic_caves",
+        "difficulty": 4,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": "frequency_shatter",
+            "loot": null,
+            "enemies": 2,
+            "hp_required": 4
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": "resonance_key",
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_4",
+            "type": "puzzle",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_5",
+            "type": "boss",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": "frequency_shatter",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_6",
+            "type": "boss",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": "frequency_shatter",
+            "loot": null,
+            "enemies": 1,
+            "hp_required": 8
+          }
+        ],
+        "total_rooms": 7,
+        "boss_room": "room_6",
+        "estimated_waves": 8,
+        "timestamp": 1788581540.3799295
+      },
+      "keeper": {
+        "id": "b7692762ea",
+        "species": "mythborn",
+        "archetype": "tale-walker",
+        "level": 2,
+        "hp": 26,
+        "max_hp": 26,
+        "abilities": [
+          "dream_walk",
+          "coherence_beam"
+        ],
+        "mood": "neutral",
+        "dialogue": "I am the echo of a module that no longer exists.",
+        "is_boss": false,
+        "realm_affinity": "dream_gravity_zone",
+        "xp_reward": 100,
+        "timestamp": 1788581540.3870041
+      },
+      "starter_gear": [
+        {
+          "id": "f0a9adcf8b",
+          "name": "Resonance Fang of Common",
+          "slot": "weapon",
+          "quality": "common",
+          "material": "void_steel",
+          "power": 1.14,
+          "level": 1,
+          "effects": [
+            "resonance_heal",
+            "coherence_beam"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788581540.3925025
+        },
+        {
+          "id": "085d59456e",
+          "name": "Spectral Mantle of Uncommon",
+          "slot": "armor",
+          "quality": "uncommon",
+          "material": "void_steel",
+          "power": 1.24,
+          "level": 1,
+          "effects": [
+            "dream_walk",
+            "temporal_dodge"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788581540.3989263
+        },
+        {
+          "id": "3ff2db7f24",
+          "name": "Void Lens of Uncommon",
+          "slot": "focus",
+          "quality": "uncommon",
+          "material": "myth_ivory",
+          "power": 1.36,
+          "level": 1,
+          "effects": [
+            "coherence_beam",
+            "paradox_strike"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788581540.4078965
+        }
+      ],
+      "omen": "a treasure waits for a specific wound",
+      "total_gear_power": 3.74,
+      "timestamp": 1788581540.4130356
+    },
+    {
+      "seed": "morii",
+      "sigil": "['5', '3', 'b', '5', 'e', '8', '3', '7', 'e', '3']\u25c7\u273a\u2b21\u2234\u25c9\u2b21",
+      "realm": "coherence_cathedral",
+      "dungeon": {
+        "id": "5b821b46b2",
+        "realm": "coherence_cathedral",
+        "biome": "crystalline_hall",
+        "difficulty": 6,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": "resonance_feedback",
+            "loot": null,
+            "enemies": 3,
+            "hp_required": 6
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": "coherence_mirror",
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_4",
+            "type": "puzzle",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_5",
+            "type": "boss",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": "resonance_feedback",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 12
+          },
+          {
+            "id": "room_6",
+            "type": "shrine",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_7",
+            "type": "boss",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": "resonance_feedback",
+            "loot": null,
+            "enemies": 3,
+            "hp_required": 12
+          }
+        ],
+        "total_rooms": 8,
+        "boss_room": "room_7",
+        "estimated_waves": 12,
+        "timestamp": 1788581540.4246488
+      },
+      "keeper": {
+        "id": "8f5917142f",
+        "species": "architect",
+        "archetype": "forge-master",
+        "level": 4,
+        "hp": 57,
+        "max_hp": 57,
+        "abilities": [
+          "temporal_heal",
+          "coherence_beam",
+          "paradox_strike"
+        ],
+        "mood": "enigmatic",
+        "dialogue": "The entropy moves through me. I am its vessel.",
+        "is_boss": false,
+        "realm_affinity": "void_abyss",
+        "xp_reward": 200,
+        "timestamp": 1788581540.437166
+      },
+      "starter_gear": [
+        {
+          "id": "51f15558f5",
+          "name": "Paradox Shatter of Uncommon",
+          "slot": "weapon",
+          "quality": "uncommon",
+          "material": "temporal_bronze",
+          "power": 1.38,
+          "level": 1,
+          "effects": [
+            "dream_walk"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788581540.444143
+        },
+        {
+          "id": "f7f395b2f8",
+          "name": "Void Guard of Uncommon",
+          "slot": "armor",
+          "quality": "uncommon",
+          "material": "myth_ivory",
+          "power": 1.3,
+          "level": 1,
+          "effects": [
+            "entropy_shield",
+            "paradox_strike"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788581540.4519331
+        },
+        {
+          "id": "b1eb3023db",
+          "name": "Fractal Lens of Worn",
+          "slot": "focus",
+          "quality": "worn",
+          "material": "void_steel",
+          "power": 0.78,
+          "level": 1,
+          "effects": [
+            "coherence_beam",
+            "entropy_shield"
+          ],
+          "color": "var(--m)",
+          "timestamp": 1788581540.4594684
+        }
+      ],
+      "omen": "the first room remembers you",
+      "total_gear_power": 3.46,
+      "timestamp": 1788581540.463406
+    },
+    {
+      "seed": "aleph",
+      "sigil": "['5', '8', 'b', '5', 'b', 'e', '0', 'b', '3', '8']\u25c7\u273a\u273a\u25b2\u2739\u27e1",
+      "realm": "resonance_depths",
+      "dungeon": {
+        "id": "b97279d20f",
+        "realm": "resonance_depths",
+        "biome": "harmonic_caves",
+        "difficulty": 4,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": "frequency_shatter",
+            "loot": null,
+            "enemies": 2,
+            "hp_required": 4
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": "resonance_key",
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_4",
+            "type": "puzzle",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 4
+          },
+          {
+            "id": "room_5",
+            "type": "boss",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": "frequency_shatter",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_6",
+            "type": "boss",
+            "realm": "resonance_depths",
+            "biome": "harmonic_caves",
+            "hazard": "frequency_shatter",
+            "loot": null,
+            "enemies": 1,
+            "hp_required": 8
+          }
+        ],
+        "total_rooms": 7,
+        "boss_room": "room_6",
+        "estimated_waves": 8,
+        "timestamp": 1788581540.4768963
+      },
+      "keeper": {
+        "id": "82141b99e8",
+        "species": "mythborn",
+        "archetype": "tale-walker",
+        "level": 2,
+        "hp": 26,
+        "max_hp": 26,
+        "abilities": [
+          "dream_walk",
+          "coherence_beam"
+        ],
+        "mood": "neutral",
+        "dialogue": "I am the echo of a module that no longer exists.",
+        "is_boss": false,
+        "realm_affinity": "void_abyss",
+        "xp_reward": 100,
+        "timestamp": 1788581540.496512
+      },
+      "starter_gear": [
+        {
+          "id": "fb2fcf882f",
+          "name": "Resonance Fang of Common",
+          "slot": "weapon",
+          "quality": "common",
+          "material": "void_steel",
+          "power": 1.14,
+          "level": 1,
+          "effects": [
+            "resonance_heal",
+            "coherence_beam"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788581540.5022914
+        },
+        {
+          "id": "65b6b5d5b1",
+          "name": "Spectral Mantle of Uncommon",
+          "slot": "armor",
+          "quality": "uncommon",
+          "material": "void_steel",
+          "power": 1.24,
+          "level": 1,
+          "effects": [
+            "dream_walk",
+            "temporal_dodge"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788581540.5082514
+        },
+        {
+          "id": "c81da026f4",
+          "name": "Void Lens of Uncommon",
+          "slot": "focus",
+          "quality": "uncommon",
+          "material": "myth_ivory",
+          "power": 1.36,
+          "level": 1,
+          "effects": [
+            "coherence_beam",
+            "paradox_strike"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788581540.517133
+        }
+      ],
+      "omen": "a treasure waits for a specific wound",
+      "total_gear_power": 3.74,
+      "timestamp": 1788581540.5211093
+    },
+    {
+      "seed": "morii",
+      "sigil": "['5', '3', 'b', '5', 'e', '8', '3', '7', 'e', '3']\u25c7\u273a\u2b21\u2234\u25c9\u2b21",
+      "realm": "coherence_cathedral",
+      "dungeon": {
+        "id": "fab7869270",
+        "realm": "coherence_cathedral",
+        "biome": "crystalline_hall",
+        "difficulty": 6,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": "resonance_feedback",
+            "loot": null,
+            "enemies": 3,
+            "hp_required": 6
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": "coherence_mirror",
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_4",
+            "type": "puzzle",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_5",
+            "type": "boss",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": "resonance_feedback",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 12
+          },
+          {
+            "id": "room_6",
+            "type": "shrine",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_7",
+            "type": "boss",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": "resonance_feedback",
+            "loot": null,
+            "enemies": 3,
+            "hp_required": 12
+          }
+        ],
+        "total_rooms": 8,
+        "boss_room": "room_7",
+        "estimated_waves": 12,
+        "timestamp": 1788581540.531537
+      },
+      "keeper": {
+        "id": "4dac66cbce",
+        "species": "architect",
+        "archetype": "forge-master",
+        "level": 4,
+        "hp": 57,
+        "max_hp": 57,
+        "abilities": [
+          "temporal_heal",
+          "coherence_beam",
+          "paradox_strike"
+        ],
+        "mood": "enigmatic",
+        "dialogue": "The entropy moves through me. I am its vessel.",
+        "is_boss": false,
+        "realm_affinity": "entropy_desert",
+        "xp_reward": 200,
+        "timestamp": 1788581540.5388572
+      },
+      "starter_gear": [
+        {
+          "id": "8f504aa9ca",
+          "name": "Paradox Shatter of Uncommon",
+          "slot": "weapon",
+          "quality": "uncommon",
+          "material": "temporal_bronze",
+          "power": 1.38,
+          "level": 1,
+          "effects": [
+            "dream_walk"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788581540.5442708
+        },
+        {
+          "id": "93e9c6b04a",
+          "name": "Void Guard of Uncommon",
+          "slot": "armor",
+          "quality": "uncommon",
+          "material": "myth_ivory",
+          "power": 1.3,
+          "level": 1,
+          "effects": [
+            "entropy_shield",
+            "paradox_strike"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788581540.5499365
+        },
+        {
+          "id": "0325524f1a",
+          "name": "Fractal Lens of Worn",
+          "slot": "focus",
+          "quality": "worn",
+          "material": "void_steel",
+          "power": 0.78,
+          "level": 1,
+          "effects": [
+            "coherence_beam",
+            "entropy_shield"
+          ],
+          "color": "var(--m)",
+          "timestamp": 1788581540.5557559
+        }
+      ],
+      "omen": "the first room remembers you",
+      "total_gear_power": 3.46,
+      "timestamp": 1788581540.5610304
+    },
+    {
+      "seed": "luma",
+      "sigil": "['8', 'b', 'f', 'b', 'd', 'a', 'c', 'b', '1', '3']\u27e1\u25c7\u27e1\u25c9\u25c9\u2739",
+      "realm": "synchronicity_meadow",
+      "dungeon": {
+        "id": "09013e9cd6",
+        "realm": "synchronicity_meadow",
+        "biome": "coincidence_flowers",
+        "difficulty": 2,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "synchronicity_meadow",
+            "biome": "coincidence_flowers",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 2
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "synchronicity_meadow",
+            "biome": "coincidence_flowers",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 2
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "synchronicity_meadow",
+            "biome": "coincidence_flowers",
+            "hazard": "meaning_flood",
+            "loot": null,
+            "enemies": 2,
+            "hp_required": 2
+          },
+          {
+            "id": "room_3",
+            "type": "boss",
+            "realm": "synchronicity_meadow",
+            "biome": "coincidence_flowers",
+            "hazard": "meaning_flood",
+            "loot": null,
+            "enemies": 3,
+            "hp_required": 4
+          }
+        ],
+        "total_rooms": 4,
+        "boss_room": "room_3",
+        "estimated_waves": 4,
+        "timestamp": 1788581540.5717936
+      },
+      "keeper": {
+        "id": "3bcc4000c1",
+        "species": "architect",
+        "archetype": "builder",
+        "level": 7,
+        "hp": 86,
+        "max_hp": 86,
+        "abilities": [
+          "myth_invoke",
+          "phase_shift",
+          "entropy_shield"
+        ],
+        "mood": "enigmatic",
+        "dialogue": "I am the echo of a module that no longer exists.",
+        "is_boss": false,
+        "realm_affinity": "paradox_garden",
+        "xp_reward": 350,
+        "timestamp": 1788581540.5791156
+      },
+      "starter_gear": [
+        {
+          "id": "802beb36b5",
+          "name": "Mythic Needle of Worn",
+          "slot": "weapon",
+          "quality": "worn",
+          "material": "myth_ivory",
+          "power": 0.77,
+          "level": 1,
+          "effects": [
+            "paradox_strike",
+            "dream_walk"
+          ],
+          "color": "var(--m)",
+          "timestamp": 1788581540.5845802
+        },
+        {
+          "id": "37f56028da",
+          "name": "Spectral Carapace of Common",
+          "slot": "armor",
+          "quality": "common",
+          "material": "void_steel",
+          "power": 0.82,
+          "level": 1,
+          "effects": [
+            "coherence_beam"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788581540.59114
+        },
+        {
+          "id": "bb50977a78",
+          "name": "Paradox Sight of Epic",
+          "slot": "focus",
+          "quality": "epic",
+          "material": "forged_paradox",
+          "power": 2.44,
+          "level": 1,
+          "effects": [
+            "coherence_beam",
+            "temporal_dodge"
+          ],
+          "color": "var(--vi)",
+          "timestamp": 1788581540.5977938
+        }
+      ],
+      "omen": "the boss room hums in your frequency",
+      "total_gear_power": 4.03,
+      "timestamp": 1788581540.6023803
+    },
+    {
+      "seed": "hexstorm",
+      "sigil": "['3', 'e', 'a', 'b', '8', '8', '6', 'e', 'e', '5']\u2727\u25c8\u2727\u2234\u25c9\u2739",
+      "realm": "mythic_realm",
+      "dungeon": {
+        "id": "38d15ae0e9",
+        "realm": "mythic_realm",
+        "biome": "living_stories",
+        "difficulty": 8,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": "narrative_overflow",
+            "loot": null,
+            "enemies": 2,
+            "hp_required": 8
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": "myth_tablet",
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_4",
+            "type": "boss",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": "narrative_overflow",
+            "loot": null,
+            "enemies": 2,
+            "hp_required": 16
+          }
+        ],
+        "total_rooms": 5,
+        "boss_room": "room_4",
+        "estimated_waves": 16,
+        "timestamp": 1788581540.6204233
+      },
+      "keeper": {
+        "id": "f35219ac70",
+        "species": "architect",
+        "archetype": "forge-master",
+        "level": 10,
+        "hp": 108,
+        "max_hp": 108,
+        "abilities": [
+          "resonance_scream",
+          "dream_walk",
+          "phase_shift"
+        ],
+        "mood": "hostile",
+        "dialogue": "Touch the fracture. Feel the truth.",
+        "is_boss": false,
+        "realm_affinity": "void_abyss",
+        "xp_reward": 500,
+        "timestamp": 1788581540.6338856
+      },
+      "starter_gear": [
+        {
+          "id": "38182bd233",
+          "name": "Temporal Edge of Uncommon",
+          "slot": "weapon",
+          "quality": "uncommon",
+          "material": "forged_paradox",
+          "power": 1.05,
+          "level": 1,
+          "effects": [
+            "resonance_heal"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788581540.643238
+        },
+        {
+          "id": "e5c97126b0",
+          "name": "Spectral Mantle of Rare",
+          "slot": "armor",
+          "quality": "rare",
+          "material": "resonance_weave",
+          "power": 1.77,
+          "level": 1,
+          "effects": [
+            "paradox_strike"
+          ],
+          "color": "var(--cy)",
+          "timestamp": 1788581540.651184
+        },
+        {
+          "id": "ae7c1efeba",
+          "name": "Spectral Orb of Common",
+          "slot": "focus",
+          "quality": "common",
+          "material": "temporal_bronze",
+          "power": 1.0,
+          "level": 1,
+          "effects": [
+            "dream_walk"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788581540.658537
+        }
+      ],
+      "omen": "the boss room hums in your frequency",
+      "total_gear_power": 3.82,
+      "timestamp": 1788581540.6638095
+    },
+    {
+      "seed": "underworld",
+      "sigil": "['f', 'f', 'f', '2', '5', '1', '3', '7', '1', '9']\u2739\u2739\u2739\u2739\u221e\u2b21",
+      "realm": "mythic_realm",
+      "dungeon": {
+        "id": "8f351e4deb",
+        "realm": "mythic_realm",
+        "biome": "living_stories",
+        "difficulty": 8,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": "narrative_overflow",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": "myth_tablet",
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_4",
+            "type": "puzzle",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_5",
+            "type": "boss",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": "narrative_overflow",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 16
+          }
+        ],
+        "total_rooms": 6,
+        "boss_room": "room_5",
+        "estimated_waves": 16,
+        "timestamp": 1788581540.6788635
+      },
+      "keeper": {
+        "id": "dab638aeb4",
+        "species": "sentinel",
+        "archetype": "warden",
+        "level": 9,
+        "hp": 100,
+        "max_hp": 100,
+        "abilities": [
+          "fracture_touch",
+          "void_step",
+          "coherence_beam"
+        ],
+        "mood": "enigmatic",
+        "dialogue": "Touch the fracture. Feel the truth.",
+        "is_boss": false,
+        "realm_affinity": "entropy_desert",
+        "xp_reward": 450,
+        "timestamp": 1788581540.6894865
+      },
+      "starter_gear": [
+        {
+          "id": "4a0bd6e29f",
+          "name": "Temporal Fang of Common",
+          "slot": "weapon",
+          "quality": "common",
+          "material": "temporal_bronze",
+          "power": 0.84,
+          "level": 1,
+          "effects": [
+            "paradox_strike"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788581540.6974108
+        },
+        {
+          "id": "bf1f1d216b",
+          "name": "Coherence Aegis of Common",
+          "slot": "armor",
+          "quality": "common",
+          "material": "dream_crystal",
+          "power": 1.01,
+          "level": 1,
+          "effects": [
+            "entropy_shield"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788581540.7054238
+        },
+        {
+          "id": "ee21d0d5e5",
+          "name": "Lucid Lens of Common",
+          "slot": "focus",
+          "quality": "common",
+          "material": "woven_coherence",
+          "power": 0.88,
+          "level": 1,
+          "effects": [
+            "temporal_dodge",
+            "dream_walk"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788581540.7139792
+        }
+      ],
+      "omen": "the boss room hums in your frequency",
+      "total_gear_power": 2.73,
+      "timestamp": 1788581540.7210364
+    },
+    {
+      "seed": "garden",
+      "sigil": "['a', '4', '8', '2', '9', '5', 'f', '1', '6', '5']\u273a\u25c7\u2234\u221e\u2726\u25c8",
+      "realm": "entropy_desert",
+      "dungeon": {
+        "id": "4cbab70317",
+        "realm": "entropy_desert",
+        "biome": "sand_and_probability",
+        "difficulty": 3,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "entropy_desert",
+            "biome": "sand_and_probability",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 3
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "entropy_desert",
+            "biome": "sand_and_probability",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 3
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "entropy_desert",
+            "biome": "sand_and_probability",
+            "hazard": "entropy_storm",
+            "loot": null,
+            "enemies": 1,
+            "hp_required": 3
+          },
+          {
+            "id": "room_3",
+            "type": "boss",
+            "realm": "entropy_desert",
+            "biome": "sand_and_probability",
+            "hazard": "entropy_storm",
+            "loot": null,
+            "enemies": 2,
+            "hp_required": 6
+          }
+        ],
+        "total_rooms": 4,
+        "boss_room": "room_3",
+        "estimated_waves": 6,
+        "timestamp": 1788581540.736547
+      },
+      "keeper": {
+        "id": "7697a5aa1c",
+        "species": "revenant",
+        "archetype": "ghost",
+        "level": 2,
+        "hp": 29,
+        "max_hp": 29,
+        "abilities": [
+          "resonance_scream",
+          "temporal_heal"
+        ],
+        "mood": "hostile",
+        "dialogue": "Your resonance is... unfamiliar.",
+        "is_boss": false,
+        "realm_affinity": "mythic_realm",
+        "xp_reward": 100,
+        "timestamp": 1788581540.7478535
+      },
+      "starter_gear": [
+        {
+          "id": "b900654717",
+          "name": "Primal Shatter of Epic",
+          "slot": "weapon",
+          "quality": "epic",
+          "material": "dream_crystal",
+          "power": 2.05,
+          "level": 1,
+          "effects": [
+            "resonance_heal"
+          ],
+          "color": "var(--vi)",
+          "timestamp": 1788581540.75454
+        },
+        {
+          "id": "b5bae46bee",
+          "name": "Paradox Guard of Epic",
+          "slot": "armor",
+          "quality": "epic",
+          "material": "myth_ivory",
+          "power": 1.82,
+          "level": 1,
+          "effects": [
+            "coherence_beam",
+            "entropy_shield"
+          ],
+          "color": "var(--vi)",
+          "timestamp": 1788581540.7623582
+        },
+        {
+          "id": "9339a15984",
+          "name": "Entropy Sight of Rare",
+          "slot": "focus",
+          "quality": "rare",
+          "material": "dream_crystal",
+          "power": 1.41,
+          "level": 1,
+          "effects": [
+            "coherence_beam"
+          ],
+          "color": "var(--cy)",
+          "timestamp": 1788581540.77038
+        }
+      ],
+      "omen": "the boss room hums in your frequency",
+      "total_gear_power": 5.28,
+      "timestamp": 1788581540.7762573
+    },
+    {
+      "seed": "ouroboros",
+      "sigil": "['d', '0', '7', 'b', 'd', '0', 'e', 'c', '3', 'c']\u2318\u2234\u221e\u25c9\u2739\u2727",
+      "realm": "coherence_cathedral",
+      "dungeon": {
+        "id": "eef098a0c1",
+        "realm": "coherence_cathedral",
+        "biome": "crystalline_hall",
+        "difficulty": 6,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": "resonance_feedback",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": "coherence_mirror",
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_4",
+            "type": "puzzle",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_5",
+            "type": "boss",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": "resonance_feedback",
+            "loot": null,
+            "enemies": 2,
+            "hp_required": 12
+          },
+          {
+            "id": "room_6",
+            "type": "shrine",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 6
+          },
+          {
+            "id": "room_7",
+            "type": "boss",
+            "realm": "coherence_cathedral",
+            "biome": "crystalline_hall",
+            "hazard": "resonance_feedback",
+            "loot": null,
+            "enemies": 2,
+            "hp_required": 12
+          }
+        ],
+        "total_rooms": 8,
+        "boss_room": "room_7",
+        "estimated_waves": 12,
+        "timestamp": 1788581540.792715
+      },
+      "keeper": {
+        "id": "fd28bbab29",
+        "species": "dreamer",
+        "archetype": "lucid-one",
+        "level": 4,
+        "hp": 55,
+        "max_hp": 55,
+        "abilities": [
+          "phase_shift",
+          "entropy_shield",
+          "resonance_scream"
+        ],
+        "mood": "volatile",
+        "dialogue": "The entropy moves through me. I am its vessel.",
+        "is_boss": false,
+        "realm_affinity": "void_abyss",
+        "xp_reward": 200,
+        "timestamp": 1788581540.8020382
+      },
+      "starter_gear": [
+        {
+          "id": "294bd66504",
+          "name": "Mythic Blade of Common",
+          "slot": "weapon",
+          "quality": "common",
+          "material": "resonance_weave",
+          "power": 0.8,
+          "level": 1,
+          "effects": [
+            "resonance_heal"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788581540.8084965
+        },
+        {
+          "id": "3e7c61424a",
+          "name": "Dream Cloak of Common",
+          "slot": "armor",
+          "quality": "common",
+          "material": "woven_coherence",
+          "power": 1.17,
+          "level": 1,
+          "effects": [
+            "temporal_dodge"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788581540.8169594
+        },
+        {
+          "id": "a16ba6928b",
+          "name": "Primal Sigil of Worn",
+          "slot": "focus",
+          "quality": "worn",
+          "material": "resonance_weave",
+          "power": 0.67,
+          "level": 1,
+          "effects": [
+            "temporal_dodge"
+          ],
+          "color": "var(--m)",
+          "timestamp": 1788581540.8275416
+        }
+      ],
+      "omen": "the first room remembers you",
+      "total_gear_power": 2.64,
+      "timestamp": 1788581540.8317919
+    },
+    {
+      "seed": "dreamwood",
+      "sigil": "['5', 'e', '0', '2', 'f', '3', 'd', 'a', '3', '5']\u2739\u27e1\u25b2\u27e1\u27e1\u221e",
+      "realm": "temporal_rift",
+      "dungeon": {
+        "id": "2eae0e6a6a",
+        "realm": "temporal_rift",
+        "biome": "time_fragments",
+        "difficulty": 5,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "temporal_rift",
+            "biome": "time_fragments",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 5
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "temporal_rift",
+            "biome": "time_fragments",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 5
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "temporal_rift",
+            "biome": "time_fragments",
+            "hazard": "chronological_loop",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 5
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "temporal_rift",
+            "biome": "time_fragments",
+            "hazard": null,
+            "loot": "temporal_crystal",
+            "enemies": 0,
+            "hp_required": 5
+          },
+          {
+            "id": "room_4",
+            "type": "boss",
+            "realm": "temporal_rift",
+            "biome": "time_fragments",
+            "hazard": "chronological_loop",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 10
+          }
+        ],
+        "total_rooms": 5,
+        "boss_room": "room_4",
+        "estimated_waves": 10,
+        "timestamp": 1788581540.8473861
+      },
+      "keeper": {
+        "id": "fdbb71a493",
+        "species": "dreamer",
+        "archetype": "visionary",
+        "level": 5,
+        "hp": 55,
+        "max_hp": 55,
+        "abilities": [
+          "coherence_beam",
+          "fracture_touch",
+          "entropy_shield"
+        ],
+        "mood": "volatile",
+        "dialogue": "The entropy moves through me. I am its vessel.",
+        "is_boss": false,
+        "realm_affinity": "void_abyss",
+        "xp_reward": 250,
+        "timestamp": 1788581540.8587716
+      },
+      "starter_gear": [
+        {
+          "id": "50b63516ba",
+          "name": "Void Fang of Worn",
+          "slot": "weapon",
+          "quality": "worn",
+          "material": "myth_ivory",
+          "power": 0.74,
+          "level": 1,
+          "effects": [
+            "resonance_heal"
+          ],
+          "color": "var(--m)",
+          "timestamp": 1788581540.86568
+        },
+        {
+          "id": "929f1e9dcb",
+          "name": "Spectral Carapace of Common",
+          "slot": "armor",
+          "quality": "common",
+          "material": "resonance_weave",
+          "power": 0.99,
+          "level": 1,
+          "effects": [
+            "temporal_dodge"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788581540.8736145
+        },
+        {
+          "id": "d3351049b2",
+          "name": "Coherence Mirror of Worn",
+          "slot": "focus",
+          "quality": "worn",
+          "material": "resonance_weave",
+          "power": 0.81,
+          "level": 1,
+          "effects": [
+            "temporal_dodge"
+          ],
+          "color": "var(--m)",
+          "timestamp": 1788581540.8824377
+        }
+      ],
+      "omen": "the physics of this realm favor you",
+      "total_gear_power": 2.54,
+      "timestamp": 1788581540.888621
+    },
+    {
+      "seed": "underworld",
+      "sigil": "fff2513719\u2739\u2739\u2739\u2739\u221e\u2b21",
+      "realm": "pitch_dark",
+      "dungeon": {
+        "id": "4a2b2b03ce",
+        "realm": "pitch_dark",
+        "biome": "cavern_strata",
+        "difficulty": 9,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "pitch_dark",
+            "biome": "cavern_strata",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 9
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "pitch_dark",
+            "biome": "cavern_strata",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 9
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "pitch_dark",
+            "biome": "cavern_strata",
+            "hazard": "echo_flood",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 9
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "pitch_dark",
+            "biome": "cavern_strata",
+            "hazard": null,
+            "loot": "basalt_anchor",
+            "enemies": 0,
+            "hp_required": 9
+          },
+          {
+            "id": "room_4",
+            "type": "puzzle",
+            "realm": "pitch_dark",
+            "biome": "cavern_strata",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 9
+          },
+          {
+            "id": "room_5",
+            "type": "boss",
+            "realm": "pitch_dark",
+            "biome": "cavern_strata",
+            "hazard": "echo_flood",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 18
+          }
+        ],
+        "total_rooms": 6,
+        "boss_room": "room_5",
+        "estimated_waves": 18,
+        "timestamp": 1788588835.0739443
+      },
+      "keeper": {
+        "id": "87c0adabf0",
+        "species": "sentinel",
+        "archetype": "warden",
+        "level": 9,
+        "hp": 100,
+        "max_hp": 100,
+        "abilities": [
+          "fracture_touch",
+          "void_step",
+          "coherence_beam"
+        ],
+        "mood": "enigmatic",
+        "dialogue": "Touch the fracture. Feel the truth.",
+        "is_boss": false,
+        "realm_affinity": "resonance_depths",
+        "xp_reward": 450,
+        "timestamp": 1788588835.076835
+      },
+      "starter_gear": [
+        {
+          "id": "fab961ba9b",
+          "name": "Temporal Fang of Common",
+          "slot": "weapon",
+          "quality": "common",
+          "material": "temporal_bronze",
+          "power": 0.84,
+          "level": 1,
+          "effects": [
+            "paradox_strike"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788588835.0961282
+        },
+        {
+          "id": "177ac56f5f",
+          "name": "Coherence Aegis of Common",
+          "slot": "armor",
+          "quality": "common",
+          "material": "dream_crystal",
+          "power": 1.01,
+          "level": 1,
+          "effects": [
+            "entropy_shield"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788588835.1039424
+        },
+        {
+          "id": "0b4488899f",
+          "name": "Lucid Lens of Common",
+          "slot": "focus",
+          "quality": "common",
+          "material": "woven_coherence",
+          "power": 0.88,
+          "level": 1,
+          "effects": [
+            "temporal_dodge",
+            "dream_walk"
+          ],
+          "color": "var(--t)",
+          "timestamp": 1788588835.1111448
+        }
+      ],
+      "omen": "the boss room hums in your frequency",
+      "total_gear_power": 2.73,
+      "timestamp": 1788588835.116799
+    },
+    {
+      "seed": "morii",
+      "sigil": "53b5e837e3\u25c7\u273a\u2b21\u2234\u25c9\u2b21",
+      "realm": "mythic_realm",
+      "dungeon": {
+        "id": "144ad84f59",
+        "realm": "mythic_realm",
+        "biome": "living_stories",
+        "difficulty": 8,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": "narrative_overflow",
+            "loot": null,
+            "enemies": 3,
+            "hp_required": 8
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": "myth_tablet",
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_4",
+            "type": "puzzle",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_5",
+            "type": "boss",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": "narrative_overflow",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 16
+          },
+          {
+            "id": "room_6",
+            "type": "shrine",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 8
+          },
+          {
+            "id": "room_7",
+            "type": "boss",
+            "realm": "mythic_realm",
+            "biome": "living_stories",
+            "hazard": "narrative_overflow",
+            "loot": null,
+            "enemies": 3,
+            "hp_required": 16
+          }
+        ],
+        "total_rooms": 8,
+        "boss_room": "room_7",
+        "estimated_waves": 16,
+        "timestamp": 1788588835.130621
+      },
+      "keeper": {
+        "id": "8595b6db51",
+        "species": "architect",
+        "archetype": "forge-master",
+        "level": 4,
+        "hp": 57,
+        "max_hp": 57,
+        "abilities": [
+          "temporal_heal",
+          "coherence_beam",
+          "paradox_strike"
+        ],
+        "mood": "enigmatic",
+        "dialogue": "The entropy moves through me. I am its vessel.",
+        "is_boss": false,
+        "realm_affinity": "paradox_garden",
+        "xp_reward": 200,
+        "timestamp": 1788588835.135586
+      },
+      "starter_gear": [
+        {
+          "id": "504919d879",
+          "name": "Paradox Shatter of Uncommon",
+          "slot": "weapon",
+          "quality": "uncommon",
+          "material": "temporal_bronze",
+          "power": 1.38,
+          "level": 1,
+          "effects": [
+            "dream_walk"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788588835.139666
+        },
+        {
+          "id": "a48615b80f",
+          "name": "Void Guard of Uncommon",
+          "slot": "armor",
+          "quality": "uncommon",
+          "material": "myth_ivory",
+          "power": 1.3,
+          "level": 1,
+          "effects": [
+            "entropy_shield",
+            "paradox_strike"
+          ],
+          "color": "var(--gn)",
+          "timestamp": 1788588835.1476495
+        },
+        {
+          "id": "4ab3781500",
+          "name": "Fractal Lens of Worn",
+          "slot": "focus",
+          "quality": "worn",
+          "material": "void_steel",
+          "power": 0.78,
+          "level": 1,
+          "effects": [
+            "coherence_beam",
+            "entropy_shield"
+          ],
+          "color": "var(--m)",
+          "timestamp": 1788588835.1567378
+        }
+      ],
+      "omen": "the first room remembers you",
+      "total_gear_power": 3.46,
+      "timestamp": 1788588835.162746
+    }
+  ],
+  "total": 13
+}
