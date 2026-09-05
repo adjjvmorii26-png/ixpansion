@@ -260,8 +260,280 @@
       "detail_strength": 1,
       "id": "45e53a2c6c",
       "timestamp": 1788594710.4518385
+    },
+    {
+      "module_a": "bridge_dreamer",
+      "module_b": "bridge_epitaphs",
+      "shared_details": [
+        "coherence",
+        "connection"
+      ],
+      "detail_strength": 2,
+      "id": "14f4796dea",
+      "timestamp": 1788614166.8078997
+    },
+    {
+      "module_a": "bridge_epitaphs",
+      "module_b": "soul_bridge",
+      "shared_details": [
+        "coherence",
+        "connection"
+      ],
+      "detail_strength": 2,
+      "id": "b30425754c",
+      "timestamp": 1788614166.8079875
+    },
+    {
+      "module_a": "bridge_dreamer",
+      "module_b": "coherence_regulator",
+      "shared_details": [
+        "coherence"
+      ],
+      "detail_strength": 1,
+      "id": "b04833ba93",
+      "timestamp": 1788614166.8079126
+    },
+    {
+      "module_a": "bridge_dreamer",
+      "module_b": "dream_interpreter_api",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "e554c50c8a",
+      "timestamp": 1788614166.8079212
+    },
+    {
+      "module_a": "bridge_dreamer",
+      "module_b": "dream_journal",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "bc6d04d287",
+      "timestamp": 1788614166.807925
+    },
+    {
+      "module_a": "bridge_dreamer",
+      "module_b": "dream_sequencer",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "9c18f09e35",
+      "timestamp": 1788614166.8079326
+    },
+    {
+      "module_a": "bridge_dreamer",
+      "module_b": "sleep_archaeology",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "44d2743a07",
+      "timestamp": 1788614166.8079493
+    },
+    {
+      "module_a": "bridge_epitaphs",
+      "module_b": "coherence_regulator",
+      "shared_details": [
+        "coherence"
+      ],
+      "detail_strength": 1,
+      "id": "c91eff9ce5",
+      "timestamp": 1788614166.8079655
+    },
+    {
+      "module_a": "bridge_epitaphs",
+      "module_b": "signal_weaver",
+      "shared_details": [
+        "connection"
+      ],
+      "detail_strength": 1,
+      "id": "ba43b769e0",
+      "timestamp": 1788614166.8079824
+    },
+    {
+      "module_a": "chaos_orchestration",
+      "module_b": "entropy_oracle",
+      "shared_details": [
+        "entropy"
+      ],
+      "detail_strength": 1,
+      "id": "b75cab0693",
+      "timestamp": 1788614166.8080254
+    },
+    {
+      "module_a": "climate_memory",
+      "module_b": "memory_engine",
+      "shared_details": [
+        "memory"
+      ],
+      "detail_strength": 1,
+      "id": "1c9917955c",
+      "timestamp": 1788614166.8080506
+    },
+    {
+      "module_a": "climate_memory",
+      "module_b": "resonance_memory",
+      "shared_details": [
+        "memory"
+      ],
+      "detail_strength": 1,
+      "id": "1d7c851ea2",
+      "timestamp": 1788614166.808055
+    },
+    {
+      "module_a": "climate_memory",
+      "module_b": "state_store",
+      "shared_details": [
+        "memory"
+      ],
+      "detail_strength": 1,
+      "id": "69987ace33",
+      "timestamp": 1788614166.8080642
+    },
+    {
+      "module_a": "coherence_regulator",
+      "module_b": "soul_bridge",
+      "shared_details": [
+        "coherence"
+      ],
+      "detail_strength": 1,
+      "id": "d7a5cd385c",
+      "timestamp": 1788614166.8081052
+    },
+    {
+      "module_a": "conscience_loop",
+      "module_b": "time_loop_detector",
+      "shared_details": [
+        "paradox"
+      ],
+      "detail_strength": 1,
+      "id": "19bc8a5c5e",
+      "timestamp": 1788614166.8081405
+    },
+    {
+      "module_a": "dream_interpreter_api",
+      "module_b": "dream_journal",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "3410fae36d",
+      "timestamp": 1788614166.8082638
+    },
+    {
+      "module_a": "dream_interpreter_api",
+      "module_b": "dream_logic_physics",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "d2b6f485c8",
+      "timestamp": 1788614166.8082676
+    },
+    {
+      "module_a": "dream_interpreter_api",
+      "module_b": "dream_sequencer",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "8baba0d9a3",
+      "timestamp": 1788614166.8082712
+    },
+    {
+      "module_a": "dream_interpreter_api",
+      "module_b": "sleep_archaeology",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "eeb93f4ad8",
+      "timestamp": 1788614166.8082836
+    },
+    {
+      "module_a": "dream_journal",
+      "module_b": "dream_logic_physics",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "2089c5d248",
+      "timestamp": 1788614166.8082926
+    },
+    {
+      "module_a": "dream_journal",
+      "module_b": "dream_sequencer",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "e12a82c429",
+      "timestamp": 1788614166.8082962
+    },
+    {
+      "module_a": "dream_journal",
+      "module_b": "sleep_archaeology",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "e0497dfb3b",
+      "timestamp": 1788614166.8083084
+    },
+    {
+      "module_a": "dream_logic_physics",
+      "module_b": "dream_sequencer",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "42b4342830",
+      "timestamp": 1788614166.808317
+    },
+    {
+      "module_a": "dream_logic_physics",
+      "module_b": "sleep_archaeology",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "a34eb8d06d",
+      "timestamp": 1788614166.8083296
+    },
+    {
+      "module_a": "dream_sequencer",
+      "module_b": "sleep_archaeology",
+      "shared_details": [
+        "dream"
+      ],
+      "detail_strength": 1,
+      "id": "cfab3d48a8",
+      "timestamp": 1788614166.8083472
+    },
+    {
+      "module_a": "memory_engine",
+      "module_b": "state_store",
+      "shared_details": [
+        "memory"
+      ],
+      "detail_strength": 1,
+      "id": "2b1699a60b",
+      "timestamp": 1788614166.8084238
+    },
+    {
+      "module_a": "resonance_memory",
+      "module_b": "state_store",
+      "shared_details": [
+        "memory"
+      ],
+      "detail_strength": 1,
+      "id": "ecbab44f93",
+      "timestamp": 1788614166.808474
     }
   ],
-  "total_scans": 5,
-  "total_veins": 26
+  "total_scans": 6,
+  "total_veins": 53
 }
