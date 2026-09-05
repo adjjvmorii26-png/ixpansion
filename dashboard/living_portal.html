@@ -70,6 +70,8 @@ footer{text-align:center;margin-top:50px;padding:20px;color:var(--dim);font-size
     <span class="meta-pill"><span class="lbl">modules</span><span class="val" id="module-val">—</span></span>
     <span class="meta-pill"><span class="lbl">mood</span><span class="val" id="mood-val">—</span></span>
     <span class="meta-pill"><span class="lbl">sources</span><span class="val" id="source-val">—</span></span>
+    <span class="meta-pill"><span class="lbl">atmosphere</span><span class="val" id="pulse-color-name">—</span></span>
+    <span class="meta-pill"><span class="lbl">sound</span><span class="val" id="sound-val">—</span></span>
   </div>
 </div>
 
@@ -138,9 +140,27 @@ async function api(p){try{const r=await fetch(B+'/api/'+p);return await r.json()
 
 // Pulse
 async function pulse(){
+  // Fetch sensory experience
+  const s=await api('sensory_layer/apply');
+  const css=s.css||{};
+  const vis=s.experience?.visual||{};
+  
+  // Apply colors to page
+  if(css.background) document.body.style.background=css.background;
+  if(css.color) document.querySelectorAll('.card h2,.card p,.card .output,.meta-pill .lbl').forEach(el=>el.style.color='');
+  
+  // Update pulse display
   const p=await api('signal_loom/pressure');
   document.getElementById('pressure-val').textContent=(p.pressure||0).toFixed(2);
-  document.getElementById('pressure-val').style.color=p.pressure>0.7?'var(--forge)':p.pressure>0.4?'var(--gold)':'var(--blue)';
+  const colorName=s.color_name||'unknown';
+  document.getElementById('pressure-val').style.color=css.color||'var(--gold)';
+  document.getElementById('pulse-color-name').textContent=colorName;
+  
+  // Update breathing animation
+  const breathRate=css.breath_animation||'3.5s';
+  document.querySelector('.pulse-ring').style.animationDuration=breathRate;
+  
+  // Update meta
   const g=await api('organism_genome/load');
   const gen=g.genome||{};
   document.getElementById('mood-val').textContent=gen.temperament?.current_mood||'—';
@@ -149,7 +169,11 @@ async function pulse(){
   document.getElementById('source-val').textContent=(gen.morphology?.sources||[]).length;
   const will=await api('organism_will/decide');
   const wave=will.organism_state?.modules_connected||'?';
-  document.getElementById('wave-badge').textContent='Wave 427 · '+wave+' connected modules';
+  document.getElementById('wave-badge').textContent='Wave 428 · '+wave+' connected modules';
+  
+  // Update sound description
+  const aud=s.auditory||{};
+  document.getElementById('sound-val').textContent=aud.description||'—';
 }
 
 // Breathe
@@ -158,7 +182,8 @@ async function breathe(){
   el.textContent='breathing...';
   const r=await api('autonomous_loop/run');
   el.textContent=r.narrative||r.error||'silence';
-  pulse();
+  // Sensory state will refresh with next pulse
+  setTimeout(pulse, 500);
 }
 
 // Dream
