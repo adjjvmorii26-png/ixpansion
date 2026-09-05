@@ -165,6 +165,38 @@ def broadcast(seed: str = None) -> dict:
     return {"action": "broadcast", "bulletin": bulletin}
 
 
+def graph(limit: int = 36, seed: str = None) -> dict:
+    """The undernet vein map — nodes and bridges with measurable strength."""
+    names = _module_names(limit * 2)[:limit]
+    if seed:
+        rng = random.Random(seed)
+        names = rng.sample(names, min(len(names), limit))
+    nodes, edges = [], []
+    degree = {n: 0 for n in names}
+    for i in range(len(names)):
+        for j in range(i + 1, len(names)):
+            if (i * 31 + j) % 5 == 0:
+                a, b = names[i], names[j]
+                strength = _resonance(a, b, _doc_of(a), _doc_of(b))
+                if strength > 0.45:
+                    edges.append({"a": a, "b": b, "strength": round(strength, 3)})
+                    degree[a] += 1
+                    degree[b] += 1
+    for n in names:
+        sig = _pair_sig(n, "node")
+        nodes.append({
+            "id": n,
+            "band": BANDS[sig % len(BANDS)],
+            "degree": degree.get(n, 0),
+            "angle": (sig % 10000) / 10000.0,
+            "ring": min(degree.get(n, 0), 4),
+        })
+    nodes.sort(key=lambda n: -n["degree"])
+    return {"action": "map", "nodes": nodes, "edges": edges,
+            "node_count": len(nodes), "edge_count": len(edges),
+            "seed": seed, "wave": 386}
+
+
 def handler(payload=None, context=None):
     payload = payload or {}
     path = payload.get("path", "/scan")
@@ -174,4 +206,6 @@ def handler(payload=None, context=None):
         return tune(payload.get("module") or "resonance_graph")
     if path == "/broadcast":
         return broadcast(payload.get("seed"))
-    return {"error": "unknown", "available": ["/scan", "/tune", "/broadcast"]}
+    if path == "/map":
+        return graph(int(payload.get("limit", 36)) if str(payload.get("limit", "36")).isdigit() else 36, payload.get("seed"))
+    return {"error": "unknown", "available": ["/scan", "/tune", "/broadcast", "/map"]}

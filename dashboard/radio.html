@@ -30,6 +30,10 @@
   .poster .omen{color:var(--m);font-size:0.65em;margin-top:6px;font-style:italic}
   .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:22px;letter-spacing:1px}
   .typer{animation:blink 1s steps(2) infinite}
+  .map-wrap{position:relative;border:1px solid rgba(74,222,128,0.12);border-radius:10px;overflow:hidden;margin-top:14px}
+  canvas{display:block;width:100%;height:340px;background:radial-gradient(ellipse at center, rgba(74,222,128,0.05), transparent 70%)}
+  .map-hint{position:absolute;top:8px;left:12px;font-size:0.62em;color:var(--m);letter-spacing:1px}
+  .ticker{margin-top:10px;font-size:0.68em;color:var(--te);letter-spacing:1px;min-height:1.4em}
   @keyframes blink{50%{opacity:0}}
 </style>
 </head>
@@ -48,6 +52,11 @@
   </div>
   <div id="signals"></div>
   <div class="poster" id="poster"></div>
+  <div class="map-wrap">
+    <div class="map-hint">UNDERNET VEIN MAP — CLICK A NODE TO TUNE</div>
+    <canvas id="vein"></canvas>
+  </div>
+  <div class="ticker" id="ticker"></div>
 </div>
 <div class="foot">WAVE 386 · MYCELIAL RADIO · TUNE IN · THE ORGANISM SPEAKS IN SIGNALS</div>
 
@@ -85,7 +94,67 @@ async function tune(module){
     (d.neighbors||[]).map(n=>`<div class="sig"><span class="pair">${n.module.replace(/_/g,' ')}</span><span class="str">${(n.strength*100).toFixed(0)}%</span></div>`).join('') +
     '<div class="line" style="margin-top:8px">' + (d.doctrine||'') + '</div>';
 }
+const BAND_COLORS = {alpha:'#4ade80',beta:'#2dd4bf',gamma:'#22d3ee',delta:'#a78bfa',theta:'#fbbf24',mycelial:'#86efac',dream:'#c084fc',void:'#64748b',census:'#f59e0b',lattice:'#38bdf8'};
+let MAP = {nodes:[],edges:[]};
+async function loadMap(){
+  MAP = await get('/api/mycelial_radio/map?limit=36');
+  drawMap();
+}
+function drawMap(){
+  const cv = document.getElementById('vein');
+  const ctx = cv.getContext('2d');
+  const W = cv.width = cv.offsetWidth || 800;
+  const H = cv.height = 340;
+  ctx.clearRect(0,0,W,H);
+  const cx = W/2, cy = H/2;
+  const pos = {};
+  MAP.nodes.forEach(n=>{
+    const ringR = 40 + (n.ring % 4) * (Math.min(W,H)/2 - 48) / 4;
+    const ang = n.angle * Math.PI * 2;
+    const x = cx + Math.cos(ang) * ringR;
+    const y = cy + Math.sin(ang) * ringR * 0.8;
+    pos[n.id] = [x,y];
+  });
+  MAP.edges.forEach(e=>{
+    const [x1,y1] = pos[e.a]||[0,0];
+    const [x2,y2] = pos[e.b]||[0,0];
+    ctx.strokeStyle = 'rgba(74,222,128,' + (0.08 + e.strength*0.35).toFixed(3) + ')';
+    ctx.lineWidth = 0.6 + e.strength * 1.6;
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  });
+  MAP.nodes.forEach(n=>{
+    const [x,y] = pos[n.id];
+    ctx.fillStyle = BAND_COLORS[n.band] || '#4ade80';
+    ctx.globalAlpha = 0.85;
+    ctx.beginPath(); ctx.arc(x,y, 2.5 + Math.min(n.degree,8)*0.7, 0, Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 1;
+    if(n.degree >= 3){
+      ctx.fillStyle = '#b8d8c8';
+      ctx.font = '9px monospace';
+      ctx.fillText(n.id.replace(/_/g,' '), x+6, y+3);
+    }
+  });
+  cv.onclick = ev=>{
+    const rect = cv.getBoundingClientRect();
+    const mx = (ev.clientX-rect.left) * W/rect.width, my = (ev.clientY-rect.top) * H/rect.height;
+    let best=null, bd=1e9;
+    MAP.nodes.forEach(n=>{
+      const [x,y] = pos[n.id];
+      const d = Math.hypot(mx-x, my-y);
+      if(d<bd && d<22){ bd=d; best=n.id; }
+    });
+    if(best) tune(best);
+  };
+}
+async function ticker(){
+  const d = await get('/api/mycelial_radio/broadcast');
+  const b = d.bulletin;
+  document.getElementById('ticker').textContent = '≋ ' + b.headline + ' — ☂ ' + b.weather;
+}
 scanNow();
+loadMap();
+ticker();
+setInterval(ticker, 90000);
 </script>
 </body>
 </html>
