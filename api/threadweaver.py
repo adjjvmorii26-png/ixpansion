@@ -162,6 +162,24 @@ def _gather_relationships():
     except Exception:
         pass
 
+    # 7. Veinbed — detail-layer shared concepts between re-membered modules
+    try:
+        sys.path.insert(0, os.path.dirname(__file__))
+        from veinbed import veins as _veins
+        vein_data = _veins(60)
+        for v in vein_data.get("veins", []):
+            threads.append({
+                "module_a": v.get("module_a"), "module_b": v.get("module_b"),
+                "type": "fusion", "strength": min(0.95, 0.5 + v.get("detail_strength", 0) / 12),
+                "source": "veinbed", "source_id": v.get("id"),
+                "age_hours": 0,
+                "shared_details": v.get("shared_details"),
+            })
+        if vein_data.get("veins"):
+            sources_used.append("veinbed")
+    except Exception:
+        pass
+
     return threads, sources_used
 
 

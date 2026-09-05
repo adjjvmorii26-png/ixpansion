@@ -1482,6 +1482,14 @@
     {
       "src": "/silence",
       "dest": "/dashboard/threads.html#silence-card"
+    },
+    {
+      "src": "/api/veinbed",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/veinbed",
+      "dest": "/dashboard/threads.html#veinbed-card"
     }
   ],
   "env": {

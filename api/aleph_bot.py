@@ -501,6 +501,20 @@ def _process_command(command: str, args: list, user: str) -> str:
         except Exception as e:
             return "🌑 " + str(e)
 
+    elif command == "/veinbed":
+        import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+        try:
+            from veinbed import veins, detail
+            if args and len(args) >= 2:
+                det = detail(args[0], args[1])
+                return "🌿 %s and %s share: %s\n%s\n\nView: https://alexalex.info/veinbed" % (det["module_a"].replace("_"," "), det["module_b"].replace("_"," "), ", ".join(det["shared_details"]), det["verse"])
+            v = veins(8)
+            veins_out = v.get("veins", [])[:6]
+            lines = "\n".join(" %s ↔ %s (%s) — %s" % ((x.get("module_a") or "?").replace("_"," "), (x.get("module_b") or "?").replace("_"," "), x.get("detail_strength",0), ", ".join(x.get("shared_details",[]))) for x in veins_out) if veins_out else "the veinbed is empty"
+            return "🌿 Veinbed — %s veins across %s modules\n%s\n\nView: https://alexalex.info/veinbed" % (v.get("total",0), len(set(x.get("module_a","") for x in veins_out)|set(x.get("module_b","") for x in veins_out)), lines)
+        except Exception as e:
+            return "🌿 " + str(e)
+
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def get_bot_info() -> dict:

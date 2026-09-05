@@ -57,6 +57,13 @@ th{color:#c88aff;font-weight:normal}
 <button class="discover-btn" onclick="discoverThread()">🔮 Discover a New Thread</button>
 <div id="discover-result" class="verse" style="display:none;margin-bottom:12px"></div>
 
+
+<div class="card" id="veinbed-card">
+<h2>🌿 Veinbed — Detail Layer</h2>
+<div class="sub" style="color:#6a7a9a;font-size:.82em;margin-bottom:8px">Names pair modules. Details show what they actually share. The veinbed maps the substrate where relationships grow.</div>
+<div id="veinbed-body" style="font-size:.85em"></div>
+<button class="discover-btn" onclick="mapVeinbed()" style="border-color:#44cc88;color:#44cc88">🌿 Map the Veinbed</button>
+</div>
 <div class="card" id="silence-card">
 <h2>🌑 Silent Pairs</h2>
 <div class="sub" style="color:#6a7a9a;font-size:.82em;margin-bottom:8px">Forgotten modules that are halves of each other — the organism forgot the seam between them.</div>
@@ -189,6 +196,20 @@ async function scanSilence(){
   body.insertAdjacentHTML('beforeend',`<div style="margin-top:8px;color:#6a7a9a;font-size:.8em">Scanned ${r.scanned} modules · ${r.total_pairs} total pairs found across ${r.total_scans} scans.</div>`);
 }
 scanSilence();
+
+async function mapVeinbed(){
+  const r=await api('/api/veinbed/map_veins');
+  const body=document.getElementById('veinbed-body');
+  const veins=r.veins||[];
+  if(!veins.length){body.textContent='The veinbed is empty — map it to reveal the detail layer.';return}
+  body.innerHTML=veins.slice(0,10).map(v=>`<div style="border-bottom:1px solid #111;padding:6px 0">
+    <span class="badge" style="border-color:#44cc88;color:#44cc88">${(v.module_a||'?').replace(/_/g,' ')} ↔ ${(v.module_b||'?').replace(/_/g,' ')}</span>
+    <span style="color:#6a7a9a;font-size:.8em;margin-left:6px">strength ${v.detail_strength}</span>
+    <div style="margin-top:4px;color:#8a6a9a;font-size:.9em">shared: <b>${(v.shared_details||[]).join(', ')}</b></div>
+  </div>`).join('');
+  body.insertAdjacentHTML('beforeend',`<div style="margin-top:8px;color:#6a7a9a;font-size:.8em">Mapped ${r.modules_sampled} modules · ${r.total_veins} veins discovered. ${r.lore||''}</div>`);
+}
+mapVeinbed();
 </script>
 </body>
 </html>
