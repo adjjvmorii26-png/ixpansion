@@ -1,0 +1,117 @@
+name: Copilot Code Review
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  copilot-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Module validation
+        run: |
+          python -c "
+          import ast, os, sys
+          errors = []
+          count = 0
+          changed = [l.strip() for l in os.popen('git diff --name-only origin/main...HEAD').read().splitlines()
+                     if l.strip().startswith('api/') and l.endswith('.py')]
+          if not changed:
+              print('No api/ modules changed — skipping validation')
+              sys.exit(0)
+          for f in changed:
+              count += 1
+              try:
+                  with open(f) as fh: ast.parse(fh.read())
+              except SyntaxError as e:
+                  errors.append(f'{f}: {e}')
+          print(f'Validated {count} changed module(s)')
+          if errors:
+              for e in errors: print(f'  ERROR: {e}')
+              sys.exit(1)
+          print('All modules parse clean')
+          "
+
+      - name: Module contract check
+        run: |
+          python -c "
+          import ast, os, sys
+          changed = [l.strip() for l in os.popen('git diff --name-only origin/main...HEAD').read().splitlines()
+                     if l.strip().startswith('api/') and l.endswith('.py') and '__pycache__' not in l]
+          missing = []
+          for f in changed:
+              if not os.path.exists(f): continue
+              with open(f) as fh: tree = ast.parse(fh.read())
+              names = {node.name for node in ast.walk(tree) if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))}
+              req = {'handler', 'coherence_vitals', 'resonates_with'}
+              absent = req - names
+              if absent:
+                  missing.append(f'{f}: missing {absent}')
+          if missing:
+              print('Module contract violations:')
+              for m in missing: print(f'  {m}')
+              sys.exit(1)
+          print(f'{len(changed)} module(s) satisfy the organism contract')
+          "
+
+      - name: Compile check
+        run: |
+          python -c "
+          import os, sys, py_compile
+          changed = [l.strip() for l in os.popen('git diff --name-only origin/main...HEAD').read().splitlines()
+                     if l.strip().startswith('api/') and l.endswith('.py')]
+          errors = []
+          for f in changed:
+              try: py_compile.compile(f, doraise=True)
+              except py_compile.PyCompileError as e: errors.append(str(e))
+          if errors:
+              for e in errors: print(f'COMPILE ERROR: {e}')
+              sys.exit(1)
+          print(f'{len(changed)} module(s) compile clean')
+          "
+
+      - name: Route coverage check
+        run: |
+          python -c "
+          import json, os
+          with open('vercel.json') as f: v = json.load(f)
+          routes = {r['src'].lstrip('/').replace('/', '.') for r in v.get('routes', []) if '/api/' in r.get('src', '')}
+          changed = [os.path.basename(l.strip()).replace('.py','')
+                     for l in os.popen('git diff --name-only origin/main...HEAD').read().splitlines()
+                     if l.strip().startswith('api/') and l.endswith('.py')]
+          missing = [m for m in changed if 'api.' + m not in routes and m]
+          if missing:
+              print(f'Modules without vercel.json routes: {missing}')
+              print('Run: add routes to vercel.json before merging')
+              sys.exit(1)
+          if changed:
+              print(f'{len(changed)} changed module(s) have routes')
+          else:
+              print('No api/ changes')
+          "
+
+      - name: Organism health summary
+        run: |
+          echo "### 🧬 Organism Health Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          MODULE_COUNT=$(find api -name '*.py' ! -path '*__pycache__*' | wc -l)
+          echo "| Total organs | $MODULE_COUNT |" >> $GITHUB_STEP_SUMMARY
+          ROUTE_COUNT=$(python3 -c "import json; print(len([r for r in json.load(open('vercel.json')).get('routes',[]) if '/api/' in r.get('src','')]))")
+          echo "| API routes | $ROUTE_COUNT |" >> $GITHUB_STEP_SUMMARY
+          WAVE=$(grep -o 'Wave [0-9]*' api/*.py | tail -1 | grep -o '[0-9]*')
+          echo "| Latest wave | $WAVE |" >> $GITHUB_STEP_SUMMARY
+          echo "| Contract | all changed modules satisfy `handler` + `coherence_vitals` + `resonates_with` |" >> $GITHUB_STEP_SUMMARY
