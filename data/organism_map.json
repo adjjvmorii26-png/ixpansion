@@ -1,0 +1,220 @@
+{
+  "timestamp": 1788619910.172998,
+  "total_modules": 672,
+  "families": {
+    "interface": 104,
+    "generator": 103,
+    "identity": 99,
+    "memory": 92,
+    "regulator": 62,
+    "resolver": 41,
+    "observer": 41,
+    "connector": 40,
+    "unclassified": 37,
+    "economy": 30,
+    "world": 23
+  },
+  "orphan_count": 17,
+  "orphan_samples": [
+    "commerce_barter",
+    "commerce_escrow",
+    "conscious_veil",
+    "cyber_dyke",
+    "cyber_lamina",
+    "dream_spore",
+    "economic_exchange",
+    "economic_mint",
+    "entropy_amp",
+    "entropy_spiral"
+  ],
+  "bridge_count": 496,
+  "top_bridges": [
+    {
+      "module": "aleph_bot",
+      "connects_families": [
+        "generator",
+        "identity",
+        "memory",
+        "observer",
+        "regulator",
+        "resolver"
+      ],
+      "bridge_strength": 6
+    },
+    {
+      "module": "self_naming",
+      "connects_families": [
+        "generator",
+        "identity",
+        "observer",
+        "regulator",
+        "resolver"
+      ],
+      "bridge_strength": 5
+    },
+    {
+      "module": "warden_ascension",
+      "connects_families": [
+        "generator",
+        "memory",
+        "regulator",
+        "resolver",
+        "world"
+      ],
+      "bridge_strength": 5
+    },
+    {
+      "module": "ascension_chronicle",
+      "connects_families": [
+        "generator",
+        "identity",
+        "memory",
+        "world"
+      ],
+      "bridge_strength": 4
+    },
+    {
+      "module": "breeze",
+      "connects_families": [
+        "generator",
+        "identity",
+        "observer",
+        "regulator"
+      ],
+      "bridge_strength": 4
+    }
+  ],
+  "cluster_count": 33,
+  "top_clusters": [
+    {
+      "size": 48,
+      "modules": [
+        "aesthetic_manifesto",
+        "agent_communication",
+        "analytics",
+        "auth",
+        "autonomous_dialogue",
+        "beauty_index",
+        "chronicle_of_chaos",
+        "chronicle_storyteller",
+        "cognitive_resonance",
+        "collective_dreamweaver",
+        "credits",
+        "data_licensing",
+        "dream_interpreter",
+        "dream_synthesis",
+        "elegance_scorer",
+        "emergence_detector",
+        "form_evaluator",
+        "grammar_weaver",
+        "integrity_oracle",
+        "interdimensional_bridge"
+      ],
+      "primary_family": "interface"
+    },
+    {
+      "size": 42,
+      "modules": [
+        "adaptation_learner",
+        "ascension_chronicle",
+        "autonomous_bloom",
+        "autonomous_loop",
+        "breeze",
+        "chrono_forge",
+        "coherence_regulator",
+        "cohort_chorus",
+        "dream_logic_physics",
+        "echoic_ember",
+        "live_telemetry",
+        "lucid_combat",
+        "lucid_dungeon",
+        "lucid_equipment",
+        "lucid_lore",
+        "lucid_npc",
+        "lucid_physics_rules",
+        "lucid_progression",
+        "lucid_session",
+        "mineral_forge"
+      ],
+      "primary_family": "generator"
+    },
+    {
+      "size": 26,
+      "modules": [
+        "aesthetic_evaluator",
+        "aesthetic_manifesto",
+        "axiom_mutator",
+        "choral_engine",
+        "codecalligraphy",
+        "collective_subconscious",
+        "consciousness_freq",
+        "consciousness_map",
+        "consciousness_simulator",
+        "continuity_weaver",
+        "dream_weaver",
+        "event_stream",
+        "imagination_engine",
+        "liminal_field",
+        "metaphor_forge",
+        "mycelial_network",
+        "neural_pathway",
+        "omniscience_weaver",
+        "organism_state",
+        "qualia_field"
+      ],
+      "primary_family": "identity"
+    },
+    {
+      "size": 20,
+      "modules": [
+        "aspiration_compass",
+        "attention_economy",
+        "boundary_detector",
+        "constraint_cartographer",
+        "counterfactual_engine",
+        "ecosystem_fitness",
+        "entropy_currency",
+        "gossip_network",
+        "govern_circle",
+        "heterarchy_oracle",
+        "horizon_scanner",
+        "impossibility_mapper",
+        "karma_engine",
+        "keystone_auditor",
+        "mutualism_optimizer",
+        "parasite_hunter",
+        "resonance_field",
+        "symbiosis_detector",
+        "talent_scout",
+        "worker_council"
+      ],
+      "primary_family": "unclassified"
+    },
+    {
+      "size": 17,
+      "modules": [
+        "archaeology_compiler",
+        "autonomous_drift",
+        "cross_realm_trade",
+        "culture_layer",
+        "ecosystem_census",
+        "extinction_mapper",
+        "fossil_registry",
+        "genesis_pulse",
+        "genetic_code_engine",
+        "paleontology_lab",
+        "royalty_registry",
+        "silence_orchard",
+        "simulation_as_service",
+        "stratigraphy_core",
+        "stratum_excavator",
+        "temporal_cartographer",
+        "void_architect"
+      ],
+      "primary_family": "memory"
+    }
+  ],
+  "connection_density": 0.004983,
+  "total_connections": 1123,
+  "modules_with_no_resonates": 17
+}

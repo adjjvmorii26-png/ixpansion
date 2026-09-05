@@ -1592,6 +1592,14 @@
       "dest": "/dashboard/autonomous.html#innovate-card"
     },
     {
+      "src": "/api/module_cartographer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/map",
+      "dest": "/dashboard/autonomous.html#cartographer-card"
+    },
+    {
       "src": "/will",
       "dest": "/dashboard/threads.html#will-card"
     }

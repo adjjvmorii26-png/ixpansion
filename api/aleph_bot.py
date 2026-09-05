@@ -608,6 +608,8 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_amplify(args, user)
     elif command == "/innovate":
         return _cmd_innovate(args, user)
+    elif command == "/map":
+        return _cmd_map(args, user)
 
     return f"Unknown command: {command}\nTry /help for available commands."
 
@@ -821,3 +823,22 @@ def _cmd_innovate(args, user):
         return "💡 Lateral Innovation Engine\\n%s\\n%s" % (r.get("verse", ""), lines)
     except Exception as e:
         return "💡 " + str(e)
+
+# --- Wave 426: Module Cartographer command ---
+
+def _cmd_map(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from module_cartographer import map_all
+        r = map_all()
+        m = r.get("map", {})
+        families = m.get("families", {})
+        top_families = list(families.items())[:5]
+        fam_str = ", ".join("%s(%d)" % (f, c) for f, c in top_families)
+        return "🗺 Module Cartographer\\nTotal: %s modules | Families: %s\\nOrphans: %s | Bridges: %s | Clusters: %s\\nDensity: %s | Connections: %s" % (
+            m.get("total_modules"), fam_str,
+            m.get("orphan_count"), m.get("bridge_count"),
+            m.get("cluster_count"), m.get("connection_density"),
+            m.get("total_connections"))
+    except Exception as e:
+        return "🗺 " + str(e)
