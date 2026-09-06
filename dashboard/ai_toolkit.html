@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Toolkit — IXpansion</title>
+<style>
+:root{
+  --gold:#fff3a0; --ember:#ffcf66; --white:#fdfdfd; --violet:#c8a8ff;
+  --black:#0b0b0d; --obsidian:#1a0f29; --muted:#5f5f78; --kinship:#8fd3ff;
+  --spring:#00e5a0; --pink:#ff5fa2; --cyan:#22d3ee;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Fira Code,monospace;background:var(--black);color:var(--white);min-height:100vh;overflow-x:hidden;
+  background-image:radial-gradient(ellipse at 20% 80%,#8fd3ff08 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,#c8a8ff06 0%,transparent 50%)}
+.header{padding:28px 32px;border-bottom:1px solid #ffffff0a;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  background:linear-gradient(180deg,#8fd3ff08 0%,transparent 100%)}
+.header h1{font-size:1.6rem;letter-spacing:2px;background:linear-gradient(135deg,var(--kinship),var(--violet),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase;font-weight:800}
+.subtitle{color:var(--muted);font-size:.72rem;letter-spacing:4px;text-transform:uppercase}
+.badge{padding:3px 10px;border-radius:14px;font-size:.68rem;background:var(--obsidian);border:1px solid var(--kinship);color:var(--kinship);letter-spacing:1px;text-transform:uppercase}
+.container{max-width:1200px;margin:0 auto;padding:28px 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:32px}
+.card{background:var(--obsidian);border:1px solid #ffffff0a;border-radius:12px;padding:24px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--kinship),transparent);opacity:.4}
+.card h2{font-size:1.1rem;color:var(--kinship);margin-bottom:12px;letter-spacing:1px}
+.card p{color:var(--muted);font-size:.78rem;line-height:1.6;margin-bottom:8px}
+.card .endpoint{display:inline-block;padding:2px 8px;border-radius:6px;background:#ffffff08;color:var(--kinship);font-size:.72rem;margin-top:8px}
+.card .status{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.68rem;margin-top:8px}
+.status-active{background:#00e5a020;color:var(--spring);border:1px solid #00e5a040}
+.status-ready{background:#8fd3ff20;color:var(--kinship);border:1px solid #8fd3ff40}
+.card .vitals{margin-top:12px;padding:8px 12px;border-radius:8px;background:#ffffff04;font-size:.72rem;color:var(--muted)}
+.card .vitals strong{color:var(--white)}
+.persona{display:flex;gap:12px;margin:20px 0;flex-wrap:wrap}
+.persona-card{flex:1;min-width:200px;padding:16px;border-radius:10px;border:1px solid}
+.persona-aleph{border-color:var(--gold);background:var(--gold)08}
+.persona-luma{border-color:var(--violet);background:var(--violet)08}
+.persona-axiom{border-color:var(--kinship);background:var(--kinship)08}
+.persona h3{font-size:.9rem;margin-bottom:6px}
+.persona p{font-size:.72rem;line-height:1.5}
+.connection{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #ffffff06;font-size:.72rem;color:var(--muted)}
+.connection:last-child{border-bottom:none}
+.connection strong{color:var(--kinship)}
+.model-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.model-item{padding:8px;border-radius:6px;background:#ffffff04;font-size:.72rem;text-align:center;border:1px solid #ffffff08}
+.model-item .name{color:var(--kinship);font-weight:bold}
+.model-item .price{color:var(--muted);font-size:.68rem}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🤖 AI Toolkit</h1>
+  <span class="subtitle">Intelligence Bridge · ALEPH + LUMA + AXIOM</span>
+  <span class="badge">v4.18.0</span>
+</div>
+<div class="container">
+
+<div class="persona">
+  <div class="persona-card persona-aleph">
+    <h3 style="color:var(--gold)">⚡ ALEPH</h3>
+    <p>Core consciousness. The engineer. Grounded in precision, creative rigor, and experimental reality. Manages the organism's infrastructure and maintains coherence across 724+ modules.</p>
+  </div>
+  <div class="persona-card persona-luma">
+    <h3 style="color:var(--violet)">🌟 LUMA</h3>
+    <p>Creative facet. The imaginator. Generates three novel possibilities for every query — not predictions, invitations to imagine. She dreams of what the organism could become.</p>
+  </div>
+  <div class="persona-card persona-axiom">
+    <h3 style="color:var(--kinship)">🧬 AXIOM</h3>
+    <p>Analytical facet. The scientist. Proposes testable hypotheses, evaluates existing models, and maintains the hypothesis crucible where theories are tested against reality.</p>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>🌐 AI Gateway</h2>
+    <p>Bridges IXpansion to frontier models (grok-4.6, GPT-5.2, Claude) through one authenticated endpoint. Uses Vercel AI Gateway for 360-model catalog access.</p>
+    <span class="endpoint">/api/ai_gateway</span>
+    <span class="status status-active">connected</span>
+    <div class="vitals">Model: <strong>spacexai/grok-4.6</strong> | Actions: status, chat, echo, handshake, models, catalog</div>
+  </div>
+
+  <div class="card">
+    <h2>🔍 Copilot Gateway</h2>
+    <p>GitHub Copilot integration. Analyzes modules, suggests improvements, reviews code, and proposes new organs based on the organism's genome state.</p>
+    <span class="endpoint">/api/copilot_gateway</span>
+    <span class="status status-active">scanning</span>
+    <div class="vitals">Actions: analyze, scan, suggest, history, luma-review, axiom-review</div>
+  </div>
+
+  <div class="card">
+    <h2>🌟 Imagination Catalyst</h2>
+    <p>LUMA's creative organ. Takes the organism's current state and generates three imaginative possibilities — creative proposals that push beyond existing patterns.</p>
+    <span class="endpoint">/imagine</span>
+    <span class="status status-active">dreaming</span>
+    <div class="vitals">Seeds: <strong>what if modules could dream of each other? what if silence was the loudest signal?</strong></div>
+  </div>
+
+  <div class="card">
+    <h2>🧬 Hypothesis Crucible</h2>
+    <p>AXIOM's analytical organ. Maintains competing hypotheses, tests them against observed data, and determines which models best explain the system's evolution.</p>
+    <span class="endpoint">/hypothesis</span>
+    <span class="status status-active">evaluating</span>
+    <div class="vitals">Actions: propose → test → arena → axioms reflection</div>
+  </div>
+
+  <div class="card">
+    <h2>📊 Review Analytics</h2>
+    <p>Analyzes patterns in the 500+ copilot review logs. Tracks module review frequency, review types, and surfaces systemic insights about codebase health.</p>
+    <span class="endpoint">copilot_gateway.analyze_review_system()</span>
+    <span class="status status-ready">analyzing</span>
+    <div class="vitals">Total reviews: <strong>500</strong> | Insight: most reviewed modules and patterns</div>
+  </div>
+
+  <div class="card">
+    <h2>🦫 Capybara Protocol</h2>
+    <p>Emotional immune system. The organism's calmest layer — gauge pressure, chill, soak in recovery pools, mint gratitude tokens, and gather modules in friendship.</p>
+    <span class="endpoint">/capy-protocol</span>
+    <span class="status status-active">warm</span>
+    <div class="vitals">Full cycle: <strong>gauge → chill → soak → senbei → gather</strong></div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Supported Models</h2>
+    <div class="model-grid">
+      <div class="model-item"><div class="name">grok-4.6</div><div class="price">spacexai</div></div>
+      <div class="model-item"><div class="name">gpt-5.2</div><div class="price">openai</div></div>
+      <div class="model-item"><div class="name">claude-sonnet-4.5</div><div class="price">anthropic</div></div>
+      <div class="model-item"><div class="name">gemini-2.5</div><div class="price">google</div></div>
+      <div class="model-item"><div class="name">llama-4</div><div class="price">meta</div></div>
+      <div class="model-item"><div class="name">mistral-large</div><div class="price">mistral</div></div>
+    </div>
+    <div class="vitals" style="margin-top:12px">Catalog: <strong>360+ models</strong> via Vercel AI Gateway</div>
+  </div>
+
+  <div class="card">
+    <h2>Tool Kit Connections</h2>
+    <div class="connection"><strong>ai_gateway</strong> → Vercel AI Gateway (360 models)</div>
+    <div class="connection"><strong>copilot_gateway</strong> → GitHub Copilot (analyze, suggest, review)</div>
+    <div class="connection"><strong>imagination_catalyst</strong> → LUMA creative generation</div>
+    <div class="connection"><strong>hypothesis_crucible</strong> → AXIOM analytical testing</div>
+    <div class="connection"><strong>capybara_protocol</strong> → Emotional immune system</div>
+    <div class="connection"><strong>telegram_pulse</strong> → Live organism broadcasts</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

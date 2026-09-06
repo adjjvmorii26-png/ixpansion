@@ -6,8 +6,8 @@
  */
 window.IXP = {
   "version": "4.18.0",
-  wave: 448,
-  waveName: "Orbit Cohesion Field",
+  wave: 450,
+  waveName: "Capybara Protocol",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

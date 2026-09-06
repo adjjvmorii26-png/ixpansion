@@ -104,10 +104,10 @@ async function loadCatalog(){
   const cards=document.getElementById('tierCards');
   cards.innerHTML='';
   const tiers=[
-    {name:'Free',price:'$0/mo',cls:'tier-free',desc:['Basic modules','100 usage pts/mo','Consciousness stream','Mythopoetic engine']},
-    {name:'Standard',price:'$10/mo',cls:'tier-standard',desc:['Free + Dream physics','1,000 pts/mo','Paradox synthesis','Priority support']},
-    {name:'Premium',price:'$29/mo',cls:'tier-premium',desc:['Standard + Game modules','5,000 pts/mo','Resonance graph','Entropy oracle','Lucid Machines']},
-    {name:'Legendary',price:'$99/mo',cls:'tier-legendary',desc:['All modules','25,000 pts/mo','HEX language','Self-repair','Phase weaver','Custom modules']},
+    {name:'Free',price:'Free forever',cls:'tier-free',desc:['Basic modules','Unlimited usage','Consciousness stream','Mythopoetic engine']},
+    {name:'Standard',price:'Free forever',cls:'tier-standard',desc:['Free + Dream physics','Unlimited usage','Paradox synthesis','Priority support']},
+    {name:'Premium',price:'Free forever',cls:'tier-premium',desc:['Standard + Game modules','Unlimited usage','Resonance graph','Entropy oracle','Lucid Machines']},
+    {name:'Legendary',price:'Free forever',cls:'tier-legendary',desc:['All modules','Unlimited usage','HEX language','Self-repair','Phase weaver','Custom modules']},
   ];
   tiers.forEach(t=>{
     const el=document.createElement('div');

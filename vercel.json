@@ -1814,6 +1814,18 @@
     {
       "src": "/will",
       "dest": "/dashboard/threads.html#will-card"
+    },
+    {
+      "src": "/wisdom_layer(?:\\/.*)?",
+      "dest": "/dashboard/wisdom_layer.html"
+    },
+    {
+      "src": "/capybara-dashboard(?:\\/.*)?",
+      "dest": "/dashboard/capybara.html"
+    },
+    {
+      "src": "/ai_toolkit(?:\\/.*)?",
+      "dest": "/dashboard/ai_toolkit.html"
     }
   ],
   "env": {

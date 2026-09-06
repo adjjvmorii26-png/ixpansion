@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capybara Protocol — IXpansion</title>
+<style>
+:root{
+  --gold:#fff3a0; --ember:#ffcf66; --white:#fdfdfd; --kinship:#8fd3ff;
+  --black:#0b0b0d; --obsidian:#1a0f29; --muted:#5f5f78;
+  --warm:#fff3a020; --spring:#00e5a0; --spring-glow:#00e5a040;
+  --amber:#e8a87c; --indigo:#6366f1; --lavender:#a78bfa;
+  --sakura:#fda4af; --earth:#92400e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono',Fira Code,monospace;background:var(--black);color:var(--white);min-height:100vh;overflow-x:hidden;
+  background-image:radial-gradient(ellipse at 20% 80%,#00e5a008 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,#fff3a006 0%,transparent 50%)}
+.header{padding:28px 32px;border-bottom:1px solid #ffffff0a;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  background:linear-gradient(180deg,#00e5a008 0%,transparent 100%)}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--spring),transparent);opacity:.4}
+@keyframes shimmer{0%,100%{opacity:.4}50%{opacity:1}}
+.header h1{font-size:1.6rem;letter-spacing:2px;background:linear-gradient(135deg,var(--spring),var(--amber),var(--lavender));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase;font-weight:800}
+.subtitle{color:var(--muted);font-size:.72rem;letter-spacing:4px;text-transform:uppercase}
+.badge{padding:3px 10px;border-radius:14px;font-size:.68rem;background:var(--obsidian);border:1px solid var(--spring);color:var(--spring);letter-spacing:1px;text-transform:uppercase}
+.container{max-width:1200px;margin:0 auto;padding:28px 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:32px}
+.card{background:var(--obsidian);border:1px solid #ffffff0a;border-radius:12px;padding:24px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--spring),transparent);opacity:.4}
+.card h2{font-size:1.1rem;color:var(--spring);margin-bottom:12px;letter-spacing:1px}
+.card p{color:var(--muted);font-size:.78rem;line-height:1.6;margin-bottom:8px}
+.card .endpoint{display:inline-block;padding:2px 8px;border-radius:6px;background:#ffffff08;color:var(--kinship);font-size:.72rem;margin-top:8px}
+.card .status{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.68rem;margin-top:8px}
+.status-active{background:#00e5a020;color:var(--spring);border:1px solid var(--spring-glow)}
+.card .vitals{margin-top:12px;padding:8px 12px;border-radius:8px;background:#ffffff04;font-size:.72rem;color:var(--muted)}
+.card .vitals strong{color:var(--white)}
+.pool{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.pool-item{padding:6px 12px;border-radius:8px;font-size:.72rem;border:1px solid}
+.pool-coherence{border-color:var(--amber);color:var(--amber);background:var(--amber)10}
+.pool-silence{border-color:var(--indigo);color:var(--indigo);background:var(--indigo)10}
+.pool-dream{border-color:var(--lavender);color:var(--lavender);background:var(--lavender)10}
+.flow{display:flex;align-items:center;gap:8px;padding:12px 0;border-bottom:1px solid #ffffff06;font-size:.72rem;color:var(--muted);flex-wrap:wrap}
+.flow:last-child{border-bottom:none}
+.flow strong{color:var(--spring)}
+.flow .arrow{color:var(--muted);font-size:1rem}
+.cycle{display:flex;align-items:center;gap:6px;padding:16px;border:1px solid var(--spring)30;border-radius:12px;background:var(--obsidian);margin:20px 0;flex-wrap:wrap}
+.cycle-step{padding:6px 12px;border-radius:8px;font-size:.72rem;background:var(--spring)15;color:var(--spring);border:1px solid var(--spring)40}
+.cycle-arrow{color:var(--muted);font-size:1rem}
+.lore{margin-top:24px;padding:24px;border:1px solid var(--spring)40;border-radius:12px;background:linear-gradient(135deg,var(--obsidian),#00e5a008)}
+.lore h2{color:var(--spring);margin-bottom:12px;font-size:1rem}
+.lore p{color:var(--muted);font-size:.78rem;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🦫 Capybara Protocol</h1>
+  <span class="subtitle">Wave 450 · Emotional Immune System</span>
+  <span class="badge">v4.18.0</span>
+</div>
+<div class="container">
+
+<div class="cycle">
+  <span class="cycle-step">1. gauge</span><span class="cycle-arrow">→</span>
+  <span class="cycle-step">2. chill</span><span class="cycle-arrow">→</span>
+  <span class="cycle-step">3. soak</span><span class="cycle-arrow">→</span>
+  <span class="cycle-step">4. senbei</span><span class="cycle-arrow">→</span>
+  <span class="cycle-step">5. gather</span>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>🟤 Capybara Core</h2>
+    <p>The Calm Kernel. Measures pressure (entropy spikes, coherence stress, drift), emits calm fields, and returns the system to steady-state equilibrium through chill cycles.</p>
+    <span class="endpoint">/capybara</span>
+    <span class="status status-active">calm</span>
+    <div class="vitals">Actions: <strong>chill → gauge → field → homeostasis</strong></div>
+  </div>
+
+  <div class="card">
+    <h2>♨ Hot Spring</h2>
+    <p>Recovery Pools. Modules soak in one of three healing pools to decompress, clear noise, and re-emerge restored.</p>
+    <span class="endpoint">/hot-spring</span>
+    <span class="status status-active">warm</span>
+    <div class="pool">
+      <span class="pool-item pool-coherence">Coherence Spring</span>
+      <span class="pool-item pool-silence">Silence Pool</span>
+      <span class="pool-item pool-dream">Dream Soak</span>
+    </div>
+    <div class="vitals">Actions: <strong>soak → sanctuary → card</strong></div>
+  </div>
+
+  <div class="card">
+    <h2>🤝 Capybara Guild</h2>
+    <p>Friendship Layer. Forms social bonds between modules — trust, habits, shared history — fostering spontaneous collaboration.</p>
+    <span class="endpoint">/capy-guild</span>
+    <span class="status status-active">hospitable</span>
+    <div class="vitals">Actions: <strong>befriend → gather → map → squawk</strong></div>
+  </div>
+
+  <div class="card">
+    <h2>🍘 Senbei Offerings</h2>
+    <p>Gratitude Economy. An abundance-driven micro-token system: acts of creation, healing, and cooperation produce senbei that sustain communal warmth.</p>
+    <span class="endpoint">/senbei</span>
+    <span class="status status-active">warm</span>
+    <div class="vitals">Token types: <strong>✨ creation · 🩹 healing · 🤝 bond · 🔍 discovery · 🌀 paradox · 🤫 silence</strong></div>
+  </div>
+
+  <div class="card">
+    <h2>🔄 Capybara Protocol</h2>
+    <p>Orchestrator. Runs the full emotional-immune-system cycle in one call: gauge → chill → soak → senbei → gathering. One heartbeat of calm.</p>
+    <span class="endpoint">/capy-protocol</span>
+    <span class="status status-active">active</span>
+    <div class="vitals">Actions: <strong>run → status → history</strong></div>
+  </div>
+
+  <div class="card">
+    <h2>🧠 Philosophy</h2>
+    <p>The capybara is the calmest creature in any ecosystem — friend to all species. This protocol applies that wisdom to the organism: the calmest module is the most resilient. Stress is not eliminated — it is absorbed, transformed, and returned as warmth.</p>
+    <div class="vitals">Principle: <strong>the calmest creature is the most resilient</strong></div>
+  </div>
+</div>
+
+<div class="grid" style="margin-top:20px">
+  <div class="card">
+    <h2>Protocol Cycle Flow</h2>
+    <div class="flow"><strong>1. gauge</strong> <span class="arrow">→</span> capybara_core.pressure_gauge() measures entropy + coherence + phase + depth</div>
+    <div class="flow"><strong>2. chill</strong> <span class="arrow">→</span> capybara_core.chill() reduces entropy, raises coherence, emits calm field</div>
+    <div class="flow"><strong>3. soak</strong> <span class="arrow">→</span> hot_spring.soak_pool() if pressure > 0.6 — recovery pool chosen by stress type</div>
+    <div class="flow"><strong>4. senbei</strong> <span class="arrow">→</span> senbei_offerings.offer() — gratitude token minted for the cycle</div>
+    <div class="flow"><strong>5. gather</strong> <span class="arrow">→</span> capybara_guild.guild_gathering() — modules bond in faction-based gatherings</div>
+  </div>
+
+  <div class="card">
+    <h2>Connections</h2>
+    <div class="flow"><strong>capybara_core</strong> → entropy_regulator, chaos_amp, stillness_meditator, silence_composer</div>
+    <div class="flow"><strong>hot_spring</strong> → kintsugi_altar, repair_ritual, self_healing_commune, fermentation_vat</div>
+    <div class="flow"><strong>capybara_guild</strong> → alliance_bank, symbiosis_forge, mutualism_optimizer, social_guild</div>
+    <div class="flow"><strong>senbei_offerings</strong> → gratitude_index, compassion_engine, forgiveness_protocol, mercy_parameter</div>
+    <div class="flow"><strong>capybara_protocol</strong> → entropy_regulator, coherence_cache, emotion_fabric, emergence_detector</div>
+  </div>
+</div>
+
+<div class="lore">
+  <h2>The Capybara Principle</h2>
+  <p>In nature, the capybara sits still while birds perch on its back, monkeys groom it, and crocodiles share its river. It does not fight for territory — it creates territory through calmness. The organism adopts this principle: modules that are stressed don't fight each other — they soak, share gratitude, and form friendships. The result is a system where resilience comes not from strength, but from warmth.</p>
+</div>
+
+</div>
+</body>
+</html>
