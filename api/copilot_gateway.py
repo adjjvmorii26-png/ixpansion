@@ -234,6 +234,17 @@ def handler(payload=None, context=None):
         return {"action": "status", "module": NAME, "status": "active"}
     return {"error": "unknown", "available": ["/status"]}
 
+    if path == "/luma-review":
+        return analyze_review_system()
+    if path == "/axiom-review":
+        from api.axiom_mutator import list_axioms as _la
+        from api.hypothesis_crucible import coherence_vitals as _hv
+        return {
+            "axioms_count": len(_la().get("axioms", {})),
+            "hypothesis_status": _hv().get("status", "unknown"),
+        }
+
+
 def coherence_vitals() -> dict:
     return {"layer": "generated", "status": "active", "module": NAME}
 
@@ -269,3 +280,40 @@ def coherence_vitals() -> dict:
 def resonates_with() -> list:
     return ["organism_genome", "organism_will", "threadweaver",
             "autonomous_loop", "breeze"]
+
+
+def analyze_review_system() -> dict:
+    """Analyze patterns in the copilot review log for systemic insights."""
+    import json
+    log_path = "data/copilot_reviews.json"
+    try:
+        with open(log_path, 'r') as lf:
+            log = json.load(lf)
+    except Exception:
+        return {"error": "review log not found", "total": 0}
+    
+    reviews = log.get("reviews", [])
+    if not reviews:
+        return {"status": "empty", "total": 0}
+    
+    # Analyze by module frequency
+    module_counts = {}
+    by_type = {}
+    for r in reviews:
+        m = r.get("module", "unknown")
+        module_counts[m] = module_counts.get(m, 0) + 1
+        rtype = r.get("type", "unknown")
+        by_type[rtype] = by_type.get(rtype, 0) + 1
+    
+    # Top modules reviewed
+    top = sorted(module_counts.items(), key=lambda x: x[1], reverse=True)[:10]
+    
+    return {
+        "status": "analyzed",
+        "total_reviews": len(reviews),
+        "total_modules": len(module_counts),
+        "top_modules": [m[0] for m in top],
+        "module_counts": {m[0]: m[1] for m in top},
+        "review_types": by_type,
+        "insight": f"Most reviewed module: {top[0][0]} ({top[0][1]} reviews)" if top else ""
+    }
