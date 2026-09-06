@@ -12,9 +12,21 @@
     {
       "src": "public/**/*",
       "use": "@vercel/static"
+    },
+    {
+      "src": "telemetry/metrics_collector.mjs",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
+    {
+      "src": "/vitals",
+      "dest": "/telemetry/metrics_collector.mjs"
+    },
+    {
+      "src": "/vitals/health",
+      "dest": "/telemetry/metrics_collector.mjs?path=/vitals/health"
+    },
     {
       "src": "/api/meaning_weaver(?:\\/.*)?",
       "dest": "/api.py"
@@ -1084,6 +1096,10 @@
       "dest": "/api.py"
     },
     {
+      "src": "/telemetry(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
       "src": "/dashboard",
       "dest": "/dashboard/index.html"
     },
@@ -1860,6 +1876,42 @@
           "value": "Content-Type, Authorization"
         }
       ]
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ],
+      "source": "/dashboard/assets/(.*)"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ],
+      "source": "/dashboard/(.*)\\.(css|js|svg|png|jpg|webp)$"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ],
+      "source": "/api/(.*)"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ],
+      "source": "/vitals(.*)"
     }
   ]
 }

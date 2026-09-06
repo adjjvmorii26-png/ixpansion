@@ -1,0 +1,15 @@
+{
+  "name": "ixpansion",
+  "version": "4.19.0",
+  "private": true,
+  "description": "IXpansion — the computational frontier organism",
+  "scripts": {
+    "speed-insights": "npx vercel speed-insights",
+    "functions": "npx vercel functions",
+    "setup": "node scripts/vercel_setup.mjs"
+  },
+  "dependencies": {
+    "@vercel/functions": "^3.9.5",
+    "@vercel/speed-insights": "^1.0.0"
+  }
+}

@@ -192,6 +192,7 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(senbei|gratitude|thank the (modules?|organism)|warmth (report|check)|offerings)\b", "/api/senbei_offerings", {}),
     (r"\b(capybara protocol|run the protocol|capy protocol|warm cycle|calm cycle)\b", "/api/capybara_protocol", {}),
 
+    (r"\b(vercel (telemetry|metrics)|telemetry health|metric catalog|vitals|observability)\b", "/api/vercel_telemetry", {}),
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),
     (r"\bshow\b.*\bmodules?\b.*\b(\w+)\b", "/echo", {"extract_word": True}),

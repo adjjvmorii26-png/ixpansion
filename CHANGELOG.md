@@ -785,3 +785,26 @@ Error is not failure — it is the organism discovering a new shape.
 - 2 new intent rules
 - 455 Vercel routes
 - Version bumped to 4.19.0 / Wave 451
+
+## [4.20.0] — Wave 452: Vercel Telemetry
+
+**Dependencies:** `@vercel/functions@3.9.5` (Metric API), `@vercel/speed-insights@^1.0.0`
+
+**Node telemetry function** (`telemetry/metrics_collector.mjs`):
+- `import { metric } from '@vercel/functions'`
+- `/vitals?name=query.duration_ms&value=100&plan=pro` — records metrics into Vercel Observability
+- `/vitals/health` — liveness probe that also emits `vitals.health`
+
+**Python awareness organ** (`api/vercel_telemetry.py`):
+- `/telemetry` — metric catalog + recording + health
+- 7 metrics promised: query.duration_ms, wave.growth, vitals.health, module.coherence, capybara.cycles, silence.predictions, error.crafts
+
+**Compute/CDN:**
+- Node 24 runtime, `@vercel/node` build, 3-region compute (iad1/sin1/sfo1)
+- CDN caching headers for dashboard assets (immutable for assets, stale-while-revalidate for css/js)
+- no-store for /api and /vitals
+
+**Deployment:**
+- SSO deployment protection DISABLED — deployment is public
+- Live: https://ixpansion-live.vercel.app
+- Speed Insights client snippet added to dashboard/index.html
