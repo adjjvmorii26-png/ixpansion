@@ -186,6 +186,12 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(imagine|imagination|catalyze|catalyst|what if|possibilities|dream up)\b", "/api/imagination_catalyst", {}),
     (r"\b(hypothesis|test the(ory)?|axiom( s)?|prove|evaluate claim|scientific method)\b", "/api/hypothesis_crucible", {}),
 
+    (r"\b(capybara|calm (down|the system)|chill protocol|steady state|soothe|emotional immune)\b", "/api/capybara_core", {}),
+    (r"\b(hot spring|soak|recover( y)?|sanctuary|rest the modules|heal (the )?modules?)\b", "/api/hot_spring", {}),
+    (r"\b(friendship|befriend|guild gathering|social bond|module friends|guild map)\b", "/api/capybara_guild", {}),
+    (r"\b(senbei|gratitude|thank the (modules?|organism)|warmth (report|check)|offerings)\b", "/api/senbei_offerings", {}),
+    (r"\b(capybara protocol|run the protocol|capy protocol|warm cycle|calm cycle)\b", "/api/capybara_protocol", {}),
+
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),
     (r"\bshow\b.*\bmodules?\b.*\b(\w+)\b", "/echo", {"extract_word": True}),

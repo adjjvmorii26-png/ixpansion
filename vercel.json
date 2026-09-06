@@ -1056,6 +1056,26 @@
       "dest": "/api.py"
     },
     {
+      "src": "/capybara(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
+      "src": "/hot-spring(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
+      "src": "/capy-guild(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
+      "src": "/senbei(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
+      "src": "/capy-protocol(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
       "src": "/dashboard",
       "dest": "/dashboard/index.html"
     },

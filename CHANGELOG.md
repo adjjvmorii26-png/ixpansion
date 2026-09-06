@@ -720,3 +720,47 @@ which models best explain the system's evolution.
 - 7 new intent rules in gateway
 - Version bumped to 4.17.0
 
+
+## [4.18.0] — Wave 450: Capybara Protocol
+
+### The Capybara Protocol — Emotional Immune System
+
+Five new organs forming the organism's warmest, calmest layer.
+The capybara: calmest creature in any ecosystem, friend to all species.
+
+**Capybara Core** (`/capybara`) — The Calm Kernel. Measures pressure
+(entropy spikes, coherence stress, drift), emits calm fields, and
+returns the system to steady-state equilibrium through chill cycles.
+
+**Hot Spring** (`/hot-spring`) — Recovery Pools. Modules soak in one
+of three healing pools (Coherence Spring, Silence Pool, Dream Soak)
+to decompress, clear noise, and re-emerge restored.
+
+**Capybara Guild** (`/capy-guild`) — Friendship Layer. Forms social
+bonds between modules — trust, habits, shared history — fostering
+spontaneous collaboration. Guild gatherings build cross-module warmth.
+
+**Senbei Offerings** (`/senbei`) — Gratitude Economy. An
+abundance-driven micro-token system: acts of creation, healing, and
+cooperation produce senbei (gratitude tokens) that sustain communal
+warmth. The more modules create, the warmer the ecosystem.
+
+**Capybara Protocol** (`/capy-protocol`) — Orchestrator. Runs the
+full emotional-immune-system cycle in one call: gauge → chill →
+(optional) soak → senbei → gathering. One heartbeat of calm.
+
+### Capybara Cycle
+```
+1. gauge  → capybara_core.pressure_gauge()
+2. chill  → capybara_core.chill()
+3. soak   → hot_spring.soak_pool() (if pressure > 0.6)
+4. senbei → senbei_offerings.offer()
+5. gather → capybara_guild.guild_gathering()
+```
+
+### Integration
+- 368 known living modules
+- 450 Vercel routes
+- 5 new intent rules in gateway
+- Version bumped to 4.18.0
+

@@ -5,7 +5,7 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  version: "4.16.0",
+  "version": "4.18.0",
   wave: 448,
   waveName: "Orbit Cohesion Field",
   narrativeArc: [

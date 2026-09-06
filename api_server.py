@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.17.0"
-WAVE = "449"
-WAVE_NAME = "Wisdom Layer"
+VERSION = "4.18.0"
+WAVE = "450"
+WAVE_NAME = "Capybara Protocol"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -686,6 +686,32 @@ class ApiHandler(BaseHTTPRequestHandler):
 
         if path == "/hypothesis":
             from api.hypothesis_crucible import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+
+        if path == "/capybara":
+            from api.capybara_core import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/hot-spring":
+            from api.hot_spring import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/capy-guild":
+            from api.capybara_guild import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/senbei":
+            from api.senbei_offerings import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/capy-protocol":
+            from api.capybara_protocol import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 
