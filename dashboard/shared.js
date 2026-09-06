@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.18.0",
-  wave: 450,
-  waveName: "Capybara Protocol",
+  "version": "4.19.0",
+  wave: 451,
+  waveName: "Silence & Error Craft",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

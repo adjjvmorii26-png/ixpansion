@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.18.0"
-WAVE = "450"
-WAVE_NAME = "Capybara Protocol"
+VERSION = "4.19.0"
+WAVE = "451"
+WAVE_NAME = "Silence & Error Craft"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY

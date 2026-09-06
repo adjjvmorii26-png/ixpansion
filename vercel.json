@@ -1076,6 +1076,14 @@
       "dest": "/api.py"
     },
     {
+      "src": "/silence-oracle(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
+      "src": "/error-craft(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
       "src": "/dashboard",
       "dest": "/dashboard/index.html"
     },

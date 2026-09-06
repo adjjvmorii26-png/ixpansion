@@ -764,3 +764,24 @@ full emotional-immune-system cycle in one call: gauge → chill →
 - 5 new intent rules in gateway
 - Version bumped to 4.18.0
 
+
+## [4.19.0] — Wave 451: Silence & Error Craft
+
+Two LUMA-proposed experiments, chosen by the imagination catalyst
+and validated by AXIOM's hypothesis crucible.
+
+**Silence Oracle** (`/silence-oracle`) — LUMA proposed "what if silence
+was the loudest signal?" (feasibility 0.89). Reads silence as a predictive
+signal: when modules go quiet, the organism is about to change. Tracks
+silence ratio, shift imminence, and predicts the nature of the coming shift.
+
+**Error Craft** (`/error-craft`) — LUMA proposed "what if error was
+considered a creative output?" Transforms system errors into creative
+artifacts: fault poems, stack stanzas, null haiku, exception sigils.
+Error is not failure — it is the organism discovering a new shape.
+
+### Integration
+- 2 new API modules (726 total)
+- 2 new intent rules
+- 455 Vercel routes
+- Version bumped to 4.19.0 / Wave 451
