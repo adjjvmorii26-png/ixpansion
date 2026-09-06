@@ -16,6 +16,10 @@
   ],
   "routes": [
     {
+      "src": "/api/meaning_weaver(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
       "src": "/spine",
       "dest": "/api/fractal_spine"
     },
@@ -1022,6 +1026,34 @@
     {
       "src": "/",
       "dest": "/dashboard/portal.html"
+    },
+    {
+      "src": "/qualia(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
+      "src": "/echo-depth(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
+      "src": "/meaning(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
+      "src": "/paradox-mag(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
+      "src": "/convergence(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
+      "src": "/imagine(?:\\/.*)?",
+      "dest": "/api.py"
+    },
+    {
+      "src": "/hypothesis(?:\\/.*)?",
+      "dest": "/api.py"
     },
     {
       "src": "/dashboard",
