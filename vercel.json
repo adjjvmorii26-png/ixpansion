@@ -16,6 +16,62 @@
   ],
   "routes": [
     {
+      "src": "/spine",
+      "dest": "/api/fractal_spine"
+    },
+    {
+      "src": "/quantum",
+      "dest": "/api/quantum_slot_matrix"
+    },
+    {
+      "src": "/memory-forge",
+      "dest": "/api/hex_lattice_memory"
+    },
+    {
+      "src": "/bio-mesh",
+      "dest": "/api/bio_mesh"
+    },
+    {
+      "src": "/temporal",
+      "dest": "/api/temporal_orbit"
+    },
+    {
+      "src": "/affiliate",
+      "dest": "/api/affiliate_engine"
+    },
+    {
+      "src": "/revenue",
+      "dest": "/api/revenue_oracle"
+    },
+    {
+      "src": "/api/fractal_spine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/quantum_slot_matrix",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/hex_lattice_memory",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/bio_mesh",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/temporal_orbit",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/affiliate_engine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/revenue_oracle",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/orbit",
       "dest": "/api/orbit_cohesion_field"
     },

@@ -22,6 +22,12 @@ from typing import Dict, List, Tuple
 # intent patterns: regex → (module_path, params)
 INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(health|status|alive|heartbeat|pulse|online)\b", "/health", {}),
+    (r"\b(fractal spine|spine core|relay channel|seed node|fractal branch)\b", "/spine", {}),
+    (r"\b(quantum slot|superposition|entangle|collapse trigger)\b", "/quantum", {}),
+    (r"\b(memory forge|lattice ring|memory shard|epoch gate|anvil)\b", "/memory-forge", {}),
+    (r"\b(bio mesh|cell unit|tissue cluster|mutation event|genome rule)\b", "/bio-mesh", {}),
+    (r"\b(temporal orbit|orbit module|gravity well|solar core|drift)\b", "/temporal", {}),
+    (r"\b(affiliate|commission|click track|conversion|earn|revenue)\b", "/revenue", {}),
     (r"\b(conjunction|collision (risk|warning|watch)|space traffic|orbit cohesion|closing distance)\b", "/api/orbit_cohesion_field", {}),
     (r"\b(re.?entry|decay(ing)?\b|decay (forecast|predict|window)|falling (satellite|debris)|deorbit|demise forecast)\b", "/api/decay_forecaster", {}),
     (r"\b(telemetry (anomaly|suspicious)|spoof(ed|ing)?\b|sensor (drift|failure)|corrupt(ed|ion)? telemetry|is .* telemetry (clean|ok))\b", "/api/telemetry_anomaly_oracle", {}),
