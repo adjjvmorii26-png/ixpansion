@@ -1,0 +1,18 @@
+{
+  "admin": {
+    "username": "admin",
+    "password": "$2a$10$g55EYBj/ZXQkTtG12jWPHeqoWJt2RKDF9iPJMlVIsPcgzzGJhMEba",
+    "role": "admin",
+    "created": "2026-09-06T15:35:18.636Z",
+    "tier": "enterprise",
+    "display_name": "ALEPH"
+  },
+  "test_user": {
+    "username": "test_user",
+    "password": "$2a$10$XFU5qSiPBUToIXJ8KtOoF.4eGqUse5jIMQKUQfRxQb3KvR1.PEnGK",
+    "role": "user",
+    "created": "2026-09-06T15:39:18.653Z",
+    "tier": "free",
+    "display_name": "Test Observer"
+  }
+}

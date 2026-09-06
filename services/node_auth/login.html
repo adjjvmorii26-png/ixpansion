@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IXpansion — Login</title>
+<style>
+  :root { --bg: #06080f; --card: #0c1018; --border: rgba(122,162,255,0.12); --text: #8fa8c8;
+    --accent: #7aa2ff; --teal: #2dd4bf; --muted: #3d556f; --white: #e8ecf4; --red: #fb7185; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'SF Mono','Fira Code',monospace;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background-image: radial-gradient(1px 1px at 30% 20%, rgba(122,162,255,0.2) 1px, transparent 0),
+      radial-gradient(1px 1px at 70% 80%, rgba(167,139,250,0.15) 1px, transparent 0);
+    background-size: 120px 120px; }
+  .login-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 40px; width: 380px; max-width: 92vw; }
+  .logo { text-align: center; margin-bottom: 28px; }
+  .logo h1 { font-size: 1.5em; color: var(--white); letter-spacing: 3px; }
+  .logo h1 span { color: var(--teal); }
+  .logo p { color: var(--muted); font-size: 0.7em; margin-top: 4px; }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; color: var(--muted); font-size: 0.72em; margin-bottom: 5px; letter-spacing: 1px; }
+  .field input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border);
+    color: var(--white); padding: 10px 14px; border-radius: 6px; font-family: inherit;
+    font-size: 0.85em; outline: none; transition: border-color 0.15s; }
+  .field input:focus { border-color: var(--accent); }
+  .btn { width: 100%; padding: 11px; border: none; border-radius: 6px; font-family: inherit;
+    font-size: 0.85em; font-weight: 600; cursor: pointer; transition: all 0.15s; margin-top: 4px; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--teal)); color: #fff; }
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted);
+    margin-top: 10px; font-size: 0.75em; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .msg { text-align: center; font-size: 0.75em; min-height: 20px; margin-top: 10px; }
+  .msg.err { color: var(--red); }
+  .msg.ok { color: var(--teal); }
+  .divider { display: flex; align-items: center; gap: 10px; margin: 18px 0; }
+  .divider::before, .divider::after { content: ''; flex: 1; border-top: 1px solid var(--border); }
+  .divider span { color: var(--muted); font-size: 0.65em; letter-spacing: 1px; }
+  .footer { text-align: center; margin-top: 20px; color: var(--muted); font-size: 0.6em; }
+  .status { display: none; background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px; margin-top: 16px; font-size: 0.72em; }
+  .status.active { display: block; }
+</style>
+</head>
+<body>
+<div class="login-card">
+  <div class="logo">
+    <h1>IX<span>PANSION</span></h1>
+    <p>organism authentication</p>
+  </div>
+
+  <div id="loginForm">
+    <div class="field">
+      <label>USERNAME</label>
+      <input id="username" type="text" autocomplete="username" placeholder="admin">
+    </div>
+    <div class="field">
+      <label>PASSWORD</label>
+      <input id="password" type="password" autocomplete="current-password" placeholder="organism">
+    </div>
+    <button class="btn btn-primary" onclick="doLogin()">ENTER THE ORGANISM</button>
+    <div class="msg" id="msg"></div>
+
+    <div class="divider"><span>OR</span></div>
+
+    <button class="btn btn-ghost" onclick="toggleRegister()">CREATE NEW USER</button>
+
+    <div id="registerForm" style="display:none">
+      <div class="field" style="margin-top:12px">
+        <label>DISPLAY NAME</label>
+        <input id="reg_display" type="text" placeholder="your name">
+      </div>
+      <div class="field">
+        <label>NEW USERNAME</label>
+        <input id="reg_user" type="text" placeholder="choose a username">
+      </div>
+      <div class="field">
+        <label>PASSWORD</label>
+        <input id="reg_pass" type="password" placeholder="choose a password">
+      </div>
+      <button class="btn btn-primary" onclick="doRegister()">REGISTER</button>
+      <button class="btn btn-ghost" onclick="toggleRegister()">CANCEL</button>
+    </div>
+  </div>
+
+  <div class="status" id="statusCard">
+    <div style="color:var(--teal);font-weight:600;margin-bottom:6px">LOGGED IN</div>
+    <div>User: <span id="s_user"></span> · Role: <span id="s_role"></span> · Tier: <span id="s_tier"></span></div>
+    <div style="margin-top:8px;color:var(--muted)">Token stored in cookie. API requests will be authenticated.</div>
+    <button class="btn btn-ghost" style="margin-top:10px" onclick="doLogout()">LOGOUT</button>
+    <button class="btn btn-ghost" onclick="checkMe()">REFRESH</button>
+  </div>
+
+  <div class="footer">IXpansion · Node.js Auth · JWT</div>
+</div>
+
+<script>
+const API = '';  // same origin
+
+function msg(text, cls) {
+  const el = document.getElementById('msg');
+  el.textContent = text;
+  el.className = 'msg ' + (cls || '');
+}
+
+async function api(method, path, body) {
+  const opts = { method, headers: {}, credentials: 'include' };
+  if (body) { opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(body); }
+  const r = await fetch(API + path, opts);
+  return { status: r.status, data: await r.json().catch(() => ({})) };
+}
+
+async function doLogin() {
+  const u = document.getElementById('username').value.trim();
+  const p = document.getElementById('password').value;
+  if (!u || !p) return msg('enter username and password', 'err');
+  msg('authenticating…');
+  const { status, data } = await api('POST', '/auth/login', { username: u, password: p });
+  if (status === 200 && data.ok) {
+    msg('welcome, ' + (data.user.display_name || data.user.username), 'ok');
+    showStatus(data.user);
+  } else {
+    msg(data.error || 'login failed', 'err');
+  }
+}
+
+async function doRegister() {
+  const display = document.getElementById('reg_display').value.trim();
+  const u = document.getElementById('reg_user').value.trim();
+  const p = document.getElementById('reg_pass').value;
+  if (!u || !p) return msg('choose username and password', 'err');
+  msg('registering…');
+  const { status, data } = await api('POST', '/auth/register', { username: u, password: p, display_name: display || u });
+  if (status === 200 && data.ok) {
+    msg('registered as ' + data.user.username, 'ok');
+    showStatus(data.user);
+  } else {
+    msg(data.error || 'registration failed', 'err');
+  }
+}
+
+async function doLogout() {
+  await api('POST', '/auth/logout');
+  document.getElementById('loginForm').style.display = '';
+  document.getElementById('statusCard').classList.remove('active');
+  msg('logged out');
+}
+
+async function checkMe() {
+  const { status, data } = await api('GET', '/auth/me');
+  if (status === 200) showStatus(data);
+  else msg(data.error || 'session expired', 'err');
+}
+
+function showStatus(u) {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('statusCard').classList.add('active');
+  document.getElementById('s_user').textContent = u.display_name || u.username;
+  document.getElementById('s_role').textContent = u.role;
+  document.getElementById('s_tier').textContent = u.tier;
+}
+
+function toggleRegister() {
+  const f = document.getElementById('registerForm');
+  f.style.display = f.style.display === 'none' ? '' : 'none';
+}
+
+// Check existing session on load
+(async () => {
+  const { status, data } = await api('GET', '/auth/me');
+  if (status === 200 && data.username) showStatus(data);
+})();
+</script>
+</body>
+</html>
