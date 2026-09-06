@@ -15,6 +15,7 @@ import time
 from typing import Any, Dict, List, Optional
 
 from api import capybara_core, hot_spring, capybara_guild, senbei_offerings
+from api import vercel_telemetry
 
 PROTOCOL_LOG: List[Dict[str, Any]] = []
 
@@ -67,6 +68,11 @@ def run_cycle(coherence: float = 0.5, entropy: float = 0.5,
         "final_pressure": chill["pressure_after_soak"],
         "verdict": "serene" if chill["pressure_after_soak"] < 0.4 else "steady" if chill["pressure_after_soak"] < 0.6 else "still seeking calm",
     }
+    # Log cycle completion as Vercel metric
+    vercel_telemetry.record("capybara.cycles", 1, tag=cycle["verdict"])
+    vercel_telemetry.record("capybara.pressure_reduction", 
+        round(pressure - chill["pressure_after_soak"], 4),
+        tag="delta")
     PROTOCOL_LOG.append(cycle)
     return cycle
 

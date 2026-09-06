@@ -1100,6 +1100,10 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/vitals-dash(?:\\/.*)?",
+      "dest": "/dashboard/vitals.html"
+    },
+    {
       "src": "/dashboard",
       "dest": "/dashboard/index.html"
     },
