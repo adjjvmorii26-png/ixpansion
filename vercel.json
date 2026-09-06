@@ -16,6 +16,78 @@
   ],
   "routes": [
     {
+      "src": "/orbit",
+      "dest": "/api/orbit_cohesion_field"
+    },
+    {
+      "src": "/orbit.html",
+      "dest": "/dashboard/orbit.html"
+    },
+    {
+      "src": "/constellation",
+      "dest": "/api/orbit_cohesion_field"
+    },
+    {
+      "src": "/decay",
+      "dest": "/api/decay_forecaster"
+    },
+    {
+      "src": "/anomaly",
+      "dest": "/api/telemetry_anomaly_oracle"
+    },
+    {
+      "src": "/passes",
+      "dest": "/api/ground_station_synthesizer"
+    },
+    {
+      "src": "/orbital-story",
+      "dest": "/api/orbital_storyteller"
+    },
+    {
+      "src": "/debris",
+      "dest": "/api/debris_field_mapper"
+    },
+    {
+      "src": "/solar-weather",
+      "dest": "/api/solar_weather_coupler"
+    },
+    {
+      "src": "/noise",
+      "dest": "/api/noise_filter"
+    },
+    {
+      "src": "/api/orbit_cohesion_field",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/noise_filter",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/decay_forecaster",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/telemetry_anomaly_oracle",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/ground_station_synthesizer",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/orbital_storyteller",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/debris_field_mapper",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/solar_weather_coupler",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/theater",
       "dest": "/public/theater.html"
     },
@@ -1639,8 +1711,8 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "212",
-    "NEXUS_MODULES": "497",
+    "NEXUS_WAVE": "448",
+    "NEXUS_MODULES": "705",
     "NEXUS_ROUTES": "72"
   },
   "headers": [

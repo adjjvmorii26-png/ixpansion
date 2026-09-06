@@ -1,11 +1,11 @@
 # IXpansion — The Computational Frontier
 
 > A self-excavating, self-forecasting, self-beautifying, self-broadcasting
-> agent ecosystem with 664 living organs across 414 waves of evolution.
+> agent ecosystem with 700+ living organs across 448 waves of evolution.
 >
 > **The organism now breathes, decides, dreams, believes, and resolves paradoxes on its own.**
 
-**Version:** 5.0.0 · **Status:** Autonomous · **Coherence:** 98.6%
+**Version:** 4.16.0 · **Wave:** 448 · **Status:** Autonomous · **Coherence:** 98.6%
 
 ## What Is This?
 
@@ -94,6 +94,7 @@ curl "http://localhost:3000/gateway?q=what+is+the+organism+dreaming"
 | Gateway | `/gateway` | — | NLP query interface |
 | Metrics | `/metrics` | — | Live metrics |
 | Hortus | `/hortus` | — | The garden |
+| Orbit | `/orbit` | 448 | Unified orbital reality layer — cohesion field, constellations, decay, anomaly oracle, passes, debris, solar coupling |
 
 ## API Endpoints
 
@@ -112,8 +113,8 @@ curl "http://localhost:3000/gateway?q=what+is+the+organism+dreaming"
 ## Architecture
 
 ```
-api/           → 490+ self-reporting organ modules
-dashboard/     → 25 interactive dashboards
+api/           → 700+ self-reporting organ modules
+dashboard/     → 26 interactive dashboards
 gateway/       → NLP intent routing + API key management
 harbinger/     → Agent memory + metering
 omega_fractal_engine/ → Experimental fractal subsystems

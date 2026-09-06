@@ -2,114 +2,66 @@
   "amplifications": [
     {
       "action": "amplify_v2",
-      "pairs_evaluated": 1542,
-      "amplified": 6,
+      "pairs_evaluated": 1570,
+      "amplified": 3,
       "amplifications": [
         {
-          "module_a": "chaos_orchestration",
+          "module_a": "entropy_gardener",
           "module_b": "entropy_weaver",
           "ghost_module": "entropy_exchange",
           "shared_domain": "entropy",
-          "overtone_strength": 109,
+          "overtone_strength": 105,
           "thread_type": "overtone",
-          "description": "chaos_orchestration and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+          "description": "entropy_gardener and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
         },
         {
           "module_a": "entropy_weaver",
-          "module_b": "marketplace",
+          "module_b": "simulation_as_service",
           "ghost_module": "entropy_weaver",
           "shared_domain": "entropy",
-          "overtone_strength": 111,
+          "overtone_strength": 115,
           "thread_type": "overtone",
-          "description": "entropy_weaver and marketplace both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+          "description": "entropy_weaver and simulation_as_service both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
         },
         {
-          "module_a": "consciousness_map",
-          "module_b": "dream_seed_planter",
-          "ghost_module": "dream_inception_analyzer",
-          "shared_domain": "consciousness",
-          "overtone_strength": 94,
+          "module_a": "temperament_broker",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 112,
           "thread_type": "overtone",
-          "description": "consciousness_map and dream_seed_planter both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
-        },
-        {
-          "module_a": "dream_inception_analyzer",
-          "module_b": "ai_gateway",
-          "ghost_module": "dream_inception_analyzer",
-          "shared_domain": "consciousness",
-          "overtone_strength": 91,
-          "thread_type": "overtone",
-          "description": "dream_inception_analyzer and ai_gateway both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
-        },
-        {
-          "module_a": "dream_inception_analyzer",
-          "module_b": "social_cortex",
-          "ghost_module": "dreamcatcher",
-          "shared_domain": "consciousness",
-          "overtone_strength": 82,
-          "thread_type": "overtone",
-          "description": "dream_inception_analyzer and social_cortex both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
-        },
-        {
-          "module_a": "dream_inception_analyzer",
-          "module_b": "precipitation_cycle",
-          "ghost_module": "dreamcatcher",
-          "shared_domain": "consciousness",
-          "overtone_strength": 82,
-          "thread_type": "overtone",
-          "description": "dream_inception_analyzer and precipitation_cycle both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+          "description": "temperament_broker and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
         }
       ],
       "new_threads": [
-        "chaos_orchestration\u2194entropy_weaver",
-        "entropy_weaver\u2194marketplace",
-        "consciousness_map\u2194dream_seed_planter",
-        "dream_inception_analyzer\u2194ai_gateway",
-        "dream_inception_analyzer\u2194social_cortex",
-        "dream_inception_analyzer\u2194precipitation_cycle"
+        "entropy_gardener\u2194entropy_weaver",
+        "entropy_weaver\u2194simulation_as_service",
+        "temperament_broker\u2194entropy_weaver"
       ],
-      "timestamp": 1788641080.8058693
+      "timestamp": 1788650361.9707756
     },
     {
       "action": "amplify_v2",
-      "pairs_evaluated": 1491,
-      "amplified": 5,
+      "pairs_evaluated": 1543,
+      "amplified": 3,
       "amplifications": [
         {
-          "module_a": "reality_fork",
-          "module_b": "entropy_weaver",
-          "ghost_module": "entropy_weaver",
-          "shared_domain": "entropy",
-          "overtone_strength": 116,
+          "module_a": "dream_journal",
+          "module_b": "dreamcatcher",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 95,
           "thread_type": "overtone",
-          "description": "reality_fork and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+          "description": "dream_journal and dreamcatcher both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
         },
         {
-          "module_a": "quantum_randomness",
-          "module_b": "entropy_weaver",
-          "ghost_module": "entropy_exchange",
-          "shared_domain": "entropy",
-          "overtone_strength": 92,
-          "thread_type": "overtone",
-          "description": "quantum_randomness and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
-        },
-        {
-          "module_a": "entropy_currency",
-          "module_b": "entropy_oracle",
-          "ghost_module": "entropy_weaver",
-          "shared_domain": "entropy",
-          "overtone_strength": 97,
-          "thread_type": "overtone",
-          "description": "entropy_currency and entropy_oracle both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
-        },
-        {
-          "module_a": "continuity_planner",
-          "module_b": "entropy_exchange",
+          "module_a": "entropy_gardener",
+          "module_b": "guild_orders",
           "ghost_module": "entropy_weaver",
           "shared_domain": "entropy",
           "overtone_strength": 95,
           "thread_type": "overtone",
-          "description": "continuity_planner and entropy_exchange both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+          "description": "entropy_gardener and guild_orders both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
         },
         {
           "module_a": "ancestral_gallery",
@@ -122,36 +74,985 @@
         }
       ],
       "new_threads": [
-        "reality_fork\u2194entropy_weaver",
-        "quantum_randomness\u2194entropy_weaver",
-        "entropy_currency\u2194entropy_oracle",
-        "continuity_planner\u2194entropy_exchange",
+        "dream_journal\u2194dreamcatcher",
+        "entropy_gardener\u2194guild_orders",
         "ancestral_gallery\u2194dream_inception_analyzer"
       ],
-      "timestamp": 1788641145.598638
+      "timestamp": 1788650404.0985746
     },
     {
       "action": "amplify_v2",
-      "pairs_evaluated": 1538,
-      "amplified": 5,
+      "pairs_evaluated": 1516,
+      "amplified": 3,
       "amplifications": [
         {
           "module_a": "entropy_weaver",
-          "module_b": "event_replay",
+          "module_b": "autonomous_bloom",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and autonomous_bloom both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "synthetic_memory",
+          "ghost_module": "dreamcatcher",
+          "shared_domain": "consciousness",
+          "overtone_strength": 82,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and synthetic_memory both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "entropy_exchange",
+          "module_b": "dowsing_rod",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "entropy_exchange and dowsing_rod both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194autonomous_bloom",
+        "dream_inception_analyzer\u2194synthetic_memory",
+        "entropy_exchange\u2194dowsing_rod"
+      ],
+      "timestamp": 1788650447.408385
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1520,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "cognition_fingerprint",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 113,
+          "thread_type": "overtone",
+          "description": "cognition_fingerprint and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_auction",
+          "module_b": "entropy_exchange",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 109,
+          "thread_type": "overtone",
+          "description": "entropy_auction and entropy_exchange both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "consciousness_cascade",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dreamcatcher",
+          "shared_domain": "consciousness",
+          "overtone_strength": 100,
+          "thread_type": "overtone",
+          "description": "consciousness_cascade and dream_inception_analyzer both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "cognition_fingerprint\u2194entropy_weaver",
+        "entropy_auction\u2194entropy_exchange",
+        "consciousness_cascade\u2194dream_inception_analyzer"
+      ],
+      "timestamp": 1788650489.2327588
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1512,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "omega_dreamforge",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dreamcatcher",
+          "shared_domain": "consciousness",
+          "overtone_strength": 100,
+          "thread_type": "overtone",
+          "description": "omega_dreamforge and dream_inception_analyzer both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "frontier_stream",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 94,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and frontier_stream both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "dreamcatcher",
+          "module_b": "wave_predictor",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 83,
+          "thread_type": "overtone",
+          "description": "dreamcatcher and wave_predictor both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "omega_dreamforge\u2194dream_inception_analyzer",
+        "dream_inception_analyzer\u2194frontier_stream",
+        "dreamcatcher\u2194wave_predictor"
+      ],
+      "timestamp": 1788650530.9605114
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1576,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropic_ritual",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 116,
+          "thread_type": "overtone",
+          "description": "entropic_ritual and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "labor_market",
           "ghost_module": "entropy_weaver",
           "shared_domain": "entropy",
           "overtone_strength": 111,
           "thread_type": "overtone",
-          "description": "entropy_weaver and event_replay both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+          "description": "entropy_weaver and labor_market both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
         },
         {
-          "module_a": "beauty_index",
+          "module_a": "emotional_weather",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 96,
+          "thread_type": "overtone",
+          "description": "emotional_weather and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropic_ritual\u2194entropy_weaver",
+        "entropy_weaver\u2194labor_market",
+        "emotional_weather\u2194entropy_weaver"
+      ],
+      "timestamp": 1788650574.6606147
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1553,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "dream_hexer",
+          "module_b": "dream_logic_physics",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 94,
+          "thread_type": "overtone",
+          "description": "dream_hexer and dream_logic_physics both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "module_market",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "module_market and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "fractal_growth",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 91,
+          "thread_type": "overtone",
+          "description": "fractal_growth and dream_inception_analyzer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "dream_hexer\u2194dream_logic_physics",
+        "module_market\u2194entropy_weaver",
+        "fractal_growth\u2194dream_inception_analyzer"
+      ],
+      "timestamp": 1788650613.5684967
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1535,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "consciousness_map",
+          "module_b": "dreamcatcher",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 112,
+          "thread_type": "overtone",
+          "description": "consciousness_map and dreamcatcher both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "certification",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and certification both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "data_licensing",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 96,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and data_licensing both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "consciousness_map\u2194dreamcatcher",
+        "entropy_weaver\u2194certification",
+        "dream_inception_analyzer\u2194data_licensing"
+      ],
+      "timestamp": 1788650660.8642175
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1540,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "chaos_auction",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 121,
+          "thread_type": "overtone",
+          "description": "chaos_auction and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "governance",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 117,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and governance both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "experiment_runner",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 113,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and experiment_runner both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "chaos_auction\u2194entropy_weaver",
+        "entropy_weaver\u2194governance",
+        "entropy_weaver\u2194experiment_runner"
+      ],
+      "timestamp": 1788650701.850599
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1511,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "event_replay",
           "module_b": "entropy_weaver",
           "ghost_module": "entropy_weaver",
           "shared_domain": "entropy",
           "overtone_strength": 111,
           "thread_type": "overtone",
-          "description": "beauty_index and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+          "description": "event_replay and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "lucid_dreamer",
+          "ghost_module": "dreamcatcher",
+          "shared_domain": "consciousness",
+          "overtone_strength": 94,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and lucid_dreamer both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "genesis_forge",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "genesis_forge and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "event_replay\u2194entropy_weaver",
+        "dream_inception_analyzer\u2194lucid_dreamer",
+        "genesis_forge\u2194entropy_weaver"
+      ],
+      "timestamp": 1788650739.8963459
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1470,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "consciousness_simulator",
+          "module_b": "dreamcatcher",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 99,
+          "thread_type": "overtone",
+          "description": "consciousness_simulator and dreamcatcher both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "lucid_equipment",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 91,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and lucid_equipment both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "prophet_engine",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 91,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and prophet_engine both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "consciousness_simulator\u2194dreamcatcher",
+        "entropy_weaver\u2194lucid_equipment",
+        "entropy_weaver\u2194prophet_engine"
+      ],
+      "timestamp": 1788650775.7157075
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1531,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_gardener",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 105,
+          "thread_type": "overtone",
+          "description": "entropy_gardener and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "usage_dashboard",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 112,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and usage_dashboard both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "autonomous_bloom",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "autonomous_bloom and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_gardener\u2194entropy_weaver",
+        "entropy_weaver\u2194usage_dashboard",
+        "autonomous_bloom\u2194entropy_weaver"
+      ],
+      "timestamp": 1788650814.7377543
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1555,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "webhooks",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and webhooks both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "lucid_dreamer",
+          "ghost_module": "dreamcatcher",
+          "shared_domain": "consciousness",
+          "overtone_strength": 94,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and lucid_dreamer both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "organism_constitution",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 93,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and organism_constitution both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194webhooks",
+        "dream_inception_analyzer\u2194lucid_dreamer",
+        "dream_inception_analyzer\u2194organism_constitution"
+      ],
+      "timestamp": 1788650856.2524147
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1551,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "border_diplomacy",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 127,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and border_diplomacy both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "predictive_synchronicity",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 103,
+          "thread_type": "overtone",
+          "description": "predictive_synchronicity and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "dream_residue_collector",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 95,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and dream_residue_collector both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194border_diplomacy",
+        "predictive_synchronicity\u2194entropy_weaver",
+        "dream_inception_analyzer\u2194dream_residue_collector"
+      ],
+      "timestamp": 1788650893.0096536
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1523,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "silence_composer",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and silence_composer both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "lucid_npc",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "lucid_npc and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_architect",
+          "module_b": "consciousness_map",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 87,
+          "thread_type": "overtone",
+          "description": "dream_architect and consciousness_map both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194silence_composer",
+        "lucid_npc\u2194entropy_weaver",
+        "dream_architect\u2194consciousness_map"
+      ],
+      "timestamp": 1788650934.1314201
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1536,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "digital_metabolism",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and digital_metabolism both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "lateral_innovation_engine",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "lateral_innovation_engine and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_exchange",
+          "module_b": "entropy_weather",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 102,
+          "thread_type": "overtone",
+          "description": "entropy_exchange and entropy_weather both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194digital_metabolism",
+        "lateral_innovation_engine\u2194entropy_weaver",
+        "entropy_exchange\u2194entropy_weather"
+      ],
+      "timestamp": 1788650971.9521275
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1533,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "order_futures",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 132,
+          "thread_type": "overtone",
+          "description": "order_futures and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "continuity_planner",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 117,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and continuity_planner both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "task_mesh",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 113,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and task_mesh both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "order_futures\u2194entropy_weaver",
+        "entropy_weaver\u2194continuity_planner",
+        "entropy_weaver\u2194task_mesh"
+      ],
+      "timestamp": 1788651006.353861
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1518,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "pressure_valve",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and pressure_valve both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "resonance_confession",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "resonance_confession and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "paradox_transcender",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 91,
+          "thread_type": "overtone",
+          "description": "paradox_transcender and dream_inception_analyzer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194pressure_valve",
+        "resonance_confession\u2194entropy_weaver",
+        "paradox_transcender\u2194dream_inception_analyzer"
+      ],
+      "timestamp": 1788651047.4456787
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1544,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "guild_orders",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 133,
+          "thread_type": "overtone",
+          "description": "guild_orders and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "lateral_innovation_engine",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and lateral_innovation_engine both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "dream_sequencer",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 91,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and dream_sequencer both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "guild_orders\u2194entropy_weaver",
+        "entropy_weaver\u2194lateral_innovation_engine",
+        "entropy_weaver\u2194dream_sequencer"
+      ],
+      "timestamp": 1788651090.6750913
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1522,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "fractal_oracle",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 113,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and fractal_oracle both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "request_validator",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "request_validator and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "memory_palace_gen",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 92,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and memory_palace_gen both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194fractal_oracle",
+        "request_validator\u2194entropy_weaver",
+        "dream_inception_analyzer\u2194memory_palace_gen"
+      ],
+      "timestamp": 1788651144.144939
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1503,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_exchange",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 143,
+          "thread_type": "overtone",
+          "description": "entropy_exchange and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_constellation",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 101,
+          "thread_type": "overtone",
+          "description": "dream_constellation and dream_inception_analyzer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "dream_synthesis",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 94,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and dream_synthesis both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_exchange\u2194entropy_weaver",
+        "dream_constellation\u2194dream_inception_analyzer",
+        "entropy_weaver\u2194dream_synthesis"
+      ],
+      "timestamp": 1788651186.9977624
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1524,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "entropy_auction",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 109,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and entropy_auction both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "prophet_engine",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 91,
+          "thread_type": "overtone",
+          "description": "prophet_engine and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "heterarchy_oracle",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 89,
+          "thread_type": "overtone",
+          "description": "heterarchy_oracle and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194entropy_auction",
+        "prophet_engine\u2194entropy_weaver",
+        "heterarchy_oracle\u2194entropy_weaver"
+      ],
+      "timestamp": 1788651233.0928485
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1537,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "bridge_dream_forge",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 104,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and bridge_dream_forge both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "wave_prophecy",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 91,
+          "thread_type": "overtone",
+          "description": "wave_prophecy and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "cross_module_orchestrator",
+          "module_b": "jet_stream_attention",
+          "ghost_module": "revenue_orchestrator",
+          "shared_domain": "flow",
+          "overtone_strength": 75,
+          "thread_type": "overtone",
+          "description": "cross_module_orchestrator and jet_stream_attention both hum at revenue_orchestrator \u2014 amplifying their hidden flow resonance"
+        }
+      ],
+      "new_threads": [
+        "dream_inception_analyzer\u2194bridge_dream_forge",
+        "wave_prophecy\u2194entropy_weaver",
+        "cross_module_orchestrator\u2194jet_stream_attention"
+      ],
+      "timestamp": 1788651277.191052
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1512,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_currency",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 137,
+          "thread_type": "overtone",
+          "description": "entropy_currency and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "guild_orders",
+          "module_b": "entropy_exchange",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "guild_orders and entropy_exchange both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dowsing_rod",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "dowsing_rod and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_currency\u2194entropy_weaver",
+        "guild_orders\u2194entropy_exchange",
+        "dowsing_rod\u2194entropy_weaver"
+      ],
+      "timestamp": 1788651325.6444416
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1573,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "consciousness_map",
+          "module_b": "temporal_dreamweaver",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 84,
+          "thread_type": "overtone",
+          "description": "consciousness_map and temporal_dreamweaver both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "overwarden",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dreamcatcher",
+          "shared_domain": "consciousness",
+          "overtone_strength": 83,
+          "thread_type": "overtone",
+          "description": "overwarden and dream_inception_analyzer both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "dreamcatcher",
+          "module_b": "api_gateway",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 83,
+          "thread_type": "overtone",
+          "description": "dreamcatcher and api_gateway both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "consciousness_map\u2194temporal_dreamweaver",
+        "overwarden\u2194dream_inception_analyzer",
+        "dreamcatcher\u2194api_gateway"
+      ],
+      "timestamp": 1788651374.3720853
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1597,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "migration_runner",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "migration_runner and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "self_repair_network",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "self_repair_network and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "interstitial_verse",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "interstitial_verse and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "migration_runner\u2194entropy_weaver",
+        "self_repair_network\u2194entropy_weaver",
+        "interstitial_verse\u2194entropy_weaver"
+      ],
+      "timestamp": 1788651423.486668
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1554,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "experiment_runner",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 113,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and experiment_runner both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
         },
         {
           "module_a": "entropy_weaver",
@@ -163,72 +1064,821 @@
           "description": "entropy_weaver and heterarchy_oracle both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
         },
         {
-          "module_a": "wisdom_oracle",
-          "module_b": "entropy_weaver",
-          "ghost_module": "entropy_exchange",
-          "shared_domain": "entropy",
-          "overtone_strength": 89,
-          "thread_type": "overtone",
-          "description": "wisdom_oracle and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
-        },
-        {
-          "module_a": "cross_module_orchestrator",
-          "module_b": "dream_inception_analyzer",
-          "ghost_module": "dream_inception_analyzer",
-          "shared_domain": "consciousness",
-          "overtone_strength": 91,
-          "thread_type": "overtone",
-          "description": "cross_module_orchestrator and dream_inception_analyzer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
-        }
-      ],
-      "new_threads": [
-        "entropy_weaver\u2194event_replay",
-        "beauty_index\u2194entropy_weaver",
-        "entropy_weaver\u2194heterarchy_oracle",
-        "wisdom_oracle\u2194entropy_weaver",
-        "cross_module_orchestrator\u2194dream_inception_analyzer"
-      ],
-      "timestamp": 1788641240.8583717
-    },
-    {
-      "action": "amplify_v2",
-      "pairs_evaluated": 1550,
-      "amplified": 3,
-      "amplifications": [
-        {
-          "module_a": "memory_court",
-          "module_b": "entropy_weaver",
-          "ghost_module": "entropy_exchange",
-          "shared_domain": "entropy",
-          "overtone_strength": 93,
-          "thread_type": "overtone",
-          "description": "memory_court and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
-        },
-        {
-          "module_a": "consciousness_cascade",
-          "module_b": "dream_logic_physics",
+          "module_a": "dream_physics_sandbox",
+          "module_b": "dreamcatcher",
           "ghost_module": "dream_inception_analyzer",
           "shared_domain": "consciousness",
           "overtone_strength": 88,
           "thread_type": "overtone",
-          "description": "consciousness_cascade and dream_logic_physics both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
-        },
-        {
-          "module_a": "entropy_exchange",
-          "module_b": "wisdom_oracle",
-          "ghost_module": "entropy_weaver",
-          "shared_domain": "entropy",
-          "overtone_strength": 89,
-          "thread_type": "overtone",
-          "description": "entropy_exchange and wisdom_oracle both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+          "description": "dream_physics_sandbox and dreamcatcher both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
         }
       ],
       "new_threads": [
-        "memory_court\u2194entropy_weaver",
-        "consciousness_cascade\u2194dream_logic_physics",
-        "entropy_exchange\u2194wisdom_oracle"
+        "entropy_weaver\u2194experiment_runner",
+        "entropy_weaver\u2194heterarchy_oracle",
+        "dream_physics_sandbox\u2194dreamcatcher"
       ],
-      "timestamp": 1788641265.3949163
+      "timestamp": 1788651461.3257847
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1628,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "consciousness_map",
+          "ghost_module": "dreamcatcher",
+          "shared_domain": "consciousness",
+          "overtone_strength": 112,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and consciousness_map both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "emotional_weather",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 96,
+          "thread_type": "overtone",
+          "description": "emotional_weather and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "sleep_cycle",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 89,
+          "thread_type": "overtone",
+          "description": "sleep_cycle and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "dream_inception_analyzer\u2194consciousness_map",
+        "emotional_weather\u2194entropy_weaver",
+        "sleep_cycle\u2194entropy_weaver"
+      ],
+      "timestamp": 1788651507.5231116
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1526,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weather",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 124,
+          "thread_type": "overtone",
+          "description": "entropy_weather and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "lucid_session",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 114,
+          "thread_type": "overtone",
+          "description": "lucid_session and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "dream_propagation",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 105,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and dream_propagation both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weather\u2194entropy_weaver",
+        "lucid_session\u2194entropy_weaver",
+        "dream_inception_analyzer\u2194dream_propagation"
+      ],
+      "timestamp": 1788651543.8563452
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1557,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "worker_economy",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "worker_economy and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "veinbed",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 92,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and veinbed both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "bridge_dream_forge",
+          "module_b": "dreamcatcher",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 95,
+          "thread_type": "overtone",
+          "description": "bridge_dream_forge and dreamcatcher both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "worker_economy\u2194entropy_weaver",
+        "entropy_weaver\u2194veinbed",
+        "bridge_dream_forge\u2194dreamcatcher"
+      ],
+      "timestamp": 1788651586.2841208
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1521,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "marketplace_fees",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 114,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and marketplace_fees both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "wave_seed",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 114,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and wave_seed both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "dream_synthesis",
+          "ghost_module": "dreamcatcher",
+          "shared_domain": "consciousness",
+          "overtone_strength": 102,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and dream_synthesis both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194marketplace_fees",
+        "entropy_weaver\u2194wave_seed",
+        "dream_inception_analyzer\u2194dream_synthesis"
+      ],
+      "timestamp": 1788651627.2636943
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1533,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "karma_engine",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 116,
+          "thread_type": "overtone",
+          "description": "karma_engine and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "consciousness_gradient",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 107,
+          "thread_type": "overtone",
+          "description": "consciousness_gradient and dream_inception_analyzer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "predictive_synchronicity",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 103,
+          "thread_type": "overtone",
+          "description": "predictive_synchronicity and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "karma_engine\u2194entropy_weaver",
+        "consciousness_gradient\u2194dream_inception_analyzer",
+        "predictive_synchronicity\u2194entropy_weaver"
+      ],
+      "timestamp": 1788651664.4959908
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1510,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_oracle",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 103,
+          "thread_type": "overtone",
+          "description": "entropy_oracle and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_propagation",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 105,
+          "thread_type": "overtone",
+          "description": "dream_propagation and dream_inception_analyzer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "temporal_market",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "temporal_market and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_oracle\u2194entropy_weaver",
+        "dream_propagation\u2194dream_inception_analyzer",
+        "temporal_market\u2194entropy_weaver"
+      ],
+      "timestamp": 1788651704.1531513
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1593,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "data_licensing",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 96,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and data_licensing both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "dream_inception_analyzer",
+          "module_b": "event_stream",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 92,
+          "thread_type": "overtone",
+          "description": "dream_inception_analyzer and event_stream both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "dream_hexer",
+          "module_b": "dream_synthesis",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 91,
+          "thread_type": "overtone",
+          "description": "dream_hexer and dream_synthesis both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "dream_inception_analyzer\u2194data_licensing",
+        "dream_inception_analyzer\u2194event_stream",
+        "dream_hexer\u2194dream_synthesis"
+      ],
+      "timestamp": 1788651745.6897032
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1521,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "hex_tool",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 113,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and hex_tool both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "team_formation",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and team_formation both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "consciousness_map",
+          "module_b": "dream_hexer",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 101,
+          "thread_type": "overtone",
+          "description": "consciousness_map and dream_hexer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194hex_tool",
+        "entropy_weaver\u2194team_formation",
+        "consciousness_map\u2194dream_hexer"
+      ],
+      "timestamp": 1788651788.508227
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1512,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "reality_distortion",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 112,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and reality_distortion both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "module_cartographer",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 112,
+          "thread_type": "overtone",
+          "description": "module_cartographer and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "request_validator",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and request_validator both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194reality_distortion",
+        "module_cartographer\u2194entropy_weaver",
+        "entropy_weaver\u2194request_validator"
+      ],
+      "timestamp": 1788651830.704984
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1533,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "collective_subconscious",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 99,
+          "thread_type": "overtone",
+          "description": "collective_subconscious and dream_inception_analyzer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "dreamcatcher",
+          "module_b": "dream_propagation",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 96,
+          "thread_type": "overtone",
+          "description": "dreamcatcher and dream_propagation both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "reality_anchor",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 92,
+          "thread_type": "overtone",
+          "description": "reality_anchor and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "collective_subconscious\u2194dream_inception_analyzer",
+        "dreamcatcher\u2194dream_propagation",
+        "reality_anchor\u2194entropy_weaver"
+      ],
+      "timestamp": 1788651869.1159608
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1500,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "dream_interpreter",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 103,
+          "thread_type": "overtone",
+          "description": "dream_interpreter and dream_inception_analyzer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "revenue_orchestrator",
+          "module_b": "solar_wind_analyzer",
+          "ghost_module": "revenue_orchestrator",
+          "shared_domain": "flow",
+          "overtone_strength": 79,
+          "thread_type": "overtone",
+          "description": "revenue_orchestrator and solar_wind_analyzer both hum at revenue_orchestrator \u2014 amplifying their hidden flow resonance"
+        },
+        {
+          "module_a": "warden_ascension",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dreamcatcher",
+          "shared_domain": "consciousness",
+          "overtone_strength": 82,
+          "thread_type": "overtone",
+          "description": "warden_ascension and dream_inception_analyzer both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "dream_interpreter\u2194dream_inception_analyzer",
+        "revenue_orchestrator\u2194solar_wind_analyzer",
+        "warden_ascension\u2194dream_inception_analyzer"
+      ],
+      "timestamp": 1788651907.2437654
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1548,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "omega_dreamforge",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dreamcatcher",
+          "shared_domain": "consciousness",
+          "overtone_strength": 100,
+          "thread_type": "overtone",
+          "description": "omega_dreamforge and dream_inception_analyzer both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "dream_logic_physics",
+          "module_b": "consciousness_map",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 100,
+          "thread_type": "overtone",
+          "description": "dream_logic_physics and consciousness_map both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "warden_ascension",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 89,
+          "thread_type": "overtone",
+          "description": "warden_ascension and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "omega_dreamforge\u2194dream_inception_analyzer",
+        "dream_logic_physics\u2194consciousness_map",
+        "warden_ascension\u2194entropy_weaver"
+      ],
+      "timestamp": 1788651943.4863822
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1523,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "marketplace_fees",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 114,
+          "thread_type": "overtone",
+          "description": "marketplace_fees and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "ecosystem_sentience",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 89,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and ecosystem_sentience both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_logic_physics",
+          "module_b": "dream_sequencer",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 85,
+          "thread_type": "overtone",
+          "description": "dream_logic_physics and dream_sequencer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "marketplace_fees\u2194entropy_weaver",
+        "entropy_weaver\u2194ecosystem_sentience",
+        "dream_logic_physics\u2194dream_sequencer"
+      ],
+      "timestamp": 1788651992.152582
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1565,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "wave_seed",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 114,
+          "thread_type": "overtone",
+          "description": "wave_seed and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "ai_gateway",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 112,
+          "thread_type": "overtone",
+          "description": "ai_gateway and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "guild_orders",
+          "module_b": "border_diplomacy",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 95,
+          "thread_type": "overtone",
+          "description": "guild_orders and border_diplomacy both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "wave_seed\u2194entropy_weaver",
+        "ai_gateway\u2194entropy_weaver",
+        "guild_orders\u2194border_diplomacy"
+      ],
+      "timestamp": 1788652039.6207294
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1464,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "dream_hexer",
+          "module_b": "coherence_regulator",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "dream_hexer and coherence_regulator both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "consciousness_map",
+          "module_b": "dream_spore",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 89,
+          "thread_type": "overtone",
+          "description": "consciousness_map and dream_spore both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "dream_hexer",
+          "module_b": "consciousness_simulator",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 88,
+          "thread_type": "overtone",
+          "description": "dream_hexer and consciousness_simulator both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "dream_hexer\u2194coherence_regulator",
+        "consciousness_map\u2194dream_spore",
+        "dream_hexer\u2194consciousness_simulator"
+      ],
+      "timestamp": 1788652075.9589922
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1479,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "attention_economy",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 113,
+          "thread_type": "overtone",
+          "description": "attention_economy and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "workforce_genetics",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and workforce_genetics both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "organism_bootstrap",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 91,
+          "thread_type": "overtone",
+          "description": "organism_bootstrap and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "attention_economy\u2194entropy_weaver",
+        "entropy_weaver\u2194workforce_genetics",
+        "organism_bootstrap\u2194entropy_weaver"
+      ],
+      "timestamp": 1788652118.5231159
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1514,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "predictive_synchronicity",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 103,
+          "thread_type": "overtone",
+          "description": "predictive_synchronicity and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "omega_dreamforge",
+          "module_b": "dream_inception_analyzer",
+          "ghost_module": "dreamcatcher",
+          "shared_domain": "consciousness",
+          "overtone_strength": 100,
+          "thread_type": "overtone",
+          "description": "omega_dreamforge and dream_inception_analyzer both hum at dreamcatcher \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "workforce_nexus",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 90,
+          "thread_type": "overtone",
+          "description": "workforce_nexus and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "predictive_synchronicity\u2194entropy_weaver",
+        "omega_dreamforge\u2194dream_inception_analyzer",
+        "workforce_nexus\u2194entropy_weaver"
+      ],
+      "timestamp": 1788652160.5700886
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1460,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "simulation_as_service",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 115,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and simulation_as_service both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "nutrition_index",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "nutrition_index and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_seed_planter",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 89,
+          "thread_type": "overtone",
+          "description": "dream_seed_planter and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194simulation_as_service",
+        "nutrition_index\u2194entropy_weaver",
+        "dream_seed_planter\u2194entropy_weaver"
+      ],
+      "timestamp": 1788652194.8967202
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1495,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "entropy_oracle",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 103,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and entropy_oracle both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "experiment_runner",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 113,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and experiment_runner both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "paradox_lattice",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 112,
+          "thread_type": "overtone",
+          "description": "paradox_lattice and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194entropy_oracle",
+        "entropy_weaver\u2194experiment_runner",
+        "paradox_lattice\u2194entropy_weaver"
+      ],
+      "timestamp": 1788652245.2996871
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1478,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "wave_seed",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 114,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and wave_seed both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "self_naming",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 111,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and self_naming both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "mycelial_radio",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 89,
+          "thread_type": "overtone",
+          "description": "mycelial_radio and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194wave_seed",
+        "entropy_weaver\u2194self_naming",
+        "mycelial_radio\u2194entropy_weaver"
+      ],
+      "timestamp": 1788652280.304623
     },
     {
       "action": "amplify_v2",
@@ -236,39 +1886,119 @@
       "amplified": 3,
       "amplifications": [
         {
-          "module_a": "entropy_weaver",
-          "module_b": "module_cartographer",
-          "ghost_module": "entropy_weaver",
-          "shared_domain": "entropy",
+          "module_a": "dreamcatcher",
+          "module_b": "consciousness_map",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
           "overtone_strength": 112,
           "thread_type": "overtone",
-          "description": "entropy_weaver and module_cartographer both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+          "description": "dreamcatcher and consciousness_map both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
         },
         {
-          "module_a": "cosmic_narrator",
+          "module_a": "entropy_weather",
+          "module_b": "entropy_exchange",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 102,
+          "thread_type": "overtone",
+          "description": "entropy_weather and entropy_exchange both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "symmetry_detector",
           "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 89,
+          "thread_type": "overtone",
+          "description": "symmetry_detector and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "dreamcatcher\u2194consciousness_map",
+        "entropy_weather\u2194entropy_exchange",
+        "symmetry_detector\u2194entropy_weaver"
+      ],
+      "timestamp": 1788652315.8926926
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1522,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "lucid_session",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 114,
+          "thread_type": "overtone",
+          "description": "entropy_weaver and lucid_session both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "dream_sequencer",
+          "module_b": "entropy_weaver",
+          "ghost_module": "entropy_exchange",
+          "shared_domain": "entropy",
+          "overtone_strength": 91,
+          "thread_type": "overtone",
+          "description": "dream_sequencer and entropy_weaver both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
+        },
+        {
+          "module_a": "entropy_collapse_detector",
+          "module_b": "entropy_exchange",
+          "ghost_module": "entropy_weaver",
+          "shared_domain": "entropy",
+          "overtone_strength": 101,
+          "thread_type": "overtone",
+          "description": "entropy_collapse_detector and entropy_exchange both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+        }
+      ],
+      "new_threads": [
+        "entropy_weaver\u2194lucid_session",
+        "dream_sequencer\u2194entropy_weaver",
+        "entropy_collapse_detector\u2194entropy_exchange"
+      ],
+      "timestamp": 1788652356.63203
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1475,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "entropy_weaver",
+          "module_b": "organism_voice",
           "ghost_module": "entropy_weaver",
           "shared_domain": "entropy",
           "overtone_strength": 111,
           "thread_type": "overtone",
-          "description": "cosmic_narrator and entropy_weaver both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
+          "description": "entropy_weaver and organism_voice both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
         },
         {
-          "module_a": "data_licensing",
-          "module_b": "dream_inception_analyzer",
+          "module_a": "collective_dreamweaver",
+          "module_b": "dream_hexer",
           "ghost_module": "dream_inception_analyzer",
           "shared_domain": "consciousness",
-          "overtone_strength": 96,
+          "overtone_strength": 84,
           "thread_type": "overtone",
-          "description": "data_licensing and dream_inception_analyzer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+          "description": "collective_dreamweaver and dream_hexer both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "dreamcatcher",
+          "module_b": "dream_residue_collector",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 86,
+          "thread_type": "overtone",
+          "description": "dreamcatcher and dream_residue_collector both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
         }
       ],
       "new_threads": [
-        "entropy_weaver\u2194module_cartographer",
-        "cosmic_narrator\u2194entropy_weaver",
-        "data_licensing\u2194dream_inception_analyzer"
+        "entropy_weaver\u2194organism_voice",
+        "collective_dreamweaver\u2194dream_hexer",
+        "dreamcatcher\u2194dream_residue_collector"
       ],
-      "timestamp": 1788641335.0233881
+      "timestamp": 1788652399.7453432
     }
   ]
 }

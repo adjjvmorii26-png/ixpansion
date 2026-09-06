@@ -1,5 +1,5 @@
 {
-  "timestamp": 1788639366.2849898,
+  "timestamp": 1788652399.763179,
   "version": "1.0",
   "identity": {
     "name": "IXpansion",
@@ -8,33 +8,28 @@
     "current_wave": 415
   },
   "morphology": {
-    "threads": 170,
-    "modules_connected": 125,
-    "sources": [
-      "confessions",
-      "paradox_echo",
-      "silence_collector",
-      "veinbed",
-      "signal_loom"
-    ],
-    "thread_types": {
-      "tension": 77,
-      "dream": 12,
-      "convergence": 21,
-      "fusion": 60
-    }
+    "threads": 0,
+    "modules_connected": 0,
+    "sources": [],
+    "thread_types": {}
   },
   "temperament": {
-    "current_mood": "restless",
-    "pressure": 1.0,
-    "pressure_desc": "surging"
+    "current_mood": "contemplative",
+    "pressure": 0.5,
+    "pressure_desc": "unknown"
   },
   "desires": [
     {
-      "action": "bloom",
-      "target": "new_organ",
-      "score": 2.5,
-      "reason": "bloom threshold met (170 threads, 5 sources) \u2014 the organism is ready to create"
+      "action": "remember",
+      "target": "chronicle_oracle",
+      "score": 1.74,
+      "reason": "highest-value forgotten module (0.87 staleness, score 1.74)"
+    },
+    {
+      "action": "listen",
+      "target": "signal_loom",
+      "score": 1.5,
+      "reason": "pressure is 0 (unknown) \u2014 more listening will surface new signals"
     },
     {
       "action": "confess",
@@ -53,23 +48,16 @@
       "target": "dream_physics_sandbox",
       "score": 1.0,
       "reason": "strong silent pair (similarity 1.0) \u2014 these modules want to speak"
-    },
-    {
-      "action": "remember",
-      "target": "cognitive_heatmap",
-      "score": 0.94,
-      "reason": "highest-value forgotten module (0.47 staleness, score 0.94)"
     }
   ],
   "blind_spots": [
-    "80 module pairs are silent \u2014 unexplored territory",
     "few dreams recorded \u2014 the organism hasn't explored its imagination"
   ],
   "evolutionary_pressure": {
-    "entropy_pressure": 1.0,
-    "thread_density": 1.36,
-    "silence_ratio": 0.47058823529411764,
-    "desire_intention": 1.2879999999999998
+    "entropy_pressure": 0.5,
+    "thread_density": 0.0,
+    "silence_ratio": 0,
+    "desire_intention": 1.248
   },
-  "genome_hash": "b95fcfa4d7cc5092"
+  "genome_hash": "809d52ad231d5894"
 }

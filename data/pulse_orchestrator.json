@@ -137,6 +137,144 @@
       ],
       "breath_symbol": "\u25fb",
       "timestamp": 1788639776.0882578
+    },
+    {
+      "action": "pulse",
+      "phase": "hold",
+      "remaining_seconds": 3.1,
+      "next_phase": "exhale",
+      "phase_color": "obsidian",
+      "instruction": "process \u2014 run internal computation, no external writes",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 684,
+        "total_scanned": 687,
+        "global_coherence": 1.9425,
+        "global_resonance": 0.5687,
+        "global_pressure": 0.5,
+        "synchronization": 0.0,
+        "total_energy_bytes": 3163793,
+        "energy_terabytes": 3e-06
+      },
+      "phase_scores": {
+        "inhale": 0.777,
+        "hold": 0.129,
+        "exhale": 0.096,
+        "rest": 0.3
+      },
+      "top_synced": [
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "growth_journal",
+          "vitals_count": 4
+        },
+        {
+          "name": "self_healing_commune",
+          "vitals_count": 4
+        },
+        {
+          "name": "bridge_dream_forge",
+          "vitals_count": 4
+        },
+        {
+          "name": "constellation_archive",
+          "vitals_count": 4
+        },
+        {
+          "name": "bridge_harvest",
+          "vitals_count": 4
+        },
+        {
+          "name": "constellation_seer",
+          "vitals_count": 4
+        }
+      ],
+      "breath_symbol": "\u25fb",
+      "timestamp": 1788641240.8738172
+    },
+    {
+      "action": "pulse",
+      "phase": "inhale",
+      "remaining_seconds": 0.2,
+      "next_phase": "hold",
+      "phase_color": "venom",
+      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 684,
+        "total_scanned": 687,
+        "global_coherence": 1.9425,
+        "global_resonance": 0.5669,
+        "global_pressure": 0.5,
+        "synchronization": 0.0,
+        "total_energy_bytes": 3163793,
+        "energy_terabytes": 3e-06
+      },
+      "phase_scores": {
+        "inhale": 0.777,
+        "hold": 0.13,
+        "exhale": 0.095,
+        "rest": 0.3
+      },
+      "top_synced": [
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "growth_journal",
+          "vitals_count": 4
+        },
+        {
+          "name": "self_healing_commune",
+          "vitals_count": 4
+        },
+        {
+          "name": "bridge_dream_forge",
+          "vitals_count": 4
+        },
+        {
+          "name": "constellation_archive",
+          "vitals_count": 4
+        },
+        {
+          "name": "bridge_harvest",
+          "vitals_count": 4
+        },
+        {
+          "name": "constellation_seer",
+          "vitals_count": 4
+        }
+      ],
+      "breath_symbol": "\u25c9",
+      "timestamp": 1788641287.7515314
     }
   ]
 }

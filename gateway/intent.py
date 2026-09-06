@@ -22,6 +22,15 @@ from typing import Dict, List, Tuple
 # intent patterns: regex → (module_path, params)
 INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(health|status|alive|heartbeat|pulse|online)\b", "/health", {}),
+    (r"\b(conjunction|collision (risk|warning|watch)|space traffic|orbit cohesion|closing distance)\b", "/api/orbit_cohesion_field", {}),
+    (r"\b(re.?entry|decay(ing)?\b|decay (forecast|predict|window)|falling (satellite|debris)|deorbit|demise forecast)\b", "/api/decay_forecaster", {}),
+    (r"\b(telemetry (anomaly|suspicious)|spoof(ed|ing)?\b|sensor (drift|failure)|corrupt(ed|ion)? telemetry|is .* telemetry (clean|ok))\b", "/api/telemetry_anomaly_oracle", {}),
+    (r"\b(ground station|pass(es)? (schedule|window|over)|next pass|visibility window|tracking window)\b", "/api/ground_station_synthesizer", {}),
+    (r"\b(debris (field|cloud|map)|space junk|fragmentation|kessler (syndrome|effect))\b", "/api/debris_field_mapper", {}),
+    (r"\b(solar (weather|storm|flare|flux)|geomagnetic (storm|activity)|space weather|f10\.7|kp index|aurora.*(orbit|drag))\b", "/api/solar_weather_coupler", {}),
+    (r"\b(story|chronicle|tale|journey).*\b(oneweb|starlink|satellite|orbital|ixp[\-_]?sentinel)\b|\b(satellite|orbital)\b.*\bstory\b|\borbital storyteller\b", "/api/orbital_storyteller", {}),
+    (r"\b(telemetry (noise|signal)|clean .* (signal|telemetry)|noisy signal|dropouts?|outlier (spike|removal))\b", "/api/noise_filter", {}),
+    (r"\b(satellit(e|es)|orbital (state|field)|constellation(s)?|starlink|oneweb|fleet(s)? above|low earth orbit|leo)\b", "/orbit", {}),
     (r"\b(dows(ing)?|hidden (streams?|connections?|links?)|secret (bond|tie)|underground (stream|connection)|latent (resonance|connection)|find.*(stream|link))\b", "/api/dowsing_rod", {}),
     (r"\b(memory (palace|room|architect|structure)|remember|recall|search memory|memory search|spatial memory)\b", "/api/memory_palace", {}),
     (r"\b(temporal echo|pattern repeat|recurring pattern|cycle detection|echo spectrum|detect.*pattern|what patterns?|pattern(s?)|pattern.*repeat)\b", "/api/temporal_echo", {}),

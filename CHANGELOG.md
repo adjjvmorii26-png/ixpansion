@@ -1,3 +1,21 @@
+## [4.16.0] - Orbit Cohesion Field (Wave 448)
+
+Eight new orbital organs unify the organism's awareness of the sky:
+
+- `orbit_cohesion_field` - one orbital reality layer; constellation
+  mapper (Starlink / OneWeb / IXP-Sentinel), pairwise conjunction risk,
+  overhead visibility.
+- `noise_filter` - Hampel-style telemetry hygiene before the oracle judges.
+- `decay_forecaster` - drag-integrated re-entry window prediction with
+  solar-flux coupling.
+- `telemetry_anomaly_oracle` - corruption / drift / spoof verdicts.
+- `ground_station_synthesizer` - pass schedules from any lat/lon.
+- `orbital_storyteller` - narrative chronicles of satellite journeys.
+- `debris_field_mapper` - fragmentation clouds, hotspots, Kessler projection.
+- `solar_weather_coupler` - Kp/F10.7 -> drag -> drift -> derate telemetry impact.
+
+New dashboard: `/orbit`. All organs expose `coherence_vitals()`, `handler()`,
+and `resonates_with()`; intent rules, manifest, routes, and aliases wired.
 
 ## Wave 411 — Autonomous Loop
 **Module:** `api/autonomous_loop.py`

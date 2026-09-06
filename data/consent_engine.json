@@ -3,10 +3,184 @@
     {
       "action": "consent_engine",
       "temperament": {
-        "mood": "restless",
-        "pressure": 1.0,
+        "mood": "contemplative",
+        "pressure": 0.5,
         "desires": [
-          "bloom",
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "entropy_collapse_detector",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 69.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.65"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 59.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.89"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 55.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.72"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650344.6425223
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "pulse_orchestrator",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 68.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.63"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 68.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.60"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 58.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.84"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650369.3590436
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "dream_seed_planter",
+        "pulse_orchestrator"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 76.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.93"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 74.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.86"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 70.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.71"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650384.7219543
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
           "remember",
           "confess",
           "confess",
@@ -15,32 +189,785 @@
       },
       "organs_scored": 3,
       "consented": [
-        "entropy_collapse_detector",
-        "bridge_consciousness",
+        "pulse_orchestrator",
+        "temporal_cohesion_field",
         "self_audit_engine"
       ],
       "denied": [],
       "verdicts": [
         {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 68.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.62"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 68.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.60"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650415.9073584
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "pulse_orchestrator",
+        "dream_seed_planter"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 74.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.85"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 73.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.83"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 68.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.63"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650430.6472244
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "remember",
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "entropy_collapse_detector",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 75.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.89"
+          ],
+          "consented": true
+        },
+        {
           "name": "entropy_collapse_detector",
           "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
-          "score": 83.8,
+          "score": 59.2,
           "criteria": [
-            "mood affinity (restless\u2194detect): 0.70",
-            "pressure fit (1.00): +20",
-            "desire aligned: organism wants growth: +15",
-            "proposal confidence: 0.83"
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.89"
           ],
           "consented": true
         },
         {
           "name": "bridge_consciousness",
           "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
-          "score": 82.0,
+          "score": 57.8,
           "criteria": [
-            "mood affinity (restless\u2194bridge): 0.70",
-            "pressure fit (1.00): +20",
-            "desire aligned: organism wants growth: +15",
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.83"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650453.9292073
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "remember",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "pulse_orchestrator",
+        "resonance_amplifier_v2"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 76.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 74.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.86"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 70.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.70"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650470.4033196
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "emotional_damper",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 75.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.91"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 69.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.64"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 60.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.94"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650498.306921
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "self_audit_engine"
+      ],
+      "denied": [
+        "entropy_collapse_detector"
+      ],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 75.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.89"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 71.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.73"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 53.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.65"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650510.062689
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "resonance_amplifier_v2",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 70.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.71"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 69.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.66"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 59.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.89"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650538.2336886
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "temporal_cohesion_field",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 74.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.86"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 69.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.67"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 59.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.90"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650554.5048883
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "remember",
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "emotional_damper",
+        "pulse_orchestrator"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 75.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.90"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 73.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.82"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 69.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.67"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650581.5285273
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "resonance_amplifier_v2",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 76.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.93"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 75.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.88"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 57.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.81"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650593.2312663
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "temporal_cohesion_field",
+        "resonance_amplifier_v2"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 76.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 73.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.83"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 71.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.75"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650630.0813076
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "self_audit_engine",
+        "temporal_cohesion_field"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 73.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.83"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 69.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.65"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 68.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.60"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650641.1879573
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "emotional_damper"
+      ],
+      "denied": [
+        "entropy_collapse_detector"
+      ],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 75.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.91"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 72.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.79"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 53.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.64"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650667.6832669
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "self_audit_engine",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 72.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
             "proposal confidence: 0.76"
           ],
           "consented": true
@@ -48,11 +975,314 @@
         {
           "name": "self_audit_engine",
           "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
-          "score": 65.0,
+          "score": 70.8,
           "criteria": [
-            "mood affinity (restless\u2194seed): 0.60",
-            "pressure fit (1.00): +8",
-            "desire aligned: organism wants growth: +15",
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.71"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 58.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650683.400949
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "emotional_damper",
+        "dream_seed_planter"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 74.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 73.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.80"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 68.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.61"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650708.4729784
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "bridge_consciousness"
+      ],
+      "denied": [
+        "entropy_collapse_detector"
+      ],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 68.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.61"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 56.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 53.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.65"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650722.7704773
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "emotional_damper",
+        "dream_seed_planter"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 72.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.77"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 71.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.74"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 70.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.70"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650746.1777062
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "dream_seed_planter",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 70.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.71"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 58.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650756.927965
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "temporal_cohesion_field",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 76.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.95"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 74.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.86"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 55.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
             "proposal confidence: 0.72"
           ],
           "consented": true
@@ -60,19 +1290,2140 @@
       ],
       "threshold": 55,
       "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
-      "timestamp": 1788641939.7141707
+      "timestamp": 1788650782.5621717
     },
     {
       "action": "consent_engine",
       "temperament": {
-        "mood": "restless",
-        "pressure": 1.0,
+        "mood": "contemplative",
+        "pressure": 0.5,
         "desires": [
-          "bloom",
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "self_audit_engine",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 69.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.64"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 68.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.60"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 55.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.74"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650794.945846
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "resonance_amplifier_v2"
+      ],
+      "denied": [
+        "bridge_consciousness"
+      ],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 74.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.86"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 68.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.62"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 54.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.70"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650821.7346125
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "resonance_amplifier_v2",
+        "emotional_damper"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 74.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 71.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.75"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 69.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.66"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650837.6946373
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
           "remember",
           "confess",
           "confess",
           "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "pulse_orchestrator",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 74.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.86"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 71.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.72"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 57.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.83"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650863.0703328
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "emotional_damper",
+        "resonance_amplifier_v2"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 75.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.91"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 71.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.72"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 71.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.72"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650873.468809
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "self_audit_engine",
+        "dream_seed_planter"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 75.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.88"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 69.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.67"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 68.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.60"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650899.7175803
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "temporal_cohesion_field",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 76.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.94"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 70.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.71"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 60.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650916.103405
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "resonance_amplifier_v2",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 70.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.68"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 60.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650941.2439728
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "pulse_orchestrator",
+        "dream_seed_planter"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 75.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.89"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 71.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.75"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 71.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.75"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650952.1315925
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "resonance_amplifier_v2",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 74.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.86"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 73.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.80"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 56.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.77"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650977.5381284
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "resonance_amplifier_v2"
+      ],
+      "denied": [
+        "entropy_collapse_detector"
+      ],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 72.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.79"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 68.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.62"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 52.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.61"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788650988.030284
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "emotional_damper",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 72.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 72.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 56.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651014.4852078
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "pulse_orchestrator",
+        "emotional_damper"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 76.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.95"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 75.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.89"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 73.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.81"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651027.2093143
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "bridge_consciousness",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 75.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.89"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 60.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.94"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 58.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.85"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651054.6501374
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "pulse_orchestrator",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 70.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.68"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 69.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.64"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 55.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.72"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651066.1419163
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "remember",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "bridge_consciousness",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 70.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.68"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 59.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.89"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 58.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.85"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651108.2904642
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "bridge_consciousness",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 71.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.73"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 58.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 57.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.80"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651120.3637419
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "self_audit_engine",
+        "emotional_damper"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 73.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.81"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 68.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.61"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651152.2636409
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "dream_seed_planter",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 75.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.89"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 70.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.71"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 56.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.77"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651168.0134556
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "resonance_amplifier_v2",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 68.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.61"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 68.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.61"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 55.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.74"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651196.1952796
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "temporal_cohesion_field",
+        "dream_seed_planter"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 76.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 72.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 68.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.63"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651212.0923622
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "temporal_cohesion_field",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 73.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.82"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 68.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.63"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 58.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.86"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651245.2791343
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "emotional_damper"
+      ],
+      "denied": [
+        "bridge_consciousness"
+      ],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 76.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.94"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 75.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.91"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 54.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.71"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651255.7513878
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "pulse_orchestrator",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 72.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 68.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.60"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 58.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651285.3735933
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "pulse_orchestrator"
+      ],
+      "denied": [
+        "bridge_consciousness"
+      ],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 69.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.66"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 54.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.69"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651305.779042
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "self_audit_engine",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 71.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.72"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 68.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.60"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 59.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.91"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651337.5900793
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "temporal_cohesion_field",
+        "pulse_orchestrator"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 76.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.94"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 74.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.84"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 72.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.79"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651349.7417657
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "pulse_orchestrator"
+      ],
+      "denied": [
+        "entropy_collapse_detector"
+      ],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 72.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 70.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.68"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 54.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.68"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651381.3057206
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "bridge_consciousness"
+      ],
+      "denied": [
+        "entropy_collapse_detector"
+      ],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 69.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.66"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 60.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.94"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 53.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.65"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651402.98577
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "self_audit_engine",
+        "dream_seed_planter"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 75.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.88"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 73.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.80"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 69.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.67"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651430.1856043
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "temporal_cohesion_field",
+        "resonance_amplifier_v2"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 75.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.90"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 69.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.64"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651441.5467787
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "dream_seed_planter",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 74.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.85"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 71.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.73"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 57.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.82"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651478.5043757
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "dream_seed_planter",
+        "temporal_cohesion_field"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 74.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 70.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.71"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 68.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.62"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651487.4480028
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "resonance_amplifier_v2",
+        "self_audit_engine"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 74.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 73.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.82"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 71.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.75"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651514.3265636
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "emotional_damper"
+      ],
+      "denied": [
+        "entropy_collapse_detector"
+      ],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 69.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.67"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 52.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.63"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651524.5388837
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "emotional_damper",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 71.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.74"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 69.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.67"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 56.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651556.3427126
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
         ]
       },
       "organs_scored": 3,
@@ -86,23 +3437,1242 @@
         {
           "name": "resonance_amplifier_v2",
           "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
-          "score": 69.8,
+          "score": 73.8,
           "criteria": [
-            "mood affinity (restless\u2194seed): 0.60",
-            "pressure fit (1.00): +8",
-            "desire aligned: organism wants growth: +15",
-            "proposal confidence: 0.91"
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.83"
           ],
           "consented": true
         },
         {
           "name": "self_audit_engine",
           "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 73.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.81"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651567.2891958
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "self_audit_engine",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 76.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 72.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.77"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 60.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.93"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651592.9041324
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "pulse_orchestrator",
+        "temporal_cohesion_field"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 75.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.91"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 71.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.74"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 70.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.70"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651607.7670712
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "pulse_orchestrator",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 70.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.70"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 60.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651634.1160903
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "emotional_damper"
+      ],
+      "denied": [
+        "bridge_consciousness"
+      ],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 75.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.91"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 72.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 53.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.64"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651645.3533554
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "pulse_orchestrator",
+        "temporal_cohesion_field"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 75.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.91"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 73.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.81"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 69.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.67"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651671.3607552
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "resonance_amplifier_v2",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 74.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.86"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 70.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.71"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 57.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.81"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651682.41644
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "temporal_cohesion_field",
+        "pulse_orchestrator"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 74.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.84"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 71.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.73"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
           "score": 69.5,
           "criteria": [
-            "mood affinity (restless\u2194seed): 0.60",
-            "pressure fit (1.00): +8",
-            "desire aligned: organism wants growth: +15",
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.66"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651711.096509
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "remember",
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "dream_seed_planter",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 76.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.93"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 76.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 57.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.80"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651725.5792346
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "temporal_cohesion_field",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 76.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.95"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 59.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.89"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651757.9877105
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "pulse_orchestrator",
+        "dream_seed_planter"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 73.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.80"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 69.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.64"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651769.3004286
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "temporal_cohesion_field",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 68.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.63"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 55.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.73"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651800.4261153
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "bridge_consciousness"
+      ],
+      "denied": [
+        "entropy_collapse_detector"
+      ],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 72.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.76"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 59.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.91"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 52.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.62"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651811.4509418
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "entropy_collapse_detector"
+      ],
+      "denied": [
+        "bridge_consciousness"
+      ],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 70.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.71"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 58.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 53.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.65"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651837.6418877
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "temporal_cohesion_field"
+      ],
+      "denied": [
+        "bridge_consciousness"
+      ],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 72.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.76"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 71.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.73"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 54.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.70"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651849.7373877
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "emotional_damper",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 76.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 70.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.70"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 58.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.86"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651877.0942233
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "resonance_amplifier_v2",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 75.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.88"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 71.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.74"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 56.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651888.1015496
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "dream_seed_planter",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 73.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.83"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 72.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.77"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 60.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.94"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651914.3118498
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "entropy_collapse_detector"
+      ],
+      "denied": [
+        "bridge_consciousness"
+      ],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 74.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 59.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.90"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 54.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.69"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651924.315541
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "remember",
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "emotional_damper",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 75.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.88"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 68.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.61"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 55.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.74"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651955.5744274
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "remember",
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "pulse_orchestrator",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 74.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.85"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 71.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.73"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 55.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.72"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788651971.959115
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "temporal_cohesion_field",
+        "self_audit_engine"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 75.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
             "proposal confidence: 0.90"
           ],
           "consented": true
@@ -110,27 +4680,274 @@
         {
           "name": "temporal_cohesion_field",
           "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
-          "score": 62.2,
+          "score": 74.5,
           "criteria": [
-            "mood affinity (restless\u2194seed): 0.60",
-            "pressure fit (1.00): +8",
-            "desire aligned: organism wants growth: +15",
-            "proposal confidence: 0.61"
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.86"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 70.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.68"
           ],
           "consented": true
         }
       ],
       "threshold": 55,
       "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
-      "timestamp": 1788642004.3852546
+      "timestamp": 1788652004.5997553
     },
     {
       "action": "consent_engine",
       "temperament": {
-        "mood": "restless",
-        "pressure": 1.0,
+        "mood": "contemplative",
+        "pressure": 0.5,
         "desires": [
-          "bloom",
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "emotional_damper",
+        "self_audit_engine"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 73.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.83"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 73.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.80"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 72.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652021.0470712
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "resonance_amplifier_v2",
+        "dream_seed_planter"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 71.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.72"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 69.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.66"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 68.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.62"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652045.5319023
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "temporal_cohesion_field"
+      ],
+      "denied": [
+        "bridge_consciousness"
+      ],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 75.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.88"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 73.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.80"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 52.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.63"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652059.3991923
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "temporal_cohesion_field",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 74.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.85"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 74.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.84"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 58.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.84"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652086.6181164
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
           "confess",
           "confess",
           "confess",
@@ -141,18 +4958,17 @@
       "consented": [
         "pulse_orchestrator",
         "dream_seed_planter",
-        "self_audit_engine"
+        "bridge_consciousness"
       ],
       "denied": [],
       "verdicts": [
         {
           "name": "pulse_orchestrator",
           "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
-          "score": 69.0,
+          "score": 75.0,
           "criteria": [
-            "mood affinity (restless\u2194seed): 0.60",
-            "pressure fit (1.00): +8",
-            "desire aligned: organism wants growth: +15",
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
             "proposal confidence: 0.88"
           ],
           "consented": true
@@ -160,31 +4976,918 @@
         {
           "name": "dream_seed_planter",
           "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
-          "score": 65.8,
+          "score": 74.2,
           "criteria": [
-            "mood affinity (restless\u2194seed): 0.60",
-            "pressure fit (1.00): +8",
-            "desire aligned: organism wants growth: +15",
-            "proposal confidence: 0.75"
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.85"
           ],
           "consented": true
         },
         {
-          "name": "self_audit_engine",
-          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
-          "score": 63.0,
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 59.5,
           "criteria": [
-            "mood affinity (restless\u2194seed): 0.60",
-            "pressure fit (1.00): +8",
-            "desire aligned: organism wants growth: +15",
-            "proposal confidence: 0.64"
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.90"
           ],
           "consented": true
         }
       ],
       "threshold": 55,
       "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
-      "timestamp": 1788642255.9710634
+      "timestamp": 1788652100.3910573
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "pulse_orchestrator",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 75.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.90"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 72.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.79"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 57.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.80"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652130.9863472
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "pulse_orchestrator",
+        "resonance_amplifier_v2"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 73.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.82"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 72.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.77"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 69.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.67"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652142.0585434
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "temporal_cohesion_field",
+        "pulse_orchestrator"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 75.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.89"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 71.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.75"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 69.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.65"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652166.5386903
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "self_audit_engine",
+        "resonance_amplifier_v2"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 74.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 72.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.76"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 68.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.63"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652177.1190352
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "remember",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "temporal_cohesion_field",
+        "pulse_orchestrator",
+        "dream_seed_planter"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 73.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.83"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 73.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.81"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 72.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.77"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652206.4936478
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "self_audit_engine"
+      ],
+      "denied": [
+        "entropy_collapse_detector"
+      ],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 72.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.79"
+          ],
+          "consented": true
+        },
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 70.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.70"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 54.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.68"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652227.2807295
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "pulse_orchestrator",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 75.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.91"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 74.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.87"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 55.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.75"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652251.4262202
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "resonance_amplifier_v2",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 76.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.93"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 72.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 58.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.85"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652262.2916014
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "pulse_orchestrator",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 76.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.93"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 72.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.76"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 55.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.74"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652286.291702
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "resonance_amplifier_v2"
+      ],
+      "denied": [
+        "entropy_collapse_detector"
+      ],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 73.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.80"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 71.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.75"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 54.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.69"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652297.032549
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "temporal_cohesion_field",
+        "entropy_collapse_detector"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 75.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.88"
+          ],
+          "consented": true
+        },
+        {
+          "name": "temporal_cohesion_field",
+          "description": "Ensures wave-rhythm across all modules remains harmonic, preventing temporal drift",
+          "score": 71.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.72"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 60.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652322.0021443
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "self_audit_engine",
+        "emotional_damper",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "self_audit_engine",
+          "description": "Periodically checks every module's contract compliance and coherence vitals, auto-patching failures",
+          "score": 74.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.85"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 74.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.84"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 56.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.77"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652334.850194
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "emotional_damper"
+      ],
+      "denied": [
+        "bridge_consciousness"
+      ],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 76.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        },
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 70.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.69"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 53.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.67"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652369.704254
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "pulse_orchestrator",
+        "entropy_collapse_detector"
+      ],
+      "denied": [
+        "bridge_consciousness"
+      ],
+      "verdicts": [
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 70.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.70"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 55.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.73"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 53.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.66"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652381.1164887
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "remember",
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "entropy_collapse_detector",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 76.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.92"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 56.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.77"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 55.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.75"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1788652405.4978256
     }
   ]
 }

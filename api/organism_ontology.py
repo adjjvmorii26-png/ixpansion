@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.15.0"
-ORGANISM_WAVE = 227
-ORGANISM_WAVE_NAME = "The Organism Heals"
+ORGANISM_VERSION = "4.16.0"
+ORGANISM_WAVE = 448
+ORGANISM_WAVE_NAME = "Orbit Cohesion Field"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

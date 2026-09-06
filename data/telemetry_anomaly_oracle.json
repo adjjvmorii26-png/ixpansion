@@ -1,0 +1,47 @@
+{
+  "ts": 1788653355.41127,
+  "results": {
+    "CORRUPTED-PANEL": {
+      "label": "CORRUPTED-PANEL",
+      "verdict": "sensor_drift",
+      "confidence": 0.538,
+      "scores": {
+        "corruption": 0.15,
+        "drift": 0.538,
+        "spoof": 0.0
+      },
+      "n": 80,
+      "mean": 39.4874,
+      "stdev": 6.5432,
+      "signature": "CORRUPTED-PANEL:sensor_drift"
+    },
+    "DRIFTING-CURRENT": {
+      "label": "DRIFTING-CURRENT",
+      "verdict": "sensor_drift",
+      "confidence": 1.0,
+      "scores": {
+        "corruption": 0.0,
+        "drift": 1.0,
+        "spoof": 0.0
+      },
+      "n": 80,
+      "mean": 38.3203,
+      "stdev": 1.4499,
+      "signature": "DRIFTING-CURRENT:sensor_drift"
+    },
+    "SUSPICIOUS-TEMP": {
+      "label": "SUSPICIOUS-TEMP",
+      "verdict": "sensor_drift",
+      "confidence": 0.942,
+      "scores": {
+        "corruption": 0.0,
+        "drift": 0.942,
+        "spoof": 0.8
+      },
+      "n": 80,
+      "mean": 36.4012,
+      "stdev": 0.0069,
+      "signature": "SUSPICIOUS-TEMP:sensor_drift"
+    }
+  }
+}

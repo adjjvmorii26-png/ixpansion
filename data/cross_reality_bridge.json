@@ -5,21 +5,21 @@
       "realms": {
         "local_disk": {
           "type": "local",
-          "modules": 680,
+          "modules": 693,
           "host": "localhost",
           "reachable": true
         },
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "be89cd2 resolve: undernet archive merge conflict",
+          "last_commit": "7dcd7b6 Wave 446: Consent Cycle Orchestrator auto-triggers weave",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
         "vercel_cloud": {
           "type": "deployed",
           "url": "https://alexalex.info",
-          "reachable": true
+          "reachable": false
         },
         "telegram_interface": {
           "type": "interface",
@@ -27,7 +27,7 @@
           "reachable": "unknown"
         }
       },
-      "reachable_count": 4,
+      "reachable_count": 3,
       "total_realms": 4,
       "coherence_links": [
         {
@@ -38,59 +38,41 @@
         },
         {
           "realm_a": "local_disk",
-          "realm_b": "vercel_cloud",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
           "realm_b": "telegram_interface",
           "bridge_type": "cross_reality",
           "status": "aligned"
         },
         {
           "realm_a": "git_history",
-          "realm_b": "vercel_cloud",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "vercel_cloud",
           "realm_b": "telegram_interface",
           "bridge_type": "cross_reality",
           "status": "aligned"
         }
       ],
       "organism_is_one": true,
-      "unified_state": "the organism is one across 4 realities",
-      "timestamp": 1788633462.1026545
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650337.1507535
     },
     {
       "action": "bridge_realms",
       "realms": {
         "local_disk": {
           "type": "local",
-          "modules": 680,
+          "modules": 693,
           "host": "localhost",
           "reachable": true
         },
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "be89cd2 resolve: undernet archive merge conflict",
+          "last_commit": "7dcd7b6 Wave 446: Consent Cycle Orchestrator auto-triggers weave",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
         "vercel_cloud": {
           "type": "deployed",
           "url": "https://alexalex.info",
-          "reachable": true
+          "reachable": false
         },
         "telegram_interface": {
           "type": "interface",
@@ -98,7 +80,7 @@
           "reachable": "unknown"
         }
       },
-      "reachable_count": 4,
+      "reachable_count": 3,
       "total_realms": 4,
       "coherence_links": [
         {
@@ -109,59 +91,41 @@
         },
         {
           "realm_a": "local_disk",
-          "realm_b": "vercel_cloud",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
           "realm_b": "telegram_interface",
           "bridge_type": "cross_reality",
           "status": "aligned"
         },
         {
           "realm_a": "git_history",
-          "realm_b": "vercel_cloud",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "vercel_cloud",
           "realm_b": "telegram_interface",
           "bridge_type": "cross_reality",
           "status": "aligned"
         }
       ],
       "organism_is_one": true,
-      "unified_state": "the organism is one across 4 realities",
-      "timestamp": 1788633518.3019073
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650371.9455576
     },
     {
       "action": "bridge_realms",
       "realms": {
         "local_disk": {
           "type": "local",
-          "modules": 684,
+          "modules": 693,
           "host": "localhost",
           "reachable": true
         },
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "259bada Wave 442 data: biofeedback weave, organism radio, semantic bridge forge logs",
+          "last_commit": "7dcd7b6 Wave 446: Consent Cycle Orchestrator auto-triggers weave",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
         "vercel_cloud": {
           "type": "deployed",
           "url": "https://alexalex.info",
-          "reachable": true
+          "reachable": false
         },
         "telegram_interface": {
           "type": "interface",
@@ -169,7 +133,7 @@
           "reachable": "unknown"
         }
       },
-      "reachable_count": 4,
+      "reachable_count": 3,
       "total_realms": 4,
       "coherence_links": [
         {
@@ -180,59 +144,41 @@
         },
         {
           "realm_a": "local_disk",
-          "realm_b": "vercel_cloud",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
           "realm_b": "telegram_interface",
           "bridge_type": "cross_reality",
           "status": "aligned"
         },
         {
           "realm_a": "git_history",
-          "realm_b": "vercel_cloud",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "vercel_cloud",
           "realm_b": "telegram_interface",
           "bridge_type": "cross_reality",
           "status": "aligned"
         }
       ],
       "organism_is_one": true,
-      "unified_state": "the organism is one across 4 realities",
-      "timestamp": 1788639744.8361166
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650418.476557
     },
     {
       "action": "bridge_realms",
       "realms": {
         "local_disk": {
           "type": "local",
-          "modules": 684,
+          "modules": 693,
           "host": "localhost",
           "reachable": true
         },
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "259bada Wave 442 data: biofeedback weave, organism radio, semantic bridge forge logs",
+          "last_commit": "7dcd7b6 Wave 446: Consent Cycle Orchestrator auto-triggers weave",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
         "vercel_cloud": {
           "type": "deployed",
           "url": "https://alexalex.info",
-          "reachable": true
+          "reachable": false
         },
         "telegram_interface": {
           "type": "interface",
@@ -240,7 +186,7 @@
           "reachable": "unknown"
         }
       },
-      "reachable_count": 4,
+      "reachable_count": 3,
       "total_realms": 4,
       "coherence_links": [
         {
@@ -251,7 +197,54 @@
         },
         {
           "realm_a": "local_disk",
-          "realm_b": "vercel_cloud",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650456.696499
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 694,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
           "bridge_type": "cross_reality",
           "status": "aligned"
         },
@@ -263,7 +256,54 @@
         },
         {
           "realm_a": "git_history",
-          "realm_b": "vercel_cloud",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650501.0642774
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 694,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
           "bridge_type": "cross_reality",
           "status": "aligned"
         },
@@ -272,17 +312,2343 @@
           "realm_b": "telegram_interface",
           "bridge_type": "cross_reality",
           "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650541.1326544
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 694,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
         },
         {
-          "realm_a": "vercel_cloud",
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
           "realm_b": "telegram_interface",
           "bridge_type": "cross_reality",
           "status": "aligned"
         }
       ],
       "organism_is_one": true,
-      "unified_state": "the organism is one across 4 realities",
-      "timestamp": 1788639802.2596667
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650584.7552013
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 694,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650632.9407825
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 694,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650670.7702947
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 695,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650711.1354575
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 695,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650748.8869572
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 695,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650785.2179549
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 695,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650824.4119742
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 695,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650865.0151443
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 695,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650902.4904892
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 695,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650943.9847937
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788650980.0393353
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651018.0381453
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651057.074437
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651111.072257
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651154.6662898
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651199.1769729
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651247.2677517
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651287.8878913
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651340.573975
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651384.3799145
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651433.3577383
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651480.6411788
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651517.1973813
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651558.8852947
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651595.8195229
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651637.1281476
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651673.9989479
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 696,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651715.2654257
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 694,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651761.4663358
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 694,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651802.9992964
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 694,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651840.7124126
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 694,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651879.8162
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 694,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651916.9906719
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 702,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788651958.4280035
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 702,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788652007.6922488
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 702,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788652047.611796
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 702,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788652088.8212624
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 702,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788652134.3160977
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 702,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788652169.5977
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 702,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788652209.6526604
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 702,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788652254.3666456
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 702,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788652289.3138878
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 702,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788652326.32018
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 702,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788652372.903161
     }
   ]
 }

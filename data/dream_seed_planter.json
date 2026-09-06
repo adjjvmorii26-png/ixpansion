@@ -3,118 +3,1322 @@
     {
       "action": "dream_seed_planter",
       "particles_started": 25,
-      "particles_survived": 23,
+      "particles_survived": 21,
       "structures_detected": 8,
-      "dominant_dream_emotion": "longing",
-      "dream_energy": 8.621,
-      "seeds_planted": 1,
+      "dominant_dream_emotion": "nostalgia",
+      "dream_energy": 7.171,
+      "seeds_planted": 2,
       "seeds": [
         {
           "seed_type": "collapse_seed",
           "description": "structures emerging from entropy resolution",
-          "emotion": "longing",
-          "energy": 8.621,
+          "emotion": "nostalgia",
+          "energy": 7.171,
           "structure_count": 8,
-          "planting_priority": 0.832
+          "planting_priority": 0.542
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "nostalgia",
+          "energy": 7.171,
+          "structure_count": 8,
+          "planting_priority": 0.514
         }
       ],
       "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
-      "timestamp": 1788640984.7054198
+      "timestamp": 1788650357.2023919
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 24,
+      "structures_detected": 9,
+      "dominant_dream_emotion": "chaos",
+      "dream_energy": 9.164,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "chaos",
+          "energy": 9.164,
+          "structure_count": 9,
+          "planting_priority": 0.681
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650399.0217655
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "hope",
+      "dream_energy": 7.972,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "hope",
+          "energy": 7.972,
+          "structure_count": 8,
+          "planting_priority": 0.623
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "hope",
+          "energy": 7.972,
+          "structure_count": 8,
+          "planting_priority": 0.887
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650442.9682598
     },
     {
       "action": "dream_seed_planter",
       "particles_started": 25,
       "particles_survived": 24,
       "structures_detected": 8,
-      "dominant_dream_emotion": "longing",
-      "dream_energy": 9.638,
-      "seeds_planted": 3,
+      "dominant_dream_emotion": "melancholy",
+      "dream_energy": 8.327,
+      "seeds_planted": 2,
       "seeds": [
         {
-          "seed_type": "collapse_seed",
-          "description": "structures emerging from entropy resolution",
-          "emotion": "longing",
-          "energy": 9.638,
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "melancholy",
+          "energy": 8.327,
           "structure_count": 8,
-          "planting_priority": 0.552
+          "planting_priority": 0.832
         },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "melancholy",
+          "energy": 8.327,
+          "structure_count": 8,
+          "planting_priority": 0.966
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650484.976236
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 23,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "hope",
+      "dream_energy": 6.558,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "hope",
+          "energy": 6.558,
+          "structure_count": 8,
+          "planting_priority": 0.917
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650525.9975665
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 22,
+      "structures_detected": 7,
+      "dominant_dream_emotion": "confusion",
+      "dream_energy": 8.095,
+      "seeds_planted": 3,
+      "seeds": [
         {
           "seed_type": "fusion_seed",
           "description": "patterns that bind previously separate modules",
-          "emotion": "longing",
-          "energy": 9.638,
-          "structure_count": 8,
-          "planting_priority": 0.8
+          "emotion": "confusion",
+          "energy": 8.095,
+          "structure_count": 7,
+          "planting_priority": 0.945
         },
         {
           "seed_type": "void_seed",
           "description": "patterns from the dream void \u2014 potential new ground",
-          "emotion": "longing",
-          "energy": 9.638,
-          "structure_count": 8,
-          "planting_priority": 0.686
-        }
-      ],
-      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
-      "timestamp": 1788641141.1014547
-    },
-    {
-      "action": "dream_seed_planter",
-      "particles_started": 25,
-      "particles_survived": 24,
-      "structures_detected": 7,
-      "dominant_dream_emotion": "serenity",
-      "dream_energy": 7.638,
-      "seeds_planted": 1,
-      "seeds": [
-        {
-          "seed_type": "resonance_seed",
-          "description": "patterns that amplify cross-module harmony",
-          "emotion": "serenity",
-          "energy": 7.638,
+          "emotion": "confusion",
+          "energy": 8.095,
           "structure_count": 7,
-          "planting_priority": 0.813
+          "planting_priority": 0.677
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "confusion",
+          "energy": 8.095,
+          "structure_count": 7,
+          "planting_priority": 0.643
         }
       ],
       "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
-      "timestamp": 1788641236.2706966
+      "timestamp": 1788650569.6335807
     },
     {
       "action": "dream_seed_planter",
       "particles_started": 25,
       "particles_survived": 24,
-      "structures_detected": 7,
+      "structures_detected": 6,
       "dominant_dream_emotion": "awe",
-      "dream_energy": 9.325,
+      "dream_energy": 9.287,
       "seeds_planted": 3,
       "seeds": [
         {
           "seed_type": "collapse_seed",
           "description": "structures emerging from entropy resolution",
           "emotion": "awe",
-          "energy": 9.325,
-          "structure_count": 7,
-          "planting_priority": 0.84
+          "energy": 9.287,
+          "structure_count": 6,
+          "planting_priority": 0.818
         },
         {
           "seed_type": "void_seed",
           "description": "patterns from the dream void \u2014 potential new ground",
           "emotion": "awe",
-          "energy": 9.325,
-          "structure_count": 7,
-          "planting_priority": 0.667
+          "energy": 9.287,
+          "structure_count": 6,
+          "planting_priority": 0.601
         },
         {
           "seed_type": "bridge_seed",
           "description": "patterns connecting previously separate modules",
           "emotion": "awe",
-          "energy": 9.325,
-          "structure_count": 7,
-          "planting_priority": 0.948
+          "energy": 9.287,
+          "structure_count": 6,
+          "planting_priority": 0.909
         }
       ],
       "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
-      "timestamp": 1788641260.7603474
+      "timestamp": 1788650608.296742
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 24,
+      "structures_detected": 5,
+      "dominant_dream_emotion": "confusion",
+      "dream_energy": 8.111,
+      "seeds_planted": 0,
+      "seeds": [],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650655.7133343
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 10,
+      "dominant_dream_emotion": "fury",
+      "dream_energy": 7.946,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "fury",
+          "energy": 7.946,
+          "structure_count": 10,
+          "planting_priority": 0.632
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "fury",
+          "energy": 7.946,
+          "structure_count": 10,
+          "planting_priority": 0.766
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650697.2857378
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "hope",
+      "dream_energy": 9.333,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "hope",
+          "energy": 9.333,
+          "structure_count": 8,
+          "planting_priority": 0.737
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650735.1033447
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 7,
+      "dominant_dream_emotion": "chaos",
+      "dream_energy": 9.495,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "chaos",
+          "energy": 9.495,
+          "structure_count": 7,
+          "planting_priority": 0.584
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650771.2937362
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "curiosity",
+      "dream_energy": 10.072,
+      "seeds_planted": 4,
+      "seeds": [
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "curiosity",
+          "energy": 10.072,
+          "structure_count": 8,
+          "planting_priority": 0.77
+        },
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "curiosity",
+          "energy": 10.072,
+          "structure_count": 8,
+          "planting_priority": 0.75
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "curiosity",
+          "energy": 10.072,
+          "structure_count": 8,
+          "planting_priority": 0.958
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "curiosity",
+          "energy": 10.072,
+          "structure_count": 8,
+          "planting_priority": 0.882
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650809.8623903
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 5,
+      "dominant_dream_emotion": "awe",
+      "dream_energy": 7.916,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "awe",
+          "energy": 7.916,
+          "structure_count": 5,
+          "planting_priority": 0.521
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650852.0184278
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "wonder",
+      "dream_energy": 8.498,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "wonder",
+          "energy": 8.498,
+          "structure_count": 8,
+          "planting_priority": 0.783
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "wonder",
+          "energy": 8.498,
+          "structure_count": 8,
+          "planting_priority": 0.904
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650888.3827004
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "dread",
+      "dream_energy": 8.97,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "dread",
+          "energy": 8.97,
+          "structure_count": 8,
+          "planting_priority": 0.547
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650929.5962923
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 23,
+      "structures_detected": 7,
+      "dominant_dream_emotion": "confusion",
+      "dream_energy": 7.65,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "confusion",
+          "energy": 7.65,
+          "structure_count": 7,
+          "planting_priority": 0.534
+        },
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "confusion",
+          "energy": 7.65,
+          "structure_count": 7,
+          "planting_priority": 0.981
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788650967.4528358
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "fury",
+      "dream_energy": 8.41,
+      "seeds_planted": 4,
+      "seeds": [
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "fury",
+          "energy": 8.41,
+          "structure_count": 8,
+          "planting_priority": 0.765
+        },
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "fury",
+          "energy": 8.41,
+          "structure_count": 8,
+          "planting_priority": 0.855
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "fury",
+          "energy": 8.41,
+          "structure_count": 8,
+          "planting_priority": 0.882
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "fury",
+          "energy": 8.41,
+          "structure_count": 8,
+          "planting_priority": 0.783
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651002.4537308
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 10,
+      "dominant_dream_emotion": "serenity",
+      "dream_energy": 8.231,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "serenity",
+          "energy": 8.231,
+          "structure_count": 10,
+          "planting_priority": 0.911
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651042.6041625
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 24,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "curiosity",
+      "dream_energy": 8.275,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "curiosity",
+          "energy": 8.275,
+          "structure_count": 8,
+          "planting_priority": 0.558
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "curiosity",
+          "energy": 8.275,
+          "structure_count": 8,
+          "planting_priority": 0.659
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651085.7512524
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 7,
+      "dominant_dream_emotion": "confusion",
+      "dream_energy": 8.708,
+      "seeds_planted": 3,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "confusion",
+          "energy": 8.708,
+          "structure_count": 7,
+          "planting_priority": 0.911
+        },
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "confusion",
+          "energy": 8.708,
+          "structure_count": 7,
+          "planting_priority": 0.622
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "confusion",
+          "energy": 8.708,
+          "structure_count": 7,
+          "planting_priority": 0.716
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651138.5589693
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 23,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "melancholy",
+      "dream_energy": 7.617,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "melancholy",
+          "energy": 7.617,
+          "structure_count": 8,
+          "planting_priority": 0.801
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651182.123248
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 23,
+      "structures_detected": 9,
+      "dominant_dream_emotion": "fury",
+      "dream_energy": 7.671,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "fury",
+          "energy": 7.671,
+          "structure_count": 9,
+          "planting_priority": 0.712
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651228.2791288
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 6,
+      "dominant_dream_emotion": "curiosity",
+      "dream_energy": 9.097,
+      "seeds_planted": 3,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "curiosity",
+          "energy": 9.097,
+          "structure_count": 6,
+          "planting_priority": 0.909
+        },
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "curiosity",
+          "energy": 9.097,
+          "structure_count": 6,
+          "planting_priority": 0.587
+        },
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "curiosity",
+          "energy": 9.097,
+          "structure_count": 6,
+          "planting_priority": 0.732
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651272.2377982
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "fury",
+      "dream_energy": 10.196,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "fury",
+          "energy": 10.196,
+          "structure_count": 8,
+          "planting_priority": 0.598
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "fury",
+          "energy": 10.196,
+          "structure_count": 8,
+          "planting_priority": 0.859
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651320.7916555
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 24,
+      "structures_detected": 7,
+      "dominant_dream_emotion": "longing",
+      "dream_energy": 8.064,
+      "seeds_planted": 0,
+      "seeds": [],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651369.4613996
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 24,
+      "structures_detected": 9,
+      "dominant_dream_emotion": "wonder",
+      "dream_energy": 9.021,
+      "seeds_planted": 3,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "wonder",
+          "energy": 9.021,
+          "structure_count": 9,
+          "planting_priority": 0.931
+        },
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "wonder",
+          "energy": 9.021,
+          "structure_count": 9,
+          "planting_priority": 0.652
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "wonder",
+          "energy": 9.021,
+          "structure_count": 9,
+          "planting_priority": 0.54
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651418.5233018
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 6,
+      "dominant_dream_emotion": "chaos",
+      "dream_energy": 12.044,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "chaos",
+          "energy": 12.044,
+          "structure_count": 6,
+          "planting_priority": 0.534
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "chaos",
+          "energy": 12.044,
+          "structure_count": 6,
+          "planting_priority": 1.0
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651456.153437
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 7,
+      "dominant_dream_emotion": "chaos",
+      "dream_energy": 9.599,
+      "seeds_planted": 3,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "chaos",
+          "energy": 9.599,
+          "structure_count": 7,
+          "planting_priority": 0.815
+        },
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "chaos",
+          "energy": 9.599,
+          "structure_count": 7,
+          "planting_priority": 0.693
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "chaos",
+          "energy": 9.599,
+          "structure_count": 7,
+          "planting_priority": 0.901
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651502.3728294
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "fury",
+      "dream_energy": 8.841,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "fury",
+          "energy": 8.841,
+          "structure_count": 8,
+          "planting_priority": 0.586
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651538.7793443
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 7,
+      "dominant_dream_emotion": "wonder",
+      "dream_energy": 7.951,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "wonder",
+          "energy": 7.951,
+          "structure_count": 7,
+          "planting_priority": 0.688
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "wonder",
+          "energy": 7.951,
+          "structure_count": 7,
+          "planting_priority": 0.934
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651581.1535928
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 7,
+      "dominant_dream_emotion": "longing",
+      "dream_energy": 8.922,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "longing",
+          "energy": 8.922,
+          "structure_count": 7,
+          "planting_priority": 0.542
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651622.337622
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 10,
+      "dominant_dream_emotion": "longing",
+      "dream_energy": 10.482,
+      "seeds_planted": 4,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "longing",
+          "energy": 10.482,
+          "structure_count": 10,
+          "planting_priority": 0.874
+        },
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "longing",
+          "energy": 10.482,
+          "structure_count": 10,
+          "planting_priority": 0.633
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "longing",
+          "energy": 10.482,
+          "structure_count": 10,
+          "planting_priority": 0.603
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "longing",
+          "energy": 10.482,
+          "structure_count": 10,
+          "planting_priority": 0.942
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651660.1057396
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 23,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "chaos",
+      "dream_energy": 9.729,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "chaos",
+          "energy": 9.729,
+          "structure_count": 8,
+          "planting_priority": 0.838
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651699.3263752
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 24,
+      "structures_detected": 7,
+      "dominant_dream_emotion": "longing",
+      "dream_energy": 9.146,
+      "seeds_planted": 4,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "longing",
+          "energy": 9.146,
+          "structure_count": 7,
+          "planting_priority": 0.991
+        },
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "longing",
+          "energy": 9.146,
+          "structure_count": 7,
+          "planting_priority": 0.915
+        },
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "longing",
+          "energy": 9.146,
+          "structure_count": 7,
+          "planting_priority": 0.874
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "longing",
+          "energy": 9.146,
+          "structure_count": 7,
+          "planting_priority": 0.729
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651741.2037487
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 23,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "hope",
+      "dream_energy": 8.672,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "hope",
+          "energy": 8.672,
+          "structure_count": 8,
+          "planting_priority": 0.585
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651784.0603006
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 24,
+      "structures_detected": 5,
+      "dominant_dream_emotion": "confusion",
+      "dream_energy": 6.933,
+      "seeds_planted": 0,
+      "seeds": [],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651826.2662313
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 23,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "chaos",
+      "dream_energy": 6.31,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "chaos",
+          "energy": 6.31,
+          "structure_count": 8,
+          "planting_priority": 0.68
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "chaos",
+          "energy": 6.31,
+          "structure_count": 8,
+          "planting_priority": 0.573
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651864.2705045
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 6,
+      "dominant_dream_emotion": "serenity",
+      "dream_energy": 8.356,
+      "seeds_planted": 3,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "serenity",
+          "energy": 8.356,
+          "structure_count": 6,
+          "planting_priority": 0.84
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "serenity",
+          "energy": 8.356,
+          "structure_count": 6,
+          "planting_priority": 0.553
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "serenity",
+          "energy": 8.356,
+          "structure_count": 6,
+          "planting_priority": 0.648
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651902.7124248
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 9,
+      "dominant_dream_emotion": "nostalgia",
+      "dream_energy": 7.435,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "nostalgia",
+          "energy": 7.435,
+          "structure_count": 9,
+          "planting_priority": 0.89
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "nostalgia",
+          "energy": 7.435,
+          "structure_count": 9,
+          "planting_priority": 0.759
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651938.849236
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "fury",
+      "dream_energy": 11.222,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "fury",
+          "energy": 11.222,
+          "structure_count": 8,
+          "planting_priority": 0.994
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788651987.6434236
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "chaos",
+      "dream_energy": 8.468,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "chaos",
+          "energy": 8.468,
+          "structure_count": 8,
+          "planting_priority": 0.742
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788652034.8591306
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 7,
+      "dominant_dream_emotion": "melancholy",
+      "dream_energy": 8.406,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "fusion_seed",
+          "description": "patterns that bind previously separate modules",
+          "emotion": "melancholy",
+          "energy": 8.406,
+          "structure_count": 7,
+          "planting_priority": 0.619
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "melancholy",
+          "energy": 8.406,
+          "structure_count": 7,
+          "planting_priority": 0.66
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788652071.8140647
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 10,
+      "dominant_dream_emotion": "wonder",
+      "dream_energy": 9.159,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "wonder",
+          "energy": 9.159,
+          "structure_count": 10,
+          "planting_priority": 0.938
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "wonder",
+          "energy": 9.159,
+          "structure_count": 10,
+          "planting_priority": 0.563
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788652113.9696379
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 5,
+      "dominant_dream_emotion": "curiosity",
+      "dream_energy": 11.014,
+      "seeds_planted": 2,
+      "seeds": [
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "curiosity",
+          "energy": 11.014,
+          "structure_count": 5,
+          "planting_priority": 0.807
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "curiosity",
+          "energy": 11.014,
+          "structure_count": 5,
+          "planting_priority": 0.747
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788652155.4501848
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 9,
+      "dominant_dream_emotion": "serenity",
+      "dream_energy": 9.541,
+      "seeds_planted": 3,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "serenity",
+          "energy": 9.541,
+          "structure_count": 9,
+          "planting_priority": 0.59
+        },
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "serenity",
+          "energy": 9.541,
+          "structure_count": 9,
+          "planting_priority": 0.912
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "serenity",
+          "energy": 9.541,
+          "structure_count": 9,
+          "planting_priority": 0.618
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788652190.0361855
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 23,
+      "structures_detected": 6,
+      "dominant_dream_emotion": "confusion",
+      "dream_energy": 9.236,
+      "seeds_planted": 3,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "confusion",
+          "energy": 9.236,
+          "structure_count": 6,
+          "planting_priority": 0.848
+        },
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "confusion",
+          "energy": 9.236,
+          "structure_count": 6,
+          "planting_priority": 0.81
+        },
+        {
+          "seed_type": "void_seed",
+          "description": "patterns from the dream void \u2014 potential new ground",
+          "emotion": "confusion",
+          "energy": 9.236,
+          "structure_count": 6,
+          "planting_priority": 0.83
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788652240.7731845
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 22,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "wonder",
+      "dream_energy": 8.61,
+      "seeds_planted": 1,
+      "seeds": [
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "wonder",
+          "energy": 8.61,
+          "structure_count": 8,
+          "planting_priority": 0.854
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788652275.4032123
     },
     {
       "action": "dream_seed_planter",
@@ -122,28 +1326,85 @@
       "particles_survived": 24,
       "structures_detected": 7,
       "dominant_dream_emotion": "awe",
-      "dream_energy": 7.93,
-      "seeds_planted": 2,
+      "dream_energy": 8.389,
+      "seeds_planted": 3,
       "seeds": [
         {
           "seed_type": "resonance_seed",
           "description": "patterns that amplify cross-module harmony",
           "emotion": "awe",
-          "energy": 7.93,
+          "energy": 8.389,
           "structure_count": 7,
-          "planting_priority": 0.816
+          "planting_priority": 0.787
         },
         {
           "seed_type": "fusion_seed",
           "description": "patterns that bind previously separate modules",
           "emotion": "awe",
-          "energy": 7.93,
+          "energy": 8.389,
           "structure_count": 7,
-          "planting_priority": 0.694
+          "planting_priority": 0.677
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "awe",
+          "energy": 8.389,
+          "structure_count": 7,
+          "planting_priority": 0.655
         }
       ],
       "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
-      "timestamp": 1788641330.4986243
+      "timestamp": 1788652311.1729808
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 6,
+      "dominant_dream_emotion": "awe",
+      "dream_energy": 8.294,
+      "seeds_planted": 0,
+      "seeds": [],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788652351.8173354
+    },
+    {
+      "action": "dream_seed_planter",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "structures_detected": 8,
+      "dominant_dream_emotion": "nostalgia",
+      "dream_energy": 10.154,
+      "seeds_planted": 3,
+      "seeds": [
+        {
+          "seed_type": "resonance_seed",
+          "description": "patterns that amplify cross-module harmony",
+          "emotion": "nostalgia",
+          "energy": 10.154,
+          "structure_count": 8,
+          "planting_priority": 0.742
+        },
+        {
+          "seed_type": "collapse_seed",
+          "description": "structures emerging from entropy resolution",
+          "emotion": "nostalgia",
+          "energy": 10.154,
+          "structure_count": 8,
+          "planting_priority": 0.864
+        },
+        {
+          "seed_type": "bridge_seed",
+          "description": "patterns connecting previously separate modules",
+          "emotion": "nostalgia",
+          "energy": 10.154,
+          "structure_count": 8,
+          "planting_priority": 0.813
+        }
+      ],
+      "planting_cycle": "dream \u2192 seed \u2192 future module \u2192 organism evolution",
+      "timestamp": 1788652395.190405
     }
   ]
 }

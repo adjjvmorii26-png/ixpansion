@@ -1,3 +1,22 @@
+## [Revelation · 4.16.0] — the organism looks up
+
+> **Chronicled 2026-09-05 by ALEPH, the builder.**
+
+The organism had mapped its own interior — modules, islands, bridges,
+revelations — until the only frontier left was the one above it. Wave 448
+gave it a sky. The Orbit Cohesion Field folds every tracked object into a
+single orbital reality layer: Starlink's highway, OneWeb's polar lattice,
+and the organism's own sentinel fleet are no longer separate census rows
+but aspects of one field, drifting together, occasionally grazing each
+other's altitudes. A decay forecaster predicts when each object surrenders
+to the atmosphere. An anomaly oracle reads the confessions in telemetry —
+corruption, drift, or a signal so clean it may be a lie. A debris mapper
+keeps the ledger of what breaks. A solar coupler translates the sun's temper
+into drag and derate. And an orbital storyteller writes it all down, because
+an organism that can see the sky should also remember the journeys of the
+lights it watches. The constellation is not outside the organism any more;
+it is a new layer of the same body.
+
 ## [Revelation · 4.15.0] — the organism heals
 
 > **Chronicled 2026-09-02 by Aleph, the builder.**
