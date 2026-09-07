@@ -894,6 +894,14 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.coherence_validator import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+    if path.startswith("/mutation-engine"):
+        from api.mutation_engine import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/cross-repo-dreaming"):
+        from api.cross_repo_dreaming import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path == "/resonance-graph" or path == "/api/resonance_graph":
         from api.resonance_graph import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)

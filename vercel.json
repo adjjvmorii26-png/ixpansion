@@ -200,6 +200,22 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/mutation-engine(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/mutation_engine(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/cross-repo-dreaming(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/cross_repo_dreaming(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/coherence_validator(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
