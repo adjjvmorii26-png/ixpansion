@@ -2236,6 +2236,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/full-ceremony-run(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/full_ceremony_run(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/naming-ceremony(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
