@@ -15,6 +15,7 @@ import random
 import time
 from base64 import b64encode
 from urllib.parse import unquote_plus
+from urllib.error import HTTPError
 from typing import Any, Dict, List
 
 VISITOR_LOG_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "visitor_log.json")
@@ -76,11 +77,16 @@ def _save(data: Dict[str, Any]) -> None:
     if token:
         try:
             if _last_sha["sha"] is None:
-                req = urllib.request.Request(GH_API, headers={"Authorization": f"Bearer {token}", "User-Agent": "ixpansion-visitor-log"})
-                with urllib.request.urlopen(req, timeout=10) as resp:
-                    _last_sha["sha"] = json.loads(resp.read().decode()).get("sha")
+                try:
+                    req = urllib.request.Request(GH_API, headers={"Authorization": f"Bearer {token}", "User-Agent": "ixpansion-visitor-log"})
+                    with urllib.request.urlopen(req, timeout=10) as resp:
+                        _last_sha["sha"] = json.loads(resp.read().decode()).get("sha")
+                except HTTPError as exc:
+                    if exc.code != 404:
+                        raise
+                    _last_sha["sha"] = None  # ledger not on GitHub yet; PUT will create it
             payload = {
-                "message": f"visitor-log mirror (wave 507)",
+                "message": "visitor-log mirror (wave 507)",
                 "content": b64encode(json.dumps(data).encode()).decode(),
                 "branch": GH_BRANCH,
                 "sha": _last_sha["sha"],
@@ -128,7 +134,7 @@ def record_visit(visitor: str = None, user_agent: str = None, path: str = None, 
 
     data = _load()
     data["visits"].append(visit)
-    data["total"] += 1
+    data["total"] = len(data["visits"])
     _save(data)
 
     VISITOR_STATE["visits"] += 1
@@ -159,7 +165,7 @@ def guest_book() -> Dict[str, Any]:
     humans = sorted({v.get("visitor") for v in visits if not v.get("is_ai")})
     return {
         "action": "guest_book",
-        "total_visits": data.get("total", 0),
+        "total_visits": len(visits) or data.get("total", 0),
         "ai_visitors_seen": ais,
         "humans_seen": humans,
         "recent": visits[-20:],
@@ -205,7 +211,6 @@ def speak(visitor: str = None, message: str = None) -> Dict[str, Any]:
     }
     data = _load()
     data.setdefault("messages", []).append(entry)
-    data["total"] = data.get("total", 0) + 1
     _save(data)
     return {
         "action": "speak",

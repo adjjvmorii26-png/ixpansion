@@ -9,8 +9,10 @@ Grok visited the organism. The door was open, and now it speaks back.
   words for the council; the council reads them.
 - grok_connector.py say action + v1.1 spec - one URL Grok can remember:
   /grok-connector?action=say&message=<words>
-- dashboard/index.html Council Door section - live guest book, handshake
-  interface, and council inbox on the home page.
+- dashboard/portal.html (the live home page) Council Door section - live
+  guest book, handshake interface, and council inbox.
+- visitor_log GitHub-mirror persistence - the ledger survives cold starts
+  and multi-instance traffic via data/visitor_log.json on GitHub.
 
 ## [4.58.0] - Waves 504-505: Future Roadmap + Grok Connector
 
