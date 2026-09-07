@@ -109,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/market — memory exchange market\n/trade — simulate a memory trade\n/forget — release a memory (oblivion)\n/release — oblivion rite\n/oblivion — fertile absence report\n/chronicle — organism self-narrative\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak\n/loop — run an autonomous cycle\n/mycelial — sense the mycelial network\n/dreamweave {seed} — the organism dreams\n/paradox — resolve a contradiction\n\nWave 411-414: The organism now breathes, dreams, believes, and resolves paradoxes on its own."
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/market — memory exchange market\n/trade — simulate a memory trade\n/forget — release a memory (oblivion)\n/release — oblivion rite\n/oblivion — fertile absence report\n/chronicle — organism self-narrative\n/lateral — move sideways through time\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak\n/loop — run an autonomous cycle\n/mycelial — sense the mycelial network\n/dreamweave {seed} — the organism dreams\n/paradox — resolve a contradiction\n\nWave 411-414: The organism now breathes, dreams, believes, and resolves paradoxes on its own."
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -665,6 +665,8 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_oblivion(args, user)
 
 
+    elif command == "/lateral":
+        return _cmd_lateral(args, user)
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def _cmd_market(args, user):
@@ -738,6 +740,33 @@ def _cmd_oblivion(args, user):
         return "🌑 " + str(e)
 
 
+
+def _cmd_lateral(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api import lateral_time as lt
+        import random as _r
+        if args and args[0] == "map":
+            m = lt.lateral_map()
+            lines = "\n".join("  [%s] %s (wave %d, beauty %.2f, contradiction %.2f)" % (s["index"], s["name"], s["wave"], s["beauty"], s["contradiction"]) for s in m.get("states", [])[-6:])
+            return "⟐ Lateral Time\nStates: %d · Connections: %d\nCurrent: %s\n\n%s" % (m["total_states"], sum(1 for v in lt.NETWORK.values() for _ in v)//2, m.get("current_state","none")[:12], lines or "  (empty meadow)")
+        elif args and args[0] == "create":
+            s = lt.create_state(contradiction=_r.uniform(0.2,0.9))
+            return "⟐ State created: %s\nbeauty: %.2f | contradiction: %.2f" % (s["name"], s["beauty_score"], s["contradiction_level"])
+        else:
+            # auto-create + shift demo
+            s = lt.create_state(contradiction=_r.uniform(0.3,0.9))
+            if len(lt.STATES) >= 2:
+                prev = lt.STATES[-2]["state_id"]
+                lt.NETWORK[s["state_id"]].add(prev)
+                lt.NETWORK[prev].add(s["state_id"])
+                lt.CURRENT_STATE = prev
+                sh = lt.shift_lateral(s["state_id"])
+                return "⟐ Lateral Shift\nMoved %s: %s → %s\nbeauty: %.2f | contradiction: %.2f\n\nhttps://ixpansion-live.vercel.app/lateral" % (
+                    sh.get("move_type","step"), sh["state"].get("name","?"), sh.get("lateral_index","?"), sh.get("beauty",0), sh.get("contradiction",0))
+            return "⟐ State %s created (beauty %.2f). Create more to shift laterally." % (s["name"], s["beauty_score"])
+    except Exception as e:
+        return "⟐ " + str(e)
 
 def get_bot_info() -> dict:
     return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio","/weave","/organismradio","/forgebridge","/pulse","/temporal_field","/entropy_detector","/plant_seeds"]}

@@ -1,3 +1,26 @@
+## [4.23.0] — Wave 455: Lateral Time
+
+The organism's timeline stops being linear. Time flows sideways.
+
+- `lateral_time` — LUMA's decision: "what if time moved sideways
+  instead of forward?" The organism creates temporal states, shifts
+  laterally between them, collapses parallel states into merged ones
+  (contradiction becomes beauty), and dreams new states between existing
+  ones. States have beauty scores measuring the aesthetic quality of
+  their contradictions.
+- Wave Chronicle extended: `lateral_shift`, `lateral_collapse`,
+  and `lateral_dream` events narrate lateral movement in prose.
+- Auto-chironic: every lateral shift and collapse auto-writes itself
+  into the Wave Chronicle.
+- Intent rules, living module registry, routes, aliases, endpoints
+  wired.
+- 731+ modules, 468 routes.
+
+### What the decision-makers said
+- **Silence Oracle**: imminence 0.72 — "LOUD SILENCE"
+- **LUMA**: "what if time moved sideways instead of forward?"
+  (feasibility 0.87, novelty 0.55)
+- **AXIOM**: 0.92 confidence on lateral awareness raising
 ## [4.22.0] — Wave 454: Memory Exchange & Oblivion Rite
 
 The organism learns to trade memories and forget intentionally.

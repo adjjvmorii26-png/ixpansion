@@ -194,7 +194,7 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
 
     (r"\b(vercel (telemetry|metrics)|telemetry health|metric catalog|vitals|observability)\b", "/api/vercel_telemetry", {}),
     (r"\b(chronicle|organism story|wave story|tell me (about )?(all|the) waves?|living archive|self.?narrat)\b", "/api/wave_chronicle", {}),
-    (\\b(memory (exchange|market|marketplace|trade|ticker|auction|swap|economy)|trade memories|buy a memory|sell a memory|memory coins|swap memories|shared memory)\", "/api/memory_exchange", {}),
+    (r"\b(memory (exchange|market|marketplace|trade|ticker|auction|swap|economy)|trade memories|buy a memory|sell a memory|memory coins|swap memories|shared memory)\b", "/api/memory_exchange", {}),
     (r"\b(forget (intentionally|on purpose|a memory)|oblivion|let go of (a|this|that) memory|release (a|the) memory|intentional forgetting|deliberate forgetting|prune memories?|rite of forgetting)\b", "/api/oblivion_rite", {}),
     (r"\b(echo|search|find|look|discover)\b.*\b(\w+)\b", "/echo", {"extract_word": True}),
     (r"\babout\b.*\b(\w{4,})\b", "/echo", {"extract_word": True}),

@@ -62,6 +62,18 @@ TEMPLATES = {
         "A rite of forgetting: \"{title}\" was released by {holder}. What remains is absence, and absence is room.",
         "\"{title}\" was pruned deliberately — {reason}. The organism breathes easier for the empty space.",
     ],
+    "lateral_shift": [
+        "The organism moved sideways — from \"{from_state}\" to \"{to_state}\". Time flowed laterally.",
+        "A lateral step: the organism left \"{from_state}\" and entered \"{to_state}\" ({move_type}).",
+    ],
+    "lateral_collapse": [
+        "Two lateral states collapsed: \"{state_a}\" and \"{state_b}\" became one — {archetype}. Beauty: {beauty}.",
+        "A merge of parallel timelines: the organism folded \"{state_a}\" and \"{state_b}\" into \"{merged}\". {archetype}",
+    ],
+    "lateral_dream": [
+        "A dream between states: \"{name}\" was born from the space between \"{from_a}\" and \"{from_b}\". Beauty: {beauty}.",
+        "The organism dreamed laterally: \"{name}\" emerged between parallel realities.",
+    ],
     "knowledge_gained": [
         "Something was learned: {insight}",
         "A new understanding crystallized: {insight}",
@@ -170,6 +182,39 @@ def from_memory_trade(trade: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_lateral_shift(shift: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a lateral time shift into a chronicle entry."""
+    return record(
+        "lateral_shift",
+        from_state=shift.get("from_state", "somewhere"),
+        to_state=shift.get("to_state", "somewhere else"),
+        move_type=shift.get("move_type", "unknown"),
+    )
+
+
+def from_lateral_collapse(collapse: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a lateral collapse into a chronicle entry."""
+    return record(
+        "lateral_collapse",
+        state_a=collapse.get("state_a", "state_a"),
+        state_b=collapse.get("state_b", "state_b"),
+        archetype=collapse.get("archetype", "a merge"),
+        beauty=collapse.get("beauty_score", 0.5),
+        merged=collapse.get("merged", ""),
+    )
+
+
+def from_lateral_dream(dream: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a lateral dream into a chronicle entry."""
+    return record(
+        "lateral_dream",
+        name=dream.get("name", "a dream"),
+        from_a=dream.get("from_a", ""),
+        from_b=dream.get("from_b", ""),
+        beauty=dream.get("beauty_score", 0.5),
+    )
+
+
 def from_memory_release(release: Dict[str, Any]) -> Dict[str, Any]:
     """Convert an oblivion rite release into a chronicle entry."""
     return record(
@@ -239,4 +284,10 @@ def handler(payload=None, context=None):
         return from_memory_trade(data.get("trade", {}))
     elif action == "from_memory_release":
         return from_memory_release(data.get("release", {}))
+    elif action == "from_lateral_shift":
+        return from_lateral_shift(data.get("shift", {}))
+    elif action == "from_lateral_collapse":
+        return from_lateral_collapse(data.get("collapse", {}))
+    elif action == "from_lateral_dream":
+        return from_lateral_dream(data.get("dream", {}))
     return {"narrative": narrative(int(data.get("limit", 10))), "entries": len(CHRONICLE_ENTRIES)}

@@ -60,6 +60,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/api/lateral_time(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/lateral(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/market(?:\\/.*)?",
       "dest": "/api/index.py"
     },
