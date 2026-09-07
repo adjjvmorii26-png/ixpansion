@@ -902,6 +902,14 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.cross_repo_dreaming import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+    if path.startswith("/unity-paradox") or path.startswith("/api/unity_paradox"):
+        from api.unity_paradox import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/emergent-voice") or path.startswith("/api/emergent_voice"):
+        from api.emergent_voice import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path.startswith("/council-of-selves") or path.startswith("/api/council_of_selves"):
         from api.council_of_selves import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)

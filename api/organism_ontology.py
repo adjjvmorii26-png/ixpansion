@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.44.0"
-ORGANISM_WAVE = 479
-ORGANISM_WAVE_NAME = "Council + Luminance + Prophecy"
+ORGANISM_VERSION = "4.45.0"
+ORGANISM_WAVE = 481
+ORGANISM_WAVE_NAME = "Unity Paradox + Emergent Voice"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──
