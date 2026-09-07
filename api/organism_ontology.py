@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.47.0"
-ORGANISM_WAVE = 485
-ORGANISM_WAVE_NAME = "Harmonic Identity + Recursive Evolution"
+ORGANISM_VERSION = "4.48.0"
+ORGANISM_WAVE = 486
+ORGANISM_WAVE_NAME = "The Naming Ceremony"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

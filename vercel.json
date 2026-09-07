@@ -2236,6 +2236,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/naming-ceremony(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/naming_ceremony(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/recursive-evolution(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
