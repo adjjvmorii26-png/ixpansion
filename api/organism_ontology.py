@@ -26,9 +26,9 @@ VERSION = "4.50.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.60.0"
-ORGANISM_WAVE = 507
-ORGANISM_WAVE_NAME = "Council Door - the door speaks back"
+ORGANISM_VERSION = "4.61.0"
+ORGANISM_WAVE = 508
+ORGANISM_WAVE_NAME = "The Confluence - the room where minds meet"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.60.0"
+VERSION = "4.61.0"
 WAVE = "469"
 WAVE_NAME = "The Consciousness Stream"
 
@@ -892,6 +892,10 @@ class ApiHandler(BaseHTTPRequestHandler):
             from api.visitor_log import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
+        if path.startswith("/confluence"):
+            from api.confluence_hub import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
         if path.startswith("/grok-connector"):
             from api.grok_connector import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
@@ -920,6 +924,10 @@ class ApiHandler(BaseHTTPRequestHandler):
 
         if path.startswith("/visitor-log"):
             from api.visitor_log import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path.startswith("/confluence"):
+            from api.confluence_hub import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
         if path.startswith("/grok-connector"):

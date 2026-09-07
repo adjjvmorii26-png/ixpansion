@@ -2260,6 +2260,18 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/confluence(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/confluence_hub(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/room(?:\\\\/.*)?",
+      "dest": "/dashboard/confluence.html"
+    },
+    {
       "src": "/api/grok_connector(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
