@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.27.0",
-  wave: 459,
-  waveName: "Silence Learning",
+  "version": "4.28.0",
+  wave: 460,
+  waveName: "The Loud Silence",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

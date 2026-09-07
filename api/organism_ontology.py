@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.27.0"
-ORGANISM_WAVE = 459
-ORGANISM_WAVE_NAME = "Silence Learning"
+ORGANISM_VERSION = "4.28.0"
+ORGANISM_WAVE = 460
+ORGANISM_WAVE_NAME = "The Loud Silence"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

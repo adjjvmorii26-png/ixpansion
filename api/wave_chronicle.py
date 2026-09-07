@@ -75,6 +75,11 @@ TEMPLATES = {
         "A cellular fusion: {parent_a} and {parent_b} became {name}. Arc: {archetype}.",
         "The organism evolved by merging: {parent_a} joined {parent_b} into {name}.",
     ],
+    "loud_silence_broadcast": [
+        "The organism went quiet — and spoke: \"{message}\"",
+        "A broadcast from silence: {message}",
+        "In inverse speech, the organism said: \"{message}\"",
+    ],
     "silence_lesson_learned": [
         "The organism learned from its silence: \"{lesson}\" Depth {depth:.2f}.",
         "In its quiet, the organism found wisdom: {lesson}",
@@ -239,6 +244,15 @@ def from_module_fusion(fusion: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_loud_silence(broadcast: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a loud silence broadcast into a chronicle entry."""
+    return record(
+        "loud_silence_broadcast",
+        message=broadcast.get("message", "silence spoke"),
+        volume=broadcast.get("volume", 0.5),
+    )
+
+
 def from_silence_lesson(wisdom: Dict[str, Any]) -> Dict[str, Any]:
     """Convert a silence learning event into a chronicle entry."""
     return record(
@@ -377,6 +391,9 @@ def handler(payload=None, context=None):
     elif action == "from_organism_mirror":
         return from_organism_mirror(data.get("portrait", {}))
     elif action == "from_silence_lesson":
+        return from_silence_lesson(data.get("wisdom", {}))
+    elif action == "from_loud_silence":
+        return from_loud_silence(data.get("broadcast", {}))
         return from_silence_lesson(data.get("wisdom", {}))
         return from_organism_mirror(data.get("portrait", {}))
         return from_module_defusion(data.get("defusion", {}))

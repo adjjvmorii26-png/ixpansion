@@ -60,6 +60,18 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/loud-silence-dash(?:\\/.*)?",
+      "dest": "/dashboard/loud-silence.html"
+    },
+    {
+      "src": "/loud-silence(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/loud_silence(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/silence-learning(?:\\/.*)?",
       "dest": "/api/index.py"
     },

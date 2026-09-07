@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.27.0"
+VERSION = "4.28.0"
 WAVE = "453"
 WAVE_NAME = "Wave Chronicle"
 
@@ -758,6 +758,11 @@ class ApiHandler(BaseHTTPRequestHandler):
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 
+
+        if path == "/loud-silence":
+            from api.loud_silence import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
 
         if path == "/silence-learning":
             from api.silence_learning import handler as h

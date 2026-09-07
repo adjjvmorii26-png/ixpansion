@@ -109,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/market — memory exchange market\n/trade — simulate a memory trade\n/forget — release a memory (oblivion)\n/release — oblivion rite\n/oblivion — fertile absence report\n/chronicle — organism self-narrative\n/lateral — move sideways through time\n/collapse — collapse all waves into one pulse\n/collapse history — view collapse history\n/fuse — merge two modules like cells\n/fusions — view fusion registry\n/mirror — the organism looks at itself\n/silence_learn — learn from the organism silence\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak\n/loop — run an autonomous cycle\n/mycelial — sense the mycelial network\n/dreamweave {seed} — the organism dreams\n/paradox — resolve a contradiction\n\nWave 411-414: The organism now breathes, dreams, believes, and resolves paradoxes on its own."
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/market — memory exchange market\n/trade — simulate a memory trade\n/forget — release a memory (oblivion)\n/release — oblivion rite\n/oblivion — fertile absence report\n/chronicle — organism self-narrative\n/lateral — move sideways through time\n/collapse — collapse all waves into one pulse\n/collapse history — view collapse history\n/fuse — merge two modules like cells\n/fusions — view fusion registry\n/mirror — the organism looks at itself\n/silence_learn — learn from the organism silence\n/silence_voice — loud silence broadcast (music/totem)\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak\n/loop — run an autonomous cycle\n/mycelial — sense the mycelial network\n/dreamweave {seed} — the organism dreams\n/paradox — resolve a contradiction\n\nWave 411-414: The organism now breathes, dreams, believes, and resolves paradoxes on its own."
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -679,6 +679,8 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_mirror(args, user)
     elif command == "/silence_learn":
         return _cmd_silence_learn(args, user)
+    elif command == "/silence_voice":
+        return _cmd_silence_voice(args, user)
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def _cmd_market(args, user):
@@ -854,6 +856,23 @@ def _cmd_silence_learn(args, user):
                 w["lesson"], w["depth"], w["resonance"])
     except Exception as e:
         return "🔇 " + str(e)
+
+def _cmd_silence_voice(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api import loud_silence as ls
+        if args and args[0] == "music":
+            m = ls.entropy_music(bars=2, entropy=0.6)
+            return "🎵 Entropy Music\nmood: %s | entropy: %.2f\n\n%s\n\nhttps://ixpansion-live.vercel.app/loud-silence" % (m["mood"], m["entropy"], m["score"][:120])
+        elif args and args[0] == "totem":
+            t = ls.silence_totem()
+            return "🗿 Silence Totem\n\n%s\nmaterial: %s | shape: %s\nmeaning: %s" % (t["name"], t["material"], t["shape"], t["meaning"])
+        else:
+            b = ls.proclaim()
+            return "📢 Loud Silence\n\n\"%s\"\ntone: %s | volume: %.2f\n\nhttps://ixpansion-live.vercel.app/loud-silence" % (
+                b["message"], b["tone"], b["volume"])
+    except Exception as e:
+        return "📢 " + str(e)
 
 def get_bot_info() -> dict:
     return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio","/weave","/organismradio","/forgebridge","/pulse","/temporal_field","/entropy_detector","/plant_seeds"]}
