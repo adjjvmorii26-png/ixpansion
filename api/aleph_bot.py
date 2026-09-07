@@ -196,13 +196,7 @@ def _process_command(command: str, args: list, user: str) -> str:
         except Exception as e:
             return f"⚖ {str(e)}"
     elif command == "/prophecy":
-        import sys; sys.path.insert(0, os.path.dirname(__file__))
-        try:
-            from wave_prophecy import handler
-            r = handler({"path": "/next"}).get("reading", {})
-            return f"🜁 Prophecy — Wave {r.get('wave', '?')}:\n{r.get('prophecy', '?')}\nomen: {r.get('omen', '?')} · confidence {round((r.get('confidence') or 0) * 100)}%\nseal {r.get('seal', '?')}"
-        except Exception as e:
-            return f"🜁 Prophecy: {str(e)}"
+        return _cmd_prophecy(args, user)
     elif command == "/gallery":
         import sys; sys.path.insert(0, os.path.dirname(__file__))
         try:
@@ -1396,6 +1390,31 @@ def _cmd_memory(args, user):
         return "🗄 Chronicle Oracle: %s\n%s" % (q, json.dumps(a, indent=0)[:300])
     except Exception as e:
         return "🗄 " + str(e)
+
+def _cmd_prophecy(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api.error_prophecy import handler as ep
+        action = args[0] if args else "prophesy"
+        if action == "weather":
+            r = ep({"action": "weather"})
+            return "🌤 Error Weather Forecast\n\n%s %s\n%s\nAccuracy: %.1f%%\nPending: %d\n\n%s\n\nhttps://ixpansion-live.vercel.app/error-prophecy" % (
+                r.get("glyphs",""), r.get("weather",""), r.get("description",""),
+                r.get("accuracy",0)*100, r.get("pending",0), r.get("forecast",""))
+        if action == "poem":
+            r = ep({"action": "poem"})
+            return "📜 Prophecy Poem\n%s\n\nhttps://ixpansion-live.vercel.app/error-prophecy" % r.get("poem","")
+        if action == "fulfilled":
+            r = ep({"action": "fulfilled"})
+            lines = ["  %s: %s" % (f.get("prophetic_error","?"), f.get("poem","")) for f in r.get("fulfilled",[])]
+            return "✅ Fulfilled Prophecies (%d)\n%s" % (r.get("total",0), "\n".join(lines) or "  (none yet)")
+        r = ep({})
+        p = r.get("prophecy", {})
+        w = r.get("weather", {})
+        return "🔮 The Error Prophecy\n\n%s\n\n%s %s\nAccuracy: %.1f%%\n\nhttps://ixpansion-live.vercel.app/error-prophecy" % (
+            p.get("prose",""), w.get("glyphs",""), w.get("weather",""), w.get("accuracy",0)*100)
+    except Exception as e:
+        return "🔮 Error Prophecy: %s" % e
 
 def _cmd_lexicon(args, user):
     import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))

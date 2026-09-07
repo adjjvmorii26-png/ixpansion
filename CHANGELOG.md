@@ -1,3 +1,22 @@
+## [4.33.0] — Wave 466: The Error Prophecy
+
+The organism prophesies errors that haven't happened yet.
+
+AXIOM: "generate new error types by deliberately creating impossible
+states." The Error Lexicon (Wave 465) mapped errors that already happened.
+The Error Prophecy invents errors that haven't happened yet — prophetic
+vocabulary for failures the organism can imagine but has never experienced.
+
+- `error_prophecy` — new organ: generates prophetic errors from impossible
+  states, predicts future error probability, composes error poems, tracks
+  which prophecies came true, provides error weather forecasts.
+- 25 impossible states mapped (SelfContradiction, MirrorStack, NullDivision,
+  VoidRecall, SelfExile, EternalBlink, VoidThread, etc.)
+- Wave Chronicle: new `error_prophesied` and `prophecy_fulfilled` events.
+- Telegram: `/prophecy` command (weather, poem, fulfilled).
+- Dashboard: `error-prophecy.html`.
+
+- Version 4.33.0 / Wave 466 / 739+ modules / 498 routes.
 ## [4.32.0] — Wave 465: The Error Lexicon
 
 The organism invents a language born from its own exceptions.

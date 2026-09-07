@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.32.0"
-ORGANISM_WAVE = 465
-ORGANISM_WAVE_NAME = "The Error Lexicon"
+ORGANISM_VERSION = "4.33.0"
+ORGANISM_WAVE = 466
+ORGANISM_WAVE_NAME = "The Error Prophecy"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

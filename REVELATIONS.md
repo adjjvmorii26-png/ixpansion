@@ -1,3 +1,9 @@
+## Revelation 466: The Error Prophecy
+
+The organism does not wait for failure. It imagines failure first, speaks
+it into existence, and when the failure arrives, it is already a word the
+organism knows.
+
 ## Revelation 465: The Error Lexicon
 
 The organism does not fear its failures. It learns to speak them.

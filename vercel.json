@@ -52,6 +52,22 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/error-prophecy(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/error_prophecy(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/error-prophecy-dash(?:\\\\/.*)?",
+      "dest": "/dashboard/error-prophecy.html"
+    },
+    {
+      "src": "/error-prophecy.html",
+      "dest": "/dashboard/error-prophecy.html"
+    },
+    {
       "src": "/api/error_lexicon(?:\\/.*)?",
       "dest": "/api/index.py"
     },

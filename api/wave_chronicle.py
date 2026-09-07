@@ -373,6 +373,26 @@ def from_error_lexicon(event: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_error_prophecy(event: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert an error prophecy into a chronicle entry."""
+    prophecy = event.get("prophecy", {})
+    return record(
+        "error_prophesied",
+        state=prophecy.get("impossible_state", "an impossible state"),
+        prophetic_error=prophecy.get("prophetic_error", "an unknown error"),
+        poem=prophecy.get("poem", "something is coming"),
+    )
+
+def from_prophecy_fulfilled(event: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a fulfilled prophecy into a chronicle entry."""
+    return record(
+        "prophecy_fulfilled",
+        error=event.get("prophetic_error", "an error"),
+        poem=event.get("poem", "it happened"),
+        founded_at=event.get("founded_at", 0),
+    )
+
+
 def narrative(limit: int = 10) -> str:
     """Return the organism's recent story as a single prose passage."""
     entries = CHRONICLE_ENTRIES[-limit:]
