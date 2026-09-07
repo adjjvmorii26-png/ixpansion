@@ -49,6 +49,7 @@ INTENT_PATTERNS: List[Tuple[str, str, dict]] = [
     (r"\b(weave.*dream|dream weaver|dream symbols|dream narrative|what did you dream|tell me a dream|a dream about|dreaming about)\b", "/api/dream_weaver", {}),
     (r"\b(dream archaeolog|dormant module|excavat|forgotten experiment|resurrect|dig up)\b", "/api/dream_archaeologist", {}),
     (r"\b(dream engine|dream cycle|dream proposal|what should we build|creative subconscious|archetype fusion|module proposal)\b", "/dream-engine", {}),
+    (r"\b(federat|federation|autonomous|self-rewrite|entropy stabiliz|repo sync|agent negotiat|dream forge)\b", "/federated-organism", {}),
     (r"\b(ancestor|lineage|genealogy|family tree|parent module|descendant|trace lineage)\b", "/api/ancestor_map", {}),
     (r"\b(nostalgia|milestone|tender|warm memory|emotional memory|backward glance)\b", "/api/nostalgia_engine", {}),
     (r"\b(forgotten language|old dialect|translate dialect|dialect census|communication history)\b", "/api/forgotten_language", {}),

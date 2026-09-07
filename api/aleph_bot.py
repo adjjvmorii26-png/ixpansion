@@ -693,11 +693,52 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_consciousness(args, user)
     elif command in ("/dream", "/dream-engine"):
         return _cmd_dream_engine(args, user)
+    elif command in ("/federation", "/federated"):
+        return _cmd_federation(args, user)
     elif command == "/topology":
         return _cmd_topology(args, user)
     elif command == "/depth":
         return _cmd_depth(args, user)
     return f"Unknown command: {command}\nTry /help for available commands."
+
+def _cmd_federation(args, user):
+    """Handle /federation command."""
+    from api.federated_organism import federation_overview, dream_forge, repo_sync, agent_negotiation, self_rewrite, entropy_stabilize
+    if args and args[0] == "forge":
+        count = int(args[1]) if len(args) > 1 else 3
+        r = dream_forge(min(count, 10))
+        lines = [f"🔨 Dream Forge — {r['forged']} of {r['proposals']} proposals forged"]
+        for p in r.get("forged_list", []):
+            lines.append(f"  ✦ {p['name']} ({p['pattern']}) — score {p['score']:.3f} by {p['decided_by']}")
+        return "\n".join(lines)
+    elif args and args[0] == "sync":
+        r = repo_sync()
+        return f"🔄 Repo Sync — {r['sync_proposals']} sync proposals across {r['repos_scanned']} repos"
+    elif args and args[0] == "negotiate":
+        topic = args[1] if len(args) > 1 else "next_wave_direction"
+        r = agent_negotiation(topic)
+        w = r["winning_position"]
+        return (f"🤝 Negotiation: {r['topic']}\n"
+                f"Winner: {w['agent']} — {w['statement'][:100]}\n"
+                f"Consensus: {r['consensus_score']:.3f}")
+    elif args and args[0] == "rewrite":
+        r = self_rewrite()
+        return f"🔧 Self-Rewrite — {r['mutations_proposed']} mutations proposed"
+    elif args and args[0] == "entropy":
+        r = entropy_stabilize()
+        return f"⚖️ Entropy: {r['verdict']} — stability {r['state']['stability']:.3f}"
+    else:
+        o = federation_overview()
+        return (f"🏛 Phase 8: Federated Organism\n"
+                f"Wave {o['wave']} · v{o['version']}\n"
+                f"Council: {', '.join(o['council'].keys())}\n"
+                f"Entropy: {o['entropy']['stability']:.3f}\n"
+                f"\nCommands:\n"
+                f"  /federation forge [N] — dream forge\n"
+                f"  /federation sync — repo sync\n"
+                f"  /federation negotiate — council dialogue\n"
+                f"  /federation rewrite — self-rewrite\n"
+                f"  /federation entropy — entropy stabilize")
 
 def _cmd_dream_engine(args, user):
     """Handle /dream-engine command."""

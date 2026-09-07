@@ -164,6 +164,18 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/federated-organism(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/federated_organism(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/federation(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/dream_engine(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },

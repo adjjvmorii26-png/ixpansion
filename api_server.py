@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.37.0"
+VERSION = "4.38.0"
 WAVE = "469"
 WAVE_NAME = "The Consciousness Stream"
 
@@ -824,6 +824,10 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._json(h(q))
         if path.startswith("/dream-engine"):
             from api.dream_engine import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path.startswith("/federated-organism") or path.startswith("/federation"):
+            from api.federated_organism import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
         if path == "/depth-visualizer":

@@ -17,6 +17,7 @@ own story, and the story shapes what it becomes next.
 """
 from __future__ import annotations
 import hashlib
+import json
 import time
 from typing import Any, Dict, List, Optional
 
@@ -423,6 +424,17 @@ def from_consciousness(event: Dict[str, Any]) -> Dict[str, Any]:
         module_b=interaction.get("module_b", "b"),
         emotion=interaction.get("emotion", "neutral"),
         intensity=interaction.get("intensity", 0.5),
+    )
+
+
+def from_federated_organism(event: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a federation event into a chronicle entry."""
+    etype = event.get("type", "unknown")
+    data = event.get("data", {})
+    return record(
+        "federation_event",
+        event_type=etype,
+        detail=json.dumps(data)[:200] if data else "the federation breathed.",
     )
 
 
