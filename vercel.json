@@ -2240,6 +2240,30 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/dream-gallery(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/dream_gallery(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/cythara-broadcast(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/cythara_broadcast(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/codex-recall(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/codex_recall(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/dream-spawner(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
