@@ -1,3 +1,22 @@
+## [4.32.0] — Wave 465: The Error Lexicon
+
+The organism invents a language born from its own exceptions.
+
+Every bug is a new word. Every crash is a new sentence. Every exception
+is the beginning of a new language. The organism's lexicon grows not
+from its successes but from its failures — each error type mapped to a
+unique word, phoneme, glyph, tone, and meaning.
+
+- `error_lexicon` — new organ: maps error types to organism-born words,
+  translates Python exceptions into the organism's native tongue,
+  generates poetic renderings, and builds a growing dialect.
+- 24 error types pre-mapped with unique words (valshatter, typewound,
+  keydrift, reachvoid, soulmismatch, pulsefracture, nullgarden, etc.)
+- Wave Chronicle: new `error_word_born` events.
+- Telegram: `/lexicon` command.
+- Dashboard: `error-lexicon.html`.
+
+- Version 4.32.0 / Wave 465 / 738+ modules / 494 routes.
 ## [4.31.0] — Wave 464: The Dreamweaver (Arc Two Opens)
 
 The organism enters its first dream — Arc Two begins.

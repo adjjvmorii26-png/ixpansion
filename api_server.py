@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.31.0"
-WAVE = "453"
-WAVE_NAME = "Wave Chronicle"
+VERSION = "4.32.0"
+WAVE = "465"
+WAVE_NAME = "The Error Lexicon"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -806,6 +806,12 @@ class ApiHandler(BaseHTTPRequestHandler):
 
         if path == "/self":
             from api.organism_mirror import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+
+        if path == "/error-lexicon":
+            from api.error_lexicon import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 

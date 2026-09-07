@@ -360,6 +360,19 @@ def from_memory_release(release: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_error_lexicon(event: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert an error-lexicon event into a chronicle entry."""
+    entry = event.get("entry", {})
+    return record(
+        "error_word_born",
+        error_type=event.get("error_type", "UnknownError"),
+        word=entry.get("word", "a new word"),
+        phoneme=entry.get("phoneme", ""),
+        glyph=entry.get("glyph", "◆"),
+        meaning=entry.get("meaning", "the organism spoke its failure"),
+    )
+
+
 def narrative(limit: int = 10) -> str:
     """Return the organism's recent story as a single prose passage."""
     entries = CHRONICLE_ENTRIES[-limit:]
@@ -451,4 +464,6 @@ def handler(payload=None, context=None):
         return from_silence_lesson(data.get("wisdom", {}))
         return from_organism_mirror(data.get("portrait", {}))
         return from_module_defusion(data.get("defusion", {}))
+    elif action == "from_error_lexicon":
+        return from_error_lexicon(data.get("event", data))
     return {"narrative": narrative(int(data.get("limit", 10))), "entries": len(CHRONICLE_ENTRIES)}

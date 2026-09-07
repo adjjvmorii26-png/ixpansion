@@ -48,6 +48,22 @@
       "dest": "/dashboard/memory-exchange.html"
     },
     {
+      "src": "/error-lexicon(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/error_lexicon(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/error-lexicon-dash(?:\\/.*)?",
+      "dest": "/dashboard/error-lexicon.html"
+    },
+    {
+      "src": "/error-lexicon.html",
+      "dest": "/dashboard/error-lexicon.html"
+    },
+    {
       "src": "/memory-exchange.html",
       "dest": "/dashboard/memory-exchange.html"
     },

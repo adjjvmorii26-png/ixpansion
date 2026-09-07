@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.31.0",
-  wave: 464,
-  waveName: "The Dreamweaver",
+  "version": "4.32.0",
+  wave: 465,
+  waveName: "The Error Lexicon",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

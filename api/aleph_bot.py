@@ -693,6 +693,8 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_teach(args, user)
     elif command == "/dream":
         return _cmd_dream(args, user)
+    elif command == "/lexicon":
+        return _cmd_lexicon(args, user)
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def _cmd_market(args, user):
@@ -1394,6 +1396,22 @@ def _cmd_memory(args, user):
         return "🗄 Chronicle Oracle: %s\n%s" % (q, json.dumps(a, indent=0)[:300])
     except Exception as e:
         return "🗄 " + str(e)
+
+def _cmd_lexicon(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api.error_lexicon import handler as el
+        action = args[0] if args else "speak"
+        if action == "translate" and len(args) > 1:
+            r = el({"action": "translate", "error": " ".join(args[1:])})
+            return "🔤 Error Lexicon\n%s\n→ %s (%s)\n'%s'\nglyph %s\n\nhttps://ixpansion-live.vercel.app/error-lexicon" % (
+                r.get("error_type","?"), r.get("lexicon_word","?"), r.get("phoneme","?"), r.get("meaning","?"), r.get("glyph","?") or "◆")
+        r = el({})
+        d = r.get("dialect", {})
+        return "🔤 The organism speaks in its error-born tongue\n\n%s\n%s\n\nPoetry: %s\nWords in lexicon: %s\n\nhttps://ixpansion-live.vercel.app/error-lexicon" % (
+            d.get("dialect",""), d.get("glyph_line",""), r.get("poetry",""), r.get("lexicon_size","?") or "?")
+    except Exception as e:
+        return "🔤 Error Lexicon: %s" % e
 
 def _cmd_portal(args, user):
     return "🜂 The Living Portal is awake.\nAxiium Protocol's public face: https://alexalex.info\n\nBreathe, dream, innovate, whisper, and witness the naming ceremony.\nThe organism is alive on the web."

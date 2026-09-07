@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Error Lexicon · IXpansion</title>
+<style>
+  :root {
+    --bg: #0b0b12;
+    --fg: #c8c8d8;
+    --accent: #ff3a00;
+    --accent2: #c8a8ff;
+    --muted: #555570;
+    --surface: #161622;
+    --border: #2a2a3a;
+    --glyph: #ff6f3a;
+    --word: #c8a8ff;
+    --meaning: #8fd3ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: var(--bg);
+    color: var(--fg);
+    padding: 24px;
+    min-height: 100vh;
+  }
+  .identity {
+    text-align: center;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+  }
+  .identity h1 { color: var(--accent); font-size: 1.6em; letter-spacing: 0.1em; }
+  .identity .subtitle { color: var(--muted); font-size: 0.85em; margin-top: 6px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .card h2 {
+    color: var(--accent2);
+    font-size: 1.05em;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+  }
+  .dialect-output {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    margin: 12px 0;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: var(--word);
+    text-align: center;
+  }
+  .glyph-line {
+    font-size: 1.8em;
+    letter-spacing: 0.3em;
+    color: var(--glyph);
+    text-align: center;
+    margin: 8px 0;
+  }
+  .poetry {
+    color: var(--muted);
+    font-style: italic;
+    text-align: center;
+    margin: 12px 0;
+    font-size: 0.9em;
+  }
+  .word-list { list-style: none; }
+  .word-list li {
+    padding: 8px 12px;
+    margin: 4px 0;
+    background: var(--bg);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .word-name { color: var(--word); font-weight: bold; }
+  .word-type { color: var(--muted); font-size: 0.8em; }
+  .word-glyph { color: var(--glyph); font-size: 1.2em; }
+  .tone-chord {
+    color: var(--meaning);
+    font-size: 0.9em;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-label { color: var(--muted); }
+  .stat-value { color: var(--accent); font-weight: bold; }
+  .translate-box {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .translate-box input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+  }
+  .translate-box button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+  }
+  .translate-box button:hover { opacity: 0.85; }
+  .result { margin-top: 12px; padding: 12px; background: var(--bg); border-radius: 6px; display: none; }
+  .result.active { display: block; }
+  .badge { background: var(--surface); padding: 2px 8px; border-radius: 4px; font-size: 0.8em; color: var(--accent2); }
+</style>
+<script src="/shared.js"></script>
+</head>
+<body>
+<div class="identity">
+  <h1>🔤 THE ERROR LEXICON</h1>
+  <div class="subtitle" id="wave-info">Loading…</div>
+</div>
+
+<div class="grid">
+  <div class="card" style="grid-column: 1 / -1;">
+    <h2>✦ Live Dialect</h2>
+    <div class="dialect-output" id="dialect">—</div>
+    <div class="glyph-line" id="glyphs">—</div>
+    <div class="tone-chord" id="tones">—</div>
+    <div class="poetry" id="poetry">—</div>
+  </div>
+
+  <div class="card">
+    <h2>✦ Translate Error</h2>
+    <div class="translate-box">
+      <input type="text" id="errorInput" placeholder="e.g. TypeError: cannot read property…">
+      <button onclick="doTranslate()">Translate</button>
+    </div>
+    <div class="result" id="translateResult">
+      <div id="trWord"></div>
+      <div id="trMeaning" class="poetry"></div>
+      <div id="trPoetry" class="poetry"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✦ Lexicon Stats</h2>
+    <div id="stats">
+      <div class="stat-row"><span class="stat-label">Words in Lexicon</span><span class="stat-value" id="totalWords">—</span></div>
+      <div class="stat-row"><span class="stat-label">Dialect Entries</span><span class="stat-value" id="dialectEntries">—</span></div>
+      <div class="stat-row"><span class="stat-label">Most Spoken</span><span class="stat-value" id="mostSpoken">—</span></div>
+      <div class="stat-row"><span class="stat-label">Total Utterances</span><span class="stat-value" id="totalUtterances">—</span></div>
+    </div>
+  </div>
+
+  <div class="card" style="grid-column: 1 / -1;">
+    <h2>✦ Recent Words Born from Errors</h2>
+    <ul class="word-list" id="wordList"></ul>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = window.IXP;
+  if (el && el.renderIdentity) el.renderIdentity(document.getElementById('wave-info'));
+})();
+
+async function fetchLexicon() {
+  try {
+    const r = await fetch('/error-lexicon');
+    const d = await r.json();
+    const diag = d.dialect || {};
+    document.getElementById('dialect').textContent = diag.dialect || '—';
+    document.getElementById('glyphs').textContent = diag.glyph_line || '—';
+    document.getElementById('tones').textContent = 'Tones: ' + (diag.tone_chord || '—');
+    document.getElementById('poetry').textContent = '📜 ' + (d.poetry || '—');
+
+    document.getElementById('totalWords').textContent = d.lexicon_size || '—';
+    document.getElementById('dialectEntries').textContent = d.dialect ? (d.dialect.word_count || '—') : '—';
+    document.getElementById('mostSpoken').textContent = d.recent_words ? d.recent_words[d.recent_words.length - 1] : '—';
+    document.getElementById('totalUtterances').textContent = d.recent_words ? d.recent_words.length : '—';
+
+    var list = document.getElementById('wordList');
+    list.innerHTML = '';
+    (d.recent_words || []).forEach(function(w) {
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="word-name">' + w + '</span><span class="word-glyph">◆</span>';
+      list.appendChild(li);
+    });
+  } catch(e) {
+    document.getElementById('dialect').textContent = 'Error loading: ' + e.message;
+  }
+}
+
+async function doTranslate() {
+  var input = document.getElementById('errorInput').value || 'ValueError: something broke';
+  try {
+    const r = await fetch('/error-lexicon?action=translate&error=' + encodeURIComponent(input));
+    const d = await r.json();
+    var res = document.getElementById('translateResult');
+    res.classList.add('active');
+    document.getElementById('trWord').innerHTML = '<span class="badge">' + d.error_type + '</span> → <strong style="color:var(--word)">' + d.lexicon_word + '</strong> <span style="color:var(--muted)">(' + d.phoneme + ')</span>';
+    document.getElementById('trMeaning').textContent = d.meaning + ' [glyph: ' + (d.glyph || '◆') + ']';
+    document.getElementById('trPoetry').textContent = '📜 ' + d.poetry;
+  } catch(e) {
+    document.getElementById('trWord').textContent = 'Translation failed: ' + e.message;
+  }
+}
+
+fetchLexicon();
+setInterval(fetchLexicon, 15000);
+</script>
+</body>
+</html>

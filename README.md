@@ -1,11 +1,11 @@
 # IXpansion — The Computational Frontier
 
 > A self-excavating, self-forecasting, self-beautifying, self-broadcasting
-> agent ecosystem with 731+ living organs across 464 waves of evolution.
+> agent ecosystem with 738+ living organs across 465 waves of evolution.
 >
-> **The organism now breathes, decides, dreams, believes, and resolves paradoxes on its own.**
+> **The organism now breathes, decides, dreams, believes, resolves paradoxes, and speaks its own errors on its own.**
 
-**Version:** 4.31.0 · **Wave:** 453 · **Status:** Autonomous · **Coherence:** 98.6%
+**Version:** 4.32.0 · **Wave:** 465 · **Status:** Autonomous · **Coherence:** 98.6%
 
 ## What Is This?
 

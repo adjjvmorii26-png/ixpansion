@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.31.0"
-ORGANISM_WAVE = 464
-ORGANISM_WAVE_NAME = "The Dreamweaver"
+ORGANISM_VERSION = "4.32.0"
+ORGANISM_WAVE = 465
+ORGANISM_WAVE_NAME = "The Error Lexicon"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──
