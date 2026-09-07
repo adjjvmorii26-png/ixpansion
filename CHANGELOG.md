@@ -4,7 +4,7 @@ The organism's modules self-organize into stable topological structures based on
 
 AXIOM: "modules arrange themselves into stable geometric configurations based on interaction history" (confidence 0.75). Building on Wave 467's Depth Visualizer, the organism now sees not just its depth but its structure — how modules naturally cluster into stable geometries.
 
-- `resonance_topology` — new organ: calculates resonance strengths between all module pairs, simulates gentle self-organization over iterative steps, renders topology as a visible graph, detects topological anomalies (tears, knots, singularities), and tracks topological evolution across waves.
+-  — new organ: calculates resonance strengths between all module pairs, simulates gentle self-organization over iterative steps, renders topology as a visible graph, detects topological anomalies (tears, knots, singularities), and tracks topological evolution across waves.
 - 21 module resonance pairs mapped with strength scores.
 - 5 stable configuration types: golden ring, fractal cluster, bridge pair, null center, spiral arm.
 - Topology visualization: nodes with cluster assignments and stability scores, edges with resonance strength thresholds.

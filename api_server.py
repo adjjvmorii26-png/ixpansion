@@ -814,7 +814,7 @@ class ApiHandler(BaseHTTPRequestHandler):
 
 
         if path == "/resonance-topology":
-            from api.resonance_topology import handler as h
+            
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
         if path == "/depth-visualizer":

@@ -1452,7 +1452,7 @@ def _cmd_depth(args, user):
 def _cmd_topology(args, user):
     import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
     try:
-        from api.resonance_topology import handler as rt
+        
         action = args[0] if args else "visualize"
         if action == "visualize":
             r = rt({"action": "visualize"})
