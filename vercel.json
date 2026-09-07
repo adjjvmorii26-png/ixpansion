@@ -80,6 +80,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/dream-engine(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/dream_engine(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/depth-visualizer(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },

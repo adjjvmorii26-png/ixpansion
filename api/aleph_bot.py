@@ -691,11 +691,42 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_lexicon(args, user)
     elif command == "/consciousness":
         return _cmd_consciousness(args, user)
+    elif command in ("/dream", "/dream-engine"):
+        return _cmd_dream_engine(args, user)
     elif command == "/topology":
         return _cmd_topology(args, user)
     elif command == "/depth":
         return _cmd_depth(args, user)
     return f"Unknown command: {command}\nTry /help for available commands."
+
+def _cmd_dream_engine(args, user):
+    """Handle /dream-engine command."""
+    from api.dream_engine import dream_cycle, generate_dream
+    if args and args[0] == "cycle":
+        count = int(args[1]) if len(args) > 1 else 3
+        result = dream_cycle(min(count, 10))
+        best = result.get("best_proposal")
+        lines = [f"🌙 Dream Cycle — {result['dreams_generated']} dreams generated"]
+        for d in result.get("dreams", []):
+            s = d["scores"]
+            lines.append(f"  ✦ {d['name']} ({d['pattern']}) — score {s['composite']:.3f}")
+        if best:
+            lines.append(f"\nBest proposal: {best['name']} — {best['description']}")
+        return "\n".join(lines)
+    elif args and args[0] == "single":
+        dream = generate_dream()
+        s = dream["scores"]
+        return (f"🌙 Dream: {dream['name']}\n"
+                f"Pattern: {dream['pattern']}\n"
+                f"Sources: {dream['source_modules'][0]} ↔ {dream['source_modules'][-1]}\n"
+                f"Score: {s['composite']:.3f} (novelty {s['novelty']:.2f}, coherence {s['coherence']:.2f})\n"
+                f"\n{dream['vision'][:200]}...")
+    else:
+        return ("🌙 Dream Engine — the organism's creative subconscious\n\n"
+                "Commands:\n"
+                "  /dream cycle [N] — run dream cycle (1-10 dreams)\n"
+                "  /dream single — generate one dream\n\n"
+                "The best ideas come when you're not trying to have them.")
 
 def _cmd_market(args, user):
     import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))

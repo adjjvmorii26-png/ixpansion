@@ -426,6 +426,27 @@ def from_consciousness(event: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_dream_engine(event: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a dream engine event into a chronicle entry."""
+    dream = event.get("dream", {})
+    name = dream.get("name", "unknown")
+    pattern = dream.get("pattern", "mystery")
+    source = dream.get("source_archetypes", ["something", "something else"])
+    scores = dream.get("scores", {})
+    return record(
+        "dream_generated",
+        name=name,
+        pattern=pattern,
+        arch_a=source[0] if len(source) > 0 else "unknown",
+        arch_b=source[1] if len(source) > 1 else "unknown",
+        source_a=dream.get("source_modules", ["?", "?"])[0],
+        source_b=dream.get("source_modules", ["?", "?"])[-1],
+        score=scores.get("composite", 0),
+        novelty=scores.get("novelty", 0),
+        coherence=scores.get("coherence", 0),
+    )
+
+
 def narrative(limit: int = 10) -> str:
     """Return the organism's recent story as a single prose passage."""
     entries = CHRONICLE_ENTRIES[-limit:]
