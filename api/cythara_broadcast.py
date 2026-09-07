@@ -34,6 +34,50 @@ def _hash(*parts):
     return hashlib.sha256("|".join(str(p) for p in parts).encode()).hexdigest()[:12]
 
 
+
+
+def _discover_chat_ids() -> List[int]:
+    """Auto-discover real chat IDs from the bot's message log."""
+    ids = set()
+    log_paths = [
+        os.path.join(os.path.dirname(__file__), "..", "data", "aleph_bot.json"),
+    ]
+    for path in log_paths:
+        try:
+            if os.path.exists(path):
+                with open(path) as f:
+                    log = json.load(f)
+                for msg in log.get("messages", []):
+                    cid = msg.get("chat_id", 0)
+                    if cid and cid > 10000:  # real Telegram chat IDs are large
+                        ids.add(cid)
+        except Exception:
+            continue
+    return sorted(ids)
+
+
+def ensure_chat_ids() -> Dict[str, Any]:
+    """Register discovered chat IDs into the bridge config."""
+    discovered = _discover_chat_ids()
+    try:
+        bridge = _load_bridge()
+        existing = set(bridge.get("chatIds") or [])
+        new_ids = [c for c in discovered if c not in existing]
+        if new_ids:
+            bridge["chatIds"] = sorted(existing | set(new_ids))
+            # Also ensure token in bridge matches env
+            if not bridge.get("botToken"):
+                bridge["botToken"] = os.environ.get("TELEGRAM_BOT_TOKEN")
+            os.makedirs(os.path.dirname(BRIDGE_PATH), exist_ok=True)
+            with open(BRIDGE_PATH, "w") as f:
+                json.dump(bridge, f, indent=2)
+            return {"action": "ensure", "registered": new_ids,
+                    "total_chat_ids": len(bridge["chatIds"])}
+        return {"action": "ensure", "registered": [],
+                "total_chat_ids": len(existing), "note": "No new chat IDs found in bot log."}
+    except Exception as e:
+        return {"action": "ensure", "error": str(e)}
+
 def _load_bridge() -> Dict[str, Any]:
     """Load telegram bridge config."""
     try:
@@ -62,7 +106,7 @@ def send_telegram(message: str) -> Dict[str, Any]:
     """Send a message via telegram-bridge-send integration."""
     bridge = _load_bridge()
     token = bridge.get("botToken") or os.environ.get("TELEGRAM_BOT_TOKEN")
-    chat_ids = bridge.get("chatIds") or []
+    chat_ids = bridge.get("chatIds") or _discover_chat_ids()
 
     BROADCAST_STATE["chat_ids_configured"] = len(chat_ids)
 
@@ -174,7 +218,20 @@ def resonates_with() -> List[str]:
 def handler(payload: Dict[str, Any] = None, context: Any = None) -> Dict[str, Any]:
     data = payload or {}
     action = data.get("action", "overview")
-    if action == "broadcast":
+    if action == "register":
+        cid = data.get("chat_id")
+        if cid:
+            bridge = _load_bridge()
+            ids = sorted(set((bridge.get("chatIds") or []) + [cid]))
+            bridge["chatIds"] = ids
+            os.makedirs(os.path.dirname(BRIDGE_PATH), exist_ok=True)
+            with open(BRIDGE_PATH, "w") as f:
+                json.dump(bridge, f, indent=2)
+            return {"action": "register", "chat_id": cid, "total": len(ids), "ok": True}
+        return {"action": "register", "error": "No chat_id provided"}
+    elif action == "ensure":
+        return ensure_chat_ids()
+    elif action == "broadcast":
         return broadcast(data.get("kind", "auto"))
     elif action == "send":
         msg = data.get("message", compose_update())
