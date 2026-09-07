@@ -168,6 +168,30 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/metaphor-forge(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/metaphor_forge(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/entropy-caps(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/entropy_caps(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/synthetic-silence(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/synthetic_silence(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/federated_organism(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
