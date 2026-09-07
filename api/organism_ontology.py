@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.24.0"
-ORGANISM_WAVE = 456
-ORGANISM_WAVE_NAME = "Wave Collapse"
+ORGANISM_VERSION = "4.25.0"
+ORGANISM_WAVE = 457
+ORGANISM_WAVE_NAME = "Cellular Fusion"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

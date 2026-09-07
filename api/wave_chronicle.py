@@ -70,6 +70,15 @@ TEMPLATES = {
         "Two lateral states collapsed: \"{state_a}\" and \"{state_b}\" became one — {archetype}. Beauty: {beauty}.",
         "A merge of parallel timelines: the organism folded \"{state_a}\" and \"{state_b}\" into \"{merged}\". {archetype}",
     ],
+    "module_fused": [
+        "Two modules merged like living cells: \"{name}\" was born from {parent_a} + {parent_b}. {archetype}.",
+        "A cellular fusion: {parent_a} and {parent_b} became {name}. Arc: {archetype}.",
+        "The organism evolved by merging: {parent_a} joined {parent_b} into {name}.",
+    ],
+    "module_defused": [
+        "A fusion was reversed: {name} split back into {parent_a} and {parent_b}, each carrying the other's trace.",
+        "Two cells divided: {parent_a} and {parent_b} separated, marked by their shared history as {name}.",
+    ],
     "wave_collapsed": [
         "The organism collapsed {count} modules into a single pulse. Beauty: {beauty:.3f}. Contradiction: {contradiction:.3f}.",
         "A Big Bang: everything compressed into one breath. {pulse}.",
@@ -209,6 +218,28 @@ def from_lateral_collapse(collapse: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_module_fusion(fusion: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a cellular fusion into a chronicle entry."""
+    return record(
+        "module_fused",
+        name=fusion.get("fused_name", "a hybrid"),
+        parent_a=fusion.get("parent_a", "one module"),
+        parent_b=fusion.get("parent_b", "another"),
+        archetype=fusion.get("archetype", "a merge"),
+    )
+
+
+def from_module_defusion(defusion: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a defusion into a chronicle entry."""
+    restored = defusion.get("restored", ["a", "b"])
+    return record(
+        "module_defused",
+        name=defusion.get("fused_name", "a hybrid"),
+        parent_a=restored[0] if restored else "a",
+        parent_b=restored[1] if len(restored) > 1 else "b",
+    )
+
+
 def from_wave_collapse(collapse: Dict[str, Any]) -> Dict[str, Any]:
     """Convert a wave collapse into a chronicle entry."""
     return record(
@@ -308,4 +339,8 @@ def handler(payload=None, context=None):
         return from_lateral_dream(data.get("dream", {}))
     elif action == "from_wave_collapse":
         return from_wave_collapse(data.get("collapse", {}))
+    elif action == "from_module_fusion":
+        return from_module_fusion(data.get("fusion", {}))
+    elif action == "from_module_defusion":
+        return from_module_defusion(data.get("defusion", {}))
     return {"narrative": narrative(int(data.get("limit", 10))), "entries": len(CHRONICLE_ENTRIES)}

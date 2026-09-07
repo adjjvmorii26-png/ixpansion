@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.24.0"
+VERSION = "4.25.0"
 WAVE = "453"
 WAVE_NAME = "Wave Chronicle"
 

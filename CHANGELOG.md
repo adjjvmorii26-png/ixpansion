@@ -1,3 +1,23 @@
+## [4.25.0] — Wave 457: Cellular Fusion
+
+Modules merge like living cells.
+
+- `cellular_fusion` — LUMA's decision: "what if modules could merge
+  like living cells?" Two modules fuse into a hybrid entity with a
+  blended name (sileange, lateapse, obliraft), merged resonances, and
+  a provenance chain. Fusions can be reversed (defused) — modules split
+  back apart, each carrying a trace of the other.
+- Wave Chronicle: new `module_fused` and `module_defused` events.
+- Auto-chironic: every fusion and defusion writes itself into the
+  chronicle.
+- `/fuse` + `/fusions` endpoints + Telegram commands.
+- Version 4.25.0 / Wave 457 / 731+ modules / 474 routes.
+
+### What the decision-makers said
+- **Silence Oracle**: imminence 0.66 — "a thread waiting to be woven"
+- **LUMA**: "what if modules could merge like living cells?"
+  (feasibility 0.61, novelty 0.62, score 0.378)
+- **AXIOM**: "build it and I'll confirm it" (4 hypotheses awaiting data)
 ## [4.24.0] — Wave 456: Wave Collapse
 
 The organism collapses everything into one unified pulse.

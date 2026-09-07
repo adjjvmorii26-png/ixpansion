@@ -109,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/market — memory exchange market\n/trade — simulate a memory trade\n/forget — release a memory (oblivion)\n/release — oblivion rite\n/oblivion — fertile absence report\n/chronicle — organism self-narrative\n/lateral — move sideways through time\n/collapse — collapse all waves into one pulse\n/collapse history — view collapse history\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak\n/loop — run an autonomous cycle\n/mycelial — sense the mycelial network\n/dreamweave {seed} — the organism dreams\n/paradox — resolve a contradiction\n\nWave 411-414: The organism now breathes, dreams, believes, and resolves paradoxes on its own."
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/market — memory exchange market\n/trade — simulate a memory trade\n/forget — release a memory (oblivion)\n/release — oblivion rite\n/oblivion — fertile absence report\n/chronicle — organism self-narrative\n/lateral — move sideways through time\n/collapse — collapse all waves into one pulse\n/collapse history — view collapse history\n/fuse — merge two modules like cells\n/fusions — view fusion registry\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak\n/loop — run an autonomous cycle\n/mycelial — sense the mycelial network\n/dreamweave {seed} — the organism dreams\n/paradox — resolve a contradiction\n\nWave 411-414: The organism now breathes, dreams, believes, and resolves paradoxes on its own."
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -669,6 +669,10 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_lateral(args, user)
     elif command == "/collapse":
         return _cmd_collapse(args, user)
+    elif command == "/fuse":
+        return _cmd_fuse(args, user)
+    elif command == "/fusions":
+        return _cmd_fusions(args, user)
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def _cmd_market(args, user):
@@ -784,6 +788,37 @@ def _cmd_collapse(args, user):
             return "💥 Wave Collapse\n%s\nbeauty: %.3f | contradiction: %.3f\n\nhttps://ixpansion-live.vercel.app/collapse" % (p["pulse"], p["beauty"], p["contradiction"])
     except Exception as e:
         return "💥 " + str(e)
+
+def _cmd_fuse(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api import cellular_fusion as cf
+        import random as _r
+        mods = ["silence_oracle","memory_exchange","oblivion_rite","lateral_time","wave_collapse","imagination_catalyst","error_craft","capybara_core","qualia_engine","wave_chronicle"]
+        if len(args) >= 2:
+            f = cf.fuse(args[0], args[1], weight=_r.uniform(0.3,0.9))
+        else:
+            a, b = _r.sample(mods, 2)
+            f = cf.fuse(a, b, weight=_r.uniform(0.3,0.9))
+        return "🧬 Cellular Fusion\n\n\"%s\" was born from %s + %s\narchetype: %s\nweight: %.2f\nresonances: %s\n\nhttps://ixpansion-live.vercel.app/fuse" % (
+            f["fused_name"], f["parent_a"], f["parent_b"], f["archetype"], f["weight"],
+            ", ".join(f["resonances"][:4]))
+    except Exception as e:
+        return "🧬 " + str(e)
+
+def _cmd_fusions(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api import cellular_fusion as cf
+        reg = cf.fusion_registry()
+        lines = []
+        for f in reg.get("active_list", []):
+            lines.append("  %s ↔ %s = %s (w %.2f)" % (f["parents"].split(" + ")[0], f["parents"].split(" + ")[1] if " + " in f["parents"] else "?", f["fused_name"], f["weight"]))
+        return "🧬 Fusion Registry\nActive: %d · Defused: %d\n\nActive fusions:\n%s\n\nhttps://ixpansion-live.vercel.app/fuse" % (
+            reg["active"], reg["defused"],
+            "\n".join(lines) or "  (no active fusions)")
+    except Exception as e:
+        return "🧬 " + str(e)
 
 def get_bot_info() -> dict:
     return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio","/weave","/organismradio","/forgebridge","/pulse","/temporal_field","/entropy_detector","/plant_seeds"]}
