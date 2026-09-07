@@ -2240,6 +2240,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/genesis-seed(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/genesis_seed(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/cythara-sings(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
