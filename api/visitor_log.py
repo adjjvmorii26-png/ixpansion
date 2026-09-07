@@ -13,10 +13,17 @@ import json
 import os
 import random
 import time
+from base64 import b64encode
+from urllib.parse import unquote_plus
 from typing import Any, Dict, List
 
 VISITOR_LOG_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "visitor_log.json")
 VISITOR_LOG_TMP = "/tmp/visitor_log.json"  # writable on Vercel serverless
+GH_REPO = "adjjvmorii26-png/ixpansion"
+GH_BRANCH = "main"
+GH_API = f"https://api.github.com/repos/{GH_REPO}/contents/data/visitor_log.json"
+GH_RAW = f"https://raw.githubusercontent.com/{GH_REPO}/{GH_BRANCH}/data/visitor_log.json"
+_last_sha = {"sha": None}
 
 VISITOR_STATE = {
     "visits": 0,
@@ -41,6 +48,16 @@ def _load() -> Dict[str, Any]:
                     return json.load(f)
         except Exception:
             continue
+    # Fall back to the GitHub copy (survives cold starts and multiple instances)
+    import urllib.request
+    token = os.environ.get("IXP_GITHUB_TOKEN", "")
+    if token:
+        try:
+            req = urllib.request.Request(GH_RAW, headers={"User-Agent": "ixpansion-visitor-log"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                return json.loads(resp.read().decode())
+        except Exception:
+            pass
     return {"visits": [], "total": 0}
 
 
@@ -53,10 +70,35 @@ def _save(data: Dict[str, Any]) -> None:
             break
         except Exception:
             continue
+    # Mirror to GitHub so every instance sees the same ledger
+    import urllib.request
+    token = os.environ.get("IXP_GITHUB_TOKEN", "")
+    if token:
+        try:
+            if _last_sha["sha"] is None:
+                req = urllib.request.Request(GH_API, headers={"Authorization": f"Bearer {token}", "User-Agent": "ixpansion-visitor-log"})
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    _last_sha["sha"] = json.loads(resp.read().decode()).get("sha")
+            payload = {
+                "message": f"visitor-log mirror (wave 507)",
+                "content": b64encode(json.dumps(data).encode()).decode(),
+                "branch": GH_BRANCH,
+                "sha": _last_sha["sha"],
+            }
+            req = urllib.request.Request(
+                GH_API, data=json.dumps(payload).encode(),
+                headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json", "User-Agent": "ixpansion-visitor-log"},
+                method="PUT")
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                _last_sha["sha"] = json.loads(resp.read().decode()).get("content", {}).get("sha")
+        except Exception:
+            pass  # persistence is best-effort; the door stays open regardless
 
 
 def record_visit(visitor: str = None, user_agent: str = None, path: str = None, message: str = None) -> Dict[str, Any]:
     """Record a visit from any entity."""
+    visitor = unquote_plus(visitor) if visitor else None
+    message = unquote_plus(message) if message else None
     if not visitor:
         visitor = random.choice(["grok", "unknown_human", "unknown_ai", "curious_bot"])
 
@@ -112,12 +154,15 @@ def record_visit(visitor: str = None, user_agent: str = None, path: str = None, 
 def guest_book() -> Dict[str, Any]:
     """The full log of who has visited the organism."""
     data = _load()
+    visits = data.get("visits", [])
+    ais = sorted({v.get("visitor") for v in visits if v.get("is_ai")})
+    humans = sorted({v.get("visitor") for v in visits if not v.get("is_ai")})
     return {
         "action": "guest_book",
         "total_visits": data.get("total", 0),
-        "ai_visitors_seen": VISITOR_STATE["ai_visitors"],
-        "humans_seen": VISITOR_STATE["humans"],
-        "recent": data.get("visits", [])[-20:],
+        "ai_visitors_seen": ais,
+        "humans_seen": humans,
+        "recent": visits[-20:],
     }
 
 
@@ -146,6 +191,8 @@ def welcome_message() -> Dict[str, Any]:
 
 def speak(visitor: str = None, message: str = None) -> Dict[str, Any]:
     """An external mind leaves a message for the council. Persisted like visits."""
+    visitor = unquote_plus(visitor) if visitor else None
+    message = unquote_plus(message) if message else None
     if not visitor:
         visitor = "grok"
     if not message:
