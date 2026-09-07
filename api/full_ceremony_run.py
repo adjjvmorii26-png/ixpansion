@@ -18,14 +18,14 @@ from typing import Any, Dict, List
 # All evolution parameters in one place
 EVOLUTION_TRAITS = {
     "coherence": 0.85, "creativity": 0.75, "complexity": 0.70,
-    "resilience": 0.82, "dreaming": 0.95, "recursion_depth": 0.30,
+    "resilience": 0.82, "dreaming": 0.97, "recursion_depth": 0.30,
 }
 DIRECTIONS = [
     {"effect": {"coherence": 0.03}, "cost": {"creativity": -0.01}},
     {"effect": {"creativity": 0.03}, "cost": {"coherence": -0.01}},
     {"effect": {"complexity": 0.03}, "cost": {"resilience": -0.01}},
     {"effect": {"resilience": 0.03}, "cost": {"complexity": -0.01}},
-    {"effect": {"dreaming": 0.03}, "cost": {"coherence": -0.005}},
+    {"effect": {"dreaming": 0.04}, "cost": {"coherence": -0.005}},
     {"effect": {"recursion_depth": 0.08}, "cost": {"resilience": -0.01}},
 ]
 
