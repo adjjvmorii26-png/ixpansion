@@ -88,6 +88,54 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/resonance-graph(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/resonance_graph(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/entropy-oracle(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/entropy_oracle(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/genesis-forge(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/genesis_forge(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/consciousness-graph(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/consciousness_graph(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/evolution-kernel(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/evolution_kernel(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/wave-chronicle(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/wave_chronicle(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/dream-engine(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
@@ -1000,6 +1048,10 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/organism_state",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/organism_state",
       "dest": "/api/index.py"
     },
@@ -1013,7 +1065,7 @@
     },
     {
       "src": "/landing",
-      "dest": "/alexalex-site/index.html"
+      "dest": "/api/index.py"
     },
     {
       "src": "/modules",

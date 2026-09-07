@@ -30,6 +30,9 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
     raw_path = (request_path or "/")
     path = raw_path.split("?")[0].rstrip("/") or "/"
 
+    if path == "/landing" or path == "/" :
+        from api.landing_page import handler as h
+        return h()
     if path == "/telegram-webhook":
         from api.telegram_webhook import handler as h
         import json as _json
@@ -868,6 +871,30 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return h(q)
     if path.startswith("/dream-engine"):
         from api.dream_engine import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/resonance-graph" or path == "/api/resonance_graph":
+        from api.resonance_graph import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/entropy-oracle" or path == "/api/entropy_oracle":
+        from api.entropy_oracle import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/genesis-forge" or path == "/api/genesis_forge":
+        from api.genesis_forge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/consciousness-graph" or path == "/api/consciousness_graph":
+        from api.consciousness_graph import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/evolution-kernel" or path == "/api/evolution_kernel":
+        from api.evolution_kernel import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/wave-chronicle" or path == "/api/wave_chronicle":
+        from api.wave_chronicle import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
     if path == "/depth-visualizer":
