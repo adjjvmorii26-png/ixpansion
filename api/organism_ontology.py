@@ -26,9 +26,9 @@ VERSION = "4.50.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.53.0"
-ORGANISM_WAVE = 495
-ORGANISM_WAVE_NAME = "Skill Integration: Gallery + Broadcast + Recall"
+ORGANISM_VERSION = "4.54.0"
+ORGANISM_WAVE = 499
+ORGANISM_WAVE_NAME = "Full Skill Stack: Composio + Social + Research + Travel"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

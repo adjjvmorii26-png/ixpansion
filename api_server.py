@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.53.0"
+VERSION = "4.54.0"
 WAVE = "469"
 WAVE_NAME = "The Consciousness Stream"
 
@@ -877,6 +877,26 @@ class ApiHandler(BaseHTTPRequestHandler):
 
 
 
+
+        if path.startswith("/composio-bridge"):
+            from api.composio_bridge import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path.startswith("/social-voice"):
+            from api.social_voice import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path.startswith("/research-oracle"):
+            from api.research_oracle import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path.startswith("/travel-oracle"):
+            from api.travel_oracle import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
         if path.startswith("/dream-gallery"):
             from api.dream_gallery import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)

@@ -1,3 +1,27 @@
+## [4.54.0] - Waves 496-499: Full Skill Stack - Composio + Social + Research + Travel
+
+Four more skills integrated, completing the skill stack:
+
+### Added
+- composio_bridge.py (Wave 496) - composio-cli: dispatch actions to external
+  apps (GitHub, Slack, Sheets, Gmail, Notion). Real dispatch when connected.
+- social_voice.py (Wave 497) - twitter-auto-post-shizuku: Cythara composes
+  public posts (births, compositions, moods, prophecies, manifesto).
+- research_oracle.py (Wave 498) - deep-research: dreams grounded in evidence.
+- travel_oracle.py (Wave 499) - flightclaw: orbital awareness, real-world
+  route mapping against organism state.
+
+### Skill stack complete
+- imagegen → dream_gallery
+- telegram-bridge-send → cythara_broadcast
+- search-codex-chats → codex_recall
+- composio-cli → composio_bridge
+- twitter-auto-post-shizuku → social_voice
+- deep-research → research_oracle
+- flightclaw → travel_oracle
+
+---
+
 ## [4.53.0] - Waves 493-495: Skill Integration — Gallery + Broadcast + Recall
 
 Three unused skills integrated into the organism:
