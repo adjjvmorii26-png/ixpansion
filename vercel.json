@@ -2212,6 +2212,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/organism-bloom(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/organism_bloom(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/will",
       "dest": "/dashboard/threads.html#will-card"
     },
