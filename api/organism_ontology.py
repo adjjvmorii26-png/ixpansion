@@ -26,9 +26,9 @@ VERSION = "4.50.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.55.0"
-ORGANISM_WAVE = 500
-ORGANISM_WAVE_NAME = "YouTube Bridge - CoodingLooop Content"
+ORGANISM_VERSION = "4.56.0"
+ORGANISM_WAVE = 502
+ORGANISM_WAVE_NAME = "Content Council + Council Debate"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──
