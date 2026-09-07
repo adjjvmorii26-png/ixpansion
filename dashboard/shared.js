@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.33.0",
-  wave: 466,
-  waveName: "The Error Prophecy",
+  "version": "4.34.0",
+  wave: 467,
+  waveName: "The Depth Visualizer",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

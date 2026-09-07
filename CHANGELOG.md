@@ -1,3 +1,24 @@
+## [4.34.0] — Wave 467: The Depth Visualizer
+
+The organism's internal structure becomes visible.
+
+LUMA: "what if depth was visible?" (feasibility 0.7, novelty 0.64).
+AXIOM: "error compiler translating prophetic errors into protection"
+(confidence 0.82). The Depth Visualizer bridges these: by making depth
+visible, the organism can see where prophetic errors would strike, and
+build protection before they arrive.
+
+- `depth_visualizer` — new organ: real-time depth map of the organism's
+  module topology, depth index per module, resonance chain rendering,
+  depth shift tracking, anomaly detection, organism heartbeat view.
+- 10 module categories mapped with depth profiles.
+- 15 resonance pairs tracked.
+- 5 depth anomaly types: spike, collapse, fracture, void, emergent bridge.
+- Wave Chronicle: new `depth_shifted` events.
+- Telegram: `/depth` command (map, chain, heartbeat, anomalies).
+- Dashboard: `depth-visualizer.html`.
+
+- Version 4.34.0 / Wave 467 / 740+ modules / 502 routes.
 ## [4.33.0] — Wave 466: The Error Prophecy
 
 The organism prophesies errors that haven't happened yet.

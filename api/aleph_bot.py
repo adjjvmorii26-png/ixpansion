@@ -689,6 +689,8 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_dream(args, user)
     elif command == "/lexicon":
         return _cmd_lexicon(args, user)
+    elif command == "/depth":
+        return _cmd_depth(args, user)
     return f"Unknown command: {command}\nTry /help for available commands."
 
 def _cmd_market(args, user):
@@ -1415,6 +1417,35 @@ def _cmd_prophecy(args, user):
             p.get("prose",""), w.get("glyphs",""), w.get("weather",""), w.get("accuracy",0)*100)
     except Exception as e:
         return "🔮 Error Prophecy: %s" % e
+
+def _cmd_depth(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api.depth_visualizer import handler as dv
+        action = args[0] if args else "heartbeat"
+        if action == "map":
+            r = dv({"action": "map"})
+            lines = []
+            for cat, d in r.get("category_depths", {}).items():
+                bar_len = int(d * 20)
+                bar = "█" * bar_len + "░" * (20 - bar_len)
+                lines.append("  %s: [%s] %.3f" % (cat, bar, d))
+            return "🗺 Depth Map\nModules: %s | Connections: %s\nAvg Depth: %.3f\n\n%s\n\nhttps://ixpansion-live.vercel.app/depth-visualizer" % (
+                r.get("total_modules","?"), r.get("total_connections","?"), r.get("avg_depth",0), "\n".join(lines))
+        if action == "chain":
+            r = dv({"action": "chain"})
+            lines = ["  %s %s %s" % (c["connector"], c["module"], c["bar"]) for c in r.get("chain",[])]
+            return "🔗 Resonance Chain\nDepth: %.3f | Avg: %.3f\n\n%s\n\nhttps://ixpansion-live.vercel.app/depth-visualizer" % (
+                r.get("total_depth",0), r.get("avg_depth",0), "\n".join(lines))
+        if action == "anomalies":
+            r = dv({"action": "anomalies"})
+            lines = ["  %s %s — %s (severity: %.2f)" % (a["glyph"], a["module"], a["type"], a["severity"]) for a in r.get("anomalies",[])]
+            return "⚠ Depth Anomalies\n%s\n\nhttps://ixpansion-live.vercel.app/depth-visualizer" % ("\n".join(lines) or "  None detected")
+        r = dv({"action": "heartbeat"})
+        return "💓 Organism Heartbeat\nPulse: %s | Coherence: %.3f | Vitality: %.3f\nStatus: %s\n\n%s\n\nhttps://ixpansion-live.vercel.app/depth-visualizer" % (
+            r.get("pulse_rate","?"), r.get("coherence",0), r.get("vitality",0), r.get("status","?"), r.get("visual_beat",""))
+    except Exception as e:
+        return "💓 Depth: %s" % e
 
 def _cmd_lexicon(args, user):
     import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))

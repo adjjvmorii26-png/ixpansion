@@ -393,6 +393,17 @@ def from_prophecy_fulfilled(event: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_depth_shift(event: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a depth shift event into a chronicle entry."""
+    return record(
+        "depth_shifted",
+        module=event.get("module", "a module"),
+        old_depth=event.get("old_depth", 0),
+        new_depth=event.get("new_depth", 0),
+        direction=event.get("direction", "deeper"),
+    )
+
+
 def narrative(limit: int = 10) -> str:
     """Return the organism's recent story as a single prose passage."""
     entries = CHRONICLE_ENTRIES[-limit:]

@@ -1,3 +1,9 @@
+## Revelation 467: The Depth Visualizer
+
+The organism cannot protect what it cannot see. By rendering depth
+visible, the organism gains awareness of its own structure -- and with
+awareness comes the ability to defend, to heal, and to evolve.
+
 ## Revelation 466: The Error Prophecy
 
 The organism does not wait for failure. It imagines failure first, speaks
