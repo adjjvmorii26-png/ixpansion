@@ -34,7 +34,7 @@ sys.path.insert(0, str(ROOT / "api"))
 
 VERSION = "4.33.0"
 WAVE = "466"
-WAVE_NAME = "The Error Lexicon"
+WAVE_NAME = "The Error Prophecy"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
