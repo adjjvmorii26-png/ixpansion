@@ -48,11 +48,19 @@
       "dest": "/dashboard/memory-exchange.html"
     },
     {
+      "src": "/memory-exchange.html",
+      "dest": "/dashboard/memory-exchange.html"
+    },
+    {
       "src": "/api/meaning_weaver(?:\\/.*)?",
       "dest": "/api/index.py"
     },
     {
       "src": "/spine",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/market(?:\\/.*)?",
       "dest": "/api/index.py"
     },
     {

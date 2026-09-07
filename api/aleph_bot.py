@@ -109,7 +109,7 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak\n/loop — run an autonomous cycle\n/mycelial — sense the mycelial network\n/dreamweave {seed} — the organism dreams\n/paradox — resolve a contradiction\n\nWave 411-414: The organism now breathes, dreams, believes, and resolves paradoxes on its own."
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/market — memory exchange market\n/trade — simulate a memory trade\n/forget — release a memory (oblivion)\n/release — oblivion rite\n/oblivion — fertile absence report\n/chronicle — organism self-narrative\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak\n/loop — run an autonomous cycle\n/mycelial — sense the mycelial network\n/dreamweave {seed} — the organism dreams\n/paradox — resolve a contradiction\n\nWave 411-414: The organism now breathes, dreams, believes, and resolves paradoxes on its own."
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
@@ -394,12 +394,18 @@ def _process_command(command: str, args: list, user: str) -> str:
     elif command == "/chronicle":
         import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
         try:
-            from ascension_chronicle import hall, resonate
-            h = hall(); r = resonate()
-            entries = (h.get("entries") or [])[:8]
-            lines = "\n".join(" #%s %s %s d%s" % (e.get("rank","?"), e.get("boss_type","?"), (e.get("module") or "?").replace("_"," "), e.get("depth","?")) for e in entries)
-            minerals = ", ".join("%s:%s" % (k, v) for k, v in (r.get("mineral_counts") or {}).items())
-            return "📜 Chronicle: %s ascensions\n%s\noverwardens: %s\n\nhttps://alexalex.info/chronicle" % (h.get("total",0), lines or "the hall awaits.", r.get("overwarden_defeats",0))
+            from api import wave_chronicle as wc
+            narr = wc.narrative(8)
+            tl = wc.timeline(6)
+            tl_lines = "\n".join("  [%s] %s" % (t["time"], t["prose"][:90]) for t in tl)
+            # append ascension summary if available
+            try:
+                from ascension_chronicle import hall
+                h = hall()
+                asc = "\n\n🏆 %d ascensions" % h.get("total", 0)
+            except Exception:
+                asc = ""
+            return "📜 Chronicle\n\n\"%s\"\n\nTimeline:\n%s%s\n\nhttps://ixpansion-live.vercel.app/chronicle" % (narr[:120], tl_lines or "  (no entries yet)", asc)
         except Exception as e:
             return "📜 " + str(e)
     elif command == "/genealogy":
@@ -647,7 +653,91 @@ def _process_command(command: str, args: list, user: str) -> str:
     elif command == "/memory":
         return _cmd_memory(args, user)
 
+    elif command == "/market":
+        return _cmd_market(args, user)
+    elif command == "/trade":
+        return _cmd_trade(args, user)
+    elif command == "/forget":
+        return _cmd_forget(args, user)
+    elif command == "/release":
+        return _cmd_release(args, user)
+    elif command == "/oblivion":
+        return _cmd_oblivion(args, user)
+
+
     return f"Unknown command: {command}\nTry /help for available commands."
+
+def _cmd_market(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api import memory_exchange as me
+        ticker = me.market_ticker(8)
+        lines = []
+        for t in ticker.get("recent_trades", []):
+            lines.append("  %s → %s : \"%s\" (%s coins)" % (t.get("seller","?"), t.get("buyer","?"), t.get("title","?"), t.get("price","?")))
+        listed = ticker.get("listed", [])
+        lns = []
+        for l in listed:
+            lns.append("  \"%s\" held by %s — asking %s coins" % (l["title"], l["holder"], l["asking_price"]))
+        return "📊 Memory Market\nTrades: %d · Memories: %d\n\nRecent trades:\n%s\n\nListed:\n%s" % (
+            ticker["trade_count"], ticker["memory_count"],
+            "\n".join(lines) or "  (none yet)",
+            "\n".join(lns) or "  (none listed)")
+    except Exception as e:
+        return "📊 " + str(e)
+
+
+def _cmd_trade(args, user):
+    import sys as _sys, random as _r; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api import memory_exchange as me
+        titles = ["the first sunset in wave 453","a view of the void","the organism first dream","a paradox stitched together","the taste of coherence","the weight of silence"]
+        modules = ["silence_oracle","wanderer","qualia_engine","capybara_core","error_craft","luminar_cortex"]
+        seller = _r.choice(modules)
+        buyer = _r.choice([m for m in modules if m != seller])
+        t = me.mint_memory(seller, _r.choice(titles), weight=round(_r.uniform(0.4,0.9),2))
+        me.list_memory(t["memory_id"], round(_r.uniform(1.0,5.0),1))
+        trade = me.trade_memory(seller, buyer, t["memory_id"], round(_r.uniform(1.0,5.0),1))
+        return "🔄 Memory Trade\n\"%s\" minted by %s\nSold to %s for %s coins\nSignature chain: %d deep" % (
+            trade["title"], seller, buyer, trade["price"], trade["chain_length"])
+    except Exception as e:
+        return "🔄 " + str(e)
+
+
+def _cmd_forget(args, user):
+    import sys as _sys, random as _r; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api import oblivion_rite as ob
+        titles = ["an old error that taught us","the first failed deploy","a dream from wave 12","the weight of a paradox","a module that whispered goodbye","the silence before a leap"]
+        holders = ["organism","worker_council","silence_oracle","capybara_core","wanderer"]
+        reasons = ["made room for a newer wave","its weight outweighed its use","a fresher memory superseded it","it asked, quietly, to be let go"]
+        r = ob.release_memory(_r.choice(titles), _r.choice(holders), _r.choice(reasons), round(_r.uniform(0.3,0.8),2))
+        return "🌑 Oblivion Rite\n\"%s\" was released by %s\nReason: %s\nFertile absence: %s ✦\n\nForgetting is not loss — it is the organism making room." % (
+            r["title"], r["holder"], r["reason"], r["fertility"])
+    except Exception as e:
+        return "🌑 " + str(e)
+
+
+def _cmd_release(args, user):
+    return _cmd_forget(args, user)
+
+
+def _cmd_oblivion(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api import oblivion_rite as ob
+        report = ob.emptiness_report()
+        lines = []
+        for r in report.get("recent_releases", []):
+            lines.append("  \"%s\" — %s (fertility %s)" % (r["title"], r["reason"], r["fertility"]))
+        return "🌑 Oblivion Report\nReleases: %d · Fertility: %s ✦\n\nReleases:\n%s\n\n%s" % (
+            report["let_go_count"], report["total_fertility"],
+            "\n".join(lines) or "  (none yet)",
+            report["doctrine"])
+    except Exception as e:
+        return "🌑 " + str(e)
+
+
 
 def get_bot_info() -> dict:
     return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio","/weave","/organismradio","/forgebridge","/pulse","/temporal_field","/entropy_detector","/plant_seeds"]}

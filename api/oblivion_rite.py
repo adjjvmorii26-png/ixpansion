@@ -53,6 +53,14 @@ def release_memory(title: str, holder: str = "organism",
     LET_GO_LEDGER.append(artifact)
     if len(LET_GO_LEDGER) > MAX_LEDGER:
         LET_GO_LEDGER.pop(0)
+
+    # auto-chronicle the release
+    try:
+        from api import wave_chronicle as _wc
+        _wc.from_memory_release(artifact)
+    except Exception:
+        pass
+
     return artifact
 
 

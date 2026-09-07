@@ -105,6 +105,14 @@ def trade_memory(seller: str, buyer: str, memory_id: str,
 
     # original stays with seller, status back to held
     mem["status"] = "held"
+
+    # auto-chronicle the trade
+    try:
+        from api import wave_chronicle as _wc
+        _wc.from_memory_trade(trade)
+    except Exception:
+        pass
+
     return trade
 
 

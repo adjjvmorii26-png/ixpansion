@@ -59,6 +59,14 @@ def listen(coherence: float = 0.5, noise_level: float = 0.5,
     SILENCE_READINGS.append(reading)
     if len(SILENCE_READINGS) > 200:
         SILENCE_READINGS.pop(0)
+
+    # auto-chronicle silence shifts
+    try:
+        from api import wave_chronicle as _wc
+        _wc.from_silence_reading(reading)
+    except Exception:
+        pass
+
     return reading
 
 

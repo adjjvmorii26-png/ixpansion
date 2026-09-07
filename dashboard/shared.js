@@ -6,8 +6,8 @@
  */
 window.IXP = {
   "version": "4.22.0",
-  wave: 453,
-  waveName: "Wave Chronicle",
+  wave: 454,
+  waveName: "Memory Exchange & Oblivion Rite",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",
