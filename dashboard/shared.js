@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.29.0",
-  wave: 461,
-  waveName: "Paradox Kintsugi",
+  "version": "4.30.0",
+  wave: 463,
+  waveName: "The Gratitude Altar",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

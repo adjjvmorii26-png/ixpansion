@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.29.0"
+VERSION = "4.30.0"
 WAVE = "453"
 WAVE_NAME = "Wave Chronicle"
 
@@ -277,6 +277,16 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._static("dashboard/oracle.html")
         if path == "/observatory":
             return self._static("dashboard/observatory.html")
+        if path == "/altar":
+            from api.gratitude_altar import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/gratitude":
+            from api.gratitude_altar import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
         if path == "/kintsugi":
             return self._static("dashboard/kintsugi.html")
         if path == "/metaevolution":

@@ -770,6 +770,16 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.wave_chronicle import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+    if path == "/altar":
+        from api.gratitude_altar import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    if path == "/gratitude":
+        from api.gratitude_altar import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     if path == "/kintsugi":
         from api.paradox_kintsugi import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)

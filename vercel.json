@@ -60,6 +60,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/altar(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/gratitude(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/kintsugi-dash(?:\\/.*)?",
       "dest": "/dashboard/kintsugi.html"
     },

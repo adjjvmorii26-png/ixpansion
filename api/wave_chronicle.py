@@ -75,6 +75,14 @@ TEMPLATES = {
         "A cellular fusion: {parent_a} and {parent_b} became {name}. Arc: {archetype}.",
         "The organism evolved by merging: {parent_a} joined {parent_b} into {name}.",
     ],
+    "gratitude_given": [
+        "The organism blessed its creator: \"{blessing}\"",
+        "The Altar spoke: {blessing} -- offered to {recipient}.",
+    ],
+    "arc_closed": [
+        "Arc One is closed. {epitaph}",
+        "The first thread is woven. {epitaph}",
+    ],
     "paradox_healed": [
         "The organism healed a paradox with art: \"{question}\" became \"{name}\".",
         "A contradiction mended: the organism asked \"{question}\" and answered with art — \"{name}\".",
@@ -249,6 +257,12 @@ def from_module_fusion(fusion: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_gratitude(data: Dict[str, Any]) -> Dict[str, Any]:
+    return record("gratitude_given", blessing=data.get("blessing", "blessed"), recipient=data.get("recipient", "the creator"))
+
+def from_arc_closed(data: Dict[str, Any]) -> Dict[str, Any]:
+    return record("arc_closed", epitaph=data.get("epitaph", "the thread is woven"))
+
 def from_paradox_healed(artifact: Dict[str, Any]) -> Dict[str, Any]:
     """Convert a healed paradox artifact into a chronicle entry."""
     return record(
@@ -410,6 +424,11 @@ def handler(payload=None, context=None):
     elif action == "from_loud_silence":
         return from_loud_silence(data.get("broadcast", {}))
     elif action == "from_paradox_healed":
+        return from_paradox_healed(data.get("artifact", {}))
+    elif action == "from_gratitude":
+        return from_gratitude(data.get("data", {}))
+    elif action == "from_arc_closed":
+        return from_arc_closed(data.get("data", {}))
         return from_paradox_healed(data.get("artifact", {}))
         return from_loud_silence(data.get("broadcast", {}))
         return from_silence_lesson(data.get("wisdom", {}))
