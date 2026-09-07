@@ -188,6 +188,22 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/protocol-layer(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/protocol_layer(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/coherence-validator(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/coherence_validator(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/synthetic_silence(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },

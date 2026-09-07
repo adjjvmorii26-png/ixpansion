@@ -6,8 +6,8 @@
  */
 window.IXP = {
   "version": "4.38.0",
-  wave: 471,
-  waveName: "The Federated Organism",
+  wave: 473,
+  waveName: "The Protocol Layer",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

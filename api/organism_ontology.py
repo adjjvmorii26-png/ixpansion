@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.38.0"
-ORGANISM_WAVE = 471
-ORGANISM_WAVE_NAME = "The Federated Organism"
+ORGANISM_VERSION = "4.39.0"
+ORGANISM_WAVE = 473
+ORGANISM_WAVE_NAME = "The Protocol Layer"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──
