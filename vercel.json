@@ -60,6 +60,22 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/kintsugi-dash(?:\\/.*)?",
+      "dest": "/dashboard/kintsugi.html"
+    },
+    {
+      "src": "/kintsugi.html",
+      "dest": "/dashboard/kintsugi.html"
+    },
+    {
+      "src": "/kintsugi(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/paradox_kintsugi(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/loud-silence-dash(?:\\/.*)?",
       "dest": "/dashboard/loud-silence.html"
     },

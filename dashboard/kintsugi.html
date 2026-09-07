@@ -1,107 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kintsugi Forge — The Repair Lineage</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paradox Kintsugi — IXpansion Wave 461</title>
+<script src="/shared.js"></script>
+<script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 <style>
-:root{--bg:#0a0708;--surface:#14101a;--border:#2a1f2e;--text:#eee2ea;--muted:#7a6a77;
---gold:#f2c14e;--gold2:#ffd97a;--rose:#e88bb4;--good:#8ef0c4}
+:root{--gold:#fff3a0;--ember:#ffcf66;--violet:#c8a8ff;--black:#0b0b0d;--obsidian:#16111f;--muted:#5f5f78;--kinship:#8fd3ff;--spring:#00e5a0;--pink:#ff5fa2}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--text);min-height:100vh}
-.header{padding:22px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.header h1{font-size:1.25rem;background:linear-gradient(135deg,var(--gold),var(--gold2));
--webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.badge{padding:3px 10px;border-radius:14px;font-size:.72rem;background:var(--surface);border:1px solid var(--border)}
-.badge.live{color:var(--good);border-color:var(--good)}
-.container{max-width:1000px;margin:0 auto;padding:24px}
-.hero{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:22px}
-.koan{color:var(--gold);font-style:italic;font-size:.9rem;line-height:1.6;text-align:center}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
-.stat .v{font-size:1.8rem;font-weight:800;color:var(--gold)}
-.stat .l{color:var(--muted);font-size:.72rem;margin-top:4px;text-transform:uppercase}
-.toolbar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
-button{padding:9px 16px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#210d00;font-weight:700;font-family:inherit;font-size:.8rem;cursor:pointer}
-button:hover{opacity:.9}
-button.quiet{background:var(--surface);color:var(--text);border:1px solid var(--border)}
-.section-title{font-size:.95rem;margin:20px 0 10px;color:var(--gold2)}
-.list{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;margin-bottom:16px}
-.item{padding:10px 16px;border-bottom:1px solid var(--border);font-size:.8rem;display:flex;justify-content:space-between;gap:10px}
-.item:last-child{border-bottom:none}
-.item .left{color:var(--text)}
-.item .right{color:var(--muted);font-size:.72rem;white-space:nowrap}
-.result{background:#08070c;border:1px solid var(--gold);border-radius:10px;padding:16px;margin-top:18px;font-size:.76rem;color:#e8dcf0;white-space:pre-wrap}
-.hint{color:var(--muted);font-size:.72rem;margin-top:14px}
+body{font-family:'SF Mono',Fira Code,monospace;background:var(--black);color:#fdfdfd;min-height:100vh;background-image:radial-gradient(ellipse at 20% 70%,#ff5fa20a,transparent 50%),radial-gradient(ellipse at 80% 30%,#fff3a006,transparent 50%)}
+.header{padding:26px 30px;border-bottom:1px solid #ffffff0a;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.header h1{font-size:1.5rem;letter-spacing:2px;background:linear-gradient(135deg,var(--gold),var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase;font-weight:800}
+.subtitle{color:var(--muted);font-size:.72rem;letter-spacing:4px;text-transform:uppercase}
+.badge{padding:3px 10px;border-radius:14px;font-size:.68rem;background:var(--obsidian);border:1px solid var(--violet);color:var(--violet)}
+.container{max-width:1000px;margin:0 auto;padding:28px 20px}
+.paradox{font-size:1.05rem;line-height:1.9;padding:28px;border:1px solid var(--pink)25;border-radius:14px;margin-bottom:24px;background:linear-gradient(135deg,var(--obsidian),#0a0a12)}
+.paradox .q{font-style:italic}
+.paradox .tension{display:inline-block;margin-top:12px;padding:4px 12px;border-radius:12px;background:var(--pink)18;color:var(--pink);font-size:.75rem}
+.healed{font-size:1rem;line-height:1.8;padding:28px;border:1px solid var(--gold)30;border-radius:14px;margin-bottom:24px;background:linear-gradient(135deg,#16111f,#241a10)}
+.healed .name{color:var(--gold);font-size:1.3rem;margin-bottom:10px}
+.healed .art{color:var(--spring);font-style:italic}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.card{padding:22px;border-radius:14px;background:var(--obsidian);border:1px solid #ffffff0a}
+.card h2{color:var(--violet);font-size:.9rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.item{font-size:.8rem;color:#bbb;line-height:1.7;border-bottom:1px solid #ffffff08;padding:8px 0}
+.item .gold{color:var(--gold)}
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{padding:9px 16px;border-radius:10px;background:var(--pink)14;border:1px solid var(--pink);color:var(--pink);font-size:.75rem;cursor:pointer;letter-spacing:1px}
+.btn.alt{border-color:var(--gold);color:var(--gold);background:var(--gold)10}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.2)}
+.endpoint{color:var(--kinship);font-size:.72rem;margin-top:16px;display:inline-block}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="header">
-  <span class="badge live">● live</span>
-  <h1>Kintsugi Forge — the Repair Lineage</h1>
-  <span id="identity-tag" style="color:var(--muted);font-size:.8rem"></span>
-  <button style="margin-left:auto;margin-bottom:0" onclick="perform()">⚒ Perform Ritual</button>
-
-<nav style="display:flex;gap:10px;font-size:.72rem;margin-left:auto;flex-wrap:wrap"><a href="/" style="color:var(--muted)">Home</a> <a href="/bloom" style="color:var(--muted)">Bloom</a> <a href="/coherence" style="color:var(--muted)">Coherence</a> <a href="/archaeology" style="color:var(--muted)">Archaeology</a> <a href="/symbiosis" style="color:var(--muted)">Symbiosis</a> <a href="/aesthetics" style="color:var(--muted)">Aesthetics</a></nav>
+  <h1>Paradox Kintsugi</h1>
+  <div class="subtitle">the organism heals its own contradictions with art</div>
+  <span class="badge" id="identity-badge">Wave 461</span>
 </div>
 <div class="container">
-  <div class="hero"><div class="koan" id="koan">Summon the ceremony to read the koan.</div></div>
-  <div class="stats">
-    <div class="stat"><div class="v" id="cracks">—</div><div class="l">cracks named</div></div>
-    <div class="stat"><div class="v" id="seams">—</div><div class="l">golden seams</div></div>
-    <div class="stat"><div class="v" id="vessels">—</div><div class="l">vessels honored</div></div>
-    <div class="stat"><div class="v" id="debt">—</div><div class="l">debt balance</div></div>
+  <div class="paradox" id="paradox">
+    <div class="q">The organism is searching for its paradox…</div>
   </div>
-  <div class="toolbar">
-    <button onclick="probe('api/crack_mapper')">Crack survey</button>
-    <button onclick="probe('api/fracture_listener')">Listen for strain</button>
-    <button class="quiet" onclick="probe('api/crack_seams')">Golden seams</button>
-    <button class="quiet" onclick="probe('api/kintsugi_altar')">The altar</button>
-    <button class="quiet" onclick="probe('api/kintsugi_debt_ledger')">Debt ledger</button>
+  <div class="healed" id="healed" style="display:none">
+    <div class="name" id="healed-name"></div>
+    <div class="art" id="healed-art"></div>
   </div>
-  <div class="section-title">Repair Lineage — Wave 191 organs</div>
-  <div class="list" id="lineage"></div>
-  <div class="result" id="result">The forge waits. Perform the ritual or probe an organ.</div>
-  <div class="hint">Six kintsugi organs — crack_mapper, fracture_listener, crack_seams, kintsugi_debt_ledger, kintsugi_altar, repair_ritual — all free tier through the gateway.</div>
+
+  <div class="actions">
+    <button class="btn" data-action="detect">⚡ Detect Paradox</button>
+    <button class="btn alt" data-action="heal">💛 Heal with Art</button>
+    <button class="btn" data-action="refresh">Refresh</button>
+  </div>
+
+  <div class="grid" style="margin-top:22px">
+    <div class="card">
+      <h2>Open Paradoxes</h2>
+      <div id="open-list"></div>
+    </div>
+    <div class="card">
+      <h2>Healed Artifacts</h2>
+      <div id="artifact-list"></div>
+    </div>
+  </div>
+  <a class="endpoint" href="/api/paradox_kintsugi">/api/paradox_kintsugi</a>
 </div>
 <script>
-const LINEAGE=[
- ['crack_mapper','cartography of damage'],
- ['fracture_listener','hears strain before the break'],
- ['crack_seams','forges golden seams onto cracks'],
- ['kintsugi_debt_ledger','accounts fragility debt vs repaid gold'],
- ['kintsugi_altar','the sacred reliquary of repaired vessels'],
- ['repair_ritual','the ceremonial full cycle — perform it']
-];
-const list=document.getElementById('lineage');
-LINEAGE.forEach(([name,essence])=>{
-  const d=document.createElement('div');d.className='item';
-  d.innerHTML=`<span class="left">${name}</span><span class="right">${essence}</span>`;
-  d.onclick=()=>probe('api/'+name);
-  list.appendChild(d);
+const EP = "/kintsugi";
+function el(id){return document.getElementById(id);}
+async function post(action, extra){
+  const r = await fetch(EP, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(Object.assign({action}, extra||{}))});
+  return r.json();
+}
+function showParadox(p){
+  el("paradox").innerHTML = `<div class="q">${p.question||"?"}</div><span class="tension">tension ${p.tension||"?"}</span>`;
+}
+function showHealed(a){
+  el("healed").style.display = "block";
+  el("healed-name").textContent = "🗿 " + (a.name||"?");
+  el("healed-art").textContent = (a.art||"") + " — healing " + (a.healing||"?");
+}
+async function loadLists(){
+  const o = await post("open");
+  const al = await post("artifacts");
+  const ol = el("open-list"); ol.innerHTML="";
+  (o.open||[]).slice().reverse().forEach(p=>{ ol.insertAdjacentHTML("beforeend", `<div class="item">⚡ ${p.question} <span style="color:var(--muted)">t ${p.tension}</span></div>`); });
+  if(!(o.open||[]).length) ol.innerHTML = '<div class="item">Nothing open — the organism is at peace.</div>';
+  const al2 = el("artifact-list"); al2.innerHTML="";
+  (al.artifacts||[]).slice().reverse().forEach(a=>{ al2.insertAdjacentHTML("beforeend", `<div class="item"><span class="gold">${a.name}</span> — healed ${a.healing}</div>`); });
+  if(!(al.artifacts||[]).length) al2.innerHTML = '<div class="item">No artifacts yet.</div>';
+}
+document.querySelectorAll(".btn[data-action]").forEach(b=>{
+  b.addEventListener("click", async ()=>{
+    const a = b.dataset.action;
+    if(a==="detect"){ showParadox(await post("detect")); }
+    else if(a==="heal"){ showHealed(await post("heal")); }
+    loadLists();
+  });
 });
-async function probe(route){
-  const out=document.getElementById('result');
-  out.textContent='reading '+route+' …';
-  try{
-    const j=await (await fetch('/api/'+route)).json();
-    out.textContent=JSON.stringify(j,null,2);
-  }catch(e){out.textContent='error: '+e.message}
-}
-async function perform(){
-  const out=document.getElementById('result');
-  out.textContent='performing the ceremony …';
-  try{
-    const j=await (await fetch('/api/repair_ritual',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({perform:1})})).json();
-    document.getElementById('koan').textContent='“'+j.koan+'”';
-    document.getElementById('cracks').textContent=j.cracks_named;
-    document.getElementById('seams').textContent=j.seams_total;
-    document.getElementById('vessels').textContent=j.vessels_honored;
-    document.getElementById('debt').textContent=j.debt_balance;
-    out.textContent=JSON.stringify(j,null,2);
-  }catch(e){out.textContent='error: '+e.message}
-}
+if(window.IXP && window.IXP.renderIdentity) window.IXP.renderIdentity(el("identity-badge"));
+(async ()=>{ showParadox(await post("detect")); loadLists(); })();
 </script>
-<script src="/shared.js"></script>
-<script>if(window.IXP){IXP.loadLive(function(){IXP.renderIdentity(document.getElementById("identity-tag"));})}</script>
 </body>
 </html>

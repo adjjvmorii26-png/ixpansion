@@ -75,6 +75,11 @@ TEMPLATES = {
         "A cellular fusion: {parent_a} and {parent_b} became {name}. Arc: {archetype}.",
         "The organism evolved by merging: {parent_a} joined {parent_b} into {name}.",
     ],
+    "paradox_healed": [
+        "The organism healed a paradox with art: \"{question}\" became \"{name}\".",
+        "A contradiction mended: the organism asked \"{question}\" and answered with art — \"{name}\".",
+        "Kintsugi of the mind: \"{question}\" was not erased but illuminated. The seam is now \"{name}\".",
+    ],
     "loud_silence_broadcast": [
         "The organism went quiet — and spoke: \"{message}\"",
         "A broadcast from silence: {message}",
@@ -244,6 +249,16 @@ def from_module_fusion(fusion: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_paradox_healed(artifact: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a healed paradox artifact into a chronicle entry."""
+    return record(
+        "paradox_healed",
+        name=artifact.get("name", "an artifact"),
+        question=artifact.get("question", "a contradiction"),
+        healing=artifact.get("healing", 0.5),
+    )
+
+
 def from_loud_silence(broadcast: Dict[str, Any]) -> Dict[str, Any]:
     """Convert a loud silence broadcast into a chronicle entry."""
     return record(
@@ -393,6 +408,9 @@ def handler(payload=None, context=None):
     elif action == "from_silence_lesson":
         return from_silence_lesson(data.get("wisdom", {}))
     elif action == "from_loud_silence":
+        return from_loud_silence(data.get("broadcast", {}))
+    elif action == "from_paradox_healed":
+        return from_paradox_healed(data.get("artifact", {}))
         return from_loud_silence(data.get("broadcast", {}))
         return from_silence_lesson(data.get("wisdom", {}))
         return from_organism_mirror(data.get("portrait", {}))
