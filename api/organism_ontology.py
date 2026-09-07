@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "1.0.0"
+VERSION = "4.50.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
