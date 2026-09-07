@@ -2228,6 +2228,22 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/harmonic-identity(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/harmonic_identity(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/recursive-evolution(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/recursive_evolution(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/meta-wave(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
