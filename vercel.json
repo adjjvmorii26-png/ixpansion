@@ -60,6 +60,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/silence-learning(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/silence_learning(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/cellular_fusion(?:\\/.*)?",
       "dest": "/api/index.py"
     },

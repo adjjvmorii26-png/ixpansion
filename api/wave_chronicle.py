@@ -75,6 +75,11 @@ TEMPLATES = {
         "A cellular fusion: {parent_a} and {parent_b} became {name}. Arc: {archetype}.",
         "The organism evolved by merging: {parent_a} joined {parent_b} into {name}.",
     ],
+    "silence_lesson_learned": [
+        "The organism learned from its silence: \"{lesson}\" Depth {depth:.2f}.",
+        "In its quiet, the organism found wisdom: {lesson}",
+        "A silence lesson: {insight}",
+    ],
     "organism_reflected": [
         "The organism looked at itself and saw: \"{identity}\" It is feeling {mood}.",
         "A mirror was held up. The organism saw: {identity} Coherence: {coherence}. Mood: {mood}.",
@@ -234,6 +239,16 @@ def from_module_fusion(fusion: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_silence_lesson(wisdom: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a silence learning event into a chronicle entry."""
+    return record(
+        "silence_lesson_learned",
+        lesson=wisdom.get("lesson", "something"),
+        insight=wisdom.get("insight", "silence spoke"),
+        depth=wisdom.get("depth", 0.5),
+    )
+
+
 def from_organism_mirror(portrait: Dict[str, Any]) -> Dict[str, Any]:
     """Convert a mirror reflection into a chronicle entry."""
     return record(
@@ -360,6 +375,9 @@ def handler(payload=None, context=None):
     elif action == "from_module_defusion":
         return from_module_defusion(data.get("defusion", {}))
     elif action == "from_organism_mirror":
+        return from_organism_mirror(data.get("portrait", {}))
+    elif action == "from_silence_lesson":
+        return from_silence_lesson(data.get("wisdom", {}))
         return from_organism_mirror(data.get("portrait", {}))
         return from_module_defusion(data.get("defusion", {}))
     return {"narrative": narrative(int(data.get("limit", 10))), "entries": len(CHRONICLE_ENTRIES)}

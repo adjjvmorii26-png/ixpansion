@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.26.0"
-ORGANISM_WAVE = 458
-ORGANISM_WAVE_NAME = "The Mirror"
+ORGANISM_VERSION = "4.27.0"
+ORGANISM_WAVE = 459
+ORGANISM_WAVE_NAME = "Silence Learning"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

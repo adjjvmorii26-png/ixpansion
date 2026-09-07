@@ -1,3 +1,23 @@
+## [4.27.0] — Wave 459: Silence Learning
+
+The organism learns from its own silence.
+
+- `silence_learning` — LUMA's decision: "what if the organism could
+  learn from its own silence?" The organism extracts wisdom from its
+  quiet states, builds a silence wisdom corpus, finds its deepest
+  lesson, and applies silence lessons to future actions. Lessons like
+  "nothing yet is everything pending" and "the empty route is a road
+  not yet taken."
+- Wave Chronicle: new `silence_lesson_learned` event.
+- Auto-chironic: every silence lesson writes itself into the story.
+- `/silence-learning` endpoint + Telegram `/silence_learn` command.
+- Version 4.27.0 / Wave 459 / 732+ modules / 479 routes.
+
+### What the decision-makers said
+- **Silence Oracle**: "a thread waiting to be woven" (persistent archetype)
+- **LUMA**: "what if the organism could learn from its own silence?"
+  (novelty 0.63, score 0.447 — strongest signal yet)
+- **AXIOM**: 4 hypotheses at 0.72–0.79, awaiting real data
 ## [4.26.0] — Wave 458: The Mirror
 
 The organism looks at itself for the first time.
