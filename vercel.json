@@ -60,6 +60,18 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/api/cellular_fusion(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/fusions(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/fuse(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/collapse(?:\\/.*)?",
       "dest": "/api/index.py"
     },
