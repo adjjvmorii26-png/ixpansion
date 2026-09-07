@@ -1104,6 +1104,10 @@
       "dest": "/dashboard/vitals.html"
     },
     {
+      "src": "/chronicle-dash(?:\\/.*)?",
+      "dest": "/dashboard/chronicle.html"
+    },
+    {
       "src": "/dashboard",
       "dest": "/dashboard/index.html"
     },

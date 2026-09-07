@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.20.0",
-  wave: 452,
-  waveName: "Vercel Telemetry",
+  "version": "4.21.0",
+  wave: 453,
+  waveName: "Wave Chronicle",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

@@ -16,6 +16,7 @@ from typing import Any, Dict, List, Optional
 
 from api import capybara_core, hot_spring, capybara_guild, senbei_offerings
 from api import vercel_telemetry
+from api import wave_chronicle
 
 PROTOCOL_LOG: List[Dict[str, Any]] = []
 
@@ -73,6 +74,7 @@ def run_cycle(coherence: float = 0.5, entropy: float = 0.5,
     vercel_telemetry.record("capybara.pressure_reduction", 
         round(pressure - chill["pressure_after_soak"], 4),
         tag="delta")
+    wave_chronicle.from_capybara_cycle(cycle)
     PROTOCOL_LOG.append(cycle)
     return cycle
 
