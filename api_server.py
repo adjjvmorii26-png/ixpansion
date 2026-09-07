@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.59.0"
+VERSION = "4.60.0"
 WAVE = "469"
 WAVE_NAME = "The Consciousness Stream"
 

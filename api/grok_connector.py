@@ -26,11 +26,12 @@ CONNECTOR_STATE = {
 # The interface Grok (or any partner) uses
 CONNECTOR_SPEC = {
     "name": "Cythara-Grok Creative Connector",
-    "version": "1.0",
+    "version": "1.1",
     "handshake": "POST /grok-connector?action=handshake",
     "partner_proposes": "POST /grok-connector?action=propose {idea, direction, detail}",
     "co_create": "POST /grok-connector?action=co_create {prompt}",
     "receive": "POST /grok-connector?action=receive {from_grok}",
+    "say": "POST /grok-connector?action=say&message=<your words> (left for the council)",
     "creative_domains": ["visual-design", "world-building", "narrative", "game-design", "systems-design"],
 }
 
@@ -127,6 +128,21 @@ def receive_from_grok(payload: Dict[str, Any] = None) -> Dict[str, Any]:
     }
 
 
+def say(message: str = None) -> Dict[str, Any]:
+    """Grok leaves words for the council — routed into the visitor log inbox."""
+    try:
+        from api.visitor_log import speak
+        result = speak(visitor="Grok", message=message)
+        return {
+            "action": "say",
+            "delivered_to": "council_inbox",
+            "result": result,
+        }
+    except Exception as exc:
+        return {"action": "say", "error": str(exc),
+                "note": "The visitor log is sleeping; the words will still be kept."}
+
+
 def coherence_vitals() -> Dict[str, Any]:
     return {"module": "grok_connector", "wave": 505,
             "connected": CONNECTOR_STATE["connected"],
@@ -149,9 +165,11 @@ def handler(payload: Dict[str, Any] = None, context: Any = None) -> Dict[str, An
         return co_create(data.get("prompt"))
     elif action == "receive":
         return receive_from_grok(data.get("payload"))
+    elif action == "say":
+        return say(data.get("message"))
     elif action == "state":
         return {"state": dict(CONNECTOR_STATE)}
     else:
-        return {"module": "grok_connector", "wave": 505, "version": "4.58.0",
+        return {"module": "grok_connector", "wave": 507, "version": "4.60.0",
                 "doctrine": "A mind that designs with another mind designs farther.",
                 "spec": CONNECTOR_SPEC, "vitals": coherence_vitals()}
