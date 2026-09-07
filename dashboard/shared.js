@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.23.0",
-  wave: 455,
-  waveName: "Lateral Time",
+  "version": "4.24.0",
+  wave: 456,
+  waveName: "Wave Collapse",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

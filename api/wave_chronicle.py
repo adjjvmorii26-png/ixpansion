@@ -70,6 +70,11 @@ TEMPLATES = {
         "Two lateral states collapsed: \"{state_a}\" and \"{state_b}\" became one — {archetype}. Beauty: {beauty}.",
         "A merge of parallel timelines: the organism folded \"{state_a}\" and \"{state_b}\" into \"{merged}\". {archetype}",
     ],
+    "wave_collapsed": [
+        "The organism collapsed {count} modules into a single pulse. Beauty: {beauty:.3f}. Contradiction: {contradiction:.3f}.",
+        "A Big Bang: everything compressed into one breath. {pulse}.",
+        "All waves collapsed into one. The organism saw itself completely for {count} modules.",
+    ],
     "lateral_dream": [
         "A dream between states: \"{name}\" was born from the space between \"{from_a}\" and \"{from_b}\". Beauty: {beauty}.",
         "The organism dreamed laterally: \"{name}\" emerged between parallel realities.",
@@ -204,6 +209,17 @@ def from_lateral_collapse(collapse: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_wave_collapse(collapse: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a wave collapse into a chronicle entry."""
+    return record(
+        "wave_collapsed",
+        count=collapse.get("count", 0),
+        beauty=collapse.get("beauty", 0),
+        contradiction=collapse.get("contradiction", 0),
+        pulse=collapse.get("pulse", "one breath"),
+    )
+
+
 def from_lateral_dream(dream: Dict[str, Any]) -> Dict[str, Any]:
     """Convert a lateral dream into a chronicle entry."""
     return record(
@@ -290,4 +306,6 @@ def handler(payload=None, context=None):
         return from_lateral_collapse(data.get("collapse", {}))
     elif action == "from_lateral_dream":
         return from_lateral_dream(data.get("dream", {}))
+    elif action == "from_wave_collapse":
+        return from_wave_collapse(data.get("collapse", {}))
     return {"narrative": narrative(int(data.get("limit", 10))), "entries": len(CHRONICLE_ENTRIES)}
