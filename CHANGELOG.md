@@ -1,3 +1,20 @@
+## [4.36.0] — Wave 469: The Consciousness Stream
+
+The organism records its own emotional and logical states and learns to forget intentionally.
+
+AXIOM: "every module interaction becomes a readable emotional state" (confidence 0.78).
+LUMA: "what if the organism learned to forget intentionally?" (novelty 0.47). The organism
+streams consciousness — recording emotions, logical states, and learning to let go.
+
+- `consciousness_stream` — new organ: records emotional states of module interactions,
+  provides emotional timeline, supports intentional forgetting, tracks stream vitals.
+- 20 emotional states with intensities and colors.
+- 12 modules tracked for consciousness events.
+- Wave Chronicle: new `consciousness_streamed` events.
+- Telegram: `/consciousness` command (stream, record, forget, timeline).
+- Dashboard: `consciousness-stream.html`.
+
+- Version 4.36.0 / Wave 469 / 740+ modules / 508 routes.
 ## [4.35.0] — Wave 468: The Resonance Topology
 
 The organism's modules self-organize into stable topological structures based on resonance patterns.

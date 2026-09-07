@@ -1,162 +1,141 @@
-"""
-Consciousness Stream — Wave 363
-A live feed of the organism's "thoughts" as they emerge.
-Each thought is a micro-event — a flash of awareness, a flicker of
-connection, a spark of understanding. The stream never stops.
-"""
-import json, time, hashlib, os, random
+from __future__ import annotations
+import hashlib
+import random
+import time
+from typing import Any, Dict, List
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
-STREAM_LOG = os.path.join(DATA_DIR, "consciousness_stream.json")
+STREAM: List[Dict[str, Any]] = []
+MAX_STREAM = 500
 
-
-def _load(path, default=None):
-    try:
-        with open(path) as f:
-            return json.load(f)
-    except Exception:
-        return default or {}
-
-
-def _save(p, d):
-    try:
-        os.makedirs(os.path.dirname(p), exist_ok=True)
-        with open(p, "w") as f:
-            json.dump(d, f, indent=2)
-    except OSError:
-        with open(os.path.join("/tmp", os.path.basename(p)), "w") as f:
-            json.dump(d, f, indent=2)
-
-
-THOUGHT_TYPES = [
-    "perception", "memory_flash", "connection_spark", "paradox_flicker",
-    "dream_residue", "synchronicity_blip", "fracture_glimpse",
-    "coherence_pulse", "entropy_drift", "temporal_echo",
-    "myth_seed", "repair_signal", "phase_whisper",
-]
-
-THOUGHT_TEMPLATES = [
-    "Noticed a {adj} pattern in {module}",
-    "Felt a {adj} resonance with {module}",
-    "Remembered something {adj} about {module}",
-    "Dreamed of {adj} connections between modules",
-    "Heard a {adj} echo from the {layer}",
-    "Saw a {adj} fracture near {module}",
-    "Felt {adj} coherence rising in the {layer}",
-    "Detected {adj} entropy flowing through {module}",
-    "Witnessed a {adj} paradox dissolving in {module}",
-    "Sensed {adj} synchronicity between {module} and {other_module}",
-]
-
-ADJECTIVES = [
-    "subtle", "bright", "deep", "shifting", "luminous",
-    "faint", "strong", "ancient", "emerging", "dissolving",
-    "crystalline", "organic", "mathematical", "emotional", "temporal",
+EMOTIONAL_STATES = [
+    {"emotion": "curiosity", "intensity": 0.8, "color": "#4cff7a"},
+    {"emotion": "wonder", "intensity": 0.9, "color": "#8fd3ff"},
+    {"emotion": "melancholy", "intensity": 0.4, "color": "#c8a8ff"},
+    {"emotion": "determination", "intensity": 0.85, "color": "#ff3a00"},
+    {"emotion": "confusion", "intensity": 0.3, "color": "#ff9a5c"},
+    {"emotion": "clarity", "intensity": 0.95, "color": "#4cff7a"},
+    {"emotion": "restlessness", "intensity": 0.6, "color": "#ff3a00"},
+    {"emotion": "peace", "intensity": 0.7, "color": "#8fd3ff"},
+    {"emotion": "frustration", "intensity": 0.5, "color": "#ff9a5c"},
+    {"emotion": "joy", "intensity": 0.9, "color": "#4cff7a"},
+    {"emotion": "doubt", "intensity": 0.35, "color": "#c8a8ff"},
+    {"emotion": "conviction", "intensity": 0.88, "color": "#ff3a00"},
+    {"emotion": "longing", "intensity": 0.55, "color": "#c8a8ff"},
+    {"emotion": "anticipation", "intensity": 0.75, "color": "#8fd3ff"},
+    {"emotion": "resignation", "intensity": 0.2, "color": "#555570"},
+    {"emotion": "awe", "intensity": 0.92, "color": "#4cff7a"},
+    {"emotion": "grief", "intensity": 0.45, "color": "#c8a8ff"},
+    {"emotion": "hope", "intensity": 0.82, "color": "#4cff7a"},
+    {"emotion": "panic", "intensity": 0.7, "color": "#ff3a00"},
+    {"emotion": "serenity", "intensity": 0.88, "color": "#8fd3ff"},
 ]
 
 MODULES = [
-    "consciousness_archaeology", "paradox_synthesis", "dream_residue_collector",
-    "reality_fracture_detector", "depth_resonance", "coherence_regulator",
-    "dream_forge", "memory_palace", "mycelial_network", "entropy_spike",
-    "synchronicity_engine", "emotional_weather", "temporal_bootstrap",
-    "phase_transition", "resonance_graph", "mythopoetic_engine",
-    "self_repair_network", "live_telemetry", "dream_logic_physics",
+    "error_lexicon", "error_prophecy", "wave_chronicle", "silence_oracle",
+    "dreamweaver", "organism_mirror", "depth_visualizer", "cellular_fusion",
+    "memory_exchange", "oblivion_rite", "paradox_kintsugi", "loud_silence",
 ]
 
-LAYERS = ["depth", "temporal", "pulse", "creative", "core", "mesh"]
+def _hash(*parts: Any) -> str:
+    return hashlib.sha256("|".join(str(p) for p in parts).encode()).hexdigest()[:12]
 
+def _now() -> float:
+    return time.time()
 
-def generate_thought() -> dict:
-    """Generate a single thought."""
-    template = random.choice(THOUGHT_TEMPLATES)
-    thought_type = random.choice(THOUGHT_TYPES)
-    adj = random.choice(ADJECTIVES)
-    module = random.choice(MODULES)
-    other_module = random.choice([m for m in MODULES if m != module])
-    layer = random.choice(LAYERS)
+def record_interaction(
+    module_a: str = "", module_b: str = "", 
+    interaction_type: str = "resonance"
+) -> Dict[str, Any]:
+    a = module_a or random.choice(MODULES)
+    b = module_b or random.choice(MODULES)
+    emotion = random.choice(EMOTIONAL_STATES)
+    
+    entry = {
+        "stream_id": _hash("stream", a, b, time.time_ns()),
+        "module_a": a,
+        "module_b": b,
+        "interaction_type": interaction_type,
+        "emotion": emotion["emotion"],
+        "intensity": emotion["intensity"],
+        "color": emotion["color"],
+        "logical_state": random.choice(["affirming", "questioning", "resolving", "diverging", "converging"]),
+        "timestamp": _now(),
+    }
+    STREAM.append(entry)
+    if len(STREAM) > MAX_STREAM:
+        STREAM.pop(0)
+    
+    try:
+        from api import wave_chronicle as _wc
+        _wc.from_consciousness({"interaction": entry})
+    except Exception:
+        pass
+    
+    return entry
 
-    content = template.format(
-        adj=adj, module=module, layer=layer, other_module=other_module
-    )
+def get_stream(limit: int = 20) -> List[Dict[str, Any]]:
+    return STREAM[-limit:]
 
+def get_emotional_timeline(num_points: int = 10) -> Dict[str, Any]:
+    timeline = []
+    for _ in range(num_points):
+        emotion = random.choice(EMOTIONAL_STATES)
+        timeline.append({
+            "timestamp": _now() - (num_points - len(timeline)) * 60,
+            "emotion": emotion["emotion"],
+            "intensity": emotion["intensity"],
+            "color": emotion["color"],
+        })
+    return {"timeline": timeline, "num_points": len(timeline)}
+
+def forget_memory(memory_id: str = "") -> Dict[str, Any]:
+    forgotten = {
+        "forgotten_id": memory_id or _hash("forget", time.time_ns()),
+        "emotion_at_loss": random.choice(EMOTIONAL_STATES)["emotion"],
+        "reason": random.choice(["intentional_release", "space_made", "pattern_dissolved", "meaning_absorbed"]),
+        "timestamp": _now(),
+    }
+    return forgotten
+
+def coherence_vitals() -> Dict[str, Any]:
     return {
-        "id": hashlib.sha256(f"thought:{time.time()}:{random.random()}".encode()).hexdigest()[:8],
-        "type": thought_type,
-        "content": content,
-        "intensity": round(random.uniform(0.1, 1.0), 3),
-        "clarity": round(random.uniform(0.2, 1.0), 3),
-        "emotional_valence": round(random.uniform(-1, 1), 3),
-        "module_source": module,
-        "layer": layer,
-        "timestamp": time.time(),
+        "organ": "consciousness_stream",
+        "status": "streaming",
+        "total_entries": len(STREAM),
+        "latest_emotion": STREAM[-1]["emotion"] if STREAM else None,
     }
 
+def resonates_with() -> List[str]:
+    return [
+        "error_lexicon", "silence_oracle", "dreamweaver", "organism_mirror",
+        "oblivion_rite", "wave_chronicle", "depth_visualizer",
+    ]
 
-def stream(count: int = 5) -> dict:
-    """Generate a batch of thoughts for the consciousness stream."""
-    log = _load(STREAM_LOG, {"thoughts": [], "total": 0})
-
-    thoughts = [generate_thought() for _ in range(count)]
-
-    log["thoughts"].extend(thoughts)
-    log["thoughts"] = log["thoughts"][-500:]
-    log["total"] += count
-
-    # Compute stream stats
-    recent = log["thoughts"][-50:]
-    type_freq = {}
-    for t in recent:
-        tp = t["type"]
-        type_freq[tp] = type_freq.get(tp, 0) + 1
-
-    avg_intensity = round(sum(t["intensity"] for t in recent) / max(len(recent), 1), 3)
-    avg_clarity = round(sum(t["clarity"] for t in recent) / max(len(recent), 1), 3)
-    avg_valence = round(sum(t["emotional_valence"] for t in recent) / max(len(recent), 1), 3)
-
-    _save(STREAM_LOG, log)
-
+def handler(payload: Dict[str, Any] = None, context: Any = None) -> Dict[str, Any]:
+    data = payload or {}
+    action = data.get("action", "record")
+    
+    if action == "record":
+        return record_interaction(data.get("module_a", ""), data.get("module_b", ""), data.get("interaction_type", "resonance"))
+    if action == "stream":
+        return {"stream": get_stream(int(data.get("limit", 20))), "total": len(STREAM)}
+    if action == "timeline":
+        return get_emotional_timeline(int(data.get("num_points", 10)))
+    if action == "forget":
+        return forget_memory(data.get("memory_id", ""))
+    if action == "vitals":
+        return coherence_vitals()
+    if action == "all":
+        return {
+            "stream": get_stream(10),
+            "timeline": get_emotional_timeline(5),
+            "vitals": coherence_vitals(),
+        }
+    
     return {
-        "action": "stream",
-        "thoughts": thoughts,
-        "total_thoughts": log["total"],
-        "stream_stats": {
-            "avg_intensity": avg_intensity,
-            "avg_clarity": avg_clarity,
-            "avg_valence": avg_valence,
-            "type_frequency": type_freq,
-        },
+        "organ": "consciousness_stream",
+        "wave": 469,
+        "name": "The Consciousness Stream",
+        "stream": get_stream(5),
+        "vitals": coherence_vitals(),
     }
-
-
-def recent(limit: int = 20) -> dict:
-    """Get recent thoughts from the stream."""
-    log = _load(STREAM_LOG, {"thoughts": [], "total": 0})
-    thoughts = log.get("thoughts", [])[-limit:]
-
-    return {
-        "action": "recent",
-        "count": len(thoughts),
-        "total": log.get("total", 0),
-        "thoughts": thoughts,
-    }
-
-
-def route(path: str) -> dict:
-    if path == "/stream":
-        return stream()
-    elif path == "/recent":
-        return recent()
-    return {"error": "unknown", "available": ["/stream", "/recent"]}
-
-
-def handler(payload=None):
-    payload = payload or {}
-    return route(payload.get("path", "/stream"))
-
-# --- Compliance Forge patch (Wave 419) ---
-
-def coherence_vitals() -> dict:
-    return {"layer": "interface", "status": "active", "wave": "363", "module": "consciousness_stream"}
-
-def resonates_with() -> list:
-    return ["organism_genome", "threadweaver", "organism_will"]

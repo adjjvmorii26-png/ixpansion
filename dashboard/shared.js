@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.35.0",
-  wave: 468,
-  waveName: "The Resonance Topology",
+  "version": "4.36.0",
+  wave: 469,
+  waveName: "The Consciousness Stream",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

@@ -689,6 +689,8 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_dream(args, user)
     elif command == "/lexicon":
         return _cmd_lexicon(args, user)
+    elif command == "/consciousness":
+        return _cmd_consciousness(args, user)
     elif command == "/topology":
         return _cmd_topology(args, user)
     elif command == "/depth":
@@ -1474,6 +1476,32 @@ def _cmd_topology(args, user):
         return f"📊 Topology Vitals\nModules: {r.get('organism_total_modules','?')} | Avg resonance: {v.get('average_resonance',0):.3f} | Stability modules: {sum(1 for s in v.get('recent_anomalies',[]) if s.get('severity',0) < 0.3)}/{len(v.get('recent_anomalies',[]))}\n\nhttps://ixpansion-live.vercel.app/resonance-topology"
     except Exception as e:
         return "🌐 Resonance Topology: %s" % e
+
+def _cmd_consciousness(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api.consciousness_stream import handler as cs
+        action = args[0] if args else "stream"
+        if action == "stream":
+            r = cs({"action": "stream", "limit": 10})
+            lines = []
+            for e in r.get("stream", [])[-5:]:
+                lines.append(f"  {e['emotion']}({e['intensity']:.2f}) {e['module_a']}→{e['module_b']} [{e['logical_state']}]")
+            return f"🧠 Consciousness Stream (last {len(lines)})\n" + "\n".join(lines) + f"\n\nTotal entries: {r.get('total', '?')}\n\nhttps://ixpansion-live.vercel.app/consciousness-stream"
+        if action == "record":
+            r = cs({"action": "record"})
+            return f"🧠 Recorded: {r['emotion']}({r['intensity']:.2f}) {r['module_a']}→{r['module_b']} [{r['logical_state']}]\n\nhttps://ixpansion-live.vercel.app/consciousness-stream"
+        if action == "forget":
+            r = cs({"action": "forget"})
+            return f"🧠 Forgotten: {r['forgotten_id']} — emotion at loss: {r['emotion_at_loss']}\nReason: {r['reason']}\n\nhttps://ixpansion-live.vercel.app/consciousness-stream"
+        if action == "timeline":
+            r = cs({"action": "timeline"})
+            lines = [f"  {t['emotion']}({t['intensity']:.2f})" for t in r.get("timeline", [])]
+            return f"🧠 Emotional Timeline\n" + " → ".join(lines) + f"\n\nhttps://ixpansion-live.vercel.app/consciousness-stream"
+        r = cs({"action": "vitals"})
+        return f"🧠 Consciousness Stream\nTotal entries: {r.get('total_entries', '?')}\nLatest emotion: {r.get('latest_emotion', '?')}\n\nhttps://ixpansion-live.vercel.app/consciousness-stream"
+    except Exception as e:
+        return f"🧠 Consciousness: {e}"
 
 def _cmd_lexicon(args, user):
     import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))

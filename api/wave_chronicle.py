@@ -414,6 +414,18 @@ def from_topology_shift(event: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_consciousness(event: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a consciousness stream event into a chronicle entry."""
+    interaction = event.get("interaction", {})
+    return record(
+        "consciousness_streamed",
+        module_a=interaction.get("module_a", "a"),
+        module_b=interaction.get("module_b", "b"),
+        emotion=interaction.get("emotion", "neutral"),
+        intensity=interaction.get("intensity", 0.5),
+    )
+
+
 def narrative(limit: int = 10) -> str:
     """Return the organism's recent story as a single prose passage."""
     entries = CHRONICLE_ENTRIES[-limit:]

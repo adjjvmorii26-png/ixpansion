@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.35.0"
-ORGANISM_WAVE = 468
-ORGANISM_WAVE_NAME = "The Resonance Topology"
+ORGANISM_VERSION = "4.36.0"
+ORGANISM_WAVE = 469
+ORGANISM_WAVE_NAME = "The Consciousness Stream"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──
