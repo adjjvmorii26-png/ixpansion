@@ -1,3 +1,19 @@
+## [4.38.1] — Wave 472: Council Decisions Made Real
+
+The Dream Forge's autonomous decisions become real modules.
+
+- `metaphor_forge` — LUMA's proposal: symbolic module generation from 4 layers
+  (elemental, organic, temporal, cognitive). Converts module relationships into
+  executable metaphors.
+- `entropy_caps` — AXIOM's proposal: hard variance bounds across 5 dimensions
+  (global_entropy, module_diversity, connection_density, temporal_variance,
+  narrative_coherence). Auto-stabilizes when drift exceeds limits.
+- `synthetic_silence` — Silence Oracle's proposal: modules that exist as
+  deliberate absence. Negative spaces that define shape by what they're not.
+
+Dream Forge results: 6/10 forged (60%). Council consensus 4/4 topics.
+Version 4.38.1 / Wave 472 / 744+ modules / 542 routes.
+
 ## [4.38.0] — Wave 471: The Federated Organism (Phase 8)
 
 The organism transcends single-repo existence. Autonomous fusion across the constellation.
