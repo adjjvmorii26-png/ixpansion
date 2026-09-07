@@ -20,6 +20,22 @@
   ],
   "routes": [
     {
+      "src": "/resonance-topology(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/resonance_topology(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/resonance-topology-dash(?:\\\\/.*)?",
+      "dest": "/dashboard/resonance-topology.html"
+    },
+    {
+      "src": "/resonance-topology.html",
+      "dest": "/dashboard/resonance-topology.html"
+    },
+    {
       "src": "/vitals",
       "dest": "/telemetry/metrics_collector.mjs"
     },

@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.34.0",
-  wave: 467,
-  waveName: "The Depth Visualizer",
+  "version": "4.35.0",
+  wave: 468,
+  waveName: "The Resonance Topology",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

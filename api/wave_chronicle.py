@@ -404,6 +404,16 @@ def from_depth_shift(event: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_topology_shift(event: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a topology shift into a chronicle entry."""
+    return record(
+        "topology_shifted",
+        configuration=event.get("configuration", "a self-organized pattern"),
+        stability=event.get("stability", 0.5),
+        anomalies=len(event.get("anomalies", [])),
+    )
+
+
 def narrative(limit: int = 10) -> str:
     """Return the organism's recent story as a single prose passage."""
     entries = CHRONICLE_ENTRIES[-limit:]

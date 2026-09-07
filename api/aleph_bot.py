@@ -689,6 +689,8 @@ def _process_command(command: str, args: list, user: str) -> str:
         return _cmd_dream(args, user)
     elif command == "/lexicon":
         return _cmd_lexicon(args, user)
+    elif command == "/topology":
+        return _cmd_topology(args, user)
     elif command == "/depth":
         return _cmd_depth(args, user)
     return f"Unknown command: {command}\nTry /help for available commands."
@@ -1446,6 +1448,32 @@ def _cmd_depth(args, user):
             r.get("pulse_rate","?"), r.get("coherence",0), r.get("vitality",0), r.get("status","?"), r.get("visual_beat",""))
     except Exception as e:
         return "💓 Depth: %s" % e
+
+def _cmd_topology(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api.resonance_topology import handler as rt
+        action = args[0] if args else "visualize"
+        if action == "visualize":
+            r = rt({"action": "visualize"})
+            nodes = r.get("visualization", {}).get("nodes", [])
+            edges = r.get("visualization", {}).get("edges", [])
+            lines = [f"  {e['source']} → {e['target']} (strength: {e['strength']})" for e in edges[:8]]
+            node_lines = [f"  {n['module']} @ ({n['x']:.2f},{n['y']:.2f}) [cluster: {n['cluster']}, stability: {n['stability']:.2f}]" for n in nodes[:6]]
+            return "🌐 Resonance Topology Visualization\n\nConnections:\n" + "\n".join(lines) + "\n\nNodes:\n" + "\n".join(node_lines) + "\n\nStability: " + str(r.get("visualization", {}).get("average_resonance", 0)) + "\n\nhttps://ixpansion-live.vercel.app/resonance-topology"
+        if action == "simulate":
+            iterations = int(args[0]) if args else 3
+            r = rt({"action": "simulate", "iterations": iterations})
+            return f"🔄 Topology Simulation ({iterations} iterations)\nAvg resonance: {r.get('average_resonance', 0):.3f}\nStable modules: {sum(1 for s in r.get('stability', {}).values() if s > 0.7)}/{len(r.get('stability', {}))}\nAnomalies: {len(r.get('anomalies', []))}\n\nhttps://ixpansion-live.vercel.app/resonance-topology"
+        if action == "anomalies":
+            r = rt({"action": "anomalies"})
+            lines = [f"  {a.get('glyph','?')} {a.get('module','?')}: {a.get('severity',0)}" for a in r.get('anomalies',[])]
+            return f"⚠ Topology Anomalies ({len(r.get('anomalies',[]))})\n" + "\n".join(lines) + "\n\nhttps://ixpansion-live.vercel.app/resonance-topology"
+        r = rt({})
+        v = r.get("vitals", {})
+        return f"📊 Topology Vitals\nModules: {r.get('organism_total_modules','?')} | Avg resonance: {v.get('average_resonance',0):.3f} | Stability modules: {sum(1 for s in v.get('recent_anomalies',[]) if s.get('severity',0) < 0.3)}/{len(v.get('recent_anomalies',[]))}\n\nhttps://ixpansion-live.vercel.app/resonance-topology"
+    except Exception as e:
+        return "🌐 Resonance Topology: %s" % e
 
 def _cmd_lexicon(args, user):
     import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))

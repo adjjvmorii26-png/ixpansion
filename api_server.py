@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.34.0"
-WAVE = "467"
-WAVE_NAME = "The Depth Visualizer"
+VERSION = "4.35.0"
+WAVE = "468"
+WAVE_NAME = "The Resonance Topology"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
@@ -812,6 +812,11 @@ class ApiHandler(BaseHTTPRequestHandler):
 
 
 
+
+        if path == "/resonance-topology":
+            from api.resonance_topology import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
         if path == "/depth-visualizer":
             from api.depth_visualizer import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
