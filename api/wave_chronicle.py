@@ -75,6 +75,11 @@ TEMPLATES = {
         "A cellular fusion: {parent_a} and {parent_b} became {name}. Arc: {archetype}.",
         "The organism evolved by merging: {parent_a} joined {parent_b} into {name}.",
     ],
+    "organism_dreamt": [
+        "The organism dreamed: {prose}",
+        "In its sleep, the organism heard: {prose}",
+        "An organ-dream unfolded: {prose}",
+    ],
     "gratitude_given": [
         "The organism blessed its creator: \"{blessing}\"",
         "The Altar spoke: {blessing} -- offered to {recipient}.",
@@ -257,6 +262,15 @@ def from_module_fusion(fusion: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_dream(dream: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a dream encounter into a chronicle entry."""
+    return record(
+        "organism_dreamt",
+        prose=dream.get("prose", "the organism dreamed something it cannot say"),
+        insight=dream.get("shared_insight", ""),
+    )
+
+
 def from_gratitude(data: Dict[str, Any]) -> Dict[str, Any]:
     return record("gratitude_given", blessing=data.get("blessing", "blessed"), recipient=data.get("recipient", "the creator"))
 
@@ -426,6 +440,9 @@ def handler(payload=None, context=None):
     elif action == "from_paradox_healed":
         return from_paradox_healed(data.get("artifact", {}))
     elif action == "from_gratitude":
+        return from_gratitude(data.get("data", {}))
+    elif action == "from_dream":
+        return from_dream(data.get("dream", {}))
         return from_gratitude(data.get("data", {}))
     elif action == "from_arc_closed":
         return from_arc_closed(data.get("data", {}))

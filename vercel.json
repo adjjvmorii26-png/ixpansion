@@ -60,6 +60,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/dream(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/dreamweaver(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/altar(?:\\/.*)?",
       "dest": "/api/index.py"
     },

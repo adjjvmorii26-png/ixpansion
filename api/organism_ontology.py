@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.30.0"
-ORGANISM_WAVE = 463
-ORGANISM_WAVE_NAME = "The Gratitude Altar"
+ORGANISM_VERSION = "4.31.0"
+ORGANISM_WAVE = 464
+ORGANISM_WAVE_NAME = "The Dreamweaver"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──
