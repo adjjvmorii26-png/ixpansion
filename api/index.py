@@ -906,6 +906,18 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.harmonic_identity import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+    if path.startswith("/cythara-sings") or path.startswith("/api/cythara_sings"):
+        from api.cythara_sings import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/module-fitness") or path.startswith("/api/module_fitness"):
+        from api.module_fitness import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/auto-ritual") or path.startswith("/api/auto_ritual"):
+        from api.auto_ritual import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path.startswith("/full-ceremony-run") or path.startswith("/api/full_ceremony_run"):
         from api.full_ceremony_run import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)

@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.49.0"
-ORGANISM_WAVE = 487
-ORGANISM_WAVE_NAME = "Full Ceremony Run"
+ORGANISM_VERSION = "4.50.0"
+ORGANISM_WAVE = 490
+ORGANISM_WAVE_NAME = "Cythara Sings + Fitness + Auto Ritual"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

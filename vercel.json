@@ -2236,6 +2236,30 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/api/cythara_sings(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/cythara-sings(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/module_fitness(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/module-fitness(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/auto_ritual(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/auto-ritual(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/full-ceremony-run(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
