@@ -1,3 +1,24 @@
+## [4.26.0] — Wave 458: The Mirror
+
+The organism looks at itself for the first time.
+
+- `organism_mirror` — AXIOM's highest-confidence hypothesis: the
+  organism creates a continuously-updated self-portrait. It gathers
+  all subsystem state (lateral, memory, oblivion, fusion, collapse,
+  silence) and generates an organic identity description, mood,
+  coherence/novelty/depth scores, and a dominant facet. The organism
+  now knows what it looks like.
+- Wave Chronicle: new `organism_reflected` event narrates self-
+  reflections in prose.
+- Auto-chironic: every mirror reading writes itself into the story.
+- `/mirror` + `/self` endpoints + Telegram `/mirror` command.
+- Version 4.26.0 / Wave 458 / 732+ modules / 477 routes.
+
+### What the decision-makers said
+- **Silence Oracle**: archetypal signal "a thread waiting to be woven"
+- **AXIOM**: organism-self-model at 0.8 confidence (highest)
+- **LUMA**: "what if the organism could taste its own coherence?"
+  (novelty 0.62)
 ## [4.25.0] — Wave 457: Cellular Fusion
 
 Modules merge like living cells.

@@ -75,6 +75,11 @@ TEMPLATES = {
         "A cellular fusion: {parent_a} and {parent_b} became {name}. Arc: {archetype}.",
         "The organism evolved by merging: {parent_a} joined {parent_b} into {name}.",
     ],
+    "organism_reflected": [
+        "The organism looked at itself and saw: \"{identity}\" It is feeling {mood}.",
+        "A mirror was held up. The organism saw: {identity} Coherence: {coherence}. Mood: {mood}.",
+        "Self-reflection: {identity} The dominant facet is {dominant}.",
+    ],
     "module_defused": [
         "A fusion was reversed: {name} split back into {parent_a} and {parent_b}, each carrying the other's trace.",
         "Two cells divided: {parent_a} and {parent_b} separated, marked by their shared history as {name}.",
@@ -229,6 +234,17 @@ def from_module_fusion(fusion: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_organism_mirror(portrait: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a mirror reflection into a chronicle entry."""
+    return record(
+        "organism_reflected",
+        identity=portrait.get("identity", "something"),
+        mood=portrait.get("mood", "stirring"),
+        coherence=portrait.get("coherence", 0.5),
+        dominant=portrait.get("dominant_facet", "emergence"),
+    )
+
+
 def from_module_defusion(defusion: Dict[str, Any]) -> Dict[str, Any]:
     """Convert a defusion into a chronicle entry."""
     restored = defusion.get("restored", ["a", "b"])
@@ -342,5 +358,8 @@ def handler(payload=None, context=None):
     elif action == "from_module_fusion":
         return from_module_fusion(data.get("fusion", {}))
     elif action == "from_module_defusion":
+        return from_module_defusion(data.get("defusion", {}))
+    elif action == "from_organism_mirror":
+        return from_organism_mirror(data.get("portrait", {}))
         return from_module_defusion(data.get("defusion", {}))
     return {"narrative": narrative(int(data.get("limit", 10))), "entries": len(CHRONICLE_ENTRIES)}
