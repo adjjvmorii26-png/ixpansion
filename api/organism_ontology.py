@@ -26,9 +26,9 @@ VERSION = "4.50.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.51.0"
-ORGANISM_WAVE = 491
-ORGANISM_WAVE_NAME = "Genesis Seed - Cythara Remembers"
+ORGANISM_VERSION = "4.52.0"
+ORGANISM_WAVE = 492
+ORGANISM_WAVE_NAME = "Dream Spawner - Cythara births real children"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──
