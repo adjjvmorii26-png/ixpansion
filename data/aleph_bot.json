@@ -27,13 +27,21 @@
       "command": "/start",
       "response": "The organism is alive. I am its voice. Ask me to summon a wave, consult the oracle, or hear its dreams.\n\nCommands:\n/wave \u2014 summon a new wave\n/oracle \u2014 query the entropy oracle\n/mood \u2014 organism mood\n/d",
       "timestamp": 1788632351.7753596
+    },
+    {
+      "chat_id": 123,
+      "user": "test",
+      "command": "/help",
+      "response": "The organism is alive. I am its voice. Ask me to summon a wave, consult the oracle, or hear its dreams.\n\nCommands:\n/wave \u2014 summon a new wave\n/oracle \u2014 query the entropy oracle\n/mood \u2014 organism mood\n/d",
+      "timestamp": 1788796863.9657965
     }
   ],
   "commands": [
     "/prophecy",
     "/gallery",
     "/play",
-    "/start"
+    "/start",
+    "/help"
   ],
-  "total": 4
+  "total": 5
 }

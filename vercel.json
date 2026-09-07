@@ -2228,6 +2228,22 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/meta-wave(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/meta_wave(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/identity-resonance(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/identity_resonance(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/council-of-selves(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
