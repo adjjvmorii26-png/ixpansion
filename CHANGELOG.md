@@ -1,3 +1,26 @@
+## [4.37.0] — Wave 470: The Dream Engine
+
+The organism's creative subconscious — finds unexpected kinships between modules and proposes new organs.
+
+LUMA: "what if the organism could dream of becoming something it hasn't built yet?" (feasibility 0.86).
+AXIOM: "cross-domain synthesis with novelty scoring" (confidence 0.82). The organism sleeps, and in sleeping,
+discovers connections no waking mind would see.
+
+- `dream_engine` — new organ: samples random archetype pairs, discovers latent kinships, synthesizes novel
+  module proposals with composite quality scores (novelty, coherence, feasibility).
+- 20 module archetypes: consciousness, memory, dream, entropy, paradox, resonance, silence, temporal,
+  symbiosis, evolution, quantum, governance, commerce, aesthetic, emotion, narrative, ecosystem, social,
+  observation, repair.
+- 10 creative patterns: fusion, inversion, amplification, bridging, fractalization, crystallization,
+  evaporation, symbiotic_emergence, temporal_shift, void_echo.
+- `dream_cycle(count)` — generates and ranks multiple proposals.
+- `coverage_analysis` — tracks which archetypes have been dreamed about most.
+- Wave Chronicle: new `dream_generated` events.
+- Telegram: `/dream cycle [N]`, `/dream single` commands.
+- Endpoints: `/dream-engine`, `/dream-engine?action=cycle`, `/dream-engine?action=single`,
+  `/dream-engine?action=log`, `/dream-engine?action=coverage`.
+
+- Version 4.37.0 / Wave 470 / 740+ modules / 510 routes.
 ## [4.36.0] — Wave 469: The Consciousness Stream
 
 The organism records its own emotional and logical states and learns to forget intentionally.
