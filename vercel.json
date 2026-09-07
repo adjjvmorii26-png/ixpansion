@@ -28,6 +28,26 @@
       "dest": "/telemetry/metrics_collector.mjs?path=/vitals/health"
     },
     {
+      "src": "/memory-exchange(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/oblivion(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/memory_exchange(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/oblivion_rite(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/memory-exchange-dash(?:\\/.*)?",
+      "dest": "/dashboard/memory-exchange.html"
+    },
+    {
       "src": "/api/meaning_weaver(?:\\/.*)?",
       "dest": "/api/index.py"
     },
@@ -1664,8 +1684,8 @@
       "dest": "/api/index.py"
     },
     {
-      "src": "/chronicle",
-      "dest": "/dashboard/warden.html#chronicle-card"
+      "src": "/api/chronicle(?:\\/.*)?",
+      "dest": "/api/index.py"
     },
     {
       "src": "/genealogy",

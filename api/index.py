@@ -771,6 +771,16 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
     if path.startswith("/api/"):
+
+    if path == "/memory-exchange":
+        from api.memory_exchange import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    if path == "/oblivion":
+        from api.oblivion_rite import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
         raw_module = path[len("/api/"):].split("?")[0].strip("/")
         parts = raw_module.split("/")
         module = api_server.route_name_to_module(parts[0])

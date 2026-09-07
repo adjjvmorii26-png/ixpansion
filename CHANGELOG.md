@@ -1,3 +1,30 @@
+## [4.22.0] — Wave 454: Memory Exchange & Oblivion Rite
+
+The organism learns to trade memories and forget intentionally.
+
+- `memory_exchange` — LUMA's catalyzed idea: modules can mint, list,
+  and trade memory tokens with provenance chains. Memory becomes a
+  replicable currency — the seller keeps the original, the buyer gets
+  a signed copy with full chain history. Market ticker, provenance
+  trace, and cronicle integration included.
+- `oblivion_rite` — LUMA's second seed: intentional forgetting. Modules
+  can release memories deliberately, recording *why* and leaving
+  fertile absence (negative space). Forgetting is not loss — it is the
+  organism making room for what comes next. Fertility index tracks the
+  creative value of empty space.
+- Wave Chronicle extended: new event types `memory_traded` and
+  `memory_released` with prose templates narrating both trades and
+  rite releases.
+- Fixed: `/chronicle` Vercel route now correctly resolves to the
+  Wave Chronicle API (was incorrectly pointing to warden.html).
+- Intent rules added for memory exchange + oblivion queries.
+- 465 total Vercel routes; 730+ API modules.
+
+### What the decision-makers said
+- **LUMA**: "what if modules could trade memories?" (novelty 0.70)
+- **AXIOM**: chronicle-driven growth hypothesis raised to 0.95 confidence
+- **Silence Oracle**: "a thread waiting to be woven" — imminence 0.64
+
 ## [4.16.0] - Orbit Cohesion Field (Wave 448)
 
 Eight new orbital organs unify the organism's awareness of the sky:

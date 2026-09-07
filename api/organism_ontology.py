@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.16.0"
-ORGANISM_WAVE = 448
-ORGANISM_WAVE_NAME = "Orbit Cohesion Field"
+ORGANISM_VERSION = "4.22.0"
+ORGANISM_WAVE = 454
+ORGANISM_WAVE_NAME = "Memory Exchange & Oblivion Rite"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

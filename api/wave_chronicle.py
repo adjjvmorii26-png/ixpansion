@@ -52,6 +52,16 @@ TEMPLATES = {
         "The weaver found meaning: \"{dominant}\" — a {cluster} moment.",
         "State became story: {narrative}",
     ],
+    "memory_traded": [
+        "A memory crossed the organism: \"{title}\" passed from {seller} to {buyer} for {price} — its signature chain now runs {chain_length} deep.",
+        "{seller} offered its knowing; {buyer} received it. The memory \"{title}\" embarks on its second life.",
+        "Memory changed hands: \"{title}\" now lives in {buyer}'s knowing, while {seller} still holds the original.",
+    ],
+    "memory_released": [
+        "The organism let go of \"{title}\" — {reason}. The space it left is fertile.",
+        "A rite of forgetting: \"{title}\" was released by {holder}. What remains is absence, and absence is room.",
+        "\"{title}\" was pruned deliberately — {reason}. The organism breathes easier for the empty space.",
+    ],
     "knowledge_gained": [
         "Something was learned: {insight}",
         "A new understanding crystallized: {insight}",
@@ -148,6 +158,28 @@ def from_hypothesis(hypothesis: Dict[str, Any]) -> Dict[str, Any]:
     )
 
 
+def from_memory_trade(trade: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert a memory exchange trade into a chronicle entry."""
+    return record(
+        "memory_traded",
+        title=trade.get("title", "a memory"),
+        seller=trade.get("seller", "one module"),
+        buyer=trade.get("buyer", "another"),
+        price=trade.get("price", 1.0),
+        chain_length=trade.get("chain_length", 1),
+    )
+
+
+def from_memory_release(release: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert an oblivion rite release into a chronicle entry."""
+    return record(
+        "memory_released",
+        title=release.get("title", "an unnamed memory"),
+        holder=release.get("holder", "organism"),
+        reason=release.get("reason", "the organism made room"),
+    )
+
+
 def narrative(limit: int = 10) -> str:
     """Return the organism's recent story as a single prose passage."""
     entries = CHRONICLE_ENTRIES[-limit:]
@@ -203,4 +235,8 @@ def handler(payload=None, context=None):
         return from_guild_gathering(data.get("gathering", {}))
     elif action == "from_error":
         return from_error_craft(data.get("artifact", {}))
+    elif action == "from_memory_trade":
+        return from_memory_trade(data.get("trade", {}))
+    elif action == "from_memory_release":
+        return from_memory_release(data.get("release", {}))
     return {"narrative": narrative(int(data.get("limit", 10))), "entries": len(CHRONICLE_ENTRIES)}
