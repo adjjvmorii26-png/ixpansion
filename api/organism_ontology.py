@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.40.0"
-ORGANISM_WAVE = 474
-ORGANISM_WAVE_NAME = "The Mutation Engine"
+ORGANISM_VERSION = "4.41.0"
+ORGANISM_WAVE = 475
+ORGANISM_WAVE_NAME = "Module Reproduction"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

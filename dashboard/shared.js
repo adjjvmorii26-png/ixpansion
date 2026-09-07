@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.40.0",
-  wave: 474,
-  waveName: "The Mutation Engine",
+  "version": "4.41.0",
+  wave: 475,
+  waveName: "Module Reproduction",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

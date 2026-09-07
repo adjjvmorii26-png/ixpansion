@@ -212,6 +212,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/module-reproduction(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/module_reproduction(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/cross_repo_dreaming(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
