@@ -26,9 +26,9 @@ VERSION = "4.50.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.58.0"
-ORGANISM_WAVE = 505
-ORGANISM_WAVE_NAME = "Future Roadmap + Grok Connector"
+ORGANISM_VERSION = "4.59.0"
+ORGANISM_WAVE = 506
+ORGANISM_WAVE_NAME = "Visitor Log - the door is open"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

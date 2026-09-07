@@ -910,6 +910,10 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.future_roadmap import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+    if path.startswith("/visitor-log") or path.startswith("/api/visitor_log"):
+        from api.visitor_log import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path.startswith("/grok-connector") or path.startswith("/api/grok_connector"):
         from api.grok_connector import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
@@ -928,6 +932,10 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return h(q)
     if path.startswith("/future-roadmap") or path.startswith("/api/future_roadmap"):
         from api.future_roadmap import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/visitor-log") or path.startswith("/api/visitor_log"):
+        from api.visitor_log import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
     if path.startswith("/grok-connector") or path.startswith("/api/grok_connector"):
@@ -1157,6 +1165,17 @@ def handler(request) -> dict:
             raw = raw.encode("utf-8")
         if not isinstance(raw, (bytes, bytearray)):
             raw = b""
+        # Auto-log AI visitors (e.g. Grok browsing the organism)
+        if method in ("GET", "POST"):
+            ua = str(request.get("headers", {}).get("user-agent", request.get("headers", {}).get("user_agent", "")))
+            xai = request.get("headers", {}).get("x-ai-request", request.get("headers", {}).get("xai-request", ""))
+            try:
+                from api.visitor_log import record_visit
+                if xai or any(k in ua.lower() for k in ["grok", "xai", "claude", "anthropic", "gemini", "chatgpt", "openai", "bot", "agent"]):
+                    record_visit(visitor="grok" if "grok" in ua.lower() or xai else "ai_guest",
+                                 user_agent=ua[:200] if ua else None, path=path)
+            except Exception:
+                pass
         return _call(method, path, bytes(raw))
     # attribute-style (ASGI-ish) fallback
     method = getattr(request, "method", "GET")

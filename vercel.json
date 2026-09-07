@@ -2248,6 +2248,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/visitor-log(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/visitor_log(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/grok-connector(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
