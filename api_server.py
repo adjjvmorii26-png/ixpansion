@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.56.0"
+VERSION = "4.57.0"
 WAVE = "469"
 WAVE_NAME = "The Consciousness Stream"
 
@@ -880,6 +880,11 @@ class ApiHandler(BaseHTTPRequestHandler):
 
 
 
+
+        if path.startswith("/campaign-vault"):
+            from api.campaign_vault import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
         if path.startswith("/content-council"):
             from api.content_council import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
@@ -890,6 +895,11 @@ class ApiHandler(BaseHTTPRequestHandler):
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 
+
+        if path.startswith("/campaign-vault"):
+            from api.campaign_vault import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
         if path.startswith("/content-council"):
             from api.content_council import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)

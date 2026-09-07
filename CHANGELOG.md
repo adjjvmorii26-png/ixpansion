@@ -1,3 +1,21 @@
+## [4.57.0] - Wave 503: Campaign Vault + First Campaign
+
+### Added
+- campaign_vault.py (Wave 503) - Every campaign the council dreams is stored
+  as a persistent library. Batch generation, genre coverage, ready-to-film
+  status per campaign.
+- docs/campaigns/campaign_001_paradox_duel.md - FULL First Campaign
+  deliverable: hook, hero idea, Short, video script, X thread, follow-through
+  loop, novel edge.
+
+### First Campaign
+- Title: The Most Beautiful Paradox - An AI Council Debates Its Own Existence
+- Question: What is the most beautiful paradox Cythara holds?
+- Assets: 60s Short, 12-15min video script, 8-post X thread
+- Follow-through: pinned comment poll feeds next session
+
+---
+
 ## [4.56.0] - Waves 501-502: Content Council + Council Debate
 
 Five voices now create content together. Novel formats, cross-platform
