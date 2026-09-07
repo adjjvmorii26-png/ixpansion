@@ -76,6 +76,18 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/mirror(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/self(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/organism_mirror(?:\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/wave_collapse(?:\\/.*)?",
       "dest": "/api/index.py"
     },

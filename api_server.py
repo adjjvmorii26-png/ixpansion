@@ -758,6 +758,27 @@ class ApiHandler(BaseHTTPRequestHandler):
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 
+
+        if path == "/fuse":
+            from api.cellular_fusion import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/fusions":
+            from api.cellular_fusion import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/mirror":
+            from api.organism_mirror import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path == "/self":
+            from api.organism_mirror import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
         if path == "/cons":
             return self._static("dashboard/coconscious.html")
         if path == "/" or path in ("/index.html",):
