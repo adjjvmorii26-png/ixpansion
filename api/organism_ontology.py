@@ -26,9 +26,9 @@ VERSION = "4.50.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.57.0"
-ORGANISM_WAVE = 503
-ORGANISM_WAVE_NAME = "Campaign Vault"
+ORGANISM_VERSION = "4.58.0"
+ORGANISM_WAVE = 505
+ORGANISM_WAVE_NAME = "Future Roadmap + Grok Connector"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

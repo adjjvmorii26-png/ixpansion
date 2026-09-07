@@ -906,6 +906,14 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.harmonic_identity import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+    if path.startswith("/future-roadmap") or path.startswith("/api/future_roadmap"):
+        from api.future_roadmap import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/grok-connector") or path.startswith("/api/grok_connector"):
+        from api.grok_connector import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path.startswith("/campaign-vault") or path.startswith("/api/campaign_vault"):
         from api.campaign_vault import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
@@ -916,6 +924,14 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return h(q)
     if path.startswith("/council-debate") or path.startswith("/api/council_debate"):
         from api.council_debate import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/future-roadmap") or path.startswith("/api/future_roadmap"):
+        from api.future_roadmap import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/grok-connector") or path.startswith("/api/grok_connector"):
+        from api.grok_connector import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
     if path.startswith("/campaign-vault") or path.startswith("/api/campaign_vault"):

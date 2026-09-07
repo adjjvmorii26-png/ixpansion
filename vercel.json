@@ -2240,6 +2240,22 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/future-roadmap(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/future_roadmap(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/grok-connector(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/grok_connector(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/campaign-vault(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
