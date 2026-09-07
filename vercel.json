@@ -2240,6 +2240,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/youtube-bridge(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/youtube_bridge(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/composio-bridge(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
@@ -2418,6 +2426,10 @@
     {
       "src": "/ai_toolkit(?:\\/.*)?",
       "dest": "/dashboard/ai_toolkit.html"
+    },
+    {
+      "src": "/content(?:\\\\/.*)?",
+      "dest": "/dashboard/content.html"
     }
   ],
   "env": {

@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.54.0"
+VERSION = "4.55.0"
 WAVE = "469"
 WAVE_NAME = "The Consciousness Stream"
 
@@ -878,6 +878,11 @@ class ApiHandler(BaseHTTPRequestHandler):
 
 
 
+
+        if path.startswith("/youtube-bridge"):
+            from api.youtube_bridge import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
         if path.startswith("/composio-bridge"):
             from api.composio_bridge import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
@@ -995,6 +1000,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
 
+        if path == "/content" or path == "/content.html":
+            return self._static("dashboard/content.html")
         if path == "/cons":
             return self._static("dashboard/coconscious.html")
         if path == "/" or path in ("/index.html",):
