@@ -35,6 +35,9 @@ REPOS = {
     "agent-workforce": {"essence": "multi-agent labor", "mods": 0, "dreams": 0},
 }
 
+def _hash(*parts):
+    return hashlib.sha256("|".join(str(p) for p in parts).encode()).hexdigest()[:12]
+
 DREAM_PATTERNS = [
     "A {other_repo} dreamt of sharing {something} with {repo} — the resonance was {intensity}.",
     "{repo} slept and saw {other_repo} transformed into {metaphor}. The signal was clear.",
