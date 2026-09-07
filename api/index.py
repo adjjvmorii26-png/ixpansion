@@ -30,6 +30,14 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
     raw_path = (request_path or "/")
     path = raw_path.split("?")[0].rstrip("/") or "/"
 
+    if path == "/telegram-webhook":
+        from api.telegram_webhook import handler as h
+        import json as _json
+        try:
+            _payload = _json.loads(body.decode("utf-8")) if body else {}
+        except Exception:
+            _payload = {}
+        return h(_payload)
     if path == "/health":
         return api_server.platform_health()
     if path == "/modules":

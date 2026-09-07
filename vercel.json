@@ -20,6 +20,14 @@
   ],
   "routes": [
     {
+      "src": "/api/telegram_webhook",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/telegram-webhook",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/resonance-topology(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },

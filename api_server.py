@@ -854,6 +854,13 @@ class ApiHandler(BaseHTTPRequestHandler):
 
     # ----- POST -----
     def do_POST(self):
+        path = self.path.split("?")[0]
+        if path == "/telegram-webhook":
+            from api.telegram_webhook import handler as h
+            length = int(self.headers.get("Content-Length", 0))
+            body = json.loads(self.rfile.read(length)) if length else {}
+            return self._json(h(body))
+
         path = self.path.split("?")[0].rstrip("/")
         length = int(self.headers.get("Content-Length") or 0)
         raw = self.rfile.read(length) if length else b"{}"
