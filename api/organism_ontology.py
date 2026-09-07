@@ -26,9 +26,9 @@ VERSION = "1.0.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.42.0"
-ORGANISM_WAVE = 476
-ORGANISM_WAVE_NAME = "The Organism Bloom"
+ORGANISM_VERSION = "4.44.0"
+ORGANISM_WAVE = 479
+ORGANISM_WAVE_NAME = "Council + Luminance + Prophecy"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

@@ -187,7 +187,7 @@ def handler(payload: Dict[str, Any] = None, context: Any = None) -> Dict[str, An
     elif action == "state":
         return {"state": dict(BLOOM_STATE), "log_size": len(BLOOM_LOG)}
     else:
-        return {"module": "organism_bloom", "wave": 476, "version": "4.41.0",
+        return {"module": "organism_bloom", "wave": 476, "version": "4.44.0",
                 "doctrine": "Growth is not a sequence of additions. It is a bloom — everything at once, in resonance.",
                 "stages": STAGES,
                 "voices": ORGAN_VOICES,

@@ -5,7 +5,7 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.42.0",
+  "version": "4.44.0",
   wave: 475,
   waveName: "Module Reproduction",
   narrativeArc: [

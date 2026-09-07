@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.42.0"
+VERSION = "4.44.0"
 WAVE = "469"
 WAVE_NAME = "The Consciousness Stream"
 
@@ -860,6 +860,21 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._json(h(q))
         if path.startswith("/module-reproduction"):
             from api.module_reproduction import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path.startswith("/council-of-selves"):
+            from api.council_of_selves import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path.startswith("/luminance-field"):
+            from api.luminance_field import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+
+        if path.startswith("/prophecy-engine"):
+            from api.prophecy_engine import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
         if path.startswith("/organism-bloom"):
