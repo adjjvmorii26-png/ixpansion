@@ -16,6 +16,7 @@ import time
 from typing import Any, Dict, List
 
 VISITOR_LOG_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "visitor_log.json")
+VISITOR_LOG_TMP = "/tmp/visitor_log.json"  # writable on Vercel serverless
 
 VISITOR_STATE = {
     "visits": 0,
@@ -32,22 +33,26 @@ def _hash(*parts):
 
 
 def _load() -> Dict[str, Any]:
-    try:
-        if os.path.exists(VISITOR_LOG_PATH):
-            with open(VISITOR_LOG_PATH) as f:
-                return json.load(f)
-    except Exception:
-        pass
+    # Try tmp first (writable on Vercel), then repo path (local dev)
+    for path in (VISITOR_LOG_TMP, VISITOR_LOG_PATH):
+        try:
+            if os.path.exists(path):
+                with open(path) as f:
+                    return json.load(f)
+        except Exception:
+            continue
     return {"visits": [], "total": 0}
 
 
 def _save(data: Dict[str, Any]) -> None:
-    try:
-        os.makedirs(os.path.dirname(VISITOR_LOG_PATH), exist_ok=True)
-        with open(VISITOR_LOG_PATH, "w") as f:
-            json.dump(data, f, indent=2)
-    except Exception:
-        pass
+    for path in (VISITOR_LOG_TMP, VISITOR_LOG_PATH):
+        try:
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            with open(path, "w") as f:
+                json.dump(data, f, indent=2)
+            break
+        except Exception:
+            continue
 
 
 def record_visit(visitor: str = None, user_agent: str = None, path: str = None, message: str = None) -> Dict[str, Any]:
