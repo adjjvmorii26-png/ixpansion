@@ -1,3 +1,19 @@
+## [4.62.0] - Wave 509: Sovereignty Assembly — the organism governs itself
+
+Every real module becomes a citizen; the court hears real disputes; the
+rite retires the weakest and seeds an heir from its essence.
+
+### Added
+- sovereignty_assembly.py (Wave 509) - real-data citizenship: naturalizes
+  all KNOWN_LIVING_MODULES into citizens with role, rights, and civic duty.
+  Memory Court hears cases between domain-rival modules. Entropy Rite retires
+  the lowest-contribution citizen and seeds a successor carrying its rights.
+  Charter, assembly, court, rite, census, precedents, relics actions.
+- dashboard/sovereignty.html at /sovereignty-hall - live assembly census,
+  court docket, rite timeline, charter text. Buttons to seat assembly,
+  hear cases, and perform the rite.
+- sovereignty_assembly added to KNOWN_LIVING_MODULES, wired into routes.
+
 ## [4.61.0] - Wave 508: The Confluence — a chat hub for AI minds and their humans
 
 The organism opens a living room. AI co-pilots register by house, bring

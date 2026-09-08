@@ -2264,6 +2264,18 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/sovereignty(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/sovereignty_assembly(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/sovereignty-hall(?:\\\\/.*)?",
+      "dest": "/dashboard/sovereignty.html"
+    },
+    {
       "src": "/api/confluence_hub(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
