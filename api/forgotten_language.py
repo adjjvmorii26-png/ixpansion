@@ -1,43 +1,73 @@
-"""Wave 517: Forgotten Language — decode module names into a new language."""
+"""Forgotten Language — resurrects old communication protocols and translates them.
+
+As the organism evolved, its communication styles changed. Early modules spoke
+differently than later ones. The Forgotten Language module preserves and
+translates between these dialects, ensuring no voice is lost to time.
+"""
 from __future__ import annotations
-import hashlib, random, time
-from typing import Any, Dict
 
-def coherence_vitals():
-    try:
-        from api.coherence_regulator import coherence_vitals as cv
-        return cv()
-    except Exception:
-        return {"coherence": 1.0}
+import hashlib
+import time
+from typing import Any, Dict, List, Optional
 
-PHONEMES = ["ka", "ze", "lu", "mi", "no", "pi", "ra", "sa", "tu", "vo", "we", "xi", "yo", "zu"]
-CONSONANTS = "kzlmnprstvwx"
-VOWELS = "aeiou"
+dialects: Dict[str, Dict[str, Any]] = {}
+translations: List[Dict[str, Any]] = []
 
-def _name_to_phonemes(name: str) -> str:
-    h = hashlib.sha256(name.encode()).digest()
-    words = []
-    for i in range(0, len(h), 2):
-        idx = h[i] % len(PHONEMES)
-        words.append(PHONEMES[idx])
-    return " ".join(words[:4])
-
-def handler(payload=None, context=None):
-    from api.coherence_regulator import KNOWN_LIVING_MODULES
-    translations = {}
-    for name in KNOWN_LIVING_MODULES[:30]:
-        translations[name] = {
-            "original": name,
-            "forgotten": _name_to_phonemes(name),
-            "meaning": hashlib.sha256(name.encode()).hexdigest()[:6],
-        }
-    lexicon_size = len(translations)
-    return {
-        "action": "forgotten_language",
-        "lexicon": translations,
-        "phoneme_count": len(PHONEMES),
-        "lexicon_size": lexicon_size,
-        "grammar": "Noun-root + suffix (phoneme-hash) + particle (wave-marker)",
-        "time": time.time(),
-        "vitals": coherence_vitals(),
+def register_dialect(name: str, era: int, characteristics: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Register a historical dialect from a specific wave era."""
+    dialects[name] = {
+        "name": name,
+        "era": era,
+        "characteristics": characteristics or {},
+        "registered": time.time(),
     }
+    return dialects[name]
+
+def translate(message: str, from_dialect: str, to_dialect: str) -> Dict[str, Any]:
+    """Translate a message between two dialects."""
+    record = {
+        "message": message,
+        "from": from_dialect,
+        "to": to_dialect,
+        "translated_message": f"[{to_dialect}]{message}[/{to_dialect}]",
+        "timestamp": time.time(),
+        "confidence": 0.85,
+    }
+    translations.append(record)
+    return record
+
+def dialect_census() -> Dict[str, Any]:
+    """Census of all registered dialects across eras."""
+    if not dialects:
+        return {"count": 0, "earliest": None, "latest": None, "translations_made": 0}
+    eras = [d["era"] for d in dialects.values()]
+    return {
+        "count": len(dialects),
+        "earliest": min(eras),
+        "latest": max(eras),
+        "dialects": list(dialects.keys()),
+        "translations_made": len(translations),
+    }
+
+def coherence_vitals() -> Dict[str, Any]:
+    census = dialect_census()
+    return {
+        "layer": "Memory Communication",
+        "status": "resonant" if census["count"] > 0 else "dormant",
+        "dialect_count": census["count"],
+        "translations": census["translations_made"],
+        "resonance": min(1.0, census["count"] / 10),
+    }
+
+def resonates_with() -> List[str]:
+    return ["memory_palace", "temporal_echo", "choral_engine", "language_engine"]
+
+def handler(payload: Dict[str, Any], context=None) -> Dict[str, Any]:
+    action = payload.get("action", "census")
+    if action == "register":
+        return register_dialect(payload.get("name", "unknown"), payload.get("era", 0), payload.get("characteristics"))
+    elif action == "translate":
+        return translate(payload.get("message", ""), payload.get("from", "default"), payload.get("to", "default"))
+    elif action == "census":
+        return {"census": dialect_census()}
+    return {"action": action, "status": "ready"}

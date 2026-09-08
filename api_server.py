@@ -34,7 +34,7 @@ sys.path.insert(0, str(ROOT / "api"))
 
 VERSION = "4.70.0"
 WAVE = "517"
-WAVE_NAME = "The Experimental Frontier"
+WAVE_NAME = "The Execution Stack — how the organism evolves"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY
