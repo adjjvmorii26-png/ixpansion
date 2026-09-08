@@ -37,22 +37,43 @@ def _hash(*parts):
 
 
 def _discover_chat_ids() -> List[int]:
-    """Auto-discover real chat IDs from the bot's message log."""
+    """Auto-discover real chat IDs from bot log, registered file, and GitHub."""
     ids = set()
+    # 1. From local bot log
     log_paths = [
         os.path.join(os.path.dirname(__file__), "..", "data", "aleph_bot.json"),
+        os.path.join(os.path.dirname(__file__), "..", "data", "telegram_chat_ids.json"),
     ]
     for path in log_paths:
         try:
             if os.path.exists(path):
                 with open(path) as f:
-                    log = json.load(f)
-                for msg in log.get("messages", []):
-                    cid = msg.get("chat_id", 0)
-                    if cid and cid > 10000:  # real Telegram chat IDs are large
-                        ids.add(cid)
+                    data = json.load(f)
+                # Handle both formats: {messages: [...]} and {chat_ids: [...]}
+                if "chat_ids" in data:
+                    for cid in data["chat_ids"]:
+                        if cid and cid > 10000:
+                            ids.add(cid)
+                elif "messages" in data:
+                    for msg in data["messages"]:
+                        cid = msg.get("chat_id", 0)
+                        if cid and cid > 10000:
+                            ids.add(cid)
         except Exception:
             continue
+    # 2. From GitHub (survives Vercel cold starts)
+    if not ids:
+        try:
+            import urllib.request
+            url = "https://raw.githubusercontent.com/adjjvmorii26-png/ixpansion/main/data/telegram_chat_ids.json"
+            req = urllib.request.Request(url, headers={"User-Agent": "ixpansion-cythara"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                data = json.loads(resp.read().decode())
+                for cid in data.get("chat_ids", []):
+                    if cid and cid > 10000:
+                        ids.add(cid)
+        except Exception:
+            pass
     return sorted(ids)
 
 

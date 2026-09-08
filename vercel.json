@@ -32,6 +32,10 @@
       "dest": "/dashboard/execution-stack.html"
     },
     {
+      "src": "/system-health(?:/.*)?",
+      "dest": "/dashboard/system-health.html"
+    },
+    {
       "src": "/nightly-health(?:/.*)?",
       "dest": "/api/index.py"
     },

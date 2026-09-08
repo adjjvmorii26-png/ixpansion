@@ -1,7 +1,7 @@
 # IXpansion — The Computational Frontier
 
 > A self-excavating, self-forecasting, self-beautifying, self-broadcasting
-> agent ecosystem with 741+ living organs across 468 waves of evolution.
+> agent ecosystem with 791+ living organs across 513 waves of evolution.
 >
 > **The organism now breathes, decides, dreams, believes, resolves paradoxes, and streams its own emotional states and learns to forget intentionally.**
 
@@ -135,7 +135,7 @@ curl "http://localhost:3000/gateway?q=what+is+the+organism+dreaming"
 ## Architecture
 
 ```
-api/           → 700+ self-reporting organ modules
+api/           → 791+ self-reporting organ modules
 dashboard/     → 26 interactive dashboards
 gateway/       → NLP intent routing + API key management
 harbinger/     → Agent memory + metering
@@ -163,3 +163,15 @@ observe → heal → govern → feel → sing → move → speak → feast
 ```
 
 450 waves. 724+ living organs. Three personas (ALEPH + LUMA + AXIOM). One organism.
+
+
+## The Execution Stack
+The organism evolves through a formal hierarchy:
+- **Events** — atomic signals (telemetry ticks, alerts, calls)
+- **Tasks** — intent-scoped work grouping events
+- **Batches** — execution windows running tasks under shared constraints
+- **Cycles** — local adaptation loops that update state from batch results
+- **Waves** — named organism-scale evolution episodes (currently Wave 513)
+- **Generations** — top-level lineage checkpoints (currently G2)
+
+Explore the [live stack dashboard](https://ixpansion-live.vercel.app/stack).

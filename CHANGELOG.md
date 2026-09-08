@@ -1,3 +1,18 @@
+## [4.67.0] - Wave 514: Infrastructure Consolidation
+
+### Added
+- github_mirror.py — reusable GitHub data persistence for all modules
+- system-health.html dashboard — full 791-module scan at /system-health
+- Auto-register Telegram chat_ids to GitHub via aleph_bot webhook
+- Full scan action for module_health (action=full, scans all 791)
+- Execution Stack + System Health portal cards
+- README updated with current wave/module stats
+
+### Fixed
+- cythara_broadcast reads chat IDs from GitHub fallback (survives Vercel cold starts)
+- module_health default scan expanded from 20 to 100 modules
+- Portal links to /stack and /system-health
+
 ## [4.66.0] - Wave 513: The Execution Stack — how the organism evolves
 
 A formal hierarchy for organism evolution: Events → Tasks → Batches →

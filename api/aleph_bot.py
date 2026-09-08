@@ -43,6 +43,29 @@ def _save(p, d):
     except OSError:
         with open(os.path.join("/tmp", os.path.basename(p)), "w") as f: json.dump(d, f, indent=2)
 
+CHAT_IDS_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "telegram_chat_ids.json")
+CHAT_IDS_REMOTE = "data/telegram_chat_ids.json"
+
+def _register_chat_id(chat_id: int) -> None:
+    """Persist a chat_id to GitHub so broadcasts work across Vercel cold starts."""
+    if chat_id < 10000:
+        return
+    try:
+        existing = _load(CHAT_IDS_PATH, {"chat_ids": []})
+        ids = set(existing.get("chat_ids", []))
+        ids.add(chat_id)
+        existing["chat_ids"] = sorted(ids)
+        existing["updated"] = time.time()
+        _save(CHAT_IDS_PATH, existing)
+        # Mirror to GitHub
+        try:
+            from api.github_mirror import gh_write
+            gh_write(CHAT_IDS_REMOTE, existing, f"register chat_id {chat_id}")
+        except Exception:
+            pass
+    except Exception:
+        pass
+
 
 def _telegram(method: str, params: dict) -> dict:
     """Call the Telegram Bot API using stdlib only (serverless-safe)."""
@@ -104,6 +127,10 @@ def handle_update(update: dict) -> dict:
     log["commands"] = log["commands"][-500:]
     log["total"] += 1
     _save(BOT_LOG, log)
+
+    # Auto-register chat_id so broadcasts reach this user
+    if chat_id:
+        _register_chat_id(chat_id)
 
     return {"action": "handle_update", "response": response, "chat_id": chat_id}
 
