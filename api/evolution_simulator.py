@@ -12,13 +12,14 @@ def coherence_vitals():
 
 def _mutate(name: str, rng) -> str:
     ops = [
-        lambda s: s + rng.choice("_", "_v2", "_prime", "_echo", "_void", "_pulse"),
-        lambda s: s.replace("_", rng.choice("_", "_", "_")) + rng.choice("r", "s", "n", "x"),
-        lambda s: "".join(rng.choice(c, c.upper()) for c in s),
+        lambda s: s + rng.choice(["_", "_v2", "_prime", "_echo", "_void", "_pulse"]),
+        lambda s: s + rng.choice(["r", "s", "n", "x"]),
+        lambda s: "".join(rng.choice([c, c.upper()]) for c in s),
     ]
     return rng.choice(ops)(name)
 
 def handler(payload=None, context=None):
+    payload = payload or {}
     from api.coherence_regulator import KNOWN_LIVING_MODULES
     rng = random.Random(time.time())
     generations = int(payload.get("generations", 5))

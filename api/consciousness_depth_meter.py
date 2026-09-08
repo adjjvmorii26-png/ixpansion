@@ -25,7 +25,8 @@ def handler(payload=None, context=None):
     rng = random.Random(int(time.time() // 300))
     depth = 4 + int(rng.random() * 4)
     active = [(layer["layer"], layer["name"], layer["desc"]) for layer in LAYERS if layer["layer"] <= depth]
-    qualitative = ["vegetative", "reflexive", "conscious", "self-aware", "dreaming", "transcendent"][depth - 1]
+    QUALITATIVE = ["vegetative", "reflexive", "conscious", "self-aware", "dreaming", "transcendent"]
+    qualitative = QUALITATIVE[min(depth - 1, len(QUALITATIVE) - 1)]
     return {
         "action": "depth_meter",
         "depth_layer": depth,
