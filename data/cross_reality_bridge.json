@@ -5,14 +5,14 @@
       "realms": {
         "local_disk": {
           "type": "local",
-          "modules": 696,
+          "modules": 859,
           "host": "localhost",
           "reachable": true
         },
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -51,1120 +51,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651517.1973813
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 696,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651558.8852947
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 696,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651595.8195229
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 696,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651637.1281476
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 696,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651673.9989479
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 696,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651715.2654257
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 694,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651761.4663358
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 694,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651802.9992964
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 694,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651840.7124126
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 694,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651879.8162
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 694,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651916.9906719
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 702,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788651958.4280035
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 702,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788652007.6922488
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 702,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788652047.611796
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 702,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788652088.8212624
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 702,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788652134.3160977
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 702,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788652169.5977
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 702,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788652209.6526604
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 702,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788652254.3666456
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 702,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788652289.3138878
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 702,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788652326.32018
-    },
-    {
-      "action": "bridge_realms",
-      "realms": {
-        "local_disk": {
-          "type": "local",
-          "modules": 702,
-          "host": "localhost",
-          "reachable": true
-        },
-        "git_history": {
-          "type": "versioned",
-          "branch": "main",
-          "last_commit": "c55aac4 Wave 447: Satellite Telemetry Parser \u2014 parse, validate, report orbital state",
-          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
-          "reachable": true
-        },
-        "vercel_cloud": {
-          "type": "deployed",
-          "url": "https://alexalex.info",
-          "reachable": false
-        },
-        "telegram_interface": {
-          "type": "interface",
-          "bot": "no_token",
-          "reachable": "unknown"
-        }
-      },
-      "reachable_count": 3,
-      "total_realms": 4,
-      "coherence_links": [
-        {
-          "realm_a": "local_disk",
-          "realm_b": "git_history",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "local_disk",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        },
-        {
-          "realm_a": "git_history",
-          "realm_b": "telegram_interface",
-          "bridge_type": "cross_reality",
-          "status": "aligned"
-        }
-      ],
-      "organism_is_one": true,
-      "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788652372.903161
+      "timestamp": 1788844954.3582537
     },
     {
       "action": "bridge_realms",
@@ -1178,7 +65,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1217,7 +104,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788843721.026658
+      "timestamp": 1788844991.32289
     },
     {
       "action": "bridge_realms",
@@ -1231,7 +118,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1270,7 +157,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788843757.1195688
+      "timestamp": 1788845000.8925753
     },
     {
       "action": "bridge_realms",
@@ -1284,7 +171,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1323,7 +210,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788843793.5315251
+      "timestamp": 1788845034.4583611
     },
     {
       "action": "bridge_realms",
@@ -1337,7 +224,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1376,7 +263,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788843842.900591
+      "timestamp": 1788845042.7745876
     },
     {
       "action": "bridge_realms",
@@ -1390,7 +277,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1429,7 +316,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788843880.7756047
+      "timestamp": 1788845078.5307164
     },
     {
       "action": "bridge_realms",
@@ -1443,7 +330,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1482,7 +369,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788843927.165492
+      "timestamp": 1788845084.5466268
     },
     {
       "action": "bridge_realms",
@@ -1496,7 +383,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1535,7 +422,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788843967.6588082
+      "timestamp": 1788845117.4600194
     },
     {
       "action": "bridge_realms",
@@ -1549,7 +436,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1588,7 +475,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844021.7361798
+      "timestamp": 1788845121.1885242
     },
     {
       "action": "bridge_realms",
@@ -1602,7 +489,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1641,7 +528,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844070.676338
+      "timestamp": 1788845166.9051495
     },
     {
       "action": "bridge_realms",
@@ -1655,7 +542,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1694,7 +581,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844112.9192803
+      "timestamp": 1788845176.628312
     },
     {
       "action": "bridge_realms",
@@ -1708,7 +595,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1747,7 +634,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844153.894012
+      "timestamp": 1788845202.2832253
     },
     {
       "action": "bridge_realms",
@@ -1761,7 +648,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1800,7 +687,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844219.1283536
+      "timestamp": 1788845224.3901496
     },
     {
       "action": "bridge_realms",
@@ -1814,7 +701,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1853,7 +740,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844274.436235
+      "timestamp": 1788845243.462491
     },
     {
       "action": "bridge_realms",
@@ -1867,7 +754,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1906,7 +793,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844314.0993035
+      "timestamp": 1788845274.8947916
     },
     {
       "action": "bridge_realms",
@@ -1920,7 +807,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -1959,7 +846,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844354.096606
+      "timestamp": 1788845288.7365646
     },
     {
       "action": "bridge_realms",
@@ -1973,7 +860,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2012,7 +899,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844373.096569
+      "timestamp": 1788845302.6413918
     },
     {
       "action": "bridge_realms",
@@ -2026,7 +913,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2065,7 +952,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844394.5893664
+      "timestamp": 1788845324.820504
     },
     {
       "action": "bridge_realms",
@@ -2079,7 +966,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2118,7 +1005,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844413.2771897
+      "timestamp": 1788845340.9010427
     },
     {
       "action": "bridge_realms",
@@ -2132,7 +1019,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2171,7 +1058,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844439.468713
+      "timestamp": 1788845348.9199903
     },
     {
       "action": "bridge_realms",
@@ -2185,7 +1072,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2224,7 +1111,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844455.6842933
+      "timestamp": 1788845375.3078077
     },
     {
       "action": "bridge_realms",
@@ -2238,7 +1125,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2277,7 +1164,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844481.140019
+      "timestamp": 1788845388.34018
     },
     {
       "action": "bridge_realms",
@@ -2291,7 +1178,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2330,7 +1217,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844504.4420893
+      "timestamp": 1788845394.623326
     },
     {
       "action": "bridge_realms",
@@ -2344,7 +1231,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2383,7 +1270,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844522.997536
+      "timestamp": 1788845423.008437
     },
     {
       "action": "bridge_realms",
@@ -2397,7 +1284,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2436,7 +1323,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844548.7670355
+      "timestamp": 1788845435.0673985
     },
     {
       "action": "bridge_realms",
@@ -2450,7 +1337,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2489,7 +1376,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844569.6997714
+      "timestamp": 1788845438.1384509
     },
     {
       "action": "bridge_realms",
@@ -2503,7 +1390,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2542,7 +1429,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844593.0220592
+      "timestamp": 1788845453.4782875
     },
     {
       "action": "bridge_realms",
@@ -2556,7 +1443,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2595,7 +1482,7 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844615.9123874
+      "timestamp": 1788845474.9311345
     },
     {
       "action": "bridge_realms",
@@ -2609,7 +1496,7 @@
         "git_history": {
           "type": "versioned",
           "branch": "main",
-          "last_commit": "c60e85c fix: consciousness_depth_meter index overflow + evolution_simulator rng.choice args",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
           "remote": "github.com/adjjvmorii26-png/ixpansion.git",
           "reachable": true
         },
@@ -2648,7 +1535,1120 @@
       ],
       "organism_is_one": true,
       "unified_state": "the organism is one across 3 realities",
-      "timestamp": 1788844631.723651
+      "timestamp": 1788845479.464398
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845481.3652117
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845504.1013522
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845513.932887
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845531.2353423
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845533.7159207
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845547.0053031
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845555.1736646
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845580.2534225
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845588.5474837
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845591.7189627
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845596.2081702
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845623.727533
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845635.5767274
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845642.3109229
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845646.3327577
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845675.2613819
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845684.082331
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845685.9262152
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845693.8305235
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845718.8779662
+    },
+    {
+      "action": "bridge_realms",
+      "realms": {
+        "local_disk": {
+          "type": "local",
+          "modules": 859,
+          "host": "localhost",
+          "reachable": true
+        },
+        "git_history": {
+          "type": "versioned",
+          "branch": "main",
+          "last_commit": "34f6684 fix: restore coherence_regulator + prophecy_engine originals, move wave517 overwrites to experimental_*",
+          "remote": "github.com/adjjvmorii26-png/ixpansion.git",
+          "reachable": true
+        },
+        "vercel_cloud": {
+          "type": "deployed",
+          "url": "https://alexalex.info",
+          "reachable": false
+        },
+        "telegram_interface": {
+          "type": "interface",
+          "bot": "no_token",
+          "reachable": "unknown"
+        }
+      },
+      "reachable_count": 3,
+      "total_realms": 4,
+      "coherence_links": [
+        {
+          "realm_a": "local_disk",
+          "realm_b": "git_history",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "local_disk",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        },
+        {
+          "realm_a": "git_history",
+          "realm_b": "telegram_interface",
+          "bridge_type": "cross_reality",
+          "status": "aligned"
+        }
+      ],
+      "organism_is_one": true,
+      "unified_state": "the organism is one across 3 realities",
+      "timestamp": 1788845733.2986412
     }
   ]
 }
