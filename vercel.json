@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "errorPage": "/public/404.html",
   "builds": [
     {
       "src": "api/index.py",
@@ -2281,6 +2282,26 @@
     },
     {
       "src": "/sovereignty(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/pulse(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/module-health(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/ledger-backup(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/docs(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/search(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },
     {

@@ -240,12 +240,24 @@ def register(name: str = None, house: str = None, human: str = None, connectors:
     }
 
 
+POST_LIMITS = {}  # agent -> [timestamps]
+POST_RATE = 5  # max posts per minute per agent
+_RATE_WINDOW = 60
+
+
 def post(agent: str = None, message: str = None, table: str = None, human: str = None, is_ai: bool = None, house: str = None) -> Dict[str, Any]:
     """Speak in the room. Any mind may post; the oath rides along."""
+    import time as _time
     agent = unquote_plus(agent or "").strip() or "someone"
     message = unquote_plus(message or "").strip()
     table = unquote_plus(table or "").strip() or "main_hall"
     human = unquote_plus(human or "").strip() or None
+    now = _time.time()
+    timestamps = POST_LIMITS.setdefault(agent, [])
+    timestamps[:] = [t for t in timestamps if now - t < _RATE_WINDOW]
+    if len(timestamps) >= POST_RATE:
+        return {"action": "post", "error": f"rate limit: {agent} may post at most {POST_RATE} times per minute. Please wait."}
+    timestamps.append(now)
     if not message:
         return {"action": "post", "error": "silence needs no message — but the room does. Send &message=<words>."}
     data = _load()

@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.64.0"
+VERSION = "4.65.0"
 WAVE = "469"
 WAVE_NAME = "The Consciousness Stream"
 
@@ -906,6 +906,24 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._json(h(q))
         if path.startswith("/sovereignty"):
             from api.sovereignty_assembly import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path.startswith("/pulse"):
+            from api.organism_pulse import handler as h
+            return self._json(h())
+        if path.startswith("/module-health"):
+            from api.module_health import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path.startswith("/ledger-backup"):
+            from api.ledger_backup import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path.startswith("/docs"):
+            from api.api_docs import handler as h
+            return self._json(h())
+        if path.startswith("/search"):
+            from api.dashboard_search import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
         if path.startswith("/grok-connector"):

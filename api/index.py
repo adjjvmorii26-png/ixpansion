@@ -930,6 +930,24 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.sovereignty_assembly import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+    if path.startswith("/pulse") or path.startswith("/api/organism_pulse"):
+        from api.organism_pulse import handler as h
+        return h()
+    if path.startswith("/module-health") or path.startswith("/api/module_health"):
+        from api.module_health import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/ledger-backup") or path.startswith("/api/ledger_backup"):
+        from api.ledger_backup import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/docs") or path.startswith("/api/api_docs"):
+        from api.api_docs import handler as h
+        return h()
+    if path.startswith("/search") or path.startswith("/api/dashboard_search"):
+        from api.dashboard_search import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path.startswith("/grok-connector") or path.startswith("/api/grok_connector"):
         from api.grok_connector import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
