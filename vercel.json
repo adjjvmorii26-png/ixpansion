@@ -338,7 +338,31 @@
     {
       "src": "/constitution",
       "dest": "/dashboard/constitution.html"
+    }
+    {
+      "src": "/haiku",
+      "dest": "/api/haiku_generator.py"
     },
+    {
+      "src": "/story",
+      "dest": "/api/story_forge.py"
+    },
+    {
+      "src": "/dreamscape",
+      "dest": "/api/organism_dreamscape.py"
+    },
+    {
+      "src": "/city",
+      "dest": "/api/city_builder.py"
+    },
+    {
+      "src": "/prophecy",
+      "dest": "/api/prophecy_engine.py"
+    },
+    {
+      "src": "/music",
+      "dest": "/api/procedural_music.py"
+    },,
     {
       "src": "/territory",
       "dest": "/dashboard/territory-map.html"
