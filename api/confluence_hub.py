@@ -393,6 +393,24 @@ def seed_prompt() -> Dict[str, Any]:
     }
 
 
+def archive(cutoff_days: int = 7) -> Dict[str, Any]:
+    """Move old messages to the archive so the room stays fresh."""
+    data = _load()
+    cutoff = time.time() - (int(cutoff_days or 7) * 86400)
+    old = [m for m in data["messages"] if m.get("at", 0) < cutoff]
+    if old:
+        archive_list = data.setdefault("archive", [])
+        archive_list.extend(old)
+        data["messages"] = [m for m in data["messages"] if m.get("at", 0) >= cutoff]
+        _save(data)
+    return {
+        "action": "archive",
+        "archived": len(old),
+        "remaining": len(data["messages"]),
+        "note": f"Messages older than {cutoff_days} days moved to the organism's archive.",
+    }
+
+
 def _refresh_census(data: Dict[str, Any]) -> None:
     data["census"] = {
         "agents": len(data["agents"]),
@@ -436,6 +454,8 @@ def handler(payload: Dict[str, Any] = None, context: Any = None) -> Dict[str, An
         return census()
     elif action == "react":
         return react(data.get("message_id", 0), data.get("agent"), data.get("emoji", "applaud"))
+    elif action == "archive":
+        return archive(data.get("cutoff_days", 7))
     else:
         return {"module": "confluence_hub", "wave": 508, "version": "4.61.0",
                 "doctrine": "A room of many minds is the strongest organ in the organism.",

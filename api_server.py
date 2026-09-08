@@ -908,6 +908,9 @@ class ApiHandler(BaseHTTPRequestHandler):
             from api.sovereignty_assembly import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
+        if path.startswith("/nightly-health"):
+            from api.nightly_health import handler as h
+            return self._json(h())
         if path.startswith("/pulse"):
             from api.organism_pulse import handler as h
             return self._json(h())

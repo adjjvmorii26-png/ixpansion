@@ -20,6 +20,10 @@
   ],
   "routes": [
     {
+      "src": "/nightly-health(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/telegram_webhook",
       "dest": "/api/index.py"
     },
@@ -2554,6 +2558,11 @@
     {
       "src": "/content(?:\\\\/.*)?",
       "dest": "/dashboard/content.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/404.html",
+      "status": 404
     }
   ],
   "env": {
@@ -2616,6 +2625,12 @@
         }
       ],
       "source": "/vitals(.*)"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/nightly_health",
+      "schedule": "0 3 * * *"
     }
   ]
 }
