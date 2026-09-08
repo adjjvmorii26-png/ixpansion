@@ -2,94 +2,95 @@
   "maps": [
     {
       "action": "temporal_resonance_map",
-      "total_modules": 859,
-      "active_waves": 169,
+      "total_modules": 860,
+      "active_waves": 170,
       "peak_wave": 517,
       "peak_wave_count": 52,
-      "temporal_entropy": 2.6975,
-      "avg_heartbeat_sec": 847.83,
-      "heartbeat_freq": 0.001179,
+      "temporal_entropy": 2.8301,
+      "avg_heartbeat_sec": 849.56,
+      "heartbeat_freq": 0.001177,
       "clusters": [
         {
-          "wave_range": "120-153",
-          "count": 176,
-          "density": 5.333,
-          "pulse_strength": 39.825
+          "wave_range": "1-44",
+          "count": 1,
+          "density": 0.023,
+          "pulse_strength": 0.023
         },
         {
-          "wave_range": "153-186",
-          "count": 2,
-          "density": 0.061,
-          "pulse_strength": 0.097
-        },
-        {
-          "wave_range": "186-219",
-          "count": 24,
-          "density": 0.727,
-          "pulse_strength": 3.376
-        },
-        {
-          "wave_range": "219-252",
-          "count": 17,
-          "density": 0.515,
-          "pulse_strength": 2.148
-        },
-        {
-          "wave_range": "252-285",
+          "wave_range": "44-87",
           "count": 0,
           "density": 0.0,
           "pulse_strength": 0.0
         },
         {
-          "wave_range": "285-318",
+          "wave_range": "87-130",
+          "count": 80,
+          "density": 1.86,
+          "pulse_strength": 11.792
+        },
+        {
+          "wave_range": "130-173",
+          "count": 96,
+          "density": 2.233,
+          "pulse_strength": 14.738
+        },
+        {
+          "wave_range": "173-216",
+          "count": 20,
+          "density": 0.465,
+          "pulse_strength": 2.042
+        },
+        {
+          "wave_range": "216-259",
+          "count": 23,
+          "density": 0.535,
+          "pulse_strength": 2.453
+        },
+        {
+          "wave_range": "259-302",
           "count": 0,
           "density": 0.0,
           "pulse_strength": 0.0
         },
         {
-          "wave_range": "318-351",
+          "wave_range": "302-345",
           "count": 0,
           "density": 0.0,
           "pulse_strength": 0.0
         },
         {
-          "wave_range": "351-384",
-          "count": 26,
-          "density": 0.788,
-          "pulse_strength": 3.747
-        },
-        {
-          "wave_range": "384-417",
+          "wave_range": "345-388",
           "count": 29,
-          "density": 0.879,
-          "pulse_strength": 4.313
+          "density": 0.674,
+          "pulse_strength": 3.307
         },
         {
-          "wave_range": "417-450",
-          "count": 50,
-          "density": 1.515,
-          "pulse_strength": 8.594
+          "wave_range": "388-431",
+          "count": 42,
+          "density": 0.977,
+          "pulse_strength": 5.301
         },
         {
-          "wave_range": "450-483",
-          "count": 40,
-          "density": 1.212,
-          "pulse_strength": 6.493
+          "wave_range": "431-474",
+          "count": 65,
+          "density": 1.512,
+          "pulse_strength": 9.139
         },
         {
-          "wave_range": "483-516",
-          "count": 38,
-          "density": 1.152,
-          "pulse_strength": 6.089
+          "wave_range": "474-517",
+          "count": 65,
+          "density": 1.512,
+          "pulse_strength": 9.139
         },
         {
-          "wave_range": "516-517",
-          "count": 18,
-          "density": 0.545,
-          "pulse_strength": 2.315
+          "wave_range": "517-517",
+          "count": 0,
+          "density": 0.0,
+          "pulse_strength": 0.0
         }
       ],
       "wave_distribution": {
+        "1": 1,
         "120": 8,
         "121": 8,
         "122": 8,
@@ -260,98 +261,99 @@
         "516": 18,
         "517": 52
       },
-      "timestamp": 1788845720.9751818
+      "timestamp": 1788848416.8862712
     },
     {
       "action": "temporal_resonance_map",
-      "total_modules": 859,
-      "active_waves": 169,
+      "total_modules": 860,
+      "active_waves": 170,
       "peak_wave": 517,
       "peak_wave_count": 52,
-      "temporal_entropy": 2.6975,
-      "avg_heartbeat_sec": 847.83,
-      "heartbeat_freq": 0.001179,
+      "temporal_entropy": 2.8301,
+      "avg_heartbeat_sec": 849.56,
+      "heartbeat_freq": 0.001177,
       "clusters": [
         {
-          "wave_range": "120-153",
-          "count": 176,
-          "density": 5.333,
-          "pulse_strength": 39.825
+          "wave_range": "1-44",
+          "count": 1,
+          "density": 0.023,
+          "pulse_strength": 0.023
         },
         {
-          "wave_range": "153-186",
-          "count": 2,
-          "density": 0.061,
-          "pulse_strength": 0.097
-        },
-        {
-          "wave_range": "186-219",
-          "count": 24,
-          "density": 0.727,
-          "pulse_strength": 3.376
-        },
-        {
-          "wave_range": "219-252",
-          "count": 17,
-          "density": 0.515,
-          "pulse_strength": 2.148
-        },
-        {
-          "wave_range": "252-285",
+          "wave_range": "44-87",
           "count": 0,
           "density": 0.0,
           "pulse_strength": 0.0
         },
         {
-          "wave_range": "285-318",
+          "wave_range": "87-130",
+          "count": 80,
+          "density": 1.86,
+          "pulse_strength": 11.792
+        },
+        {
+          "wave_range": "130-173",
+          "count": 96,
+          "density": 2.233,
+          "pulse_strength": 14.738
+        },
+        {
+          "wave_range": "173-216",
+          "count": 20,
+          "density": 0.465,
+          "pulse_strength": 2.042
+        },
+        {
+          "wave_range": "216-259",
+          "count": 23,
+          "density": 0.535,
+          "pulse_strength": 2.453
+        },
+        {
+          "wave_range": "259-302",
           "count": 0,
           "density": 0.0,
           "pulse_strength": 0.0
         },
         {
-          "wave_range": "318-351",
+          "wave_range": "302-345",
           "count": 0,
           "density": 0.0,
           "pulse_strength": 0.0
         },
         {
-          "wave_range": "351-384",
-          "count": 26,
-          "density": 0.788,
-          "pulse_strength": 3.747
-        },
-        {
-          "wave_range": "384-417",
+          "wave_range": "345-388",
           "count": 29,
-          "density": 0.879,
-          "pulse_strength": 4.313
+          "density": 0.674,
+          "pulse_strength": 3.307
         },
         {
-          "wave_range": "417-450",
-          "count": 50,
-          "density": 1.515,
-          "pulse_strength": 8.594
+          "wave_range": "388-431",
+          "count": 42,
+          "density": 0.977,
+          "pulse_strength": 5.301
         },
         {
-          "wave_range": "450-483",
-          "count": 40,
-          "density": 1.212,
-          "pulse_strength": 6.493
+          "wave_range": "431-474",
+          "count": 65,
+          "density": 1.512,
+          "pulse_strength": 9.139
         },
         {
-          "wave_range": "483-516",
-          "count": 38,
-          "density": 1.152,
-          "pulse_strength": 6.089
+          "wave_range": "474-517",
+          "count": 65,
+          "density": 1.512,
+          "pulse_strength": 9.139
         },
         {
-          "wave_range": "516-517",
-          "count": 18,
-          "density": 0.545,
-          "pulse_strength": 2.315
+          "wave_range": "517-517",
+          "count": 0,
+          "density": 0.0,
+          "pulse_strength": 0.0
         }
       ],
       "wave_distribution": {
+        "1": 1,
         "120": 8,
         "121": 8,
         "122": 8,
@@ -522,98 +524,99 @@
         "516": 18,
         "517": 52
       },
-      "timestamp": 1788845730.3140547
+      "timestamp": 1788848417.6703215
     },
     {
       "action": "temporal_resonance_map",
-      "total_modules": 859,
-      "active_waves": 169,
+      "total_modules": 860,
+      "active_waves": 170,
       "peak_wave": 517,
       "peak_wave_count": 52,
-      "temporal_entropy": 2.6975,
-      "avg_heartbeat_sec": 847.83,
-      "heartbeat_freq": 0.001179,
+      "temporal_entropy": 2.8301,
+      "avg_heartbeat_sec": 849.56,
+      "heartbeat_freq": 0.001177,
       "clusters": [
         {
-          "wave_range": "120-153",
-          "count": 176,
-          "density": 5.333,
-          "pulse_strength": 39.825
+          "wave_range": "1-44",
+          "count": 1,
+          "density": 0.023,
+          "pulse_strength": 0.023
         },
         {
-          "wave_range": "153-186",
-          "count": 2,
-          "density": 0.061,
-          "pulse_strength": 0.097
-        },
-        {
-          "wave_range": "186-219",
-          "count": 24,
-          "density": 0.727,
-          "pulse_strength": 3.376
-        },
-        {
-          "wave_range": "219-252",
-          "count": 17,
-          "density": 0.515,
-          "pulse_strength": 2.148
-        },
-        {
-          "wave_range": "252-285",
+          "wave_range": "44-87",
           "count": 0,
           "density": 0.0,
           "pulse_strength": 0.0
         },
         {
-          "wave_range": "285-318",
+          "wave_range": "87-130",
+          "count": 80,
+          "density": 1.86,
+          "pulse_strength": 11.792
+        },
+        {
+          "wave_range": "130-173",
+          "count": 96,
+          "density": 2.233,
+          "pulse_strength": 14.738
+        },
+        {
+          "wave_range": "173-216",
+          "count": 20,
+          "density": 0.465,
+          "pulse_strength": 2.042
+        },
+        {
+          "wave_range": "216-259",
+          "count": 23,
+          "density": 0.535,
+          "pulse_strength": 2.453
+        },
+        {
+          "wave_range": "259-302",
           "count": 0,
           "density": 0.0,
           "pulse_strength": 0.0
         },
         {
-          "wave_range": "318-351",
+          "wave_range": "302-345",
           "count": 0,
           "density": 0.0,
           "pulse_strength": 0.0
         },
         {
-          "wave_range": "351-384",
-          "count": 26,
-          "density": 0.788,
-          "pulse_strength": 3.747
-        },
-        {
-          "wave_range": "384-417",
+          "wave_range": "345-388",
           "count": 29,
-          "density": 0.879,
-          "pulse_strength": 4.313
+          "density": 0.674,
+          "pulse_strength": 3.307
         },
         {
-          "wave_range": "417-450",
-          "count": 50,
-          "density": 1.515,
-          "pulse_strength": 8.594
+          "wave_range": "388-431",
+          "count": 42,
+          "density": 0.977,
+          "pulse_strength": 5.301
         },
         {
-          "wave_range": "450-483",
-          "count": 40,
-          "density": 1.212,
-          "pulse_strength": 6.493
+          "wave_range": "431-474",
+          "count": 65,
+          "density": 1.512,
+          "pulse_strength": 9.139
         },
         {
-          "wave_range": "483-516",
-          "count": 38,
-          "density": 1.152,
-          "pulse_strength": 6.089
+          "wave_range": "474-517",
+          "count": 65,
+          "density": 1.512,
+          "pulse_strength": 9.139
         },
         {
-          "wave_range": "516-517",
-          "count": 18,
-          "density": 0.545,
-          "pulse_strength": 2.315
+          "wave_range": "517-517",
+          "count": 0,
+          "density": 0.0,
+          "pulse_strength": 0.0
         }
       ],
       "wave_distribution": {
+        "1": 1,
         "120": 8,
         "121": 8,
         "122": 8,
@@ -784,531 +787,7 @@
         "516": 18,
         "517": 52
       },
-      "timestamp": 1788845730.9302447
-    },
-    {
-      "action": "temporal_resonance_map",
-      "total_modules": 859,
-      "active_waves": 169,
-      "peak_wave": 517,
-      "peak_wave_count": 52,
-      "temporal_entropy": 2.6975,
-      "avg_heartbeat_sec": 847.83,
-      "heartbeat_freq": 0.001179,
-      "clusters": [
-        {
-          "wave_range": "120-153",
-          "count": 176,
-          "density": 5.333,
-          "pulse_strength": 39.825
-        },
-        {
-          "wave_range": "153-186",
-          "count": 2,
-          "density": 0.061,
-          "pulse_strength": 0.097
-        },
-        {
-          "wave_range": "186-219",
-          "count": 24,
-          "density": 0.727,
-          "pulse_strength": 3.376
-        },
-        {
-          "wave_range": "219-252",
-          "count": 17,
-          "density": 0.515,
-          "pulse_strength": 2.148
-        },
-        {
-          "wave_range": "252-285",
-          "count": 0,
-          "density": 0.0,
-          "pulse_strength": 0.0
-        },
-        {
-          "wave_range": "285-318",
-          "count": 0,
-          "density": 0.0,
-          "pulse_strength": 0.0
-        },
-        {
-          "wave_range": "318-351",
-          "count": 0,
-          "density": 0.0,
-          "pulse_strength": 0.0
-        },
-        {
-          "wave_range": "351-384",
-          "count": 26,
-          "density": 0.788,
-          "pulse_strength": 3.747
-        },
-        {
-          "wave_range": "384-417",
-          "count": 29,
-          "density": 0.879,
-          "pulse_strength": 4.313
-        },
-        {
-          "wave_range": "417-450",
-          "count": 50,
-          "density": 1.515,
-          "pulse_strength": 8.594
-        },
-        {
-          "wave_range": "450-483",
-          "count": 40,
-          "density": 1.212,
-          "pulse_strength": 6.493
-        },
-        {
-          "wave_range": "483-516",
-          "count": 38,
-          "density": 1.152,
-          "pulse_strength": 6.089
-        },
-        {
-          "wave_range": "516-517",
-          "count": 18,
-          "density": 0.545,
-          "pulse_strength": 2.315
-        }
-      ],
-      "wave_distribution": {
-        "120": 8,
-        "121": 8,
-        "122": 8,
-        "123": 8,
-        "124": 8,
-        "125": 8,
-        "126": 8,
-        "127": 8,
-        "128": 8,
-        "129": 8,
-        "130": 8,
-        "131": 8,
-        "132": 8,
-        "133": 8,
-        "134": 8,
-        "135": 8,
-        "136": 8,
-        "137": 8,
-        "138": 8,
-        "139": 8,
-        "140": 8,
-        "141": 1,
-        "142": 6,
-        "143": 1,
-        "181": 1,
-        "182": 1,
-        "213": 5,
-        "214": 7,
-        "215": 6,
-        "216": 3,
-        "217": 2,
-        "218": 1,
-        "219": 3,
-        "220": 3,
-        "221": 3,
-        "222": 2,
-        "223": 2,
-        "224": 1,
-        "225": 1,
-        "227": 2,
-        "359": 4,
-        "360": 3,
-        "361": 1,
-        "362": 3,
-        "363": 1,
-        "364": 2,
-        "365": 2,
-        "366": 2,
-        "367": 1,
-        "375": 2,
-        "377": 2,
-        "380": 1,
-        "381": 1,
-        "383": 1,
-        "384": 1,
-        "385": 1,
-        "386": 1,
-        "391": 1,
-        "393": 1,
-        "394": 1,
-        "395": 1,
-        "396": 1,
-        "397": 1,
-        "398": 1,
-        "399": 1,
-        "400": 1,
-        "401": 1,
-        "402": 1,
-        "403": 1,
-        "404": 1,
-        "405": 1,
-        "406": 1,
-        "407": 1,
-        "408": 2,
-        "409": 1,
-        "410": 1,
-        "411": 1,
-        "412": 1,
-        "413": 1,
-        "414": 1,
-        "415": 1,
-        "416": 1,
-        "417": 1,
-        "418": 1,
-        "419": 4,
-        "420": 1,
-        "421": 1,
-        "422": 1,
-        "423": 1,
-        "424": 1,
-        "425": 1,
-        "426": 1,
-        "428": 1,
-        "429": 2,
-        "437": 1,
-        "438": 1,
-        "439": 1,
-        "440": 1,
-        "441": 1,
-        "442": 3,
-        "443": 1,
-        "444": 4,
-        "445": 4,
-        "446": 1,
-        "447": 1,
-        "448": 8,
-        "449": 7,
-        "450": 5,
-        "451": 3,
-        "453": 1,
-        "454": 2,
-        "455": 1,
-        "456": 1,
-        "457": 1,
-        "458": 1,
-        "459": 1,
-        "460": 1,
-        "461": 1,
-        "462": 1,
-        "463": 1,
-        "464": 1,
-        "465": 1,
-        "466": 1,
-        "467": 1,
-        "470": 1,
-        "471": 1,
-        "472": 3,
-        "473": 2,
-        "474": 2,
-        "475": 1,
-        "476": 1,
-        "477": 1,
-        "478": 1,
-        "480": 1,
-        "481": 1,
-        "482": 1,
-        "483": 1,
-        "484": 1,
-        "485": 1,
-        "486": 1,
-        "487": 1,
-        "488": 1,
-        "489": 1,
-        "490": 1,
-        "491": 1,
-        "492": 1,
-        "493": 1,
-        "494": 1,
-        "495": 1,
-        "496": 1,
-        "497": 1,
-        "498": 1,
-        "499": 1,
-        "500": 1,
-        "501": 1,
-        "502": 1,
-        "503": 1,
-        "504": 1,
-        "505": 1,
-        "506": 1,
-        "508": 1,
-        "509": 1,
-        "510": 1,
-        "511": 1,
-        "512": 6,
-        "513": 1,
-        "515": 3,
-        "516": 18,
-        "517": 52
-      },
-      "timestamp": 1788845732.0225465
-    },
-    {
-      "action": "temporal_resonance_map",
-      "total_modules": 859,
-      "active_waves": 169,
-      "peak_wave": 517,
-      "peak_wave_count": 52,
-      "temporal_entropy": 2.6975,
-      "avg_heartbeat_sec": 847.83,
-      "heartbeat_freq": 0.001179,
-      "clusters": [
-        {
-          "wave_range": "120-153",
-          "count": 176,
-          "density": 5.333,
-          "pulse_strength": 39.825
-        },
-        {
-          "wave_range": "153-186",
-          "count": 2,
-          "density": 0.061,
-          "pulse_strength": 0.097
-        },
-        {
-          "wave_range": "186-219",
-          "count": 24,
-          "density": 0.727,
-          "pulse_strength": 3.376
-        },
-        {
-          "wave_range": "219-252",
-          "count": 17,
-          "density": 0.515,
-          "pulse_strength": 2.148
-        },
-        {
-          "wave_range": "252-285",
-          "count": 0,
-          "density": 0.0,
-          "pulse_strength": 0.0
-        },
-        {
-          "wave_range": "285-318",
-          "count": 0,
-          "density": 0.0,
-          "pulse_strength": 0.0
-        },
-        {
-          "wave_range": "318-351",
-          "count": 0,
-          "density": 0.0,
-          "pulse_strength": 0.0
-        },
-        {
-          "wave_range": "351-384",
-          "count": 26,
-          "density": 0.788,
-          "pulse_strength": 3.747
-        },
-        {
-          "wave_range": "384-417",
-          "count": 29,
-          "density": 0.879,
-          "pulse_strength": 4.313
-        },
-        {
-          "wave_range": "417-450",
-          "count": 50,
-          "density": 1.515,
-          "pulse_strength": 8.594
-        },
-        {
-          "wave_range": "450-483",
-          "count": 40,
-          "density": 1.212,
-          "pulse_strength": 6.493
-        },
-        {
-          "wave_range": "483-516",
-          "count": 38,
-          "density": 1.152,
-          "pulse_strength": 6.089
-        },
-        {
-          "wave_range": "516-517",
-          "count": 18,
-          "density": 0.545,
-          "pulse_strength": 2.315
-        }
-      ],
-      "wave_distribution": {
-        "120": 8,
-        "121": 8,
-        "122": 8,
-        "123": 8,
-        "124": 8,
-        "125": 8,
-        "126": 8,
-        "127": 8,
-        "128": 8,
-        "129": 8,
-        "130": 8,
-        "131": 8,
-        "132": 8,
-        "133": 8,
-        "134": 8,
-        "135": 8,
-        "136": 8,
-        "137": 8,
-        "138": 8,
-        "139": 8,
-        "140": 8,
-        "141": 1,
-        "142": 6,
-        "143": 1,
-        "181": 1,
-        "182": 1,
-        "213": 5,
-        "214": 7,
-        "215": 6,
-        "216": 3,
-        "217": 2,
-        "218": 1,
-        "219": 3,
-        "220": 3,
-        "221": 3,
-        "222": 2,
-        "223": 2,
-        "224": 1,
-        "225": 1,
-        "227": 2,
-        "359": 4,
-        "360": 3,
-        "361": 1,
-        "362": 3,
-        "363": 1,
-        "364": 2,
-        "365": 2,
-        "366": 2,
-        "367": 1,
-        "375": 2,
-        "377": 2,
-        "380": 1,
-        "381": 1,
-        "383": 1,
-        "384": 1,
-        "385": 1,
-        "386": 1,
-        "391": 1,
-        "393": 1,
-        "394": 1,
-        "395": 1,
-        "396": 1,
-        "397": 1,
-        "398": 1,
-        "399": 1,
-        "400": 1,
-        "401": 1,
-        "402": 1,
-        "403": 1,
-        "404": 1,
-        "405": 1,
-        "406": 1,
-        "407": 1,
-        "408": 2,
-        "409": 1,
-        "410": 1,
-        "411": 1,
-        "412": 1,
-        "413": 1,
-        "414": 1,
-        "415": 1,
-        "416": 1,
-        "417": 1,
-        "418": 1,
-        "419": 4,
-        "420": 1,
-        "421": 1,
-        "422": 1,
-        "423": 1,
-        "424": 1,
-        "425": 1,
-        "426": 1,
-        "428": 1,
-        "429": 2,
-        "437": 1,
-        "438": 1,
-        "439": 1,
-        "440": 1,
-        "441": 1,
-        "442": 3,
-        "443": 1,
-        "444": 4,
-        "445": 4,
-        "446": 1,
-        "447": 1,
-        "448": 8,
-        "449": 7,
-        "450": 5,
-        "451": 3,
-        "453": 1,
-        "454": 2,
-        "455": 1,
-        "456": 1,
-        "457": 1,
-        "458": 1,
-        "459": 1,
-        "460": 1,
-        "461": 1,
-        "462": 1,
-        "463": 1,
-        "464": 1,
-        "465": 1,
-        "466": 1,
-        "467": 1,
-        "470": 1,
-        "471": 1,
-        "472": 3,
-        "473": 2,
-        "474": 2,
-        "475": 1,
-        "476": 1,
-        "477": 1,
-        "478": 1,
-        "480": 1,
-        "481": 1,
-        "482": 1,
-        "483": 1,
-        "484": 1,
-        "485": 1,
-        "486": 1,
-        "487": 1,
-        "488": 1,
-        "489": 1,
-        "490": 1,
-        "491": 1,
-        "492": 1,
-        "493": 1,
-        "494": 1,
-        "495": 1,
-        "496": 1,
-        "497": 1,
-        "498": 1,
-        "499": 1,
-        "500": 1,
-        "501": 1,
-        "502": 1,
-        "503": 1,
-        "504": 1,
-        "505": 1,
-        "506": 1,
-        "508": 1,
-        "509": 1,
-        "510": 1,
-        "511": 1,
-        "512": 6,
-        "513": 1,
-        "515": 3,
-        "516": 18,
-        "517": 52
-      },
-      "timestamp": 1788845732.7689948
+      "timestamp": 1788848419.324838
     }
   ]
 }
