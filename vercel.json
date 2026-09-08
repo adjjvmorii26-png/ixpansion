@@ -2720,11 +2720,6 @@
       "dest": "/dashboard/content.html"
     },
     {
-      "src": "/(.*)",
-      "dest": "/public/404.html",
-      "status": 404
-    },
-    {
       "src": "/self-test-generator(?:/.*)?",
       "dest": "/api/self_test_generator.py"
     },
@@ -2951,6 +2946,11 @@
     {
       "src": "/music",
       "dest": "/api/procedural_music.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/404.html",
+      "status": 404
     }
   ],
   "env": {
