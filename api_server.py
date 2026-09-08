@@ -32,9 +32,9 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.69.0"
-WAVE = "516"
-WAVE_NAME = "The Deep Architecture"
+VERSION = "4.70.0"
+WAVE = "517"
+WAVE_NAME = "The Experimental Frontier"
 
 try:
     from api.unified_router import UnifiedRouter, MODULE_REGISTRY

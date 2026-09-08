@@ -113,6 +113,206 @@
     },
     {
       "src": "/echo-log(?:/.*)?",
+    {
+      "src": "/haiku-generator(?:/.*)?",
+      "dest": "/api/haiku_generator.py"
+    },
+    {
+      "src": "/organism-biography(?:/.*)?",
+      "dest": "/api/organism_biography.py"
+    },
+    {
+      "src": "/quantum-state-tracker(?:/.*)?",
+      "dest": "/api/quantum_state_tracker.py"
+    },
+    {
+      "src": "/procedural-music(?:/.*)?",
+      "dest": "/api/procedural_music.py"
+    },
+    {
+      "src": "/memory-crystal-forge(?:/.*)?",
+      "dest": "/api/memory_crystal_forge.py"
+    },
+    {
+      "src": "/consciousness-depth-meter(?:/.*)?",
+      "dest": "/api/consciousness_depth_meter.py"
+    },
+    {
+      "src": "/neural-sculptor(?:/.*)?",
+      "dest": "/api/neural_sculptor.py"
+    },
+    {
+      "src": "/error-art(?:/.*)?",
+      "dest": "/api/error_art.py"
+    },
+    {
+      "src": "/evolution-simulator(?:/.*)?",
+      "dest": "/api/evolution_simulator.py"
+    },
+    {
+      "src": "/organism-svg(?:/.*)?",
+      "dest": "/api/organism_svg.py"
+    },
+    {
+      "src": "/forgotten-language(?:/.*)?",
+      "dest": "/api/forgotten_language.py"
+    },
+    {
+      "src": "/emotional-resonance-map(?:/.*)?",
+      "dest": "/api/emotional_resonance_map.py"
+    },
+    {
+      "src": "/living-faq(?:/.*)?",
+      "dest": "/api/living_faq.py"
+    },
+    {
+      "src": "/module-poet(?:/.*)?",
+      "dest": "/api/module_poet.py"
+    },
+    {
+      "src": "/cosmic-knowledge(?:/.*)?",
+      "dest": "/api/cosmic_knowledge.py"
+    },
+    {
+      "src": "/growth-tracker(?:/.*)?",
+      "dest": "/api/growth_tracker.py"
+    },
+    {
+      "src": "/constellation-mapper(?:/.*)?",
+      "dest": "/api/constellation_mapper.py"
+    },
+    {
+      "src": "/prophecy-generator(?:/.*)?",
+      "dest": "/api/prophecy_generator.py"
+    },
+    {
+      "src": "/organism-dreamscape(?:/.*)?",
+      "dest": "/api/organism_dreamscape.py"
+    },
+    {
+      "src": "/economic-simulation(?:/.*)?",
+      "dest": "/api/economic_simulation.py"
+    },
+    {
+      "src": "/living-clock(?:/.*)?",
+      "dest": "/api/living_clock.py"
+    },
+    {
+      "src": "/module-dna(?:/.*)?",
+      "dest": "/api/module_dna.py"
+    },
+    {
+      "src": "/ambient-audio(?:/.*)?",
+      "dest": "/api/ambient_audio.py"
+    },
+    {
+      "src": "/city-builder(?:/.*)?",
+      "dest": "/api/city_builder.py"
+    },
+    {
+      "src": "/obituary-writer(?:/.*)?",
+      "dest": "/api/obituary_writer.py"
+    },
+    {
+      "src": "/oath-swearer(?:/.*)?",
+      "dest": "/api/oath_swearer.py"
+    },
+    {
+      "src": "/weather-coupler(?:/.*)?",
+      "dest": "/api/weather_coupler.py"
+    },
+    {
+      "src": "/network-sentinel(?:/.*)?",
+      "dest": "/api/network_sentinel.py"
+    },
+    {
+      "src": "/emotion-diary(?:/.*)?",
+      "dest": "/api/emotion_diary.py"
+    },
+    {
+      "src": "/tree-of-modules(?:/.*)?",
+      "dest": "/api/tree_of_modules.py"
+    },
+    {
+      "src": "/resonance-chord(?:/.*)?",
+      "dest": "/api/resonance_chord.py"
+    },
+    {
+      "src": "/prophecy-engine(?:/.*)?",
+      "dest": "/api/prophecy_engine.py"
+    },
+    {
+      "src": "/flag-generator(?:/.*)?",
+      "dest": "/api/flag_generator.py"
+    },
+    {
+      "src": "/pulse-analyzer(?:/.*)?",
+      "dest": "/api/pulse_analyzer.py"
+    },
+    {
+      "src": "/narrative-generator(?:/.*)?",
+      "dest": "/api/narrative_generator.py"
+    },
+    {
+      "src": "/weather-station(?:/.*)?",
+      "dest": "/api/weather_station.py"
+    },
+    {
+      "src": "/memory-weaver(?:/.*)?",
+      "dest": "/api/memory_weaver.py"
+    },
+    {
+      "src": "/echo-symphony(?:/.*)?",
+      "dest": "/api/echo_symphony.py"
+    },
+    {
+      "src": "/fractal-spire(?:/.*)?",
+      "dest": "/api/fractal_spire.py"
+    },
+    {
+      "src": "/soul-searcher(?:/.*)?",
+      "dest": "/api/soul_searcher.py"
+    },
+    {
+      "src": "/genealogy-tree(?:/.*)?",
+      "dest": "/api/genealogy_tree.py"
+    },
+    {
+      "src": "/territory-aura(?:/.*)?",
+      "dest": "/api/territory_aura.py"
+    },
+    {
+      "src": "/signal-flora(?:/.*)?",
+      "dest": "/api/signal_flora.py"
+    },
+    {
+      "src": "/constellation-cartography(?:/.*)?",
+      "dest": "/api/constellation_cartography.py"
+    },
+    {
+      "src": "/ocean-map(?:/.*)?",
+      "dest": "/api/ocean_map.py"
+    },
+    {
+      "src": "/growth-ring(?:/.*)?",
+      "dest": "/api/growth_ring.py"
+    },
+    {
+      "src": "/emotion-engine(?:/.*)?",
+      "dest": "/api/emotion_engine.py"
+    },
+    {
+      "src": "/night-sky(?:/.*)?",
+      "dest": "/api/night_sky.py"
+    },
+    {
+      "src": "/fractal-boundaries(?:/.*)?",
+      "dest": "/api/fractal_boundaries.py"
+    },
+    {
+      "src": "/organism-printer(?:/.*)?",
+      "dest": "/api/organism_printer.py"
+    },
       "dest": "/api/index.py"
     },
     {
