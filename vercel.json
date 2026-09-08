@@ -2268,6 +2268,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/organism-mood(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/organism_mood(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/api/council_live(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },

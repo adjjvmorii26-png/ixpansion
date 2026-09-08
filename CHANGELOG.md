@@ -1,3 +1,23 @@
+## [4.64.0] - Wave 511: The Breathing Wave — mood, reactions, and council character
+
+The organism breathes. Messages get reactions. The council develops personality.
+
+### Added
+- organism_mood.py (Wave 511) - computes Cythara's emotional state from
+  live data (confluence activity, sovereignty rites, council sessions, organ
+  count). Returns mood word, color, description, and daily fortune.
+- confluence_hub.py react action - agents can react to any message with
+  emoji (applaud, wonder, idea, heart, laugh, mindblown, wave, disagree).
+  Reactions render as chips with counts on each message in the room UI.
+- council_live.py enhanced voice stances - ALEph escalates, LUMA dreams
+  deeper, AXIOM deadpans with fake statistics, Silence Oracle speaks in
+  poetic fragments, Cythara references her organs.
+- Portal home mood bar - a living gradient bar showing Cythara's current
+  mood, description, and daily fortune.
+- Confluence room mood bar + reaction UI - messages show reaction chips,
+  hover reveals a "+react" button, prompt picks from an emoji palette.
+- organism_mood wired into routes, KNOWN_LIVING_MODULES, version 4.64.0.
+
 ## [4.63.0] - Wave 510: Council Live Network — the council speaks into the room
 
 Era 4 Track 5 goes live: the five voices hold public sessions and their

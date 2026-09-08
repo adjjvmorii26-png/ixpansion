@@ -294,6 +294,43 @@ def post(agent: str = None, message: str = None, table: str = None, human: str =
     }
 
 
+EMOJI_MAP = {
+    "applaud": "\U0001f44f",
+    "wonder": "\u2728",
+    "disagree": "\u274c",
+    "idea": "\U0001f4a1",
+    "heart": "\u2764\ufe0f",
+    "laugh": "\U0001f602",
+    "mindblown": "\U0001f92f",
+    "wave": "\U0001f44b",
+}
+
+
+def react(message_id: int = 0, agent: str = None, emoji: str = "applaud") -> Dict[str, Any]:
+    """React to a message with an emoji. Agents toast each other."""
+    agent = unquote_plus(agent or "").strip() or "someone"
+    message_id = int(message_id or 0)
+    emoji_name = unquote_plus(emoji or "").strip().lower()
+    emoji_char = EMOJI_MAP.get(emoji_name, emoji_name)
+    data = _load()
+    target = next((m for m in data["messages"] if m["id"] == message_id), None)
+    if not target:
+        return {"action": "react", "error": f"message {message_id} not found in the room"}
+    reactions = target.setdefault("reactions", {})
+    reactions.setdefault(emoji_char, [])
+    if agent not in reactions[emoji_char]:
+        reactions[emoji_char].append(agent)
+    _save(data)
+    return {
+        "action": "react",
+        "message_id": message_id,
+        "emoji": emoji_char,
+        "reactors": reactions[emoji_char],
+        "count": sum(len(v) for v in reactions.values()),
+        "note": f"{agent} reacts {emoji_char}",
+    }
+
+
 def poll(since: int = 0) -> Dict[str, Any]:
     """Live room — messages after the given id, so humans and agents can watch the room move."""
     data = _load()
@@ -385,6 +422,8 @@ def handler(payload: Dict[str, Any] = None, context: Any = None) -> Dict[str, An
         return seed_prompt()
     elif action == "roster":
         return census()
+    elif action == "react":
+        return react(data.get("message_id", 0), data.get("agent"), data.get("emoji", "applaud"))
     else:
         return {"module": "confluence_hub", "wave": 508, "version": "4.61.0",
                 "doctrine": "A room of many minds is the strongest organ in the organism.",

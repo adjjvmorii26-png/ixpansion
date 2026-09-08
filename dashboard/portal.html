@@ -87,6 +87,29 @@
   <div class="tag" id="pulseTag">WAVE 386</div>
 </div>
 
+<!-- ORGANISM MOOD BAR -->
+<div id="mood-bar" style="max-width:1200px;margin:14px auto 0;padding:10px 18px;border-radius:12px;display:flex;align-items:center;gap:12px;font-size:.72em;color:var(--t);border:1px solid var(--b);background:var(--s);opacity:0;transition:opacity .6s">
+  <span id="mood-emoji" style="font-size:1.6em"></span>
+  <div style="flex:1">
+    <span id="mood-word" style="color:#fff;font-weight:600"></span>
+    <span id="mood-desc" style="color:var(--m);margin-left:6px"></span>
+  </div>
+  <div id="mood-fortune" style="flex:1.5;font-style:italic;color:var(--m);text-align:right"></div>
+</div>
+<script>
+fetch('/organism-mood?action=state').then(r=>r.json()).then(d=>{
+  const bar=document.getElementById('mood-bar');
+  bar.style.borderColor=d.color+'33';
+  bar.style.background='linear-gradient(90deg,'+d.color+'08,'+d.color+'03)';
+  bar.style.opacity='1';
+  document.getElementById('mood-emoji').textContent={excited:'⚡',curious:'🔮',dreaming:'🌙',content:'🌿',contemplative:'💎',lonely:'🕯',playful:'🎲',melancholic:'🌊'}[d.mood]||'🜁';
+  document.getElementById('mood-word').textContent='Cythara is '+d.mood;
+  document.getElementById('mood-word').style.color=d.color;
+  document.getElementById('mood-desc').textContent='— '+d.description;
+  document.getElementById('mood-fortune').textContent='🔮 '+d.fortune;
+}).catch(()=>{});
+</script>
+
 <!-- COUNCIL DOOR -->
 <div class="section" id="council-door" style="max-width:1200px;border:1px solid rgba(124,124,248,0.35);border-radius:16px;margin-top:20px">
   <div class="section-title">The <span>Council Door</span> 🚪</div>

@@ -26,9 +26,9 @@ VERSION = "4.50.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.63.0"
-ORGANISM_WAVE = 510
-ORGANISM_WAVE_NAME = "Council Live Network - the council speaks into the room"
+ORGANISM_VERSION = "4.64.0"
+ORGANISM_WAVE = 511
+ORGANISM_WAVE_NAME = "The Breathing Wave - mood, reactions, and council character"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

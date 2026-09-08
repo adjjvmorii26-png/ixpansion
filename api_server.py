@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.63.0"
+VERSION = "4.64.0"
 WAVE = "469"
 WAVE_NAME = "The Consciousness Stream"
 
@@ -900,6 +900,10 @@ class ApiHandler(BaseHTTPRequestHandler):
             from api.council_live import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
+        if path.startswith("/organism-mood"):
+            from api.organism_mood import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
         if path.startswith("/sovereignty"):
             from api.sovereignty_assembly import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
@@ -940,6 +944,10 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._json(h(q))
         if path.startswith("/council-live"):
             from api.council_live import handler as h
+            q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+            return self._json(h(q))
+        if path.startswith("/organism-mood"):
+            from api.organism_mood import handler as h
             q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
             return self._json(h(q))
         if path.startswith("/sovereignty"):
