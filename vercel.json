@@ -20,6 +20,18 @@
   ],
   "routes": [
     {
+      "src": "/exec-stack(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/execution_stack(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/stack(?:/.*)?",
+      "dest": "/dashboard/execution-stack.html"
+    },
+    {
       "src": "/nightly-health(?:/.*)?",
       "dest": "/api/index.py"
     },

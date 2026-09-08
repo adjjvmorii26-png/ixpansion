@@ -1,3 +1,16 @@
+## [4.66.0] - Wave 513: The Execution Stack — how the organism evolves
+
+A formal hierarchy for organism evolution: Events → Tasks → Batches →
+Cycles → Waves → Generations. The organism now knows how it changes.
+
+### Added
+- execution_stack.py (Wave 513) - full hierarchy: emit_event, create_task,
+  complete_task, create_batch, complete_batch, run_cycle, start_wave,
+  complete_wave, generation_info, stack_overview. GitHub-mirrored ledger.
+- dashboard/execution-stack.html at /stack - visual dashboard showing
+  stats, recent events/tasks/batches/cycles, generation lineage.
+- Generations G0-G3 defined with themes and wave ranges.
+
 ## [4.65.0] - Wave 512: The Infrastructure Wave — 10 environment improvements
 
 ALEph's 10 projects: pulse endpoint, custom 404, health scanner, rate
