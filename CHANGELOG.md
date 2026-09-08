@@ -1,3 +1,20 @@
+## [4.68.0] - Wave 515: The Maintenance Frontier
+
+### Added
+- organism_maint.py — maintenance & observability suite (env_status, sync_status, cron_jobs, error_log, webhooks, active_modules, release_notes, backup_status)
+- module_analytics.py — aggregate stats across all organism components
+- leaderboard.py — Lucid Machines runs + module fitness rankings
+- dashboard/maintenance.html — tabbed observability dashboard at /maintenance
+- dashboard/leaderboard.html — rankings at /leaderboard
+- dashboard/bot-commands.html — complete @aleph_bot command reference at /bot-commands
+- Portal cards for Maintenance, Leaderboard, Bot Commands
+- Routes: /organism-maint, /module-analytics, /leaderboard, /maintenance, /bot-commands
+
+### Fixed
+- organism_maint registered in KNOWN_LIVING_MODULES
+- All new modules registered in coherence_regulator
+- Version bump 4.67.0 → 4.68.0
+
 ## [4.67.0] - Wave 514: Infrastructure Consolidation
 
 ### Added

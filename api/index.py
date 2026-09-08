@@ -51,6 +51,27 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
     if path == "/organism_ontology":
         from api.organism_ontology import handler as ontology_handler
         return ontology_handler()
+    if path.startswith("/organism-maint") or path.startswith("/organism_maint"):
+        from api.organism_maint import handler as maint_handler
+        import json as _json
+        params = {}
+        if "?" in path:
+            params = dict(p.split("=", 1) for p in path.split("?", 1)[1].split("&") if "=" in p)
+        return maint_handler(params)
+    if path.startswith("/module-analytics") or path == "/analytics":
+        from api.module_analytics import handler as analytics_handler
+        import json as _json
+        params = {}
+        if "?" in path:
+            params = dict(p.split("=", 1) for p in path.split("?", 1)[1].split("&") if "=" in p)
+        return analytics_handler(params)
+    if path.startswith("/leaderboard"):
+        from api.leaderboard import handler as lb_handler
+        import json as _json
+        params = {}
+        if "?" in path:
+            params = dict(p.split("=", 1) for p in path.split("?", 1)[1].split("&") if "=" in p)
+        return lb_handler(params)
     if path == "/biographer_voice":
         from api.biographer_voice import handler as _h; return _h()
     if path == "/manifesto_echo":

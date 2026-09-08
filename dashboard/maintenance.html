@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maintenance & Observability — IXpansion</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a14;color:#e0e0e0;min-height:100vh}
+.header{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:20px 24px;border-bottom:1px solid #222244}
+.header h1{font-size:1.5em;color:#41b3a3}.header p{color:#888;margin-top:2px;font-size:0.85em}
+.tabs{display:flex;gap:4px;padding:12px 24px;background:#0d0d1a;border-bottom:1px solid #222244;flex-wrap:wrap}
+.tab{padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85em;background:#161628;color:#aaa;border:1px solid #222244;transition:all 0.2s}
+.tab:hover{background:#1e1e38;color:#41b3a3}.tab.active{background:#41b3a3;color:#0a0a14;border-color:#41b3a3;font-weight:600}
+.panel{display:none;padding:20px 24px}.panel.active{display:block}
+.card{background:#161628;border:1px solid #222244;border-radius:8px;padding:16px;margin-bottom:12px}
+.card h3{color:#41b3a3;font-size:0.95em;margin-bottom:8px}
+.row{display:flex;gap:12px;margin-bottom:6px;align-items:center}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:600}
+.ok{background:#41b3a322;color:#41b3a3}.warn{background:#e8a87c22;color:#e8a87c}.err{background:#c38d9e22;color:#c38d9e}
+.mono{font-family:'Fira Code',monospace;font-size:0.82em}
+.empty{color:#555;font-style:italic;padding:20px;text-align:center}
+table{width:100%;border-collapse:collapse;margin-top:8px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid #222244;font-size:0.85em}
+th{color:#41b3a3;font-weight:600}
+.refresh{background:none;border:1px solid #41b3a3;color:#41b3a3;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.8em;margin-bottom:12px}
+.refresh:hover{background:#41b3a3;color:#0a0a14}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🔧 Maintenance & Observability</h1>
+  <p>Environment, sync, cron, errors, webhooks, releases — all in one place.</p>
+</div>
+<div class="tabs">
+  <div class="tab active" data-tab="env">Environment</div>
+  <div class="tab" data-tab="sync">Sync Status</div>
+  <div class="tab" data-tab="cron">Cron Jobs</div>
+  <div class="tab" data-tab="errors">Errors</div>
+  <div class="tab" data-tab="hooks">Webhooks</div>
+  <div class="tab" data-tab="releases">Releases</div>
+  <div class="tab" data-tab="modules">Active Modules</div>
+  <div class="tab" data-tab="backups">Backups</div>
+</div>
+
+<div class="panel active" id="env"><div class="empty" id="env-content">Loading...</div></div>
+<div class="panel" id="sync"><div class="empty" id="sync-content">Loading...</div></div>
+<div class="panel" id="cron"><div class="empty" id="cron-content">Loading...</div></div>
+<div class="panel" id="errors"><div class="empty" id="errors-content">Loading...</div></div>
+<div class="panel" id="hooks"><div class="empty" id="hooks-content">Loading...</div></div>
+<div class="panel" id="releases"><div class="empty" id="releases-content">Loading...</div></div>
+<div class="panel" id="modules"><div class="empty" id="modules-content">Loading...</div></div>
+<div class="panel" id="backups"><div class="empty" id="backups-content">Loading...</div></div>
+
+<script>
+const API = '/organism-maint';
+let loaded = {};
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+    if (!loaded[tab.dataset.tab]) loadTab(tab.dataset.tab);
+  });
+});
+
+async function loadTab(name) {
+  const el = document.getElementById(name + '-content');
+  try {
+    const resp = await fetch(API + '?action=' + name);
+    const data = await resp.json();
+    loaded[name] = true;
+    renderTab(name, data, el);
+  } catch(e) {
+    el.innerHTML = '<div class="empty">Failed to load: ' + e.message + '</div>';
+  }
+}
+
+function renderTab(name, data, el) {
+  if (name === 'env') {
+    let h = '<div class="card"><h3>Environment Variables</h3>';
+    for (const [key, info] of Object.entries(data.vars || {})) {
+      h += `<div class="row"><span class="mono">${key}</span>
+        <span class="badge ${info.configured ? 'ok' : info.required ? 'err' : 'warn'}">${info.configured ? '✓ ' + info.prefix : '✗ not set'}</span>
+        <span class="badge ${info.required ? 'err' : 'ok'}">${info.required ? 'required' : 'optional'}</span></div>`;
+    }
+    h += `<div style="margin-top:8px;color:#888;font-size:0.8em">${data.configured}/${data.total} configured</div></div>`;
+    el.innerHTML = h;
+  } else if (name === 'sync') {
+    let h = '<div class="card"><h3>GitHub Mirror Sync</h3><table><tr><th>Topic</th><th>Exists</th><th>Age</th><th>Status</th></tr>';
+    for (const t of (data.topics || [])) {
+      h += `<tr><td class="mono">${t.topic}</td><td>${t.exists ? '✓' : '✗'}</td><td>${t.last_modified_min !== null ? t.last_modified_min + ' min' : 'never'}</td><td><span class="badge ${t.fresh ? 'ok' : 'warn'}">${t.fresh ? 'fresh' : 'stale'}</span></td></tr>`;
+    }
+    h += '</table></div>';
+    el.innerHTML = h;
+  } else if (name === 'cron') {
+    let h = '<div class="card"><h3>Scheduled GitHub Actions (' + data.count + ')</h3><table><tr><th>Name</th><th>Schedule</th></tr>';
+    for (const j of (data.jobs || [])) {
+      h += `<tr><td>${j.name}</td><td class="mono">${j.cron || 'manual only'}</td></tr>`;
+    }
+    h += '</table></div>';
+    el.innerHTML = h;
+  } else if (name === 'errors') {
+    let h = '<div class="card"><h3>Error Log (' + data.count + ' entries)</h3>';
+    if (data.entries.length === 0) h += '<div class="empty">No errors recorded.</div>';
+    else {
+      for (const e of data.entries.slice(0, 20)) {
+        h += `<div class="row" style="border-bottom:1px solid #222244;padding:6px 0"><span class="mono">${e.module || e.source || 'unknown'}</span><span style="color:#c38d9e;font-size:0.85em">${e.error || e.message || JSON.stringify(e).slice(0,80)}</span></div>`;
+      }
+    }
+    h += '</div>';
+    el.innerHTML = h;
+  } else if (name === 'hooks') {
+    let h = '<div class="card"><h3>Webhooks (' + data.count + ')</h3><table><tr><th>Path</th><th>Target</th><th>Status</th></tr>';
+    for (const h2 of (data.hooks || [])) {
+      h += `<tr><td class="mono">${h2.path}</td><td>${h2.target}</td><td><span class="badge ok">${h2.status}</span></td></tr>`;
+    }
+    h += '</table></div>';
+    el.innerHTML = h;
+  } else if (name === 'releases') {
+    let h = '';
+    for (const r of (data.releases || [])) {
+      h += `<div class="card"><h3>v${r.version} — ${r.title}</h3><div style="font-size:0.82em;color:#aaa;white-space:pre-wrap">${r.body}</div></div>`;
+    }
+    el.innerHTML = h || '<div class="empty">No releases found.</div>';
+  } else if (name === 'modules') {
+    el.innerHTML = `<div class="card"><h3>Active Modules</h3><div style="font-size:2em;color:#41b3a3;margin:12px 0">${data.total}</div><div style="color:#888">Modules registered in the organism.</div></div>`;
+  } else if (name === 'backups') {
+    let h = '<div class="card"><h3>Data File Status (' + data.count + ')</h3><table><tr><th>File</th><th>Age</th></tr>';
+    for (const f of (data.files || []).slice(0, 15)) {
+      h += `<tr><td class="mono">${f.file}</td><td>${f.age_min} min</td></tr>`;
+    }
+    h += '</table></div>';
+    el.innerHTML = h;
+  }
+}
+
+// Load first tab
+loadTab('env');
+</script>
+</body>
+</html>

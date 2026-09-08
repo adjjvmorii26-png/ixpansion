@@ -36,6 +36,34 @@
       "dest": "/dashboard/system-health.html"
     },
     {
+      "src": "/organism-maint(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/maintenance(?:/.*)?",
+      "dest": "/dashboard/maintenance.html"
+    },
+    {
+      "src": "/module-analytics(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/analytics(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/leaderboard(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/leaderboard.html",
+      "dest": "/dashboard/leaderboard.html"
+    },
+    {
+      "src": "/bot-commands",
+      "dest": "/dashboard/bot-commands.html"
+    },
+    {
       "src": "/nightly-health(?:/.*)?",
       "dest": "/api/index.py"
     },
