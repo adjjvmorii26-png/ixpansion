@@ -2264,6 +2264,14 @@
       "dest": "/api/index.py"
     },
     {
+      "src": "/council-live(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/council_live(?:\\\\/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/sovereignty(?:\\\\/.*)?",
       "dest": "/api/index.py"
     },

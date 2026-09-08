@@ -26,9 +26,9 @@ VERSION = "4.50.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.62.0"
-ORGANISM_WAVE = 509
-ORGANISM_WAVE_NAME = "Sovereignty Assembly - the organism governs itself"
+ORGANISM_VERSION = "4.63.0"
+ORGANISM_WAVE = 510
+ORGANISM_WAVE_NAME = "Council Live Network - the council speaks into the room"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

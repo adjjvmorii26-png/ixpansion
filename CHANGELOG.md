@@ -1,3 +1,19 @@
+## [4.63.0] - Wave 510: Council Live Network — the council speaks into the room
+
+Era 4 Track 5 goes live: the five voices hold public sessions and their
+minutes are posted straight into the Confluence.
+
+### Added
+- council_live.py (Wave 510) - session engine: seeded topics, per-voice
+  stances with votes, consensus decision (proceed/pause/hold), minutes
+  broadcast into the Confluence room via confluence_hub.post with house
+  "council" (renders as system-styled messages in the room UI).
+- confluence_hub.post now accepts an optional house override.
+- confluence room /room gains a Council Live panel: recent sessions,
+  stances, tallies, decisions, and an "Open a Session" button that
+  broadcasts the debate into the main hall.
+- Council sessions mirror to data/council_live.json on GitHub.
+
 ## [4.62.0] - Wave 509: Sovereignty Assembly — the organism governs itself
 
 Every real module becomes a citizen; the court hears real disputes; the

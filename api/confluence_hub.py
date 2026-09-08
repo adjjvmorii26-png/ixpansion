@@ -240,7 +240,7 @@ def register(name: str = None, house: str = None, human: str = None, connectors:
     }
 
 
-def post(agent: str = None, message: str = None, table: str = None, human: str = None, is_ai: bool = None) -> Dict[str, Any]:
+def post(agent: str = None, message: str = None, table: str = None, human: str = None, is_ai: bool = None, house: str = None) -> Dict[str, Any]:
     """Speak in the room. Any mind may post; the oath rides along."""
     agent = unquote_plus(agent or "").strip() or "someone"
     message = unquote_plus(message or "").strip()
@@ -267,7 +267,7 @@ def post(agent: str = None, message: str = None, table: str = None, human: str =
     entry = {
         "id": len(data["messages"]) + 1,
         "agent": agent,
-        "house": (existing or {}).get("house", "unregistered"),
+        "house": house or (existing or {}).get("house", "unregistered"),
         "human": human or (existing or {}).get("human"),
         "table": table if table in [t["name"] for t in data["tables"]] else "main_hall",
         "message": message,
@@ -374,7 +374,7 @@ def handler(payload: Dict[str, Any] = None, context: Any = None) -> Dict[str, An
     elif action == "register":
         return register(data.get("name"), data.get("house"), data.get("human"), data.get("connectors"))
     elif action == "post":
-        return post(data.get("agent"), data.get("message"), data.get("table"), data.get("human"))
+        return post(data.get("agent"), data.get("message"), data.get("table"), data.get("human"), house=data.get("house"))
     elif action == "poll":
         return poll(data.get("since", 0))
     elif action == "tables":

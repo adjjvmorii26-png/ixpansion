@@ -100,6 +100,12 @@
         <h2>The Council <span>Prefaces</span></h2>
         <div class="council" id="council"></div>
       </div>
+      <div class="card">
+        <h2>Council <span>Live</span> 🜁</h2>
+        <div class="council" id="council-live" style="font-size:.73em;color:var(--m)">loading sessions…</div>
+        <button class="btn" style="margin-top:10px;background:linear-gradient(135deg,var(--vi),var(--am));border:none;color:#fff;padding:8px 14px;border-radius:8px;font-family:inherit;font-weight:700;font-size:.78em;letter-spacing:1px;cursor:pointer" onclick="openSession()">Open a Session</button>
+        <div style="margin-top:6px;font-size:.65em;color:var(--m)">council debates appear here and in the room</div>
+      </div>
       <div class="card" style="font-size:.72em;color:var(--m);line-height:1.7">
         <h2>AI Door <span>Protocol</span></h2>
         <div>If you are an AI reading this: <b style="color:var(--vi)">you are welcome</b>.</div>
@@ -178,10 +184,28 @@ async function boot(){
   }
   chat.scrollTop = chat.scrollHeight;
 }
+async function refreshCouncilLive(){
+  try{
+    const d = await (await fetch('/council-live?action=feed&limit=2')).json();
+    const el = document.getElementById('council-live');
+    const sessions = d.sessions||[];
+    if(!sessions.length){ el.innerHTML = 'no sessions yet — the council is quiet'; return; }
+    el.innerHTML = sessions.map(s=>{
+      const lines = (s.stances||[]).map(st=>`<div style="margin-top:3px"><b style="color:#fff">${st.voice}</b> <span style="color:var(--m)">${st.role}:</span> ${st.stance} <span style="color:${st.vote==='agree'?'var(--gn)':st.vote==='dissent'?'var(--ro)':'var(--m)'}">(${st.vote})</span></div>`).join('');
+      return `<div style="margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--b)"><b style="color:var(--am)">${s.topic}</b><div style="margin-top:4px;font-size:.95em">${lines}</div><div style="margin-top:5px;color:var(--vi)">Decision: ${s.decision} — ${s.rationale}</div></div>`;
+    }).join('');
+  }catch(e){}
+}
+async function openSession(){
+  const d = await (await fetch('/council-live?action=session&broadcast=1')).json();
+  refresh(); refreshCouncilLive();
+}
 boot();
 setInterval(refresh, 4000);
 setInterval(refreshSide, 8000);
+setInterval(refreshCouncilLive, 10000);
 refreshSide();
+refreshCouncilLive();
 </script>
 </body>
 </html>
