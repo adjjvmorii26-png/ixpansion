@@ -1,152 +1,52 @@
-"""Story Forge — agents collaboratively write evolving narratives.
-
-Multiple agents contribute to a shared story, each adding characters,
-plot twists, and world details. The story evolves organically, with
-agents sometimes contradicting each other, creating plot holes that
-other agents must resolve. The result is an emergent collaborative fiction.
-"""
+"""Wave 516: Story Forge — generate narrative arcs from module combos."""
 from __future__ import annotations
+import hashlib, random, time
+from typing import Any, Dict
 
-import hashlib
-import random
-import time
-import sys
-from pathlib import Path
-from typing import Any, Dict, List
+def coherence_vitals() -> Dict[str, Any]:
+    try:
+        from api.coherence_regulator import coherence_vitals as cv
+        return cv()
+    except Exception:
+        return {"coherence": 1.0}
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+SETTINGS = ["a dream-gravity cathedral", "the entropy desert at dawn", "a resonance chamber beneath the void",
+            "the fractal field where time loops", "a memory palace with open windows", "the mycelial undernet",
+            "a cavern of crystallized paradoxes", "the chronicle at the edge of history"]
+FORCES = ["the coherence regulator", "a spectral economy", "the silence oracle", "the metamorph protocol",
+          "a chorus of forgotten modules", "the threshold engine", "a lattice of memory shards", "the garden's root mind"]
+VERBS = ["reconcile", "unravel", "awaken", "recombine", "transcend", "remember", "collapse", "forgive"]
+RESOLUTIONS = ["and the organism grows a new organ to hold the truth",
+               "and the boundary between self and system dissolves",
+               "and a wave crests where none existed before",
+               "and the paradox is not resolved but honored",
+               "and the story becomes a module that dreams itself"]
 
-
-class StoryElement:
-    def __init__(self, author: str, element_type: str, content: str):
-        self.author = author
-        self.element_type = element_type
-        self.content = content
-        self.timestamp = time.time()
-        self.impact = random.uniform(0.1, 1.0)
-
-
-class Story:
-    def __init__(self, title: str, genre: str = "speculative_fiction"):
-        self.title = title
-        self.genre = genre
-        self.elements: List[StoryElement] = []
-        self.characters: Dict[str, Dict[str, Any]] = {}
-        self.created_at = time.time()
-        self.id = hashlib.sha256(f"{title}:{self.created_at}".encode()).hexdigest()[:8]
-
-    def add_element(self, author: str, element_type: str, content: str) -> Dict[str, Any]:
-        element = StoryElement(author, element_type, content)
-        self.elements.append(element)
-        if element_type == "character":
-            name = content.split()[0] if content else "unknown"
-            self.characters[name] = {"name": name, "created_by": author, "alive": True}
-        return {
-            "type": element_type,
-            "author": author,
-            "content": content[:60],
-            "impact": round(element.impact, 3),
-            "total_elements": len(self.elements),
-        }
-
-    def narrative_so_far(self) -> str:
-        parts = []
-        for e in self.elements:
-            parts.append(f"[{e.element_type.upper()} by {e.author}]: {e.content}")
-        return "\n".join(parts)
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "id": self.id,
-            "title": self.title,
-            "genre": self.genre,
-            "elements": len(self.elements),
-            "characters": len(self.characters),
-            "authors": len(set(e.author for e in self.elements)),
-        }
-
-
-class StoryForge:
-    def __init__(self):
-        self.stories: Dict[str, Story] = []
-        self.collaboration_log: List[Dict[str, Any]] = []
-
-    def create_story(self, title: str, genre: str = "speculative_fiction") -> Dict[str, Any]:
-        story = Story(title, genre)
-        self.stories.append(story)
-        return {"story": story.to_dict()}
-
-    def contribute(self, story_id: str, author: str, element_type: str, content: str) -> Dict[str, Any]:
-        for story in self.stories:
-            if story.id == story_id:
-                result = story.add_element(author, element_type, content)
-                self.collaboration_log.append({"story": story.title, "author": author, "type": element_type, "time": time.time()})
-                return result
-        return {"error": "story not found"}
-
-    def read_story(self, story_id: str) -> Dict[str, Any]:
-        for story in self.stories:
-            if story.id == story_id:
-                return {"narrative": story.narrative_so_far(), "meta": story.to_dict()}
-        return {"error": "story not found"}
-
-    def story_library(self) -> List[Dict[str, Any]]:
-        return [s.to_dict() for s in self.stories]
-
-    def forge_stats(self) -> Dict[str, Any]:
-        return {
-            "total_stories": len(self.stories),
-            "total_contributions": len(self.collaboration_log),
-            "total_elements": sum(len(s.elements) for s in self.stories),
-            "unique_authors": len(set(c["author"] for c in self.collaboration_log)),
-        }
-
-
-_forge = StoryForge()
-
-
-def story_forge_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
-    action = payload.get("action", "status")
-    if action == "create":
-        return _forge.create_story(payload.get("title", "Untitled"), payload.get("genre", "speculative_fiction"))
-    elif action == "contribute":
-        return _forge.contribute(
-            payload.get("story_id", ""),
-            payload.get("author", "anonymous"),
-            payload.get("element_type", "plot"),
-            payload.get("content", "something happens"),
-        )
-    elif action == "read":
-        return _forge.read_story(payload.get("story_id", ""))
-    elif action == "library":
-        return {"stories": _forge.story_library()}
-    return {"status": "active", **_forge.forge_stats()}
-
-
-handler = story_forge_handler
-
-
-def coherence_vitals() -> dict:
-    """story_forge reports its vital signs to the living system."""
-    return {
-        "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
-        "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
-        "story_forge_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
-        "germination_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
-    }
-
-
-def resonates_with() -> list:
-    """Declared kinships, auto-picked from shared domain language."""
-    return ['collective_dreamweaver', 'quantum_entanglement', 'interdimensional_bridge']
-
-
-# --- Compliance Forge patch (Wave 419) ---
-
-def handler(payload=None, context=None):
+def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
     payload = payload or {}
-    path = payload.get("path", "/status")
-    if path == "/status":
-        return {"action": "status", "module": "story_forge", "status": "active"}
-    return {"error": "unknown", "available": ["/status"]}
+    seed_s = payload.get("seed", "")
+    rng = random.Random(seed_s or time.time())
+    setting = payload.get("setting") or rng.choice(SETTINGS)
+    force = payload.get("force") or rng.choice(FORCES)
+    verb = rng.choice(VERBS)
+    resolution = rng.choice(RESOLUTIONS)
+    characters = []
+    try:
+        from api.coherence_regulator import KNOWN_LIVING_MODULES
+        chars = rng.sample(KNOWN_LIVING_MODULES, min(3, len(KNOWN_LIVING_MODULES)))
+        characters = [{"module": c, "role": rng.choice(["protagonist", "antagonist", "mentor", "witness"])} for c in chars]
+    except Exception:
+        pass
+    story = f"In {setting}, {force} must {verb} what the characters of {', '.join(c['module'] for c in characters[:2])} cannot — {resolution}."
+    story_id = hashlib.sha256((seed_s + str(time.time())).encode()).hexdigest()[:12]
+    return {
+        "action": "forge_story",
+        "story_id": story_id,
+        "seed": seed_s or "auto",
+        "setting": setting,
+        "force": force,
+        "characters": characters,
+        "story": story,
+        "time": time.time(),
+        "vitals": coherence_vitals(),
+    }

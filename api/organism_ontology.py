@@ -26,8 +26,8 @@ VERSION = "4.50.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.68.0"
-ORGANISM_WAVE = 515
+ORGANISM_VERSION = "4.69.0"
+ORGANISM_WAVE = 516
 ORGANISM_WAVE_NAME = "The Execution Stack — how the organism evolves"
 ORGANISM_COHERENCE = 0.986
 

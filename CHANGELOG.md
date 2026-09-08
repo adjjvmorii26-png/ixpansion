@@ -1,3 +1,35 @@
+## [4.69.0] - Wave 516: The Deep Architecture
+
+### Added
+- coherence_regulator: added regulate() + coherence_vitals() functions (was just a bare list)
+- error_tracker.py — aggregate and surface module errors
+- deploy_status.py — deployment health and GitHub repo status
+- wave_timeline.py — chronological wave history from CHANGELOG
+- module_search.py — organic search across all modules
+- story_forge.py — generate narrative arcs from module combos
+- council_health.py — council member status and mood
+- rate_monitor.py — request rate tracking and throttling
+- dependency_map.py — inter-module dependency discovery
+- resonance_graph.py — keyword-based resonance connections
+- memory_palace.py — spatial organization of organism memories
+- territory_map.py — geographic view of organism domains
+- constitution.py — founding principles and living bylaws
+- visitor_map.py — visitor tracking from visitor log
+- genome_map.py — DNA and evolutionary trait clusters
+- synapse_web.py — nervous system connecting modules
+- module_soul.py — read any module's soul (docstring, functions, personality)
+- organism_clock.py — temporal rhythms and circadian phase
+- echo_log.py — self-narrative journal entries
+- Dashboard routes: /timeline, /territory, /genome, /clock, /constitution, /soul, /error-log, /deploy
+- Portal cards: Wave Timeline, Territory Map, Genome Map, Organism Clock, Constitution, Module Soul
+
+### Fixed
+- organism_state coherence/living_organs now returns real values
+- vercel.json API routes now point to correct module files (not /api/index.py)
+
+### Stats
+- 812 modules, 95 dashboards, 680+ routes, 18 new APIs, 11 new dashboard routes
+
 ## [4.68.0] - Wave 515: The Maintenance Frontier
 
 ### Added

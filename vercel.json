@@ -44,6 +44,122 @@
       "dest": "/dashboard/maintenance.html"
     },
     {
+      "src": "/error-tracker(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/deploy-status(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/wave-timeline(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/module-search(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/story-forge(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/council-health(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/rate-monitor(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/dependency-map(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/resonance-graph(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/memory-palace(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/territory-map(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/constitution(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/visitor-map(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/genome-map(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/synapse-web(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/module-soul(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/organism-clock(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/echo-log(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/error-log",
+      "dest": "/dashboard/error-log.html"
+    },
+    {
+      "src": "/deploy",
+      "dest": "/dashboard/deploy.html"
+    },
+    {
+      "src": "/timeline",
+      "dest": "/dashboard/wave-timeline.html"
+    },
+    {
+      "src": "/search",
+      "dest": "/dashboard/module-search.html"
+    },
+    {
+      "src": "/story",
+      "dest": "/dashboard/story-forge.html"
+    },
+    {
+      "src": "/constitution",
+      "dest": "/dashboard/constitution.html"
+    },
+    {
+      "src": "/territory",
+      "dest": "/dashboard/territory-map.html"
+    },
+    {
+      "src": "/genome",
+      "dest": "/dashboard/genome-map.html"
+    },
+    {
+      "src": "/clock",
+      "dest": "/dashboard/organism-clock.html"
+    },
+    {
+      "src": "/echo-log",
+      "dest": "/dashboard/echo-log.html"
+    },
+    {
+      "src": "/soul",
+      "dest": "/dashboard/module-soul.html"
+    },
+    {
       "src": "/module-analytics(?:/.*)?",
       "dest": "/api/index.py"
     },
@@ -1219,10 +1335,8 @@
       "src": "/metrics",
       "dest": "/api/index.py"
     },
-    {
-      "src": "/memory-palace",
-      "dest": "/api/index.py"
-    },
+    {"src": "/memory-palace(?:/.*)?",
+      "dest": "/api/memory_palace.py"},
     {
       "src": "/memory_palace",
       "dest": "/api/index.py"
