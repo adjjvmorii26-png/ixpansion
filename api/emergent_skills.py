@@ -98,6 +98,31 @@ _skill_registry = {
         "description": "Predicts future entropy states using momentum and atmospheric modeling",
         "status": "active",
         "capabilities": ["record_entropy", "forecast", "storm_prediction"]
+    },
+    "pattern_alchemist": {
+        "description": "Discovers hidden patterns across disparate data sources",
+        "status": "active",
+        "capabilities": ["observe", "find_patterns", "cluster_detection"]
+    },
+    "innovation_synthesizer": {
+        "description": "Combines existing ideas into novel hybrid innovations",
+        "status": "active",
+        "capabilities": ["synthesize", "bridge_concepts", "generate_novelty"]
+    },
+    "narrative_sculptor": {
+        "description": "Shapes raw data into compelling stories and narratives",
+        "status": "active",
+        "capabilities": ["sculpt", "story_generation", "metaphor_creation"]
+    },
+    "emergence_detector": {
+        "description": "Spots emergent behavior before it becomes obvious",
+        "status": "active",
+        "capabilities": ["scan_signal", "detect_emergence", "predict_transitions"]
+    },
+    "cross_domain_bridge": {
+        "description": "Connects knowledge across unrelated fields via analogy",
+        "status": "active",
+        "capabilities": ["find_bridge", "analogical_reasoning", "domain_transfer"]
     }
 }
 
