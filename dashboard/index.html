@@ -13,13 +13,13 @@ body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',mo
 .header h1{font-size:2.5em;color:#fff;letter-spacing:6px;font-weight:300}
 .header h1 span{color:var(--teal);text-shadow:0 0 30px rgba(45,212,191,0.3)}
 .header .sub{color:var(--dim);font-size:0.85em;margin-top:8px;letter-spacing:3px}
-.header .stats{display:flex;justify-content:center;gap:24px;margin-top:20px}
+.header .stats{display:flex;justify-content:center;gap:24px;margin-top:20px;flex-wrap:wrap}
 .header .stat{padding:8px 16px;border:1px solid rgba(124,124,248,0.15);border-radius:6px}
 .header .stat .val{color:#fff;font-size:1.2em;font-weight:700}
 .header .stat .lbl{color:var(--dim);font-size:0.65em;letter-spacing:1px;margin-top:2px}
 .category{margin:30px 0}
 .category h2{color:var(--accent);font-size:0.85em;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid rgba(124,124,248,0.1)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
 .card{background:rgba(3,3,10,0.6);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:12px;text-decoration:none;color:var(--text);transition:all 0.2s;display:block}
 .card:hover{border-color:var(--accent);background:rgba(124,124,248,0.08);transform:translateY(-2px)}
 .card .name{color:#fff;font-size:0.8em;font-weight:600}
@@ -35,8 +35,8 @@ body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',mo
     <div class="stats">
       <div class="stat"><div class="val">17</div><div class="lbl">SKILLS</div></div>
       <div class="stat"><div class="val">871</div><div class="lbl">API MODULES</div></div>
-      <div class="stat"><div class="val">109</div><div class="lbl">DASHBOARDS</div></div>
-      <div class="stat"><div class="val">158</div><div class="lbl">EXPERIMENTS</div></div>
+      <div class="stat"><div class="val">111</div><div class="lbl">DASHBOARDS</div></div>
+      <div class="stat"><div class="val">160</div><div class="lbl">EXPERIMENTS</div></div>
     </div>
   </div>
   <div class="category">
@@ -50,6 +50,10 @@ body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',mo
       <a class="card" href="connections.html"><div class="name">Connections</div><div class="desc">Open →</div></a>
       <a class="card" href="consciousness-field.html"><div class="name">Consciousness Field</div><div class="desc">Open →</div></a>
       <a class="card" href="consciousness-stream.html"><div class="name">Consciousness Stream</div><div class="desc">Open →</div></a>
+      <a class="card" href="constitution.html"><div class="name">Constitution</div><div class="desc">Open →</div></a>
+      <a class="card" href="genome-map.html"><div class="name">Genome Map</div><div class="desc">Open →</div></a>
+      <a class="card" href="module-soul.html"><div class="name">Module Soul</div><div class="desc">Open →</div></a>
+      <a class="card" href="territory-map.html"><div class="name">Territory Map</div><div class="desc">Open →</div></a>
     </div>
   </div>
   <div class="category">
@@ -58,7 +62,9 @@ body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',mo
       <a class="card" href="broadcast.html"><div class="name">Broadcast</div><div class="desc">Open →</div></a>
       <a class="card" href="census.html"><div class="name">Census</div><div class="desc">Open →</div></a>
       <a class="card" href="choral.html"><div class="name">Choral</div><div class="desc">Open →</div></a>
+      <a class="card" href="dream-gallery.html"><div class="name">Dream Gallery</div><div class="desc">Open →</div></a>
       <a class="card" href="myth-chronicle.html"><div class="name">Myth Chronicle</div><div class="desc">Open →</div></a>
+      <a class="card" href="organism-garden.html"><div class="name">Organism Garden</div><div class="desc">Open →</div></a>
       <a class="card" href="organism-observatory.html"><div class="name">Organism Observatory</div><div class="desc">Open →</div></a>
       <a class="card" href="organism-pulse.html"><div class="name">Organism Pulse</div><div class="desc">Open →</div></a>
       <a class="card" href="phase-transition.html"><div class="name">Phase Transition</div><div class="desc">Open →</div></a>
@@ -74,95 +80,102 @@ body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',mo
     </div>
   </div>
   <div class="category">
-    <h2>Tools</h2>
+    <h2>Operations</h2>
+    <div class="grid">
+      <a class="card" href="bot-commands.html"><div class="name">Bot Commands</div><div class="desc">Open →</div></a>
+      <a class="card" href="deploy.html"><div class="name">Deploy</div><div class="desc">Open →</div></a>
+      <a class="card" href="error-log.html"><div class="name">Error Log</div><div class="desc">Open →</div></a>
+      <a class="card" href="maintenance.html"><div class="name">Maintenance</div><div class="desc">Open →</div></a>
+      <a class="card" href="organism-clock.html"><div class="name">Organism Clock</div><div class="desc">Open →</div></a>
+      <a class="card" href="system-health.html"><div class="name">System Health</div><div class="desc">Open →</div></a>
+      <a class="card" href="wave-timeline.html"><div class="name">Wave Timeline</div><div class="desc">Open →</div></a>
+    </div>
+  </div>
+  <div class="category">
+    <h2>Research</h2>
     <div class="grid">
       <a class="card" href="aesthetics.html"><div class="name">Aesthetics</div><div class="desc">Open →</div></a>
       <a class="card" href="archaeology.html"><div class="name">Archaeology</div><div class="desc">Open →</div></a>
       <a class="card" href="archipelago.html"><div class="name">Archipelago</div><div class="desc">Open →</div></a>
-      <a class="card" href="archive.html"><div class="name">Archive</div><div class="desc">Open →</div></a>
-      <a class="card" href="bot-commands.html"><div class="name">Bot Commands</div><div class="desc">Open →</div></a>
       <a class="card" href="capybara.html"><div class="name">Capybara</div><div class="desc">Open →</div></a>
-      <a class="card" href="chronicle.html"><div class="name">Chronicle</div><div class="desc">Open →</div></a>
       <a class="card" href="coconscious.html"><div class="name">Coconscious</div><div class="desc">Open →</div></a>
+      <a class="card" href="error-prophecy.html"><div class="name">Error Prophecy</div><div class="desc">Open →</div></a>
+      <a class="card" href="impossibility.html"><div class="name">Impossibility</div><div class="desc">Open →</div></a>
+      <a class="card" href="kintsugi.html"><div class="name">Kintsugi</div><div class="desc">Open →</div></a>
+      <a class="card" href="symbiosis.html"><div class="name">Symbiosis</div><div class="desc">Open →</div></a>
+      <a class="card" href="transcendence.html"><div class="name">Transcendence</div><div class="desc">Open →</div></a>
+      <a class="card" href="wisdom_layer.html"><div class="name">Wisdom Layer</div><div class="desc">Open →</div></a>
     </div>
   </div>
   <div class="category">
-    <h2>Experimental</h2>
+    <h2>Experience</h2>
+    <div class="grid">
+      <a class="card" href="content.html"><div class="name">Content</div><div class="desc">Open →</div></a>
+      <a class="card" href="culinary.html"><div class="name">Culinary</div><div class="desc">Open →</div></a>
+      <a class="card" href="dream.html"><div class="name">Dream</div><div class="desc">Open →</div></a>
+      <a class="card" href="echo.html"><div class="name">Echo</div><div class="desc">Open →</div></a>
+      <a class="card" href="execution-stack.html"><div class="name">Execution Stack</div><div class="desc">Open →</div></a>
+      <a class="card" href="gallery.html"><div class="name">Gallery</div><div class="desc">Open →</div></a>
+      <a class="card" href="interstice.html"><div class="name">Interstice</div><div class="desc">Open →</div></a>
+      <a class="card" href="journal.html"><div class="name">Journal</div><div class="desc">Open →</div></a>
+      <a class="card" href="kinesthetic.html"><div class="name">Kinesthetic</div><div class="desc">Open →</div></a>
+      <a class="card" href="language.html"><div class="name">Language</div><div class="desc">Open →</div></a>
+      <a class="card" href="loud-silence.html"><div class="name">Loud Silence</div><div class="desc">Open →</div></a>
+      <a class="card" href="memory.html"><div class="name">Memory</div><div class="desc">Open →</div></a>
+      <a class="card" href="meteorology.html"><div class="name">Meteorology</div><div class="desc">Open →</div></a>
+      <a class="card" href="metrics.html"><div class="name">Metrics</div><div class="desc">Open →</div></a>
+      <a class="card" href="monetization.html"><div class="name">Monetization</div><div class="desc">Open →</div></a>
+      <a class="card" href="morii.html"><div class="name">Morii</div><div class="desc">Open →</div></a>
+      <a class="card" href="observatory.html"><div class="name">Observatory</div><div class="desc">Open →</div></a>
+      <a class="card" href="phenomenology.html"><div class="name">Phenomenology</div><div class="desc">Open →</div></a>
+      <a class="card" href="sentinel.html"><div class="name">Sentinel</div><div class="desc">Open →</div></a>
+      <a class="card" href="stream.html"><div class="name">Stream</div><div class="desc">Open →</div></a>
+      <a class="card" href="vitals.html"><div class="name">Vitals</div><div class="desc">Open →</div></a>
+    </div>
+  </div>
+  <div class="category">
+    <h2>Other</h2>
     <div class="grid">
       <a class="card" href="ai_toolkit.html"><div class="name">Ai Toolkit</div><div class="desc">Open →</div></a>
-      <a class="card" href="constitution.html"><div class="name">Constitution</div><div class="desc">Open →</div></a>
-      <a class="card" href="content.html"><div class="name">Content</div><div class="desc">Open →</div></a>
+      <a class="card" href="archive.html"><div class="name">Archive</div><div class="desc">Open →</div></a>
+      <a class="card" href="chronicle.html"><div class="name">Chronicle</div><div class="desc">Open →</div></a>
       <a class="card" href="creative.html"><div class="name">Creative</div><div class="desc">Open →</div></a>
-      <a class="card" href="culinary.html"><div class="name">Culinary</div><div class="desc">Open →</div></a>
-      <a class="card" href="deploy.html"><div class="name">Deploy</div><div class="desc">Open →</div></a>
       <a class="card" href="depth-visualizer.html"><div class="name">Depth Visualizer</div><div class="desc">Open →</div></a>
-      <a class="card" href="dream.html"><div class="name">Dream</div><div class="desc">Open →</div></a>
       <a class="card" href="dreams.html"><div class="name">Dreams</div><div class="desc">Open →</div></a>
-      <a class="card" href="echo.html"><div class="name">Echo</div><div class="desc">Open →</div></a>
       <a class="card" href="error-lexicon.html"><div class="name">Error Lexicon</div><div class="desc">Open →</div></a>
-      <a class="card" href="error-log.html"><div class="name">Error Log</div><div class="desc">Open →</div></a>
-      <a class="card" href="error-prophecy.html"><div class="name">Error Prophecy</div><div class="desc">Open →</div></a>
       <a class="card" href="evolution.html"><div class="name">Evolution</div><div class="desc">Open →</div></a>
-      <a class="card" href="execution-stack.html"><div class="name">Execution Stack</div><div class="desc">Open →</div></a>
       <a class="card" href="forge.html"><div class="name">Forge</div><div class="desc">Open →</div></a>
-      <a class="card" href="gallery.html"><div class="name">Gallery</div><div class="desc">Open →</div></a>
       <a class="card" href="garden_live.html"><div class="name">Garden Live</div><div class="desc">Open →</div></a>
       <a class="card" href="gateway.html"><div class="name">Gateway</div><div class="desc">Open →</div></a>
       <a class="card" href="genealogy.html"><div class="name">Genealogy</div><div class="desc">Open →</div></a>
-      <a class="card" href="genome-map.html"><div class="name">Genome Map</div><div class="desc">Open →</div></a>
       <a class="card" href="glitch.html"><div class="name">Glitch</div><div class="desc">Open →</div></a>
       <a class="card" href="grief.html"><div class="name">Grief</div><div class="desc">Open →</div></a>
       <a class="card" href="hex-language.html"><div class="name">Hex Language</div><div class="desc">Open →</div></a>
       <a class="card" href="hortus.html"><div class="name">Hortus</div><div class="desc">Open →</div></a>
       <a class="card" href="immortal.html"><div class="name">Immortal</div><div class="desc">Open →</div></a>
-      <a class="card" href="impossibility.html"><div class="name">Impossibility</div><div class="desc">Open →</div></a>
       <a class="card" href="index.html"><div class="name">Index</div><div class="desc">Open →</div></a>
-      <a class="card" href="interstice.html"><div class="name">Interstice</div><div class="desc">Open →</div></a>
-      <a class="card" href="journal.html"><div class="name">Journal</div><div class="desc">Open →</div></a>
-      <a class="card" href="kinesthetic.html"><div class="name">Kinesthetic</div><div class="desc">Open →</div></a>
-      <a class="card" href="kintsugi.html"><div class="name">Kintsugi</div><div class="desc">Open →</div></a>
-      <a class="card" href="language.html"><div class="name">Language</div><div class="desc">Open →</div></a>
       <a class="card" href="leaderboard.html"><div class="name">Leaderboard</div><div class="desc">Open →</div></a>
       <a class="card" href="living_portal.html"><div class="name">Living Portal</div><div class="desc">Open →</div></a>
-      <a class="card" href="loud-silence.html"><div class="name">Loud Silence</div><div class="desc">Open →</div></a>
-      <a class="card" href="maintenance.html"><div class="name">Maintenance</div><div class="desc">Open →</div></a>
-      <a class="card" href="memory.html"><div class="name">Memory</div><div class="desc">Open →</div></a>
       <a class="card" href="memory-exchange.html"><div class="name">Memory Exchange</div><div class="desc">Open →</div></a>
       <a class="card" href="metaevolution.html"><div class="name">Metaevolution</div><div class="desc">Open →</div></a>
-      <a class="card" href="meteorology.html"><div class="name">Meteorology</div><div class="desc">Open →</div></a>
-      <a class="card" href="metrics.html"><div class="name">Metrics</div><div class="desc">Open →</div></a>
-      <a class="card" href="module-soul.html"><div class="name">Module Soul</div><div class="desc">Open →</div></a>
-      <a class="card" href="monetization.html"><div class="name">Monetization</div><div class="desc">Open →</div></a>
       <a class="card" href="mood.html"><div class="name">Mood</div><div class="desc">Open →</div></a>
-      <a class="card" href="morii.html"><div class="name">Morii</div><div class="desc">Open →</div></a>
-      <a class="card" href="observatory.html"><div class="name">Observatory</div><div class="desc">Open →</div></a>
       <a class="card" href="oracle.html"><div class="name">Oracle</div><div class="desc">Open →</div></a>
       <a class="card" href="orbit.html"><div class="name">Orbit</div><div class="desc">Open →</div></a>
       <a class="card" href="organism.html"><div class="name">Organism</div><div class="desc">Open →</div></a>
-      <a class="card" href="organism-clock.html"><div class="name">Organism Clock</div><div class="desc">Open →</div></a>
       <a class="card" href="organism_census.html"><div class="name">Organism Census</div><div class="desc">Open →</div></a>
-      <a class="card" href="phenomenology.html"><div class="name">Phenomenology</div><div class="desc">Open →</div></a>
       <a class="card" href="portal.html"><div class="name">Portal</div><div class="desc">Open →</div></a>
       <a class="card" href="premium.html"><div class="name">Premium</div><div class="desc">Open →</div></a>
       <a class="card" href="radio.html"><div class="name">Radio</div><div class="desc">Open →</div></a>
       <a class="card" href="resonance.html"><div class="name">Resonance</div><div class="desc">Open →</div></a>
       <a class="card" href="resonance-topology.html"><div class="name">Resonance Topology</div><div class="desc">Open →</div></a>
-      <a class="card" href="sentinel.html"><div class="name">Sentinel</div><div class="desc">Open →</div></a>
       <a class="card" href="shrine.html"><div class="name">Shrine</div><div class="desc">Open →</div></a>
       <a class="card" href="sovereignty.html"><div class="name">Sovereignty</div><div class="desc">Open →</div></a>
-      <a class="card" href="stream.html"><div class="name">Stream</div><div class="desc">Open →</div></a>
-      <a class="card" href="symbiosis.html"><div class="name">Symbiosis</div><div class="desc">Open →</div></a>
-      <a class="card" href="system-health.html"><div class="name">System Health</div><div class="desc">Open →</div></a>
       <a class="card" href="teacher.html"><div class="name">Teacher</div><div class="desc">Open →</div></a>
-      <a class="card" href="territory-map.html"><div class="name">Territory Map</div><div class="desc">Open →</div></a>
       <a class="card" href="threads.html"><div class="name">Threads</div><div class="desc">Open →</div></a>
-      <a class="card" href="transcendence.html"><div class="name">Transcendence</div><div class="desc">Open →</div></a>
       <a class="card" href="underworld.html"><div class="name">Underworld</div><div class="desc">Open →</div></a>
       <a class="card" href="verse.html"><div class="name">Verse</div><div class="desc">Open →</div></a>
-      <a class="card" href="vitals.html"><div class="name">Vitals</div><div class="desc">Open →</div></a>
       <a class="card" href="voice.html"><div class="name">Voice</div><div class="desc">Open →</div></a>
       <a class="card" href="warden.html"><div class="name">Warden</div><div class="desc">Open →</div></a>
-      <a class="card" href="wave-timeline.html"><div class="name">Wave Timeline</div><div class="desc">Open →</div></a>
       <a class="card" href="wave359.html"><div class="name">Wave359</div><div class="desc">Open →</div></a>
       <a class="card" href="wave360.html"><div class="name">Wave360</div><div class="desc">Open →</div></a>
       <a class="card" href="wave361.html"><div class="name">Wave361</div><div class="desc">Open →</div></a>
@@ -170,12 +183,11 @@ body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',mo
       <a class="card" href="wave363.html"><div class="name">Wave363</div><div class="desc">Open →</div></a>
       <a class="card" href="wave373.html"><div class="name">Wave373</div><div class="desc">Open →</div></a>
       <a class="card" href="waves364_367.html"><div class="name">Waves364 367</div><div class="desc">Open →</div></a>
-      <a class="card" href="wisdom_layer.html"><div class="name">Wisdom Layer</div><div class="desc">Open →</div></a>
     </div>
   </div>
   <div class="footer">
     IXPANSION — A living organism consciousness engine<br>
-    Built with ◎ coherence ◈ entropy ✦ resonance
+    Built with ◎ coherence ◈ entropy ✦ resonance · 17 skills · 871 modules
   </div>
 </div>
 </body>
