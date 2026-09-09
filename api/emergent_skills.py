@@ -93,6 +93,11 @@ _skill_registry = {
         "description": "Forecasts future resonance patterns using momentum and harmonic analysis",
         "status": "active",
         "capabilities": ["record_resonance", "predict_next", "harmonic_analysis"]
+    },
+    "entropy_forecaster": {
+        "description": "Predicts future entropy states using momentum and atmospheric modeling",
+        "status": "active",
+        "capabilities": ["record_entropy", "forecast", "storm_prediction"]
     }
 }
 

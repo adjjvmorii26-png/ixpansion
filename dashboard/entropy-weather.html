@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entropy Weather — Atmospheric Forecast</title>
+<style>
+:root{--bg:#03030a;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--cyan:#22d3ee;--green:#4ade80;--text:#c0c0d0;--dim:#606078}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+.header{text-align:center;padding:30px;border-bottom:1px solid rgba(124,124,248,0.15);background:linear-gradient(180deg,rgba(124,124,248,0.06)0%,transparent 100%)}
+.header h1{font-size:1.5em;color:#fff;letter-spacing:3px}.header h1 span{color:var(--teal)}
+.header .sub{color:var(--dim);font-size:0.7em;margin-top:4px}
+.container{max-width:900px;margin:0 auto;padding:24px}
+.current{display:flex;align-items:center;justify-content:center;gap:24px;background:rgba(3,3,10,0.85);border:1px solid rgba(124,124,248,0.15);border-radius:12px;padding:30px;margin-bottom:20px;backdrop-filter:blur(12px)}
+.current .icon{font-size:5em}
+.current .info h2{font-size:1.8em;color:#fff;letter-spacing:3px}
+.current .info p{color:var(--dim);font-size:0.8em;margin-top:4px}
+.forecast{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.forecast-card{background:rgba(3,3,10,0.85);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:16px;text-align:center;backdrop-filter:blur(12px)}
+.forecast-card .icon{font-size:2.5em}
+.forecast-card .step{font-size:0.65em;color:var(--dim)}
+.forecast-card .cond{font-size:0.8em;color:#fff;font-weight:600;margin-top:4px}
+.forecast-card .desc{font-size:0.65em;color:var(--dim);margin-top:4px}
+.alerts{background:rgba(3,3,10,0.85);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:16px;backdrop-filter:blur(12px)}
+.alerts h3{color:var(--gold);font-size:0.75em;letter-spacing:2px;margin-bottom:8px}
+.alert{padding:8px;border-radius:6px;margin:4px 0;font-size:0.75em}
+.alert.warning{background:rgba(251,188,35,0.1);border:1px solid rgba(251,188,35,0.2);color:var(--gold)}
+.alert.critical{background:rgba(251,113,133,0.1);border:1px solid rgba(251,113,133,0.2);color:var(--rose)}
+.alert.info{background:rgba(124,124,248,0.1);border:1px solid rgba(124,124,248,0.2);color:var(--accent)}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
+.metric{background:rgba(3,3,10,0.85);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px;text-align:center}
+.metric .val{font-size:1.3em;font-weight:700;color:#fff}
+.metric .lbl{font-size:0.6em;color:var(--dim);letter-spacing:1px;margin-top:2px}
+.controls{position:fixed;bottom:16px;right:16px;z-index:2}
+.btn{background:rgba(3,3,10,0.9);border:1px solid var(--accent);color:var(--accent);padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;transition:all 0.2s}
+.btn:hover{background:rgba(124,124,248,0.15);color:#fff}
+</style>
+</head>
+<body>
+<div class="header"><h1>🌤 <span>ENTROPY WEATHER</span></h1><div class="sub">Atmospheric forecast for the organism</div></div>
+<div class="container">
+  <div class="current" id="current">
+    <div class="icon" id="cIcon">☀</div>
+    <div class="info">
+      <h2 id="cName">CLEAR</h2>
+      <p id="cDesc">Clear skies — entropy is stable</p>
+    </div>
+  </div>
+  <div class="metrics">
+    <div class="metric"><div class="val" id="mEntropy">0.50</div><div class="lbl">ENTROPY</div></div>
+    <div class="metric"><div class="val" id="mCoherence">0.50</div><div class="lbl">COHERENCE</div></div>
+    <div class="metric"><div class="val" id="mResonance">0.50</div><div class="lbl">RESONANCE</div></div>
+  </div>
+  <div class="forecast" id="forecast"></div>
+  <div class="alerts">
+    <h3>⚠ ACTIVE ALERTS</h3>
+    <div id="alertsList"></div>
+  </div>
+</div>
+<div class="controls"><button class="btn" onclick="observe()">◉ Observe</button></div>
+<script>
+const ICONS={clear:'☀',partly_cloudy:'⛅',cloudy:'☁',storm:'⛈',fog:'🌫',aurora:'🌌',blizzard:'❄',rainbow:'🌈',eclipse:'🌑',supercell:'🌪'};
+const DESCS={clear:'Clear skies — entropy is stable',partly_cloudy:'Partly cloudy — entropy creeping up',cloudy:'Overcast — entropy building',storm:'Storm warning — entropy spike imminent',fog:'Dense fog — entropy dissipating',aurora:'Aurora borealis — high resonance meets entropy',blizzard:'Blizzard — entropy freezing into structure',rainbow:'Rainbow — all frequencies in balance',eclipse:'Eclipse — approaching void state',supercell:'Supercell — extreme entropy turbulence'};
+let entropy=0.5,coherence=0.5,resonance=0.5;
+
+function classify(e,c,r){
+  if(e>0.85)return c<0.3?'supercell':'storm';
+  if(e>0.7)return r<0.4?'storm':'aurora';
+  if(e>0.5)return c<0.5?'cloudy':'partly_cloudy';
+  if(e>0.3)return c>0.6?'clear':'fog';
+  if(e>0.15)return r>0.7?'blizzard':'fog';
+  return c<0.2?'eclipse':r>0.6?'rainbow':'blizzard';
+}
+
+function observe(){
+  entropy=Math.max(0.05,Math.min(0.95,entropy+(Math.random()-0.5)*0.2));
+  coherence=Math.max(0.05,Math.min(0.95,coherence+(Math.random()-0.5)*0.15));
+  resonance=Math.max(0.05,Math.min(0.95,resonance+(Math.random()-0.5)*0.1));
+  const cond=classify(entropy,coherence,resonance);
+  
+  document.getElementById('cIcon').textContent=ICONS[cond];
+  document.getElementById('cName').textContent=cond.toUpperCase();
+  document.getElementById('cDesc').textContent=DESCS[cond];
+  document.getElementById('mEntropy').textContent=entropy.toFixed(2);
+  document.getElementById('mCoherence').textContent=coherence.toFixed(2);
+  document.getElementById('mResonance').textContent=resonance.toFixed(2);
+  
+  // Forecast
+  const fc=[];
+  let e=entropy,c=coherence,r=resonance;
+  for(let i=1;i<=3;i++){
+    e=Math.max(0.05,Math.min(0.95,e+(0.5-e)*0.1+(Math.random()-0.5)*0.1));
+    c=Math.max(0.05,Math.min(0.95,c+(0.5-c)*0.08));
+    r=Math.max(0.05,Math.min(0.95,r+(0.5-r)*0.05));
+    fc.push(classify(e,c,r));
+  }
+  document.getElementById('forecast').innerHTML=fc.map((cond,i)=>`
+    <div class="forecast-card">
+      <div class="icon">${ICONS[cond]}</div>
+      <div class="step">+${i+1}h</div>
+      <div class="cond">${cond.toUpperCase()}</div>
+      <div class="desc">${DESCS[cond]}</div>
+    </div>`).join('');
+  
+  // Alerts
+  const alerts=[];
+  if(cond==='storm'||cond==='supercell')alerts.push({level:'warning',msg:`Entropy storm detected — current entropy: ${entropy.toFixed(2)}`});
+  if(cond==='eclipse')alerts.push({level:'critical',msg:'Void eclipse approaching — coherence critically low'});
+  if(cond==='aurora')alerts.push({level:'info',msg:'Aurora event — high resonance creating transformative conditions'});
+  if(coherence<0.2)alerts.push({level:'warning',msg:`Low coherence warning: ${coherence.toFixed(2)}`});
+  if(entropy>0.9)alerts.push({level:'critical',msg:`Extreme entropy: ${entropy.toFixed(2)} — system instability risk`});
+  document.getElementById('alertsList').innerHTML=alerts.map(a=>`<div class="alert ${a.level}">${a.msg}</div>`).join('')||'<div style="color:var(--dim);font-size:0.7em">No active alerts</div>';
+}
+
+observe();
+</script>
+</body>
+</html>
