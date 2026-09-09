@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucid Machines — 2D</title>
+<style>
+:root{--bg:#05050f;--panel:rgba(10,10,24,0.95);--border:rgba(255,255,255,0.06);--text:#a0a0b8;--dim:#606078;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--green:#4ade80;--cyan:#22d3ee}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;overflow:hidden;height:100vh}
+.game{display:grid;grid-template-columns:1fr 260px;height:100vh;gap:0}
+canvas{width:100%;height:100%;display:block;image-rendering:pixelated}
+.sidebar{background:var(--panel);border-left:1px solid var(--border);padding:12px;display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+.panel{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:6px;padding:10px}
+.panel h3{color:var(--accent);font-size:0.65em;letter-spacing:2px;margin-bottom:6px}
+.stat-row{display:flex;justify-content:space-between;padding:2px 0;font-size:0.7em}
+.stat-row .k{color:var(--dim)}.stat-row .v{color:#fff;font-weight:600}
+.bar-bg{width:100%;height:6px;background:rgba(255,255,255,0.05);border-radius:3px;overflow:hidden;margin:3px 0}
+.bar-fill{height:100%;border-radius:3px;transition:width 0.3s}
+.log{font-size:0.65em;max-height:120px;overflow-y:auto}
+.log-entry{padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
+.log-entry.combat{color:var(--rose)}.log-entry.loot{color:var(--gold)}.log-entry.info{color:var(--teal)}.log-entry.level{color:var(--green)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.act-btn{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);padding:6px;border-radius:4px;font-size:0.7em;font-family:inherit;cursor:pointer;transition:all 0.15s}
+.act-btn:hover{background:rgba(124,124,248,0.15);border-color:var(--accent);color:#fff}
+.minimap{width:100%;height:100px;background:rgba(0,0,0,0.3);border-radius:4px}
+</style>
+</head>
+<body>
+<div class="game">
+  <canvas id="c"></canvas>
+  <div class="sidebar">
+    <div class="panel"><h3>◎ PLAYER</h3>
+      <div class="stat-row"><span class="k">HP</span><span class="v" id="hp">100/100</span></div>
+      <div class="bar-bg"><div class="bar-fill" id="hpBar" style="width:100%;background:var(--green)"></div></div>
+      <div class="stat-row"><span class="k">XP</span><span class="v" id="xp">0/100</span></div>
+      <div class="bar-bg"><div class="bar-fill" id="xpBar" style="width:0%;background:var(--gold)"></div></div>
+      <div class="stat-row"><span class="k">Level</span><span class="v" id="lvl">1</span></div>
+      <div class="stat-row"><span class="k">ATK</span><span class="v" id="atk">5</span></div>
+      <div class="stat-row"><span class="k">DEF</span><span class="v" id="def">2</span></div>
+      <div class="stat-row"><span class="k">Coherence</span><span class="v" id="coh">0.80</span></div>
+    </div>
+    <div class="panel"><h3>🗺 MINIMAP</h3><canvas class="minimap" id="minimap"></canvas></div>
+    <div class="panel"><h3>⚔ ACTIONS</h3>
+      <div class="actions">
+        <button class="act-btn" onclick="doAction('move')">↑ Move</button>
+        <button class="act-btn" onclick="doAction('attack')">⚔ Attack</button>
+        <button class="act-btn" onclick="doAction('left')">← Left</button>
+        <button class="act-btn" onclick="doAction('right')">→ Right</button>
+        <button class="act-btn" onclick="doAction('rest')">♡ Rest</button>
+        <button class="act-btn" onclick="doAction('interact')">◎ Interact</button>
+        <button class="act-btn" onclick="doAction('down')">↓ Back</button>
+        <button class="act-btn" onclick="doAction('special')">✦ Special</button>
+      </div>
+    </div>
+    <div class="panel"><h3>📜 LOG</h3><div class="log" id="log"></div></div>
+    <div class="panel"><h3>📦 INVENTORY</h3><div id="inv" style="font-size:0.7em"></div></div>
+  </div>
+</div>
+<script>
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');
+const mmCanvas=document.getElementById('minimap');const mmCtx=mmCanvas.getContext('2d');
+let W,H;
+function resize(){const r=canvas.parentElement.getBoundingClientRect();canvas.width=r.width;canvas.height=r.height;W=canvas.width;H=canvas.height;mmCanvas.width=mmCanvas.offsetWidth;mmCanvas.height=mmCanvas.offsetHeight}
+resize();window.addEventListener('resize',resize);
+
+// ── Game State ──
+const TILE=32;const MAP_W=40;const MAP_H=30;
+const player={x:20,y:15,hp:100,maxHp:100,xp:0,xpNext:100,level:1,atk:5,def:2,coherence:0.8,
+  facing:'right',animFrame:0,attackAnim:0};
+const camera={x:0,y:0};
+let rooms=[];let currentRoom=0;let enemies=[];let items=[];let particles=[];
+let logs=[];let inventory=[];let wave=0;let gameOver=false;
+
+// ── Colors ──
+const COLORS={
+  floor:'#0a0a18',wall:'#1a1a2e',player:'#7c7cf8',playerGlow:'rgba(124,124,248,0.3)',
+  enemy:'#fb7185',enemyGlow:'rgba(251,113,133,0.3)',item:'#fbbf24',
+  door:'#2dd4bf',shrine:'#22d3ee',hp:'#4ade80',xp:'#fbbf24',
+  tile1:'#0d0d1f',tile2:'#0f0f22'
+};
+
+// ── Room Generation ──
+function genRoom(){
+  const grid=Array.from({length:MAP_H},()=>Array(MAP_W).fill(0));
+  // Walls
+  for(let x=0;x<MAP_W;x++){grid[0][x]=1;grid[MAP_H-1][x]=1}
+  for(let y=0;y<MAP_H;y++){grid[y][0]=1;grid[y][MAP_W-1]=1}
+  // Random walls
+  for(let i=0;i<30;i++){
+    const wx=Math.floor(Math.random()*(MAP_W-4))+2;
+    const wy=Math.floor(Math.random()*(MAP_H-4))+2;
+    for(let dx=0;dx<2;dx++)for(let dy=0;dy<2;dy++)if(wy+dy<MAP_H&&wx+dx<MAP_W)grid[wy+dy][wx+dx]=1;
+  }
+  return grid;
+}
+
+function spawnEnemies(room){
+  const e=[];
+  const count=2+Math.floor(Math.random()*4);
+  const types=[
+    {name:'Entropy Wisp',hp:15,atk:3,def:0,color:'#fb7185',xp:20,glyph:'◎'},
+    {name:'Paradox Fragment',hp:25,atk:5,def:1,color:'#fbbf24',xp:35,glyph:'◆'},
+    {name:'Void Stalker',hp:35,atk:7,def:2,color:'#a78bfa',xp:50,glyph:'▲'},
+    {name:'Coherence Shade',hp:20,atk:4,def:1,color:'#22d3ee',xp:30,glyph:'●'},
+    {name:'Fractal Beast',hp:40,atk:8,def:3,color:'#4ade80',xp:60,glyph:'✦'}
+  ];
+  for(let i=0;i<count;i++){
+    const t=types[Math.floor(Math.random()*types.length)];
+    let ex,ey;
+    do{ex=Math.floor(Math.random()*(MAP_W-4))+2;ey=Math.floor(Math.random()*(MAP_H-4))+2}
+    while(room[ey][ex]===1||(ex===player.x&&ey===player.y));
+    e.push({...t,x:ex,y:ey,maxHp:t.hp});
+  }
+  return e;
+}
+
+function spawnItems(room){
+  const it=[];const count=1+Math.floor(Math.random()*3);
+  for(let i=0;i<count;i++){
+    let ix,iy;
+    do{ix=Math.floor(Math.random()*(MAP_W-4))+2;iy=Math.floor(Math.random()*(MAP_H-4))+2}
+    while(room[iy][ix]===1);
+    it.push({x:ix,y:iy,type:Math.random()>0.5?'potion':'scroll',name:Math.random()>0.5?'Health Potion':'Coherence Scroll',color:Math.random()>0.5?'#4ade80':'#7c7cf8'});
+  }
+  return it;
+}
+
+function initGame(){
+  rooms=[genRoom()];currentRoom=0;
+  enemies=spawnEnemies(rooms[0]);items=spawnItems(rooms[0]);
+  player.x=20;player.y=15;player.hp=100;player.maxHp=100;player.xp=0;player.level=1;
+  player.atk=5;player.def=2;player.coherence=0.8;wave=0;
+  inventory=[];logs=[];gameOver=false;
+  addLog('info','You awaken in the '+['Entropy Desert','Dream Gravity Zone','Paradox Garden','Coherence Cathedral'][Math.floor(Math.random()*4)]+'.');
+  addLog('info','The organism watches. Each turn is a wave.');
+  updateUI();
+}
+
+// ── Rendering ──
+function render(){
+  if(gameOver)return;
+  ctx.fillStyle=COLORS.floor;ctx.fillRect(0,0,W,H);
+  
+  const room=rooms[currentRoom];
+  const camX=player.x*TILE-W/2+TILE/2;
+  const camY=player.y*TILE-H/2+TILE/2;
+  camera.x+=(camX-camera.x)*0.1;camera.y+=(camY-camera.y)*0.1;
+  
+  // Tiles
+  const startX=Math.max(0,Math.floor(camera.x/TILE)-1);
+  const startY=Math.max(0,Math.floor(camera.y/TILE)-1);
+  const endX=Math.min(MAP_W,Math.ceil((camera.x+W)/TILE)+1);
+  const endY=Math.min(MAP_H,Math.ceil((camera.y+H)/TILE)+1);
+  
+  for(let y=startY;y<endY;y++){
+    for(let x=startX;x<endX;x++){
+      const sx=x*TILE-camera.x;const sy=y*TILE-camera.y;
+      if(room[y][x]===1){
+        ctx.fillStyle=COLORS.wall;
+        ctx.fillRect(sx,sy,TILE,TILE);
+        ctx.fillStyle='rgba(124,124,248,0.05)';
+        ctx.fillRect(sx,sy,TILE,1);
+      }else{
+        ctx.fillStyle=(x+y)%2===0?COLORS.tile1:COLORS.tile2;
+        ctx.fillRect(sx,sy,TILE,TILE);
+      }
+    }
+  }
+  
+  // Items
+  items.forEach(item=>{
+    const sx=item.x*TILE-camera.x;const sy=item.y*TILE-camera.y;
+    ctx.fillStyle=item.color+'30';ctx.fillRect(sx,sy,TILE,TILE);
+    ctx.fillStyle=item.color;ctx.font='16px monospace';ctx.textAlign='center';
+    ctx.fillText(item.type==='potion'?'♡':'◈',sx+TILE/2,sy+TILE/2+5);
+  });
+  
+  // Enemies
+  enemies.forEach(e=>{
+    const sx=e.x*TILE-camera.x;const sy=e.y*TILE-camera.y;
+    // Glow
+    ctx.beginPath();ctx.arc(sx+TILE/2,sy+TILE/2,TILE*0.8,0,Math.PI*2);
+    ctx.fillStyle=e.color+'15';ctx.fill();
+    // Body
+    ctx.fillStyle=e.color;
+    ctx.font='18px monospace';ctx.textAlign='center';
+    ctx.fillText(e.glyph,sx+TILE/2,sy+TILE/2+6);
+    // HP bar
+    const hpPct=e.hp/e.maxHp;
+    ctx.fillStyle='rgba(255,255,255,0.1)';ctx.fillRect(sx+4,sy-4,TILE-8,3);
+    ctx.fillStyle=hpPct>0.5?COLORS.hp:hpPct>0.2?COLORS.xp:COLORS.enemy;
+    ctx.fillRect(sx+4,sy-4,(TILE-8)*hpPct,3);
+    // Name
+    ctx.fillStyle='#fff8';ctx.font='8px monospace';
+    ctx.fillText(e.name,sx+TILE/2,sy-8);
+  });
+  
+  // Player
+  const psx=player.x*TILE-camera.x;const psy=player.y*TILE-camera.y;
+  // Glow
+  ctx.beginPath();ctx.arc(psx+TILE/2,psy+TILE/2,TILE,0,Math.PI*2);
+  ctx.fillStyle=COLORS.playerGlow;ctx.fill();
+  // Body
+  ctx.fillStyle=COLORS.player;
+  ctx.beginPath();ctx.arc(psx+TILE/2,psy+TILE/2,TILE*0.35,0,Math.PI*2);ctx.fill();
+  // Eyes
+  ctx.fillStyle='#fff';
+  const eyeOff=player.facing==='right'?3:player.facing==='left'?-3:0;
+  const eyeOffY=player.facing==='up'?-3:player.facing==='down'?3:0;
+  ctx.beginPath();ctx.arc(psx+TILE/2-4+eyeOff,psy+TILE/2-2+eyeOffY,2,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(psx+TILE/2+4+eyeOff,psy+TILE/2-2+eyeOffY,2,0,Math.PI*2);ctx.fill();
+  
+  // Attack animation
+  if(player.attackAnim>0){
+    ctx.strokeStyle=COLORS.accent;ctx.lineWidth=2;ctx.globalAlpha=player.attackAnim/10;
+    const ax=psx+TILE/2+(player.facing==='right'?20:player.facing==='left'?-20:0);
+    const ay=psy+TILE/2+(player.facing==='down'?20:player.facing==='up'?-20:0);
+    ctx.beginPath();ctx.arc(ax,ay,15*(10-player.attackAnim)/10,0,Math.PI*2);ctx.stroke();
+    ctx.globalAlpha=1;player.attackAnim--;
+  }
+  
+  // Particles
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    p.x+=p.vx;p.y+=p.vy;p.life--;p.vy+=0.1;
+    ctx.fillStyle=p.color+Math.floor(p.life/p.maxLife*200).toString(16).padStart(2,'0');
+    ctx.fillRect(p.x,p.y,p.size,p.size);
+    if(p.life<=0)particles.splice(i,1);
+  }
+  
+  // Wave indicator
+  ctx.fillStyle='#fff8';ctx.font='11px monospace';ctx.textAlign='left';
+  ctx.fillText(`WAVE ${wave}`,16,24);
+  ctx.fillText(`ROOM ${currentRoom+1}`,16,38);
+  
+  // Minimap
+  renderMinimap();
+  
+  requestAnimationFrame(render);
+}
+
+function renderMinimap(){
+  const mw=mmCanvas.width;const mh=mmCanvas.height;
+  mmCtx.fillStyle='rgba(0,0,0,0.5)';mmCtx.fillRect(0,0,mw,mh);
+  const room=rooms[currentRoom];
+  const sx=mw/MAP_W;const sy=mh/MAP_H;
+  for(let y=0;y<MAP_H;y++){
+    for(let x=0;x<MAP_W;x++){
+      if(room[y][x]===1){mmCtx.fillStyle='#333';mmCtx.fillRect(x*sx,y*sy,sx+0.5,sy+0.5)}
+    }
+  }
+  enemies.forEach(e=>{mmCtx.fillStyle=COLORS.enemy;mmCtx.fillRect(e*sx-1,e.y*sy-1,3,3)});
+  mmCtx.fillStyle=COLORS.player;mmCtx.fillRect(player.x*sx-1,player.y*sy-1,3,3);
+}
+
+// ── Actions ──
+function doAction(act){
+  if(gameOver)return;
+  wave++;
+  let moved=false;
+  
+  if(act==='move'||act==='left'||act==='right'||act==='down'){
+    let dx=0,dy=0;
+    if(act==='move'){dy=-1;player.facing='up'}
+    if(act==='down'){dy=1;player.facing='down'}
+    if(act==='left'){dx=-1;player.facing='left'}
+    if(act==='right'){dx=1;player.facing='right'}
+    
+    const nx=player.x+dx;const ny=player.y+dy;
+    if(nx>=0&&nx<MAP_W&&ny>=0&&ny<MAP_H&&rooms[currentRoom][ny][nx]!==1){
+      // Check enemy collision
+      const enemy=enemies.find(e=>e.x===nx&&e.y===ny);
+      if(enemy){
+        doAction('attack');return;
+      }
+      player.x=nx;player.y=ny;moved=true;
+    }
+  }
+  
+  if(act==='attack'){
+    const dirs=[{dx:0,dy:-1},{dx:0,dy:1},{dx:-1,dy:0},{dx:1,dy:0}];
+    const target=dirs.find(d=>{
+      const e=enemies.find(e=>e.x===player.x+d.dx&&e.y===player.y+d.dy);
+      return e;
+    });
+    if(target){
+      const enemy=enemies.find(e=>e.x===player.x+target.dx&&e.y===player.y+target.dy);
+      const dmg=Math.max(1,player.atk-enemy.def+Math.floor(Math.random()*3));
+      enemy.hp-=dmg;
+      player.attackAnim=10;
+      addLog('combat',`You hit ${enemy.name} for ${dmg} damage!`);
+      spawnParticles(enemy.x*TILE-camera.x+TILE/2,enemy.y*TILE-camera.y+TILE/2,enemy.color,8);
+      if(enemy.hp<=0){
+        addLog('loot',`${enemy.name} defeated! +${enemy.xp} XP`);
+        player.xp+=enemy.xp;
+        enemies=enemies.filter(e=>e!==enemy);
+        checkLevelUp();
+      }
+    }else{
+      addLog('info','Nothing to attack nearby.');
+    }
+  }
+  
+  if(act==='rest'){
+    const heal=Math.floor(player.maxHp*0.15);
+    player.hp=Math.min(player.maxHp,player.hp+heal);
+    addLog('info',`You rest and recover ${heal} HP.`);
+    player.coherence=Math.min(1,player.coherence+0.05);
+  }
+  
+  if(act==='interact'){
+    // Pick up items
+    const item=items.find(i=>i.x===player.x&&i.y===player.y);
+    if(item){
+      if(item.type==='potion'){player.hp=Math.min(player.maxHp,player.hp+30);addLog('loot',`Used ${item.name} (+30 HP)`)}
+      else{player.coherence=Math.min(1,player.coherence+0.2);addLog('loot',`Used ${item.name} (+0.2 coherence)`)}
+      items=items.filter(i=>i!==item);
+    }else{
+      // Check for exit
+      if(enemies.length===0){
+        addLog('info','Room cleared! Moving to next wave...');
+        nextRoom();
+      }else{
+        addLog('info',`${enemies.length} enemies remain.`);
+      }
+    }
+  }
+  
+  if(act==='special'){
+    if(player.coherence>=0.3){
+      player.coherence-=0.3;
+      // Coherence blast — damages all enemies
+      enemies.forEach(e=>{
+        const dmg=Math.floor(player.atk*1.5);
+        e.hp-=dmg;
+        spawnParticles(e.x*TILE-camera.x+TILE/2,e.y*TILE-camera.y+TILE/2,'#7c7cf8',12);
+      });
+      addLog('level',`✦ Coherence Blast! All enemies take ${Math.floor(player.atk*1.5)} damage!`);
+      enemies=enemies.filter(e=>e.hp>0);
+      if(enemies.length===0){
+        addLog('info','All enemies destroyed!');
+        setTimeout(()=>nextRoom(),500);
+      }
+    }else{
+      addLog('info','Not enough coherence for special.');
+    }
+  }
+  
+  // Enemy turn
+  if(moved||act==='attack'||act==='rest'||act==='special'){
+    enemyTurn();
+  }
+  
+  updateUI();
+}
+
+function enemyTurn(){
+  enemies.forEach(e=>{
+    const dx=player.x-e.x;const dy=player.y-e.y;
+    const dist=Math.abs(dx)+Math.abs(dy);
+    
+    if(dist<=1){
+      // Attack player
+      const dmg=Math.max(1,e.atk-player.def+Math.floor(Math.random()*2));
+      player.hp-=dmg;
+      addLog('combat',`${e.name} hits you for ${dmg} damage!`);
+      spawnParticles(player.x*TILE-camera.x+TILE/2,player.y*TILE-camera.y+TILE/2,COLORS.enemy,6);
+      if(player.hp<=0){
+        player.hp=0;gameOver=true;
+        addLog('combat','💀 YOU HAVE FALLEN. The organism mourns.');
+      }
+    }else if(dist<8){
+      // Move toward player
+      const mx=dx>0?1:dx<0?-1:0;
+      const my=dy>0?1:dy<0?-1:0;
+      const nx=e.x+(Math.random()>0.5?mx:0);
+      const ny=e.y+(Math.random()>0.5?my:0);
+      if(nx>=0&&nx<MAP_W&&ny>=0&&ny<MAP_H&&rooms[currentRoom][ny][nx]!==1){
+        if(!enemies.find(o=>o!==e&&o.x===nx&&o.y===ny)){
+          e.x=nx;e.y=ny;
+        }
+      }
+    }
+  });
+}
+
+function nextRoom(){
+  wave++;
+  rooms.push(genRoom());
+  currentRoom=rooms.length-1;
+  enemies=spawnEnemies(rooms[currentRoom]);
+  items=spawnItems(rooms[currentRoom]);
+  player.x=20;player.y=15;
+  player.coherence=Math.min(1,player.coherence+0.1);
+  addLog('info',`═══ WAVE ${wave} ═══`);
+  const realms=['Entropy Desert','Dream Gravity Zone','Paradox Garden','Coherence Cathedral','Void Abyss','Temporal Rift','Mythic Realm','Resonance Depths'];
+  addLog('info',`Entering: ${realms[wave%realms.length]}`);
+}
+
+function checkLevelUp(){
+  while(player.xp>=player.xpNext){
+    player.xp-=player.xpNext;
+    player.level++;
+    player.xpNext=Math.floor(player.xpNext*1.5);
+    player.maxHp+=10;player.hp=player.maxHp;
+    player.atk+=2;player.def+=1;
+    addLog('level',`★ LEVEL UP! You are now level ${player.level}!`);
+    spawnParticles(player.x*TILE-camera.x+TILE/2,player.y*TILE-camera.y+TILE/2,COLORS.gold,20);
+  }
+}
+
+function spawnParticles(x,y,color,count){
+  for(let i=0;i<count;i++){
+    particles.push({x,y,vx:(Math.random()-0.5)*4,vy:(Math.random()-0.5)*4-2,
+      size:Math.random()*3+1,life:30,maxLife:30,color});
+  }
+}
+
+function addLog(type,msg){
+  logs.unshift({type,msg});
+  if(logs.length>30)logs.pop();
+  document.getElementById('log').innerHTML=logs.map(l=>`<div class="log-entry ${l.type}">${l.msg}</div>`).join('');
+}
+
+function updateUI(){
+  document.getElementById('hp').textContent=`${player.hp}/${player.maxHp}`;
+  document.getElementById('hpBar').style.width=`${player.hp/player.maxHp*100}%`;
+  document.getElementById('hpBar').style.background=player.hp/player.maxHp>0.5?COLORS.green:player.hp/player.maxHp>0.2?COLORS.gold:COLORS.rose;
+  document.getElementById('xp').textContent=`${player.xp}/${player.xpNext}`;
+  document.getElementById('xpBar').style.width=`${player.xp/player.xpNext*100}%`;
+  document.getElementById('lvl').textContent=player.level;
+  document.getElementById('atk').textContent=player.atk;
+  document.getElementById('def').textContent=player.def;
+  document.getElementById('coh').textContent=player.coherence.toFixed(2);
+  document.getElementById('inv').innerHTML=inventory.length?inventory.map(i=>`<div style="color:${i.color}">• ${i.name}</div>`).join(''):'<div style="color:var(--dim)">Empty</div>';
+}
+
+// ── Keyboard ──
+document.addEventListener('keydown',e=>{
+  const keymap={'ArrowUp':'move','ArrowDown':'down','ArrowLeft':'left','ArrowRight':'right',
+    'w':'move','s':'down','a':'left','d':'right',' ':'attack','e':'interact','r':'rest',
+    'q':'special','1':'move','2':'attack','3':'rest','4':'special'};
+  if(keymap[e.key]){e.preventDefault();doAction(keymap[e.key])}
+});
+
+initGame();render();
+</script>
+</body>
+</html>
