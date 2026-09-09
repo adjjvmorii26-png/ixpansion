@@ -3,30 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>error-log — IXpansion</title>
+<title>Error Log — IXPANSION</title>
 <style>
+:root{--bg:#03030a;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--cyan:#22d3ee;--green:#4ade80;--text:#c0c0d0;--dim:#606078}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a14;color:#e0e0e0;min-height:100vh}
-.header{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:20px 24px;border-bottom:1px solid #222244}
-.header h1{font-size:1.4em;color:#41b3a3}.header p{color:#888;margin-top:2px;font-size:0.85em}
-.content{padding:20px 24px}
-.card{background:#161628;border:1px solid #222244;border-radius:10px;padding:16px;margin-bottom:12px}
-pre{background:#0d0d1a;padding:12px;border-radius:6px;overflow-x:auto;font-size:0.82em;color:#ccc}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+.header{text-align:center;padding:30px;border-bottom:1px solid rgba(124,124,248,0.15);background:linear-gradient(180deg,rgba(124,124,248,0.06)0%,transparent 100%)}
+.header h1{font-size:1.5em;color:#fff;letter-spacing:3px}.header h1 span{color:var(--teal)}
+.header .sub{color:var(--dim);font-size:0.75em;margin-top:4px}
+.container{max-width:1000px;margin:0 auto;padding:24px}
+.card{background:rgba(3,3,10,0.85);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:16px;margin-bottom:12px;backdrop-filter:blur(12px)}
+.card h3{color:var(--accent);font-size:0.75em;letter-spacing:2px;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;padding:4px 0;font-size:0.75em;border-bottom:1px solid rgba(255,255,255,0.02)}
+.row .k{color:var(--dim)}.row .v{color:#fff;font-weight:600}
+canvas{width:100%;height:200px;border-radius:6px;margin-top:8px}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.7em;margin:2px}
+.badge.active{background:rgba(74,222,128,0.15);color:var(--green);border:1px solid rgba(74,222,128,0.2)}
+.badge.warn{background:rgba(251,188,35,0.15);color:var(--gold);border:1px solid rgba(251,188,35,0.2)}
+.badge.info{background:rgba(124,124,248,0.15);color:var(--accent);border:1px solid rgba(124,124,248,0.2)}
+.back{position:fixed;top:16px;left:16px;z-index:10;color:var(--accent);text-decoration:none;font-size:0.75em;opacity:0.6;transition:opacity 0.2s}.back:hover{opacity:1}
 </style>
 </head>
 <body>
-<div class="header"><h1>error-log</h1><p>API data below</p></div>
-<div class="content"><div class="card"><pre id="data">Loading...</pre></div></div>
+<a class="back" href="index.html">← Back to Index</a>
+<div class="header"><h1>⚠ <span>Error Log</span></h1><div class="sub">System error tracking and resolution</div></div>
+<div class="container">
+
+<div class="card"><h3>⚠ RECENT ERRORS</h3>
+<div class="row"><span class="k">Template KeyError (m3)</span><span class="badge active">RESOLVED</span></div>
+<div class="row"><span class="k">Broken docstrings (8 skills)</span><span class="badge active">RESOLVED</span></div>
+<div class="row"><span class="k">Git push HTTPS auth</span><span class="badge active">RESOLVED</span></div>
+<div class="row"><span class="k">Vercel fair-use limit</span><span class="badge warn">PENDING</span></div>
+<div class="row"><span class="k">GitHub Pages not found</span><span class="badge active">RESOLVED</span></div>
+</div>
+<div class="card"><h3>📊 ERROR STATS</h3>
+<div class="row"><span class="k">Total Errors</span><span class="v">5</span></div>
+<div class="row"><span class="k">Resolved</span><span class="v" style="color:var(--green)">4 (80%)</span></div>
+<div class="row"><span class="k">Pending</span><span class="v" style="color:var(--gold)">1 (20%)</span></div>
+</div>
+</div>
 <script>
-fetch('/error_log').then(r=>r.json()).then(d=>{
-  document.getElementById('data').textContent=JSON.stringify(d,null,2);
-}).catch(e=>{
-  fetch('/error-log').then(r=>r.json()).then(d=>{
-    document.getElementById('data').textContent=JSON.stringify(d,null,2);
-  }).catch(e2=>{
-    document.getElementById('data').textContent='Error: '+e2.message;
-  });
-});
+
 </script>
 </body>
 </html>
