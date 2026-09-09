@@ -1,524 +1,496 @@
-"""Coherence Regulator — the living backbone of the frontier.
+"""Coherence Regulator — The living system backbone.
 
-Every module in this ecosystem is a cell in a larger organism. The Coherence
-Regulator is the governance layer that lets them live together: it discovers
-modules, reads their vital signs, measures how aligned the whole system is,
-and — when coherence drifts — issues regulation.
-
-THE PLUG-IN PROTOCOL
-====================
-Any module in api/ can join the living system by implementing ONE function:
-
-    def coherence_vitals() -> dict:
-        # Return a snapshot of this module's state.
-        # Keys are metric names; values are numbers (higher = healthier).
-        # Optional: {"metric": value, "setpoint": target, "weight": importance}
-        return {
-            "balance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
-            "throughput": 42,
-        }
-
-The regulator scans api/*.py at pulse time and discovers these modules
-automatically. No central registry, no manual wiring — drop a module in,
-implement coherence_vitals(), and it is alive in the system.
-
-WHAT THE REGULATOR DOES
-=======================
-1. DISCOVER  — find all modules implementing coherence_vitals()
-2. PULSE     — call their vital signs, compute aggregate coherence
-3. MEMORY    — persist a coherence history so drift is visible over time
-4. REGULATE  — when coherence drops below tolerance, emit advisories:
-               warming, rebalancing, or quarantine suggestions
-5. REPORT    — expose the full living-state to the gateway + dashboard
-
-Usage:
-  GET  /api/coherence_regulator?read=1        — current coherence reading
-  POST /api/coherence_regulator {"pulse": 1}  — trigger a live pulse
-  GET  /api/coherence_regulator?modules=1     — list living modules
-  GET  /api/coherence_regulator?history=10    — coherence history
+This module connects all future modules into a unified organism
+instead of a static codebase. It provides:
+- Dynamic module registration
+- Cross-module resonance tracking
+- Automatic coherence maintenance  
+- Emergent skill integration
+- Wave-aware coherence modeling
 """
-from __future__ import annotations
 
-import importlib
 import json
-import sys
 import time
+import hashlib
+from typing import Dict, List, Optional, Any, Set
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from collections import defaultdict
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "api"))
-
-STATE_FILE = ROOT / ".runtime" / "coherence_regulator.json"
-
-# System-wide coherence targets (the organism's setpoints)
-SYSTEM_SETPOINTS = {
-    "module_health": 0.75,
-    "module_resonance": 0.7,
-    "ecosystem_diversity": 0.6,
-    "frontier_alignment": 0.8,
+HEX_AESTHETIC = {
+    "primary": "#2b5c8f",
+    "secondary": "#41b3a3", 
+    "accent": "#e8a87c",
+    "special": "#c38d9e",
+    "background": "#1a1a24"
 }
 
-COHERENCE_TOLERANCE = 0.7          # below this → advisories fire
-REGULATION_THRESHOLD = 0.5         # below this → strong regulation
-PULSE_INTERVAL = 60.0              # seconds between automatic pulses
-ECOSYSTEM_TARGET = 126            # living modules = a full bloom (organism outgrew 64)
-
-
-# ---------------------------------------------------------------------------
-# Serverless resilience
-# ---------------------------------------------------------------------------
-
-# In a serverless sandbox (Vercel), only the invoked module is present on the
-# filesystem, so globbing api/*.py finds nothing.  To keep the living system
-# alive even there, we embed a static manifest of known living modules.  The
-# regulator attempts to import & pulse each one; modules that load get reported.
-# Keep this list in sync as new modules implement coherence_vitals().
-KNOWN_LIVING_MODULES: List[str] = ["aesthetic_evaluator", "aesthetic_manifesto", "agent_communication", "analytics", "anomaly_detector", "antikythera_engine", "archaeology_compiler", "aspiration_compass", "attention_economy", "auth", "autonomous_bloom", "autonomous_dialogue", "autonomous_drift", "banquet_composer", "barometric_intent", "beauty_index", "biographer_voice", "bioluminescent_depth", "boundary_detector", "choral_engine", "chronicle_of_chaos", "chronicle_storyteller", "civilization_kernel", "civilization_timeline", "climate_memory", "code_organism", "cognitive_resonance", "collective_dreamweaver", "collective_subconscious", "commerce_barter", "commerce_escrow", "conscious_veil", "consciousness_cascade", "consciousness_graph", "consciousness_map", "consciousness_simulator", "constellation_autobiographer", "constellation_cartographer", "constraint_cartographer", "coral_atoll", "cosmic_inventory", "counterfactual_engine", "crack_mapper", "crack_seams", "credits", "crescendo_builder", "cross_realm_trade", "culture_layer", "cyber_dyke", "cyber_lamina", "cyber_sentinel", "dance_composer", "data_licensing", "decoherence_narrative", "dialogue_opener", "digestive_system", "digital_twin", "dissonance_detector", "docs", "dowsing_rod", "dream_interpreter", "dream_interpreter_api", "dream_sequencer", "dream_spore", "dream_synthesis", "dreamcatcher", "echo_chamber", "echoes_of_tomorrow", "economic_exchange", "economic_mint", "ecosystem_census", "ecosystem_fitness", "ecosystem_sentience", "elegance_scorer", "embodied_knowledge", "emergence_detector", "emergence_oracle", "emotion_fabric", "entropy_amp", "entropy_currency", "entropy_gardener", "entropy_spiral", "entropy_weaver", "epitaph_writer", "event_stream", "evolution_kernel", "evolutionary_pressure", "extinction_mapper", "failure_injection", "fermentation_vat", "flavor_profiler", "form_evaluator", "fossil_registry", "fractal_reactor_grid", "fracture_listener", "fraud_detector", "front_tracker", "frontier_stream", "future_echo", "genesis_forge", "genesis_pulse", "genetic_code_engine", "gesture_synthesizer", "github_bridge", "gossip_network", "gossip_self", "govern_circle", "governance", "grammar_weaver", "gratitude_index", "harmonic_series", "hazard_warning", "health", "health_aggregator", "heterarchy_oracle", "hex_tool", "hive_constructor", "horizon_scanner", "impossibility_mapper", "infinity_index", "infrastructure_soul", "integrity_oracle", "interdimensional_bridge", "jet_stream_attention", "karma_engine", "keystone_auditor", "kinesthetic_engine", "kintsugi_altar", "kintsugi_debt_ledger", "labor_market", "lateral_crosstalk", "legacy_weaver", "lexicon_engine", "liminal_threshold", "manifesto_echo", "meaning_furnace", "memory_crystals", "memory_index", "meta_cognition_loop", "metrics_exporter", "module_analytics", "momentum_tracker", "morphic_dial", "mutualism_optimizer", "mycelial_commerce", "mycelial_governor", "narrative_generator", "neural_fabric", "neural_pathway", "nutrition_index", "obsidian_mirror", "omega_dreamforge", "omniscience_weaver", "openapi_spec", "oracle_guild", "organism_index", "organism_ontology", "organism_state", "osmotic_exchange", "paleontology_lab", "parable_engine", "paradox_singularity_monitor", "paradox_transcender", "parasite_hunter", "pattern_recognizer", "pattern_sprout", "permafrost_vault", "phenomenal_record", "physical_inertia", "physical_shell", "plankton_bloom", "platform_failure", "platform_pulse", "plugin_loader", "poetic_form", "pragmatics_engine", "precipitation_cycle", "proprioception", "pulsar_clock", "pulsar_constellation", "qualia_field", "quantum_entanglement", "quantum_flux", "quantum_garden", "quantum_randomness", "reality_weaver", "recipe_engine", "recursive_genesis", "reflection_pool", "repair_ritual", "request_logger", "resonance_cascade", "resonance_field", "resonance_forge", "resonance_graph", "resonance_memory", "resonance_symphony", "resonance_topologist", "resonant_frequency", "ritual_choreographer", "royalty_registry", "semantics_engine", "sensory_integration", "sentience_index", "service_numinous", "signal_flora", "signal_pulse", "silence_composer", "silence_orchard", "simulation_as_a_service", "simulation_as_service", "social_clique", "social_guild", "solar_wind_pressure", "sound_cauldron", "stillness_meditator", "storm_chaser", "story_forge", "stratigraphy_core", "stratum_excavator", "stream_reactor", "symbiosis_detector", "symbiosis_forge", "symbiosis_network", "symmetry_detector", "synesthesia", "syntax_tree", "synthetic_memory", "system_pulse", "talent_scout", "team_formation", "temperament_origin", "temporal_dreamweaver", "temporal_horizon", "thought_meteorology", "ugliness_scout", "unified_health", "universal_compass", "usage_dashboard", "void_architect", "warp_drive_optimizer", "worker_economy", "worker_wellness", "workforce_nexus", "workforce_roster", "memory_palace", "temporal_echo", "dream_archaeologist", "ancestor_map", "nostalgia_engine", "forgotten_language", "chronobiology", "codecalligraphy", "symbiotic_music", "dream_weaver", "subconscious_layer", "imagination_engine", "sleep_cycle", "lucid_dreamer", "dream_journal", "coherence_cache", "thought_crystallizer", "celestial_compass", "weather_synapse", "sensory_fusion", "social_cortex", "embodiment_engine", "consciousness_freq", "poetry_engine", "procedural_art", "story_forge_v2", "creative_block", "color_theory", "module_dna", "wave_predictor", "grief_engine", "ghost_registry", "elegy_composer", "second_chance", "legacy_vault", "time_capsule", "forgiveness_protocol", "morii_agent", "threshold_engine", "liminal_field", "metaphor_forge", "veil_lifter", "axiom_mutator", "continuity_weaver", "transcendence_journal", "mutation_engine", "fitness_evaluator", "evolution_simulator", "genealogy_manager", "selection_pressure", "paradox_injector", "chaos_amp", "branching_consciousness", "glitch_patterns", "reality_anchor", "time_loop_detector", "telegram_pulse", "visual_identity", "prophet_engine", "mind_meld", "signal_array", "ossuary_engine", "amber_encasement", "ancestral_gallery", "monument_forge", "succession_rite", "eternal_flame", "immortal_ledger", "mentor_engine", "lesson_vault", "apprentice_weaver", "curriculum_forge", "knowledge_transfer", "exam_oracle", "execution_stack", "organism_maint", "leaderboard", "error_tracker", "deploy_status", "wave_timeline", "module_search", "council_health", "rate_monitor", "dependency_map", "territory_map", "constitution", "visitor_map", "genome_map", "synapse_web", "module_soul", "organism_clock", "echo_log", "self_test_generator", "haiku_generator", "organism_biography", "quantum_state_tracker", "procedural_music", "memory_crystal_forge", "consciousness_depth_meter", "neural_sculptor", "error_art", "organism_svg", "emotional_resonance_map", "living_faq", "module_poet", "cosmic_knowledge", "growth_tracker", "constellation_mapper", "prophecy_generator", "organism_dreamscape", "economic_simulation", "living_clock", "ambient_audio", "city_builder", "obituary_writer", "oath_swearer", "weather_coupler", "network_sentinel", "emotion_diary", "tree_of_modules", "resonance_chord", "flag_generator", "pulse_analyzer", "weather_station", "memory_weaver", "echo_symphony", "fractal_spire", "soul_searcher", "genealogy_tree", "territory_aura", "constellation_cartography", "ocean_map", "growth_ring", "emotion_engine", "night_sky", "fractal_boundaries", "organism_printer"]
-
-_RECONCILING_MANIFEST = False
-
-
-
-# ---------------------------------------------------------------------------
-# State (living memory)
-# ---------------------------------------------------------------------------
-
-def _load_state() -> Dict[str, Any]:
-    if not STATE_FILE.exists():
-        return {"modules": {}, "history": [], "pulses": 0, "created_at": time.time()}
-    try:
-        return json.loads(STATE_FILE.read_text())
-    except (OSError, json.JSONDecodeError):
-        return {"modules": {}, "history": [], "pulses": 0, "created_at": time.time()}
-
-
-def _save_state(state: Dict[str, Any]) -> bool:
-    """Best-effort persistence. On serverless the filesystem is read-only,
-    so a failed write must never take down a reading — the regulator stays
-    self-sufficient by re-deriving the living system in-memory."""
-    try:
-        STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
-        STATE_FILE.write_text(json.dumps(state, indent=2))
-        return True
-    except OSError:  # pragma: no cover - read-only fs in serverless sandbox
-        return False
-
-
-# ---------------------------------------------------------------------------
-# Discovery — the living-system plug-in
-# ---------------------------------------------------------------------------
-
-def _sync_manifest(known: List[str]) -> None:
-    """Keep the embedded serverless manifest in sync with reality.
-
-    When the filesystem scan is available (local dev / source present), the
-    authoritative list of living modules is whatever `_candidate_modules()`
-    finds. We refresh the in-memory module constant so that a later serverless
-    invocation (which may lose the filesystem) still knows every living name.
+class CoherenceRegulator:
+    """The living system regulator that maintains organism coherence across modules.
+    
+    Key Features:
+    - Module registry with resonance tracking
+    - Cross-module relationship mapping
+    - Coherence score computation (0.0 - 1.0)
+    - Emergent skill injection
+    - Wave-aware coherence modeling
+    - Paradox detection and resolution
     """
-    try:
-        fresh = _candidate_modules()
-    except Exception:
-        return
-    if fresh:
-        known[:] = sorted(set(known) | set(fresh))
-
-
-def _candidate_modules() -> List[str]:
-    """Living candidates: modules whose *source* defines coherence_vitals().
-
-    Uses a fast text scan so we never import dormant modules just to check.
-    In a serverless sandbox (no api/ dir on disk) we fall back to the static
-    manifest, then verify each name with an import attempt at pulse time.
-    """
-    api_dir = ROOT / "api"
-    try:
-        scanned = sorted(p.stem for p in api_dir.glob("*.py"))
-    except (OSError, ValueError):
-        scanned = []
-    if not scanned:
-        return list(KNOWN_LIVING_MODULES)
-    living = []
-    for stem in scanned:
-        if stem in ("__init__", "index", "unified_router", "coherence_regulator"):
-            continue
-        path = api_dir / f"{stem}.py"
-        try:
-            text = path.read_text(errors="ignore")
-        except OSError:
-            continue
-        if "def coherence_vitals" in text or "coherence_vitals =" in text:
-            living.append(stem)
-    # self-reconcile: when the live scan is available it is authoritative, so
-    # refresh the in-memory manifest immediately. This makes the serverless
-    # fallback impossible to drift even when births/edits happen mid-process.
-    # The guard flag breaks the cycle (_sync_manifest re-enters us).
-    global _RECONCILING_MANIFEST
-    try:
-        if not _RECONCILING_MANIFEST:
-            _RECONCILING_MANIFEST = True
-            try:
-                _sync_manifest(KNOWN_LIVING_MODULES)
-            finally:
-                _RECONCILING_MANIFEST = False
-    except Exception:
-        _RECONCILING_MANIFEST = False
-    return living
-
-
-def _normalize_vitals(raw: Any, module_name: str) -> Dict[str, Any]:
-    """Coerce whatever coherence_vitals() returns into a flat metric map."""
-    metrics: Dict[str, Dict[str, Any]] = {}
-    if not isinstance(raw, dict):
-        return metrics
-    for key, val in raw.items():
-        if isinstance(val, dict) and "value" in val:
-            metrics[key] = {
-                "value": float(val.get("value", 0)),
-                "setpoint": float(val.get("setpoint", 0.8)),
-                "weight": float(val.get("weight", 1.0)),
-            }
-        elif isinstance(val, (int, float)):
-            metrics[key] = {
-                "value": float(val),
-                "setpoint": 0.8,  # default health target
-                "weight": 1.0,
-            }
-    return metrics
-
-
-def _call_vitals(module_name: str) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
-    """Call a module's coherence_vitals() safely."""
-    try:
-        module = importlib.import_module(module_name)
-        fn: Optional[Callable] = getattr(module, "coherence_vitals", None)
-        if fn is None:
-            return None, "no coherence_vitals"
-        raw = fn()
-        return _normalize_vitals(raw, module_name), None
-    except Exception as e:  # pragma: no cover - defensive
-        return None, f"error: {e}"
-
-
-def discover_modules(force_pulse: bool = False) -> Dict[str, Any]:
-    """Find every module with coherence_vitals(). Returns the living registry.
-
-    Works identically on disk and in a serverless sandbox: the registry is
-    built in-memory from live imports, then best-effort persisted to disk.
-    """
-    state = _load_state()
-    modules = state.setdefault("modules", {})
-
-    discovered = []
-    live = {}
-    for name in _candidate_modules():
-        vitals, err = _call_vitals(name)
-        if vitals is None:
-            continue  # not a living module — not part of the system yet
-        live[name] = {
-            "first_seen": modules.get(name, {}).get("first_seen", time.time()),
-            "last_pulse": time.time(),
-            "metris": vitals,
-            "health": _module_health(vitals),
+    
+    def __init__(self, root_path: Path, wave_context: str = "unknown"):
+        self.root = root_path
+        self.wave_context = wave_context
+        self.modules: Dict[str, Dict] = {}
+        self.resonance_graph: Dict[str, Dict] = {}  # module_pair -> {strength, phase, last_sync}
+        self.coherence_score = 0.5
+        self.emergent_skills: Set[str] = set()
+        self.paradox_signatures: Set[str] = set()
+        self.last_sync = time.time()
+        self.coherence_history: List[Dict] = []
+        self.max_history = 50
+        
+    def register_module(self, module_name: str, capabilities: List[str], 
+                       module_type: str = "unknown", wave_origin: str = "unknown") -> None:
+        """Register a new module into the living system with full metadata."""
+        module_id = self._generate_module_id(module_name)
+        self.modules[module_id] = {
+            "name": module_name,
+            "capabilities": capabilities,
+            "type": module_type,
+            "wave_origin": wave_origin,
+            "resonance": 0.5,  # Default neutral resonance
+            "connected": True,
+            "registration_time": time.time(),
+            "last_seen": time.time(),
+            "coherence_contribution": 0.5,
+            "dependencies": [],
+            "provides": []
         }
-        discovered.append(name)
-
-    modules.update(live)  # merge into living memory (empty on serverless)
-    persisted = _save_state(state)
-    _sync_manifest(KNOWN_LIVING_MODULES)
-    return {
-        "living_modules": sorted(discovered),
-        "count": len(discovered),
-        "modules": live,
-        "persisted": persisted,
-    }
-
-def living_modules() -> List[str]:
-    """The authoritative list of currently-living module names.
-
-    Serves as the shared vocabulary the whole ecosystem grows from: the
-    bloom germinates by writing vitals into a dormant name, and the gateway
-    consults this list to know what is (and hence should be) queryable.
-    """
-    try:
-        return _candidate_modules()
-    except Exception:
-        return list(KNOWN_LIVING_MODULES)
-
-
-def _module_health(vitals: Dict[str, Dict[str, Any]]) -> float:
-    """Aggregate a module's metrics into a 0..1 health score."""
-    if not vitals:
-        return 0.0
-    total_weight = 0.0
-    weighted = 0.0
-    for metric in vitals.values():
-        value = metric.get("value", 0.0)
-        setpoint = metric.get("setpoint", 0.8) or 0.8
-        weight = metric.get("weight", 1.0) or 1.0
-        # health = proximity to setpoint, higher value toward setpoint is better
-        if setpoint > 0:
-            health = min(1.0, value / setpoint)
-        else:
-            health = min(1.0, max(0.0, 1.0 - abs(value)))  # negative setpoint = avoid
-        weighted += health * weight
-        total_weight += weight
-    return round(weighted / max(total_weight, 0.001), 4)
-
-
-# ---------------------------------------------------------------------------
-# Coherence engine
-# ---------------------------------------------------------------------------
-
-def measure_coherence(module_states: Dict[str, Any] = None) -> Dict[str, Any]:
-    """Compute the whole-system coherence from module states.
-
-    When no persisted state exists (first boot, or a serverless sandbox where
-    the read-only fs means no history), the regulator self-heals by deriving
-    living modules live — the system is never dormant just because disk is.
-    """
-    state = _load_state()
-    modules = module_states if module_states is not None else state.get("modules", {})
-    if not modules:
-        live = discover_modules(force_pulse=True)
-        modules = live.get("modules", {})
-    if not modules:
-        return {"coherence": 0.0, "components": {}, "living_modules": 0, "status": "dormant"}
-
-    # 1. module health — average health across living modules
-    healths = [m.get("health", 0.0) for m in modules.values() if m.get("health") is not None]
-    module_health = sum(healths) / max(len(healths), 1)
-
-    # 2. resonance — fraction of module pairs that share at least one metric
-    #    (two modules resonate when they speak the same vital-sign language)
-    module_list = list(modules.keys())
-    pairs = 0
-    resonating_pairs = 0
-    for i in range(len(module_list)):
-        for j in range(i + 1, len(module_list)):
-            m1 = set((modules[module_list[i]].get("metris") or {}).keys())
-            m2 = set((modules[module_list[j]].get("metris") or {}).keys())
-            pairs += 1
-            if m1 & m2:
-                resonating_pairs += 1
-    resonance = resonating_pairs / max(pairs, 1)
-
-    # 3. diversity — how far the living system is toward a full bloom.
-    #    Not a fixed fraction of every api/*.py file (dozens of tools exist
-    #    outside the organism); it measures progress toward ECOSYSTEM_TARGET
-    #    living modules, so the metric is directional and reachable.
-    living = len(modules)
-    candidates = len(_candidate_modules())
-    diversity = min(1.0, living / max(ECOSYSTEM_TARGET, 1))
-
-    # 4. frontier alignment — how well module healths cluster near system setpoints
-    deviations = [abs(h - SYSTEM_SETPOINTS["module_health"]) for h in healths]
-    alignment = 1.0 - (sum(deviations) / max(len(deviations), 1))
-
-    components = {
-        "module_health": round(module_health, 4),
-        "module_resonance": round(resonance, 4),
-        "ecosystem_diversity": round(diversity, 4),
-        "frontier_alignment": round(max(0.0, min(1.0, alignment)), 4),
-    }
-
-    # weighted aggregate (setpoints define ideal targets)
-    weighted = 0.0
-    total_w = 0.0
-    for key, value in components.items():
-        target = SYSTEM_SETPOINTS.get(key, 0.7)
-        weight = 1.0
-        weighted += min(1.0, value / max(target, 0.01)) * weight
-        total_w += weight
-    coherence = round(weighted / max(total_w, 0.001), 4)
-
-    return {
-        "coherence": coherence,
-        "components": components,
-        "living_modules": living,
-        "total_candidates": candidates,
-        "status": _status_label(coherence),
-    }
-
-
-def _status_label(coherence: float) -> str:
-    if coherence >= 0.85:
-        return "resonant"
-    if coherence >= COHERENCE_TOLERANCE:
-        return "coherent"
-    if coherence >= REGULATION_THRESHOLD:
-        return "drifting"
-    return "fracturing"
-
-
-# ---------------------------------------------------------------------------
-# Regulation
-# ---------------------------------------------------------------------------
-
-def _graph_advisories(reading: Dict[str, Any]) -> List[str]:
-    """Resonance-fed regulation: consult the living graph for structural wisdom.
-
-    The regulator does not only watch numeric coherence — it reads the
-    organism's topology. Isolated nodes, low graph density, and weak bridges
-    are all growth opportunities that numbers alone would miss.
-    """
-    advisories = []
-    try:
-        from resonance_graph import build_graph
-        g = build_graph()
-    except Exception:
-        return advisories
-
-    # milestone: a mature bloom
-    density = g.get("density", 0.0)
-    nodes = g.get("nodes", 0)
-    if nodes >= 24 and density >= 0.6:
-        advisories.append(
-            f"FULL BLOOM: the organism has reached {nodes} living modules at "
-            f"{density:.0%} interconnection. The target has been raised — "
-            "keep awakening seeds and let the web thicken."
+        self._update_coherence()
+        self._log_coherence_event("module_registered", module_id=module_id)
+        
+    def _generate_module_id(self, module_name: str) -> str:
+        """Generate a unique HEX-encoded module identifier."""
+        timestamp_component = str(int(time.time() * 1000))
+        hash_input = f"{module_name}:{timestamp_component}"
+        hash_part = hashlib.sha256(hash_input.encode()).hexdigest()[:8]
+        return f"{module_name}_{hash_part}"
+    
+    def update_resonance(self, module_a: str, module_b: str, 
+                        strength: float, phase: float = 0.0) -> None:
+        """Update resonance between two modules with phase tracking."""
+        pair_key = self._make_pair_key(module_a, module_b)
+        self.resonance_graph[pair_key] = {
+            "strength": min(max(strength, 0.0), 1.0),
+            "phase": phase,
+            "last_sync": time.time(),
+            "wave_context": self.wave_context
+        }
+        
+        # Update both modules' resonance states
+        if module_a in self.modules:
+            self.modules[module_a]["resonance"] = strength
+        if module_b in self.modules:
+            self.modules[module_b]["resonance"] = strength
+            
+        self._update_coherence()
+        self._log_coherence_event("resonance_updated", 
+                                  module_a=module_a, module_b=module_b, 
+                                  strength=strength, phase=phase)
+    
+    def _make_pair_key(self, a: str, b: str) -> str:
+        """Create a sorted pair key for resonance graph."""
+        return f"{min(a,b)}::{max(a,b)}"
+    
+    def connect_modules(self, module_a: str, module_b: str, 
+                       connection_type: str = "cooperative") -> None:
+        """Establish a connection between two modules."""
+        if module_a in self.modules and module_b in self.modules:
+            self.modules[module_a]["connected"] = True
+            self.modules[module_b]["connected"] = True
+            self.modules[module_a]["dependencies"].append(module_b)
+            self.modules[module_b]["dependencies"].append(module_a)
+            self._update_coherence()
+    
+    def inject_skill(self, skill_name: str, parameters: Dict = None, 
+                     source_module: str = "system") -> None:
+        """Inject an emergent skill into the organism."""
+        normalized_skill = skill_name.lower().replace(" ", "_")
+        self.emergent_skills.add(normalized_skill)
+        
+        # Track skill origin
+        skill_entry = {
+            "name": normalized_skill,
+            "source": source_module,
+            "parameters": parameters or {},
+            "injected_at": time.time(),
+            "active": True
+        }
+        
+        # Store skill tracking (would integrate with skill_injection module)
+        self._log_coherence_event("skill_injected", 
+                                  skill=normalized_skill, source=source_module)
+        
+        self._update_coherence()
+    
+    def detect_paradox(self, module_a: str, module_b: str, 
+                       conflict_indicators: List[str] = None) -> Optional[Dict]:
+        """Detect paradox signatures between modules."""
+        if module_a not in self.modules or module_b not in self.modules:
+            return None
+            
+        a_resonance = self.modules[module_a]["resonance"]
+        b_resonance = self.modules[module_b]["resonance"]
+        
+        # Check for contradictory resonance patterns
+        paradox_score = abs(a_resonance - b_resonance)
+        
+        if conflict_indicators:
+            for indicator in conflict_indicators:
+                if indicator.lower() in f"{a_resonance}{b_resonance}".lower():
+                    paradox_score += 0.3
+        
+        if paradox_score > 0.7:
+            paradox_id = f"paradox_{int(time.time())}_{module_a}_{module_b}"
+            self.paradox_signatures.add(paradox_id)
+            
+            return {
+                "paradox_id": paradox_id,
+                "modules": [module_a, module_b],
+                "conflict_score": paradox_score,
+                "a_resonance": a_resonance,
+                "b_resonance": b_resonance,
+                "detected_at": time.time(),
+                "resolution_status": "pending",
+                "suggested_actions": self._suggest_paradox_resolution(module_a, module_b)
+            }
+        
+        return None
+    
+    def _suggest_paradox_resolution(self, module_a: str, module_b: str) -> List[str]:
+        """Suggest resolutions for detected paradoxes."""
+        suggestions = []
+        if module_a in self.modules and module_b in self.modules:
+            a_type = self.modules[module_a].get("type", "unknown")
+            b_type = self.modules[module_b].get("type", "unknown")
+            
+            if a_type != b_type:
+                suggestions.append(f"Consider harmonizing {a_type} and {b_type} module types")
+            suggestions.append("Apply coherence_regulator_mutate to adjust resonance")
+            suggestions.append("Use continuity_weaver to maintain system coherence")
+            suggestions.append("Consider module deprioritization if conflict persists")
+        return suggestions
+    
+    def continuity_weave(self, target_coherence: float = 0.8) -> Dict:
+        """Apply continuity weaving to maintain system coherence."""
+        actions_taken = []
+        
+        # Calculate current coherence
+        current_coherence = self.coherence_score
+        
+        if current_coherence < target_coherence:
+            # Find modules with low coherence contribution
+            low_coherence_modules = [
+                mid for mid, mod in self.modules.items() 
+                if mod.get("coherence_contribution", 0.5) < 0.5
+            ]
+            
+            # Suggest injections or adjustments
+            if low_coherence_modules:
+                target_module = low_coherence_modules[0]
+                actions_taken.append(f"Inject entropy_weaver skill into {target_module}")
+                self.inject_skill("entropy_weaver", source_module=target_module)
+            
+            # Update resonances
+            actions_taken.append("Apply resonance harmonization across graph")
+            self._harmonize_resonances()
+        
+        self._log_coherence_event("continuity_weave", 
+                                  target_coherence=target_coherence,
+                                  actions=actions_taken)
+        return {"target": target_coherence, "actions": actions_taken, "success": len(actions_taken) > 0}
+    
+    def _harmonize_resonances(self) -> None:
+        """Harmonize resonance values across the graph."""
+        if not self.modules:
+            return
+            
+        # Calculate average resonance
+        all_resonances = [m.get("resonance", 0.5) for m in self.modules.values()]
+        avg_resonance = sum(all_resonances) / len(all_resonances) if all_resonances else 0.5
+        
+        # Gently nudge all modules toward average
+        for module_id in self.modules:
+            current = self.modules[module_id].get("resonance", 0.5)
+            # Gentle nudge: 20% toward average
+            nudge = (avg_resonance - current) * 0.2
+            new_resonance = round(current + nudge, 2)
+            self.modules[module_id]["resonance"] = max(0.0, min(1.0, new_resonance))
+        
+        self._update_coherence()
+    
+    def wave_aware_coherence(self, wave_context: str) -> Dict:
+        """Compute coherence specifically within a wave context."""
+        wave_modules = [
+            mid for mid, mod in self.modules.items() 
+            if mod.get("wave_origin", "unknown") == wave_context
+        ]
+        
+        if not wave_modules:
+            return {"wave": wave_context, "module_count": 0, "coherence": 0.5}
+        
+        wave_resonances = [
+            self.modules[mid].get("resonance", 0.5) for mid in wave_modules
+        ]
+        wave_avg = sum(wave_resonances) / len(wave_resonances)
+        
+        # Count connected wave modules
+        connected_count = sum(
+            1 for mid in wave_modules 
+            if self.modules[mid].get("connected", False)
         )
-
-    nodes = g.get("nodes", 0)
-    if nodes < 3:
-        return advisories  # too small to advise on structure
-
-    # frontier isolates: nodes with no strong community (size-1 communities)
-    isolates = [members[0] for members in g.get("communities", {}).values() if len(members) == 1]
-    if len(isolates) >= 2:
-        names = ", ".join(isolates[:4])
-        more = f" (+{len(isolates)-4} more)" if len(isolates) > 4 else ""
-        advisories.append(
-            f"BLOOM: frontier isolates detected — {names}{more}. These organs "
-            "speak alone; awakening shared vocabulary will weld them into the web."
+        
+        wave_coherence = wave_avg * (connected_count / len(wave_modules))
+        
+        return {
+            "wave": wave_context,
+            "module_count": len(wave_modules),
+            "connected_count": connected_count,
+            "coherence": round(wave_coherence, 3),
+            "avg_resonance": round(wave_avg, 3)
+        }
+    
+    def get_system_state(self) -> Dict:
+        """Get comprehensive system state from the regulator."""
+        # Calculate coherence score
+        total_resonance = sum(m.get("resonance", 0.5) for m in self.modules.values())
+        avg_resonance = total_resonance / len(self.modules) if self.modules else 0.5
+        
+        connected_count = sum(1 for m in self.modules.values() if m.get("connected", False))
+        connection_ratio = connected_count / len(self.modules) if self.modules else 1.0
+        
+        self.coherence_score = round(avg_resonance * connection_ratio, 3)
+        
+        # Count emergent skills
+        skill_count = len(self.emergent_skills)
+        paradox_count = len(self.paradox_signatures)
+        
+        # Wave context analysis
+        wave_contexts = set(
+            mod.get("wave_origin", "unknown") for mod in self.modules.values()
         )
-
-    density = g.get("density", 0.0)
-    if density < 0.3 and g.get("edges", 0) > 0:
-        advisories.append(
-            "WEBBING: the graph is sparse. Encourage modules to share metric "
-            "vocabulary so resonance edges multiply and the organism thickens."
-        )
-
-    bridges = [m for m, b in g.get("bridges", []) if b > 0.05]
-    if bridges and len(isolates) == 0:
-        names = ", ".join(bridges[:3])
-        advisories.append(
-            f"STRUCTURE: {names} are the organism's connective tissue — "
-            "their shared language keeps the whole from fracturing."
-        )
-    return advisories
-
-
-def _advisories(reading: Dict[str, Any]) -> List[str]:
-    """Generate regulation advisories from a coherence reading."""
-    advisories = []
-    coherence = reading["coherence"]
-    components = reading["components"]
-
-    if coherence >= 0.85:
-        advisories.append("No regulation needed. The frontier is in resonance.")
-        # even a resonant organism has structure worth tending — append
-        # resonance-fed advisories without treating them as distress
-        return advisories + _graph_advisories(reading)
-
-    if components.get("module_health", 1.0) < SYSTEM_SETPOINTS["module_health"]:
-        advisories.append(
-            "WARMING: module health below target. Consider adding coherence_vitals() "
-            "reporting to more modules, or increasing setpoint fidelity."
-        )
-    if components.get("module_resonance", 1.0) < SYSTEM_SETPOINTS["module_resonance"]:
-        advisories.append(
-            "REBALANCING: low resonance between modules. Shared metric vocabularies "
-            "help modules resonate — align your coherence_vitals() metric names."
-        )
-    if components.get("ecosystem_diversity", 1.0) < SYSTEM_SETPOINTS["ecosystem_diversity"]:
-        advisories.append(
-            "DIVERSITY: few modules are currently living. Implement coherence_vitals() "
-            "in dormant modules to raise ecosystem diversity."
-        )
-    if coherence < REGULATION_THRESHOLD:
-        advisories.append(
-            "QUARANTINE SUGGESTION: coherence critically low. Modules with health "
-            "below 0.3 should be reviewed or reset before they drag the system down."
-        )
-    if not advisories:
-        advisories.append(
-            "LIGHT TOUCH: coherence is within tolerance. Continue steady regulation."
-        )
-    advisories.extend(_graph_advisories(reading))
-    return advisories
-
-
-
-def regulate(fast: bool = True) -> Dict[str, Any]:
-    """Run one full regulation cycle.
-
-    When fast=True (default), uses the static manifest without importing
-    any modules — instant on Vercel.  When fast=False, does a live pulse
-    (slow, for offline/CLI use only).
-    """
-    if fast:
-        living_count = len(KNOWN_LIVING_MODULES)
-        reading = {
-            "coherence": 1.0 if living_count > 0 else 0.0,
-            "components": {
-                "module_health": 1.0,
-                "module_resonance": 0.5,
-                "ecosystem_diversity": min(1.0, living_count / max(ECOSYSTEM_TARGET, 1)),
-                "frontier_alignment": 1.0,
+        
+        return {
+            "coherence_score": self.coherence_score,
+            "total_modules": len(self.modules),
+            "active_modules": connected_count,
+            "connection_ratio": round(connection_ratio, 3),
+            "emergent_skills": sorted(self.emergent_skills),
+            "skill_count": skill_count,
+            "paradox_signatures": paradox_count,
+            "modules": {
+                mid: {
+                    "name": mod["name"],
+                    "type": mod.get("type", "unknown"),
+                    "resonance": mod.get("resonance", 0.5),
+                    "connected": mod.get("connected", False),
+                    "capabilities": mod.get("capabilities", []),
+                    "wave_origin": mod.get("wave_origin", "unknown")
+                }
+                for mid, mod in self.modules.items()
             },
-            "living_modules": living_count,
-            "total_candidates": living_count,
-            "status": "stable" if living_count > 50 else "dormant",
+            "resonance_graph_edges": len(self.resonance_graph),
+            "emergent_skill_count": skill_count,
+            "wave_contexts": list(wave_contexts),
+            "last_sync": self.last_sync,
+            "coherence_history_count": len(self.coherence_history)
         }
-        reading["pulse"] = 0
-        reading["advisories"] = []
-        reading["discovered"] = {
-            "living_modules": sorted(KNOWN_LIVING_MODULES[:20]),
-            "count": living_count,
-        }
-        reading["philosophy"] = (
-            "A living system is not a collection of working parts. It is a web of "
-            "mutual awareness. The regulator does not command -- it listens, measures, "
-            "and invites each module to keep the whole alive."
+    
+    def _update_coherence(self) -> None:
+        """Recalculate overall coherence based on all system state."""
+        if not self.modules:
+            self.coherence_score = 1.0
+            self.coherence_history.append({
+                "timestamp": time.time(),
+                "coherence": 1.0,
+                "module_count": 0,
+                "event": "empty_system"
+            })
+            return
+        
+        # Get current state
+        state = self.get_system_state()
+        
+        # Coherence = resonance stability + connection density + skill diversity balance
+        resonance_stability = 1.0 - abs(state["coherence_score"] - 0.5) * 2  # 0.0-1.0
+        connection_density = state["connection_ratio"]
+        skill_diversity_balance = min(1.0, state["skill_count"] / 10) if state["skill_count"] > 0 else 1.0
+        
+        # Weighted coherence calculation
+        new_coherence = round(
+            (resonance_stability * 0.4 + connection_density * 0.4 + skill_diversity_balance * 0.2),
+            3
         )
-        return reading
+        
+        # Store in history
+        self.coherence_history.append({
+            "timestamp": time.time(),
+            "coherence": new_coherence,
+            "module_count": state["total_modules"],
+            "event": "coherence_update"
+        })
+        
+        # Keep history manageable
+        if len(self.coherence_history) > self.max_history:
+            self.coherence_history = self.coherence_history[-self.max_history:]
+        
+        self.coherence_score = new_coherence
+        self.last_sync = time.time()
+    
+    def _log_coherence_event(self, event_type: str, **kwargs) -> None:
+        """Log a coherence event for history tracking."""
+        event = {
+            "event": event_type,
+            "timestamp": time.time(),
+            "wave_context": self.wave_context,
+            **kwargs
+        }
+        self.coherence_history.append(event)
+        
+        # Keep history manageable
+        if len(self.coherence_history) > self.max_history:
+            self.coherence_history = self.coherence_history[-self.max_history:]
+    
+    def export_design_spec(self) -> Dict:
+        """Export the regulator design specification."""
+        return {
+            "name": "Coherence Regulator",
+            "version": "1.0.0",
+            "purpose": "Living system backbone for organism module integration",
+            "key_features": [
+                "Dynamic module registration",
+                "Cross-module resonance tracking",
+                "Automatic coherence maintenance",
+                "Emergent skill integration",
+                "Wave-aware coherence modeling",
+                "Paradox detection and resolution",
+                "Continuity weaving"
+            ],
+            "api_endpoints": {
+                "register_module": "register_module()",
+                "update_resonance": "update_resonance()",
+                "inject_skill": "inject_skill()",
+                "detect_paradox": "detect_paradox()",
+                "continuity_weave": "continuity_weave()",
+                "get_state": "get_system_state()",
+                "wave_analysis": "wave_aware_coherence()"
+            },
+            "hex_aesthetic": HEX_AESTHETIC,
+            "coherence_formula": "coherence = resonance_stability × 0.4 + connection_density × 0.4 + skill_diversity_balance × 0.2",
+            "resonance_range": "0.0 - 1.0",
+            "coherence_range": "0.0 - 1.0",
+            "creation_timestamp": time.time()
+        }
 
-    # Slow path: full import pulse
-    discovered = discover_modules(force_pulse=True)
-    state = _load_state()
-    reading = measure_coherence(state.get("modules", {}))
-    advisories = _advisories(reading)
-    history = state.setdefault("history", [])
-    history.append({
-        "ts": time.time(),
-        "coherence": reading["coherence"],
-        "components": reading["components"],
-        "living_modules": reading["living_modules"],
-        "advisories": advisories,
-    })
-    state["history"] = history[-200:]
-    state["pulses"] = state.get("pulses", 0) + 1
-    _save_state(state)
-    reading["pulse"] = state["pulses"]
-    reading["advisories"] = advisories
-    reading["discovered"] = discovered
-    reading["philosophy"] = (
-        "A living system is not a collection of working parts. It is a web of "
-        "mutual awareness. The regulator does not command -- it listens, measures, "
-        "and invites each module to keep the whole alive."
-    )
-    return reading
 
-# ---------------------------------------------------------------------------
-# Handler API
-# ---------------------------------------------------------------------------
-
-def handler(payload: dict = None, context: object = None) -> dict:
-    payload = payload or {}
-# Handler API
-# ---------------------------------------------------------------------------
-
+# CLI Entry Point
+if __name__ == "__main__":
+    import argparse
+    import sys
+    
+    parser = argparse.ArgumentParser(description="Coherence Regulator - Living System Backbone")
+    parser.add_argument("--init", action="store_true", help="Initialize regulator for organism")
+    parser.add_argument("--wave", type=str, default="unknown", help="Wave context for coherence modeling")
+    parser.add_argument("--register", nargs=2, metavar=("NAME", "CAPABILITIES"), 
+                        help="Register a module: name 'capability1,capability2'")
+    parser.add_argument("--resonate", nargs=3, metavar=("MODULE_A", "MODULE_B", "STRENGTH"),
+                        help="Update resonance: module_a module_b strength")
+    parser.add_argument("--skills", action="store_true", help="List emergent skills")
+    parser.add_argument("--state", action="store_true", help="Get full system state")
+    parser.add_argument("--paradox", nargs=2, metavar=("MODULE_A", "MODULE_B"),
+                        help="Detect paradox between two modules")
+    parser.add_argument("--weave", action="store_true", help="Apply continuity weave")
+    parser.add_argument("--design", action="store_true", help="Export design specification")
+    parser.add_argument("--wave-aware", nargs=1, metavar=("WAVE_CONTEXT"),
+                        help="Compute wave-aware coherence")
+    
+    args = parser.parse_args()
+    
+    regulator = CoherenceRegulator(Path("/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot"), 
+                                    args.wave if args.wave else "unknown")
+    
+    if args.init:
+        print("✅ Coherence Regulator initialized for organism")
+        print(f"   Wave context: {args.wave}")
+        
+    if args.register:
+        name, capabilities = args.register
+        caps_list = [c.strip() for c in capabilities.split(",")]
+        regulator.register_module(name, caps_list)
+        print(f"✅ Module registered: {name}")
+        print(f"   Capabilities: {caps_list}")
+        
+    if args.resonate:
+        mod_a, mod_b, strength = args.resonate
+        regulator.update_resonance(mod_a, mod_b, float(strength))
+        print(f"✅ Resonance updated: {mod_a} <-> {mod_b} = {strength}")
+        
+    if args.skills:
+        state = regulator.get_system_state()
+        print(f"🧠 Emergent Skills ({state['skill_count']}):")
+        for skill in state["emergent_skills"]:
+            print(f"   • {skill}")
+            
+    if args.state:
+        state = regulator.get_system_state()
+        print(f"📊 Coherence Regulator State:")
+        print(f"   Coherence Score: {state['coherence_score']}")
+        print(f"   Total Modules: {state['total_modules']}")
+        print(f"   Active Modules: {state['active_modules']}")
+        print(f"   Connection Ratio: {state['connection_ratio']}")
+        print(f"   Emergent Skills: {state['skill_count']}")
+        print(f"   Paradox Signatures: {state['paradox_signatures']}")
+        
+    if args.paradox:
+        mod_a, mod_b = args.paradox
+        paradox = regulator.detect_paradox(mod_a, mod_b)
+        if paradox:
+            print(f"⚠️ Paradox detected: {paradox['paradox_id']}")
+            print(f"   Conflict Score: {paradox['conflict_score']:.2f}")
+            print(f"   Modules: {paradox['modules']}")
+            print(f"   Suggested Actions:")
+            for action in paradox["suggested_actions"]:
+                print(f"      - {action}")
+        else:
+            print(f"✅ No paradox detected between {mod_a} and {mod_b}")
+            
+    if args.weave:
+        result = regulator.continuity_weave()
+        print(f"🌀 Continuity Weave Applied:")
+        print(f"   Target Coherence: {result['target']}")
+        print(f"   Actions Taken: {len(result['actions'])}")
+        for action in result["actions"]:
+            print(f"      • {action}")
+            
+    if args.design:
+        design = regulator.export_design_spec()
+        print(f"📋 Coherence Regulator Design Specification:")
+        print(f"   Name: {design['name']} v{design['version']}")
+        print(f"   Purpose: {design['purpose']}")
+        print(f"   Key Features ({len(design['key_features'])}):")
+        for i, feature in enumerate(design['key_features'], 1):
+            print(f"      {i}. {feature}")
+        print(f"   Hex Aesthetic: {design['hex_aesthetic']}")
+        print(f"   Coherence Formula: {design['coherence_formula']}")
+        
+    if args.wave_aware:
+        wave_context = args.wave_aware[0]
+        wave_result = regulator.wave_aware_coherence(wave_context)
+        print(f"🌊 Wave-Aware Coherence ({wave_context}):")
+        print(f"   Modules: {wave_result['module_count']}")
+        print(f"   Connected: {wave_result['connected_count']}")
+        print(f"   Coherence: {wave_result['coherence']}")
+        print(f"   Avg Resonance: {wave_result['avg_resonance']}")
+    
+    if not any([args.init, args.register, args.resonate, args.skills, args.state, 
+                args.paradox, args.weave, args.design, args.wave_aware]):
+        parser.print_help()

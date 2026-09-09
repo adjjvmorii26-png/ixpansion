@@ -1,7 +1,7 @@
-""
+"""
  wave_orchestrator — Coordinates module evolution across wave fronts, managing module birth/death/transformation.
  Handles wave_management for the IXpansion organism.
-""
+"""
 import json
 import time
 from typing import Dict, List, Optional, Any

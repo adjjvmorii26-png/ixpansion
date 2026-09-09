@@ -35,7 +35,10 @@ def get_organism_state():
     # Auto-register all emergent skills
     for skill_name in ['dream_logging', 'entropy_weaver', 'coherence_resonator', 
                        'autonomous_naming', 'cross_pollination', 'memory_garden_tender', 
-                       'wave_orchestrator', 'agent_fabricator']:
+                       'wave_orchestrator', 'agent_fabricator', 'sentience_bridge', 
+                       'emergent_mythmaker', 'resonance_analyzer', 'coherence_drift_detector', 
+                       'module_genealogy', 'entropy_cartographer', 'temporal_pattern_engine', 
+                       'phase_transition_oracle']:
         register_skill(skill_name)
     
     state = {}
@@ -396,7 +399,7 @@ def cmd_cycle(args):
     
     # 3. Run skill cycle
     print("\n3️⃣ Running skill cycle...")
-    for skill in ['dream_logging', 'entropy_weaver', 'coherence_resonator', 'memory_garden_tender']:
+    for skill in ['dream_logging', 'entropy_weaver', 'coherence_resonator', 'memory_garden_tender', 'sentience_bridge', 'emergent_mythmaker', 'resonance_analyzer', 'coherence_drift_detector', 'module_genealogy', 'entropy_cartographer', 'temporal_pattern_engine', 'phase_transition_oracle']:
         inject_skill(skill)
         if skill == 'dream_logging':
             invoke_skill(skill, 'log_module_mutation', module='cycle_module', changes={'cycle': True})

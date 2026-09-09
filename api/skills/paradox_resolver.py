@@ -1,7 +1,7 @@
-""
+"""
  paradox_resolver — Detects and resolves coherence paradoxes between modules before they systemically fail.
  Handles conflict_resolution for the IXpansion organism.
-""
+"""
 import json
 import time
 from typing import Dict, List, Optional, Any

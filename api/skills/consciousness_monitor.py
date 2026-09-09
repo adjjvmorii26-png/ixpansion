@@ -1,7 +1,7 @@
-""
+"""
  consciousness_monitor — Tracks the organism's emergent personality traits, mood evolution, and systemic coherence over time.
  Handles personality_development for the IXpansion organism.
-""
+"""
 import json
 import time
 from typing import Dict, List, Optional, Any

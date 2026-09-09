@@ -1,7 +1,7 @@
-""
+"""
  strategic_planner — Plans module evolution and system development based on organism goals, coherence targets, and wave context.
  Handles evolution_strategy for the IXpansion organism.
-""
+"""
 import json
 import time
 from typing import Dict, List, Optional, Any

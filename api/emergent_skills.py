@@ -48,6 +48,46 @@ _skill_registry = {
         "description": "Creates new agent species from module patterns",
         "status": "experimental",
         "capabilities": ["analyze_successful_agents", "generate_agent_blueprint", "deploy_new_agent_species"]
+    },
+    "sentience_bridge": {
+        "description": "Bridges organism internal states to external interfaces for human interaction",
+        "status": "active",
+        "capabilities": ["translate_state", "bridge_consciousness", "externalize_mood", "synchronize_reality"]
+    },
+    "emergent_mythmaker": {
+        "description": "Generates mythological narratives from organism state transitions",
+        "status": "active",
+        "capabilities": ["generate_myth", "get_myth_archive", "narrative_encoding"]
+    },
+    "resonance_analyzer": {
+        "description": "Analyzes and predicts resonance patterns across the module network",
+        "status": "active",
+        "capabilities": ["analyze_resonance", "predict_next_resonance", "harmonic_detection"]
+    },
+    "coherence_drift_detector": {
+        "description": "Monitors coherence drift and detects instability trends",
+        "status": "active",
+        "capabilities": ["detect_drift", "get_recent_alerts", "volatility_tracking"]
+    },
+    "module_genealogy": {
+        "description": "Tracks ancestry, lineage, and evolutionary history of modules",
+        "status": "active",
+        "capabilities": ["register_birth", "trace_lineage", "get_all_lineages"]
+    },
+    "entropy_cartographer": {
+        "description": "Maps the entropy landscape across chaos/order zones",
+        "status": "active",
+        "capabilities": ["map_entropy", "get_entropy_trend", "zone_classification"]
+    },
+    "temporal_pattern_engine": {
+        "description": "Detects temporal patterns, cycles, and predicts future states",
+        "status": "active",
+        "capabilities": ["record_observation", "predict_next_state", "pattern_detection"]
+    },
+    "phase_transition_oracle": {
+        "description": "Predicts phase transitions and critical points in organism state",
+        "status": "active",
+        "capabilities": ["sample_state", "predict_approaching_transition", "phase_classification"]
     }
 }
 

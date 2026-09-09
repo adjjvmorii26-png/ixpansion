@@ -1,7 +1,7 @@
-""
+"""
  module_evolution_engine — Drives module mutation and evolution based on environmental pressures and organism goals.
  Handles evolution_management for the IXpansion organism.
-""
+"""
 import json
 import time
 from typing import Dict, List, Optional, Any

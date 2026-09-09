@@ -1,7 +1,7 @@
-""
+"""
  dream_orchestrator — Orchestrates dream generation, interpretation, and broadcasting across the organism's connected channels.
  Handles dream_journal integration for the IXpansion organism.
-""
+"""
 import json
 import time
 from typing import Dict, List, Optional, Any
