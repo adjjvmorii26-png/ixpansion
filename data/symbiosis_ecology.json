@@ -1,0 +1,242 @@
+{
+  "organisms": [
+    {
+      "name": "coherence",
+      "species": "anchor",
+      "niche": "stability",
+      "energy": 1.0,
+      "health": 0.5327148125827417,
+      "age": 20,
+      "reproduction_rate": 0.1,
+      "resilience": 0.9,
+      "bonds": [
+        "09d159"
+      ],
+      "offspring": 0,
+      "fitness": 0.8098144437748225
+    },
+    {
+      "name": "entropy",
+      "species": "catalyst",
+      "niche": "disruption",
+      "energy": 1.0,
+      "health": 0.9347008024169203,
+      "age": 20,
+      "reproduction_rate": 0.3,
+      "resilience": 0.4,
+      "bonds": [
+        "09d159",
+        "fa37a9"
+      ],
+      "offspring": 0,
+      "fitness": 0.8804102407250761
+    },
+    {
+      "name": "resonance",
+      "species": "weaver",
+      "niche": "connection",
+      "energy": 1.0,
+      "health": 0.8609809894130468,
+      "age": 20,
+      "reproduction_rate": 0.2,
+      "resilience": 0.6,
+      "bonds": [
+        "fa37a9",
+        "2032db"
+      ],
+      "offspring": 1,
+      "fitness": 0.878294296823914
+    },
+    {
+      "name": "dream",
+      "species": "oracle",
+      "niche": "prediction",
+      "energy": 1.0,
+      "health": 0.6114963690995616,
+      "age": 20,
+      "reproduction_rate": 0.15,
+      "resilience": 0.5,
+      "bonds": [
+        "2032db",
+        "317ad8"
+      ],
+      "offspring": 0,
+      "fitness": 0.7934489107298686
+    },
+    {
+      "name": "paradox",
+      "species": "gardener",
+      "niche": "nurturing",
+      "energy": 1.0,
+      "health": 0.5089901982446139,
+      "age": 20,
+      "reproduction_rate": 0.25,
+      "resilience": 0.7,
+      "bonds": [
+        "317ad8",
+        "eef0cb"
+      ],
+      "offspring": 0,
+      "fitness": 0.7826970594733842
+    },
+    {
+      "name": "fractal",
+      "species": "sentinel",
+      "niche": "protection",
+      "energy": 1.0,
+      "health": 0.6257890436770945,
+      "age": 20,
+      "reproduction_rate": 0.1,
+      "resilience": 0.8,
+      "bonds": [
+        "eef0cb",
+        "1a0950"
+      ],
+      "offspring": 0,
+      "fitness": 0.8277367131031284
+    },
+    {
+      "name": "wave",
+      "species": "parasite",
+      "niche": "exploitation",
+      "energy": 0.7078112590311512,
+      "health": 0.6481588867229455,
+      "age": 20,
+      "reproduction_rate": 0.4,
+      "resilience": 0.2,
+      "bonds": [
+        "1a0950"
+      ],
+      "offspring": 1,
+      "fitness": 0.7375721696293442
+    },
+    {
+      "name": "memory",
+      "species": "symbiont",
+      "niche": "cooperation",
+      "energy": 0.8995217050079183,
+      "health": 0.9556181006201524,
+      "age": 20,
+      "reproduction_rate": 0.2,
+      "resilience": 0.6,
+      "bonds": [],
+      "offspring": 1,
+      "fitness": 0.8664941121892131
+    },
+    {
+      "name": "resonance_g0",
+      "species": "weaver",
+      "niche": "connection",
+      "energy": 0.8106453270567792,
+      "health": 0.5,
+      "age": 7,
+      "reproduction_rate": 0.18000000000000002,
+      "resilience": 0.57,
+      "bonds": [],
+      "offspring": 0,
+      "fitness": 0.7172581308227117
+    },
+    {
+      "name": "memory_g0",
+      "species": "symbiont",
+      "niche": "cooperation",
+      "energy": 0.7240808680852172,
+      "health": 0.5,
+      "age": 4,
+      "reproduction_rate": 0.18000000000000002,
+      "resilience": 0.57,
+      "bonds": [],
+      "offspring": 0,
+      "fitness": 0.6886323472340867
+    },
+    {
+      "name": "wave_g0",
+      "species": "parasite",
+      "niche": "exploitation",
+      "energy": 0.5555341598713354,
+      "health": 0.5,
+      "age": 1,
+      "reproduction_rate": 0.36000000000000004,
+      "resilience": 0.19,
+      "bonds": [],
+      "offspring": 0,
+      "fitness": 0.5892136639485342
+    }
+  ],
+  "bonds": [
+    {
+      "id": "09d159",
+      "a": "coherence",
+      "b": "entropy",
+      "type": "mutualism",
+      "strength": 0.5,
+      "formed": 1788981881.2890134
+    },
+    {
+      "id": "fa37a9",
+      "a": "entropy",
+      "b": "resonance",
+      "type": "mutualism",
+      "strength": 0.5,
+      "formed": 1788981881.292346
+    },
+    {
+      "id": "2032db",
+      "a": "resonance",
+      "b": "dream",
+      "type": "mutualism",
+      "strength": 0.5,
+      "formed": 1788981881.2948315
+    },
+    {
+      "id": "317ad8",
+      "a": "dream",
+      "b": "paradox",
+      "type": "mutualism",
+      "strength": 0.5,
+      "formed": 1788981881.2972257
+    },
+    {
+      "id": "eef0cb",
+      "a": "paradox",
+      "b": "fractal",
+      "type": "commensalism",
+      "strength": 0.5,
+      "formed": 1788981881.3003886
+    },
+    {
+      "id": "1a0950",
+      "a": "fractal",
+      "b": "wave",
+      "type": "mutualism",
+      "strength": 0.5,
+      "formed": 1788981881.3033648
+    }
+  ],
+  "environment": {
+    "energy": 0.5740278344927151,
+    "stability": 0.4975741030459315
+  },
+  "generation": 0,
+  "events": [
+    {
+      "type": "birth",
+      "organism": "resonance_g0",
+      "parent": "resonance",
+      "time": 1788981881.3431683
+    },
+    {
+      "type": "birth",
+      "organism": "memory_g0",
+      "parent": "memory",
+      "time": 1788981881.3523893
+    },
+    {
+      "type": "birth",
+      "organism": "wave_g0",
+      "parent": "wave",
+      "time": 1788981881.3619745
+    }
+  ],
+  "biodiversity": 1.0
+}

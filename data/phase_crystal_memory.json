@@ -1,0 +1,622 @@
+{
+  "facets": [
+    {
+      "id": "d42e12d4",
+      "phase": "chaos",
+      "phase_name": "Chaos",
+      "coherence": 0.375446453052356,
+      "entropy": 0.8781379721274034,
+      "mood": "neutral",
+      "pulse": "pulse",
+      "growth_rate": 0.8,
+      "size": 0.3003571624418848,
+      "timestamp": 1788981913.96524,
+      "angle": 120
+    },
+    {
+      "id": "c3c28bb9",
+      "phase": "crystalline",
+      "phase_name": "Order",
+      "coherence": 0.1324832411013953,
+      "entropy": 0.19177131740083697,
+      "mood": "neutral",
+      "pulse": "whisper",
+      "growth_rate": 1.2,
+      "size": 0.15897988932167437,
+      "timestamp": 1788981913.9684587,
+      "angle": 15
+    },
+    {
+      "id": "d1f3308b",
+      "phase": "void",
+      "phase_name": "Dormancy",
+      "coherence": 0.13388926397499312,
+      "entropy": 0.6124001809446902,
+      "mood": "volatile",
+      "pulse": "surge",
+      "growth_rate": 0.4,
+      "size": 0.053555705589997255,
+      "timestamp": 1788981913.9714592,
+      "angle": 270
+    },
+    {
+      "id": "7cbd7d1d",
+      "phase": "living_crystal",
+      "phase_name": "Vitality",
+      "coherence": 0.7965750705509407,
+      "entropy": 0.349295134229903,
+      "mood": "volatile",
+      "pulse": "crescendo",
+      "growth_rate": 1.4,
+      "size": 1.115205098771317,
+      "timestamp": 1788981913.9736507,
+      "angle": 345
+    },
+    {
+      "id": "0db633e4",
+      "phase": "chaos",
+      "phase_name": "Chaos",
+      "coherence": 0.3815756498730275,
+      "entropy": 0.5445776183337867,
+      "mood": "neutral",
+      "pulse": "stillness",
+      "growth_rate": 0.8,
+      "size": 0.305260519898422,
+      "timestamp": 1788981913.975908,
+      "angle": 180
+    },
+    {
+      "id": "e0c53171",
+      "phase": "liminal",
+      "phase_name": "Threshold",
+      "coherence": 0.10018688154998323,
+      "entropy": 0.623860376108279,
+      "mood": "focused",
+      "pulse": "whisper",
+      "growth_rate": 0.6,
+      "size": 0.06011212892998993,
+      "timestamp": 1788981913.9781287,
+      "angle": 255
+    },
+    {
+      "id": "fb8ffa22",
+      "phase": "liminal",
+      "phase_name": "Threshold",
+      "coherence": 0.9403692111930562,
+      "entropy": 0.7424911786145119,
+      "mood": "volatile",
+      "pulse": "stillness",
+      "growth_rate": 0.6,
+      "size": 0.5642215267158337,
+      "timestamp": 1788981913.9812162,
+      "angle": 270
+    },
+    {
+      "id": "b08f969b",
+      "phase": "emergent",
+      "phase_name": "Emergence",
+      "coherence": 0.9895416640784181,
+      "entropy": 0.6208459634042561,
+      "mood": "neutral",
+      "pulse": "pulse",
+      "growth_rate": 1.0,
+      "size": 0.9895416640784181,
+      "timestamp": 1788981913.9838066,
+      "angle": 165
+    },
+    {
+      "id": "5ef24a85",
+      "phase": "chaos",
+      "phase_name": "Chaos",
+      "coherence": 0.11367403089648698,
+      "entropy": 0.8971788128196835,
+      "mood": "excited",
+      "pulse": "stillness",
+      "growth_rate": 0.8,
+      "size": 0.09093922471718958,
+      "timestamp": 1788981913.9868193,
+      "angle": 240
+    },
+    {
+      "id": "979916b7",
+      "phase": "emergent",
+      "phase_name": "Emergence",
+      "coherence": 0.8683764825268814,
+      "entropy": 0.5567809023416993,
+      "mood": "excited",
+      "pulse": "pulse",
+      "growth_rate": 1.0,
+      "size": 0.8683764825268814,
+      "timestamp": 1788981913.9897478,
+      "angle": 195
+    },
+    {
+      "id": "c1b74a92",
+      "phase": "chaos",
+      "phase_name": "Chaos",
+      "coherence": 0.569449387471935,
+      "entropy": 0.6001977958919211,
+      "mood": "excited",
+      "pulse": "whisper",
+      "growth_rate": 0.8,
+      "size": 0.455559509977548,
+      "timestamp": 1788981913.9925294,
+      "angle": 270
+    },
+    {
+      "id": "669c03e5",
+      "phase": "living_crystal",
+      "phase_name": "Vitality",
+      "coherence": 0.8710391376973616,
+      "entropy": 0.9917718327672271,
+      "mood": "focused",
+      "pulse": "crescendo",
+      "growth_rate": 1.4,
+      "size": 1.2194547927763062,
+      "timestamp": 1788981913.9954057,
+      "angle": 465
+    },
+    {
+      "id": "86fdef40",
+      "phase": "living_crystal",
+      "phase_name": "Vitality",
+      "coherence": 0.21603008866120088,
+      "entropy": 0.5332619537076195,
+      "mood": "focused",
+      "pulse": "crescendo",
+      "growth_rate": 1.4,
+      "size": 0.3024421241256812,
+      "timestamp": 1788981913.9983392,
+      "angle": 480
+    },
+    {
+      "id": "43d42575",
+      "phase": "void",
+      "phase_name": "Dormancy",
+      "coherence": 0.016330443233573466,
+      "entropy": 0.9736646249843053,
+      "mood": "focused",
+      "pulse": "crescendo",
+      "growth_rate": 0.4,
+      "size": 0.006532177293429387,
+      "timestamp": 1788981914.001087,
+      "angle": 435
+    },
+    {
+      "id": "bd82a23c",
+      "phase": "crystalline",
+      "phase_name": "Order",
+      "coherence": 0.004954315723313285,
+      "entropy": 0.6813368255555236,
+      "mood": "volatile",
+      "pulse": "whisper",
+      "growth_rate": 1.2,
+      "size": 0.005945178867975942,
+      "timestamp": 1788981914.0046535,
+      "angle": 210
+    },
+    {
+      "id": "3234a5e0",
+      "phase": "living_crystal",
+      "phase_name": "Vitality",
+      "coherence": 0.7648700787303502,
+      "entropy": 0.7553243706930601,
+      "mood": "neutral",
+      "pulse": "stillness",
+      "growth_rate": 1.4,
+      "size": 1.07081811022249,
+      "timestamp": 1788981914.0082603,
+      "angle": 525
+    },
+    {
+      "id": "fe9b9e63",
+      "phase": "liminal",
+      "phase_name": "Threshold",
+      "coherence": 0.4683995373915525,
+      "entropy": 0.6615698992512363,
+      "mood": "excited",
+      "pulse": "stillness",
+      "growth_rate": 0.6,
+      "size": 0.28103972243493147,
+      "timestamp": 1788981914.0116365,
+      "angle": 420
+    },
+    {
+      "id": "b7576dd6",
+      "phase": "liminal",
+      "phase_name": "Threshold",
+      "coherence": 0.03656751839444916,
+      "entropy": 0.49463097145369006,
+      "mood": "focused",
+      "pulse": "pulse",
+      "growth_rate": 0.6,
+      "size": 0.021940511036669497,
+      "timestamp": 1788981914.014529,
+      "angle": 435
+    },
+    {
+      "id": "6d4298db",
+      "phase": "void",
+      "phase_name": "Dormancy",
+      "coherence": 0.5603973389313865,
+      "entropy": 0.009672062191747322,
+      "mood": "neutral",
+      "pulse": "crescendo",
+      "growth_rate": 0.4,
+      "size": 0.22415893557255462,
+      "timestamp": 1788981914.0180972,
+      "angle": 510
+    },
+    {
+      "id": "305ed956",
+      "phase": "emergent",
+      "phase_name": "Emergence",
+      "coherence": 0.9749246510418832,
+      "entropy": 0.6710113910312566,
+      "mood": "focused",
+      "pulse": "surge",
+      "growth_rate": 1.0,
+      "size": 0.9749246510418832,
+      "timestamp": 1788981914.0226119,
+      "angle": 345
+    },
+    {
+      "id": "3643a5b8",
+      "phase": "living_crystal",
+      "phase_name": "Vitality",
+      "coherence": 0.15075519252050484,
+      "entropy": 0.1755286161340307,
+      "mood": "neutral",
+      "pulse": "crescendo",
+      "growth_rate": 1.4,
+      "size": 0.21105726952870676,
+      "timestamp": 1788981914.0260623,
+      "angle": 600
+    },
+    {
+      "id": "3046fbc1",
+      "phase": "liminal",
+      "phase_name": "Threshold",
+      "coherence": 0.24729010579746813,
+      "entropy": 0.3939819580795101,
+      "mood": "volatile",
+      "pulse": "surge",
+      "growth_rate": 0.6,
+      "size": 0.14837406347848087,
+      "timestamp": 1788981914.0302045,
+      "angle": 495
+    },
+    {
+      "id": "01c6451d",
+      "phase": "chaos",
+      "phase_name": "Chaos",
+      "coherence": 0.21052596953825908,
+      "entropy": 0.8215751180605665,
+      "mood": "excited",
+      "pulse": "stillness",
+      "growth_rate": 0.8,
+      "size": 0.16842077563060728,
+      "timestamp": 1788981914.034377,
+      "angle": 450
+    },
+    {
+      "id": "91199ec3",
+      "phase": "liminal",
+      "phase_name": "Threshold",
+      "coherence": 0.9588750212490061,
+      "entropy": 0.02836976989301676,
+      "mood": "neutral",
+      "pulse": "surge",
+      "growth_rate": 0.6,
+      "size": 0.5753250127494036,
+      "timestamp": 1788981914.0380125,
+      "angle": 525
+    },
+    {
+      "id": "6916aac0",
+      "phase": "crystalline",
+      "phase_name": "Order",
+      "coherence": 0.42033830435399244,
+      "entropy": 0.556314563164419,
+      "mood": "excited",
+      "pulse": "pulse",
+      "growth_rate": 1.2,
+      "size": 0.5044059652247909,
+      "timestamp": 1788981914.0418663,
+      "angle": 360
+    }
+  ],
+  "total_growth": 22.4,
+  "generation": 25,
+  "phase_history": {
+    "chaos": 5,
+    "crystalline": 3,
+    "void": 3,
+    "living_crystal": 5,
+    "liminal": 6,
+    "emergent": 3
+  },
+  "memory_fragments": [
+    {
+      "id": "6f185c",
+      "facets_compressed": 5,
+      "avg_coherence": 0.364,
+      "avg_entropy": 0.5152,
+      "dominant_phase": "chaos",
+      "timestamp": 1788981913.9760787,
+      "summary": "A period of chaos (coherence=0.36, entropy=0.52)"
+    },
+    {
+      "id": "b3fb27",
+      "facets_compressed": 5,
+      "avg_coherence": 0.6024,
+      "avg_entropy": 0.6882,
+      "dominant_phase": "emergent",
+      "timestamp": 1788981913.9898725,
+      "summary": "A period of emergent (coherence=0.60, entropy=0.69)"
+    },
+    {
+      "id": "3181e9",
+      "facets_compressed": 5,
+      "avg_coherence": 0.3356,
+      "avg_entropy": 0.756,
+      "dominant_phase": "living_crystal",
+      "timestamp": 1788981914.004791,
+      "summary": "A period of living_crystal (coherence=0.34, entropy=0.76)"
+    },
+    {
+      "id": "40c072",
+      "facets_compressed": 5,
+      "avg_coherence": 0.561,
+      "avg_entropy": 0.5184,
+      "dominant_phase": "liminal",
+      "timestamp": 1788981914.0227485,
+      "summary": "A period of liminal (coherence=0.56, entropy=0.52)"
+    },
+    {
+      "id": "b37646",
+      "facets_compressed": 5,
+      "avg_coherence": 0.3976,
+      "avg_entropy": 0.3952,
+      "dominant_phase": "liminal",
+      "timestamp": 1788981914.042015,
+      "summary": "A period of liminal (coherence=0.40, entropy=0.40)"
+    }
+  ],
+  "temporal_patterns": [
+    {
+      "type": "phase_cycle",
+      "period": 4,
+      "strength": 0.5,
+      "cycle": [
+        "chaos",
+        "crystalline",
+        "void",
+        "living_crystal"
+      ],
+      "timestamp": 1788981913.9781735
+    },
+    {
+      "type": "phase_cycle",
+      "period": 4,
+      "strength": 0.3333333333333333,
+      "cycle": [
+        "chaos",
+        "crystalline",
+        "void",
+        "living_crystal"
+      ],
+      "timestamp": 1788981913.9812722
+    },
+    {
+      "type": "phase_progression",
+      "sequence": [
+        "chaos",
+        "crystalline",
+        "void",
+        "living_crystal",
+        "liminal"
+      ],
+      "timestamp": 1788981913.9838583
+    },
+    {
+      "type": "phase_cycle",
+      "period": 4,
+      "strength": 0.4,
+      "cycle": [
+        "chaos",
+        "crystalline",
+        "void",
+        "living_crystal"
+      ],
+      "timestamp": 1788981913.9868667
+    },
+    {
+      "type": "phase_cycle",
+      "period": 4,
+      "strength": 0.3333333333333333,
+      "cycle": [
+        "chaos",
+        "crystalline",
+        "void",
+        "living_crystal"
+      ],
+      "timestamp": 1788981913.989795
+    },
+    {
+      "type": "phase_progression",
+      "sequence": [
+        "crystalline",
+        "void",
+        "living_crystal",
+        "chaos",
+        "liminal"
+      ],
+      "timestamp": 1788981913.9925818
+    },
+    {
+      "type": "phase_progression",
+      "sequence": [
+        "void",
+        "living_crystal",
+        "chaos",
+        "liminal",
+        "emergent"
+      ],
+      "timestamp": 1788981913.995458
+    },
+    {
+      "type": "phase_progression",
+      "sequence": [
+        "living_crystal",
+        "chaos",
+        "liminal",
+        "emergent"
+      ],
+      "timestamp": 1788981913.9983933
+    },
+    {
+      "type": "phase_progression",
+      "sequence": [
+        "chaos",
+        "liminal",
+        "emergent",
+        "living_crystal",
+        "void"
+      ],
+      "timestamp": 1788981914.0011442
+    },
+    {
+      "type": "phase_progression",
+      "sequence": [
+        "liminal",
+        "emergent",
+        "chaos",
+        "living_crystal",
+        "void"
+      ],
+      "timestamp": 1788981914.0047169
+    },
+    {
+      "type": "phase_progression",
+      "sequence": [
+        "liminal",
+        "emergent",
+        "chaos",
+        "living_crystal",
+        "void"
+      ],
+      "timestamp": 1788981914.008314
+    },
+    {
+      "type": "phase_progression",
+      "sequence": [
+        "emergent",
+        "chaos",
+        "living_crystal",
+        "void",
+        "crystalline"
+      ],
+      "timestamp": 1788981914.0116932
+    },
+    {
+      "type": "phase_progression",
+      "sequence": [
+        "chaos",
+        "emergent",
+        "living_crystal",
+        "void",
+        "crystalline"
+      ],
+      "timestamp": 1788981914.014587
+    },
+    {
+      "type": "phase_progression",
+      "sequence": [
+        "emergent",
+        "chaos",
+        "living_crystal",
+        "void",
+        "crystalline"
+      ],
+      "timestamp": 1788981914.0181592
+    },
+    {
+      "type": "phase_progression",
+      "sequence": [
+        "chaos",
+        "living_crystal",
+        "void",
+        "crystalline",
+        "liminal"
+      ],
+      "timestamp": 1788981914.0226731
+    },
+    {
+      "type": "phase_cycle",
+      "period": 5,
+      "strength": 0.4,
+      "cycle": [
+        "living_crystal",
+        "living_crystal",
+        "void",
+        "crystalline",
+        "living_crystal"
+      ],
+      "timestamp": 1788981914.0261145
+    },
+    {
+      "type": "phase_cycle",
+      "period": 5,
+      "strength": 0.6,
+      "cycle": [
+        "living_crystal",
+        "void",
+        "crystalline",
+        "living_crystal",
+        "liminal"
+      ],
+      "timestamp": 1788981914.0302572
+    },
+    {
+      "type": "phase_cycle",
+      "period": 5,
+      "strength": 0.6,
+      "cycle": [
+        "void",
+        "crystalline",
+        "living_crystal",
+        "liminal",
+        "liminal"
+      ],
+      "timestamp": 1788981914.0344284
+    },
+    {
+      "type": "phase_cycle",
+      "period": 5,
+      "strength": 0.4,
+      "cycle": [
+        "crystalline",
+        "living_crystal",
+        "liminal",
+        "liminal",
+        "void"
+      ],
+      "timestamp": 1788981914.0380623
+    },
+    {
+      "type": "phase_cycle",
+      "period": 5,
+      "strength": 0.4,
+      "cycle": [
+        "living_crystal",
+        "liminal",
+        "liminal",
+        "void",
+        "emergent"
+      ],
+      "timestamp": 1788981914.0419333
+    }
+  ],
+  "prediction_accuracy": 0.176
+}
