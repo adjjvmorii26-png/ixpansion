@@ -208,3 +208,64 @@ if __name__ == "__main__":
         print("Vercel AI Gateway Integration operational")
         print("Commands: --interpret <module> <type>, --broadcast, --history N")
         print("          --enable, --disable, --model <model_name>")
+
+
+def ai_gateway_handler(payload: dict) -> dict:
+    """Main handler for AI Gateway API endpoint."""
+    action = payload.get("action", "status")
+    
+    if action == "status":
+        return {
+            "status": "active" if _AI_GATEWAY_CONFIG["enabled"] else "disabled",
+            "catalog_models": 1,
+            "default_model": _AI_GATEWAY_CONFIG["default_model"],
+            "broadcasts_sent": _broadcast_state["broadcasts_sent"],
+            "connected_channels": _broadcast_state["connected_channels"],
+            "hint": "AI_GATEWAY_API_KEY not required for local mode"
+        }
+    
+    elif action == "interpret":
+        dream_entry = payload.get("dream", {})
+        mood = payload.get("mood", None)
+        return interpret_dream(dream_entry, mood)
+    
+    elif action == "broadcast":
+        dream_entry = payload.get("dream", {})
+        interpretation = interpret_dream(dream_entry)
+        return broadcast_dream(dream_entry, interpretation)
+    
+    elif action == "history":
+        limit = payload.get("limit", 10)
+        return get_broadcast_history(limit)
+    
+    elif action == "enable":
+        enabled = payload.get("enabled", True)
+        return enable_ai_gateway(enabled)
+    
+    elif action == "set_model":
+        model = payload.get("model", _AI_GATEWAY_CONFIG["default_model"])
+        return set_model(model)
+    
+    else:
+        return {"error": f"Unknown action: {action}", "available": ["status", "interpret", "broadcast", "history", "enable", "set_model"]}
+
+
+def _estimate_tokens(text: str) -> int:
+    """Estimate token count for text."""
+    return len(text) // 4
+
+
+def _estimate_cost(tokens: int, model: str = None) -> float:
+    """Estimate cost in USD for token usage."""
+    model = model or _AI_GATEWAY_CONFIG["default_model"]
+    # Rough pricing per 1K tokens
+    rates = {
+        "gpt-4o-mini": 0.00015,
+        "gpt-4o": 0.005,
+        "gpt-3.5-turbo": 0.0005,
+    }
+    rate = rates.get(model, 0.001)
+    return (tokens / 1000) * rate
+
+
+DEFAULT_MODEL = _AI_GATEWAY_CONFIG["default_model"]
