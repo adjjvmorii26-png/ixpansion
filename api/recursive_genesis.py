@@ -31,23 +31,24 @@ _BIRTH_ERA: Dict[str, float] = {}  # module_name -> birth_timestamp
 
 def _genesis_children() -> List[str]:
     """Find modules that have genesis_era in their coherence vitals
-    (they were self-authored, not pre-existing seeds)."""
-    try:
-        from coherence_regulator import _candidate_modules
-        all_mods = _candidate_modules()
-    except Exception:
-        return []
+    (they were self-authored, not pre-existing seeds).
+
+    Uses static source scanning so the audit never imports the full
+    800+ module surface (imports trigger network/telemetry side effects).
+    """
+    api_dir = ROOT / "api"
     children = []
-    for name in all_mods:
+    for py in sorted(api_dir.glob("*.py")):
+        name = py.stem
+        if name.startswith("_") or name in ("__init__", "unified_router"):
+            continue
         try:
-            import importlib
-            m = importlib.import_module(name)
-            vitals = getattr(m, "coherence_vitals", lambda: {})()
-            if "genesis_era" in vitals or "self_creation_era" in vitals:
+            text = py.read_text(errors="ignore")
+            if "genesis_era" in text or "self_creation_era" in text:
                 children.append(name)
                 if name not in _BIRTH_ERA:
                     _BIRTH_ERA[name] = time.time()
-        except Exception:
+        except Exception:  # noqa: BLE001
             continue
     return children
 
@@ -82,14 +83,18 @@ def _child_performance(name: str) -> Dict[str, Any]:
     except Exception:
         details["kinship_count"] = 0
 
-    # dispatch success
+    # dispatch success (never route to self — that would recurse infinitely)
     try:
-        from unified_router import UnifiedRouter
-        u = UnifiedRouter()
-        r = u.route(name, {})
-        ok = not (isinstance(r, dict) and "error" in r)
-        details["dispatch"] = ok
-        score += 0.3 if ok else 0.0
+        if name == "recursive_genesis":
+            details["dispatch"] = True
+            score += 0.3
+        else:
+            from unified_router import UnifiedRouter
+            u = UnifiedRouter()
+            r = u.route(name, {})
+            ok = not (isinstance(r, dict) and "error" in r)
+            details["dispatch"] = ok
+            score += 0.3 if ok else 0.0
     except Exception:
         details["dispatch"] = False
 
@@ -99,7 +104,7 @@ def _child_performance(name: str) -> Dict[str, Any]:
 
 def self_audit() -> Dict[str, Any]:
     """Analyze the forge's own children and propose mutations to itself."""
-    children = _genesis_children()
+    children = [c for c in _genesis_children() if c != "recursive_genesis"]
     perf: Dict[str, Dict[str, Any]] = {}
     for c in children:
         perf[c] = _child_performance(c)

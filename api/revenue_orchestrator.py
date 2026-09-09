@@ -75,7 +75,7 @@ def handler(payload: dict = None, context: object = None) -> dict:
     """Vercel-compatible handler."""
     payload = payload or {}
     orchestrator = EngagementOrchestrator()
-    return {"status": "active", "module": "engagement_orchestrator",
+    return {"status": "active", "module": "revenue_orchestrator",
             **orchestrator.status()}
 
 # --- Compliance Forge patch (Wave 419) ---

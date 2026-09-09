@@ -36,6 +36,12 @@ def _read_qualia() -> Dict[str, Any]:
         modules = cr.get("modules", {})
     except Exception:
         modules = {}
+    if not modules:
+        try:
+            from coherence_regulator import _candidate_modules
+            modules = {name: {"health": 1.0} for name in _candidate_modules()}
+        except Exception:  # noqa: BLE001
+            modules = {}
 
     # count states
     healthy = sum(1 for m in modules.values() if (m.get("health") or 1.0) >= 0.85)

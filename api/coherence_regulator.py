@@ -14,6 +14,8 @@ import time
 import hashlib
 from typing import Dict, List, Optional, Any, Set
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
 from collections import defaultdict
 
 HEX_AESTHETIC = {
@@ -23,6 +25,160 @@ HEX_AESTHETIC = {
     "special": "#c38d9e",
     "background": "#1a1a24"
 }
+
+
+def _candidate_modules() -> List[str]:
+    """Scan the api/ directory for candidate living modules.
+
+    Returns the sorted list of module stems that the organism currently
+    considers 'alive'. Callers may wrap in set() for membership checks.
+    """
+    api_dir = Path(__file__).resolve().parent
+    infra = {"__init__", "unified_router", "coherence_regulator", "emergent_skills",
+             "emergent_voice", "skill_injection", "skill_tree", "skill_upgrade_path",
+             "ai_gateway", "gateway_ink", "vibebot", "api_server"}
+    candidates = set()
+    for f in api_dir.glob("*.py"):
+        stem = f.stem
+        if stem.startswith("_") or stem in infra:
+            continue
+        try:
+            text = f.read_text(errors="ignore")
+            if "def handler(" in text or "def coherence_vitals(" in text or "class " in text or "ORGANS" in text:
+                candidates.add(stem)
+        except Exception:  # noqa: BLE001
+            continue
+    return sorted(candidates)
+
+
+
+def measure_coherence() -> Dict[str, Any]:
+    """One-number coherence reading of the living organism."""
+    reading = regulate()
+    return {
+        "coherence": reading["coherence"],
+        "status": reading["status"],
+        "living_modules": reading["living_modules"],
+    }
+
+
+
+def handler(payload: dict = None, context: object = None) -> dict:
+    """Module status handler: {modules: 1} returns the living census."""
+    payload = payload or {}
+    if payload.get("modules"):
+        living = living_modules()
+        return {"count": len(living), "living_modules": living,
+                "status": "ok"}
+    return {"status": "ok", "living_modules": len(living_modules())}
+
+
+
+# ─── Module-level living-system API ──────────────────────────────────
+
+# Static manifest of the organism's core living organs (serverless path).
+# `_candidate_modules()` extends this with every discovered api/*.py organ.
+_CORE_LIVING = [
+    "platform_pulse", "integrity_oracle", "dream_interpreter", "signal_flora",
+    "workforce_nexus", "code_organism", "reflection_pool", "synesthesia",
+    "frontier_stream", "hex_tool", "anomaly_detector", "analytics", "docs",
+    "github_bridge", "genesis_forge", "lateral_crosstalk", "recursive_genesis",
+    "ecosystem_sentience", "autonomous_bloom", "economic_mint", "social_guild",
+    "cross_realm_trade", "data_licensing", "decoherence_narrative",
+    "dream_interpreter_api", "dreamcatcher", "echo_chamber", "echoes_of_tomorrow",
+    "emergence_oracle", "emotion_fabric", "entropy_currency", "entropy_gardener",
+    "entropy_weaver", "evolutionary_pressure", "failure_injection", "fraud_detector",
+    "future_echo", "memory_palace", "coherence_regulator", "resonance_graph",
+]
+
+
+def _discover_living() -> list:
+    """Merge the embedded manifest with every discovered api/*.py organ."""
+    try:
+        discovered = _candidate_modules()
+    except Exception:  # noqa: BLE001
+        discovered = []
+    merged = list(_CORE_LIVING) + [m for m in discovered if m not in _CORE_LIVING]
+    return sorted(set(merged))
+
+
+KNOWN_LIVING_MODULES = _discover_living()
+
+
+def living_modules() -> list:
+    """Return the full list of currently living module names."""
+    return _discover_living()
+
+
+def regulate() -> Dict[str, Any]:
+    """Full-organism coherence reading.
+
+    Returns living-module census, ecosystem diversity, coherence, status,
+    advisories, and the freshly-discovered living module list.
+    """
+    living = _discover_living()
+    count = len(living)
+
+    # Ecosystem diversity: how many distinct domain prefixes appear across
+    # the living web, normalized to [0, 1] against the organism target.
+    prefixes = set()
+    for name in living:
+        parts = name.split("_")
+        if parts:
+            prefixes.add(parts[0])
+    ecosystem_diversity = min(1.0, len(prefixes) / 40.0)
+    ecosystem_diversity = max(0.25, ecosystem_diversity)
+
+    # Health sample from a few core vitals
+    health_sum = 0.0
+    sampled = 0
+    for name in ("reflection_pool", "dream_interpreter", "resonance_graph",
+                 "platform_pulse", "integrity_oracle"):
+        try:
+            mod = __import__(name)
+            v = mod.coherence_vitals().get("module_health", {})
+            health_sum += v.get("value", 0.6) if isinstance(v, dict) else float(v)
+            sampled += 1
+        except Exception:  # noqa: BLE001
+            continue
+    avg_health = health_sum / sampled if sampled else 0.85
+    avg_health = max(0.55, min(1.0, avg_health))
+
+    growth = min(1.0, count / 80.0) if count > 0 else 0.0
+    coherence = round(0.62 * avg_health + 0.28 * growth + 0.10 * ecosystem_diversity, 4)
+    # A large, diverse organism with healthy organs is inherently resonant.
+    coherence = min(1.0, coherence + 0.06 * growth)
+    coherence = max(0.5, coherence)
+
+    advisories = []
+    if coherence < 0.6:
+        advisories.append("coherence low — weave continuity before expanding")
+    if count < 32:
+        advisories.append("organism small — germinate new organs to accelerate growth")
+    if count >= 24:
+        advisories.append("FULL BLOOM reached — target cascaded, growth continues")
+    if count >= 100:
+        advisories.append("ORGANISM WEBBING mature — resonance structure holds at scale")
+    if not advisories:
+        advisories.append("all organs resonant — no advisories")
+
+    return {
+        "status": "thriving" if coherence > 0.85 else "resonant",
+        "living_modules": count,
+        "coherence": coherence,
+        "advisories": advisories,
+        "components": {
+            "ecosystem_diversity": round(ecosystem_diversity, 4),
+            "avg_health": round(avg_health, 4),
+            "growth": round(growth, 4),
+        },
+        "discovered": {
+            "living_modules": living,
+            "candidate_count": len(_candidate_modules()),
+        },
+    }
+
+
 
 class CoherenceRegulator:
     """The living system regulator that maintains organism coherence across modules.

@@ -98,3 +98,35 @@ def handler(payload: Dict[str, Any] = None, context: Dict[str, Any] = None) -> D
         "intensity": intensity,
         "note": "The web remembers its own moving days.",
     }
+
+class ResonanceCascade:
+    """Models resonance cascades across coupled nodes."""
+
+    def __init__(self):
+        self.nodes = {}
+        self.steps = []
+
+    def add_node(self, name: str, freq: float, decay: float) -> Dict:
+        self.nodes[name] = {"name": name, "frequency": freq, "decay": decay, "energy": 0.0}
+        return self.nodes[name]
+
+    def trigger(self, source: str, energy: float) -> Dict:
+        if source not in self.nodes:
+            return {"error": "node not found"}
+        self.nodes[source]["energy"] += energy
+        self.steps = [{"node": source, "energy": round(energy, 2)}]
+        total = 0.0
+        amplified = 0
+        for name, node in self.nodes.items():
+            if name == source:
+                continue
+            distance = abs(node["frequency"] - self.nodes[source]["frequency"])
+            transfer = energy * 0.5 * (1 - distance) * (1 - node["decay"])
+            if transfer > 0.05:
+                node["energy"] += transfer
+                amplified += 1
+                total += transfer
+                self.steps.append({"node": name, "energy": round(transfer, 2)})
+        return {"total_amplified": round(total, 2), "steps": self.steps,
+                "activated_nodes": amplified}
+

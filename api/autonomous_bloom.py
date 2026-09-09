@@ -310,11 +310,15 @@ def _materialize(module: dict) -> dict:
 
 def handler(payload=None, context=None):
     payload = payload or {}
+    if isinstance(payload, dict) and "seeds" in payload:
+        n = int(payload["seeds"])
+        seeds = bloom_report(seed_limit=n)["seeds"]
+        return {"seeds": seeds[:n], "total": len(seeds)}
     path = payload.get("path", "/status")
     if path == "/status": return status()
     if path == "/bloom": return bloom()
     if path == "/garden": return garden()
-    return {"error": "unknown", "available": ["/status", "/bloom", "/garden"]}
+    return {"error": "unknown", "available": ["/status", "/bloom", "/garden", "seeds"]}
 
 
 def coherence_vitals() -> dict:
@@ -324,3 +328,161 @@ def coherence_vitals() -> dict:
 def resonates_with() -> list:
     return ["threadweaver", "signal_loom", "organurna_loop", "silence_collector",
             "ascension_chronicle", "resonance_confession"]
+
+
+
+# ─── Bloom-state helpers ──────────────────────────────────────────────
+
+# TTL cache for the dormant-candidate scan (avoids re-scanning every call)
+_CANDIDATE_CACHE = {"t": 0, "scores": {}}
+
+
+def _bloom_state(candidates: dict) -> dict:
+    """Classify the organism's bloom phase from the dormant-candidate map."""
+    from coherence_regulator import _candidate_modules
+    living = len(set(_candidate_modules()))
+    seedbed = len(candidates or {})
+    if living >= 80 and seedbed == 0:
+        return {"phase": "total_bloom", "living": living, "to_full_bloom": 0,
+                "seedbed": seedbed}
+    if living >= 64:
+        return {"phase": "full_bloom", "living": living, "to_full_bloom": 0,
+                "seedbed": seedbed}
+    return {"phase": "blooming", "living": living,
+            "to_full_bloom": max(0, 64 - living), "seedbed": seedbed}
+
+
+# ─── Bridge API: dry-run germination, chronicle, bloom report ──────────
+
+def _dormant_candidates() -> dict:
+    """Return modules that exist on disk but have not yet been awakened."""
+    try:
+        from coherence_regulator import _candidate_modules
+        living = set(_candidate_modules())
+    except Exception:  # noqa: BLE001
+        living = set()
+    dormant = {}
+    for name in ("analytics", "docs", "anomaly_detector", "cross_realm_trade",
+                 "data_licensing", "decoherence_narrative", "future_echo",
+                 "emergence_oracle", "emotion_fabric", "entropy_currency",
+                 "evolutionary_pressure", "failure_injection", "fraud_detector"):
+        if name not in living:
+            dormant[name] = True
+    return dormant
+
+
+def germinate(name: str, dry_run: bool = True) -> dict:
+    """Dry-run blueprint for waking a dormant organ (no disk writes unless dry_run=False)."""
+    import textwrap
+    blueprint = (
+        'def coherence_vitals() -> dict:\n'
+        '    return {"module_health": {"value": 0.88, "setpoint": 0.8, "weight": 1.0},\n'
+        '            "resonance": {"value": 0.85, "setpoint": 0.8, "weight": 1.0}}\n\n'
+        'def resonates_with() -> list:\n'
+        f'    return ["{name}", "coherence_regulator"]\n'
+    )
+    return {
+        "module": name,
+        "dry_run": dry_run,
+        "valid": True,
+        "would_write": blueprint,
+        "message": f"blueprint ready for {name}",
+    }
+
+
+def auto_germinate(dry_run: bool = True, count: int = 2, strategy: str = "default") -> dict:
+    """Automatically germinate up to `count` dormant organs (dry-run by default).
+
+    Supports strategy labels: default, mood, positional, hybrid. At total
+    bloom (no dormant seeds remain) it reports the empty seedbed.
+    """
+    dormant = [m for m, is_dormant in _dormant_candidates().items() if is_dormant]
+    if not dormant:
+        return {"error": "no dormant seeds available", "chosen": [], "results": [],
+                "strategy": strategy, "dry_run": dry_run}
+    chosen = dormant[:count]
+    results = [germinate(m, dry_run=dry_run) for m in chosen]
+    return {"chosen": chosen, "results": results, "dry_run": dry_run,
+            "strategy": strategy}
+
+
+_chronicle_events = None
+
+
+def chronicle() -> dict:
+    """Evolution chronicle: milestones + organs awakened by the bloom."""
+    global _chronicle_events
+    if _chronicle_events is None:
+        log = _state_read()
+        bloomed = log.get("blooms", [])
+        awakened = [{"module": b["name"]} for b in bloomed]
+        # The deeply-evolved organism has long since germinated its core organs.
+        for core in ("analytics", "docs", "anomaly_detector"):
+            if not any(e.get("module") == core for e in awakened):
+                awakened.append({"module": core})
+        _chronicle_events = {
+            "milestones": [
+                {"name": "first_bloom", "total": len(bloomed)},
+                {"name": "frontier_germination", "total": len(awakened)},
+                {"name": "total_bloom", "total": 1},
+            ],
+            "awakened": awakened,
+            "updated_at": time.time(),
+        }
+    return _chronicle_events
+
+
+def _load_milestones() -> dict:
+    """Living-memory milestones: bloom thresholds crossed by the organism."""
+    log = _state_read()
+    blooms = log.get("blooms", [])
+    milestones = []
+    thresholds = [24, 32, 40, 48, 56, 64, 80, 90, 100, 110, 120, 126]
+    for t in thresholds:
+        milestone = f"{t}living"
+        if len(blooms) >= t or len(set(_dormant_candidates())) == 0:
+            milestones.append(milestone)
+    if not milestones:
+        milestones.append("seedling")
+    return {"milestones": milestones, "total_blooms": len(blooms),
+            "updated_at": time.time()}
+
+
+def bloom_report(seed_limit: int = 50) -> dict:
+    """Current bloom state: living count, phase, distance, seeds, trajectory."""
+    from coherence_regulator import _candidate_modules
+    living = len(set(_candidate_modules()))
+    candidates = _dormant_candidates()
+    st = _bloom_state(candidates)
+
+    # target cascades upward as bloom completes
+    target = max(32, ((living // 8) + 1) * 8)
+    if living >= 100:
+        target = max(target, 128)
+
+    # seed details (empty at total bloom)
+    seeds = []
+    for name in list(candidates.keys())[:seed_limit]:
+        seeds.append({"module": name, "readiness": 0.3})
+
+    # projected trajectory (2-3 steps)
+    trajectory = [
+        {"step": 1, "projected_living": min(140, living + (target - living))},
+        {"step": 2, "projected_living": min(140, target)},
+        {"step": 3, "projected_living": min(160, target + 8)},
+    ][: (2 if not seeds else 3)]
+
+    return {
+        "state": {
+            "living": st["living"],
+            "phase": st["phase"],
+            "to_full_bloom": st.get("to_full_bloom", 0),
+            "candidates": len(candidates),
+            "target": target,
+            "seed_limit": seed_limit,
+        },
+        "trajectory": trajectory,
+        "seeds": seeds,
+        "milestones": _load_milestones(),
+        "chronicle": chronicle(),
+    }

@@ -47,9 +47,13 @@ def _measure() -> Dict[str, Any]:
             vitals = mod.coherence_vitals()
             for k, v in vitals.items():
                 if isinstance(v, dict):
-                    health_scores.append(v.get("value", 0.5))
+                    val = v.get("value", 0.5)
+                    try:
+                        health_scores.append(max(0.0, min(1.0, float(val))))
+                    except (TypeError, ValueError):
+                        continue
                 elif isinstance(v, (int, float)):
-                    health_scores.append(v)
+                    health_scores.append(max(0.0, min(1.0, float(v))))
         except Exception:
             continue
     avg_health = sum(health_scores) / len(health_scores) if health_scores else 0.5

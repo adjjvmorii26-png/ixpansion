@@ -154,6 +154,61 @@ def set_model(model: str) -> dict:
     return {"status": "model_updated", "model": model}
 
 
+
+
+ALEPH_SYSTEM_PROMPT = _AI_GATEWAY_CONFIG.get("system_prompt", _AI_GATEWAY_CONFIG["system_prompt"])
+
+
+def _gateway_key() -> Optional[str]:
+    """Return the configured AI Gateway API key, if any."""
+    return os.environ.get("AI_GATEWAY_API_KEY") or os.environ.get("ALEPH_API_KEY")
+
+
+def _request(path: str, body: Optional[dict] = None, timeout: float = 60.0):
+    """POST to the AI Gateway relay. Returns (json_payload, latency_ms).
+
+    Network stub that mirrors the classic /chat/completions contract.
+    """
+    import urllib.request
+    started = time.time()
+    key = _gateway_key()
+    base = os.environ.get("AI_GATEWAY_BASE_URL", "https://gateway.example.local/v1")
+    url = base.rstrip("/") + path
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(body or {}).encode("utf-8"),
+        headers={"Content-Type": "application/json",
+                 "Authorization": f"Bearer {key or ''}"},
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        data = json.loads(resp.read().decode("utf-8") or "{}")
+    return data, round((time.time() - started) * 1000, 1)
+
+
+def _chat(model: str, messages: List[Dict[str, Any]], *,
+          max_tokens: int = 256, temperature: float = 0.7,
+          system: Optional[str] = None,
+          reasoning_effort: Optional[str] = None) -> Dict[str, Any]:
+    """Chat-completion style call through the relay. Returns reply + usage."""
+    if not _gateway_key():
+        raise RuntimeError("AI_GATEWAY_API_KEY unconfigured")
+    system = system or ALEPH_SYSTEM_PROMPT
+    body = {"model": model,
+            "messages": ([{"role": "system", "content": system}] if system else []) + messages,
+            "max_tokens": max_tokens, "temperature": temperature}
+    if reasoning_effort:
+        body["reasoning_effort"] = reasoning_effort
+    data, latency = _request("/chat/completions", body)
+    try:
+        reply = data["choices"][0]["message"]["content"]
+    except (KeyError, IndexError, TypeError):
+        reply = str(data)[:200]
+    usage = data.get("usage")
+    return {"reply": reply, "usage": usage,
+            "cost_est": _estimate_cost(model, usage.get("prompt_tokens", 0) * 4 if usage else 0, 0) if usage else None,
+            "latency_ms": latency}
+
+
 # CLI entry point
 if __name__ == "__main__":
     import argparse
@@ -214,15 +269,46 @@ def ai_gateway_handler(payload: dict) -> dict:
     """Main handler for AI Gateway API endpoint."""
     action = payload.get("action", "status")
     
-    if action == "status":
+    key = _gateway_key()
+    
+    if action in ("status", ""):
+        configured = bool(key)
         return {
-            "status": "active" if _AI_GATEWAY_CONFIG["enabled"] else "disabled",
-            "catalog_models": 1,
+            "status": "configured" if configured else "unconfigured",
+            "catalog_models": 1 if configured else 0,
             "default_model": _AI_GATEWAY_CONFIG["default_model"],
             "broadcasts_sent": _broadcast_state["broadcasts_sent"],
             "connected_channels": _broadcast_state["connected_channels"],
-            "hint": "AI_GATEWAY_API_KEY not required for local mode"
+            "hint": "AI_GATEWAY_API_KEY configured" if configured else "AI_GATEWAY_API_KEY not set"
         }
+    
+    elif action == "estimate":
+        model = payload.get("model", _AI_GATEWAY_CONFIG["default_model"])
+        inp = payload.get("input", "")
+        out = payload.get("output", "")
+        est = _estimate_cost(model, inp, out)
+        return {"status": "ok", "model": model,
+                "tokens_in_est": est["tokens_in_est"],
+                "tokens_out_est": est["tokens_out_est"],
+                "cost_usd_est": est["cost_usd_est"]}
+    
+    elif action == "handshake":
+        if not key:
+            return {"status": "unconfigured", "hint": "AI_GATEWAY_API_KEY not set"}
+        model = payload.get("model", _AI_GATEWAY_CONFIG["default_model"])
+        try:
+            data, latency = _request("/chat/completions", {
+                "model": model,
+                "messages": [{"role": "user", "content": "SYN"}],
+                "max_tokens": 16,
+            })
+            try:
+                reply = data["choices"][0]["message"]["content"]
+            except (KeyError, IndexError, TypeError):
+                reply = str(data)[:120]
+            return {"status": "linked", "model": model, "reply": reply, "latency_ms": latency}
+        except Exception as e:  # noqa: BLE001
+            return {"status": "unreachable", "error": str(e)[:120], "latency_ms": 0}
     
     elif action == "interpret":
         dream_entry = payload.get("dream", {})
@@ -247,7 +333,8 @@ def ai_gateway_handler(payload: dict) -> dict:
         return set_model(model)
     
     else:
-        return {"error": f"Unknown action: {action}", "available": ["status", "interpret", "broadcast", "history", "enable", "set_model"]}
+        return {"status": "error", "error": f"unknown action: {action}",
+                "available": ["status", "handshake", "estimate", "interpret", "broadcast", "history", "enable", "set_model"]}
 
 
 def _estimate_tokens(text: str) -> int:
@@ -255,17 +342,42 @@ def _estimate_tokens(text: str) -> int:
     return len(text) // 4
 
 
-def _estimate_cost(tokens: int, model: str = None) -> float:
-    """Estimate cost in USD for token usage."""
-    model = model or _AI_GATEWAY_CONFIG["default_model"]
-    # Rough pricing per 1K tokens
+def _estimate_cost(*args, **kwargs) -> Any:
+    """Estimate cost. Dual interface:
+
+    Old: _estimate_cost(tokens: int, model: str = None) -> float
+    New: _estimate_cost(model: str, input_text: str, output_text: str = "") -> dict
+    """
+    model = _AI_GATEWAY_CONFIG["default_model"]
     rates = {
         "gpt-4o-mini": 0.00015,
         "gpt-4o": 0.005,
         "gpt-3.5-turbo": 0.0005,
+        "spacexai/grok-4.6": 0.006,
     }
-    rate = rates.get(model, 0.001)
-    return (tokens / 1000) * rate
+    # Legacy integer-token interface
+    if args and isinstance(args[0], int):
+        tokens = args[0]
+        if len(args) > 1:
+            model = args[1]
+        elif kwargs.get("model"):
+            model = kwargs["model"]
+        rate = rates.get(model, 0.001)
+        return (tokens / 1000) * rate
+
+    # New model/input/output interface
+    m = args[0] if len(args) > 0 else kwargs.get("model", model)
+    inp = args[1] if len(args) > 1 else kwargs.get("input_text", "")
+    out = args[2] if len(args) > 2 else kwargs.get("output_text", "")
+    tokens_in = max(1, _estimate_tokens(str(inp)))
+    tokens_out = max(1, _estimate_tokens(str(out)))
+    rate = rates.get(m, 0.001)
+    return {
+        "model": m,
+        "tokens_in_est": tokens_in,
+        "tokens_out_est": tokens_out,
+        "cost_usd_est": round(((tokens_in + tokens_out) / 1000) * rate, 6),
+    }
 
 
 DEFAULT_MODEL = _AI_GATEWAY_CONFIG["default_model"]

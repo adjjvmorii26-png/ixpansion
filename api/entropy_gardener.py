@@ -190,3 +190,25 @@ def coherence_vitals() -> dict:
 def resonates_with() -> list:
     return ["signal_loom", "threadweaver", "organism_genome",
             "organism_will", "breeze"]
+
+class EntropyGardener:
+    """Tends entropy seeds — plants, evaluates, and prunes chaos gardens."""
+
+    def __init__(self):
+        self.seeds = {}
+
+    def seed(self, seed_type: str, zone: str = "default") -> Dict:
+        seed_id = f"seed_{len(self.seeds)+1}_{int(time.time())}"
+        self.seeds[seed_id] = {
+            "id": seed_id, "type": seed_type, "zone": zone,
+            "entropy": random.uniform(0.3, 0.45) if "noise" in seed_type else random.uniform(0.6, 0.9),
+            "planted_at": time.time(),
+        }
+        return {"seeded": self.seeds[seed_id]}
+
+    def selective_prune(self, threshold: float = 0.5) -> list:
+        pruned = [s["id"] for s in self.seeds.values() if s["entropy"] < threshold]
+        for pid in pruned:
+            self.seeds.pop(pid, None)
+        return pruned
+

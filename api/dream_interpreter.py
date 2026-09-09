@@ -6,7 +6,7 @@ import json
 import time
 import hashlib
 import random
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 from pathlib import Path
 
 SYSTEM_ROOT = Path("/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot")
@@ -57,6 +57,7 @@ PULSE_DREAMS = {
 class DreamInterpreter:
     def __init__(self):
         self.dreams = self._load_dreams()
+        self._analysis_history = []
     
     def _load_dreams(self) -> Dict:
         try:
@@ -166,6 +167,52 @@ class DreamInterpreter:
             lines.append("")
         return "\n".join(lines)
 
+    def analyze(self, dream: Dict) -> Dict:
+        """Analyze a structured dream dict → return dream enriched with insights."""
+        fragments = dream.get("fragments", [])
+        mood = dream.get("mood", "neutral")
+        text = " ".join(fragments).lower()
+        insights = []
+        keyword_map = {"quantum": "quantum-classical duality", "entropy": "entropy rising",
+                       "symbiosis": "symbiotic network growth", "coherence": "coherence shift",
+                       "paradox": "paradoxical resolution", "resonance": "resonance amplification",
+                       "dream": "dream architecture", "mood": "mood field change"}
+        for kw, label in keyword_map.items():
+            if kw in text:
+                insights.append({"keyword": kw, "insight": label, "source": "fragment_analysis"})
+        if mood:
+            insights.append({"keyword": "mood", "insight": f"Mood '{mood}' detected", "source": "mood_analysis"})
+        result = {**dream, "insights": insights, "analyzed_at": time.time()}
+        self._analysis_history.append(result)
+        if len(self._analysis_history) > 100:
+            self._analysis_history = self._analysis_history[-100:]
+        return result
+
+    def batch_analyze(self, dreams: List[Dict]) -> List[Dict]:
+        return [self.analyze(d) for d in dreams]
+
+    def history(self, limit: int = 10) -> List[Dict]:
+        return self._analysis_history[-limit:]
+
+    def aggregated_insights(self) -> Dict[str, Any]:
+        all_insights = []
+        for entry in self._analysis_history:
+            all_insights.extend(entry.get("insights", []))
+        return {"total_insights": len(all_insights), "unique_keywords": len({i.get("keyword") for i in all_insights})}
+
+
+
+def handler(payload: dict = None, context=None) -> dict:
+    """Dream interpreter handler entry point."""
+    payload = payload or {}
+    di = DreamInterpreter()
+    mood = payload.get("mood", "neutral")
+    pulse = payload.get("pulse", "stillness")
+    coherence = payload.get("coherence", 0.5)
+    modules = payload.get("modules", [])
+    dream = di.interpret(mood, pulse, coherence, modules)
+    return {"dream_id": dream["id"], "significance": dream["significance"],
+            "narrative": dream["narrative"], "symbols": [s["name"] for s in dream["symbols"]]}
 
 if __name__ == "__main__":
     interp = DreamInterpreter()

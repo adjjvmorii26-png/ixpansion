@@ -60,3 +60,30 @@ def handler(payload: Dict[str, Any], context=None) -> Dict[str, Any]:
     elif action == "history":
         return {"history": sim_history(payload.get("limit", 5))}
     return {"action": action, "status": "simulating"}
+
+
+class EvolutionSimulator:
+    """Species-level evolution simulator — spawns species and evolves generations."""
+
+    def __init__(self):
+        self._species = {}
+        self.generation = 0
+
+    def spawn_species(self, name: str, fitness: float = None) -> Dict[str, Any]:
+        if name not in self._species:
+            self._species[name] = {
+                "name": name,
+                "fitness": fitness if fitness is not None else random.uniform(0.1, 0.9),
+                "traits": [],
+                "born": time.time(),
+            }
+        return self._species[name]
+
+    def evolve(self) -> Dict[str, Any]:
+        self.generation += 1
+        for s in self._species.values():
+            s["fitness"] = max(0.0, min(1.0, s["fitness"] + random.uniform(-0.1, 0.15)))
+            if random.random() < 0.3:
+                s["traits"].append(f"trait_g{self.generation}")
+        return {"generation": self.generation, "species_count": len(self._species),
+                "species": {n: round(s["fitness"], 3) for n, s in self._species.items()}}

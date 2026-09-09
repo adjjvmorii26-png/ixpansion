@@ -50,3 +50,23 @@ def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
         "time": time.time(),
         "vitals": coherence_vitals(),
     }
+
+class StoryForge:
+    """Collaborative story forging — create stories and accept contributions."""
+
+    def __init__(self):
+        self._stories = {}
+
+    def create_story(self, title: str, genre: str = "general") -> Dict:
+        story_id = f"story_{len(self._stories)+1}_{int(time.time())}"
+        story = {"id": story_id, "title": title, "genre": genre, "elements": [], "created_at": time.time()}
+        self._stories[story_id] = story
+        return {"story": story}
+
+    def contribute(self, story_id: str, author: str, element_type: str, content: str) -> Dict:
+        if story_id not in self._stories:
+            return {"error": "story not found"}
+        element = {"author": author, "type": element_type, "content": content, "added_at": time.time()}
+        self._stories[story_id]["elements"].append(element)
+        return element
+

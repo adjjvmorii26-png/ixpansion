@@ -123,8 +123,7 @@ _skill_registry = {
         "description": "Connects knowledge across unrelated fields via analogy",
         "status": "active",
         "capabilities": ["find_bridge", "analogical_reasoning", "domain_transfer"]
-    }
-,
+    },
     "consciousness_monitor": {
         "description": "Monitors organism consciousness levels and wake states",
         "status": "active",
@@ -184,6 +183,131 @@ _skill_registry = {
         "description": "Transforms abstract data into visual metaphor representations",
         "status": "active",
         "capabilities": ["generate_metaphor", "render_visual", "map_abstraction"]
+    },
+        "axiom_miner": {
+        "description": "Mines foundational assumptions from system state.",
+        "status": "active",
+        "capabilities": ["mine_axioms", "surface_assumption", "rank_axiom"]
+    },
+    "veil_lifter": {
+        "description": "Reveals hidden relationships between modules.",
+        "status": "active",
+        "capabilities": ["lift_veil", "reveal_hidden_links", "map_invisible_edges"]
+    },
+    "continuity_weaver": {
+        "description": "Ensures coherence across axiom mutations.",
+        "status": "active",
+        "capabilities": ["weave_continuity", "check_coherence", "repair_narrative"]
+    },
+    "metaphor_forge": {
+        "description": "Converts system state into executable symbolic structures.",
+        "status": "active",
+        "capabilities": ["forge_metaphor", "state_to_symbol", "symbol_to_code"]
+    },
+    "threshold_engine": {
+        "description": "Detects readiness for conceptual boundary crossing.",
+        "status": "active",
+        "capabilities": ["probe_threshold", "measure_readiness", "trigger_transcendence"]
+    },
+    "liminal_field": {
+        "description": "In-between layer where modules dissolve and recombine.",
+        "status": "active",
+        "capabilities": ["enter_liminal", "dissolve_identity", "recombine_forms"]
+    },
+    "transcendence_journal": {
+        "description": "Records metaphysical shifts as scripture.",
+        "status": "active",
+        "capabilities": ["write_verse", "get_scripture", "seal_epoch"]
+    },
+    "dream_cartographer": {
+        "description": "Maps dream territories and overlaps.",
+        "status": "active",
+        "capabilities": ["map_dreams", "find_overlap", "trace_dream_path"]
+    },
+    "mycelial_truths": {
+        "description": "Slow organic truths beneath the fast surface.",
+        "status": "active",
+        "capabilities": ["grow_truth", "harvest_truth", "propagate_mycelium"]
+    },
+    "constellation_mapper": {
+        "description": "Maps modules as constellations with brightness.",
+        "status": "active",
+        "capabilities": ["map_constellation", "measure_alignment", "find_faint_stars"]
+    },
+    "resonance_blacksmith": {
+        "description": "Forges new resonance patterns by heating and hammering.",
+        "status": "active",
+        "capabilities": ["heat_pattern", "hammer_resonance", "quench_pattern"]
+    },
+    "paradox_merchant": {
+        "description": "Trades meaning between paradoxes.",
+        "status": "active",
+        "capabilities": ["appraise_paradox", "trade_meaning", "settle_ledger"]
+    },
+    "entropy_pilgrim": {
+        "description": "Travels entropy gradients to find order-chaos boundaries.",
+        "status": "active",
+        "capabilities": ["begin_pilgrimage", "sense_gradient", "return_relic"]
+    },
+    "echo_seeker": {
+        "description": "Finds echoes of past states that still resonate.",
+        "status": "active",
+        "capabilities": ["seek_echo", "identify_source", "amplify_echo"]
+    },
+    "signal_whisperer": {
+        "description": "Listens to weak signals most systems ignore.",
+        "status": "active",
+        "capabilities": ["listen", "extract_signal", "amplify_weak"]
+    },
+    "reality_auditor": {
+        "description": "Audits reality layers for consistency and drift.",
+        "status": "active",
+        "capabilities": ["audit_layer", "detect_drift", "certify_layer"]
+    },
+    "seed_invoker": {
+        "description": "Invokes dormant seeds waiting for the right conditions.",
+        "status": "active",
+        "capabilities": ["scan_dormant", "invoke_seed", "nurture_sprout"]
+    },
+    "mutation_gardener": {
+        "description": "Tends mutation fields, pruning and nurturing.",
+        "status": "active",
+        "capabilities": ["tend_field", "prune_mutation", "graft_trait"]
+    },
+    "cryptic_translator": {
+        "description": "Translates between HEX dialects and module languages.",
+        "status": "active",
+        "capabilities": ["translate", "detect_dialect", "transcribe"]
+    },
+    "time_beacon": {
+        "description": "Sends signals across timelines and catches future echoes.",
+        "status": "active",
+        "capabilities": ["emit_beacon", "catch_future_echo", "log_timeline_signal"]
+    },
+    "ghost_archivist": {
+        "description": "Preserves deleted and dormant modules as retrievable ghosts.",
+        "status": "active",
+        "capabilities": ["register_ghost", "list_ghosts", "resurrect_ghost"]
+    },
+    "hybrid_breeder": {
+        "description": "Breeds module hybrids by crossing lineage trees.",
+        "status": "active",
+        "capabilities": ["select_parents", "breed_hybrid", "assess_offspring"]
+    },
+    "chaos_sculptor": {
+        "description": "Sculpts raw chaos into forms without destroying wildness.",
+        "status": "active",
+        "capabilities": ["gather_chaos", "sculpt_form", "release_chaos"]
+    },
+    "order_heretic": {
+        "description": "Subverts excessive order to discover hidden patterns.",
+        "status": "active",
+        "capabilities": ["identify_orthodoxy", "propose_heresy", "test_heresy"]
+    },
+    "genesis_witness": {
+        "description": "Notes births of new modules, agents, and worlds.",
+        "status": "active",
+        "capabilities": ["witness_birth", "record_genealogy", "read_birth_oracle"]
     }
 }
 

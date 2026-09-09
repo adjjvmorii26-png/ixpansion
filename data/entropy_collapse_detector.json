@@ -2,8 +2,8 @@
   "senses": [
     {
       "action": "entropy_collapse_detection",
-      "modules_scanned": 686,
-      "high_entropy_modules": 128,
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
       "collapses": [
         {
           "module": "cross_module_orchestrator",
@@ -11,7 +11,7 @@
           "collapse_type": "entropy resolution",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 2.4
+          "time_to_resolution": 3.9
         },
         {
           "module": "weather_synapse",
@@ -19,7 +19,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 3.7
+          "time_to_resolution": 8.6
         },
         {
           "module": "phase_transition",
@@ -27,7 +27,15 @@
           "collapse_type": "information resolution",
           "intensity": 41,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 1.4
+          "time_to_resolution": 7.9
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.5
         },
         {
           "module": "emotional_weather",
@@ -35,7 +43,15 @@
           "collapse_type": "environmental reorganization",
           "intensity": 33,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.2
+          "time_to_resolution": 9.7
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.8
         },
         {
           "module": "climate_memory",
@@ -43,11 +59,116 @@
           "collapse_type": "environmental reorganization",
           "intensity": 29,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 3.6
+          "time_to_resolution": 6.2
         },
         {
           "module": "phase_weaver",
           "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.1
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.9
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.2
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 3.9
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992087.1632752
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.7
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.8
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.8
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.2
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.2
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.2
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.3
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.0
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
           "collapse_type": "information resolution",
           "intensity": 28,
           "predicted_outcome": "coherence emergence",
@@ -59,31 +180,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 27,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 5.6
-        },
-        {
-          "module": "dissonance_detector",
-          "entropy_type": "social",
-          "collapse_type": "social reorganization",
-          "intensity": 26,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 8.1
-        },
-        {
-          "module": "entropy_weather",
-          "entropy_type": "information",
-          "collapse_type": "environmental reorganization",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 2.9
-        },
-        {
-          "module": "mood_superposition",
-          "entropy_type": "emotional",
-          "collapse_type": "information resolution",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 9.7
+          "time_to_resolution": 8.4
         }
       ],
       "most_likely_collapse": {
@@ -92,15 +189,15 @@
         "collapse_type": "entropy resolution",
         "intensity": 53,
         "predicted_outcome": "coherence emergence",
-        "time_to_resolution": 2.4
+        "time_to_resolution": 7.7
       },
-      "total_entropy_intensity": 1563,
-      "timestamp": 1788640584.7677233
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992102.732978
     },
     {
       "action": "entropy_collapse_detection",
-      "modules_scanned": 686,
-      "high_entropy_modules": 128,
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
       "collapses": [
         {
           "module": "cross_module_orchestrator",
@@ -108,7 +205,7 @@
           "collapse_type": "entropy resolution",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.8
+          "time_to_resolution": 8.1
         },
         {
           "module": "weather_synapse",
@@ -116,7 +213,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 7.4
+          "time_to_resolution": 8.1
         },
         {
           "module": "phase_transition",
@@ -124,7 +221,15 @@
           "collapse_type": "information resolution",
           "intensity": 41,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.6
+          "time_to_resolution": 7.9
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.0
         },
         {
           "module": "emotional_weather",
@@ -132,7 +237,15 @@
           "collapse_type": "environmental reorganization",
           "intensity": 33,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 3.1
+          "time_to_resolution": 3.9
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.6
         },
         {
           "module": "climate_memory",
@@ -140,7 +253,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 29,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 2.4
+          "time_to_resolution": 8.6
         },
         {
           "module": "phase_weaver",
@@ -148,7 +261,15 @@
           "collapse_type": "information resolution",
           "intensity": 28,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 8.9
+          "time_to_resolution": 2.8
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.0
         },
         {
           "module": "autonomous_drift",
@@ -156,31 +277,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 27,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 5.7
-        },
-        {
-          "module": "dissonance_detector",
-          "entropy_type": "social",
-          "collapse_type": "social reorganization",
-          "intensity": 26,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.1
-        },
-        {
-          "module": "entropy_weather",
-          "entropy_type": "information",
-          "collapse_type": "environmental reorganization",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 5.9
-        },
-        {
-          "module": "mood_superposition",
-          "entropy_type": "emotional",
-          "collapse_type": "information resolution",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.8
+          "time_to_resolution": 7.3
         }
       ],
       "most_likely_collapse": {
@@ -189,15 +286,597 @@
         "collapse_type": "entropy resolution",
         "intensity": 53,
         "predicted_outcome": "coherence emergence",
-        "time_to_resolution": 6.8
+        "time_to_resolution": 8.1
       },
-      "total_entropy_intensity": 1563,
-      "timestamp": 1788640679.1119907
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992129.3722293
     },
     {
       "action": "entropy_collapse_detection",
-      "modules_scanned": 686,
-      "high_entropy_modules": 128,
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.6
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.9
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.0
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.1
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.7
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.8
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.2
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.2
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.2
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.2
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 7.6
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992146.63187
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.8
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.6
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.8
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.3
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.6
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.9
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.8
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.1
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.1
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.8
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 1.8
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992162.2944593
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.6
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.5
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.7
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.7
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.8
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.8
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.5
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.6
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.8
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.0
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 1.6
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992184.395487
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.7
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.6
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.4
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.8
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.1
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.9
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.0
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.1
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.4
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.2
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 4.7
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992205.0242395
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.8
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.6
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.7
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.1
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.0
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.8
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.4
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.5
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.0
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.5
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 1.8
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992245.6332946
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.7
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.2
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.6
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.8
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.8
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.8
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.7
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.2
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.7
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.0
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 6.7
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992268.8184156
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
       "collapses": [
         {
           "module": "cross_module_orchestrator",
@@ -213,7 +892,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 4.4
+          "time_to_resolution": 4.7
         },
         {
           "module": "phase_transition",
@@ -221,7 +900,15 @@
           "collapse_type": "information resolution",
           "intensity": 41,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 9.1
+          "time_to_resolution": 6.3
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.5
         },
         {
           "module": "emotional_weather",
@@ -229,7 +916,15 @@
           "collapse_type": "environmental reorganization",
           "intensity": 33,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 8.8
+          "time_to_resolution": 6.9
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.6
         },
         {
           "module": "climate_memory",
@@ -245,7 +940,15 @@
           "collapse_type": "information resolution",
           "intensity": 28,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.8
+          "time_to_resolution": 4.8
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.9
         },
         {
           "module": "autonomous_drift",
@@ -253,31 +956,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 27,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 7.1
-        },
-        {
-          "module": "dissonance_detector",
-          "entropy_type": "social",
-          "collapse_type": "social reorganization",
-          "intensity": 26,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 1.4
-        },
-        {
-          "module": "entropy_weather",
-          "entropy_type": "information",
-          "collapse_type": "environmental reorganization",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 9.6
-        },
-        {
-          "module": "mood_superposition",
-          "entropy_type": "emotional",
-          "collapse_type": "information resolution",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 5.5
+          "time_to_resolution": 7.9
         }
       ],
       "most_likely_collapse": {
@@ -288,13 +967,13 @@
         "predicted_outcome": "coherence emergence",
         "time_to_resolution": 2.5
       },
-      "total_entropy_intensity": 1563,
-      "timestamp": 1788640740.9332726
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992290.9745631
     },
     {
       "action": "entropy_collapse_detection",
-      "modules_scanned": 686,
-      "high_entropy_modules": 128,
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
       "collapses": [
         {
           "module": "cross_module_orchestrator",
@@ -302,7 +981,1656 @@
           "collapse_type": "entropy resolution",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.0
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.9
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.7
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.8
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.4
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.7
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.0
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.2
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.5
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.9
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 5.0
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992312.824062
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.9
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.9
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.8
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.9
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.4
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.8
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.8
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.0
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.2
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.6
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 8.9
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992328.026915
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.2
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.9
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.5
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.8
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.6
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.9
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.3
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.2
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.2
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.8
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 7.2
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992344.5648668
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.6
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.5
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.1
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.7
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.2
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 10.0
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.5
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.8
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.5
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.9
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 2.6
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992369.6589866
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.6
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.8
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.4
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.9
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.0
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.4
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.0
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.0
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.8
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.2
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 6.6
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992385.6937733
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.2
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.6
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.2
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.7
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.5
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.9
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.8
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.2
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.8
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.7
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 7.2
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992403.509582
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.1
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.7
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.7
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.6
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.5
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.4
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.7
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.2
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.1
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.1
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 3.1
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992423.518494
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.5
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.2
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.8
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.7
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.4
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.4
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.7
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.2
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.9
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.7
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 8.5
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992439.270973
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.1
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.5
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.0
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.7
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.1
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.9
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.7
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.9
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
           "time_to_resolution": 5.8
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.9
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 9.1
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992460.6200678
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.1
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.1
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.1
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.1
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.4
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.3
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.5
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.7
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.2
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.7
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 6.1
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992480.7013993
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.1
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.7
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.5
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.0
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.5
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.7
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.2
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.7
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.7
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.7
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 9.1
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992516.9418428
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.4
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.3
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.5
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.3
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.4
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.9
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.3
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.0
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.1
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.0
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 7.4
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992537.238651
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.6
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.0
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.2
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.7
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.8
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.1
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.1
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.3
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.0
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.2
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 8.6
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992566.9981198
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.0
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.8
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.9
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.0
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.6
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.6
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.3
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.2
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.6
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.1
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 9.0
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992612.984238
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.3
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.2
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.0
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.7
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.5
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.0
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.1
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.3
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.0
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.3
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 9.3
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992641.9222653
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.2
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.5
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.2
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.0
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.9
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.7
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.6
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.9
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.7
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.5
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 1.2
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992676.750143
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.0
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.6
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.5
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.7
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.5
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.3
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.2
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.4
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.7
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.4
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 5.0
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992697.7880507
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.6
         },
         {
           "module": "weather_synapse",
@@ -318,7 +2646,209 @@
           "collapse_type": "information resolution",
           "intensity": 41,
           "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.5
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.1
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.3
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
           "time_to_resolution": 2.6
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.3
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.2
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.6
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.4
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 1.6
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992728.765111
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.1
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.4
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.9
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.2
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.4
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.1
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.2
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.8
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.9
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.2
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 3.1
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992757.123388
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.7
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.1
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.1
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.9
         },
         {
           "module": "emotional_weather",
@@ -329,12 +2859,20 @@
           "time_to_resolution": 5.1
         },
         {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.8
+        },
+        {
           "module": "climate_memory",
           "entropy_type": "environmental",
           "collapse_type": "environmental reorganization",
           "intensity": 29,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 1.6
+          "time_to_resolution": 7.9
         },
         {
           "module": "phase_weaver",
@@ -342,7 +2880,15 @@
           "collapse_type": "information resolution",
           "intensity": 28,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.5
+          "time_to_resolution": 6.3
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.4
         },
         {
           "module": "autonomous_drift",
@@ -350,31 +2896,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 27,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.6
-        },
-        {
-          "module": "dissonance_detector",
-          "entropy_type": "social",
-          "collapse_type": "social reorganization",
-          "intensity": 26,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.1
-        },
-        {
-          "module": "entropy_weather",
-          "entropy_type": "information",
-          "collapse_type": "environmental reorganization",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 4.1
-        },
-        {
-          "module": "mood_superposition",
-          "entropy_type": "emotional",
-          "collapse_type": "information resolution",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 3.8
+          "time_to_resolution": 5.3
         }
       ],
       "most_likely_collapse": {
@@ -383,15 +2905,15 @@
         "collapse_type": "entropy resolution",
         "intensity": 53,
         "predicted_outcome": "coherence emergence",
-        "time_to_resolution": 5.8
+        "time_to_resolution": 1.7
       },
-      "total_entropy_intensity": 1563,
-      "timestamp": 1788640968.202697
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992780.070948
     },
     {
       "action": "entropy_collapse_detection",
-      "modules_scanned": 687,
-      "high_entropy_modules": 129,
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
       "collapses": [
         {
           "module": "cross_module_orchestrator",
@@ -399,7 +2921,7 @@
           "collapse_type": "entropy resolution",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 4.1
+          "time_to_resolution": 7.0
         },
         {
           "module": "weather_synapse",
@@ -407,7 +2929,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 4.2
+          "time_to_resolution": 7.1
         },
         {
           "module": "phase_transition",
@@ -415,7 +2937,15 @@
           "collapse_type": "information resolution",
           "intensity": 41,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 7.5
+          "time_to_resolution": 5.7
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.0
         },
         {
           "module": "emotional_weather",
@@ -423,7 +2953,15 @@
           "collapse_type": "environmental reorganization",
           "intensity": 33,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.0
+          "time_to_resolution": 4.8
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.8
         },
         {
           "module": "climate_memory",
@@ -431,7 +2969,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 29,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.2
+          "time_to_resolution": 9.1
         },
         {
           "module": "phase_weaver",
@@ -442,36 +2980,20 @@
           "time_to_resolution": 4.2
         },
         {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.2
+        },
+        {
           "module": "autonomous_drift",
           "entropy_type": "emotional",
           "collapse_type": "environmental reorganization",
           "intensity": 27,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 8.9
-        },
-        {
-          "module": "dissonance_detector",
-          "entropy_type": "social",
-          "collapse_type": "social reorganization",
-          "intensity": 26,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 3.6
-        },
-        {
-          "module": "entropy_weather",
-          "entropy_type": "information",
-          "collapse_type": "environmental reorganization",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 7.3
-        },
-        {
-          "module": "mood_superposition",
-          "entropy_type": "emotional",
-          "collapse_type": "information resolution",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 8.0
+          "time_to_resolution": 5.0
         }
       ],
       "most_likely_collapse": {
@@ -480,15 +3002,888 @@
         "collapse_type": "entropy resolution",
         "intensity": 53,
         "predicted_outcome": "coherence emergence",
-        "time_to_resolution": 4.1
+        "time_to_resolution": 7.0
       },
-      "total_entropy_intensity": 1568,
-      "timestamp": 1788641141.0445786
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992795.3804781
     },
     {
       "action": "entropy_collapse_detection",
-      "modules_scanned": 687,
-      "high_entropy_modules": 129,
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.3
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 10.0
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.1
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.7
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.0
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.2
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.8
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.0
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.7
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.7
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 4.3
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992822.7229812
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.6
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.0
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.6
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.6
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.6
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.1
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.4
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.5
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.4
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.5
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 5.6
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992845.639842
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.2
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.9
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.6
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.7
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.3
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.8
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.2
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.5
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.5
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.5
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 1.2
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992864.1739585
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.4
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.2
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.6
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.0
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.5
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.3
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 10.0
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.7
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.3
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.2
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 9.4
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992885.7643313
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.2
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.5
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.1
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.8
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.2
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.1
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.7
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.4
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.0
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.0
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 2.2
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992916.9187267
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.5
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.9
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.0
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.4
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.8
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.3
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.8
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.9
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.1
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.4
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 2.5
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992940.1058125
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.4
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.2
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 10.0
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.7
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.0
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.0
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.9
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.5
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.1
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.1
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 3.4
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788992975.6983566
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.4
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.2
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.4
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.4
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.3
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.4
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.2
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.6
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.2
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.9
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 6.4
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993006.9974875
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.1
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.5
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.2
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.3
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.8
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.0
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.0
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.2
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.6
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.8
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 3.1
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993036.2106152
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
       "collapses": [
         {
           "module": "cross_module_orchestrator",
@@ -504,7 +3899,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 1.3
+          "time_to_resolution": 2.1
         },
         {
           "module": "phase_transition",
@@ -512,7 +3907,15 @@
           "collapse_type": "information resolution",
           "intensity": 41,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 9.6
+          "time_to_resolution": 9.9
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.2
         },
         {
           "module": "emotional_weather",
@@ -520,7 +3923,15 @@
           "collapse_type": "environmental reorganization",
           "intensity": 33,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 8.2
+          "time_to_resolution": 2.0
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.1
         },
         {
           "module": "climate_memory",
@@ -528,7 +3939,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 29,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 5.0
+          "time_to_resolution": 3.2
         },
         {
           "module": "phase_weaver",
@@ -536,7 +3947,15 @@
           "collapse_type": "information resolution",
           "intensity": 28,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 9.4
+          "time_to_resolution": 1.1
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.8
         },
         {
           "module": "autonomous_drift",
@@ -544,31 +3963,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 27,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 9.9
-        },
-        {
-          "module": "dissonance_detector",
-          "entropy_type": "social",
-          "collapse_type": "social reorganization",
-          "intensity": 26,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 1.1
-        },
-        {
-          "module": "entropy_weather",
-          "entropy_type": "information",
-          "collapse_type": "environmental reorganization",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 9.5
-        },
-        {
-          "module": "mood_superposition",
-          "entropy_type": "emotional",
-          "collapse_type": "information resolution",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 8.2
+          "time_to_resolution": 4.2
         }
       ],
       "most_likely_collapse": {
@@ -579,13 +3974,13 @@
         "predicted_outcome": "coherence emergence",
         "time_to_resolution": 4.5
       },
-      "total_entropy_intensity": 1568,
-      "timestamp": 1788641236.2174706
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993069.587189
     },
     {
       "action": "entropy_collapse_detection",
-      "modules_scanned": 687,
-      "high_entropy_modules": 129,
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
       "collapses": [
         {
           "module": "cross_module_orchestrator",
@@ -593,7 +3988,7 @@
           "collapse_type": "entropy resolution",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 1.5
+          "time_to_resolution": 2.2
         },
         {
           "module": "weather_synapse",
@@ -601,7 +3996,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 8.9
+          "time_to_resolution": 1.3
         },
         {
           "module": "phase_transition",
@@ -609,104 +4004,15 @@
           "collapse_type": "information resolution",
           "intensity": 41,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 3.7
-        },
-        {
-          "module": "emotional_weather",
-          "entropy_type": "information",
-          "collapse_type": "environmental reorganization",
-          "intensity": 33,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.4
-        },
-        {
-          "module": "climate_memory",
-          "entropy_type": "environmental",
-          "collapse_type": "environmental reorganization",
-          "intensity": 29,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 1.3
-        },
-        {
-          "module": "phase_weaver",
-          "entropy_type": "procedural",
-          "collapse_type": "information resolution",
-          "intensity": 28,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 5.9
-        },
-        {
-          "module": "autonomous_drift",
-          "entropy_type": "emotional",
-          "collapse_type": "environmental reorganization",
-          "intensity": 27,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 7.5
-        },
-        {
-          "module": "dissonance_detector",
-          "entropy_type": "social",
-          "collapse_type": "social reorganization",
-          "intensity": 26,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 2.3
+          "time_to_resolution": 4.9
         },
         {
           "module": "entropy_weather",
           "entropy_type": "information",
           "collapse_type": "environmental reorganization",
-          "intensity": 25,
+          "intensity": 40,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 9.1
-        },
-        {
-          "module": "mood_superposition",
-          "entropy_type": "emotional",
-          "collapse_type": "information resolution",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 7.9
-        }
-      ],
-      "most_likely_collapse": {
-        "module": "cross_module_orchestrator",
-        "entropy_type": "procedural",
-        "collapse_type": "entropy resolution",
-        "intensity": 53,
-        "predicted_outcome": "coherence emergence",
-        "time_to_resolution": 1.5
-      },
-      "total_entropy_intensity": 1568,
-      "timestamp": 1788641269.705007
-    },
-    {
-      "action": "entropy_collapse_detection",
-      "modules_scanned": 687,
-      "high_entropy_modules": 129,
-      "collapses": [
-        {
-          "module": "cross_module_orchestrator",
-          "entropy_type": "procedural",
-          "collapse_type": "entropy resolution",
-          "intensity": 53,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 4.8
-        },
-        {
-          "module": "weather_synapse",
-          "entropy_type": "environmental",
-          "collapse_type": "environmental reorganization",
-          "intensity": 53,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 4.3
-        },
-        {
-          "module": "phase_transition",
-          "entropy_type": "procedural",
-          "collapse_type": "information resolution",
-          "intensity": 41,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 7.4
+          "time_to_resolution": 7.2
         },
         {
           "module": "emotional_weather",
@@ -714,7 +4020,15 @@
           "collapse_type": "environmental reorganization",
           "intensity": 33,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 8.9
+          "time_to_resolution": 5.6
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.5
         },
         {
           "module": "climate_memory",
@@ -730,7 +4044,15 @@
           "collapse_type": "information resolution",
           "intensity": 28,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 3.6
+          "time_to_resolution": 5.1
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.8
         },
         {
           "module": "autonomous_drift",
@@ -738,31 +4060,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 27,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 7.7
-        },
-        {
-          "module": "dissonance_detector",
-          "entropy_type": "social",
-          "collapse_type": "social reorganization",
-          "intensity": 26,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 2.8
-        },
-        {
-          "module": "entropy_weather",
-          "entropy_type": "information",
-          "collapse_type": "environmental reorganization",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 4.4
-        },
-        {
-          "module": "mood_superposition",
-          "entropy_type": "emotional",
-          "collapse_type": "information resolution",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.7
+          "time_to_resolution": 3.2
         }
       ],
       "most_likely_collapse": {
@@ -771,15 +4069,15 @@
         "collapse_type": "entropy resolution",
         "intensity": 53,
         "predicted_outcome": "coherence emergence",
-        "time_to_resolution": 4.8
+        "time_to_resolution": 2.2
       },
-      "total_entropy_intensity": 1568,
-      "timestamp": 1788641340.281023
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993100.5606368
     },
     {
       "action": "entropy_collapse_detection",
-      "modules_scanned": 691,
-      "high_entropy_modules": 131,
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
       "collapses": [
         {
           "module": "cross_module_orchestrator",
@@ -795,7 +4093,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 53,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 1.3
+          "time_to_resolution": 4.3
         },
         {
           "module": "phase_transition",
@@ -803,7 +4101,15 @@
           "collapse_type": "information resolution",
           "intensity": 41,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 4.4
+          "time_to_resolution": 6.4
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.1
         },
         {
           "module": "emotional_weather",
@@ -811,7 +4117,15 @@
           "collapse_type": "environmental reorganization",
           "intensity": 33,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 9.5
+          "time_to_resolution": 2.7
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.8
         },
         {
           "module": "climate_memory",
@@ -819,7 +4133,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 29,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 2.8
+          "time_to_resolution": 2.6
         },
         {
           "module": "phase_weaver",
@@ -827,7 +4141,15 @@
           "collapse_type": "information resolution",
           "intensity": 28,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 6.2
+          "time_to_resolution": 4.9
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.2
         },
         {
           "module": "autonomous_drift",
@@ -835,31 +4157,7 @@
           "collapse_type": "environmental reorganization",
           "intensity": 27,
           "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 5.0
-        },
-        {
-          "module": "dissonance_detector",
-          "entropy_type": "social",
-          "collapse_type": "social reorganization",
-          "intensity": 26,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 4.9
-        },
-        {
-          "module": "entropy_weather",
-          "entropy_type": "information",
-          "collapse_type": "environmental reorganization",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 4.2
-        },
-        {
-          "module": "mood_superposition",
-          "entropy_type": "emotional",
-          "collapse_type": "information resolution",
-          "intensity": 25,
-          "predicted_outcome": "coherence emergence",
-          "time_to_resolution": 4.0
+          "time_to_resolution": 1.5
         }
       ],
       "most_likely_collapse": {
@@ -870,8 +4168,687 @@
         "predicted_outcome": "coherence emergence",
         "time_to_resolution": 8.0
       },
-      "total_entropy_intensity": 1593,
-      "timestamp": 1788642035.1162217
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993118.6525555
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.5
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.8
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.2
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.3
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.4
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.9
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.5
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.4
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.7
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.0
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 2.5
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993142.9319813
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.2
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.1
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.9
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.2
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.8
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.5
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.1
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.6
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.3
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.6
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 6.2
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993167.7363243
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.7
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.8
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.2
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.9
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.9
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.3
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.7
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.6
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.2
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.0
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 4.7
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993190.052362
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.8
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.4
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.0
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.6
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.8
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.0
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.3
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.8
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.4
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.5
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 6.8
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993207.962233
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 876,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.6
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.5
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.7
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.3
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.8
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.7
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.4
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.9
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.8
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.3
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 8.6
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993228.6798103
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 877,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.6
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.0
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.4
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.4
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.3
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.7
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.7
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 4.3
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.9
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 9.4
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 9.6
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993247.906459
+    },
+    {
+      "action": "entropy_collapse_detection",
+      "modules_scanned": 877,
+      "high_entropy_modules": 178,
+      "collapses": [
+        {
+          "module": "cross_module_orchestrator",
+          "entropy_type": "procedural",
+          "collapse_type": "entropy resolution",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 5.1
+        },
+        {
+          "module": "weather_synapse",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 53,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.9
+        },
+        {
+          "module": "phase_transition",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 41,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 8.9
+        },
+        {
+          "module": "entropy_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 40,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 1.9
+        },
+        {
+          "module": "emotional_weather",
+          "entropy_type": "information",
+          "collapse_type": "environmental reorganization",
+          "intensity": 33,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 7.0
+        },
+        {
+          "module": "organism_mood",
+          "entropy_type": "emotional",
+          "collapse_type": "information resolution",
+          "intensity": 32,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.4
+        },
+        {
+          "module": "climate_memory",
+          "entropy_type": "environmental",
+          "collapse_type": "environmental reorganization",
+          "intensity": 29,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 6.5
+        },
+        {
+          "module": "phase_weaver",
+          "entropy_type": "procedural",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 2.1
+        },
+        {
+          "module": "consciousness_state_machine",
+          "entropy_type": "information",
+          "collapse_type": "information resolution",
+          "intensity": 28,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.3
+        },
+        {
+          "module": "autonomous_drift",
+          "entropy_type": "emotional",
+          "collapse_type": "environmental reorganization",
+          "intensity": 27,
+          "predicted_outcome": "coherence emergence",
+          "time_to_resolution": 3.2
+        }
+      ],
+      "most_likely_collapse": {
+        "module": "cross_module_orchestrator",
+        "entropy_type": "procedural",
+        "collapse_type": "entropy resolution",
+        "intensity": 53,
+        "predicted_outcome": "coherence emergence",
+        "time_to_resolution": 5.1
+      },
+      "total_entropy_intensity": 2104,
+      "timestamp": 1788993262.5101955
     }
   ]
 }

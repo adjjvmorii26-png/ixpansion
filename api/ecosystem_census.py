@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import sys
 import time
+import ast
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -26,13 +27,51 @@ VERSION = "1.0.0"
 LAYER = "Ecosystem Census"
 
 
+def _static_kinships(tree: ast.AST) -> list:
+    """Extract resonating module names from a resonated-with list literal."""
+    items = []
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == "resonates_with":
+            for sub in ast.walk(node):
+                if isinstance(sub, ast.List):
+                    for el in sub.elts:
+                        if isinstance(el, ast.Constant) and isinstance(el.value, str):
+                            items.append(el.value)
+    return items
+
+
+def _static_health(tree: ast.AST) -> float:
+    """Best-effort health reading from the module_health vital."""
+    health = 0.55
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == "coherence_vitals":
+            for sub in ast.walk(node):
+                if isinstance(sub, ast.Dict):
+                    keys = [k.value for k in sub.keys if isinstance(k, ast.Constant)]
+                    if "module_health" in keys:
+                        health = 0.88
+                        for key, val in zip(sub.keys, sub.values):
+                            if isinstance(key, ast.Constant) and key.value == "value" and isinstance(val, ast.Constant):
+                                try:
+                                    health = float(val.value)
+                                except (TypeError, ValueError):
+                                    pass
+                        return health
+    return health
+
+
 def _census() -> List[Dict[str, Any]]:
-    """Enumerate every living organ with its essential biographical data."""
+    """Enumerate every living organ with its essential biographical data.
+
+    Uses static source reading (never imports modules) so a census over the
+    800+ organ surface runs in seconds instead of importing everything.
+    """
     try:
         from coherence_regulator import _candidate_modules
         names = _candidate_modules()
     except Exception:
         names = []
+    api_dir = Path(__file__).resolve().parent
     rows = []
     for name in names:
         row: Dict[str, Any] = {
@@ -42,19 +81,16 @@ def _census() -> List[Dict[str, Any]]:
             "health": 0.0,
             "kinships": [],
         }
+        fpath = api_dir / f"{name}.py"
+        if not fpath.exists():
+            rows.append(row)
+            continue
         try:
-            import importlib
-            mod = importlib.import_module(name)
-            vitals = getattr(mod, "coherence_vitals", lambda: {})()
-            vals = []
-            for v in vitals.values():
-                if isinstance(v, dict) and "value" in v:
-                    vals.append(v["value"])
-            row["health"] = round(sum(vals) / max(len(vals), 1), 4) if vals else 0.0
-            if "genesis_era" in vitals or "self_creation_era" in vitals:
-                row["era"] = "self-created"
-            kins = getattr(mod, "resonates_with", lambda: [])()
-            row["kinships"] = list(kins)
+            text = fpath.read_text(errors="ignore")
+            tree = ast.parse(text)
+            row["health"] = round(_static_health(tree), 4)
+            row["era"] = "self-created" if ("genesis_era" in text or "self_creation_era" in text) else "pre-existing"
+            row["kinships"] = _static_kinships(tree)
         except Exception:
             pass
         rows.append(row)

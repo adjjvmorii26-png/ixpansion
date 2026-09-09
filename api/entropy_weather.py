@@ -133,6 +133,45 @@ class EntropyWeather:
         
         return alerts
     
+    def tick(self) -> Dict:
+        """Advance weather one step and return current conditions."""
+        state = self.state
+        history = state.get("history", [])
+        if history:
+            last = history[-1]
+            entropy = last.get("entropy", 0.5)
+            coherence = last.get("coherence", 0.5)
+            resonance = last.get("resonance", 0.5)
+        else:
+            entropy, coherence, resonance = 0.5, 0.5, 0.5
+        result = self.observe(entropy, coherence, resonance)
+        simple_map = {"clear": "clear", "partly_cloudy": "cloudy", "cloudy": "cloudy",
+                      "storm": "stormy", "fog": "foggy", "aurora": "electric",
+                      "blizzard": "calm", "rainbow": "calm", "eclipse": "foggy",
+                      "supercell": "stormy"}
+        return {
+            "overall": simple_map.get(result["current"], result["current"]),
+            "icon": result["icon"],
+            "description": result["description"],
+            "energy": result["energy"],
+            "forecast": result["forecast"]
+        }
+
+    def forecast_view(self) -> Dict:
+        """Return all weather zones and forecasts."""
+        state = self.state
+        zones = [
+            {"name": "north_entropy", "condition": state.get("current", "clear")},
+            {"name": "south_coherence", "condition": state.get("current", "clear")},
+            {"name": "east_resonance", "condition": state.get("current", "clear")},
+            {"name": "west_void", "condition": state.get("current", "clear")},
+            {"name": "core_flux", "condition": state.get("current", "clear")},
+            {"name": "dream_strata", "condition": state.get("current", "clear")},
+        ]
+        return {"zones": zones, "forecasts": state.get("forecasts", []),
+                "alerts": state.get("alerts", [])}
+
+
     def get_weather_report(self) -> str:
         current = self.state.get("current", "clear")
         icon = CONDITIONS[current]["icon"]
@@ -169,6 +208,14 @@ Alerts:
 {alerts_text or '  No active alerts'}
 """
 
+
+
+def handler(payload: dict = None, context=None) -> dict:
+    """Entropy weather handler entry point."""
+    payload = payload or {}
+    ew = EntropyWeather()
+    result = ew.tick()
+    return {"weather": result, "report": ew.get_weather_report()}
 
 if __name__ == "__main__":
     weather = EntropyWeather()

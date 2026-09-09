@@ -30,3 +30,23 @@ def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
         "time": time.time(),
         "vitals": coherence_vitals(),
     }
+
+class TerritoryMap:
+    """Grid-based territory claiming and improvement."""
+
+    def __init__(self, width: int = 3, height: int = 3):
+        self.width = width
+        self.height = height
+        self.regions = {}
+
+    def claim(self, region_id: str, owner: str) -> Dict:
+        self.regions[region_id] = {"owner": owner, "improvements": []}
+        return {"region": region_id, "old_owner": None, "new_owner": owner}
+
+    def improve(self, region_id: str, improvement: str) -> Dict:
+        if region_id not in self.regions:
+            return {"error": "region not claimed"}
+        self.regions[region_id]["improvements"].append(improvement)
+        return {"region": region_id, "improvement": improvement,
+                "improvements": self.regions[region_id]["improvements"]}
+

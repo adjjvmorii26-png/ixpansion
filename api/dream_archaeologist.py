@@ -86,3 +86,22 @@ def handler(payload: Dict[str, Any], context=None) -> Dict[str, Any]:
     elif action == "history":
         return {"excavations": excavations[-5:]}
     return {"action": action, "status": "ready"}
+
+
+class DreamArchaeologist:
+    """Deposits and excavates layered dream artifacts."""
+
+    def __init__(self):
+        self._layers = []
+
+    def deposit(self, content: str, era: str = "ancient") -> Dict[str, Any]:
+        layer = {"content": content, "era": era, "deposited_at": time.time()}
+        self._layers.append(layer)
+        return layer
+
+    def excavate(self) -> Dict[str, Any]:
+        if not self._layers:
+            return {"artifact": None}
+        layer = self._layers.pop(0)
+        return {"artifact": {"content": layer["content"], "era": layer["era"]},
+                "layers_remaining": len(self._layers)}

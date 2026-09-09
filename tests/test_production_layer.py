@@ -96,7 +96,7 @@ def test_landing_page_exists():
     content = index.read_text()
     assert "IXpansion" in content
     assert "Scientist" in content
-    assert "$29" in content
+    assert "free" in content.lower()
 
 def test_premium_dashboard_exists():
     from pathlib import Path

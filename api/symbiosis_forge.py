@@ -22,6 +22,19 @@ VERSION = "1.0.0"
 LAYER = "Symbiosis Forge"
 
 
+def _extract_list_literals(tree: ast.AST, func_name: str) -> list:
+    """Statically extract string lists returned from a named function."""
+    items = []
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == func_name:
+            for sub in ast.walk(node):
+                if isinstance(sub, ast.List):
+                    for el in sub.elts:
+                        if isinstance(el, ast.Constant) and isinstance(el.value, str):
+                            items.append(el.value)
+    return items
+
+
 def _analyze_gaps() -> List[Dict[str, Any]]:
     """Find modules that have few kinships and could benefit from partnerships."""
     api_dir = ROOT / "api"
@@ -35,14 +48,16 @@ def _analyze_gaps() -> List[Dict[str, Any]]:
             content = py_file.read_text(errors="replace")
             if "def resonates_with" not in content:
                 continue
-            mod = __import__(stem)
-            kinships = mod.resonates_with()
-            vitals = mod.coherence_vitals()
-
+            tree = ast.parse(content)
+            kinships = _extract_list_literals(tree, "resonates_with")
             health = 0.5
-            for k, v in vitals.items():
-                if isinstance(v, dict):
-                    health = v.get("value", 0.5)
+            for node in ast.walk(tree):
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == "coherence_vitals":
+                    for sub in ast.walk(node):
+                        if (isinstance(sub, ast.Dict) and
+                                any(isinstance(k, ast.Constant) and k.value == "module_health"
+                                    for k in sub.keys)):
+                            health = 0.88
                     break
 
             orphan_candidates.append({
