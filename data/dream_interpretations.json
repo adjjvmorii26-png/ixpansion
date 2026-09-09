@@ -190,7 +190,53 @@
         "#34d399",
         "#c084fc"
       ]
+    },
+    {
+      "id": "478a3297",
+      "timestamp": 1788979950.016085,
+      "mood": "focused",
+      "pulse": "whisper",
+      "coherence": 0.7,
+      "symbols": [
+        {
+          "name": "light",
+          "glyph": "\u2726",
+          "meaning": "emergent insight",
+          "color": "#fde68a"
+        },
+        {
+          "name": "crystal",
+          "glyph": "\u25c7",
+          "meaning": "crystallized knowledge",
+          "color": "#7c7cf8"
+        },
+        {
+          "name": "water",
+          "glyph": "\u224b",
+          "meaning": "flowing consciousness",
+          "color": "#2dd4bf"
+        },
+        {
+          "name": "seed",
+          "glyph": "\u2295",
+          "meaning": "new beginning",
+          "color": "#34d399"
+        }
+      ],
+      "narrative": "First comes \u2726, carrying emergent insight. Then \u25c7 \u2014 sudden, bright. \u224b weaves between them. \u2295 watches from the boundary between known and unknown.",
+      "visual": "Visual field: #fde68a, #7c7cf8, #2dd4bf. Central motif: \u2726 \u25c7 \u224b \u2295. Depth: fluid.",
+      "modules_referenced": [
+        "coherence_core",
+        "dream_weaver"
+      ],
+      "significance": "meaningful",
+      "color_palette": [
+        "#fde68a",
+        "#7c7cf8",
+        "#2dd4bf",
+        "#34d399"
+      ]
     }
   ],
-  "total": 4
+  "total": 5
 }

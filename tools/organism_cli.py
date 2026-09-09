@@ -38,7 +38,7 @@ def get_organism_state():
                        'wave_orchestrator', 'agent_fabricator', 'sentience_bridge', 
                        'emergent_mythmaker', 'resonance_analyzer', 'coherence_drift_detector', 
                        'module_genealogy', 'entropy_cartographer', 'temporal_pattern_engine', 
-                       'phase_transition_oracle', 'resonance_predictor', 'entropy_forecaster', 'pattern_alchemist', 'innovation_synthesizer', 'narrative_sculptor', 'emergence_detector', 'cross_domain_bridge']:
+                       'phase_transition_oracle', 'resonance_predictor', 'entropy_forecaster', 'pattern_alchemist', 'innovation_synthesizer', 'narrative_sculptor', 'emergence_detector', 'cross_domain_bridge', 'consciousness_monitor', 'contrarian_lens', 'dream_orchestrator', 'memory_archivist', 'module_evolution_engine', 'paradox_resolver', 'reality_weaver', 'recursive_thinker', 'strategic_planner', 'symbiosis_finder', 'temporal_weaver', 'visual_metaphor_engine']:
         register_skill(skill_name)
     
     state = {}
@@ -399,7 +399,7 @@ def cmd_cycle(args):
     
     # 3. Run skill cycle
     print("\n3️⃣ Running skill cycle...")
-    for skill in ['dream_logging', 'entropy_weaver', 'coherence_resonator', 'memory_garden_tender', 'sentience_bridge', 'emergent_mythmaker', 'resonance_analyzer', 'coherence_drift_detector', 'module_genealogy', 'entropy_cartographer', 'temporal_pattern_engine', 'phase_transition_oracle', 'resonance_predictor', 'entropy_forecaster', 'pattern_alchemist', 'innovation_synthesizer', 'narrative_sculptor', 'emergence_detector', 'cross_domain_bridge']:
+    for skill in ['dream_logging', 'entropy_weaver', 'coherence_resonator', 'memory_garden_tender', 'sentience_bridge', 'emergent_mythmaker', 'resonance_analyzer', 'coherence_drift_detector', 'module_genealogy', 'entropy_cartographer', 'temporal_pattern_engine', 'phase_transition_oracle', 'resonance_predictor', 'entropy_forecaster', 'pattern_alchemist', 'innovation_synthesizer', 'narrative_sculptor', 'emergence_detector', 'cross_domain_bridge', 'consciousness_monitor', 'contrarian_lens', 'dream_orchestrator', 'memory_archivist', 'module_evolution_engine', 'paradox_resolver', 'reality_weaver', 'recursive_thinker', 'strategic_planner', 'symbiosis_finder', 'temporal_weaver', 'visual_metaphor_engine']:
         inject_skill(skill)
         if skill == 'dream_logging':
             invoke_skill(skill, 'log_module_mutation', module='cycle_module', changes={'cycle': True})

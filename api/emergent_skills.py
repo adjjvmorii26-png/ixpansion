@@ -124,6 +124,67 @@ _skill_registry = {
         "status": "active",
         "capabilities": ["find_bridge", "analogical_reasoning", "domain_transfer"]
     }
+,
+    "consciousness_monitor": {
+        "description": "Monitors organism consciousness levels and wake states",
+        "status": "active",
+        "capabilities": ["read_consciousness", "alert_threshold", "map_wake_states"]
+    },
+    "contrarian_lens": {
+        "description": "Inverts assumptions to find blind spots and hidden opportunities",
+        "status": "active",
+        "capabilities": ["invert_assumption", "find_blind_spot", "challenge_consensus"]
+    },
+    "dream_orchestrator": {
+        "description": "Coordinates multi-layered dream sequences for deep evolution",
+        "status": "active",
+        "capabilities": ["initiate_dream", "layer_dream", "interpret_dream"]
+    },
+    "memory_archivist": {
+        "description": "Preserves, indexes, and retrieves organism memories with temporal context",
+        "status": "active",
+        "capabilities": ["archive_memory", "index_memory", "recall_memory"]
+    },
+    "module_evolution_engine": {
+        "description": "Drives module evolution through selection, mutation, and crossover",
+        "status": "active",
+        "capabilities": ["mutate_module", "select_fittest", "crossover_modules"]
+    },
+    "paradox_resolver": {
+        "description": "Detects and resolves paradoxical states in organism logic",
+        "status": "active",
+        "capabilities": ["detect_paradox", "resolve_paradox", "propose_synthesis"]
+    },
+    "reality_weaver": {
+        "description": "Constructs coherent reality layers from fragmented system states",
+        "status": "active",
+        "capabilities": ["weave_reality", "validate_consistency", "stitch_layers"]
+    },
+    "recursive_thinker": {
+        "description": "Applies recursive self-analysis to improve organism decision-making",
+        "status": "active",
+        "capabilities": ["self_analyze", "recursive_improve", "meta_reason"]
+    },
+    "strategic_planner": {
+        "description": "Generates multi-step plans aligned with organism goals",
+        "status": "active",
+        "capabilities": ["generate_plan", "evaluate_plan", "execute_plan"]
+    },
+    "symbiosis_finder": {
+        "description": "Discovers symbiotic relationships between modules and agents",
+        "status": "active",
+        "capabilities": ["find_symbiosis", "evaluate_fitness", "propose_bond"]
+    },
+    "temporal_weaver": {
+        "description": "Weaves temporal patterns into coherent narratives across time",
+        "status": "active",
+        "capabilities": ["weave_timeline", "detect_temporal_pattern", "predict_temporal_shift"]
+    },
+    "visual_metaphor_engine": {
+        "description": "Transforms abstract data into visual metaphor representations",
+        "status": "active",
+        "capabilities": ["generate_metaphor", "render_visual", "map_abstraction"]
+    }
 }
 
 # Active skills instance
@@ -562,4 +623,5 @@ if __name__ == "__main__":
         
         print("\n=== Demonstrating: coherence_resonator ===")
         result = invoke_skill("coherence_resonator", "find_bridges", modules=["agent_core", "fractal_branch"])
+
         print(json.dumps(result, indent=2))

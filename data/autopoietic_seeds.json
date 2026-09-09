@@ -79,8 +79,56 @@
       "spawn_id": "edfcdccc",
       "fitness": 0.8265358460164951,
       "description": "Strengthens existing signals in the network"
+    },
+    {
+      "name": "dream_bridge",
+      "archetype": "bridge",
+      "concept": "dream",
+      "capabilities": [
+        "cross_module_linking",
+        "pathway_creation",
+        "signal_routing"
+      ],
+      "resonance": 0.5627034423234437,
+      "generation": 1,
+      "spawn_time": 1788979914.4823601,
+      "spawn_id": "9f0a4057",
+      "fitness": 0.8325652852616434,
+      "description": "Connects disparate modules into new pathways"
+    },
+    {
+      "name": "resonance_bridge",
+      "archetype": "bridge",
+      "concept": "resonance",
+      "capabilities": [
+        "cross_module_linking",
+        "pathway_creation",
+        "signal_routing"
+      ],
+      "resonance": 0.46351037436158976,
+      "generation": 1,
+      "spawn_time": 1788979914.4825568,
+      "spawn_id": "56d4a2fe",
+      "fitness": 0.8157487936330463,
+      "description": "Connects disparate modules into new pathways"
+    },
+    {
+      "name": "dream_amplifier",
+      "archetype": "amplifier",
+      "concept": "dream",
+      "capabilities": [
+        "signal_boost",
+        "resonance_enhancement",
+        "pattern_reinforcement"
+      ],
+      "resonance": 0.7105122923404822,
+      "generation": 1,
+      "spawn_time": 1788979914.4826007,
+      "spawn_id": "21b9e7ed",
+      "fitness": 0.7994592429603377,
+      "description": "Strengthens existing signals in the network"
     }
   ],
-  "generation": 1,
-  "total_spawned": 5
+  "generation": 2,
+  "total_spawned": 8
 }

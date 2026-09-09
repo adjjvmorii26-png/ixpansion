@@ -1,107 +1,107 @@
 {
   "last_scan": {
-    "timestamp": 1788979767.7446194,
-    "scan_id": "a40a0bb0",
+    "timestamp": 1788979914.5239046,
+    "scan_id": "4d2478ee",
     "module_count": 10,
-    "mean_resonance": 0.563,
-    "resonance_variance": 0.1429,
+    "mean_resonance": 0.42,
+    "resonance_variance": 0.0,
     "resonance_map": {
       "coherence_core": {
         "name": "coherence_core",
-        "base_resonance": 0.7,
-        "neighbor_resonance": 0.6667,
-        "resonance_score": 0.7,
+        "base_resonance": 0.5,
+        "neighbor_resonance": 0,
+        "resonance_score": 0.42,
         "category": "core",
         "capability_count": 1,
-        "neighbor_count": 3,
-        "harmonic_class": "resonant"
+        "neighbor_count": 0,
+        "harmonic_class": "moderate"
       },
       "entropy_field": {
         "name": "entropy_field",
-        "base_resonance": 0.3,
-        "neighbor_resonance": 0.55,
-        "resonance_score": 0.425,
-        "category": "chaos",
+        "base_resonance": 0.5,
+        "neighbor_resonance": 0,
+        "resonance_score": 0.42,
+        "category": "core",
         "capability_count": 1,
-        "neighbor_count": 2,
+        "neighbor_count": 0,
         "harmonic_class": "moderate"
       },
       "resonance_nexus": {
         "name": "resonance_nexus",
-        "base_resonance": 0.8,
-        "neighbor_resonance": 0.65,
-        "resonance_score": 0.735,
+        "base_resonance": 0.5,
+        "neighbor_resonance": 0,
+        "resonance_score": 0.42,
         "category": "core",
         "capability_count": 1,
-        "neighbor_count": 2,
-        "harmonic_class": "resonant"
+        "neighbor_count": 0,
+        "harmonic_class": "moderate"
       },
       "dream_weaver": {
         "name": "dream_weaver",
-        "base_resonance": 0.6,
-        "neighbor_resonance": 0.7,
-        "resonance_score": 0.63,
-        "category": "cognition",
+        "base_resonance": 0.5,
+        "neighbor_resonance": 0,
+        "resonance_score": 0.42,
+        "category": "core",
         "capability_count": 1,
-        "neighbor_count": 2,
-        "harmonic_class": "resonant"
+        "neighbor_count": 0,
+        "harmonic_class": "moderate"
       },
       "paradox_engine": {
         "name": "paradox_engine",
-        "base_resonance": 0.4,
-        "neighbor_resonance": 0.4,
+        "base_resonance": 0.5,
+        "neighbor_resonance": 0,
         "resonance_score": 0.42,
-        "category": "chaos",
+        "category": "core",
         "capability_count": 1,
-        "neighbor_count": 2,
+        "neighbor_count": 0,
         "harmonic_class": "moderate"
       },
       "fractal_spine": {
         "name": "fractal_spine",
-        "base_resonance": 0.9,
-        "neighbor_resonance": 0.7,
-        "resonance_score": 0.79,
+        "base_resonance": 0.5,
+        "neighbor_resonance": 0,
+        "resonance_score": 0.42,
         "category": "core",
         "capability_count": 1,
-        "neighbor_count": 1,
-        "harmonic_class": "resonant"
+        "neighbor_count": 0,
+        "harmonic_class": "moderate"
       },
       "wave_orchestrator": {
         "name": "wave_orchestrator",
         "base_resonance": 0.5,
-        "neighbor_resonance": 0.4,
-        "resonance_score": 0.49,
-        "category": "evolution",
+        "neighbor_resonance": 0,
+        "resonance_score": 0.42,
+        "category": "core",
         "capability_count": 1,
-        "neighbor_count": 1,
+        "neighbor_count": 0,
         "harmonic_class": "moderate"
       },
       "memory_archivist": {
         "name": "memory_archivist",
-        "base_resonance": 0.6,
-        "neighbor_resonance": 0.6,
-        "resonance_score": 0.62,
-        "category": "memory",
+        "base_resonance": 0.5,
+        "neighbor_resonance": 0,
+        "resonance_score": 0.42,
+        "category": "core",
         "capability_count": 1,
-        "neighbor_count": 1,
-        "harmonic_class": "resonant"
+        "neighbor_count": 0,
+        "harmonic_class": "moderate"
       },
       "consciousness_stream": {
         "name": "consciousness_stream",
         "base_resonance": 0.5,
         "neighbor_resonance": 0,
-        "resonance_score": 0.36,
-        "category": "perception",
+        "resonance_score": 0.42,
+        "category": "core",
         "capability_count": 1,
         "neighbor_count": 0,
-        "harmonic_class": "faint"
+        "harmonic_class": "moderate"
       },
       "reality_weaver": {
         "name": "reality_weaver",
-        "base_resonance": 0.7,
+        "base_resonance": 0.5,
         "neighbor_resonance": 0,
-        "resonance_score": 0.46,
-        "category": "cognition",
+        "resonance_score": 0.42,
+        "category": "core",
         "capability_count": 1,
         "neighbor_count": 0,
         "harmonic_class": "moderate"
@@ -109,49 +109,45 @@
     },
     "harmonics": [
       {
-        "class": "resonant",
-        "modules": [
-          "coherence_core",
-          "resonance_nexus",
-          "dream_weaver",
-          "fractal_spine",
-          "memory_archivist"
-        ],
-        "count": 5
-      },
-      {
         "class": "moderate",
         "modules": [
+          "coherence_core",
           "entropy_field",
+          "resonance_nexus",
+          "dream_weaver",
           "paradox_engine",
+          "fractal_spine",
           "wave_orchestrator",
+          "memory_archivist",
+          "consciousness_stream",
           "reality_weaver"
         ],
-        "count": 4
-      },
-      {
-        "class": "faint",
-        "modules": [
-          "consciousness_stream"
-        ],
-        "count": 1
+        "count": 10
       }
     ],
     "dead_zones": [],
     "hot_zones": [],
     "isolated": [
+      "coherence_core",
+      "entropy_field",
+      "resonance_nexus",
+      "dream_weaver",
+      "paradox_engine",
+      "fractal_spine",
+      "wave_orchestrator",
+      "memory_archivist",
       "consciousness_stream",
       "reality_weaver"
     ],
     "network_health": {
-      "score": 0.7591,
-      "status": "thriving",
-      "mean_resonance": 0.563,
-      "variance": 0.0204,
-      "isolated_ratio": 0.2
+      "score": 0.468,
+      "status": "stressed",
+      "mean_resonance": 0.42,
+      "variance": 0.0,
+      "isolated_ratio": 1.0
     },
     "recommendations": [
-      "Connect 2 isolated modules to the main network."
+      "Connect 10 isolated modules to the main network."
     ]
   },
   "history_count": 1

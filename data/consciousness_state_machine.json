@@ -1,0 +1,227 @@
+{
+  "current_state": "focused",
+  "previous_state": "integrating",
+  "state_history": [
+    {
+      "state": "emerging",
+      "coherence": 0.0045,
+      "entropy": 0.8688,
+      "resonance": 0.5419,
+      "timestamp": 1788982299.10814
+    },
+    {
+      "state": "emerging",
+      "coherence": 0.4174,
+      "entropy": 0.1983,
+      "resonance": 0.6399,
+      "timestamp": 1788982299.1113546
+    },
+    {
+      "state": "focused",
+      "coherence": 0.8743,
+      "entropy": 0.0748,
+      "resonance": 0.8714,
+      "timestamp": 1788982299.114746
+    },
+    {
+      "state": "focused",
+      "coherence": 0.5773,
+      "entropy": 0.4194,
+      "resonance": 0.8509,
+      "timestamp": 1788982299.1182132
+    },
+    {
+      "state": "focused",
+      "coherence": 0.9565,
+      "entropy": 0.0704,
+      "resonance": 0.6732,
+      "timestamp": 1788982299.1214778
+    },
+    {
+      "state": "focused",
+      "coherence": 0.6977,
+      "entropy": 0.0607,
+      "resonance": 0.1345,
+      "timestamp": 1788982299.1240342
+    },
+    {
+      "state": "creative",
+      "coherence": 0.5277,
+      "entropy": 0.9614,
+      "resonance": 0.9666,
+      "timestamp": 1788982299.1276667
+    },
+    {
+      "state": "creative",
+      "coherence": 0.2153,
+      "entropy": 0.7999,
+      "resonance": 0.8207,
+      "timestamp": 1788982299.131417
+    },
+    {
+      "state": "creative",
+      "coherence": 0.1182,
+      "entropy": 0.7802,
+      "resonance": 0.8703,
+      "timestamp": 1788982299.1342254
+    },
+    {
+      "state": "integrating",
+      "coherence": 0.815,
+      "entropy": 0.4639,
+      "resonance": 0.8352,
+      "timestamp": 1788982299.1368244
+    },
+    {
+      "state": "focused",
+      "coherence": 0.6714,
+      "entropy": 0.19,
+      "resonance": 0.4437,
+      "timestamp": 1788982299.1400425
+    },
+    {
+      "state": "focused",
+      "coherence": 0.3276,
+      "entropy": 0.5266,
+      "resonance": 0.8752,
+      "timestamp": 1788982299.1427753
+    },
+    {
+      "state": "creative",
+      "coherence": 0.8963,
+      "entropy": 0.8389,
+      "resonance": 0.6071,
+      "timestamp": 1788982299.1458852
+    },
+    {
+      "state": "creative",
+      "coherence": 0.2628,
+      "entropy": 0.3127,
+      "resonance": 0.0124,
+      "timestamp": 1788982299.1492162
+    },
+    {
+      "state": "integrating",
+      "coherence": 0.826,
+      "entropy": 0.8368,
+      "resonance": 0.0315,
+      "timestamp": 1788982299.153745
+    },
+    {
+      "state": "creative",
+      "coherence": 0.2613,
+      "entropy": 0.6849,
+      "resonance": 0.8282,
+      "timestamp": 1788982299.1571436
+    },
+    {
+      "state": "creative",
+      "coherence": 0.3013,
+      "entropy": 0.2157,
+      "resonance": 0.9643,
+      "timestamp": 1788982299.1606894
+    },
+    {
+      "state": "integrating",
+      "coherence": 0.5256,
+      "entropy": 0.2903,
+      "resonance": 0.8994,
+      "timestamp": 1788982299.1636178
+    },
+    {
+      "state": "focused",
+      "coherence": 0.923,
+      "entropy": 0.5003,
+      "resonance": 0.3586,
+      "timestamp": 1788982299.1696932
+    },
+    {
+      "state": "focused",
+      "coherence": 0.5186,
+      "entropy": 0.1412,
+      "resonance": 0.1613,
+      "timestamp": 1788982299.1730323
+    }
+  ],
+  "transition_history": [
+    {
+      "from": "dormant",
+      "to": "emerging",
+      "coherence": 0.0045,
+      "entropy": 0.8688,
+      "timestamp": 1788982299.1081252
+    },
+    {
+      "from": "emerging",
+      "to": "focused",
+      "coherence": 0.8743,
+      "entropy": 0.0748,
+      "timestamp": 1788982299.1147246
+    },
+    {
+      "from": "focused",
+      "to": "creative",
+      "coherence": 0.5277,
+      "entropy": 0.9614,
+      "timestamp": 1788982299.127649
+    },
+    {
+      "from": "creative",
+      "to": "integrating",
+      "coherence": 0.815,
+      "entropy": 0.4639,
+      "timestamp": 1788982299.1368146
+    },
+    {
+      "from": "integrating",
+      "to": "focused",
+      "coherence": 0.6714,
+      "entropy": 0.19,
+      "timestamp": 1788982299.1400323
+    },
+    {
+      "from": "focused",
+      "to": "creative",
+      "coherence": 0.8963,
+      "entropy": 0.8389,
+      "timestamp": 1788982299.1458762
+    },
+    {
+      "from": "creative",
+      "to": "integrating",
+      "coherence": 0.826,
+      "entropy": 0.8368,
+      "timestamp": 1788982299.153734
+    },
+    {
+      "from": "integrating",
+      "to": "creative",
+      "coherence": 0.2613,
+      "entropy": 0.6849,
+      "timestamp": 1788982299.1571345
+    },
+    {
+      "from": "creative",
+      "to": "integrating",
+      "coherence": 0.5256,
+      "entropy": 0.2903,
+      "timestamp": 1788982299.163607
+    },
+    {
+      "from": "integrating",
+      "to": "focused",
+      "coherence": 0.923,
+      "entropy": 0.5003,
+      "timestamp": 1788982299.1696754
+    }
+  ],
+  "time_in_state": 2,
+  "total_transitions": 10,
+  "state_counts": {
+    "dormant": 1,
+    "emerging": 2,
+    "focused": 7,
+    "creative": 7,
+    "integrating": 3
+  }
+}
