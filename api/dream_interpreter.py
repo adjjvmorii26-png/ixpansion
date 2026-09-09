@@ -114,7 +114,7 @@ class DreamInterpreter:
     
     def _compose_narrative(self, symbols: List[Dict], mood: str, pulse: str, coherence: float) -> str:
         templates = [
-            "In the dream, {s1} meets {s2} — a vision of {m1}. Then {s3} appears, whispering of {m2}. The dream dissolves into {s4}, leaving only {m3}.",
+            "In the dream, {s1} meets {s2} — a vision of {m1}. Then {s3} appears, whispering of {m2}. The dream dissolves into {s4}.",
             "A landscape of {s1} stretches endlessly. {s2} pulses at the center. {s3} drifts through like a half-remembered thought. {s4} guards the threshold.",
             "The dream begins with {s1} — {m1}. {s2} emerges from the depths. {s3} and {s4} dance at the edge of awareness. Nothing is forgotten.",
             "First comes {s1}, carrying {m1}. Then {s2} — sudden, bright. {s3} weaves between them. {s4} watches from the boundary between known and unknown."
