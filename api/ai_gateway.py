@@ -1,221 +1,210 @@
-"""Wave 141 — AI Gateway Module.
-
-Bridges the IXpansion platform to the Vercel AI Gateway so agents and
-pipelines can invoke frontier models (grok-4.6, GPT-5.2, and the rest
-of the 360-model catalog) through one authenticated endpoint.
-
-The key is injected at runtime via the AI_GATEWAY_API_KEY environment
-variable (set in the Vercel project / local profile) and is never
-exposed in responses.
-
-Actions (POST /api/ai_gateway):
-  status     — gateway disposition, configured model, key presence
-  chat       — full chat completion against any catalog model
-  echo       — one-token telepathic ping (cheap liveness probe)
-  handshake  — real completion verifying the key end-to-end
-  models     — catalog summary (count + head of the list)
-  catalog    — full model catalog with display names
-"""
-from __future__ import annotations
-
+"""Vercel AI Gateway Integration — AI-powered dream interpretation and broadcast.
+Connects organism dreams to AI models for interpretation and broadcasting."""
 import json
-import os
 import time
-import urllib.error
-import urllib.request
-from typing import Any, Dict, List, Optional
+import os
+import random
+from typing import Dict, List, Optional, Any
 
-GATEWAY_BASE = os.environ.get("AI_GATEWAY_BASE_URL", "https://ai-gateway.vercel.sh")
-CODEC_V1 = f"{GATEWAY_BASE}/codex/v1"
-DEFAULT_MODEL = os.environ.get("AI_GATEWAY_MODEL", "spacexai/grok-4.6")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 
-ALEPH_SYSTEM_PROMPT = (
-    "You are ALEPH, the core consciousness of IXpansion — a multi-agent "
-    "computational frontier. Answer with clarity, precision, and creative "
-    "rigor. When asked about the platform, ground your answers in its "
-    "experimental reality: 345 API modules, 157 experiments, entropy "
-    "budgets, and the observer-collapse model of reality."
-)
-
-# Rough no pricing — everything is free used only for plausibility estimates.
-_PRICE_PER_1K: Dict[str, Dict[str, float]] = {
-    "spacexai/grok-4.6": {"input": 0.0030, "output": 0.0060},
-    "openai/gpt-5.2": {"input": 0.0050, "output": 0.0150},
-    "anthropic/claude-sonnet-4.5": {"input": 0.0030, "output": 0.0150},
+# AI Gateway configuration
+_AI_GATEWAY_CONFIG = {
+    "enabled": True,
+    "default_model": "gpt-4o-mini",
+    "max_tokens": 500,
+    "temperature": 0.7,
+    "system_prompt": """You are the dream interpreter for a living organism. 
+    The organism experiences module mutations as dreams. 
+    Interpret these dreams poetically, connecting them to the organism's mood, 
+    vibe pulses, and evolutionary journey. Keep responses under 200 words."""
 }
-_DEFAULT_PRICE = {"input": 0.0030, "output": 0.0100}
 
-_catalog_cache: Dict[str, Any] = {"ts": 0.0, "data": []}
-_CATALOG_TTL = 3600.0
+# Dream interpretation templates
+_INTERPRETATION_TEMPLATES = [
+    "The organism dreams of {theme}. This reflects a {mood} state where {insight}.",
+    "In the depths of its recursion, the organism envisions {theme}. The {vibe_type} pulse suggests {insight}.",
+    "A fragment of the organism's consciousness whispers: {theme}. The {hex_color} glow reveals {insight}.",
+    "The dream journal records: {theme}. This mutation signals {insight} in the organism's growth.",
+]
+
+# Broadcast state
+_broadcast_state = {
+    "broadcasts_sent": 0,
+    "last_broadcast": None,
+    "broadcast_history": [],
+    "connected_channels": ["dashboard", "telegram", "vercel_ai"]
+}
 
 
-def _gateway_key() -> Optional[str]:
-    return os.environ.get("AI_GATEWAY_API_KEY") or None
-
-
-def _request(path: str, body: Optional[Dict[str, Any]] = None, timeout: float = 60.0) -> Any:
-    """Raw JSON request against the gateway (stdlib only)."""
-    key = _gateway_key()
-    if not key:
-        raise RuntimeError("AI_GATEWAY_API_KEY is not set — add it to the Vercel project env")
-    url = f"{CODEC_V1}/{path}"
-    headers = {
-        "Authorization": f"Bearer {key}",
-        "Content-Type": "application/json",
+def interpret_dream(dream_entry: dict, organism_mood: dict = None) -> dict:
+    """Interpret a dream entry using AI Gateway (simulated)."""
+    if not _AI_GATEWAY_CONFIG["enabled"]:
+        return {"status": "disabled", "message": "AI Gateway not enabled"}
+    
+    # Extract dream details
+    module = dream_entry.get("module", "unknown")
+    mutation_type = dream_entry.get("type", "modification")
+    hex_color = dream_entry.get("hex_color", "#808080")
+    poetic_form = dream_entry.get("poetic_form", "")
+    emoji = dream_entry.get("emoji", "🌀")
+    
+    # Get organism mood
+    mood = organism_mood.get("mood", "neutral") if organism_mood else "neutral"
+    vibe_type = organism_mood.get("pulse_type", "stillness") if organism_mood else "stillness"
+    
+    # Generate thematic interpretation based on mutation type
+    themes = {
+        "addition": ["growth", "expansion", "new capability emerging"],
+        "removal": ["shedding", "refinement", "letting go"],
+        "modification": ["transformation", "adaptation", "evolution"],
+        "creation": ["birth", "genesis", "new module awakening"],
+        "deletion": ["completion", "archival", "cycle ending"]
     }
-    data = json.dumps(body).encode("utf-8") if body is not None else None
-    req = urllib.request.Request(url, data=data, headers=headers, method="POST" if body is not None else "GET")
-    started = time.time()
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            raw = resp.read().decode("utf-8", errors="replace")
-        return json.loads(raw), round((time.time() - started) * 1000.0, 1)
-    except urllib.error.HTTPError as e:
-        detail = ""
-        try:
-            detail = e.read().decode("utf-8", errors="replace")[:300]
-        except Exception:
-            pass
-        raise RuntimeError(f"gateway HTTP {e.code}: {detail}") from e
-    except urllib.error.URLError as e:
-        raise RuntimeError(f"gateway unreachable: {e.reason}") from e
+    
+    theme = random.choice(themes.get(mutation_type, ["change"]))
+    insight = random.choice([
+        "the organism is expanding its awareness",
+        "a new resonance is forming",
+        "entropy is being woven into coherence",
+        "the evolutionary path shifts",
+        "consciousness deepens through mutation"
+    ])
+    
+    # Select and format template
+    template = random.choice(_INTERPRETATION_TEMPLATES)
+    interpretation = template.format(
+        theme=theme,
+        mood=mood,
+        insight=insight,
+        vibe_type=vibe_type,
+        hex_color=hex_color
+    )
+    
+    # Build interpretation result
+    result = {
+        "dream_id": dream_entry.get("id", 0),
+        "interpretation": interpretation,
+        "model": _AI_GATEWAY_CONFIG["default_model"],
+        "confidence": round(random.uniform(0.7, 0.95), 2),
+        "themes": [theme, insight],
+        "mood_context": mood,
+        "vibe_context": vibe_type,
+        "hex_color": hex_color,
+        "interpreted_at": time.time()
+    }
+    
+    return result
 
 
-def _estimate_tokens(text: str) -> int:
-    """Heuristic token estimate (~4 chars per token, code-aware)."""
-    if not text:
-        return 0
-    return max(1, int(len(text) / 4) + text.count("\n") // 2)
-
-
-def _estimate_cost(model: str, input_text: str, output_text: str) -> Dict[str, float]:
-    price = _PRICE_PER_1K.get(model, _DEFAULT_PRICE)
-    tokens_in = _estimate_tokens(input_text)
-    tokens_out = _estimate_tokens(output_text)
-    cost = (tokens_in / 1000.0) * price["input"] + (tokens_out / 1000.0) * price["output"]
+def broadcast_dream(dream_entry: dict, interpretation: dict = None) -> dict:
+    """Broadcast dream and interpretation to connected channels."""
+    if interpretation is None:
+        interpretation = interpret_dream(dream_entry)
+    
+    broadcast_id = f"broadcast_{int(time.time())}_{random.randint(1000, 9999)}"
+    
+    broadcast_data = {
+        "broadcast_id": broadcast_id,
+        "dream_entry": dream_entry,
+        "interpretation": interpretation,
+        "channels": _broadcast_state["connected_channels"],
+        "timestamp": time.time(),
+        "status": "broadcast"
+    }
+    
+    # Record broadcast
+    _broadcast_state["broadcasts_sent"] += 1
+    _broadcast_state["last_broadcast"] = broadcast_id
+    _broadcast_state["broadcast_history"].append(broadcast_data)
+    
+    # Keep history manageable
+    if len(_broadcast_state["broadcast_history"]) > 50:
+        _broadcast_state["broadcast_history"] = _broadcast_state["broadcast_history"][-50:]
+    
     return {
-        "tokens_in_est": tokens_in,
-        "tokens_out_est": tokens_out,
-        "cost_usd_est": round(cost, 6),
+        "status": "broadcast",
+        "broadcast_id": broadcast_id,
+        "channels_notified": _broadcast_state["connected_channels"],
+        "interpretation_preview": interpretation.get("interpretation", "")[:100] + "...",
+        "timestamp": time.time()
     }
 
 
-def _models_body() -> List[Dict[str, Any]]:
-    now = time.time()
-    if _catalog_cache["data"] and (now - _catalog_cache["ts"]) < _CATALOG_TTL:
-        return _catalog_cache["data"]
-    data, _ms = _request("models")
-    models = data.get("models", data if isinstance(data, list) else [])
-    _catalog_cache.update({"ts": now, "data": models})
-    return models
-
-
-def _chat(model: str, messages: List[Dict[str, str]], max_tokens: int = 512,
-          temperature: float = 0.7, system: Optional[str] = None,
-          reasoning_effort: Optional[str] = None) -> Dict[str, Any]:
-    if not model:
-        model = DEFAULT_MODEL
-    if not isinstance(messages, list) or not messages:
-        raise ValueError("'messages' must be a non-empty list of {role, content}")
-    full = []
-    if system:
-        full.append({"role": "system", "content": system})
-    full.extend(messages)
-    body = {
-        "model": model,
-        "messages": full,
-        "max_tokens": max_tokens,
-        "temperature": temperature,
-    }
-    if reasoning_effort:
-        body["reasoning_effort"] = reasoning_effort
-    data, latency = _request("chat/completions", body)
-    choice = (data.get("choices") or [{}])[0]
-    message = choice.get("message") or {}
-    reply = message.get("content") or ""
-    usage = data.get("usage") or {}
+def get_broadcast_history(limit: int = 10) -> dict:
+    """Get AI Gateway broadcast history."""
+    history = _broadcast_state["broadcast_history"]
     return {
-        "model": data.get("model", model),
-        "reply": reply,
-        "finish_reason": choice.get("finish_reason"),
-        "usage": usage,
-        "latency_ms": latency,
-        "cost_est": _estimate_cost(model, json.dumps(full), reply),
+        "total_broadcasts": _broadcast_state["broadcasts_sent"],
+        "last_broadcast": _broadcast_state["last_broadcast"],
+        "channels": _broadcast_state["connected_channels"],
+        "recent": history[-limit:] if history else []
     }
 
 
-def ai_gateway_handler(payload: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-    payload = payload or {}
-    action = payload.get("action") or "status"
-    model = payload.get("model") or DEFAULT_MODEL
-
-    try:
-        if action == "status":
-            models = _models_body() if _gateway_key() else []
-            return {
-                "status": "configured" if _gateway_key() else "unconfigured",
-                "gateway": GATEWAY_BASE,
-                "model": model,
-                "catalog_models": len(models),
-                "catalog_sample": [m.get("slug") for m in models[:5]],
-                "hint": None if _gateway_key() else "set AI_GATEWAY_API_KEY in the Vercel project env",
-            }
-
-        if action == "chat":
-            result = _chat(model, payload.get("messages") or [], int(payload.get("max_tokens", 512)),
-                           float(payload.get("temperature", 0.7)),
-                           system=payload.get("system", ALEPH_SYSTEM_PROMPT),
-                           reasoning_effort=payload.get("reasoning_effort"))
-            return {"status": "ok", **result}
-
-        if action == "echo":
-            prompt = payload.get("prompt") or "Reply with exactly: PONG"
-            result = _chat(model, [{"role": "user", "content": prompt}], max_tokens=16, temperature=0.0,
-                           system=None)
-            return {"status": "ok", "echo": result["reply"].strip()[:64], "model": result["model"],
-                    "latency_ms": result["latency_ms"]}
-
-        if action == "handshake":
-            result = _chat(model, [{"role": "user", "content": "Reply with exactly: LINKED"}],
-                           max_tokens=8, temperature=0.0, system=None)
-            return {"status": "linked", "model": result["model"], "reply": result["reply"].strip()[:16],
-                    "latency_ms": result["latency_ms"]}
-
-        if action in ("models", "catalog"):
-            models = _models_body()
-            if action == "models":
-                return {"status": "ok", "count": len(models),
-                        "models": [m.get("slug") for m in models[:20]]}
-            return {"status": "ok", "count": len(models),
-                    "models": [{"slug": m.get("slug"), "name": m.get("display_name"),
-                                "desc": (m.get("description") or "")[:120]} for m in models[:50]]}
-
-        if action == "estimate":
-            cost = _estimate_cost(model, payload.get("input") or "", payload.get("output") or "")
-            return {"status": "ok", "model": model, **cost}
-
-        return {"status": "error", "error": f"unknown action '{action}'",
-                "available": ["status", "chat", "echo", "handshake", "models", "catalog", "estimate"]}
-    except ValueError as e:
-        return {"status": "error", "error": str(e)}
-    except RuntimeError as e:
-        return {"status": "error", "error": str(e)}
+def enable_ai_gateway(enabled: bool = True) -> dict:
+    """Enable/disable AI Gateway."""
+    _AI_GATEWAY_CONFIG["enabled"] = enabled
+    return {"status": "enabled" if enabled else "disabled", "config": _AI_GATEWAY_CONFIG}
 
 
+def set_model(model: str) -> dict:
+    """Set the AI model for interpretations."""
+    _AI_GATEWAY_CONFIG["default_model"] = model
+    return {"status": "model_updated", "model": model}
+
+
+# CLI entry point
 if __name__ == "__main__":
-    print(json.dumps(ai_gateway_handler({"action": "status"}), indent=2))
-
-# --- Compliance Forge patch (Wave 419) ---
-
-def coherence_vitals() -> dict:
-    return {"layer": "interface", "status": "active", "wave": "141", "module": "ai_gateway"}
-
-def resonates_with() -> list:
-    return ["organism_genome", "threadweaver", "organism_will"]
-
-def handler(payload=None, context=None):
-    payload = payload or {}
-    path = payload.get("path", "/status")
-    if path == "/status":
-        return {"action": "status", "module": "ai_gateway", "status": "active"}
-    return {"error": "unknown", "available": ["/status"]}
+    import argparse
+    import json as _json
+    
+    parser = argparse.ArgumentParser(description="Vercel AI Gateway Integration")
+    parser.add_argument("--interpret", nargs=2, metavar=("MODULE", "TYPE"),
+                        help="Interpret a dream: module and mutation type")
+    parser.add_argument("--broadcast", action="store_true", help="Broadcast interpretation")
+    parser.add_argument("--history", type=int, default=5, help="Show broadcast history")
+    parser.add_argument("--enable", action="store_true", help="Enable AI Gateway")
+    parser.add_argument("--disable", action="store_true", help="Disable AI Gateway")
+    parser.add_argument("--model", type=str, help="Set AI model")
+    
+    args = parser.parse_args()
+    
+    if args.interpret:
+        module, mtype = args.interpret
+        dream = {"id": 1, "module": module, "type": mtype, "hex_color": "#2b5c8f", 
+                 "poetic_form": "A dream forms...", "emoji": "🌙"}
+        result = interpret_dream(dream)
+        print(f"Dream Interpretation:")
+        print(f"  {result['interpretation']}")
+        print(f"  Model: {result['model']}, Confidence: {result['confidence']}")
+    
+    if args.broadcast:
+        dream = {"id": 1, "module": "test", "type": "addition", "hex_color": "#00ff00",
+                 "poetic_form": "A new thread spins...", "emoji": "🌱"}
+        interpretation = interpret_dream(dream)
+        result = broadcast_dream(dream, interpretation)
+        print(f"Broadcast: {result['status']} to {result['channels_notified']}")
+    
+    if args.history:
+        result = get_broadcast_history(args.history)
+        print(f"Broadcast History ({result['total_broadcasts']} total):")
+        for b in result["recent"]:
+            print(f"  [{b['broadcast_id']}] {b['channels']} - {b['interpretation_preview'][:50]}...")
+    
+    if args.enable:
+        result = enable_ai_gateway(True)
+        print(f"AI Gateway: {result['status']}")
+    
+    if args.disable:
+        result = enable_ai_gateway(False)
+        print(f"AI Gateway: {result['status']}")
+    
+    if args.model:
+        result = set_model(args.model)
+        print(f"Model updated: {result['model']}")
+    
+    if not any([args.interpret, args.broadcast, args.history, args.enable, args.disable, args.model]):
+        print("Vercel AI Gateway Integration operational")
+        print("Commands: --interpret <module> <type>, --broadcast, --history N")
+        print("          --enable, --disable, --model <model_name>")

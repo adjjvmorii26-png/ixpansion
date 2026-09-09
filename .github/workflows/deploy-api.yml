@@ -1,0 +1,52 @@
+name: Deploy API via Cloudflare Tunnel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/**'
+      - 'main.py'
+      - 'api_server.py'
+      - 'requirements.txt'
+      - '.github/workflows/deploy-api.yml'
+  workflow_dispatch:
+
+jobs:
+  tunnel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          
+      - name: Install cloudflared
+        run: |
+          curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
+          sudo dpkg -i cloudflared.deb
+          
+      - name: Start API server
+        run: |
+          python main.py serve --port 3000 &
+          sleep 10
+          curl -s http://localhost:3000/health
+          
+      - name: Create Cloudflare Tunnel
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_TUNNEL_TOKEN: ${{ secrets.CF_TUNNEL_TOKEN }}
+        run: |
+          if [ -n "$CF_TUNNEL_TOKEN" ]; then
+            cloudflared tunnel run --token $CF_TUNNEL_TOKEN &
+            sleep 5
+            echo "Tunnel started"
+          else
+            echo "No tunnel token configured - skipping"
+          fi
