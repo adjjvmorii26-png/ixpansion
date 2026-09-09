@@ -88,6 +88,11 @@ _skill_registry = {
         "description": "Predicts phase transitions and critical points in organism state",
         "status": "active",
         "capabilities": ["sample_state", "predict_approaching_transition", "phase_classification"]
+    },
+    "resonance_predictor": {
+        "description": "Forecasts future resonance patterns using momentum and harmonic analysis",
+        "status": "active",
+        "capabilities": ["record_resonance", "predict_next", "harmonic_analysis"]
     }
 }
 
