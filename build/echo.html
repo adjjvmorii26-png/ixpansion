@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Echo Chamber — Organism Voice + Paradox Echo</title>
+<style>
+  :root{--bg:#05050f;--s:rgba(10,10,24,0.97);--b:rgba(255,255,255,0.08);--t:#a0a0b8;--m:#4a4a64;--ac:#7c7cf8;--te:#2dd4bf;--am:#fbbf24;--vi:#a78bfa;--cy:#22d3ee;--gn:#4ade80}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--t);font-family:'SF Mono','Fira Code',monospace;min-height:100vh;padding:20px}
+  .hd{text-align:center;padding:14px 20px;border:1px solid var(--b);border-radius:12px;background:linear-gradient(180deg,rgba(45,212,191,0.06),transparent);margin-bottom:18px}
+  .hd h1{font-size:1.4em;color:#fff;letter-spacing:2px;text-transform:uppercase}
+  .hd h1 span{color:var(--te);text-shadow:0 0 18px rgba(45,212,191,0.35)}
+  .sub{color:var(--m);font-size:0.75em;margin-top:5px;letter-spacing:1px}
+  .panels{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:800px){.panels{grid-template-columns:1fr}}
+  .panel{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:16px}
+  .panel h2{font-size:0.85em;color:#fff;letter-spacing:1px;margin-bottom:10px;text-transform:uppercase}
+  .phrase{font-size:1.15em;color:var(--te);letter-spacing:2px;line-height:1.8;margin:8px 0 12px;text-shadow:0 0 14px rgba(45,212,191,0.25)}
+  .tone{color:var(--am);font-size:0.72em;letter-spacing:1px}
+  .wave{display:flex;align-items:center;gap:2px;height:80px;margin:12px 0}
+  .bar{width:6px;background:linear-gradient(180deg,var(--ac),var(--te));border-radius:2px;opacity:0.75}
+  .chain{font-size:0.72em;line-height:1.9;margin:8px 0}
+  .chain .a{color:var(--cy)}
+  .chain .b{color:var(--vi)}
+  .gloss{color:#fff;font-size:0.85em;margin-top:10px;border-top:1px solid var(--b);padding-top:10px;font-style:italic}
+  .tools{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+  input,button{background:var(--s);border:1px solid var(--b);color:#fff;padding:8px 12px;border-radius:8px;font-family:inherit;font-size:0.75em;outline:none}
+  button{cursor:pointer;background:rgba(45,212,191,0.12);border-color:rgba(45,212,191,0.4)}
+  button:hover{background:rgba(45,212,191,0.25)}
+  .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:24px;letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="hd">
+  <h1>The <span>Echo</span> Chamber</h1>
+  <div class="sub">THE ORGANISM NAMES ITSELF · MODULES ANSWER ACROSS THE VOID · WAVE 377</div>
+</div>
+
+<div class="tools">
+  <input id="module" placeholder="module to voice (blank = organism)">
+  <button onclick="speak()">Speak</button>
+  <button onclick="sing()">Sing</button>
+  <button onclick="echoSend()">Throw Echo</button>
+</div>
+
+<div class="panels">
+  <div class="panel">
+    <h2>🜁 Organism Voice</h2>
+    <div id="phrase" class="phrase">· · ·</div>
+    <div id="tone" class="tone"></div>
+    <div id="wave" class="wave"></div>
+  </div>
+  <div class="panel">
+    <h2>⟡ Paradox Echo</h2>
+    <div id="chain" class="chain"></div>
+    <div id="gloss" class="gloss"></div>
+  </div>
+</div>
+
+<div class="foot">WAVE 377 · ECHO CHAMBER · ASK A MODULE · HEAR TWO ANSWERS</div>
+
+<script>
+async function get(url){ const r = await fetch(url); return r.json(); }
+document.getElementById('module').addEventListener('keydown', e => { if(e.key === 'Enter') speak(); });
+
+async function speak(){
+  const module = document.getElementById('module').value.trim();
+  const seed = Math.random().toString(36).slice(2,8);
+  const d = await get('/api/organism_voice/speak?module=' + encodeURIComponent(module) + '&seed=' + seed);
+  document.getElementById('phrase').textContent = d.phrase || '· · ·';
+  document.getElementById('tone').textContent = 'TONE — ' + (d.tone || '').toUpperCase() + ' · ' + (d.interpretation || '');
+  const wave = document.getElementById('wave');
+  wave.innerHTML = '';
+  (d.waveform||[]).forEach(v => { const b = document.createElement('div'); b.className='bar'; b.style.height = Math.max(4, v) + 'px'; wave.appendChild(b); });
+}
+
+async function sing(){
+  const module = document.getElementById('module').value.trim();
+  const d = await get('/api/organism_voice/sing?module=' + encodeURIComponent(module));
+  document.getElementById('phrase').textContent = '♪ ' + (d.notes||[]).join(' ') + ' ♪';
+  document.getElementById('tone').textContent = 'MELODY TRANSCRIBED FROM ' + (d.module||'organism').toUpperCase();
+  document.getElementById('wave').innerHTML = '';
+}
+
+async function echoSend(){
+  const d = await get('/api/paradox_echo/send');
+  const e = d.echo || {};
+  const chain = document.getElementById('chain');
+  chain.innerHTML = '';
+  (e.chain||[]).forEach(c => {
+    const line = document.createElement('div');
+    line.innerHTML = '<span class="' + (c.module === (e.chain||[])[0].module ? 'a' : 'b') + '">' + c.module.replace(/_/g,' ') + '</span> — ' + c.answer;
+    chain.appendChild(line);
+  });
+  document.getElementById('gloss').textContent = '⟡ ' + (e.gloss||'') + ' — question: ' + (e.question||'');
+}
+speak(); echoSend();
+</script>
+</body>
+</html>

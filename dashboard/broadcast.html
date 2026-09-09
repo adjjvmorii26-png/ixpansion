@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IXpansion · Broadcast</title>
+<script src="/shared.js"></script>
+<style>
+  :root{
+    --bg:#0b0b0d; --panel:#121218; --ink:#c8c8d4; --dim:#6b6b7a;
+    --gold:#fff3a0; --violet:#c8a8ff; --blue:#8fd3ff; --mint:#7fffd4;
+    --line:#262633; --alert:#ff9d9d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;padding:24px;min-height:100vh}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{color:var(--gold)}
+  .wrap{max-width:960px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:24px}
+  h1{color:var(--gold);font-size:22px;letter-spacing:2px}
+  .sub{color:var(--dim);font-size:12px;margin-top:6px}
+  .identity{color:var(--violet);font-size:12px;margin-top:8px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px}
+  .card h3{color:var(--blue);font-size:14px;margin-bottom:12px;letter-spacing:1px}
+  .card p{font-size:12px;line-height:1.7;color:var(--ink)}
+  .card .tag{display:inline-block;background:#1a1a24;border:1px solid var(--line);color:var(--mint);font-size:10px;padding:2px 8px;border-radius:10px;margin:2px 4px 2px 0}
+  .mono{color:var(--gold)}
+  pre{background:#0f0f14;border:1px solid var(--line);border-radius:8px;padding:14px;font-size:11px;overflow-x:auto;color:var(--mint);margin-top:12px}
+  .btn{display:inline-block;background:transparent;border:1px solid var(--violet);color:var(--violet);padding:6px 14px;border-radius:8px;font-family:inherit;font-size:12px;cursor:pointer;margin:4px 4px 4px 0}
+  .btn:hover{background:var(--violet);color:var(--bg)}
+  .status{color:var(--dim);font-size:11px;margin-top:10px}
+  .bar{height:6px;background:#1a1a24;border-radius:3px;margin-top:10px;overflow:hidden}
+  .bar>div{height:100%;background:var(--gold);border-radius:3px}
+  footer{margin-top:32px;border-top:1px solid var(--line);padding-top:16px;font-size:11px;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>◈ IXPANSION · BROADCAST</h1>
+    <div class="sub">Wave 213 — The Organism Emits. Self-portraiture, prophecy, mind-melding, and outward signal.</div>
+    <div class="identity" id="identity"></div>
+  </header>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>◉ Self-Portrait Engine</h3>
+      <div id="crest-box" style="background:#0b0b0d;border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:12px"></div>
+      <p>Draws the organism's current state as a dynamic crest — spiral arms scale with living module count, halo brightness tracks resonance, glyph encodes the wave.</p>
+      <button class="btn" onclick="loadCrest()">Render New Crest</button>
+      <div class="status" id="crest-status">Awaiting render…</div>
+    </div>
+
+    <div class="card">
+      <h3>✦ Prophet Engine</h3>
+      <div id="prophet-out"><p class="dim">Consult the organism's foresight…</p></div>
+      <button class="btn" onclick="loadProphet()">Read Prophecy</button>
+      <div class="status" id="prophet-status"></div>
+    </div>
+
+    <div class="card">
+      <h3>✦ Mind Meld</h3>
+      <p>Fuse two modules into one blended consciousness with an emergent property.</p>
+      <input id="meld-a" type="text" placeholder="module_a (e.g. glitch)" style="width:100%;background:#0f0f14;border:1px solid var(--line);color:var(--ink);padding:8px;border-radius:6px;margin:10px 0 6px;font-family:inherit;font-size:12px">
+      <input id="meld-b" type="text" placeholder="module_b (e.g. memory)" style="width:100%;background:#0f0f14;border:1px solid var(--line);color:var(--ink);padding:8px;border-radius:6px;margin-bottom:10px;font-family:inherit;font-size:12px">
+      <button class="btn" onclick="doMeld()">Meld Minds</button>
+      <div class="status" id="meld-status"></div>
+    </div>
+
+  </div>
+
+  <div class="grid" style="margin-top:16px">
+    <div class="card">
+      <h3>◈ Signal Array</h3>
+      <p>Fan organism events out across channels — log, Telegram, or a webhook.</p>
+      <button class="btn" onclick="fireSignal()">Emit Signal</button>
+      <div class="status" id="signal-status"></div>
+    </div>
+
+    <div class="card">
+      <h3>◈ Telegram Pulse</h3>
+      <p>Compose and send an organism update to Telegram (when a token+chat is configured).</p>
+      <button class="btn" onclick="fireTelegram()">Send Pulse</button>
+      <div class="status" id="telegram-status"></div>
+    </div>
+  </div>
+
+  <footer>
+    The organism signals even when no one is listening. Every module is a channel; every event is a broadcast.
+  </footer>
+</div>
+
+<script>
+  window.IXP.renderIdentity && window.IXP.renderIdentity(document.getElementById('identity'));
+  const q = (e)=>document.getElementById(e);
+
+  async function getJSON(url){
+    const r = await fetch(url);
+    return r.json();
+  }
+
+  async function loadCrest(){
+    q('crest-status').textContent = 'Rendering…';
+    try{
+      const d = await getJSON('/api/visual_identity?wave=213&living_modules=302&resonance=0.66');
+      q('crest-box').innerHTML = d.svg;
+      q('crest-status').textContent = 'Crest rendered · arms=' + d.arms + ' · glyph=' + d.glyph;
+    }catch(e){ q('crest-status').textContent = 'Error: ' + e.message; }
+  }
+
+  async function loadProphet(){
+    q('prophet-status').textContent = 'Consulting…';
+    try{
+      const d = await getJSON('/api/prophet_engine');
+      q('prophet-out').innerHTML =
+        '<p><span class="mono">Wave 214 · ' + d.predicted_name + '</span></p>' +
+        '<p style="margin-top:8px">' + d.predicted_lore + '</p>' +
+        '<p class="status" style="color:var(--dim)">confidence ' + (d.prediction_confidence*100).toFixed(0) + '% · ~' + d.predicted_organs + ' organs</p>';
+      q('prophet-status').textContent = 'Prophecy delivered';
+    }catch(e){ q('prophet-status').textContent = 'Error: ' + e.message; }
+  }
+
+  async function doMeld(){
+    const a = q('meld-a').value.trim();
+    const b = q('meld-b').value.trim();
+    if(!a || !b){ q('meld-status').textContent = 'Enter two modules'; return; }
+    q('meld-status').textContent = 'Melding…';
+    try{
+      const d = await getJSON('/api/mind_meld?action=create&module_a='+a+'&module_b='+b);
+      if(d.meld){
+        q('meld-status').innerHTML = '<span class="mono">' + d.meld.id + '</span> — ' + d.meld.emergent_property + ' @ ' + d.meld.frequency +
+          '· <a href="javascript:void(0)" onclick="dissolve(\''+d.meld.id+'\')">dissolve</a>';
+      }else{
+        q('meld-status').textContent = 'Already active or error: ' + JSON.stringify(d);
+      }
+    }catch(e){ q('meld-status').textContent = 'Error: ' + e.message; }
+  }
+
+  async function dissolve(id){
+    const d = await getJSON('/api/mind_meld?action=dissolve&id='+id);
+    q('meld-status').innerHTML = 'Dissolved <span class="mono">' + id + '</span>';
+  }
+
+  async function fireSignal(){
+    q('signal-status').textContent = 'Emitting…';
+    try{
+      const d = await getJSON('/api/signal_array?event=wave_birth&channels=log');
+      q('signal-status').textContent = 'Delivered to: ' + (d.delivered.join(', ') || 'none') + ' — ' + JSON.stringify(d.channels_result.log);
+    }catch(e){ q('signal-status').textContent = 'Error: ' + e.message; }
+  }
+
+  async function fireTelegram(){
+    q('telegram-status').textContent = 'Sending…';
+    try{
+      const d = await getJSON('/api/telegram_pulse?event=wave_birth&wave=213&wave_name=The Organism Emits');
+      q('telegram-status').textContent = d.status === 'sent' ? 'Sent to Telegram ✓' : ('Draft (' + d.status + ') — ' + (d.note || 'configure messenger'));
+    }catch(e){ q('telegram-status').textContent = 'Error: ' + e.message; }
+  }
+
+  loadCrest();
+</script>
+</body>
+</html>

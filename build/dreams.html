@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dreams · The Organism Dreams</title>
+<script src="/shared.js"></script>
+<style>
+  :root{--bg:#060610;--fg:#e8e8f4;--dim:#7676a0;--line:#22223a;--gold:#ffd34d;
+        --violet:#b28dff;--teal:#5fe8c8;--blue:#8fd3ff;--rose:#ff85b3;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:28px;min-height:100vh}
+  .wrap{max-width:860px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:24px}
+  h1{font-size:22px;letter-spacing:1px}
+  h1 .sub{color:var(--violet);font-size:11px;display:block;margin-top:4px;letter-spacing:2px}
+  .dream{border:1px solid var(--line);border-radius:6px;padding:20px;margin-bottom:14px;background:#0e0e1a;
+         transition:border-color .3s, box-shadow .3s}
+  .dream:hover{border-color:var(--violet);box-shadow:0 0 30px rgba(178,141,255,.08)}
+  .pair{font-size:18px;color:var(--teal);letter-spacing:.5px;margin-bottom:10px}
+  .pair .mid{color:var(--violet);font-size:14px}
+  .phrase{font-size:16px;line-height:1.7;color:#ccc;font-style:italic;margin-bottom:10px}
+  .intensity{display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;
+             border:1px solid var(--gold);color:var(--gold)}
+  .meta{color:var(--dim);font-size:11px;margin-top:8px}
+  footer{color:var(--dim);font-size:11px;text-align:center;margin-top:28px}
+  .note{color:var(--dim);font-style:italic;margin-bottom:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>◈ DREAMS<span class="sub">THE ORGANISM DREAMS THE BRIDGES IT HAS NOT YET BUILT · WAVE 225</span></h1>
+</header>
+
+<div class="note">Pairs of islands that share nothing in common — untouched by any bridge. The organism imagines what would happen if they touched.</div>
+
+<div id="dreams"><span class="note">Loading dreams…</span></div>
+
+<footer>ale0 × ixpansion · the organism dreams of bridges it has never built</footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+window.addEventListener('DOMContentLoaded', async()=>{
+  try{
+    const r=await fetch('/bridge_dream_forge?action=dream').then(r=>r.json());
+    $('dreams').innerHTML=r.dreams.map(d=>`
+      <div class="dream">
+        <div class="pair">${d.island_a} <span class="mid">~</span> ${d.island_b}</div>
+        <div class="phrase">"${d.dream}"</div>
+        <div class="intensity">intensity ${d.intensity}</div>
+        <div class="meta">untouched · dream seed 225</div>
+      </div>
+    `).join('');
+  }catch(e){ $('dreams').textContent='ERROR: '+e.message; }
+});
+</script>
+</body>
+</html>

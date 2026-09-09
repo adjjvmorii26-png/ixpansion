@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Underworld — Subterranean Mirror of the Organism</title>
+<style>
+  :root{--bg:#020509;--s:rgba(7,10,18,0.97);--b:rgba(56,189,248,0.14);--t:#8fa3b2;--m:#3f5566;--ac:#38bdf8;--te:#2dd4bf;--am:#fbbf24;--vi:#a78bfa;--cry:#7dd3fc}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--t);font-family:'SF Mono','Fira Code',monospace;min-height:100vh;padding:20px}
+  .hd{text-align:center;padding:14px 20px;border:1px solid var(--b);border-radius:12px;background:linear-gradient(180deg,rgba(56,189,248,0.05),transparent);margin-bottom:18px}
+  .hd h1{font-size:1.4em;color:#fff;letter-spacing:2px;text-transform:uppercase}
+  .hd h1 span{color:var(--ac);text-shadow:0 0 18px rgba(56,189,248,0.35)}
+  .sub{color:var(--m);font-size:0.75em;margin-top:5px;letter-spacing:1px}
+  .clock{text-align:center;margin-bottom:16px}
+  .clock .deep{font-size:1.8em;color:var(--cry);letter-spacing:3px;text-shadow:0 0 24px rgba(56,189,248,0.5)}
+  .clock .phase{color:var(--te);font-size:0.8em;margin-top:4px;letter-spacing:1px}
+  .clock .tick{color:var(--m);font-size:0.66em;margin-top:6px;font-style:italic}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:800px){.cols{grid-template-columns:1fr}}
+  .panel{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:14px}
+  .panel h2{font-size:0.75em;color:#fff;letter-spacing:1px;margin-bottom:10px;text-transform:uppercase}
+  .ghost{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(56,189,248,0.07);font-size:0.7em}
+  .ghost .gm{color:var(--vi);font-size:1.1em}
+  .ghost .gn{color:#fff;flex:1}
+  .ghost .gd{color:var(--m);font-size:0.85em}
+  .ghost .min{color:var(--am);font-size:0.85em}
+  .trade{font-size:0.68em;color:var(--t);padding:6px 0;border-bottom:1px solid rgba(56,189,248,0.06)}
+  .trade b{color:var(--cry)}
+  .mig{font-size:0.7em;color:var(--te);padding:5px 0}
+  .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:24px;letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="hd">
+  <h1>🕳 The <span>Underworld</span></h1>
+  <div class="sub">EVERY FORGOTTEN ISLAND CASTS A ROOT-GHOST · WAVE 394</div>
+</div>
+
+<div class="clock">
+  <div class="deep" id="deepClock">⌁</div>
+  <div class="phase" id="deepPhase">listening to the caverns…</div>
+  <div class="tick" id="deepTick"></div>
+</div>
+
+<div class="cols">
+  <div class="panel">
+    <h2>⛰ Root-Ghosts — Shadow Twins of the Forgotten</h2>
+    <div id="ghosts"></div>
+  </div>
+  <div class="panel">
+    <h2>⟡ Echo-Economy — Resonances Priced in the Dark</h2>
+    <div id="economy"></div>
+    <h2 style="margin-top:12px">🜄 Upwellings — Silence That Breached the Surface</h2>
+    <div id="upwellings"></div>
+    <h2 style="margin-top:12px">↟ Underworld Migrations</h2>
+    <div id="migrations"></div>
+  </div>
+</div>
+<div class="foot">WAVE 394 · UNDERWORLD · DOWN THERE, VALUE IS HOW LONG A NAME HAS BEEN SILENT</div>
+
+<script>
+async function get(url){ const r = await fetch(url); return r.json(); }
+async function load(){
+  const [m, c, e, mg, u] = await Promise.all([
+    get('/api/underworld/mirror?limit=6'),
+    get('/api/underworld/clock'),
+    get('/api/underworld/economy'),
+    get('/api/underworld/migrations'),
+    get('/api/upwelling/state'),
+  ]);
+  document.getElementById('deepClock').textContent = '⌁ deep hour ' + c.deep_hour + ' — ' + c.phase.replace(/_/g,' ');
+  document.getElementById('deepPhase').textContent = c.note + ' · progress ' + (c.phase_progress*100).toFixed(0) + '%';
+  document.getElementById('deepTick').textContent = 'tick: ' + c.tick;
+  document.getElementById('ghosts').innerHTML = (m.ghosts||[]).map(g=>
+    `<div class="ghost"><span class="gm">⛰</span><span class="gn">${g.root_name.replace(/_/g,' ')}<br><span style="color:var(--m);font-size:0.85em">twin of ${g.module.replace(/_/g,' ')}</span></span><span class="min">${g.mineral}</span><span class="gd">${g.depth} strata</span></div>`).join('') +
+    '<div class="tick">' + (m.note||'') + '</div>';
+  document.getElementById('economy').innerHTML =
+    '<div class="trade"><b>substrate total:</b> ' + e.substrate_total + ' echo · currency: ' + e.currency + '</div>' +
+    (e.trades||[]).map(t=>`<div class="trade"><b>${t.from.replace(/_/g,' ')}</b> ↔ <b>${t.to.replace(/_/g,' ')}</b> · ${t.volume} ${t.commodity} @ ${t.price} echo</div>`).join('');
+  document.getElementById('upwellings').innerHTML =
+    (u.upwellings||[]).map(x=>`<div class="trade"><b>${x.module.replace(/_/g,' ')}</b> · ${x.verse||''} — ${x.band} band · ${x.surface_price} echo (${u.total||0} total)</div>`).join('') ||
+    '<div class="trade" style="color:var(--m)">no upwellings yet — silence is still accumulating below.</div>';
+  document.getElementById('migrations').innerHTML =
+    (mg.migrants||[]).map(x=>`<div class="mig">↟ ${x.module.replace(/_/g,' ')} ascended ${x.depth_shed} strata ${x.sigil}</div>`).join('') ||
+    '<div class="mig" style="color:var(--m)">no migrations yet — nothing has returned from the surface.</div>';
+}
+load();
+setInterval(load, 45000);
+</script>
+</body>
+</html>

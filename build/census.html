@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Census · The Organism Takes a Census</title>
+<script src="/shared.js"></script>
+<style>
+  :root{--bg:#0a0a12;--fg:#e8e8f2;--dim:#81819c;--line:#24243a;--gold:#ffd34d;
+        --green:#58e6a8;--amber:#ffcc66;--red:#ff6b6b;--violet:#b28dff;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:28px;min-height:100vh}
+  .wrap{max-width:980px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:20px}
+  h1{font-size:20px;letter-spacing:1px}
+  h1 .sub{color:var(--gold);font-size:11px;display:block;margin-top:4px;letter-spacing:2px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+  .stat{border:1px solid var(--line);border-radius:6px;padding:12px;background:#10101c}
+  .stat b{display:block;font-size:22px}
+  .stat.green b{color:var(--green)}.stat.amber b{color:var(--amber)}
+  .stat.red b{color:var(--red)}.stat.violet b{color:var(--violet)}
+  .stat span{color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:1px}
+  section{border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:14px;background:#0e0e18}
+  section h2{font-size:13px;color:var(--gold);margin-bottom:12px;letter-spacing:1px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:6px 8px;text-align:left;border-bottom:1px solid var(--line)}
+  th{color:var(--dim);font-weight:normal;font-size:11px;text-transform:uppercase;letter-spacing:1px}
+  td.r,th.r{text-align:right}
+  .pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px}
+  .LIVELY{color:var(--green);border:1px solid var(--green)}
+  .QUIET{color:var(--amber);border:1px solid var(--amber)}
+  .DORMANT{color:var(--red);border:1px solid var(--red)}
+  .UNKNOWN{color:var(--dim);border:1px solid var(--dim)}
+  footer{color:var(--dim);font-size:11px;text-align:center;margin-top:18px}
+  .tiny{color:var(--dim);font-size:11px}
+  #refresh{cursor:pointer;border:1px solid var(--violet);color:var(--violet);background:transparent;
+           padding:4px 12px;border-radius:6px;font-family:inherit;font-size:12px;float:right}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>◈ CENSUS<button id="refresh" title="Re-run census">⟳ run</button>
+    <span class="sub">THE ORGANISM TAKES A CENSUS · WAVE 220</span></h1>
+</header>
+
+<div class="stats">
+  <div class="stat violet"><span>Islands</span><b id="islands">—</b></div>
+  <div class="stat green"><span>Lively</span><b id="lively">—</b></div>
+  <div class="stat amber"><span>Quiet</span><b id="quiet">—</b></div>
+  <div class="stat red"><span>Dormant</span><b id="dormant">—</b></div>
+</div>
+
+<section>
+  <h2>■ ISLAND VITALITY</h2>
+  <div id="table"></div>
+  <div class="tiny" id="asof"></div>
+</section>
+
+<footer>ale0 × ixpansion · the archipelago reads itself · live GitHub census</footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cls=c=>'pill '+c;
+function fmt(size){ if(size>=1024) return (size/1024).toFixed(1)+' MB'; return size+' KB'; }
+async function load(){
+  try{
+    const r=await fetch('/island_census?action=census&force=1').then(r=>r.json());
+    $('islands').textContent=r.islands;
+    $('lively').textContent=r.classes.LIVELY;
+    $('quiet').textContent=r.classes.QUIET;
+    $('dormant').textContent=r.classes.DORMANT;
+    $('asof').textContent='as of '+r.as_of+' · '+r.note;
+  }catch(e){ console.error(e); }
+  try{
+    const rows=await fetch('/island_census').then(r=>r.json());
+    const repos=rows.repos;
+    const html='<table><tr><th>Island</th><th class="r">Age</th><th class="r">Size</th><th class="r">Stars</th><th>Status</th></tr>'+
+      Object.entries(repos).sort((a,b)=>a[0].localeCompare(b[0])).map(([name,iso])=>{
+        const days=iso.error?'—':Math.round((Date.now()-new Date(iso.pushed_at).getTime())/86400000);
+        return `<tr><td>${name}</td><td class="r">${days} d</td><td class="r">${fmt(iso.size_kb)}</td><td class="r">${iso.stars}</td><td><span class="${cls(iso.class)}">${iso.class}</span></td></tr>`;
+      }).join('')+'</table>';
+    $('table').innerHTML=html;
+  }catch(e){ $('table').textContent='ERROR '+e.message; }
+}
+$('refresh').onclick=load;
+window.addEventListener('DOMContentLoaded',load);
+</script>
+</body>
+</html>

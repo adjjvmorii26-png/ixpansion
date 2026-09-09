@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Archipelago · The Organism's Whole Shape</title>
+<script src="/shared.js"></script>
+<style>
+  :root{--bg:#0a0a12;--fg:#e8e8f2;--dim:#82829a;--line:#24243a;
+        --gold:#ffd34d;--teal:#5fe8c8;--violet:#b28dff;--red:#ff6b6b;--blue:#8fd3ff;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:28px;min-height:100vh}
+  .wrap{max-width:1000px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:20px}
+  h1{font-size:20px;letter-spacing:1px}
+  h1 .sub{color:var(--gold);font-size:11px;display:block;margin-top:4px;letter-spacing:2px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:20px}
+  .kpi{border:1px solid var(--line);border-radius:6px;padding:12px;background:#10101c}
+  .kpi b{display:block;font-size:24px}
+  .kpi.teal b{color:var(--teal)}.kpi.violet b{color:var(--violet)}
+  .kpi.gold b{color:var(--gold)}.kpi.blue b{color:var(--blue)}
+  .kpi span{color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:1px}
+  section{border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:14px;background:#0e0e18}
+  section h2{font-size:13px;color:var(--gold);margin-bottom:12px;letter-spacing:1px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:700px){.cols{grid-template-columns:1fr}}
+  .haiku{border-left:2px solid var(--violet);padding-left:10px;margin:6px 0;color:var(--fg);white-space:pre-line;font-size:13px}
+  .haiku .meta{color:var(--dim);font-size:10px;margin-top:2px}
+  ul{list-style:none}
+  li{padding:4px 0;border-bottom:1px dashed var(--line);font-size:13px}
+  li .n{color:var(--dim);font-size:11px}
+  .pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;border:1px solid var(--teal);color:var(--teal)}
+  .pill.warn{color:var(--gold);border-color:var(--gold)}
+  .pill.bad{color:var(--red);border-color:var(--red)}
+  footer{color:var(--dim);font-size:11px;text-align:center;margin-top:20px}
+  .mood{font-style:italic;color:var(--teal);margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>◈ ARCHIPELAGO<span class="sub">THE ORGANISM'S WHOLE SHAPE · WAVES 216–219</span></h1>
+</header>
+
+<div class="grid">
+  <div class="kpi teal"><span>Bridge Stones</span><b id="nstones">—</b></div>
+  <div class="kpi violet"><span>Constellation Repos</span><b id="nrepos">—</b></div>
+  <div class="kpi gold"><span>Health Index</span><b id="health">—</b></div>
+  <div class="kpi blue"><span>Articulation Points</span><b id="artic">—</b></div>
+</div>
+
+<div class="cols">
+  <section>
+    <h2>■ RHYTHM — <span id="rhythmpill" class="pill">…</span></h2>
+    <div id="mood" class="mood"></div>
+    <div id="timeline"></div>
+  </section>
+
+  <section>
+    <h2>■ TOPOLOGY — the web's shape</h2>
+    <div id="central"></div>
+    <div id="clusters" style="margin-top:10px"></div>
+  </section>
+</div>
+
+<section>
+  <h2>■ EPITAPHS — what the stones say</h2>
+  <div id="epitaphs"></div>
+</section>
+
+<footer>ale0 × ixpansion · the organism speaks, sees, and beats</footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+function pill(el,txt,cls){el.textContent=txt;el.className='pill '+cls;}
+window.addEventListener('DOMContentLoaded', async ()=>{
+  try{
+    const [sent,topo,pulse,epi]=await Promise.all([
+      fetch('/resonance_sentinel').then(r=>r.json()),
+      fetch('/constellation_topology').then(r=>r.json()),
+      fetch('/rhythm_pulse').then(r=>r.json()),
+      fetch('/bridge_epitaphs').then(r=>r.json())
+    ]);
+    $('nstones').textContent=sent.stones;
+    $('nrepos').textContent=sent.repos;
+    $('health').textContent=sent.health_index;
+    $('artic').textContent=topo.articulation_points.length;
+
+    pill($('rhythmpill'), pulse.rhythm.toUpperCase(), pulse.rhythm==='bloom'?'':'warn');
+    $('mood').textContent=pulse.mood;
+    $('timeline').innerHTML='<ul>'+pulse.timeline.map(t=>`<li>${t.date} <span class="n">— ${t.stones} stones</span></li>`).join('')+'</ul>';
+
+    $('central').innerHTML='<b style="font-size:11px;color:var(--gold)">CENTRAL ISLANDS</b><ul>'+topo.central.slice(0,6).map(c=>`<li>${c.repo} <span class="n">(${c.stones} stones)</span></li>`).join('')+'</ul>';
+    const topClusters=Object.entries(topo.clusters).sort((a,b)=>b[1].length-a[1].length).slice(0,6);
+    $('clusters').innerHTML='<b style="font-size:11px;color:var(--gold)">CLUSTERS</b><ul>'+topClusters.map(([k,v])=>`<li>${k} <span class="n">× ${v.length} islands</span></li>`).join('')+'</ul>';
+
+    $('epitaphs').innerHTML=epi.epitaphs.slice(0,14).map(e=>`<div class="haiku">${e.haiku}<div class="meta">${e.repo} × ${e.organ} · r=${e.resonance}</div></div>`).join('');
+  }catch(e){$('epitaphs').textContent='ERROR '+e.message;}
+});
+</script>
+</body>
+</html>

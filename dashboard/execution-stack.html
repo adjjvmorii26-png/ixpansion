@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Execution Stack — how the organism evolves</title>
+<style>
+  :root{--bg:#040410;--s:rgba(8,8,20,0.96);--b:rgba(255,255,255,0.07);--t:#9898b0;--m:#3e3e58;--vi:#a78bfa;--te:#2dd4bf;--am:#fbbf24;--gn:#4ade80;--ro:#fb7185;--cy:#22d3ee;--gd:#f59e0b}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--t);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+  header{text-align:center;padding:40px 0 24px;border-bottom:1px solid var(--b)}
+  header h1{font-size:1.8em;color:#fff;letter-spacing:4px;text-transform:uppercase}
+  header h1 span{color:var(--vi)}
+  header p{color:var(--m);font-size:.8em;margin-top:6px}
+  .hierarchy{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;padding:16px 0;font-size:.72em;color:var(--m)}
+  .hierarchy .h{padding:5px 10px;border:1px solid var(--b);border-radius:6px;color:var(--vi)}
+  .hierarchy .arrow{color:var(--m)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;padding:20px 0}
+  .card{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:16px}
+  .card h2{color:#fff;font-size:.88em;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+  .card h2 span{color:var(--vi)}
+  .stat{display:flex;gap:14px;flex-wrap:wrap;font-size:.74em;margin-bottom:8px}
+  .stat b{color:#fff}
+  .list{display:flex;flex-direction:column;gap:6px;font-size:.72em;max-height:180px;overflow-y:auto}
+  .row{padding:6px 8px;border:1px solid var(--b);border-radius:6px;background:rgba(255,255,255,.01)}
+  .row b{color:#fff}
+  .tag{display:inline-block;padding:2px 6px;border-radius:10px;font-size:.65em;margin-left:4px}
+  .tag-active{background:rgba(74,222,128,.15);color:var(--gn)}
+  .tag-pending{background:rgba(251,191,36,.15);color:var(--am)}
+  .tag-completed{background:rgba(167,139,250,.15);color:var(--vi)}
+  .gen{padding:10px;border:1px solid var(--b);border-radius:8px;margin-bottom:6px}
+  .gen b{color:var(--te)}
+  .gen .theme{color:var(--m);font-size:.9em;margin-top:2px}
+  .pulse{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--gn);box-shadow:0 0 12px var(--gn);animation:pulse 1.6s infinite;margin-right:6px}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Execution <span>Stack</span></h1>
+    <p><span class="pulse"></span>Events → Tasks → Batches → Cycles → Waves → Generations</p>
+  </header>
+  <div class="hierarchy">
+    <span class="h">Events</span><span class="arrow">→</span>
+    <span class="h">Tasks</span><span class="arrow">→</span>
+    <span class="h">Batches</span><span class="arrow">→</span>
+    <span class="h">Cycles</span><span class="arrow">→</span>
+    <span class="h">Waves</span><span class="arrow">→</span>
+    <span class="h">Generations</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <h2>Stats</h2>
+      <div class="stat" id="stats">loading…</div>
+      <div style="font-size:.72em;color:var(--m)" id="gen-info"></div>
+    </div>
+    <div class="card">
+      <h2>Recent <span>Events</span></h2>
+      <div class="list" id="events"></div>
+    </div>
+    <div class="card">
+      <h2>Recent <span>Tasks</span></h2>
+      <div class="list" id="tasks"></div>
+    </div>
+    <div class="card">
+      <h2>Recent <span>Batches</span></h2>
+      <div class="list" id="batches"></div>
+    </div>
+    <div class="card">
+      <h2>Recent <span>Cycles</span></h2>
+      <div class="list" id="cycles"></div>
+    </div>
+    <div class="card">
+      <h2>Generations</h2>
+      <div id="generations"></div>
+    </div>
+  </div>
+</div>
+<script>
+async function j(u){ return (await fetch(u)).json(); }
+async function refresh(){
+  const d = await j('/exec-stack?action=overview');
+  const s = d.stats||{};
+  document.getElementById('stats').innerHTML =
+    '<div><b>'+s.total_events+'</b> events</div>'+
+    '<div><b>'+s.total_tasks+'</b> tasks</div>'+
+    '<div><b>'+s.total_batches+'</b> batches</div>'+
+    '<div><b>'+s.total_cycles+'</b> cycles</div>'+
+    '<div><b>'+s.total_waves+'</b> waves</div>';
+  document.getElementById('gen-info').textContent =
+    'Current: '+d.current_generation+' · Wave '+d.current_wave;
+  document.getElementById('events').innerHTML = (d.recent_events||[]).map(e=>
+    '<div class="row"><b>'+e.source+'</b> · '+e.kind+' <span class="tag tag-completed">'+new Date(e.emitted_at*1000).toLocaleTimeString()+'</span></div>'
+  ).join('')||'<div style="color:var(--m)">no events yet</div>';
+  document.getElementById('tasks').innerHTML = (d.recent_tasks||[]).map(t=>
+    '<div class="row"><b>'+t.name+'</b> <span class="tag '+(t.status==='completed'?'tag-completed':'tag-pending')+'">'+t.status+'</span></div>'
+  ).join('')||'<div style="color:var(--m)">no tasks yet</div>';
+  document.getElementById('batches').innerHTML = (d.recent_batches||[]).map(b=>
+    '<div class="row"><b>'+b.name+'</b> <span class="tag '+(b.status==='completed'?'tag-completed':'tag-pending')+'">'+b.status+'</span></div>'
+  ).join('')||'<div style="color:var(--m)">no batches yet</div>';
+  document.getElementById('cycles').innerHTML = (d.recent_cycles||[]).map(c=>
+    '<div class="row"><b>cycle</b> · '+c.metrics.tasks_completed+' tasks · '+c.metrics.events_processed+' events</div>'
+  ).join('')||'<div style="color:var(--m)">no cycles yet</div>';
+  document.getElementById('generations').innerHTML = (d.generations||[]).map(g=>
+    '<div class="gen"><b>'+g.id+': '+g.name+'</b> <span class="tag '+(g.id===d.current_generation?'tag-active':'tag-completed')+'">'+g.waves+'</span><div class="theme">'+g.theme+'</div></div>'
+  ).join('');
+}
+refresh();
+setInterval(refresh, 15000);
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Commune · The Federation Dashboard</title>
+<script src="/shared.js"></script>
+<style>
+  :root{--bg:#08080e;--fg:#e8e8f2;--dim:#7878a0;--line:#24243a;--gold:#ffd34d;
+        --green:#58e6a8;--violet:#b28dff;--teal:#5fe8c8;--blue:#8fd3ff;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:28px;min-height:100vh}
+  .wrap{max-width:1000px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:20px}
+  h1{font-size:20px;letter-spacing:1px}
+  h1 .sub{color:var(--gold);font-size:11px;display:block;margin-top:4px;letter-spacing:2px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+  .kpi{border:1px solid var(--line);border-radius:6px;padding:12px;background:#10101c}
+  .kpi b{display:block;font-size:22px}
+  .kpi.teal b{color:var(--teal)}.kpi.gold b{color:var(--gold)}
+  .kpi.green b{color:var(--green)}.kpi.blue b{color:var(--blue)}
+  .kpi span{color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:1px}
+  section{border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:14px;background:#0e0e18}
+  section h2{font-size:13px;color:var(--gold);margin-bottom:12px;letter-spacing:1px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:700px){.cols{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:5px 8px;text-align:left;border-bottom:1px solid var(--line)}
+  th{color:var(--dim);font-weight:normal;font-size:11px;text-transform:uppercase;letter-spacing:1px}
+  td.r,th.r{text-align:right}
+  .pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px}
+  .pill.ok{color:var(--green);border:1px solid var(--green)}
+  .pill.bad{color:#ff6b6b;border:1px solid #ff6b6b}
+  .pill.warn{color:var(--gold);border:1px solid var(--gold)}
+  .clique{border-left:2px solid var(--violet);padding-left:10px;margin:6px 0;font-size:13px}
+  .clique .meta{color:var(--dim);font-size:11px}
+  footer{color:var(--dim);font-size:11px;text-align:center;margin-top:18px}
+  .loading{color:var(--dim);font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>◈ COMMUNE<span class="sub">THE FEDERATION DASHBOARD · WAVE 222</span></h1>
+</header>
+
+<div class="grid">
+  <div class="kpi green"><span>Fidelity</span><b id="fidelity">—</b></div>
+  <div class="kpi teal"><span>Islands in Federation</span><b id="islands">—</b></div>
+  <div class="kpi blue"><span>Audit — CURRENT</span><b id="current">—</b></div>
+  <div class="kpi gold"><span>Audit — STALE</span><b id="stale">—</b></div>
+  <div class="kpi" style="color:#ff6b6b"><span>Audit — MISSING</span><b id="missing">—</b></div>
+</div>
+
+<section>
+  <h2>■ AUDIT — each island's registry fidelity</h2>
+  <div id="audit"><span class="loading">Loading audit…</span></div>
+</section>
+
+<div class="cols">
+  <section>
+    <h2>■ DEGREE — most connected islands</h2>
+    <div id="degree"></div>
+  </section>
+  <section>
+    <h2>■ CLIQUES — shared alliances</h2>
+    <div id="cliques"></div>
+  </section>
+</div>
+
+<footer>ale0 × ixpansion · the archipelago knows itself island by island</footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+window.addEventListener('DOMContentLoaded', async()=>{
+  try{
+    const [auditRes, graphRes]=await Promise.all([
+      fetch('/registry_auditor?action=audit').then(r=>r.json()),
+      fetch('/federation_graph?action=graph').then(r=>r.json()),
+    ]);
+    $('fidelity').textContent=auditRes.fidelity;
+    $('islands').textContent=auditRes.tallies.CURRENT;
+    $('current').textContent=auditRes.tallies.CURRENT||0;
+    $('stale').textContent=auditRes.tallies.STALE||0;
+    $('missing').textContent=auditRes.tallies.MISSING||0;
+    const fp=$('fidelity').parentElement;
+    if(auditRes.fidelity>=1) fp.style.borderColor='var(--green)';
+    else if(auditRes.fidelity>=0.9) fp.style.borderColor='var(--gold)';
+    else fp.style.borderColor='#ff6b6b';
+
+    $('audit').innerHTML='<table><tr><th>Island</th><th>State</th><th>Stones</th><th class="r">Fidelity</th><th>Registry</th></tr>'+
+      auditRes.results.sort((a,b)=>a.repo.localeCompare(b.repo)).map(a=>{
+        const st=a.state.split(':')[0];
+        const cls=st==='CURRENT'?'ok':st==='STALE'?'warn':'bad';
+        return `<tr><td>${a.repo}</td><td><span class="pill ${cls}">${st}</span></td><td>${a.stones_in_registry||'-'}</td><td class="r">${a.fidelity}</td><td>${a.wave_in_registry?'w'+a.wave_in_registry:'-'}</td></tr>`;
+      }).join('')+'</table>';
+
+    $('degree').innerHTML='<table><tr><th>Island</th><th class="r">Organ partners</th></tr>'+
+      graphRes.top_connected.map(c=>`<tr><td>${c[0]}</td><td class="r">${c[1]}</td></tr>`).join('')+'</table>';
+
+    const cliques=graphRes.clique_sample||[];
+    if(cliques.length===0) $('cliques').innerHTML='<span class="loading">No multi-organ alliances — every stone is a unique pairing.</span>';
+    else $('cliques').innerHTML=cliques.map(c=>`<div class="clique"><b>${c.a}</b> ↔ <b>${c.b}</b><br/><span class="meta">shared: ${c.shared_organs.join(', ')} · strength ${c.strength}</span></div>`).join('');
+  }catch(e){ $('audit').textContent='ERROR: '+e.message; }
+});
+</script>
+</body>
+</html>

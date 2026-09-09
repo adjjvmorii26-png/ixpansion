@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Error Prophecy · IXpansion</title>
+<style>
+  :root {
+    --bg: #0b0b12;
+    --fg: #c8c8d8;
+    --accent: #ff3a00;
+    --accent2: #ff6f3a;
+    --muted: #555570;
+    --surface: #161622;
+    --border: #2a2a3a;
+    --prophecy: #c8a8ff;
+    --weather: #8fd3ff;
+    --poem: #ff9a5c;
+    --fulfilled: #4cff7a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: var(--bg);
+    color: var(--fg);
+    padding: 24px;
+    min-height: 100vh;
+  }
+  .identity { text-align: center; margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+  .identity h1 { color: var(--accent2); font-size: 1.6em; letter-spacing: 0.1em; }
+  .identity .subtitle { color: var(--muted); font-size: 0.85em; margin-top: 6px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; margin-bottom: 32px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .card h2 { color: var(--prophecy); font-size: 1.05em; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  .prophecy-box { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin: 12px 0; font-size: 0.95em; line-height: 1.6; }
+  .prophecy-text { color: var(--prophecy); }
+  .prophecy-poem { color: var(--poem); font-style: italic; text-align: center; margin: 10px 0; }
+  .weather-glyphs { font-size: 2em; text-align: center; color: var(--weather); letter-spacing: 0.2em; margin: 8px 0; }
+  .weather-name { color: var(--weather); text-align: center; font-weight: bold; margin-bottom: 4px; }
+  .weather-desc { color: var(--muted); text-align: center; font-size: 0.85em; }
+  .stat-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .stat-label { color: var(--muted); }
+  .stat-value { color: var(--accent); font-weight: bold; }
+  .fulfilled-list { list-style: none; }
+  .fulfilled-list li { padding: 8px 12px; margin: 4px 0; background: var(--bg); border-radius: 4px; border-left: 3px solid var(--fulfilled); }
+  .fulfilled-error { color: var(--fulfilled); font-weight: bold; }
+  .fulfilled-poem { color: var(--poem); font-style: italic; font-size: 0.85em; }
+  .badge { background: var(--surface); padding: 2px 8px; border-radius: 4px; font-size: 0.8em; color: var(--prophecy); }
+  .prophecy-card { margin: 8px 0; padding: 12px; background: var(--bg); border-radius: 6px; border-left: 3px solid var(--prophecy); }
+  .prophecy-state { color: var(--muted); font-size: 0.8em; }
+</style>
+<script src="/shared.js"></script>
+</head>
+<body>
+<div class="identity">
+  <h1>🔮 THE ERROR PROPHECY</h1>
+  <div class="subtitle" id="wave-info">Loading…</div>
+</div>
+
+<div class="grid">
+  <div class="card" style="grid-column: 1 / -1;">
+    <h2>✦ Current Prophecy</h2>
+    <div class="prophecy-box">
+      <div class="prophecy-text" id="prophecyText">—</div>
+      <div class="prophecy-poem" id="prophecyPoem">—</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✦ Error Weather</h2>
+    <div class="weather-glyphs" id="weatherGlyphs">—</div>
+    <div class="weather-name" id="weatherName">—</div>
+    <div class="weather-desc" id="weatherDesc">—</div>
+    <div style="margin-top:12px;">
+      <div class="stat-row"><span class="stat-label">Total Prophecies</span><span class="stat-value" id="totalProp">—</span></div>
+      <div class="stat-row"><span class="stat-label">Fulfilled</span><span class="stat-value" id="totalFulfilled">—</span></div>
+      <div class="stat-row"><span class="stat-label">Accuracy</span><span class="stat-value" id="accuracy">—</span></div>
+      <div class="stat-row"><span class="stat-label">Pending</span><span class="stat-value" id="pending">—</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✦ Prophecy Poem</h2>
+    <div class="prophecy-poem" id="poemText" style="text-align:left; white-space:pre-wrap; color:var(--poem);">—</div>
+  </div>
+
+  <div class="card" style="grid-column: 1 / -1;">
+    <h2>✦ Recent Prophecies</h2>
+    <div id="prophecyList"></div>
+  </div>
+
+  <div class="card" style="grid-column: 1 / -1;">
+    <h2>✦ Fulfilled Prophecies</h2>
+    <ul class="fulfilled-list" id="fulfilledList"></ul>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = window.IXP;
+  if (el && el.renderIdentity) el.renderIdentity(document.getElementById('wave-info'));
+})();
+
+async function fetchProphecy() {
+  try {
+    const r = await fetch('/error-prophecy?action=all');
+    const d = await r.json();
+
+    var p = d.prophecy || d.prophecies || {};
+    if (p && p.prose) {
+      document.getElementById('prophecyText').textContent = p.prose;
+      document.getElementById('prophecyPoem').textContent = '📜 ' + p.poem;
+    }
+
+    var w = d.weather || {};
+    document.getElementById('weatherGlyphs').textContent = w.glyphs || '◆';
+    document.getElementById('weatherName').textContent = w.weather || '—';
+    document.getElementById('weatherDesc').textContent = w.description || '—';
+    document.getElementById('totalProp').textContent = w.total_prophecies || '—';
+    document.getElementById('totalFulfilled').textContent = w.fulfilled || '0';
+    document.getElementById('accuracy').textContent = w.accuracy ? (w.accuracy * 100).toFixed(1) + '%' : '0%';
+    document.getElementById('pending').textContent = w.pending || '—';
+
+    var poem = d.poem || {};
+    document.getElementById('poemText').textContent = poem.poem || '—';
+
+    var list = document.getElementById('prophecyList');
+    list.innerHTML = '';
+    (d.prophecies || []).forEach(function(pr) {
+      var div = document.createElement('div');
+      div.className = 'prophecy-card';
+      div.innerHTML = '<div class="prophecy-text">' + (pr.prose || pr.poem || '—') + '</div><div class="prophecy-state">' + (pr.impossible_state || '—') + ' → ' + (pr.prophetic_error || '—') + (pr.fulfilled ? ' <span class="fulfilled-error">✓ FULFILLED</span>' : '') + '</div>';
+      list.appendChild(div);
+    });
+
+    var fList = document.getElementById('fulfilledList');
+    fList.innerHTML = '';
+    (d.fulfilled || []).forEach(function(f) {
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="fulfilled-error">' + (f.prophetic_error || '—') + '</span> <span class="fulfilled-poem">— ' + (f.poem || '—') + '</span>';
+      fList.appendChild(li);
+    });
+  } catch(e) {
+    document.getElementById('prophecyText').textContent = 'Error loading: ' + e.message;
+  }
+}
+
+fetchProphecy();
+setInterval(fetchProphecy, 20000);
+</script>
+</body>
+</html>

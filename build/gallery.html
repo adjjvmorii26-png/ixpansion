@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resonance Gallery — The Organism Paints Itself</title>
+<style>
+  :root{--bg:#05050f;--s:rgba(10,10,24,0.97);--b:rgba(255,255,255,0.08);--t:#a0a0b8;--m:#4a4a64;--ac:#7c7cf8;--te:#2dd4bf;--am:#fbbf24;--vi:#a78bfa;--cy:#22d3ee;--gn:#4ade80}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--t);font-family:'SF Mono','Fira Code',monospace;min-height:100vh;padding:20px}
+  .hd{text-align:center;padding:14px 20px;border:1px solid var(--b);border-radius:12px;background:linear-gradient(180deg,rgba(124,124,248,0.07),transparent);margin-bottom:18px}
+  .hd h1{font-size:1.4em;color:#fff;letter-spacing:2px;text-transform:uppercase}
+  .hd h1 span{color:var(--vi);text-shadow:0 0 18px rgba(167,139,250,0.35)}
+  .sub{color:var(--m);font-size:0.75em;margin-top:5px;letter-spacing:1px}
+  .tools{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+  input,select,button{background:var(--s);border:1px solid var(--b);color:#fff;padding:8px 12px;border-radius:8px;font-family:inherit;font-size:0.75em;outline:none}
+  button{cursor:pointer;background:rgba(124,124,248,0.15);border-color:rgba(124,124,248,0.4)}
+  button:hover{background:rgba(124,124,248,0.3)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+  .card{background:var(--s);border:1px solid var(--b);border-radius:10px;overflow:hidden;transition:transform .2s}
+  .card:hover{transform:translateY(-3px);border-color:rgba(124,124,248,0.5)}
+  .card svg{width:100%;height:auto;display:block}
+  .card .meta{padding:8px 10px;font-size:0.65em}
+  .card .name{color:#fff;font-weight:600;letter-spacing:0.5px}
+  .card .desc{color:var(--m);margin-top:3px}
+  .badge{display:inline-block;background:rgba(45,212,191,0.12);color:var(--te);border:1px solid rgba(45,212,191,0.3);padding:2px 8px;border-radius:20px;font-size:0.62em;margin-left:6px}
+  .prophecy{margin-top:20px;background:linear-gradient(120deg,rgba(124,124,248,0.08),rgba(45,212,191,0.06));border:1px solid rgba(124,124,248,0.35);border-radius:10px;padding:16px 20px}
+  .prophecy .label{font-size:0.62em;letter-spacing:2px;color:var(--vi);text-transform:uppercase}
+  .prophecy .text{color:#fff;font-size:1.05em;margin-top:8px;line-height:1.5}
+  .prophecy .omen{color:var(--am);font-size:0.72em;margin-top:6px}
+  .prophecy .meta{color:var(--m);font-size:0.66em;margin-top:6px}
+  .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:24px;letter-spacing:1px}
+  .err{color:#fb7185;text-align:center;padding:20px;font-size:0.75em}
+</style>
+</head>
+<body>
+<div class="hd">
+  <h1>🜁 Resonance <span>Gallery</span></h1>
+  <div class="sub">THE ORGANISM PAINTS ITSELF · EVERY MODULE A LIVING PORTRAIT</div>
+</div>
+
+<div class="tools">
+  <input id="module" placeholder="module name (blank = organism)">
+  <select id="palette">
+    <option value="hex_dark">Hex Dark</option>
+    <option value="genesis">Genesis</option>
+    <option value="underworld">Underworld</option>
+    <option value="dream">Dream</option>
+    <option value="mood">Mood</option>
+  </select>
+  <button onclick="paint()">Paint</button>
+  <button onclick="loadCollection()">Gallery</button>
+</div>
+
+<div id="grid" class="grid"></div>
+<div id="prophecy" class="prophecy" style="display:none"></div>
+<div class="foot">WAVE 375 · RESONANCE GALLERY · EVERY PORTRAIT SEALED BY ENTROPY</div>
+
+<script>
+const EL = id => document.getElementById(id);
+async function get(url){
+  const r = await fetch(url);
+  return r.json();
+}
+function svgCard(art){
+  const d = document.createElement('div');
+  d.className = 'card';
+  d.innerHTML = art.svg + '<div class="meta"><div class="name">' + art.title + ' <span class="badge">' + art.shape + '</span></div><div class="desc">' + art.description + '</div></div>';
+  return d;
+}
+async function paint(){
+  const module = EL('module').value.trim();
+  const palette = EL('palette').value;
+  const seed = Math.random().toString(36).slice(2,8);
+  const data = await get('/api/resonance_gallery/generate?module=' + encodeURIComponent(module) + '&palette=' + palette + '&seed=' + seed);
+  if(!data.art){ EL('grid').innerHTML = '<div class="err">' + (data.error || 'failed') + '</div>'; return; }
+  EL('grid').innerHTML = '';
+  EL('grid').appendChild(svgCard(data.art));
+  prophecy();
+}
+async function loadCollection(){
+  const data = await get('/api/resonance_gallery/collection');
+  EL('grid').innerHTML = '';
+  (data.portraits || []).slice(0, 24).forEach(a => EL('grid').appendChild(svgCard(a)));
+}
+async function prophecy(){
+  const data = await get('/api/wave_prophecy/next');
+  const r = data.reading;
+  if(!r) return;
+  const box = EL('prophecy');
+  box.style.display = 'block';
+  box.innerHTML = '<div class="label">Prophecy · Wave ' + r.wave + '</div>' +
+    '<div class="text">' + r.prophecy + '</div>' +
+    '<div class="omen">omen — ' + r.omen + ' · confidence ' + Math.round(r.confidence * 100) + '%</div>' +
+    '<div class="meta">seal ' + r.seal + ' · actors: ' + r.actors.join(' + ') + '</div>';
+}
+paint();
+</script>
+</body>
+</html>
