@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Nexus Observatory — Visualizer</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0c12; color: #c8d0e0; font-family: monospace; padding: 24px; }
+  h1 { font-size: 14px; letter-spacing: 0.2em; color: #6af; margin-bottom: 8px; }
+  .sub { font-size: 11px; color: #567; margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .card { background: #12161f; border: 1px solid #1e2636; border-radius: 6px; padding: 12px 14px; }
+  .card h2 { font-size: 11px; color: #8ab; letter-spacing: 0.15em; margin-bottom: 10px; text-transform: uppercase; }
+  .row { display: flex; align-items: center; gap: 8px; margin: 4px 0; font-size: 11px; }
+  .label { width: 28px; color: #678; }
+  .track { flex: 1; height: 8px; background: #1a2030; border-radius: 4px; overflow: hidden; }
+  .fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+  .fill.str { background: linear-gradient(90deg, #2a6, #4d8); }
+  .fill.ent { background: linear-gradient(90deg, #a42, #d64); }
+  .fill.coh { background: linear-gradient(90deg, #26a, #48c); }
+  .fill.con { background: linear-gradient(90deg, #84a, #a6c); }
+  .val { width: 40px; text-align: right; color: #9ab; }
+  #bus { margin-top: 20px; font-size: 11px; }
+  #bus .ev { padding: 3px 0; border-bottom: 1px solid #1a2030; color: #789; }
+  #bus .ev b { color: #6af; }
+  canvas { width: 100%; height: 120px; margin-top: 16px; background: #0d1118; border-radius: 6px; border: 1px solid #1e2636; }
+  button { background: #1a3048; color: #8cf; border: 1px solid #2a4060; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 11px; margin-right: 8px; }
+</style>
+</head>
+<body>
+  <h1>NEXUS OBSERVATORY</h1>
+  <div class="sub">Wave 4 visualizer — offline demo frames</div>
+  <div><button id="tick">Tick</button><button id="auto">Auto</button></div>
+  <div class="grid" id="cards" style="margin-top:16px"></div>
+  <canvas id="spark" width="800" height="120"></canvas>
+  <div id="bus"><div class="sub" style="margin-top:12px">Resonance bus</div></div>
+<script>
+const systems = [
+  { label: "quantum", metrics: { strength: 0.70, entropy: 0.30, coherence: 0.65, consensus: 0.60 } },
+  { label: "mesh", metrics: { strength: 0.75, entropy: 0.28, coherence: 0.80, consensus: 0.86 } },
+  { label: "recursive", metrics: { strength: 0.75, entropy: 0.25, coherence: 0.70, consensus: 0.55 } },
+  { label: "attention", metrics: { strength: 0.74, entropy: 0.31, coherence: 0.72, consensus: 0.68 } },
+  { label: "quietus", metrics: { strength: 0.42, entropy: 0.58, coherence: 0.40, consensus: 0.35 } },
+  { label: "metamorph", metrics: { strength: 0.66, entropy: 0.37, coherence: 0.62, consensus: 0.58 } }
+];
+const history = systems.map(() => []);
+let autoId = null, tickN = 0;
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function renderCards() {
+  const root = document.getElementById("cards"); root.innerHTML = "";
+  systems.forEach((s, i) => {
+    const card = el("div", "card"); card.appendChild(el("h2", null, s.label));
+    ["strength","entropy","coherence","consensus"].forEach(k => {
+      const row = el("div", "row"); row.appendChild(el("span", "label", k.slice(0,3)));
+      const track = el("div", "track"); const fill = el("div", "fill " + k.slice(0,3));
+      fill.style.width = (s.metrics[k] * 100) + "%"; track.appendChild(fill); row.appendChild(track);
+      row.appendChild(el("span", "val", s.metrics[k].toFixed(2))); card.appendChild(row);
+    });
+    root.appendChild(card); history[i].push(s.metrics.strength); if (history[i].length > 40) history[i].shift();
+  });
+}
+function renderSpark() {
+  const c = document.getElementById("spark"); const ctx = c.getContext("2d"); const w = c.width, h = c.height;
+  ctx.clearRect(0, 0, w, h);
+  const colors = ["#4d8","#d64","#48c","#a6c","#c8a","#8cf"];
+  history.forEach((series, i) => {
+    if (series.length < 2) return;
+    ctx.beginPath(); ctx.strokeStyle = colors[i % colors.length]; ctx.lineWidth = 1.5;
+    series.forEach((v, x) => {
+      const px = (x / (series.length - 1)) * (w - 20) + 10;
+      const py = h - 10 - v * (h - 20);
+      if (x === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    });
+    ctx.stroke();
+  });
+}
+function busLog(msg) {
+  const b = document.getElementById("bus"); const d = el("div", "ev");
+  d.innerHTML = "<b>" + msg.event + "</b> " + (msg.detail || ""); b.appendChild(d);
+  while (b.querySelectorAll(".ev").length > 12) b.querySelector(".ev").remove();
+}
+function tick() {
+  tickN++;
+  systems.forEach(s => {
+    s.metrics.strength = Math.max(0.15, Math.min(0.95, s.metrics.strength + (Math.random() - 0.48) * 0.06));
+    s.metrics.entropy = Math.max(0.1, Math.min(0.9, s.metrics.entropy + (Math.random() - 0.45) * 0.05));
+    s.metrics.coherence = Math.max(0.2, Math.min(0.95, s.metrics.strength * 0.9 + (Math.random() - 0.5) * 0.05));
+    s.metrics.consensus = Math.max(0.2, Math.min(0.95, s.metrics.coherence * 0.85 + (Math.random() - 0.5) * 0.04));
+  });
+  renderCards(); renderSpark();
+  const events = ["MESH_VOTE", "QUANTUM_COLLAPSE", "SELF_REWRITE", "PARADOX_SUTURE", "EXEC_METRIC"];
+  busLog({ event: events[tickN % events.length], detail: "tick=" + tickN });
+}
+document.getElementById("tick").onclick = tick;
+document.getElementById("auto").onclick = () => {
+  if (autoId) { clearInterval(autoId); autoId = null; document.getElementById("auto").textContent = "Auto"; }
+  else { autoId = setInterval(tick, 800); document.getElementById("auto").textContent = "Stop"; }
+};
+renderCards(); renderSpark();
+</script>
+</body>
+</html>

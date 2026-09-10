@@ -1,0 +1,10 @@
+# Crucible Flux Protocol
+# 02 = version
+# FX = flux marker
+# DD = distortion code (F0=fold, S1=shear, L2=liquefy, B3=bloom)
+# TT = temperature 00-FF
+
+02FX F0 64
+02FX S1 72
+02FX L2 8A
+02FX B3 9C

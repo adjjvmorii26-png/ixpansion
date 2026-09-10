@@ -1,0 +1,9 @@
+# Crucible Temperature Lookup
+# temp | state          | recommended distortion
+0.20   | cold           | bloom
+0.40   | cool           | fold
+0.60   | balanced       | fold / shear
+0.80   | warm           | shear / liquefy
+1.00   | hot            | liquefy
+1.20   | critical       | liquefy + void dampen
+1.40   | supercritical  | emergency fold

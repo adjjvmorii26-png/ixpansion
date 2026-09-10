@@ -1,0 +1,8 @@
+# Abyss Void Lookup
+# pressure | state          | recommended action
+0.30       | calm           | none
+0.55       | rising         | monitor
+0.75       | elevated       | null_prepare
+0.90       | critical       | null_dampen
+1.10       | cascade        | full_void + echo_seal
+1.25       | supercritical  | emergency fold into reef

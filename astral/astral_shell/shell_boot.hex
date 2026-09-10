@@ -1,0 +1,9 @@
+# Shell Boot Sequence (hex)
+# 04 = version
+# BT = boot
+# stages: LT=lattice, CR=crucible, CH=choir
+
+04BT LT 01
+04BT CR 02
+04BT CH 03
+04BT OK FF

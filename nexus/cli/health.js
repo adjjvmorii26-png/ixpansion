@@ -1,0 +1,31 @@
+const fs = require("fs");
+const path = require("path");
+const crystals = require("../memory_crystals/crystal_store.js");
+const { latest } = require("../reports/report.js");
+const { listReports } = require("../reports/compare.js");
+const { load: loadExport } = require("../metrics_export/export.js");
+const { load: loadConfig } = require("../bridge/config.js");
+const { available } = require("../bridge/exec_adapters/exec.js");
+const lineage = require("../lineage_map/map.js");
+function check() {
+  const issues = [], ok = [];
+  const cfg = loadConfig();
+  ok.push(`config v${cfg.version}`);
+  ok.push(`lineage ${lineage.count()} systems`);
+  ok.push(`exec available ${available().length}`);
+  const sum = crystals.summary();
+  if (sum.count === 0) ok.push("crystals cold start"); else ok.push(`crystals ${sum.count}`);
+  const rep = latest();
+  if (!rep) ok.push("report cold start"); else ok.push(`report ${rep.id}`);
+  ok.push(`archive ${listReports().length}`);
+  const frame = loadExport();
+  if (!frame?.systems?.length) ok.push("export cold start"); else ok.push(`export ${frame.systems.length}`);
+  console.log("NEXUS HEALTH\n");
+  ok.forEach(l => console.log("  ✓", l));
+  issues.forEach(l => console.log("  ✗", l));
+  console.log(issues.length ? `\nHEALTH: ${issues.length} issue(s)` : "\nHEALTH: OK");
+  if (issues.length) process.exitCode = 1;
+  return { ok, issues };
+}
+module.exports = { check };
+if (require.main === module) check();

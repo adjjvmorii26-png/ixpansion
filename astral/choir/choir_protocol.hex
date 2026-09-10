@@ -1,0 +1,10 @@
+# Choir Protocol — Harmonic Consensus Frames
+# 03 = version
+# AA/BB/GG/VV = agent
+# SS = strength
+# VT = vote (01=affirm, 00=abstain)
+
+03AA D8 01
+03BB E2 01
+03GG D2 01
+03VV 8C 00
