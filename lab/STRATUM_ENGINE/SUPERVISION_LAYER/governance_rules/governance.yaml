@@ -1,0 +1,7 @@
+rules:
+  - id: ethics_before_act
+    enforce: true
+  - id: uncertainty_band_required
+    enforce: true
+  - id: foundation_constraints_closed
+    enforce: true
