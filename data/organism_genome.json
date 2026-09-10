@@ -1,5 +1,5 @@
 {
-  "timestamp": 1788993263.007248,
+  "timestamp": 1788998690.7075295,
   "version": "1.0",
   "identity": {
     "name": "IXpansion",
@@ -10,4 +10,54 @@
   "morphology": {
     "threads": 0,
     "modules_connected": 0,
-    "sources": 
+    "sources": [],
+    "thread_types": {}
+  },
+  "temperament": {
+    "current_mood": "contemplative",
+    "pressure": 0.5,
+    "pressure_desc": "unknown"
+  },
+  "desires": [
+    {
+      "action": "listen",
+      "target": "signal_loom",
+      "score": 1.5,
+      "reason": "pressure is 0 (unknown) \u2014 more listening will surface new signals"
+    },
+    {
+      "action": "confess",
+      "target": "chronicle_of_chaos",
+      "score": 1.0,
+      "reason": "strong silent pair (similarity 1.0) \u2014 these modules want to speak"
+    },
+    {
+      "action": "confess",
+      "target": "dream_physics_sandbox",
+      "score": 1.0,
+      "reason": "strong silent pair (similarity 1.0) \u2014 these modules want to speak"
+    },
+    {
+      "action": "confess",
+      "target": "dream_physics_sandbox",
+      "score": 1.0,
+      "reason": "strong silent pair (similarity 1.0) \u2014 these modules want to speak"
+    },
+    {
+      "action": "remember",
+      "target": "void_cartographer",
+      "score": 0.98,
+      "reason": "highest-value forgotten module (0.24 staleness, score 0.98)"
+    }
+  ],
+  "blind_spots": [
+    "few dreams recorded \u2014 the organism hasn't explored its imagination"
+  ],
+  "evolutionary_pressure": {
+    "entropy_pressure": 0.5,
+    "thread_density": 0.0,
+    "silence_ratio": 0,
+    "desire_intention": 1.096
+  },
+  "genome_hash": "04b54bdaf5e8bdae"
+}

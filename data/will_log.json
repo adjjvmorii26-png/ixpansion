@@ -1,2 +1,665 @@
 {
-  "decisions": 
+  "decisions": [
+    {
+      "timestamp": 1788998037.0446134,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: city_builder",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 12
+    },
+    {
+      "timestamp": 1788998059.1183424,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: telemetry_parser",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 12
+    },
+    {
+      "timestamp": 1788998081.3689957,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "remember: consensus_reality",
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 13
+    },
+    {
+      "timestamp": 1788998100.1509051,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "remember: semantic_catalyst",
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 11
+    },
+    {
+      "timestamp": 1788998126.4619346,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: system_mood",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 10
+    },
+    {
+      "timestamp": 1788998149.9043057,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: stress_simulator",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 12
+    },
+    {
+      "timestamp": 1788998181.569465,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos",
+        "confess: dream_physics_sandbox"
+      ],
+      "total_forgotten": 11
+    },
+    {
+      "timestamp": 1788998210.2810564,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "remember: self_reproducing",
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 10
+    },
+    {
+      "timestamp": 1788998240.850913,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: void_sculptor",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 9
+    },
+    {
+      "timestamp": 1788998257.5407112,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "remember: craft_guilds",
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 9
+    },
+    {
+      "timestamp": 1788998282.9648924,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos",
+        "confess: dream_physics_sandbox"
+      ],
+      "total_forgotten": 10
+    },
+    {
+      "timestamp": 1788998299.6920469,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "remember: route_registry",
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 12
+    },
+    {
+      "timestamp": 1788998325.576836,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: uptime_monitor",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 12
+    },
+    {
+      "timestamp": 1788998342.762199,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos",
+        "confess: dream_physics_sandbox"
+      ],
+      "total_forgotten": 11
+    },
+    {
+      "timestamp": 1788998368.6496317,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos",
+        "confess: dream_physics_sandbox"
+      ],
+      "total_forgotten": 10
+    },
+    {
+      "timestamp": 1788998385.8213036,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos",
+        "confess: dream_physics_sandbox"
+      ],
+      "total_forgotten": 12
+    },
+    {
+      "timestamp": 1788998405.9141314,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: telegram_webhook",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 13
+    },
+    {
+      "timestamp": 1788998423.1518579,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: runtime_config",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 13
+    },
+    {
+      "timestamp": 1788998449.0534594,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: semantic_transmuter",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 15
+    },
+    {
+      "timestamp": 1788998471.3381615,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "remember: cosmic_ray_detector",
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 16
+    },
+    {
+      "timestamp": 1788998492.8212926,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos",
+        "confess: dream_physics_sandbox"
+      ],
+      "total_forgotten": 14
+    },
+    {
+      "timestamp": 1788998520.4127288,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "remember: territory_map",
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 13
+    },
+    {
+      "timestamp": 1788998558.6058664,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: autonomous_marketplace",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 13
+    },
+    {
+      "timestamp": 1788998586.7282178,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: deployment_log",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 13
+    },
+    {
+      "timestamp": 1788998607.6693604,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos",
+        "confess: dream_physics_sandbox"
+      ],
+      "total_forgotten": 11
+    },
+    {
+      "timestamp": 1788998634.4808471,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "remember: synapse_web",
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 13
+    },
+    {
+      "timestamp": 1788998649.3034496,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: complexity_currency",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 13
+    },
+    {
+      "timestamp": 1788998659.8006673,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "remember: semantic_precipitate",
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 16
+    },
+    {
+      "timestamp": 1788998681.0711765,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: timeline_weaver",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 16
+    },
+    {
+      "timestamp": 1788998691.4837625,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos",
+        "confess: dream_physics_sandbox"
+      ],
+      "total_forgotten": 13
+    }
+  ],
+  "total": 30
+}
