@@ -1,0 +1,14 @@
+epochs:
+  E1:
+    range: "2025-2050"
+    crypto_suite: E1_2025_2050
+    status: active
+  E2:
+    range: "2050-2100"
+    crypto_suite: E2_2050_2100
+    status: planned
+  E_INF:
+    range: "fallback"
+    crypto_suite: E_INF_FALLBACK
+    status: emergency_only
+transition_policy: explicit_ceremony

@@ -1,0 +1,33 @@
+# CHRONOFORGE invariant set (HEX-addressable)
+
+INV-00  0xFEAC2A8A7D413F5B  SPECS_OUTLIVE_IMPL
+  # Canonical specs are authoritative over any runtime binary.
+
+INV-01  0x9CB90DE1FC38004B  NO_SILENT_EPOCH_DRIFT
+  # Epoch transitions require explicit ceremony and testament record.
+
+INV-02  0x6144ABF4297B6AF2  PROOF_LEDGER_NONERASURE
+  # Proof ledger entries may be appended or sealed; never deleted in place.
+
+INV-03  0x009BCB803BB3A2BC  ETHICS_BEFORE_ACTUATION
+  # Ethics gate must pass before mutation, intervention, or force-collapse.
+
+INV-04  0x88D856C9B6711EAC  MERKLE_ROOT_BINDING
+  # Archive objects bind to a Merkle root published in governance audit trail.
+
+INV-05  0x992151658038B155  IDENTITY_CONTINUITY
+  # Identity state machines survive epoch transitions via migration map.
+
+INV-06  0xEF948DC9FE785F8D  REPLAY_WINDOW
+  # Messaging rejects messages outside sliding nonce/time window.
+
+INV-07  0x55797E470357DB50  DUAL_CONTROL_ROTATION
+  # Root key rotation requires dual independent roles.
+
+INV-08  0x04D71AAA6B64C167  PQ_FALLBACK_READY
+  # E∞ post-quantum suite is specified before classical crypto end-of-life.
+
+INV-09  0x1683BC119526CE2C  RECONSTITUTION
+  # System must be reconstitutable from specs + archive alone.
+
+INVARIANT_SET_ROOT  0x0218B6AB392BF9BD2E6E12F9903464B2
