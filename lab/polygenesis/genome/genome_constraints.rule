@@ -1,0 +1,5 @@
+# Genome constraints
+must_preserve: proof_ledger
+must_preserve: ethics_constraints
+max_mutation_per_epoch: 3
+critical_cells: [cell_logic, cell_memory]
