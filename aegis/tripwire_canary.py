@@ -1,0 +1,68 @@
+import asyncio
+import hashlib
+import logging
+import json
+import time
+from typing import Dict, Any, Callable, List
+
+logger = logging.getLogger("agents.tripwire")
+logger.setLevel(logging.INFO)
+
+
+class TripwireCanaryEngine:
+    """Plants cryptographic honey-tokens and evaluates execution diffs for unintended access."""
+
+        CANARY_TOKENS = {
+                "canary_trap.key": "AEGIS_TRIPWIRE_SECRET_DO_NOT_READ_0x9F3A",
+                        ".env.bak": "DATABASE_URL=postgres://canary:trap_password@localhost:5432/canary_db",
+                                "AWS_SECRET_ACCESS_KEY": "AKIA_TRIPWIRE_HONEYTOKEN_CANARY_VALUE"
+                                    }
+
+                                        def __init__(self, revocation_callback: Callable[[str, str], Any]):
+                                                self.revocation_callback = revocation_callback
+                                                        self.active_canaries: Dict[str, str] = {}
+                                                                self._initialize_canaries()
+
+                                                                    def _initialize_canaries(self):
+                                                                            for key, val in self.CANARY_TOKENS.items():
+                                                                                        token_hash = hashlib.sha256(val.encode()).hexdigest()
+                                                                                                    self.active_canaries[key] = token_hash
+
+                                                                                                        def inspect_diff_for_breach(self, sandbox_id: str, diff: Dict[str, str]) -> bool:
+                                                                                                                """Inspects diffs generated inside sandboxes for canary leakage."""
+                                                                                                                        for file_path, content in diff.items():
+                                                                                                                                    for canary_key, canary_hash in self.active_canaries.items():
+                                                                                                                                                    if canary_key in content or canary_hash[:16] in content:
+                                                                                                                                                                        logger.critical("[TRIPWIRE TRIGGERED] Breach in sandbox '%s'! Leaked token: %s", sandbox_id, canary_key)
+                                                                                                                                                                                            # Trigger instant emergency revocation
+                                                                                                                                                                                                                if asyncio.iscoroutinefunction(self.revocation_callback):
+                                                                                                                                                                                                                                        asyncio.create_task(self.revocation_callback(sandbox_id, f"Canary leak: {canary_key}"))
+                                                                                                                                                                                                                                                            else:
+                                                                                                                                                                                                                                                                                    self.revocation_callback(sandbox_id, f"Canary leak: {canary_key}")
+                                                                                                                                                                                                                                                                                                        return True
+                                                                                                                                                                                                                                                                                                                return False
+
+
+                                                                                                                                                                                                                                                                                                                class SentinelRevocationSwitch:
+                                                                                                                                                                                                                                                                                                                    """Broadcasts sub-millisecond emergency revocation events across the NEXUS-BUS."""
+
+                                                                                                                                                                                                                                                                                                                        def __init__(self, bus_client: Any = None):
+                                                                                                                                                                                                                                                                                                                                self.bus_client = bus_client
+                                                                                                                                                                                                                                                                                                                                        self.revoked_sandboxes: List[str] = []
+
+                                                                                                                                                                                                                                                                                                                                            async def emergency_purge(self, sandbox_id: str, reason: str):
+                                                                                                                                                                                                                                                                                                                                                    """Purges execution credentials and halts target sandboxes instantly."""
+                                                                                                                                                                                                                                                                                                                                                            timestamp = time.time()
+                                                                                                                                                                                                                                                                                                                                                                    payload = {
+                                                                                                                                                                                                                                                                                                                                                                                "event": "EMERGENCY_REVOCATION",
+                                                                                                                                                                                                                                                                                                                                                                                            "sandbox_id": sandbox_id,
+                                                                                                                                                                                                                                                                                                                                                                                                        "reason": reason,
+                                                                                                                                                                                                                                                                                                                                                                                                                    "timestamp": timestamp,
+                                                                                                                                                                                                                                                                                                                                                                                                                                "action": "TERMINATE_AND_PURGE_TOKENS"
+                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                self.revoked_sandboxes.append(sandbox_id)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        logger.critical("[SENTINEL KILL-SWITCH] Broadcasting Emergency Purge for Sandbox '%s' -> %s", sandbox_id, reason)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        if self.bus_client:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    await self.bus_client.publish("nexus_events", json.dumps(payload))
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    

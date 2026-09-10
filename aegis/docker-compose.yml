@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  nexus-bus:
+    image: redis:7-alpine
+    container_name: aegis-nexus-bus
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  aegis-identity:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM python:3.11-slim
+        WORKDIR /app
+        COPY requirements.txt .
+        RUN pip install --no-cache-dir -r requirements.txt
+        COPY service/ service/
+        CMD ["python", "service/identity_service.py"]
+    container_name: aegis-identity-service
+    environment:
+      - PORT=5001
+      - NEXUS_BUS_HOST=nexus-bus
+    ports:
+      - "5001:5001"
+    depends_on:
+      nexus-bus:
+        condition: service_healthy
+
+  myagentspace-dashboard:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM python:3.11-slim
+        WORKDIR /app
+        RUN pip install --no-cache-dir fastapi uvicorn websockets
+        COPY service/service/dashboard_server.py service/
+        CMD ["python", "service/dashboard_server.py"]
+    container_name: aegis-myspace-hub
+    ports:
+      - "5000:5000"
+    environment:
+      - NEXUS_BUS_HOST=nexus-bus
+
+  aegis-core-swarm:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM python:3.11-slim
+        WORKDIR /app
+        COPY requirements.txt .
+        RUN pip install --no-cache-dir -r requirements.txt
+        COPY agents/ agents/
+        COPY ci/ ci/
+        CMD ["python", "-m", "unittest", "ci/test_triad_integration.py"]
+    container_name: aegis-core-swarm
+    environment:
+      - NEXUS_BUS_HOST=nexus-bus
+      - AEGIS_GATEKEEPER_URL=http://aegis-gatekeeper:8080"
+    depends_on:
+      nexus-bus:
+        condition: service_healthy
+      myagentspace-dashboard:
+        condition: service_started
