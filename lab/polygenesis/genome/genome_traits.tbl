@@ -1,0 +1,5 @@
+trait	weight	note
+proof_first	1.0	ledger density over vanity
+sentinel_before_mutate	0.9	harden before change
+observe_only_fork	0.85	soft forks default
+zero_copy_hotpath	0.7	no alloc in tick if possible

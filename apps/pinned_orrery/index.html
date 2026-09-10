@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PINNED ORRERY · IXPANSION</title>
+<style>
+:root{--void:#05050c;--cyan:#00e5ff;--mag:#ff2bd6;--dim:#6b7a8f;--panel:#0c0c18}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse at 50% 30%,#0a1020 0%,var(--void) 70%);color:#d8e6f0;font-family:ui-monospace,monospace;min-height:100vh}
+header{padding:1.25rem 1.5rem .5rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;align-items:baseline}
+h1{font-size:1.15rem;letter-spacing:.28em;color:var(--cyan);font-weight:500}
+.sub{color:var(--dim);font-size:.75rem;max-width:28rem}
+.stats{display:flex;gap:1rem;font-size:.7rem;color:var(--dim)}.stats b{color:var(--cyan);font-weight:500}
+main{display:grid;grid-template-columns:1fr minmax(260px,320px);min-height:calc(100vh - 5rem)}
+@media(max-width:800px){main{grid-template-columns:1fr}}
+#stage-wrap{position:relative;min-height:420px}
+canvas{width:100%;height:100%;min-height:420px;display:block;cursor:crosshair}
+aside{background:linear-gradient(180deg,var(--panel),var(--void));border-left:1px solid #1a2238;padding:1rem 1.1rem 2rem;font-size:.78rem}
+aside h2{font-size:.7rem;letter-spacing:.2em;color:var(--mag);margin-bottom:.75rem}
+.rite{border:1px solid #1e2a40;background:#080814;padding:.85rem;border-radius:4px;min-height:10rem}
+.rite .sigil{color:var(--cyan);letter-spacing:.08em}
+.rite .path{color:var(--dim);word-break:break-all;margin-top:.4rem}
+.rite .args{color:#9ab;margin-top:.35rem}
+.badge{display:inline-block;padding:.12rem .4rem;border-radius:2px;font-size:.65rem;letter-spacing:.12em;margin-top:.5rem}
+.badge.crit{background:#2a0018;color:var(--mag);border:1px solid var(--mag)}
+.badge.opt{background:#001820;color:var(--cyan);border:1px solid #0a4050}
+.list{margin-top:1.25rem;max-height:40vh;overflow:auto}
+.list button{display:block;width:100%;text-align:left;background:transparent;border:none;border-bottom:1px solid #141a28;color:#b8c8d8;padding:.45rem .2rem;font:inherit;font-size:.72rem;cursor:pointer}
+.list button:hover,.list button.active{color:var(--cyan);background:#0a121c}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:.45rem;vertical-align:middle}
+footer{padding:.6rem 1.5rem 1rem;font-size:.65rem;color:var(--dim);letter-spacing:.06em}
+.hint{opacity:.7}
+</style>
+</head>
+<body>
+<header>
+<div><h1>PINNED ORRERY</h1>
+<p class="sub">Instrument of critical paths · strike a node to reveal its rite · not a dashboard</p></div>
+<div class="stats" id="stats"></div>
+</header>
+<main>
+<div id="stage-wrap"><canvas id="orrery"></canvas></div>
+<aside>
+<h2>ACTIVE RITE</h2>
+<div class="rite" id="rite"><p class="hint">Loading constellation…</p></div>
+<h2 style="margin-top:1.2rem">LEDGER</h2>
+<div class="list" id="list"></div>
+</aside>
+</main>
+<footer>IXPANSION · proof over spectacle · <span id="channel"></span> · lab/pinned_projects.json</footer>
+<script>
+const canvas=document.getElementById('orrery'),ctx=canvas.getContext('2d');
+const riteEl=document.getElementById('rite'),listEl=document.getElementById('list');
+const statsEl=document.getElementById('stats'),channelEl=document.getElementById('channel');
+let W,H,CX,CY,R,selected=null,t0=performance.now(),nodes=[];
+
+function resize(){
+  const wrap=document.getElementById('stage-wrap');
+  const rect=wrap.getBoundingClientRect();
+  W=canvas.width=Math.floor(rect.width*devicePixelRatio);
+  H=canvas.height=Math.floor(Math.max(420,rect.height)*devicePixelRatio);
+  canvas.style.width=rect.width+'px';
+  canvas.style.height=Math.max(420,rect.height)+'px';
+  CX=W/2;CY=H/2;R=Math.min(W,H)*.36;
+}
+window.addEventListener('resize',resize);
+
+function project(n){
+  const s=n.ring===0?.72:1;
+  return{x:CX+n.x*R*s,y:CY+n.y*R*s};
+}
+
+function draw(now){
+  const t=(now-t0)/1000;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle='rgba(0,229,255,0.08)';
+  ctx.lineWidth=devicePixelRatio;
+  [0.72,1].forEach(s=>{ctx.beginPath();ctx.arc(CX,CY,R*s,0,Math.PI*2);ctx.stroke()});
+  const cp=.5+.5*Math.sin(t*2.1);
+  ctx.beginPath();ctx.arc(CX,CY,6*devicePixelRatio+cp*3*devicePixelRatio,0,Math.PI*2);
+  ctx.fillStyle=`rgba(255,43,214,${.35+cp*.35})`;ctx.fill();
+  ctx.strokeStyle='rgba(0,229,255,0.12)';
+  for(let i=0;i<nodes.length;i++){
+    const a=project(nodes[i]),b=project(nodes[(i+1)%nodes.length]);
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+  }
+  nodes.filter(n=>n.critical).forEach(n=>{
+    const p=project(n);
+    ctx.strokeStyle='rgba(255,43,214,0.18)';
+    ctx.beginPath();ctx.moveTo(CX,CY);ctx.lineTo(p.x,p.y);ctx.stroke();
+  });
+  nodes.forEach((n,i)=>{
+    const p=project(n);
+    const pulse=n.critical?(0.6+0.4*Math.sin(t*3+i)):(0.75+0.25*Math.sin(t*1.2+i));
+    const rad=(n.critical?7:5)*devicePixelRatio*pulse;
+    ctx.beginPath();ctx.arc(p.x,p.y,rad+8*devicePixelRatio,0,Math.PI*2);
+    ctx.fillStyle=n.hue+'22';ctx.fill();
+    ctx.beginPath();ctx.arc(p.x,p.y,rad,0,Math.PI*2);
+    ctx.fillStyle=n.hue;ctx.shadowColor=n.hue;ctx.shadowBlur=n.critical?18:8;ctx.fill();ctx.shadowBlur=0;
+    if(selected&&selected.id===n.id){
+      ctx.strokeStyle='#fff';ctx.lineWidth=1.5*devicePixelRatio;
+      ctx.beginPath();ctx.arc(p.x,p.y,rad+6*devicePixelRatio,0,Math.PI*2);ctx.stroke();
+    }
+  });
+  requestAnimationFrame(draw);
+}
+
+function show(n){
+  selected=n;
+  [...listEl.querySelectorAll('button')].forEach(b=>b.classList.toggle('active',b.dataset.id===n.id));
+  const args=(n.args&&n.args.length)?n.args.join(' '):'—';
+  riteEl.innerHTML=`<div class="sigil">${n.sigil}</div>
+    <div style="margin-top:.35rem;font-size:.95rem;color:#e8f4ff">${n.id}</div>
+    <div class="path">${n.path}</div>
+    <div class="args">args: ${args}</div>
+    <span class="badge ${n.critical?'crit':'opt'}">${n.critical?'CRITICAL':'OPTIONAL'}</span>
+    <p style="margin-top:.8rem;color:#6b7a8f;font-size:.68rem">ring ${n.ring===0?'inner · critical orbit':'outer · exploratory'}</p>`;
+}
+
+function boot(DATA){
+  channelEl.textContent=DATA.channel||'';
+  statsEl.innerHTML=`<span>TOTAL <b>${DATA.stats.total}</b></span>
+    <span>CRITICAL <b>${DATA.stats.critical}</b></span>
+    <span>OPTIONAL <b>${DATA.stats.optional}</b></span>`;
+  nodes=DATA.projects.map(p=>({...p}));
+  listEl.innerHTML=nodes.map(n=>
+    `<button data-id="${n.id}" type="button"><span class="dot" style="background:${n.hue}"></span>${n.id}</button>`
+  ).join('');
+  listEl.addEventListener('click',e=>{
+    const btn=e.target.closest('button');
+    if(!btn)return;
+    const n=nodes.find(x=>x.id===btn.dataset.id);
+    if(n)show(n);
+  });
+  canvas.addEventListener('click',e=>{
+    const rect=canvas.getBoundingClientRect();
+    const x=(e.clientX-rect.left)*devicePixelRatio,y=(e.clientY-rect.top)*devicePixelRatio;
+    let best=null,bestD=28*devicePixelRatio;
+    nodes.forEach(n=>{const p=project(n),d=Math.hypot(p.x-x,p.y-y);if(d<bestD){bestD=d;best=n}});
+    if(best)show(best);
+  });
+  resize();
+  show(nodes.find(n=>n.critical)||nodes[0]);
+  requestAnimationFrame(draw);
+}
+
+fetch('data.json').then(r=>r.json()).then(boot).catch(err=>{
+  riteEl.innerHTML='<p class="hint">Failed to load data.json — open via serve.py</p>';
+  console.error(err);
+});
+</script>
+</body>
+</html>

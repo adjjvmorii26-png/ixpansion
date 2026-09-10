@@ -1,0 +1,4 @@
+{
+  "nodes": ["boot", "pulse", "proof", "branch"],
+  "edges": [{"from": "boot", "to": "pulse"}, {"from": "pulse", "to": "proof"}]
+}

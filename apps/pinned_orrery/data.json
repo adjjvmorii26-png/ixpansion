@@ -1,0 +1,23 @@
+{
+  "title": "PINNED ORRERY",
+  "subtitle": "Instrument of critical paths · not a dashboard",
+  "doctrine": "Proof density over vanity · strike a node to reveal its rite",
+  "channel": "@CoodingLooop",
+  "generated": "2026-09-09T22:44:15.123402+00:00",
+  "projects": [
+    {"id": "lab_smoke", "path": "lab/experiments/lab_smoke.py", "args": [], "critical": true, "sigil": "0xCE04990A", "hue": "#04990a", "x": 1.0, "y": 0.0, "ring": 0},
+    {"id": "pulse", "path": "lab/chrono_forge/0_primal_core/pulse_driver.py", "args": ["--beats", "3"], "critical": true, "sigil": "0xA1B2C3D4", "hue": "#b2c3d4", "x": 0.8855, "y": 0.4647, "ring": 0},
+    {"id": "sentinel", "path": "lab/chrono_forge/2_agents/sentinel.py", "args": [], "critical": true, "sigil": "0xB3C4D5E6", "hue": "#c4d5e6", "x": 0.5681, "y": 0.8229, "ring": 0},
+    {"id": "sandbox_status", "path": "sandbox/sandbox_engine.py", "args": ["--status"], "critical": true, "sigil": "0xC4D5E6F7", "hue": "#d5e6f7", "x": 0.1205, "y": 0.9927, "ring": 0},
+    {"id": "proof_density", "path": "lab/experiments/proof_density.py", "args": [], "critical": false, "sigil": "0xD5E6F708", "hue": "#e6f708", "x": -0.3546, "y": 0.9350, "ring": 1},
+    {"id": "sigil_constellation", "path": "lab/experiments/sigil_constellation.py", "args": [], "critical": false, "sigil": "0xE6F70819", "hue": "#f70819", "x": -0.7485, "y": 0.6631, "ring": 1},
+    {"id": "flux", "path": "lab/chrono_forge/6_worlds/sandbox_flux.py", "args": [], "critical": false, "sigil": "0xF708192A", "hue": "#08192a", "x": -0.9709, "y": 0.2393, "ring": 1},
+    {"id": "void", "path": "lab/chrono_forge/6_worlds/sandbox_void.py", "args": [], "critical": false, "sigil": "0x08192A3B", "hue": "#192a3b", "x": -0.9709, "y": -0.2393, "ring": 1},
+    {"id": "handshake", "path": "lab/experiments/handshake_card.py", "args": [], "critical": false, "sigil": "0x192A3B4C", "hue": "#2a3b4c", "x": -0.7485, "y": -0.6631, "ring": 1},
+    {"id": "cli_portal_help", "path": "lab/chrono_forge/5_interfaces/cli_portal.py", "args": ["help"], "critical": false, "sigil": "0x2A3B4C5D", "hue": "#3b4c5d", "x": -0.3546, "y": -0.9350, "ring": 1},
+    {"id": "sigil_collision", "path": "lab/experiments/sigil_collision.py", "args": [], "critical": false, "sigil": "0x3B4C5D6E", "hue": "#4c5d6e", "x": 0.1205, "y": -0.9927, "ring": 1},
+    {"id": "entropy_weather", "path": "lab/experiments/entropy_weather.py", "args": [], "critical": false, "sigil": "0x4C5D6E7F", "hue": "#5d6e7f", "x": 0.5681, "y": -0.8229, "ring": 1},
+    {"id": "glyph_braid", "path": "lab/experiments/glyph_braid.py", "args": [], "critical": false, "sigil": "0x5D6E7F80", "hue": "#6e7f80", "x": 0.8855, "y": -0.4647, "ring": 1}
+  ],
+  "stats": {"total": 13, "critical": 4, "optional": 9}
+}

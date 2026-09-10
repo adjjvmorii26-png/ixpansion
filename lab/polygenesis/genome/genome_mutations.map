@@ -1,0 +1,5 @@
+{
+  "allowed": ["trait_weight_nudge", "cell_rewire", "agent_spawn"],
+  "forbidden": ["ethics_disable", "ledger_erase"],
+  "rate_cap": 0.05
+}
