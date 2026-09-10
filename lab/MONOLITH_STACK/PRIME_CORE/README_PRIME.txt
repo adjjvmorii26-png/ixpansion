@@ -1,0 +1,1 @@
+MONOLITH_STACK PRIME_CORE — rebuild alphabet for IXPANSION.
