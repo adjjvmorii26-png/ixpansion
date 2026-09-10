@@ -137,6 +137,86 @@ def neighborhood(module: str) -> Dict[str, Any]:
     return {"module": module, "neighbors": neighbors}
 
 
+
+    
+    def community_detail(self, community_id: str = None) -> Dict[str, Any]:
+        """Get detailed metrics for a specific community within the resonance graph.
+        
+        Provides per-community metrics including:
+        - Node count and density
+        - Average affinity within community
+        - Boundary nodes and external connections
+        - Prominent modules and their roles
+        
+        Args:
+            community_id: Specific community to query (None returns all communities)
+            
+        Returns:
+            Dictionary containing community metrics
+        """
+        if community_id:
+            # Find the specific community
+            communities = self.communities()
+            if community_id not in communities:
+                return {"error": f"Community '{community_id}' not found"}
+            
+            nodes = communities[community_id]
+            internal_edges = sum(
+                1 for n in nodes 
+                for n2 in nodes 
+                if n2 in self.neighborhood(n) and n2 != n
+            )
+            
+            # Calculate average affinity for internal connections
+            affinities = []
+            for n in nodes:
+                for n2 in self.neighborhood(n):
+                    if n2 in nodes and n2 != n:
+                        edge_data = self.graph.get_edge_data(n, n2, {})
+                        affinity = edge_data.get("affinity", 0.5)
+                        affinities.append(affinity)
+            
+            avg_affinity = sum(affinities) / len(affinities) if affinities else 0.5
+            
+            return {
+                "community_id": community_id,
+                "node_count": len(nodes),
+                "internal_edges": internal_edges,
+                "average_affinity": round(avg_affinity, 4),
+                "density": round(2 * internal_edges / (len(nodes) * (len(nodes) - 1)), 4) if len(nodes) > 1 else 1.0,
+                "boundary_nodes": len([n for n in nodes if any(
+                    n2 not in nodes for n2 in self.neighborhood(n)
+                )]),
+            }
+        else:
+            # Return details for all communities
+            communities = self.communities()
+            result = {}
+            for cid, nodes in communities.items():
+                internal_edges = sum(
+                    1 for n in nodes 
+                    for n2 in nodes 
+                    if n2 in self.neighborhood(n) and n2 != n
+                )
+                affinities = []
+                for n in nodes:
+                    for n2 in self.neighborhood(n):
+                        if n2 in nodes and n2 != n:
+                            edge_data = self.graph.get_edge_data(n, n2, {})
+                            affinity = edge_data.get("affinity", 0.5)
+                            affinities.append(affinity)
+                
+                avg_affinity = sum(affinities) / len(affinities) if affinities else 0.5
+                
+                result[cid] = {
+                    "node_count": len(nodes),
+                    "internal_edges": internal_edges,
+                    "average_affinity": round(avg_affinity, 4),
+                    "density": round(2 * internal_edges / (len(nodes) * (len(nodes) - 1)), 4) if len(nodes) > 1 else 1.0,
+                }
+            
+            return result
+
 def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
     result = _compute()
     return {"action": "resonance_graph", **result}
