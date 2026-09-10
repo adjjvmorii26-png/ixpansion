@@ -1,0 +1,5 @@
+# Temporal ethics (mandatory)
+no_rewrite_past_without_audit: true
+no_intervention_without_ethics_gate: true
+prefer_observe_over_act: true
+max_branch_divergence: 0.3
