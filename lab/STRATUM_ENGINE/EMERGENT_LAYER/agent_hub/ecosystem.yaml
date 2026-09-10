@@ -1,0 +1,23 @@
+version: "2.0"
+ecosystem: stratum_agents
+roles:
+  - id: guardian
+    capabilities: [ethics_gate, constrain]
+  - id: estimator
+    capabilities: [state_estimate]
+  - id: scout
+    capabilities: [anomaly_detect]
+  - id: tuner
+    capabilities: [optimize_alpha]
+  - id: synthesizer
+    capabilities: [fuse, reason]
+  - id: arbiter
+    capabilities: [decide, uncertainty_band]
+  - id: herald
+    capabilities: [ingest, alert]
+  - id: auditor
+    capabilities: [audit, metrics]
+handoff:
+  default: guardian -> estimator -> scout -> synthesizer -> arbiter -> herald -> auditor
+  on_anomaly: scout -> synthesizer -> arbiter -> guardian
+  on_chaos: guardian -> auditor
