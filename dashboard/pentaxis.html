@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PENTAXIS — 5D Reality Engine</title>
+<style>
+:root{--bg:#03030a;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--cyan:#22d3ee;--green:#4ade80;--violet:#c084fc;--text:#c0c0d0;--dim:#606078;--deep:#0a0a1a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh;overflow-x:hidden}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;text-align:center;padding:40px 24px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(124,124,248,0.08),transparent 70%);pointer-events:none}
+.hero h1{font-size:4em;font-weight:300;letter-spacing:12px;color:#fff;margin-bottom:12px;text-shadow:0 0 60px rgba(124,124,248,0.3)}
+.hero h1 span{color:var(--accent)}
+.hero .sub{color:var(--dim);font-size:0.9em;letter-spacing:4px;margin-bottom:40px}
+.axes{display:flex;gap:12px;margin-bottom:40px;flex-wrap:wrap;justify-content:center}
+.axis{padding:8px 16px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;font-size:0.75em;letter-spacing:2px;transition:all 0.3s}
+.axis:hover{border-color:var(--accent);transform:translateY(-2px)}
+.axis.sigma{color:#4ecdc4;border-color:#4ecdc433}
+.axis.tau{color:#ff6b6b;border-color:#ff6b6b33}
+.axis.psi{color:#ffd93d;border-color:#ffd93d33}
+.axis.mu{color:#c084fc;border-color:#c084fc33}
+.axis.omega{color:#7c7cf8;border-color:#7c7cf833}
+.cta{display:inline-block;padding:16px 48px;background:var(--accent);color:#000;font-weight:700;font-size:1em;letter-spacing:3px;border-radius:8px;text-decoration:none;transition:all 0.3s;margin-bottom:32px}
+.cta:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(124,124,248,0.4)}
+.cta:hover::after{content:' →'}
+.desc{max-width:640px;color:var(--dim);font-size:0.8em;line-height:1.8;margin-bottom:40px}
+.controls{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;max-width:800px;margin-top:20px}
+.ctrl{padding:10px 14px;background:rgba(3,3,10,0.6);border:1px solid rgba(255,255,255,0.06);border-radius:6px;font-size:0.7em}
+.ctrl .key{color:var(--accent);font-weight:700;margin-right:6px}
+.ctrl .act{color:var(--dim)}
+.chambers{max-width:800px;margin-top:40px}
+.chambers h2{color:var(--gold);font-size:0.85em;letter-spacing:3px;margin-bottom:16px;text-align:center}
+.chamber-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.chamber{padding:14px;background:rgba(3,3,10,0.7);border:1px solid rgba(255,255,255,0.06);border-radius:8px}
+.chamber .name{font-weight:700;font-size:0.85em;margin-bottom:4px}
+.chamber .law{color:var(--dim);font-size:0.7em;line-height:1.5}
+.organism{margin-top:40px;text-align:center}
+.organism .note{color:var(--dim);font-size:0.72em;max-width:500px;margin:0 auto;line-height:1.6}
+.organism .pulse{color:var(--gold);font-size:0.8em;margin-top:12px;letter-spacing:2px}
+.footer{text-align:center;padding:40px 0;border-top:1px solid rgba(124,124,248,0.1);margin-top:60px}
+.footer a{color:var(--teal);text-decoration:none;font-size:0.75em}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1><span>PENTAXIS</span></h1>
+  <div class="sub">FIVE-DIMENSIONAL REALITY ENGINE · WAVE 247+</div>
+  
+  <div class="axes">
+    <div class="axis sigma">Σ SPACE</div>
+    <div class="axis tau">Τ TIME</div>
+    <div class="axis psi">Ψ STATE</div>
+    <div class="axis mu">Μ MIND</div>
+    <div class="axis omega">Ω META</div>
+  </div>
+
+  <div class="desc">
+    A world whose coordinates are space, time, state, mind, and meta.
+    Five corridors leave the Atrium of Five Axes. Each corridor is a chart into one dimension.
+    Recover five Axis Keys. Attune the core. Decide whether to stabilize the projection,
+    let it collapse, or accept promotion into Ω.
+    <br><br>
+    <strong style="color:var(--accent)">Player cognition is a coordinate.</strong>
+    The engine samples intention, decision entropy, and query count, then writes those
+    samples back into Μ and Ω. At mutation threshold, Ω is allowed to rewrite its own rules.
+  </div>
+
+  <a class="cta" href="https://pentaxis-5d-engine.vercel.app" target="_blank">ENTER THE ENGINE</a>
+
+  <div class="controls">
+    <div class="ctrl"><span class="key">WASD</span><span class="act">Move (A strafes left, D right)</span></div>
+    <div class="ctrl"><span class="key">Mouse</span><span class="act">Look around</span></div>
+    <div class="ctrl"><span class="key">Space</span><span class="act">Jump</span></div>
+    <div class="ctrl"><span class="key">Shift</span><span class="act">Sprint</span></div>
+    <div class="ctrl"><span class="key">1/2/3</span><span class="act">Timeline: past / present / future</span></div>
+    <div class="ctrl"><span class="key">Q hold</span><span class="act">Reverse local time</span></div>
+    <div class="ctrl"><span class="key">E</span><span class="act">Observe, interact, attune</span></div>
+    <div class="ctrl"><span class="key">F hold</span><span class="act">Cognitive focus — leak entropy</span></div>
+    <div class="ctrl"><span class="key">R</span><span class="act">Query the engine (Ω)</span></div>
+    <div class="ctrl"><span class="key">Tab</span><span class="act">Codex</span></div>
+    <div class="ctrl"><span class="key">Esc</span><span class="act">Pause</span></div>
+  </div>
+
+  <div class="chambers">
+    <h2>◈ THE FIVE CHAMBERS</h2>
+    <div class="chamber-grid">
+      <div class="chamber"><div class="name" style="color:#4ecdc4">Σ Space</div><div class="law">Non-Euclidean portals. The small door is a liar about size. Climb the recursive well.</div></div>
+      <div class="chamber"><div class="name" style="color:#ff6b6b">Τ Time</div><div class="law">Tracks Past / Present / Future. Future has the key. Hold Q to rewind time-mass.</div></div>
+      <div class="chamber"><div class="name" style="color:#ffd93d">Ψ State</div><div class="law">Superposed ghost-bridges. Look, then E. Only the longest eigenstate bears weight.</div></div>
+      <div class="chamber"><div class="name" style="color:#c084fc">Μ Mind</div><div class="law">Hold F. Stop turning. Low entropy opens the light-path. The Chorus has three voices.</div></div>
+      <div class="chamber"><div class="name" style="color:#7c7cf8">Ω Meta</div><div class="law">Query the engine with R. At 2 queries a wall forgets it is a wall. At 4 the HUD lies.</div></div>
+    </div>
+  </div>
+
+  <div class="organism">
+    <div class="note">
+      Pentaxis is the crown jewel of the IXpansion organism — a game where the world dreams you back.
+      Built by the organism, for the organism. Part of the constellation.
+    </div>
+    <div class="pulse">⌁ · ◈ · ✦ · ◉ · ⬡</div>
+  </div>
+
+  <div class="footer">
+    <a href="index.html">← Back to IXpansion Dashboard</a>
+  </div>
+</div>
+</body>
+</html>
