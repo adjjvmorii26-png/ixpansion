@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "organism_orchestrator"
+version = "0.1.0"
+description = "Organism Orchestrator - coordinates evolution across all dimensions"
+requires-python = ">=3.9"
+
+[project.scripts]
+orchestrator = "src.orchestration.orchestrator:main"
+
+[dependencies]
+# Core dependencies
