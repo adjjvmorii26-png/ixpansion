@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axis Unlock Engine — IXpansion 5D Interface</title>
+<style>
+:root{--bg:#02020a;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--cyan:#22d3ee;--green:#4ade80;--violet:#c084fc;--bright:#e8e8f8;--dim:#505068;--text:#b8b8d0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+.hero{text-align:center;padding:60px 24px 30px}
+.hero h1{font-size:2em;font-weight:200;letter-spacing:8px;color:var(--bright)}
+.hero h1 span{color:var(--cyan)}
+.hero .sub{color:var(--dim);font-size:0.75em;letter-spacing:3px;margin-top:8px}
+.axes{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;max-width:1200px;margin:32px auto;padding:0 24px}
+.axis{text-align:center;padding:32px 16px;background:rgba(6,6,26,0.8);border:2px solid rgba(255,255,255,0.06);border-radius:16px;position:relative;transition:all 0.4s;cursor:pointer}
+.axis:hover{transform:translateY(-4px)}
+.axis.locked{opacity:0.5}
+.axis.unlocked{opacity:1}
+.axis.unlocked::after{content:'UNLOCKED';position:absolute;top:8px;right:8px;font-size:0.5em;padding:2px 6px;border-radius:4px;background:rgba(74,222,128,0.15);color:var(--green)}
+.axis .glyph{font-size:3em;display:block;margin-bottom:8px}
+.axis .name{font-size:0.85em;font-weight:700;color:var(--bright);margin-bottom:4px}
+.axis .desc{color:var(--dim);font-size:0.65em;line-height:1.5;margin-bottom:12px}
+.axis .effect{font-size:0.6em;padding:4px 8px;border-radius:6px;background:rgba(124,124,248,0.06);color:var(--accent)}
+.game-state{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;max-width:1200px;margin:32px auto;padding:0 24px}
+.state-card{background:rgba(6,6,26,0.6);border:1px solid rgba(124,124,248,0.08);border-radius:8px;padding:14px;text-align:center}
+.state-card .val{font-size:1.8em;font-weight:200;color:var(--bright)}
+.state-card .label{color:var(--dim);font-size:0.6em;letter-spacing:2px;margin-top:4px}
+.timeline{max-width:1200px;margin:32px auto;padding:0 24px}
+.timeline h2{color:var(--gold);font-size:0.75em;letter-spacing:3px;text-align:center;margin-bottom:16px}
+.events{max-height:200px;overflow-y:auto;padding:8px;background:rgba(6,6,26,0.5);border-radius:8px;font-size:0.65em}
+.events .ev{padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.events .ev .type{color:var(--accent);font-weight:600}
+.controls{display:flex;justify-content:center;gap:8px;margin:24px auto;max-width:1200px;flex-wrap:wrap}
+.btn{background:rgba(6,6,26,0.9);border:1px solid rgba(124,124,248,0.3);color:var(--accent);padding:10px 20px;border-radius:8px;font-family:inherit;font-size:0.72em;cursor:pointer;transition:all 0.2s}
+.btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:var(--teal)}
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:var(--accent);padding:8px 14px;border-radius:6px;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff}
+@media(max-width:768px){.axes{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>AXIS <span>UNLOCK</span> ENGINE</h1>
+  <div class="sub">5D GAMEPLAY ↔ ORGANISM INTERFACE</div>
+</div>
+
+<div class="axes" id="axesGrid"></div>
+
+<div class="game-state">
+  <div class="state-card"><div class="val" style="color:var(--green)" id="coherenceVal">100</div><div class="label">COHERENCE</div></div>
+  <div class="state-card"><div class="val" style="color:var(--cyan)" id="cognitionVal">24</div><div class="label">COGNITION</div></div>
+  <div class="state-card"><div class="val" style="color:var(--gold)" id="entropyVal">0.18</div><div class="label">ENTROPY</div></div>
+  <div class="state-card"><div class="val" style="color:var(--violet)" id="queriesVal">0</div><div class="label">QUERIES</div></div>
+  <div class="state-card"><div class="val" style="color:var(--rose)" id="unlockedVal">0</div><div class="label">AXES UNLOCKED</div></div>
+</div>
+
+<div class="controls">
+  <button class="btn" onclick="unlock('sigma')">Σ Unlock Space</button>
+  <button class="btn" onclick="unlock('tau')">Τ Unlock Time</button>
+  <button class="btn" onclick="unlock('psi')">Ψ Unlock State</button>
+  <button class="btn" onclick="unlock('mu')">Μ Unlock Mind</button>
+  <button class="btn" onclick="query()">Ω Query Engine (R)</button>
+</div>
+
+<div class="timeline">
+  <h2>◈ EVENT TIMELINE</h2>
+  <div class="events" id="eventLog"></div>
+</div>
+
+<a class="back-btn" href="index.html">← Organism</a>
+
+<script>
+const axes = [
+  {id:'sigma',glyph:'Σ',name:'Σ Space',color:'#4ecdc4',desc:'Non-Euclidean portals. The small door is a liar about size.',effect:'expands_module_territory',unlocked:false},
+  {id:'tau',glyph:'Τ',name:'Τ Time',color:'#ff6b6b',desc:'Tracks Past / Present / Future. Future has the key.',effect:'enables_temporal_memory',unlocked:false},
+  {id:'psi',glyph:'Ψ',name:'Ψ State',color:'#ffd93d',desc:'Superposed ghost-bridges. Only the longest eigenstate bears weight.',effect:'superposition_awareness',unlocked:false},
+  {id:'mu',glyph:'Μ',name:'Μ Mind',color:'#c084fc',desc:'Hold F. Stop turning. Low entropy opens the light-path.',effect:'deep_cognition_channel',unlocked:false},
+  {id:'omega',glyph:'Ω',name:'Ω Meta',color:'#7c7cf8',desc:'Query the engine. At 4 queries the HUD lies.',effect:'self_rewrite_access',unlocked:false},
+];
+
+let gameState = {coherence:100,cognition:24,entropy:0.18,queries:0};
+const events = [];
+
+function renderAxes() {
+  const grid = document.getElementById('axesGrid');
+  grid.innerHTML = '';
+  axes.forEach(a => {
+    const div = document.createElement('div');
+    div.className = `axis ${a.unlocked ? 'unlocked' : 'locked'}`;
+    div.style.borderColor = a.unlocked ? a.color + '60' : '';
+    div.innerHTML = `
+      <span class="glyph" style="color:${a.color}">${a.glyph}</span>
+      <div class="name" style="color:${a.color}">${a.name}</div>
+      <div class="desc">${a.desc}</div>
+      <div class="effect">${a.effect}</div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+function unlock(id) {
+  const a = axes.find(x => x.id === id);
+  if (!a || a.unlocked) return;
+  a.unlocked = true;
+  gameState.coherence = Math.min(100, gameState.coherence + 10);
+  addEvent('axis_unlocked', `${a.name} unlocked — ${a.effect} activated`, a.color);
+  updateState();
+  renderAxes();
+}
+
+function query() {
+  gameState.queries++;
+  gameState.entropy = Math.min(1.0, gameState.entropy + 0.02);
+  const lying = gameState.queries >= 4;
+  addEvent('query', `Engine queried (${gameState.queries}/5) ${lying ? '— HUD LYING' : ''}`, lying ? '#fb7185' : '#22d3ee');
+  if (gameState.queries >= 5) unlock('omega');
+  updateState();
+}
+
+function addEvent(type, text, color) {
+  events.unshift({type, text, color, time: new Date().toLocaleTimeString()});
+  const log = document.getElementById('eventLog');
+  log.innerHTML = events.slice(0, 20).map(e => 
+    `<div class="ev"><span class="type" style="color:${e.color}">[${e.time}]</span> ${e.text}</div>`
+  ).join('');
+}
+
+function updateState() {
+  document.getElementById('coherenceVal').textContent = gameState.coherence;
+  document.getElementById('cognitionVal').textContent = gameState.cognition;
+  document.getElementById('entropyVal').textContent = gameState.entropy.toFixed(2);
+  document.getElementById('queriesVal').textContent = gameState.queries;
+  document.getElementById('unlockedVal').textContent = axes.filter(a => a.unlocked).length;
+}
+
+renderAxes();
+addEvent('system', 'Axis Unlock Engine initialized — 5 axes ready', '#7c7cf8');
+</script>
+</body>
+</html>
