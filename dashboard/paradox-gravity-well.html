@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paradox Gravity Well — Conceptual Physics</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(138,43,226,0.06);z-index:9999;animation:scan 4.5s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(138,43,226,0.15)}
+.header h1{font-size:1.8em;color:#8a2be2;text-shadow:0 0 30px rgba(138,43,226,0.4)}
+.header .sub{color:#2dd4bf;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(138,43,226,0.12);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#8a2be2,transparent)}
+.card h2{font-size:1em;color:#8a2be2;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:10px}
+.stat .val{font-size:1.8em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(138,43,226,0.15);border:1px solid rgba(138,43,226,0.3);color:#8a2be2;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(138,43,226,0.3)}
+.btn-teal{background:rgba(45,212,191,0.15);border-color:rgba(45,212,191,0.3);color:#2dd4bf}
+input,.input{background:rgba(20,20,35,0.8);border:1px solid rgba(138,43,226,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em;width:100%;margin-top:4px}
+select{background:rgba(20,20,35,0.8);border:1px solid rgba(138,43,226,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em;width:100%;margin-top:4px}
+canvas{width:100%;border-radius:8px;background:rgba(5,5,15,0.9)}
+#well-canvas{height:300px}
+.paradox-list{max-height:250px;overflow-y:auto;font-size:0.82em}
+.paradox-item{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(138,43,226,0.08)}
+.interaction-list{max-height:180px;overflow-y:auto;font-size:0.8em}
+.interaction-item{padding:4px 0;border-bottom:1px solid rgba(138,43,226,0.08)}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>⊛ PARADOX GRAVITY WELL</h1>
+<div class="sub">Conceptual Physics — Paradoxes Attracting in Conceptual Space</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Inject Paradox</h2>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Name</label><input id="paradox-name" placeholder="e.g. p-paradox_alpha"></div>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Mass</label><input id="paradox-mass" type="number" value="3" min="0.1" max="100"></div>
+<button class="btn" onclick="injectParadox()">INJECT</button>
+</div>
+<div class="card">
+<h2>Merge</h2>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Paradox IDs (comma sep)</label><input id="merge-ids" placeholder="e.g. 1,2"></div>
+<button class="btn btn-teal" onclick="mergeParadoxes()">MERGE</button>
+</div>
+<div class="card" style="grid-column:span 2">
+<h2>Gravity Field Visualization</h2>
+<canvas id="well-canvas"></canvas>
+</div>
+<div class="card">
+<h2>Field Stats</h2>
+<div class="stat"><div class="val" id="active-count" style="color:#8a2be2">0</div><div class="label">active paradoxes</div></div>
+<div class="stat"><div class="val" id="well-depth" style="color:#2dd4bf;font-size:1.4em">0.000</div><div class="label">well depth</div></div>
+<div class="stat"><div class="val" id="merger-count" style="color:#e8a87c;font-size:1.2em">0</div><div class="label">total mergers</div></div>
+</div>
+<div class="card">
+<h2>Active Paradoxes</h2>
+<div class="paradox-list" id="paradox-list"></div>
+</div>
+<div class="card">
+<h2>Interaction History</h2>
+<div class="interaction-list" id="interactions"></div>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(138,43,226,0.15);color:#8a2be2;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(138,43,226,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+let paradoxes=[];let nextId=1;let mergers=[];let interactions=[];
+
+function injectParadox(){
+  const name=document.getElementById('paradox-name').value||`paradox_${nextId}`;
+  const mass=parseFloat(document.getElementById('paradox-mass').value)||3;
+  const h=[...crypto.getRandomValues(new Uint8Array(12))].map(b=>b.toString(16).padStart(2,'0')).join('');
+  paradoxes.push({
+    id:nextId++,name,mass:Math.min(mass,100),
+    x:((parseInt(h.slice(0,4),16)%1000)-500)/100,
+    y:((parseInt(h.slice(4,8),16)%1000)-500)/100,
+    vx:0,vy:0,
+    complexity:Math.round(300+Math.random()*700)/1000,
+    created:new Date().toLocaleTimeString(),
+    status:'active',
+  });
+  document.getElementById('paradox-name').value='';
+  renderAll();
+}
+
+function mergeParadoxes(){
+  const ids=document.getElementById('merge-ids').value.split(',').map(Number).filter(n=>n);
+  if(ids.length<2)return;
+  const p1=paradoxes.find(p=>p.id===ids[0]&&p.status==='active');
+  const p2=paradoxes.find(p=>p.id===ids[1]&&p.status==='active');
+  if(!p1||!p2)return;
+  const merged={
+    id:nextId++,
+    name:`super(${p1.name},${p2.name})`,
+    mass:p1.mass+p2.mass,
+    x:(p1.x+p2.x)/2,y:(p1.y+p2.y)/2,
+    vx:0,vy:0,
+    complexity:Math.round(Math.min(1,(p1.complexity+p2.complexity)/2*1.3)*1000)/1000,
+    created:new Date().toLocaleTimeString(),
+    status:'active',
+  };
+  p1.status='merged';p2.status='merged';
+  mergers.push({p1:ids[0],p2:ids[1],mass:merged.mass,ts:new Date().toLocaleTimeString()});
+  interactions.push(`MERGED #${ids[0]}+#${ids[1]} → #${merged.id} (mass ${merged.mass.toFixed(1)})`);
+  paradoxes.push(merged);
+  document.getElementById('merge-ids').value='';
+  renderAll();
+}
+
+function physicsTick(){
+  const active=paradoxes.filter(p=>p.status==='active');
+  const G=0.618;
+  active.forEach(p=>{
+    let fx=0,fy=0;
+    active.forEach(q=>{
+      if(p.id===q.id)return;
+      const dx=q.x-p.x,dy=q.y-p.y;
+      const d=Math.max(0.1,Math.sqrt(dx*dx+dy*dy));
+      const F=G*p.mass*q.mass/(d*d);
+      fx+=F*(dx/d);fy+=F*(dy/d);
+    });
+    p.vx+=fx*0.01;p.vy+=fy*0.01;
+    p.x+=p.vx;p.y+=p.vy;
+  });
+  drawWell();
+}
+
+function renderAll(){
+  const active=paradoxes.filter(p=>p.status==='active');
+  document.getElementById('active-count').textContent=active.length;
+  document.getElementById('well-depth').textContent=(active.reduce((s,p)=>s+p.mass,0)*0.618).toFixed(3);
+  document.getElementById('merger-count').textContent=mergers.length;
+  const pl=document.getElementById('paradox-list');
+  pl.innerHTML=paradoxes.map(p=>`<div class="paradox-item"><span style="color:${p.status==='active'?'#8a2be2':'#555'}">${p.status==='active'?'⊛':'✕'} #${p.id} ${p.name}</span><span style="color:#666">m${p.mass.toFixed(1)} c${(p.complexity*100).toFixed(0)}%</span></div>`).join('');
+  const il=document.getElementById('interactions');
+  il.innerHTML=interactions.slice(-15).reverse().map(i=>`<div class="interaction-item" style="color:#8a2be2">${i}</div>`).join('');
+  drawWell();
+}
+
+function drawWell(){
+  const c=document.getElementById('well-canvas');c.width=c.offsetWidth;c.height=300;
+  const ctx=c.getContext('2d');
+  ctx.fillStyle='#05050f';ctx.fillRect(0,0,c.width,c.height);
+  const cx=c.width/2,cy=c.height/2;
+  // gravity grid
+  ctx.strokeStyle='rgba(138,43,226,0.08)';ctx.lineWidth=1;
+  for(let i=0;i<Math.max(c.width,c.height);i+=30){
+    ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,c.height);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,i);ctx.lineTo(c.width,i);ctx.stroke();
+  }
+  const active=paradoxes.filter(p=>p.status==='active');
+  active.forEach(p=>{
+    const sx=cx+p.x*2,sy=cy+p.y*2;
+    const r=Math.sqrt(p.mass)*3+5;
+    const grad=ctx.createRadialGradient(sx,sy,0,sx,sy,r*2);
+    grad.addColorStop(0,'rgba(138,43,226,0.5)');grad.addColorStop(1,'rgba(138,43,226,0)');
+    ctx.fillStyle=grad;ctx.beginPath();ctx.arc(sx,sy,r*2,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#8a2be2';ctx.beginPath();ctx.arc(sx,sy,r,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='9px monospace';ctx.textAlign='center';
+    ctx.fillText(`#${p.id}`,sx,sy-r-4);
+    // draw force lines to other paradoxes
+    active.forEach(q=>{
+      if(p.id===q.id)return;
+      const qx=cx+q.x*2,qy=cy+q.y*2;
+      ctx.strokeStyle='rgba(138,43,226,0.12)';ctx.lineWidth=0.5;
+      ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(qx,qy);ctx.stroke();
+    });
+  });
+}
+
+// auto-inject seed paradoxes
+injectParadox();injectParadox();injectParadox();
+setInterval(physicsTick,100);
+</script>
+</body>
+</html>
