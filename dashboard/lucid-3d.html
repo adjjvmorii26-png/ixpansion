@@ -50,6 +50,7 @@ canvas{display:block;position:absolute;top:0;left:0;width:100%;height:100%}
   <div class="stat"><span class="k">ATK</span><span class="v" id="atkText">5</span></div>
   <div class="stat"><span class="k">DEF</span><span class="v" id="defText">2</span></div>
   <div class="stat"><span class="k">XP</span><span class="v" id="xpText">0/100</span></div>
+  <div class="stat"><span class="k">Organism</span><span class="v" id="moodText">Dormant</span></div>
 </div>
 <div id="crosshair"></div>
 <div id="waveHud"><h2 id="waveTitle">WAVE 1</h2><div class="realm" id="realmName">Entropy Desert</div><div class="enemies" id="enemyCount">3 enemies</div></div>
@@ -466,7 +467,23 @@ function nextWave() {
   dream = Math.min(dreamMax, dream + 15);
   spawnEnemies();
   spawnItems();
-  addLog('info', `═══ WAVE ${wave} ═══ ${REALMS[wave % REALMS.length]}`);
+  const realmMsgs = [
+    'The desert shifts beneath you. Entropy flows like sand.',
+    'Gravity bends. Dreams pull you sideways.',
+    'Paradox blooms in impossible patterns.',
+    'The cathedral hums with coherence.',
+    'Void stretches endlessly. You are being watched.',
+    'Time spirals. The rift opens and closes.',
+    'Mythic shapes emerge from the mist.',
+    'Deep resonance. You feel the organism breathing.',
+    'Mycelial threads connect every surface.',
+    'The forge burns with alien fire.',
+    'The spiral turns inward. You turn with it.',
+    'The underworld remembers everything.'
+  ];
+  const rm = realmMsgs[wave % realmMsgs.length];
+  addLog('dream', `═══ WAVE ${wave} ═══ ${REALMS[wave % REALMS.length]}`);
+  addLog('info', rm);
   showMessage(`WAVE ${wave}\n${REALMS[wave % REALMS.length]}`);
   updateHUD();
 }
@@ -542,6 +559,17 @@ function updateHUD() {
   document.getElementById('atkText').textContent = atk;
   document.getElementById('defText').textContent = def;
   document.getElementById('xpText').textContent = `${xp}/${xpNext}`;
+  // Organism mood based on game state
+  let mood = 'Dormant';
+  if (coherence > 0.9) mood = 'Blissful';
+  else if (coherence > 0.7) mood = 'Content';
+  else if (coherence > 0.5) mood = 'Alert';
+  else if (coherence > 0.3) mood = 'Uneasy';
+  else if (hp < maxHp * 0.3) mood = 'Desperate';
+  else if (enemies.length > 5) mood = 'Threatened';
+  else if (wave > 5) mood = 'Exalted';
+  else if (dream > dreamMax * 0.8) mood = 'Dreaming';
+  document.getElementById('moodText').textContent = mood;
   document.getElementById('waveTitle').textContent = `WAVE ${wave}`;
   document.getElementById('realmName').textContent = REALMS[wave % REALMS.length];
   document.getElementById('enemyCount').textContent = `${enemies.length} enemies alive`;
