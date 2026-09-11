@@ -35,7 +35,7 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 <body>
 <div class="header">
 <h1>⛈ Meteorology of Thought</h1>
-<span class="badge live">Wave 199</span>
+<span class="badge live">Wave 508</span>
 <span class="badge">6 Organs</span>
 <span class="badge">Cognitive Weather</span>
 <nav style="display:flex;gap:10px;font-size:.72rem;margin-left:auto;flex-wrap:wrap"><a href="/" style="color:var(--muted)">Home</a> <a href="/bloom" style="color:var(--muted)">Bloom</a> <a href="/coherence" style="color:var(--muted)">Coherence</a> <a href="/archaeology" style="color:var(--muted)">Archaeology</a> <a href="/symbiosis" style="color:var(--muted)">Symbiosis</a> <a href="/aesthetics" style="color:var(--muted)">Aesthetics</a></nav>
@@ -54,15 +54,15 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 </div>
 
 <div class="cards">
-<div class="card" onclick="query('barometric_intent')">
+<div class="card" onclick="query('weather_coupler')">
 <div class="name">🌡 Barometric Intent</div>
 <div class="essence">Measures the pressure of the organism's intentions — high pressure = focused clarity, low = scattered diffusion.</div>
 </div>
-<div class="card" onclick="query('front_tracker')">
+<div class="card" onclick="query('frontier_stream')">
 <div class="name">🌥 Front Tracker</div>
 <div class="essence">Maps cognitive fronts: where clarity meets confusion, where action meets contemplation.</div>
 </div>
-<div class="card" onclick="query('precipitation_cycle')">
+<div class="card" onclick="query('weather_synapse')">
 <div class="name">🌧 Precipitation Cycle</div>
 <div class="essence">Tracks how thoughts condense from vapor (abstractions) into rain (concrete modules, commits, decisions).</div>
 </div>
@@ -70,11 +70,11 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 <div class="name">🌪 Jet Stream Attention</div>
 <div class="essence">Tracks fast-flowing currents of attention through the codebase — the hottest files and fastest-changing regions.</div>
 </div>
-<div class="card" onclick="query('climate_memory')">
+<div class="card" onclick="query('weather_station')">
 <div class="name">🌍 Climate Memory</div>
 <div class="essence">Long-term weather patterns — seasons of creation, winters of consolidation, the organism's behavioral climate.</div>
 </div>
-<div class="card" onclick="query('storm_chaser')">
+<div class="card" onclick="query('anomaly_detector')">
 <div class="name">⚡ Storm Chaser</div>
 <div class="essence">Follows chaos events through the organism — supercells, mass extinctions, and extreme restructuring.</div>
 </div>
@@ -97,19 +97,19 @@ async function query(mod) {
 
 async function load() {
   try {
-    const res = await fetch('/api/barometric_intent?read=1');
+    const res = await fetch('/api/weather_coupler?read=1');
     const data = await res.json();
     document.getElementById('pressure').textContent = data.pressure_hpa || '—';
     document.getElementById('condition').textContent = data.condition || '—';
     document.getElementById('weather-banner').textContent = '🌤 Current Cognitive Weather: ' + (data.condition || 'Unknown');
   } catch(e) { /* silent */ }
   try {
-    const res = await fetch('/api/precipitation_cycle?read=1');
+    const res = await fetch('/api/weather_synapse?read=1');
     const data = await res.json();
     document.getElementById('rain').textContent = (data.condensation_rate || 0) * 100 + '%';
   } catch(e) { /* silent */ }
   try {
-    const res = await fetch('/api/storm_chaser?read=1');
+    const res = await fetch('/api/anomaly_detector?read=1');
     const data = await res.json();
     document.getElementById('storms').textContent = data.total_storms_detected || '—';
   } catch(e) { /* silent */ }

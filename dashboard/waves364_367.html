@@ -129,22 +129,22 @@ function log(el,msg){document.getElementById(el).innerHTML=msg}
 async function api(p){try{const r=await fetch(p);return await r.json()}catch(e){return{error:e.message}}}
 
 async function oracleDivine(){
-  const d=await api('/api/entropy_oracle/divine');
+  const d=await api('/api/entropy_forecaster/divine');
   const o=d.oracle||{};
   log('oracleOut',`<span class="hl">🔮 ORACLE SPEAKS</span>\n\n`+`${o.prophecy||'?'}\n\n`+`Reading:\n`+`  entropy: <span class="w">${o.reading?.current_entropy||0}</span>\n`+`  trend: <span class="te">${o.reading?.predicted_trend||'?'}</span>\n`+`  confidence: <span class="g">${o.reading?.confidence||0}</span>\n`+`  next_peak: <span class="w">${o.reading?.next_peak||0}</span>`);
 }
 async function oracleHistory(){
-  const d=await api('/api/entropy_oracle/history');
+  const d=await api('/api/entropy_forecaster/history');
   log('oracleOut',`<span class="hl">📜 ORACLE HISTORY</span>\n\n`+`Readings: <span class="c">${d.total_readings||0}</span>\n`+`Trends: ${fmt(d.trend_distribution||{})}`);
 }
 
 async function ledgerRecord(){
-  const d=await api('/api/paradox_ledger/record');
+  const d=await api('/api/paradox_resolver/record');
   const e=d.entry||{};
   log('ledgerOut',`<span class="hl">📒 PARADOX RECORDED</span>\n\n`+`ID: <span class="c">${e.id||'?'}</span>\n`+`Debit: <span class="r">${e.debit?.account||'?'} ${e.debit?.amount||0}</span>\n`+`Credit: <span class="g">${e.credit?.account||'?'} ${e.credit?.amount||0}</span>\n`+`"${e.description||'?'}"\n\n`+`Total entries: <span class="hl">${d.total_entries||0}</span>`);
 }
 async function ledgerBalance(){
-  const d=await api('/api/paradox_ledger/balance');
+  const d=await api('/api/paradox_resolver/balance');
   log('ledgerOut',`<span class="hl">⚖ LEDGER BALANCE</span>\n\n`+`Total entries: <span class="c">${d.total_entries||0}</span>\n`+`Net balance: <span class="g">${d.net_balance||0}</span>\n\n`+`Accounts:\n${fmt(d.accounts||{})}`);
 }
 
@@ -216,8 +216,8 @@ async function signalNetwork(){
 async function fullIntegrate(){
   log('intOut','<span class="hl">☉ Integrating waves 364-367...</span>');
   const [oracle,ledger,voidMap,forge,network,palace] = await Promise.all([
-    api('/api/entropy_oracle/divine'),
-    api('/api/paradox_ledger/record'),
+    api('/api/entropy_forecaster/divine'),
+    api('/api/paradox_resolver/record'),
     api('/api/void_cartographer/map'),
     api('/api/chrono_forge/forge'),
     api('/api/signal_weaver/network'),

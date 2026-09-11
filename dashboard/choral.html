@@ -53,16 +53,16 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
   </div>
   <div class="cards" id="cards"></div>
   <div class="result" id="result">Select an organ — or listen to the organism sing.</div>
-  <div class="hint">Six Wave 194 choral organs — choral_engine, harmonic_series, resonant_frequency, dissonance_detector, crescendo_builder, silence_composer. All free tier.</div>
+  <div class="hint">Six Wave 508 choral organs — choral_engine, harmonic_series, resonance_analyzer, resonance_analyzer, crescendo_builder, choral_engine. All free tier.</div>
 </div>
 <script>
 const ORGANS=[
 {name:'Choral Engine',essence:'Reads every organ vital as a musical note — the organism voice.',route:'api/choral_engine'},
 {name:'Harmonic Series',essence:'Extracts overtones and consonance ratios — the acoustic fingerprint.',route:'api/harmonic_series'},
-{name:'Resonant Frequency',essence:'Finds the one pitch at which the whole system vibrates.',route:'api/resonant_frequency'},
-{name:'Dissonance Detector',essence:'Finds clashing notes between modules — tension that demands resolution.',route:'api/dissonance_detector'},
+{name:'Resonant Frequency',essence:'Finds the one pitch at which the whole system vibrates.',route:'api/resonance_analyzer'},
+{name:'Dissonance Detector',essence:'Finds clashing notes between modules — tension that demands resolution.',route:'api/resonance_analyzer'},
 {name:'Crescendo Builder',essence:'Builds intensity toward a peak moment — are we rising or fading?',route:'api/crescendo_builder'},
-{name:'Silence Composer',essence:'Composes the rests between notes — where the organism needs to breathe.',route:'api/silence_composer'},
+{name:'Silence Composer',essence:'Composes the rests between notes — where the organism needs to breathe.',route:'api/choral_engine'},
 ];
 const cards=document.getElementById('cards');
 ORGANS.forEach(o=>{
@@ -88,16 +88,16 @@ async function probe(route){
     document.getElementById('sub').textContent=c.avg_volume+' avg volume';
   }catch(e){}
   try{
-    const f=await (await fetch('/api/resonant_frequency')).json();
+    const f=await (await fetch('/api/resonance_analyzer')).json();
     document.getElementById('note').textContent=f.fundamental;
     document.getElementById('hz').textContent=f.frequency_hz+' Hz';
   }catch(e){}
   try{
-    const d=await (await fetch('/api/dissonance_detector')).json();
+    const d=await (await fetch('/api/resonance_analyzer')).json();
     document.getElementById('clashes').textContent=d.clash_count;
   }catch(e){}
   try{
-    const s=await (await fetch('/api/silence_composer')).json();
+    const s=await (await fetch('/api/choral_engine')).json();
     document.getElementById('fermatas').textContent=s.fermata_count;
   }catch(e){}
 })();

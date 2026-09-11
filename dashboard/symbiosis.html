@@ -36,7 +36,7 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 <body>
 <div class="header">
 <h1>🌿 Symbiosis Engine</h1>
-<span class="badge live">Wave 200</span>
+<span class="badge live">Wave 508</span>
 <span class="badge">5 Organs</span>
 <span class="badge">Milestone</span>
 <nav style="display:flex;gap:10px;font-size:.72rem;margin-left:auto;flex-wrap:wrap"><a href="/" style="color:var(--muted)">Home</a> <a href="/bloom" style="color:var(--muted)">Bloom</a> <a href="/coherence" style="color:var(--muted)">Coherence</a> <a href="/archaeology" style="color:var(--muted)">Archaeology</a> <a href="/symbiosis" style="color:var(--muted)">Symbiosis</a> <a href="/aesthetics" style="color:var(--muted)">Aesthetics</a></nav>
@@ -68,11 +68,11 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 <div class="name">🤝 Mutualism Optimizer</div>
 <div class="essence">Strengthens beneficial partnerships — shared abstractions, co-located tests, interface harmonization.</div>
 </div>
-<div class="card" onclick="query('parasite_hunter')">
+<div class="card" onclick="query('anomaly_detector')">
 <div class="name">🐛 Parasite Hunter</div>
 <div class="essence">Finds modules that import many but are imported by none — taking without giving.</div>
 </div>
-<div class="card" onclick="query('ecosystem_fitness')">
+<div class="card" onclick="query('ecosystem_sentience')">
 <div class="name">💪 Ecosystem Fitness</div>
 <div class="essence">Measures biodiversity, redundancy, connectivity, and resilience across the module ecosystem.</div>
 </div>
@@ -105,12 +105,12 @@ async function load() {
     document.getElementById('relationships').textContent = d1.total_relationships || '—';
   } catch(e) {}
   try {
-    const r2 = await fetch('/api/parasite_hunter?read=1');
+    const r2 = await fetch('/api/anomaly_detector?read=1');
     const d2 = await r2.json();
     document.getElementById('parasites').textContent = d2.parasites_found || '—';
   } catch(e) {}
   try {
-    const r3 = await fetch('/api/ecosystem_fitness?read=1');
+    const r3 = await fetch('/api/ecosystem_sentience?read=1');
     const d3 = await r3.json();
     const f = d3.fitness_score || 0;
     document.getElementById('fitness').textContent = f.toFixed(3);

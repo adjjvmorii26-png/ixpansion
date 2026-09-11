@@ -169,7 +169,7 @@ async function pulse(){
   document.getElementById('source-val').textContent=(gen.morphology?.sources||[]).length;
   const will=await api('organism_will/decide');
   const wave=will.organism_state?.modules_connected||'?';
-  document.getElementById('wave-badge').textContent='Wave 428 · '+wave+' connected modules';
+  document.getElementById('wave-badge').textContent='Wave 508 · '+wave+' connected modules';
   
   // Update sound description
   const aud=s.auditory||{};

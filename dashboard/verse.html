@@ -35,9 +35,9 @@
 </div>
 
 <div class="tools">
-  <input id="a" placeholder="parent A (e.g. dream_logic_physics)">
+  <input id="a" placeholder="parent A (e.g. consciousness_stream)">
   <span style="color:var(--vi)">+</span>
-  <input id="b" placeholder="parent B (e.g. paradox_ledger)">
+  <input id="b" placeholder="parent B (e.g. paradox_resolver)">
   <button onclick="writeVerse()">✍ Write</button>
   <button onclick="randomVerse()">🎲 Random</button>
 </div>
@@ -49,8 +49,8 @@
 <script>
 async function get(url){ const r = await fetch(url); return r.json(); }
 async function writeVerse(){
-  const a = document.getElementById('a').value.trim() || 'entropy_oracle';
-  const b = document.getElementById('b').value.trim() || 'resonance_graph';
+  const a = document.getElementById('a').value.trim() || 'entropy_forecaster';
+  const b = document.getElementById('b').value.trim() || 'resonance_analyzer';
   const d = await get(`/api/interstitial_verse/write?a=${encodeURIComponent(a)}&b=${encodeURIComponent(b)}`);
   const v = d.verse;
   const el = document.getElementById('verse');
@@ -61,7 +61,7 @@ async function writeVerse(){
   loadHistory();
 }
 async function randomVerse(){
-  const names = ['entropy_oracle','resonance_graph','dream_logic_physics','paradox_ledger','consciousness_stream','mythopoetic_engine','void_cartographer','memory_palace_gen','lucid_dungeon','synchronicity_engine'];
+  const names = ['entropy_forecaster','resonance_analyzer','consciousness_stream','paradox_resolver','consciousness_stream','mythopoetic_engine','void_cartographer','memory_palace_gen','lucid_dungeon','synchronicity_engine'];
   const a = names[Math.floor(Math.random()*names.length)];
   let b = names[Math.floor(Math.random()*names.length)];
   while(b===a) b = names[Math.floor(Math.random()*names.length)];

@@ -51,16 +51,16 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
   </div>
   <div class="cards" id="cards"></div>
   <div class="result" id="result">Select an organ — or watch the organism move.</div>
-  <div class="hint">Six Wave 195 kinesthetic organs — kinesthetic_engine, gesture_synthesizer, proprioception, momentum_tracker, dance_composer, stillness_meditator. All free tier.</div>
+  <div class="hint">Six Wave 508 kinesthetic organs — kinesthetic_engine, kinesthetic_engine, proprioception, kinesthetic_engine, dance_composer, kinesthetic_engine. All free tier.</div>
 </div>
 <script>
 const ORGANS=[
 {name:'Kinesthetic Engine',essence:'The organism sense of its own movement — velocity, direction, acceleration.',route:'api/kinesthetic_engine'},
-{name:'Gesture Synthesizer',essence:'Creates named movement patterns from state changes — reach, recoil, surge.',route:'api/gesture_synthesizer'},
+{name:'Gesture Synthesizer',essence:'Creates named movement patterns from state changes — reach, recoil, surge.',route:'api/kinesthetic_engine'},
 {name:'Proprioception',essence:'The body map — where every family is in space, and which are islands.',route:'api/proprioception'},
-{name:'Momentum Tracker',essence:'Mass times velocity — the organism directional inertia.',route:'api/momentum_tracker'},
+{name:'Momentum Tracker',essence:'Mass times velocity — the organism directional inertia.',route:'api/kinesthetic_engine'},
 {name:'Dance Composer',essence:'Composes movement sequences into named dances with meaning.',route:'api/dance_composer'},
-{name:'Stillness Meditator',essence:'The art of deliberate rest — where the organism chooses to be still.',route:'api/stillness_meditator'},
+{name:'Stillness Meditator',essence:'The art of deliberate rest — where the organism chooses to be still.',route:'api/kinesthetic_engine'},
 ];
 const cards=document.getElementById('cards');
 ORGANS.forEach(o=>{
@@ -85,15 +85,15 @@ async function probe(route){
     document.getElementById('velocity').textContent=k.velocity;
   }catch(e){}
   try{
-    const m=await (await fetch('/api/momentum_tracker')).json();
+    const m=await (await fetch('/api/kinesthetic_engine')).json();
     document.getElementById('mass').textContent=m.mass;
   }catch(e){}
   try{
-    const g=await (await fetch('/api/gesture_synthesizer')).json();
+    const g=await (await fetch('/api/kinesthetic_engine')).json();
     document.getElementById('gesture').textContent=g.latest.gesture;
   }catch(e){}
   try{
-    const s=await (await fetch('/api/stillness_meditator')).json();
+    const s=await (await fetch('/api/kinesthetic_engine')).json();
     document.getElementById('stillness').textContent=s.stillness_ratio;
   }catch(e){}
 })();

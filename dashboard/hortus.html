@@ -160,7 +160,8 @@ async function loadOrgs(){
     const d = await api('/hortus/api/organisms');
     const oa=$('#hx'), ob=$('#hy');
     for(const r of d.organisms){ const o=document.createElement('option'); o.value=r.name; o.text=r.name; oa.appendChild(o); ob.appendChild(o.cloneNode()); }
-  }catch(e){ console.log(e); }
+  }catch(e){
+}
 }
 loadOrgs(); refresh(); setInterval(refresh, 8000);
 </script>

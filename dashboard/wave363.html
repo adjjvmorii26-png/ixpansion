@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wave 363 — Dream Physics + Consciousness Stream</title>
+<title>Wave 508 — Dream Physics + Consciousness Stream</title>
 <style>
   :root{--bg:#04040e;--s:rgba(8,8,18,0.96);--g:rgba(255,255,255,0.03);--b:rgba(255,255,255,0.05);--t:#9898b0;--m:#3e3e58;--ac:#7c7cf8;--te:#2dd4bf;--am:#fbbf24;--ro:#fb7185;--cy:#22d3ee;--gn:#4ade80;--gd:#f59e0b;--dn:#ef4444;--vi:#a78bfa}
   *{margin:0;padding:0;box-sizing:border-box}
@@ -127,7 +127,7 @@ async function api(p){try{const r=await fetch(p);return await r.json()}catch(e){
 // ─── Dream Physics ───
 async function dreamNew(){
   log('dreamOut','<span class="hl">☽ Dreaming a new law...</span>');
-  const d=await api('/api/dream_logic_physics/dream');
+  const d=await api('/api/consciousness_stream/dream');
   const l=d.law||{};
   const disp=document.getElementById('lawDisplay');
   disp.innerHTML=`<div class="law-card"><div class="law-name">☽ ${l.name||'?'}</div>`+
@@ -145,7 +145,7 @@ async function dreamNew(){
 
 async function dreamCatalog(){
   log('dreamOut','<span class="hl">📖 Loading catalog...</span>');
-  const d=await api('/api/dream_logic_physics/catalog');
+  const d=await api('/api/consciousness_stream/catalog');
   let msg=`<span class="hl">📖 DREAM PHYSICS CATALOG</span>\n\n`;
   msg+=`Total laws: <span class="c">${d.total_laws||0}</span>\n`;
   msg+=`Total dreams: <span class="g">${d.total_dreams||0}</span>\n`;
@@ -158,7 +158,7 @@ async function dreamCatalog(){
 
 async function dreamSimulate(){
   log('dreamOut','<span class="hl">⚡ Simulating dream physics...</span>');
-  const d=await api('/api/dream_logic_physics/simulate');
+  const d=await api('/api/consciousness_stream/simulate');
   let msg=`<span class="hl">⚡ DREAM SIMULATION</span>\n\n`;
   msg+=`Active laws: <span class="c">${d.active_laws||0}</span>\n\n`;
   (d.effects||[]).forEach(e=>{

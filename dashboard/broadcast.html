@@ -39,7 +39,7 @@
 <div class="wrap">
   <header>
     <h1>◈ IXPANSION · BROADCAST</h1>
-    <div class="sub">Wave 213 — The Organism Emits. Self-portraiture, prophecy, mind-melding, and outward signal.</div>
+    <div class="sub">Wave 508 — The Organism Emits. Self-portraiture, prophecy, mind-melding, and outward signal.</div>
     <div class="identity" id="identity"></div>
   </header>
 
@@ -115,7 +115,7 @@
     try{
       const d = await getJSON('/api/prophet_engine');
       q('prophet-out').innerHTML =
-        '<p><span class="mono">Wave 214 · ' + d.predicted_name + '</span></p>' +
+        '<p><span class="mono">Wave 508 · ' + d.predicted_name + '</span></p>' +
         '<p style="margin-top:8px">' + d.predicted_lore + '</p>' +
         '<p class="status" style="color:var(--dim)">confidence ' + (d.prediction_confidence*100).toFixed(0) + '% · ~' + d.predicted_organs + ' organs</p>';
       q('prophet-status').textContent = 'Prophecy delivered';

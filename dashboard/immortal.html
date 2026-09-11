@@ -43,7 +43,7 @@
 <div class="wrap">
   <header>
     <h1>◈ IXPANSION · IMMORTAL</h1>
-    <div class="sub">Wave 214 — The Organism Immortalizes. Ossuaries, amber, ancestor galleries, monuments, succession, and the eternal flame.</div>
+    <div class="sub">Wave 508 — The Organism Immortalizes. Ossuaries, amber, ancestor galleries, monuments, succession, and the eternal flame.</div>
     <div class="identity" id="identity"></div>
   </header>
 
@@ -86,7 +86,7 @@
     <div class="card">
       <h3>◒ Amber Encasement</h3>
       <div id="amber-out"><p class="dim">Preserving moments…</p></div>
-      <button class="btn" onclick="encaseMoment()">Encase Wave 214</button>
+      <button class="btn" onclick="encaseMoment()">Encase Wave 508</button>
       <div class="status" id="amber-status"></div>
     </div>
 
@@ -144,7 +144,7 @@
 
   async function forgeMonument(){
     try{
-      const d = await getJSON('/api/monument_forge?action=forge&what=wave214&kind=wave&resonance=0.9&inscription=Here%20stood%20the%20wave%20that%20refused%20to%20die');
+      const d = await getJSON('/api/monument_forge?action=forge&what=Wave 508&kind=wave&resonance=0.9&inscription=Here%20stood%20the%20wave%20that%20refused%20to%20die');
       q('monument-out').innerHTML =
         '<p><span class="mono">' + d.monument.id + '</span> — ' + d.monument.what + '</p>' +
         '<p class="dim">Material: ' + d.monument.material + ' · Grandness: ' + d.monument.grandness + '</p>' +
@@ -166,7 +166,7 @@
 
   async function encaseMoment(){
     try{
-      const d = await getJSON('/api/amber_encasement?action=encase&label=wave214&resonance=0.88');
+      const d = await getJSON('/api/amber_encasement?action=encase&label=Wave 508&resonance=0.88');
       q('amber-out').innerHTML =
         '<p>Sealed: <span class="mono">' + d.artifact.seal + '</span></p>' +
         '<p class="dim">State: ' + d.artifact.state_hex + '</p>';

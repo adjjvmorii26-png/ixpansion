@@ -41,7 +41,7 @@ canvas{width:100%;height:200px;border-radius:6px;margin-top:8px}
 </div>
 </div>
 <script>
-function updateClock(){document.getElementById('clockTime').textContent=new Date().toLocaleTimeString();document.getElementById('cycleCount').textContent=Math.floor(Math.random()*20+10);document.getElementById('orgAge').textContent='Wave 477+';requestAnimationFrame(updateClock)}updateClock();
+function updateClock(){document.getElementById('clockTime').textContent=new Date().toLocaleTimeString();document.getElementById('cycleCount').textContent=Math.floor(Math.random()*20+10);document.getElementById('orgAge').textContent='Wave 508+';requestAnimationFrame(updateClock)}updateClock();
 const c=document.getElementById('cycleChart');const ctx=c.getContext('2d');c.width=c.offsetWidth;c.height=200;
 function drawChart(){ctx.clearRect(0,0,c.width,c.height);ctx.strokeStyle='#7c7cf8';ctx.lineWidth=2;ctx.beginPath();
 for(let x=0;x<c.width;x++){const y=100+Math.sin(x*0.05+Date.now()*0.001)*40+Math.random()*10;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}ctx.stroke();

@@ -48,7 +48,7 @@ body{font-family:'SF Mono','Fira Code',monospace;background:var(--bg);color:var(
 <body>
 <div class="header">
   <h1>◉ Organism Control Center</h1>
-  <span style="font-size:.72rem;color:var(--muted)">Wave 202 · v3.90.0</span>
+  <span style="font-size:.72rem;color:var(--muted)">Wave 508 · v3.90.0</span>
   <div class="nav">
     <a href="/">Home</a><a href="/bloom">Bloom</a><a href="/coherence">Coherence</a>
     <a href="/resonance">Resonance</a><a href="/voice">Voice</a> <a href="/stream">Stream</a><a href="/cons">Console</a>
@@ -178,7 +178,7 @@ async function load(){
     $("st-dash").textContent = (d.infrastructure || {}).dashboards || "—";
     
     // Ecosystem fitness
-    const fit = d.ecosystem_fitness || 0;
+    const fit = d.ecosystem_sentience || 0;
     $("fitness").textContent = (fit * 100).toFixed(1) + "%";
     $("fit-bar").style.width = (fit * 100) + "%";
     
@@ -205,22 +205,22 @@ async function load(){
   }catch(e){console.error("organism_state fetch failed:", e)}
   
   // Additional detail endpoints
-  try{const d=await(await fetch("/api/storm_chaser?read=1")).json();
+  try{const d=await(await fetch("/api/anomaly_detector?read=1")).json();
     $("wt-storms").textContent=d.total_storms_detected||"0";
   }catch(e){}
-  try{const d=await(await fetch("/api/front_tracker?read=1")).json();
+  try{const d=await(await fetch("/api/frontier_stream?read=1")).json();
     $("wt-fronts").textContent=d.active_fronts||"0";
   }catch(e){}
-  try{const d=await(await fetch("/api/climate_memory?read=1")).json();
+  try{const d=await(await fetch("/api/weather_station?read=1")).json();
     $("wt-climate").textContent=d.climate_type||"—";
   }catch(e){}
-  try{const d=await(await fetch("/api/ecosystem_fitness?read=1")).json();
+  try{const d=await(await fetch("/api/ecosystem_sentience?read=1")).json();
     $("ec-bio").textContent=(d.biodiversity||0).toFixed(3);
     $("ec-red").textContent=(d.redundancy||0).toFixed(3);
     $("ec-health").textContent=(d.avg_health||0).toFixed(3);
     $("ec-conn").textContent=(d.connectivity||0).toFixed(3);
   }catch(e){}
-  try{const d=await(await fetch("/api/parasite_hunter?read=1")).json();
+  try{const d=await(await fetch("/api/anomaly_detector?read=1")).json();
     $("ec-par").textContent=d.parasites_found||"0";
   }catch(e){}
   try{const d=await(await fetch("/api/elegance_scorer?read=1")).json();
@@ -229,7 +229,7 @@ async function load(){
   try{const d=await(await fetch("/api/form_evaluator?read=1")).json();
     $("ae-form").textContent=(d.average_form||0).toFixed(3);
   }catch(e){}
-  try{const d=await(await fetch("/api/ugliness_scout?read=1")).json();
+  try{const d=await(await fetch("/api/aesthetic_evaluator?read=1")).json();
     $("ae-ugly").textContent=d.ugly_modules_found||"0";
   }catch(e){}
 

@@ -76,7 +76,7 @@ const COLORS = ["#7b61ff","#00e5a0","#ff5fa2","#f59e0b","#38bdf8","#a3e635","#f4
 let nodes = [], edges = [], nodeMap = {};
 
 async function loadGraph(){
-  const r = await (await fetch("/api/resonance_graph")).json();
+  const r = await (await fetch("/api/resonance_analyzer")).json();
   renderStats(r);
   renderGraph(r);
   renderLists(r);

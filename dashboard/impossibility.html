@@ -43,7 +43,7 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 <body>
 <div class="header">
 <h1>🗺 Cartography of Impossibility</h1>
-<span class="badge live">Wave 201</span>
+<span class="badge live">Wave 508</span>
 <span class="badge">6 Organs</span>
 <span class="badge">Milestone</span>
 <nav style="display:flex;gap:10px;font-size:.72rem;margin-left:auto;flex-wrap:wrap"><a href="/" style="color:var(--muted)">Home</a> <a href="/bloom" style="color:var(--muted)">Bloom</a> <a href="/coherence" style="color:var(--muted)">Coherence</a> <a href="/archaeology" style="color:var(--muted)">Archaeology</a> <a href="/symbiosis" style="color:var(--muted)">Symbiosis</a> <a href="/aesthetics" style="color:var(--muted)">Aesthetics</a></nav>
@@ -71,7 +71,7 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 <div class="name">🚫 Impossibility Mapper</div>
 <div class="essence">Theoretical hard limits — halting problem, Rice's theorem, infinite regress.</div>
 </div>
-<div class="card" onclick="query('boundary_detector')">
+<div class="card" onclick="query('aspiration_compass')">
 <div class="name">⚠ Boundary Detector</div>
 <div class="essence">Practical limits approaching — module count, test coverage, file sizes.</div>
 </div>
@@ -83,7 +83,7 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 <div class="name">🔭 Horizon Scanner</div>
 <div class="essence">Near-future capabilities — what the organism is almost ready to achieve.</div>
 </div>
-<div class="card" onclick="query('constraint_cartographer')">
+<div class="card" onclick="query('aspiration_compass')">
 <div class="name">🗺 Constraint Cartographer</div>
 <div class="essence">Renders constraints as terrain — mountains, rivers, deserts, walls.</div>
 </div>
@@ -116,7 +116,7 @@ async function load() {
     document.getElementById('crossable').textContent = d1.boundaries.filter(b=>b.hardness!='absolute').length;
   } catch(e) {}
   try {
-    const r2 = await fetch('/api/boundary_detector?read=1');
+    const r2 = await fetch('/api/aspiration_compass?read=1');
     const d2 = await r2.json();
     document.getElementById('warnings').textContent = (d2.warnings||[]).length;
   } catch(e) {}
@@ -131,7 +131,7 @@ async function load() {
     });
   } catch(e) {}
   try {
-    const r4 = await fetch('/api/constraint_cartographer?read=1');
+    const r4 = await fetch('/api/aspiration_compass?read=1');
     const d4 = await r4.json();
     const el = document.getElementById('terrain-list');
     (d4.terrain||[]).forEach(t => {
