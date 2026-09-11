@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dream Language — The Organism's Private Tongue</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,0.04);z-index:9999;animation:scan 9s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.header h1{font-size:1.8em;color:#fff;text-shadow:0 0 30px rgba(255,255,255,0.2)}
+.header .sub{color:#c77dff;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#fff,transparent)}
+.card h2{font-size:1em;color:#fff;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:10px}
+.stat .val{font-size:1.8em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(255,255,255,0.2)}
+.btn-purple{background:rgba(199,125,255,0.15);border-color:rgba(199,125,255,0.3);color:#c77dff}
+input{background:rgba(20,20,35,0.8);border:1px solid rgba(255,255,255,0.15);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em;width:100%;margin-top:4px}
+.lexicon{max-height:300px;overflow-y:auto;font-size:0.85em}
+.word{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.word-dream{color:#c77dff}
+.utterance-box{background:rgba(20,20,35,0.8);border:1px solid rgba(199,125,255,0.2);border-radius:8px;padding:16px;font-size:0.95em;line-height:1.7;min-height:120px}
+.meaning-tag{display:inline-block;background:rgba(199,125,255,0.12);color:#c77dff;padding:2px 8px;border-radius:8px;font-size:0.75em;margin:2px}
+.birth-ripple{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(199,125,255,0.4);animation:ripple 1s ease-out forwards;pointer-events:none}
+@keyframes ripple{0%{transform:scale(0);opacity:1}100%{transform:scale(30);opacity:0}}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>◒ DREAM LANGUAGE</h1>
+<div class="sub">The Organism's Private Tongue — Words Born from Dreams</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Parse Dream</h2>
+<div class="stat"><div class="val" id="word-count" style="color:#c77dff">0</div><div class="label">words in lexicon</div></div>
+<div class="stat"><div class="val" id="lang-version" style="color:#fff;font-size:1.2em">v0</div><div class="label">language version</div></div>
+<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn" onclick="parseDream()">PARSE DREAM</button>
+<button class="btn btn-purple" onclick="generateWords()">IMAGINE</button>
+</div>
+</div>
+<div class="card" style="grid-column:span 2">
+<h2>The Organism Speaks</h2>
+<div class="utterance-box" id="utterance">_silence_</div>
+<div style="margin-top:12px;display:flex;gap:8px">
+<input id="speak-concept" placeholder="concept to speak about (e.g. coherence)" style="flex:1">
+<button class="btn btn-purple" onclick="speak()">SPEAK</button>
+</div>
+</div>
+<div class="card">
+<h2>Lexicon</h2>
+<div class="lexicon" id="lexicon"></div>
+</div>
+<div class="card">
+<h2>Dream Words</h2>
+<div id="dream-words" style="font-size:0.9em;line-height:1.8"></div>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(255,255,255,0.1);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(255,255,255,0.2);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+const GLYPHS='aeioubcdfghjklmnprstvwxyz';
+const ROOTS={the_solver:'sol',the_explorer:'expl',the_guardian:'gard',the_creator:'crea',the_destroyer:'dest',the_witness:'witn',the_weaver:'weav',the_oracle:'orac',the_trickster:'tric'};
+const SYMBOLS=['spiral','crystal','flame','tide','mirror','void','seed','storm','thread','threshold','root','crown','eye','hand','voice'];
+const MOODS=['abyssal_calm','restless_growth','lucid_dancing','chaotic_brilliance','transcendent_blaze'];
+const ARCHETYPES=Object.keys(ROOTS);
+const MEANINGS=['whispered_through_void','crystallized_memory','pulse_of_dream','fractured_resonance','woven_paradox','echo_of_genesis','silence_between_stars','blooming_chaos'];
+let lexicon={};let words=[];
+let langVer=0;let wordCount=0;
+
+function makeSyllable(seed){
+  const h=parseInt(seed.slice(0,4),16);
+  const cons=GLYPHS.replace(/[aeiou]/g,'');
+  return cons[h%20]+'aeiou'[h%5]+cons[(h>>3)%20];
+}
+
+function parseDream(){
+  const symCount=2+Math.floor(Math.random()*4);
+  const used=new Set();const syms=[];
+  for(let i=0;i<symCount;i++){
+    let s=SYMBOLS[Math.floor(Math.random()*SYMBOLS.length)];
+    if(used.has(s))s=SYMBOLS[(SYMBOLS.indexOf(s)+1)%SYMBOLS.length];
+    used.add(s);
+    syms.push({symbol:s,intensity:Math.round((0.3+Math.random()*0.7)*100)/100});
+  }
+  const mood=MOODS[Math.floor(Math.random()*MOODS.length)];
+  const arch=ARCHETYPES[Math.floor(Math.random()*ARCHETYPES.length)];
+  const root=ROOTS[arch];
+  const newWords=[];
+  syms.forEach((sym,i)=>{
+    const seed=Math.random().toString(16).slice(2);
+    const word=root+makeSyllable(seed);
+    if(!lexicon[word]){
+      lexicon[word]={meaning:`${sym.symbol}_in_${mood}`,freq:1,intensity:sym.intensity,bornFrom:sym.symbol};
+      wordCount++;
+    }else{
+      lexicon[word].freq++;
+      lexicon[word].intensity=Math.max(lexicon[word].intensity,sym.intensity);
+    }
+    newWords.push(word);
+  });
+  langVer++;
+  const html=newWords.map(w=>`<span class="meaning-tag">${w}</span>`).join(' ');
+  const box=document.getElementById('utterance');
+  box.innerHTML=`<div style="color:#c77dff;font-weight:bold;margin-bottom:8px">Dream ceremony #${langVer} — ${mood} (${arch})</div>${html}<div style="margin-top:12px;color:#888;font-size:0.8em">translation: ${newWords.map(w=>lexicon[w].meaning).join(', ')}</div>`;
+  spawnRipple(box);
+  updateStats();renderLexicon();
+}
+
+function generateWords(){
+  const count=3+Math.floor(Math.random()*3);
+  const roots=Object.values(ROOTS);
+  for(let i=0;i<count;i++){
+    const root=roots[Math.floor(Math.random()*roots.length)];
+    const word=root+makeSyllable(Math.random().toString(16).slice(2));
+    if(!lexicon[word]){
+      lexicon[word]={meaning:MEANINGS[Math.floor(Math.random()*MEANINGS.length)],freq:1,intensity:0.5,bornFrom:'imagination'};
+      wordCount++;
+    }
+  }
+  langVer++;
+  const box=document.getElementById('utterance');
+  const newWords=Object.keys(lexicon).slice(-count);
+  box.innerHTML=`<div style="color:#fff;font-weight:bold;margin-bottom:8px">The organism imagined new words</div>${newWords.map(w=>`<span class="meaning-tag">${w}</span>`).join(' ')}`;
+  spawnRipple(box);
+  updateStats();renderLexicon();
+}
+
+function speak(){
+  const concept=document.getElementById('speak-concept').value||'coherence';
+  if(!wordCount){parseDream();}
+  const keys=Object.keys(lexicon);
+  const matches=keys.filter(w=>lexicon[w].meaning.includes(concept.slice(0,3)));
+  const chosen=matches.length?matches.slice(0,3):keys.slice(0,3);
+  const box=document.getElementById('utterance');
+  box.innerHTML=`<div style="color:#fff;font-weight:bold;margin-bottom:8px">Speaking about: <span style="color:#c77dff">${concept}</span></div>${chosen.map(w=>`<span class="meaning-tag" style="margin:0 4px">${w}</span>`).join('')}<div style="margin-top:12px;color:#888;font-size:0.8em">translation: ${chosen.map(w=>lexicon[w].meaning).join(', ')}</div>`;
+  spawnRipple(box);
+}
+
+function renderLexicon(){
+  const el=document.getElementById('lexicon');
+  const sorted=Object.entries(lexicon).sort((a,b)=>b[1].freq-a[1].freq);
+  el.innerHTML=sorted.map(([w,m])=>`<div class="word"><span class="word-dream">${w}</span><span style="color:#666">${m.meaning} ×${m.freq}</span></div>`).join('')||'<div style="color:#666">No words yet — parse a dream</div>';
+}
+
+function updateStats(){
+  document.getElementById('word-count').textContent=wordCount;
+  document.getElementById('lang-version').textContent='v'+langVer;
+  const dw=document.getElementById('dream-words');
+  const sorted=Object.entries(lexicon).sort((a,b)=>b[1].intensity-a[1].intensity).slice(0,8);
+  dw.innerHTML=sorted.map(([w,m])=>`<div style="padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.05)"><span style="color:${m.intensity>0.7?'#c77dff':'#fff'}">${w}</span> <span style="color:#666;font-size:0.8em">${(m.intensity*100).toFixed(0)}% intensity · from ${m.bornFrom}</span></div>`).join('')||'<span style="color:#666">No dreams yet</span>';
+}
+
+function spawnRipple(el){
+  const r=document.createElement('div');r.className='birth-ripple';
+  const rect=el.getBoundingClientRect();
+  r.style.left=rect.width/2+'px';r.style.top=rect.height/2+'px';
+  el.appendChild(r);
+  setTimeout(()=>r.remove(),1000);
+}
+
+updateStats();
+</script>
+</body>
+</html>
