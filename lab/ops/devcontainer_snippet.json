@@ -1,0 +1,8 @@
+{
+  "name": "IXPANSION Organism Lab",
+  "postCreateCommand": "bash lab/ops/codespace_boot.sh",
+  "containerEnv": {
+    "IX_EPOCH_SECRET": "replace-in-codespace-secrets",
+    "IX_CHANNEL": "@CoodingLooop"
+  }
+}
