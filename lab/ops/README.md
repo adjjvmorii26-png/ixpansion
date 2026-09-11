@@ -1,16 +1,17 @@
-# Lab Ops · PR / CI / sandbox / codespace
+# Lab Ops
 
 | Tool | Innovation |
 |------|------------|
-| epoch_ticket.py | HMAC time-bound tickets; writes need `act` mode |
-| pr_graft_advisor.py | PR as graft → hold/observe/act |
-| sandbox_guarded.py | Ticks only with fresh ticket |
-| codespace_boot.sh | postCreate = constellation + smoke + graft |
-| lab-graft.yml | Path-filtered CI + graft artifact |
+| epoch_ticket | HMAC TTL tickets |
+| pr_graft_advisor | hold/observe/act |
+| graft_sonify | GRAFT → silent score |
+| diff_constellation | paths → star field |
+| island | ephemeral namespaces + reap |
+| graft_caption_reactor | GRAFT → @CoodingLooop frames |
 
 ```bash
-python lab/ops/epoch_ticket.py issue --ttl 3600
-python lab/ops/sandbox_guarded.py 10
-python lab/ops/pr_graft_advisor.py
-bash lab/ops/codespace_boot.sh
+python lab/ops/graft_sonify.py
+python lab/ops/diff_constellation.py lab/ops/island.py
+python lab/ops/island.py spawn --ttl 600
+python lab/ops/graft_caption_reactor.py
 ```
