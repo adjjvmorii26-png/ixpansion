@@ -5,323 +5,586 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lucid Machines — 3D</title>
 <style>
-:root{--bg:#05050f;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--green:#4ade80;--text:#a0a0b8;--dim:#606078}
+:root{--bg:#05050f;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--green:#4ade80;--cyan:#22d3ee;--text:#a0a0b8;--dim:#606078}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;overflow:hidden;height:100vh}
-canvas{display:block;width:100%;height:100%}
-.hud{position:fixed;top:16px;left:16px;z-index:2;pointer-events:none}
-.hud .stat{display:flex;justify-content:space-between;width:200px;padding:4px 0;font-size:0.7em}
-.hud .stat .k{color:var(--dim)}.hud .stat .v{color:#fff;font-weight:600}
-.bar{width:200px;height:5px;background:rgba(255,255,255,0.05);border-radius:3px;overflow:hidden;margin:2px 0}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;overflow:hidden;height:100vh;user-select:none}
+canvas{display:block;position:absolute;top:0;left:0;width:100%;height:100%}
+#hud{position:fixed;top:16px;left:16px;z-index:2;pointer-events:none;min-width:180px}
+#hud .stat{display:flex;justify-content:space-between;padding:3px 0;font-size:0.72em}
+#hud .stat .k{color:var(--dim)}.hud .stat .v, #hud .stat .v{color:#fff;font-weight:600}
+.bar{width:180px;height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;margin:2px 0}
 .bar-fill{height:100%;border-radius:3px;transition:width 0.3s}
-.crosshair{position:fixed;top:50%;left:calc(50% - 130px);transform:translate(-50%,-50%);z-index:2;pointer-events:none}
-.crosshair::before,.crosshair::after{content:'';position:absolute;background:rgba(124,124,248,0.4)}
-.crosshair::before{width:20px;height:2px;top:-1px;left:-10px}
-.crosshair::after{width:2px;height:20px;left:-1px;top:-10px}
-.controls{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:2;display:flex;gap:8px}
-.btn{background:rgba(5,5,15,0.9);border:1px solid var(--accent);color:var(--accent);padding:8px 16px;border-radius:6px;font-family:inherit;font-size:0.75em;cursor:pointer;transition:all 0.2s}
-.btn:hover{background:rgba(124,124,248,0.15);color:#fff}
-.log{position:fixed;bottom:60px;left:16px;z-index:2;max-width:300px;pointer-events:none}
-.log-entry{font-size:0.65em;padding:2px 0;opacity:0.8}
-.log-entry.combat{color:var(--rose)}.log-entry.loot{color:var(--gold)}.log-entry.info{color:var(--teal)}
-.wave-display{position:fixed;top:16px;right:280px;z-index:2;text-align:right;pointer-events:none}
-.wave-display h2{color:var(--accent);font-size:1.2em;letter-spacing:3px}.wave-display .sub{color:var(--dim);font-size:0.7em}
+#crosshair{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;pointer-events:none;width:24px;height:24px}
+#crosshair::before,#crosshair::after{content:'';position:absolute;background:rgba(124,124,248,0.5)}
+#crosshair::before{width:20px;height:2px;top:11px;left:2px}
+#crosshair::after{width:2px;height:20px;left:11px;top:2px}
+#waveHud{position:fixed;top:16px;right:16px;z-index:2;text-align:right;pointer-events:none}
+#waveHud h2{color:var(--accent);font-size:1.1em;letter-spacing:3px}
+#waveHud .realm{color:var(--gold);font-size:0.75em;margin-top:4px}
+#waveHud .enemies{color:var(--rose);font-size:0.65em;margin-top:2px}
+#controls{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:2;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.btn{background:rgba(5,5,15,0.92);border:1px solid var(--accent);color:var(--accent);padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;transition:all 0.15s}
+.btn:hover,.btn:active{background:rgba(124,124,248,0.2);color:#fff;border-color:var(--teal)}
+#log{position:fixed;bottom:64px;left:16px;z-index:2;max-width:320px;pointer-events:none}
+.log-entry{font-size:0.62em;padding:2px 0;opacity:0.9;text-shadow:0 0 4px rgba(0,0,0,0.8)}
+.log-entry.combat{color:var(--rose)}.log-entry.loot{color:var(--gold)}.log-entry.info{color:var(--teal)}.log-entry.dream{color:var(--cyan)}.log-entry.level{color:var(--accent)}
+#minimap{position:fixed;bottom:16px;right:16px;z-index:2;border:1px solid rgba(124,124,248,0.2);border-radius:4px;overflow:hidden}
+#msgOverlay{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;color:var(--accent);font-size:1.8em;letter-spacing:4px;text-shadow:0 0 30px rgba(124,124,248,0.5);pointer-events:none;opacity:0;transition:opacity 0.5s}
+#msgOverlay.show{opacity:1}
+#inventory{position:fixed;top:50%;right:16px;transform:translateY(-50%);z-index:2;pointer-events:none;opacity:0;transition:opacity 0.3s}
+#inventory.show{opacity:1}
+#inventory .inv-title{color:var(--gold);font-size:0.7em;letter-spacing:2px;margin-bottom:6px}
+#inventory .inv-item{color:var(--text);font-size:0.62em;padding:2px 0}
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
-<div class="hud">
-  <div class="stat"><span class="k">HP</span><span class="v" id="hp">100/100</span></div>
+<div id="hud">
+  <div class="stat"><span class="k">HP</span><span class="v" id="hpText">100/100</span></div>
   <div class="bar"><div class="bar-fill" id="hpBar" style="width:100%;background:var(--green)"></div></div>
-  <div class="stat"><span class="k">Coherence</span><span class="v" id="coh">0.80</span></div>
+  <div class="stat"><span class="k">Coherence</span><span class="v" id="cohText">0.80</span></div>
   <div class="bar"><div class="bar-fill" id="cohBar" style="width:80%;background:var(--accent)"></div></div>
-  <div class="stat"><span class="k">Level</span><span class="v" id="lvl">1</span></div>
-  <div class="stat"><span class="k">ATK</span><span class="v" id="atk">5</span></div>
-  <div class="stat"><span class="k">DEF</span><span class="v" id="def">2</span></div>
+  <div class="stat"><span class="k">Dream</span><span class="v" id="dreamText">0</span></div>
+  <div class="bar"><div class="bar-fill" id="dreamBar" style="width:0%;background:var(--cyan)"></div></div>
+  <div class="stat"><span class="k">Level</span><span class="v" id="lvlText">1</span></div>
+  <div class="stat"><span class="k">ATK</span><span class="v" id="atkText">5</span></div>
+  <div class="stat"><span class="k">DEF</span><span class="v" id="defText">2</span></div>
+  <div class="stat"><span class="k">XP</span><span class="v" id="xpText">0/100</span></div>
 </div>
-<div class="crosshair"></div>
-<div class="wave-display"><h2 id="waveNum">WAVE 1</h2><div class="sub" id="realmName">Entropy Desert</div></div>
-<div class="controls">
-  <button class="btn" onclick="moveForward()">↑ Forward</button>
-  <button class="btn" onclick="turnLeft()">← Turn</button>
-  <button class="btn" onclick="turnRight()">→ Turn</button>
-  <button class="btn" onclick="attack()">⚔ Attack</button>
-  <button class="btn" onclick="special()">✦ Special</button>
-  <button class="btn" onclick="nextWave()">→ Next</button>
+<div id="crosshair"></div>
+<div id="waveHud"><h2 id="waveTitle">WAVE 1</h2><div class="realm" id="realmName">Entropy Desert</div><div class="enemies" id="enemyCount">3 enemies</div></div>
+<div id="controls">
+  <button class="btn" onclick="G.move()" title="W / ↑">↑ Move</button>
+  <button class="btn" onclick="G.turnL()" title="A / ←">← Left</button>
+  <button class="btn" onclick="G.turnR()" title="D / →">→ Right</button>
+  <button class="btn" onclick="G.attack()" title="Space">⚔ Strike</button>
+  <button class="btn" onclick="G.special()" title="Q">✦ Dream Blast</button>
+  <button class="btn" onclick="G.interact()" title="E">◎ Interact</button>
+  <button class="btn" onclick="G.nextWave()" title="N">→ Next Wave</button>
 </div>
-<div class="log" id="log"></div>
+<div id="log"></div>
+<canvas id="minimap" width="140" height="140"></canvas>
+<div id="msgOverlay"></div>
+<div id="inventory"><div class="inv-title">◈ INVENTORY</div><div id="invList"></div></div>
+
 <script>
-const c=document.getElementById('c');const gl=c.getContext('webgl');
-let W,H;
-function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;gl.viewport(0,0,W,H)}
-resize();window.addEventListener('resize',resize);
+"use strict";
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const mmCanvas = document.getElementById('minimap');
+const mmCtx = mmCanvas.getContext('2d');
 
-// ── Simple 3D Renderer (Raycasting) ──
-const MAP_SIZE=24;const TILE_SIZE=1;
-let map=[];let playerX=12,playerY=12,playerAngle=0;
-let hp=100,maxHp=100,level=1,atk=5,def2=2,coherence=0.8,xp=0,xpNext=100,wave=1;
-let enemies=[];let logs=[];let gameOver=false;
-const FOV=Math.PI/3;const DEPTH=16;
-const REALMS=['Entropy Desert','Dream Gravity Zone','Paradox Garden','Coherence Cathedral','Void Abyss','Temporal Rift','Mythic Realm','Resonance Depths'];
+// ── Constants ──
+const MAP = 32, FOV = Math.PI / 3, DEPTH = 16, STRIP = 2;
+const REALMS = [
+  'Entropy Desert','Dream Gravity Zone','Paradox Garden',
+  'Coherence Cathedral','Void Abyss','Temporal Rift',
+  'Mythic Realm','Resonance Depths','Mycelial Cavern',
+  'Abyssal Forge','Chrono Spiral','The Underworld'
+];
+const ENEMY_TYPES = [
+  {name:'Glitch Phantom', color:'#fb7185', glyph:'◉', baseHp:12, baseAtk:2},
+  {name:'Entropy Worm', color:'#c084fc', glyph:'◆', baseHp:18, baseAtk:3},
+  {name:'Paradox Wraith', color:'#fbbf24', glyph:'✦', baseHp:22, baseAtk:4},
+  {name:'Dream Eater', color:'#22d3ee', glyph:'◈', baseHp:30, baseAtk:5},
+  {name:'Void Walker', color:'#a78bfa', glyph:'⬡', baseHp:40, baseAtk:6}
+];
+const ITEMS = [
+  {name:'Coherence Shard', type:'heal', value:20, color:'#2dd4bf', glyph:'◇'},
+  {name:'Entropy Core', type:'buff_atk', value:2, color:'#fbbf24', glyph:'◆'},
+  {name:'Dream Essence', type:'buff_dream', value:0.2, color:'#22d3ee', glyph:'✦'},
+  {name:'Void Crystal', type:'buff_def', value:1, color:'#a78bfa', glyph:'⬡'}
+];
+const WALL_COLORS = [
+  {r:70,g:70,b:160},{r:50,g:100,b:140},{r:80,g:60,b:120},
+  {r:60,g:80,b:150},{r:45,g:110,b:130}
+];
 
-function genMap(){
-  map=Array.from({length:MAP_SIZE},()=>Array(MAP_SIZE).fill(0));
-  for(let x=0;x<MAP_SIZE;x++){map[0][x]=1;map[MAP_SIZE-1][x]=1}
-  for(let y=0;y<MAP_SIZE;y++){map[y][0]=1;map[y][MAP_SIZE-1]=1}
-  for(let i=0;i<40;i++){
-    const wx=2+Math.floor(Math.random()*(MAP_SIZE-4));
-    const wy=2+Math.floor(Math.random()*(MAP_SIZE-4));
-    map[wy][wx]=1;if(wy+1<MAP_SIZE-1)map[wy+1][wx]=1;
+// ── State ──
+let map, playerX, playerY, angle, hp, maxHp, atk, def, coherence, dream, dreamMax;
+let level, xp, xpNext, wave, enemies, items, logs, particles;
+let gameOver, paused, keys = {};
+
+function init() {
+  genMap();
+  playerX = MAP/2 + 0.5; playerY = MAP/2 + 0.5; angle = 0;
+  hp = 100; maxHp = 100; atk = 5; def = 2; coherence = 0.8;
+  dream = 0; dreamMax = 100; level = 1; xp = 0; xpNext = 100;
+  wave = 1; enemies = []; items = []; logs = []; particles = [];
+  gameOver = false; paused = false;
+  spawnEnemies(); spawnItems(); updateHUD();
+}
+
+function genMap() {
+  map = Array.from({length: MAP}, () => Array(MAP).fill(0));
+  // Walls border
+  for (let i = 0; i < MAP; i++) { map[0][i] = 1; map[MAP-1][i] = 1; map[i][0] = 1; map[i][MAP-1] = 1; }
+  // Random rooms
+  for (let r = 0; r < 3 + Math.floor(Math.random()*4); r++) {
+    const rw = 3 + Math.floor(Math.random()*5), rh = 3 + Math.floor(Math.random()*5);
+    const rx = 2 + Math.floor(Math.random()*(MAP-rw-4)), ry = 2 + Math.floor(Math.random()*(MAP-rh-4));
+    for (let y = ry; y < ry+rh; y++) for (let x = rx; x < rx+rw; x++) map[y][x] = 1;
+  }
+  // Scatter pillars
+  for (let i = 0; i < 15; i++) {
+    const px = 2 + Math.floor(Math.random()*(MAP-4)), py = 2 + Math.floor(Math.random()*(MAP-4));
+    if (map[py][px] === 0) map[py][px] = 1;
+  }
+  // Color variation
+  for (let y = 0; y < MAP; y++) for (let x = 0; x < MAP; x++) {
+    if (map[y][x] === 1) map[y][x] = 1 + Math.floor(Math.random() * WALL_COLORS.length);
+  }
+  // Ensure center is clear
+  for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+    const ny = Math.floor(MAP/2)+dy, nx = Math.floor(MAP/2)+dx;
+    if (ny > 0 && ny < MAP-1 && nx > 0 && nx < MAP-1) map[ny][nx] = 0;
   }
 }
 
-function spawnEnemies3D(){
-  enemies=[];
-  const count=3+Math.floor(Math.random()*5);
-  for(let i=0;i<count;i++){
-    let ex,ey;
-    do{ex=2+Math.floor(Math.random()*(MAP_SIZE-4));ey=2+Math.floor(Math.random()*(MAP_SIZE-4))}
-    while(map[ey][ex]===1);
-    enemies.push({x:ex,y:ey,hp:15+wave*5,maxHp:15+wave*5,atk:2+wave,color:'#fb7185',glyph:'◉'});
+function spawnEnemies() {
+  enemies = [];
+  const count = 2 + Math.floor(Math.random()*3) + Math.floor(wave*0.5);
+  for (let i = 0; i < count; i++) {
+    let ex, ey, tries = 0;
+    do { ex = 2+Math.floor(Math.random()*(MAP-4)); ey = 2+Math.floor(Math.random()*(MAP-4)); tries++; }
+    while ((map[ey][ex] !== 0 || dist(ex,ey,playerX,playerY) < 5) && tries < 100);
+    if (tries >= 100) continue;
+    const tier = Math.min(Math.floor(wave/3), ENEMY_TYPES.length-1);
+    const t = ENEMY_TYPES[tier];
+    const scale = 1 + wave*0.12;
+    enemies.push({
+      x: ex+0.5, y: ey+0.5,
+      hp: Math.floor(t.baseHp * scale), maxHp: Math.floor(t.baseHp * scale),
+      atk: Math.floor(t.baseAtk * scale), color: t.color, glyph: t.glyph, name: t.name,
+      speed: 0.02 + Math.random()*0.015
+    });
   }
 }
 
-function render3D(){
-  if(gameOver)return;
-  gl.clearColor(0.02,0.02,0.06,1);gl.clear(gl.COLOR_BUFFER_BIT);
-  
-  const numRays=W;
-  for(let i=0;i<numRays;i+=2){
-    const rayAngle=playerAngle-FOV/2+i/numRays*FOV;
-    const sin=Math.sin(rayAngle);const cos=Math.cos(rayAngle);
-    
-    let dist=0;let hit=0;let hitEnemy=null;
-    while(dist<DEPTH){
-      dist+=0.1;
-      const mx=Math.floor(playerX+cos*dist);
-      const my=Math.floor(playerY+sin*dist);
-      if(mx<0||mx>=MAP_SIZE||my<0||my>=MAP_SIZE){hit=1;break}
-      if(map[my][mx]===1){hit=1;break}
-      // Check enemy
-      const e=enemies.find(e=>Math.floor(e.x)===mx&&Math.floor(e.y)===my);
-      if(e&&dist<2){hitEnemy=e;break}
+function spawnItems() {
+  items = [];
+  const count = 2 + Math.floor(Math.random()*3);
+  for (let i = 0; i < count; i++) {
+    let ix, iy, tries = 0;
+    do { ix = 2+Math.floor(Math.random()*(MAP-4)); iy = 2+Math.floor(Math.random()*(MAP-4)); tries++; }
+    while ((map[iy][ix] !== 0 || dist(ix,iy,playerX,playerY) < 3) && tries < 100);
+    if (tries >= 100) continue;
+    const t = ITEMS[Math.floor(Math.random()*ITEMS.length)];
+    items.push({x: ix+0.5, y: iy+0.5, ...t, alive: true});
+  }
+}
+
+function dist(x1,y1,x2,y2) { return Math.sqrt((x1-x2)**2+(y1-y2)**2); }
+
+// ── Raycaster ──
+function render() {
+  const W = canvas.width, H = canvas.height;
+  ctx.fillStyle = '#05050f';
+  ctx.fillRect(0, 0, W, H);
+
+  // Sky gradient
+  const skyGrad = ctx.createLinearGradient(0, 0, 0, H/2);
+  const realmIdx = wave % REALMS.length;
+  const skyColors = ['#0a0a1a','#0d0820','#060612','#080818','#0a0015','#050510','#0c0820','#080018'];
+  skyGrad.addColorStop(0, skyColors[realmIdx] || '#0a0a1a');
+  skyGrad.addColorStop(1, '#05050f');
+  ctx.fillStyle = skyGrad;
+  ctx.fillRect(0, 0, W, H/2);
+
+  // Floor gradient
+  const floorGrad = ctx.createLinearGradient(0, H/2, 0, H);
+  floorGrad.addColorStop(0, '#05050f');
+  floorGrad.addColorStop(1, '#080812');
+  ctx.fillStyle = floorGrad;
+  ctx.fillRect(0, H/2, W, H/2);
+
+  const numRays = Math.ceil(W / STRIP);
+  const zBuffer = [];
+
+  for (let i = 0; i < numRays; i++) {
+    const rayAngle = angle - FOV/2 + (i/numRays)*FOV;
+    const sin = Math.sin(rayAngle), cos = Math.cos(rayAngle);
+    let dist = 0, hit = false, wallType = 0;
+
+    while (dist < DEPTH) {
+      dist += 0.05;
+      const mx = Math.floor(playerX + cos*dist);
+      const my = Math.floor(playerY + sin*dist);
+      if (mx < 0 || mx >= MAP || my < 0 || my >= MAP) { hit = true; wallType = 1; break; }
+      if (map[my][mx] > 0) { hit = true; wallType = map[my][mx]; break; }
     }
-    
-    const correctedDist=dist*Math.cos(rayAngle-playerAngle);
-    const wallHeight=Math.min(H,H/correctedDist*0.5);
-    const y=(H-wallHeight)/2;
-    
-    const brightness=Math.max(0.1,1-correctedDist/DEPTH);
-    
-    if(hitEnemy){
-      const eb=hitEnemy.hp/hitEnemy.maxHp;
-      const r=Math.floor(251*eb);const g=Math.floor(113*(1-eb));
-      gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);
-      gl.clearColor(r/255*0.3*brightness,g/255*0.3*brightness,0.2*brightness,1);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.disable(gl.BLEND);
-      
-      // Draw enemy sprite column
-      gl.enable(gl.SCISSOR);
-      gl.scissor(i,y,2,wallHeight);
-      gl.clearColor(r/255*brightness,g/255*brightness,0.1*brightness,1);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.disable(gl.SCISSOR);
-    }else if(hit){
-      // Wall
-      const depth_shade=correctedDist/DEPTH;
-      const r=0.07+depth_shade*0.05;const g=0.07+depth_shade*0.08;const b=0.18+depth_shade*0.1;
-      gl.enable(gl.SCISSOR);
-      gl.scissor(i,0,2,y);
-      gl.clearColor(r*0.3,g*0.3,b*0.3,1);gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.scissor(i,y,2,wallHeight);
-      gl.clearColor(r*brightness,g*brightness,b*brightness,1);gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.scissor(i,y+wallHeight,2,H-y-wallHeight);
-      gl.clearColor(0.01,0.01,0.03,1);gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.disable(gl.SCISSOR);
-    }else{
-      // Floor/ceiling
-      gl.enable(gl.SCISSOR);
-      gl.scissor(i,0,2,y);
-      gl.clearColor(0.01,0.01,0.03,1);gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.scissor(i,y,2,wallHeight);
-      gl.clearColor(0.04,0.04,0.08,1);gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.scissor(i,y+wallHeight,2,H-y-wallHeight);
-      gl.clearColor(0.02,0.02,0.05,1);gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.disable(gl.SCISSOR);
+
+    const corrected = dist * Math.cos(rayAngle - angle);
+    zBuffer[i] = corrected;
+    const wallH = Math.min(H*2, H / (corrected + 0.001) * 0.6);
+    const wallY = (H - wallH) / 2;
+
+    if (hit) {
+      const wc = WALL_COLORS[(wallType - 1) % WALL_COLORS.length];
+      const bright = Math.max(0.15, 1 - corrected/DEPTH);
+      const fog = Math.pow(bright, 0.8);
+      const r = Math.floor(wc.r * fog), g = Math.floor(wc.g * fog), b = Math.floor(wc.b * fog);
+      // Wall strip with edge highlight
+      ctx.fillStyle = `rgb(${r},${g},${b})`;
+      ctx.fillRect(i*STRIP, wallY, STRIP, wallH);
+      // Edge darkening for depth
+      ctx.fillStyle = `rgba(0,0,0,${0.1 + corrected*0.03})`;
+      ctx.fillRect(i*STRIP, wallY, STRIP, wallH * 0.15);
+      ctx.fillRect(i*STRIP, wallY + wallH*0.85, STRIP, wallH * 0.15);
     }
   }
-  
-  // Render enemies as sprites
-  enemies.forEach(e=>{
-    const dx=e.x-playerX;const dy=e.y-playerY;
-    const dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist>DEPTH)return;
-    const angle=Math.atan2(dy,dx)-playerAngle;
-    if(Math.abs(angle)>FOV/2)return;
-    const screenX=W/2+angle/FOV*W;
-    const spriteH=Math.min(H,H/dist*0.4);
-    const spriteW=spriteH*0.6;
-    const spriteY=(H-spriteH)/2;
-    
-    // Simple colored rectangle for sprite
-    const ctx2=c.getContext('2d');
-    if(!c._ctx2d){
-      c._ctx2d=document.createElement('canvas');
-      c._ctx2d.width=W;c._ctx2d.height=H;
-    }
+
+  // ── Render Items ──
+  items.forEach(item => {
+    if (!item.alive) return;
+    const dx = item.x - playerX, dy = item.y - playerY;
+    const d = Math.sqrt(dx*dx+dy*dy);
+    if (d > DEPTH) return;
+    const ang = Math.atan2(dy, dx) - angle;
+    if (Math.abs(ang) > FOV/2) return;
+    const sx = W/2 + (ang/FOV)*W;
+    const sh = Math.min(H, H/d*0.35);
+    const sy = H/2 + sh*0.15;
+    // Glow
+    ctx.save();
+    ctx.globalAlpha = 0.3 + 0.2*Math.sin(Date.now()*0.005);
+    ctx.shadowColor = item.color;
+    ctx.shadowBlur = 12;
+    ctx.fillStyle = item.color;
+    ctx.font = `${Math.floor(sh*0.6)}px monospace`;
+    ctx.textAlign = 'center';
+    ctx.fillText(item.glyph, sx, sy);
+    ctx.shadowBlur = 0;
+    ctx.restore();
   });
-  
-  // Overlay text
-  const ctx2=c.getContext('2d');
-  ctx2.clearRect(0,0,W,H);
-  ctx2.fillStyle='rgba(255,255,255,0.7)';ctx2.font='12px monospace';ctx2.textAlign='center';
-  
-  // Draw enemy indicators
-  enemies.forEach(e=>{
-    const dx=e.x-playerX;const dy=e.y-playerY;
-    const dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist>DEPTH)return;
-    const angle=Math.atan2(dy,dx)-playerAngle;
-    if(Math.abs(angle)>FOV/2)return;
-    const screenX=W/2+angle/FOV*W;
-    const spriteH=Math.min(80,200/dist);
-    const spriteY=H/2-spriteH/2;
-    
-    ctx2.fillStyle=e.color+'80';
-    ctx2.fillRect(screenX-spriteH*0.3,spriteY,spriteH*0.6,spriteH);
-    ctx2.fillStyle='#fff';ctx2.font='10px monospace';
-    ctx2.fillText(e.glyph,screenX,spriteY+spriteH/2+4);
-    
-    // HP bar
-    const hpPct=e.hp/e.maxHp;
-    ctx2.fillStyle='rgba(255,255,255,0.2)';ctx2.fillRect(screenX-20,spriteY-8,40,3);
-    ctx2.fillStyle=hpPct>0.5?'#4ade80':'#fb7185';
-    ctx2.fillRect(screenX-20,spriteY-8,40*hpPct,3);
-    ctx2.fillStyle='#fff8';ctx2.font='8px monospace';
-    ctx2.fillText(`${e.hp}/${e.maxHp}`,screenX,spriteY-12);
+
+  // ── Render Enemies ──
+  const sortedEnemies = [...enemies].sort((a,b) => {
+    const da = dist(a.x,a.y,playerX,playerY);
+    const db = dist(b.x,b.y,playerX,playerY);
+    return db - da;
   });
-  
-  // HUD overlay
-  ctx2.fillStyle='#fff6';ctx2.font='11px monospace';ctx2.textAlign='left';
-  ctx2.fillText(`POS: ${playerX.toFixed(1)}, ${playerY.toFixed(1)}  ANGLE: ${(playerAngle*180/Math.PI).toFixed(0)}°`,16,H-16);
-  ctx2.fillText(`ENEMIES: ${enemies.length}`,16,H-30);
-  
-  requestAnimationFrame(render3D);
+
+  sortedEnemies.forEach(e => {
+    const dx = e.x - playerX, dy = e.y - playerY;
+    const d = Math.sqrt(dx*dx+dy*dy);
+    if (d > DEPTH) return;
+    const ang = Math.atan2(dy, dx) - angle;
+    if (Math.abs(ang) > FOV*0.7) return;
+    const sx = W/2 + (ang/FOV)*W;
+    const sh = Math.min(H*0.6, H/d*0.45);
+    const sy = H/2 + sh*0.05;
+    const sw = sh*0.5;
+
+    // Glow aura
+    ctx.save();
+    ctx.globalAlpha = 0.15 + 0.1*Math.sin(Date.now()*0.003 + e.x);
+    ctx.shadowColor = e.color;
+    ctx.shadowBlur = 20;
+    ctx.fillStyle = e.color;
+    ctx.fillRect(sx-sw/2, sy, sw, sh);
+    ctx.shadowBlur = 0;
+
+    // Body
+    const hpPct = e.hp / e.maxHp;
+    ctx.globalAlpha = 0.8 + 0.2*hpPct;
+    ctx.fillStyle = e.color;
+    ctx.fillRect(sx-sw*0.3, sy+sh*0.15, sw*0.6, sh*0.7);
+
+    // Glyph
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = '#fff';
+    ctx.font = `${Math.floor(sh*0.35)}px monospace`;
+    ctx.textAlign = 'center';
+    ctx.fillText(e.glyph, sx, sy+sh*0.55);
+
+    // Name + HP bar
+    ctx.fillStyle = '#fff8';
+    ctx.font = `${Math.max(9, Math.floor(sh*0.1))}px monospace`;
+    ctx.fillText(e.name, sx, sy - 10);
+    ctx.fillStyle = 'rgba(255,255,255,0.15)';
+    ctx.fillRect(sx-sw*0.35, sy - 7, sw*0.7, 4);
+    ctx.fillStyle = hpPct > 0.5 ? '#4ade80' : hpPct > 0.25 ? '#fbbf24' : '#fb7185';
+    ctx.fillRect(sx-sw*0.35, sy - 7, sw*0.7*hpPct, 4);
+
+    ctx.restore();
+  });
+
+  // ── Particles ──
+  particles.forEach(p => {
+    ctx.save();
+    ctx.globalAlpha = p.life;
+    ctx.fillStyle = p.color;
+    ctx.shadowColor = p.color;
+    ctx.shadowBlur = 6;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size*p.life, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  });
+
+  // ── Minimap ──
+  renderMinimap();
 }
 
-function moveForward(){
-  const nx=playerX+Math.cos(playerAngle)*0.5;
-  const ny=playerY+Math.sin(playerAngle)*0.5;
-  if(nx>0&&nx<MAP_SIZE-1&&ny>0&&ny<MAP_SIZE-1&&map[Math.floor(ny)][Math.floor(nx)]!==1){
-    // Check enemy
-    const enemy=enemies.find(e=>Math.abs(e.x-nx)<0.8&&Math.abs(e.y-ny)<0.8);
-    if(enemy){attack();return}
-    playerX=nx;playerY=ny;
+function renderMinimap() {
+  const mw = 140, mh = 140, cs = mw/MAP;
+  mmCtx.fillStyle = '#0a0a18';
+  mmCtx.fillRect(0, 0, mw, mh);
+  for (let y = 0; y < MAP; y++) for (let x = 0; x < MAP; x++) {
+    if (map[y][x] > 0) { mmCtx.fillStyle = 'rgba(124,124,248,0.3)'; mmCtx.fillRect(x*cs, y*cs, cs, cs); }
+  }
+  // Items
+  items.forEach(it => {
+    if (!it.alive) return;
+    mmCtx.fillStyle = it.color;
+    mmCtx.fillRect(it.x*cs-1, it.y*cs-1, 3, 3);
+  });
+  // Enemies
+  enemies.forEach(e => {
+    mmCtx.fillStyle = e.color;
+    mmCtx.beginPath(); mmCtx.arc(e.x*cs, e.y*cs, 2.5, 0, Math.PI*2); mmCtx.fill();
+  });
+  // Player
+  mmCtx.fillStyle = var_accent();
+  mmCtx.beginPath(); mmCtx.arc(playerX*cs, playerY*cs, 3, 0, Math.PI*2); mmCtx.fill();
+  // Player direction
+  mmCtx.strokeStyle = var_accent();
+  mmCtx.lineWidth = 1;
+  mmCtx.beginPath();
+  mmCtx.moveTo(playerX*cs, playerY*cs);
+  mmCtx.lineTo(playerX*cs + Math.cos(angle)*12, playerY*cs + Math.sin(angle)*12);
+  mmCtx.stroke();
+}
+
+function var_accent() { return '#7c7cf8'; }
+
+// ── Game Logic ──
+function move() {
+  if (gameOver) return;
+  const nx = playerX + Math.cos(angle)*0.5;
+  const ny = playerY + Math.sin(angle)*0.5;
+  const mx = Math.floor(nx), my = Math.floor(ny);
+  if (mx >= 0 && mx < MAP && my >= 0 && my < MAP && map[my][mx] === 0) {
+    // Check enemy collision
+    const enemy = enemies.find(e => Math.abs(e.x-nx) < 0.8 && Math.abs(e.y-ny) < 0.8);
+    if (enemy) { attack(); return; }
+    playerX = nx; playerY = ny;
+    // Auto-pickup items
+    items.forEach(it => {
+      if (!it.alive) return;
+      if (dist(it.x, it.y, playerX, playerY) < 0.8) {
+        it.alive = false;
+        applyItem(it);
+        addLog('loot', `Picked up ${it.name}!`);
+      }
+    });
   }
   enemyTurn();
   updateHUD();
 }
 
-function turnLeft(){playerAngle-=Math.PI/6}
-function turnRight(){playerAngle+=Math.PI/6}
+function turnL() { angle -= Math.PI/6; }
+function turnR() { angle += Math.PI/6; }
 
-function attack(){
-  let hit=false;
-  enemies.forEach(e=>{
-    const dx=e.x-playerX;const dy=e.y-playerY;
-    const dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<2){
-      const dmg=Math.max(1,atk+Math.floor(Math.random()*3));
-      e.hp-=dmg;
-      addLog('combat',`You hit for ${dmg}!`);
-      hit=true;
-      if(e.hp<=0){
-        addLog('loot',`Enemy defeated! +${20+wave*5} XP`);
-        xp+=20+wave*5;checkLevelUp();
-        enemies=enemies.filter(en=>en!==e);
+function attack() {
+  if (gameOver) return;
+  let hit = false;
+  enemies.forEach(e => {
+    const d = dist(e.x, e.y, playerX, playerY);
+    if (d < 2.0) {
+      const dmg = Math.max(1, atk + Math.floor(Math.random()*3) - 1);
+      e.hp -= dmg;
+      hit = true;
+      addLog('combat', `You strike ${e.name} for ${dmg}!`);
+      spawnParticles(e.x, e.y, e.color, 8);
+      if (e.hp <= 0) {
+        const xpGain = 20 + wave*5 + Math.floor(Math.random()*10);
+        xp += xpGain;
+        addLog('loot', `${e.name} defeated! +${xpGain} XP`);
+        dream = Math.min(dreamMax, dream + 5);
+        checkLevelUp();
       }
     }
   });
-  if(!hit)addLog('info','Nothing in range.');
-  enemyTurn();updateHUD();
-}
-
-function special(){
-  if(coherence>=0.3){
-    coherence-=0.3;
-    enemies.forEach(e=>{
-      const dmg=Math.floor(atk*2);
-      e.hp-=dmg;
-      addLog('level',`✦ Blast! ${dmg} to all!`);
-    });
-    enemies=enemies.filter(e=>e.hp>0);
-  }else{addLog('info','Not enough coherence.')}
+  enemies = enemies.filter(e => e.hp > 0);
+  if (!hit) addLog('info', 'Nothing in range...');
+  enemyTurn();
   updateHUD();
 }
 
-function nextWave(){
-  wave++;genMap();spawnEnemies3D();
-  playerX=MAP_SIZE/2;playerY=MAP_SIZE/2;
-  coherence=Math.min(1,coherence+0.1);
-  addLog('info',`═══ WAVE ${wave} ═══ ${REALMS[wave%REALMS.length]}`);
-  updateHUD();
-}
-
-function enemyTurn(){
-  enemies.forEach(e=>{
-    const dx=playerX-e.x;const dy=playerY-e.y;
-    const dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<1.5){
-      const dmg=Math.max(1,e.atk-def2+Math.floor(Math.random()*2));
-      hp-=dmg;addLog('combat',`Enemy hits for ${dmg}!`);
-      if(hp<=0){hp=0;gameOver=true;addLog('combat','💀 YOU HAVE FALLEN.')}
-    }else if(dist<6){
-      const mx=dx/dist*0.3;const my=dy/dist*0.3;
-      const nx=e.x+mx;const ny=e.y+my;
-      if(nx>0&&nx<MAP_SIZE-1&&ny>0&&ny<MAP_SIZE-1&&map[Math.floor(ny)][Math.floor(nx)]!==1){
-        e.x=nx;e.y=ny;
-      }
+function special() {
+  if (gameOver) return;
+  if (dream < 20) { addLog('info', 'Not enough dream energy (need 20)'); return; }
+  dream -= 20;
+  let total = 0;
+  enemies.forEach(e => {
+    const d = dist(e.x, e.y, playerX, playerY);
+    if (d < DEPTH) {
+      const dmg = Math.floor(atk * 2.5);
+      e.hp -= dmg;
+      total += dmg;
+      spawnParticles(e.x, e.y, '#22d3ee', 12);
     }
   });
+  enemies = enemies.filter(e => e.hp > 0);
+  addLog('dream', `✦ Dream Blast! ${total} damage to all enemies!`);
+  spawnParticles(playerX, playerY, '#22d3ee', 20);
+  coherence = Math.min(1, coherence + 0.05);
+  enemyTurn();
+  updateHUD();
 }
 
-function checkLevelUp(){
-  while(xp>=xpNext){
-    xp-=xpNext;level++;xpNext=Math.floor(xpNext*1.5);
-    maxHp+=10;hp=maxHp;atk+=2;def2+=1;
-    addLog('level',`★ LEVEL ${level}!`);
+function interact() {
+  if (gameOver) return;
+  items.forEach(it => {
+    if (!it.alive) return;
+    if (dist(it.x, it.y, playerX, playerY) < 1.5) {
+      it.alive = false;
+      applyItem(it);
+      addLog('loot', `Activated ${it.name}!`);
+    }
+  });
+  updateHUD();
+}
+
+function applyItem(it) {
+  switch(it.type) {
+    case 'heal': hp = Math.min(maxHp, hp + it.value); addLog('info', `+${it.value} HP`); break;
+    case 'buff_atk': atk += it.value; addLog('level', `+${it.value} ATK`); break;
+    case 'buff_def': def += it.value; addLog('level', `+${it.value} DEF`); break;
+    case 'buff_dream': dream = Math.min(dreamMax, dream + it.value*dreamMax); addLog('dream', `+${Math.floor(it.value*100)}% Dream`); break;
   }
 }
 
-function addLog(type,msg){
-  logs.unshift({type,msg});if(logs.length>15)logs.pop();
-  document.getElementById('log').innerHTML=logs.map(l=>`<div class="log-entry ${l.type}">${l.msg}</div>`).join('');
+function nextWave() {
+  if (gameOver) { init(); return; }
+  wave++;
+  genMap();
+  playerX = MAP/2 + 0.5; playerY = MAP/2 + 0.5;
+  coherence = Math.min(1, coherence + 0.08);
+  dream = Math.min(dreamMax, dream + 15);
+  spawnEnemies();
+  spawnItems();
+  addLog('info', `═══ WAVE ${wave} ═══ ${REALMS[wave % REALMS.length]}`);
+  showMessage(`WAVE ${wave}\n${REALMS[wave % REALMS.length]}`);
+  updateHUD();
 }
 
-function updateHUD(){
-  document.getElementById('hp').textContent=`${hp}/${maxHp}`;
-  document.getElementById('hpBar').style.width=`${hp/maxHp*100}%`;
-  document.getElementById('coh').textContent=coherence.toFixed(2);
-  document.getElementById('cohBar').style.width=`${coherence*100}%`;
-  document.getElementById('lvl').textContent=level;
-  document.getElementById('atk').textContent=atk;
-  document.getElementById('def').textContent=def2;
-  document.getElementById('waveNum').textContent=`WAVE ${wave}`;
-  document.getElementById('realmName').textContent=REALMS[wave%REALMS.length];
+function enemyTurn() {
+  enemies.forEach(e => {
+    if (gameOver) return;
+    const d = dist(e.x, e.y, playerX, playerY);
+    if (d < 1.2) {
+      const dmg = Math.max(1, e.atk - def + Math.floor(Math.random()*2));
+      hp -= dmg;
+      addLog('combat', `${e.name} hits you for ${dmg}!`);
+      spawnParticles(playerX, playerY, '#fb7185', 6);
+      if (hp <= 0) { hp = 0; gameOver = true; addLog('combat', '💀 YOU HAVE FALLEN. Press N to restart.'); }
+    } else if (d < 8) {
+      const mx = (playerX - e.x) / d * e.speed;
+      const my = (playerY - e.y) / d * e.speed;
+      const nx = e.x + mx, ny = e.y + my;
+      if (nx > 1 && nx < MAP-1 && ny > 1 && ny < MAP-1 && map[Math.floor(ny)][Math.floor(nx)] === 0) {
+        e.x = nx; e.y = ny;
+      }
+    }
+    // Drift dream in proximity
+    if (d < 3) dream = Math.max(0, dream - 0.5);
+  });
 }
 
-// ── Keyboard ──
-document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowUp'||e.key==='w')moveForward();
-  if(e.key==='ArrowLeft'||e.key==='a')turnLeft();
-  if(e.key==='ArrowRight'||e.key==='d')turnRight();
-  if(e.key===' ')attack();
-  if(e.key==='q')special();
-  if(e.key==='n')nextWave();
+function checkLevelUp() {
+  while (xp >= xpNext) {
+    xp -= xpNext; level++;
+    xpNext = Math.floor(xpNext * 1.5);
+    maxHp += 12; hp = maxHp; atk += 2; def += 1;
+    dreamMax += 10;
+    addLog('level', `★ LEVEL ${level}! HP/ATK/DEF increased!`);
+    showMessage(`LEVEL ${level}`);
+  }
+}
+
+function spawnParticles(wx, wy, color, count) {
+  const sx = canvas.width/2, sy = canvas.height/2;
+  for (let i = 0; i < count; i++) {
+    const ang = Math.random()*Math.PI*2;
+    const spd = 0.5 + Math.random()*2;
+    particles.push({
+      x: sx + (Math.random()-0.5)*100,
+      y: sy + (Math.random()-0.5)*100,
+      vx: Math.cos(ang)*spd, vy: Math.sin(ang)*spd,
+      life: 1, decay: 0.02 + Math.random()*0.02,
+      color, size: 2 + Math.random()*3
+    });
+  }
+}
+
+function updateParticles() {
+  particles.forEach(p => { p.x += p.vx; p.y += p.vy; p.life -= p.decay; });
+  particles = particles.filter(p => p.life > 0);
+}
+
+function addLog(type, msg) {
+  logs.unshift({type, msg, time: Date.now()});
+  if (logs.length > 20) logs.pop();
+  document.getElementById('log').innerHTML = logs.slice(0, 8).map(l => `<div class="log-entry ${l.type}">${l.msg}</div>`).join('');
+}
+
+function updateHUD() {
+  document.getElementById('hpText').textContent = `${hp}/${maxHp}`;
+  document.getElementById('hpBar').style.width = `${(hp/maxHp)*100}%`;
+  document.getElementById('cohText').textContent = coherence.toFixed(2);
+  document.getElementById('cohBar').style.width = `${coherence*100}%`;
+  document.getElementById('dreamText').textContent = `${Math.floor(dream)}/${dreamMax}`;
+  document.getElementById('dreamBar').style.width = `${(dream/dreamMax)*100}%`;
+  document.getElementById('lvlText').textContent = level;
+  document.getElementById('atkText').textContent = atk;
+  document.getElementById('defText').textContent = def;
+  document.getElementById('xpText').textContent = `${xp}/${xpNext}`;
+  document.getElementById('waveTitle').textContent = `WAVE ${wave}`;
+  document.getElementById('realmName').textContent = REALMS[wave % REALMS.length];
+  document.getElementById('enemyCount').textContent = `${enemies.length} enemies alive`;
+}
+
+function showMessage(msg) {
+  const el = document.getElementById('msgOverlay');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+// ── Game Loop ──
+function gameLoop() {
+  updateParticles();
+  render();
+  requestAnimationFrame(gameLoop);
+}
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+// ── Input ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') move();
+  if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') turnL();
+  if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') turnR();
+  if (e.key === ' ') { e.preventDefault(); attack(); }
+  if (e.key === 'q' || e.key === 'Q') special();
+  if (e.key === 'e' || e.key === 'E') interact();
+  if (e.key === 'n' || e.key === 'N') nextWave();
 });
 
-genMap();spawnEnemies3D();render3D();
+window.addEventListener('resize', resize);
+
+// ── Start ──
+resize();
+init();
+addLog('info', '═ LUCID MACHINES ═ A game where the world dreams you back');
+addLog('info', 'WASD/Arrows: move · Space: attack · Q: dream blast · E: interact');
+gameLoop();
 </script>
 </body>
 </html>
