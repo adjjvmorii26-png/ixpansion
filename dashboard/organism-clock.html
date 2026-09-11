@@ -48,5 +48,6 @@ for(let x=0;x<c.width;x++){const y=100+Math.sin(x*0.05+Date.now()*0.001)*40+Math
 ctx.strokeStyle='rgba(124,124,248,0.1)';ctx.beginPath();for(let x=0;x<c.width;x++){const y=100+Math.sin(x*0.02+Date.now()*0.0005)*60;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}ctx.stroke();
 requestAnimationFrame(drawChart)}drawChart();
 </script>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(124,124,248,0.15);color:#7c7cf8;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(124,124,248,0.3);z-index:9999;backdrop-filter:blur(8px);">← Organism</a>
 </body>
 </html>

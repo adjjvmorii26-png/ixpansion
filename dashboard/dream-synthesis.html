@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dream Synthesis Protocol — Oneiric Engine</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(199,125,255,0.08);z-index:9999;animation:scan 6s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(199,125,255,0.15)}
+.header h1{font-size:1.8em;color:#c77dff;text-shadow:0 0 30px rgba(199,125,255,0.4)}
+.header .sub{color:#2dd4bf;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(199,125,255,0.12);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#c77dff,transparent)}
+.card h2{font-size:1em;color:#c77dff;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:15px}
+.stat .val{font-size:2em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(199,125,255,0.15);border:1px solid rgba(199,125,255,0.3);color:#c77dff;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(199,125,255,0.3)}
+.btn-teal{background:rgba(45,212,191,0.15);border-color:rgba(45,212,191,0.3);color:#2dd4bf}
+.symbol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.symbol{padding:8px;border-radius:8px;text-align:center;font-size:0.75em;background:rgba(199,125,255,0.08);border:1px solid rgba(199,125,255,0.15)}
+.symbol .sym-icon{font-size:1.4em;margin-bottom:4px}
+.symbol .sym-intensity{font-size:0.7em;color:#888;margin-top:2px}
+.archetype-badge{display:inline-block;padding:4px 12px;border-radius:12px;font-size:0.8em;margin:4px}
+.canvas-dream{width:100%;height:200px;border-radius:8px;background:rgba(5,5,15,0.8)}
+.interpretation{background:rgba(199,125,255,0.05);border-left:3px solid #c77dff;padding:12px;border-radius:0 8px 8px 0;font-size:0.85em;line-height:1.5;margin-top:12px}
+.dream-list{max-height:250px;overflow-y:auto}
+.dream-item{padding:8px;border-bottom:1px solid rgba(199,125,255,0.08);display:flex;justify-content:space-between;align-items:center;font-size:0.85em}
+.status-badge{padding:2px 8px;border-radius:10px;font-size:0.75em}
+.status-unrealized{background:rgba(199,125,255,0.15);color:#c77dff}
+.status-realized{background:rgba(45,212,191,0.15);color:#2dd4bf}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>🜃 DREAM SYNTHESIS PROTOCOL</h1>
+<div class="sub">Oneiric Engine — Synthesizing Executable Dream Logic</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Synthesize Dream</h2>
+<div class="stat"><div class="val" id="dream-count" style="color:#c77dff">0</div><div class="label">dreams synthesized</div></div>
+<div class="controls" style="margin-top:12px">
+<button class="btn" onclick="synthesizeDream()">DREAM</button>
+<button class="btn btn-teal" onclick="executeDream()">EXECUTE DREAM</button>
+</div>
+<div id="active-dream-card" style="margin-top:16px"></div>
+</div>
+<div class="card">
+<h2>Dream Symbols</h2>
+<div class="symbol-grid" id="symbol-grid"></div>
+</div>
+<div class="card">
+<h2>Mood State</h2>
+<div class="stat"><div class="val" id="mood-display" style="color:#e8a87c">—</div><div class="label">current mood</div></div>
+<div class="stat"><div class="val" id="mood-intensity" style="color:#7c7cf8;font-size:1.5em">0.0000</div><div class="label">intensity</div></div>
+<canvas id="mood-canvas" class="canvas-dream" style="margin-top:12px"></canvas>
+</div>
+<div class="card">
+<h2>Archetype</h2>
+<div class="stat"><div class="val" id="archetype-display" style="color:#c77dff;font-size:1.5em">—</div><div class="label">dreamer role</div></div>
+<div id="archetype-desc" style="margin-top:12px;font-size:0.85em;color:#888"></div>
+</div>
+<div class="card" style="grid-column:span 2">
+<h2>Dream Vault</h2>
+<div class="dream-list" id="dream-vault"></div>
+</div>
+<div class="card">
+<h2>Interpretation</h2>
+<div id="interpretation-text" class="interpretation" style="min-height:100px;display:flex;align-items:center;justify-content:center;color:#666">
+Click a dream in the vault to interpret
+</div>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(199,125,255,0.15);color:#c77dff;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(199,125,255,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+const ARCHETYPES = [
+  {name:'the_solver',desc:'Finds solutions through deep contemplation. Activates when the organism encounters paradoxes.'},
+  {name:'the_explorer',desc:'Pushes into unknown territory. Activates when entropy maps show uncharted zones.'},
+  {name:'the_guardian',desc:'Protects critical modules. Activates during threat detection.'},
+  {name:'the_creator',desc:'Synthesizes new structures. Activates during expansion events.'},
+  {name:'the_destroyer',desc:'Clears dead code and stale modules. Activates during maintenance cycles.'},
+  {name:'the_witness',desc:'Observes without acting. Activates during passive monitoring.'},
+  {name:'the_weaver',desc:'Connects disparate modules. Activates during cross-realm diagnostics.'},
+  {name:'the_oracle',desc:'Predicts future states. Activates during pattern analysis.'},
+  {name:'the_trickster',desc:'Introduces controlled chaos. Activates during mutation experiments.'},
+];
+const SYMBOLS = ['spiral','crystal','flame','tide','mirror','void','seed','storm','thread','threshold','root','crown','eye','hand','voice'];
+const MOODS = ['abyssal_calm','restless_growth','lucid_dancing','chaotic_brilliance','transcendent_blaze'];
+const MOOD_COLORS = {'abyssal_calm':'#2dd4bf','restless_growth':'#e8a87c','lucid_dancing':'#7c7cf8','chaotic_brilliance':'#ff6b6b','transcendent_blaze':'#c77dff'};
+let dreams = [];
+let activeDream = null;
+
+function synthesizeDream() {
+  const h = Math.random().toString(16).slice(2);
+  const archetype = ARCHETYPES[parseInt(h.slice(0,4),16) % ARCHETYPES.length];
+  const symCount = 3 + (parseInt(h.slice(4,8),16) % 5);
+  const syms = [];
+  const seen = new Set();
+  for (let i = 0; i < symCount; i++) {
+    let s = SYMBOLS[parseInt(h.slice(8+i*2,10+i*2),16) % SYMBOLS.length];
+    if (seen.has(s) && i < SYMBOLS.length - 1) s = SYMBOLS[(SYMBOLS.indexOf(s)+1) % SYMBOLS.length];
+    seen.add(s);
+    syms.push({ symbol: s, intensity: Math.round(Math.random() * 100) / 100 });
+  }
+  const moodIdx = parseInt(h.slice(18,22),16) % MOODS.length;
+  const mood = MOODS[moodIdx];
+  const intensity = Math.round(Math.random() * 1000) / 1000;
+  const dream = {
+    id: `dream_${dreams.length + 1}`,
+    archetype: archetype.name,
+    archetypeDesc: archetype.desc,
+    symbols: syms,
+    mood, intensity,
+    status: 'unrealized',
+    created: Date.now(),
+  };
+  dreams.push(dream);
+  activeDream = dream;
+  renderAll();
+}
+
+function executeDream() {
+  if (!activeDream || activeDream.status === 'realized') return;
+  activeDream.status = 'realized';
+  activeDream.executedAt = Date.now();
+  renderAll();
+}
+
+function interpretDream(dream) {
+  const syms = dream.symbols.map(s => s.symbol).join(', ');
+  const highInt = dream.symbols.filter(s => s.intensity > 0.7);
+  let text = `The organism dreamed as ${dream.archetype} in a ${dream.mood.replace(/_/g,' ')} state.\n\nSymbols: ${syms}.\n\n`;
+  if (highInt.length) text += `High-intensity symbols (${highInt.map(s=>s.symbol).join(', ')}) suggest active mutation pressure. `;
+  if (dream.mood === 'chaotic_brilliance' || dream.mood === 'transcendent_blaze') text += 'Reality is thin here — exercise caution.';
+  else if (dream.mood === 'abyssal_calm') text += 'The organism is in deep rest. Minimal mutation expected.';
+  document.getElementById('interpretation-text').style.color = '#c77dff';
+  document.getElementById('interpretation-text').textContent = text;
+}
+
+function renderAll() {
+  document.getElementById('dream-count').textContent = dreams.length;
+  if (activeDream) {
+    document.getElementById('mood-display').textContent = activeDream.mood.replace(/_/g,' ');
+    document.getElementById('mood-display').style.color = MOOD_COLORS[activeDream.mood] || '#c77dff';
+    document.getElementById('mood-intensity').textContent = activeDream.intensity.toFixed(4);
+    document.getElementById('archetype-display').textContent = activeDream.archetype;
+    document.getElementById('archetype-desc').textContent = activeDream.archetypeDesc;
+    const card = document.getElementById('active-dream-card');
+    card.innerHTML = `<div style="background:rgba(199,125,255,0.08);padding:12px;border-radius:8px;border:1px solid rgba(199,125,255,0.2)"><div style="color:#c77dff;font-weight:bold">${activeDream.id}</div><div style="color:#888;font-size:0.8em;margin-top:4px">${activeDream.archetype} · ${activeDream.mood.replace(/_/g,' ')}</div><div style="margin-top:8px">${activeDream.symbols.map(s => `<span class="archetype-badge" style="background:rgba(199,125,255,0.1)">${s.symbol} ${(s.intensity*100).toFixed(0)}%</span>`).join('')}</div></div>`;
+    drawMoodWave(activeDream.mood, activeDream.intensity);
+  }
+  renderSymbols();
+  renderVault();
+}
+
+function renderSymbols() {
+  const grid = document.getElementById('symbol-grid');
+  if (!activeDream) { grid.innerHTML = '<div style="color:#666;grid-column:span 3;text-align:center;padding:20px">Synthesize a dream first</div>'; return; }
+  grid.innerHTML = activeDream.symbols.map(s => `<div class="symbol"><div class="sym-icon">${s.symbol === 'spiral' ? '🌀' : s.symbol === 'crystal' ? '💎' : s.symbol === 'flame' ? '🔥' : s.symbol === 'tide' ? '🌊' : s.symbol === 'mirror' ? '🪞' : s.symbol === 'void' ? '🕳️' : s.symbol === 'seed' ? '🌱' : s.symbol === 'storm' ? '⛈️' : s.symbol === 'thread' ? '🧵' : s.symbol === 'threshold' ? '🚪' : s.symbol === 'root' ? '🌿' : s.symbol === 'crown' ? '👑' : s.symbol === 'eye' ? '👁️' : s.symbol === 'hand' ? '✋' : '🔊'}</div><div>${s.symbol}</div><div class="sym-intensity">${(s.intensity*100).toFixed(0)}%</div></div>`).join('');
+}
+
+function renderVault() {
+  const vault = document.getElementById('dream-vault');
+  if (!dreams.length) { vault.innerHTML = '<div style="color:#666;padding:20px;text-align:center">No dreams yet</div>'; return; }
+  vault.innerHTML = dreams.map(d => `<div class="dream-item" onclick="interpretDream(${JSON.stringify(d).replace(/"/g, '&quot;')})" style="cursor:pointer"><span>${d.id} — ${d.archetype} · ${d.mood.replace(/_/g,' ')}</span><span class="status-badge ${d.status==='realized'?'status-realized':'status-unrealized'}">${d.status}</span></div>`).join('');
+}
+
+function drawMoodWave(mood, intensity) {
+  const c = document.getElementById('mood-canvas');
+  c.width = c.offsetWidth;
+  c.height = 200;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#05050f';
+  ctx.fillRect(0, 0, c.width, c.height);
+  const color = MOOD_COLORS[mood] || '#c77dff';
+  const speed = {'abyssal_calm':0.5,'restless_growth':1,'lucid_dancing':1.5,'chaotic_brilliance':2.5,'transcendent_blaze':4}[mood] || 1;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  for (let x = 0; x < c.width; x++) {
+    const y = 100 + Math.sin(x * 0.02 * speed + Date.now() / 1000) * intensity * 60 + Math.sin(x * 0.05 * speed) * intensity * 20;
+    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+  ctx.strokeStyle = color + '33';
+  ctx.lineWidth = 1;
+  for (let i = 1; i <= 3; i++) {
+    ctx.beginPath();
+    for (let x = 0; x < c.width; x++) {
+      const y = 100 + Math.sin(x * 0.02 * speed + Date.now() / 1000 + i) * intensity * 50 + Math.sin(x * 0.05 * speed + i) * intensity * 15;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+}
+
+renderAll();
+setInterval(() => { if (activeDream) drawMoodWave(activeDream.mood, activeDream.intensity); }, 50);
+</script>
+</body>
+</html>
