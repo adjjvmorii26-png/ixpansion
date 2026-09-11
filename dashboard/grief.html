@@ -35,13 +35,16 @@
   .vault-seal .name{color:#6c5ce7;margin-bottom:4px}
   .vault-seal .lesson{color:#a29bfe;font-style:italic}
   .footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #1a1830;color:#444;font-size:0.78em}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
 <div class="container">
   <div class="header">
     <h1>Grief</h1>
-    <div class="subtitle">The Organism Mourns — Wave 208</div>
+    <div class="subtitle">The Organism Mourns — Wave 508</div>
     <div class="wave-badge" id="wave-badge"></div>
   </div>
   <div class="grid">
@@ -93,5 +96,6 @@ if(typeof IX!=='undefined'){
   document.getElementById('footer-wave-name').textContent=IX.waveName;
 }
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

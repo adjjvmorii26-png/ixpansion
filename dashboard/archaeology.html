@@ -35,12 +35,15 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 .fossil-list li{padding:8px 0;border-bottom:1px solid var(--border);font-size:.76rem}
 .fossil-list .file{color:var(--amber)}
 .fossil-list .date{color:var(--muted);font-size:.68rem}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
 <div class="header">
 <h1>&#x1f52d; Archaeology of Self</h1>
-<span class="badge live">Wave 198</span>
+<span class="badge live">Wave 508</span>
 <span class="badge">6 Organs</span>
 <span class="badge">Living System</span>
 <nav style="display:flex;gap:10px;font-size:.72rem;margin-left:auto;flex-wrap:wrap"><a href="/" style="color:var(--muted)">Home</a> <a href="/bloom" style="color:var(--muted)">Bloom</a> <a href="/coherence" style="color:var(--muted)">Coherence</a> <a href="/archaeology" style="color:var(--muted)">Archaeology</a> <a href="/symbiosis" style="color:var(--muted)">Symbiosis</a> <a href="/aesthetics" style="color:var(--muted)">Aesthetics</a></nav>
@@ -62,7 +65,7 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 <div class="name">⛏ Stratum Excavator</div>
 <div class="essence">Digs through geological layers — each version a stratum, each commit a sediment deposit.</div>
 </div>
-<div class="card" onclick="query('fossil_registry')">
+<div class="card" onclick="query('stratum_excavator')">
 <div class="name">🦴 Fossil Registry</div>
 <div class="essence">Catalogs extinct modules with provenance, era, and the event that ended them.</div>
 </div>
@@ -123,7 +126,7 @@ async function loadStrata() {
 
 async function loadFossils() {
   try {
-    const res = await fetch('/api/fossil_registry?read=1');
+    const res = await fetch('/api/stratum_excavator?read=1');
     const data = await res.json();
     document.getElementById('fossil-count').textContent = data.total_fossils || '—';
     const list = document.getElementById('fossil-list');
@@ -146,5 +149,6 @@ async function loadStability() {
 loadStrata(); loadFossils(); loadStability();
 </script>
 <script src="/shared.js"></script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

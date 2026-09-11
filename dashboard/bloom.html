@@ -203,6 +203,9 @@ button:hover{background:var(--gold);color:var(--black);box-shadow:0 0 20px var(-
   .orbital-1{width:210px;height:210px}
   .orbital-2{width:260px;height:260px}
 }
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -215,7 +218,7 @@ button:hover{background:var(--gold);color:var(--black);box-shadow:0 0 20px var(-
   <div>
     <h1>Apotheosis</h1>
     <div class="subtitle">The Transcendent Organism</div>
-    <div class="subtitle" style="color:var(--violet);letter-spacing:2px;margin-top:2px">Wave 202 · v3.90.0 · 237+ living organs</div>
+    <div class="subtitle" style="color:var(--violet);letter-spacing:2px;margin-top:2px">Wave 508 · v3.90.0 · 237+ living organs</div>
   </div>
   <span class="badge" id="bloom-count">—</span>
   <nav style="display:flex;gap:10px;font-size:.7rem;margin-left:auto;flex-wrap:wrap">
@@ -520,5 +523,6 @@ async function commune(){
 refresh();
 </script>
 <script src="/shared.js"></script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

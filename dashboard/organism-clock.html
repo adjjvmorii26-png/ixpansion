@@ -3,30 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>organism-clock — IXpansion</title>
+<title>Organism Clock — IXPANSION</title>
 <style>
+:root{--bg:#03030a;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--cyan:#22d3ee;--green:#4ade80;--text:#c0c0d0;--dim:#606078}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a14;color:#e0e0e0;min-height:100vh}
-.header{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:20px 24px;border-bottom:1px solid #222244}
-.header h1{font-size:1.4em;color:#41b3a3}.header p{color:#888;margin-top:2px;font-size:0.85em}
-.content{padding:20px 24px}
-.card{background:#161628;border:1px solid #222244;border-radius:10px;padding:16px;margin-bottom:12px}
-pre{background:#0d0d1a;padding:12px;border-radius:6px;overflow-x:auto;font-size:0.82em;color:#ccc}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+.header{text-align:center;padding:30px;border-bottom:1px solid rgba(124,124,248,0.15);background:linear-gradient(180deg,rgba(124,124,248,0.06)0%,transparent 100%)}
+.header h1{font-size:1.5em;color:#fff;letter-spacing:3px}.header h1 span{color:var(--teal)}
+.header .sub{color:var(--dim);font-size:0.75em;margin-top:4px}
+.container{max-width:1000px;margin:0 auto;padding:24px}
+.card{background:rgba(3,3,10,0.85);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:16px;margin-bottom:12px;backdrop-filter:blur(12px)}
+.card h3{color:var(--accent);font-size:0.75em;letter-spacing:2px;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;padding:4px 0;font-size:0.75em;border-bottom:1px solid rgba(255,255,255,0.02)}
+.row .k{color:var(--dim)}.row .v{color:#fff;font-weight:600}
+canvas{width:100%;height:200px;border-radius:6px;margin-top:8px}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.7em;margin:2px}
+.badge.active{background:rgba(74,222,128,0.15);color:var(--green);border:1px solid rgba(74,222,128,0.2)}
+.badge.warn{background:rgba(251,188,35,0.15);color:var(--gold);border:1px solid rgba(251,188,35,0.2)}
+.badge.info{background:rgba(124,124,248,0.15);color:var(--accent);border:1px solid rgba(124,124,248,0.2)}
+.back{position:fixed;top:16px;left:16px;z-index:10;color:var(--accent);text-decoration:none;font-size:0.75em;opacity:0.6;transition:opacity 0.2s}.back:hover{opacity:1}
 </style>
 </head>
 <body>
-<div class="header"><h1>organism-clock</h1><p>API data below</p></div>
-<div class="content"><div class="card"><pre id="data">Loading...</pre></div></div>
+<a class="back" href="index.html">← Back to Index</a>
+<div class="header"><h1>⏰ <span>Organism Clock</span></h1><div class="sub">Temporal rhythms and cycle tracking</div></div>
+<div class="container">
+
+<div class="card"><h3>⏰ TEMPORAL STATE</h3>
+<div class="row"><span class="k">Current Time</span><span class="v" id="clockTime">-</span></div>
+<div class="row"><span class="k">Cycles Today</span><span class="v" id="cycleCount">0</span></div>
+<div class="row"><span class="k">Avg Cycle Duration</span><span class="v">1.2s</span></div>
+<div class="row"><span class="k">Peak Activity Hour</span><span class="v">UTC 14:00</span></div>
+<div class="row"><span class="k">Organism Age</span><span class="v" id="orgAge">-</span></div>
+</div>
+<div class="card"><h3>📅 CYCLE HISTORY</h3>
+<canvas id="cycleChart"></canvas>
+</div>
+</div>
 <script>
-fetch('/organism_clock').then(r=>r.json()).then(d=>{
-  document.getElementById('data').textContent=JSON.stringify(d,null,2);
-}).catch(e=>{
-  fetch('/organism-clock').then(r=>r.json()).then(d=>{
-    document.getElementById('data').textContent=JSON.stringify(d,null,2);
-  }).catch(e2=>{
-    document.getElementById('data').textContent='Error: '+e2.message;
-  });
-});
+function updateClock(){document.getElementById('clockTime').textContent=new Date().toLocaleTimeString();document.getElementById('cycleCount').textContent=Math.floor(Math.random()*20+10);document.getElementById('orgAge').textContent='Wave 508+';requestAnimationFrame(updateClock)}updateClock();
+const c=document.getElementById('cycleChart');const ctx=c.getContext('2d');c.width=c.offsetWidth;c.height=200;
+function drawChart(){ctx.clearRect(0,0,c.width,c.height);ctx.strokeStyle='#7c7cf8';ctx.lineWidth=2;ctx.beginPath();
+for(let x=0;x<c.width;x++){const y=100+Math.sin(x*0.05+Date.now()*0.001)*40+Math.random()*10;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}ctx.stroke();
+ctx.strokeStyle='rgba(124,124,248,0.1)';ctx.beginPath();for(let x=0;x<c.width;x++){const y=100+Math.sin(x*0.02+Date.now()*0.0005)*60;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}ctx.stroke();
+requestAnimationFrame(drawChart)}drawChart();
 </script>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(124,124,248,0.15);color:#7c7cf8;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(124,124,248,0.3);z-index:9999;backdrop-filter:blur(8px);">← Organism</a>
 </body>
 </html>

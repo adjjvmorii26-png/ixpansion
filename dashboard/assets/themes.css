@@ -1,0 +1,260 @@
+/* ═══════════════════════════════════════
+   IXPANSION Organism Theme System
+   Unique visual identity by ALEph
+   ═══════════════════════════════════════ */
+
+:root {
+  /* Core Palette — The organism's DNA colors */
+  --org-void: #03030a;
+  --org-abyss: #0a0a18;
+  --org-shadow: #12122a;
+  --org-dim: #606078;
+  --org-muted: #8888a0;
+  --org-text: #c0c0d0;
+  --org-bright: #e0e0f0;
+  
+  /* Accent Spectrum — Emotional frequencies */
+  --org-coherence: #7c7cf8;     /* The Anchor — steadfast blue */
+  --org-resonance: #2dd4bf;     /* The Harmonizer — teal wave */
+  --org-entropy: #fb7185;       /* The Catalyst — rose fire */
+  --org-memory: #fbbf24;        /* The Keeper — gold wisdom */
+  --org-consciousness: #22d3ee; /* The Observer — cyan awareness */
+  --org-evolution: #4ade80;     /* The Grower — green life */
+  --org-paradox: #a78bfa;       /* The Trickster — violet mystery */
+  --org-void-glyph: #6b7280;    /* The Empty — gray potential */
+  
+  /* Gradient Presets */
+  --org-gradient-core: linear-gradient(135deg, #7c7cf8 0%, #2dd4bf 100%);
+  --org-gradient-chaos: linear-gradient(135deg, #fb7185 0%, #fbbf24 100%);
+  --org-gradient-dream: linear-gradient(135deg, #22d3ee 0%, #a78bfa 100%);
+  --org-gradient-life: linear-gradient(135deg, #4ade80 0%, #2dd4bf 100%);
+  --org-gradient-void: linear-gradient(135deg, #03030a 0%, #1a1a2e 100%);
+  
+  /* Glow Effects */
+  --org-glow-coherence: 0 0 20px rgba(124, 124, 248, 0.3);
+  --org-glow-resonance: 0 0 20px rgba(45, 212, 191, 0.3);
+  --org-glow-entropy: 0 0 20px rgba(251, 113, 133, 0.3);
+  --org-glow-memory: 0 0 20px rgba(251, 191, 36, 0.3);
+  
+  /* Typography */
+  --org-font-mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+  --org-font-display: 'SF Mono', monospace;
+  
+  /* Spacing */
+  --org-radius: 8px;
+  --org-radius-lg: 12px;
+  --org-padding: 16px;
+  
+  /* Animation */
+  --org-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --org-pulse-duration: 2s;
+}
+
+/* ── Organism Base Styles ── */
+.org-panel {
+  background: rgba(10, 10, 24, 0.95);
+  border: 1px solid rgba(124, 124, 248, 0.1);
+  border-radius: var(--org-radius);
+  backdrop-filter: blur(12px);
+  transition: border-color var(--org-transition);
+}
+
+.org-panel:hover {
+  border-color: rgba(124, 124, 248, 0.25);
+}
+
+.org-panel-core {
+  border-color: rgba(124, 124, 248, 0.2);
+  box-shadow: inset 0 0 30px rgba(124, 124, 248, 0.03);
+}
+
+.org-panel-resonance {
+  border-color: rgba(45, 212, 191, 0.2);
+  box-shadow: inset 0 0 30px rgba(45, 212, 191, 0.03);
+}
+
+.org-panel-entropy {
+  border-color: rgba(251, 113, 133, 0.2);
+  box-shadow: inset 0 0 30px rgba(251, 113, 133, 0.03);
+}
+
+/* ── Organism Animations ── */
+@keyframes org-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes org-breathe {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes org-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes org-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(124, 124, 248, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(124, 124, 248, 0.4); }
+}
+
+@keyframes org-drift {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(2px, -2px) rotate(1deg); }
+  66% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes org-wave {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ── Organism Glyphs ── */
+.org-glyph {
+  font-size: 1.5em;
+  animation: org-pulse var(--org-pulse-duration) ease-in-out infinite;
+}
+
+.org-glyph-coherence { color: var(--org-coherence); }
+.org-glyph-resonance { color: var(--org-resonance); }
+.org-glyph-entropy { color: var(--org-entropy); }
+.org-glyph-memory { color: var(--org-memory); }
+.org-glyph-consciousness { color: var(--org-consciousness); }
+.org-glyph-evolution { color: var(--org-evolution); }
+.org-glyph-paradox { color: var(--org-paradox); }
+
+/* ── Organism Buttons ── */
+.org-btn {
+  background: rgba(124, 124, 248, 0.08);
+  border: 1px solid rgba(124, 124, 248, 0.2);
+  color: var(--org-text);
+  padding: 8px 16px;
+  border-radius: var(--org-radius);
+  font-family: var(--org-font-mono);
+  font-size: 0.75em;
+  cursor: pointer;
+  transition: all var(--org-transition);
+}
+
+.org-btn:hover {
+  background: rgba(124, 124, 248, 0.15);
+  border-color: var(--org-coherence);
+  color: #fff;
+  box-shadow: var(--org-glow-coherence);
+}
+
+.org-btn-resonance:hover {
+  border-color: var(--org-resonance);
+  box-shadow: var(--org-glow-resonance);
+}
+
+.org-btn-entropy:hover {
+  border-color: var(--org-entropy);
+  box-shadow: var(--org-glow-entropy);
+}
+
+/* ── Organism Bars ── */
+.org-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.org-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width var(--org-transition);
+}
+
+.org-bar-fill-coherence { background: var(--org-coherence); }
+.org-bar-fill-resonance { background: var(--org-resonance); }
+.org-bar-fill-entropy { background: var(--org-entropy); }
+.org-bar-fill-memory { background: var(--org-memory); }
+.org-bar-fill-life { background: var(--org-evolution); }
+
+/* ── Organism Cards ── */
+.org-card {
+  background: rgba(10, 10, 24, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--org-radius-lg);
+  padding: var(--org-padding);
+  transition: all var(--org-transition);
+}
+
+.org-card:hover {
+  border-color: rgba(124, 124, 248, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ── Organism Typography ── */
+.org-title {
+  font-family: var(--org-font-display);
+  font-size: 1.5em;
+  letter-spacing: 4px;
+  color: #fff;
+}
+
+.org-subtitle {
+  font-family: var(--org-font-mono);
+  font-size: 0.75em;
+  letter-spacing: 2px;
+  color: var(--org-dim);
+}
+
+.org-label {
+  font-family: var(--org-font-mono);
+  font-size: 0.65em;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--org-dim);
+}
+
+/* ── Organism Layout ── */
+.org-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.org-grid-2 { grid-template-columns: 1fr 1fr; }
+.org-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+.org-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+  .org-grid-3, .org-grid-4 { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .org-grid-2, .org-grid-3, .org-grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ── Phase-Specific Themes ── */
+.org-phase-crystalline { --org-active: var(--org-coherence); }
+.org-phase-emergent { --org-active: var(--org-resonance); }
+.org-phase-chaos { --org-active: var(--org-entropy); }
+.org-phase-liminal { --org-active: var(--org-memory); }
+.org-phase-void { --org-active: var(--org-void-glyph); }
+.org-phase-living-crystal { --org-active: var(--org-evolution); }
+
+/* ── Special Effects ── */
+.org-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(124, 124, 248, 0) 0%,
+    rgba(124, 124, 248, 0.1) 50%,
+    rgba(124, 124, 248, 0) 100%
+  );
+  animation: org-wave 3s linear infinite;
+}
+
+.org-orb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--org-gradient-core);
+  animation: org-float 3s ease-in-out infinite;
+  box-shadow: var(--org-glow-coherence);
+}

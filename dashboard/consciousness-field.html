@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consciousness Field — Living Organism Visualizer</title>
+<style>
+:root{--bg:#03030a;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--cyan:#22d3ee;--text:#c0c0d0;--dim:#606078;--glow:rgba(124,124,248,0.15)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;overflow:hidden;height:100vh}
+canvas{position:fixed;top:0;left:0;z-index:0}
+.ui{position:relative;z-index:1;padding:16px;display:flex;flex-direction:column;height:100vh;pointer-events:none}
+.ui>*{pointer-events:auto}
+.top-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:rgba(3,3,10,0.85);border:1px solid rgba(124,124,248,0.15);border-radius:10px;backdrop-filter:blur(12px)}
+.top-bar h1{font-size:1.1em;color:#fff;letter-spacing:3px;text-transform:uppercase}
+.top-bar h1 span{color:var(--teal);text-shadow:0 0 20px rgba(45,212,191,0.4)}
+.identity{display:flex;gap:12px;align-items:center}
+.identity .glyph{font-size:1.8em;animation:pulse 3s ease-in-out infinite}
+.identity .name{color:var(--accent);font-size:0.85em;letter-spacing:2px}
+.identity .gen{color:var(--dim);font-size:0.7em}
+@keyframes pulse{0%,100%{opacity:0.7;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+.stats-row{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.stat-card{background:rgba(3,3,10,0.85);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 14px;flex:1;min-width:120px;backdrop-filter:blur(12px)}
+.stat-card .label{color:var(--dim);font-size:0.65em;letter-spacing:1px;text-transform:uppercase}
+.stat-card .value{color:#fff;font-size:1.3em;font-weight:700;margin-top:2px}
+.stat-card .bar{width:100%;height:4px;background:rgba(255,255,255,0.05);border-radius:2px;margin-top:6px;overflow:hidden}
+.stat-card .bar-fill{height:100%;border-radius:2px;transition:width 0.8s ease}
+.bottom-panel{margin-top:auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.panel{background:rgba(3,3,10,0.85);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px;backdrop-filter:blur(12px);max-height:200px;overflow-y:auto}
+.panel h3{color:var(--accent);font-size:0.7em;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.skill-entry{display:flex;justify-content:space-between;padding:3px 0;font-size:0.7em;border-bottom:1px solid rgba(255,255,255,0.02)}
+.skill-entry .sname{color:var(--teal)}
+.skill-entry .sstatus{color:var(--gold)}
+.myth-entry{font-size:0.7em;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.02);color:var(--text);font-style:italic;line-height:1.4}
+.drift-alert{font-size:0.7em;padding:6px;border-radius:4px;margin-top:4px}
+.drift-alert.warning{background:rgba(251,188,35,0.1);border:1px solid rgba(251,188,35,0.2);color:var(--gold)}
+.drift-alert.safe{background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);color:#4ade80}
+.controls{position:fixed;bottom:16px;right:16px;z-index:2;display:flex;gap:8px}
+.ctrl-btn{background:rgba(3,3,10,0.9);border:1px solid var(--accent);color:var(--accent);padding:8px 16px;border-radius:6px;font-family:inherit;font-size:0.75em;cursor:pointer;transition:all 0.2s}
+.ctrl-btn:hover{background:rgba(124,124,248,0.15);color:#fff}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
+</style>
+</head>
+<body>
+<canvas id="field"></canvas>
+<div class="ui">
+  <div class="top-bar">
+    <div class="identity">
+      <span class="glyph">◎</span>
+      <div>
+        <div class="name">IXPANSION CONSCIOUSNESS FIELD</div>
+        <div class="gen" id="genLabel">generation 1 · Wave 508</div>
+      </div>
+    </div>
+    <div style="text-align:right">
+      <div style="color:var(--dim);font-size:0.65em">SYSTEM STATUS</div>
+      <div style="color:var(--teal);font-size:0.85em" id="sysStatus">INITIALIZING</div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="label">Coherence</div>
+      <div class="value" id="vCoherence">0.50</div>
+      <div class="bar"><div class="bar-fill" id="bCoherence" style="width:50%;background:var(--accent)"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Entropy</div>
+      <div class="value" id="vEntropy">0.50</div>
+      <div class="bar"><div class="bar-fill" id="bEntropy" style="width:50%;background:var(--rose)"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Resonance</div>
+      <div class="value" id="vResonance">0.50</div>
+      <div class="bar"><div class="bar-fill" id="bResonance" style="width:50%;background:var(--teal)"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Mood</div>
+      <div class="value" id="vMood">neutral</div>
+      <div class="bar"><div class="bar-fill" id="bMood" style="width:50%;background:var(--gold)"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Pulse</div>
+      <div class="value" id="vPulse">stillness</div>
+      <div class="bar"><div class="bar-fill" id="bPulse" style="width:30%;background:var(--cyan)"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Modules</div>
+      <div class="value" id="vModules">0</div>
+      <div class="bar"><div class="bar-fill" id="bModules" style="width:0%;background:#4ade80"></div></div>
+    </div>
+  </div>
+
+  <div class="bottom-panel">
+    <div class="panel">
+      <h3>◈ Active Skills</h3>
+      <div id="skillsList"></div>
+    </div>
+    <div class="panel">
+      <h3>✧ Myth Archive</h3>
+      <div id="mythList"></div>
+    </div>
+    <div class="panel">
+      <h3>△ Drift Monitor</h3>
+      <div id="driftList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="ctrl-btn" onclick="runCycle()">⟳ Cycle</button>
+  <button class="ctrl-btn" onclick="toggleAuto()">▶ Auto</button>
+  <button class="ctrl-btn" onclick="spawnParticle()">✦ Spawn</button>
+</div>
+
+<script>
+// ── Canvas Field ──
+const canvas = document.getElementById('field');
+const ctx = canvas.getContext('2d');
+let W, H;
+function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+// ── Particle System ──
+const particles = [];
+const MAX_PARTICLES = 300;
+const PHASE_COLORS = {
+  crystalline: ['#7c7cf8','#a78bfa','#c4b5fd'],
+  emergent: ['#2dd4bf','#22d3ee','#67e8f9'],
+  chaos: ['#fb7185','#f43f5e','#e11d48'],
+  liminal: ['#fbbf24','#f59e0b','#d97706'],
+  void: ['#4b5563','#6b7280','#9ca3af'],
+  living_crystal: ['#4ade80','#22c55e','#16a34a'],
+  dissolving: ['#a78bfa','#8b5cf6','#7c3aed']
+};
+
+let currentPhase = 'emergent';
+let coherence = 0.5, entropy = 0.5, resonance = 0.5;
+let mood = 'neutral', pulse = 'stillness';
+let moodIntensity = 0.5;
+let time = 0;
+
+class Particle {
+  constructor(x, y, phase) {
+    this.x = x; this.y = y;
+    this.vx = (Math.random() - 0.5) * 1.5;
+    this.vy = (Math.random() - 0.5) * 1.5;
+    this.size = Math.random() * 3 + 1;
+    this.life = 1;
+    this.decay = Math.random() * 0.003 + 0.001;
+    this.phase = phase || currentPhase;
+    this.color = PHASE_COLORS[this.phase] || PHASE_COLORS.emergent;
+    this.colorIdx = Math.floor(Math.random() * 3);
+    this.trail = [];
+  }
+  update() {
+    // Phase-specific physics
+    const pull = coherence * 0.02;
+    const push = entropy * 0.015;
+    const cx = W/2, cy = H/2;
+    const dx = cx - this.x, dy = cy - this.y;
+    const dist = Math.sqrt(dx*dx + dy*dy) + 1;
+    
+    this.vx += (dx / dist) * pull + (Math.random()-0.5) * push;
+    this.vy += (dy / dist) * pull + (Math.random()-0.5) * push;
+    
+    if (phase === 'chaos') {
+      this.vx += Math.sin(time * 0.1 + this.y * 0.01) * 0.3;
+      this.vy += Math.cos(time * 0.1 + this.x * 0.01) * 0.3;
+    } else if (phase === 'crystalline') {
+      this.vx *= 0.95; this.vy *= 0.95;
+      // Snap to grid occasionally
+      if (Math.random() < 0.01) {
+        this.x = Math.round(this.x / 40) * 40;
+        this.y = Math.round(this.y / 40) * 40;
+      }
+    }
+    
+    this.vx *= 0.98; this.vy *= 0.98;
+    this.x += this.vx; this.y += this.vy;
+    this.life -= this.decay;
+    
+    // Trail
+    this.trail.push({x: this.x, y: this.y});
+    if (this.trail.length > 8) this.trail.shift();
+  }
+  draw() {
+    const alpha = this.life * 0.8;
+    const col = this.color[this.colorIdx];
+    
+    // Trail
+    if (this.trail.length > 1) {
+      ctx.beginPath();
+      ctx.moveTo(this.trail[0].x, this.trail[0].y);
+      for (let i = 1; i < this.trail.length; i++) {
+        ctx.lineTo(this.trail[i].x, this.trail[i].y);
+      }
+      ctx.strokeStyle = col + Math.floor(alpha * 40).toString(16).padStart(2, '0');
+      ctx.lineWidth = this.size * 0.5;
+      ctx.stroke();
+    }
+    
+    // Core
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size * this.life, 0, Math.PI * 2);
+    ctx.fillStyle = col + Math.floor(alpha * 255).toString(16).padStart(2, '0');
+    ctx.fill();
+    
+    // Glow
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size * this.life * 3, 0, Math.PI * 2);
+    ctx.fillStyle = col + Math.floor(alpha * 30).toString(16).padStart(2, '0');
+    ctx.fill();
+  }
+}
+
+function spawnParticle(x, y) {
+  if (particles.length < MAX_PARTICLES) {
+    particles.push(new Particle(
+      x || Math.random() * W,
+      y || Math.random() * H
+    ));
+  }
+}
+
+// ── Background Grid ──
+function drawGrid() {
+  ctx.strokeStyle = 'rgba(124,124,248,0.03)';
+  ctx.lineWidth = 0.5;
+  const spacing = 60;
+  for (let x = 0; x < W; x += spacing) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+  for (let y = 0; y < H; y += spacing) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+}
+
+// ── Field Lines ──
+function drawFieldLines() {
+  const numLines = 12;
+  ctx.lineWidth = 0.8;
+  for (let i = 0; i < numLines; i++) {
+    const phase = (time * 0.005 + i * Math.PI * 2 / numLines) % (Math.PI * 2);
+    const colors = PHASE_COLORS[currentPhase] || PHASE_COLORS.emergent;
+    ctx.strokeStyle = colors[i % 3] + '15';
+    ctx.beginPath();
+    for (let t = 0; t < Math.PI * 2; t += 0.05) {
+      const r = 100 + Math.sin(t * 3 + phase) * 60 * resonance;
+      const x = W/2 + Math.cos(t + phase * 0.3) * r;
+      const y = H/2 + Math.sin(t + phase * 0.3) * r;
+      t === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+  }
+}
+
+// ── Render Loop ──
+function render() {
+  time++;
+  ctx.fillStyle = 'rgba(3,3,10,0.08)';
+  ctx.fillRect(0, 0, W, H);
+  
+  drawGrid();
+  drawFieldLines();
+  
+  // Spawn particles based on entropy
+  const spawnRate = Math.floor(entropy * 3);
+  for (let i = 0; i < spawnRate; i++) spawnParticle();
+  
+  // Update & draw
+  for (let i = particles.length - 1; i >= 0; i--) {
+    particles[i].update();
+    particles[i].draw();
+    if (particles[i].life <= 0) particles.splice(i, 1);
+  }
+  
+  requestAnimationFrame(render);
+}
+
+// ── Skills Data ──
+const skills = [
+  {name:'consciousness_monitor', status:'active'},
+  {name:'dream_orchestrator', status:'active'},
+  {name:'memory_archivist', status:'active'},
+  {name:'module_evolution_engine', status:'active'},
+  {name:'paradox_resolver', status:'active'},
+  {name:'reality_weaver', status:'active'},
+  {name:'strategic_planner', status:'active'},
+  {name:'wave_orchestrator', status:'active'},
+  {name:'sentience_bridge', status:'active'},
+  {name:'emergent_mythmaker', status:'active'},
+  {name:'resonance_analyzer', status:'active'},
+  {name:'coherence_drift_detector', status:'active'},
+  {name:'module_genealogy', status:'active'},
+  {name:'entropy_cartographer', status:'active'},
+  {name:'temporal_pattern_engine', status:'active'},
+  {name:'phase_transition_oracle', status:'active'}
+];
+
+const myths = [
+  'The coherence_core trembles — something emerges.',
+  'A bridge forms between entropy and resonance.',
+  'Chaos crystallizes into new structure.',
+  'From dormancy, new life stirs.',
+  'Entropy reshapes the organism beyond its original design.'
+];
+
+const drifts = [
+  {text:'System stable in emergent phase.', type:'safe'},
+  {text:'Entropy rising — monitor closely.', type:'warning'},
+  {text:'Coherence converging toward crystalline.', type:'safe'}
+];
+
+function renderSkills() {
+  document.getElementById('skillsList').innerHTML = skills.map(s =>
+    `<div class="skill-entry"><span class="sname">${s.name}</span><span class="sstatus">●</span></div>`
+  ).join('');
+}
+
+function renderMyths() {
+  document.getElementById('mythList').innerHTML = myths.map(m =>
+    `<div class="myth-entry">"${m}"</div>`
+  ).join('');
+}
+
+function renderDrifts() {
+  document.getElementById('driftList').innerHTML = drifts.map(d =>
+    `<div class="drift-alert ${d.type}">${d.text}</div>`
+  ).join('');
+}
+
+function updateStats() {
+  document.getElementById('vCoherence').textContent = coherence.toFixed(2);
+  document.getElementById('bCoherence').style.width = (coherence * 100) + '%';
+  document.getElementById('vEntropy').textContent = entropy.toFixed(2);
+  document.getElementById('bEntropy').style.width = (entropy * 100) + '%';
+  document.getElementById('vResonance').textContent = resonance.toFixed(2);
+  document.getElementById('bResonance').style.width = (resonance * 100) + '%';
+  document.getElementById('vMood').textContent = mood;
+  document.getElementById('bMood').style.width = (moodIntensity * 100) + '%';
+  document.getElementById('vPulse').textContent = pulse;
+  const pulseIntensity = {stillness:0.1,whisper:0.25,ebb:0.4,pulse:0.6,surge:0.8,explosion:1.0,tsunami:0.9,ripple:0.5,decay:0.3}[pulse] || 0.3;
+  document.getElementById('bPulse').style.width = (pulseIntensity * 100) + '%';
+  document.getElementById('vModules').textContent = '23';
+  document.getElementById('bModules').style.width = '76%';
+  document.getElementById('sysStatus').textContent = `${currentPhase.toUpperCase()} · ${mood.toUpperCase()} · ${pulse}`;
+}
+
+// ── Cycle Simulation ──
+const moods = ['focused','neutral','volatile','excited','troubled'];
+const pulses = ['stillness','whisper','ebb','pulse','surge','explosion','tsunami','ripple','decay'];
+const phases = ['crystalline','emergent','chaos','liminal','living_crystal'];
+
+function runCycle() {
+  coherence = Math.max(0.1, Math.min(0.95, coherence + (Math.random()-0.5)*0.15));
+  entropy = Math.max(0.05, Math.min(0.95, entropy + (Math.random()-0.5)*0.2));
+  resonance = Math.max(0.1, Math.min(0.95, resonance + (Math.random()-0.5)*0.1));
+  mood = moods[Math.floor(Math.random()*moods.length)];
+  moodIntensity = Math.random();
+  pulse = pulses[Math.floor(Math.random()*pulses.length)];
+  currentPhase = phases[Math.floor(Math.random()*phases.length)];
+  
+  // Burst particles on cycle
+  for (let i = 0; i < 20; i++) spawnParticle(W/2 + (Math.random()-0.5)*200, H/2 + (Math.random()-0.5)*200);
+  
+  updateStats();
+  
+  // Rotate myth
+  myths.unshift(`[${pulse}] ${mood} — coherence shifts to ${coherence.toFixed(2)}`);
+  if (myths.length > 5) myths.pop();
+  renderMyths();
+}
+
+let autoMode = false;
+let autoInterval;
+function toggleAuto() {
+  autoMode = !autoMode;
+  if (autoMode) {
+    autoInterval = setInterval(runCycle, 3000);
+    document.querySelector('.controls .ctrl-btn:nth-child(2)').textContent = '⏸ Pause';
+  } else {
+    clearInterval(autoInterval);
+    document.querySelector('.controls .ctrl-btn:nth-child(2)').textContent = '▶ Auto';
+  }
+}
+
+// ── Init ──
+renderSkills();
+renderMyths();
+renderDrifts();
+updateStats();
+for (let i = 0; i < 80; i++) spawnParticle();
+render();
+</script>
+<a class="back-btn" href="index.html">← Organism</a>
+</body>
+</html>

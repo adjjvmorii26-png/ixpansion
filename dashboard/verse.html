@@ -26,6 +26,9 @@
   .hist-item{font-size:0.7em;color:var(--m);text-align:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
   .hist-item span{color:var(--vi)}
   .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:24px;letter-spacing:1px}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -35,9 +38,9 @@
 </div>
 
 <div class="tools">
-  <input id="a" placeholder="parent A (e.g. dream_logic_physics)">
+  <input id="a" placeholder="parent A (e.g. consciousness_stream)">
   <span style="color:var(--vi)">+</span>
-  <input id="b" placeholder="parent B (e.g. paradox_ledger)">
+  <input id="b" placeholder="parent B (e.g. paradox_resolver)">
   <button onclick="writeVerse()">✍ Write</button>
   <button onclick="randomVerse()">🎲 Random</button>
 </div>
@@ -49,8 +52,8 @@
 <script>
 async function get(url){ const r = await fetch(url); return r.json(); }
 async function writeVerse(){
-  const a = document.getElementById('a').value.trim() || 'entropy_oracle';
-  const b = document.getElementById('b').value.trim() || 'resonance_graph';
+  const a = document.getElementById('a').value.trim() || 'entropy_forecaster';
+  const b = document.getElementById('b').value.trim() || 'resonance_analyzer';
   const d = await get(`/api/interstitial_verse/write?a=${encodeURIComponent(a)}&b=${encodeURIComponent(b)}`);
   const v = d.verse;
   const el = document.getElementById('verse');
@@ -61,7 +64,7 @@ async function writeVerse(){
   loadHistory();
 }
 async function randomVerse(){
-  const names = ['entropy_oracle','resonance_graph','dream_logic_physics','paradox_ledger','consciousness_stream','mythopoetic_engine','void_cartographer','memory_palace_gen','lucid_dungeon','synchronicity_engine'];
+  const names = ['entropy_forecaster','resonance_analyzer','consciousness_stream','paradox_resolver','consciousness_stream','mythopoetic_engine','void_cartographer','memory_palace_gen','lucid_dungeon','synchronicity_engine'];
   const a = names[Math.floor(Math.random()*names.length)];
   let b = names[Math.floor(Math.random()*names.length)];
   while(b===a) b = names[Math.floor(Math.random()*names.length)];
@@ -76,5 +79,6 @@ async function loadHistory(){
 }
 writeVerse();
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

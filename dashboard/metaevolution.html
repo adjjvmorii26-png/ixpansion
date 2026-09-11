@@ -27,6 +27,9 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 .card .essence{color:var(--muted);font-size:.78rem;margin-top:6px;line-height:1.45}
 .result{background:#080a16;border:1px solid var(--neon);border-radius:10px;padding:16px;margin-top:18px;font-size:.76rem;color:#d0d4f0;white-space:pre-wrap}
 .hint{color:var(--muted);font-size:.72rem;margin-top:14px}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -47,7 +50,7 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
   </div>
   <div class="cards" id="cards"></div>
   <div class="result" id="result">Select an organ above — the meta-evolution layer awaits.</div>
-  <div class="hint">Six Wave 192 organs — evolution_kernel, fractal_reactor_grid, mycelial_governor, constellation_autobiographer, omega_dreamforge, paradox_singularity_monitor. All free tier via the gateway.</div>
+  <div class="hint">Six Wave 508 organs — evolution_kernel, fractal_reactor_grid, mycelial_governor, constellation_autobiographer, omega_dreamforge, paradox_singularity_monitor. All free tier via the gateway.</div>
 </div>
 <script>
 const ORGANS=[
@@ -82,5 +85,6 @@ probe('api/evolution_kernel');
 </script>
 <script src="/shared.js"></script>
 <script>if(window.IXP){IXP.loadLive(function(){IXP.renderIdentity(document.getElementById("identity-tag"));})}</script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

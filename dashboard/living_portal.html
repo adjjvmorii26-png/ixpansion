@@ -48,6 +48,9 @@ header{text-align:center;margin-bottom:50px;animation:fade-in 1s ease}
 .nav a:hover{color:var(--gold);border-color:rgba(255,243,160,.3)}
 footer{text-align:center;margin-top:50px;padding:20px;color:var(--dim);font-size:.8em;border-top:1px solid var(--border)}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.name{font-size:2em}}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -169,7 +172,7 @@ async function pulse(){
   document.getElementById('source-val').textContent=(gen.morphology?.sources||[]).length;
   const will=await api('organism_will/decide');
   const wave=will.organism_state?.modules_connected||'?';
-  document.getElementById('wave-badge').textContent='Wave 428 · '+wave+' connected modules';
+  document.getElementById('wave-badge').textContent='Wave 508 · '+wave+' connected modules';
   
   // Update sound description
   const aud=s.auditory||{};
@@ -251,5 +254,6 @@ pulse();
 loadMap();
 setInterval(pulse,30000);
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

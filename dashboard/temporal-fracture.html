@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporal Fracture Engine — Timeline Splitting</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(200,107,107,0.08);z-index:9999;animation:scan 5s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(200,107,107,0.15)}
+.header h1{font-size:1.8em;color:#ff6b6b;text-shadow:0 0 30px rgba(200,107,107,0.4)}
+.header .sub{color:#7c7cf8;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(200,107,107,0.12);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#ff6b6b,transparent)}
+.card h2{font-size:1em;color:#ff6b6b;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:15px}
+.stat .val{font-size:2em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(200,107,107,0.15);border:1px solid rgba(200,107,107,0.3);color:#ff6b6b;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(200,107,107,0.3)}
+.btn-green{background:rgba(45,212,191,0.15);border-color:rgba(45,212,191,0.3);color:#2dd4bf}
+.btn-green:hover{background:rgba(45,212,191,0.3)}
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:rgba(200,107,107,0.3)}
+.timeline-item{position:relative;margin-bottom:15px;padding:10px;background:rgba(200,107,107,0.05);border-radius:8px;border-left:2px solid #ff6b6b}
+.timeline-item::before{content:'';position:absolute;left:-25px;top:15px;width:10px;height:10px;border-radius:50%;background:#ff6b6b}
+.timeline-item.converged{border-left-color:#2dd4bf}
+.timeline-item.converged::before{background:#2dd4bf}
+.branch-visual{display:flex;gap:4px;margin:8px 0;flex-wrap:wrap}
+.branch-bar{height:8px;border-radius:4px;transition:width 0.5s}
+.branch-bar.active{background:rgba(124,124,248,0.6);animation:pulse-branch 1.5s infinite}
+.branch-bar.converged{background:rgba(45,212,191,0.6)}
+@keyframes pulse-branch{0%,100%{opacity:1}50%{opacity:0.5}}
+.canvas-wrap{height:200px;margin-top:12px}
+canvas{width:100%;height:100%;border-radius:8px;background:rgba(5,5,15,0.8)}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.input{background:rgba(20,20,35,0.8);border:1px solid rgba(200,107,107,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em}
+select{background:rgba(20,20,35,0.8);border:1px solid rgba(200,107,107,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>⧖ TEMPORAL FRACTURE ENGINE</h1>
+<div class="sub">Timeline Splitting — Parallel Branch Resolution</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Create Fracture</h2>
+<div style="margin-bottom:12px">
+<label style="font-size:0.8em;color:#888">Trigger</label><br>
+<input class="input" id="trigger-input" placeholder="e.g. paradox_cascade" style="width:100%;margin-top:4px">
+</div>
+<div style="margin-bottom:12px">
+<label style="font-size:0.8em;color:#888">Branch Depth</label><br>
+<select id="depth-select" class="input" style="width:100%;margin-top:4px">
+<option value="2">2 branches</option>
+<option value="3" selected>3 branches</option>
+<option value="4">4 branches</option>
+<option value="5">5 branches</option>
+</select>
+</div>
+<button class="btn" onclick="createFracture()">FRACTURE TIMELINE</button>
+</div>
+<div class="card">
+<h2>Active Fractures</h2>
+<div class="stat"><div class="val" id="fracture-count" style="color:#ff6b6b">0</div><div class="label">open fractures</div></div>
+<div class="stat"><div class="val" id="branch-count" style="color:#7c7cf8">0</div><div class="label">active branches</div></div>
+<div id="fracture-list" style="margin-top:12px;max-height:200px;overflow-y:auto;font-size:0.8em"></div>
+</div>
+<div class="card" style="grid-column:span 2">
+<h2>Timeline Visualization</h2>
+<canvas id="timeline-canvas"></canvas>
+</div>
+<div class="card">
+<h2>Convergence Log</h2>
+<div id="convergence-log" style="max-height:250px;overflow-y:auto;font-size:0.8em"></div>
+</div>
+<div class="card">
+<h2>Merge Branches</h2>
+<div style="margin-bottom:12px">
+<label style="font-size:0.8em;color:#888">Fracture ID</label><br>
+<input class="input" id="merge-id-input" placeholder="e.g. 1" style="width:100%;margin-top:4px">
+</div>
+<div style="margin-bottom:12px">
+<label style="font-size:0.8em;color:#888">Strategy</label><br>
+<select id="merge-strategy" class="input" style="width:100%;margin-top:4px">
+<option value="wisdom_of_crowds">Wisdom of Crowds</option>
+<option value="strongest_branch">Strongest Branch</option>
+<option value="novelty_weighted">Novelty Weighted</option>
+</select>
+</div>
+<button class="btn btn-green" onclick="mergeBranches()">MERGE</button>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(200,107,107,0.15);color:#ff6b6b;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(200,107,107,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+let fractures = [];
+let nextId = 1;
+
+function createFracture() {
+  const trigger = document.getElementById('trigger-input').value || 'auto_trigger';
+  const depth = parseInt(document.getElementById('depth-select').value);
+  const f = { id: nextId++, trigger, depth, branches: [], created: Date.now(), status: 'open' };
+  for (let i = 0; i < depth; i++) {
+    f.branches.push({ id: `b${f.id}_${i}`, variant: i, status: 'active', events: Math.floor(Math.random() * 20) });
+  }
+  fractures.push(f);
+  document.getElementById('trigger-input').value = '';
+  renderAll();
+}
+
+function mergeBranches() {
+  const fid = parseInt(document.getElementById('merge-id-input').value);
+  const f = fractures.find(x => x.id === fid);
+  if (!f || f.status !== 'open') return;
+  f.status = 'converged';
+  f.mergedAt = Date.now();
+  f.strategy = document.getElementById('merge-strategy').value;
+  f.branches.forEach(b => b.status = 'converged');
+  document.getElementById('merge-id-input').value = '';
+  renderAll();
+}
+
+function renderAll() {
+  const open = fractures.filter(f => f.status === 'open');
+  const allB = fractures.reduce((a, f) => a + f.branches.length, 0);
+  const activeB = fractures.reduce((a, f) => a + f.branches.filter(b => b.status === 'active').length, 0);
+  document.getElementById('fracture-count').textContent = open.length;
+  document.getElementById('branch-count').textContent = activeB;
+  const list = document.getElementById('fracture-list');
+  list.innerHTML = fractures.map(f => `<div style="padding:6px 0;border-bottom:1px solid rgba(200,107,107,0.1)"><span style="color:${f.status==='open'?'#ff6b6b':'#2dd4bf'}">F#${f.id}</span> ${f.trigger} <span style="color:#666">${f.branches.length}b · ${f.status}</span></div>`).join('');
+  const clog = document.getElementById('convergence-log');
+  const converged = fractures.filter(f => f.status === 'converged');
+  clog.innerHTML = converged.length ? converged.map(f => `<div style="padding:6px 0;border-bottom:1px solid rgba(45,212,191,0.1);color:#2dd4bf">F#${f.id} merged via ${f.strategy||'default'} — ${f.branches.length} branches resolved</div>`).join('') : '<div style="color:#666">No convergences yet</div>';
+  drawTimeline();
+}
+
+function drawTimeline() {
+  const c = document.getElementById('timeline-canvas');
+  c.width = c.offsetWidth;
+  c.height = 200;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#05050f';
+  ctx.fillRect(0, 0, c.width, c.height);
+  if (!fractures.length) { ctx.fillStyle = '#666'; ctx.font = '14px monospace'; ctx.textAlign = 'center'; ctx.fillText('Create a fracture to visualize the timeline', c.width / 2, 100); return; }
+  const segW = c.width / Math.max(fractures.length, 1);
+  fractures.forEach((f, i) => {
+    const x = i * segW + segW / 2;
+    const color = f.status === 'open' ? '#ff6b6b' : '#2dd4bf';
+    ctx.strokeStyle = color + '66';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x, 20);
+    ctx.lineTo(x, 180);
+    ctx.stroke();
+    f.branches.forEach((b, j) => {
+      const bColor = b.status === 'active' ? '#7c7cf8' : '#2dd4bf';
+      const yOff = (j - (f.branches.length - 1) / 2) * 25;
+      ctx.strokeStyle = bColor;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(x, 20);
+      ctx.quadraticCurveTo(x + 15, 100 + yOff, x, 180);
+      ctx.stroke();
+    });
+    ctx.fillStyle = color;
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(`F#${f.id}`, x, 195);
+  });
+}
+
+renderAll();
+</script>
+</body>
+</html>

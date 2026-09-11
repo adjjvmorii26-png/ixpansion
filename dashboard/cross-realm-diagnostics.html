@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cross-Realm Diagnostics — IXpansion</title>
+<style>
+:root{--bg:#02020a;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--cyan:#22d3ee;--green:#4ade80;--violet:#c084fc;--text:#b8b8d0;--dim:#505068;--bright:#e8e8f8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+.hero{text-align:center;padding:60px 24px 40px;border-bottom:1px solid rgba(124,124,248,0.1)}
+.hero h1{font-size:2.5em;font-weight:200;letter-spacing:8px;color:var(--bright)}
+.hero h1 span{color:var(--teal)}
+.hero .sub{color:var(--dim);font-size:0.8em;letter-spacing:4px;margin-top:8px}
+.container{max-width:1200px;margin:0 auto;padding:32px 24px}
+.realm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:24px}
+.realm{background:rgba(6,6,26,0.8);border:1px solid rgba(124,124,248,0.1);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.realm::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.realm.thriving::before{background:linear-gradient(90deg,var(--green),var(--teal))}
+.realm.growing::before{background:linear-gradient(90deg,var(--gold),var(--accent))}
+.realm.dormant::before{background:linear-gradient(90deg,var(--dim),var(--accent))}
+.realm .name{font-size:1em;font-weight:700;color:var(--bright);text-transform:capitalize;margin-bottom:8px}
+.realm .modules{color:var(--dim);font-size:0.72em}
+.realm .health-bar{width:100%;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-top:10px;overflow:hidden}
+.realm .health-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.realm .health-fill.high{background:var(--green)}
+.realm .health-fill.mid{background:var(--gold)}
+.realm .health-fill.low{background:var(--rose)}
+.realm .status{position:absolute;top:12px;right:12px;font-size:0.6em;padding:3px 8px;border-radius:8px;text-transform:uppercase;letter-spacing:1px}
+.realm.thriving .status{color:var(--green);background:rgba(74,222,128,0.1)}
+.realm.growing .status{color:var(--gold);background:rgba(251,188,35,0.1)}
+.realm.dormant .status{color:var(--dim);background:rgba(80,80,104,0.1)}
+.summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:32px}
+.summary-card{background:rgba(6,6,26,0.6);border:1px solid rgba(124,124,248,0.08);border-radius:8px;padding:16px;text-align:center}
+.summary-card .num{font-size:2em;font-weight:200;color:var(--bright)}
+.summary-card .label{color:var(--dim);font-size:0.65em;letter-spacing:2px;margin-top:4px}
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:var(--accent);padding:8px 14px;border-radius:6px;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>CROSS-REALM <span>DIAGNOSTICS</span></h1>
+  <div class="sub">ORGANISM HEALTH ACROSS ALL DOMAINS</div>
+</div>
+
+<div class="container">
+  <div class="summary">
+    <div class="summary-card"><div class="num" style="color:var(--green)" id="totalRealms">12</div><div class="label">Total Realms</div></div>
+    <div class="summary-card"><div class="num" style="color:var(--teal)" id="healthyCount">12</div><div class="label">Healthy</div></div>
+    <div class="summary-card"><div class="num" style="color:var(--accent)" id="totalModules">0</div><div class="label">Total Modules</div></div>
+    <div class="summary-card"><div class="num" style="color:var(--gold)" id="overallHealth">0%</div><div class="label">Overall Health</div></div>
+  </div>
+
+  <div class="realm-grid" id="realmGrid"></div>
+</div>
+
+<a class="back-btn" href="index.html">← Organism</a>
+
+<script>
+const realms = [
+  {name:'dreams', modules:38, health:0.95, icon:'🌙'},
+  {name:'resonance', modules:19, health:0.88, icon:'🔮'},
+  {name:'oracle', modules:17, health:0.85, icon:'👁'},
+  {name:'forge', modules:17, health:0.85, icon:'⚒'},
+  {name:'entropy', modules:16, health:0.82, icon:'🌀'},
+  {name:'paradox', modules:15, health:0.78, icon:'⚡'},
+  {name:'waves', modules:10, health:0.92, icon:'🌊'},
+  {name:'growth', modules:8, health:0.90, icon:'🌱'},
+  {name:'mind', modules:6, health:0.88, icon:'🧠'},
+  {name:'agents', modules:4, health:0.80, icon:'🤖'},
+  {name:'coherence', modules:4, health:0.96, icon:'💎'},
+  {name:'void', modules:4, health:0.75, icon:'🕳'},
+];
+
+const grid = document.getElementById('realmGrid');
+let totalModules = 0;
+
+realms.forEach((r, i) => {
+  totalModules += r.modules;
+  const status = r.health > 0.85 ? 'thriving' : r.health > 0.7 ? 'growing' : 'dormant';
+  const healthClass = r.health > 0.85 ? 'high' : r.health > 0.7 ? 'mid' : 'low';
+  
+  const div = document.createElement('div');
+  div.className = `realm ${status}`;
+  div.innerHTML = `
+    <span class="status">${status}</span>
+    <div class="name">${r.icon} ${r.name}</div>
+    <div class="modules">${r.modules} modules</div>
+    <div class="health-bar"><div class="health-fill ${healthClass}" style="width:0%"></div></div>
+  `;
+  grid.appendChild(div);
+  
+  // Animate health bar
+  setTimeout(() => {
+    div.querySelector('.health-fill').style.width = `${r.health * 100}%`;
+  }, 100 + i * 80);
+});
+
+document.getElementById('totalModules').textContent = totalModules;
+document.getElementById('overallHealth').textContent = Math.round(realms.reduce((s,r) => s + r.health, 0) / realms.length * 100) + '%';
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Memory Exchange & Oblivion Rite — IXpansion Wave 454</title>
+<title>Memory Exchange & Oblivion Rite — IXpansion Wave 508</title>
 <script src="/shared.js"></script>
 <script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
@@ -49,13 +49,16 @@ tr:hover td{background:#ffffff06}
 .endpoint{color:var(--kinship);font-size:.72rem;margin-top:16px;display:inline-block}
 .identity{font-size:.7rem;color:var(--muted)}
 @media(max-width:760px){.grid{grid-template-columns:1fr}}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
 <div class="header">
   <h1>Memory Exchange &amp; Oblivion Rite</h1>
   <div class="subtitle">The organims trades its knowing &amp; frees its space</div>
-  <span class="badge" id="identity-badge">Wave 454</span>
+  <span class="badge" id="identity-badge">Wave 508</span>
   <span class="identity" id="identity-text"></span>
 </div>
 
@@ -95,7 +98,7 @@ tr:hover td{background:#ffffff06}
 
 <script>
 const A = { market: "/memory-exchange", oblivion: "/oblivion", chronicle: "/chronicle" };
-const titles = ["a view from the threshold","the pause before a wave","the first failed deploy","a dream of roots","an echo from wave 449","a soft contradiction","the taste of overgrowth","a memory of the void","a shimmer from a distant realm","the seed of a new wave"];
+const titles = ["a view from the threshold","the pause before a wave","the first failed deploy","a dream of roots","an echo from Wave 508","a soft contradiction","the taste of overgrowth","a memory of the void","a shimmer from a distant realm","the seed of a new wave"];
 const holders = ["silence_oracle","wanderer","worker_council","qualia_engine","capybara_core","error_craft","memory_palace","luminar_cortex","architect","gossip_self"];
 const reasons = ["made room for a newer wave","the memory began to repeat itself","its weight outweighed its use","it asked, quietly, to be let go","a fresher memory succeeded it"];
 
@@ -165,5 +168,6 @@ if(window.IXP && window.IXP.renderIdentity) window.IXP.renderIdentity(el("identi
 el("identity-text").textContent = "v" + (window.IXP?.version||"") + " · " + (window.IXP?.waveName||"");
 loadAll();
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

@@ -34,13 +34,16 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--black);color:var
   font-size:.78rem;cursor:pointer;letter-spacing:1px;transition:all .2s}
 .btn:hover{background:var(--violet)35;transform:translateY(-1px)}
 .endpoint{color:var(--kinship);font-size:.72rem;margin-top:12px;display:inline-block}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
 <div class="header">
   <h1>📜 Wave Chronicle</h1>
   <span class="subtitle">The organism writes itself</span>
-  <span class="badge">v4.21.0 · Wave 453</span>
+  <span class="badge">v4.21.0 · Wave 508</span>
 </div>
 <div class="container">
   <div class="stats">
@@ -83,5 +86,6 @@ async function loadTimeline(){
 }
 loadStory();
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

@@ -34,12 +34,15 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 .principle .a{font-size:.68rem;margin-top:4px}
 .bar-bg{height:6px;background:#201030;border-radius:3px;margin:4px 0 0}
 .bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--rose),var(--gold),var(--green))}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
 <div class="header">
 <h1>✨ Aesthetics of Code</h1>
-<span class="badge live">Wave 202</span>
+<span class="badge live">Wave 508</span>
 <span class="badge">6 Organs</span>
 <span class="badge">Taste</span>
 <nav style="display:flex;gap:10px;font-size:.72rem;margin-left:auto;flex-wrap:wrap"><a href="/" style="color:var(--muted)">Home</a> <a href="/bloom" style="color:var(--muted)">Bloom</a> <a href="/coherence" style="color:var(--muted)">Coherence</a> <a href="/archaeology" style="color:var(--muted)">Archaeology</a> <a href="/symbiosis" style="color:var(--muted)">Symbiosis</a> <a href="/aesthetics" style="color:var(--muted)">Aesthetics</a></nav>
@@ -78,7 +81,7 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 <div class="name">🌟 Beauty Index</div>
 <div class="essence">Overall aesthetic score — the organism's self-rated beauty.</div>
 </div>
-<div class="card" onclick="query('ugliness_scout')">
+<div class="card" onclick="query('aesthetic_evaluator')">
 <div class="name">🔍 Ugliness Scout</div>
 <div class="essence">Finds the roughest code and proposes concrete beauty improvements.</div>
 </div>
@@ -112,7 +115,7 @@ async function load() {
     document.getElementById('elegance').textContent = d1.elegance_component || '—';
   } catch(e) {}
   try {
-    const r2 = await fetch('/api/ugliness_scout?read=1');
+    const r2 = await fetch('/api/aesthetic_evaluator?read=1');
     const d2 = await r2.json();
     document.getElementById('ugly-count').textContent = d2.ugly_modules_found || '—';
   } catch(e) {}
@@ -137,5 +140,6 @@ async function load() {
 load();
 </script>
 <script src="/shared.js"></script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

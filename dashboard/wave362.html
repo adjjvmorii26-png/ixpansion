@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wave 362 — Command Center</title>
+<title>Wave 508 — Command Center</title>
 <style>
   :root{--bg:#040410;--s:rgba(8,8,20,0.96);--g:rgba(255,255,255,0.03);--b:rgba(255,255,255,0.05);--t:#a0a0b8;--m:#424260;--ac:#7c7cf8;--te:#2dd4bf;--am:#fbbf24;--ro:#fb7185;--cy:#22d3ee;--gn:#4ade80;--gd:#f59e0b;--dn:#ef4444}
   *{margin:0;padding:0;box-sizing:border-box}
@@ -45,6 +45,9 @@
   .myth-moral{color:var(--gd);font-style:italic;font-size:0.65em;margin-top:6px}
   .repair-item{display:flex;align-items:center;gap:6px;padding:4px 0;font-size:0.66em;border-bottom:1px solid rgba(255,255,255,0.02)}
   .repair-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -345,5 +348,6 @@ telemetrySnapshot();
 mythGenerate();
 repairDiagnose();
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

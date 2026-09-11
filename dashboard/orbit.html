@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wave 448 — Orbit Cohesion Field</title>
+<title>Wave 508 — Orbit Cohesion Field</title>
 <style>
   :root{--bg:#02040a;--s:rgba(6,12,26,0.96);--g:rgba(140,180,255,0.04);--b:rgba(140,180,255,0.12);--t:#8fa8c8;--m:#3d556f;--ac:#7aa2ff;--te:#2dd4bf;--am:#fbbf24;--ro:#fb7185;--cy:#38bdf8;--gn:#4ade80;--gd:#f59e0b;--dn:#ef4444;--vi:#a78bfa}
   *{margin:0;padding:0;box-sizing:border-box}
@@ -32,6 +32,9 @@
   .sb{display:flex;justify-content:center;gap:16px;padding:9px;border-top:1px solid var(--b);font-size:0.56em;color:var(--m);position:fixed;bottom:0;left:0;right:0;background:var(--bg)}
   .dl{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gn);margin-right:3px;animation:pulse 2s infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -247,5 +250,6 @@ async function noiseDemo(){
 
 setInterval(()=>{document.getElementById('clock').textContent=new Date().toISOString().slice(11,19)},1000);
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

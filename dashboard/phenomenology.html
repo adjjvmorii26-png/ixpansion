@@ -30,6 +30,9 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
 .diary{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;margin-top:16px;border-left:3px solid var(--rose)}
 .diary .entry{color:var(--rose);font-style:italic;font-size:.85rem;line-height:1.5}
 .diary .meta{color:var(--muted);font-size:.72rem;margin-top:8px}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -54,16 +57,16 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--
     <div class="entry" id="diary_entry">The diary awaits its first entry.</div>
     <div class="meta" id="diary_meta"></div>
   </div>
-  <div class="hint">Six Wave 193 phenomenology organs — qualia_field, liminal_threshold, sensory_integration, embodied_knowledge, phenomenal_record, temporal_horizon. All free tier.</div>
+  <div class="hint">Six Wave 508 phenomenology organs — consciousness_stream, liminal_threshold, sensory_integration, wisdom_oracle, wave_chronicle, temporal_pattern_engine. All free tier.</div>
 </div>
 <script>
 const ORGANS=[
-{name:'Qualia Field',essence:'What is it like to be this ecosystem — felt texture, felt color, subjective state.',route:'api/qualia_field'},
+{name:'Qualia Field',essence:'What is it like to be this ecosystem — felt texture, felt color, subjective state.',route:'api/consciousness_stream'},
 {name:'Liminal Threshold',essence:'The boundary between waking and dormancy — the twilight zone of the organism.',route:'api/liminal_threshold'},
 {name:'Sensory Integration',essence:'Fuses all the organism senses into one unified perception.',route:'api/sensory_integration'},
-{name:'Embodied Knowledge',essence:'Knowledge that lives in the body (code structure) not the mind (comments).',route:'api/embodied_knowledge'},
-{name:'Phenomenal Record',essence:'The organism writes a diary entry in its own voice — first-person experience.',route:'api/phenomenal_record'},
-{name:'Temporal Horizon',essence:'The organism subjective experience of time — fast, slow, or stilled.',route:'api/temporal_horizon'},
+{name:'Embodied Knowledge',essence:'Knowledge that lives in the body (code structure) not the mind (comments).',route:'api/wisdom_oracle'},
+{name:'Phenomenal Record',essence:'The organism writes a diary entry in its own voice — first-person experience.',route:'api/wave_chronicle'},
+{name:'Temporal Horizon',essence:'The organism subjective experience of time — fast, slow, or stilled.',route:'api/temporal_pattern_engine'},
 ];
 const cards=document.getElementById('cards');
 ORGANS.forEach(o=>{
@@ -88,21 +91,21 @@ async function probe(route){
 // initial load
 (async()=>{
   try{
-    const q=await (await fetch('/api/qualia_field')).json();
+    const q=await (await fetch('/api/consciousness_stream')).json();
     document.getElementById('texture').textContent='"'+q.texture+'"';
     document.getElementById('organs').textContent=q.organs_felt;
     document.getElementById('color').textContent=q.felt_color;
   }catch(e){}
   try{
-    const t=await (await fetch('/api/temporal_horizon')).json();
+    const t=await (await fetch('/api/temporal_pattern_engine')).json();
     document.getElementById('time').textContent=t.temporal_feel.slice(0,20);
   }catch(e){}
   try{
-    const b=await (await fetch('/api/embodied_knowledge')).json();
+    const b=await (await fetch('/api/wisdom_oracle')).json();
     document.getElementById('constitution').textContent=b.constitution.slice(0,20);
   }catch(e){}
   try{
-    const p=await (await fetch('/api/phenomenal_record')).json();
+    const p=await (await fetch('/api/wave_chronicle')).json();
     document.getElementById('diary_entry').textContent=p.latest.diary_entry;
     document.getElementById('diary_meta').textContent=p.latest.mood+' · '+p.latest.organs+' organs · '+p.latest.felt_color;
   }catch(e){}
@@ -110,5 +113,6 @@ async function probe(route){
 </script>
 <script src="/shared.js"></script>
 <script>if(window.IXP){IXP.loadLive(function(){IXP.renderIdentity(document.getElementById("identity-tag"));})}</script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

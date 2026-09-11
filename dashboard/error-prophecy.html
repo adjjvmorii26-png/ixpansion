@@ -48,6 +48,9 @@
   .badge { background: var(--surface); padding: 2px 8px; border-radius: 4px; font-size: 0.8em; color: var(--prophecy); }
   .prophecy-card { margin: 8px 0; padding: 12px; background: var(--bg); border-radius: 6px; border-left: 3px solid var(--prophecy); }
   .prophecy-state { color: var(--muted); font-size: 0.8em; }
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 <script src="/shared.js"></script>
 </head>
@@ -148,5 +151,6 @@ async function fetchProphecy() {
 fetchProphecy();
 setInterval(fetchProphecy, 20000);
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

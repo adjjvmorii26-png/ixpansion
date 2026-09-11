@@ -37,11 +37,14 @@ h1{text-align:center;font-size:2em;margin-bottom:5px;color:var(--gold)}
 ul{list-style:none;padding:0}
 li{padding:4px 0;border-bottom:1px solid #1a1a2e;font-size:0.9em;color:#ccc}
 li:last-child{border:none}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
 <h1 class="pulse">↻ The Autonomous Nervous System</h1>
-<p class="subtitle">Wave 411-414 — The organism breathes, decides, dreams, and resolves on its own</p>
+<p class="subtitle">Wave 508-414 — The organism breathes, decides, dreams, and resolves on its own</p>
 <div class="status-bar">
   <span class="badge gold" id="cycle-count">cycles: ...</span>
   <span class="badge violet" id="thread-count">threads: ...</span>
@@ -286,5 +289,6 @@ const b=await api('echoic_ember/state');
   document.getElementById('thread-count').textContent='threads: '+(b.pulse?.threads||'?');
 })();
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

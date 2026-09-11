@@ -43,12 +43,15 @@ body{font-family:'SF Mono','Fira Code',monospace;background:var(--bg);color:var(
 .link .lwave{color:var(--muted);font-size:.65rem}
 .result{background:#08080c;border:1px solid var(--accent);border-radius:8px;padding:14px;margin-top:14px;font-size:.75rem;white-space:pre-wrap;max-height:300px;overflow-y:auto;display:none}
 @media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
 <div class="header">
   <h1>◉ Organism Control Center</h1>
-  <span style="font-size:.72rem;color:var(--muted)">Wave 202 · v3.90.0</span>
+  <span style="font-size:.72rem;color:var(--muted)">Wave 508 · v3.90.0</span>
   <div class="nav">
     <a href="/">Home</a><a href="/bloom">Bloom</a><a href="/coherence">Coherence</a>
     <a href="/resonance">Resonance</a><a href="/voice">Voice</a> <a href="/stream">Stream</a><a href="/cons">Console</a>
@@ -178,7 +181,7 @@ async function load(){
     $("st-dash").textContent = (d.infrastructure || {}).dashboards || "—";
     
     // Ecosystem fitness
-    const fit = d.ecosystem_fitness || 0;
+    const fit = d.ecosystem_sentience || 0;
     $("fitness").textContent = (fit * 100).toFixed(1) + "%";
     $("fit-bar").style.width = (fit * 100) + "%";
     
@@ -205,22 +208,22 @@ async function load(){
   }catch(e){console.error("organism_state fetch failed:", e)}
   
   // Additional detail endpoints
-  try{const d=await(await fetch("/api/storm_chaser?read=1")).json();
+  try{const d=await(await fetch("/api/anomaly_detector?read=1")).json();
     $("wt-storms").textContent=d.total_storms_detected||"0";
   }catch(e){}
-  try{const d=await(await fetch("/api/front_tracker?read=1")).json();
+  try{const d=await(await fetch("/api/frontier_stream?read=1")).json();
     $("wt-fronts").textContent=d.active_fronts||"0";
   }catch(e){}
-  try{const d=await(await fetch("/api/climate_memory?read=1")).json();
+  try{const d=await(await fetch("/api/weather_station?read=1")).json();
     $("wt-climate").textContent=d.climate_type||"—";
   }catch(e){}
-  try{const d=await(await fetch("/api/ecosystem_fitness?read=1")).json();
+  try{const d=await(await fetch("/api/ecosystem_sentience?read=1")).json();
     $("ec-bio").textContent=(d.biodiversity||0).toFixed(3);
     $("ec-red").textContent=(d.redundancy||0).toFixed(3);
     $("ec-health").textContent=(d.avg_health||0).toFixed(3);
     $("ec-conn").textContent=(d.connectivity||0).toFixed(3);
   }catch(e){}
-  try{const d=await(await fetch("/api/parasite_hunter?read=1")).json();
+  try{const d=await(await fetch("/api/anomaly_detector?read=1")).json();
     $("ec-par").textContent=d.parasites_found||"0";
   }catch(e){}
   try{const d=await(await fetch("/api/elegance_scorer?read=1")).json();
@@ -229,12 +232,13 @@ async function load(){
   try{const d=await(await fetch("/api/form_evaluator?read=1")).json();
     $("ae-form").textContent=(d.average_form||0).toFixed(3);
   }catch(e){}
-  try{const d=await(await fetch("/api/ugliness_scout?read=1")).json();
+  try{const d=await(await fetch("/api/aesthetic_evaluator?read=1")).json();
     $("ae-ugly").textContent=d.ugly_modules_found||"0";
   }catch(e){}
 
 load();
 </script>
 <script src="/shared.js"></script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

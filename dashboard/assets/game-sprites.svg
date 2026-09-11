@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="128" viewBox="0 0 640 128">
+  <!-- Game Character Sprites — 32x32 grid -->
+  
+  <!-- Player Sprite (idle) -->
+  <g transform="translate(16,16)">
+    <circle cx="16" cy="12" r="8" fill="#7c7cf8"/>
+    <circle cx="13" cy="10" r="2" fill="#fff"/>
+    <circle cx="19" cy="10" r="2" fill="#fff"/>
+    <rect x="12" y="18" width="8" height="10" rx="2" fill="#7c7cf8"/>
+    <rect x="10" y="22" width="4" height="6" rx="1" fill="#7c7cf8"/>
+    <rect x="18" y="22" width="4" height="6" rx="1" fill="#7c7cf8"/>
+    <!-- Glow -->
+    <circle cx="16" cy="16" r="16" fill="#7c7cf8" opacity="0.1"/>
+  </g>
+  
+  <!-- Player Attack -->
+  <g transform="translate(80,16)">
+    <circle cx="16" cy="12" r="8" fill="#7c7cf8"/>
+    <circle cx="13" cy="10" r="2" fill="#fff"/>
+    <circle cx="19" cy="10" r="2" fill="#fff"/>
+    <rect x="12" y="18" width="8" height="10" rx="2" fill="#7c7cf8"/>
+    <rect x="22" y="16" width="12" height="3" rx="1" fill="#fbbf24"/>
+    <!-- Slash effect -->
+    <path d="M24,14 Q30,8 36,12" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <circle cx="16" cy="16" r="16" fill="#fbbf24" opacity="0.15"/>
+  </g>
+  
+  <!-- Entropy Wisp -->
+  <g transform="translate(144,16)">
+    <ellipse cx="16" cy="16" rx="10" ry="8" fill="#fb7185" opacity="0.6"/>
+    <ellipse cx="16" cy="16" rx="6" ry="5" fill="#fb7185" opacity="0.8"/>
+    <circle cx="16" cy="16" r="3" fill="#fff"/>
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Paradox Fragment -->
+  <g transform="translate(208,16)">
+    <polygon points="16,2 28,24 4,24" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <polygon points="16,26 28,4 4,4" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.5"/>
+    <circle cx="16" cy="16" r="4" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Void Stalker -->
+  <g transform="translate(272,16)">
+    <path d="M16,2 L28,12 L24,28 L8,28 L4,12 Z" fill="#a78bfa" opacity="0.7"/>
+    <circle cx="16" cy="14" r="4" fill="#fff" opacity="0.8"/>
+    <circle cx="16" cy="14" r="2" fill="#000"/>
+    <path d="M8,20 Q16,24 24,20" fill="none" stroke="#fff" stroke-width="1" opacity="0.5"/>
+  </g>
+  
+  <!-- Coherence Shade -->
+  <g transform="translate(336,16)">
+    <circle cx="16" cy="16" r="12" fill="#22d3ee" opacity="0.3"/>
+    <circle cx="16" cy="16" r="8" fill="#22d3ee" opacity="0.5"/>
+    <circle cx="16" cy="16" r="4" fill="#22d3ee"/>
+    <circle cx="16" cy="16" r="2" fill="#fff"/>
+    <animate attributeName="r" values="12;14;12" dur="2s" repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Fractal Beast -->
+  <g transform="translate(400,16)">
+    <path d="M16,4 L24,12 L28,12 L24,20 L28,28 L20,24 L16,28 L12,24 L4,28 L8,20 L4,12 L8,12 Z" fill="#4ade80" opacity="0.7"/>
+    <circle cx="16" cy="16" r="4" fill="#fff" opacity="0.6"/>
+    <circle cx="16" cy="16" r="2" fill="#000"/>
+  </g>
+  
+  <!-- Health Potion -->
+  <g transform="translate(464,16)">
+    <rect x="12" y="8" width="8" height="4" rx="1" fill="#666"/>
+    <rect x="10" y="12" width="12" height="16" rx="4" fill="#4ade80" opacity="0.7"/>
+    <text x="16" y="24" text-anchor="middle" font-size="10" fill="#fff">+</text>
+  </g>
+  
+  <!-- Coherence Scroll -->
+  <g transform="translate(528,16)">
+    <rect x="8" y="4" width="16" height="24" rx="2" fill="#7c7cf8" opacity="0.5"/>
+    <line x1="12" y1="10" x2="20" y2="10" stroke="#fff" stroke-width="1" opacity="0.6"/>
+    <line x1="12" y1="14" x2="20" y2="14" stroke="#fff" stroke-width="1" opacity="0.6"/>
+    <line x1="12" y1="18" x2="18" y2="18" stroke="#fff" stroke-width="1" opacity="0.6"/>
+  </g>
+  
+  <!-- Tile Floor -->
+  <g transform="translate(592,16)">
+    <rect x="0" y="0" width="16" height="16" fill="#0d0d1f"/>
+    <rect x="16" y="0" width="16" height="16" fill="#0f0f22"/>
+    <rect x="0" y="16" width="16" height="16" fill="#0f0f22"/>
+    <rect x="16" y="16" width="16" height="16" fill="#0d0d1f"/>
+  </g>
+  
+  <!-- Wall -->
+  <g transform="translate(592,80)">
+    <rect x="0" y="0" width="32" height="32" fill="#1a1a2e"/>
+    <line x1="0" y1="0" x2="32" y2="0" stroke="#7c7cf8" stroke-width="1" opacity="0.2"/>
+  </g>
+</svg>

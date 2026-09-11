@@ -50,6 +50,9 @@
   .sb{display:flex;justify-content:center;gap:16px;padding:9px;border-top:1px solid var(--b);font-size:0.55em;color:var(--m);position:fixed;bottom:0;left:0;right:0;background:var(--bg)}
   .dl{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gn);margin-right:3px;animation:pulse 2s infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -80,7 +83,7 @@
   <div class="c">
     <div class="ch"><div class="ic" style="background:rgba(124,124,248,0.12);color:var(--ac)">🔓</div><div><div class="ct">Module Access</div><div class="cs">Query module availability and pricing</div></div></div>
     <div class="cb">
-      <div class="br"><button class="b p" onclick="checkAccess('hex_language','free')">Hex Language</button><button class="b" onclick="checkAccess('dream_logic_physics','free')">Dream Physics</button><button class="b" onclick="checkAccess('resonance_graph','standard')">Resonance Graph</button></div>
+      <div class="br"><button class="b p" onclick="checkAccess('hex_language','free')">Hex Language</button><button class="b" onclick="checkAccess('consciousness_stream','free')">Dream Physics</button><button class="b" onclick="checkAccess('resonance_analyzer','standard')">Resonance Graph</button></div>
       <div id="accessOut" class="o">Select a module to check access...</div>
     </div>
   </div>
@@ -145,5 +148,6 @@ async function subscribeTier(tier){
 setInterval(()=>{document.getElementById('clock').textContent=new Date().toISOString().slice(11,19)},1000);
 loadCatalog();
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

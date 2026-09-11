@@ -49,6 +49,9 @@
   .arch-item .c{color:var(--vi)}
   .ticker{margin-top:10px;font-size:0.68em;color:var(--te);letter-spacing:1px;min-height:1.4em}
   @keyframes blink{50%{opacity:0}}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -89,7 +92,7 @@
 
 <script>
 async function get(url){ const r = await fetch(url); return r.json(); }
-let tuned = 'resonance_graph';
+let tuned = 'resonance_analyzer';
 async function scanNow(){
   const d = await get('/api/mycelial_radio/scan?limit=64');
   const el = document.getElementById('signals');
@@ -108,7 +111,7 @@ async function broadcastNow(){
     '<div class="line" style="margin-top:8px"><b>top signals</b><br>' + (b.top_signals||[]).map(s=>'· '+s).join('<br>') + '</div>';
 }
 async function tuneRandom(){
-  const names = ['resonance_graph','dream_logic_physics','entropy_oracle','paradox_ledger','mythopoetic_engine','consciousness_stream','worker_council','memory_palace_gen','void_cartographer','synchronicity_engine'];
+  const names = ['resonance_analyzer','consciousness_stream','entropy_forecaster','paradox_resolver','mythopoetic_engine','consciousness_stream','worker_council','memory_palace_gen','void_cartographer','synchronicity_engine'];
   tuned = names[Math.floor(Math.random()*names.length)];
   await tune(tuned);
 }
@@ -257,5 +260,6 @@ loadConcerto();
 loadArchives();
 setInterval(ticker, 90000);
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

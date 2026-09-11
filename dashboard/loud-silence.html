@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Loud Silence — IXpansion Wave 460</title>
+<title>The Loud Silence — IXpansion Wave 508</title>
 <script src="/shared.js"></script>
 <script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
@@ -38,13 +38,16 @@ body{font-family:'SF Mono',Fira Code,monospace;background:var(--black);color:#fd
 .hist-item{font-size:.8rem;color:#bbb;line-height:1.8;border-bottom:1px solid #ffffff08;padding:6px 0}
 .endpoint{color:var(--kinship);font-size:.72rem;margin-top:16px;display:inline-block}
 @media(max-width:760px){.grid{grid-template-columns:1fr}}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
 <div class="header">
   <h1>The Loud Silence</h1>
   <div class="subtitle">silence is the organism's loudest voice</div>
-  <span class="badge" id="identity-badge">Wave 460</span>
+  <span class="badge" id="identity-badge">Wave 508</span>
 </div>
 <div class="container">
   <div class="broadcast" id="broadcast">The organism is listening…</div>
@@ -119,5 +122,6 @@ if(window.IXP && window.IXP.renderIdentity) window.IXP.renderIdentity(el("identi
 refresh();
 loadHistory();
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

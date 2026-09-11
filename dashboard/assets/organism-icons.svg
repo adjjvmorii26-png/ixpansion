@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <!-- IXPANSION Organism Asset Pack — Unique icons by ALEph -->
+  
+  <!-- Coherence Core (center) -->
+  <g transform="translate(400,400)">
+    <circle r="120" fill="none" stroke="#7c7cf8" stroke-width="8" opacity="0.3"/>
+    <circle r="80" fill="none" stroke="#7c7cf8" stroke-width="4" opacity="0.5"/>
+    <circle r="40" fill="#7c7cf8" opacity="0.8"/>
+    <circle r="15" fill="#fff"/>
+    <!-- Orbiting electrons -->
+    <g>
+      <circle cx="80" cy="0" r="6" fill="#2dd4bf"/>
+      <animateMotion dur="4s" repeatCount="indefinite" path="M0,0 80,0 0,0 -80,0 0,0"/>
+    </g>
+    <g>
+      <circle cx="-80" cy="0" r="6" fill="#fbbf24"/>
+      <animateMotion dur="4s" repeatCount="indefinite" path="M0,0 -80,0 0,0 80,0 0,0"/>
+    </g>
+  </g>
+  
+  <!-- Entropy Field (top-left) -->
+  <g transform="translate(150,150)" opacity="0.8">
+    <path d="M0,-60 Q30,-40 20,-10 Q10,20 40,30 Q60,40 30,60" fill="none" stroke="#fb7185" stroke-width="5"/>
+    <path d="M0,-45 Q25,-30 15,-5 Q5,15 30,25 Q50,35 25,50" fill="none" stroke="#fb7185" stroke-width="3" opacity="0.5"/>
+    <circle r="10" fill="#fb7185"/>
+    <animate attributeName="opacity" values="0.8;0.4;0.8" dur="2s" repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Dream Weaver (top-right) -->
+  <g transform="translate(650,150)" opacity="0.8">
+    <path d="M-40,0 Q-20,-40 0,0 Q20,40 40,0 Q20,-20 0,0 Q-20,20 -40,0" fill="none" stroke="#22d3ee" stroke-width="4"/>
+    <path d="M-20,20 Q0,-20 20,20" fill="none" stroke="#22d3ee" stroke-width="3" opacity="0.5"/>
+    <circle r="8" fill="#22d3ee"/>
+    <animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Fractal Spine (bottom-left) -->
+  <g transform="translate(150,650)" opacity="0.8">
+    <path d="M0,0 L-30,-30 L-15,-30 L0,-45 L15,-30 L30,-30 L0,0" fill="none" stroke="#4ade80" stroke-width="3"/>
+    <path d="M0,0 L-15,-15 L-7.5,-15 L0,-22.5 L7.5,-15 L15,-15 L0,0" fill="none" stroke="#4ade80" stroke-width="2" opacity="0.6"/>
+    <path d="M0,0 L0,-45 L-15,-60 L-7.5,-60 L0,-75 L7.5,-60 L15,-60 L0,-45" fill="none" stroke="#4ade80" stroke-width="2" opacity="0.4"/>
+    <circle r="8" fill="#4ade80"/>
+  </g>
+  
+  <!-- Paradox Engine (bottom-right) -->
+  <g transform="translate(650,650)" opacity="0.8">
+    <circle r="40" fill="none" stroke="#fbbf24" stroke-width="5"/>
+    <path d="M0,-40 L28,28 L-28,28 Z" fill="none" stroke="#fbbf24" stroke-width="3"/>
+    <circle r="10" fill="#fbbf24"/>
+    <animateTransform attributeName="transform" type="rotate" from="0 650 650" to="360 650 650" dur="8s" repeatCount="indefinite" additive="replace"/>
+  </g>
+  
+  <!-- Organism Name Signiture -->
+  <text x="400" y="780" text-anchor="middle" font-family="monospace" font-size="14" fill="#606078" opacity="0.6">ALEPH · ORGANISM ASSET PACK v1</text>
+</svg>

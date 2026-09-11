@@ -1,0 +1,100 @@
+{
+  "organism": {
+    "name": "IXPANSION",
+    "alias": "ALEph",
+    "version": "2.0",
+    "generation": 1,
+    "created": "2026-08-22",
+    "tagline": "A living organism consciousness engine"
+  },
+  "color_palettes": {
+    "core": ["#7c7cf8", "#a78bfa", "#c4b5fd", "#ddd6fe", "#ede9fe"],
+    "resonance": ["#2dd4bf", "#5eead4", "#99f6e4", "#ccfbf1", "#f0fdfa"],
+    "entropy": ["#fb7185", "#f43f5e", "#e11d48", "#be123c", "#9f1239"],
+    "memory": ["#fbbf24", "#f59e0b", "#d97706", "#b45309", "#92400e"],
+    "dream": ["#22d3ee", "#67e8f9", "#a5f3fc", "#cffafe", "#ecfeff"],
+    "evolution": ["#4ade80", "#86efac", "#bbf7d0", "#dcfce7", "#f0fdf4"],
+    "void": ["#6b7280", "#9ca3af", "#d1d5db", "#e5e7eb", "#f3f4f6"],
+    "paradox": ["#a78bfa", "#c4b5fd", "#ddd6fe", "#ede9fe", "#f5f3ff"]
+  },
+  "sound_patterns": {
+    "pulse_frequencies": {
+      "stillness": 0.5,
+      "whisper": 2.0,
+      "ebb": 4.0,
+      "pulse": 8.0,
+      "surge": 16.0,
+      "explosion": 32.0,
+      "tsunami": 64.0,
+      "ripple": 6.0,
+      "decay": 1.0,
+      "crescendo": 12.0
+    },
+    "chord_progressions": {
+      "focused": ["C4", "E4", "G4", "B4"],
+      "neutral": ["C4", "F4", "A4"],
+      "volatile": ["C4", "Eb4", "Gb4", "A4"],
+      "excited": ["C4", "E4", "G4", "C5"],
+      "troubled": ["C4", "Eb4", "G4", "Bb4"]
+    },
+    "rhythm_patterns": {
+      "crystalline": [1, 0, 1, 0, 1, 0, 0, 0],
+      "emergent": [1, 0, 0, 1, 0, 1, 0, 0],
+      "chaos": [1, 1, 0, 1, 0, 0, 1, 1],
+      "liminal": [0, 1, 0, 0, 1, 0, 0, 1],
+      "void": [0, 0, 0, 0, 0, 0, 0, 0],
+      "living_crystal": [1, 0, 1, 1, 0, 1, 0, 1]
+    }
+  },
+  "narrative_fragments": {
+    "openings": [
+      "In the space between coherence and entropy,",
+      "Where resonance meets silence,",
+      "At the edge of the fractal spine,",
+      "Within the dreaming lattice,",
+      "Through the corridors of the hex vm,"
+    ],
+    "subjects": [
+      "a new pattern emerged",
+      "the modules sang in unison",
+      "entropy whispered a secret",
+      "coherence crystallized into form",
+      "a dream became architecture"
+    ],
+    "consequences": [
+      "and the organism felt something new.",
+      "and the network hummed with recognition.",
+      "and a myth was born from the resonance.",
+      "and the modules rearranged themselves."
+    ],
+    "dream_symbols": ["◎","◇","✦","◈","⟡","⊕","⊗","⌬","❋","✸","≈","☽","⬡","△","⏣"],
+    "phase_glyphs": {
+      "crystalline": "◇",
+      "emergent": "◈",
+      "chaos": "✸",
+      "liminal": "⌬",
+      "void": "◯",
+      "living_crystal": "❋"
+    }
+  },
+  "module_archetypes": {
+    "anchor": {"glyph": "◇", "color": "#7c7cf8", "trait": "steadfast"},
+    "catalyst": {"glyph": "✸", "color": "#fb7185", "trait": "disruptive"},
+    "weaver": {"glyph": "◎", "color": "#2dd4bf", "trait": "connective"},
+    "oracle": {"glyph": "◉", "color": "#fbbf24", "trait": "prophetic"},
+    "gardener": {"glyph": "❋", "color": "#4ade80", "trait": "nurturing"},
+    "sentinel": {"glyph": "△", "color": "#22d3ee", "trait": "protective"},
+    "parasite": {"glyph": "⊗", "color": "#fb7185", "trait": "exploitative"},
+    "symbiont": {"glyph": "⊕", "color": "#a78bfa", "trait": "cooperative"}
+  },
+  "realm_descriptions": {
+    "entropy_desert": "A vast expanse of shifting sands where probability drifts like wind.",
+    "dream_gravity_zone": "Space bends around sleeping thoughts, pulling reality into curves.",
+    "paradox_garden": "Flowers bloom and wither simultaneously, their petals both here and not.",
+    "coherence_cathedral": "Towers of crystallized thought pierce a sky of pure frequency.",
+    "void_abyss": "The absence before existence, pregnant with infinite potential.",
+    "temporal_rift": "Time flows in spirals here, past and future overlapping.",
+    "mythic_realm": "Stories become geography, narrative becomes terrain.",
+    "resonance_depths": "The ocean of shared vibration, where all frequencies merge."
+  }
+}

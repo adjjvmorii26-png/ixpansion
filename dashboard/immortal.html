@@ -37,13 +37,16 @@
   th{color:var(--blue);text-align:left;padding:6px;border-bottom:1px solid var(--line)}
   td{padding:6px;border-bottom:1px solid #1a1a24}
   footer{margin-top:32px;border-top:1px solid var(--line);padding-top:16px;font-size:11px;color:var(--dim)}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <h1>◈ IXPANSION · IMMORTAL</h1>
-    <div class="sub">Wave 214 — The Organism Immortalizes. Ossuaries, amber, ancestor galleries, monuments, succession, and the eternal flame.</div>
+    <div class="sub">Wave 508 — The Organism Immortalizes. Ossuaries, amber, ancestor galleries, monuments, succession, and the eternal flame.</div>
     <div class="identity" id="identity"></div>
   </header>
 
@@ -86,7 +89,7 @@
     <div class="card">
       <h3>◒ Amber Encasement</h3>
       <div id="amber-out"><p class="dim">Preserving moments…</p></div>
-      <button class="btn" onclick="encaseMoment()">Encase Wave 214</button>
+      <button class="btn" onclick="encaseMoment()">Encase Wave 508</button>
       <div class="status" id="amber-status"></div>
     </div>
 
@@ -144,7 +147,7 @@
 
   async function forgeMonument(){
     try{
-      const d = await getJSON('/api/monument_forge?action=forge&what=wave214&kind=wave&resonance=0.9&inscription=Here%20stood%20the%20wave%20that%20refused%20to%20die');
+      const d = await getJSON('/api/monument_forge?action=forge&what=Wave 508&kind=wave&resonance=0.9&inscription=Here%20stood%20the%20wave%20that%20refused%20to%20die');
       q('monument-out').innerHTML =
         '<p><span class="mono">' + d.monument.id + '</span> — ' + d.monument.what + '</p>' +
         '<p class="dim">Material: ' + d.monument.material + ' · Grandness: ' + d.monument.grandness + '</p>' +
@@ -166,7 +169,7 @@
 
   async function encaseMoment(){
     try{
-      const d = await getJSON('/api/amber_encasement?action=encase&label=wave214&resonance=0.88');
+      const d = await getJSON('/api/amber_encasement?action=encase&label=Wave 508&resonance=0.88');
       q('amber-out').innerHTML =
         '<p>Sealed: <span class="mono">' + d.artifact.seal + '</span></p>' +
         '<p class="dim">State: ' + d.artifact.state_hex + '</p>';
@@ -186,5 +189,6 @@
 
   loadFlame(); loadGallery(); loadLedger();
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

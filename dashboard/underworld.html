@@ -29,6 +29,9 @@
   .trade b{color:var(--cry)}
   .mig{font-size:0.7em;color:var(--te);padding:5px 0}
   .foot{text-align:center;color:var(--m);font-size:0.62em;margin-top:24px;letter-spacing:1px}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -88,5 +91,6 @@ async function load(){
 load();
 setInterval(load, 45000);
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>
