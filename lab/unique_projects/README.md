@@ -1,16 +1,11 @@
-# Unique + creative projects
+# Unique + creative
 
-| Project | Path |
+| Project | Idea |
 |---------|------|
-| Proof Sonifier | `lab/proof_sonifier/` |
-| Caption Lattice | `lab/caption_lattice/` |
-| Mirror Ledger | `lab/mirror_ledger/` |
-| Proof Comet | `lab/proof_comet/` |
-| Entropy Caption | `lab/entropy_caption/` |
-| Sigil Stamp | `lab/sigil_stamp/` |
+| pulse_echo | entropy shapes caption curve |
+| null_orchard | absence map as signal |
+| merkle_mood | ledger → palette mood |
 
 ```bash
 python lab/unique_projects/run_creative.py
-python lab/proof_comet/build_data.py
-python lab/proof_comet/serve.py
 ```
