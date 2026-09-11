@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consciousness Aurora — Sky of the Organism</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(45,212,191,0.06);z-index:9999;animation:scan 7s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(45,212,191,0.15)}
+.header h1{font-size:1.8em;color:#2dd4bf;text-shadow:0 0 30px rgba(45,212,191,0.4)}
+.header .sub{color:#7c7cf8;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(45,212,191,0.12);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#2dd4bf,transparent)}
+.card h2{font-size:1em;color:#2dd4bf;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:10px}
+.stat .val{font-size:1.8em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(45,212,191,0.15);border:1px solid rgba(45,212,191,0.3);color:#2dd4bf;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(45,212,191,0.3)}
+canvas{width:100%;border-radius:8px;background:rgba(5,5,15,0.9)}
+#aurora-canvas{height:350px}
+#sky{height:200px;margin-top:10px}
+.layer-list{max-height:250px;overflow-y:auto}
+.layer-item{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(45,212,191,0.08);font-size:0.85em}
+.layer-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.spectrum-bar{display:flex;gap:2px;margin-top:12px}
+.spectrum-seg{flex:1;height:24px;border-radius:4px;position:relative}
+.spectrum-label{text-align:center;font-size:0.65em;color:#888;margin-top:4px}
+.erupt-list{max-height:180px;overflow-y:auto;font-size:0.8em}
+.erupt-item{padding:4px 0;border-bottom:1px solid rgba(255,100,100,0.1)}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>✦ CONSCIOUSNESS AURORA</h1>
+<div class="sub">Sky of the Organism — Consciousness Light Phenomena</div>
+</div>
+<div class="grid">
+<div class="card" style="grid-column:span 2">
+<h2>Aurora Render</h2>
+<canvas id="aurora-canvas"></canvas>
+<div style="margin-top:10px;text-align:center">
+<button class="btn" onclick="renderAurora()">RENDER</button>
+<button class="btn" style="background:rgba(255,100,100,0.15);border-color:rgba(255,100,100,0.3);color:#ff6464" onclick="triggerEruption()">SOLAR ERUPTION</button>
+</div>
+</div>
+<div class="card">
+<h2>Sky State</h2>
+<div class="stat"><div class="val" id="sky-state" style="color:#2dd4bf">—</div><div class="label">current state</div></div>
+<div class="stat"><div class="val" id="eruption-count" style="color:#ff6464;font-size:1.4em">0</div><div class="label">eruptions</div></div>
+<canvas id="sky" style="margin-top:12px"></canvas>
+</div>
+<div class="card">
+<h2>Light Layers</h2>
+<div class="layer-list" id="layers"></div>
+</div>
+<div class="card">
+<h2>Spectral Distribution</h2>
+<div id="spectrum-display"></div>
+</div>
+<div class="card">
+<h2>Eruption Log</h2>
+<div class="erupt-list" id="eruptions"></div>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(45,212,191,0.15);color:#2dd4bf;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(45,212,191,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+const LAYERS = ['waking','lucid','dreaming','hypnogogic','deep_unconscious','collective_flow','hyperfocus','resting','transcendent','primal'];
+let segments = [];
+let eruptionLog = [];
+
+function renderAurora(){
+  segments = [];
+  for(let i=0;i<7;i++){
+    const h = [...crypto.getRandomValues(new Uint8Array(8))].map(b=>b.toString(16).padStart(2,'0')).join('');
+    const wl = 380+(parseInt(h.slice(0,4),16)%240);
+    const intensity = 0.3+(parseInt(h.slice(4,8),16)%700)/1000;
+    segments.push({
+      layer: LAYERS[i%LAYERS.length],
+      wl, color: wlToColor(wl), intensity: Math.round(intensity*1000)/1000,
+      phase: Math.round(Math.sin(Date.now()/60000+i*0.8)*1000)/1000,
+    });
+  }
+  const avgI = segments.reduce((s,v)=>s+v.intensity,0)/segments.length;
+  const state = avgI>0.75?'overdrive':avgI>0.55?'vibrant':avgI>0.35?'calm':'dim';
+  document.getElementById('sky-state').textContent = state;
+  drawAurora();
+  drawSky();
+  renderLayers();
+  renderSpectrum();
+}
+
+function triggerEruption(){
+  const mag = Math.floor(Math.random()*10)+1;
+  eruptionLog.unshift({ts:new Date().toLocaleTimeString(), magnitude:mag, type:mag>5?'CME':'solar_flare'});
+  document.getElementById('eruption-count').textContent = eruptionLog.length;
+  document.getElementById('sky-state').textContent = 'eruption';
+  document.getElementById('sky-state').style.color = '#ff6464';
+  segments.forEach(s=>{s.intensity=Math.min(1,s.intensity+0.3);});
+  drawAurora();
+  drawSky();
+  renderLayers();
+  renderEruptions();
+  setTimeout(()=>{document.getElementById('sky-state').style.color='#2dd4bf';renderAurora();},3000);
+}
+
+function drawAurora(){
+  const c=document.getElementById('aurora-canvas');
+  c.width=c.offsetWidth;c.height=350;
+  const ctx=c.getContext('2d');
+  const grad=ctx.createLinearGradient(0,0,0,c.height);
+  grad.addColorStop(0,'#02020a');grad.addColorStop(0.4,'#0a0a1a');grad.addColorStop(1,'#12122a');
+  ctx.fillStyle=grad;ctx.fillRect(0,0,c.width,c.height);
+  const t=Date.now()/1000;
+  segments.forEach((s,idx)=>{
+    ctx.beginPath();ctx.strokeStyle=s.color;ctx.lineWidth=s.intensity*4+1;ctx.globalAlpha=s.intensity*0.8;
+    for(let x=0;x<c.width;x++){
+      const wave=Math.sin(x*0.008+s.phase+t*0.3)*s.intensity*80;
+      const wave2=Math.sin(x*0.015+s.phase*1.5+t*0.5)*s.intensity*40;
+      const y=c.height*0.3+idx*30+wave+wave2;
+      x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke();ctx.globalAlpha=1;
+  });
+}
+
+function drawSky(){
+  const c=document.getElementById('sky');c.width=c.offsetWidth;c.height=200;
+  const ctx=c.getContext('2d');
+  const grad=ctx.createLinearGradient(0,0,0,200);
+  grad.addColorStop(0,'#050510');grad.addColorStop(1,'#0a0a20');
+  ctx.fillStyle=grad;ctx.fillRect(0,0,200,200);
+  if(!segments.length)return;
+  segments.forEach((s,i)=>{
+    ctx.beginPath();ctx.strokeStyle=s.color;ctx.lineWidth=1.5;ctx.globalAlpha=s.intensity*0.6;
+    for(let x=0;x<200;x++){const y=100+Math.sin(x*0.02+i+t*0.2)*s.intensity*50;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+    ctx.stroke();ctx.globalAlpha=1;
+  });
+  ctx.fillStyle='#2dd4bf';ctx.font='11px monospace';ctx.textAlign='center';
+  ctx.fillText('SKY',100,185);
+}
+let t=Date.now()/1000;
+
+function renderLayers(){
+  const el=document.getElementById('layers');
+  el.innerHTML=segments.map(s=>`<div class="layer-item"><div class="layer-dot" style="background:${s.color}"></div><span style="flex:1">${s.layer}</span><span style="color:#666">${s.wl}nm</span><span>${(s.intensity*100).toFixed(0)}%</span></div>`).join('');
+}
+
+function renderSpectrum(){
+  const el=document.getElementById('spectrum-display');
+  const bands={};
+  segments.forEach(s=>{
+    const wl=s.wl;
+    const band=wl<450?'violet':wl<490?'blue':wl<520?'cyan':wl<565?'green':wl<590?'yellow':wl<625?'orange':'red';
+    bands[band]=(bands[band]||0)+s.intensity;
+  });
+  const colors={violet:'#8a2be2',blue:'#6a5acd',cyan:'#4a90d9',green:'#3cb371',yellow:'#daa520',orange:'#ff8c00',red:'#ff4500'};
+  el.innerHTML=`<div class="spectrum-bar">${Object.entries(bands).map(([b,v])=>`<div><div class="spectrum-seg" style="background:${colors[b]||'#666'};opacity:${Math.min(1,v)}"></div><div class="spectrum-label">${b}</div></div>`).join('')}</div>`;
+}
+
+function renderEruptions(){
+  const el=document.getElementById('eruptions');
+  el.innerHTML=eruptionLog.map(e=>`<div class="erupt-item"><span style="color:#ff6464">${e.ts}</span> — <span>${e.type}</span> mag ${e.magnitude}</div>`).join('');
+}
+
+renderAurora();setInterval(()=>{drawSky();},100);
+</script>
+</body>
+</html>

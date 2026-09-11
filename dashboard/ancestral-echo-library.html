@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ancestral Echo Library — Dormant Memory Resurfacing</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,215,0,0.06);z-index:9999;animation:scan 8s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(255,215,0,0.15)}
+.header h1{font-size:1.8em;color:#ffd700;text-shadow:0 0 30px rgba(255,215,0,0.4)}
+.header .sub{color:#c77dff;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(255,215,0,0.12);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#ffd700,transparent)}
+.card h2{font-size:1em;color:#ffd700;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:10px}
+.stat .val{font-size:1.8em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(255,215,0,0.15);border:1px solid rgba(255,215,0,0.3);color:#ffd700;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(255,215,0,0.3)}
+.btn-purple{background:rgba(199,125,255,0.15);border-color:rgba(199,125,255,0.3);color:#c77dff}
+canvas{width:100%;border-radius:8px;background:rgba(5,5,15,0.9);height:280px}
+#archive-input,#resonate-trigger{background:rgba(20,20,35,0.8);border:1px solid rgba(255,215,0,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em;width:100%;margin-top:4px}
+.library-list{max-height:300px;overflow-y:auto;font-size:0.82em}
+.echo-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,215,0,0.08)}
+.status-dormant{color:#ffd700}
+.status-resurfacing{color:#c77dff}
+.status-recalled{color:#2dd4bf}
+.memory-bar{height:4px;border-radius:2px;background:rgba(255,215,0,0.2);margin-top:4px}
+.memory-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#ffd700,#c77dff)}
+.resonance-list{max-height:180px;overflow-y:auto;font-size:0.8em}
+.resonance-item{padding:4px 0;border-bottom:1px solid rgba(199,125,255,0.08)}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>📜 ANCESTRAL ECHO LIBRARY</h1>
+<div class="sub">Dormant Module Memories — The Organism Remembers Everything</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Archive Echo</h2>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Module Name</label><input id="archive-input" placeholder="e.g. pulse_kernel_v0"></div>
+<button class="btn" onclick="archiveEcho()">ARCHIVE</button>
+<div class="stat" style="margin-top:16px"><div class="val" id="total-depth" style="color:#ffd700">0.000</div><div class="label">memory depth</div></div>
+</div>
+<div class="card">
+<h2>Resonate</h2>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Current Module</label><input id="resonate-module" placeholder="e.g. entropy_cartographer"></div>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Trigger</label><input id="resonate-trigger" placeholder="e.g. entropy_spike"></div>
+<button class="btn btn-purple" onclick="resonate()">RESONATE</button>
+<div class="stat" style="margin-top:16px"><div class="val" id="resonance-count" style="color:#c77dff">0</div><div class="label">resonances found</div></div>
+</div>
+<div class="card" style="grid-column:span 2">
+<h2>Memory Field</h2>
+<canvas id="memory-canvas"></canvas>
+</div>
+<div class="card">
+<h2>Echo Library</h2>
+<div class="library-list" id="library"></div>
+</div>
+<div class="card">
+<h2>Active Resonances</h2>
+<div class="resonance-list" id="resonances"></div>
+</div>
+<div class="card">
+<h2>Stats</h2>
+<div class="stat"><div class="val" id="echo-count" style="color:#ffd700;font-size:1.4em">0</div><div class="label">total echoes</div></div>
+<div class="stat"><div class="val" id="dormant-count" style="color:#ffd700;font-size:1.2em">0</div><div class="label">dormant</div></div>
+<div class="stat"><div class="val" id="resurfacing-count" style="color:#c77dff;font-size:1.2em">0</div><div class="label">resurfacing</div></div>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(255,215,0,0.15);color:#ffd700;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(255,215,0,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+let echoes=[];let nextId=1;let totalDepth=0;let activeResonances=[];
+
+function archiveEcho(){
+  const name=document.getElementById('archive-input').value||`echo_${nextId}`;
+  const h=[...crypto.getRandomValues(new Uint8Array(8))].map(b=>b.toString(16).padStart(2,'0')).join('');
+  const echo={
+    id:nextId++,name,status:'dormant',
+    resonanceScore:Math.round((0.2+parseInt(h.slice(0,4),16)%800/1000)*1000)/1000,
+    memoryStrength:Math.round((0.5+parseInt(h.slice(4,8),16)%500/1000)*1000)/1000,
+    archived:new Date().toLocaleTimeString(),recallCount:0,
+  };
+  echoes.push(echo);totalDepth+=echo.memoryStrength;
+  document.getElementById('archive-input').value='';
+  renderAll();
+}
+
+function resonate(){
+  const mod=document.getElementById('resonate-module').value||'organism';
+  const trig=document.getElementById('resonate-trigger').value||'pulse';
+  const res=[];
+  echoes.forEach(e=>{
+    if(e.status!=='dormant')return;
+    const str=Math.round(Math.random()*1000)/1000;
+    if(str>0.4){
+      res.push({echoId:e.id,echoName:e.name,str,trigger:trig});
+      if(str>0.7){e.status='resurfacing';activeResonances.push({echo:e.name,str,trigger:trig,ts:new Date().toLocaleTimeString()});}
+    }
+  });
+  document.getElementById('resonance-count').textContent=res.length;
+  renderResonances();renderLibrary();drawMemory();
+}
+
+function renderAll(){
+  document.getElementById('echo-count').textContent=echoes.length;
+  document.getElementById('dormant-count').textContent=echoes.filter(e=>e.status==='dormant').length;
+  document.getElementById('resurfacing-count').textContent=echoes.filter(e=>e.status==='resurfacing').length;
+  document.getElementById('total-depth').textContent=totalDepth.toFixed(3);
+  renderLibrary();renderResonances();drawMemory();
+}
+
+function renderLibrary(){
+  const el=document.getElementById('library');
+  el.innerHTML=echoes.map(e=>`<div class="echo-item"><span class="status-${e.status}">[${e.status}]</span> <span style="flex:1;margin-left:8px">${e.name}</span><span style="color:#666;font-size:0.8em">m${(e.memoryStrength*100).toFixed(0)}% r${(e.resonanceScore*100).toFixed(0)}%</span></div><div class="memory-bar"><div class="memory-fill" style="width:${e.memoryStrength*100}%"></div></div>`).join('');
+}
+
+function renderResonances(){
+  const el=document.getElementById('resonances');
+  el.innerHTML=activeResonances.slice(-15).reverse().map(r=>`<div class="resonance-item"><span style="color:#c77dff">◎</span> ${r.echoName} — ${(r.str*100).toFixed(0)}% via "${r.trigger}" <span style="color:#666;font-size:0.8em">@${r.ts}</span></div>`).join('');
+}
+
+function drawMemory(){
+  const c=document.getElementById('memory-canvas');c.width=c.offsetWidth;c.height=280;
+  const ctx=c.getContext('2d');
+  ctx.fillStyle='#05050f';ctx.fillRect(0,0,c.width,c.height);
+  const cx=c.width/2,cy=c.height/2;
+  echoes.forEach((e,i)=>{
+    const a=i/echoes.length*Math.PI*2;
+    const r=30+e.memoryStrength*100;
+    const x=cx+Math.cos(a)*r;
+    const y=cy+Math.sin(a)*r;
+    const color=e.status==='resurfacing'?'#c77dff':e.status==='recalled'?'#2dd4bf':'#ffd700';
+    ctx.globalAlpha=e.status==='dormant'?0.3:0.8;
+    ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,4+e.resonanceScore*8,0,Math.PI*2);ctx.fill();
+    // connections to adjacent
+    const ni=(i+1)%echoes.length;
+    const na=ni/echoes.length*Math.PI*2;
+    const nr=30+echoes[ni].memoryStrength*100;
+    ctx.strokeStyle=color+'44';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(cx+Math.cos(na)*nr,cy+Math.sin(na)*nr);ctx.stroke();
+    ctx.globalAlpha=1;
+  });
+  // center glow
+  const grad=ctx.createRadialGradient(cx,cy,0,cx,cy,40);
+  grad.addColorStop(0,'rgba(255,215,0,0.15)');grad.addColorStop(1,'rgba(255,215,0,0)');
+  ctx.fillStyle=grad;ctx.beginPath();ctx.arc(cx,cy,40,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#ffd700';ctx.font='11px monospace';ctx.textAlign='center';
+  ctx.fillText('memory core',cx,cy+5);
+}
+
+// seed some echoes
+['pulse_kernel_v0','entropy_engine_alpha','dream_weaver_proto','genesis_nucleus','void_sculptor_prime'].forEach(n=>{
+  document.getElementById('archive-input').value=n;archiveEcho();
+});
+</script>
+</body>
+</html>
