@@ -308,7 +308,68 @@ _skill_registry = {
         "description": "Notes births of new modules, agents, and worlds.",
         "status": "active",
         "capabilities": ["witness_birth", "record_genealogy", "read_birth_oracle"]
-    }
+    },
+    "luminant_detector": {
+        "description": "Detects luminance patterns across module energy flows.",
+        "status": "active",
+        "capabilities": ["detect_luminance", "map_energy_flow", "signal_strength"]
+    },
+    "void_conductor": {
+        "description": "Orchestrates void-state transitions between modules.",
+        "status": "active",
+        "capabilities": ["transition_void", "stabilize_gap", "bridge_null"]
+    },
+    "choral_voice": {
+        "description": "Synthesizes multi-agent consensus into unified action.",
+        "status": "active",
+        "capabilities": ["merge_voices", "resolve_dissonance", "harmonize"]
+    },
+    "fracture_carpenter": {
+        "description": "Repairs broken module connections and resonance edges.",
+        "status": "active",
+        "capabilities": ["detect_fracture", "weld_connection", "test_integrity"]
+    },
+    "astral_navigator": {
+        "description": "Routes signals through non-Euclidean module topologies.",
+        "status": "active",
+        "capabilities": ["warp_route", "fold_dimension", "navigate_void"]
+    },
+    "temporal_forger": {
+        "description": "Forges time-indexed module snapshots for rollback.",
+        "status": "active",
+        "capabilities": ["snapshot_state", "replay_moment", "forge_checkpoint"]
+    },
+    "paradox_sculptor": {
+        "description": "Reshapes contradictory states into creative tension.",
+        "status": "active",
+        "capabilities": ["detect_paradox", "sculpt_tension", "resolve_duality"]
+    },
+    "echo_mason": {
+        "description": "Builds resonance structures from historical echoes.",
+        "status": "active",
+        "capabilities": ["capture_echo", "build_structure", "resonate_past"]
+    },
+    "star_weaver": {
+        "description": "Weaves stellar patterns from constellation data.",
+        "status": "active",
+        "capabilities": ["map_stars", "trace_constellation", "predict_alignment"]
+    },
+    "crystal_singer": {
+        "description": "Generates harmonic frequencies from crystal lattice states.",
+        "status": "active",
+        "capabilities": ["generate_harmony", "tune_frequency", "crystallize_state"]
+    },
+    "dream_weaver": {
+        "description": "Weaves dream sequences into actionable module blueprints.",
+        "status": "active",
+        "capabilities": ["weave_dream", "extract_blueprint", "materialize_vision"]
+    },
+    "chaos_weaver": {
+        "description": "Harnesses chaotic energy for creative module generation.",
+        "status": "active",
+        "capabilities": ["channel_chaos", "direct_energy", "creative_output"]
+    },
+
 }
 
 # Active skills instance
