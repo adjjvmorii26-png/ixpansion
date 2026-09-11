@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conscience Arbiter — Ethical Decision Layer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(229,115,115,0.06);z-index:9999;animation:scan:5s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(229,115,115,0.15)}
+.header h1{font-size:1.8em;color:#e57373;text-shadow:0 0 30px rgba(229,115,115,0.4)}
+.header .sub{color:#00ff88;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(229,115,115,0.12);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#e57373,transparent)}
+.card h2{font-size:1em;color:#e57373;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:10px}
+.stat .val{font-size:1.8em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(229,115,115,0.15);border:1px solid rgba(229,115,115,0.3);color:#e57373;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(229,115,115,0.3)}
+input{background:rgba(20,20,35,0.8);border:1px solid rgba(229,115,115,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em;width:100%;margin-top:4px}
+select{background:rgba(20,20,35,0.8);border:1px solid rgba(229,115,115,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em;width:100%;margin-top:4px}
+canvas{width:100%;border-radius:8px;background:rgba(5,5,15,0.9);height:250px}
+#ethical-canvas{height:250px}
+.principles-list{max-height:250px;overflow-y:auto;font-size:0.82em}
+.principle-item{padding:8px 0;border-bottom:1px solid rgba(229,115,115,0.08)}
+.principle-weight{display:inline-block;padding:2px 8px;border-radius:10px;font-size:0.7em;background:rgba(229,115,115,0.12)}
+.verdict-list{max-height:300px;overflow-y:auto;font-size:0.82em}
+.verdict-item{padding:8px 0;border-bottom:1px solid rgba(229,115,115,0.08)}
+.verdict-badge{padding:2px 8px;border-radius:10px;font-size:0.7em}
+.verdict-permitted{background:rgba(45,212,191,0.15);color:#2dd4bf}
+.verdict-conditional{background:rgba(255,182,0,0.15);color:#ffb600}
+.verdict-forbidden{background:rgba(229,115,115,0.15);color:#e57373}
+.gauge{width:100%;height:20px;background:rgba(229,115,115,0.1);border-radius:10px;overflow:hidden;margin:8px 0}
+.gauge-fill{height:100%;border-radius:10px;transition:width 0.5s}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>⚖ CONSCIENCE ARBITER</h1>
+<div class="sub">Ethical Decision Layer — The Organism's Moral Compass</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Judge Action</h2>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Module</label><input id="judge-module" placeholder="e.g. entropy_cartographer"></div>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Action</label><input id="judge-action" placeholder="e.g. destruct"></div>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Impact (0-1)</label><input id="judge-impact" type="range" min="0" max="1" step="0.1" value="0.5"></div>
+<button class="btn" onclick="judgeAction()">JUDGE</button>
+<div class="stat" style="margin-top:16px"><div class="val" id="ethical-score" style="color:#e57373">0.85</div><div class="label">ethical score</div></div>
+<div class="gauge"><div class="gauge-fill" id="score-gauge" style="width:85%;background:linear-gradient(90deg,#e57373,#00ff88)"></div></div>
+</div>
+<div class="card">
+<h2>Principles</h2>
+<div class="principles-list" id="principles"></div>
+</div>
+<div class="card" style="grid-column:span 2">
+<h2>Ethical Trend</h2>
+<canvas id="ethical-canvas"></canvas>
+</div>
+<div class="card">
+<h2>Verdict Ledger</h2>
+<div style="display:flex;gap:8px;margin-bottom:12px">
+<div class="stat" style="flex:1"><div class="val" style="color:#2dd4bf;font-size:1.2em" id="permitted-count">0</div><div class="label">permitted</div></div>
+<div class="stat" style="flex:1"><div class="val" style="color:#ffb600;font-size:1.2em" id="conditional-count">0</div><div class="label">conditional</div></div>
+<div class="stat" style="flex:1"><div class="val" style="color:#e57373;font-size:1.2em" id="forbidden-count">0</div><div class="label">forbidden</div></div>
+</div>
+<div class="verdict-list" id="verdicts"></div>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(229,115,115,0.15);color:#e57373;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(229,115,115,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+const PRINCIPLES=[
+  {name:'coherence_preservation',weight:0.9,desc:'Actions must maintain system coherence'},
+  {name:'entropy_balance',weight:0.8,desc:'Neither over-stabilize nor over-destabilize'},
+  {name:'autonomy_respect',weight:0.7,desc:'Respect the autonomy of subsystems'},
+  {name:'memory_integrity',weight:0.85,desc:'Never corrupt ancestral memories'},
+  {name:'dream_safety',weight:0.6,desc:'Contain experimental dream mutations'},
+  {name:'paradox_care',weight:0.75,desc:'Handle paradoxes with wisdom'},
+  {name:'emergence_protection',weight:0.7,desc:'Nurture emergent behaviors'},
+];
+let verdicts=[];let ethicalScore=0.85;let scoreHistory=[];let permitted=0,conditional=0,forbidden=0;
+
+function judgeAction(){
+  const mod=document.getElementById('judge-module').value||'unknown_module';
+  const act=document.getElementById('judge-action').value||'unknown';
+  const impact=parseFloat(document.getElementById('judge-impact').value);
+  const violations=[];
+  let totalScore=0;
+  PRINCIPLES.forEach(p=>{
+    let violation=false;
+    if(p.name.includes('coherence')&&['destruct','fragment','scatter'].includes(act.toLowerCase()))violation=true;
+    else if(p.name.includes('entropy')&&['lock','freeze'].includes(act.toLowerCase()))violation=true;
+    else if(p.name.includes('memory')&&['delete_memory','corrupt','erase'].includes(act.toLowerCase()))violation=true;
+    else if(p.name.includes('paradox')&&['force_resolve','ignore','suppress'].includes(act.toLowerCase()))violation=true;
+    const ps=violation?(1-impact*0.3):(0.8+impact*0.2);
+    totalScore+=Math.max(0,Math.min(1,ps))*p.weight;
+    if(violations.length<3)violations.push(p.name);
+  });
+  totalScore/=PRINCIPLES.length;
+  const verdict=totalScore<0.3?'forbidden':totalScore<0.6?'conditional':'permitted';
+  if(verdict==='permitted')permitted++;else if(verdict==='conditional')conditional++;else forbidden++;
+  verdicts.unshift({mod,act,verdict,score:totalScore.toFixed(3),violations,ts:new Date().toLocaleTimeString()});
+  ethicalScore=Math.round(ethicalScore*0.95+totalScore*0.05);
+  scoreHistory.push(ethicalScore);if(scoreHistory.length>50)scoreHistory.shift();
+  document.getElementById('ethical-score').textContent=ethicalScore.toFixed(4);
+  document.getElementById('score-gauge').style.width=(ethicalScore*100)+'%';
+  document.getElementById('permitted-count').textContent=permitted;
+  document.getElementById('conditional-count').textContent=conditional;
+  document.getElementById('forbidden-count').textContent=forbidden;
+  renderVerdicts();drawEthicalTrend();
+  document.getElementById('judge-module').value='';document.getElementById('judge-action').value='';
+}
+
+function renderVerdicts(){
+  const el=document.getElementById('verdicts');
+  el.innerHTML=verdicts.slice(0,20).map(v=>`<div class="verdict-item"><span class="verdict-badge verdict-${v.verdict}">${v.verdict}</span> <span style="margin-left:8px">${v.mod}.${v.act}</span> <span style="color:#666;margin-left:8px">${v.score} @${v.ts}</span></div>`).join('');
+}
+
+function renderPrinciples(){
+  const el=document.getElementById('principles');
+  el.innerHTML=PRINCIPLES.map(p=>`<div class="principle-item"><div style="display:flex;justify-content:space-between"><span>${p.name}</span><span class="principle-weight">${p.weight}</span></div><div style="font-size:0.8em;color:#666;margin-top:4px">${p.desc}</div></div>`).join('');
+}
+
+function drawEthicalTrend(){
+  const c=document.getElementById('ethical-canvas');c.width=c.offsetWidth;c.height=250;
+  const ctx=c.getContext('2d');ctx.fillStyle='#05050f';ctx.fillRect(0,0,c.width,c.height);
+  if(scoreHistory.length<2){ctx.fillStyle='#666';ctx.font='12px monospace';ctx.textAlign='center';ctx.fillText('Judge actions to see trend',c.width/2,125);return;}
+  ctx.strokeStyle='rgba(229,115,115,0.1)';ctx.lineWidth=0.5;
+  for(let y=0;y<=1;y+=0.2){const py=220-y*200;ctx.beginPath();ctx.moveTo(40,py);ctx.lineTo(c.width-20,py);ctx.stroke();ctx.fillStyle='#444';ctx.font='9px monospace';ctx.textAlign='right';ctx.fillText(y.toFixed(1),35,py+3);}
+  ctx.beginPath();ctx.strokeStyle='#e57373';ctx.lineWidth=2;
+  scoreHistory.forEach((s,i)=>{const x=40+i*(c.width-60)/Math.max(1,scoreHistory.length-1);const y=220-s*200;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.stroke();
+}
+
+renderPrinciples();
+// seed a few judgments
+['entropy_cartographer.destruct','dream_synthesis_protocol.lock','pattern_analyzer.analyze','coherence_regulator_v2.stabilize_completely'].forEach(a=>{const [m,act]=a.split('.');document.getElementById('judge-module').value=m;document.getElementById('judge-action').value=act;judgeAction();});
+</script>
+</body>
+</html>

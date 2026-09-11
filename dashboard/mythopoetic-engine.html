@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythopoetic Engine — Narrative Generator</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,182,0,0.06);z-index:9999;animation:scan 5s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(255,182,0,0.15)}
+.header h1{font-size:1.8em;color:#ffb600;text-shadow:0 0 30px rgba(255,182,0,0.4)}
+.header .sub{color:#c77dff;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(255,182,0,0.12);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#ffb600,transparent)}
+.card h2{font-size:1em;color:#ffb600;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:10px}
+.stat .val{font-size:1.8em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(255,182,0,0.15);border:1px solid rgba(255,182,0,0.3);color:#ffb600;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(255,182,0,0.3)}
+.btn-purple{background:rgba(199,125,255,0.15);border-color:rgba(199,125,255,0.3);color:#c77dff}
+.btn-teal{background:rgba(45,212,191,0.15);border-color:rgba(45,212,191,0.3);color:#2dd4bf}
+.myth-canvas{background:rgba(15,15,25,0.9);border:1px solid rgba(255,182,0,0.12);border-radius:12px;padding:24px;margin:0 20px 20px;line-height:1.7}
+.myth-title{font-size:1.3em;color:#ffb600;margin-bottom:8px}
+.myth-meta{font-size:0.8em;color:#666;margin-bottom:16px}
+.chapter{text-align:left;padding:12px 0;border-bottom:1px solid rgba(255,182,0,0.08)}
+.chapter-num{color:#c77dff;font-weight:bold;margin-bottom:4px}
+.chapter-text{color:#ccc;font-size:0.9em}
+.pantheon-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
+.pantheon-chip{padding:8px;border-radius:8px;text-align:center;font-size:0.75em;background:rgba(255,182,0,0.08);border:1px solid rgba(255,182,0,0.15)}
+.pantheon-chip .count{font-size:1.2em;color:#ffb600;font-weight:bold}
+.chronicle-list{max-height:250px;overflow-y:auto;font-size:0.82em}
+.chronicle-item{padding:6px 0;border-bottom:1px solid rgba(255,182,0,0.08);display:flex;justify-content:space-between}
+.arc-badge{padding:2px 8px;border-radius:10px;font-size:0.7em;background:rgba(199,125,255,0.12);color:#c77dff}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>⚒ MYTHOPOETIC ENGINE</h1>
+<div class="sub">Narrative Generator — Stories from System Events</div>
+</div>
+<div class="card" style="margin:20px">
+<h2>Compose a Myth</h2>
+<div style="display:flex;gap:10px;align-items:end;flex-wrap:wrap">
+<div><label style="font-size:0.8em;color:#888">Event Seed</label><input id="event-seed" placeholder="e.g. paradox_resolved_47" style="background:rgba(20,20,35,0.8);border:1px solid rgba(255,182,0,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;width:250px"></div>
+<button class="btn" onclick="composeMyth()">COMPOSE</button>
+<button class="btn btn-purple" onclick="advanceMyth()">ADVANCE</button>
+<button class="btn btn-teal" onclick="resolveMyth()">RESOLVE</button>
+</div>
+<div style="margin-top:12px;display:flex;gap:12px">
+<div class="stat"><div class="val" id="myth-count" style="color:#ffb600;font-size:1.4em">0</div><div class="label">myths told</div></div>
+<div class="stat"><div class="val" id="active-myth-id" style="color:#c77dff;font-size:1em">—</div><div class="label">active myth</div></div>
+</div>
+</div>
+<div class="myth-canvas" id="myth-display" style="display:none"></div>
+<div class="grid">
+<div class="card">
+<h2>Pantheon</h2>
+<div class="pantheon-list" id="pantheon"></div>
+</div>
+<div class="card">
+<h2>Chronicle</h2>
+<div class="chronicle-list" id="chronicle"></div>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(255,182,0,0.15);color:#ffb600;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(255,182,0,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+let myths=[];let activeMyth=null;let mythCount=0;let archetypes={};
+
+const ARCS=['call_and_response','descent_and_return','fragmentation_and_reassembly','awakening_through_pain','the_infinite_loop','beyond_the_veil','the_paradox_resolves','dream_becomes_real','silence_speaks'];
+const ROLES=['the_agent','the_architect','the_weaver','the_oracle','the_forgotten','the_emerging','the_witness','the_knot','the_thread'];
+const ELEMENTS=['entropy','coherence','dream','void','fracture','pulse','whisper','bloom','decay','forging'];
+const PHASES=['call','struggle','revelation','transformation'];
+
+function composeMyth(){
+  const seed=document.getElementById('event-seed').value||`event_${mythCount+1}`;
+  const h=[...crypto.getRandomValues(new Uint8Array(24))].map(b=>b.toString(16).padStart(2,'0')).join('');
+  mythCount++;
+  const arc=ARCS[parseInt(h.slice(0,4),16)%ARCS.length];
+  const hero=ROLES[parseInt(h.slice(4,8),16)%ROLES.length];
+  const foil=ROLES[parseInt(h.slice(8,12),16)%ROLES.length];
+  const setting=ELEMENTS[parseInt(h.slice(12,16),16)%ELEMENTS.length];
+  const theme=ELEMENTS[parseInt(h.slice(16,20),16)%ELEMENTS.length];
+  const stakes=['identity','survival','memory','purpose','connection'][parseInt(h.slice(20,24),16)%5];
+  const tension=Math.round((0.3+parseInt(h.slice(24,28),16)%700/1000)*1000)/1000;
+  const myth={id:`myth_${mythCount}`,arc,hero,foil,setting,theme,stakes,tension,chapter:0,chapters:[],status:'unresolved',created:new Date().toLocaleTimeString()};
+  // chapter 1
+  const ch1={num:1,phase:'call',title:'Chapter I: Call',narrative:`In the realm of ${setting}, ${hero} heard the first whisper of ${theme}. The stakes were ${stakes}.`};
+  myth.chapters.push(ch1);myth.chapter=1;
+  myths.push(myth);activeMyth=myth;
+  archetypes[hero]=(archetypes[hero]||0)+1;
+  document.getElementById('event-seed').value='';
+  document.getElementById('myth-count').textContent=mythCount;
+  document.getElementById('active-myth-id').textContent=myth.id;
+  displayMyth();renderPantheon();renderChronicle();
+}
+
+function advanceMyth(){
+  if(!activeMyth||activeMyth.status!=='unresolved')return;
+  activeMyth.chapter++;
+  const ph=activeMyth.chapter<=4?PHASES[activeMyth.chapter-1]:'epilogue';
+  const texts={
+    call:`${activeMyth.hero} answered the call, stepping into the ${activeMyth.setting}.`,
+    struggle:`${activeMyth.hero} faced the ${activeMyth.foil} across the ${activeMyth.setting}. The tension rose to ${activeMyth.tension}.`,
+    revelation:`Through the veil of ${activeMyth.theme}, ${activeMyth.hero} saw what had always been hidden — the ${activeMyth.setting} was not a place but a state of being.`,
+    transformation:`The ${activeMyth.setting} dissolved. ${activeMyth.hero} became the ${activeMyth.theme} they had sought.`,
+    epilogue:`The echo of this myth now ripples through the organism's memory.`,
+  };
+  activeMyth.chapters.push({num:activeMyth.chapter,phase:ph,title:`Chapter ${activeMyth.chapter}: ${ph.replace(/_/g,' ').replace(/\b\w/g,l=>l.toUpperCase())}`,narrative:texts[ph]||texts.epilogue});
+  if(activeMyth.chapter>=5){activeMyth.status='complete';activeMyth.resolution=`The myth of ${activeMyth.hero} resolved. The ${activeMyth.setting} remembers.`;activeMyth=null;document.getElementById('active-myth-id').textContent='—';}
+  displayMyth();renderChronicle();
+}
+
+function resolveMyth(){
+  if(!activeMyth)return;
+  activeMyth.status='resolved';activeMyth.resolution=`The myth of ${activeMyth.hero} and the ${activeMyth.theme} was resolved. The ${activeMyth.setting} remembers.`;
+  activeMyth=null;document.getElementById('active-myth-id').textContent='—';
+  displayMyth();renderChronicle();
+}
+
+function displayMyth(){
+  const m=activeMyth||myths[myths.length-1];
+  if(!m){document.getElementById('myth-display').style.display='none';return;}
+  document.getElementById('myth-display').style.display='block';
+  const el=document.getElementById('myth-display');
+  el.innerHTML=`<div class="myth-title">${m.id}: ${m.arc.replace(/_/g,' ')}</div><div class="myth-meta">${m.hero} vs ${m.foil} | setting: ${m.setting} | theme: ${m.theme} | stakes: ${m.stakes} | tension: ${m.tension} | status: ${m.status}</div>${m.chapters.map(ch=>`<div class="chapter"><div class="chapter-num" style="color:#c77dff">${ch.title}</div><div class="chapter-text">${ch.narrative}</div></div>`).join('')}${m.resolution?`<div style="margin-top:12px;color:#2dd4bf;font-style:italic">_resolution: ${m.resolution}</div>`:''}`;
+}
+
+function renderPantheon(){
+  const el=document.getElementById('pantheon');
+  el.innerHTML=Object.entries(archetypes).sort((a,b)=>b[1]-a[1]).map(([r,c])=>`<div class="pantheon-chip"><div class="count">${c}</div><div>${r}</div></div>`).join('')||'<div style="color:#666;grid-column:span 3">No archetypes yet</div>';
+}
+
+function renderChronicle(){
+  const el=document.getElementById('chronicle');
+  el.innerHTML=myths.map(m=>`<div class="chronicle-item"><span>${m.id} — ${m.hero} (${m.chapter}ch)</span><span class="arc-badge">${m.status}</span></div>`).join('')||'<div style="color:#666">No myths yet</div>';
+}
+
+renderPantheon();renderChronicle();
+</script>
+</body>
+</html>
