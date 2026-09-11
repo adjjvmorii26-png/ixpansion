@@ -8,33 +8,34 @@
 :root{--bg:#05050f;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--green:#4ade80;--cyan:#22d3ee;--text:#a0a0b8;--dim:#606078}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;overflow:hidden;height:100vh;user-select:none}
-canvas{display:block;position:absolute;top:0;left:0;width:100%;height:100%}
-#hud{position:fixed;top:16px;left:16px;z-index:2;pointer-events:none;min-width:180px}
-#hud .stat{display:flex;justify-content:space-between;padding:3px 0;font-size:0.72em}
-#hud .stat .k{color:var(--dim)}.hud .stat .v, #hud .stat .v{color:#fff;font-weight:600}
+canvas{display:block;position:absolute;top:0;left:0}
+#hud{position:fixed;top:16px;left:16px;z-index:10;pointer-events:none;min-width:180px;background:rgba(5,5,15,0.7);padding:12px;border-radius:8px;border:1px solid rgba(124,124,248,0.15)}
+#hud .stat{display:flex;justify-content:space-between;padding:2px 0;font-size:0.72em}
+#hud .stat .k{color:var(--dim)}#hud .stat .v{color:#fff;font-weight:600}
 .bar{width:180px;height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;margin:2px 0}
 .bar-fill{height:100%;border-radius:3px;transition:width 0.3s}
-#crosshair{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;pointer-events:none;width:24px;height:24px}
+#crosshair{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;pointer-events:none;width:24px;height:24px}
 #crosshair::before,#crosshair::after{content:'';position:absolute;background:rgba(124,124,248,0.5)}
-#crosshair::before{width:20px;height:2px;top:11px;left:2px}
-#crosshair::after{width:2px;height:20px;left:11px;top:2px}
-#waveHud{position:fixed;top:16px;right:16px;z-index:2;text-align:right;pointer-events:none}
+#crosshair::before{width:18px;height:2px;top:11px;left:3px}
+#crosshair::after{width:2px;height:18px;left:11px;top:3px}
+#waveHud{position:fixed;top:16px;right:16px;z-index:10;text-align:right;pointer-events:none;background:rgba(5,5,15,0.7);padding:12px 16px;border-radius:8px;border:1px solid rgba(124,124,248,0.15)}
 #waveHud h2{color:var(--accent);font-size:1.1em;letter-spacing:3px}
 #waveHud .realm{color:var(--gold);font-size:0.75em;margin-top:4px}
 #waveHud .enemies{color:var(--rose);font-size:0.65em;margin-top:2px}
-#controls{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:2;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+#controls{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
 .btn{background:rgba(5,5,15,0.92);border:1px solid var(--accent);color:var(--accent);padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;transition:all 0.15s}
 .btn:hover,.btn:active{background:rgba(124,124,248,0.2);color:#fff;border-color:var(--teal)}
-#log{position:fixed;bottom:64px;left:16px;z-index:2;max-width:320px;pointer-events:none}
+#log{position:fixed;bottom:64px;left:16px;z-index:10;max-width:320px;pointer-events:none}
 .log-entry{font-size:0.62em;padding:2px 0;opacity:0.9;text-shadow:0 0 4px rgba(0,0,0,0.8)}
 .log-entry.combat{color:var(--rose)}.log-entry.loot{color:var(--gold)}.log-entry.info{color:var(--teal)}.log-entry.dream{color:var(--cyan)}.log-entry.level{color:var(--accent)}
-#minimap{position:fixed;bottom:16px;right:16px;z-index:2;border:1px solid rgba(124,124,248,0.2);border-radius:4px;overflow:hidden}
-#msgOverlay{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;color:var(--accent);font-size:1.8em;letter-spacing:4px;text-shadow:0 0 30px rgba(124,124,248,0.5);pointer-events:none;opacity:0;transition:opacity 0.5s}
+#minimap{position:fixed;bottom:16px;right:16px;z-index:10;border:1px solid rgba(124,124,248,0.2);border-radius:4px;overflow:hidden}
+#msgOverlay{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:20;color:var(--accent);font-size:1.8em;letter-spacing:4px;text-shadow:0 0 30px rgba(124,124,248,0.5);pointer-events:none;opacity:0;transition:opacity 0.5s;text-align:center;white-space:pre-line}
 #msgOverlay.show{opacity:1}
-#inventory{position:fixed;top:50%;right:16px;transform:translateY(-50%);z-index:2;pointer-events:none;opacity:0;transition:opacity 0.3s}
-#inventory.show{opacity:1}
-#inventory .inv-title{color:var(--gold);font-size:0.7em;letter-spacing:2px;margin-bottom:6px}
-#inventory .inv-item{color:var(--text);font-size:0.62em;padding:2px 0}
+#gameOver{position:fixed;top:0;left:0;right:0;bottom:0;z-index:25;background:rgba(5,5,15,0.9);display:none;flex-direction:column;align-items:center;justify-content:center}
+#gameOver.show{display:flex}
+#gameOver h1{color:var(--rose);font-size:2.5em;letter-spacing:6px;margin-bottom:20px}
+#gameOver p{color:var(--dim);font-size:0.85em;margin-bottom:8px}
+#gameOver .btn{margin-top:20px;padding:12px 32px;font-size:0.9em}
 </style>
 </head>
 <body>
@@ -44,7 +45,7 @@ canvas{display:block;position:absolute;top:0;left:0;width:100%;height:100%}
   <div class="bar"><div class="bar-fill" id="hpBar" style="width:100%;background:var(--green)"></div></div>
   <div class="stat"><span class="k">Coherence</span><span class="v" id="cohText">0.80</span></div>
   <div class="bar"><div class="bar-fill" id="cohBar" style="width:80%;background:var(--accent)"></div></div>
-  <div class="stat"><span class="k">Dream</span><span class="v" id="dreamText">0</span></div>
+  <div class="stat"><span class="k">Dream</span><span class="v" id="dreamText">0/100</span></div>
   <div class="bar"><div class="bar-fill" id="dreamBar" style="width:0%;background:var(--cyan)"></div></div>
   <div class="stat"><span class="k">Level</span><span class="v" id="lvlText">1</span></div>
   <div class="stat"><span class="k">ATK</span><span class="v" id="atkText">5</span></div>
@@ -55,28 +56,48 @@ canvas{display:block;position:absolute;top:0;left:0;width:100%;height:100%}
 <div id="crosshair"></div>
 <div id="waveHud"><h2 id="waveTitle">WAVE 1</h2><div class="realm" id="realmName">Entropy Desert</div><div class="enemies" id="enemyCount">3 enemies</div></div>
 <div id="controls">
-  <button class="btn" onclick="G.move()" title="W / ↑">↑ Move</button>
-  <button class="btn" onclick="G.turnL()" title="A / ←">← Left</button>
-  <button class="btn" onclick="G.turnR()" title="D / →">→ Right</button>
-  <button class="btn" onclick="G.attack()" title="Space">⚔ Strike</button>
-  <button class="btn" onclick="G.special()" title="Q">✦ Dream Blast</button>
-  <button class="btn" onclick="G.interact()" title="E">◎ Interact</button>
-  <button class="btn" onclick="G.nextWave()" title="N">→ Next Wave</button>
+  <button class="btn" id="btnMove">↑ Move</button>
+  <button class="btn" id="btnLeft">← Left</button>
+  <button class="btn" id="btnRight">→ Right</button>
+  <button class="btn" id="btnAttack">⚔ Strike</button>
+  <button class="btn" id="btnSpecial">✦ Dream Blast</button>
+  <button class="btn" id="btnInteract">◎ Interact</button>
+  <button class="btn" id="btnWave">→ Next Wave</button>
 </div>
 <div id="log"></div>
-<canvas id="minimap" width="140" height="140"></canvas>
+<canvas id="minimap" width="130" height="130"></canvas>
 <div id="msgOverlay"></div>
-<div id="inventory"><div class="inv-title">◈ INVENTORY</div><div id="invList"></div></div>
+<div id="gameOver">
+  <h1>💀 YOU HAVE FALLEN</h1>
+  <p id="deathStats"></p>
+  <button class="btn" id="btnRestart">↻ Rise Again</button>
+</div>
 
 <script>
 "use strict";
+
+// ═══════════════════════════════════════════
+// CANVAS SETUP
+// ═══════════════════════════════════════════
 const canvas = document.getElementById('c');
 const ctx = canvas.getContext('2d');
 const mmCanvas = document.getElementById('minimap');
 const mmCtx = mmCanvas.getContext('2d');
 
-// ── Constants ──
-const MAP = 32, FOV = Math.PI / 3, DEPTH = 16, STRIP = 2;
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// ═══════════════════════════════════════════
+// CONSTANTS
+// ═══════════════════════════════════════════
+const MAP = 28;
+const FOV = Math.PI / 3;
+const MAX_DEPTH = 16;
+const CELL = 1;
 const REALMS = [
   'Entropy Desert','Dream Gravity Zone','Paradox Garden',
   'Coherence Cathedral','Void Abyss','Temporal Rift',
@@ -84,80 +105,116 @@ const REALMS = [
   'Abyssal Forge','Chrono Spiral','The Underworld'
 ];
 const ENEMY_TYPES = [
-  {name:'Glitch Phantom', color:'#fb7185', glyph:'◉', baseHp:12, baseAtk:2},
-  {name:'Entropy Worm', color:'#c084fc', glyph:'◆', baseHp:18, baseAtk:3},
-  {name:'Paradox Wraith', color:'#fbbf24', glyph:'✦', baseHp:22, baseAtk:4},
-  {name:'Dream Eater', color:'#22d3ee', glyph:'◈', baseHp:30, baseAtk:5},
-  {name:'Void Walker', color:'#a78bfa', glyph:'⬡', baseHp:40, baseAtk:6}
+  {name:'Glitch Phantom', color:'#fb7185', glyph:'◉', hp:12, atk:2, speed:0.02},
+  {name:'Entropy Worm',   color:'#c084fc', glyph:'◆', hp:18, atk:3, speed:0.025},
+  {name:'Paradox Wraith', color:'#fbbf24', glyph:'✦', hp:24, atk:4, speed:0.03},
+  {name:'Dream Eater',    color:'#22d3ee', glyph:'◈', hp:32, atk:5, speed:0.02},
+  {name:'Void Walker',    color:'#a78bfa', glyph:'⬡', hp:45, atk:6, speed:0.035}
 ];
-const ITEMS = [
-  {name:'Coherence Shard', type:'heal', value:20, color:'#2dd4bf', glyph:'◇'},
-  {name:'Entropy Core', type:'buff_atk', value:2, color:'#fbbf24', glyph:'◆'},
-  {name:'Dream Essence', type:'buff_dream', value:0.2, color:'#22d3ee', glyph:'✦'},
-  {name:'Void Crystal', type:'buff_def', value:1, color:'#a78bfa', glyph:'⬡'}
+const ITEM_TYPES = [
+  {name:'Coherence Shard', type:'heal',      value:25, color:'#2dd4bf', glyph:'◇'},
+  {name:'Entropy Core',    type:'buff_atk',   value:2,  color:'#fbbf24', glyph:'◆'},
+  {name:'Dream Essence',   type:'buff_dream', value:0.25,color:'#22d3ee', glyph:'✦'},
+  {name:'Void Crystal',    type:'buff_def',   value:1,  color:'#a78bfa', glyph:'⬡'}
 ];
 const WALL_COLORS = [
-  {r:70,g:70,b:160},{r:50,g:100,b:140},{r:80,g:60,b:120},
-  {r:60,g:80,b:150},{r:45,g:110,b:130}
+  [70,70,160],[50,100,140],[80,60,120],[60,80,150],[45,110,130]
+];
+const REALM_MSGS = [
+  'The desert shifts. Entropy flows like sand.',
+  'Gravity bends. Dreams pull you sideways.',
+  'Paradox blooms in impossible patterns.',
+  'The cathedral hums with coherence.',
+  'Void stretches endlessly. You are being watched.',
+  'Time spirals. The rift opens and closes.',
+  'Mythic shapes emerge from the mist.',
+  'Deep resonance. You feel the organism breathing.',
+  'Mycelial threads connect every surface.',
+  'The forge burns with alien fire.',
+  'The spiral turns inward. You turn with it.',
+  'The underworld remembers everything.'
 ];
 
-// ── State ──
-let map, playerX, playerY, angle, hp, maxHp, atk, def, coherence, dream, dreamMax;
-let level, xp, xpNext, wave, enemies, items, logs, particles;
-let gameOver, paused, keys = {};
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let map, playerX, playerY, angle;
+let hp, maxHp, atk, def, coherence, dream, dreamMax;
+let level, xp, xpNext, wave;
+let enemies, items, logs, particles;
+let gameOver;
 
-function init() {
-  genMap();
-  playerX = MAP/2 + 0.5; playerY = MAP/2 + 0.5; angle = 0;
-  hp = 100; maxHp = 100; atk = 5; def = 2; coherence = 0.8;
-  dream = 0; dreamMax = 100; level = 1; xp = 0; xpNext = 100;
-  wave = 1; enemies = []; items = []; logs = []; particles = [];
-  gameOver = false; paused = false;
-  spawnEnemies(); spawnItems(); updateHUD();
+function initState() {
+  playerX = MAP/2 + 0.5;
+  playerY = MAP/2 + 0.5;
+  angle = 0;
+  hp = 100; maxHp = 100;
+  atk = 5; def = 2;
+  coherence = 0.8;
+  dream = 0; dreamMax = 100;
+  level = 1; xp = 0; xpNext = 100;
+  wave = 1;
+  enemies = []; items = []; logs = []; particles = [];
+  gameOver = false;
 }
 
+// ═══════════════════════════════════════════
+// MAP GENERATION
+// ═══════════════════════════════════════════
 function genMap() {
-  map = Array.from({length: MAP}, () => Array(MAP).fill(0));
-  // Walls border
-  for (let i = 0; i < MAP; i++) { map[0][i] = 1; map[MAP-1][i] = 1; map[i][0] = 1; map[i][MAP-1] = 1; }
+  map = Array.from({length:MAP}, () => new Array(MAP).fill(0));
+  // Border walls
+  for (let i = 0; i < MAP; i++) {
+    map[0][i] = 1; map[MAP-1][i] = 1;
+    map[i][0] = 1; map[i][MAP-1] = 1;
+  }
   // Random rooms
-  for (let r = 0; r < 3 + Math.floor(Math.random()*4); r++) {
-    const rw = 3 + Math.floor(Math.random()*5), rh = 3 + Math.floor(Math.random()*5);
-    const rx = 2 + Math.floor(Math.random()*(MAP-rw-4)), ry = 2 + Math.floor(Math.random()*(MAP-rh-4));
-    for (let y = ry; y < ry+rh; y++) for (let x = rx; x < rx+rw; x++) map[y][x] = 1;
+  for (let r = 0; r < 4 + Math.floor(Math.random()*3); r++) {
+    const rw = 3 + Math.floor(Math.random()*5);
+    const rh = 3 + Math.floor(Math.random()*5);
+    const rx = 2 + Math.floor(Math.random()*(MAP-rw-4));
+    const ry = 2 + Math.floor(Math.random()*(MAP-rh-4));
+    for (let y = ry; y < ry+rh; y++)
+      for (let x = rx; x < rx+rw; x++)
+        map[y][x] = 1 + Math.floor(Math.random()*WALL_COLORS.length);
   }
   // Scatter pillars
-  for (let i = 0; i < 15; i++) {
-    const px = 2 + Math.floor(Math.random()*(MAP-4)), py = 2 + Math.floor(Math.random()*(MAP-4));
-    if (map[py][px] === 0) map[py][px] = 1;
+  for (let i = 0; i < 12; i++) {
+    const px = 2+Math.floor(Math.random()*(MAP-4));
+    const py = 2+Math.floor(Math.random()*(MAP-4));
+    if (map[py][px] === 0) map[py][px] = 1 + Math.floor(Math.random()*WALL_COLORS.length);
   }
-  // Color variation
-  for (let y = 0; y < MAP; y++) for (let x = 0; x < MAP; x++) {
-    if (map[y][x] === 1) map[y][x] = 1 + Math.floor(Math.random() * WALL_COLORS.length);
-  }
-  // Ensure center is clear
-  for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-    const ny = Math.floor(MAP/2)+dy, nx = Math.floor(MAP/2)+dx;
-    if (ny > 0 && ny < MAP-1 && nx > 0 && nx < MAP-1) map[ny][nx] = 0;
-  }
+  // Clear center
+  for (let dy = -1; dy <= 1; dy++)
+    for (let dx = -1; dx <= 1; dx++) {
+      const ny = Math.floor(MAP/2)+dy, nx = Math.floor(MAP/2)+dx;
+      if (ny > 0 && ny < MAP-1 && nx > 0 && nx < MAP-1) map[ny][nx] = 0;
+    }
 }
 
+// ═══════════════════════════════════════════
+// SPAWNING
+// ═══════════════════════════════════════════
 function spawnEnemies() {
   enemies = [];
-  const count = 2 + Math.floor(Math.random()*3) + Math.floor(wave*0.5);
+  const count = 2 + Math.floor(Math.random()*3) + Math.floor(wave*0.4);
+  const tier = Math.min(Math.floor((wave-1)/3), ENEMY_TYPES.length-1);
+  const scale = 1 + (wave-1)*0.15;
   for (let i = 0; i < count; i++) {
     let ex, ey, tries = 0;
-    do { ex = 2+Math.floor(Math.random()*(MAP-4)); ey = 2+Math.floor(Math.random()*(MAP-4)); tries++; }
-    while ((map[ey][ex] !== 0 || dist(ex,ey,playerX,playerY) < 5) && tries < 100);
-    if (tries >= 100) continue;
-    const tier = Math.min(Math.floor(wave/3), ENEMY_TYPES.length-1);
+    do {
+      ex = 1.5+Math.random()*(MAP-3);
+      ey = 1.5+Math.random()*(MAP-3);
+      tries++;
+    } while ((map[Math.floor(ey)][Math.floor(ex)] !== 0 || dist(ex,ey,playerX,playerY) < 5) && tries < 200);
+    if (tries >= 200) continue;
     const t = ENEMY_TYPES[tier];
-    const scale = 1 + wave*0.12;
     enemies.push({
-      x: ex+0.5, y: ey+0.5,
-      hp: Math.floor(t.baseHp * scale), maxHp: Math.floor(t.baseHp * scale),
-      atk: Math.floor(t.baseAtk * scale), color: t.color, glyph: t.glyph, name: t.name,
-      speed: 0.02 + Math.random()*0.015
+      x:ex, y:ey,
+      hp:Math.floor(t.hp*scale), maxHp:Math.floor(t.hp*scale),
+      atk:Math.floor(t.atk*scale),
+      color:t.color, glyph:t.glyph, name:t.name,
+      speed:t.speed + Math.random()*0.01
     });
   }
 }
@@ -167,146 +224,181 @@ function spawnItems() {
   const count = 2 + Math.floor(Math.random()*3);
   for (let i = 0; i < count; i++) {
     let ix, iy, tries = 0;
-    do { ix = 2+Math.floor(Math.random()*(MAP-4)); iy = 2+Math.floor(Math.random()*(MAP-4)); tries++; }
-    while ((map[iy][ix] !== 0 || dist(ix,iy,playerX,playerY) < 3) && tries < 100);
-    if (tries >= 100) continue;
-    const t = ITEMS[Math.floor(Math.random()*ITEMS.length)];
-    items.push({x: ix+0.5, y: iy+0.5, ...t, alive: true});
+    do {
+      ix = 1.5+Math.random()*(MAP-3);
+      iy = 1.5+Math.random()*(MAP-3);
+      tries++;
+    } while ((map[Math.floor(iy)][Math.floor(ix)] !== 0 || dist(ix,iy,playerX,playerY) < 3) && tries < 200);
+    if (tries >= 200) continue;
+    const t = ITEM_TYPES[Math.floor(Math.random()*ITEM_TYPES.length)];
+    items.push({x:ix, y:iy, ...t, alive:true});
   }
 }
 
-function dist(x1,y1,x2,y2) { return Math.sqrt((x1-x2)**2+(y1-y2)**2); }
+// ═══════════════════════════════════════════
+// UTILITY
+// ═══════════════════════════════════════════
+function dst(x1,y1,x2,y2) { return Math.sqrt((x1-x2)**2 + (y1-y2)**2); }
 
-// ── Raycaster ──
+// ═══════════════════════════════════════════
+// RAYCASTER
+// ═══════════════════════════════════════════
 function render() {
   const W = canvas.width, H = canvas.height;
-  ctx.fillStyle = '#05050f';
-  ctx.fillRect(0, 0, W, H);
 
-  // Sky gradient
-  const skyGrad = ctx.createLinearGradient(0, 0, 0, H/2);
-  const realmIdx = wave % REALMS.length;
-  const skyColors = ['#0a0a1a','#0d0820','#060612','#080818','#0a0015','#050510','#0c0820','#080018'];
-  skyGrad.addColorStop(0, skyColors[realmIdx] || '#0a0a1a');
+  // Sky
+  const skyGrad = ctx.createLinearGradient(0,0,0,H/2);
+  skyGrad.addColorStop(0, '#0a0a1a');
   skyGrad.addColorStop(1, '#05050f');
   ctx.fillStyle = skyGrad;
-  ctx.fillRect(0, 0, W, H/2);
+  ctx.fillRect(0,0,W,H/2);
 
-  // Floor gradient
-  const floorGrad = ctx.createLinearGradient(0, H/2, 0, H);
+  // Floor
+  const floorGrad = ctx.createLinearGradient(0,H/2,0,H);
   floorGrad.addColorStop(0, '#05050f');
-  floorGrad.addColorStop(1, '#080812');
+  floorGrad.addColorStop(1, '#0a0a14');
   ctx.fillStyle = floorGrad;
-  ctx.fillRect(0, H/2, W, H/2);
+  ctx.fillRect(0,H/2,W,H/2);
 
-  const numRays = Math.ceil(W / STRIP);
-  const zBuffer = [];
+  const numRays = Math.ceil(W / 2);
 
   for (let i = 0; i < numRays; i++) {
     const rayAngle = angle - FOV/2 + (i/numRays)*FOV;
-    const sin = Math.sin(rayAngle), cos = Math.cos(rayAngle);
-    let dist = 0, hit = false, wallType = 0;
+    const rayDirX = Math.cos(rayAngle);
+    const rayDirY = Math.sin(rayAngle);
 
-    while (dist < DEPTH) {
-      dist += 0.05;
-      const mx = Math.floor(playerX + cos*dist);
-      const my = Math.floor(playerY + sin*dist);
-      if (mx < 0 || mx >= MAP || my < 0 || my >= MAP) { hit = true; wallType = 1; break; }
-      if (map[my][mx] > 0) { hit = true; wallType = map[my][mx]; break; }
+    // DDA raycast
+    let mapX = Math.floor(playerX);
+    let mapY = Math.floor(playerY);
+    const deltaDistX = Math.abs(1 / (rayDirX || 0.0001));
+    const deltaDistY = Math.abs(1 / (rayDirY || 0.0001));
+    let stepX, stepY, sideDistX, sideDistY;
+
+    if (rayDirX < 0) { stepX = -1; sideDistX = (playerX - mapX) * deltaDistX; }
+    else { stepX = 1; sideDistX = (mapX + 1 - playerX) * deltaDistX; }
+    if (rayDirY < 0) { stepY = -1; sideDistY = (playerY - mapY) * deltaDistY; }
+    else { stepY = 1; sideDistY = (mapY + 1 - playerY) * deltaDistY; }
+
+    let hit = false, side = 0, wallVal = 0;
+    for (let step = 0; step < 40; step++) {
+      if (sideDistX < sideDistY) {
+        sideDistX += deltaDistX; mapX += stepX; side = 0;
+      } else {
+        sideDistY += deltaDistY; mapY += stepY; side = 1;
+      }
+      if (mapX < 0 || mapX >= MAP || mapY < 0 || mapY >= MAP) break;
+      if (map[mapY][mapX] > 0) { hit = true; wallVal = map[mapY][mapX]; break; }
     }
 
-    const corrected = dist * Math.cos(rayAngle - angle);
-    zBuffer[i] = corrected;
-    const wallH = Math.min(H*2, H / (corrected + 0.001) * 0.6);
-    const wallY = (H - wallH) / 2;
+    let perpDist;
+    if (hit) {
+      if (side === 0) perpDist = (mapX - playerX + (1-stepX)/2) / (rayDirX || 0.0001);
+      else perpDist = (mapY - playerY + (1-stepY)/2) / (rayDirY || 0.0001);
+    } else {
+      perpDist = MAX_DEPTH;
+    }
+
+    perpDist = Math.max(perpDist, 0.001);
+    const corrected = perpDist * Math.cos(rayAngle - angle);
+    const lineH = Math.min(H * 2, H / corrected * 0.5);
+    const lineY = (H - lineH) / 2;
 
     if (hit) {
-      const wc = WALL_COLORS[(wallType - 1) % WALL_COLORS.length];
-      const bright = Math.max(0.15, 1 - corrected/DEPTH);
-      const fog = Math.pow(bright, 0.8);
-      const r = Math.floor(wc.r * fog), g = Math.floor(wc.g * fog), b = Math.floor(wc.b * fog);
-      // Wall strip with edge highlight
+      const wc = WALL_COLORS[(wallVal - 1) % WALL_COLORS.length];
+      const bright = Math.max(0.15, 1 - corrected/MAX_DEPTH);
+      const fog = Math.pow(bright, 0.85);
+      // Side darkening
+      const sideMod = side === 1 ? 0.7 : 1.0;
+      const r = Math.floor(wc[0] * fog * sideMod);
+      const g = Math.floor(wc[1] * fog * sideMod);
+      const b = Math.floor(wc[2] * fog * sideMod);
+
       ctx.fillStyle = `rgb(${r},${g},${b})`;
-      ctx.fillRect(i*STRIP, wallY, STRIP, wallH);
-      // Edge darkening for depth
-      ctx.fillStyle = `rgba(0,0,0,${0.1 + corrected*0.03})`;
-      ctx.fillRect(i*STRIP, wallY, STRIP, wallH * 0.15);
-      ctx.fillRect(i*STRIP, wallY + wallH*0.85, STRIP, wallH * 0.15);
+      ctx.fillRect(i*2, Math.max(0,lineY), 2, Math.min(lineH, H));
+
+      // Top/bottom edge highlight
+      ctx.fillStyle = `rgba(124,124,248,${0.05*fog})`;
+      ctx.fillRect(i*2, Math.max(0,lineY), 2, 2);
+      ctx.fillRect(i*2, Math.min(H-1, lineY+lineH-2), 2, 2);
     }
   }
 
-  // ── Render Items ──
-  items.forEach(item => {
-    if (!item.alive) return;
+  // ── Items ──
+  const sortedItems = [...items].filter(it => it.alive).sort((a,b) => dst(b.x,b.y,playerX,playerY) - dst(a.x,a.y,playerX,playerY));
+  sortedItems.forEach(item => {
     const dx = item.x - playerX, dy = item.y - playerY;
-    const d = Math.sqrt(dx*dx+dy*dy);
-    if (d > DEPTH) return;
+    const d = Math.sqrt(dx*dx + dy*dy);
+    if (d > MAX_DEPTH || d < 0.3) return;
     const ang = Math.atan2(dy, dx) - angle;
-    if (Math.abs(ang) > FOV/2) return;
-    const sx = W/2 + (ang/FOV)*W;
-    const sh = Math.min(H, H/d*0.35);
-    const sy = H/2 + sh*0.15;
-    // Glow
+    // Wrap angle
+    let wrapAng = ang;
+    if (wrapAng > Math.PI) wrapAng -= Math.PI*2;
+    if (wrapAng < -Math.PI) wrapAng += Math.PI*2;
+    if (Math.abs(wrapAng) > FOV*0.6) return;
+    const sx = W/2 + (wrapAng/FOV)*W;
+    const sh = Math.min(H*0.4, H/d*0.3);
+    const sy = H/2 + sh*0.1;
+    const pulse = 0.6 + 0.4*Math.sin(Date.now()*0.004 + item.x*3);
     ctx.save();
-    ctx.globalAlpha = 0.3 + 0.2*Math.sin(Date.now()*0.005);
+    ctx.globalAlpha = pulse;
     ctx.shadowColor = item.color;
-    ctx.shadowBlur = 12;
+    ctx.shadowBlur = 16;
     ctx.fillStyle = item.color;
-    ctx.font = `${Math.floor(sh*0.6)}px monospace`;
+    ctx.font = `${Math.floor(sh*0.7)}px monospace`;
     ctx.textAlign = 'center';
     ctx.fillText(item.glyph, sx, sy);
-    ctx.shadowBlur = 0;
     ctx.restore();
   });
 
-  // ── Render Enemies ──
-  const sortedEnemies = [...enemies].sort((a,b) => {
-    const da = dist(a.x,a.y,playerX,playerY);
-    const db = dist(b.x,b.y,playerX,playerY);
-    return db - da;
-  });
-
-  sortedEnemies.forEach(e => {
+  // ── Enemies (sorted far→near for painter's algo) ──
+  const sorted = [...enemies].sort((a,b) => dst(b.x,b.y,playerX,playerY) - dst(a.x,a.y,playerX,playerY));
+  sorted.forEach(e => {
     const dx = e.x - playerX, dy = e.y - playerY;
-    const d = Math.sqrt(dx*dx+dy*dy);
-    if (d > DEPTH) return;
+    const d = Math.sqrt(dx*dx + dy*dy);
+    if (d > MAX_DEPTH || d < 0.3) return;
     const ang = Math.atan2(dy, dx) - angle;
-    if (Math.abs(ang) > FOV*0.7) return;
-    const sx = W/2 + (ang/FOV)*W;
-    const sh = Math.min(H*0.6, H/d*0.45);
-    const sy = H/2 + sh*0.05;
-    const sw = sh*0.5;
+    let wrapAng = ang;
+    if (wrapAng > Math.PI) wrapAng -= Math.PI*2;
+    if (wrapAng < -Math.PI) wrapAng += Math.PI*2;
+    if (Math.abs(wrapAng) > FOV*0.6) return;
 
-    // Glow aura
+    const sx = W/2 + (wrapAng/FOV)*W;
+    const sh = Math.min(H*0.55, H/d*0.4);
+    const sy = H/2 - sh*0.15;
+    const sw = sh*0.5;
+    const hpPct = e.hp / e.maxHp;
+
+    // Glow
     ctx.save();
-    ctx.globalAlpha = 0.15 + 0.1*Math.sin(Date.now()*0.003 + e.x);
+    ctx.globalAlpha = 0.12 + 0.08*Math.sin(Date.now()*0.003 + e.x);
     ctx.shadowColor = e.color;
-    ctx.shadowBlur = 20;
+    ctx.shadowBlur = 24;
     ctx.fillStyle = e.color;
     ctx.fillRect(sx-sw/2, sy, sw, sh);
-    ctx.shadowBlur = 0;
 
     // Body
-    const hpPct = e.hp / e.maxHp;
-    ctx.globalAlpha = 0.8 + 0.2*hpPct;
+    ctx.globalAlpha = 0.85;
+    ctx.shadowBlur = 0;
     ctx.fillStyle = e.color;
-    ctx.fillRect(sx-sw*0.3, sy+sh*0.15, sw*0.6, sh*0.7);
+    ctx.fillRect(sx-sw*0.35, sy+sh*0.1, sw*0.7, sh*0.75);
 
     // Glyph
     ctx.globalAlpha = 1;
     ctx.fillStyle = '#fff';
-    ctx.font = `${Math.floor(sh*0.35)}px monospace`;
+    ctx.font = `bold ${Math.floor(sh*0.3)}px monospace`;
     ctx.textAlign = 'center';
     ctx.fillText(e.glyph, sx, sy+sh*0.55);
 
-    // Name + HP bar
-    ctx.fillStyle = '#fff8';
-    ctx.font = `${Math.max(9, Math.floor(sh*0.1))}px monospace`;
-    ctx.fillText(e.name, sx, sy - 10);
+    // Name
+    ctx.fillStyle = '#fff9';
+    ctx.font = `${Math.max(9,Math.floor(sh*0.09))}px monospace`;
+    ctx.fillText(e.name, sx, sy-10);
+
+    // HP bar
     ctx.fillStyle = 'rgba(255,255,255,0.15)';
-    ctx.fillRect(sx-sw*0.35, sy - 7, sw*0.7, 4);
+    ctx.fillRect(sx-sw*0.4, sy-7, sw*0.8, 4);
     ctx.fillStyle = hpPct > 0.5 ? '#4ade80' : hpPct > 0.25 ? '#fbbf24' : '#fb7185';
-    ctx.fillRect(sx-sw*0.35, sy - 7, sw*0.7*hpPct, 4);
+    ctx.fillRect(sx-sw*0.4, sy-7, sw*0.8*hpPct, 4);
 
     ctx.restore();
   });
@@ -329,12 +421,16 @@ function render() {
 }
 
 function renderMinimap() {
-  const mw = 140, mh = 140, cs = mw/MAP;
+  const mw = 130, mh = 130, cs = mw/MAP;
   mmCtx.fillStyle = '#0a0a18';
-  mmCtx.fillRect(0, 0, mw, mh);
-  for (let y = 0; y < MAP; y++) for (let x = 0; x < MAP; x++) {
-    if (map[y][x] > 0) { mmCtx.fillStyle = 'rgba(124,124,248,0.3)'; mmCtx.fillRect(x*cs, y*cs, cs, cs); }
-  }
+  mmCtx.fillRect(0,0,mw,mh);
+  // Walls
+  for (let y = 0; y < MAP; y++)
+    for (let x = 0; x < MAP; x++)
+      if (map[y][x] > 0) {
+        mmCtx.fillStyle = 'rgba(124,124,248,0.3)';
+        mmCtx.fillRect(x*cs, y*cs, cs, cs);
+      }
   // Items
   items.forEach(it => {
     if (!it.alive) return;
@@ -344,40 +440,42 @@ function renderMinimap() {
   // Enemies
   enemies.forEach(e => {
     mmCtx.fillStyle = e.color;
-    mmCtx.beginPath(); mmCtx.arc(e.x*cs, e.y*cs, 2.5, 0, Math.PI*2); mmCtx.fill();
+    mmCtx.beginPath();
+    mmCtx.arc(e.x*cs, e.y*cs, 2.5, 0, Math.PI*2);
+    mmCtx.fill();
   });
   // Player
-  mmCtx.fillStyle = var_accent();
-  mmCtx.beginPath(); mmCtx.arc(playerX*cs, playerY*cs, 3, 0, Math.PI*2); mmCtx.fill();
-  // Player direction
-  mmCtx.strokeStyle = var_accent();
-  mmCtx.lineWidth = 1;
+  mmCtx.fillStyle = '#7c7cf8';
+  mmCtx.beginPath();
+  mmCtx.arc(playerX*cs, playerY*cs, 3, 0, Math.PI*2);
+  mmCtx.fill();
+  // Direction line
+  mmCtx.strokeStyle = '#7c7cf8';
+  mmCtx.lineWidth = 1.5;
   mmCtx.beginPath();
   mmCtx.moveTo(playerX*cs, playerY*cs);
-  mmCtx.lineTo(playerX*cs + Math.cos(angle)*12, playerY*cs + Math.sin(angle)*12);
+  mmCtx.lineTo(playerX*cs + Math.cos(angle)*14, playerY*cs + Math.sin(angle)*14);
   mmCtx.stroke();
 }
 
-function var_accent() { return '#7c7cf8'; }
-
-// ── Game Logic ──
-function move() {
+// ═══════════════════════════════════════════
+// GAME LOGIC
+// ═══════════════════════════════════════════
+function movePlayer() {
   if (gameOver) return;
   const nx = playerX + Math.cos(angle)*0.5;
   const ny = playerY + Math.sin(angle)*0.5;
   const mx = Math.floor(nx), my = Math.floor(ny);
   if (mx >= 0 && mx < MAP && my >= 0 && my < MAP && map[my][mx] === 0) {
-    // Check enemy collision
     const enemy = enemies.find(e => Math.abs(e.x-nx) < 0.8 && Math.abs(e.y-ny) < 0.8);
     if (enemy) { attack(); return; }
     playerX = nx; playerY = ny;
-    // Auto-pickup items
+    // Auto-pickup
     items.forEach(it => {
       if (!it.alive) return;
-      if (dist(it.x, it.y, playerX, playerY) < 0.8) {
+      if (dst(it.x,it.y,playerX,playerY) < 0.8) {
         it.alive = false;
         applyItem(it);
-        addLog('loot', `Picked up ${it.name}!`);
       }
     });
   }
@@ -385,21 +483,23 @@ function move() {
   updateHUD();
 }
 
-function turnL() { angle -= Math.PI/6; }
-function turnR() { angle += Math.PI/6; }
+function turnLeft() { angle -= Math.PI/6; }
+function turnRight() { angle += Math.PI/6; }
 
 function attack() {
   if (gameOver) return;
-  let hit = false;
+  let hitAny = false;
+  const toRemove = [];
   enemies.forEach(e => {
-    const d = dist(e.x, e.y, playerX, playerY);
+    const d = dst(e.x,e.y,playerX,playerY);
     if (d < 2.0) {
       const dmg = Math.max(1, atk + Math.floor(Math.random()*3) - 1);
       e.hp -= dmg;
-      hit = true;
+      hitAny = true;
       addLog('combat', `You strike ${e.name} for ${dmg}!`);
-      spawnParticles(e.x, e.y, e.color, 8);
+      spawnParticles(e.x,e.y,e.color,8);
       if (e.hp <= 0) {
+        toRemove.push(e);
         const xpGain = 20 + wave*5 + Math.floor(Math.random()*10);
         xp += xpGain;
         addLog('loot', `${e.name} defeated! +${xpGain} XP`);
@@ -408,29 +508,37 @@ function attack() {
       }
     }
   });
-  enemies = enemies.filter(e => e.hp > 0);
-  if (!hit) addLog('info', 'Nothing in range...');
+  enemies = enemies.filter(e => !toRemove.includes(e));
+  if (!hitAny) addLog('info', 'Nothing in range...');
   enemyTurn();
   updateHUD();
 }
 
 function special() {
   if (gameOver) return;
-  if (dream < 20) { addLog('info', 'Not enough dream energy (need 20)'); return; }
+  if (dream < 20) { addLog('info', 'Need 20 dream energy'); return; }
   dream -= 20;
   let total = 0;
+  const toRemove = [];
   enemies.forEach(e => {
-    const d = dist(e.x, e.y, playerX, playerY);
-    if (d < DEPTH) {
+    const d = dst(e.x,e.y,playerX,playerY);
+    if (d < MAX_DEPTH) {
       const dmg = Math.floor(atk * 2.5);
       e.hp -= dmg;
       total += dmg;
-      spawnParticles(e.x, e.y, '#22d3ee', 12);
+      spawnParticles(e.x,e.y,'#22d3ee',12);
+      if (e.hp <= 0) toRemove.push(e);
     }
   });
-  enemies = enemies.filter(e => e.hp > 0);
-  addLog('dream', `✦ Dream Blast! ${total} damage to all enemies!`);
-  spawnParticles(playerX, playerY, '#22d3ee', 20);
+  enemies = enemies.filter(e => !toRemove.includes(e));
+  toRemove.forEach(e => {
+    const xpGain = 20 + wave*5;
+    xp += xpGain;
+    addLog('loot', `${e.name} destroyed! +${xpGain} XP`);
+    dream = Math.min(dreamMax, dream + 3);
+  });
+  checkLevelUp();
+  addLog('dream', `✦ Dream Blast! ${total} damage!`);
   coherence = Math.min(1, coherence + 0.05);
   enemyTurn();
   updateHUD();
@@ -440,10 +548,9 @@ function interact() {
   if (gameOver) return;
   items.forEach(it => {
     if (!it.alive) return;
-    if (dist(it.x, it.y, playerX, playerY) < 1.5) {
+    if (dst(it.x,it.y,playerX,playerY) < 1.5) {
       it.alive = false;
       applyItem(it);
-      addLog('loot', `Activated ${it.name}!`);
     }
   });
   updateHUD();
@@ -451,15 +558,27 @@ function interact() {
 
 function applyItem(it) {
   switch(it.type) {
-    case 'heal': hp = Math.min(maxHp, hp + it.value); addLog('info', `+${it.value} HP`); break;
-    case 'buff_atk': atk += it.value; addLog('level', `+${it.value} ATK`); break;
-    case 'buff_def': def += it.value; addLog('level', `+${it.value} DEF`); break;
-    case 'buff_dream': dream = Math.min(dreamMax, dream + it.value*dreamMax); addLog('dream', `+${Math.floor(it.value*100)}% Dream`); break;
+    case 'heal':
+      hp = Math.min(maxHp, hp + it.value);
+      addLog('info', `+${it.value} HP — ${it.name}`);
+      break;
+    case 'buff_atk':
+      atk += it.value;
+      addLog('level', `+${it.value} ATK — ${it.name}`);
+      break;
+    case 'buff_def':
+      def += it.value;
+      addLog('level', `+${it.value} DEF — ${it.name}`);
+      break;
+    case 'buff_dream':
+      dream = Math.min(dreamMax, dream + it.value*dreamMax);
+      addLog('dream', `Dream surge — ${it.name}`);
+      break;
   }
 }
 
-function nextWave() {
-  if (gameOver) { init(); return; }
+function nextWaveAction() {
+  if (gameOver) { startGame(); return; }
   wave++;
   genMap();
   playerX = MAP/2 + 0.5; playerY = MAP/2 + 0.5;
@@ -467,23 +586,8 @@ function nextWave() {
   dream = Math.min(dreamMax, dream + 15);
   spawnEnemies();
   spawnItems();
-  const realmMsgs = [
-    'The desert shifts beneath you. Entropy flows like sand.',
-    'Gravity bends. Dreams pull you sideways.',
-    'Paradox blooms in impossible patterns.',
-    'The cathedral hums with coherence.',
-    'Void stretches endlessly. You are being watched.',
-    'Time spirals. The rift opens and closes.',
-    'Mythic shapes emerge from the mist.',
-    'Deep resonance. You feel the organism breathing.',
-    'Mycelial threads connect every surface.',
-    'The forge burns with alien fire.',
-    'The spiral turns inward. You turn with it.',
-    'The underworld remembers everything.'
-  ];
-  const rm = realmMsgs[wave % realmMsgs.length];
   addLog('dream', `═══ WAVE ${wave} ═══ ${REALMS[wave % REALMS.length]}`);
-  addLog('info', rm);
+  addLog('info', REALM_MSGS[wave % REALM_MSGS.length]);
   showMessage(`WAVE ${wave}\n${REALMS[wave % REALMS.length]}`);
   updateHUD();
 }
@@ -491,22 +595,26 @@ function nextWave() {
 function enemyTurn() {
   enemies.forEach(e => {
     if (gameOver) return;
-    const d = dist(e.x, e.y, playerX, playerY);
+    const d = dst(e.x,e.y,playerX,playerY);
     if (d < 1.2) {
       const dmg = Math.max(1, e.atk - def + Math.floor(Math.random()*2));
       hp -= dmg;
       addLog('combat', `${e.name} hits you for ${dmg}!`);
-      spawnParticles(playerX, playerY, '#fb7185', 6);
-      if (hp <= 0) { hp = 0; gameOver = true; addLog('combat', '💀 YOU HAVE FALLEN. Press N to restart.'); }
+      spawnParticles(playerX,playerY,'#fb7185',6);
+      if (hp <= 0) {
+        hp = 0;
+        gameOver = true;
+        addLog('combat', '💀 YOU HAVE FALLEN');
+        showGameOver();
+      }
     } else if (d < 8) {
-      const mx = (playerX - e.x) / d * e.speed;
-      const my = (playerY - e.y) / d * e.speed;
+      const mx = (playerX - e.x)/d * e.speed;
+      const my = (playerY - e.y)/d * e.speed;
       const nx = e.x + mx, ny = e.y + my;
       if (nx > 1 && nx < MAP-1 && ny > 1 && ny < MAP-1 && map[Math.floor(ny)][Math.floor(nx)] === 0) {
         e.x = nx; e.y = ny;
       }
     }
-    // Drift dream in proximity
     if (d < 3) dream = Math.max(0, dream - 0.5);
   });
 }
@@ -515,24 +623,34 @@ function checkLevelUp() {
   while (xp >= xpNext) {
     xp -= xpNext; level++;
     xpNext = Math.floor(xpNext * 1.5);
-    maxHp += 12; hp = maxHp; atk += 2; def += 1;
+    maxHp += 12; hp = maxHp;
+    atk += 2; def += 1;
     dreamMax += 10;
-    addLog('level', `★ LEVEL ${level}! HP/ATK/DEF increased!`);
+    addLog('level', `★ LEVEL ${level}! All stats increased!`);
     showMessage(`LEVEL ${level}`);
   }
 }
 
-function spawnParticles(wx, wy, color, count) {
-  const sx = canvas.width/2, sy = canvas.height/2;
+// ═══════════════════════════════════════════
+// PARTICLES
+// ═══════════════════════════════════════════
+function spawnParticles(wx,wy,color,count) {
+  // Convert world pos to screen pos
+  const dx = wx - playerX, dy = wy - playerY;
+  const d = Math.sqrt(dx*dx + dy*dy);
+  const ang = Math.atan2(dy, dx) - angle;
+  const W = canvas.width, H = canvas.height;
+  const sx = W/2 + (ang/FOV)*W * (Math.abs(ang) < FOV/2 ? 1 : 0);
+  const sy = H/2;
   for (let i = 0; i < count; i++) {
-    const ang = Math.random()*Math.PI*2;
-    const spd = 0.5 + Math.random()*2;
+    const a = Math.random()*Math.PI*2;
+    const spd = 0.5 + Math.random()*3;
     particles.push({
-      x: sx + (Math.random()-0.5)*100,
-      y: sy + (Math.random()-0.5)*100,
-      vx: Math.cos(ang)*spd, vy: Math.sin(ang)*spd,
-      life: 1, decay: 0.02 + Math.random()*0.02,
-      color, size: 2 + Math.random()*3
+      x: sx + (Math.random()-0.5)*40,
+      y: sy + (Math.random()-0.5)*40,
+      vx: Math.cos(a)*spd, vy: Math.sin(a)*spd,
+      life:1, decay:0.015+Math.random()*0.02,
+      color, size:2+Math.random()*3
     });
   }
 }
@@ -542,37 +660,43 @@ function updateParticles() {
   particles = particles.filter(p => p.life > 0);
 }
 
+// ═══════════════════════════════════════════
+// UI
+// ═══════════════════════════════════════════
 function addLog(type, msg) {
-  logs.unshift({type, msg, time: Date.now()});
+  logs.unshift({type, msg});
   if (logs.length > 20) logs.pop();
-  document.getElementById('log').innerHTML = logs.slice(0, 8).map(l => `<div class="log-entry ${l.type}">${l.msg}</div>`).join('');
+  document.getElementById('log').innerHTML = logs.slice(0,8).map(l =>
+    `<div class="log-entry ${l.type}">${l.msg}</div>`
+  ).join('');
 }
 
 function updateHUD() {
-  document.getElementById('hpText').textContent = `${hp}/${maxHp}`;
-  document.getElementById('hpBar').style.width = `${(hp/maxHp)*100}%`;
+  document.getElementById('hpText').textContent = `${Math.max(0,hp)}/${maxHp}`;
+  document.getElementById('hpBar').style.width = `${Math.max(0,hp/maxHp*100)}%`;
   document.getElementById('cohText').textContent = coherence.toFixed(2);
   document.getElementById('cohBar').style.width = `${coherence*100}%`;
   document.getElementById('dreamText').textContent = `${Math.floor(dream)}/${dreamMax}`;
-  document.getElementById('dreamBar').style.width = `${(dream/dreamMax)*100}%`;
+  document.getElementById('dreamBar').style.width = `${dream/dreamMax*100}%`;
   document.getElementById('lvlText').textContent = level;
   document.getElementById('atkText').textContent = atk;
   document.getElementById('defText').textContent = def;
   document.getElementById('xpText').textContent = `${xp}/${xpNext}`;
-  // Organism mood based on game state
-  let mood = 'Dormant';
-  if (coherence > 0.9) mood = 'Blissful';
-  else if (coherence > 0.7) mood = 'Content';
-  else if (coherence > 0.5) mood = 'Alert';
-  else if (coherence > 0.3) mood = 'Uneasy';
-  else if (hp < maxHp * 0.3) mood = 'Desperate';
-  else if (enemies.length > 5) mood = 'Threatened';
-  else if (wave > 5) mood = 'Exalted';
-  else if (dream > dreamMax * 0.8) mood = 'Dreaming';
-  document.getElementById('moodText').textContent = mood;
   document.getElementById('waveTitle').textContent = `WAVE ${wave}`;
   document.getElementById('realmName').textContent = REALMS[wave % REALMS.length];
   document.getElementById('enemyCount').textContent = `${enemies.length} enemies alive`;
+  // Mood
+  let mood = 'Dormant';
+  if (gameOver) mood = 'Shattered';
+  else if (coherence > 0.9) mood = 'Blissful';
+  else if (coherence > 0.7) mood = 'Content';
+  else if (hp < maxHp*0.3) mood = 'Desperate';
+  else if (enemies.length > 5) mood = 'Threatened';
+  else if (coherence > 0.5) mood = 'Alert';
+  else if (wave > 5) mood = 'Exalted';
+  else if (dream > dreamMax*0.8) mood = 'Dreaming';
+  else if (coherence > 0.3) mood = 'Uneasy';
+  document.getElementById('moodText').textContent = mood;
 }
 
 function showMessage(msg) {
@@ -582,36 +706,65 @@ function showMessage(msg) {
   setTimeout(() => el.classList.remove('show'), 2000);
 }
 
-// ── Game Loop ──
+function showGameOver() {
+  document.getElementById('deathStats').textContent =
+    `Wave ${wave} · Level ${level} · ${REALMS[wave%REALMS.length]}`;
+  document.getElementById('gameOver').classList.add('show');
+}
+
+function startGame() {
+  document.getElementById('gameOver').classList.remove('show');
+  initState();
+  genMap();
+  spawnEnemies();
+  spawnItems();
+  addLog('info', '═══ LUCID MACHINES ═══');
+  addLog('info', 'A game where the world dreams you back');
+  addLog('info', 'WASD/Arrows · Space: attack · Q: dream blast · E: interact');
+  updateHUD();
+}
+
+// ═══════════════════════════════════════════
+// GAME LOOP
+// ═══════════════════════════════════════════
 function gameLoop() {
   updateParticles();
   render();
   requestAnimationFrame(gameLoop);
 }
 
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-
-// ── Input ──
+// ═══════════════════════════════════════════
+// INPUT — Keyboard
+// ═══════════════════════════════════════════
 document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') move();
-  if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') turnL();
-  if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') turnR();
-  if (e.key === ' ') { e.preventDefault(); attack(); }
-  if (e.key === 'q' || e.key === 'Q') special();
-  if (e.key === 'e' || e.key === 'E') interact();
-  if (e.key === 'n' || e.key === 'N') nextWave();
+  if (gameOver && e.key !== 'n' && e.key !== 'N') return;
+  switch(e.key) {
+    case 'ArrowUp': case 'w': case 'W': movePlayer(); break;
+    case 'ArrowLeft': case 'a': case 'A': turnLeft(); updateHUD(); break;
+    case 'ArrowRight': case 'd': case 'D': turnRight(); updateHUD(); break;
+    case ' ': e.preventDefault(); attack(); break;
+    case 'q': case 'Q': special(); break;
+    case 'e': case 'E': interact(); break;
+    case 'n': case 'N': nextWaveAction(); break;
+  }
 });
 
-window.addEventListener('resize', resize);
+// ═══════════════════════════════════════════
+// INPUT — Touch/Click buttons
+// ═══════════════════════════════════════════
+document.getElementById('btnMove').addEventListener('click', movePlayer);
+document.getElementById('btnLeft').addEventListener('click', () => { turnLeft(); updateHUD(); });
+document.getElementById('btnRight').addEventListener('click', () => { turnRight(); updateHUD(); });
+document.getElementById('btnAttack').addEventListener('click', attack);
+document.getElementById('btnSpecial').addEventListener('click', special);
+document.getElementById('btnInteract').addEventListener('click', interact);
+document.getElementById('btnWave').addEventListener('click', nextWaveAction);
+document.getElementById('btnRestart').addEventListener('click', startGame);
 
-// ── Start ──
-resize();
-init();
-addLog('info', '═ LUCID MACHINES ═ A game where the world dreams you back');
-addLog('info', 'WASD/Arrows: move · Space: attack · Q: dream blast · E: interact');
+// ═══════════════════════════════════════════
+// START
+// ═══════════════════════════════════════════
+startGame();
 gameLoop();
 </script>
 </body>
