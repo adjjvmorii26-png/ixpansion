@@ -83,7 +83,11 @@ class EvolutionTracker:
         return patterns
     
     def get_lineage_tree(self, root_module: str) -> Dict[str, Any]:
+        visited = set()
         def build(node_id: str) -> Dict[str, Any]:
+            if node_id in visited:
+                return {"module_id": node_id, "children": [], "history_length": len(self.snapshots.get(node_id, [])), "circular": True}
+            visited.add(node_id)
             children = self.lineage_graph.get(node_id, [])
             return {
                 "module_id": node_id,
