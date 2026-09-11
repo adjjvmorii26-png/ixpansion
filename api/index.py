@@ -1720,7 +1720,59 @@ def handler(request) -> dict:
     return _call(method, path, body)
 
 
-app = application
+    # Wave 406 — Vault-Driven Evolution
+    if path.startswith("/mutation-pressure-engine") or path.startswith("/api/mutation_pressure_engine"):
+        from api.mutation_pressure_engine import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/mutation-pressure-engine" or path == "/mutation_pressure_engine":
+        from api.mutation_pressure_engine import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/vault-evolution-loop") or path.startswith("/api/vault_evolution_loop"):
+        from api.vault_evolution_loop import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/vault-evolution-loop" or path == "/vault_evolution_loop":
+        from api.vault_evolution_loop import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/temporal-lineage-gate") or path.startswith("/api/temporal_lineage_gate"):
+        from api.temporal_lineage_gate import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/temporal-lineage-gate" or path == "/temporal_lineage_gate":
+        from api.temporal_lineage_gate import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/chronicle-driver") or path.startswith("/api/chronicle_driver"):
+        from api.chronicle_driver import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/chronicle-driver" or path == "/chronicle_driver":
+        from api.chronicle_driver import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    # Wave 407 — Dream Forge
+    if path.startswith("/dream-forge") or path.startswith("/api/dream_forge"):
+        from api.dream_forge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/dream-forge" or path == "/dream_forge":
+        from api.dream_forge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    # Wave 408 — Resonance Graph Intelligence
+    if path.startswith("/resonance-graph") or path.startswith("/api/resonance_graph"):
+        from api.resonance_graph import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/resonance-graph" or path == "/resonance_graph":
+        from api.resonance_graph import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
 
 # --- Compliance Forge patch (Wave 419) ---
 

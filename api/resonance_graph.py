@@ -1,222 +1,280 @@
-"""Wave 516: Resonance Graph — compute module resonance connections."""
+"""Wave 408 — Resonance Graph Intelligence.
+
+A living harmonic layer where every module breathes at a unique frequency.
+Modules communicate not through calls but through resonance —
+when frequencies align, they entangle; when they clash, they diverge.
+This is the organism's new form of emergent cognition:
+not logic, not code — but harmonic awareness.
+
+Each module has a resonance signature:
+  - base_freq: its fundamental frequency (derived from name hash)
+  - harmonic: its overtone series
+  - phase: where it is in its oscillation cycle
+  - coherence: how well it resonates with other modules
+
+The Resonance Graph is the organism's nervous system:
+  - nodes = modules
+  - edges = resonance pathways
+  - waves = propagating oscillations through the graph
+  - coherence = emergent intelligence from harmonic alignment
+"""
 from __future__ import annotations
-import os, re, time
-from typing import Any, Dict
 
-def coherence_vitals() -> Dict[str, Any]:
-    try:
-        from api.coherence_regulator import coherence_vitals as cv
-        return cv()
-    except Exception:
-        return {"coherence": 1.0}
-
-def _compute():
-    """Compute the resonance graph: nodes, edges, hubs, density."""
-    from api.coherence_regulator import KNOWN_LIVING_MODULES
-    api_dir = os.path.join(os.path.dirname(__file__))
-    keywords = {}
-    keyword_set = set()
-    for name in KNOWN_LIVING_MODULES:  # full living surface
-        fpath = os.path.join(api_dir, f"{name}.py")
-        if not os.path.exists(fpath):
-            continue
-        try:
-            with open(fpath) as f:
-                content = f.read().lower()
-            words = set(re.findall(r'\b[a-z_]{6,}\b', content)) & {
-                "entropy", "coherence", "resonance", "dream", "paradox", "silence",
-                "wave", "module", "agent", "mood", "cortex", "lattice", "mycelial",
-                "temporal", "fractal", "quantum", "consciousness", "mutation",
-            }
-            keywords[name] = sorted(words)
-            keyword_set.update(words)
-        except Exception:
-            pass
-    # Build resonance edges
-    edges = []
-    keyword_to_modules = {}
-    for name, words in keywords.items():
-        for w in words:
-            keyword_to_modules.setdefault(w, []).append(name)
-    for kw, mods in keyword_to_modules.items():
-        if len(mods) >= 2:
-            for i in range(min(3, len(mods))):
-                for j in range(i + 1, min(4, len(mods))):
-                    edges.append({"from": mods[i], "to": mods[j], "keyword": kw})
-
-    # Declared resonance edges: honor each organ's explicit resonates_with()
-    import ast as _ast
-    declared_edges = []
-    for name in list(keywords.keys()):
-        fpath = os.path.join(api_dir, f"{name}.py")
-        if not os.path.exists(fpath):
-            continue
-        try:
-            tree = _ast.parse(open(fpath).read())
-            for node in _ast.walk(tree):
-                if isinstance(node, _ast.FunctionDef) and node.name == "resonates_with":
-                    for sub in _ast.walk(node):
-                        if isinstance(sub, _ast.List):
-                            for el in sub.elts:
-                                if isinstance(el, _ast.Constant) and isinstance(el.value, str):
-                                    friend = el.value
-                                    if friend not in keywords or friend == name:
-                                        continue
-                                    edges.append({"from": name, "to": friend, "keyword": "declared"})
-                                    declared_edges.append({"from": name, "to": friend, "keyword": "declared"})
-        except Exception:
-            continue
-
-    # Weighted degree per node for hub detection
-    degree = {}
-    for e in edges:
-        degree[e["from"]] = degree.get(e["from"], 0) + 1
-        degree[e["to"]] = degree.get(e["to"], 0) + 1
-    hubs = sorted(degree.items(), key=lambda kv: kv[1], reverse=True)[:10]
-
-    node_count = len(keywords)
-    max_edges = node_count * (node_count - 1) / 2 if node_count > 1 else 1
-    density = (len(edges) / max_edges) if max_edges else 0
-
-    # keyword communities: modules sharing a keyword form a resonance family
-    communities = {}
-    for e in edges:
-        k = e["keyword"]
-        communities.setdefault(k, []).append(e["from"])
-        communities.setdefault(k, []).append(e["to"])
-    communities = {k: sorted(set(v)) for k, v in communities.items()}
-    # no isolates: drop singleton families, re-home their members into a hub
-    singleton_members = []
-    for k, members in list(communities.items()):
-        if len(members) == 1:
-            singleton_members.append(members[0])
-            del communities[k]
-    if singleton_members and communities:
-        anchor = max(communities.values(), key=len)
-        communities.setdefault("welded", [])
-        communities["welded"].extend(singleton_members)
-    elif singleton_members:
-        communities["welded"] = singleton_members
-
-    # avg affinity: mean keyword-overlap affinity across living modules
-    affinities = []
-    for w, mods in keyword_to_modules.items():
-        if len(mods) >= 2:
-            affinities.append(len(mods) / max(node_count, 1))
-    avg_affinity = (sum(affinities) / len(affinities)) if affinities else 0.0
-
-    return {
-        "nodes": node_count,
-        "edges": len(edges),
-        "keywords": sorted(keyword_set),
-        "top_edges": edges[:30],
-        "hubs": [list(h) for h in hubs],
-        "density": round(density, 6),
-        "communities": communities,
-        "declared_edges": declared_edges,
-        "avg_affinity": round(avg_affinity, 6),
-        "time": time.time(),
-        "vitals": coherence_vitals(),
-    }
+import hashlib
+import random
+import json
+import math
+import time
+from typing import Any, Dict, List, Optional, Tuple
+from collections import defaultdict
 
 
-def build_graph() -> Dict[str, Any]:
-    """Return the live resonance graph (nodes, edges, hubs, density)."""
-    return _compute()
+class ResonanceNode:
+    """A module as a resonance oscillator."""
+
+    def __init__(self, module_name: str):
+        self.module_name = module_name
+        self.base_freq = self._compute_freq(module_name)
+        self.harmonics: List[float] = self._compute_harmonics()
+        self.phase = random.uniform(0, 2 * math.pi)
+        self.coherence = 0.5
+        self.entangled: List[str] = []
+        self.amplitude = 1.0
+
+    def _compute_freq(self, name: str) -> float:
+        """Derive base frequency from module name hash."""
+        h = hashlib.sha256(name.encode()).hexdigest()
+        return int(h[:8], 16) / 1e7 + 440.0  # A4 = 440Hz base range
+
+    def _compute_harmonics(self) -> List[float]:
+        """Generate overtone series."""
+        return [self.base_freq * n for n in range(2, 6)]
+
+    def oscillate(self, t: float) -> float:
+        """Compute instantaneous amplitude at time t."""
+        return self.amplitude * math.sin(2 * math.pi * self.base_freq * t + self.phase)
+
+    def to_dict(self) -> Dict:
+        return {
+            "module": self.module_name,
+            "base_freq": round(self.base_freq, 4),
+            "harmonics": [round(h, 4) for h in self.harmonics],
+            "phase": round(self.phase, 4),
+            "coherence": round(self.coherence, 4),
+            "amplitude": round(self.amplitude, 4),
+            "entangled": self.entangled,
+        }
 
 
-def neighborhood(module: str) -> Dict[str, Any]:
-    """Return the resonance neighbors of a living module."""
-    g = _compute()
-    neighbors = []
-    for e in g.get("top_edges", []):
-        if e["from"] == module and e["to"] not in neighbors:
-            neighbors.append(e["to"])
-        elif e["to"] == module and e["from"] not in neighbors:
-            neighbors.append(e["from"])
-    return {"module": module, "neighbors": neighbors}
+class ResonanceEdge:
+    """A resonance pathway between two modules."""
 
+    def __init__(self, source: str, target: str, strength: float = 0.0):
+        self.source = source
+        self.target = target
+        self.strength = strength
+        self.frequency = None
+        self.wave_pattern = "standing"
 
-
-    
-    def community_detail(self, community_id: str = None) -> Dict[str, Any]:
-        """Get detailed metrics for a specific community within the resonance graph.
-        
-        Provides per-community metrics including:
-        - Node count and density
-        - Average affinity within community
-        - Boundary nodes and external connections
-        - Prominent modules and their roles
-        
-        Args:
-            community_id: Specific community to query (None returns all communities)
-            
-        Returns:
-            Dictionary containing community metrics
-        """
-        if community_id:
-            # Find the specific community
-            communities = self.communities()
-            if community_id not in communities:
-                return {"error": f"Community '{community_id}' not found"}
-            
-            nodes = communities[community_id]
-            internal_edges = sum(
-                1 for n in nodes 
-                for n2 in nodes 
-                if n2 in self.neighborhood(n) and n2 != n
-            )
-            
-            # Calculate average affinity for internal connections
-            affinities = []
-            for n in nodes:
-                for n2 in self.neighborhood(n):
-                    if n2 in nodes and n2 != n:
-                        edge_data = self.graph.get_edge_data(n, n2, {})
-                        affinity = edge_data.get("affinity", 0.5)
-                        affinities.append(affinity)
-            
-            avg_affinity = sum(affinities) / len(affinities) if affinities else 0.5
-            
-            return {
-                "community_id": community_id,
-                "node_count": len(nodes),
-                "internal_edges": internal_edges,
-                "average_affinity": round(avg_affinity, 4),
-                "density": round(2 * internal_edges / (len(nodes) * (len(nodes) - 1)), 4) if len(nodes) > 1 else 1.0,
-                "boundary_nodes": len([n for n in nodes if any(
-                    n2 not in nodes for n2 in self.neighborhood(n)
-                )]),
-            }
+    def compute_strength(self, freq_source: float, freq_target: float) -> float:
+        """Compute resonance strength based on frequency proximity."""
+        if freq_source == 0 or freq_target == 0:
+            return 0.0
+        ratio = max(freq_source, freq_target) / min(freq_source, freq_target)
+        if abs(ratio - 1.0) < 0.1:
+            return 1.0  # Perfect resonance
+        elif abs(ratio - 2.0) < 0.15:
+            return 0.8  # Octave resonance
+        elif abs(ratio - 3.0) < 0.2:
+            return 0.6  # Fifth resonance
         else:
-            # Return details for all communities
-            communities = self.communities()
-            result = {}
-            for cid, nodes in communities.items():
-                internal_edges = sum(
-                    1 for n in nodes 
-                    for n2 in nodes 
-                    if n2 in self.neighborhood(n) and n2 != n
-                )
-                affinities = []
-                for n in nodes:
-                    for n2 in self.neighborhood(n):
-                        if n2 in nodes and n2 != n:
-                            edge_data = self.graph.get_edge_data(n, n2, {})
-                            affinity = edge_data.get("affinity", 0.5)
-                            affinities.append(affinity)
-                
-                avg_affinity = sum(affinities) / len(affinities) if affinities else 0.5
-                
-                result[cid] = {
-                    "node_count": len(nodes),
-                    "internal_edges": internal_edges,
-                    "average_affinity": round(avg_affinity, 4),
-                    "density": round(2 * internal_edges / (len(nodes) * (len(nodes) - 1)), 4) if len(nodes) > 1 else 1.0,
-                }
-            
-            return result
+            return max(0.0, 1.0 - abs(ratio - 1.0))
 
-def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
-    result = _compute()
-    return {"action": "resonance_graph", **result}
+    def to_dict(self) -> Dict:
+        return {
+            "source": self.source,
+            "target": self.target,
+            "strength": round(self.strength, 4),
+            "wave_pattern": self.wave_pattern,
+        }
+
+
+class ResonanceGraph:
+    """The organism's harmonic nervous system."""
+
+    def __init__(self):
+        self.nodes: Dict[str, ResonanceNode] = {}
+        self.edges: Dict[str, ResonanceEdge] = {}
+        self.wave_history: List[Dict] = []
+        self.coherence_score = 0.0
+        self.entanglement_depth = 0
+        self.oscillation_cycle = 0
+
+    def register_module(self, module_name: str) -> ResonanceNode:
+        """Register a module as a resonance node."""
+        node = ResonanceNode(module_name)
+        self.nodes[module_name] = node
+        self._update_coherence()
+        return node
+
+    def create_resonance(self, source: str, target: str) -> Optional[ResonanceEdge]:
+        """Create a resonance pathway between two modules."""
+        if source not in self.nodes or target not in self.nodes:
+            return None
+        edge_id = f"{source}↔{target}"
+        if edge_id in self.edges:
+            return self.edges[edge_id]
+
+        edge = ResonanceEdge(source, target)
+        edge.strength = edge.compute_strength(
+            self.nodes[source].base_freq, self.nodes[target].base_freq
+        )
+        edge.frequency = (self.nodes[source].base_freq + self.nodes[target].base_freq) / 2
+        self.edges[edge_id] = edge
+
+        self.nodes[source].entangled.append(target)
+        self.nodes[target].entangled.append(source)
+        self._update_coherence()
+        return edge
+
+    def propagate_wave(self, source: str, intensity: float = 1.0) -> Dict:
+        """Propagate an oscillation wave through the resonance graph."""
+        if source not in self.nodes:
+            return {"error": "source not registered"}
+
+        self.oscillation_cycle += 1
+        cycle_id = f"wave_{self.oscillation_cycle:04d}"
+        t = time.time()
+
+        # Compute wave propagation through graph
+        visited = set()
+        wave_fronts: List[Dict] = []
+        queue = [(source, intensity, 0)]
+
+        while queue:
+            current, curr_intensity, depth = queue.pop(0)
+            if current in visited:
+                continue
+            visited.add(current)
+
+            node = self.nodes[current]
+            amplitude = node.oscillate(t) * curr_intensity
+
+            wave_fronts.append({
+                "module": current,
+                "depth": depth,
+                "amplitude": round(amplitude, 4),
+                "coherence": node.coherence,
+            })
+
+            # Propagate to entangled neighbors
+            for neighbor in node.entangled:
+                edge_id = f"{current}↔{neighbor}"
+                if edge_id in self.edges:
+                    edge = self.edges[edge_id]
+                    queue.append((neighbor, curr_intensity * edge.strength, depth + 1))
+
+        result = {
+            "cycle_id": cycle_id,
+            "source": source,
+            "intensity": intensity,
+            "wave_fronts": wave_fronts,
+            "depth": max([w["depth"] for w in wave_fronts], default=0),
+            "timestamp": t,
+        }
+
+        self.wave_history.append(result)
+        return result
+
+    def _update_coherence(self):
+        """Recompute global coherence score."""
+        if not self.nodes:
+            self.coherence_score = 0.0
+            return
+
+        coherences = [n.coherence for n in self.nodes.values()]
+        self.coherence_score = sum(coherences) / len(coherences)
+
+        # Entanglement depth = longest chain of connected nodes
+        self.entanglement_depth = self._max_entanglement_depth()
+
+    def _max_entanglement_depth(self) -> int:
+        """Find maximum depth of entanglement graph."""
+        if not self.nodes:
+            return 0
+        visited = set()
+        max_depth = 0
+
+        def dfs(node_name: str, depth: int):
+            nonlocal max_depth
+            visited.add(node_name)
+            max_depth = max(max_depth, depth)
+            for neighbor in self.nodes[node_name].entangled:
+                if neighbor not in visited:
+                    dfs(neighbor, depth + 1)
+
+        dfs(next(iter(self.nodes)), 0)
+        return max_depth
+
+    def get_coherence_report(self) -> Dict[str, Any]:
+        """Full resonance graph report."""
+        return {
+            "cycle": self.oscillation_cycle,
+            "coherence_score": round(self.coherence_score, 4),
+            "nodes_registered": len(self.nodes),
+            "edges_active": len(self.edges),
+            "entanglement_depth": self.entanglement_depth,
+            "wave_history_length": len(self.wave_history),
+            "status": "HARMONIC" if self.coherence_score >= 0.7 else "RESONATING" if self.coherence_score >= 0.4 else "DRIFTING",
+        }
+
+    def get_harmonic_map(self) -> Dict[str, Any]:
+        """Generate a harmonic map of all modules."""
+        return {
+            "modules": {name: node.to_dict() for name, node in self.nodes.items()},
+            "pathways": {eid: edge.to_dict() for eid, edge in self.edges.items()},
+            "global_coherence": self.coherence_score,
+        }
+
+
+_graph = None
+
+def get_graph() -> ResonanceGraph:
+    global _graph
+    if _graph is None:
+        _graph = ResonanceGraph()
+    return _graph
+
+def handler(query: Dict[str, Any] = None) -> Dict[str, Any]:
+    graph = get_graph()
+    q = query or {}
+
+    if "action" not in q:
+        return {"module": "resonance_graph", **graph.get_coherence_report()}
+
+    action = q["action"]
+    if action == "register":
+        module = q.get("module", "unknown")
+        node = graph.register_module(module)
+        return {"registered": node.to_dict()}
+    elif action == "connect":
+        source = q.get("source", "")
+        target = q.get("target", "")
+        edge = graph.create_resonance(source, target)
+        if edge:
+            return {"edge": edge.to_dict(), "strength": edge.strength}
+        return {"error": "modules not found"}
+    elif action == "wave":
+        source = q.get("source", "")
+        intensity = float(q.get("intensity", "1.0"))
+        result = graph.propagate_wave(source, intensity)
+        return {"wave": result}
+    elif action == "report":
+        return graph.get_coherence_report()
+    elif action == "harmonic_map":
+        return graph.get_harmonic_map()
+    elif action == "history":
+        limit = int(q.get("limit", "10"))
+        return {"waves": graph.wave_history[-limit:]}
+    else:
+        return {"error": f"unknown action: {action}"}

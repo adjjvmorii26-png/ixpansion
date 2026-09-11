@@ -3007,13 +3007,37 @@
     {
       "src": "/garden-plant",
       "dest": "/api/garden.py"
+    },
+    {
+      "src": "/mutation-pressure-engine(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/vault-evolution-loop(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/temporal-lineage-gate(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/chronicle-driver(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/dream-forge(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/resonance-graph(?:/.*)?",
+      "dest": "/api/index.py"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "405",
-    "NEXUS_MODULES": "914",
+    "NEXUS_WAVE": "408",
+    "NEXUS_MODULES": "921",
     "NEXUS_ROUTES": "72"
   },
   "headers": [
