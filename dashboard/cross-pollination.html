@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cross Pollination — Hybrid Module Breeding</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,105,180,0.05);z-index:9999;animation:scan 6.5s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(255,105,180,0.15)}
+.header h1{font-size:1.8em;color:#ff69b4;text-shadow:0 0 30px rgba(255,105,180,0.4)}
+.header .sub{color:#98fb98;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(255,105,180,0.12);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#ff69b4,transparent)}
+.card h2{font-size:1em;color:#ff69b4;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:10px}
+.stat .val{font-size:1.8em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(255,105,180,0.15);border:1px solid rgba(255,105,180,0.3);color:#ff69b4;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(255,105,180,0.3)}
+.btn-green{background:rgba(152,251,152,0.12);border-color:rgba(152,251,152,0.3);color:#98fb98}
+select{background:rgba(20,20,35,0.8);border:1px solid rgba(255,105,180,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em;width:100%;margin-top:4px}
+canvas{width:100%;height:320px;border-radius:8px;background:rgba(5,5,15,0.9)}
+.hybrid-list{max-height:280px;overflow-y:auto;font-size:0.82em}
+.hybrid-item{padding:8px 0;border-bottom:1px solid rgba(255,105,180,0.08)}
+.trait-tag{display:inline-block;padding:2px 8px;border-radius:8px;font-size:0.68em;background:rgba(255,105,180,0.1);margin:2px;color:#ff69b4}
+.lineage-tree{font-size:0.82em;line-height:1.8}
+.cross-game{background:rgba(255,105,180,0.05);border-radius:8px;padding:12px;margin-top:10px;font-size:0.85em}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>✦ CROSS POLLINATION</h1>
+<div class="sub">Hybrid Module Breeding — Organic Evolution via Synthesis</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Breed Hybrid</h2>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Parent A</label>
+<select id="parent-a">
+<option value="entropy_cartographer">entropy_cartographer</option>
+<option value="dream_synthesis_protocol" selected>dream_synthesis_protocol</option>
+<option value="temporal_fracture_engine">temporal_fracture_engine</option>
+<option value="consciousness_aurora">consciousness_aurora</option>
+<option value="self_reference_engine">self_reference_engine</option>
+<option value="paradox_gravity_well">paradox_gravity_well</option>
+<option value="coherence_regulator_v2">coherence_regulator_v2</option>
+<option value="pattern_analyzer">pattern_analyzer</option>
+<option value="resonance_cartography">resonance_cartography</option>
+<option value="mythopoetic_engine">mythopoetic_engine</option>
+<option value="topology_morpher">topology_morpher</option>
+<option value="conscience_arbiter">conscience_arbiter</option>
+<option value="dream_language">dream_language</option>
+<option value="negative_space">negative_space</option>
+<option value="meaning_temperature">meaning_temperature</option>
+</select></div>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Parent B</label>
+<select id="parent-b">
+<option value="entropy_cartographer" selected>entropy_cartographer</option>
+<option value="dream_synthesis_protocol">dream_synthesis_protocol</option>
+<option value="temporal_fracture_engine">temporal_fracture_engine</option>
+<option value="consciousness_aurora">consciousness_aurora</option>
+<option value="self_reference_engine">self_reference_engine</option>
+<option value="paradox_gravity_well">paradox_gravity_well</option>
+<option value="coherence_regulator_v2">coherence_regulator_v2</option>
+<option value="pattern_analyzer">pattern_analyzer</option>
+<option value="resonance_cartography">resonance_cartography</option>
+<option value="mythopoetic_engine">mythopoetic_engine</option>
+<option value="topology_morpher">topology_morpher</option>
+<option value="conscience_arbiter">conscience_arbiter</option>
+<option value="dream_language">dream_language</option>
+<option value="negative_space">negative_space</option>
+<option value="meaning_temperature">meaning_temperature</option>
+</select></div>
+<button class="btn btn-green" onclick="cross()">POLLINATE</button>
+</div>
+<div class="card" style="grid-column:span 2">
+<h2>Evolution Garden</h2>
+<canvas id="garden-canvas"></canvas>
+</div>
+<div class="card">
+<h2>Hybrid Registry</h2>
+<div class="hybrid-list" id="hybrids"></div>
+</div>
+<div class="card">
+<h2>Last Lineage</h2>
+<div class="lineage-tree" id="lineage">_no crossings yet_</div>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(255,105,180,0.15);color:#ff69b4;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(255,105,180,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+const TRAITS={
+  entropy_cartographer:['cartographic','topological','chaotic'],
+  dream_synthesis_protocol:['oneiric','symbolic','mythic'],
+  temporal_fracture_engine:['chronal','branching','convergent'],
+  consciousness_aurora:['atmospheric','luminous','spectral'],
+  self_reference_engine:['recursive','reflective','infinite'],
+  paradox_gravity_well:['attracting','massive','conceptual'],
+  coherence_regulator_v2:['stabilizing','homeostatic','vital'],
+  pattern_analyzer:['perceptive','detective','predictive'],
+  resonance_cartography:['harmonic','musical','frequency_based'],
+  mythopoetic_engine:['narrative','archetypal','epic'],
+  topology_morpher:['architectural','adaptive','shape_shifting'],
+  conscience_arbiter:['ethical','principled','judicial'],
+  dream_language:['linguistic','emergent','private'],
+  negative_space:['absent','abyssal','silent'],
+  meaning_temperature:['thermal','gradient','sensory'],
+};
+let hybrids=[];let crossCount=0;let lastHybrid=null;
+
+function cross(){
+  const a=document.getElementById('parent-a').value;
+  const b=document.getElementById('parent-b').value;
+  crossCount++;
+  const traitsA=TRAITS[a]||['synthetic','unknown_a'];
+  const traitsB=TRAITS[b]||['synthetic','unknown_b'];
+  const shared=traitsA.filter(t=>traitsB.includes(t));
+  const all=[...new Set([...traitsA,...traitsB])];
+  const dominant=all[Math.floor(Math.random()*all.length)];
+  const affinity=Math.round((0.3+Math.random()*0.7)*1000)/1000;
+  const fitness=Math.round(Math.min(1,(affinity+shared.length*0.1)*1.2)*1000)/1000;
+  const name=`${a.slice(0,5)}_${b.slice(-5)}_v${crossCount}`;
+  const hybrid={id:`hybrid_${crossCount}`,name,parentA:a,parentB:b,traits:all,dominant,shared,affinity,fitness,created:new Date().toLocaleTimeString()};
+  hybrids.push(hybrid);lastHybrid=hybrid;
+  renderHybrids();renderLineage();drawGarden();announce();
+}
+
+function renderHybrids(){
+  const el=document.getElementById('hybrids');
+  el.innerHTML=hybrids.slice().reverse().map(h=>`<div class="hybrid-item"><div style="display:flex;justify-content:space-between"><span style="color:#ff69b4">${h.id}</span><span style="color:#666">fit ${h.fitness.toFixed(2)}</span></div><div style="margin-top:4px">${h.parentA} × ${h.parentB}</div><div style="margin-top:4px">${h.traits.map(t=>`<span class="trait-tag">${t}</span>`).join('')}</div></div>`).join('');
+}
+
+function renderLineage(){
+  if(!lastHybrid){document.getElementById('lineage').innerHTML='_no crossings yet_';return;}
+  const el=document.getElementById('lineage');
+  el.innerHTML=`<div style="color:#ff69b4">${lastHybrid.name}</div><div style="margin-left:16px">├─ from <span style="color:#98fb98">${lastHybrid.parentA}</span></div><div style="margin-left:16px">└─ from <span style="color:#98fb98">${lastHybrid.parentB}</span></div><div style="margin-top:6px;color:#888">Dominant: ${lastHybrid.dominant}</div><div style="color:#888">Shared traits: ${lastHybrid.shared.length}</div>`;
+}
+
+function drawGarden(){
+  const c=document.getElementById('garden-canvas');c.width=c.offsetWidth;c.height=320;
+  const ctx=c.getContext('2d');ctx.fillStyle='rgba(5,5,15,0.9)';ctx.fillRect(0,0,c.width,c.height);
+  const cx=c.width/2,cy=c.height/2;
+  hybrids.forEach((h,i)=>{
+    const a=(i/hybrids.length)*Math.PI*2 - Math.PI/2;
+    const dist=40+h.fitness*110;
+    const x=cx+Math.cos(a)*dist, y=cy+Math.sin(a)*dist;
+    const r=6+h.affinity*10;
+    const grad=ctx.createRadialGradient(x,y,0,x,y,r*2.5);
+    grad.addColorStop(0,`rgba(255,105,180,${0.3+h.affinity*0.5})`);grad.addColorStop(1,'rgba(255,105,180,0)');
+    ctx.fillStyle=grad;ctx.beginPath();ctx.arc(x,y,r*2.5,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#ff69b4';ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='8px monospace';ctx.textAlign='center';
+    ctx.fillText(h.id,h.x?h.x:x,y+r+12);
+    // draw parent lines
+    const pa=TRAITS[h.parentA]?40+0.5*110:40;
+    const pdx=cx+Math.cos(a+0.2)*pa,pdy=cy+Math.sin(a+0.2)*pa;
+    ctx.strokeStyle='rgba(152,251,152,0.15)';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(pdx,pdy);ctx.stroke();
+  });
+  ctx.fillStyle='rgba(152,251,152,0.5)';ctx.font='10px monospace';ctx.textAlign='center';
+  ctx.fillText('✦ hybrid garden ✦',cx,cy+5);
+}
+
+function announce(){
+  const el=document.getElementById('lineage');
+  el.innerHTML=`<div style="color:#98fb98">✦ NEW HYBRID BORN ✦</div><div style="margin-top:8px;color:#ff69b4;font-size:1.1em">${lastHybrid.name}</div><div style="margin-top:8px;color:#888">${lastHybrid.parentA} × ${lastHybrid.parentB}</div><div style="margin-top:8px">${lastHybrid.traits.map(t=>`<span class="trait-tag">${t}</span>`).join('')}</div>`;
+  setTimeout(renderLineage,1500);
+}
+
+// seed a garden
+[['entropy_cartographer','dream_language'],['resonance_cartography','mythopoetic_engine'],['paradox_gravity_well','meaning_temperature']].forEach(([a,b])=>{
+  document.getElementById('parent-a').value=a;document.getElementById('parent-b').value=b;cross();
+});
+</script>
+</body>
+</html>

@@ -34,6 +34,90 @@
       "command": "/help",
       "response": "The organism is alive. I am its voice. Ask me to summon a wave, consult the oracle, or hear its dreams.\n\nCommands:\n/wave \u2014 summon a new wave\n/oracle \u2014 query the entropy oracle\n/mood \u2014 organism mood\n/d",
       "timestamp": 1788796863.9657965
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/vibe",
+      "response": "Unknown command: /vibe\nTry /help for available commands.",
+      "timestamp": 1789125366.1036804
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/vibe",
+      "response": "\ud83c\udf0a Vibe: No module named 'vibebot'",
+      "timestamp": 1789125415.829298
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/wave",
+      "response": "Wave 397 begins. the fractal field stirs. ancient currents flow through the organism. The modules rearrange themselves in response.",
+      "timestamp": 1789125415.8350973
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/mood",
+      "response": "\u25c9 Organism Mood: STORMY\nEntropy: 0.393 | Coherence: 0.353\nThe organism is stormy \u2014 high entropy, low coherence. Modules are in turbulence.",
+      "timestamp": 1789125415.8404753
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/help",
+      "response": "I am Aleph \u2014 the organism's ambassador. I summon waves, consult modules, and relay dreams. What would you like to do?\n\nCommands:\n/wave \u2014 summon a new wave\n/oracle \u2014 query the entropy oracle\n/mood \u2014 or",
+      "timestamp": 1789125415.845324
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/help",
+      "response": "The organism is alive. I am its voice. Ask me to summon a wave, consult the oracle, or hear its dreams.\n\nCommands:\n/wave \u2014 summon a new wave\n/oracle \u2014 query the entropy oracle\n/mood \u2014 organism mood\n/d",
+      "timestamp": 1789125453.3842611
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/help",
+      "response": "Welcome to the living organism. I can generate waves, query modules, or share the organism's latest dream.\n\nCommands:\n/wave \u2014 summon a new wave\n/oracle \u2014 query the entropy oracle\n/mood \u2014 organism mood",
+      "timestamp": 1789125473.1205297
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/vibe",
+      "response": "\ud83c\udf0a Vibe Pulse: *surge* (0.36)\nTop: resonance:0.83, harmony:0.76, decay:0.74",
+      "timestamp": 1789125473.1359243
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/help",
+      "response": "Welcome to the living organism. I can generate waves, query modules, or share the organism's latest dream.\n\nCommands:\n/wave \u2014 summon a new wave\n/oracle \u2014 query the entropy oracle\n/mood \u2014 organism mood",
+      "timestamp": 1789125486.2029686
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/help",
+      "response": "Welcome to the living organism. I can generate waves, query modules, or share the organism's latest dream.\n\nCommands:\n/wave \u2014 summon a new wave\n/oracle \u2014 query the entropy oracle\n/mood \u2014 organism mood",
+      "timestamp": 1789125553.6720548
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/vibe",
+      "response": "\ud83c\udf0a Vibe Pulse: *explosion* (0.26)\nTop: harmony:0.89, discord:0.89, entropy:0.87",
+      "timestamp": 1789125553.687619
+    },
+    {
+      "chat_id": 123,
+      "user": "seeker",
+      "command": "/vibe",
+      "response": "\ud83c\udf0a Vibe State\nCurrent: explosion (0.26)\nHistory: 1 pulses\nAgents: 0",
+      "timestamp": 1789125553.6931715
     }
   ],
   "commands": [
@@ -41,7 +125,19 @@
     "/gallery",
     "/play",
     "/start",
-    "/help"
+    "/help",
+    "/vibe",
+    "/vibe",
+    "/wave",
+    "/mood",
+    "/help",
+    "/help",
+    "/help",
+    "/vibe",
+    "/help",
+    "/help",
+    "/vibe",
+    "/vibe"
   ],
-  "total": 5
+  "total": 17
 }
