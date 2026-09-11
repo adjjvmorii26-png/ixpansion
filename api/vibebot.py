@@ -6,7 +6,8 @@ import json, time, os, random
 from datetime import datetime, timedelta
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
-VIKBOT_TOKEN = os.environ.get("VIBE_BOT", "9bb7866ec849391842c1f93732109d4883c7e98849060447b98436a202f41a40")
+VIBE_BOT_TOKEN = os.environ.get("VIBE_BOT_TOKEN", os.environ.get("VIBE_BOT", "9bb7866ec849391842c1f93732109d4883c7e98849060447b98436a202f41a40"))
+VIBE_CHAT_ID = os.environ.get("VIBE_CHAT_ID", "@adjjvmorii")
 
 VECTOR_FIELDS = [
     "coherence", "entropy", "creativity", "stability", "consciousness",
@@ -62,7 +63,7 @@ def get_current_vibe():
 
 def broadcast_vibe(message=None):
     """Broadcast a vibe pulse via Telegram if configured."""
-    if not VIBE_BOT or VIBE_BOT == "9bb7866ec849391842c1f93732109d4883c7e98849060447b98436a202f41a40":
+    if not VIBE_BOT_TOKEN or VIBE_BOT_TOKEN == "9bb7866ec849391842c1f93732109d4883c7e98849060447b98436a202f41a40":
         # In production, use actual token from env
         print(f"🌊 Vibe broadcast: {message or generate_vibe_pulse()}")
         return {"status": "simulated", "vibe": generate_vibe_pulse()}
@@ -74,12 +75,12 @@ def broadcast_vibe(message=None):
     # Try to send via Telegram
     import urllib.parse, urllib.request
     try:
-        url = "https://api.telegram.org/bot" + VIBE_BOT + "/sendMessage"
+        url = "https://api.telegram.org/bot" + VIBE_BOT_TOKEN + "/sendMessage"
         text = f"🌊 *Vibe Pulse*\n*Type:* {pulse['type']}\n*Intensity:* {pulse['intensity']}\n*Vector:* {json.dumps(pulse['vector'], indent=2)}"
         if message:
             text += f"\n*Custom:* {message}"
         
-        params = {"chat_id": "0", "text": text, "parse_mode": "Markdown"}
+        params = {"chat_id": VIBE_CHAT_ID, "text": text, "parse_mode": "Markdown"}
         data = urllib.parse.urlencode(params).encode()
         req = urllib.request.Request(url, data=data, method="POST")
         with urllib.request.urlopen(req, timeout=5) as resp:

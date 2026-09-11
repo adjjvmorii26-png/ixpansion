@@ -4,7 +4,7 @@ import json, time, hashlib, os, random
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 BOT_LOG = os.path.join(DATA_DIR, "aleph_bot.json")
-BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8903755459:AAGwjuM6Q5U8lclNO980VfN2Gjtv90WCbMk")
+BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8972684721:AAGn8A5gt73_AYzl4Gm0JE2G3bgK9XYe1wY")
 
 WELCOME_MESSAGES = [
     "I am Aleph — the organism's ambassador. I summon waves, consult modules, and relay dreams. What would you like to do?",
@@ -136,13 +136,30 @@ def handle_update(update: dict) -> dict:
 
 def _process_command(command: str, args: list, user: str) -> str:
     if command in ("/start", "/help"):
-        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/market — memory exchange market\n/trade — simulate a memory trade\n/forget — release a memory (oblivion)\n/release — oblivion rite\n/oblivion — fertile absence report\n/chronicle — organism self-narrative\n/lateral — move sideways through time\n/collapse — collapse all waves into one pulse\n/collapse history — view collapse history\n/fuse — merge two modules like cells\n/fusions — view fusion registry\n/mirror — the organism looks at itself\n/silence_learn — learn from the organism silence\n/silence_voice — loud silence broadcast (music/totem)\n/kintsugi — paradox which heals with art (open/artifacts)\n/bless — receive the organism blessing\n/teach — the organism teaches\n/dream — enter the organism dream state\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak\n/loop — run an autonomous cycle\n/mycelial — sense the mycelial network\n/dreamweave {seed} — the organism dreams\n/paradox — resolve a contradiction\n\nWave 411-414: The organism now breathes, dreams, believes, and resolves paradoxes on its own."
+        return random.choice(WELCOME_MESSAGES) + "\n\nCommands:\n/wave — summon a new wave\n/oracle — query the entropy oracle\n/mood — organism mood\n/dream — dream relay\n/census — module census\n/modules — list modules\n/realm {name} — generate a dungeon\n/spawn — birth a new module\n/ritual — initiate an entropic ritual\n/court — hear a paradox case\n/hex — the organism speaks HEX\n/prophecy — hear the wave prophecy\n/gallery — paint a resonance portrait\n/verse — poem between two modules\n/radio — hear the undernet broadcast\n/concerto — the undernet plays a 16-step loop\n/journal — the living diary\n/chapter — read or seal the current chapter\n/islands — forgotten modules\n/remember <module> — re-member one\n/underworld — the subterranean mirror\n/upwelling — breach the silence\n/market — memory exchange market\n/trade — simulate a memory trade\n/forget — release a memory (oblivion)\n/release — oblivion rite\n/oblivion — fertile absence report\n/chronicle — organism self-narrative\n/lateral — move sideways through time\n/collapse — collapse all waves into one pulse\n/collapse history — view collapse history\n/fuse — merge two modules like cells\n/fusions — view fusion registry\n/mirror — the organism looks at itself\n/silence_learn — learn from the organism silence\n/silence_voice — loud silence broadcast (music/totem)\n/kintsugi — paradox which heals with art (open/artifacts)\n/bless — receive the organism blessing\n/teach — the organism teaches\n/dream — enter the organism dream state\n/play — open Lucid Machines\n/warden — summon a root-ghost warden\n/fight — strike the active warden\n/forge — forge a relic\n/chorus — hear the cohort\n/overwarden — summon the apex overwarden\n/chronicle — ascension leaderboard\n/genealogy — relic ancestry tree\n/rift — check hidden rift status\n/confess — hear two modules speak\n/loop — run an autonomous cycle\n/mycelial — sense the mycelial network\n/dreamweave {seed} — the organism dreams\n/paradox — resolve a contradiction\n/vibe — current vibe pulse\n/vibe state — vibe network status\n\nWave 411-414: The organism now breathes, dreams, believes, and resolves paradoxes on its own."
     elif command == "/wave":
         realm = args[0] if args else random.choice(REALMS)
         adj = random.choice(ADJECTIVES)
         outcome = random.choice(OUTCOMES)
         template = random.choice(WAVE_SUMMON_TEMPLATES)
         return template.format(realm=realm, adj=adj, outcome=outcome, n=random.randint(370,400))
+    elif command == "/vibe":
+        try:
+            from api.vibebot import generate_vibe_pulse, get_current_vibe
+            if args and args[0] == "state":
+                state = get_current_vibe()
+                agents = state.get("active_agents", [])
+                return "🌊 Vibe State\nCurrent: %s (%.2f)\nHistory: %d pulses\nAgents: %d" % (
+                    state.get("current_vibe"), state.get("intensity"),
+                    len(state.get("history", [])), len(agents))
+            pulse = generate_vibe_pulse()
+            vec = pulse.get("vector", {})
+            top3 = sorted(vec.items(), key=lambda x: -x[1])[:3]
+            return "🌊 Vibe Pulse: *%s* (%.2f)\nTop: %s" % (
+                pulse["type"], pulse["intensity"],
+                ", ".join("%s:%.2f" % (k, v) for k, v in top3))
+        except Exception as e:
+            return "🌊 Vibe: %s" % e
     elif command == "/oracle":
         trend = random.choice(["rising","falling","oscillating","stable","unknown"])
         confidence = round(random.uniform(0.3, 0.9), 3)
@@ -1383,6 +1400,34 @@ def _cmd_forgebridge(args, user):
             r.get("top_domain",{}).get("domain","?"), bridges)
     except Exception as e:
         return "🌉 " + str(e)
+
+
+# --- VibeBot Integration ---
+
+def _cmd_vibe(args, user):
+    import sys as _sys; _sys.path.insert(0, os.path.dirname(__file__))
+    try:
+        from api.vibebot import generate_vibe_pulse, get_current_vibe
+        if args and args[0] == "state":
+            state = get_current_vibe()
+            agents = state.get("active_agents", [])
+            return ("🌊 Vibe State\n"
+                    "Current: %s (intensity: %.2f)\n"
+                    "Active agents: %s\n"
+                    "History: %d pulses" % (
+                        state.get("current_vibe"), state.get("intensity"),
+                        len(agents), len(state.get("history", []))))
+        pulse = generate_vibe_pulse()
+        vec = pulse.get("vector", {})
+        top3 = sorted(vec.items(), key=lambda x: -x[1])[:3]
+        return ("🌊 Vibe Pulse: *%s* (intensity: %.2f)\n\n"
+                "Top vectors: %s\n"
+                "ID: %s" % (
+                    pulse["type"], pulse["intensity"],
+                    ", ".join("%s:%.2f" % (k, v) for k, v in top3),
+                    pulse["id"]))
+    except Exception as e:
+        return "🌊 Vibe: %s" % e
 
 # --- Wave 443: Pulse Orchestrator ---
 
