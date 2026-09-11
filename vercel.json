@@ -2993,6 +2993,18 @@
       "dest": "/public/wave405/index.html"
     },
     {
+      "src": "/social-ritual(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/social_ritual(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/social_ritual",
+      "dest": "/api/index.py"
+    },
+    {
       "src": "/garden-plant",
       "dest": "/api/garden.py"
     }
@@ -3001,7 +3013,7 @@
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
     "NEXUS_WAVE": "405",
-    "NEXUS_MODULES": "913",
+    "NEXUS_MODULES": "914",
     "NEXUS_ROUTES": "72"
   },
   "headers": [

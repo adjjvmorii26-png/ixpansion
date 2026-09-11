@@ -248,3 +248,27 @@ def test_evolution_tracker_handler():
     assert "report" in res
 
 print("All Wave 405 tests passed!")
+
+
+# ── Social Ritual (Genesis Forge child) ───────────────────────────
+
+def test_social_ritual_handler():
+    from api.index import _call
+    res = _call('GET', '/social-ritual?action=status')
+    assert res["status"] == "active"
+    assert res["module"] == "social_ritual"
+    assert res["domain_family"] == "social"
+    res = _call('POST', '/social-ritual?action=pulse', b'{}')
+    assert res["module"] == "social_ritual"
+    assert res["pulses"] >= 1
+
+def test_social_ritual_coherence():
+    from api.social_ritual import coherence_vitals, resonates_with
+    vitals = coherence_vitals()
+    assert "module_health" in vitals
+    assert "resonance" in vitals
+    assert "social_ritual_vitality" in vitals
+    assert "genesis_era" in vitals
+    assert resonates_with() == []
+
+print("Social ritual tests passed!")
