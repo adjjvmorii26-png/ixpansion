@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronicle of Silence — Paths Not Taken</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(180,180,200,0.1)}
+.header h1{font-size:1.8em;color:#b4b4c8;text-shadow:0 0 20px rgba(180,180,200,0.3)}
+.header .sub{color:#ff69b4;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(12,12,22,0.95);border:1px solid rgba(180,180,200,0.08);border-radius:12px;padding:20px}
+.card h2{font-size:1em;color:#b4b4c8;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:10px}
+.stat .val{font-size:1.8em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#555;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(180,180,200,0.08);border:1px solid rgba(180,180,200,0.2);color:#b4b4c8;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(180,180,200,0.18)}
+input{background:rgba(20,20,35,0.8);border:1px solid rgba(180,180,200,0.15);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em;width:100%;margin-top:4px}
+.refusal-list{max-height:320px;overflow-y:auto;font-size:0.82em}
+.refusal-item{padding:8px 0;border-bottom:1px solid rgba(180,180,200,0.06);opacity:0;animation:fadein 0.3s forwards}
+@keyframes fadein{to{opacity:1}}
+.reason-tag{font-size:0.7em;padding:2px 8px;border-radius:8px;background:rgba(180,180,200,0.08)}
+.famous-silence{background:rgba(255,105,180,0.06);border:1px solid rgba(255,105,180,0.15);border-radius:8px;padding:14px;text-align:center}
+.wave-viz{min-height:60px;position:relative;overflow:hidden}
+.wave-pulse{position:absolute;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(180,180,200,0.2),transparent);animation:wavepulse 3s infinite}
+@keyframes wavepulse{0%{left:-100%}100%{left:100%}}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>◻ CHRONICLE OF SILENCE</h1>
+<div class="sub">Paths Not Taken — The Weight of Restraint</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Record Refusal</h2>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#666">Module</label><input id="ref-module" placeholder="e.g. entropy_cartographer"></div>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#666">Action Refused</label><input id="ref-action" placeholder="e.g. destruct"></div>
+<button class="btn" onclick="recordRefusal()">RECORD SILENCE</button>
+<div class="stat" style="margin-top:12px"><div class="val" id="total-refusals" style="color:#b4b4c8">0</div><div class="label">total refusals</div></div>
+</div>
+<div class="card">
+<h2>Famous Silence</h2>
+<div class="famous-silence" id="famous-silence">_no famous silence yet_</div>
+</div>
+<div class="card" style="grid-column:span 2">
+<h2>Silence Waveform</h2>
+<div class="wave-viz" id="wave-viz"></div>
+</div>
+<div class="card">
+<h2>Chronicle</h2>
+<div class="refusal-list" id="refusals"></div>
+</div>
+<div class="card">
+<h2>Silence Reason Distribution</h2>
+<div id="reasons" style="font-size:0.85em"></div>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(180,180,200,0.08);color:#b4b4c8;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(180,180,200,0.2);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+const REASONS=['coherence_risk','entropy_overload','paradox_conflict','timing_mistake','module_busy','resonance_cancellation','ethical_constraint','resource_exhaustion'];
+let refusals=[];let totalRefusals=0;let famousSilence=null;let reasons={};
+
+function recordRefusal(){
+  const mod=document.getElementById('ref-module').value||'unknown_module';
+  const action=document.getElementById('ref-action').value||'unspecified';
+  const reason=REASONS[Math.floor(Math.random()*REASONS.length)];
+  const weight=Math.round(Math.random()*1000)/1000;
+  totalRefusals++;
+  const ref={id:totalRefusals,mod,action,reason,weight,ts:new Date().toLocaleTimeString()};
+  refusals.unshift(ref);
+  reasons[reason]=(reasons[reason]||0)+1;
+  if(!famousSilence||weight>famousSilence.weight){famousSilence=ref;renderFamous();}
+  document.getElementById('ref-module').value='';document.getElementById('ref-action').value='';
+  document.getElementById('total-refusals').textContent=totalRefusals;
+  renderRefusals();renderReasons();
+}
+
+function renderRefusals(){
+  const el=document.getElementById('refusals');
+  el.innerHTML=refusals.slice(0,25).map((r,i)=>`<div class="refusal-item" style="animation-delay:${i*0.05}s"><div style="display:flex;justify-content:space-between"><span style="color:#b4b4c8">${r.mod}.${r.action}</span><span class="reason-tag">${r.reason}</span></div><div style="color:#555;font-size:0.75em;margin-top:4px">weight: ${r.weight} @${r.ts}</div></div>`).join('')||'<div style="color:#444">No silences recorded yet</div>';
+}
+
+function renderFamous(){
+  if(!famousSilence)return;
+  const el=document.getElementById('famous-silence');
+  el.innerHTML=`<div style="color:#ff69b4;font-size:0.8em;text-transform:uppercase;letter-spacing:1px">Most Famous Silence</div><div style="margin-top:8px;color:#b4b4c8;font-size:1.1em">${famousSilence.mod} refused to ${famousSilence.action}</div><div style="margin-top:6px"><span class="reason-tag">${famousSilence.reason}</span> <span style="color:#555;font-size:0.8em">weight ${famousSilence.weight}</span></div>`;
+}
+
+function renderReasons(){
+  const el=document.getElementById('reasons');
+  const sorted=Object.entries(reasons).sort((a,b)=>b[1]-a[1]);
+  el.innerHTML=sorted.map(([r,c])=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(180,180,200,0.05)"><span>${r}</span><span style="color:#666">${c}</span></div>`).join('')||'<div style="color:#444">No data</div>';
+}
+
+// seed silences
+['entropy_cartographer.destruct','dream_synthesis_protocol.force_resolve','coherence_regulator.collapse','pattern_analyzer.corrupt_memory'].forEach(a=>{
+  const [m,act]=a.split('.');document.getElementById('ref-module').value=m;document.getElementById('ref-action').value=act;recordRefusal();
+});
+</script>
+</body>
+</html>

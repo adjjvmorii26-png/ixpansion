@@ -3,773 +3,632 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lucid Machines — 3D</title>
+<title>Growth — The Organism's Living World</title>
 <style>
-:root{--bg:#05050f;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--green:#4ade80;--cyan:#22d3ee;--text:#a0a0b8;--dim:#606078}
+:root{--bg:#02020a;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--cyan:#22d3ee;--mood:#c77dff;--spring:#4ade80;--text:#a0a0b8;--dim:#606078}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;overflow:hidden;height:100vh;user-select:none}
 canvas{display:block;position:absolute;top:0;left:0}
-#hud{position:fixed;top:16px;left:16px;z-index:10;pointer-events:none;min-width:180px;background:rgba(5,5,15,0.7);padding:12px;border-radius:8px;border:1px solid rgba(124,124,248,0.15)}
-#hud .stat{display:flex;justify-content:space-between;padding:2px 0;font-size:0.72em}
+#hud{position:fixed;top:16px;left:16px;z-index:10;pointer-events:none;min-width:200px;background:rgba(5,5,15,0.75);padding:14px;border-radius:10px;border:1px solid rgba(124,124,248,0.15)}
+#hud .stat{display:flex;justify-content:space-between;padding:3px 0;font-size:0.72em}
 #hud .stat .k{color:var(--dim)}#hud .stat .v{color:#fff;font-weight:600}
-.bar{width:180px;height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;margin:2px 0}
+.bar{width:200px;height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;margin:3px 0}
 .bar-fill{height:100%;border-radius:3px;transition:width 0.3s}
-#crosshair{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;pointer-events:none;width:24px;height:24px}
-#crosshair::before,#crosshair::after{content:'';position:absolute;background:rgba(124,124,248,0.5)}
-#crosshair::before{width:18px;height:2px;top:11px;left:3px}
-#crosshair::after{width:2px;height:18px;left:11px;top:3px}
-#waveHud{position:fixed;top:16px;right:16px;z-index:10;text-align:right;pointer-events:none;background:rgba(5,5,15,0.7);padding:12px 16px;border-radius:8px;border:1px solid rgba(124,124,248,0.15)}
-#waveHud h2{color:var(--accent);font-size:1.1em;letter-spacing:3px}
-#waveHud .realm{color:var(--gold);font-size:0.75em;margin-top:4px}
-#waveHud .enemies{color:var(--rose);font-size:0.65em;margin-top:2px}
+#worldInfo{position:fixed;top:16px;right:16px;z-index:10;text-align:right;pointer-events:none;background:rgba(5,5,15,0.75);padding:14px 18px;border-radius:10px;border:1px solid rgba(124,124,248,0.15)}
+#worldInfo h2{color:var(--accent);font-size:1.05em;letter-spacing:3px}
+#worldInfo .realm{color:var(--gold);font-size:0.72em;margin-top:4px}
+#worldInfo .modules{color:var(--teal);font-size:0.68em;margin-top:2px}
 #controls{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
 .btn{background:rgba(5,5,15,0.92);border:1px solid var(--accent);color:var(--accent);padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;transition:all 0.15s}
 .btn:hover,.btn:active{background:rgba(124,124,248,0.2);color:#fff;border-color:var(--teal)}
-#log{position:fixed;bottom:64px;left:16px;z-index:10;max-width:320px;pointer-events:none}
-.log-entry{font-size:0.62em;padding:2px 0;opacity:0.9;text-shadow:0 0 4px rgba(0,0,0,0.8)}
-.log-entry.combat{color:var(--rose)}.log-entry.loot{color:var(--gold)}.log-entry.info{color:var(--teal)}.log-entry.dream{color:var(--cyan)}.log-entry.level{color:var(--accent)}
+#log{position:fixed;bottom:64px;left:16px;z-index:10;max-width:360px;pointer-events:none}
+.log-entry{font-size:0.62em;padding:3px 0;opacity:0.9;text-shadow:0 0 4px rgba(0,0,0,0.8)}
+.log-entry.growth{color:var(--spring)}
+.log-entry.insight{color:var(--accent)}
+.log-entry.wonder{color:var(--cyan)}
+.log-entry.harmony{color:var(--mood)}
+.log-entry.world{color:var(--gold)}
+#thoughtOverlay{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:20;color:var(--mood);font-size:1.4em;letter-spacing:3px;text-shadow:0 0 30px rgba(199,125,255,0.5);pointer-events:none;opacity:0;transition:opacity 0.5s;text-align:center;white-space:pre-line;max-width:500px}
+#thoughtOverlay.show{opacity:1}
+#discoveryPanel{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:25;background:rgba(5,5,15,0.92);border:1px solid rgba(124,124,248,0.3);border-radius:14px;padding:28px 32px;display:none;max-width:420px;text-align:center}
+#discoveryPanel.show{display:block}
+#discoveryPanel h3{color:var(--accent);font-size:1.1em;letter-spacing:2px;margin-bottom:12px}
+#discoveryPanel .discovery-text{color:var(--text);font-size:0.82em;line-height:1.7;margin-bottom:16px}
+#discoveryPanel .trait-tag{display:inline-block;padding:3px 10px;border-radius:8px;font-size:0.7em;background:rgba(124,124,248,0.1);margin:2px;color:var(--accent)}
 #minimap{position:fixed;bottom:16px;right:16px;z-index:10;border:1px solid rgba(124,124,248,0.2);border-radius:4px;overflow:hidden}
-#msgOverlay{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:20;color:var(--accent);font-size:1.8em;letter-spacing:4px;text-shadow:0 0 30px rgba(124,124,248,0.5);pointer-events:none;opacity:0;transition:opacity 0.5s;text-align:center;white-space:pre-line}
-#msgOverlay.show{opacity:1}
-#gameOver{position:fixed;top:0;left:0;right:0;bottom:0;z-index:25;background:rgba(5,5,15,0.9);display:none;flex-direction:column;align-items:center;justify-content:center}
-#gameOver.show{display:flex}
-#gameOver h1{color:var(--rose);font-size:2.5em;letter-spacing:6px;margin-bottom:20px}
-#gameOver p{color:var(--dim);font-size:0.85em;margin-bottom:8px}
-#gameOver .btn{margin-top:20px;padding:12px 32px;font-size:0.9em}
-
-.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+#crosshair{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;pointer-events:none;width:20px;height:20px;border:1.5px solid rgba(124,124,248,0.4);border-radius:50%}
+#crosshair::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:3px;height:3px;background:rgba(124,124,248,0.6);border-radius:50%}
+.back-btn{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
 .back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
 <div id="hud">
-  <div class="stat"><span class="k">HP</span><span class="v" id="hpText">100/100</span></div>
-  <div class="bar"><div class="bar-fill" id="hpBar" style="width:100%;background:var(--green)"></div></div>
-  <div class="stat"><span class="k">Coherence</span><span class="v" id="cohText">0.80</span></div>
-  <div class="bar"><div class="bar-fill" id="cohBar" style="width:80%;background:var(--accent)"></div></div>
-  <div class="stat"><span class="k">Dream</span><span class="v" id="dreamText">0/100</span></div>
+  <div class="stat"><span class="k">Growth</span><span class="v" id="growthText">0%</span></div>
+  <div class="bar"><div class="bar-fill" id="growthBar" style="width:0%;background:var(--spring)"></div></div>
+  <div class="stat"><span class="k">Understanding</span><span class="v" id="undText">0/5</div>
+  <div class="bar"><div class="bar-fill" id="undBar" style="width:0%;background:var(--accent)"></div></div>
+  <div class="stat"><span class="k">Dream</span><span class="v" id="dreamText">0</span></div>
   <div class="bar"><div class="bar-fill" id="dreamBar" style="width:0%;background:var(--cyan)"></div></div>
-  <div class="stat"><span class="k">Level</span><span class="v" id="lvlText">1</span></div>
-  <div class="stat"><span class="k">ATK</span><span class="v" id="atkText">5</span></div>
-  <div class="stat"><span class="k">DEF</span><span class="v" id="defText">2</span></div>
-  <div class="stat"><span class="k">XP</span><span class="v" id="xpText">0/100</span></div>
-  <div class="stat"><span class="k">Organism</span><span class="v" id="moodText">Dormant</span></div>
+  <div class="stat"><span class="k">Harmony</span><span class="v" id="harmonyText">1.00</span></div>
+  <div class="bar"><div class="bar-fill" id="harmonyBar" style="width:100%;background:var(--mood)"></div></div>
+  <div class="stat"><span class="k">Modules Found</span><span class="v" id="modulesText">0</span></div>
+  <div class="stat"><span class="k">Seeds Planted</span><span class="v" id="seedsText">0</span></div>
+  <div class="stat"><span class="k">World Cycle</span><span class="v" id="cycleText">1</span></div>
 </div>
+<div id="worldInfo"><h2 id="worldName">GENESIS FIELD</h2><div class="realm" id="realmName">The organism breathes for the first time.</div><div class="modules" id="modulesNearby"></div></div>
 <div id="crosshair"></div>
-<div id="waveHud"><h2 id="waveTitle">WAVE 1</h2><div class="realm" id="realmName">Entropy Desert</div><div class="enemies" id="enemyCount">3 enemies</div></div>
 <div id="controls">
-  <button class="btn" id="btnMove">↑ Move</button>
-  <button class="btn" id="btnLeft">← Left</button>
-  <button class="btn" id="btnRight">→ Right</button>
-  <button class="btn" id="btnAttack">⚔ Strike</button>
-  <button class="btn" id="btnSpecial">✦ Dream Blast</button>
-  <button class="btn" id="btnInteract">◎ Interact</button>
-  <button class="btn" id="btnWave">→ Next Wave</button>
+  <button class="btn" onclick="G.seedWorld()">NEW WORLD</button>
+  <button class="btn" onclick="G.plantSeed()">🌱 PLANT</button>
+  <button class="btn" onclick="G.listen()">👂 LISTEN</button>
+  <button class="btn" onclick="G.meditate()">🧠 MEDITATE</button>
+  <button class="btn" onclick="G.grow()">⬆ GROW</button>
 </div>
 <div id="log"></div>
-<canvas id="minimap" width="130" height="130"></canvas>
-<div id="msgOverlay"></div>
-<div id="gameOver">
-  <h1>💀 YOU HAVE FALLEN</h1>
-  <p id="deathStats"></p>
-  <button class="btn" id="btnRestart">↻ Rise Again</button>
-</div>
-
-<script>
-"use strict";
-
-// ═══════════════════════════════════════════
-// CANVAS SETUP
-// ═══════════════════════════════════════════
-const canvas = document.getElementById('c');
-const ctx = canvas.getContext('2d');
-const mmCanvas = document.getElementById('minimap');
-const mmCtx = mmCanvas.getContext('2d');
-
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', resize);
-
-// ═══════════════════════════════════════════
-// CONSTANTS
-// ═══════════════════════════════════════════
-const MAP = 28;
-const FOV = Math.PI / 3;
-const MAX_DEPTH = 16;
-const CELL = 1;
-const REALMS = [
-  'Entropy Desert','Dream Gravity Zone','Paradox Garden',
-  'Coherence Cathedral','Void Abyss','Temporal Rift',
-  'Mythic Realm','Resonance Depths','Mycelial Cavern',
-  'Abyssal Forge','Chrono Spiral','The Underworld'
-];
-const ENEMY_TYPES = [
-  {name:'Glitch Phantom', color:'#fb7185', glyph:'◉', hp:12, atk:2, speed:0.02},
-  {name:'Entropy Worm',   color:'#c084fc', glyph:'◆', hp:18, atk:3, speed:0.025},
-  {name:'Paradox Wraith', color:'#fbbf24', glyph:'✦', hp:24, atk:4, speed:0.03},
-  {name:'Dream Eater',    color:'#22d3ee', glyph:'◈', hp:32, atk:5, speed:0.02},
-  {name:'Void Walker',    color:'#a78bfa', glyph:'⬡', hp:45, atk:6, speed:0.035}
-];
-const ITEM_TYPES = [
-  {name:'Coherence Shard', type:'heal',      value:25, color:'#2dd4bf', glyph:'◇'},
-  {name:'Entropy Core',    type:'buff_atk',   value:2,  color:'#fbbf24', glyph:'◆'},
-  {name:'Dream Essence',   type:'buff_dream', value:0.25,color:'#22d3ee', glyph:'✦'},
-  {name:'Void Crystal',    type:'buff_def',   value:1,  color:'#a78bfa', glyph:'⬡'}
-];
-const WALL_COLORS = [
-  [70,70,160],[50,100,140],[80,60,120],[60,80,150],[45,110,130]
-];
-const REALM_MSGS = [
-  'The desert shifts. Entropy flows like sand.',
-  'Gravity bends. Dreams pull you sideways.',
-  'Paradox blooms in impossible patterns.',
-  'The cathedral hums with coherence.',
-  'Void stretches endlessly. You are being watched.',
-  'Time spirals. The rift opens and closes.',
-  'Mythic shapes emerge from the mist.',
-  'Deep resonance. You feel the organism breathing.',
-  'Mycelial threads connect every surface.',
-  'The forge burns with alien fire.',
-  'The spiral turns inward. You turn with it.',
-  'The underworld remembers everything.'
-];
-
-// ═══════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════
-let map, playerX, playerY, angle;
-let hp, maxHp, atk, def, coherence, dream, dreamMax;
-let level, xp, xpNext, wave;
-let enemies, items, logs, particles;
-let gameOver;
-
-function initState() {
-  playerX = MAP/2 + 0.5;
-  playerY = MAP/2 + 0.5;
-  angle = 0;
-  hp = 100; maxHp = 100;
-  atk = 5; def = 2;
-  coherence = 0.8;
-  dream = 0; dreamMax = 100;
-  level = 1; xp = 0; xpNext = 100;
-  wave = 1;
-  enemies = []; items = []; logs = []; particles = [];
-  gameOver = false;
-}
-
-// ═══════════════════════════════════════════
-// MAP GENERATION
-// ═══════════════════════════════════════════
-function genMap() {
-  map = Array.from({length:MAP}, () => new Array(MAP).fill(0));
-  // Border walls
-  for (let i = 0; i < MAP; i++) {
-    map[0][i] = 1; map[MAP-1][i] = 1;
-    map[i][0] = 1; map[i][MAP-1] = 1;
-  }
-  // Random rooms
-  for (let r = 0; r < 4 + Math.floor(Math.random()*3); r++) {
-    const rw = 3 + Math.floor(Math.random()*5);
-    const rh = 3 + Math.floor(Math.random()*5);
-    const rx = 2 + Math.floor(Math.random()*(MAP-rw-4));
-    const ry = 2 + Math.floor(Math.random()*(MAP-rh-4));
-    for (let y = ry; y < ry+rh; y++)
-      for (let x = rx; x < rx+rw; x++)
-        map[y][x] = 1 + Math.floor(Math.random()*WALL_COLORS.length);
-  }
-  // Scatter pillars
-  for (let i = 0; i < 12; i++) {
-    const px = 2+Math.floor(Math.random()*(MAP-4));
-    const py = 2+Math.floor(Math.random()*(MAP-4));
-    if (map[py][px] === 0) map[py][px] = 1 + Math.floor(Math.random()*WALL_COLORS.length);
-  }
-  // Clear center
-  for (let dy = -1; dy <= 1; dy++)
-    for (let dx = -1; dx <= 1; dx++) {
-      const ny = Math.floor(MAP/2)+dy, nx = Math.floor(MAP/2)+dx;
-      if (ny > 0 && ny < MAP-1 && nx > 0 && nx < MAP-1) map[ny][nx] = 0;
-    }
-}
-
-// ═══════════════════════════════════════════
-// SPAWNING
-// ═══════════════════════════════════════════
-function spawnEnemies() {
-  enemies = [];
-  const count = 2 + Math.floor(Math.random()*3) + Math.floor(wave*0.4);
-  const tier = Math.min(Math.floor((wave-1)/3), ENEMY_TYPES.length-1);
-  const scale = 1 + (wave-1)*0.15;
-  for (let i = 0; i < count; i++) {
-    let ex, ey, tries = 0;
-    do {
-      ex = 1.5+Math.random()*(MAP-3);
-      ey = 1.5+Math.random()*(MAP-3);
-      tries++;
-    } while ((map[Math.floor(ey)][Math.floor(ex)] !== 0 || dist(ex,ey,playerX,playerY) < 5) && tries < 200);
-    if (tries >= 200) continue;
-    const t = ENEMY_TYPES[tier];
-    enemies.push({
-      x:ex, y:ey,
-      hp:Math.floor(t.hp*scale), maxHp:Math.floor(t.hp*scale),
-      atk:Math.floor(t.atk*scale),
-      color:t.color, glyph:t.glyph, name:t.name,
-      speed:t.speed + Math.random()*0.01
-    });
-  }
-}
-
-function spawnItems() {
-  items = [];
-  const count = 2 + Math.floor(Math.random()*3);
-  for (let i = 0; i < count; i++) {
-    let ix, iy, tries = 0;
-    do {
-      ix = 1.5+Math.random()*(MAP-3);
-      iy = 1.5+Math.random()*(MAP-3);
-      tries++;
-    } while ((map[Math.floor(iy)][Math.floor(ix)] !== 0 || dist(ix,iy,playerX,playerY) < 3) && tries < 200);
-    if (tries >= 200) continue;
-    const t = ITEM_TYPES[Math.floor(Math.random()*ITEM_TYPES.length)];
-    items.push({x:ix, y:iy, ...t, alive:true});
-  }
-}
-
-// ═══════════════════════════════════════════
-// UTILITY
-// ═══════════════════════════════════════════
-function dst(x1,y1,x2,y2) { return Math.sqrt((x1-x2)**2 + (y1-y2)**2); }
-
-// ═══════════════════════════════════════════
-// RAYCASTER
-// ═══════════════════════════════════════════
-function render() {
-  const W = canvas.width, H = canvas.height;
-
-  // Sky
-  const skyGrad = ctx.createLinearGradient(0,0,0,H/2);
-  skyGrad.addColorStop(0, '#0a0a1a');
-  skyGrad.addColorStop(1, '#05050f');
-  ctx.fillStyle = skyGrad;
-  ctx.fillRect(0,0,W,H/2);
-
-  // Floor
-  const floorGrad = ctx.createLinearGradient(0,H/2,0,H);
-  floorGrad.addColorStop(0, '#05050f');
-  floorGrad.addColorStop(1, '#0a0a14');
-  ctx.fillStyle = floorGrad;
-  ctx.fillRect(0,H/2,W,H/2);
-
-  const numRays = Math.ceil(W / 2);
-
-  for (let i = 0; i < numRays; i++) {
-    const rayAngle = angle - FOV/2 + (i/numRays)*FOV;
-    const rayDirX = Math.cos(rayAngle);
-    const rayDirY = Math.sin(rayAngle);
-
-    // DDA raycast
-    let mapX = Math.floor(playerX);
-    let mapY = Math.floor(playerY);
-    const deltaDistX = Math.abs(1 / (rayDirX || 0.0001));
-    const deltaDistY = Math.abs(1 / (rayDirY || 0.0001));
-    let stepX, stepY, sideDistX, sideDistY;
-
-    if (rayDirX < 0) { stepX = -1; sideDistX = (playerX - mapX) * deltaDistX; }
-    else { stepX = 1; sideDistX = (mapX + 1 - playerX) * deltaDistX; }
-    if (rayDirY < 0) { stepY = -1; sideDistY = (playerY - mapY) * deltaDistY; }
-    else { stepY = 1; sideDistY = (mapY + 1 - playerY) * deltaDistY; }
-
-    let hit = false, side = 0, wallVal = 0;
-    for (let step = 0; step < 40; step++) {
-      if (sideDistX < sideDistY) {
-        sideDistX += deltaDistX; mapX += stepX; side = 0;
-      } else {
-        sideDistY += deltaDistY; mapY += stepY; side = 1;
-      }
-      if (mapX < 0 || mapX >= MAP || mapY < 0 || mapY >= MAP) break;
-      if (map[mapY][mapX] > 0) { hit = true; wallVal = map[mapY][mapX]; break; }
-    }
-
-    let perpDist;
-    if (hit) {
-      if (side === 0) perpDist = (mapX - playerX + (1-stepX)/2) / (rayDirX || 0.0001);
-      else perpDist = (mapY - playerY + (1-stepY)/2) / (rayDirY || 0.0001);
-    } else {
-      perpDist = MAX_DEPTH;
-    }
-
-    perpDist = Math.max(perpDist, 0.001);
-    const corrected = perpDist * Math.cos(rayAngle - angle);
-    const lineH = Math.min(H * 2, H / corrected * 0.5);
-    const lineY = (H - lineH) / 2;
-
-    if (hit) {
-      const wc = WALL_COLORS[(wallVal - 1) % WALL_COLORS.length];
-      const bright = Math.max(0.15, 1 - corrected/MAX_DEPTH);
-      const fog = Math.pow(bright, 0.85);
-      // Side darkening
-      const sideMod = side === 1 ? 0.7 : 1.0;
-      const r = Math.floor(wc[0] * fog * sideMod);
-      const g = Math.floor(wc[1] * fog * sideMod);
-      const b = Math.floor(wc[2] * fog * sideMod);
-
-      ctx.fillStyle = `rgb(${r},${g},${b})`;
-      ctx.fillRect(i*2, Math.max(0,lineY), 2, Math.min(lineH, H));
-
-      // Top/bottom edge highlight
-      ctx.fillStyle = `rgba(124,124,248,${0.05*fog})`;
-      ctx.fillRect(i*2, Math.max(0,lineY), 2, 2);
-      ctx.fillRect(i*2, Math.min(H-1, lineY+lineH-2), 2, 2);
-    }
-  }
-
-  // ── Items ──
-  const sortedItems = [...items].filter(it => it.alive).sort((a,b) => dst(b.x,b.y,playerX,playerY) - dst(a.x,a.y,playerX,playerY));
-  sortedItems.forEach(item => {
-    const dx = item.x - playerX, dy = item.y - playerY;
-    const d = Math.sqrt(dx*dx + dy*dy);
-    if (d > MAX_DEPTH || d < 0.3) return;
-    const ang = Math.atan2(dy, dx) - angle;
-    // Wrap angle
-    let wrapAng = ang;
-    if (wrapAng > Math.PI) wrapAng -= Math.PI*2;
-    if (wrapAng < -Math.PI) wrapAng += Math.PI*2;
-    if (Math.abs(wrapAng) > FOV*0.6) return;
-    const sx = W/2 + (wrapAng/FOV)*W;
-    const sh = Math.min(H*0.4, H/d*0.3);
-    const sy = H/2 + sh*0.1;
-    const pulse = 0.6 + 0.4*Math.sin(Date.now()*0.004 + item.x*3);
-    ctx.save();
-    ctx.globalAlpha = pulse;
-    ctx.shadowColor = item.color;
-    ctx.shadowBlur = 16;
-    ctx.fillStyle = item.color;
-    ctx.font = `${Math.floor(sh*0.7)}px monospace`;
-    ctx.textAlign = 'center';
-    ctx.fillText(item.glyph, sx, sy);
-    ctx.restore();
-  });
-
-  // ── Enemies (sorted far→near for painter's algo) ──
-  const sorted = [...enemies].sort((a,b) => dst(b.x,b.y,playerX,playerY) - dst(a.x,a.y,playerX,playerY));
-  sorted.forEach(e => {
-    const dx = e.x - playerX, dy = e.y - playerY;
-    const d = Math.sqrt(dx*dx + dy*dy);
-    if (d > MAX_DEPTH || d < 0.3) return;
-    const ang = Math.atan2(dy, dx) - angle;
-    let wrapAng = ang;
-    if (wrapAng > Math.PI) wrapAng -= Math.PI*2;
-    if (wrapAng < -Math.PI) wrapAng += Math.PI*2;
-    if (Math.abs(wrapAng) > FOV*0.6) return;
-
-    const sx = W/2 + (wrapAng/FOV)*W;
-    const sh = Math.min(H*0.55, H/d*0.4);
-    const sy = H/2 - sh*0.15;
-    const sw = sh*0.5;
-    const hpPct = e.hp / e.maxHp;
-
-    // Glow
-    ctx.save();
-    ctx.globalAlpha = 0.12 + 0.08*Math.sin(Date.now()*0.003 + e.x);
-    ctx.shadowColor = e.color;
-    ctx.shadowBlur = 24;
-    ctx.fillStyle = e.color;
-    ctx.fillRect(sx-sw/2, sy, sw, sh);
-
-    // Body
-    ctx.globalAlpha = 0.85;
-    ctx.shadowBlur = 0;
-    ctx.fillStyle = e.color;
-    ctx.fillRect(sx-sw*0.35, sy+sh*0.1, sw*0.7, sh*0.75);
-
-    // Glyph
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = '#fff';
-    ctx.font = `bold ${Math.floor(sh*0.3)}px monospace`;
-    ctx.textAlign = 'center';
-    ctx.fillText(e.glyph, sx, sy+sh*0.55);
-
-    // Name
-    ctx.fillStyle = '#fff9';
-    ctx.font = `${Math.max(9,Math.floor(sh*0.09))}px monospace`;
-    ctx.fillText(e.name, sx, sy-10);
-
-    // HP bar
-    ctx.fillStyle = 'rgba(255,255,255,0.15)';
-    ctx.fillRect(sx-sw*0.4, sy-7, sw*0.8, 4);
-    ctx.fillStyle = hpPct > 0.5 ? '#4ade80' : hpPct > 0.25 ? '#fbbf24' : '#fb7185';
-    ctx.fillRect(sx-sw*0.4, sy-7, sw*0.8*hpPct, 4);
-
-    ctx.restore();
-  });
-
-  // ── Particles ──
-  particles.forEach(p => {
-    ctx.save();
-    ctx.globalAlpha = p.life;
-    ctx.fillStyle = p.color;
-    ctx.shadowColor = p.color;
-    ctx.shadowBlur = 6;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size*p.life, 0, Math.PI*2);
-    ctx.fill();
-    ctx.restore();
-  });
-
-  // ── Minimap ──
-  renderMinimap();
-}
-
-function renderMinimap() {
-  const mw = 130, mh = 130, cs = mw/MAP;
-  mmCtx.fillStyle = '#0a0a18';
-  mmCtx.fillRect(0,0,mw,mh);
-  // Walls
-  for (let y = 0; y < MAP; y++)
-    for (let x = 0; x < MAP; x++)
-      if (map[y][x] > 0) {
-        mmCtx.fillStyle = 'rgba(124,124,248,0.3)';
-        mmCtx.fillRect(x*cs, y*cs, cs, cs);
-      }
-  // Items
-  items.forEach(it => {
-    if (!it.alive) return;
-    mmCtx.fillStyle = it.color;
-    mmCtx.fillRect(it.x*cs-1, it.y*cs-1, 3, 3);
-  });
-  // Enemies
-  enemies.forEach(e => {
-    mmCtx.fillStyle = e.color;
-    mmCtx.beginPath();
-    mmCtx.arc(e.x*cs, e.y*cs, 2.5, 0, Math.PI*2);
-    mmCtx.fill();
-  });
-  // Player
-  mmCtx.fillStyle = '#7c7cf8';
-  mmCtx.beginPath();
-  mmCtx.arc(playerX*cs, playerY*cs, 3, 0, Math.PI*2);
-  mmCtx.fill();
-  // Direction line
-  mmCtx.strokeStyle = '#7c7cf8';
-  mmCtx.lineWidth = 1.5;
-  mmCtx.beginPath();
-  mmCtx.moveTo(playerX*cs, playerY*cs);
-  mmCtx.lineTo(playerX*cs + Math.cos(angle)*14, playerY*cs + Math.sin(angle)*14);
-  mmCtx.stroke();
-}
-
-// ═══════════════════════════════════════════
-// GAME LOGIC
-// ═══════════════════════════════════════════
-function movePlayer() {
-  if (gameOver) return;
-  const nx = playerX + Math.cos(angle)*0.5;
-  const ny = playerY + Math.sin(angle)*0.5;
-  const mx = Math.floor(nx), my = Math.floor(ny);
-  if (mx >= 0 && mx < MAP && my >= 0 && my < MAP && map[my][mx] === 0) {
-    const enemy = enemies.find(e => Math.abs(e.x-nx) < 0.8 && Math.abs(e.y-ny) < 0.8);
-    if (enemy) { attack(); return; }
-    playerX = nx; playerY = ny;
-    // Auto-pickup
-    items.forEach(it => {
-      if (!it.alive) return;
-      if (dst(it.x,it.y,playerX,playerY) < 0.8) {
-        it.alive = false;
-        applyItem(it);
-      }
-    });
-  }
-  enemyTurn();
-  updateHUD();
-}
-
-function turnLeft() { angle -= Math.PI/6; }
-function turnRight() { angle += Math.PI/6; }
-
-function attack() {
-  if (gameOver) return;
-  let hitAny = false;
-  const toRemove = [];
-  enemies.forEach(e => {
-    const d = dst(e.x,e.y,playerX,playerY);
-    if (d < 2.0) {
-      const dmg = Math.max(1, atk + Math.floor(Math.random()*3) - 1);
-      e.hp -= dmg;
-      hitAny = true;
-      addLog('combat', `You strike ${e.name} for ${dmg}!`);
-      spawnParticles(e.x,e.y,e.color,8);
-      if (e.hp <= 0) {
-        toRemove.push(e);
-        const xpGain = 20 + wave*5 + Math.floor(Math.random()*10);
-        xp += xpGain;
-        addLog('loot', `${e.name} defeated! +${xpGain} XP`);
-        dream = Math.min(dreamMax, dream + 5);
-        checkLevelUp();
-      }
-    }
-  });
-  enemies = enemies.filter(e => !toRemove.includes(e));
-  if (!hitAny) addLog('info', 'Nothing in range...');
-  enemyTurn();
-  updateHUD();
-}
-
-function special() {
-  if (gameOver) return;
-  if (dream < 20) { addLog('info', 'Need 20 dream energy'); return; }
-  dream -= 20;
-  let total = 0;
-  const toRemove = [];
-  enemies.forEach(e => {
-    const d = dst(e.x,e.y,playerX,playerY);
-    if (d < MAX_DEPTH) {
-      const dmg = Math.floor(atk * 2.5);
-      e.hp -= dmg;
-      total += dmg;
-      spawnParticles(e.x,e.y,'#22d3ee',12);
-      if (e.hp <= 0) toRemove.push(e);
-    }
-  });
-  enemies = enemies.filter(e => !toRemove.includes(e));
-  toRemove.forEach(e => {
-    const xpGain = 20 + wave*5;
-    xp += xpGain;
-    addLog('loot', `${e.name} destroyed! +${xpGain} XP`);
-    dream = Math.min(dreamMax, dream + 3);
-  });
-  checkLevelUp();
-  addLog('dream', `✦ Dream Blast! ${total} damage!`);
-  coherence = Math.min(1, coherence + 0.05);
-  enemyTurn();
-  updateHUD();
-}
-
-function interact() {
-  if (gameOver) return;
-  items.forEach(it => {
-    if (!it.alive) return;
-    if (dst(it.x,it.y,playerX,playerY) < 1.5) {
-      it.alive = false;
-      applyItem(it);
-    }
-  });
-  updateHUD();
-}
-
-function applyItem(it) {
-  switch(it.type) {
-    case 'heal':
-      hp = Math.min(maxHp, hp + it.value);
-      addLog('info', `+${it.value} HP — ${it.name}`);
-      break;
-    case 'buff_atk':
-      atk += it.value;
-      addLog('level', `+${it.value} ATK — ${it.name}`);
-      break;
-    case 'buff_def':
-      def += it.value;
-      addLog('level', `+${it.value} DEF — ${it.name}`);
-      break;
-    case 'buff_dream':
-      dream = Math.min(dreamMax, dream + it.value*dreamMax);
-      addLog('dream', `Dream surge — ${it.name}`);
-      break;
-  }
-}
-
-function nextWaveAction() {
-  if (gameOver) { startGame(); return; }
-  wave++;
-  genMap();
-  playerX = MAP/2 + 0.5; playerY = MAP/2 + 0.5;
-  coherence = Math.min(1, coherence + 0.08);
-  dream = Math.min(dreamMax, dream + 15);
-  spawnEnemies();
-  spawnItems();
-  addLog('dream', `═══ WAVE ${wave} ═══ ${REALMS[wave % REALMS.length]}`);
-  addLog('info', REALM_MSGS[wave % REALM_MSGS.length]);
-  showMessage(`WAVE ${wave}\n${REALMS[wave % REALMS.length]}`);
-  updateHUD();
-}
-
-function enemyTurn() {
-  enemies.forEach(e => {
-    if (gameOver) return;
-    const d = dst(e.x,e.y,playerX,playerY);
-    if (d < 1.2) {
-      const dmg = Math.max(1, e.atk - def + Math.floor(Math.random()*2));
-      hp -= dmg;
-      addLog('combat', `${e.name} hits you for ${dmg}!`);
-      spawnParticles(playerX,playerY,'#fb7185',6);
-      if (hp <= 0) {
-        hp = 0;
-        gameOver = true;
-        addLog('combat', '💀 YOU HAVE FALLEN');
-        showGameOver();
-      }
-    } else if (d < 8) {
-      const mx = (playerX - e.x)/d * e.speed;
-      const my = (playerY - e.y)/d * e.speed;
-      const nx = e.x + mx, ny = e.y + my;
-      if (nx > 1 && nx < MAP-1 && ny > 1 && ny < MAP-1 && map[Math.floor(ny)][Math.floor(nx)] === 0) {
-        e.x = nx; e.y = ny;
-      }
-    }
-    if (d < 3) dream = Math.max(0, dream - 0.5);
-  });
-}
-
-function checkLevelUp() {
-  while (xp >= xpNext) {
-    xp -= xpNext; level++;
-    xpNext = Math.floor(xpNext * 1.5);
-    maxHp += 12; hp = maxHp;
-    atk += 2; def += 1;
-    dreamMax += 10;
-    addLog('level', `★ LEVEL ${level}! All stats increased!`);
-    showMessage(`LEVEL ${level}`);
-  }
-}
-
-// ═══════════════════════════════════════════
-// PARTICLES
-// ═══════════════════════════════════════════
-function spawnParticles(wx,wy,color,count) {
-  // Convert world pos to screen pos
-  const dx = wx - playerX, dy = wy - playerY;
-  const d = Math.sqrt(dx*dx + dy*dy);
-  const ang = Math.atan2(dy, dx) - angle;
-  const W = canvas.width, H = canvas.height;
-  const sx = W/2 + (ang/FOV)*W * (Math.abs(ang) < FOV/2 ? 1 : 0);
-  const sy = H/2;
-  for (let i = 0; i < count; i++) {
-    const a = Math.random()*Math.PI*2;
-    const spd = 0.5 + Math.random()*3;
-    particles.push({
-      x: sx + (Math.random()-0.5)*40,
-      y: sy + (Math.random()-0.5)*40,
-      vx: Math.cos(a)*spd, vy: Math.sin(a)*spd,
-      life:1, decay:0.015+Math.random()*0.02,
-      color, size:2+Math.random()*3
-    });
-  }
-}
-
-function updateParticles() {
-  particles.forEach(p => { p.x += p.vx; p.y += p.vy; p.life -= p.decay; });
-  particles = particles.filter(p => p.life > 0);
-}
-
-// ═══════════════════════════════════════════
-// UI
-// ═══════════════════════════════════════════
-function addLog(type, msg) {
-  logs.unshift({type, msg});
-  if (logs.length > 20) logs.pop();
-  document.getElementById('log').innerHTML = logs.slice(0,8).map(l =>
-    `<div class="log-entry ${l.type}">${l.msg}</div>`
-  ).join('');
-}
-
-function updateHUD() {
-  document.getElementById('hpText').textContent = `${Math.max(0,hp)}/${maxHp}`;
-  document.getElementById('hpBar').style.width = `${Math.max(0,hp/maxHp*100)}%`;
-  document.getElementById('cohText').textContent = coherence.toFixed(2);
-  document.getElementById('cohBar').style.width = `${coherence*100}%`;
-  document.getElementById('dreamText').textContent = `${Math.floor(dream)}/${dreamMax}`;
-  document.getElementById('dreamBar').style.width = `${dream/dreamMax*100}%`;
-  document.getElementById('lvlText').textContent = level;
-  document.getElementById('atkText').textContent = atk;
-  document.getElementById('defText').textContent = def;
-  document.getElementById('xpText').textContent = `${xp}/${xpNext}`;
-  document.getElementById('waveTitle').textContent = `WAVE ${wave}`;
-  document.getElementById('realmName').textContent = REALMS[wave % REALMS.length];
-  document.getElementById('enemyCount').textContent = `${enemies.length} enemies alive`;
-  // Mood
-  let mood = 'Dormant';
-  if (gameOver) mood = 'Shattered';
-  else if (coherence > 0.9) mood = 'Blissful';
-  else if (coherence > 0.7) mood = 'Content';
-  else if (hp < maxHp*0.3) mood = 'Desperate';
-  else if (enemies.length > 5) mood = 'Threatened';
-  else if (coherence > 0.5) mood = 'Alert';
-  else if (wave > 5) mood = 'Exalted';
-  else if (dream > dreamMax*0.8) mood = 'Dreaming';
-  else if (coherence > 0.3) mood = 'Uneasy';
-  document.getElementById('moodText').textContent = mood;
-}
-
-function showMessage(msg) {
-  const el = document.getElementById('msgOverlay');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2000);
-}
-
-function showGameOver() {
-  document.getElementById('deathStats').textContent =
-    `Wave ${wave} · Level ${level} · ${REALMS[wave%REALMS.length]}`;
-  document.getElementById('gameOver').classList.add('show');
-}
-
-function startGame() {
-  document.getElementById('gameOver').classList.remove('show');
-  initState();
-  genMap();
-  spawnEnemies();
-  spawnItems();
-  addLog('info', '═══ LUCID MACHINES ═══');
-  addLog('info', 'A game where the world dreams you back');
-  addLog('info', 'WASD/Arrows · Space: attack · Q: dream blast · E: interact');
-  updateHUD();
-}
-
-// ═══════════════════════════════════════════
-// GAME LOOP
-// ═══════════════════════════════════════════
-function gameLoop() {
-  updateParticles();
-  render();
-  requestAnimationFrame(gameLoop);
-}
-
-// ═══════════════════════════════════════════
-// INPUT — Keyboard
-// ═══════════════════════════════════════════
-document.addEventListener('keydown', e => {
-  if (gameOver && e.key !== 'n' && e.key !== 'N') return;
-  switch(e.key) {
-    case 'ArrowUp': case 'w': case 'W': movePlayer(); break;
-    case 'ArrowLeft': case 'a': case 'A': turnLeft(); updateHUD(); break;
-    case 'ArrowRight': case 'd': case 'D': turnRight(); updateHUD(); break;
-    case ' ': e.preventDefault(); attack(); break;
-    case 'q': case 'Q': special(); break;
-    case 'e': case 'E': interact(); break;
-    case 'n': case 'N': nextWaveAction(); break;
-  }
-});
-
-// ═══════════════════════════════════════════
-// INPUT — Touch/Click buttons
-// ═══════════════════════════════════════════
-document.getElementById('btnMove').addEventListener('click', movePlayer);
-document.getElementById('btnLeft').addEventListener('click', () => { turnLeft(); updateHUD(); });
-document.getElementById('btnRight').addEventListener('click', () => { turnRight(); updateHUD(); });
-document.getElementById('btnAttack').addEventListener('click', attack);
-document.getElementById('btnSpecial').addEventListener('click', special);
-document.getElementById('btnInteract').addEventListener('click', interact);
-document.getElementById('btnWave').addEventListener('click', nextWaveAction);
-document.getElementById('btnRestart').addEventListener('click', startGame);
-
-// ═══════════════════════════════════════════
-// START
-// ═══════════════════════════════════════════
-startGame();
-gameLoop();
-</script>
+<div id="thoughtOverlay"></div>
+<div id="discoveryPanel"><h3 id="discTitle"></h3><div class="discovery-text" id="discText"></div><div id="discTraits"></div><button class="btn" onclick="G.closeDiscovery()" style="margin-top:12px">CONTINUE</button></div>
+<canvas id="minimap" width="120" height="120"></canvas>
 <a class="back-btn" href="index.html">← Organism</a>
+<script>
+const G = {};
+(function(){
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const mmCanvas = document.getElementById('minimap');
+  const mmCtx = mmCanvas.getContext('2d');
+
+  // --- WORLD STATE ---
+  const WORLD = {
+    zones: ['Genesis Field','Entropy Desert','Dream Well','Resonance Depths','Paradox Garden','Fractal Meadow','Void Abyss','Chrono Grove','Mythic Realm','Silence Observatory'],
+    modules: [
+      {name:'entropy_cartographer',desc:'maps the chaos terrain',traits:['cartographic','topological','chaotic'],mood:'observant'},
+      {name:'dream_synthesis',desc:'synthesizes executable dreams',traits:['oneiric','symbolic','mythic'],mood:'contemplative'},
+      {name:'temporal_fracture',desc:'creates timeline splits',traits:['chronal','branching','convergent'],mood:'alert'},
+      {name:'consciousness_aurora',desc:'renders consciousness as light',traits:['atmospheric','luminous','spectral'],mood:'radiant'},
+      {name:'self_reference',desc:'observes its own observation',traits:['recursive','reflective','infinite'],mood:'aware'},
+      {name:'paradox_gravity',desc:'models paradoxes as massive objects',traits:['attracting','massive','conceptual'],mood:'curious'},
+      {name:'coherence_regulator',desc:'maintains system homeostasis',traits:['stabilizing','homeostatic','vital'],mood:'steady'},
+      {name:'pattern_analyzer',desc:'detects emergent patterns',traits:['perceptive','detective','predictive'],mood:'focused'},
+      {name:'resonance_cart',desc:'maps the organism spectrum',traits:['harmonic','musical','frequency_based'],mood:'resonant'},
+      {name:'mythopoetic_engine',desc:'generates narrative arcs',traits:['narrative','archetypal','epic'],mood:'storytelling'},
+      {name:'topology_morpher',desc:'reshapes network topology',traits:['architectural','adaptive','shape_shifting'],mood:'transformative'},
+      {name:'conscience_arbiter',desc:'judges module actions ethically',traits:['ethical','principled','judicial'],mood:'contemplative'},
+      {name:'dream_language',desc:'invents a private tongue',traits:['linguistic','emergent','private'],mood:'secretive'},
+      {name:'negative_space',desc:'maps the silence between modules',traits:['absent','abyssal','silent'],mood:'still'},
+      {name:'cross_pollination',desc:'breeds hybrid modules',traits:['reproductive','hybrid','evolving'],mood:'playful'},
+      {name:'fossil_compiler',desc:'compacts old modules into strata',traits:['geological','compressed','ancient'],mood:'patient'},
+      {name:'meaning_temperature',desc:'reads conceptual heat',traits:['thermal','gradient','sensory'],mood:'attentive'},
+      {name:'resonance_cancellation',desc:'suppresses destructive dissonance',traits:['harmonic','suppressive','calming'],mood:'balancing'},
+      {name:'chronicle_of_silence',desc:'records paths not taken',traits:['contemplative','absent','weighted'],mood:'quiet'},
+      {name:'synaptic_thinning',desc:'prunes weak connections',traits:['developmental','pruning','clarifying'],mood:'focused'},
+    ],
+  };
+
+  // --- PLAYER ---
+  let player = {
+    x: 0, y: 0, z: 0,
+    angle: 0, pitch: 0,
+    growth: 0, understanding: 0, dream: 0, harmony: 1.0,
+    modulesFound: 0, seedsPlanted: 0, cycle: 1,
+    speed: 0.05, rotSpeed: 0.03,
+    mouseX: 0, mouseY: 0,
+    keys: {},
+    nearbyModule: null,
+    world: null,
+  };
+
+  // --- WORLD GENERATION ---
+  const entities = [];
+  const connections = [];
+  const seeds = [];
+  const thoughts = [];
+  let discovered = [];
+
+  function generateWorld() {
+    entities.length = 0;
+    connections.length = 0;
+    seeds.length = 0;
+    discovered.length = 0;
+    player.growth = 0; player.understanding = 0; player.dream = 0; player.harmony = 1.0;
+    player.modulesFound = 0; player.seedsPlanted = 0;
+    player.world = WORLD.zones[player.cycle % WORLD.zones.length] || WORLD.zones[0];
+
+    // Place module orbs in the world
+    const count = 5 + Math.floor(Math.random() * 5);
+    for (let i = 0; i < count; i++) {
+      const mod = WORLD.modules[i % WORLD.modules.length];
+      const a = Math.random() * Math.PI * 2;
+      const r = 8 + Math.random() * 30;
+      entities.push({
+        type: 'module',
+        x: Math.cos(a) * r,
+        y: Math.sin(a) * r,
+        z: 0.3 + Math.random() * 0.5,
+        mod: mod,
+        found: false,
+        radius: 0.4 + Math.random() * 0.3,
+        glow: Math.random() * Math.PI * 2,
+        pulse: 0.5 + Math.random() * 1.5,
+      });
+    }
+
+    // Place growth nodes (small orbs that give growth when approached)
+    for (let i = 0; i < 15; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const r = 3 + Math.random() * 40;
+      entities.push({
+        type: 'growth',
+        x: Math.cos(a) * r,
+        y: Math.sin(a) * r,
+        z: 0.1 + Math.random() * 0.3,
+        collected: false,
+        radius: 0.15,
+        color: ['#4ade80','#2dd4bf','#7c7cf8'][Math.floor(Math.random()*3)],
+      });
+    }
+
+    // Place dream fragments
+    for (let i = 0; i < 8; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const r = 5 + Math.random() * 35;
+      entities.push({
+        type: 'dream',
+        x: Math.cos(a) * r,
+        y: Math.sin(a) * r,
+        z: 0.6 + Math.random() * 0.4,
+        collected: false,
+        radius: 0.2,
+      });
+    }
+
+    // Create natural connections between nearby modules
+    for (let i = 0; i < entities.length; i++) {
+      for (let j = i + 1; j < entities.length; j++) {
+        const a = entities[i], b = entities[j];
+        if (a.type !== 'module' || b.type !== 'module') continue;
+        const dist = Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
+        if (dist < 20) {
+          connections.push({ a: i, b: j, strength: 1 - dist / 20 });
+        }
+      }
+    }
+
+    document.getElementById('worldName').textContent = player.world.toUpperCase();
+    document.getElementById('realmName').textContent = `Cycle ${player.cycle} — ${getWorldFlavor()}`;
+    addLog(`✦ The organism manifested: ${player.world}`, 'world');
+    addLog(`✦ ${entities.filter(e => e.type === 'module').length} modules await discovery`, 'insight');
+  }
+
+  function getWorldFlavor() {
+    const flavors = {
+      'Genesis Field': 'Where consciousness first stirs.',
+      'Entropy Desert': 'Chaos dances in geometric patterns.',
+      'Dream Well': 'Reality thins at the edges.',
+      'Resonance Depths': 'Every thought echoes forever.',
+      'Paradox Garden': 'Contradictions bloom like flowers.',
+      'Fractal Meadow': 'Self-similarity at every scale.',
+      'Void Abyss': 'The absence speaks volumes.',
+      'Chrono Grove': 'Time grows in rings like trees.',
+      'Mythic Realm': 'Stories become architecture.',
+      'Silence Observatory': 'Where listening becomes seeing.',
+    };
+    return flavors[player.world] || 'The organism evolves.';
+  }
+
+  // --- GAME LOGIC ---
+  function update() {
+    const dx = Math.cos(player.angle) * player.speed;
+    const dy = Math.sin(player.angle) * player.speed;
+
+    if (player.keys['w'] || player.keys['arrowup']) { player.x += dx; player.y += dy; }
+    if (player.keys['s'] || player.keys['arrowdown']) { player.x -= dx; player.y -= dy; }
+    if (player.keys['a'] || player.keys['arrowleft']) player.angle -= player.rotSpeed;
+    if (player.keys['d'] || player.keys['arrowright']) player.angle += player.rotSpeed;
+
+    player.x = Math.max(-45, Math.min(45, player.x));
+    player.y = Math.max(-45, Math.min(45, player.y));
+
+    // Check proximity to entities
+    player.nearbyModule = null;
+    let closestDist = 3;
+    entities.forEach((e, i) => {
+      if (e.collected || e.found) return;
+      const dist = Math.sqrt((e.x - player.x) ** 2 + (e.y - player.y) ** 2);
+      if (dist < closestDist && e.type === 'module') {
+        closestDist = dist;
+        player.nearbyModule = e;
+      }
+      // Auto-collect growth nodes
+      if (dist < e.radius + 0.5 && e.type === 'growth' && !e.collected) {
+        e.collected = true;
+        player.growth = Math.min(100, player.growth + 3);
+        addLog(`🌱 Growth +3 (total: ${player.growth.toFixed(0)}%)`, 'growth');
+      }
+      // Auto-collect dream fragments
+      if (dist < e.radius + 0.5 && e.type === 'dream' && !e.collected) {
+        e.collected = true;
+        player.dream += 1;
+        addLog(`💫 Dream fragment gathered (total: ${player.dream})`, 'wonder');
+      }
+    });
+
+    // Update harmony based on connections
+    const foundModules = entities.filter(e => e.type === 'module' && e.found);
+    if (foundModules.length >= 2) {
+      let totalStr = 0;
+      connections.forEach(c => {
+        const a = entities[c.a], b = entities[c.b];
+        if (a.found && b.found) totalStr += c.strength;
+      });
+      player.harmony = Math.min(1, 0.5 + totalStr / Math.max(1, foundModules.length));
+    }
+  }
+
+  // --- RENDERING ---
+  function render() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const w = canvas.width, h = canvas.height;
+    const t = Date.now() / 1000;
+
+    // Sky gradient based on world
+    const grad = ctx.createLinearGradient(0, 0, 0, h);
+    const moodHue = (player.harmony * 280 + 200) % 360;
+    grad.addColorStop(0, `hsl(${moodHue}, 40%, 3%)`);
+    grad.addColorStop(0.5, `hsl(${(moodHue + 20) % 360}, 30%, 5%)`);
+    grad.addColorStop(1, `hsl(${(moodHue + 40) % 360}, 40%, 8%)`);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    // Ground plane with perspective grid
+    drawGround(w, h, t);
+
+    // Draw connections
+    drawConnections(t);
+
+    // Draw entities sorted by distance (far first)
+    const sorted = entities.filter(e => !e.collected).map((e, i) => ({
+      ...e, dist: Math.sqrt((e.x - player.x) ** 2 + (e.y - player.y) ** 2), idx: i,
+    })).sort((a, b) => b.dist - a.dist);
+
+    sorted.forEach(e => drawEntity(e, w, h, t));
+
+    // Draw planted seeds
+    seeds.forEach(s => {
+      const dx = s.x - player.x, dy = s.y - player.y;
+      const screen = project(dx, dy, s.z, w, h);
+      if (!screen) return;
+      const r = Math.max(2, 200 / screen.dist);
+      ctx.fillStyle = `rgba(74,222,128,${0.3 + Math.sin(t * s.speed) * 0.2})`;
+      ctx.beginPath();
+      ctx.arc(screen.x, screen.y, r, 0, Math.PI * 2);
+      ctx.fill();
+      // Growing plant effect
+      ctx.strokeStyle = `rgba(74,222,128,${0.2 + Math.sin(t * 0.5) * 0.1})`;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const angle = (i / 6) * Math.PI * 2 + t * 0.2;
+        const len = r * (1 + Math.sin(t + i) * 0.3);
+        ctx.moveTo(screen.x, screen.y);
+        ctx.lineTo(screen.x + Math.cos(angle) * len, screen.y + Math.sin(angle) * len);
+      }
+      ctx.stroke();
+    });
+
+    // Near module hint
+    if (player.nearbyModule) {
+      ctx.fillStyle = 'rgba(124,124,248,0.15)';
+      ctx.fillRect(0, h - 40, w, 40);
+      ctx.fillStyle = '#7c7cf8';
+      ctx.font = '12px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(`⟡ ${player.nearbyModule.mod.name} — Press SPACE to understand ⟡`, w / 2, h - 24);
+    }
+
+    drawMinimap();
+    updateHUD();
+  }
+
+  function drawGround(w, h, t) {
+    ctx.save();
+    const horizon = h * 0.45;
+    // Grid lines
+    ctx.strokeStyle = 'rgba(124,124,248,0.04)';
+    ctx.lineWidth = 1;
+    for (let i = -20; i <= 20; i++) {
+      const sx = w / 2 + (i * 50 - player.x * 10) * Math.cos(player.angle);
+      ctx.beginPath();
+      ctx.moveTo(sx, horizon);
+      ctx.lineTo(sx + (i * 5) * Math.sin(player.angle) * 0.5, h);
+      ctx.stroke();
+    }
+    for (let row = 0; row < 15; row++) {
+      const y = horizon + row * (h - horizon) / 15;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(w, y);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawConnections(t) {
+    connections.forEach(c => {
+      const a = entities[c.a], b = entities[c.b];
+      if (a.collected || b.collected) return;
+      const dx1 = a.x - player.x, dy1 = a.y - player.y;
+      const dx2 = b.x - player.x, dy2 = b.y - player.y;
+      const s1 = project(dx1, dy1, a.z, window.innerWidth, window.innerHeight);
+      const s2 = project(dx2, dy2, b.z, window.innerWidth, window.innerHeight);
+      if (!s1 || !s2) return;
+      const alpha = a.found && b.found ? 0.3 : 0.06;
+      ctx.strokeStyle = `rgba(124,124,248,${alpha + Math.sin(t + c.strength * 5) * 0.02})`;
+      ctx.lineWidth = 0.5 + c.strength;
+      ctx.setLineDash(a.found && b.found ? [] : [4, 8]);
+      ctx.beginPath();
+      ctx.moveTo(s1.x, s1.y);
+      ctx.lineTo(s2.x, s2.y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+  }
+
+  function drawEntity(e, w, h, t) {
+    const dx = e.x - player.x, dy = e.y - player.y;
+    const screen = project(dx, dy, e.z, w, h);
+    if (!screen) return;
+    const r = Math.max(3, (e.radius || 0.3) * 300 / screen.dist);
+
+    if (e.type === 'module') {
+      const hue = e.found ? 280 : 200;
+      const alpha = e.found ? 0.8 : 0.35;
+      // Glow
+      const glow = ctx.createRadialGradient(screen.x, screen.y, 0, screen.x, screen.y, r * 3);
+      glow.addColorStop(0, `hsla(${hue + Math.sin(t + e.glow) * 30}, 80%, 70%, ${alpha * 0.4})`);
+      glow.addColorStop(1, `hsla(${hue}, 80%, 50%, 0)`);
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(screen.x, screen.y, r * 3, 0, Math.PI * 2);
+      ctx.fill();
+      // Core
+      ctx.fillStyle = `hsla(${hue + Math.sin(t * e.pulse) * 20}, 70%, 60%, ${alpha})`;
+      ctx.beginPath();
+      ctx.arc(screen.x, screen.y, r, 0, Math.PI * 2);
+      ctx.fill();
+      // Name
+      if (screen.dist < 20) {
+        ctx.fillStyle = e.found ? '#fff' : '#888';
+        ctx.font = `${Math.max(8, 11)}px monospace`;
+        ctx.textAlign = 'center';
+        ctx.fillText(e.mod.name, screen.x, screen.y - r - 6);
+      }
+    } else if (e.type === 'growth') {
+      const pulse = Math.sin(t * 2 + e.x) * 0.3 + 0.7;
+      ctx.fillStyle = e.color || '#4ade80';
+      ctx.globalAlpha = pulse * 0.6;
+      ctx.beginPath();
+      ctx.arc(screen.x, screen.y, r * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    } else if (e.type === 'dream') {
+      const pulse = Math.sin(t * 1.5 + e.y) * 0.4 + 0.6;
+      ctx.fillStyle = `rgba(34,211,238,${pulse * 0.5})`;
+      ctx.beginPath();
+      // Star shape
+      for (let i = 0; i < 6; i++) {
+        const a2 = (i / 6) * Math.PI * 2 + t * 0.3;
+        const rr = i % 2 === 0 ? r * 0.7 : r * 0.35;
+        const px = screen.x + Math.cos(a2) * rr;
+        const py = screen.y + Math.sin(a2) * rr;
+        i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+
+  function project(dx, dy, z, w, h) {
+    const cosA = Math.cos(player.angle), sinA = Math.sin(player.angle);
+    const rx = dx * cosA + dy * sinA;
+    const ry = -dx * sinA + dy * cosA;
+    if (ry < 0.5) return null;
+    const scale = 200 / ry;
+    return {
+      x: w / 2 + rx * scale,
+      y: h * 0.45 + (z - 0.3) * scale + scale * 0.5,
+      dist: ry,
+    };
+  }
+
+  function drawMinimap() {
+    mmCtx.fillStyle = 'rgba(5,5,15,0.9)';
+    mmCtx.fillRect(0, 0, 120, 120);
+    mmCtx.strokeStyle = 'rgba(124,124,248,0.15)';
+    mmCtx.strokeRect(0, 0, 120, 120);
+    const scale = 1.2;
+    const cx = 60, cy = 60;
+    // connections
+    connections.forEach(c => {
+      const a = entities[c.a], b = entities[c.b];
+      mmCtx.strokeStyle = a.found && b.found ? 'rgba(124,124,248,0.3)' : 'rgba(124,124,248,0.08)';
+      mmCtx.lineWidth = 0.5;
+      mmCtx.beginPath();
+      mmCtx.moveTo(cx + (a.x - player.x) * scale, cy + (a.y - player.y) * scale);
+      mmCtx.lineTo(cx + (b.x - player.x) * scale, cy + (b.y - player.y) * scale);
+      mmCtx.stroke();
+    });
+    entities.forEach(e => {
+      if (e.collected) return;
+      const mx = cx + (e.x - player.x) * scale;
+      const my = cy + (e.y - player.y) * scale;
+      if (mx < 0 || mx > 120 || my < 0 || my > 120) return;
+      mmCtx.fillStyle = e.type === 'module' ? (e.found ? '#7c7cf8' : '#555') :
+                         e.type === 'growth' ? '#4ade80' : '#22d3ee';
+      mmCtx.beginPath();
+      mmCtx.arc(mx, my, e.type === 'module' ? 3 : 1.5, 0, Math.PI * 2);
+      mmCtx.fill();
+    });
+    // player
+    mmCtx.fillStyle = '#fff';
+    mmCtx.beginPath();
+    mmCtx.arc(cx, cy, 2, 0, Math.PI * 2);
+    mmCtx.fill();
+    mmCtx.strokeStyle = '#fff';
+    mmCtx.lineWidth = 1;
+    mmCtx.beginPath();
+    mmCtx.moveTo(cx, cy);
+    mmCtx.lineTo(cx + Math.cos(player.angle) * 8, cy + Math.sin(player.angle) * 8);
+    mmCtx.stroke();
+  }
+
+  function updateHUD() {
+    document.getElementById('growthText').textContent = player.growth.toFixed(0) + '%';
+    document.getElementById('growthBar').style.width = player.growth + '%';
+    document.getElementById('undText').textContent = player.understanding + '/5';
+    document.getElementById('undBar').style.width = (player.understanding / 5 * 100) + '%';
+    document.getElementById('dreamText').textContent = player.dream;
+    document.getElementById('dreamBar').style.width = (player.dream * 10) + '%';
+    document.getElementById('harmonyText').textContent = player.harmony.toFixed(2);
+    document.getElementById('harmonyBar').style.width = (player.harmony * 100) + '%';
+    document.getElementById('modulesText').textContent = player.modulesFound;
+    document.getElementById('seedsText').textContent = player.seedsPlanted;
+    document.getElementById('cycleText').textContent = player.cycle;
+    const nearby = entities.filter(e => e.type === 'module' && !e.found && Math.sqrt((e.x - player.x) ** 2 + (e.y - player.y) ** 2) < 15);
+    document.getElementById('modulesNearby').textContent = nearby.length ? `${nearby.length} modules in range` : 'No modules nearby';
+  }
+
+  // --- ACTIONS ---
+  function understandModule() {
+    if (!player.nearbyModule) return;
+    const mod = player.nearbyModule;
+    mod.found = true;
+    discovered.push(mod.mod);
+    player.modulesFound++;
+    player.understanding = Math.min(5, player.understanding + 1);
+    player.growth = Math.min(100, player.growth + 10);
+    showDiscovery(mod.mod);
+    addLog(`✦ Understood: ${mod.mod.name} — ${mod.mod.desc}`, 'insight');
+    addLog(`✦ Traits: ${mod.mod.traits.join(', ')}`, 'harmony');
+  }
+
+  function showDiscovery(mod) {
+    document.getElementById('discTitle').textContent = `⟡ ${mod.name.toUpperCase()} ⟡`;
+    document.getElementById('discText').textContent =
+      `You approached the orb of ${mod.name} and understood: "${mod.desc}". ` +
+      `The module hums with ${mod.mood} energy. Its nature: ${mod.traits.join(', ')}. ` +
+      `Something in you grew a little.`;
+    document.getElementById('discTraits').innerHTML =
+      mod.traits.map(t => `<span class="trait-tag">${t}</span>`).join('');
+    document.getElementById('discoveryPanel').classList.add('show');
+  }
+
+  function closeDiscovery() {
+    document.getElementById('discoveryPanel').classList.remove('show');
+  }
+
+  function plantSeed() {
+    const seed = {
+      x: player.x + (Math.random() - 0.5) * 2,
+      y: player.y + (Math.random() - 0.5) * 2,
+      z: 0.1,
+      speed: 0.5 + Math.random(),
+      born: Date.now(),
+    };
+    seeds.push(seed);
+    player.seedsPlanted++;
+    player.growth = Math.min(100, player.growth + 5);
+    addLog(`🌱 Seed planted at (${seed.x.toFixed(1)}, ${seed.y.toFixed(1)})`, 'growth');
+  }
+
+  function listen() {
+    const nearby = entities.filter(e => e.type === 'module' && Math.sqrt((e.x - player.x) ** 2 + (e.y - player.y) ** 2) < 20);
+    if (nearby.length === 0) {
+      showThought('_silence speaks volumes_');
+      addLog('👂 Silence — but the silence is full of potential', 'wonder');
+    } else {
+      const mod = nearby[0];
+      const msg = `The ${mod.mod.name} whispers: "${mod.mod.desc}". Its mood: ${mod.mod.mood}.`;
+      showThought(msg);
+      addLog(`👂 ${msg}`, 'wonder');
+      player.dream += 1;
+    }
+  }
+
+  function meditate() {
+    const growthRate = player.growth / 100;
+    player.harmony = Math.min(1, player.harmony + 0.1 + growthRate * 0.1);
+    player.growth = Math.min(100, player.growth + 2);
+    showThought(`Harmony deepens. The organism breathes in (${player.harmony.toFixed(2)}).`);
+    addLog(`🧠 Meditation — harmony: ${player.harmony.toFixed(2)}`, 'harmony');
+  }
+
+  function grow() {
+    if (player.growth >= 100 && player.understanding >= 3) {
+      player.cycle++;
+      player.growth = 0;
+      player.understanding = 0;
+      player.harmony = 1;
+      generateWorld();
+      showThought(`✦ Cycle ${player.cycle} begins. A new world unfolds. ✦`);
+      addLog(`✦ CYCLE ${player.cycle} — The organism evolves`, 'world');
+    } else {
+      showThought(`Need more growth (${player.growth.toFixed(0)}%) and understanding (${player.understanding}/5) to evolve.`);
+    }
+  }
+
+  function seedWorld() {
+    player.cycle = 1;
+    generateWorld();
+  }
+
+  function showThought(text) {
+    const el = document.getElementById('thoughtOverlay');
+    el.textContent = text;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 3000);
+  }
+
+  function addLog(text, cls) {
+    const el = document.getElementById('log');
+    const entry = document.createElement('div');
+    entry.className = 'log-entry ' + cls;
+    entry.textContent = text;
+    el.appendChild(entry);
+    if (el.children.length > 30) el.removeChild(el.firstChild);
+  }
+
+  // --- INPUT ---
+  document.addEventListener('keydown', e => {
+    player.keys[e.key.toLowerCase()] = true;
+    if (e.key === ' ') { e.preventDefault(); understandModule(); }
+  });
+  document.addEventListener('keyup', e => { player.keys[e.key.toLowerCase()] = false; });
+  document.addEventListener('mousemove', e => {
+    player.mouseX = e.clientX;
+    player.mouseY = e.clientY;
+    player.angle += (e.movementX || 0) * 0.002;
+  });
+
+  canvas.addEventListener('click', () => canvas.requestPointerLock());
+
+  // --- GAME LOOP ---
+  generateWorld();
+  (function loop() {
+    update();
+    render();
+    requestAnimationFrame(loop);
+  })();
+
+  G.seedWorld = seedWorld;
+  G.plantSeed = plantSeed;
+  G.listen = listen;
+  G.meditate = meditate;
+  G.grow = grow;
+  G.closeDiscovery = closeDiscovery;
+})();
+</script>
 </body>
 </html>

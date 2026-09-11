@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fossil Compiler — Strata of Forgetting</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(200,150,100,0.05);z-index:9999;animation:scan 7s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(200,150,100,0.15)}
+.header h1{font-size:1.8em;color:#c89664;text-shadow:0 0 30px rgba(200,150,100,0.3)}
+.header .sub{color:#e8a87c;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(200,150,100,0.12);border-radius:12px;padding:20px}
+.card h2{font-size:1em;color:#c89664;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:10px}
+.stat .val{font-size:1.8em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(200,150,100,0.12);border:1px solid rgba(200,150,100,0.3);color:#c89664;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(200,150,100,0.25)}
+.btn-green{background:rgba(181,234,215,0.12);border-color:rgba(181,234,215,0.3);color:#b5ead7}
+input{background:rgba(20,20,35,0.8);border:1px solid rgba(200,150,100,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em;width:100%;margin-top:4px}
+.strata-panel{position:relative;min-height:300px;padding:10px}
+.stratum-layer{border-radius:8px;padding:10px 14px;margin:4px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.3s}
+.stratum-layer:hover{transform:scale(1.01)}
+.fossil-list{max-height:280px;overflow-y:auto;font-size:0.82em}
+.fossil-item{padding:8px 0;border-bottom:1px solid rgba(200,150,100,0.08)}
+.trait-tag{display:inline-block;padding:2px 8px;border-radius:8px;font-size:0.68em;background:rgba(200,150,100,0.1);margin:2px}
+.fossil-state{font-size:0.7em;padding:2px 8px;border-radius:8px}
+.state-compressed{background:rgba(200,150,100,0.15);color:#c89664}
+.state-excavated{background:rgba(232,168,124,0.15);color:#e8a87c}
+.state-reanimated{background:rgba(181,234,215,0.15);color:#b5ead7}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>🦴 FOSSIL COMPILER</h1>
+<div class="sub">Strata of Forgetting — Compacting Ancient Modules</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Compact Module</h2>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Module Name</label><input id="compact-name" placeholder="e.g. pulse_kernel_v0"></div>
+<button class="btn" onclick="compactModule()">COMPACT</button>
+<div class="stat" style="margin-top:12px"><div class="val" id="fossil-count" style="color:#c89664">0</div><div class="label">fossils</div></div>
+</div>
+<div class="card" style="grid-column:span 2">
+<h2>Strata Panel</h2>
+<div class="strata-panel" id="strata-panel"></div>
+</div>
+<div class="card">
+<h2>Fossil Registry</h2>
+<div class="fossil-list" id="fossils"></div>
+</div>
+<div class="card">
+<h2>Excavation Tools</h2>
+<div style="margin-bottom:10px"><label style="font-size:0.8em;color:#888">Fossil ID (e.g. fossil_1)</label><input id="fossil-id" placeholder="fossil_1"></div>
+<button class="btn" onclick="excavate()">EXCAVATE</button>
+<button class="btn btn-green" style="margin-left:6px" onclick="reanimate()">REANIMATE</button>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(200,150,100,0.12);color:#c89664;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(200,150,100,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+const STRATA=['Cambrian_expanse','Ordovician_depth','Silurian_glow','Devonian_rise','Carboniferous_fog','Permian_shard','Triassic_spore','Jurassic_canopy','Cretaceous_bloom','Holocene_current'];
+const STRATA_COLORS=['#8b7355','#7a6a4e','#6b5b45','#5c4c3c','#a08060','#8a6e50','#7d6547','#6e573e','#5f4835','#50402c'];
+let fossils=[];let fossilCount=0;let strata=[];
+
+function compactModule(){
+  const name=document.getElementById('compact-name').value||`module_${fossilCount+1}`;
+  const h=Array.from(crypto.getRandomValues(new Uint8Array(12))).map(b=>b.toString(16).padStart(2,'0')).join('');
+  const stratum=STRATA[parseInt(h.slice(0,4),16)%STRATA.length];
+  const traits=[];const n=3+parseInt(h.slice(4,6),16)%5;
+  for(let i=0;i<n;i++)traits.push(['cartographic','oneiric','chronal','spectral','architectural','thermal','linguistic','abyssal'][parseInt(h.slice(6+i*2,8+i*2),16)%8]);
+  const ratio=Math.round((0.1+parseInt(h.slice(10,14),16)%400/1000)*1000)/1000;
+  fossilCount++;
+  const fossil={id:`fossil_${fossilCount}`,name,stratum,traits,ratio,state:'compressed',reanimations:0};
+  fossils.push(fossil);
+  let se=strata.find(s=>s.name===stratum);
+  if(!se){se={name:stratum,count:0,energy:0,color:STRATA_COLORS[STRATA.indexOf(stratum)]};strata.push(se);}
+  se.count++;
+  document.getElementById('compact-name').value='';
+  document.getElementById('fossil-count').textContent=fossilCount;
+  renderStrata();renderFossils();
+}
+
+function excavate(){
+  const id=document.getElementById('fossil-id').value;
+  const f=fossils.find(x=>x.id===id);
+  if(!f||f.state==='reanimated')return;
+  f.state='excavated';
+  renderStrata();renderFossils();showAction(`${f.id} excavated — ${f.traits.length} ancient traits revealed`);
+}
+
+function reanimate(){
+  const id=document.getElementById('fossil-id').value;
+  const f=fossils.find(x=>x.id===id);
+  if(!f)return;
+  f.state='reanimated';f.reanimations++;
+  renderStrata();renderFossils();showAction(`${f.id} REANIMATED — ${f.reanimations} lives`);
+}
+
+function showAction(msg){
+  const s=document.getElementById('strata-panel');
+  s.innerHTML+=`<div style="padding:8px;margin-top:6px;background:rgba(181,234,215,0.08);border-radius:6px;color:#b5ead7;font-size:0.8em">✦ ${msg}</div>`;
+}
+
+function renderStrata(){
+  const el=document.getElementById('strata-panel');
+  el.innerHTML=strata.slice().reverse().map(s=>`<div class="stratum-layer" style="background:${s.color}22;border:1px solid ${s.color}44"><div><span style="color:${s.color};font-weight:bold">${s.name}</span></div><div style="color:#aaa;font-size:0.8em">${s.count} fossils</div></div>`).join('')||'<div style="color:#555;padding:20px;text-align:center">Compact a module to lay down a stratum</div>';
+}
+
+function renderFossils(){
+  const el=document.getElementById('fossils');
+  el.innerHTML=fossils.slice().reverse().map(f=>`<div class="fossil-item"><div style="display:flex;justify-content:space-between"><span style="color:${f.state==='reanimated'?'#b5ead7':f.state==='excavated'?'#e8a87c':'#c89664'}">${f.id}</span><span class="fossil-state state-${f.state}">${f.state}</span></div><div style="margin-top:4px">${f.name} <span style="color:#666">· ${f.stratum}</span></div><div style="margin-top:4px">${f.traits.map(t=>`<span class="trait-tag">${t}</span>`).join('')}</div></div>`).join('')||'<div style="color:#555">No fossils yet</div>';
+}
+
+// seed
+['pulse_kernel_v0','entropy_engine_alpha','dream_weaver_proto','genesis_nucleus'].forEach(n=>{document.getElementById('compact-name').value=n;compactModule();});
+</script>
+</body>
+</html>

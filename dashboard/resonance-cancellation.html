@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resonance Cancellation — Anti-Phase Engine</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(80,200,200,0.05);z-index:9999;animation:scan 5s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(80,200,200,0.15)}
+.header h1{font-size:1.8em;color:#50c8c8;text-shadow:0 0 30px rgba(80,200,200,0.4)}
+.header .sub{color:#ff69b4;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(80,200,200,0.12);border-radius:12px;padding:20px}
+.card h2{font-size:1em;color:#50c8c8;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:10px}
+.stat .val{font-size:1.8em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(80,200,200,0.12);border:1px solid rgba(80,200,200,0.3);color:#50c8c8;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(80,200,200,0.25)}
+canvas{width:100%;height:200px;border-radius:8px;background:rgba(5,5,15,0.9)}
+.dissonance-list{max-height:300px;overflow-y:auto;font-size:0.82em}
+.dissonance-item{padding:6px 0;border-bottom:1px solid rgba(80,200,200,0.08)}
+.filter-list{max-height:150px;overflow-y:auto;font-size:0.8em}
+.filter-item{padding:4px 0;border-bottom:1px solid rgba(80,200,200,0.08);color:#50c8c8}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>≋ RESONANCE CANCELLATION</h1>
+<div class="sub">Anti-Phase Engine — Neutralizing Destructive Interference</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Detect Dissonance</h2>
+<div class="stat"><div class="val" id="dissonance-count" style="color:#50c8c8">0</div><div class="label">dissonances found</div></div>
+<button class="btn" onclick="detect()">DETECT</button>
+</div>
+<div class="card" style="grid-column:span 2">
+<h2>Waveforms</h2>
+<canvas id="wave-canvas"></canvas>
+</div>
+<div class="card">
+<h2>Dissonances</h2>
+<div class="dissonance-list" id="dissonances"></div>
+</div>
+<div class="card">
+<h2>Active Filters</h2>
+<div class="filter-list" id="filters"></div>
+<div class="stat" style="margin-top:8px"><div class="val" id="filter-count" style="color:#ff69b4;font-size:1.2em">0</div><div class="label">active</div></div>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(80,200,200,0.12);color:#50c8c8;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(80,200,200,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+const MODS=['entropy_carto','dream_proto','temporal_fract','consc_aurora','self_refer','paradox_grav','coherence_reg','pattern_analyz','resonance_cart'];
+let dissonances=[];let filters=[];let timer=0;
+
+function detect(){
+  dissonances=[];
+  for(let i=0;i<MODS.length;i++){
+    for(let j=i+1;j<MODS.length;j++){
+      const ratio=0.5+Math.random()*0.5;
+      const res=1-Math.abs(1-ratio*2);
+      if(res<0.3)dissonances.push({source:MODS[i],target:MODS[j],ratio:Math.round(ratio*1000)/1000,resonance:Math.round(res*1000)/1000,severity:Math.round((1-res)*1000)/1000,phase:Math.round(Math.PI*ratio*1000)/1000});
+    }
+  }
+  dissonances.sort((a,b)=>b.severity-a.severity);
+  document.getElementById('dissonance-count').textContent=dissonances.length;
+  renderDissonances();renderFilters();
+}
+
+function cancel(src,tgt){
+  const h=Array.from(crypto.getRandomValues(new Uint8Array(8))).map(b=>b.toString(16).padStart(2,'0')).join('');
+  filters.push({src,tgt,antiPhase:Math.PI,amplitude:Math.round((0.5+parseInt(h.slice(0,4),16)%500/1000)*1000)/1000,effect:Math.round((0.6+parseInt(h.slice(4,8),16)%400/1000)*1000)/1000});
+  document.getElementById('filter-count').textContent=filters.length;
+  renderFilters();
+}
+
+function renderDissonances(){
+  const el=document.getElementById('dissonances');
+  el.innerHTML=dissonances.map(d=>`<div class="dissonance-item" style="display:flex;justify-content:space-between;align-items:center"><span>${d.source} ↔ ${d.target}</span><span style="color:${d.severity>0.7?'#ff6b6b':'#666'}">${d.severity.toFixed(2)} <button class="btn" style="padding:2px 8px;font-size:0.75em" onclick="cancel('${d.source}','${d.target}')">✕</button></span></div>`).join('')||'<div style="color:#555">No dissonances detected</div>';
+}
+
+function renderFilters(){
+  const el=document.getElementById('filters');
+  el.innerHTML=filters.map(f=>`<div class="filter-item">✕ ${f.src} ↔ ${f.target} — eff ${f.effect}</div>`).join('')||'<div style="color:#555">No active filters</div>';
+}
+
+function drawWaves(){
+  const c=document.getElementById('wave-canvas');c.width=c.offsetWidth;c.height=200;
+  const ctx=c.getContext('2d');ctx.fillStyle='rgba(5,5,15,0.9)';ctx.fillRect(0,0,c.width,c.height);
+  const t=Date.now()/1000;
+  // dissonance waves
+  dissonances.slice(0,5).forEach((d,i)=>{
+    ctx.strokeStyle=`rgba(255,105,180,${0.2+i*0.12})`;ctx.lineWidth=1.5;
+    ctx.beginPath();
+    for(let x=0;x<c.width;x++){
+      const y=100+Math.sin(x*0.015+t*(1+i*0.3)+d.phase)*d.severity*80+Math.sin(x*0.008+t*0.5)*10;
+      x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  });
+  // cancellation waves
+  filters.forEach((f,i)=>{
+    ctx.strokeStyle=`rgba(80,200,200,${0.3+i*0.1})`;ctx.lineWidth=2;ctx.setLineDash([4,4]);
+    ctx.beginPath();
+    for(let x=0;x<c.width;x++){
+      const y=100+Math.sin(x*0.015+t+Math.PI)*f.amplitude*60;
+      x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke();ctx.setLineDash([]);
+  });
+}
+
+detect();
+setInterval(drawWaves,50);
+</script>
+</body>
+</html>
