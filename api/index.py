@@ -822,6 +822,32 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         from api.genealogy_manager import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+    # Wave 405 — Storage & Evolution
+    if path.startswith("/storage-vault") or path.startswith("/api/storage_vault"):
+        from api.storage_vault import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/storage-vault" or path == "/storage_vault":
+        from api.storage_vault import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/storage-protocols") or path.startswith("/api/storage_protocols"):
+        from api.storage_protocols import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/storage-protocols" or path == "/storage_protocols":
+        from api.storage_protocols import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/evolution-tracker") or path.startswith("/api/evolution_tracker"):
+        from api.evolution_tracker import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/evolution-tracker" or path == "/evolution_tracker":
+        from api.evolution_tracker import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     if path == "/selection_pressure":
         from api.selection_pressure import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)

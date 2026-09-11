@@ -2961,6 +2961,38 @@
       "dest": "/api/garden.py"
     },
     {
+      "src": "/storage-vault(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/storage_vault(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/storage-protocols(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/storage_protocols(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/evolution-tracker(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/evolution_tracker(?:/.*)?",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/wave405",
+      "dest": "/public/wave405/index.html"
+    },
+    {
+      "src": "/wave405/",
+      "dest": "/public/wave405/index.html"
+    },
+    {
       "src": "/garden-plant",
       "dest": "/api/garden.py"
     }
@@ -2968,8 +3000,8 @@
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "448",
-    "NEXUS_MODULES": "705",
+    "NEXUS_WAVE": "405",
+    "NEXUS_MODULES": "913",
     "NEXUS_ROUTES": "72"
   },
   "headers": [

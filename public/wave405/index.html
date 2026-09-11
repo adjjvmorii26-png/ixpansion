@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave 405 — Storage & Evolution | ixpansion</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a0f; color: #e8e8e8; min-height: 100vh; }
+        .bg-grid { position: fixed; inset: 0; background-image: linear-gradient(rgba(0,217,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,217,255,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; }
+        .container { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        header { text-align: center; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid #1a1a2e; }
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); background: linear-gradient(135deg, #00d9ff, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .subtitle { color: #888; margin-top: 0.5rem; font-size: 1.1rem; }
+        .wave-badge { display: inline-block; background: rgba(0,217,255,0.2); border: 1px solid #00d9ff; padding: 0.25rem 1rem; border-radius: 999px; font-size: 0.85rem; margin-top: 1rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1.5rem; }
+        .card { background: #11111a; border: 1px solid #1a1a2e; border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #00d9ff, #ff6b6b); }
+        .card h2 { color: #00d9ff; font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .stat { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #1a1a2e; }
+        .stat:last-child { border-bottom: none; }
+        .stat-label { color: #888; }
+        .stat-value { color: #e8e8e8; font-weight: 600; }
+        .stat-value.good { color: #4ecdc4; }
+        .stat-value.warn { color: #ffe66d; }
+        .stat-value.bad { color: #ff6b6b; }
+        canvas { max-height: 250px; }
+        .module-list { max-height: 300px; overflow-y: auto; }
+        .module-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: #0a0a0f; border-radius: 6px; margin-bottom: 0.5rem; }
+        .module-name { font-family: monospace; font-size: 0.85rem; color: #00d9ff; }
+        .module-meta { display: flex; gap: 0.5rem; font-size: 0.75rem; }
+        .badge { padding: 0.125rem 0.5rem; border-radius: 4px; background: #1a1a2e; color: #aaa; }
+        .badge.mutation { background: rgba(255,107,107,0.2); color: #ff6b6b; }
+        .badge.parent { background: rgba(78,205,196,0.2); color: #4ecdc4; }
+        .lineage-tree { font-family: monospace; font-size: 0.8rem; line-height: 1.8; white-space: pre; color: #aaa; }
+        .btn { background: linear-gradient(135deg, #00d9ff, #0099cc); border: none; color: #0a0a0f; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; margin: 0.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,217,255,0.4); }
+        .btn.secondary { background: transparent; border: 1px solid #00d9ff; color: #00d9ff; }
+        .btn.secondary:hover { background: rgba(0,217,255,0.1); }
+        .actions { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 2rem; }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .back-link { display: inline-block; margin-top: 2rem; color: #888; text-decoration: none; }
+        .back-link:hover { color: #00d9ff; }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="container">
+        <header>
+            <h1>🧬 Wave 405</h1>
+            <p class="subtitle">Storage Vault & Evolution Tracker — Persistent Memory & Lineage Intelligence</p>
+            <span class="wave-badge">4 new organs · protocol v2.3.2 · cross-vault sync</span>
+        </header>
+
+        <div class="grid">
+            <!-- Vault Status -->
+            <div class="card">
+                <h2>🔐 Storage Vault</h2>
+                <div id="vault-stats">
+                    <div class="stat"><span class="stat-label">Vault ID</span><span class="stat-value" id="vault-id">—</span></div>
+                    <div class="stat"><span class="stat-label">Capacity</span><span class="stat-value" id="vault-capacity">—</span></div>
+                    <div class="stat"><span class="stat-label">Items Stored</span><span class="stat-value" id="vault-items">—</span></div>
+                    <div class="stat"><span class="stat-label">Efficiency</span><span class="stat-value" id="vault-eff">—</span></div>
+                    <div class="stat"><span class="stat-label">Total Accesses</span><span class="stat-value" id="vault-accesses">—</span></div>
+                    <div class="stat"><span class="stat-label">Status</span><span class="stat-value" id="vault-locked">—</span></div>
+                </div>
+            </div>
+
+            <!-- Protocol Report -->
+            <div class="card">
+                <h2>📋 Storage Protocols</h2>
+                <div id="protocol-stats">
+                    <div class="stat"><span class="stat-label">Protocol Version</span><span class="stat-value" id="proto-version">—</span></div>
+                    <div class="stat"><span class="stat-label">Modules Tracked</span><span class="stat-value" id="proto-modules">—</span></div>
+                    <div class="stat"><span class="stat-label">Integrity Checks</span><span class="stat-value" id="proto-integrity">—</span></div>
+                    <div class="stat"><span class="stat-label">Sync Operations</span><span class="stat-value" id="proto-syncs">—</span></div>
+                </div>
+            </div>
+
+            <!-- Evolution Tracker -->
+            <div class="card">
+                <h2>🧬 Evolution Tracker</h2>
+                <div id="evo-stats">
+                    <div class="stat"><span class="stat-label">Current Wave</span><span class="stat-value" id="evo-wave">—</span></div>
+                    <div class="stat"><span class="stat-label">Modules Recorded</span><span class="stat-value" id="evo-modules">—</span></div>
+                    <div class="stat"><span class="stat-label">Lineage Roots</span><span class="stat-value" id="evo-roots">—</span></div>
+                    <div class="stat"><span class="stat-label">Total Mutations</span><span class="stat-value" id="evo-mutations">—</span></div>
+                </div>
+            </div>
+
+            <!-- Wave Activity Chart -->
+            <div class="card" style="grid-column: span 2;">
+                <h2>📊 Wave Activity</h2>
+                <canvas id="waveChart"></canvas>
+            </div>
+
+            <!-- Mutation Types Chart -->
+            <div class="card">
+                <h2>🔬 Mutation Types</h2>
+                <canvas id="mutationChart"></canvas>
+            </div>
+
+            <!-- Module Lineage -->
+            <div class="card">
+                <h2>🌳 Lineage Explorer</h2>
+                <select id="lineage-select" style="width: 100%; padding: 0.5rem; background: #0a0a0f; border: 1px solid #1a1a2e; border-radius: 6px; color: #e8e8e8; margin-bottom: 1rem;">
+                    <option value="">Select a root module...</option>
+                </select>
+                <pre class="lineage-tree" id="lineage-tree">Select a module to view its lineage tree...</pre>
+            </div>
+
+            <!-- Recent Modules -->
+            <div class="card" style="grid-column: span 2;">
+                <h2>📦 Recent Module Records</h2>
+                <div class="module-list" id="module-list">Loading...</div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn" onclick="refreshAll()">🔄 Refresh All Data</button>
+            <button class="btn secondary" onclick="recordTestModule()">🧪 Record Test Module</button>
+            <button class="btn secondary" onclick="exportEvolution()">📥 Export Evolution Log</button>
+            <button class="btn secondary" onclick="syncVaults()">🔄 Sync Vaults</button>
+        </div>
+
+        <a href="../../" class="back-link">← Back to Dashboard Index</a>
+    </div>
+
+    <script>
+        const API_BASE = '/api';
+        let evolutionData = { wave_activity: {}, mutation_types: {}, lineage_trees: [] };
+
+        async function apiCall(endpoint, body = {}) {
+            const res = await fetch(`${API_BASE}${endpoint}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+            return res.json();
+        }
+
+        async function refreshAll() {
+            const [vaultRes, protoRes, evoRes] = await Promise.all([
+                apiCall('/storage_vault', { action: 'status' }),
+                apiCall('/storage_protocols', { action: 'report' }),
+                apiCall('/evolution_tracker', { action: 'wave_report', wave: 405 })
+            ]);
+            
+            updateVaultUI(vaultRes);
+            updateProtocolUI(protoRes);
+            updateEvoUI(evoRes);
+            updateCharts(evoRes);
+            populateLineageSelect(evoRes);
+            populateModuleList(evoRes);
+        }
+
+        function updateVaultUI(res) {
+            if (res.vault) {
+                document.getElementById('vault-id').textContent = res.vault.vault_id;
+                document.getElementById('vault-capacity').textContent = res.vault.capacity;
+                document.getElementById('vault-items').textContent = res.vault.current_items;
+                document.getElementById('vault-eff').textContent = ((res.vault.current_items / res.vault.capacity) * 100).toFixed(1) + '%';
+                document.getElementById('vault-accesses').textContent = res.vault.total_accesses;
+                document.getElementById('vault-locked').textContent = res.vault.locked ? '🔒 Locked' : '🔓 Unlocked';
+                document.getElementById('vault-locked').className = res.vault.locked ? 'stat-value bad' : 'stat-value good';
+            }
+        }
+
+        function updateProtocolUI(res) {
+            if (res.report) {
+                document.getElementById('proto-version').textContent = res.report.protocol_version;
+                document.getElementById('proto-modules').textContent = res.report.current_items;
+                document.getElementById('proto-integrity').textContent = 'Active (SHA-256)';
+                document.getElementById('proto-syncs').textContent = 'Ready';
+            }
+        }
+
+        function updateEvoUI(res) {
+            if (res.report) {
+                document.getElementById('evo-wave').textContent = res.report.wave;
+                document.getElementById('evo-modules').textContent = res.report.module_count;
+                document.getElementById('evo-roots').textContent = '—';
+                document.getElementById('evo-mutations').textContent = res.report.modules.reduce((sum, m) => sum + (m.mutation_type !== 'initial' ? 1 : 0), 0);
+            }
+        }
+
+        function updateCharts(report) {
+            // Build wave activity from module data
+            const waveActivity = {};
+            const mutationTypes = {};
+            
+            if (report.report?.modules) {
+                for (const m of report.report.modules) {
+                    if (!waveActivity[m.module_id]) waveActivity[m.module_id] = 0;
+                    waveActivity[m.module_id]++;
+                    mutationTypes[m.mutation_type] = (mutationTypes[m.mutation_type] || 0) + 1;
+                }
+            }
+
+            evolutionData = { wave_activity: waveActivity, mutation_types: mutationTypes, lineage_trees: [] };
+
+            // Wave chart
+            const waveLabels = Object.keys(waveActivity).sort((a,b) => a-b).slice(-10);
+            const waveCounts = waveLabels.map(w => waveActivity[w]);
+            
+            if (window.waveChart) window.waveChart.destroy();
+            window.waveChart = new Chart(document.getElementById('waveChart'), {
+                type: 'bar',
+                data: {
+                    labels: waveLabels.length ? waveLabels : ['401','402','403','404','405'],
+                    datasets: [{
+                        label: 'Modules per Wave',
+                        data: waveCounts.length ? waveCounts : [4,4,4,4,4],
+                        backgroundColor: 'rgba(0, 217, 255, 0.6)',
+                        borderColor: 'rgba(0, 217, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' } }, x: { grid: { color: 'rgba(255,255,255,0.1)' } } } }
+            });
+
+            // Mutation chart
+            if (window.mutationChart) window.mutationChart.destroy();
+            window.mutationChart = new Chart(document.getElementById('mutationChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(mutationTypes).length ? Object.keys(mutationTypes) : ['initial','mutation','fusion','divergence'],
+                    datasets: [{
+                        data: Object.values(mutationTypes).length ? Object.values(mutationTypes) : [4,8,2,1],
+                        backgroundColor: ['#4ecdc4','#ff6b6b','#ffe66d','#95e1d3','#f38181','#aa96da']
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        function populateLineageSelect(report) {
+            const select = document.getElementById('lineage-select');
+            const modules = new Set();
+            if (report.report?.modules) {
+                for (const m of report.report.modules) modules.add(m.module_id);
+            }
+            if (modules.size === 0) {
+                // Add some defaults
+                ['agent_core', 'entropy_regulator', 'pulse_loop', 'fusion_reactor', 'storage_vault', 'evolution_tracker'].forEach(m => modules.add(m));
+            }
+            select.innerHTML = '<option value="">Select a root module...</option>' + 
+                Array.from(modules).map(m => `<option value="${m}">${m}</option>`).join('');
+        }
+
+        function populateModuleList(report) {
+            const container = document.getElementById('module-list');
+            if (report.report?.modules?.length) {
+                container.innerHTML = report.report.modules.map(m => `
+                    <div class="module-item">
+                        <span class="module-name">${m.module_id}</span>
+                        <div class="module-meta">
+                            <span class="badge mutation">${m.mutation_type}</span>
+                            ${m.parent ? `<span class="badge parent">← ${m.parent}</span>` : ''}
+                            <span class="badge">${m.hash}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                container.innerHTML = '<div class="module-item"><span class="module-name">No modules recorded yet</span><span class="badge">Run tests or use API to populate</span></div>';
+            }
+        }
+
+        async function recordTestModule() {
+            const moduleId = 'test_module_' + Date.now();
+            await apiCall('/evolution_tracker', { action: 'record', module_id: moduleId, data: { test: true, timestamp: Date.now() }, mutation_type: 'test', parent_module: 'storage_vault' });
+            await apiCall('/storage_protocols', { action: 'store_module', module_id: moduleId, data: { test: true } });
+            alert('Test module recorded!');
+            refreshAll();
+        }
+
+        async function exportEvolution() {
+            const res = await apiCall('/evolution_tracker', { action: 'export' });
+            const blob = new Blob([JSON.stringify(res.export, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `evolution-export-wave405-${Date.now()}.json`;
+            a.click();
+        }
+
+        async function syncVaults() {
+            const res = await apiCall('/storage_protocols', { action: 'sync' });
+            alert('Vault sync complete: ' + res.report.synced_keys.length + ' keys synced');
+            refreshAll();
+        }
+
+        document.getElementById('lineage-select').addEventListener('change', async (e) => {
+            if (!e.target.value) {
+                document.getElementById('lineage-tree').textContent = 'Select a module to view its lineage tree...';
+                return;
+            }
+            const res = await apiCall('/evolution_tracker', { action: 'lineage', module_id: e.target.value });
+            if (res.lineage) {
+                function render(node, depth = 0) {
+                    const indent = '  '.repeat(depth);
+                    let out = `${indent}├─ ${node.module_id} (${node.history_length} versions)\n`;
+                    if (node.children) {
+                        for (const child of node.children) out += render(child, depth + 1);
+                    }
+                    return out;
+                }
+                document.getElementById('lineage-tree').textContent = render(res.lineage);
+            }
+        });
+
+        // Initial load
+        refreshAll();
+    </script>
+</body>
+</html>
