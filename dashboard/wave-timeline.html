@@ -51,5 +51,6 @@ const max=Math.max(...Object.values(types));const colors=['#7c7cf8','#2dd4bf','#
 const keys=Object.keys(types);const bw=c.width/keys.length-4;
 keys.forEach((k,i)=>{const h=(types[k]/max)*120;ctx.fillStyle=colors[i];ctx.fillRect(i*(bw+4)+2,c.height-h-20,bw,h);ctx.fillStyle='#888';ctx.font='9px monospace';ctx.textAlign='center';ctx.fillText(k.slice(0,4),i*(bw+4)+bw/2+2,c.height-5)});
 </script>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(124,124,248,0.15);color:#7c7cf8;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(124,124,248,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
 </body>
 </html>

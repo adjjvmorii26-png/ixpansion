@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Topology Morpher — Network Shape Shifter</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(0,255,136,0.06);z-index:9999;animation:scan 5.5s linear infinite;pointer-events:none}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(0,255,136,0.15)}
+.header h1{font-size:1.8em;color:#00ff88;text-shadow:0 0 30px rgba(0,255,136,0.4)}
+.header .sub{color:#3a86ff;font-size:0.85em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
+.card{background:rgba(15,15,25,0.9);border:1px solid rgba(0,255,136,0.12);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#00ff88,transparent)}
+.card h2{font-size:1em;color:#00ff88;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
+.stat{text-align:center;padding:10px}
+.stat .val{font-size:1.8em;font-weight:bold}
+.stat .label{font-size:0.7em;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.btn{background:rgba(0,255,136,0.15);border:1px solid rgba(0,255,136,0.3);color:#00ff88;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
+.btn:hover{background:rgba(0,255,136,0.3)}
+canvas{width:100%;border-radius:8px;background:rgba(5,5,15,0.9);height:350px}
+#topo-canvas{height:350px}
+.topo-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.topo-card{padding:10px;border-radius:8px;text-align:center;cursor:pointer;transition:all 0.3s;font-size:0.8em}
+.topo-card:hover{transform:scale(1.05)}
+.topo-card.active{border-color:rgba(0,255,136,0.6);background:rgba(0,255,136,0.1)}
+.topo-card.inactive{border-color:rgba(100,100,100,0.3);background:rgba(20,20,30,0.8)}
+.metric-bar{height:6px;border-radius:3px;background:rgba(0,255,136,0.15);margin:6px 0}
+.metric-fill{height:100%;border-radius:3px;background:#00ff88}
+.history-list{max-height:200px;overflow-y:auto;font-size:0.8em}
+.history-item{padding:4px 0;border-bottom:1px solid rgba(0,255,136,0.08)}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="header">
+<h1>◎ TOPOLOGY MORPHER</h1>
+<div class="sub">Network Shape Shifter — Reshaping the Organism</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Select Topology</h2>
+<div class="topo-cards" id="topo-select"></div>
+<div style="margin-top:12px;text-align:center">
+<button class="btn" onclick="morphTopology()">MORPH</button>
+</div>
+<div style="margin-top:16px">
+<label style="font-size:0.8em;color:#888">Morph Reason</label>
+<input id="morph-reason" placeholder="e.g. resilience_increase" style="background:rgba(20,20,35,0.8);border:1px solid rgba(0,255,136,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;width:100%;margin-top:4px">
+</div>
+</div>
+<div class="card" style="grid-column:span 2">
+<h2>Network Visualization</h2>
+<canvas id="topo-canvas"></canvas>
+</div>
+<div class="card">
+<h2>Current Topology</h2>
+<div class="stat"><div class="val" id="current-topo" style="color:#00ff88">star</div><div class="label">active shape</div></div>
+<div id="topo-desc" style="margin-top:12px;font-size:0.85em;color:#888"></div>
+<div style="margin-top:12px">
+<div style="display:flex;justify-content:space-between;font-size:0.8em"><span>Latency</span><span id="metric-latency">—</span></div>
+<div class="metric-bar"><div class="metric-fill" id="bar-latency" style="width:50%"></div></div>
+<div style="display:flex;justify-content:space-between;font-size:0.8em"><span>Resilience</span><span id="metric-resilience">—</span></div>
+<div class="metric-bar"><div class="metric-fill" id="bar-resilience" style="width:50%"></div></div>
+<div style="display:flex;justify-content:space-between;font-size:0.8em"><span>Autonomy</span><span id="metric-autonomy">—</span></div>
+<div class="metric-bar"><div class="metric-fill" id="bar-autonomy" style="width:50%"></div></div>
+</div>
+</div>
+<div class="card">
+<h2>Morph History</h2>
+<div class="history-list" id="history"></div>
+</div>
+</div>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(0,255,136,0.15);color:#00ff88;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(0,255,136,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<script>
+const TOPOS={
+  star:{desc:'Central hub controls all nodes. Optimal for command.',lat:1.0,res:0.2,aut:0.1,color:'#3a86ff'},
+  ring:{desc:'Nodes form a circle; data flows in a loop.',lat:2.0,res:0.5,aut:0.4,color:'#ffb600'},
+  mesh:{desc:'Every node connects to many others. Resilient.',lat:0.7,res:0.9,aut:0.5,color:'#00ff88'},
+  hierarchical:{desc:'Levels of control. Structured governance.',lat:1.5,res:0.4,aut:0.2,color:'#c77dff'},
+  chaotic:{desc:'Connections form unpredictably. Exploration.',lat:0.9,res:0.6,aut:0.9,color:'#ff6b6b'},
+};
+let currentTopo='star';let selectedTopo='star';let history=[];let nodes=[];
+
+function initNodes(){
+  nodes=[];
+  for(let i=0;i<12;i++){
+    const a=i/12*Math.PI*2-Math.PI/2;
+    nodes.push({x:150+Math.cos(a)*100,y:150+Math.sin(a)*100,vx:0,vy:0,idx:i});
+  }
+}
+
+function morphTopology(){
+  history.push({from:currentTopo,to:selectedTopo,ts:new Date().toLocaleTimeString()});
+  currentTopo=selectedTopo;
+  document.getElementById('current-topo').textContent=currentTopo;
+  document.getElementById('topo-desc').textContent=TOPOS[currentTopo].desc;
+  const m=TOPOS[currentTopo];
+  document.getElementById('metric-latency').textContent=m.lat;document.getElementById('bar-latency').style.width=m.lat/2.5*100+'%';
+  document.getElementById('metric-resilience').textContent=m.res;document.getElementById('bar-resilience').style.width=m.res*100+'%';
+  document.getElementById('metric-autonomy').textContent=m.aut;document.getElementById('bar-autonomy').style.width=m.aut*100+'%';
+  renderTopoSelect();renderHistory();drawNetwork();
+}
+
+function renderTopoSelect(){
+  const el=document.getElementById('topo-select');
+  el.innerHTML=Object.entries(TOPOS).map(([name,t])=>`<div class="topo-card ${name===currentTopo?'active':'inactive'}" onclick="selectTopo('${name}')" style="border:1px solid ${name===currentTopo?t.color:'rgba(100,100,100,0.3)'}"><div style="font-weight:bold;color:${t.color}">${name}</div><div style="font-size:0.7em;color:#666;margin-top:4px">L${t.lat} R${t.res} A${t.aut}</div></div>`).join('');
+}
+
+function selectTopo(name){selectedTopo=name;renderTopoSelect();}
+
+function renderHistory(){
+  const el=document.getElementById('history');
+  el.innerHTML=history.slice(-15).reverse().map(h=>`<div class="history-item"><span style="color:#00ff88">${h.from}</span> → <span style="color:#00ff88">${h.to}</span> <span style="color:#666">@${h.ts}</span></div>`).join('')||'<div style="color:#666">No morphs yet</div>';
+}
+
+function drawNetwork(){
+  const c=document.getElementById('topo-canvas');c.width=c.offsetWidth;c.height=350;
+  const ctx=c.getContext('2d');
+  ctx.fillStyle='#05050f';ctx.fillRect(0,0,c.width,c.height);
+  const cx=c.width/2,cy=c.height/2;
+  const t=TOPOS[currentTopo];
+  const positions=nodes.map((n,i)=>{
+    if(currentTopo==='star')return{x:cx,y:cy};
+    const a=i/nodes.length*Math.PI*2-Math.PI/2;
+    return{x:cx+Math.cos(a)*120,y:cy+Math.sin(a)*120};
+  });
+  const edges=[];
+  if(currentTopo==='star'){
+    for(let i=1;i<positions.length;i++)edges.push([0,i]);
+  }else if(currentTopo==='ring'){
+    for(let i=0;i<positions.length;i++)edges.push([i,(i+1)%positions.length]);
+  }else if(currentTopo==='mesh'){
+    for(let i=0;i<positions.length;i++)for(let j=i+1;j<positions.length;j++){if(Math.random()<0.4)edges.push([i,j]);}
+  }else if(currentTopo==='hierarchical'){
+    edges.push([0,1]);edges.push([0,2]);edges.push([0,3]);
+    edges.push([1,4]);edges.push([1,5]);edges.push([2,6]);edges.push([2,7]);
+    edges.push([3,8]);edges.push([3,9]);edges.push([4,10]);edges.push([5,11]);
+  }else{
+    for(let i=0;i<positions.length;i++){const count=1+Math.floor(Math.random()*3);for(let c=0;c<count;c++){const j=Math.floor(Math.random()*positions.length);if(j!==i)edges.push([i,j]);}}
+  }
+  edges.forEach(([a,b])=>{
+    ctx.strokeStyle=t.color+'44';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(positions[a].x,positions[a].y);ctx.lineTo(positions[b].x,positions[b].y);ctx.stroke();
+  });
+  positions.forEach((p,i)=>{
+    const r=i===0?10:7;
+    ctx.fillStyle=i===0?t.color:t.color+'aa';
+    ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='8px monospace';ctx.textAlign='center';
+    ctx.fillText(`n${i}`,p.x,p.y+r+10);
+  });
+  ctx.fillStyle=t.color;ctx.font='12px monospace';ctx.textAlign='center';
+  ctx.fillText(`Topology: ${currentTopo}`,cx,c.height-15);
+}
+
+initNodes();renderTopoSelect();renderHistory();document.getElementById('topo-desc').textContent=TOPOS[currentTopo].desc;morphTopology();
+</script>
+</body>
+</html>
