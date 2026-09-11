@@ -40,6 +40,9 @@ body{background:var(--bg);color:var(--text);font-family:'Georgia','Times New Rom
 .dream-section h2{color:var(--accent);font-family:'SF Mono',monospace;font-size:0.9em;letter-spacing:3px;margin-bottom:20px}
 .dream-entry{padding:16px;margin:12px 0;background:rgba(124,124,248,0.03);border:1px solid rgba(124,124,248,0.08);border-radius:8px}
 .dream-visual{font-family:'SF Mono',monospace;font-size:0.75em;color:var(--dim);margin-top:8px;padding:8px;background:rgba(0,0,0,0.3);border-radius:4px}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -179,5 +182,6 @@ function render() {
 
 render();
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

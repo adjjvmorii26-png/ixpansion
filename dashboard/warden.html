@@ -38,6 +38,9 @@ td{padding:6px 8px;border-bottom:1px solid #1a0a28}
 .fail{color:#ff3344}
 .fade-in{animation:fadeIn .5s ease-in}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -246,5 +249,6 @@ async function callGenealogy(){
   $('genealogy-body').innerHTML=`<table><tr><th>Relic</th><th>Quality</th><th>Power</th><th>Forged From</th><th>Minerals</th></tr>${rows||'<tr><td colspan=5 style="color:#6a4a7a">No relics forged yet — fight wardens and forge! <button class="btn ghost" onclick="forgeNow()">Forge</button></td></tr>'}</table>`;
 }
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

@@ -35,6 +35,9 @@ background:var(--surface);font-size:.8rem;animation:fadeIn .3s}
 .stats{padding:8px 24px;display:flex;gap:20px;font-size:.75rem;color:var(--muted);border-bottom:1px solid var(--border)}
 .stats span{color:var(--accent2)}
 .empty{text-align:center;padding:60px;color:var(--muted)}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -129,5 +132,6 @@ function addEvent(evt){
 function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 </script>
 <script src="/shared.js"></script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

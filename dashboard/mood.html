@@ -28,6 +28,9 @@
   .subtitle{color:#8fd3ff;font-size:0.9em;text-align:center;margin-bottom:40px}
   .wave-badge{display:inline-block;border:1px solid #c8a8ff;padding:4px 16px;border-radius:20px;font-size:0.8em;color:#c8a8ff;margin-top:12px}
   .footer{text-align:center;margin-top:40px;color:#444;font-size:0.8em;padding:20px;border-top:1px solid #1a1a2e;width:100%}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -92,5 +95,6 @@ if(typeof IX!=='undefined'){
   setInterval(()=>{hue=(hue+0.5)%360;orb.style.background=`radial-gradient(circle at 30% 30%,hsl(${hue},70%,75%),hsl(${(hue+60)%360},60%,60%),hsl(${hue},70%,75%))`;orb.style.boxShadow=`0 0 60px hsl(${hue},70%,75%,0.33),0 0 120px hsl(${(hue+60)%360},60%,60%,0.2)`},100);
 }
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

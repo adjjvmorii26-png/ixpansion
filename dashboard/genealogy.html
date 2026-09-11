@@ -29,6 +29,9 @@ svg .node text{fill:#c8c8ff;font-size:10px}
 svg .link{stroke:#2a2a3e;stroke-width:1.5;fill:none}
 svg .apex-line{stroke:#c88aff;stroke-width:2}
 svg .rift-glow{filter:url(#glow)}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -191,5 +194,6 @@ async function loadConfessions(){
 }
 loadConfessions();
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

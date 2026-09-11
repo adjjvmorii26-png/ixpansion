@@ -43,6 +43,9 @@ body{font-family:'SF Mono','Fira Code',monospace;background:var(--bg);color:var(
 .link .lwave{color:var(--muted);font-size:.65rem}
 .result{background:#08080c;border:1px solid var(--accent);border-radius:8px;padding:14px;margin-top:14px;font-size:.75rem;white-space:pre-wrap;max-height:300px;overflow-y:auto;display:none}
 @media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -236,5 +239,6 @@ async function load(){
 load();
 </script>
 <script src="/shared.js"></script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

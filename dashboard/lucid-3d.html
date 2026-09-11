@@ -36,6 +36,9 @@ canvas{display:block;position:absolute;top:0;left:0}
 #gameOver h1{color:var(--rose);font-size:2.5em;letter-spacing:6px;margin-bottom:20px}
 #gameOver p{color:var(--dim);font-size:0.85em;margin-bottom:8px}
 #gameOver .btn{margin-top:20px;padding:12px 32px;font-size:0.9em}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -767,5 +770,6 @@ document.getElementById('btnRestart').addEventListener('click', startGame);
 startGame();
 gameLoop();
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>

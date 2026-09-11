@@ -33,6 +33,9 @@
   .muted{color:var(--m);font-size:.7em;margin-top:6px}
   .pulse{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--gn);box-shadow:0 0 12px var(--gn);animation:pulse 1.6s infinite;margin-right:7px}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
+.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
 </style>
 </head>
 <body>
@@ -93,5 +96,6 @@ async function rite(){ await j('/sovereignty?action=rite'); refresh(); }
 boot();
 setInterval(refresh, 12000);
 </script>
+<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>
