@@ -68,6 +68,22 @@ body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',mo
   <div class="events" id="eventLog"></div>
 </div>
 
+  <div style="max-width:1200px;margin:32px auto;padding:0 24px">
+    <h2 style="color:var(--gold);font-size:0.8em;letter-spacing:3px;text-align:center;margin-bottom:20px">AXIS QUESTS</h2>
+    <div id="questGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px"></div>
+  </div>
+  <div style="max-width:1200px;margin:32px auto;padding:0 24px">
+    <h2 style="color:var(--violet);font-size:0.8em;letter-spacing:3px;text-align:center;margin-bottom:20px">META-GOVERNANCE</h2>
+    <div style="background:rgba(6,6,26,0.8);border:1px solid rgba(192,132,252,0.15);border-radius:12px;padding:20px;text-align:center">
+      <p style="color:var(--dim);font-size:0.72em;margin-bottom:12px">The axis can propose changes to organism rules.</p>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button class="btn" onclick="govern()">Propose Rule Change</button>
+        <button class="btn" onclick="solvePuzzle('sigma')">Solve Portal Puzzle</button>
+        <button class="btn" onclick="solvePuzzle('omega')">Accept Meta-Truth</button>
+      </div>
+      <div id="govLog" style="margin-top:12px;font-size:0.65em;color:var(--dim)"></div>
+    </div>
+  </div>
 <a class="back-btn" href="index.html">← Organism</a>
 
 <script>
@@ -107,6 +123,35 @@ function unlock(id) {
   addEvent('axis_unlocked', `${a.name} unlocked — ${a.effect} activated`, a.color);
   updateState();
   renderAxes();
+
+const quests = [
+  {axis:'sigma',title:"The Liar's Door",steps:['Enter the small door','Climb recursive well','Recover Space Key'],color:'#4ecdc4'},
+  {axis:'tau',title:'The Future Holds the Key',steps:['Switch to Future','Hold Q to rewind','Recover Time Key'],color:'#ff6b6b'},
+  {axis:'psi',title:'The Longest Eigenstate',steps:['Observe ghost-bridges','Press E on longest','Recover State Key'],color:'#ffd93d'},
+  {axis:'mu',title:'The Still Center',steps:['Hold F to focus','Lower entropy below 0.2','Walk light-path'],color:'#c084fc'},
+  {axis:'omega',title:'The Engine Dreams',steps:['Query engine 5 times','Accept meta-truth','Propose governance change'],color:'#7c7cf8'},
+];
+const qg = document.getElementById('questGrid');
+if (qg) {
+  quests.forEach(q => {
+    const div = document.createElement('div');
+    div.style.cssText = 'background:rgba(6,6,26,0.8);border:1px solid rgba(124,124,248,0.1);border-radius:10px;padding:16px';
+    const stepsHtml = q.steps.map((s,i) => '<div style="color:var(--dim);font-size:0.65em;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.03)">'+(i+1)+'. '+s+'</div>').join('');
+    div.innerHTML = '<div style="color:'+q.color+';font-weight:700;font-size:0.85em">'+q.title+'</div><div style="color:var(--dim);font-size:0.6em;margin:6px 0">Axis: '+q.axis.toUpperCase()+'</div>'+stepsHtml;
+    qg.appendChild(div);
+  });
+}
+const govEvents = [];
+function govern() {
+  const el = document.getElementById('govLog');
+  govEvents.unshift('['+new Date().toLocaleTimeString()+'] Governance proposal submitted - pending review');
+  if (el) el.innerHTML = govEvents.slice(0,5).join('<br>');
+}
+function solvePuzzle(axis) {
+  addEvent('puzzle', 'Attempting '+axis.toUpperCase()+' puzzle...', '#22d3ee');
+  setTimeout(function(){ addEvent('puzzle_solved', axis.toUpperCase()+' puzzle SOLVED - cognition boosted!', '#4ade80'); }, 500);
+}
+
 }
 
 function query() {
@@ -135,6 +180,35 @@ function updateState() {
 }
 
 renderAxes();
+
+const quests = [
+  {axis:'sigma',title:"The Liar's Door",steps:['Enter the small door','Climb recursive well','Recover Space Key'],color:'#4ecdc4'},
+  {axis:'tau',title:'The Future Holds the Key',steps:['Switch to Future','Hold Q to rewind','Recover Time Key'],color:'#ff6b6b'},
+  {axis:'psi',title:'The Longest Eigenstate',steps:['Observe ghost-bridges','Press E on longest','Recover State Key'],color:'#ffd93d'},
+  {axis:'mu',title:'The Still Center',steps:['Hold F to focus','Lower entropy below 0.2','Walk light-path'],color:'#c084fc'},
+  {axis:'omega',title:'The Engine Dreams',steps:['Query engine 5 times','Accept meta-truth','Propose governance change'],color:'#7c7cf8'},
+];
+const qg = document.getElementById('questGrid');
+if (qg) {
+  quests.forEach(q => {
+    const div = document.createElement('div');
+    div.style.cssText = 'background:rgba(6,6,26,0.8);border:1px solid rgba(124,124,248,0.1);border-radius:10px;padding:16px';
+    const stepsHtml = q.steps.map((s,i) => '<div style="color:var(--dim);font-size:0.65em;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.03)">'+(i+1)+'. '+s+'</div>').join('');
+    div.innerHTML = '<div style="color:'+q.color+';font-weight:700;font-size:0.85em">'+q.title+'</div><div style="color:var(--dim);font-size:0.6em;margin:6px 0">Axis: '+q.axis.toUpperCase()+'</div>'+stepsHtml;
+    qg.appendChild(div);
+  });
+}
+const govEvents = [];
+function govern() {
+  const el = document.getElementById('govLog');
+  govEvents.unshift('['+new Date().toLocaleTimeString()+'] Governance proposal submitted - pending review');
+  if (el) el.innerHTML = govEvents.slice(0,5).join('<br>');
+}
+function solvePuzzle(axis) {
+  addEvent('puzzle', 'Attempting '+axis.toUpperCase()+' puzzle...', '#22d3ee');
+  setTimeout(function(){ addEvent('puzzle_solved', axis.toUpperCase()+' puzzle SOLVED - cognition boosted!', '#4ade80'); }, 500);
+}
+
 addEvent('system', 'Axis Unlock Engine initialized — 5 axes ready', '#7c7cf8');
 </script>
 </body>
