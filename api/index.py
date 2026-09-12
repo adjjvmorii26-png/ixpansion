@@ -1794,6 +1794,16 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+    # Wave 413 — Underworld Path
+    if path.startswith("/underworld") or path.startswith("/api/underworld"):
+        from api.wave413_underworld import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/underworld" or path == "/underworld":
+        from api.wave413_underworld import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     # Wave 412 — Garden Realm
     if path.startswith("/garden-realm") or path.startswith("/api/garden_realm"):
         from api.wave412_garden import handler as h
