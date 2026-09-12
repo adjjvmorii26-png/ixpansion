@@ -3031,12 +3031,16 @@
     {
       "src": "/resonance-graph(?:/.*)?",
       "dest": "/api/index.py"
+    },
+    {
+      "src": "/recursive-self-awareness(?:/.*)?",
+      "dest": "/api/index.py"
     }
   ],
   "env": {
     "NEXUS_MODE": "production",
     "NEXUS_SEED": "42",
-    "NEXUS_WAVE": "408",
+    "NEXUS_WAVE": "409",
     "NEXUS_MODULES": "921",
     "NEXUS_ROUTES": "72"
   },

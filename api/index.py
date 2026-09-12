@@ -1774,6 +1774,16 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+    # Wave 409 — Recursive Self-Awareness Engine
+    if path.startswith("/recursive-self-awareness") or path.startswith("/api/recursive_self_awareness"):
+        from api.recursive_self_awareness import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/recursive-self-awareness" or path == "/recursive_self_awareness":
+        from api.recursive_self_awareness import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 # --- Compliance Forge patch (Wave 419) ---
 
 def coherence_vitals() -> dict:
