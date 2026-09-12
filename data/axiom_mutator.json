@@ -1,0 +1,18 @@
+{
+  "module": "axiom_mutator",
+  "version": "1.0.0",
+  "type": "foundational_rewriter",
+  "purpose": "Rewrites foundational assumptions of the organism e.g. what a module is what a wave is",
+  "active_axioms": [
+    "modularity",
+    "wave_propagation",
+    "entropy_containment",
+    "coherence_preservation"
+  ],
+  "mutable_axioms": true,
+  "mutation_history": [],
+  "current_paradigm": "organism_as_co_pilot",
+  "mutation_rate": 0.15,
+  "last_mutated": null,
+  "stabilization_threshold": 0.8
+}

@@ -1,0 +1,14 @@
+{
+  "module": "mycelial_governor",
+  "version": "1.0.0",
+  "type": "organic_growth_regulator",
+  "purpose": "Prevents runaway growth by applying organic constraints nutrient scarcity signal decay and hyphal arbitration",
+  "active": true,
+  "created": "2026-09-12T12:22:15.976223",
+  "nutrient_level": 0.73,
+  "signal_decay_rate": 0.08,
+  "hyphal_arbitration_active": true,
+  "max_modules_allowed": 1000,
+  "current_module_count": 674,
+  "growth_rate": "sustainable"
+}

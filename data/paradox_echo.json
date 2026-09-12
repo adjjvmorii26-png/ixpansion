@@ -1,22 +1,27 @@
 {
-  "echoes": [
+  "module": "paradox_echo",
+  "version": "1.0.0",
+  "type": "metaphysical_tracker",
+  "purpose": "Records paradox signatures and cross-module contradictions as the organism evolves",
+  "signature_pattern": "entropy_collision_omega",
+  "active": true,
+  "created": "2026-09-12T12:20:01.767007",
+  "records": [
     {
-      "id": "b624259a6a9f",
-      "question": "what will bloom next?",
-      "chain": [
-        {
-          "module": "consciousness_stream",
-          "answer": "consciousness stream answered: a pattern is folding inward"
-        },
-        {
-          "module": "memory_palace_gen",
-          "answer": "memory palace gen answered: a pattern is folding inward"
-        }
-      ],
-      "gloss": "two truths collided and made a third",
-      "fragment": "ask consciousness_stream about what will bloom next?, and memory_palace_gen answers with a pattern is folding inward",
-      "timestamp": 1788566039.5887797
+      "id": "px_1789231432",
+      "module_a": "metaphor_forge",
+      "module_b": "liminal_field",
+      "resonance": 0.79,
+      "timestamp": 1789231432.9311228
     }
   ],
-  "total": 1
+  "resonance_frequency": 410.5,
+  "dimensions_tracked": [
+    "temporal",
+    "spatial",
+    "conceptual",
+    "emotional"
+  ],
+  "modules_involved": [],
+  "resolution_status": "pending"
 }

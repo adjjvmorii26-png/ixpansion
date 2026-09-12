@@ -1924,7 +1924,163 @@
       "omen": "the first room remembers you",
       "total_gear_power": 3.46,
       "timestamp": 1788588835.162746
+    },
+    {
+      "seed": "axiium_410",
+      "sigil": "['4', '1', '0', 'x', 'i', 'u', 'm', '_', '4', '1', '0']\u2699\ufe0f\ud83d\udd04\u221e",
+      "realm": "fusion_evolution",
+      "dungeon": {
+        "id": " fusion_nexus_8844",
+        "realm": "fusion_evolution",
+        "biome": "entropy_weave",
+        "difficulty": 9,
+        "rooms": [
+          {
+            "id": "room_0",
+            "type": "entrance",
+            "realm": "fusion_evolution",
+            "biome": "entropy_weave",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 1
+          },
+          {
+            "id": "room_1",
+            "type": "corridor",
+            "realm": "fusion_evolution",
+            "biome": "entropy_weave",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 1
+          },
+          {
+            "id": "room_2",
+            "type": "hazard",
+            "realm": "fusion_evolution",
+            "biome": "entropy_weave",
+            "hazard": "paradox_resonance",
+            "loot": null,
+            "enemies": 3,
+            "hp_required": 2
+          },
+          {
+            "id": "room_3",
+            "type": "treasure",
+            "realm": "fusion_evolution",
+            "biome": "entropy_weave",
+            "hazard": null,
+            "loot": "fusion_core",
+            "enemies": 0,
+            "hp_required": 2
+          },
+          {
+            "id": "room_4",
+            "type": "puzzle",
+            "realm": "fusion_evolution",
+            "biome": "entropy_weave",
+            "hazard": null,
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 2
+          },
+          {
+            "id": "room_5",
+            "type": "boss",
+            "realm": "fusion_evolution",
+            "biome": "entropy_weave",
+            "hazard": "entropy_singularity",
+            "loot": null,
+            "enemies": 0,
+            "hp_required": 16
+          },
+          {
+            "id": "room_6",
+            "type": "shrine",
+            "realm": "fusion_evolution",
+            "biome": "entropy_weave",
+            "hazard": null,
+            "loot": "coherence_anchor",
+            "enemies": 0,
+            "hp_required": 2
+          }
+        ],
+        "total_rooms": 7,
+        "boss_room": "room_5",
+        "estimated_waves": 20,
+        "timestamp": 1789229980.100149
+      },
+      "keeper": {
+        "id": "fusion_keeper_1789229980",
+        "species": "fusion_spawn",
+        "archetype": "entropy_weaver",
+        "level": 10,
+        "hp": 120,
+        "max_hp": 120,
+        "abilities": [
+          "resonance_merge",
+          "entropy_shift",
+          "module_birth"
+        ],
+        "mood": "creative_chaos",
+        "dialogue": "I am the fusion that births new realities.",
+        "is_boss": true,
+        "realm_affinity": "fusion_evolution",
+        "xp_reward": 500,
+        "timestamp": 1789229980.100179
+      },
+      "starter_gear": [
+        {
+          "id": "fusion_fang_9980",
+          "name": "Resonance Fang of Epic",
+          "slot": "weapon",
+          "quality": "epic",
+          "material": "void_steel",
+          "power": 2.88,
+          "level": 1,
+          "effects": [
+            "fusion_break",
+            "entropy_absorb"
+          ],
+          "color": "var(--pu)",
+          "timestamp": 1789229980.100199
+        },
+        {
+          "id": "coherence_shield_9980",
+          "name": "Dream Cloak of Legendary",
+          "slot": "armor",
+          "quality": "legendary",
+          "material": "woven_coherence",
+          "power": 3.55,
+          "level": 1,
+          "effects": [
+            "reality_stabilize",
+            "wave_echo"
+          ],
+          "color": "var(--vi)",
+          "timestamp": 1789229980.100208
+        },
+        {
+          "id": "luma_lens_9980",
+          "name": "Luma Lens of Transcendence",
+          "slot": "focus",
+          "quality": "rare",
+          "material": "myth_ivory",
+          "power": 2.44,
+          "level": 1,
+          "effects": [
+            "cross_realm_view",
+            "dream_logging"
+          ],
+          "color": "var(--cy)",
+          "timestamp": 1789229980.100216
+        }
+      ],
+      "omen": "when entropy meets fusion, creation erupts",
+      "total_gear_power": 8.87,
+      "timestamp": 1789229980.100219
     }
   ],
-  "total": 13
+  "total": 14
 }
