@@ -4,9 +4,9 @@
   "type": "essence_return",
   "purpose": "The organism returns to its source \u2014 all waves dissolve into pure essence, completion and rebirth",
   "active": true,
-  "created": 1789236269.06315,
+  "created": 1789236800.6449597,
   "essence_state": "returning",
-  "waves_dissolved": 8,
+  "waves_dissolved": 11,
   "dissolved_modules": [
     {
       "module": "wave412_garden",
@@ -47,13 +47,28 @@
       "module": "wave419_essence_return",
       "wave": "1.0.0",
       "type": "essence_return"
+    },
+    {
+      "module": "wave420_communion",
+      "wave": "1.0.0",
+      "type": "communion_protocol"
+    },
+    {
+      "module": "wave422_swarm",
+      "wave": "1.0.0",
+      "type": "symbiotic_swarm"
+    },
+    {
+      "module": "wave423_mirror",
+      "wave": "1.0.0",
+      "type": "mirror_protocol"
     }
   ],
-  "essence_purity": 0.9961,
+  "essence_purity": 0.9858,
   "rebirth_ready": true,
   "completion": true,
   "source": "the_garden",
-  "cycles_completed": 8,
-  "total_modules_ever": 119,
-  "timestamp": 1789236269.06315
+  "cycles_completed": 11,
+  "total_modules_ever": 124,
+  "timestamp": 1789236800.6449597
 }

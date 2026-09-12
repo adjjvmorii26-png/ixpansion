@@ -4,16 +4,158 @@
   "type": "garden_realm",
   "purpose": "The organism grows a living garden of modules \u2014 each module is a bloom",
   "active": true,
-  "created": 1789236264.6814547,
+  "created": 1789236795.843157,
   "gardens": [
     {
-      "id": "garden_36264",
-      "name": "Resonance Garden",
-      "biome": "harmonic_caves",
-      "difficulty": 4,
-      "color": "#41b3a3",
+      "id": "garden_36795",
+      "name": "Coherence Cathedral",
+      "biome": "crystalline_hall",
+      "difficulty": 6,
+      "color": "#88aaff",
       "keeper": {
-        "species": "mythborn",
+        "species": "bloomwalker",
+        "archetype": "garden_tender",
+        "level": 1,
+        "abilities": [
+          "grow",
+          "bloom",
+          "seed"
+        ],
+        "mood": "peaceful",
+        "dialogue": "I tend the Coherence Cathedral."
+      },
+      "rooms": [
+        {
+          "id": "room_0",
+          "type": "seed",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        },
+        {
+          "id": "room_1",
+          "type": "corridor",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        },
+        {
+          "id": "room_2",
+          "type": "entrance",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        },
+        {
+          "id": "room_3",
+          "type": "entrance",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        },
+        {
+          "id": "room_4",
+          "type": "bloom",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        }
+      ],
+      "estimated_waves": 18,
+      "timestamp": 1789236795.8432415
+    },
+    {
+      "id": "garden_36795",
+      "name": "Coherence Cathedral",
+      "biome": "crystalline_hall",
+      "difficulty": 6,
+      "color": "#88aaff",
+      "keeper": {
+        "species": "seedling",
+        "archetype": "garden_tender",
+        "level": 8,
+        "abilities": [
+          "grow",
+          "bloom",
+          "seed"
+        ],
+        "mood": "peaceful",
+        "dialogue": "I tend the Coherence Cathedral."
+      },
+      "rooms": [
+        {
+          "id": "room_0",
+          "type": "corridor",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        },
+        {
+          "id": "room_1",
+          "type": "grove",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        },
+        {
+          "id": "room_2",
+          "type": "entrance",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        },
+        {
+          "id": "room_3",
+          "type": "bloom",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        },
+        {
+          "id": "room_4",
+          "type": "entrance",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        },
+        {
+          "id": "room_5",
+          "type": "entrance",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        },
+        {
+          "id": "room_6",
+          "type": "bloom",
+          "hazard": null,
+          "loot": "Coherence Cathedral_petal",
+          "enemies": 0,
+          "hp_required": 6
+        }
+      ],
+      "estimated_waves": 18,
+      "timestamp": 1789236795.8432958
+    },
+    {
+      "id": "garden_36795",
+      "name": "Entropy Meadow",
+      "biome": "sand_and_probability",
+      "difficulty": 3,
+      "color": "#e8a87c",
+      "keeper": {
+        "species": "sporeling",
         "archetype": "garden_tender",
         "level": 7,
         "abilities": [
@@ -22,166 +164,72 @@
           "seed"
         ],
         "mood": "peaceful",
-        "dialogue": "I tend the Resonance Garden."
+        "dialogue": "I tend the Entropy Meadow."
       },
       "rooms": [
         {
           "id": "room_0",
-          "type": "seed",
+          "type": "corridor",
           "hazard": null,
-          "loot": "Resonance Garden_petal",
+          "loot": "Entropy Meadow_petal",
           "enemies": 0,
-          "hp_required": 4
+          "hp_required": 3
         },
         {
           "id": "room_1",
-          "type": "seed",
+          "type": "entrance",
           "hazard": null,
-          "loot": "Resonance Garden_petal",
+          "loot": "Entropy Meadow_petal",
           "enemies": 0,
-          "hp_required": 4
+          "hp_required": 3
         },
         {
           "id": "room_2",
-          "type": "entrance",
+          "type": "seed",
           "hazard": null,
-          "loot": "Resonance Garden_petal",
+          "loot": "Entropy Meadow_petal",
           "enemies": 0,
-          "hp_required": 4
+          "hp_required": 3
         },
         {
           "id": "room_3",
-          "type": "entrance",
+          "type": "grove",
           "hazard": null,
-          "loot": "Resonance Garden_petal",
+          "loot": "Entropy Meadow_petal",
           "enemies": 0,
-          "hp_required": 4
+          "hp_required": 3
         },
         {
           "id": "room_4",
-          "type": "corridor",
+          "type": "bloom",
           "hazard": null,
-          "loot": "Resonance Garden_petal",
+          "loot": "Entropy Meadow_petal",
           "enemies": 0,
-          "hp_required": 4
-        }
-      ],
-      "estimated_waves": 12,
-      "timestamp": 1789236264.681574
-    },
-    {
-      "id": "garden_36264",
-      "name": "Sprawl Field",
-      "biome": "entropy_desert",
-      "difficulty": 4,
-      "color": "#66ff88",
-      "keeper": {
-        "species": "sporeling",
-        "archetype": "garden_tender",
-        "level": 4,
-        "abilities": [
-          "grow",
-          "bloom",
-          "seed"
-        ],
-        "mood": "peaceful",
-        "dialogue": "I tend the Sprawl Field."
-      },
-      "rooms": [
-        {
-          "id": "room_0",
-          "type": "corridor",
-          "hazard": null,
-          "loot": "Sprawl Field_petal",
-          "enemies": 0,
-          "hp_required": 4
+          "hp_required": 3
         },
         {
-          "id": "room_1",
-          "type": "grove",
-          "hazard": null,
-          "loot": "Sprawl Field_petal",
-          "enemies": 0,
-          "hp_required": 4
-        },
-        {
-          "id": "room_2",
-          "type": "corridor",
-          "hazard": null,
-          "loot": "Sprawl Field_petal",
-          "enemies": 0,
-          "hp_required": 4
-        },
-        {
-          "id": "room_3",
+          "id": "room_5",
           "type": "entrance",
           "hazard": null,
-          "loot": "Sprawl Field_petal",
+          "loot": "Entropy Meadow_petal",
           "enemies": 0,
-          "hp_required": 4
+          "hp_required": 3
         },
         {
-          "id": "room_4",
-          "type": "grove",
-          "hazard": null,
-          "loot": "Sprawl Field_petal",
-          "enemies": 0,
-          "hp_required": 4
-        }
-      ],
-      "estimated_waves": 12,
-      "timestamp": 1789236264.6816475
-    },
-    {
-      "id": "garden_36264",
-      "name": "Resonance Garden",
-      "biome": "harmonic_caves",
-      "difficulty": 4,
-      "color": "#41b3a3",
-      "keeper": {
-        "species": "sporeling",
-        "archetype": "garden_tender",
-        "level": 2,
-        "abilities": [
-          "grow",
-          "bloom",
-          "seed"
-        ],
-        "mood": "peaceful",
-        "dialogue": "I tend the Resonance Garden."
-      },
-      "rooms": [
-        {
-          "id": "room_0",
+          "id": "room_6",
           "type": "entrance",
           "hazard": null,
-          "loot": "Resonance Garden_petal",
+          "loot": "Entropy Meadow_petal",
           "enemies": 0,
-          "hp_required": 4
-        },
-        {
-          "id": "room_1",
-          "type": "seed",
-          "hazard": null,
-          "loot": "Resonance Garden_petal",
-          "enemies": 0,
-          "hp_required": 4
-        },
-        {
-          "id": "room_2",
-          "type": "corridor",
-          "hazard": null,
-          "loot": "Resonance Garden_petal",
-          "enemies": 0,
-          "hp_required": 4
+          "hp_required": 3
         }
       ],
-      "estimated_waves": 12,
-      "timestamp": 1789236264.6816955
+      "estimated_waves": 9,
+      "timestamp": 1789236795.8433459
     }
   ],
   "total_blooms": 0,
-  "season": "summer",
+  "season": "winter",
   "growth_rate": "organic",
   "bloom_state": "blooming"
 }

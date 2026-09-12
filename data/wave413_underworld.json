@@ -4,150 +4,114 @@
   "type": "underworld_path",
   "purpose": "The shadow organism \u2014 root-ghosts, cavern clocks, mineral languages, subterranean archives, echo-economies, underworld migrations",
   "active": true,
-  "created": 1789236264.8108711,
+  "created": 1789236795.9667814,
   "caverns": [
     {
-      "id": "uw_36264",
-      "name": "Ghost Caverns",
-      "depth_meters": 800,
-      "mineral": "bone_silver",
-      "age": "forgotten",
+      "id": "uw_36795",
+      "name": "Archive Abyss",
+      "depth_meters": 2000,
+      "mineral": "memory_stone",
+      "age": "eternal",
       "echo_economy": {
-        "currency": "bone_silver_echo",
-        "exchange_rate": 0.71,
-        "trade_volume": 2700
+        "currency": "memory_stone_echo",
+        "exchange_rate": 1.7,
+        "trade_volume": 6429
       },
       "migrations": [
         {
           "species": "root_ghost",
-          "origin": "Ghost Caverns",
+          "origin": "Archive Abyss",
           "destination": "Surface_Zone",
-          "distance": 3481
+          "distance": 4700
         },
         {
           "species": "root_ghost",
-          "origin": "Ghost Caverns",
-          "destination": "Echo_Zone",
-          "distance": 2826
-        },
-        {
-          "species": "root_ghost",
-          "origin": "Ghost Caverns",
-          "destination": "Echo_Zone",
-          "distance": 4863
+          "origin": "Archive Abyss",
+          "destination": "Archive_Zone",
+          "distance": 1083
         }
       ],
       "cavern_clock": {
-        "ticks_per_cycle": 265,
+        "ticks_per_cycle": 121,
         "echoes_per_tick": 10,
-        "last_tick": 1789232678.811036
+        "last_tick": 1789236280.9669094
       },
       "subterranean_archive": {
-        "scrolls": 265,
-        "mineral_language": "script_bone_silver",
+        "scrolls": 178,
+        "mineral_language": "script_memory_stone",
         "deciphered": false
       }
     },
     {
-      "id": "uw_36264",
+      "id": "uw_36795",
       "name": "Echo Depths",
       "depth_meters": 1200,
       "mineral": "obsidian",
       "age": "ancient",
       "echo_economy": {
         "currency": "obsidian_echo",
-        "exchange_rate": 2.66,
-        "trade_volume": 7681
+        "exchange_rate": 0.32,
+        "trade_volume": 2467
       },
       "migrations": [
         {
           "species": "root_ghost",
           "origin": "Echo Depths",
-          "destination": "Archive_Zone",
-          "distance": 699
+          "destination": "Echo_Zone",
+          "distance": 2584
         },
         {
           "species": "root_ghost",
           "origin": "Echo Depths",
-          "destination": "Surface_Zone",
-          "distance": 4452
-        },
-        {
-          "species": "root_ghost",
-          "origin": "Echo Depths",
-          "destination": "Surface_Zone",
-          "distance": 670
-        },
-        {
-          "species": "root_ghost",
-          "origin": "Echo Depths",
-          "destination": "Archive_Zone",
-          "distance": 1886
+          "destination": "Echo_Zone",
+          "distance": 2705
         }
       ],
       "cavern_clock": {
-        "ticks_per_cycle": 143,
-        "echoes_per_tick": 4,
-        "last_tick": 1789235105.8117967
+        "ticks_per_cycle": 355,
+        "echoes_per_tick": 6,
+        "last_tick": 1789235910.9670405
       },
       "subterranean_archive": {
-        "scrolls": 192,
+        "scrolls": 475,
         "mineral_language": "script_obsidian",
-        "deciphered": false
+        "deciphered": true
       }
     },
     {
-      "id": "uw_36264",
-      "name": "Root Hollows",
-      "depth_meters": 400,
-      "mineral": "iron_root",
-      "age": "primordial",
+      "id": "uw_36795",
+      "name": "Echo Depths",
+      "depth_meters": 1200,
+      "mineral": "obsidian",
+      "age": "ancient",
       "echo_economy": {
-        "currency": "iron_root_echo",
-        "exchange_rate": 1.84,
-        "trade_volume": 8878
+        "currency": "obsidian_echo",
+        "exchange_rate": 1.02,
+        "trade_volume": 6212
       },
       "migrations": [
         {
           "species": "root_ghost",
-          "origin": "Root Hollows",
-          "destination": "Surface_Zone",
-          "distance": 1133
-        },
-        {
-          "species": "root_ghost",
-          "origin": "Root Hollows",
-          "destination": "Surface_Zone",
-          "distance": 863
-        },
-        {
-          "species": "root_ghost",
-          "origin": "Root Hollows",
-          "destination": "Archive_Zone",
-          "distance": 3511
-        },
-        {
-          "species": "root_ghost",
-          "origin": "Root Hollows",
-          "destination": "Archive_Zone",
-          "distance": 971
+          "origin": "Echo Depths",
+          "destination": "Echo_Zone",
+          "distance": 3927
         }
       ],
       "cavern_clock": {
-        "ticks_per_cycle": 263,
-        "echoes_per_tick": 9,
-        "last_tick": 1789233358.8118608
+        "ticks_per_cycle": 216,
+        "echoes_per_tick": 6,
+        "last_tick": 1789233560.9679441
       },
       "subterranean_archive": {
-        "scrolls": 192,
-        "mineral_language": "script_iron_root",
-        "deciphered": true
+        "scrolls": 416,
+        "mineral_language": "script_obsidian",
+        "deciphered": false
       }
     }
   ],
   "total_ghosts": 0,
   "echo_economy_active": true,
-  "migration_wave": 4,
+  "migration_wave": 10,
   "depth_layer": "deep",
-  "mineral_resonance": 0.62
+  "mineral_resonance": 0.56
 }

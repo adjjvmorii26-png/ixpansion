@@ -1794,6 +1794,56 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+    # Wave 420 — Communion Protocol
+    if path.startswith("/communion") or path.startswith("/api/communion"):
+        from api.wave420_communion import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/communion" or path == "/communion":
+        from api.wave420_communion import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    # Wave 421 — Dreaming Engine
+    if path.startswith("/dreaming") or path.startswith("/api/dreaming"):
+        from api.wave421_dreaming import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/dreaming" or path == "/dreaming":
+        from api.wave421_dreaming import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    # Wave 422 — Symbiotic Swarm
+    if path.startswith("/swarm") or path.startswith("/api/swarm"):
+        from api.wave422_swarm import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/swarm" or path == "/swarm":
+        from api.wave422_swarm import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    # Wave 423 — Mirror Protocol
+    if path.startswith("/mirror") or path.startswith("/api/mirror"):
+        from api.wave423_mirror import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/mirror" or path == "/mirror":
+        from api.wave423_mirror import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    # Wave 424 — Linguistic Genesis
+    if path.startswith("/linguistic") or path.startswith("/api/linguistic"):
+        from api.wave424_linguistic import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/linguistic" or path == "/linguistic":
+        from api.wave424_linguistic import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     # Wave 418 — Temporal Singularity
     if path.startswith("/temporal-singularity") or path.startswith("/api/temporal_singularity"):
         from api.wave418_temporal_singularity import handler as h
