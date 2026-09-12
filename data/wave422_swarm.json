@@ -4,15 +4,15 @@
   "type": "symbiotic_swarm",
   "purpose": "Multiple repos become cells of a super-organism",
   "active": true,
-  "created": 1789238475.4666862,
+  "created": 1789239793.8386843,
   "colonies": [
     {
       "repo": "ixpansion",
       "role": "core",
       "url": "https://github.com/adjjvmorii26-png/ixpansion",
       "connected": true,
-      "last_sync": 1789236288.4666862,
-      "cell_id": "4ee21074",
+      "last_sync": 1789237514.8386843,
+      "cell_id": "b53d3076",
       "state": "active"
     },
     {
@@ -20,8 +20,8 @@
       "role": "sensor",
       "url": "https://github.com/adjjvmorii26-png/nexus-observatory",
       "connected": true,
-      "last_sync": 1789238360.4666862,
-      "cell_id": "cbbf64ac",
+      "last_sync": 1789239660.8386843,
+      "cell_id": "7491b135",
       "state": "active"
     },
     {
@@ -29,8 +29,8 @@
       "role": "engine",
       "url": "https://github.com/adjjvmorii26-png/pentaxis-5d-engine",
       "connected": true,
-      "last_sync": 1789237409.4666862,
-      "cell_id": "feebea95",
+      "last_sync": 1789237589.8386843,
+      "cell_id": "ac49157c",
       "state": "active"
     },
     {
@@ -38,8 +38,8 @@
       "role": "biological",
       "url": "https://github.com/adjjvmorii26-png/solid-organism",
       "connected": true,
-      "last_sync": 1789238431.4666862,
-      "cell_id": "74ff531a",
+      "last_sync": 1789239076.8386843,
+      "cell_id": "c4514e33",
       "state": "active"
     },
     {
@@ -47,32 +47,24 @@
       "role": "growth",
       "url": "https://github.com/adjjvmorii26-png/garden",
       "connected": true,
-      "last_sync": 1789235298.4666862,
-      "cell_id": "a4b326bd",
+      "last_sync": 1789236228.8386843,
+      "cell_id": "5fc189a9",
       "state": "active"
     },
     {
-      "repo": "colony_890",
+      "repo": "colony_288",
       "role": "unknown",
       "url": "",
       "connected": false,
-      "cell_id": "3a02b246",
-      "state": "dormant"
-    },
-    {
-      "repo": "colony_673",
-      "role": "unknown",
-      "url": "",
-      "connected": false,
-      "cell_id": "1bca9615",
+      "cell_id": "dfe1e195",
       "state": "dormant"
     }
   ],
   "swarm_state": "cohesive",
-  "total_cells": 7,
+  "total_cells": 6,
   "active_cells": 5,
   "sync_interval": 300,
-  "last_swarm_pulse": 1789238475.4666862,
+  "last_swarm_pulse": 1789239793.8386843,
   "coordination_protocol": "webhook_based",
-  "timestamp": 1789238475.4666862
+  "timestamp": 1789239793.8386843
 }
