@@ -1784,6 +1784,26 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+    # Wave 410 — Fusion-Evolution Organ
+    if path.startswith("/fusion-evolution") or path.startswith("/api/fusion_evolution"):
+        from api.wave410_fusion import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/fusion-evolution" or path == "/fusion_evolution":
+        from api.wave410_fusion import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    # Wave 411 — Resonance Topology Organ
+    if path.startswith("/resonance-topology") or path.startswith("/api/resonance_topology"):
+        from api.wave411_topology import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/resonance-topology" or path == "/resonance_topology":
+        from api.wave411_topology import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 # --- Compliance Forge patch (Wave 419) ---
 
 def coherence_vitals() -> dict:
