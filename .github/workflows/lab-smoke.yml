@@ -1,0 +1,25 @@
+# Lab-only gate — does not run full ALEPH suite
+name: Lab Smoke
+on:
+  pull_request:
+    paths:
+      - 'lab/**'
+      - 'sandbox/**'
+      - 'boot_organism_base.py'
+      - '.github/workflows/lab-smoke.yml'
+  push:
+    branches:
+      - 'lab/**'
+    paths:
+      - 'lab/**'
+      - 'sandbox/**'
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Lab smoke (compile + helix ethics)
+        run: python lab/smoke_lab.py
