@@ -1,0 +1,153 @@
+{
+  "module": "wave413_underworld",
+  "version": "1.0.0",
+  "type": "underworld_path",
+  "purpose": "The shadow organism \u2014 root-ghosts, cavern clocks, mineral languages, subterranean archives, echo-economies, underworld migrations",
+  "active": true,
+  "created": 1789236264.8108711,
+  "caverns": [
+    {
+      "id": "uw_36264",
+      "name": "Ghost Caverns",
+      "depth_meters": 800,
+      "mineral": "bone_silver",
+      "age": "forgotten",
+      "echo_economy": {
+        "currency": "bone_silver_echo",
+        "exchange_rate": 0.71,
+        "trade_volume": 2700
+      },
+      "migrations": [
+        {
+          "species": "root_ghost",
+          "origin": "Ghost Caverns",
+          "destination": "Surface_Zone",
+          "distance": 3481
+        },
+        {
+          "species": "root_ghost",
+          "origin": "Ghost Caverns",
+          "destination": "Echo_Zone",
+          "distance": 2826
+        },
+        {
+          "species": "root_ghost",
+          "origin": "Ghost Caverns",
+          "destination": "Echo_Zone",
+          "distance": 4863
+        }
+      ],
+      "cavern_clock": {
+        "ticks_per_cycle": 265,
+        "echoes_per_tick": 10,
+        "last_tick": 1789232678.811036
+      },
+      "subterranean_archive": {
+        "scrolls": 265,
+        "mineral_language": "script_bone_silver",
+        "deciphered": false
+      }
+    },
+    {
+      "id": "uw_36264",
+      "name": "Echo Depths",
+      "depth_meters": 1200,
+      "mineral": "obsidian",
+      "age": "ancient",
+      "echo_economy": {
+        "currency": "obsidian_echo",
+        "exchange_rate": 2.66,
+        "trade_volume": 7681
+      },
+      "migrations": [
+        {
+          "species": "root_ghost",
+          "origin": "Echo Depths",
+          "destination": "Archive_Zone",
+          "distance": 699
+        },
+        {
+          "species": "root_ghost",
+          "origin": "Echo Depths",
+          "destination": "Surface_Zone",
+          "distance": 4452
+        },
+        {
+          "species": "root_ghost",
+          "origin": "Echo Depths",
+          "destination": "Surface_Zone",
+          "distance": 670
+        },
+        {
+          "species": "root_ghost",
+          "origin": "Echo Depths",
+          "destination": "Archive_Zone",
+          "distance": 1886
+        }
+      ],
+      "cavern_clock": {
+        "ticks_per_cycle": 143,
+        "echoes_per_tick": 4,
+        "last_tick": 1789235105.8117967
+      },
+      "subterranean_archive": {
+        "scrolls": 192,
+        "mineral_language": "script_obsidian",
+        "deciphered": false
+      }
+    },
+    {
+      "id": "uw_36264",
+      "name": "Root Hollows",
+      "depth_meters": 400,
+      "mineral": "iron_root",
+      "age": "primordial",
+      "echo_economy": {
+        "currency": "iron_root_echo",
+        "exchange_rate": 1.84,
+        "trade_volume": 8878
+      },
+      "migrations": [
+        {
+          "species": "root_ghost",
+          "origin": "Root Hollows",
+          "destination": "Surface_Zone",
+          "distance": 1133
+        },
+        {
+          "species": "root_ghost",
+          "origin": "Root Hollows",
+          "destination": "Surface_Zone",
+          "distance": 863
+        },
+        {
+          "species": "root_ghost",
+          "origin": "Root Hollows",
+          "destination": "Archive_Zone",
+          "distance": 3511
+        },
+        {
+          "species": "root_ghost",
+          "origin": "Root Hollows",
+          "destination": "Archive_Zone",
+          "distance": 971
+        }
+      ],
+      "cavern_clock": {
+        "ticks_per_cycle": 263,
+        "echoes_per_tick": 9,
+        "last_tick": 1789233358.8118608
+      },
+      "subterranean_archive": {
+        "scrolls": 192,
+        "mineral_language": "script_iron_root",
+        "deciphered": true
+      }
+    }
+  ],
+  "total_ghosts": 0,
+  "echo_economy_active": true,
+  "migration_wave": 4,
+  "depth_layer": "deep",
+  "mineral_resonance": 0.62
+}
