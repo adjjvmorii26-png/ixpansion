@@ -1794,6 +1794,26 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+    # Wave 416 — Paradox Singularity
+    if path.startswith("/paradox-singularity") or path.startswith("/api/paradox_singularity"):
+        from api.wave416_paradox_singularity import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/paradox-singularity" or path == "/paradox_singularity":
+        from api.wave416_paradox_singularity import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    # Wave 417 — Causality Loop
+    if path.startswith("/causality-loop") or path.startswith("/api/causality_loop"):
+        from api.wave417_causality_loop import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/causality-loop" or path == "/causality_loop":
+        from api.wave417_causality_loop import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     # Wave 415 — Chrono-Forge Temporal Engine
     if path.startswith("/chrono-forge") or path.startswith("/api/chrono_forge"):
         from api.wave415_chrono_forge import handler as h
