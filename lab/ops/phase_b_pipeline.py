@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase B: ticket → graft → seams → captions."""
+"""Phase B+: ticket → graft → seams → captions → dual_track."""
 from __future__ import annotations
 import json, subprocess, sys
 from pathlib import Path
@@ -14,6 +14,7 @@ def main():
         ("graft", [str(REPO / "lab" / "ops" / "pr_graft_advisor.py")]),
         ("seams", [str(REPO / "apps" / "seamwalk" / "build_seams.py")]),
         ("captions", [str(REPO / "apps" / "seamwalk" / "to_captions.py")]),
+        ("dual_track", [str(REPO / "lab" / "ops" / "dual_track_card.py")]),
     ]:
         good = run(args)
         steps.append({"step": name, "ok": good}); ok &= good
