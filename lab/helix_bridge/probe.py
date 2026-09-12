@@ -24,13 +24,6 @@ def main():
     ok = all(n.get("ok") for n in nodes)
     constellation = {"protocol": "HB-1", "ts": datetime.now(timezone.utc).isoformat(), "ok": ok, "nodes": nodes, "channel": "@CoodingLooop", "doctrine": "ethics_first_soft_skip"}
     OUT.write_text(json.dumps(constellation, indent=2) + "\n")
-    ledger = REPO / "lab" / "unique_path" / "proof_ledger.jsonl"
-    try:
-        ledger.parent.mkdir(parents=True, exist_ok=True)
-        with ledger.open("a") as f:
-            f.write(json.dumps({"ts": constellation["ts"], "type": "helix_bridge", "ok": ok}) + "\n")
-    except OSError:
-        pass
     print(json.dumps(constellation, indent=2))
     return 0 if ok else 1
 if __name__ == "__main__":
