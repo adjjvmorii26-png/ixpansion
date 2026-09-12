@@ -2,11 +2,11 @@
 
 | Tool | Role |
 |------|------|
-| route_scar.py | Vercel 754→89 scar memory |
-| silence_ledger.py | Caption deposits · 0 audio capital |
-| dual_track_card.py | ALEPH vs Lab |
+| route_scar.py | Vercel collapse scar memory |
+| silence_ledger.py | Caption silence capital |
+| proof_tide.py | Hash spine → rising/ebb tide |
 
 ```bash
-python lab/ops/route_scar.py
+python lab/ops/proof_tide.py
 python lab/ops/silence_ledger.py
 ```
