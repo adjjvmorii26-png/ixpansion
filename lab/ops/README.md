@@ -1,12 +1,16 @@
-# Lab Ops
+# Lab Ops · creative organs
 
-| Tool | Role |
+| Tool | Idea |
 |------|------|
-| route_scar.py | Vercel scar memory |
-| silence_ledger.py | Silence capital |
-| proof_tide.py | Proof density tide |
-| **lab_constellation.py** | Fuse all three → one caption pack |
+| glyph_weather | mood + tide → day glyph |
+| absence_choir | voids as silent choir |
+| invert_compass | graft → smallest next truth |
+| lab_constellation | fuse scar/silence/tide |
+| proof_tide | proof density tide |
+| route_scar | vercel collapse memory |
 
 ```bash
-python lab/ops/lab_constellation.py
+python lab/ops/glyph_weather.py
+python lab/ops/absence_choir.py
+python lab/ops/invert_compass.py
 ```
