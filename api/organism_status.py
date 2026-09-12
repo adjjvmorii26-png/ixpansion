@@ -23,25 +23,26 @@ def get_organism_status() -> dict:
     now = time.time()
     
     # Load all wave data for counts
-    module_count = 0
-    wave_count = 0
-    dashboard_count = 0
-    data_file_count = 0
-    
-    for f in DATA.glob("*.json"):
-        data_file_count += 1
-        try:
-            d = json.loads(f.read_text())
-            if isinstance(d, dict) and "module" in d:
-                module_count += 1
-                wave_count = max(wave_count, int(d.get("version", "0").split(".")[0]) if isinstance(d.get("version", str), str) and d["version"].replace(".", "").isdigit() else wave_count)
-        except:
-            pass
-    
+    # Count API modules (the organism's real module body)
+    api_dir = Path(__file__).parent.parent / "api"
+    module_count = len(list(api_dir.glob("*.py"))) if api_dir.exists() else 0
+
+    # Count data files
+    data_file_count = len(list(DATA.glob("*.json")))
+
     # Count dashboards
     dashboard_dir = Path(__file__).parent.parent / "dashboard"
-    if dashboard_dir.exists():
-        dashboard_count = len(list(dashboard_dir.glob("*.html")))
+    dashboard_count = len(list(dashboard_dir.glob("*.html"))) if dashboard_dir.exists() else 0
+
+    # Highest wave index derived from api/wave4*.py files
+    wave_count = 0
+    for f in api_dir.glob("wave*.py"):
+        try:
+            num = int(f.stem.replace("wave", "").split("_")[0])
+            if num > wave_count:
+                wave_count = num
+        except ValueError:
+            pass
     
     # Load meta-coordination for overall coherence
     meta = _load("wave414_meta_coordination")

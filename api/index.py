@@ -1804,6 +1804,16 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+    # Wave 425 — Quantum Superposition
+    if path.startswith("/superposition") or path.startswith("/api/superposition"):
+        from api.wave425_superposition import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/superposition" or path == "/superposition":
+        from api.wave425_superposition import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     # Wave 420 — Communion Protocol
     if path.startswith("/communion") or path.startswith("/api/communion"):
         from api.wave420_communion import handler as h
