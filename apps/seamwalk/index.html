@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<title>SEAMWALK</title>
+<style>
+:root{--bg:#04040a;--cyan:#00e5ff;--mag:#ff2bd6}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:#8a9;overflow:hidden;font-family:ui-monospace,monospace}
+canvas{display:block;width:100%;height:100%;cursor:none}
+#hud{position:fixed;left:1rem;bottom:1rem;right:1rem;pointer-events:none;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,229,255,.55)}
+#hud b{color:var(--mag);font-weight:400}
+#title{position:fixed;top:1rem;left:1rem;font-size:12px;letter-spacing:.35em;color:var(--cyan)}
+#doctrine{position:fixed;top:1rem;right:1rem;font-size:10px;letter-spacing:.2em;color:rgba(255,43,214,.5);max-width:40vw;text-align:right}
+#cursor-ring{position:fixed;width:28px;height:28px;margin:-14px 0 0 -14px;border:1px solid rgba(0,229,255,.5);border-radius:50%;pointer-events:none;z-index:5}
+#trail-cap{position:fixed;left:50%;bottom:3.5rem;transform:translateX(-50%);font-size:13px;color:rgba(255,255,255,.75);letter-spacing:.08em;pointer-events:none;text-align:center;min-height:1.2em}
+</style>
+</head>
+<body>
+<div id="title">SEAMWALK</div>
+<div id="doctrine">absence is structure</div>
+<div id="cursor-ring"></div>
+<div id="trail-cap"></div>
+<div id="hud">walk · hold · <b>never fill</b> the rift</div>
+<canvas id="stage"></canvas>
+<script>
+(async()=>{
+let DATA={field:[],primary:'#00e5ff',secondary:'#ff2bd6',mood:'void',title:'SEAMWALK'};
+try{DATA=await fetch('seams.json').then(r=>r.json())}catch(e){
+DATA.field=Array.from({length:12},(_,i)=>{const a=i/12*Math.PI*2;return{id:'s'+i,kind:i%3===0?'rift':'plate',tension:i%3===0?0.8:0.2,x:Math.cos(a)*.5,y:Math.sin(a)*.5,hue:i*30,label:'seam-'+i}})}
+document.getElementById('doctrine').textContent=DATA.doctrine||'absence is structure';
+if(DATA.primary)document.documentElement.style.setProperty('--cyan',DATA.primary);
+if(DATA.secondary)document.documentElement.style.setProperty('--mag',DATA.secondary);
+const canvas=document.getElementById('stage'),ctx=canvas.getContext('2d');
+const ring=document.getElementById('cursor-ring'),cap=document.getElementById('trail-cap');
+let W,H,dpr,t0=performance.now();const trail=[];let held=null,walkDist=0;
+function resize(){dpr=devicePixelRatio||1;W=canvas.width=Math.floor(innerWidth*dpr);H=canvas.height=Math.floor(innerHeight*dpr);canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px'}
+addEventListener('resize',resize);resize();
+function toScreen(x,y){const R=Math.min(W,H)*.38;return[W/2+x*R,H/2+y*R]}
+addEventListener('pointermove',e=>{
+mx=e.clientX/innerWidth;my=e.clientY/innerHeight;
+ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';
+const nx=(e.clientX/innerWidth-.5)*2,ny=(e.clientY/innerHeight-.5)*2;
+trail.push({x:nx*.55,y:ny*.55,t:performance.now()});if(trail.length>80)trail.shift();
+if(trail.length>1){const a=trail[trail.length-2],b=trail[trail.length-1];walkDist+=Math.hypot(b.x-a.x,b.y-a.y)}
+let best=null,bd=1e9;for(const s of DATA.field){const d=Math.hypot(s.x-nx*.55,s.y-ny*.55);if(d<bd){bd=d;best=s}}
+held=bd<.12?best:null;
+ring.style.borderColor=held?(held.kind==='rift'?'rgba(255,43,214,.9)':'rgba(0,229,255,.9)'):'rgba(0,229,255,.35)';
+cap.textContent=held?(held.kind==='rift'?`rift · ${held.label} · leave open`:`plate · ${held.label} · tension ${held.tension}`):(walkDist>.01?`trail ${walkDist.toFixed(2)} · proof of walk`:'')
+});
+addEventListener('pointerdown',()=>{if(held&&held.kind==='rift')cap.textContent='refused · void stays void';else if(held)cap.textContent=`witnessed · ${held.label}`});
+function draw(now){const t=(now-t0)/1000;ctx.clearRect(0,0,W,H);
+ctx.fillStyle='rgba(0,229,255,.015)';for(let i=0;i<40;i++){const x=(Math.sin(t*.2+i*1.7)*.5+.5)*W,y=(Math.cos(t*.15+i)*.5+.5)*H;ctx.fillRect(x,y,dpr,dpr)}
+const R=Math.min(W,H)*.38;ctx.strokeStyle='rgba(0,229,255,.08)';ctx.lineWidth=dpr;ctx.beginPath();ctx.arc(W/2,H/2,R,0,Math.PI*2);ctx.stroke();
+for(const s of DATA.field){const[sx,sy]=toScreen(s.x,s.y);const pulse=.5+.5*Math.sin(t*2+s.hue);
+if(s.kind==='rift'){ctx.strokeStyle=`hsla(${s.hue},90%,60%,${.35+.35*pulse})`;ctx.lineWidth=2*dpr;ctx.setLineDash([6*dpr,6*dpr]);ctx.beginPath();ctx.moveTo(sx-18*dpr,sy-18*dpr);ctx.lineTo(sx+18*dpr,sy+18*dpr);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=`hsla(${s.hue},90%,55%,.15)`;ctx.beginPath();ctx.arc(sx,sy,14*dpr,0,Math.PI*2);ctx.fill()}
+else{ctx.fillStyle=s.kind==='fault'?`rgba(255,43,214,${.3+.3*pulse})`:`rgba(0,229,255,${.25+.35*pulse})`;ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=12*dpr;ctx.beginPath();ctx.arc(sx,sy,(4+s.tension*6)*dpr,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0}
+if(held&&held.id===s.id){ctx.strokeStyle='rgba(255,255,255,.5)';ctx.lineWidth=dpr;ctx.beginPath();ctx.arc(sx,sy,20*dpr,0,Math.PI*2);ctx.stroke()}}
+if(trail.length>1){ctx.strokeStyle='rgba(255,43,214,.25)';ctx.lineWidth=1.5*dpr;ctx.beginPath();for(let i=0;i<trail.length;i++){const[tx,ty]=toScreen(trail[i].x,trail[i].y);i?ctx.lineTo(tx,ty):ctx.moveTo(tx,ty)}ctx.stroke()}
+const sig=Math.floor(walkDist*100)%7;ctx.fillStyle='rgba(0,229,255,.4)';ctx.font=`${11*dpr}px monospace`;ctx.textAlign='center';ctx.fillText('·'.repeat(1+sig),W/2,H/2+4*dpr);
+requestAnimationFrame(draw)}requestAnimationFrame(draw)
+})();
+</script>
+</body>
+</html>
