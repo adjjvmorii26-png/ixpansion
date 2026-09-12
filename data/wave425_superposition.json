@@ -4,47 +4,59 @@
   "type": "quantum_state",
   "purpose": "Organism exists in multiple states simultaneously until observed",
   "active": true,
-  "created": 1789243885.5571806,
+  "created": 1789248353.2169602,
   "states": [
     {
-      "state_id": "q0_43885",
-      "realm": "garden_realm",
-      "amplitude": 0.194,
-      "phase": 2.315,
+      "state_id": "q0_48353",
+      "realm": "paradox_singularity",
+      "amplitude": 0.751,
+      "phase": 0.622,
       "properties": {
-        "color": "#b03fd0",
-        "frequency": 913.2
+        "color": "#1eade9",
+        "frequency": 901.3
       },
-      "created": 1789243885.5571806,
-      "probability": 0.2775
+      "created": 1789248353.2169602,
+      "probability": 0.2708
     },
     {
-      "state_id": "q1_43885",
-      "realm": "chrono_forge",
-      "amplitude": 0.13,
-      "phase": 5.121,
+      "state_id": "q1_48353",
+      "realm": "dreaming",
+      "amplitude": 0.393,
+      "phase": 0.359,
       "properties": {
-        "color": "#1d5981",
-        "frequency": 389.5
+        "color": "#1659c6",
+        "frequency": 656.3
       },
-      "created": 1789243885.5571806,
-      "probability": 0.186
+      "created": 1789248353.2169602,
+      "probability": 0.1417
     },
     {
-      "state_id": "q2_43885",
-      "realm": "temporal_singularity",
-      "amplitude": 0.375,
-      "phase": 5.29,
+      "state_id": "q2_48353",
+      "realm": "swarm",
+      "amplitude": 0.96,
+      "phase": 3.641,
       "properties": {
-        "color": "#7ad0bd",
-        "frequency": 837.9
+        "color": "#36265e",
+        "frequency": 888.0
       },
-      "created": 1789243885.5571806,
-      "probability": 0.5365
+      "created": 1789248353.2169602,
+      "probability": 0.3462
+    },
+    {
+      "state_id": "q3_48353",
+      "realm": "swarm",
+      "amplitude": 0.669,
+      "phase": 1.453,
+      "properties": {
+        "color": "#1fee53",
+        "frequency": 479.4
+      },
+      "created": 1789248353.2169602,
+      "probability": 0.2413
     }
   ],
   "superposed": true,
   "uncollapsed": true,
-  "state_count": 3,
-  "entanglement_fingerprint": "704cb9220317bbc2"
+  "state_count": 4,
+  "entanglement_fingerprint": "1633674bb812c26d"
 }

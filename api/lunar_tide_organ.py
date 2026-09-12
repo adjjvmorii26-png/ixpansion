@@ -42,4 +42,8 @@ def resonates_with() -> List[str]:
 
 
 # Registry entry (will be auto-detected by coherence_regulator)
-KNOWN_LIVING_MODULES.append(__name__)
+try:
+    from coherence_regulator import KNOWN_LIVING_MODULES
+    KNOWN_LIVING_MODULES.append(__name__)
+except Exception:
+    pass

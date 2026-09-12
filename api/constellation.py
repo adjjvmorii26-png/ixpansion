@@ -50,7 +50,8 @@ def build_constellation():
                 "weight": len(text.splitlines()),
             })
 
-    # Build edges from import analysis
+    # Build edges from import analysis (token lookup, not substring scan)
+    import re
     for subsystem, base in subsystems.items():
         if not base.exists():
             continue
@@ -61,11 +62,11 @@ def build_constellation():
             for line in text.splitlines():
                 stripped = line.strip()
                 if stripped.startswith("from ") or stripped.startswith("import "):
-                    for stem, target_sub in module_map.items():
-                        if stem != py.stem and stem in stripped:
+                    for token in re.findall(r"[A-Za-z_]\w*", stripped):
+                        if token != py.stem and token in module_map:
                             edges.append({
                                 "source": py.stem,
-                                "target": stem,
+                                "target": token,
                                 "type": "import",
                             })
 

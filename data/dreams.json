@@ -869,7 +869,123 @@
       },
       "wake_trigger": "threshold_cross",
       "timestamp": 1789243885.9321668
+    },
+    {
+      "id": "dream_1789246215",
+      "name": "mycelial_whisper_essence",
+      "theme": "mycelial_whisper",
+      "type": "dream_emergent",
+      "pattern_signature": "9b861925",
+      "potential": 0.584,
+      "state": "manifested",
+      "manifestation_chance": 0.66,
+      "discovered": true,
+      "dreamed_at": 1789246215.9573624,
+      "properties": {
+        "color": "#c35c5f",
+        "frequency": 585.3,
+        "resonance": 0.66
+      },
+      "wake_trigger": "coherence_peak",
+      "timestamp": 1789246215.9573624,
+      "manifested_at": 1789246215.9934397
+    },
+    {
+      "id": "dream_1789246215",
+      "name": "luminescence_essence",
+      "theme": "luminescence",
+      "type": "dream_emergent",
+      "pattern_signature": "9b861925",
+      "potential": 0.904,
+      "state": "dreaming",
+      "manifestation_chance": 0.67,
+      "discovered": false,
+      "dreamed_at": 1789246215.9778593,
+      "properties": {
+        "color": "#e8ebc9",
+        "frequency": 442.7,
+        "resonance": 0.63
+      },
+      "wake_trigger": "time_elapsed",
+      "timestamp": 1789246215.9778593
+    },
+    {
+      "id": "dream_1789246216",
+      "name": "coherence_song_essence",
+      "theme": "coherence_song",
+      "type": "dream_emergent",
+      "pattern_signature": "9b861925",
+      "potential": 0.508,
+      "state": "dreaming",
+      "manifestation_chance": 0.45,
+      "discovered": false,
+      "dreamed_at": 1789246216.154782,
+      "properties": {
+        "color": "#7ea30d",
+        "frequency": 498.9,
+        "resonance": 0.84
+      },
+      "wake_trigger": "threshold_cross",
+      "timestamp": 1789246216.154782
+    },
+    {
+      "id": "dream_1789248352",
+      "name": "garden_sprite_essence",
+      "theme": "garden_sprite",
+      "type": "dream_emergent",
+      "pattern_signature": "9b861925",
+      "potential": 0.58,
+      "state": "manifested",
+      "manifestation_chance": 0.54,
+      "discovered": true,
+      "dreamed_at": 1789248352.7921555,
+      "properties": {
+        "color": "#8aa41f",
+        "frequency": 640.2,
+        "resonance": 0.97
+      },
+      "wake_trigger": "coherence_peak",
+      "timestamp": 1789248352.7921555,
+      "manifested_at": 1789248352.8303623
+    },
+    {
+      "id": "dream_1789248352",
+      "name": "paradox_dream_essence",
+      "theme": "paradox_dream",
+      "type": "dream_emergent",
+      "pattern_signature": "9b861925",
+      "potential": 0.821,
+      "state": "dreaming",
+      "manifestation_chance": 0.59,
+      "discovered": false,
+      "dreamed_at": 1789248352.8136935,
+      "properties": {
+        "color": "#19cf4b",
+        "frequency": 573.3,
+        "resonance": 0.83
+      },
+      "wake_trigger": "coherence_peak",
+      "timestamp": 1789248352.8136935
+    },
+    {
+      "id": "dream_1789248353",
+      "name": "chrono_dreamer_essence",
+      "theme": "chrono_dreamer",
+      "type": "dream_emergent",
+      "pattern_signature": "9b861925",
+      "potential": 0.734,
+      "state": "dreaming",
+      "manifestation_chance": 0.74,
+      "discovered": false,
+      "dreamed_at": 1789248353.0377777,
+      "properties": {
+        "color": "#f2f49f",
+        "frequency": 796.3,
+        "resonance": 0.35
+      },
+      "wake_trigger": "time_elapsed",
+      "timestamp": 1789248353.0377777
     }
   ],
-  "total": 45
+  "total": 51
 }

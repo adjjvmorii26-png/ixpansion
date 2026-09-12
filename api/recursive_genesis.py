@@ -188,8 +188,14 @@ def apply_mutations(audit: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
                 import random
                 candidates = ["shard", "beacon", "tide", "chord", "shelf",
                               "veil", "loom", "graft", "pulse", "well"]
-                new_suffix = random.choice([c for c in candidates
-                                            if c not in existing] or ["_v2"])
+                free = [c for c in candidates if c not in existing]
+                if free:
+                    new_suffix = random.choice(free)
+                else:
+                    n = 2
+                    while f"_v{n}" in existing:
+                        n += 1
+                    new_suffix = f"_v{n}"
                 if new_suffix not in existing:
                     new_list = ", ".join([f'"{s}"' for s in existing] +
                                          [f'"{new_suffix}"'])

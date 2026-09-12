@@ -27,6 +27,7 @@ import math
 import time
 from typing import Any, Dict, List, Optional, Tuple
 from collections import defaultdict
+import importlib
 
 
 class ResonanceNode:
@@ -310,6 +311,7 @@ def build_graph() -> Dict[str, Any]:
         weighted_degree[edge.target] += edge.strength
     hubs = sorted(weighted_degree.items(), key=lambda kv: kv[1], reverse=True)[:10]
     communities = _connected_components(graph)
+    declared_edges = _declare_resonances(graph, cap=12)
     n = len(graph.nodes)
     edge_count = len(graph.edges)
     density = (2 * edge_count) / (n * (n - 1)) if n > 1 else 0.0
@@ -319,6 +321,7 @@ def build_graph() -> Dict[str, Any]:
         "density": round(density, 6),
         "hubs": [(name, round(strength, 4)) for name, strength in hubs],
         "communities": communities,
+        "declared_edges": declared_edges,
         "coherence": round(graph.coherence_score, 4),
     }
 
@@ -333,6 +336,30 @@ def neighborhood(module_name: str) -> Dict[str, Any]:
         "neighbors": list(node.entangled) if node else [],
         "registered": node is not None,
     }
+
+
+def _declare_resonances(graph: ResonanceGraph, cap: int = 12) -> List[Dict[str, Any]]:
+    """Explicitly declare resonance edges from modules' own resonates_with()."""
+    declared: List[Dict[str, Any]] = []
+    seen: set = set()
+    for name in sorted(graph.nodes):
+        if len(declared) >= cap:
+            break
+        try:
+            mod = importlib.import_module(f"api.{name}")
+            fn = getattr(mod, "resonates_with", None)
+            targets = fn() if callable(fn) else []
+        except Exception:
+            targets = []
+        for target in targets or []:
+            if target in graph.nodes and (name, target) not in seen:
+                seen.add((name, target))
+                edge = graph.create_resonance(name, target)
+                if edge:
+                    declared.append(edge.to_dict())
+                    if len(declared) >= cap:
+                        break
+    return declared
 
 
 def _connected_components(graph: ResonanceGraph) -> Dict[str, List[str]]:

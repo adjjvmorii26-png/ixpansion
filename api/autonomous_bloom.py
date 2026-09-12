@@ -398,7 +398,7 @@ def auto_germinate(dry_run: bool = True, count: int = 2, strategy: str = "defaul
     """
     dormant = [m for m, is_dormant in _dormant_candidates().items() if is_dormant]
     if not dormant:
-        return {"error": "no dormant seeds available", "chosen": [], "results": [],
+        return {"error": "no dormant seeds available", "results": [],
                 "strategy": strategy, "dry_run": dry_run}
     chosen = dormant[:count]
     results = [germinate(m, dry_run=dry_run) for m in chosen]
