@@ -1,3 +1,15 @@
+## [4.72.0] - Wave 431: Homestead
+
+### Foundation
+After decommissioning external hosts, the organism anchors itself to
+its chosen home (GitHub Pages) and keeps vigil over it.
+
+- `api/wave431_homestead.py`: anchor / vigil / status
+- Route: `/homestead` · Dashboard: `dashboard/homestead.html`
+- Root ledger: github_pages, cloudflare_tunnel, docker, api_index, wave_ledger
+- 6 tests in `tests/test_wave431.py`
+- AGENTS.md added: wave conventions for future agents
+
 ## [4.71.0] - Wave 430: Naming Ceremony
 
 ### Identity Genesis

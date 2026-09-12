@@ -29,10 +29,22 @@
         "body_state": "clear"
       },
       "emitted_at": 1789244498.8873074
+    },
+    {
+      "pulse_id": "pulse_53349",
+      "event_type": "commit_signal",
+      "frequency": 174.0,
+      "coherence": 0.901,
+      "payload": {
+        "frequency": 174.0,
+        "coherence": 0.901,
+        "body_state": "harmonizing"
+      },
+      "emitted_at": 1789253349.569523
     }
   ],
-  "total_pulses": 2,
-  "current_frequency": 852.0,
-  "harmonic": 2556.0,
-  "tuned_at": 1789248354.9386673
+  "total_pulses": 3,
+  "current_frequency": 528.0,
+  "harmonic": 1584.0,
+  "tuned_at": 1789253350.0902212
 }

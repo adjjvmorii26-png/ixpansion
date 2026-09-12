@@ -1,0 +1,29 @@
+{
+  "module": "wave431_homestead",
+  "wave": 431,
+  "anchored": {
+    "home": "https://adjjvmorii26-png.github.io/ixpansion/",
+    "hosting": "github_pages",
+    "api_runtime": "serverless api/index.py + cloudflare tunnel",
+    "local_runtime": "docker",
+    "at": 1789253640.578
+  },
+  "vigils": [],
+  "roots": {
+    "github_pages": {
+      "status": "held"
+    },
+    "cloudflare_tunnel": {
+      "status": "held"
+    },
+    "docker": {
+      "status": "held"
+    },
+    "api_index": {
+      "status": "held"
+    },
+    "wave_ledger": {
+      "status": "held"
+    }
+  }
+}
