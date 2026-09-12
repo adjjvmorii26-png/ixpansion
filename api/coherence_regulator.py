@@ -571,7 +571,7 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     
-    regulator = CoherenceRegulator(Path("/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot"), 
+    regulator = CoherenceRegulator(Path(__file__).resolve().parents[1], 
                                     args.wave if args.wave else "unknown")
     
     if args.init:

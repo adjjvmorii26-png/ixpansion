@@ -9,7 +9,7 @@ import os
 import sys
 
 # Add paths
-sys.path.insert(0, '/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot')
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from api.vibebot import generate_vibe_pulse, get_current_vibe
 from api.emergent_skills import (
@@ -42,7 +42,7 @@ def initialize_orchestrator():
     scan_result = invoke_skill(
         "cross_pollination", 
         "scan_repo_patterns", 
-        repo_path="/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot"
+        repo_path=os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     )
     print(f"  Scanned 1 repo, found {scan_result.get('opportunities_found', 0)} pattern opportunities")
     

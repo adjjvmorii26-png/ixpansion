@@ -6,7 +6,7 @@ including vault management, protocol compliance, and inter-vault synchronization
 """
 
 import sys
-sys.path.insert(0, '/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot/ixpansion/src')
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from storage import (
     VaultSimulator, StorageProtocols, create_vault,

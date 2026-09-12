@@ -8,7 +8,7 @@ from typing import Dict, List, Optional, Any
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-SYSTEM_ROOT = Path("/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot")
+SYSTEM_ROOT = Path(__file__).resolve().parents[2]
 
 _skill_active = False
 _skill_parameters = {}

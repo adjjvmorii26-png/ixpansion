@@ -1,4 +1,3 @@
-# Wave 405 Tests: Storage Vault & Evolution Tracker
 """Tests for Wave 405 - Storage Vault + Storage Protocols + Evolution Tracker."""
 
 import sys
@@ -8,14 +7,12 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 # ── Storage Vault ─────────────────────────────────────────────────
 
 def test_storage_vault_create():
-    from api.storage_vault import get_vault
     vault = get_vault(capacity=100)
     assert vault.capacity == 100
     assert vault.current_items == 0
     assert not vault._locked
 
 def test_storage_vault_store_retrieve():
-    from api.storage_vault import get_vault
     vault = get_vault(capacity=50)
     success = vault.store("test_key", {"value": 123, "meta": "test"})
     assert success is True
@@ -23,13 +20,11 @@ def test_storage_vault_store_retrieve():
     assert result == {"value": 123, "meta": "test"}
 
 def test_storage_vault_missing_key():
-    from api.storage_vault import get_vault
     vault = get_vault(capacity=50)
     result = vault.retrieve("nonexistent")
     assert result is None
 
 def test_storage_vault_lock_unlock():
-    from api.storage_vault import get_vault
     vault = get_vault(capacity=50)
     vault.lock()
     assert vault._locked is True
@@ -39,7 +34,8 @@ def test_storage_vault_lock_unlock():
     assert vault.store("key", "value") is True
 
 def test_storage_vault_capacity_eviction():
-    from api.storage_vault import get_vault
+    global _vault
+    _vault = None
     vault = get_vault(capacity=3)
     vault.store("key1", "val1")
     vault.store("key2", "val2")
@@ -51,7 +47,8 @@ def test_storage_vault_capacity_eviction():
     assert vault.retrieve("key4") == "val4"
 
 def test_storage_vault_status():
-    from api.storage_vault import get_vault
+    global _vault
+    _vault = None
     vault = get_vault(capacity=100)
     vault.store("key1", "val1")
     status = vault.status()
@@ -73,7 +70,6 @@ def test_storage_protocols_store_retrieve():
 
 def test_storage_protocols_integrity_check():
     from api.storage_protocols import get_protocols, StorageProtocols
-    from api.storage_vault import StorageVault
     # Create fresh vault and protocols to avoid interference
     vault = StorageVault(capacity=50)
     protocols = StorageProtocols(vault)
@@ -115,7 +111,6 @@ def test_evolution_tracker_record():
 def test_evolution_tracker_history():
     from api.evolution_tracker import get_tracker, EvolutionTracker
     from api.storage_protocols import StorageProtocols
-    from api.storage_vault import StorageVault
     # Fresh tracker
     vault = StorageVault(capacity=50)
     protocols = StorageProtocols(vault)
@@ -133,7 +128,6 @@ def test_evolution_tracker_history():
 def test_evolution_tracker_mutation_patterns():
     from api.evolution_tracker import get_tracker, EvolutionTracker
     from api.storage_protocols import StorageProtocols
-    from api.storage_vault import StorageVault
     vault = StorageVault(capacity=50)
     protocols = StorageProtocols(vault)
     tracker = EvolutionTracker(protocols)
@@ -152,7 +146,6 @@ def test_evolution_tracker_mutation_patterns():
 def test_evolution_tracker_lineage():
     from api.evolution_tracker import get_tracker, EvolutionTracker
     from api.storage_protocols import StorageProtocols
-    from api.storage_vault import StorageVault
     vault = StorageVault(capacity=50)
     protocols = StorageProtocols(vault)
     tracker = EvolutionTracker(protocols)
@@ -172,7 +165,6 @@ def test_evolution_tracker_lineage():
 def test_evolution_tracker_wave_report():
     from api.evolution_tracker import get_tracker, EvolutionTracker
     from api.storage_protocols import StorageProtocols
-    from api.storage_vault import StorageVault
     vault = StorageVault(capacity=50)
     protocols = StorageProtocols(vault)
     tracker = EvolutionTracker(protocols)
@@ -186,7 +178,6 @@ def test_evolution_tracker_wave_report():
 def test_evolution_tracker_export():
     from api.evolution_tracker import get_tracker, EvolutionTracker
     from api.storage_protocols import StorageProtocols
-    from api.storage_vault import StorageVault
     vault = StorageVault(capacity=50)
     protocols = StorageProtocols(vault)
     tracker = EvolutionTracker(protocols)
@@ -202,7 +193,6 @@ def test_evolution_tracker_export():
 # ── Handler Tests ─────────────────────────────────────────────────
 
 def test_storage_vault_handler():
-    from api.storage_vault import handler
     # Status
     res = handler({"action": "status"}, {})
     assert res["status"] == "ok"

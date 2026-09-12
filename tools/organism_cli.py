@@ -7,8 +7,8 @@ import os
 import argparse
 
 # Add project paths
-sys.path.insert(0, '/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot')
-sys.path.insert(0, '/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot/api')
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'api'))
 
 def print_banner():
     """Print the organism CLI banner."""

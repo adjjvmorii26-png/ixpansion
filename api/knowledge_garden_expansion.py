@@ -6,6 +6,7 @@ import time
 import os
 import random
 from typing import Dict, List, Optional, Any
+from pathlib import Path
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 
@@ -86,7 +87,7 @@ def discover_new_modules() -> List[str]:
         
         # Scan for patterns
         result = invoke_skill("cross_pollination", "scan_repo_patterns", 
-                            repo_path="/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot")
+                            repo_path=str(Path(__file__).resolve().parents[1]))
         
         new_modules = []
         for opp in result.get("opportunities", []):

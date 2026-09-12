@@ -4,6 +4,7 @@ between repositories automatically.
 """
 import json, time, os, random, hashlib
 from datetime import datetime, timedelta
+from pathlib import Path
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 
@@ -468,7 +469,7 @@ def invoke_skill(skill_name, action, **kwargs):
             module_purpose = kwargs.get("module_purpose", "")
             return mapped_action(module_purpose if module_purpose else "new module")
         elif action in ["scan_repo_patterns", "suggest_imports", "detect_version_conflicts"]:
-            repos = kwargs.get("repos", ["/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot"])
+            repos = kwargs.get("repos", [str(Path(__file__).resolve().parents[1])])
             return mapped_action(repos=repos)
         elif action in ["expire_unused_modules", "refresh_active_modules", "categorize_by_domain"]:
             return mapped_action(module_id=kwargs.get("module_id", "unused"))
@@ -641,7 +642,7 @@ def _suggest_module_name(module_purpose=""):
 def _scan_cross_repo(repos=None):
     """Scan repositories for cross-pollination opportunities."""
     if not repos:
-        repos = ["/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot"]
+        repos = [str(Path(__file__).resolve().parents[1])]
     
     opportunities = []
     

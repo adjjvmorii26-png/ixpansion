@@ -11,7 +11,7 @@ import math
 from typing import Dict, List, Optional, Tuple
 from pathlib import Path
 
-SYSTEM_ROOT = Path("/root/Documents/Codex/2026-08-22/chmod-x-nexus-observatory-nexus-boot")
+SYSTEM_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = SYSTEM_ROOT / "data"
 ECO_FILE = DATA_DIR / "symbiosis_ecology.json"
 
