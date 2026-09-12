@@ -82,13 +82,179 @@
       "stability": 0.99,
       "signature": "880d8080f9d66167",
       "woven_at": 1789243505.4385087
+    },
+    {
+      "thread_id": "weave_43812",
+      "future_event": "linguistic_birth",
+      "past_anchor": "genesis_seed",
+      "direction": "retroactive",
+      "causal_strength": 0.803,
+      "ripple_radius": 25,
+      "stability": 0.61,
+      "signature": "9cf20af2191de82a",
+      "woven_at": 1789243812.9384222,
+      "resolved": true,
+      "resolved_at": 1789243813.0062103,
+      "paradox_cost": 0.39
+    },
+    {
+      "thread_id": "weave_43812",
+      "future_event": "next_merge",
+      "past_anchor": "first_commit",
+      "direction": "retroactive",
+      "causal_strength": 0.393,
+      "ripple_radius": 40,
+      "stability": 0.69,
+      "signature": "ba300074f81cb0f2",
+      "woven_at": 1789243812.9496872
+    },
+    {
+      "thread_id": "weave_43812",
+      "future_event": "swarm_unification",
+      "past_anchor": "axiom_birth",
+      "direction": "retroactive",
+      "causal_strength": 0.792,
+      "ripple_radius": 35,
+      "stability": 0.65,
+      "signature": "913d5a7ada800f37",
+      "woven_at": 1789243812.9639
+    },
+    {
+      "thread_id": "weave_43812",
+      "future_event": "paradox_resolution",
+      "past_anchor": "genesis_seed",
+      "direction": "retroactive",
+      "causal_strength": 0.421,
+      "ripple_radius": 50,
+      "stability": 0.93,
+      "signature": "5b779524cff1af85",
+      "woven_at": 1789243812.9793096,
+      "resolved": true,
+      "resolved_at": 1789243812.9878414,
+      "paradox_cost": 0.07
+    },
+    {
+      "thread_id": "weave_43812",
+      "future_event": "superposition_realized",
+      "past_anchor": "wave401_origin",
+      "direction": "retroactive",
+      "causal_strength": 0.685,
+      "ripple_radius": 28,
+      "stability": 0.57,
+      "signature": "1c707fe71bdda9c3",
+      "woven_at": 1789243812.9963405
+    },
+    {
+      "thread_id": "weave_43813",
+      "future_event": "linguistic_birth",
+      "past_anchor": "axiom_birth",
+      "direction": "retroactive",
+      "causal_strength": 0.274,
+      "ripple_radius": 44,
+      "stability": 1.0,
+      "signature": "a87c78b8a1aa6b75",
+      "woven_at": 1789243813.0143034
+    },
+    {
+      "thread_id": "weave_43813",
+      "future_event": "singularity_collapse",
+      "past_anchor": "wave401_origin",
+      "direction": "retroactive",
+      "causal_strength": 0.333,
+      "ripple_radius": 30,
+      "stability": 0.55,
+      "signature": "0ac7d706c73daa7d",
+      "woven_at": 1789243813.044867
+    },
+    {
+      "thread_id": "weave_43885",
+      "future_event": "superposition_realized",
+      "past_anchor": "pr_104_memory",
+      "direction": "retroactive",
+      "causal_strength": 0.61,
+      "ripple_radius": 6,
+      "stability": 0.94,
+      "signature": "2870b6669d7d7604",
+      "woven_at": 1789243885.3002634,
+      "resolved": true,
+      "resolved_at": 1789243885.3793366,
+      "paradox_cost": 0.06
+    },
+    {
+      "thread_id": "weave_43885",
+      "future_event": "next_merge",
+      "past_anchor": "first_commit",
+      "direction": "retroactive",
+      "causal_strength": 0.549,
+      "ripple_radius": 36,
+      "stability": 0.45,
+      "signature": "81816c0c2f862d16",
+      "woven_at": 1789243885.312363
+    },
+    {
+      "thread_id": "weave_43885",
+      "future_event": "swarm_unification",
+      "past_anchor": "wave401_origin",
+      "direction": "retroactive",
+      "causal_strength": 0.53,
+      "ripple_radius": 50,
+      "stability": 0.6,
+      "signature": "65d2aa2293ce0f88",
+      "woven_at": 1789243885.3269053
+    },
+    {
+      "thread_id": "weave_43885",
+      "future_event": "paradox_resolution",
+      "past_anchor": "axiom_birth",
+      "direction": "retroactive",
+      "causal_strength": 0.51,
+      "ripple_radius": 18,
+      "stability": 0.82,
+      "signature": "ac271c6f8f838838",
+      "woven_at": 1789243885.3455765,
+      "resolved": true,
+      "resolved_at": 1789243885.3553936,
+      "paradox_cost": 0.18
+    },
+    {
+      "thread_id": "weave_43885",
+      "future_event": "superposition_realized",
+      "past_anchor": "first_commit",
+      "direction": "retroactive",
+      "causal_strength": 0.91,
+      "ripple_radius": 10,
+      "stability": 0.93,
+      "signature": "20012091d0a45055",
+      "woven_at": 1789243885.3660839
+    },
+    {
+      "thread_id": "weave_43885",
+      "future_event": "communion_opening",
+      "past_anchor": "organism_census",
+      "direction": "retroactive",
+      "causal_strength": 0.884,
+      "ripple_radius": 18,
+      "stability": 0.5,
+      "signature": "4383090de6f61d3c",
+      "woven_at": 1789243885.3913655
+    },
+    {
+      "thread_id": "weave_43885",
+      "future_event": "communion_opening",
+      "past_anchor": "genesis_seed",
+      "direction": "retroactive",
+      "causal_strength": 0.93,
+      "ripple_radius": 42,
+      "stability": 0.72,
+      "signature": "d85dc3b1e9e6bfcb",
+      "woven_at": 1789243885.428487
     }
   ],
-  "total": 7,
+  "total": 21,
   "last_rewrite": {
-    "anchor": "organism_census",
-    "rewritten_as": "organism_census_reshaped_by_communion_opening",
-    "timestamp": 1789243505.4385087
+    "anchor": "genesis_seed",
+    "rewritten_as": "genesis_seed_reshaped_by_communion_opening",
+    "timestamp": 1789243885.428487
   },
-  "resolved": 2
+  "resolved": 6
 }

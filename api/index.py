@@ -1824,6 +1824,36 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+    # Wave 427 — Archive of Forgotten Waves
+    if path.startswith("/forgotten-archive") or path.startswith("/api/forgotten_archive"):
+        from api.wave427_forgotten_archive import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/forgotten-archive" or path == "/forgotten_archive":
+        from api.wave427_forgotten_archive import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    # Wave 428 — Resonance Chamber
+    if path.startswith("/resonance-chamber") or path.startswith("/api/resonance_chamber"):
+        from api.wave428_resonance_chamber import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/resonance-chamber" or path == "/resonance_chamber":
+        from api.wave428_resonance_chamber import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    # Wave 429 — Garden of Forking Paths
+    if path.startswith("/forking-paths") or path.startswith("/api/forking_paths"):
+        from api.wave429_forking_paths import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/forking-paths" or path == "/forking_paths":
+        from api.wave429_forking_paths import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     # Wave 420 — Communion Protocol
     if path.startswith("/communion") or path.startswith("/api/communion"):
         from api.wave420_communion import handler as h

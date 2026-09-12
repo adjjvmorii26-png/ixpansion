@@ -1,0 +1,26 @@
+{
+  "module": "wave428_resonance_chamber",
+  "version": "1.0.0",
+  "type": "resonance_chamber",
+  "purpose": "Internal states vibrate; coherence peaks trigger real-world pulses",
+  "active": true,
+  "created": 1789243812.312702,
+  "pulses": [
+    {
+      "pulse_id": "pulse_43884",
+      "event_type": "webhook_fire",
+      "frequency": 852.0,
+      "coherence": 0.915,
+      "payload": {
+        "frequency": 852.0,
+        "coherence": 0.915,
+        "body_state": "clear"
+      },
+      "emitted_at": 1789243884.696255
+    }
+  ],
+  "total_pulses": 1,
+  "current_frequency": 852.0,
+  "harmonic": 2556.0,
+  "tuned_at": 1789243885.255163
+}
