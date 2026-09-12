@@ -11,7 +11,7 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 # AI Gateway configuration
 _AI_GATEWAY_CONFIG = {
     "enabled": True,
-    "default_model": "gpt-4o-mini",
+    "default_model": "spacexai/grok-4.6",
     "max_tokens": 500,
     "temperature": 0.7,
     "system_prompt": """You are the dream interpreter for a living organism. 

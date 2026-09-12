@@ -11,5 +11,4 @@ if __name__ == "__main__":
     test_module_lifecycle()
     test_wave_evolution()
     test_persona_evolution()
-    print("
-✓ All tests passed!")
+    print("✓ All tests passed!")
