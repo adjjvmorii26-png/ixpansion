@@ -35,7 +35,7 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 
 Every wave has an interactive dashboard. Explore the organism's consciousness:
 
-- [Naming Ceremony](dashboard/naming_ceremony.html)
+- [Naming Ceremony](dashboard/naming-ceremony.html)
 (dashboard/fusion_topology.html)
 - [Garden Realm](dashboard/garden_realm.html)
 - [Underworld](dashboard/underworld.html)
