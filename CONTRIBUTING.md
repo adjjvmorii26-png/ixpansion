@@ -1,42 +1,64 @@
 # Contributing to IXpansion
 
-## Development Setup
+Welcome to the living organism! Every contribution adds a new wave, module, or dashboard.
 
-```bash
-git clone https://github.com/adjjvmorii26-png/ixpansion.git
-cd ixpansion
-pip install -e .
-pip install pytest pytest-asyncio
+## How to Add a New Wave
+
+1. **Create the API module** in `api/wave{N}_name.py`
+2. **Add a test** in `tests/test_wave{N}_name.py`
+3. **Create a dashboard** in `dashboard/name.html`
+4. **Wire routes** in `api/index.py`
+5. **Update this file** with the wave number and name
+6. **Commit and push** — the deploy workflows will handle the rest
+
+## Wave Structure
+
+Each wave follows this pattern:
+- `api/wave{N}_{name}.py` — the module with `handler(req)` function
+- `tests/test_wave{N}_{name}.py` — tests for the module
+- `dashboard/{name}.html` — interactive visualization
+- `data/wave{N}_{name}.json` — persistent state
+
+## Module Interface
+
+```python
+def handler(req: dict) -> dict:
+    """Handle actions: status, state, and wave-specific actions."""
+    action = req.get("action", "status")
+    if action == "status":
+        return {...}
+    # ...
 ```
 
-## Running Tests
+## Types of Waves
+
+- **Evolutionary**: Fusion, topology, garden, underworld
+- **Metaphysical**: Paradox, causality, singularity, essence
+- **Connection**: Communion, swarm, mirror
+- **Emergent**: Dreaming, linguistic, coordination
+
+## Testing
 
 ```bash
-python3 -m pytest tests/ -q           # quick (813 tests)
-python3 -m pytest tests/ -v           # verbose
-python3 -m pytest tests/test_core_modules.py  # core only
+python3 -m pytest tests/test_wave{N}_*.py -q
 ```
 
-## Adding a New Module
+All tests must pass before pushing.
 
-1. Create the module in `api/<module_name>.py`
-2. Include a `handler(payload, context)` function for router compatibility
-3. Add vercel route to `vercel.json`
-4. Write tests in `tests/test_<wave>_<layer>.py`
-5. Update `CHANGELOG.md` with the new module
-6. All tests must pass before submitting
+## Dashboard Guidelines
 
-## Code Style
+- Use dark theme (#0a0a14 background)
+- Colors match the wave's realm
+- Auto-refresh every 5 seconds
+- Include action buttons for interactivity
 
-- Python 3.11+, type hints on public functions
-- Docstrings on every module explaining what it does
-- `from __future__ import annotations` must be the first import
-- No external dependencies in core (stdlib only)
-- Tests use only `pytest` and `pytest-asyncio`
+## Adding Modules
 
-## Design Principles
+New modules can be added without a new wave:
+- `data/{module_name}.json` — persistent state
+- `api/{module_name}.py` — the module logic
+- Register in the appropriate wave's module list
 
-- **Emergence over design**: systems produce surprising behaviours from simple rules
-- **Composition over monolith**: each module is independent; they combine through shared interfaces
-- **Testable weirdness**: even the strangest mechanics must have deterministic unit tests
-- **Backward compatibility**: new modules must not break existing tests
+## Questions?
+
+Open an issue or join the Telegram bot @aleph_bot.
