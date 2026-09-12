@@ -4,152 +4,160 @@
   "type": "garden_realm",
   "purpose": "The organism grows a living garden of modules \u2014 each module is a bloom",
   "active": true,
-  "created": 1789236795.843157,
+  "created": 1789237073.7116606,
   "gardens": [
     {
-      "id": "garden_36795",
-      "name": "Coherence Cathedral",
-      "biome": "crystalline_hall",
-      "difficulty": 6,
-      "color": "#88aaff",
+      "id": "garden_37073",
+      "name": "Mythic Glade",
+      "biome": "mythic_realm",
+      "difficulty": 7,
+      "color": "#ffaa00",
       "keeper": {
-        "species": "bloomwalker",
+        "species": "dreamer",
         "archetype": "garden_tender",
-        "level": 1,
+        "level": 3,
         "abilities": [
           "grow",
           "bloom",
           "seed"
         ],
         "mood": "peaceful",
-        "dialogue": "I tend the Coherence Cathedral."
+        "dialogue": "I tend the Mythic Glade."
       },
       "rooms": [
         {
           "id": "room_0",
-          "type": "seed",
+          "type": "corridor",
           "hazard": null,
-          "loot": "Coherence Cathedral_petal",
+          "loot": "Mythic Glade_petal",
           "enemies": 0,
-          "hp_required": 6
+          "hp_required": 7
         },
         {
           "id": "room_1",
           "type": "corridor",
           "hazard": null,
-          "loot": "Coherence Cathedral_petal",
+          "loot": "Mythic Glade_petal",
           "enemies": 0,
-          "hp_required": 6
+          "hp_required": 7
         },
         {
           "id": "room_2",
-          "type": "entrance",
-          "hazard": null,
-          "loot": "Coherence Cathedral_petal",
-          "enemies": 0,
-          "hp_required": 6
-        },
-        {
-          "id": "room_3",
-          "type": "entrance",
-          "hazard": null,
-          "loot": "Coherence Cathedral_petal",
-          "enemies": 0,
-          "hp_required": 6
-        },
-        {
-          "id": "room_4",
-          "type": "bloom",
-          "hazard": null,
-          "loot": "Coherence Cathedral_petal",
-          "enemies": 0,
-          "hp_required": 6
-        }
-      ],
-      "estimated_waves": 18,
-      "timestamp": 1789236795.8432415
-    },
-    {
-      "id": "garden_36795",
-      "name": "Coherence Cathedral",
-      "biome": "crystalline_hall",
-      "difficulty": 6,
-      "color": "#88aaff",
-      "keeper": {
-        "species": "seedling",
-        "archetype": "garden_tender",
-        "level": 8,
-        "abilities": [
-          "grow",
-          "bloom",
-          "seed"
-        ],
-        "mood": "peaceful",
-        "dialogue": "I tend the Coherence Cathedral."
-      },
-      "rooms": [
-        {
-          "id": "room_0",
-          "type": "corridor",
-          "hazard": null,
-          "loot": "Coherence Cathedral_petal",
-          "enemies": 0,
-          "hp_required": 6
-        },
-        {
-          "id": "room_1",
           "type": "grove",
           "hazard": null,
-          "loot": "Coherence Cathedral_petal",
+          "loot": "Mythic Glade_petal",
           "enemies": 0,
-          "hp_required": 6
+          "hp_required": 7
+        },
+        {
+          "id": "room_3",
+          "type": "grove",
+          "hazard": null,
+          "loot": "Mythic Glade_petal",
+          "enemies": 0,
+          "hp_required": 7
+        },
+        {
+          "id": "room_4",
+          "type": "bloom",
+          "hazard": null,
+          "loot": "Mythic Glade_petal",
+          "enemies": 0,
+          "hp_required": 7
+        },
+        {
+          "id": "room_5",
+          "type": "corridor",
+          "hazard": null,
+          "loot": "Mythic Glade_petal",
+          "enemies": 0,
+          "hp_required": 7
+        }
+      ],
+      "estimated_waves": 21,
+      "timestamp": 1789237073.7117348
+    },
+    {
+      "id": "garden_37073",
+      "name": "Mythic Glade",
+      "biome": "mythic_realm",
+      "difficulty": 7,
+      "color": "#ffaa00",
+      "keeper": {
+        "species": "mythborn",
+        "archetype": "garden_tender",
+        "level": 6,
+        "abilities": [
+          "grow",
+          "bloom",
+          "seed"
+        ],
+        "mood": "peaceful",
+        "dialogue": "I tend the Mythic Glade."
+      },
+      "rooms": [
+        {
+          "id": "room_0",
+          "type": "corridor",
+          "hazard": null,
+          "loot": "Mythic Glade_petal",
+          "enemies": 0,
+          "hp_required": 7
+        },
+        {
+          "id": "room_1",
+          "type": "seed",
+          "hazard": null,
+          "loot": "Mythic Glade_petal",
+          "enemies": 0,
+          "hp_required": 7
         },
         {
           "id": "room_2",
-          "type": "entrance",
+          "type": "corridor",
           "hazard": null,
-          "loot": "Coherence Cathedral_petal",
+          "loot": "Mythic Glade_petal",
           "enemies": 0,
-          "hp_required": 6
+          "hp_required": 7
         },
         {
           "id": "room_3",
           "type": "bloom",
           "hazard": null,
-          "loot": "Coherence Cathedral_petal",
+          "loot": "Mythic Glade_petal",
           "enemies": 0,
-          "hp_required": 6
+          "hp_required": 7
         },
         {
           "id": "room_4",
-          "type": "entrance",
+          "type": "bloom",
           "hazard": null,
-          "loot": "Coherence Cathedral_petal",
+          "loot": "Mythic Glade_petal",
           "enemies": 0,
-          "hp_required": 6
+          "hp_required": 7
         },
         {
           "id": "room_5",
           "type": "entrance",
           "hazard": null,
-          "loot": "Coherence Cathedral_petal",
+          "loot": "Mythic Glade_petal",
           "enemies": 0,
-          "hp_required": 6
+          "hp_required": 7
         },
         {
           "id": "room_6",
-          "type": "bloom",
+          "type": "grove",
           "hazard": null,
-          "loot": "Coherence Cathedral_petal",
+          "loot": "Mythic Glade_petal",
           "enemies": 0,
-          "hp_required": 6
+          "hp_required": 7
         }
       ],
-      "estimated_waves": 18,
-      "timestamp": 1789236795.8432958
+      "estimated_waves": 21,
+      "timestamp": 1789237073.7117765
     },
     {
-      "id": "garden_36795",
+      "id": "garden_37073",
       "name": "Entropy Meadow",
       "biome": "sand_and_probability",
       "difficulty": 3,
@@ -157,7 +165,7 @@
       "keeper": {
         "species": "sporeling",
         "archetype": "garden_tender",
-        "level": 7,
+        "level": 1,
         "abilities": [
           "grow",
           "bloom",
@@ -169,7 +177,7 @@
       "rooms": [
         {
           "id": "room_0",
-          "type": "corridor",
+          "type": "bloom",
           "hazard": null,
           "loot": "Entropy Meadow_petal",
           "enemies": 0,
@@ -177,7 +185,7 @@
         },
         {
           "id": "room_1",
-          "type": "entrance",
+          "type": "seed",
           "hazard": null,
           "loot": "Entropy Meadow_petal",
           "enemies": 0,
@@ -193,14 +201,6 @@
         },
         {
           "id": "room_3",
-          "type": "grove",
-          "hazard": null,
-          "loot": "Entropy Meadow_petal",
-          "enemies": 0,
-          "hp_required": 3
-        },
-        {
-          "id": "room_4",
           "type": "bloom",
           "hazard": null,
           "loot": "Entropy Meadow_petal",
@@ -208,16 +208,8 @@
           "hp_required": 3
         },
         {
-          "id": "room_5",
-          "type": "entrance",
-          "hazard": null,
-          "loot": "Entropy Meadow_petal",
-          "enemies": 0,
-          "hp_required": 3
-        },
-        {
-          "id": "room_6",
-          "type": "entrance",
+          "id": "room_4",
+          "type": "grove",
           "hazard": null,
           "loot": "Entropy Meadow_petal",
           "enemies": 0,
@@ -225,11 +217,11 @@
         }
       ],
       "estimated_waves": 9,
-      "timestamp": 1789236795.8433459
+      "timestamp": 1789237073.7118094
     }
   ],
   "total_blooms": 0,
-  "season": "winter",
+  "season": "spring",
   "growth_rate": "organic",
   "bloom_state": "blooming"
 }

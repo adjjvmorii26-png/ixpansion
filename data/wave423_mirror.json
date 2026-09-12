@@ -4,11 +4,11 @@
   "type": "mirror_protocol",
   "purpose": "Cross-repo entanglement \u2014 changes reflect instantly",
   "active": true,
-  "created": 1789236793.6750991,
+  "created": 1789237081.5452647,
   "entanglement": {
-    "seed": "mirror_1789236793.6750991_6957",
-    "primary_fingerprint": "c122b355acc294bf",
-    "mirror_fingerprint": "fa8bd32c1c66a6c3",
+    "seed": "mirror_1789237081.5452647_2797",
+    "primary_fingerprint": "1ac9630339dcc658",
+    "mirror_fingerprint": "01c1cf51378755f0",
     "entangled": true,
     "correlation": 1.0
   },
@@ -16,17 +16,17 @@
     {
       "name": "ixpansion",
       "status": "primary",
-      "last_change": 1789236793.6750991
+      "last_change": 1789237081.5452647
     },
     {
       "name": "mirror_ixpansion",
       "status": "mirror",
-      "last_change": 1789236793.6750991
+      "last_change": 1789237081.5452647
     }
   ],
   "sync_state": "entangled",
   "delay_ms": 0,
   "cross_repo_links": 1,
   "quantum_entanglement": true,
-  "timestamp": 1789236793.6750991
+  "timestamp": 1789237081.5452647
 }
