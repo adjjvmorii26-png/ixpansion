@@ -272,3 +272,22 @@ if __name__ == "__main__":
     if not any([args.record, args.get, args.summary, args.list_forms, args.current]):
         print("Dream Journal System operational")
         print("Commands: --record <module> <type> <changes_json>, --get N, --summary, --list-forms, --current")
+
+
+def handler(req: dict) -> dict:
+    """Route handler for the dream journal organ."""
+    action = (req or {}).get("action", "summary")
+    if action == "record":
+        return record_dream((req or {}).get("module_name", "unknown"),
+                            (req or {}).get("mutation_type", "modification"),
+                            (req or {}).get("changes", {}) or {},
+                            (req or {}).get("organism_state"))
+    if action == "journal":
+        try:
+            limit = int((req or {}).get("limit", 10))
+        except (TypeError, ValueError):
+            limit = 10
+        return get_dream_journal(limit)
+    if action in ("summary", "status"):
+        return get_dream_summary()
+    return {"error": "unknown action", "valid": ["record", "journal", "summary"]}

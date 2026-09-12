@@ -257,3 +257,28 @@ if __name__ == "__main__":
         print("Use --current to check current state")
         print("Use --update <mood> to change mood")
         print("Mood types: " + ", ".join(_mood_state["mood_emoji_map"].keys()))
+
+
+def handler(req: dict) -> dict:
+    """Route handler for the organism mood organ."""
+    action = (req or {}).get("action", "status")
+    if action in ("status", "get", "current"):
+        return get_current_mood()
+    if action in ("set", "update"):
+        return update_mood((req or {}).get("mood", "calm"),
+                           _safe_float((req or {}).get("intensity")))
+    if action in ("transition", "simulate"):
+        return simulate_mood_transition((req or {}).get("condition", "growth"))
+    if action in ("stats", "statistics"):
+        return get_mood_statistics()
+    if action == "influence":
+        return influence_skill_selection((req or {}).get("skill_name", "oracle"),
+                                         (req or {}).get("current_mood"))
+    return {"error": "unknown action", "valid": ["status", "set", "transition", "stats", "influence"]}
+
+
+def _safe_float(value):
+    try:
+        return float(value) if value is not None else None
+    except (TypeError, ValueError):
+        return None
