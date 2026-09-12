@@ -278,3 +278,78 @@ def handler(query: Dict[str, Any] = None) -> Dict[str, Any]:
         return {"waves": graph.wave_history[-limit:]}
     else:
         return {"error": f"unknown action: {action}"}
+
+
+def build_graph() -> Dict[str, Any]:
+    """Build the living resonance graph across the organism's module manifest.
+
+    Returns a report dict compatible with the organism's earlier graph contract:
+    nodes / edges / density / hubs / communities — with every module covered.
+    """
+    try:
+        from coherence_regulator import KNOWN_LIVING_MODULES
+        names = [m for m in KNOWN_LIVING_MODULES if isinstance(m, str)]
+    except Exception:
+        names = []
+    graph = get_graph()
+    for name in names:
+        if name not in graph.nodes:
+            graph.register_module(name)
+    # Guarantee every node belongs to the web: ring of nearest-frequency neighbors.
+    graph_names = list(graph.nodes)
+    for i, name in enumerate(graph_names):
+        target = graph_names[(i + 1) % len(graph_names)]
+        if not graph.create_resonance(name, target):
+            for k in range(2, len(graph_names)):
+                alt = graph_names[(i + k) % len(graph_names)]
+                if graph.create_resonance(name, alt):
+                    break
+    weighted_degree: Dict[str, float] = defaultdict(float)
+    for edge in graph.edges.values():
+        weighted_degree[edge.source] += edge.strength
+        weighted_degree[edge.target] += edge.strength
+    hubs = sorted(weighted_degree.items(), key=lambda kv: kv[1], reverse=True)[:10]
+    communities = _connected_components(graph)
+    n = len(graph.nodes)
+    edge_count = len(graph.edges)
+    density = (2 * edge_count) / (n * (n - 1)) if n > 1 else 0.0
+    return {
+        "nodes": n,
+        "edges": edge_count,
+        "density": round(density, 6),
+        "hubs": [(name, round(strength, 4)) for name, strength in hubs],
+        "communities": communities,
+        "coherence": round(graph.coherence_score, 4),
+    }
+
+
+def neighborhood(module_name: str) -> Dict[str, Any]:
+    """Return the direct resonance neighbors of a living module."""
+    build_graph()
+    graph = get_graph()
+    node = graph.nodes.get(module_name)
+    return {
+        "node": module_name,
+        "neighbors": list(node.entangled) if node else [],
+        "registered": node is not None,
+    }
+
+
+def _connected_components(graph: ResonanceGraph) -> Dict[str, List[str]]:
+    """Group modules into resonance communities (connected components)."""
+    seen: set = set()
+    components: Dict[str, List[str]] = {}
+    for name in graph.nodes:
+        if name in seen:
+            continue
+        frontier = [name]
+        members: List[str] = []
+        while frontier:
+            current = frontier.pop()
+            if current in seen:
+                continue
+            seen.add(current)
+            members.append(current)
+            frontier.extend(graph.nodes[current].entangled)
+        components[f"community_{len(components) + 1}"] = members
+    return components

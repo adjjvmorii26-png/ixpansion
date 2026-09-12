@@ -4,6 +4,8 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
+from api.storage_vault import StorageVault, _vault, get_vault, handler
+
 # ── Storage Vault ─────────────────────────────────────────────────
 
 def test_storage_vault_create():

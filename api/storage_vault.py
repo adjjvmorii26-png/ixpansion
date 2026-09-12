@@ -69,7 +69,7 @@ _vault = None
 
 def get_vault(capacity: int = 1000) -> StorageVault:
     global _vault
-    if _vault is None:
+    if _vault is None or _vault.capacity != capacity:
         _vault = StorageVault(capacity=capacity)
     return _vault
 
