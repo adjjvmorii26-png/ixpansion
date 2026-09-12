@@ -1,0 +1,1406 @@
+{
+  "sweep_id": "diag_1789233348",
+  "wave": 412,
+  "realm": "garden",
+  "timestamp": 1789233348.3797798,
+  "summary": {
+    "total_files": 112,
+    "healthy": 112,
+    "stale": 76,
+    "corrupted": 0,
+    "anomaly_count": 82
+  },
+  "modules": [
+    {
+      "name": "aleph_bot",
+      "class": "interface",
+      "size_bytes": 5361,
+      "modified": 1789159784.3506444,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "ascension_chronicle",
+      "class": "narrative",
+      "size_bytes": 2296,
+      "modified": 1789130370.6235676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "autonomous_loop",
+      "class": "general",
+      "size_bytes": 5603,
+      "modified": 1789130370.6275675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "autopoietic_seeds",
+      "class": "general",
+      "size_bytes": 3778,
+      "modified": 1789130370.6275675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "axiom_mutator",
+      "class": "foundational",
+      "size_bytes": 777,
+      "modified": 1789233245.8585944,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "is_module": true,
+      "status": "active"
+    },
+    {
+      "name": "biofeedback_weave",
+      "class": "general",
+      "size_bytes": 76926,
+      "modified": 1789159784.3626442,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "blooms",
+      "class": "general",
+      "size_bytes": 614,
+      "modified": 1789130370.6355677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "breeze_log",
+      "class": "general",
+      "size_bytes": 7287,
+      "modified": 1789130370.6355677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "campaign_vault",
+      "class": "general",
+      "size_bytes": 3799,
+      "modified": 1789130370.6395676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "chronicle_oracle",
+      "class": "narrative",
+      "size_bytes": 61197,
+      "modified": 1789159784.3706443,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "cohort_chorus",
+      "class": "general",
+      "size_bytes": 54,
+      "modified": 1789130370.6475675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "compliance_forge",
+      "class": "general",
+      "size_bytes": 338,
+      "modified": 1789130370.6475675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "confessions",
+      "class": "general",
+      "size_bytes": 9707,
+      "modified": 1789130370.6475675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "confluence_hub",
+      "class": "general",
+      "size_bytes": 10506,
+      "modified": 1789130370.6555676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "consciousness_gradient",
+      "class": "consciousness",
+      "size_bytes": 4071,
+      "modified": 1789130370.6555676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "consciousness_manifold",
+      "class": "consciousness",
+      "size_bytes": 4528,
+      "modified": 1789130370.6595676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "consciousness_state_machine",
+      "class": "consciousness",
+      "size_bytes": 4956,
+      "modified": 1789130370.6635675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "consent_cycle_orchestrator",
+      "class": "general",
+      "size_bytes": 81,
+      "modified": 1789130370.6675675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "consent_engine",
+      "class": "general",
+      "size_bytes": 138191,
+      "modified": 1789159784.3786442,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "continuity_weaver",
+      "class": "coherence",
+      "size_bytes": 454,
+      "modified": 1789231473.5425956,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "is_module": true,
+      "status": "active"
+    },
+    {
+      "name": "council_live",
+      "class": "general",
+      "size_bytes": 4311,
+      "modified": 1789130370.6755676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "cross_reality_bridge",
+      "class": "general",
+      "size_bytes": 76502,
+      "modified": 1789159784.3906443,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "cythara_broadcast",
+      "class": "communication",
+      "size_bytes": 371,
+      "modified": 1789130370.6795676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data_array"
+    },
+    {
+      "name": "dashboard_kernel",
+      "class": "general",
+      "size_bytes": 4859,
+      "modified": 1789130370.6835675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "decay_forecaster",
+      "class": "prediction",
+      "size_bytes": 2182,
+      "modified": 1789231662.5705955,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data_array"
+    },
+    {
+      "name": "diagnostic_report",
+      "class": "general",
+      "size_bytes": 31691,
+      "modified": 1789233348.3705943,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "dream_engine_v2",
+      "class": "dream_engine",
+      "size_bytes": 8705,
+      "modified": 1789130370.6955676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "dream_interpretations",
+      "class": "dream_engine",
+      "size_bytes": 9266,
+      "modified": 1789130370.6995676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "dream_particle_physics",
+      "class": "dream_engine",
+      "size_bytes": 137682,
+      "modified": 1789159784.4026442,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "dream_seed_planter",
+      "class": "dream_engine",
+      "size_bytes": 32617,
+      "modified": 1789159784.4106443,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "dream_weaver",
+      "class": "dream_engine",
+      "size_bytes": 4444,
+      "modified": 1789130370.7115676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "entropy_collapse_detector",
+      "class": "general",
+      "size_bytes": 163357,
+      "modified": 1789159784.4226441,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "entropy_garden",
+      "class": "environment",
+      "size_bytes": 504,
+      "modified": 1789130370.7195675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "entropy_weather",
+      "class": "general",
+      "size_bytes": 4429,
+      "modified": 1789130370.7235675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "execution_stack",
+      "class": "general",
+      "size_bytes": 894,
+      "modified": 1789130370.7275677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "genesis_seed",
+      "class": "general",
+      "size_bytes": 1596,
+      "modified": 1789130370.7275677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "hex_dialects",
+      "class": "general",
+      "size_bytes": 426,
+      "modified": 1789130370.7315676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "hex_language",
+      "class": "general",
+      "size_bytes": 1040,
+      "modified": 1789130370.7315676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "interstitial_verse",
+      "class": "general",
+      "size_bytes": 7554,
+      "modified": 1789130370.7355676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "journal",
+      "class": "general",
+      "size_bytes": 2831,
+      "modified": 1789130370.7355676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data_array"
+    },
+    {
+      "name": "lateral_innovation",
+      "class": "general",
+      "size_bytes": 5269,
+      "modified": 1789130370.7395675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "liminal_field",
+      "class": "transient",
+      "size_bytes": 490,
+      "modified": 1789231473.5465958,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "is_module": true,
+      "status": "active"
+    },
+    {
+      "name": "lucid_combat",
+      "class": "general",
+      "size_bytes": 30715,
+      "modified": 1789130370.7395675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "lucid_dungeons",
+      "class": "general",
+      "size_bytes": 7203,
+      "modified": 1789130370.7435677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "lucid_equipment",
+      "class": "general",
+      "size_bytes": 15090,
+      "modified": 1789130370.7435677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "lucid_npcs",
+      "class": "general",
+      "size_bytes": 1449,
+      "modified": 1789130370.7435677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "lucid_sessions",
+      "class": "general",
+      "size_bytes": 949,
+      "modified": 1789130370.7475677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "lucid_shrine",
+      "class": "general",
+      "size_bytes": 1657,
+      "modified": 1789130370.7515676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "memory_court",
+      "class": "general",
+      "size_bytes": 854,
+      "modified": 1789130370.7515676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "memory_palaces",
+      "class": "general",
+      "size_bytes": 1056,
+      "modified": 1789130370.7555676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "metaphor_forge",
+      "class": "symbolic",
+      "size_bytes": 444,
+      "modified": 1789231473.5465958,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "is_module": true,
+      "status": "active"
+    },
+    {
+      "name": "mineral_forge",
+      "class": "general",
+      "size_bytes": 62,
+      "modified": 1789130370.7595675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "mutation_forge",
+      "class": "general",
+      "size_bytes": 2249,
+      "modified": 1789130370.7635677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "mycelial_beliefs",
+      "class": "regulator",
+      "size_bytes": 1706,
+      "modified": 1789130370.7635677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "mycelial_consensus",
+      "class": "regulator",
+      "size_bytes": 199,
+      "modified": 1789130370.7675676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "mycelial_governor",
+      "class": "regulator",
+      "size_bytes": 468,
+      "modified": 1789231473.5505958,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "is_module": true,
+      "status": "active"
+    },
+    {
+      "name": "mycelial_radio",
+      "class": "regulator",
+      "size_bytes": 26516,
+      "modified": 1789130370.7675676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "myth_archive",
+      "class": "general",
+      "size_bytes": 3974,
+      "modified": 1789130370.7755675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "myth_epoch_engine",
+      "class": "general",
+      "size_bytes": 17097,
+      "modified": 1789130370.7795675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "noise_filter",
+      "class": "general",
+      "size_bytes": 271,
+      "modified": 1789231662.6345956,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "orbit_cohesion_field",
+      "class": "telemetry",
+      "size_bytes": 3251,
+      "modified": 1789231662.5545955,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data_array"
+    },
+    {
+      "name": "orbital_storyteller",
+      "class": "telemetry",
+      "size_bytes": 15026,
+      "modified": 1789231662.6065955,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data_array"
+    },
+    {
+      "name": "organism_autobiography",
+      "class": "organism_core",
+      "size_bytes": 1289,
+      "modified": 1789130370.7955675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "incomplete",
+      "status": "data"
+    },
+    {
+      "name": "organism_census",
+      "class": "organism_core",
+      "size_bytes": 326,
+      "modified": 1789130370.7995677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "incomplete",
+      "status": "data"
+    },
+    {
+      "name": "organism_genome",
+      "class": "organism_core",
+      "size_bytes": 1662,
+      "modified": 1789159784.4346442,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "incomplete",
+      "status": "data"
+    },
+    {
+      "name": "organism_map",
+      "class": "organism_core",
+      "size_bytes": 4941,
+      "modified": 1789130370.8035676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "incomplete",
+      "status": "data"
+    },
+    {
+      "name": "organism_name",
+      "class": "organism_core",
+      "size_bytes": 1142,
+      "modified": 1789130370.8075676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "organism_radio",
+      "class": "organism_core",
+      "size_bytes": 775,
+      "modified": 1789130370.8075676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "incomplete",
+      "status": "data"
+    },
+    {
+      "name": "organism_theater",
+      "class": "organism_core",
+      "size_bytes": 341424,
+      "modified": 1789159784.4466443,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "incomplete",
+      "status": "data"
+    },
+    {
+      "name": "ouroboros",
+      "class": "general",
+      "size_bytes": 355,
+      "modified": 1789130370.8195677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "overwarden",
+      "class": "general",
+      "size_bytes": 39,
+      "modified": 1789130370.8195677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "paradox_echo",
+      "class": "metaphysical",
+      "size_bytes": 3830,
+      "modified": 1789233282.4865944,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "is_module": true,
+      "status": "active"
+    },
+    {
+      "name": "paradox_oracle",
+      "class": "metaphysical",
+      "size_bytes": 3972,
+      "modified": 1789130370.8235676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "phase_crystal_memory",
+      "class": "general",
+      "size_bytes": 14736,
+      "modified": 1789130370.8275676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "pitch_dark",
+      "class": "general",
+      "size_bytes": 7158,
+      "modified": 1789130370.8315675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "pressure_valve",
+      "class": "general",
+      "size_bytes": 2942,
+      "modified": 1789130370.8315675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "prophecies",
+      "class": "general",
+      "size_bytes": 3739,
+      "modified": 1789130370.8315675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "pulse_orchestrator",
+      "class": "general",
+      "size_bytes": 331702,
+      "modified": 1789159784.4626443,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "reality_vital_sign",
+      "class": "general",
+      "size_bytes": 212370,
+      "modified": 1789159784.4746442,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "remembrances",
+      "class": "general",
+      "size_bytes": 1468,
+      "modified": 1789130370.8475676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "resonance_amplifier",
+      "class": "metaphysical",
+      "size_bytes": 3158,
+      "modified": 1789130370.8515675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "resonance_amplifier_v2",
+      "class": "metaphysical",
+      "size_bytes": 79179,
+      "modified": 1789159784.4826443,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "resonance_compositions",
+      "class": "metaphysical",
+      "size_bytes": 3532,
+      "modified": 1789130370.8595676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "resonance_gallery",
+      "class": "metaphysical",
+      "size_bytes": 13389,
+      "modified": 1789130370.8635676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "resonance_scan",
+      "class": "metaphysical",
+      "size_bytes": 4123,
+      "modified": 1789130370.8675675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "semantic_bridge_forge",
+      "class": "general",
+      "size_bytes": 70463,
+      "modified": 1789159784.4946442,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "sensory_state",
+      "class": "general",
+      "size_bytes": 629,
+      "modified": 1789130370.8755677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "signal_loom",
+      "class": "general",
+      "size_bytes": 2021,
+      "modified": 1789130370.8795676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "signal_memoir",
+      "class": "general",
+      "size_bytes": 343,
+      "modified": 1789130370.8795676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "silence_pairs",
+      "class": "general",
+      "size_bytes": 23025,
+      "modified": 1789130370.8835676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "solar_weather_coupler",
+      "class": "general",
+      "size_bytes": 63,
+      "modified": 1789231662.6225955,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "sovereignty_assembly",
+      "class": "general",
+      "size_bytes": 143169,
+      "modified": 1789130370.8915677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "subconscious_layer",
+      "class": "general",
+      "size_bytes": 1676,
+      "modified": 1789130370.8955677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "symbiosis_ecology",
+      "class": "general",
+      "size_bytes": 5241,
+      "modified": 1789130370.9035676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "telegram_chat_ids",
+      "class": "general",
+      "size_bytes": 71,
+      "modified": 1789159784.5066442,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "telemetry_anomaly_oracle",
+      "class": "monitoring",
+      "size_bytes": 1057,
+      "modified": 1789231662.5825956,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "temporal_cohesion_field",
+      "class": "general",
+      "size_bytes": 291153,
+      "modified": 1789159784.5186443,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "temporal_resonance_map",
+      "class": "metaphysical",
+      "size_bytes": 258951,
+      "modified": 1789159784.5346444,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "threadweaver",
+      "class": "general",
+      "size_bytes": 440,
+      "modified": 1789130370.9355676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "threshold_engine",
+      "class": "boundary",
+      "size_bytes": 477,
+      "modified": 1789231473.5585957,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "is_module": true,
+      "status": "active"
+    },
+    {
+      "name": "transcendence_journal",
+      "class": "scripture",
+      "size_bytes": 431,
+      "modified": 1789233282.4865944,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "is_module": true,
+      "status": "active"
+    },
+    {
+      "name": "undernet_archive",
+      "class": "general",
+      "size_bytes": 17141,
+      "modified": 1789130370.9355676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "underworld",
+      "class": "general",
+      "size_bytes": 24,
+      "modified": 1789130370.9395676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "upwellings",
+      "class": "general",
+      "size_bytes": 584,
+      "modified": 1789130370.9395676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "veil_lifter",
+      "class": "metaphysical",
+      "size_bytes": 510,
+      "modified": 1789233281.6505945,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "is_module": true,
+      "status": "active"
+    },
+    {
+      "name": "veinbed",
+      "class": "general",
+      "size_bytes": 18535,
+      "modified": 1789130370.9435675,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "visitor_log",
+      "class": "general",
+      "size_bytes": 785,
+      "modified": 1789130370.9475677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "warden_ascensions",
+      "class": "general",
+      "size_bytes": 1407,
+      "modified": 1789130370.9475677,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "wave412_garden",
+      "class": "wave_seed",
+      "size_bytes": 4921,
+      "modified": 1789233346.6265943,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "is_module": true,
+      "status": "active"
+    },
+    {
+      "name": "wave_seeds",
+      "class": "wave_seed",
+      "size_bytes": 57953,
+      "modified": 1789231473.5705957,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "whisper_log",
+      "class": "general",
+      "size_bytes": 3174,
+      "modified": 1789130370.9515676,
+      "stale": true,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "will_log",
+      "class": "general",
+      "size_bytes": 15982,
+      "modified": 1789159784.5466442,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    }
+  ],
+  "anomalies": [
+    {
+      "type": "stale_data",
+      "file": "ascension_chronicle",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "autonomous_loop",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "autopoietic_seeds",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "blooms",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "breeze_log",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "campaign_vault",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "cohort_chorus",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "compliance_forge",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "confessions",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "confluence_hub",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "consciousness_gradient",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "consciousness_manifold",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "consciousness_state_machine",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "consent_cycle_orchestrator",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "council_live",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "cythara_broadcast",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "dashboard_kernel",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "dream_engine_v2",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "dream_interpretations",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "dream_weaver",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "entropy_garden",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "entropy_weather",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "execution_stack",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "genesis_seed",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "hex_dialects",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "hex_language",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "interstitial_verse",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "journal",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "lateral_innovation",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "lucid_combat",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "lucid_dungeons",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "lucid_equipment",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "lucid_npcs",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "lucid_sessions",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "lucid_shrine",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "memory_court",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "memory_palaces",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "mineral_forge",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "mutation_forge",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "mycelial_beliefs",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "mycelial_consensus",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "mycelial_radio",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "myth_archive",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "myth_epoch_engine",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "stale_data",
+      "file": "organism_autobiography",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "schema_incomplete",
+      "file": "organism_autobiography",
+      "missing": [
+        "name"
+      ]
+    },
+    {
+      "type": "stale_data",
+      "file": "organism_census",
+      "hours_ago": 28.6
+    },
+    {
+      "type": "schema_incomplete",
+      "file": "organism_census",
+      "missing": [
+        "name"
+      ]
+    },
+    {
+      "type": "schema_incomplete",
+      "file": "organism_genome",
+      "missing": [
+        "name"
+      ]
+    },
+    {
+      "type": "stale_data",
+      "file": "organism_map",
+      "hours_ago": 28.6
+    }
+  ],
+  "health_score": 100.0,
+  "wave_seeds_total": 14,
+  "completed_at": 1789233348.6861715
+}
