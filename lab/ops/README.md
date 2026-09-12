@@ -2,11 +2,11 @@
 
 | Tool | Role |
 |------|------|
-| route_scar.py | Vercel collapse scar memory |
-| silence_ledger.py | Caption silence capital |
-| proof_tide.py | Hash spine → rising/ebb tide |
+| route_scar.py | Vercel scar memory |
+| silence_ledger.py | Silence capital |
+| proof_tide.py | Proof density tide |
+| **lab_constellation.py** | Fuse all three → one caption pack |
 
 ```bash
-python lab/ops/proof_tide.py
-python lab/ops/silence_ledger.py
+python lab/ops/lab_constellation.py
 ```
