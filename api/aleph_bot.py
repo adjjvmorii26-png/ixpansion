@@ -1057,7 +1057,7 @@ def _cmd_dream(args, user):
         return "🌌 " + str(e)
 
 def get_bot_info() -> dict:
-    return {"action": "bot_info", "token": BOT_TOKEN, "name": "aleph_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio","/weave","/organismradio","/forgebridge","/pulse","/temporal_field","/entropy_detector","/plant_seeds"]}
+    return {"action": "bot_info", "token": BOT_TOKEN, "name": "adjjv_bot", "description": "The organism's Telegram ambassador", "commands": ["/wave","/oracle","/mood","/dream","/census","/modules","/loop","/mycelial","/dreamweave","/paradox","/temporal","/meditate","/dreamsim","/realms","/autobio","/weave","/organismradio","/forgebridge","/pulse","/temporal_field","/entropy_detector","/plant_seeds"]}
 
 def stats() -> dict:
     log = _load(BOT_LOG, {"messages": [], "commands": [], "total": 0})

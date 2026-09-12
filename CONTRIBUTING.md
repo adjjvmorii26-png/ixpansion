@@ -61,4 +61,4 @@ New modules can be added without a new wave:
 
 ## Questions?
 
-Open an issue or join the Telegram bot @aleph_bot.
+Open an issue or join the Telegram bot @adjjv_bot.

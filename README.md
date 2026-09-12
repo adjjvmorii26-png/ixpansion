@@ -80,7 +80,7 @@ curl http://localhost:3000/communion?action=status
 ## 📡 Connect
 
 - **GitHub**: [adjjvmorii26-png/ixpansion](https://github.com/adjjvmorii26-png/ixpansion)
-- **Telegram**: [@aleph_bot](https://t.me/aleph_bot)
+- **Telegram**: [@adjjv_bot](https://t.me/adjjv_bot)
 - **YouTube**: [CodingLooop](https://www.youtube.com/@CoodingLooop)
 
 ## 🏗️ Architecture

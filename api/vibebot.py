@@ -1,6 +1,6 @@
 """VibeBot — Creative resonance broadcaster for the organism.
 Monitors system state and broadcasts "vibe" pulses to connected agents.
-Integrates with Telegram aleph_bot and Vercel AI Gateway.
+Integrates with Telegram adjjv_bot and Vercel AI Gateway.
 """
 import json, time, os, random
 from datetime import datetime, timedelta
