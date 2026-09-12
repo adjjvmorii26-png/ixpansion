@@ -1,28 +1,42 @@
-version: '3.8'
-
+version: "3.8"
 services:
-  ixpansion:
+  ixpansion-api:
     build: .
     ports:
-      - "3000:3000"
+      - "8000:8000"
     environment:
-      - NEXUS_MODE=production
-      - NEXUS_SEED=42
-      - NEXUS_WAVE=139
+      - VERCEL_DEPLOY_TOKEN=${VERCEL_DEPLOY_TOKEN}
+      - NODE_ENV=production
     volumes:
-      - ./.runtime:/app/.runtime
-      - ./backup:/app/backup
+      - ./api:/app/api
+      - ./data:/app/data
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:3000/health')"]
+      test: ["CMD", "python3", "-c", "import sys; sys.path.insert(0, 'api'); import wave410_fusion; print('ok')"]
       interval: 30s
       timeout: 10s
       retries: 3
 
-  dashboard:
+  ixpansion-dashboard:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dashboard:/app/dashboard
+    restart: unless-stopped
+
+  ixpansion-nginx:
     image: nginx:alpine
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
     volumes:
-      - ./dashboard:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - ixpansion-api
+      - ixpansion-dashboard
     restart: unless-stopped
+
+volumes:
+  ixpansion_data:
+  ixpansion_dashboard:

@@ -1,20 +1,8 @@
-FROM python:3.12-slim
-
+FROM python:3.11-slim
 WORKDIR /app
-
-# Copy dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application
-COPY . .
-
-# Expose port
-EXPOSE 3000
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-  CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:3000/health')" || exit 1
-
-# Default command
-CMD ["python", "main.py", "serve"]
+RUN pip install --quiet fastapi uvicorn python-multipart
+COPY api/ /app/api/
+COPY data/ /app/data/
+COPY tests/ /app/tests/
+EXPOSE 8000
+CMD ["python3", "-m", "uvicorn", "api.wave410_fusion:handler", "--host", "0.0.0.0", "--port", "8000"]
