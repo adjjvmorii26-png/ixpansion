@@ -2,12 +2,11 @@
 
 | Tool | Role |
 |------|------|
-| route_scar.py | Vercel 754→89 as scar memory + captions |
+| route_scar.py | Vercel 754→89 scar memory |
+| silence_ledger.py | Caption deposits · 0 audio capital |
 | dual_track_card.py | ALEPH vs Lab |
-| phase_b_pipeline.py | ticket → graft → seams → captions |
 
 ```bash
 python lab/ops/route_scar.py
+python lab/ops/silence_ledger.py
 ```
-
-Doctrine: compression is memory, not deletion.
