@@ -105,7 +105,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how to add a new wave, module, or das
 ## 🌐 Hosting
 
 - **GitHub Pages**: [adjjvmorii26-png.github.io/ixpansion](https://adjjvmorii26-png.github.io/ixpansion/)
-- **Vercel**: [ixpansion-live](https://vercel.com/adjjvmorii26-pngs-projects) (pending fair-use reset)
 - **Cloudflare Tunnel**: API deployed via CI/CD
 - **Docker**: [docker-compose.yml](docker-compose.yml)
 

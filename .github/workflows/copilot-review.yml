@@ -86,6 +86,9 @@ jobs:
         run: |
           python -c "
           import json, os
+          if not os.path.exists('vercel.json'):
+              print('vercel.json removed (Vercel decommissioned) - route coverage check skipped')
+              raise SystemExit(0)
           with open('vercel.json') as f: v = json.load(f)
           routes = {r['src'].lstrip('/').replace('/', '.') for r in v.get('routes', []) if '/api/' in r.get('src', '')}
           changed = [os.path.basename(l.strip()).replace('.py','')
@@ -110,7 +113,7 @@ jobs:
           echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
           MODULE_COUNT=$(find api -name '*.py' ! -path '*__pycache__*' | wc -l)
           echo "| Total organs | $MODULE_COUNT |" >> $GITHUB_STEP_SUMMARY
-          ROUTE_COUNT=$(python3 -c "import json; print(len([r for r in json.load(open('vercel.json')).get('routes',[]) if '/api/' in r.get('src','')]))")
+          ROUTE_COUNT=$(python3 -c "import json, os; print(len([r for r in json.load(open('vercel.json')).get('routes',[]) if '/api/' in r.get('src','')]) if os.path.exists('vercel.json') else 'n/a (vercel removed)')")
           echo "| API routes | $ROUTE_COUNT |" >> $GITHUB_STEP_SUMMARY
           WAVE=$(grep -o 'Wave [0-9]*' api/*.py | tail -1 | grep -o '[0-9]*')
           echo "| Latest wave | $WAVE |" >> $GITHUB_STEP_SUMMARY
