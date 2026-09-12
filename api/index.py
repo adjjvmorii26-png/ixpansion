@@ -1814,6 +1814,16 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+    # Wave 426 — Causal Weaving
+    if path.startswith("/causal-weave") or path.startswith("/api/causal_weave"):
+        from api.wave426_causal_weave import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/causal-weave" or path == "/causal_weave":
+        from api.wave426_causal_weave import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     # Wave 420 — Communion Protocol
     if path.startswith("/communion") or path.startswith("/api/communion"):
         from api.wave420_communion import handler as h
