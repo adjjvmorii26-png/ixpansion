@@ -4,15 +4,15 @@
   "type": "symbiotic_swarm",
   "purpose": "Multiple repos become cells of a super-organism",
   "active": true,
-  "created": 1789239793.8386843,
+  "created": 1789242992.020699,
   "colonies": [
     {
       "repo": "ixpansion",
       "role": "core",
       "url": "https://github.com/adjjvmorii26-png/ixpansion",
       "connected": true,
-      "last_sync": 1789237514.8386843,
-      "cell_id": "b53d3076",
+      "last_sync": 1789240539.020699,
+      "cell_id": "c6acbb34",
       "state": "active"
     },
     {
@@ -20,8 +20,8 @@
       "role": "sensor",
       "url": "https://github.com/adjjvmorii26-png/nexus-observatory",
       "connected": true,
-      "last_sync": 1789239660.8386843,
-      "cell_id": "7491b135",
+      "last_sync": 1789241089.020699,
+      "cell_id": "019ac5fe",
       "state": "active"
     },
     {
@@ -29,8 +29,8 @@
       "role": "engine",
       "url": "https://github.com/adjjvmorii26-png/pentaxis-5d-engine",
       "connected": true,
-      "last_sync": 1789237589.8386843,
-      "cell_id": "ac49157c",
+      "last_sync": 1789240981.020699,
+      "cell_id": "008575a8",
       "state": "active"
     },
     {
@@ -38,8 +38,8 @@
       "role": "biological",
       "url": "https://github.com/adjjvmorii26-png/solid-organism",
       "connected": true,
-      "last_sync": 1789239076.8386843,
-      "cell_id": "c4514e33",
+      "last_sync": 1789239648.020699,
+      "cell_id": "4c4ceecc",
       "state": "active"
     },
     {
@@ -47,16 +47,16 @@
       "role": "growth",
       "url": "https://github.com/adjjvmorii26-png/garden",
       "connected": true,
-      "last_sync": 1789236228.8386843,
-      "cell_id": "5fc189a9",
+      "last_sync": 1789242576.020699,
+      "cell_id": "9e3f2556",
       "state": "active"
     },
     {
-      "repo": "colony_288",
+      "repo": "colony_356",
       "role": "unknown",
       "url": "",
       "connected": false,
-      "cell_id": "dfe1e195",
+      "cell_id": "109bb946",
       "state": "dormant"
     }
   ],
@@ -64,7 +64,7 @@
   "total_cells": 6,
   "active_cells": 5,
   "sync_interval": 300,
-  "last_swarm_pulse": 1789239793.8386843,
+  "last_swarm_pulse": 1789242992.020699,
   "coordination_protocol": "webhook_based",
-  "timestamp": 1789239793.8386843
+  "timestamp": 1789242992.020699
 }
