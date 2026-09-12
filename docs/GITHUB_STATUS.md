@@ -1,29 +1,29 @@
-# GitHub Status · 2026-09-11
+# GitHub Status · 2026-09-12
 
-## Primary: `adjjvmorii26-png/ixpansion`
+## Branches
+| Branch | Notes |
+|--------|--------|
+| main (protected) | ALEPH/Growth — diverged from lab |
+| lab/chrono-forge-wave | Organism + ops tip |
+| merge-lab-chronoforge | PR #105 vehicle |
+| gh-pages | Pages |
 
-| Branch | Tip | Notes |
-|--------|-----|-------|
-| **main** (protected) | `f66db20` | ALEPH / Growth waves; Pages OK; **CI failing** on latest |
-| **lab/chrono-forge-wave** | lab organism workstream | CHRONOFORGE, STRATUM, unique projects |
-| **gh-pages** | pages deploy | |
+## Open PRs
+- **#104** lab creative + ops — Lab Smoke/Graft/Integration ✅ · full CI ❌
+- **#105** merge lab → main (CHRONOFORGE/STRATUM/MONOLITH)
 
-### PRs
-- **Open:** [#104](https://github.com/adjjvmorii26-png/ixpansion/pull/104) proof_comet / entropy_caption / sigil_stamp
-- #103 organism-base closed; main continued on ALEPH waves
+## Local organism
+- GRAFT-1: **act** (fused ~0.96)
+- smoke_lab + helix ethics: green
+- Null orchard voids (expected): openclaw, wasm_lattice
 
-### Actions
-| Workflow | Result |
-|----------|--------|
-| Pinned Lab | success (cron) |
-| CI | failure (main) |
-| Pages | success |
-| Deploy API tunnel | failure |
+## Weekly automation
+`weekly-github-status` — Mondays 09:30 America/New_York
 
-### Family
-~28 repos under adjjvmorii26-png (ixpansion, pentaxis, oracle, chronocrypt, astral, interstice, …)
-
-## Helix Bridge
+## Commands
 ```bash
-python lab/helix_bridge/probe.py
+python lab/smoke_lab.py
+python lab/ops/epoch_ticket.py issue
+python lab/ops/pr_graft_advisor.py
+python lab/ops/graft_caption_reactor.py
 ```
