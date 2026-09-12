@@ -1794,6 +1794,26 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+    # Wave 418 — Temporal Singularity
+    if path.startswith("/temporal-singularity") or path.startswith("/api/temporal_singularity"):
+        from api.wave418_temporal_singularity import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/temporal-singularity" or path == "/temporal_singularity":
+        from api.wave418_temporal_singularity import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+    # Wave 419 — Essence Return
+    if path.startswith("/essence-return") or path.startswith("/api/essence_return"):
+        from api.wave419_essence_return import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/essence-return" or path == "/essence_return":
+        from api.wave419_essence_return import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     # Wave 416 — Paradox Singularity
     if path.startswith("/paradox-singularity") or path.startswith("/api/paradox_singularity"):
         from api.wave416_paradox_singularity import handler as h
