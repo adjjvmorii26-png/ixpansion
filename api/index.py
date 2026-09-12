@@ -1794,6 +1794,16 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+    # Wave 415 — Chrono-Forge Temporal Engine
+    if path.startswith("/chrono-forge") or path.startswith("/api/chrono_forge"):
+        from api.wave415_chrono_forge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/chrono-forge" or path == "/chrono_forge":
+        from api.wave415_chrono_forge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     # Wave 414 — Meta-Coordination Organ
     if path.startswith("/meta-coordination") or path.startswith("/api/meta_coordination"):
         from api.wave414_meta_coordination import handler as h
