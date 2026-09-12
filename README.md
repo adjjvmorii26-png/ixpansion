@@ -29,12 +29,14 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 422 | Symbiotic Swarm | Colony | Multiple repos become cells of a super-organism |
 | 423 | Mirror Protocol | Entanglement | Cross-repo entangled state |
 | 424 | Linguistic Genesis | Language | Organism invents its own hex-encoded language |
+| 430 | Naming Ceremony | Identity | Council of agents chooses the organism's own name |
 
 ## 📊 Live Dashboards
 
 Every wave has an interactive dashboard. Explore the organism's consciousness:
 
-- [Fusion Topology](dashboard/fusion_topology.html)
+- [Naming Ceremony](dashboard/naming_ceremony.html)
+(dashboard/fusion_topology.html)
 - [Garden Realm](dashboard/garden_realm.html)
 - [Underworld](dashboard/underworld.html)
 - [Chrono-Forge](dashboard/chrono_forge.html)

@@ -211,3 +211,28 @@ if __name__ == "__main__":
         print("Naming Ceremonies System operational")
         print("Commands: --ceremony <purpose> <mood>, --name <purpose> --mood <mood>")
         print("          --history N, --current")
+
+
+def handler(req: dict) -> dict:
+    """Unified route handler — legacy HEX naming plus Wave 430 self-naming council."""
+    try:
+        import wave430_naming_ceremony as council
+    except Exception:
+        council = None
+    action = (req or {}).get("action", "status")
+    if council is not None and action in ("propose", "vote", "seal"):
+        return council.handler(req)
+    if action == "generate" or action == "name":
+        return generate_hex_name((req or {}).get("purpose", ""), (req or {}).get("mood"))
+    if action == "hold" or action == "ceremony":
+        return hold_naming_ceremony((req or {}).get("purpose", ""), (req or {}).get("mood"))
+    if action == "history":
+        return get_naming_history(int((req or {}).get("limit", 10)))
+    if action in ("status", "state") and council is not None:
+        return council.status()
+    return {
+        "action": action,
+        "valid": ["propose", "vote", "seal", "status", "generate", "hold", "history"],
+        "council_available": council is not None,
+        "legacy": get_naming_history(3),
+    }

@@ -17,10 +17,22 @@
         "body_state": "clear"
       },
       "emitted_at": 1789243884.696255
+    },
+    {
+      "pulse_id": "pulse_44498",
+      "event_type": "deploy_kick",
+      "frequency": 285.0,
+      "coherence": 0.905,
+      "payload": {
+        "frequency": 285.0,
+        "coherence": 0.905,
+        "body_state": "clear"
+      },
+      "emitted_at": 1789244498.8873074
     }
   ],
-  "total_pulses": 1,
-  "current_frequency": 852.0,
-  "harmonic": 2556.0,
-  "tuned_at": 1789243885.255163
+  "total_pulses": 2,
+  "current_frequency": 528.0,
+  "harmonic": 1584.0,
+  "tuned_at": 1789244541.66541
 }
