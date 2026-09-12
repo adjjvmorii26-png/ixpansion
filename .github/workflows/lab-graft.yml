@@ -1,0 +1,36 @@
+name: Lab Graft
+on:
+  pull_request:
+    paths:
+      - 'lab/**'
+      - 'sandbox/**'
+      - 'boot_organism_base.py'
+      - '.github/workflows/lab-graft.yml'
+  push:
+    branches: ['lab/**']
+    paths: ['lab/**', 'sandbox/**']
+jobs:
+  graft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Issue CI epoch ticket
+        run: python lab/ops/epoch_ticket.py issue --scope "ci:graft" --ttl 3600
+        env:
+          IX_EPOCH_SECRET: ${{ secrets.IX_EPOCH_SECRET }}
+      - name: Lab smoke
+        run: python lab/smoke_lab.py
+      - name: Graft advisor
+        run: python lab/ops/pr_graft_advisor.py | tee graft_report.json
+      - name: Upload graft report
+        uses: actions/upload-artifact@v4
+        with:
+          name: graft-report
+          path: |
+            graft_report.json
+            lab/ops/graft_reports/
+            lab/helix_bridge/constellation.json
+          if-no-files-found: warn
