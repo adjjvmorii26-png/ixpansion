@@ -1,8 +1,5 @@
-"""Repository bootstrap for direct and per-project pytest invocations."""
-from __future__ import annotations
+import pytest
 
-from pathlib import Path
-
-ROOT = Path(__file__).resolve().parent
-if str(ROOT) not in __import__("sys").path:
-    __import__("sys").path.insert(0, str(ROOT))
+def pytest_configure(config):
+    config.addinivalue_line("markers", "slow: marks tests as slow")
+    config.addinivalue_line("markers", "fast: marks tests as fast (wave tests)")

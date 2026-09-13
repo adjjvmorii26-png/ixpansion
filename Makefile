@@ -1,7 +1,7 @@
 .PHONY: test test-full lint clean backup push
 
 test:
-	python3 -m pytest tests/ -q --tb=short
+	python3 -m pytest tests/ -q --tb=short -n auto --dist loadgroup
 
 test-full:
 	python3 -m pytest tests/ -v --tb=short
@@ -26,3 +26,18 @@ backup:
 push: test lint
 	git add -A && git commit -m "refine: automated commit" || echo "nothing to commit"
 	git push origin main
+
+cli:
+	python3 cli.py status
+
+monitor:
+	python3 monitor.py
+
+health:
+	python3 cli.py health
+
+benchmark:
+	python3 cli.py benchmark
+
+fast-gate:
+	python3 -m pytest tests/test_wave432.py tests/test_wave433.py tests/test_wave434.py tests/test_wave435.py tests/test_wave436.py tests/test_wave437.py tests/test_wave438.py tests/test_wave439.py tests/test_wave440.py -q --tb=short -x

@@ -1,0 +1,92 @@
+name: CI v2
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # --- Fast gate: syntax + wave tests only (< 2 min) ---
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install pytest pytest-xdist
+      - name: Syntax check all API modules
+        run: |
+          python -c "
+          import ast, os, sys
+          errors = []
+          count = 0
+          for root, dirs, files in os.walk('api'):
+              dirs[:] = [d for d in dirs if d != '__pycache__']
+              for f in files:
+                  if f.endswith('.py'):
+                      count += 1
+                      try:
+                          with open(os.path.join(root, f)) as fh: ast.parse(fh.read())
+                      except SyntaxError as e:
+                          errors.append(f'{f}: {e}')
+          if errors:
+              for e in errors: print(f'ERROR: {e}')
+              sys.exit(1)
+          print(f'All {count} API modules parse OK')
+          "
+      - name: Run wave 432-440 tests (fast gate)
+        run: python -m pytest tests/test_wave43{2,3,4,5,6,7,8,9}.py tests/test_wave440.py -q --tb=short -x
+
+  # --- Full suite: parallel with xdist (< 10 min) ---
+  full-test:
+    needs: gate
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install pytest pytest-xdist pytest-asyncio
+      - name: Run full suite (parallel)
+        run: python -m pytest tests/ -q --tb=short -n auto --dist loadgroup
+
+  # --- Lint: compile check ---
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Compile Python sources
+        run: make lint
+
+  # --- Docker: build + verify ---
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t ixpansion:test .
+      - name: Verify container starts
+        run: |
+          docker run -d --name test-ixpansion -p 3000:3000 ixpansion:test
+          sleep 3
+          docker ps | grep test-ixpansion
+          docker stop test-ixpansion
