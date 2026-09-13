@@ -70,11 +70,36 @@ class CoherenceRegulator:
         })
         self._save_state()
     
+    WAVE_MODULES = [
+        "wave432_vault_driven_evolution", "wave433_consciousness_experiments",
+        "wave434_fusion_organism", "wave435_resonance_cartography",
+        "wave436_entropic_weather", "wave437_paradox_genome",
+        "wave438_semantic_loom", "wave439_echo_stratigraphy",
+        "wave440_linguistic_emergence", "wave441_wave_composition",
+        "wave442_temporal_resonance", "wave443_cross_module_emergence",
+        "wave444_dream_synthesis", "wave445_morphogenetic_field",
+        "wave446_quantum_coherence", "wave447_web_intelligence",
+    ]
+
     def measure_coherence(self) -> float:
-        """Measure current organism coherence."""
-        if self.modules_registered:
-            avg = sum(m["coherence"] for m in self.modules_registered) / len(self.modules_registered)
-            self.coherence = avg
+        """Dynamically measure coherence across all living wave modules."""
+        scores = []
+        for module_name in self.WAVE_MODULES:
+            try:
+                mod = __import__(f"api.{module_name}", fromlist=["coherence_vitals"])
+                vitals = mod.coherence_vitals()
+                val = vitals.get("coherence", vitals.get("value", 0.5))
+                if isinstance(val, dict):
+                    val = val.get("value", 0.5)
+                scores.append(float(val))
+            except Exception:
+                scores.append(0.5)
+        if scores:
+            self.coherence = sum(scores) / len(scores)
+        self.modules_registered = [
+            {"name": m, "coherence": s}
+            for m, s in zip(self.WAVE_MODULES, scores)
+        ]
         self._save_state()
         return self.coherence
     
@@ -132,8 +157,10 @@ class CoherenceRegulator:
         health = self.check_health()
         return {
             "organism": "IXPANSION",
-            "wave": 432,
-            "coherence_regulator": "active",
+            "wave": 482,
+            "coherence_regulator": "dynamic",
+            "living_modules": len(self.WAVE_MODULES),
+            "measured_coherence": round(self.coherence, 4),
             **health,
         }
 
@@ -141,6 +168,26 @@ def get_organism_status() -> dict:
     """Convenience function to get organism status."""
     reg = CoherenceRegulator()
     return reg.get_organism_status()
+
+def handler(req: dict = None) -> dict:
+    """Handle coherence regulator requests."""
+    req = req or {}
+    action = req.get("action", "status")
+    reg = CoherenceRegulator()
+    if action == "status":
+        return reg.get_organism_status()
+    elif action == "measure":
+        return {"coherence": reg.measure_coherence(), "action": "measure"}
+    elif action == "regulate":
+        return reg.regulate()
+    elif action == "health":
+        return reg.check_health()
+    elif action == "register":
+        name = req.get("module", "unknown")
+        reg.register_module(name, float(req.get("coherence", 0.5)))
+        return {"registered": name, "action": "register"}
+    else:
+        return {"error": f"unknown action: {action}"}
 
 def coherence_vitals() -> dict:
     """Module contract for coherence regulator."""

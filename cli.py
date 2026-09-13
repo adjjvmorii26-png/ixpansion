@@ -456,6 +456,28 @@ def cmd_children():
             print(f"    • {name}: ERROR {e}")
     print()
 
+
+
+@cmd("coherence", "Measure organism coherence across all waves")
+def cmd_coherence():
+    result = _call("coherence_regulator", "status")
+    print(f"\n  🧬 Organism Coherence")
+    print(f"  {'─'*50}")
+    co = result.get('measured_coherence', result.get('coherence', 0))
+    try: co = float(co)
+    except (TypeError, ValueError): co = 0
+    print(f"    Coherence: {co:.4f}")
+    print(f"    Status: {result.get('status', '?')}")
+    print(f"    Living Modules: {result.get('living_modules', '?')}")
+    print(f"    Mutation Pressure: {result.get('mutation_pressure', 0):.4f}")
+    print(f"    Entropy Budget: {result.get('entropy_budget', '?')}")
+    per_module = result.get('modules_registered', [])
+    if per_module:
+        print(f"    Per-Module Coherence:")
+        for m in per_module[:10]:
+            print(f"      {m.get('name', '?')}: {m.get('coherence', '?')}")
+    print()
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

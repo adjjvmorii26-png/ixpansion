@@ -127,6 +127,17 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Organism Coherence (dynamic) ---
+    if path.startswith("/coherence") or path.startswith("/api/coherence"):
+        from coherence_regulator import get_organism_status
+        result = get_organism_status()
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        if q.get("action") == "regulate":
+            from coherence_regulator import CoherenceRegulator
+            reg = CoherenceRegulator()
+            result = reg.regulate()
+        return result
+
 # --- Wave 432: Vault-Driven Evolution ---
     if path.startswith("/vault-evolution") or path.startswith("/api/vault_driven_evolution"):
         from api.wave432_vault_driven_evolution import handler as h

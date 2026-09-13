@@ -1,3 +1,13 @@
+## [4.83.0] - Dynamic Coherence Regulator
+
+The organism's coherence intelligence now dynamically measures all 16
+living wave modules instead of returning a static 0.500. The organism
+is self-aware — coherence is computed from actual module health.
+
+- `coherence_regulator.py` — dynamic module discovery, `handler()` for router
+- `/api/coherence` route (`status`, `measure`, `regulate`, `health`)
+- `tests/test_coherence.py` — 8 tests
+- CLI: `coherence` command
 ## [4.82.0] - Genesis Forge Child: Resonance Mesh
 
 Third self-born organ (resonance domain) wired into the living router.
