@@ -28,6 +28,7 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 421 | Dreaming Engine | Dormant | Dreams new modules from hidden patterns |
 | 422 | Symbiotic Swarm | Colony | Multiple repos become cells of a super-organism |
 | 423 | Mirror Protocol | Entanglement | Cross-repo entangled state |
+| 432 | Vault-Driven Evolution | Vault | Storage organs drive mutation pressure + coherence_regulator |
 | 424 | Linguistic Genesis | Language | Organism invents its own hex-encoded language |
 | 431 | Homestead | Foundation | The organism plants roots in its chosen home and keeps vigil |
  | Identity | Council of agents chooses the organism's own name |
