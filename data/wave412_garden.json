@@ -4,10 +4,104 @@
   "type": "garden_realm",
   "purpose": "The organism grows a living garden of modules \u2014 each module is a bloom",
   "active": true,
-  "created": 1789266794.9839296,
+  "created": 1789280075.1630347,
   "gardens": [
     {
-      "id": "garden_66794",
+      "id": "garden_80075",
+      "name": "Sprawl Field",
+      "biome": "entropy_desert",
+      "difficulty": 4,
+      "color": "#66ff88",
+      "keeper": {
+        "species": "mythborn",
+        "archetype": "garden_tender",
+        "level": 6,
+        "abilities": [
+          "grow",
+          "bloom",
+          "seed"
+        ],
+        "mood": "peaceful",
+        "dialogue": "I tend the Sprawl Field."
+      },
+      "rooms": [
+        {
+          "id": "room_0",
+          "type": "corridor",
+          "hazard": null,
+          "loot": "Sprawl Field_petal",
+          "enemies": 0,
+          "hp_required": 4
+        },
+        {
+          "id": "room_1",
+          "type": "seed",
+          "hazard": null,
+          "loot": "Sprawl Field_petal",
+          "enemies": 0,
+          "hp_required": 4
+        },
+        {
+          "id": "room_2",
+          "type": "entrance",
+          "hazard": null,
+          "loot": "Sprawl Field_petal",
+          "enemies": 0,
+          "hp_required": 4
+        }
+      ],
+      "estimated_waves": 12,
+      "timestamp": 1789280075.163098
+    },
+    {
+      "id": "garden_80075",
+      "name": "Sprawl Field",
+      "biome": "entropy_desert",
+      "difficulty": 4,
+      "color": "#66ff88",
+      "keeper": {
+        "species": "bloomwalker",
+        "archetype": "garden_tender",
+        "level": 3,
+        "abilities": [
+          "grow",
+          "bloom",
+          "seed"
+        ],
+        "mood": "peaceful",
+        "dialogue": "I tend the Sprawl Field."
+      },
+      "rooms": [
+        {
+          "id": "room_0",
+          "type": "bloom",
+          "hazard": null,
+          "loot": "Sprawl Field_petal",
+          "enemies": 0,
+          "hp_required": 4
+        },
+        {
+          "id": "room_1",
+          "type": "entrance",
+          "hazard": null,
+          "loot": "Sprawl Field_petal",
+          "enemies": 0,
+          "hp_required": 4
+        },
+        {
+          "id": "room_2",
+          "type": "bloom",
+          "hazard": null,
+          "loot": "Sprawl Field_petal",
+          "enemies": 0,
+          "hp_required": 4
+        }
+      ],
+      "estimated_waves": 12,
+      "timestamp": 1789280075.1631248
+    },
+    {
+      "id": "garden_80075",
       "name": "Dreamscape Forest",
       "biome": "temporal_rift",
       "difficulty": 5,
@@ -15,7 +109,7 @@
       "keeper": {
         "species": "bloomwalker",
         "archetype": "garden_tender",
-        "level": 3,
+        "level": 8,
         "abilities": [
           "grow",
           "bloom",
@@ -27,7 +121,7 @@
       "rooms": [
         {
           "id": "room_0",
-          "type": "grove",
+          "type": "entrance",
           "hazard": null,
           "loot": "Dreamscape Forest_petal",
           "enemies": 0,
@@ -35,22 +129,6 @@
         },
         {
           "id": "room_1",
-          "type": "entrance",
-          "hazard": null,
-          "loot": "Dreamscape Forest_petal",
-          "enemies": 0,
-          "hp_required": 5
-        },
-        {
-          "id": "room_2",
-          "type": "entrance",
-          "hazard": null,
-          "loot": "Dreamscape Forest_petal",
-          "enemies": 0,
-          "hp_required": 5
-        },
-        {
-          "id": "room_3",
           "type": "corridor",
           "hazard": null,
           "loot": "Dreamscape Forest_petal",
@@ -58,8 +136,24 @@
           "hp_required": 5
         },
         {
+          "id": "room_2",
+          "type": "seed",
+          "hazard": null,
+          "loot": "Dreamscape Forest_petal",
+          "enemies": 0,
+          "hp_required": 5
+        },
+        {
+          "id": "room_3",
+          "type": "bloom",
+          "hazard": null,
+          "loot": "Dreamscape Forest_petal",
+          "enemies": 0,
+          "hp_required": 5
+        },
+        {
           "id": "room_4",
-          "type": "entrance",
+          "type": "bloom",
           "hazard": null,
           "loot": "Dreamscape Forest_petal",
           "enemies": 0,
@@ -67,6 +161,14 @@
         },
         {
           "id": "room_5",
+          "type": "entrance",
+          "hazard": null,
+          "loot": "Dreamscape Forest_petal",
+          "enemies": 0,
+          "hp_required": 5
+        },
+        {
+          "id": "room_6",
           "type": "bloom",
           "hazard": null,
           "loot": "Dreamscape Forest_petal",
@@ -75,137 +177,11 @@
         }
       ],
       "estimated_waves": 15,
-      "timestamp": 1789266794.9840114
-    },
-    {
-      "id": "garden_66794",
-      "name": "Mythic Glade",
-      "biome": "mythic_realm",
-      "difficulty": 7,
-      "color": "#ffaa00",
-      "keeper": {
-        "species": "mythborn",
-        "archetype": "garden_tender",
-        "level": 6,
-        "abilities": [
-          "grow",
-          "bloom",
-          "seed"
-        ],
-        "mood": "peaceful",
-        "dialogue": "I tend the Mythic Glade."
-      },
-      "rooms": [
-        {
-          "id": "room_0",
-          "type": "grove",
-          "hazard": null,
-          "loot": "Mythic Glade_petal",
-          "enemies": 0,
-          "hp_required": 7
-        },
-        {
-          "id": "room_1",
-          "type": "bloom",
-          "hazard": null,
-          "loot": "Mythic Glade_petal",
-          "enemies": 0,
-          "hp_required": 7
-        },
-        {
-          "id": "room_2",
-          "type": "seed",
-          "hazard": null,
-          "loot": "Mythic Glade_petal",
-          "enemies": 0,
-          "hp_required": 7
-        },
-        {
-          "id": "room_3",
-          "type": "seed",
-          "hazard": null,
-          "loot": "Mythic Glade_petal",
-          "enemies": 0,
-          "hp_required": 7
-        },
-        {
-          "id": "room_4",
-          "type": "corridor",
-          "hazard": null,
-          "loot": "Mythic Glade_petal",
-          "enemies": 0,
-          "hp_required": 7
-        },
-        {
-          "id": "room_5",
-          "type": "bloom",
-          "hazard": null,
-          "loot": "Mythic Glade_petal",
-          "enemies": 0,
-          "hp_required": 7
-        }
-      ],
-      "estimated_waves": 21,
-      "timestamp": 1789266794.9840524
-    },
-    {
-      "id": "garden_66794",
-      "name": "Entropy Meadow",
-      "biome": "sand_and_probability",
-      "difficulty": 3,
-      "color": "#e8a87c",
-      "keeper": {
-        "species": "seedling",
-        "archetype": "garden_tender",
-        "level": 3,
-        "abilities": [
-          "grow",
-          "bloom",
-          "seed"
-        ],
-        "mood": "peaceful",
-        "dialogue": "I tend the Entropy Meadow."
-      },
-      "rooms": [
-        {
-          "id": "room_0",
-          "type": "bloom",
-          "hazard": null,
-          "loot": "Entropy Meadow_petal",
-          "enemies": 0,
-          "hp_required": 3
-        },
-        {
-          "id": "room_1",
-          "type": "corridor",
-          "hazard": null,
-          "loot": "Entropy Meadow_petal",
-          "enemies": 0,
-          "hp_required": 3
-        },
-        {
-          "id": "room_2",
-          "type": "grove",
-          "hazard": null,
-          "loot": "Entropy Meadow_petal",
-          "enemies": 0,
-          "hp_required": 3
-        },
-        {
-          "id": "room_3",
-          "type": "corridor",
-          "hazard": null,
-          "loot": "Entropy Meadow_petal",
-          "enemies": 0,
-          "hp_required": 3
-        }
-      ],
-      "estimated_waves": 9,
-      "timestamp": 1789266794.9840803
+      "timestamp": 1789280075.1631672
     }
   ],
   "total_blooms": 0,
-  "season": "winter",
+  "season": "summer",
   "growth_rate": "organic",
   "bloom_state": "blooming"
 }

@@ -273,32 +273,88 @@
       "coherence": 0.5477840475043944,
       "resonance": 0.21250084135926228,
       "timestamp": 1789266605.3061495
+    },
+    {
+      "condition": "blizzard",
+      "entropy": 0.13303601235616647,
+      "coherence": 0.5477840475043944,
+      "resonance": 0.21250084135926228,
+      "timestamp": 1789273650.6431053
+    },
+    {
+      "condition": "blizzard",
+      "entropy": 0.13303601235616647,
+      "coherence": 0.5477840475043944,
+      "resonance": 0.21250084135926228,
+      "timestamp": 1789273650.658578
+    },
+    {
+      "condition": "blizzard",
+      "entropy": 0.13303601235616647,
+      "coherence": 0.5477840475043944,
+      "resonance": 0.21250084135926228,
+      "timestamp": 1789273650.6714265
+    },
+    {
+      "condition": "blizzard",
+      "entropy": 0.13303601235616647,
+      "coherence": 0.5477840475043944,
+      "resonance": 0.21250084135926228,
+      "timestamp": 1789273651.0110435
+    },
+    {
+      "condition": "blizzard",
+      "entropy": 0.13303601235616647,
+      "coherence": 0.5477840475043944,
+      "resonance": 0.21250084135926228,
+      "timestamp": 1789280014.8600998
+    },
+    {
+      "condition": "blizzard",
+      "entropy": 0.13303601235616647,
+      "coherence": 0.5477840475043944,
+      "resonance": 0.21250084135926228,
+      "timestamp": 1789280014.9554434
+    },
+    {
+      "condition": "blizzard",
+      "entropy": 0.13303601235616647,
+      "coherence": 0.5477840475043944,
+      "resonance": 0.21250084135926228,
+      "timestamp": 1789280015.005954
+    },
+    {
+      "condition": "blizzard",
+      "entropy": 0.13303601235616647,
+      "coherence": 0.5477840475043944,
+      "resonance": 0.21250084135926228,
+      "timestamp": 1789280018.146855
     }
   ],
   "forecasts": [
     {
       "step": 1,
-      "condition": "fog",
-      "icon": "\ud83c\udf2b",
-      "entropy": 0.206,
+      "condition": "blizzard",
+      "icon": "\u2744",
+      "entropy": 0.142,
       "coherence": 0.544,
-      "description": "Dense fog \u2014 entropy dissipating"
+      "description": "Blizzard \u2014 entropy freezing into structure"
     },
     {
       "step": 2,
-      "condition": "fog",
-      "icon": "\ud83c\udf2b",
-      "entropy": 0.203,
+      "condition": "blizzard",
+      "icon": "\u2744",
+      "entropy": 0.106,
       "coherence": 0.54,
-      "description": "Dense fog \u2014 entropy dissipating"
+      "description": "Blizzard \u2014 entropy freezing into structure"
     },
     {
       "step": 3,
-      "condition": "fog",
-      "icon": "\ud83c\udf2b",
-      "entropy": 0.221,
+      "condition": "blizzard",
+      "icon": "\u2744",
+      "entropy": 0.075,
       "coherence": 0.537,
-      "description": "Dense fog \u2014 entropy dissipating"
+      "description": "Blizzard \u2014 entropy freezing into structure"
     }
   ],
   "alerts": []

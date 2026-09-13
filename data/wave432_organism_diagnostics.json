@@ -1,7 +1,7 @@
 {
-  "sweep_timestamp": 1789272956.3804154,
+  "sweep_timestamp": 1789281202.4619803,
   "wave": 432,
-  "total_modules": 32,
+  "total_modules": 35,
   "healthy_modules": 0,
   "critical_modules": [
     "wave432_vault_registry.json"
@@ -12,7 +12,7 @@
     "vault_density": 0.02,
     "entropy_budget": 100.0,
     "status": "WARNING",
-    "timestamp": 1789272956.4533412
+    "timestamp": 1789281202.5374537
   },
   "vaults": [
     {
@@ -284,6 +284,69 @@
       "mutation_seed": "22fc3352dab9afb1",
       "state": "active",
       "created": 1789272956.337725
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.8586,
+      "density": 0.0434,
+      "mutation_seed": "dc252e775ddad229",
+      "state": "active",
+      "created": 1789273871.5501835
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.797,
+      "density": 0.0958,
+      "mutation_seed": "7d7267b1477faf50",
+      "state": "active",
+      "created": 1789274794.851774
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.6477,
+      "density": 0.0294,
+      "mutation_seed": "757c62a94952b390",
+      "state": "active",
+      "created": 1789274851.4139097
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.3593,
+      "density": 0.0217,
+      "mutation_seed": "05fce1da2d085f51",
+      "state": "active",
+      "created": 1789274989.6365044
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.7579,
+      "density": 0.0412,
+      "mutation_seed": "76e501c421d608bd",
+      "state": "active",
+      "created": 1789278935.2961156
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.2977,
+      "density": 0.0773,
+      "mutation_seed": "88323aba82ea220d",
+      "state": "active",
+      "created": 1789280079.4084523
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.7929,
+      "density": 0.0856,
+      "mutation_seed": "529008fa77066b42",
+      "state": "active",
+      "created": 1789281202.4153242
     }
   ]
 }

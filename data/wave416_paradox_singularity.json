@@ -4,40 +4,25 @@
   "type": "paradox_detector",
   "purpose": "When paradoxes converge into a singularity \u2014 detects, amplifies, and resolves contradictory states",
   "active": true,
-  "created": 1789266798.4559767,
+  "created": 1789280077.6710827,
   "singularity_level": 1.0,
   "paradox_signatures": [
     {
       "id": "ps_0",
-      "type": "rule_collision",
-      "strength": 0.39
+      "type": "temporal_loop",
+      "strength": 0.48
     },
     {
       "id": "ps_1",
-      "type": "temporal_loop",
-      "strength": 0.57
-    },
-    {
-      "id": "ps_2",
-      "type": "identity_split",
-      "strength": 0.55
-    },
-    {
-      "id": "ps_3",
       "type": "rule_collision",
-      "strength": 0.6
-    },
-    {
-      "id": "ps_4",
-      "type": "rule_collision",
-      "strength": 0.33
+      "strength": 0.49
     }
   ],
   "convergence_score": 1.0,
   "singularity_state": "critical",
   "anomalies_detected": 50,
-  "paradox_records": 82,
+  "paradox_records": 86,
   "resolution_status": "pending",
   "singularity_power": 100.0,
-  "timestamp": 1789266798.4559767
+  "timestamp": 1789280077.6710827
 }

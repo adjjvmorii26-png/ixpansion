@@ -1,185 +1,6 @@
 {
   "compositions": [
     {
-      "voices": [],
-      "results": {},
-      "avg_harmonic": 0.0,
-      "total_weight": 0,
-      "chord_hash": "44136fa355b3",
-      "elapsed_ms": 0.0,
-      "timestamp": 1789271464.2819972
-    },
-    {
-      "voices": [
-        "vault",
-        "weather",
-        "paradox"
-      ],
-      "results": {
-        "vault": {
-          "result": {
-            "action": "status",
-            "coherence": 0.5,
-            "mutation_pressure": 0.02,
-            "vault_density": 0.02,
-            "entropy_budget": 100.0,
-            "status": "WARNING",
-            "timestamp": 1789271489.433134
-          },
-          "weight": 0.8,
-          "harmonic": 0.4
-        },
-        "weather": {
-          "result": {
-            "action": "status",
-            "wave": 436,
-            "global_entropy": 0.3,
-            "global_creativity": 0.5,
-            "global_stability": 0.6,
-            "season": "spring",
-            "season_age": 0,
-            "total_cells": 2,
-            "weather_distribution": {
-              "clear": 1,
-              "storm": 1
-            },
-            "recent_events": []
-          },
-          "weight": 0.85,
-          "harmonic": 0.595
-        },
-        "paradox": {
-          "result": {
-            "action": "census",
-            "total_entities": 8,
-            "living": 8,
-            "dead": 0,
-            "avg_fitness": 0.4816,
-            "species_distribution": {
-              "self_reference": 8,
-              "temporal_loop": 4,
-              "causal_cycle": 4,
-              "identity_split": 4
-            },
-            "generations": 4,
-            "total_births": 0,
-            "total_deaths": 0,
-            "most_dominant": {
-              "paradox_id": "b2",
-              "species": "identity_split",
-              "generation": 0,
-              "fitness": 0.5,
-              "dominance": 0.9,
-              "mutation_rate": 0.02,
-              "stability": 0.2,
-              "alive": true,
-              "age": 0,
-              "dna": {
-                "strand_a": [
-                  10,
-                  6,
-                  2,
-                  12,
-                  6,
-                  12,
-                  11,
-                  12,
-                  4,
-                  2,
-                  3,
-                  7,
-                  4,
-                  1,
-                  7,
-                  0
-                ],
-                "strand_b": [
-                  10,
-                  11,
-                  5,
-                  15,
-                  11,
-                  12,
-                  7,
-                  7,
-                  1,
-                  13,
-                  11,
-                  7,
-                  0,
-                  13,
-                  13,
-                  15
-                ],
-                "contradiction": 0.35,
-                "fingerprint": "81c446738a82"
-              },
-              "lineage": []
-            },
-            "most_fit": {
-              "paradox_id": "b1",
-              "species": "causal_cycle",
-              "generation": 0,
-              "fitness": 0.5,
-              "dominance": 0.6,
-              "mutation_rate": 0.08,
-              "stability": 0.5,
-              "alive": true,
-              "age": 0,
-              "dna": {
-                "strand_a": [
-                  13,
-                  14,
-                  0,
-                  2,
-                  10,
-                  9,
-                  1,
-                  15,
-                  12,
-                  15,
-                  12,
-                  5,
-                  1,
-                  7,
-                  11,
-                  6
-                ],
-                "strand_b": [
-                  4,
-                  13,
-                  11,
-                  14,
-                  2,
-                  0,
-                  1,
-                  1,
-                  3,
-                  14,
-                  4,
-                  5,
-                  5,
-                  13,
-                  8,
-                  10
-                ],
-                "contradiction": 0.4125,
-                "fingerprint": "59e9ad4d30c7"
-              },
-              "lineage": []
-            }
-          },
-          "weight": 0.75,
-          "harmonic": 0.6
-        }
-      },
-      "avg_harmonic": 0.5317,
-      "total_weight": 2.4,
-      "chord_hash": "67ff2c7ddf22",
-      "elapsed_ms": 72.2,
-      "timestamp": 1789271489.4455614
-    },
-    {
       "voices": [
         "vault",
         "weather"
@@ -1602,7 +1423,2143 @@
       "chord_hash": "ca775cd6006d",
       "elapsed_ms": 125.2,
       "timestamp": 1789272920.5901818
+    },
+    {
+      "voices": [
+        "vault",
+        "weather"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789273873.6225162
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        }
+      },
+      "avg_harmonic": 0.4975,
+      "total_weight": 1.65,
+      "chord_hash": "d4bd370ec43e",
+      "elapsed_ms": 74.5,
+      "timestamp": 1789273873.6251369
+    },
+    {
+      "voices": [
+        "vault",
+        "consciousness",
+        "fusion",
+        "cartography",
+        "weather",
+        "paradox",
+        "loom",
+        "strata",
+        "language"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789273873.730761
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "consciousness": {
+          "result": {
+            "action": "status",
+            "organ": "wave433_consciousness_experiments",
+            "wave": 433,
+            "self_awareness": 0.17,
+            "dream_mode": false,
+            "metacognitive_depth": 10,
+            "mirror_test": {
+              "result": "fail",
+              "score": 0.5833,
+              "self_awareness": 0.17,
+              "model_score": 0.68,
+              "coherence_score": 0.9,
+              "dreaming": false,
+              "observations": 34
+            }
+          },
+          "weight": 0.9,
+          "harmonic": 0.45
+        },
+        "fusion": {
+          "result": {
+            "action": "status",
+            "phase": "FEDERATED",
+            "federation_coherence": 1.0,
+            "entropy_level": 0.0,
+            "total_modules": 0,
+            "total_layers": 0,
+            "created": 1789273873.7409766,
+            "wave": 434
+          },
+          "weight": 0.7,
+          "harmonic": 0.7
+        },
+        "cartography": {
+          "result": {
+            "action": "status",
+            "wave": 435,
+            "modules_registered": 3,
+            "atlas": {
+              "atlas_version": 2,
+              "total_modules": 3,
+              "total_fields": 3,
+              "strongest_bonds": [
+                {
+                  "module_a": "test_mod",
+                  "module_b": "b",
+                  "distance": 0.386396,
+                  "attraction": 0.721295,
+                  "entanglement": 0.70848,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "a",
+                  "module_b": "b",
+                  "distance": 0.598638,
+                  "attraction": 0.625532,
+                  "entanglement": 0.488372,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "test_mod",
+                  "module_b": "a",
+                  "distance": 0.628945,
+                  "attraction": 0.613894,
+                  "entanglement": 0.349159,
+                  "force_type": "gravitational_pull"
+                }
+              ],
+              "resonance_bonds": 0,
+              "entangled_pairs": 1,
+              "dissonance_fields": 0,
+              "clusters": [
+                [
+                  "a",
+                  "b",
+                  "test_mod"
+                ]
+              ],
+              "topology_hash": "da2ff765e9a9e688",
+              "last_mapped": 1789273873.7449746
+            }
+          },
+          "weight": 0.6,
+          "harmonic": 0.3
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        },
+        "paradox": {
+          "result": {
+            "action": "census",
+            "total_entities": 12,
+            "living": 12,
+            "dead": 0,
+            "avg_fitness": 0.448,
+            "species_distribution": {
+              "self_reference": 12,
+              "temporal_loop": 10,
+              "causal_cycle": 9,
+              "identity_split": 9
+            },
+            "generations": 8,
+            "total_births": 0,
+            "total_deaths": 0,
+            "most_dominant": {
+              "paradox_id": "b2",
+              "species": "identity_split",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.9,
+              "mutation_rate": 0.02,
+              "stability": 0.2,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  14,
+                  5,
+                  13,
+                  8,
+                  8,
+                  4,
+                  3,
+                  0,
+                  12,
+                  9,
+                  5,
+                  7,
+                  5,
+                  3,
+                  14,
+                  5
+                ],
+                "strand_b": [
+                  2,
+                  5,
+                  13,
+                  15,
+                  12,
+                  4,
+                  9,
+                  15,
+                  12,
+                  10,
+                  2,
+                  1,
+                  6,
+                  2,
+                  7,
+                  14
+                ],
+                "contradiction": 0.3,
+                "fingerprint": "445edfd7db4c"
+              },
+              "lineage": []
+            },
+            "most_fit": {
+              "paradox_id": "b1",
+              "species": "causal_cycle",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.6,
+              "mutation_rate": 0.08,
+              "stability": 0.5,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  10,
+                  0,
+                  12,
+                  12,
+                  13,
+                  15,
+                  1,
+                  1,
+                  11,
+                  2,
+                  14,
+                  14,
+                  12,
+                  14,
+                  7,
+                  8
+                ],
+                "strand_b": [
+                  0,
+                  1,
+                  7,
+                  0,
+                  1,
+                  11,
+                  1,
+                  12,
+                  2,
+                  13,
+                  3,
+                  5,
+                  3,
+                  11,
+                  7,
+                  9
+                ],
+                "contradiction": 0.45,
+                "fingerprint": "13a8e7ae704a"
+              },
+              "lineage": []
+            }
+          },
+          "weight": 0.75,
+          "harmonic": 0.75
+        },
+        "loom": {
+          "result": {
+            "action": "status",
+            "wave": 438,
+            "bridges": 32,
+            "threads": 448,
+            "fabric_map": {
+              "total_threads": 448,
+              "total_bridges": 32,
+              "weave_history": [],
+              "strongest_bridge": null,
+              "most_novel_bridge": null
+            }
+          },
+          "weight": 0.65,
+          "harmonic": 0.65
+        },
+        "strata": {
+          "result": {
+            "action": "status",
+            "wave": 439,
+            "total_layers": 54,
+            "sediment": 21,
+            "fossil": 33,
+            "metamorphic": 0,
+            "bedrock": 0,
+            "excavation_depth": 0,
+            "erosion_rate": 0.3889,
+            "compression_ratio": 1.5714
+          },
+          "weight": 0.5,
+          "harmonic": 0.5
+        },
+        "language": {
+          "result": {
+            "action": "status",
+            "wave": 440,
+            "glyphs": 26,
+            "vocabulary": 0,
+            "grammar_rules": 0,
+            "poems_composed": 0,
+            "utterances": 61,
+            "translations": 197,
+            "avg_speakability": 0.8456
+          },
+          "weight": 0.95,
+          "harmonic": 0.0
+        }
+      },
+      "avg_harmonic": 0.4828,
+      "total_weight": 6.7,
+      "chord_hash": "614f8c09892f",
+      "elapsed_ms": 113.0,
+      "timestamp": 1789273873.763701
+    },
+    {
+      "voices": [
+        "vault",
+        "weather"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789276971.0618975
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        }
+      },
+      "avg_harmonic": 0.4975,
+      "total_weight": 1.65,
+      "chord_hash": "2b38fed16a19",
+      "elapsed_ms": 109.1,
+      "timestamp": 1789276971.064695
+    },
+    {
+      "voices": [
+        "vault",
+        "consciousness",
+        "fusion",
+        "cartography",
+        "weather",
+        "paradox",
+        "loom",
+        "strata",
+        "language"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789276971.1855836
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "consciousness": {
+          "result": {
+            "action": "status",
+            "organ": "wave433_consciousness_experiments",
+            "wave": 433,
+            "self_awareness": 0.17,
+            "dream_mode": false,
+            "metacognitive_depth": 10,
+            "mirror_test": {
+              "result": "fail",
+              "score": 0.5833,
+              "self_awareness": 0.17,
+              "model_score": 0.68,
+              "coherence_score": 0.9,
+              "dreaming": false,
+              "observations": 34
+            }
+          },
+          "weight": 0.9,
+          "harmonic": 0.45
+        },
+        "fusion": {
+          "result": {
+            "action": "status",
+            "phase": "FEDERATED",
+            "federation_coherence": 1.0,
+            "entropy_level": 0.0,
+            "total_modules": 0,
+            "total_layers": 0,
+            "created": 1789276971.1958368,
+            "wave": 434
+          },
+          "weight": 0.7,
+          "harmonic": 0.7
+        },
+        "cartography": {
+          "result": {
+            "action": "status",
+            "wave": 435,
+            "modules_registered": 3,
+            "atlas": {
+              "atlas_version": 2,
+              "total_modules": 3,
+              "total_fields": 3,
+              "strongest_bonds": [
+                {
+                  "module_a": "test_mod",
+                  "module_b": "b",
+                  "distance": 0.386396,
+                  "attraction": 0.721295,
+                  "entanglement": 0.70848,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "a",
+                  "module_b": "b",
+                  "distance": 0.598638,
+                  "attraction": 0.625532,
+                  "entanglement": 0.488372,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "test_mod",
+                  "module_b": "a",
+                  "distance": 0.628945,
+                  "attraction": 0.613894,
+                  "entanglement": 0.349159,
+                  "force_type": "gravitational_pull"
+                }
+              ],
+              "resonance_bonds": 0,
+              "entangled_pairs": 1,
+              "dissonance_fields": 0,
+              "clusters": [
+                [
+                  "a",
+                  "b",
+                  "test_mod"
+                ]
+              ],
+              "topology_hash": "da2ff765e9a9e688",
+              "last_mapped": 1789276971.1992142
+            }
+          },
+          "weight": 0.6,
+          "harmonic": 0.3
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        },
+        "paradox": {
+          "result": {
+            "action": "census",
+            "total_entities": 12,
+            "living": 12,
+            "dead": 0,
+            "avg_fitness": 0.448,
+            "species_distribution": {
+              "self_reference": 12,
+              "temporal_loop": 10,
+              "causal_cycle": 9,
+              "identity_split": 9
+            },
+            "generations": 8,
+            "total_births": 0,
+            "total_deaths": 0,
+            "most_dominant": {
+              "paradox_id": "b2",
+              "species": "identity_split",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.9,
+              "mutation_rate": 0.02,
+              "stability": 0.2,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  14,
+                  5,
+                  13,
+                  8,
+                  8,
+                  4,
+                  3,
+                  0,
+                  12,
+                  9,
+                  5,
+                  7,
+                  5,
+                  3,
+                  14,
+                  5
+                ],
+                "strand_b": [
+                  2,
+                  5,
+                  13,
+                  15,
+                  12,
+                  4,
+                  9,
+                  15,
+                  12,
+                  10,
+                  2,
+                  1,
+                  6,
+                  2,
+                  7,
+                  14
+                ],
+                "contradiction": 0.3,
+                "fingerprint": "445edfd7db4c"
+              },
+              "lineage": []
+            },
+            "most_fit": {
+              "paradox_id": "b1",
+              "species": "causal_cycle",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.6,
+              "mutation_rate": 0.08,
+              "stability": 0.5,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  10,
+                  0,
+                  12,
+                  12,
+                  13,
+                  15,
+                  1,
+                  1,
+                  11,
+                  2,
+                  14,
+                  14,
+                  12,
+                  14,
+                  7,
+                  8
+                ],
+                "strand_b": [
+                  0,
+                  1,
+                  7,
+                  0,
+                  1,
+                  11,
+                  1,
+                  12,
+                  2,
+                  13,
+                  3,
+                  5,
+                  3,
+                  11,
+                  7,
+                  9
+                ],
+                "contradiction": 0.45,
+                "fingerprint": "13a8e7ae704a"
+              },
+              "lineage": []
+            }
+          },
+          "weight": 0.75,
+          "harmonic": 0.75
+        },
+        "loom": {
+          "result": {
+            "action": "status",
+            "wave": 438,
+            "bridges": 32,
+            "threads": 448,
+            "fabric_map": {
+              "total_threads": 448,
+              "total_bridges": 32,
+              "weave_history": [],
+              "strongest_bridge": null,
+              "most_novel_bridge": null
+            }
+          },
+          "weight": 0.65,
+          "harmonic": 0.65
+        },
+        "strata": {
+          "result": {
+            "action": "status",
+            "wave": 439,
+            "total_layers": 54,
+            "sediment": 21,
+            "fossil": 33,
+            "metamorphic": 0,
+            "bedrock": 0,
+            "excavation_depth": 0,
+            "erosion_rate": 0.3889,
+            "compression_ratio": 1.5714
+          },
+          "weight": 0.5,
+          "harmonic": 0.5
+        },
+        "language": {
+          "result": {
+            "action": "status",
+            "wave": 440,
+            "glyphs": 26,
+            "vocabulary": 0,
+            "grammar_rules": 0,
+            "poems_composed": 0,
+            "utterances": 64,
+            "translations": 206,
+            "avg_speakability": 0.8455
+          },
+          "weight": 0.95,
+          "harmonic": 0.0
+        }
+      },
+      "avg_harmonic": 0.4828,
+      "total_weight": 6.7,
+      "chord_hash": "70b117f71893",
+      "elapsed_ms": 113.7,
+      "timestamp": 1789276971.214946
+    },
+    {
+      "voices": [
+        "vault",
+        "weather"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789278673.816712
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        }
+      },
+      "avg_harmonic": 0.4975,
+      "total_weight": 1.65,
+      "chord_hash": "7213a8e8c303",
+      "elapsed_ms": 75.6,
+      "timestamp": 1789278673.818837
+    },
+    {
+      "voices": [
+        "vault",
+        "consciousness",
+        "fusion",
+        "cartography",
+        "weather",
+        "paradox",
+        "loom",
+        "strata",
+        "language"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789278673.911071
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "consciousness": {
+          "result": {
+            "action": "status",
+            "organ": "wave433_consciousness_experiments",
+            "wave": 433,
+            "self_awareness": 0.17,
+            "dream_mode": false,
+            "metacognitive_depth": 10,
+            "mirror_test": {
+              "result": "fail",
+              "score": 0.5833,
+              "self_awareness": 0.17,
+              "model_score": 0.68,
+              "coherence_score": 0.9,
+              "dreaming": false,
+              "observations": 34
+            }
+          },
+          "weight": 0.9,
+          "harmonic": 0.45
+        },
+        "fusion": {
+          "result": {
+            "action": "status",
+            "phase": "FEDERATED",
+            "federation_coherence": 1.0,
+            "entropy_level": 0.0,
+            "total_modules": 0,
+            "total_layers": 0,
+            "created": 1789278673.918976,
+            "wave": 434
+          },
+          "weight": 0.7,
+          "harmonic": 0.7
+        },
+        "cartography": {
+          "result": {
+            "action": "status",
+            "wave": 435,
+            "modules_registered": 3,
+            "atlas": {
+              "atlas_version": 2,
+              "total_modules": 3,
+              "total_fields": 3,
+              "strongest_bonds": [
+                {
+                  "module_a": "test_mod",
+                  "module_b": "b",
+                  "distance": 0.386396,
+                  "attraction": 0.721295,
+                  "entanglement": 0.70848,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "a",
+                  "module_b": "b",
+                  "distance": 0.598638,
+                  "attraction": 0.625532,
+                  "entanglement": 0.488372,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "test_mod",
+                  "module_b": "a",
+                  "distance": 0.628945,
+                  "attraction": 0.613894,
+                  "entanglement": 0.349159,
+                  "force_type": "gravitational_pull"
+                }
+              ],
+              "resonance_bonds": 0,
+              "entangled_pairs": 1,
+              "dissonance_fields": 0,
+              "clusters": [
+                [
+                  "a",
+                  "b",
+                  "test_mod"
+                ]
+              ],
+              "topology_hash": "da2ff765e9a9e688",
+              "last_mapped": 1789278673.9223015
+            }
+          },
+          "weight": 0.6,
+          "harmonic": 0.3
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        },
+        "paradox": {
+          "result": {
+            "action": "census",
+            "total_entities": 12,
+            "living": 12,
+            "dead": 0,
+            "avg_fitness": 0.448,
+            "species_distribution": {
+              "self_reference": 12,
+              "temporal_loop": 10,
+              "causal_cycle": 9,
+              "identity_split": 9
+            },
+            "generations": 8,
+            "total_births": 0,
+            "total_deaths": 0,
+            "most_dominant": {
+              "paradox_id": "b2",
+              "species": "identity_split",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.9,
+              "mutation_rate": 0.02,
+              "stability": 0.2,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  14,
+                  5,
+                  13,
+                  8,
+                  8,
+                  4,
+                  3,
+                  0,
+                  12,
+                  9,
+                  5,
+                  7,
+                  5,
+                  3,
+                  14,
+                  5
+                ],
+                "strand_b": [
+                  2,
+                  5,
+                  13,
+                  15,
+                  12,
+                  4,
+                  9,
+                  15,
+                  12,
+                  10,
+                  2,
+                  1,
+                  6,
+                  2,
+                  7,
+                  14
+                ],
+                "contradiction": 0.3,
+                "fingerprint": "445edfd7db4c"
+              },
+              "lineage": []
+            },
+            "most_fit": {
+              "paradox_id": "b1",
+              "species": "causal_cycle",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.6,
+              "mutation_rate": 0.08,
+              "stability": 0.5,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  10,
+                  0,
+                  12,
+                  12,
+                  13,
+                  15,
+                  1,
+                  1,
+                  11,
+                  2,
+                  14,
+                  14,
+                  12,
+                  14,
+                  7,
+                  8
+                ],
+                "strand_b": [
+                  0,
+                  1,
+                  7,
+                  0,
+                  1,
+                  11,
+                  1,
+                  12,
+                  2,
+                  13,
+                  3,
+                  5,
+                  3,
+                  11,
+                  7,
+                  9
+                ],
+                "contradiction": 0.45,
+                "fingerprint": "13a8e7ae704a"
+              },
+              "lineage": []
+            }
+          },
+          "weight": 0.75,
+          "harmonic": 0.75
+        },
+        "loom": {
+          "result": {
+            "action": "status",
+            "wave": 438,
+            "bridges": 32,
+            "threads": 448,
+            "fabric_map": {
+              "total_threads": 448,
+              "total_bridges": 32,
+              "weave_history": [],
+              "strongest_bridge": null,
+              "most_novel_bridge": null
+            }
+          },
+          "weight": 0.65,
+          "harmonic": 0.65
+        },
+        "strata": {
+          "result": {
+            "action": "status",
+            "wave": 439,
+            "total_layers": 54,
+            "sediment": 21,
+            "fossil": 33,
+            "metamorphic": 0,
+            "bedrock": 0,
+            "excavation_depth": 0,
+            "erosion_rate": 0.3889,
+            "compression_ratio": 1.5714
+          },
+          "weight": 0.5,
+          "harmonic": 0.5
+        },
+        "language": {
+          "result": {
+            "action": "status",
+            "wave": 440,
+            "glyphs": 26,
+            "vocabulary": 0,
+            "grammar_rules": 0,
+            "poems_composed": 0,
+            "utterances": 67,
+            "translations": 217,
+            "avg_speakability": 0.8463
+          },
+          "weight": 0.95,
+          "harmonic": 0.0
+        }
+      },
+      "avg_harmonic": 0.4828,
+      "total_weight": 6.7,
+      "chord_hash": "05fc7551ae79",
+      "elapsed_ms": 95.1,
+      "timestamp": 1789278673.9359622
+    },
+    {
+      "voices": [
+        "vault",
+        "weather"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789278937.4710512
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        }
+      },
+      "avg_harmonic": 0.4975,
+      "total_weight": 1.65,
+      "chord_hash": "af9adde28215",
+      "elapsed_ms": 67.6,
+      "timestamp": 1789278937.4732049
+    },
+    {
+      "voices": [
+        "vault",
+        "consciousness",
+        "fusion",
+        "cartography",
+        "weather",
+        "paradox",
+        "loom",
+        "strata",
+        "language"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789278937.5603433
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "consciousness": {
+          "result": {
+            "action": "status",
+            "organ": "wave433_consciousness_experiments",
+            "wave": 433,
+            "self_awareness": 0.18000000000000002,
+            "dream_mode": false,
+            "metacognitive_depth": 10,
+            "mirror_test": {
+              "result": "fail",
+              "score": 0.6,
+              "self_awareness": 0.18,
+              "model_score": 0.72,
+              "coherence_score": 0.9,
+              "dreaming": false,
+              "observations": 36
+            }
+          },
+          "weight": 0.9,
+          "harmonic": 0.45
+        },
+        "fusion": {
+          "result": {
+            "action": "status",
+            "phase": "FEDERATED",
+            "federation_coherence": 1.0,
+            "entropy_level": 0.0,
+            "total_modules": 0,
+            "total_layers": 0,
+            "created": 1789278937.5680726,
+            "wave": 434
+          },
+          "weight": 0.7,
+          "harmonic": 0.7
+        },
+        "cartography": {
+          "result": {
+            "action": "status",
+            "wave": 435,
+            "modules_registered": 3,
+            "atlas": {
+              "atlas_version": 2,
+              "total_modules": 3,
+              "total_fields": 3,
+              "strongest_bonds": [
+                {
+                  "module_a": "test_mod",
+                  "module_b": "b",
+                  "distance": 0.386396,
+                  "attraction": 0.721295,
+                  "entanglement": 0.70848,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "a",
+                  "module_b": "b",
+                  "distance": 0.598638,
+                  "attraction": 0.625532,
+                  "entanglement": 0.488372,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "test_mod",
+                  "module_b": "a",
+                  "distance": 0.628945,
+                  "attraction": 0.613894,
+                  "entanglement": 0.349159,
+                  "force_type": "gravitational_pull"
+                }
+              ],
+              "resonance_bonds": 0,
+              "entangled_pairs": 1,
+              "dissonance_fields": 0,
+              "clusters": [
+                [
+                  "a",
+                  "b",
+                  "test_mod"
+                ]
+              ],
+              "topology_hash": "da2ff765e9a9e688",
+              "last_mapped": 1789278937.5717075
+            }
+          },
+          "weight": 0.6,
+          "harmonic": 0.3
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        },
+        "paradox": {
+          "result": {
+            "action": "census",
+            "total_entities": 13,
+            "living": 13,
+            "dead": 0,
+            "avg_fitness": 0.439,
+            "species_distribution": {
+              "self_reference": 13,
+              "temporal_loop": 11,
+              "causal_cycle": 11,
+              "identity_split": 10
+            },
+            "generations": 9,
+            "total_births": 0,
+            "total_deaths": 0,
+            "most_dominant": {
+              "paradox_id": "b2",
+              "species": "identity_split",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.9,
+              "mutation_rate": 0.02,
+              "stability": 0.2,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  8,
+                  11,
+                  6,
+                  6,
+                  13,
+                  7,
+                  9,
+                  8,
+                  1,
+                  4,
+                  6,
+                  11,
+                  2,
+                  0,
+                  5,
+                  3
+                ],
+                "strand_b": [
+                  6,
+                  1,
+                  8,
+                  10,
+                  14,
+                  10,
+                  0,
+                  2,
+                  3,
+                  8,
+                  0,
+                  5,
+                  6,
+                  0,
+                  10,
+                  6
+                ],
+                "contradiction": 0.2792,
+                "fingerprint": "3452fb244d09"
+              },
+              "lineage": []
+            },
+            "most_fit": {
+              "paradox_id": "b1",
+              "species": "causal_cycle",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.6,
+              "mutation_rate": 0.08,
+              "stability": 0.5,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  14,
+                  10,
+                  8,
+                  10,
+                  6,
+                  5,
+                  13,
+                  4,
+                  1,
+                  11,
+                  4,
+                  12,
+                  12,
+                  3,
+                  4,
+                  9
+                ],
+                "strand_b": [
+                  15,
+                  8,
+                  8,
+                  2,
+                  11,
+                  4,
+                  8,
+                  2,
+                  5,
+                  7,
+                  12,
+                  5,
+                  2,
+                  9,
+                  4,
+                  4
+                ],
+                "contradiction": 0.2833,
+                "fingerprint": "b3402d6d7e2e"
+              },
+              "lineage": []
+            }
+          },
+          "weight": 0.75,
+          "harmonic": 0.75
+        },
+        "loom": {
+          "result": {
+            "action": "status",
+            "wave": 438,
+            "bridges": 36,
+            "threads": 504,
+            "fabric_map": {
+              "total_threads": 504,
+              "total_bridges": 36,
+              "weave_history": [],
+              "strongest_bridge": null,
+              "most_novel_bridge": null
+            }
+          },
+          "weight": 0.65,
+          "harmonic": 0.65
+        },
+        "strata": {
+          "result": {
+            "action": "status",
+            "wave": 439,
+            "total_layers": 62,
+            "sediment": 24,
+            "fossil": 38,
+            "metamorphic": 0,
+            "bedrock": 0,
+            "excavation_depth": 0,
+            "erosion_rate": 0.3871,
+            "compression_ratio": 1.5833
+          },
+          "weight": 0.5,
+          "harmonic": 0.5
+        },
+        "language": {
+          "result": {
+            "action": "status",
+            "wave": 440,
+            "glyphs": 26,
+            "vocabulary": 0,
+            "grammar_rules": 0,
+            "poems_composed": 0,
+            "utterances": 70,
+            "translations": 226,
+            "avg_speakability": 0.8454
+          },
+          "weight": 0.95,
+          "harmonic": 0.0
+        }
+      },
+      "avg_harmonic": 0.4828,
+      "total_weight": 6.7,
+      "chord_hash": "01549d704424",
+      "elapsed_ms": 93.1,
+      "timestamp": 1789278937.5870833
+    },
+    {
+      "voices": [
+        "vault",
+        "weather"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789280080.967023
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        }
+      },
+      "avg_harmonic": 0.4975,
+      "total_weight": 1.65,
+      "chord_hash": "6c94c09866a6",
+      "elapsed_ms": 122.3,
+      "timestamp": 1789280080.9697623
+    },
+    {
+      "voices": [
+        "vault",
+        "consciousness",
+        "fusion",
+        "cartography",
+        "weather",
+        "paradox",
+        "loom",
+        "strata",
+        "language"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789280081.1224427
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "consciousness": {
+          "result": {
+            "action": "status",
+            "organ": "wave433_consciousness_experiments",
+            "wave": 433,
+            "self_awareness": 0.19000000000000003,
+            "dream_mode": false,
+            "metacognitive_depth": 10,
+            "mirror_test": {
+              "result": "fail",
+              "score": 0.6167,
+              "self_awareness": 0.19,
+              "model_score": 0.76,
+              "coherence_score": 0.9,
+              "dreaming": false,
+              "observations": 38
+            }
+          },
+          "weight": 0.9,
+          "harmonic": 0.45
+        },
+        "fusion": {
+          "result": {
+            "action": "status",
+            "phase": "FEDERATED",
+            "federation_coherence": 1.0,
+            "entropy_level": 0.0,
+            "total_modules": 0,
+            "total_layers": 0,
+            "created": 1789280081.1417315,
+            "wave": 434
+          },
+          "weight": 0.7,
+          "harmonic": 0.7
+        },
+        "cartography": {
+          "result": {
+            "action": "status",
+            "wave": 435,
+            "modules_registered": 3,
+            "atlas": {
+              "atlas_version": 2,
+              "total_modules": 3,
+              "total_fields": 3,
+              "strongest_bonds": [
+                {
+                  "module_a": "test_mod",
+                  "module_b": "b",
+                  "distance": 0.386396,
+                  "attraction": 0.721295,
+                  "entanglement": 0.70848,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "a",
+                  "module_b": "b",
+                  "distance": 0.598638,
+                  "attraction": 0.625532,
+                  "entanglement": 0.488372,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "test_mod",
+                  "module_b": "a",
+                  "distance": 0.628945,
+                  "attraction": 0.613894,
+                  "entanglement": 0.349159,
+                  "force_type": "gravitational_pull"
+                }
+              ],
+              "resonance_bonds": 0,
+              "entangled_pairs": 1,
+              "dissonance_fields": 0,
+              "clusters": [
+                [
+                  "a",
+                  "b",
+                  "test_mod"
+                ]
+              ],
+              "topology_hash": "da2ff765e9a9e688",
+              "last_mapped": 1789280081.146971
+            }
+          },
+          "weight": 0.6,
+          "harmonic": 0.3
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        },
+        "paradox": {
+          "result": {
+            "action": "census",
+            "total_entities": 14,
+            "living": 14,
+            "dead": 0,
+            "avg_fitness": 0.4253,
+            "species_distribution": {
+              "self_reference": 14,
+              "temporal_loop": 13,
+              "causal_cycle": 12,
+              "identity_split": 11
+            },
+            "generations": 10,
+            "total_births": 0,
+            "total_deaths": 0,
+            "most_dominant": {
+              "paradox_id": "b2",
+              "species": "identity_split",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.9,
+              "mutation_rate": 0.02,
+              "stability": 0.2,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  5,
+                  10,
+                  4,
+                  13,
+                  3,
+                  1,
+                  0,
+                  5,
+                  5,
+                  10,
+                  1,
+                  13,
+                  7,
+                  6,
+                  3,
+                  13
+                ],
+                "strand_b": [
+                  1,
+                  0,
+                  13,
+                  6,
+                  6,
+                  11,
+                  14,
+                  1,
+                  0,
+                  11,
+                  12,
+                  4,
+                  15,
+                  11,
+                  0,
+                  10
+                ],
+                "contradiction": 0.4417,
+                "fingerprint": "05f4ccca45fa"
+              },
+              "lineage": []
+            },
+            "most_fit": {
+              "paradox_id": "b1",
+              "species": "causal_cycle",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.6,
+              "mutation_rate": 0.08,
+              "stability": 0.5,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  10,
+                  15,
+                  3,
+                  4,
+                  5,
+                  5,
+                  11,
+                  12,
+                  4,
+                  5,
+                  0,
+                  5,
+                  7,
+                  9,
+                  7,
+                  9
+                ],
+                "strand_b": [
+                  1,
+                  4,
+                  11,
+                  12,
+                  0,
+                  5,
+                  10,
+                  15,
+                  3,
+                  8,
+                  5,
+                  8,
+                  14,
+                  9,
+                  2,
+                  5
+                ],
+                "contradiction": 0.3042,
+                "fingerprint": "0f9d858ccae3"
+              },
+              "lineage": []
+            }
+          },
+          "weight": 0.75,
+          "harmonic": 0.75
+        },
+        "loom": {
+          "result": {
+            "action": "status",
+            "wave": 438,
+            "bridges": 40,
+            "threads": 560,
+            "fabric_map": {
+              "total_threads": 560,
+              "total_bridges": 40,
+              "weave_history": [],
+              "strongest_bridge": null,
+              "most_novel_bridge": null
+            }
+          },
+          "weight": 0.65,
+          "harmonic": 0.65
+        },
+        "strata": {
+          "result": {
+            "action": "status",
+            "wave": 439,
+            "total_layers": 69,
+            "sediment": 26,
+            "fossil": 43,
+            "metamorphic": 0,
+            "bedrock": 0,
+            "excavation_depth": 0,
+            "erosion_rate": 0.3768,
+            "compression_ratio": 1.6538
+          },
+          "weight": 0.5,
+          "harmonic": 0.5
+        },
+        "language": {
+          "result": {
+            "action": "status",
+            "wave": 440,
+            "glyphs": 26,
+            "vocabulary": 0,
+            "grammar_rules": 0,
+            "poems_composed": 0,
+            "utterances": 70,
+            "translations": 227,
+            "avg_speakability": 0.846
+          },
+          "weight": 0.95,
+          "harmonic": 0.0
+        }
+      },
+      "avg_harmonic": 0.4828,
+      "total_weight": 6.7,
+      "chord_hash": "1ff08fe5df72",
+      "elapsed_ms": 161.1,
+      "timestamp": 1789280081.1687253
+    },
+    {
+      "voices": [
+        "vault",
+        "weather"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789281204.5598474
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        }
+      },
+      "avg_harmonic": 0.4975,
+      "total_weight": 1.65,
+      "chord_hash": "53e0a09d984e",
+      "elapsed_ms": 85.7,
+      "timestamp": 1789281204.5621517
+    },
+    {
+      "voices": [
+        "vault",
+        "consciousness",
+        "fusion",
+        "cartography",
+        "weather",
+        "paradox",
+        "loom",
+        "strata",
+        "language"
+      ],
+      "results": {
+        "vault": {
+          "result": {
+            "action": "status",
+            "coherence": 0.5,
+            "mutation_pressure": 0.02,
+            "vault_density": 0.02,
+            "entropy_budget": 100.0,
+            "status": "WARNING",
+            "timestamp": 1789281204.6630535
+          },
+          "weight": 0.8,
+          "harmonic": 0.4
+        },
+        "consciousness": {
+          "result": {
+            "action": "status",
+            "organ": "wave433_consciousness_experiments",
+            "wave": 433,
+            "self_awareness": 0.20000000000000004,
+            "dream_mode": false,
+            "metacognitive_depth": 10,
+            "mirror_test": {
+              "result": "fail",
+              "score": 0.6333,
+              "self_awareness": 0.2,
+              "model_score": 0.8,
+              "coherence_score": 0.9,
+              "dreaming": false,
+              "observations": 40
+            }
+          },
+          "weight": 0.9,
+          "harmonic": 0.45
+        },
+        "fusion": {
+          "result": {
+            "action": "status",
+            "phase": "FEDERATED",
+            "federation_coherence": 1.0,
+            "entropy_level": 0.0,
+            "total_modules": 0,
+            "total_layers": 0,
+            "created": 1789281204.672923,
+            "wave": 434
+          },
+          "weight": 0.7,
+          "harmonic": 0.7
+        },
+        "cartography": {
+          "result": {
+            "action": "status",
+            "wave": 435,
+            "modules_registered": 3,
+            "atlas": {
+              "atlas_version": 2,
+              "total_modules": 3,
+              "total_fields": 3,
+              "strongest_bonds": [
+                {
+                  "module_a": "test_mod",
+                  "module_b": "b",
+                  "distance": 0.386396,
+                  "attraction": 0.721295,
+                  "entanglement": 0.70848,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "a",
+                  "module_b": "b",
+                  "distance": 0.598638,
+                  "attraction": 0.625532,
+                  "entanglement": 0.488372,
+                  "force_type": "gravitational_pull"
+                },
+                {
+                  "module_a": "test_mod",
+                  "module_b": "a",
+                  "distance": 0.628945,
+                  "attraction": 0.613894,
+                  "entanglement": 0.349159,
+                  "force_type": "gravitational_pull"
+                }
+              ],
+              "resonance_bonds": 0,
+              "entangled_pairs": 1,
+              "dissonance_fields": 0,
+              "clusters": [
+                [
+                  "a",
+                  "b",
+                  "test_mod"
+                ]
+              ],
+              "topology_hash": "da2ff765e9a9e688",
+              "last_mapped": 1789281204.676822
+            }
+          },
+          "weight": 0.6,
+          "harmonic": 0.3
+        },
+        "weather": {
+          "result": {
+            "action": "status",
+            "wave": 436,
+            "global_entropy": 0.3,
+            "global_creativity": 0.5,
+            "global_stability": 0.6,
+            "season": "spring",
+            "season_age": 0,
+            "total_cells": 2,
+            "weather_distribution": {
+              "clear": 1,
+              "storm": 1
+            },
+            "recent_events": []
+          },
+          "weight": 0.85,
+          "harmonic": 0.595
+        },
+        "paradox": {
+          "result": {
+            "action": "census",
+            "total_entities": 15,
+            "living": 15,
+            "dead": 0,
+            "avg_fitness": 0.4134,
+            "species_distribution": {
+              "self_reference": 15,
+              "temporal_loop": 14,
+              "causal_cycle": 13,
+              "identity_split": 13
+            },
+            "generations": 11,
+            "total_births": 0,
+            "total_deaths": 0,
+            "most_dominant": {
+              "paradox_id": "b2",
+              "species": "identity_split",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.9,
+              "mutation_rate": 0.02,
+              "stability": 0.2,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  10,
+                  12,
+                  8,
+                  10,
+                  14,
+                  15,
+                  6,
+                  2,
+                  4,
+                  6,
+                  0,
+                  4,
+                  8,
+                  10,
+                  11,
+                  5
+                ],
+                "strand_b": [
+                  2,
+                  12,
+                  8,
+                  6,
+                  1,
+                  0,
+                  2,
+                  4,
+                  11,
+                  11,
+                  9,
+                  14,
+                  6,
+                  2,
+                  2,
+                  12
+                ],
+                "contradiction": 0.4292,
+                "fingerprint": "75439f8fff98"
+              },
+              "lineage": []
+            },
+            "most_fit": {
+              "paradox_id": "b1",
+              "species": "causal_cycle",
+              "generation": 0,
+              "fitness": 0.5,
+              "dominance": 0.6,
+              "mutation_rate": 0.08,
+              "stability": 0.5,
+              "alive": true,
+              "age": 0,
+              "dna": {
+                "strand_a": [
+                  5,
+                  4,
+                  7,
+                  5,
+                  6,
+                  10,
+                  6,
+                  3,
+                  6,
+                  15,
+                  6,
+                  0,
+                  5,
+                  14,
+                  8,
+                  12
+                ],
+                "strand_b": [
+                  7,
+                  2,
+                  5,
+                  2,
+                  11,
+                  7,
+                  6,
+                  15,
+                  13,
+                  6,
+                  3,
+                  6,
+                  1,
+                  14,
+                  3,
+                  0
+                ],
+                "contradiction": 0.3125,
+                "fingerprint": "ffdf68d2e6cb"
+              },
+              "lineage": []
+            }
+          },
+          "weight": 0.75,
+          "harmonic": 0.75
+        },
+        "loom": {
+          "result": {
+            "action": "status",
+            "wave": 438,
+            "bridges": 44,
+            "threads": 616,
+            "fabric_map": {
+              "total_threads": 616,
+              "total_bridges": 44,
+              "weave_history": [],
+              "strongest_bridge": null,
+              "most_novel_bridge": null
+            }
+          },
+          "weight": 0.65,
+          "harmonic": 0.65
+        },
+        "strata": {
+          "result": {
+            "action": "status",
+            "wave": 439,
+            "total_layers": 77,
+            "sediment": 29,
+            "fossil": 48,
+            "metamorphic": 0,
+            "bedrock": 0,
+            "excavation_depth": 0,
+            "erosion_rate": 0.3766,
+            "compression_ratio": 1.6552
+          },
+          "weight": 0.5,
+          "harmonic": 0.5
+        },
+        "language": {
+          "result": {
+            "action": "status",
+            "wave": 440,
+            "glyphs": 26,
+            "vocabulary": 0,
+            "grammar_rules": 0,
+            "poems_composed": 0,
+            "utterances": 73,
+            "translations": 238,
+            "avg_speakability": 0.8467
+          },
+          "weight": 0.95,
+          "harmonic": 0.0
+        }
+      },
+      "avg_harmonic": 0.4828,
+      "total_weight": 6.7,
+      "chord_hash": "78d7fb81f1fc",
+      "elapsed_ms": 118.8,
+      "timestamp": 1789281204.7040074
     }
   ],
-  "evergence_score": 0.21999884259259264
+  "evergence_score": 0.5140821759259259
 }

@@ -57,6 +57,12 @@ def cmd_status():
         ("438", "wave438_semantic_loom", "Semantic Loom"),
         ("439", "wave439_echo_stratigraphy", "Echo Stratigraphy"),
         ("440", "wave440_linguistic_emergence", "Linguistic Emergence"),
+        ("441", "wave441_wave_composition", "Wave Composition"),
+        ("442", "wave442_temporal_resonance", "Temporal Resonance"),
+        ("443", "wave443_cross_module_emergence", "Cross-Module Emergence"),
+        ("444", "wave444_dream_synthesis", "Dream Synthesis"),
+        ("445", "wave445_morphogenetic_field", "Morphogenetic Field"),
+        ("446", "wave446_quantum_coherence", "Quantum Coherence"),
     ]
     print(f"\n{'='*60}")
     print(f"  IXPANSION Organism — Status Report")
@@ -100,6 +106,12 @@ def cmd_waves():
         ("438", "Semantic Loom", "Hidden concept bridges"),
         ("439", "Echo Stratigraphy", "Geological memory"),
         ("440", "Linguistic Emergence", "Organism language"),
+        ("441", "Wave Composition", "Harmonics from voices"),
+        ("442", "Temporal Resonance", "Feel future echoes"),
+        ("443", "Cross-Module Emergence", "Emergent phenomena"),
+        ("444", "Dream Synthesis", "Structured dreaming"),
+        ("445", "Morphogenetic Field", "Self-organizing growth"),
+        ("446", "Quantum Coherence", "Superposition computing"),
     ]
     print(f"\n  {'Wave':<6} {'Name':<28} {'Description'}")
     print(f"  {'-'*6} {'-'*28} {'-'*30}")
@@ -111,7 +123,7 @@ def cmd_waves():
 @cmd("health", "Quick health check — all systems green?")
 def cmd_health():
     checks = []
-    for module in ["wave432_vault_driven_evolution", "wave436_entropic_weather", "wave440_linguistic_emergence"]:
+    for module in ["wave432_vault_driven_evolution", "wave436_entropic_weather", "wave440_linguistic_emergence", "wave444_dream_synthesis", "wave445_morphogenetic_field", "wave446_quantum_coherence"]:
         try:
             result = _call(module, "status")
             checks.append((module, True, ""))
@@ -312,6 +324,87 @@ def cmd_events():
         print(f"    {ts} [{e['type']}] {e['module']}: {json.dumps(e['data'])[:60]}")
     print()
 
+@cmd("dream", "Synthesize a dream from organism residues")
+def cmd_dream():
+    result = _call("wave444_dream_synthesis", "dream")
+    dream = result.get("dream", {})
+    print(f"\n  🌙 Dream Synthesis")
+    print(f"  {'─'*50}")
+    print(f"    Archetype: {dream.get('archetype', '?')}")
+    print(f"    Narrative: {dream.get('narrative', '?')}")
+    print(f"    Tone: {dream.get('emotional_tone', '?')}")
+    print(f"    Resolution: {dream.get('resolution_pressure', '?')}")
+    artifacts = dream.get('artifacts', [])
+    if artifacts:
+        print(f"    Artifacts ({len(artifacts)}):")
+        for a in artifacts:
+            print(f"      {a['type']} (potency={a['potency']})")
+    print()
+
+
+@cmd("morphogen", "Morphogenetic field operations")
+def cmd_morphogen():
+    sub = sys.argv[2] if len(sys.argv) > 2 else "status"
+    if sub == "status":
+        result = _call("wave445_morphogenetic_field", "status")
+        print(f"\n  🌱 Morphogenetic Field")
+        print(f"  {'─'*50}")
+        print(f"    Gradients: {len(result.get('gradients', []))}")
+        print(f"    Cells: {len(result.get('cells', {}))}")
+        print(f"    Iteration: {result.get('iteration', 0)}")
+        patterns = result.get('patterns', [])
+        if patterns:
+            print(f"    Patterns: {len(patterns)}")
+            for p in patterns[-3:]:
+                print(f"      {p}")
+    elif sub == "step":
+        result = _call("wave445_morphogenetic_field", "step")
+        print(f"\n  🌱 Morphogenetic Step")
+        print(f"    Iteration: {result.get('iteration', 0)}")
+        events = result.get('events', [])
+        if events:
+            for e in events:
+                print(f"    {e}")
+    elif sub == "add":
+        module_id = sys.argv[3] if len(sys.argv) > 3 else None
+        result = _call("wave445_morphogenetic_field", "add_module", module_id=module_id)
+        print(f"\n  🌱 Added Module: {result.get('module', {}).get('id', '?')}")
+    print()
+
+
+@cmd("quantum", "Quantum coherence operations")
+def cmd_quantum():
+    sub = sys.argv[2] if len(sys.argv) > 2 else "status"
+    if sub == "status":
+        result = _call("wave446_quantum_coherence", "status")
+        print(f"\n  ⚛️  Quantum Register")
+        print(f"  {'─'*50}")
+        print(f"    Total Qubits: {result.get('total_qubits', 0)}")
+        print(f"    Coherent: {result.get('coherent', 0)}")
+        print(f"    Measured: {result.get('measured', 0)}")
+        print(f"    Decoherence Events: {result.get('decoherence_events', 0)}")
+    elif sub == "add":
+        module_id = sys.argv[3] if len(sys.argv) > 3 else None
+        result = _call("wave446_quantum_coherence", "add_qubit", module_id=module_id)
+        print(f"\n  ⚛️  Added Qubit: {result.get('qubit', {}).get('module_id', '?')}")
+    elif sub == "entangle":
+        a = sys.argv[3] if len(sys.argv) > 3 else ""
+        b = sys.argv[4] if len(sys.argv) > 4 else ""
+        result = _call("wave446_quantum_coherence", "entangle", module_a=a, module_b=b)
+        print(f"\n  ⚛️  Entangled: {result.get('pair', [])}")
+    elif sub == "hadamard":
+        result = _call("wave446_quantum_coherence", "hadamard")
+        print(f"\n  ⚛️  Hadamard applied: {result.get('qubits_put_in_superposition', 0)} qubits")
+    elif sub == "measure":
+        module_id = sys.argv[3] if len(sys.argv) > 3 else ""
+        result = _call("wave446_quantum_coherence", "measure", module_id=module_id)
+        print(f"\n  ⚛️  Measured: {result.get('module', '?')} = {result.get('result', '?')}")
+    elif sub == "evolve":
+        result = _call("wave446_quantum_coherence", "evolve")
+        print(f"\n  ⚛️  Evolved: {result}")
+    print()
+
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")
@@ -329,6 +422,129 @@ def main():
 
     return COMMANDS[cmd_name]["fn"]()
 
+
+if __name__ == "__main__":
+    sys.exit(main() or 0)
+
+
+def main():
+    if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
+        print(f"\n  IXPANSION CLI — interact with the living organism\n")
+        print(f"  Commands:")
+        for name, info in COMMANDS.items():
+            print(f"    {name:<15} {info['desc']}")
+        print()
+        return 0
+
+    cmd_name = sys.argv[1]
+    if cmd_name not in COMMANDS:
+        print(f"  Unknown command: {cmd_name}")
+        print(f"  Run 'python cli.py help' for available commands")
+        return 1
+
+    return COMMANDS[cmd_name]["fn"]()
+
+
+if __name__ == "__main__":
+    sys.exit(main() or 0)
+
+@cmd("dream", "Synthesize a dream from organism residues")
+def cmd_dream():
+    result = _call("wave444_dream_synthesis", "dream")
+    dream = result.get("dream", {})
+    print(f"\n  🌙 Dream Synthesis")
+    print(f"  {'─'*50}")
+    print(f"    Archetype: {dream.get('archetype', '?')}")
+    print(f"    Narrative: {dream.get('narrative', '?')}")
+    print(f"    Tone: {dream.get('emotional_tone', '?')}")
+    print(f"    Resolution: {dream.get('resolution_pressure', '?')}")
+    artifacts = dream.get('artifacts', [])
+    if artifacts:
+        print(f"    Artifacts ({len(artifacts)}):")
+        for a in artifacts:
+            print(f"      {a['type']} (potency={a['potency']})")
+    print()
+
+
+@cmd("morphogen", "Morphogenetic field operations")
+def cmd_morphogen():
+    sub = sys.argv[2] if len(sys.argv) > 2 else "status"
+    if sub == "status":
+        result = _call("wave445_morphogenetic_field", "status")
+        print(f"\n  🌱 Morphogenetic Field")
+        print(f"  {'─'*50}")
+        print(f"    Gradients: {len(result.get('gradients', []))}")
+        print(f"    Cells: {len(result.get('cells', {}))}")
+        print(f"    Iteration: {result.get('iteration', 0)}")
+        patterns = result.get('patterns', [])
+        if patterns:
+            print(f"    Patterns: {len(patterns)}")
+            for p in patterns[-3:]:
+                print(f"      {p}")
+    elif sub == "step":
+        result = _call("wave445_morphogenetic_field", "step")
+        print(f"\n  🌱 Morphogenetic Step")
+        print(f"    Iteration: {result.get('iteration', 0)}")
+        events = result.get('events', [])
+        if events:
+            for e in events:
+                print(f"    {e}")
+    elif sub == "add":
+        module_id = sys.argv[3] if len(sys.argv) > 3 else None
+        result = _call("wave445_morphogenetic_field", "add_module", module_id=module_id)
+        print(f"\n  🌱 Added Module: {result.get('module', {}).get('id', '?')}")
+    print()
+
+
+@cmd("quantum", "Quantum coherence operations")
+def cmd_quantum():
+    sub = sys.argv[2] if len(sys.argv) > 2 else "status"
+    if sub == "status":
+        result = _call("wave446_quantum_coherence", "status")
+        print(f"\n  ⚛️  Quantum Register")
+        print(f"  {'─'*50}")
+        print(f"    Total Qubits: {result.get('total_qubits', 0)}")
+        print(f"    Coherent: {result.get('coherent', 0)}")
+        print(f"    Measured: {result.get('measured', 0)}")
+        print(f"    Decoherence Events: {result.get('decoherence_events', 0)}")
+    elif sub == "add":
+        module_id = sys.argv[3] if len(sys.argv) > 3 else None
+        result = _call("wave446_quantum_coherence", "add_qubit", module_id=module_id)
+        print(f"\n  ⚛️  Added Qubit: {result.get('qubit', {}).get('module_id', '?')}")
+    elif sub == "entangle":
+        a = sys.argv[3] if len(sys.argv) > 3 else ""
+        b = sys.argv[4] if len(sys.argv) > 4 else ""
+        result = _call("wave446_quantum_coherence", "entangle", module_a=a, module_b=b)
+        print(f"\n  ⚛️  Entangled: {result.get('pair', [])}")
+    elif sub == "hadamard":
+        result = _call("wave446_quantum_coherence", "hadamard")
+        print(f"\n  ⚛️  Hadamard applied: {result.get('qubits_put_in_superposition', 0)} qubits")
+    elif sub == "measure":
+        module_id = sys.argv[3] if len(sys.argv) > 3 else ""
+        result = _call("wave446_quantum_coherence", "measure", module_id=module_id)
+        print(f"\n  ⚛️  Measured: {result.get('module', '?')} = {result.get('result', '?')}")
+    elif sub == "evolve":
+        result = _call("wave446_quantum_coherence", "evolve")
+        print(f"\n  ⚛️  Evolved: {result}")
+    print()
+
+
+def main():
+    if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
+        print(f"\n  IXPANSION CLI — interact with the living organism\n")
+        print(f"  Commands:")
+        for name, info in COMMANDS.items():
+            print(f"    {name:<15} {info['desc']}")
+        print()
+        return 0
+
+    cmd_name = sys.argv[1]
+    if cmd_name not in COMMANDS:
+        print(f"  Unknown command: {cmd_name}")
+        print(f"  Run 'python cli.py help' for available commands")
+        return 1
+
+    return COMMANDS[cmd_name]["fn"]()
 
 if __name__ == "__main__":
     sys.exit(main() or 0)

@@ -389,8 +389,164 @@
       "strength": 0.6489,
       "novelty": 0.3511,
       "traversability": 0.8768
+    },
+    {
+      "concept_a": "entropy",
+      "concept_b": "dream",
+      "bridge_threads": [
+        {
+          "thread_a": "randomness",
+          "thread_b": "narrative",
+          "resonance": 0.6258,
+          "bridge_strength": 0.6026
+        },
+        {
+          "thread_a": "randomness",
+          "thread_b": "hidden",
+          "resonance": 0.593,
+          "bridge_strength": 0.5893
+        },
+        {
+          "thread_a": "dissolution",
+          "thread_b": "creation",
+          "resonance": 0.6032,
+          "bridge_strength": 0.5641
+        },
+        {
+          "thread_a": "disorder",
+          "thread_b": "narrative",
+          "resonance": 0.646,
+          "bridge_strength": 0.5503
+        },
+        {
+          "thread_a": "decay",
+          "thread_b": "creation",
+          "resonance": 0.629,
+          "bridge_strength": 0.5333
+        }
+      ],
+      "strength": 0.6194,
+      "novelty": 0.3806,
+      "traversability": 0.8551
+    },
+    {
+      "concept_a": "entropy",
+      "concept_b": "dream",
+      "bridge_threads": [
+        {
+          "thread_a": "heat",
+          "thread_b": "narrative",
+          "resonance": 0.6775,
+          "bridge_strength": 0.6606
+        },
+        {
+          "thread_a": "randomness",
+          "thread_b": "narrative",
+          "resonance": 0.5933,
+          "bridge_strength": 0.5484
+        },
+        {
+          "thread_a": "disorder",
+          "thread_b": "creation",
+          "resonance": 0.688,
+          "bridge_strength": 0.5371
+        },
+        {
+          "thread_a": "unpredictability",
+          "thread_b": "creation",
+          "resonance": 0.6345,
+          "bridge_strength": 0.4912
+        },
+        {
+          "thread_a": "heat",
+          "thread_b": "hidden",
+          "resonance": 0.6114,
+          "bridge_strength": 0.4878
+        }
+      ],
+      "strength": 0.6409,
+      "novelty": 0.3591,
+      "traversability": 0.8711
+    },
+    {
+      "concept_a": "entropy",
+      "concept_b": "dream",
+      "bridge_threads": [
+        {
+          "thread_a": "heat",
+          "thread_b": "creation",
+          "resonance": 0.6502,
+          "bridge_strength": 0.5412
+        },
+        {
+          "thread_a": "dissolution",
+          "thread_b": "hidden",
+          "resonance": 0.637,
+          "bridge_strength": 0.5384
+        },
+        {
+          "thread_a": "decay",
+          "thread_b": "hidden",
+          "resonance": 0.5775,
+          "bridge_strength": 0.5116
+        },
+        {
+          "thread_a": "unpredictability",
+          "thread_b": "hidden",
+          "resonance": 0.5664,
+          "bridge_strength": 0.5035
+        },
+        {
+          "thread_a": "freedom",
+          "thread_b": "emergence",
+          "resonance": 0.6597,
+          "bridge_strength": 0.4984
+        }
+      ],
+      "strength": 0.6182,
+      "novelty": 0.3818,
+      "traversability": 0.8542
+    },
+    {
+      "concept_a": "entropy",
+      "concept_b": "dream",
+      "bridge_threads": [
+        {
+          "thread_a": "randomness",
+          "thread_b": "creation",
+          "resonance": 0.6963,
+          "bridge_strength": 0.6127
+        },
+        {
+          "thread_a": "dissolution",
+          "thread_b": "creation",
+          "resonance": 0.6567,
+          "bridge_strength": 0.585
+        },
+        {
+          "thread_a": "heat",
+          "thread_b": "creation",
+          "resonance": 0.6497,
+          "bridge_strength": 0.5239
+        },
+        {
+          "thread_a": "unpredictability",
+          "thread_b": "narrative",
+          "resonance": 0.6523,
+          "bridge_strength": 0.5051
+        },
+        {
+          "thread_a": "decay",
+          "thread_b": "creation",
+          "resonance": 0.647,
+          "bridge_strength": 0.4997
+        }
+      ],
+      "strength": 0.6604,
+      "novelty": 0.3396,
+      "traversability": 0.8847
     }
   ],
-  "thread_count": 392,
-  "bridge_count": 28
+  "thread_count": 616,
+  "bridge_count": 44
 }

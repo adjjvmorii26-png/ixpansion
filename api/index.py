@@ -62,6 +62,41 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Wave 444: Dream Synthesis ---
+    if path.startswith("/dream-synthesis") or path.startswith("/api/dream_synthesis"):
+        from api.wave444_dream_synthesis import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 445: Morphogenetic Field ---
+    if path.startswith("/morphogenetic-field") or path.startswith("/api/morphogenetic_field"):
+        from api.wave445_morphogenetic_field import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 446: Quantum Coherence ---
+    if path.startswith("/quantum-coherence") or path.startswith("/api/quantum_coherence"):
+        from api.wave446_quantum_coherence import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 444: Dream Synthesis ---
+    if path.startswith("/dream-synthesis") or path.startswith("/api/dream_synthesis"):
+        from api.wave444_dream_synthesis import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 445: Morphogenetic Field ---
+    if path.startswith("/morphogenetic-field") or path.startswith("/api/morphogenetic_field"):
+        from api.wave445_morphogenetic_field import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 446: Quantum Coherence ---
+    if path.startswith("/quantum-coherence") or path.startswith("/api/quantum_coherence"):
+        from api.wave446_quantum_coherence import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 # --- Event Stream ---
     if path.startswith("/events") or path.startswith("/api/events"):
         from api.event_stream import handler as h
@@ -2113,6 +2148,24 @@ def handler(request) -> dict:
 # --- Wave 443: Cross-Module Emergence ---
     if path.startswith("/emergence") or path.startswith("/api/emergence"):
         from api.wave443_cross_module_emergence import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 444: Dream Synthesis ---
+    if path.startswith("/dream-synthesis") or path.startswith("/api/dream_synthesis"):
+        from api.wave444_dream_synthesis import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 445: Morphogenetic Field ---
+    if path.startswith("/morphogenetic-field") or path.startswith("/api/morphogenetic_field"):
+        from api.wave445_morphogenetic_field import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 446: Quantum Coherence ---
+    if path.startswith("/quantum-coherence") or path.startswith("/api/quantum_coherence"):
+        from api.wave446_quantum_coherence import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 

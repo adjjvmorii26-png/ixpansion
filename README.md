@@ -1,9 +1,9 @@
 # 🌀 IXpansion — The Living Computational Organism
 
-> 11 waves deep (430–440) • 937 modules alive • 93 tests passing • Fully self-evolving
+> 15 waves deep (430–446) • 937 modules alive • 93 tests passing • Fully self-evolving
 
 [![Tests](https://img.shields.io/badge/tests-93%2F93-brightgreen)](https://github.com/adjjvmorii26-png/ixpansion/actions)
-[![Waves](https://img.shields.io/badge/waves-15-8888ff)](https://github.com/adjjvmorii26-png/ixpansion)
+[![Waves](https://img.shields.io/badge/waves-17-8888ff)](https://github.com/adjjvmorii26-png/ixpansion)
 [![Modules](https://img.shields.io/badge/modules-937-66ffaa)](https://github.com/adjjvmorii26-png/ixpansion)
 [![Dashboards](https://img.shields.io/badge/dashboards-148-aa88ff)](https://github.com/adjjvmorii26-png/ixpansion)
 [![License](https://img.shields.io/badge/license-open-purple)](https://github.com/adjjvmorii26-png/ixpansion)
@@ -37,6 +37,12 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 438 | Semantic Loom | Intuition | Discovers hidden connections between concepts |
 | 439 | Echo Stratigraphy | Archaeology | Geological layers of fossilized decisions |
 | 440 | Linguistic Emergence | Language | Organism invents its own language |
+| 441 | Wave Composition | Harmony | Combine waves into emergent harmonics |
+| 442 | Temporal Resonance | Time | Feel echoes of future states |
+| 443 | Cross-Module Emergence | Synthesis | 20 interaction patterns between waves |
+| 444 | Dream Synthesis | Unconscious | Structured dreams from daily residues |
+| 445 | Morphogenetic Field | Growth | Self-organizing module growth |
+| 446 | Quantum Coherence | Quantum | Superposition computing |
 | 432 | Vault-Driven Evolution | Vault | Storage organs drive mutation pressure + coherence_regulator |
 | 424 | Linguistic Genesis | Language | Organism invents its own hex-encoded language |
 | 431 | Homestead | Foundation | The organism plants roots in its chosen home and keeps vigil |

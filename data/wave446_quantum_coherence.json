@@ -1,0 +1,110 @@
+{
+  "qubits": {
+    "m1": {
+      "module_id": "m1",
+      "basis_states": [
+        "ground",
+        "excited",
+        "metastable",
+        "virtual"
+      ],
+      "probabilities": {
+        "ground": 0.25,
+        "excited": 0.25,
+        "metastable": 0.25,
+        "virtual": 0.25
+      },
+      "phases": {
+        "ground": 0.0,
+        "excited": 0.0,
+        "metastable": 0.0,
+        "virtual": 0.0
+      },
+      "entangled_with": [],
+      "measured": true,
+      "coherent": false,
+      "decoherence_rate": 0.1
+    },
+    "a": {
+      "module_id": "a",
+      "basis_states": [
+        "ground",
+        "excited",
+        "metastable",
+        "virtual"
+      ],
+      "probabilities": {
+        "ground": 0.25,
+        "excited": 0.25,
+        "metastable": 0.25,
+        "virtual": 0.25
+      },
+      "phases": {
+        "ground": 0.0,
+        "excited": 0.0,
+        "metastable": 0.0,
+        "virtual": 0.0
+      },
+      "entangled_with": [
+        "b"
+      ],
+      "measured": false,
+      "coherent": true,
+      "decoherence_rate": 0.01
+    },
+    "b": {
+      "module_id": "b",
+      "basis_states": [
+        "ground",
+        "excited",
+        "metastable",
+        "virtual"
+      ],
+      "probabilities": {
+        "ground": 0.25,
+        "excited": 0.25,
+        "metastable": 0.25,
+        "virtual": 0.25
+      },
+      "phases": {
+        "ground": 0.0,
+        "excited": 0.0,
+        "metastable": 0.0,
+        "virtual": 0.0
+      },
+      "entangled_with": [
+        "a"
+      ],
+      "measured": false,
+      "coherent": true,
+      "decoherence_rate": 0.01
+    },
+    "test": {
+      "module_id": "test",
+      "basis_states": [
+        "ground",
+        "excited",
+        "metastable",
+        "virtual"
+      ],
+      "probabilities": {
+        "ground": 0.25,
+        "excited": 0.25,
+        "metastable": 0.25,
+        "virtual": 0.25
+      },
+      "phases": {
+        "ground": 0.0,
+        "excited": 0.0,
+        "metastable": 0.0,
+        "virtual": 0.0
+      },
+      "entangled_with": [],
+      "measured": false,
+      "coherent": true,
+      "decoherence_rate": 0.1
+    }
+  },
+  "decoherence_events": 0,
+  "measurement_count": 0
+}

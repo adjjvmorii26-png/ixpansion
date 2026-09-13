@@ -44,8 +44,8 @@ jobs:
               sys.exit(1)
           print(f'All {count} API modules parse OK')
           "
-      - name: Run wave 432-440 tests (fast gate)
-        run: python -m pytest tests/test_wave43{2,3,4,5,6,7,8,9}.py tests/test_wave440.py -q --tb=short -x
+      - name: Run wave 432-446 tests (fast gate)
+        run: python -m pytest tests/test_wave43{2,3,4,5,6,7,8,9}.py tests/test_wave44{0,1,2,3,4,5,6}.py -q --tb=short -x
 
   # --- Full suite: parallel with xdist (< 10 min) ---
   full-test:
