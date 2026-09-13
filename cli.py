@@ -440,6 +440,22 @@ def cmd_web():
     print()
 
 
+
+
+@cmd("children", "List Genesis Forge self-born organs")
+def cmd_children():
+    result = _call("genesis_forge", "status")
+    print(f"\n  🜏 Genesis Forge Children")
+    print(f"  {'─'*50}")
+    for name in ["commerce_shelf", "physical_tide"]:
+        try:
+            r = _call(name, "status")
+            print(f"    • {r.get('module')}: {r.get('status')} ({r.get('domain_family')})")
+            print(f"      niche: {r.get('niche')}")
+        except Exception as e:
+            print(f"    • {name}: ERROR {e}")
+    print()
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")
