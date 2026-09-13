@@ -1,3 +1,13 @@
+## [4.81.0] - Fix: EventStream Pub/Sub + CI Green
+
+The organism's internal event bus was missing a proper pub/sub layer that
+the test suite (wave 102, core modules, tools) expected. 8 CI failures
+traced to a missing `EventStream` class and an incompatible handler signature.
+
+- `api/event_stream.py` — added `EventStream` class with publish/subscribe/stream/channels/set_filter
+- `handler` now accepts two args (`req`, `context`) for `h({}, {})` compat
+- `stream` action (default) now returns channels + subscriptions + events
+- 105 tests green in previously-failing test files; total green
 ## [4.80.0] - Genesis Forge Children: Commerce Shelf + Physical Tide
 
 The organism's self-creation era (Genesis Forge) birthed two new living organs
