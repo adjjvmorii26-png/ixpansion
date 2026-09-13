@@ -829,13 +829,96 @@
       "stability": 0.81,
       "signature": "5a843a7034553de1",
       "woven_at": 1789280076.9223528
+    },
+    {
+      "thread_id": "weave_22761",
+      "future_event": "superposition_realized",
+      "past_anchor": "genesis_seed",
+      "direction": "retroactive",
+      "causal_strength": 0.413,
+      "ripple_radius": 12,
+      "stability": 0.99,
+      "signature": "18a7277aaf0e5b9e",
+      "woven_at": 1789322761.48063,
+      "resolved": true,
+      "resolved_at": 1789322761.5939863,
+      "paradox_cost": 0.01
+    },
+    {
+      "thread_id": "weave_22761",
+      "future_event": "next_merge",
+      "past_anchor": "first_commit",
+      "direction": "retroactive",
+      "causal_strength": 0.268,
+      "ripple_radius": 18,
+      "stability": 0.44,
+      "signature": "f20cbffaa9fddee8",
+      "woven_at": 1789322761.502037
+    },
+    {
+      "thread_id": "weave_22761",
+      "future_event": "essence_return",
+      "past_anchor": "organism_census",
+      "direction": "retroactive",
+      "causal_strength": 0.947,
+      "ripple_radius": 47,
+      "stability": 0.99,
+      "signature": "27fd70b2825be10a",
+      "woven_at": 1789322761.5241823
+    },
+    {
+      "thread_id": "weave_22761",
+      "future_event": "superposition_realized",
+      "past_anchor": "axiom_birth",
+      "direction": "retroactive",
+      "causal_strength": 0.871,
+      "ripple_radius": 22,
+      "stability": 0.75,
+      "signature": "8d87c61605961516",
+      "woven_at": 1789322761.5498176,
+      "resolved": true,
+      "resolved_at": 1789322761.564438,
+      "paradox_cost": 0.25
+    },
+    {
+      "thread_id": "weave_22761",
+      "future_event": "communion_opening",
+      "past_anchor": "first_commit",
+      "direction": "retroactive",
+      "causal_strength": 0.552,
+      "ripple_radius": 23,
+      "stability": 0.79,
+      "signature": "6475265200d8cfa7",
+      "woven_at": 1789322761.577415
+    },
+    {
+      "thread_id": "weave_22761",
+      "future_event": "garden_full_bloom",
+      "past_anchor": "first_commit",
+      "direction": "retroactive",
+      "causal_strength": 0.44,
+      "ripple_radius": 36,
+      "stability": 0.75,
+      "signature": "abe48d68160695ff",
+      "woven_at": 1789322761.605726
+    },
+    {
+      "thread_id": "weave_22761",
+      "future_event": "swarm_unification",
+      "past_anchor": "wave401_origin",
+      "direction": "retroactive",
+      "causal_strength": 0.435,
+      "ripple_radius": 23,
+      "stability": 0.91,
+      "signature": "a27eed166881d8eb",
+      "woven_at": 1789322761.6468925
     }
   ],
-  "total": 70,
+  "total": 77,
   "last_rewrite": {
-    "anchor": "lab_merge",
-    "rewritten_as": "lab_merge_reshaped_by_paradox_resolution",
-    "timestamp": 1789280076.9223528
+    "anchor": "wave401_origin",
+    "rewritten_as": "wave401_origin_reshaped_by_swarm_unification",
+    "timestamp": 1789322761.6468925
   },
-  "resolved": 20
+  "resolved": 22
 }

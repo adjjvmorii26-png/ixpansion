@@ -4,63 +4,57 @@
   "type": "causality_engine",
   "purpose": "Creates recursive causality chains that self-reference and evolve",
   "active": true,
-  "created": 1789280077.6946077,
+  "created": 1789322760.146632,
   "causality_chains": [
     {
       "id": "causal_0",
-      "cause": "event_18",
-      "effect": "outcome_88",
-      "loop_depth": 2,
+      "cause": "event_44",
+      "effect": "outcome_32",
+      "loop_depth": 4,
       "recursive": false,
-      "stability": 0.65
+      "stability": 0.92
     },
     {
       "id": "causal_1",
-      "cause": "event_72",
-      "effect": "outcome_98",
-      "loop_depth": 4,
+      "cause": "event_63",
+      "effect": "outcome_60",
+      "loop_depth": 3,
       "recursive": true,
-      "stability": 0.82,
+      "stability": 0.92,
       "loop_back_to": "causal_0"
     },
     {
       "id": "causal_2",
-      "cause": "event_86",
-      "effect": "outcome_28",
-      "loop_depth": 4,
-      "recursive": false,
-      "stability": 0.57
+      "cause": "event_34",
+      "effect": "outcome_72",
+      "loop_depth": 1,
+      "recursive": true,
+      "stability": 0.92,
+      "loop_back_to": "causal_0"
     },
     {
       "id": "causal_3",
-      "cause": "event_5",
-      "effect": "outcome_70",
-      "loop_depth": 3,
-      "recursive": false,
-      "stability": 0.62
+      "cause": "event_89",
+      "effect": "outcome_12",
+      "loop_depth": 2,
+      "recursive": true,
+      "stability": 0.76,
+      "loop_back_to": "causal_1"
     },
     {
       "id": "causal_4",
-      "cause": "event_43",
-      "effect": "outcome_38",
-      "loop_depth": 1,
-      "recursive": false,
-      "stability": 0.65
-    },
-    {
-      "id": "causal_5",
-      "cause": "event_3",
-      "effect": "outcome_64",
+      "cause": "event_74",
+      "effect": "outcome_41",
       "loop_depth": 4,
       "recursive": false,
-      "stability": 0.59
+      "stability": 0.99
     }
   ],
-  "total_loops": 18,
-  "recursive_chains": 1,
-  "average_stability": 0.65,
-  "causality_integrity": 0.863,
+  "total_loops": 14,
+  "recursive_chains": 3,
+  "average_stability": 0.902,
+  "causality_integrity": 0.854,
   "loop_closed": true,
   "temporal_depth": 5,
-  "timestamp": 1789280077.6946077
+  "timestamp": 1789322760.146632
 }

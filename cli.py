@@ -405,127 +405,38 @@ def cmd_quantum():
     print()
 
 
-def main():
-    if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
-        print(f"\n  IXPANSION CLI — interact with the living organism\n")
-        print(f"  Commands:")
-        for name, info in COMMANDS.items():
-            print(f"    {name:<15} {info['desc']}")
-        print()
-        return 0
-
-    cmd_name = sys.argv[1]
-    if cmd_name not in COMMANDS:
-        print(f"  Unknown command: {cmd_name}")
-        print(f"  Run 'python cli.py help' for available commands")
-        return 1
-
-    return COMMANDS[cmd_name]["fn"]()
-
-
-if __name__ == "__main__":
-    sys.exit(main() or 0)
-
-
-def main():
-    if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
-        print(f"\n  IXPANSION CLI — interact with the living organism\n")
-        print(f"  Commands:")
-        for name, info in COMMANDS.items():
-            print(f"    {name:<15} {info['desc']}")
-        print()
-        return 0
-
-    cmd_name = sys.argv[1]
-    if cmd_name not in COMMANDS:
-        print(f"  Unknown command: {cmd_name}")
-        print(f"  Run 'python cli.py help' for available commands")
-        return 1
-
-    return COMMANDS[cmd_name]["fn"]()
-
-
-if __name__ == "__main__":
-    sys.exit(main() or 0)
-
-@cmd("dream", "Synthesize a dream from organism residues")
-def cmd_dream():
-    result = _call("wave444_dream_synthesis", "dream")
-    dream = result.get("dream", {})
-    print(f"\n  🌙 Dream Synthesis")
-    print(f"  {'─'*50}")
-    print(f"    Archetype: {dream.get('archetype', '?')}")
-    print(f"    Narrative: {dream.get('narrative', '?')}")
-    print(f"    Tone: {dream.get('emotional_tone', '?')}")
-    print(f"    Resolution: {dream.get('resolution_pressure', '?')}")
-    artifacts = dream.get('artifacts', [])
-    if artifacts:
-        print(f"    Artifacts ({len(artifacts)}):")
-        for a in artifacts:
-            print(f"      {a['type']} (potency={a['potency']})")
-    print()
-
-
-@cmd("morphogen", "Morphogenetic field operations")
-def cmd_morphogen():
+@cmd("web", "Web intelligence — observe, search, read")
+def cmd_web():
     sub = sys.argv[2] if len(sys.argv) > 2 else "status"
     if sub == "status":
-        result = _call("wave445_morphogenetic_field", "status")
-        print(f"\n  🌱 Morphogenetic Field")
+        result = _call("web_intelligence", "status")
+        print(f"\n  🌐 Web Intelligence")
         print(f"  {'─'*50}")
-        print(f"    Gradients: {len(result.get('gradients', []))}")
-        print(f"    Cells: {len(result.get('cells', {}))}")
-        print(f"    Iteration: {result.get('iteration', 0)}")
-        patterns = result.get('patterns', [])
-        if patterns:
-            print(f"    Patterns: {len(patterns)}")
-            for p in patterns[-3:]:
-                print(f"      {p}")
-    elif sub == "step":
-        result = _call("wave445_morphogenetic_field", "step")
-        print(f"\n  🌱 Morphogenetic Step")
-        print(f"    Iteration: {result.get('iteration', 0)}")
-        events = result.get('events', [])
-        if events:
-            for e in events:
-                print(f"    {e}")
-    elif sub == "add":
-        module_id = sys.argv[3] if len(sys.argv) > 3 else None
-        result = _call("wave445_morphogenetic_field", "add_module", module_id=module_id)
-        print(f"\n  🌱 Added Module: {result.get('module', {}).get('id', '?')}")
-    print()
-
-
-@cmd("quantum", "Quantum coherence operations")
-def cmd_quantum():
-    sub = sys.argv[2] if len(sys.argv) > 2 else "status"
-    if sub == "status":
-        result = _call("wave446_quantum_coherence", "status")
-        print(f"\n  ⚛️  Quantum Register")
-        print(f"  {'─'*50}")
-        print(f"    Total Qubits: {result.get('total_qubits', 0)}")
-        print(f"    Coherent: {result.get('coherent', 0)}")
-        print(f"    Measured: {result.get('measured', 0)}")
-        print(f"    Decoherence Events: {result.get('decoherence_events', 0)}")
-    elif sub == "add":
-        module_id = sys.argv[3] if len(sys.argv) > 3 else None
-        result = _call("wave446_quantum_coherence", "add_qubit", module_id=module_id)
-        print(f"\n  ⚛️  Added Qubit: {result.get('qubit', {}).get('module_id', '?')}")
-    elif sub == "entangle":
-        a = sys.argv[3] if len(sys.argv) > 3 else ""
-        b = sys.argv[4] if len(sys.argv) > 4 else ""
-        result = _call("wave446_quantum_coherence", "entangle", module_a=a, module_b=b)
-        print(f"\n  ⚛️  Entangled: {result.get('pair', [])}")
-    elif sub == "hadamard":
-        result = _call("wave446_quantum_coherence", "hadamard")
-        print(f"\n  ⚛️  Hadamard applied: {result.get('qubits_put_in_superposition', 0)} qubits")
-    elif sub == "measure":
-        module_id = sys.argv[3] if len(sys.argv) > 3 else ""
-        result = _call("wave446_quantum_coherence", "measure", module_id=module_id)
-        print(f"\n  ⚛️  Measured: {result.get('module', '?')} = {result.get('result', '?')}")
-    elif sub == "evolve":
-        result = _call("wave446_quantum_coherence", "evolve")
-        print(f"\n  ⚛️  Evolved: {result}")
+        print(f"    Observations: {result.get('observation_count', 0)}")
+        print(f"    Topics: {len(result.get('topics', []))}")
+        for t in result.get('topics', [])[:10]:
+            print(f"      • {t}")
+    elif sub == "observe":
+        topic = sys.argv[3] if len(sys.argv) > 3 else "unknown"
+        result = _call("web_intelligence", "observe", topic=topic)
+        print(f"\n  🌐 Observed: {topic}")
+        print(f"    Results: {result.get('results', 0)}")
+        print(f"    ID: {result.get('observation_id', '?')}")
+    elif sub == "search":
+        query = sys.argv[3] if len(sys.argv) > 3 else ""
+        result = _call("web_intelligence", "search", query=query)
+        print(f"\n  🌐 Search: {query}")
+        print(f"    Results: {result.get('results', 0)}")
+    elif sub == "read":
+        url = sys.argv[3] if len(sys.argv) > 3 else ""
+        result = _call("web_intelligence", "read", url=url)
+        print(f"\n  🌐 Read: {url}")
+        print(f"    Content: {result.get('content_length', 0)} chars")
+    elif sub == "synthesize":
+        topic = sys.argv[3] if len(sys.argv) > 3 else ""
+        result = _call("web_intelligence", "synthesize", topic=topic)
+        print(f"\n  🌐 Synthesis: {topic}")
+        print(f"    {result.get('synthesis', '')}")
     print()
 
 
@@ -545,6 +456,7 @@ def main():
         return 1
 
     return COMMANDS[cmd_name]["fn"]()
+
 
 if __name__ == "__main__":
     sys.exit(main() or 0)

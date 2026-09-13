@@ -1,5 +1,5 @@
 {
-  "sweep_timestamp": 1789281202.4619803,
+  "sweep_timestamp": 1789322768.149592,
   "wave": 432,
   "total_modules": 35,
   "healthy_modules": 0,
@@ -12,7 +12,7 @@
     "vault_density": 0.02,
     "entropy_budget": 100.0,
     "status": "WARNING",
-    "timestamp": 1789281202.5374537
+    "timestamp": 1789322768.268554
   },
   "vaults": [
     {
@@ -347,6 +347,15 @@
       "mutation_seed": "529008fa77066b42",
       "state": "active",
       "created": 1789281202.4153242
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.9106,
+      "density": 0.0699,
+      "mutation_seed": "06525f34f8292cb3",
+      "state": "active",
+      "created": 1789322768.079243
     }
   ]
 }

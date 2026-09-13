@@ -98,6 +98,11 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return h(q)
 
 # --- Event Stream ---
+# --- Wave 447: Web Intelligence ---
+    if path.startswith("/web-intelligence") or path.startswith("/api/web_intelligence"):
+        from api.web_intelligence import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path.startswith("/events") or path.startswith("/api/events"):
         from api.event_stream import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
