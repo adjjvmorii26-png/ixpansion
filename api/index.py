@@ -2017,6 +2017,60 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Wave 432: Vault-Driven Evolution ---
+    if path.startswith("/vault-evolution") or path.startswith("/api/vault_driven_evolution"):
+        from api.wave432_vault_driven_evolution import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 433: Consciousness Experiments ---
+    if path.startswith("/consciousness") or path.startswith("/api/consciousness_experiments"):
+        from api.wave433_consciousness_experiments import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 434: Autonomous Fusion Organism ---
+    if path.startswith("/fusion-organism") or path.startswith("/api/fusion_organism"):
+        from api.wave434_fusion_organism import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 435: Resonance Cartography ---
+    if path.startswith("/resonance-cartography") or path.startswith("/api/resonance_cartography"):
+        from api.wave435_resonance_cartography import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 436: Entropic Weather ---
+    if path.startswith("/entropic-weather") or path.startswith("/api/entropic_weather"):
+        from api.wave436_entropic_weather import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 437: Paradox Genome ---
+    if path.startswith("/paradox-genome") or path.startswith("/api/paradox_genome"):
+        from api.wave437_paradox_genome import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 438: Semantic Loom ---
+    if path.startswith("/semantic-loom") or path.startswith("/api/semantic_loom"):
+        from api.wave438_semantic_loom import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 439: Echo Stratigraphy ---
+    if path.startswith("/echo-stratigraphy") or path.startswith("/api/echo_stratigraphy"):
+        from api.wave439_echo_stratigraphy import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 440: Linguistic Emergence ---
+    if path.startswith("/linguistic-emergence") or path.startswith("/api/linguistic_emergence"):
+        from api.wave440_linguistic_emergence import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 # --- Compliance Forge patch (Wave 419) ---
 
 def coherence_vitals() -> dict:
