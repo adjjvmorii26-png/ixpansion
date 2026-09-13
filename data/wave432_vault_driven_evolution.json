@@ -206,6 +206,69 @@
       "mutation_seed": "765f7d66d72f9303",
       "state": "active",
       "created": 1789271578.6243398
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.6556,
+      "density": 0.0284,
+      "mutation_seed": "0d04f381a8035968",
+      "state": "active",
+      "created": 1789272291.757955
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.9927,
+      "density": 0.0696,
+      "mutation_seed": "ef30305232cd7706",
+      "state": "active",
+      "created": 1789272349.6517386
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.265,
+      "density": 0.029,
+      "mutation_seed": "c705d5936fafbc16",
+      "state": "active",
+      "created": 1789272651.5477238
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.2976,
+      "density": 0.0877,
+      "mutation_seed": "487e7563731d357d",
+      "state": "active",
+      "created": 1789272701.598668
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.1343,
+      "density": 0.0749,
+      "mutation_seed": "1ae775f9401d7ebb",
+      "state": "active",
+      "created": 1789272749.940419
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.1792,
+      "density": 0.0994,
+      "mutation_seed": "b03974ee0eb51324",
+      "state": "active",
+      "created": 1789272918.237043
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.3548,
+      "density": 0.0733,
+      "mutation_seed": "22fc3352dab9afb1",
+      "state": "active",
+      "created": 1789272956.337725
     }
   ],
   "history": [
@@ -4333,6 +4396,2141 @@
       },
       "new_vaults": 0,
       "timestamp": 1789271578.865302
+    },
+    {
+      "action": "regulate",
+      "result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272291.7107215
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "timestamp": 1789272291.7198653
+    },
+    {
+      "action": "diagnostics_sweep",
+      "diagnostics": {
+        "sweep_timestamp": 1789272291.787217,
+        "wave": 432,
+        "total_modules": 32,
+        "healthy_modules": 0,
+        "critical_modules": [
+          "wave432_vault_registry.json"
+        ],
+        "coherence_regulator": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272291.8587632
+        },
+        "vaults": [
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1009,
+            "density": 0.0942,
+            "mutation_seed": "d780ae8996198504",
+            "state": "active",
+            "created": 1789264810.3559585
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6307,
+            "density": 0.0192,
+            "mutation_seed": "196e231f0cddf6cd",
+            "state": "active",
+            "created": 1789264874.155534
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2773,
+            "density": 0.048,
+            "mutation_seed": "b6828910934e5a83",
+            "state": "active",
+            "created": 1789264912.1768382
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7707,
+            "density": 0.0483,
+            "mutation_seed": "be63700dbb58ef97",
+            "state": "active",
+            "created": 1789265119.9575102
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.5615,
+            "density": 0.072,
+            "mutation_seed": "a2ed993e1b0c710b",
+            "state": "active",
+            "created": 1789265231.5432773
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1804,
+            "density": 0.024,
+            "mutation_seed": "53bcb3daeb42f17d",
+            "state": "active",
+            "created": 1789265294.5168889
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9608,
+            "density": 0.0464,
+            "mutation_seed": "3e7af229c82b346d",
+            "state": "active",
+            "created": 1789265323.36472
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8992,
+            "density": 0.0712,
+            "mutation_seed": "fadffb11d0ebaf08",
+            "state": "active",
+            "created": 1789265660.8773856
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2265,
+            "density": 0.0836,
+            "mutation_seed": "afa78636c8177d64",
+            "state": "active",
+            "created": 1789266559.6833441
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1895,
+            "density": 0.0879,
+            "mutation_seed": "84ed9b50dfb90a46",
+            "state": "active",
+            "created": 1789266560.9535666
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8588,
+            "density": 0.0971,
+            "mutation_seed": "08174f8cd2701ed7",
+            "state": "active",
+            "created": 1789266598.5061042
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7979,
+            "density": 0.0657,
+            "mutation_seed": "a8969b08fdbf7022",
+            "state": "active",
+            "created": 1789266802.034788
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2702,
+            "density": 0.0846,
+            "mutation_seed": "b1d1ecc9e8278c88",
+            "state": "active",
+            "created": 1789267434.957454
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9345,
+            "density": 0.0161,
+            "mutation_seed": "ad2857015beef2b1",
+            "state": "active",
+            "created": 1789269328.864409
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7317,
+            "density": 0.0257,
+            "mutation_seed": "8fa8643c7660a138",
+            "state": "active",
+            "created": 1789269644.602752
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.113,
+            "density": 0.0109,
+            "mutation_seed": "fddfda92d5e2c3fb",
+            "state": "active",
+            "created": 1789270239.9038377
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.959,
+            "density": 0.0371,
+            "mutation_seed": "ee97278445e6fad9",
+            "state": "active",
+            "created": 1789270282.0064576
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.4805,
+            "density": 0.0657,
+            "mutation_seed": "a7bf18ae09607607",
+            "state": "active",
+            "created": 1789270361.0279973
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9387,
+            "density": 0.092,
+            "mutation_seed": "6185f2efbc650285",
+            "state": "active",
+            "created": 1789270365.8216586
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6442,
+            "density": 0.0695,
+            "mutation_seed": "e3f85ca1b811e160",
+            "state": "active",
+            "created": 1789270945.7401235
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7131,
+            "density": 0.0775,
+            "mutation_seed": "eb7586e7e534c8de",
+            "state": "active",
+            "created": 1789270950.8721309
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.3096,
+            "density": 0.0248,
+            "mutation_seed": "26a6ff007ba5d383",
+            "state": "active",
+            "created": 1789271512.2202895
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1713,
+            "density": 0.0657,
+            "mutation_seed": "765f7d66d72f9303",
+            "state": "active",
+            "created": 1789271578.6243398
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6556,
+            "density": 0.0284,
+            "mutation_seed": "0d04f381a8035968",
+            "state": "active",
+            "created": 1789272291.757955
+          }
+        ]
+      },
+      "timestamp": 1789272291.945322
+    },
+    {
+      "action": "evolve",
+      "reg_result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272292.0460696
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "new_vaults": 0,
+      "timestamp": 1789272292.050479
+    },
+    {
+      "action": "regulate",
+      "result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272349.621198
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "timestamp": 1789272349.6265697
+    },
+    {
+      "action": "diagnostics_sweep",
+      "diagnostics": {
+        "sweep_timestamp": 1789272349.6821833,
+        "wave": 432,
+        "total_modules": 32,
+        "healthy_modules": 0,
+        "critical_modules": [
+          "wave432_vault_registry.json"
+        ],
+        "coherence_regulator": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272349.7493386
+        },
+        "vaults": [
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1009,
+            "density": 0.0942,
+            "mutation_seed": "d780ae8996198504",
+            "state": "active",
+            "created": 1789264810.3559585
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6307,
+            "density": 0.0192,
+            "mutation_seed": "196e231f0cddf6cd",
+            "state": "active",
+            "created": 1789264874.155534
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2773,
+            "density": 0.048,
+            "mutation_seed": "b6828910934e5a83",
+            "state": "active",
+            "created": 1789264912.1768382
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7707,
+            "density": 0.0483,
+            "mutation_seed": "be63700dbb58ef97",
+            "state": "active",
+            "created": 1789265119.9575102
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.5615,
+            "density": 0.072,
+            "mutation_seed": "a2ed993e1b0c710b",
+            "state": "active",
+            "created": 1789265231.5432773
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1804,
+            "density": 0.024,
+            "mutation_seed": "53bcb3daeb42f17d",
+            "state": "active",
+            "created": 1789265294.5168889
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9608,
+            "density": 0.0464,
+            "mutation_seed": "3e7af229c82b346d",
+            "state": "active",
+            "created": 1789265323.36472
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8992,
+            "density": 0.0712,
+            "mutation_seed": "fadffb11d0ebaf08",
+            "state": "active",
+            "created": 1789265660.8773856
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2265,
+            "density": 0.0836,
+            "mutation_seed": "afa78636c8177d64",
+            "state": "active",
+            "created": 1789266559.6833441
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1895,
+            "density": 0.0879,
+            "mutation_seed": "84ed9b50dfb90a46",
+            "state": "active",
+            "created": 1789266560.9535666
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8588,
+            "density": 0.0971,
+            "mutation_seed": "08174f8cd2701ed7",
+            "state": "active",
+            "created": 1789266598.5061042
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7979,
+            "density": 0.0657,
+            "mutation_seed": "a8969b08fdbf7022",
+            "state": "active",
+            "created": 1789266802.034788
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2702,
+            "density": 0.0846,
+            "mutation_seed": "b1d1ecc9e8278c88",
+            "state": "active",
+            "created": 1789267434.957454
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9345,
+            "density": 0.0161,
+            "mutation_seed": "ad2857015beef2b1",
+            "state": "active",
+            "created": 1789269328.864409
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7317,
+            "density": 0.0257,
+            "mutation_seed": "8fa8643c7660a138",
+            "state": "active",
+            "created": 1789269644.602752
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.113,
+            "density": 0.0109,
+            "mutation_seed": "fddfda92d5e2c3fb",
+            "state": "active",
+            "created": 1789270239.9038377
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.959,
+            "density": 0.0371,
+            "mutation_seed": "ee97278445e6fad9",
+            "state": "active",
+            "created": 1789270282.0064576
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.4805,
+            "density": 0.0657,
+            "mutation_seed": "a7bf18ae09607607",
+            "state": "active",
+            "created": 1789270361.0279973
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9387,
+            "density": 0.092,
+            "mutation_seed": "6185f2efbc650285",
+            "state": "active",
+            "created": 1789270365.8216586
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6442,
+            "density": 0.0695,
+            "mutation_seed": "e3f85ca1b811e160",
+            "state": "active",
+            "created": 1789270945.7401235
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7131,
+            "density": 0.0775,
+            "mutation_seed": "eb7586e7e534c8de",
+            "state": "active",
+            "created": 1789270950.8721309
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.3096,
+            "density": 0.0248,
+            "mutation_seed": "26a6ff007ba5d383",
+            "state": "active",
+            "created": 1789271512.2202895
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1713,
+            "density": 0.0657,
+            "mutation_seed": "765f7d66d72f9303",
+            "state": "active",
+            "created": 1789271578.6243398
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6556,
+            "density": 0.0284,
+            "mutation_seed": "0d04f381a8035968",
+            "state": "active",
+            "created": 1789272291.757955
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9927,
+            "density": 0.0696,
+            "mutation_seed": "ef30305232cd7706",
+            "state": "active",
+            "created": 1789272349.6517386
+          }
+        ]
+      },
+      "timestamp": 1789272349.8325543
+    },
+    {
+      "action": "evolve",
+      "reg_result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272349.9392328
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "new_vaults": 0,
+      "timestamp": 1789272349.9443548
+    },
+    {
+      "action": "regulate",
+      "result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272651.5163074
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "timestamp": 1789272651.5209677
+    },
+    {
+      "action": "diagnostics_sweep",
+      "diagnostics": {
+        "sweep_timestamp": 1789272651.597627,
+        "wave": 432,
+        "total_modules": 32,
+        "healthy_modules": 0,
+        "critical_modules": [
+          "wave432_vault_registry.json"
+        ],
+        "coherence_regulator": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272651.6629307
+        },
+        "vaults": [
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1009,
+            "density": 0.0942,
+            "mutation_seed": "d780ae8996198504",
+            "state": "active",
+            "created": 1789264810.3559585
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6307,
+            "density": 0.0192,
+            "mutation_seed": "196e231f0cddf6cd",
+            "state": "active",
+            "created": 1789264874.155534
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2773,
+            "density": 0.048,
+            "mutation_seed": "b6828910934e5a83",
+            "state": "active",
+            "created": 1789264912.1768382
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7707,
+            "density": 0.0483,
+            "mutation_seed": "be63700dbb58ef97",
+            "state": "active",
+            "created": 1789265119.9575102
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.5615,
+            "density": 0.072,
+            "mutation_seed": "a2ed993e1b0c710b",
+            "state": "active",
+            "created": 1789265231.5432773
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1804,
+            "density": 0.024,
+            "mutation_seed": "53bcb3daeb42f17d",
+            "state": "active",
+            "created": 1789265294.5168889
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9608,
+            "density": 0.0464,
+            "mutation_seed": "3e7af229c82b346d",
+            "state": "active",
+            "created": 1789265323.36472
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8992,
+            "density": 0.0712,
+            "mutation_seed": "fadffb11d0ebaf08",
+            "state": "active",
+            "created": 1789265660.8773856
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2265,
+            "density": 0.0836,
+            "mutation_seed": "afa78636c8177d64",
+            "state": "active",
+            "created": 1789266559.6833441
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1895,
+            "density": 0.0879,
+            "mutation_seed": "84ed9b50dfb90a46",
+            "state": "active",
+            "created": 1789266560.9535666
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8588,
+            "density": 0.0971,
+            "mutation_seed": "08174f8cd2701ed7",
+            "state": "active",
+            "created": 1789266598.5061042
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7979,
+            "density": 0.0657,
+            "mutation_seed": "a8969b08fdbf7022",
+            "state": "active",
+            "created": 1789266802.034788
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2702,
+            "density": 0.0846,
+            "mutation_seed": "b1d1ecc9e8278c88",
+            "state": "active",
+            "created": 1789267434.957454
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9345,
+            "density": 0.0161,
+            "mutation_seed": "ad2857015beef2b1",
+            "state": "active",
+            "created": 1789269328.864409
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7317,
+            "density": 0.0257,
+            "mutation_seed": "8fa8643c7660a138",
+            "state": "active",
+            "created": 1789269644.602752
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.113,
+            "density": 0.0109,
+            "mutation_seed": "fddfda92d5e2c3fb",
+            "state": "active",
+            "created": 1789270239.9038377
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.959,
+            "density": 0.0371,
+            "mutation_seed": "ee97278445e6fad9",
+            "state": "active",
+            "created": 1789270282.0064576
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.4805,
+            "density": 0.0657,
+            "mutation_seed": "a7bf18ae09607607",
+            "state": "active",
+            "created": 1789270361.0279973
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9387,
+            "density": 0.092,
+            "mutation_seed": "6185f2efbc650285",
+            "state": "active",
+            "created": 1789270365.8216586
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6442,
+            "density": 0.0695,
+            "mutation_seed": "e3f85ca1b811e160",
+            "state": "active",
+            "created": 1789270945.7401235
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7131,
+            "density": 0.0775,
+            "mutation_seed": "eb7586e7e534c8de",
+            "state": "active",
+            "created": 1789270950.8721309
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.3096,
+            "density": 0.0248,
+            "mutation_seed": "26a6ff007ba5d383",
+            "state": "active",
+            "created": 1789271512.2202895
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1713,
+            "density": 0.0657,
+            "mutation_seed": "765f7d66d72f9303",
+            "state": "active",
+            "created": 1789271578.6243398
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6556,
+            "density": 0.0284,
+            "mutation_seed": "0d04f381a8035968",
+            "state": "active",
+            "created": 1789272291.757955
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9927,
+            "density": 0.0696,
+            "mutation_seed": "ef30305232cd7706",
+            "state": "active",
+            "created": 1789272349.6517386
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.265,
+            "density": 0.029,
+            "mutation_seed": "c705d5936fafbc16",
+            "state": "active",
+            "created": 1789272651.5477238
+          }
+        ]
+      },
+      "timestamp": 1789272651.729794
+    },
+    {
+      "action": "evolve",
+      "reg_result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272651.8309817
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "new_vaults": 0,
+      "timestamp": 1789272651.8368194
+    },
+    {
+      "action": "regulate",
+      "result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272701.548957
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "timestamp": 1789272701.5589988
+    },
+    {
+      "action": "diagnostics_sweep",
+      "diagnostics": {
+        "sweep_timestamp": 1789272701.6538594,
+        "wave": 432,
+        "total_modules": 32,
+        "healthy_modules": 0,
+        "critical_modules": [
+          "wave432_vault_registry.json"
+        ],
+        "coherence_regulator": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272701.7175624
+        },
+        "vaults": [
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1009,
+            "density": 0.0942,
+            "mutation_seed": "d780ae8996198504",
+            "state": "active",
+            "created": 1789264810.3559585
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6307,
+            "density": 0.0192,
+            "mutation_seed": "196e231f0cddf6cd",
+            "state": "active",
+            "created": 1789264874.155534
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2773,
+            "density": 0.048,
+            "mutation_seed": "b6828910934e5a83",
+            "state": "active",
+            "created": 1789264912.1768382
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7707,
+            "density": 0.0483,
+            "mutation_seed": "be63700dbb58ef97",
+            "state": "active",
+            "created": 1789265119.9575102
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.5615,
+            "density": 0.072,
+            "mutation_seed": "a2ed993e1b0c710b",
+            "state": "active",
+            "created": 1789265231.5432773
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1804,
+            "density": 0.024,
+            "mutation_seed": "53bcb3daeb42f17d",
+            "state": "active",
+            "created": 1789265294.5168889
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9608,
+            "density": 0.0464,
+            "mutation_seed": "3e7af229c82b346d",
+            "state": "active",
+            "created": 1789265323.36472
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8992,
+            "density": 0.0712,
+            "mutation_seed": "fadffb11d0ebaf08",
+            "state": "active",
+            "created": 1789265660.8773856
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2265,
+            "density": 0.0836,
+            "mutation_seed": "afa78636c8177d64",
+            "state": "active",
+            "created": 1789266559.6833441
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1895,
+            "density": 0.0879,
+            "mutation_seed": "84ed9b50dfb90a46",
+            "state": "active",
+            "created": 1789266560.9535666
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8588,
+            "density": 0.0971,
+            "mutation_seed": "08174f8cd2701ed7",
+            "state": "active",
+            "created": 1789266598.5061042
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7979,
+            "density": 0.0657,
+            "mutation_seed": "a8969b08fdbf7022",
+            "state": "active",
+            "created": 1789266802.034788
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2702,
+            "density": 0.0846,
+            "mutation_seed": "b1d1ecc9e8278c88",
+            "state": "active",
+            "created": 1789267434.957454
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9345,
+            "density": 0.0161,
+            "mutation_seed": "ad2857015beef2b1",
+            "state": "active",
+            "created": 1789269328.864409
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7317,
+            "density": 0.0257,
+            "mutation_seed": "8fa8643c7660a138",
+            "state": "active",
+            "created": 1789269644.602752
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.113,
+            "density": 0.0109,
+            "mutation_seed": "fddfda92d5e2c3fb",
+            "state": "active",
+            "created": 1789270239.9038377
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.959,
+            "density": 0.0371,
+            "mutation_seed": "ee97278445e6fad9",
+            "state": "active",
+            "created": 1789270282.0064576
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.4805,
+            "density": 0.0657,
+            "mutation_seed": "a7bf18ae09607607",
+            "state": "active",
+            "created": 1789270361.0279973
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9387,
+            "density": 0.092,
+            "mutation_seed": "6185f2efbc650285",
+            "state": "active",
+            "created": 1789270365.8216586
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6442,
+            "density": 0.0695,
+            "mutation_seed": "e3f85ca1b811e160",
+            "state": "active",
+            "created": 1789270945.7401235
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7131,
+            "density": 0.0775,
+            "mutation_seed": "eb7586e7e534c8de",
+            "state": "active",
+            "created": 1789270950.8721309
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.3096,
+            "density": 0.0248,
+            "mutation_seed": "26a6ff007ba5d383",
+            "state": "active",
+            "created": 1789271512.2202895
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1713,
+            "density": 0.0657,
+            "mutation_seed": "765f7d66d72f9303",
+            "state": "active",
+            "created": 1789271578.6243398
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6556,
+            "density": 0.0284,
+            "mutation_seed": "0d04f381a8035968",
+            "state": "active",
+            "created": 1789272291.757955
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9927,
+            "density": 0.0696,
+            "mutation_seed": "ef30305232cd7706",
+            "state": "active",
+            "created": 1789272349.6517386
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.265,
+            "density": 0.029,
+            "mutation_seed": "c705d5936fafbc16",
+            "state": "active",
+            "created": 1789272651.5477238
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2976,
+            "density": 0.0877,
+            "mutation_seed": "487e7563731d357d",
+            "state": "active",
+            "created": 1789272701.598668
+          }
+        ]
+      },
+      "timestamp": 1789272701.786592
+    },
+    {
+      "action": "evolve",
+      "reg_result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272701.8835604
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "new_vaults": 0,
+      "timestamp": 1789272701.8934312
+    },
+    {
+      "action": "regulate",
+      "result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272749.897109
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "timestamp": 1789272749.9065952
+    },
+    {
+      "action": "diagnostics_sweep",
+      "diagnostics": {
+        "sweep_timestamp": 1789272749.9777467,
+        "wave": 432,
+        "total_modules": 32,
+        "healthy_modules": 0,
+        "critical_modules": [
+          "wave432_vault_registry.json"
+        ],
+        "coherence_regulator": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272750.0503774
+        },
+        "vaults": [
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1009,
+            "density": 0.0942,
+            "mutation_seed": "d780ae8996198504",
+            "state": "active",
+            "created": 1789264810.3559585
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6307,
+            "density": 0.0192,
+            "mutation_seed": "196e231f0cddf6cd",
+            "state": "active",
+            "created": 1789264874.155534
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2773,
+            "density": 0.048,
+            "mutation_seed": "b6828910934e5a83",
+            "state": "active",
+            "created": 1789264912.1768382
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7707,
+            "density": 0.0483,
+            "mutation_seed": "be63700dbb58ef97",
+            "state": "active",
+            "created": 1789265119.9575102
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.5615,
+            "density": 0.072,
+            "mutation_seed": "a2ed993e1b0c710b",
+            "state": "active",
+            "created": 1789265231.5432773
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1804,
+            "density": 0.024,
+            "mutation_seed": "53bcb3daeb42f17d",
+            "state": "active",
+            "created": 1789265294.5168889
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9608,
+            "density": 0.0464,
+            "mutation_seed": "3e7af229c82b346d",
+            "state": "active",
+            "created": 1789265323.36472
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8992,
+            "density": 0.0712,
+            "mutation_seed": "fadffb11d0ebaf08",
+            "state": "active",
+            "created": 1789265660.8773856
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2265,
+            "density": 0.0836,
+            "mutation_seed": "afa78636c8177d64",
+            "state": "active",
+            "created": 1789266559.6833441
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1895,
+            "density": 0.0879,
+            "mutation_seed": "84ed9b50dfb90a46",
+            "state": "active",
+            "created": 1789266560.9535666
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8588,
+            "density": 0.0971,
+            "mutation_seed": "08174f8cd2701ed7",
+            "state": "active",
+            "created": 1789266598.5061042
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7979,
+            "density": 0.0657,
+            "mutation_seed": "a8969b08fdbf7022",
+            "state": "active",
+            "created": 1789266802.034788
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2702,
+            "density": 0.0846,
+            "mutation_seed": "b1d1ecc9e8278c88",
+            "state": "active",
+            "created": 1789267434.957454
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9345,
+            "density": 0.0161,
+            "mutation_seed": "ad2857015beef2b1",
+            "state": "active",
+            "created": 1789269328.864409
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7317,
+            "density": 0.0257,
+            "mutation_seed": "8fa8643c7660a138",
+            "state": "active",
+            "created": 1789269644.602752
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.113,
+            "density": 0.0109,
+            "mutation_seed": "fddfda92d5e2c3fb",
+            "state": "active",
+            "created": 1789270239.9038377
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.959,
+            "density": 0.0371,
+            "mutation_seed": "ee97278445e6fad9",
+            "state": "active",
+            "created": 1789270282.0064576
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.4805,
+            "density": 0.0657,
+            "mutation_seed": "a7bf18ae09607607",
+            "state": "active",
+            "created": 1789270361.0279973
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9387,
+            "density": 0.092,
+            "mutation_seed": "6185f2efbc650285",
+            "state": "active",
+            "created": 1789270365.8216586
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6442,
+            "density": 0.0695,
+            "mutation_seed": "e3f85ca1b811e160",
+            "state": "active",
+            "created": 1789270945.7401235
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7131,
+            "density": 0.0775,
+            "mutation_seed": "eb7586e7e534c8de",
+            "state": "active",
+            "created": 1789270950.8721309
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.3096,
+            "density": 0.0248,
+            "mutation_seed": "26a6ff007ba5d383",
+            "state": "active",
+            "created": 1789271512.2202895
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1713,
+            "density": 0.0657,
+            "mutation_seed": "765f7d66d72f9303",
+            "state": "active",
+            "created": 1789271578.6243398
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6556,
+            "density": 0.0284,
+            "mutation_seed": "0d04f381a8035968",
+            "state": "active",
+            "created": 1789272291.757955
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9927,
+            "density": 0.0696,
+            "mutation_seed": "ef30305232cd7706",
+            "state": "active",
+            "created": 1789272349.6517386
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.265,
+            "density": 0.029,
+            "mutation_seed": "c705d5936fafbc16",
+            "state": "active",
+            "created": 1789272651.5477238
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2976,
+            "density": 0.0877,
+            "mutation_seed": "487e7563731d357d",
+            "state": "active",
+            "created": 1789272701.598668
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1343,
+            "density": 0.0749,
+            "mutation_seed": "1ae775f9401d7ebb",
+            "state": "active",
+            "created": 1789272749.940419
+          }
+        ]
+      },
+      "timestamp": 1789272750.1348383
+    },
+    {
+      "action": "evolve",
+      "reg_result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272750.2540987
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "new_vaults": 0,
+      "timestamp": 1789272750.2596593
+    },
+    {
+      "action": "regulate",
+      "result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272918.197002
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "timestamp": 1789272918.2050495
+    },
+    {
+      "action": "diagnostics_sweep",
+      "diagnostics": {
+        "sweep_timestamp": 1789272918.2757545,
+        "wave": 432,
+        "total_modules": 32,
+        "healthy_modules": 0,
+        "critical_modules": [
+          "wave432_vault_registry.json"
+        ],
+        "coherence_regulator": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272918.4090028
+        },
+        "vaults": [
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1009,
+            "density": 0.0942,
+            "mutation_seed": "d780ae8996198504",
+            "state": "active",
+            "created": 1789264810.3559585
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6307,
+            "density": 0.0192,
+            "mutation_seed": "196e231f0cddf6cd",
+            "state": "active",
+            "created": 1789264874.155534
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2773,
+            "density": 0.048,
+            "mutation_seed": "b6828910934e5a83",
+            "state": "active",
+            "created": 1789264912.1768382
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7707,
+            "density": 0.0483,
+            "mutation_seed": "be63700dbb58ef97",
+            "state": "active",
+            "created": 1789265119.9575102
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.5615,
+            "density": 0.072,
+            "mutation_seed": "a2ed993e1b0c710b",
+            "state": "active",
+            "created": 1789265231.5432773
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1804,
+            "density": 0.024,
+            "mutation_seed": "53bcb3daeb42f17d",
+            "state": "active",
+            "created": 1789265294.5168889
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9608,
+            "density": 0.0464,
+            "mutation_seed": "3e7af229c82b346d",
+            "state": "active",
+            "created": 1789265323.36472
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8992,
+            "density": 0.0712,
+            "mutation_seed": "fadffb11d0ebaf08",
+            "state": "active",
+            "created": 1789265660.8773856
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2265,
+            "density": 0.0836,
+            "mutation_seed": "afa78636c8177d64",
+            "state": "active",
+            "created": 1789266559.6833441
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1895,
+            "density": 0.0879,
+            "mutation_seed": "84ed9b50dfb90a46",
+            "state": "active",
+            "created": 1789266560.9535666
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8588,
+            "density": 0.0971,
+            "mutation_seed": "08174f8cd2701ed7",
+            "state": "active",
+            "created": 1789266598.5061042
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7979,
+            "density": 0.0657,
+            "mutation_seed": "a8969b08fdbf7022",
+            "state": "active",
+            "created": 1789266802.034788
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2702,
+            "density": 0.0846,
+            "mutation_seed": "b1d1ecc9e8278c88",
+            "state": "active",
+            "created": 1789267434.957454
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9345,
+            "density": 0.0161,
+            "mutation_seed": "ad2857015beef2b1",
+            "state": "active",
+            "created": 1789269328.864409
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7317,
+            "density": 0.0257,
+            "mutation_seed": "8fa8643c7660a138",
+            "state": "active",
+            "created": 1789269644.602752
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.113,
+            "density": 0.0109,
+            "mutation_seed": "fddfda92d5e2c3fb",
+            "state": "active",
+            "created": 1789270239.9038377
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.959,
+            "density": 0.0371,
+            "mutation_seed": "ee97278445e6fad9",
+            "state": "active",
+            "created": 1789270282.0064576
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.4805,
+            "density": 0.0657,
+            "mutation_seed": "a7bf18ae09607607",
+            "state": "active",
+            "created": 1789270361.0279973
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9387,
+            "density": 0.092,
+            "mutation_seed": "6185f2efbc650285",
+            "state": "active",
+            "created": 1789270365.8216586
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6442,
+            "density": 0.0695,
+            "mutation_seed": "e3f85ca1b811e160",
+            "state": "active",
+            "created": 1789270945.7401235
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7131,
+            "density": 0.0775,
+            "mutation_seed": "eb7586e7e534c8de",
+            "state": "active",
+            "created": 1789270950.8721309
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.3096,
+            "density": 0.0248,
+            "mutation_seed": "26a6ff007ba5d383",
+            "state": "active",
+            "created": 1789271512.2202895
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1713,
+            "density": 0.0657,
+            "mutation_seed": "765f7d66d72f9303",
+            "state": "active",
+            "created": 1789271578.6243398
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6556,
+            "density": 0.0284,
+            "mutation_seed": "0d04f381a8035968",
+            "state": "active",
+            "created": 1789272291.757955
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9927,
+            "density": 0.0696,
+            "mutation_seed": "ef30305232cd7706",
+            "state": "active",
+            "created": 1789272349.6517386
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.265,
+            "density": 0.029,
+            "mutation_seed": "c705d5936fafbc16",
+            "state": "active",
+            "created": 1789272651.5477238
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2976,
+            "density": 0.0877,
+            "mutation_seed": "487e7563731d357d",
+            "state": "active",
+            "created": 1789272701.598668
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1343,
+            "density": 0.0749,
+            "mutation_seed": "1ae775f9401d7ebb",
+            "state": "active",
+            "created": 1789272749.940419
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1792,
+            "density": 0.0994,
+            "mutation_seed": "b03974ee0eb51324",
+            "state": "active",
+            "created": 1789272918.237043
+          }
+        ]
+      },
+      "timestamp": 1789272918.4899144
+    },
+    {
+      "action": "evolve",
+      "reg_result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272918.5958545
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "new_vaults": 0,
+      "timestamp": 1789272918.6065767
+    },
+    {
+      "action": "regulate",
+      "result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272956.2959929
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "timestamp": 1789272956.303599
+    },
+    {
+      "action": "diagnostics_sweep",
+      "diagnostics": {
+        "sweep_timestamp": 1789272956.3804154,
+        "wave": 432,
+        "total_modules": 32,
+        "healthy_modules": 0,
+        "critical_modules": [
+          "wave432_vault_registry.json"
+        ],
+        "coherence_regulator": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272956.4533412
+        },
+        "vaults": [
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1009,
+            "density": 0.0942,
+            "mutation_seed": "d780ae8996198504",
+            "state": "active",
+            "created": 1789264810.3559585
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6307,
+            "density": 0.0192,
+            "mutation_seed": "196e231f0cddf6cd",
+            "state": "active",
+            "created": 1789264874.155534
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2773,
+            "density": 0.048,
+            "mutation_seed": "b6828910934e5a83",
+            "state": "active",
+            "created": 1789264912.1768382
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7707,
+            "density": 0.0483,
+            "mutation_seed": "be63700dbb58ef97",
+            "state": "active",
+            "created": 1789265119.9575102
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.5615,
+            "density": 0.072,
+            "mutation_seed": "a2ed993e1b0c710b",
+            "state": "active",
+            "created": 1789265231.5432773
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1804,
+            "density": 0.024,
+            "mutation_seed": "53bcb3daeb42f17d",
+            "state": "active",
+            "created": 1789265294.5168889
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9608,
+            "density": 0.0464,
+            "mutation_seed": "3e7af229c82b346d",
+            "state": "active",
+            "created": 1789265323.36472
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8992,
+            "density": 0.0712,
+            "mutation_seed": "fadffb11d0ebaf08",
+            "state": "active",
+            "created": 1789265660.8773856
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2265,
+            "density": 0.0836,
+            "mutation_seed": "afa78636c8177d64",
+            "state": "active",
+            "created": 1789266559.6833441
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1895,
+            "density": 0.0879,
+            "mutation_seed": "84ed9b50dfb90a46",
+            "state": "active",
+            "created": 1789266560.9535666
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.8588,
+            "density": 0.0971,
+            "mutation_seed": "08174f8cd2701ed7",
+            "state": "active",
+            "created": 1789266598.5061042
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7979,
+            "density": 0.0657,
+            "mutation_seed": "a8969b08fdbf7022",
+            "state": "active",
+            "created": 1789266802.034788
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2702,
+            "density": 0.0846,
+            "mutation_seed": "b1d1ecc9e8278c88",
+            "state": "active",
+            "created": 1789267434.957454
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9345,
+            "density": 0.0161,
+            "mutation_seed": "ad2857015beef2b1",
+            "state": "active",
+            "created": 1789269328.864409
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7317,
+            "density": 0.0257,
+            "mutation_seed": "8fa8643c7660a138",
+            "state": "active",
+            "created": 1789269644.602752
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.113,
+            "density": 0.0109,
+            "mutation_seed": "fddfda92d5e2c3fb",
+            "state": "active",
+            "created": 1789270239.9038377
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.959,
+            "density": 0.0371,
+            "mutation_seed": "ee97278445e6fad9",
+            "state": "active",
+            "created": 1789270282.0064576
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.4805,
+            "density": 0.0657,
+            "mutation_seed": "a7bf18ae09607607",
+            "state": "active",
+            "created": 1789270361.0279973
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9387,
+            "density": 0.092,
+            "mutation_seed": "6185f2efbc650285",
+            "state": "active",
+            "created": 1789270365.8216586
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6442,
+            "density": 0.0695,
+            "mutation_seed": "e3f85ca1b811e160",
+            "state": "active",
+            "created": 1789270945.7401235
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.7131,
+            "density": 0.0775,
+            "mutation_seed": "eb7586e7e534c8de",
+            "state": "active",
+            "created": 1789270950.8721309
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.3096,
+            "density": 0.0248,
+            "mutation_seed": "26a6ff007ba5d383",
+            "state": "active",
+            "created": 1789271512.2202895
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1713,
+            "density": 0.0657,
+            "mutation_seed": "765f7d66d72f9303",
+            "state": "active",
+            "created": 1789271578.6243398
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.6556,
+            "density": 0.0284,
+            "mutation_seed": "0d04f381a8035968",
+            "state": "active",
+            "created": 1789272291.757955
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.9927,
+            "density": 0.0696,
+            "mutation_seed": "ef30305232cd7706",
+            "state": "active",
+            "created": 1789272349.6517386
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.265,
+            "density": 0.029,
+            "mutation_seed": "c705d5936fafbc16",
+            "state": "active",
+            "created": 1789272651.5477238
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.2976,
+            "density": 0.0877,
+            "mutation_seed": "487e7563731d357d",
+            "state": "active",
+            "created": 1789272701.598668
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1343,
+            "density": 0.0749,
+            "mutation_seed": "1ae775f9401d7ebb",
+            "state": "active",
+            "created": 1789272749.940419
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1792,
+            "density": 0.0994,
+            "mutation_seed": "b03974ee0eb51324",
+            "state": "active",
+            "created": 1789272918.237043
+          },
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.3548,
+            "density": 0.0733,
+            "mutation_seed": "22fc3352dab9afb1",
+            "state": "active",
+            "created": 1789272956.337725
+          }
+        ]
+      },
+      "timestamp": 1789272956.5329485
+    },
+    {
+      "action": "evolve",
+      "reg_result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789272956.6567233
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "new_vaults": 0,
+      "timestamp": 1789272956.6686141
     }
   ]
 }

@@ -1,11 +1,11 @@
 {
-  "sweep_id": "diag_1789265372",
+  "sweep_id": "diag_1789272336",
   "wave": 412,
   "realm": "garden",
-  "timestamp": 1789265372.9575944,
+  "timestamp": 1789272336.716956,
   "summary": {
-    "total_files": 137,
-    "healthy": 137,
+    "total_files": 146,
+    "healthy": 146,
     "stale": 91,
     "corrupted": 0,
     "anomaly_count": 97
@@ -54,8 +54,8 @@
     {
       "name": "axiom_mutator",
       "class": "foundational",
-      "size_bytes": 1897,
-      "modified": 1789243297.0345871,
+      "size_bytes": 2036,
+      "modified": 1789266794.5640926,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -266,8 +266,8 @@
     {
       "name": "decay_forecaster",
       "class": "prediction",
-      "size_bytes": 2740,
-      "modified": 1789265370.1560936,
+      "size_bytes": 2796,
+      "modified": 1789272333.4219592,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -276,8 +276,8 @@
     {
       "name": "diagnostic_report",
       "class": "general",
-      "size_bytes": 38014,
-      "modified": 1789265372.9480937,
+      "size_bytes": 40203,
+      "modified": 1789272336.705959,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -296,8 +296,8 @@
     {
       "name": "dream_interpretations",
       "class": "dream_engine",
-      "size_bytes": 11927,
-      "modified": 1789248127.2585838,
+      "size_bytes": 15651,
+      "modified": 1789266603.8120928,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -336,8 +336,8 @@
     {
       "name": "dreams",
       "class": "dream_engine",
-      "size_bytes": 28035,
-      "modified": 1789248353.0505836,
+      "size_bytes": 33010,
+      "modified": 1789266799.1880927,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -366,8 +366,8 @@
     {
       "name": "entropy_weather",
       "class": "general",
-      "size_bytes": 6019,
-      "modified": 1789248128.8305838,
+      "size_bytes": 8402,
+      "modified": 1789266605.3080928,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -457,8 +457,8 @@
     {
       "name": "linguistic_archive",
       "class": "general",
-      "size_bytes": 23608,
-      "modified": 1789248353.0945835,
+      "size_bytes": 27828,
+      "modified": 1789266799.2240927,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -537,8 +537,8 @@
     {
       "name": "memory_palaces",
       "class": "general",
-      "size_bytes": 1584,
-      "modified": 1789248356.1665835,
+      "size_bytes": 2375,
+      "modified": 1789266803.1760926,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -640,7 +640,7 @@
       "name": "noise_filter",
       "class": "general",
       "size_bytes": 271,
-      "modified": 1789265370.2280936,
+      "modified": 1789272333.4899592,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -649,8 +649,8 @@
     {
       "name": "orbit_cohesion_field",
       "class": "telemetry",
-      "size_bytes": 3251,
-      "modified": 1789265370.1440935,
+      "size_bytes": 3252,
+      "modified": 1789272333.4059591,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -659,8 +659,8 @@
     {
       "name": "orbital_storyteller",
       "class": "telemetry",
-      "size_bytes": 18978,
-      "modified": 1789265370.2000935,
+      "size_bytes": 19769,
+      "modified": 1789272333.4619591,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -759,8 +759,8 @@
     {
       "name": "paradox_echo",
       "class": "metaphysical",
-      "size_bytes": 13784,
-      "modified": 1789248347.9385836,
+      "size_bytes": 14830,
+      "modified": 1789266794.5680926,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -950,8 +950,8 @@
     {
       "name": "solar_weather_coupler",
       "class": "general",
-      "size_bytes": 62,
-      "modified": 1789265370.2160935,
+      "size_bytes": 64,
+      "modified": 1789272333.4779592,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1001,7 +1001,7 @@
       "name": "telemetry_anomaly_oracle",
       "class": "monitoring",
       "size_bytes": 1057,
-      "modified": 1789265370.1720936,
+      "modified": 1789272333.4379592,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1052,7 +1052,7 @@
       "name": "transcendence_journal",
       "class": "scripture",
       "size_bytes": 431,
-      "modified": 1789248347.9425836,
+      "modified": 1789266794.5720925,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1093,7 +1093,7 @@
       "name": "veil_lifter",
       "class": "metaphysical",
       "size_bytes": 510,
-      "modified": 1789248346.7825837,
+      "modified": 1789266793.5400927,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1133,8 +1133,8 @@
     {
       "name": "wave412_garden",
       "class": "wave_seed",
-      "size_bytes": 4461,
-      "modified": 1789248348.3985837,
+      "size_bytes": 5046,
+      "modified": 1789266794.9840927,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1144,8 +1144,8 @@
     {
       "name": "wave413_underworld",
       "class": "wave_seed",
-      "size_bytes": 3174,
-      "modified": 1789248348.5145836,
+      "size_bytes": 3355,
+      "modified": 1789266795.0640926,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1155,8 +1155,8 @@
     {
       "name": "wave414_meta_coordination",
       "class": "wave_seed",
-      "size_bytes": 2209,
-      "modified": 1789248350.2825837,
+      "size_bytes": 2205,
+      "modified": 1789266796.8400927,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1166,8 +1166,8 @@
     {
       "name": "wave415_chrono_forge",
       "class": "wave_seed",
-      "size_bytes": 1523,
-      "modified": 1789248351.9785836,
+      "size_bytes": 1544,
+      "modified": 1789266798.3320925,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1177,8 +1177,8 @@
     {
       "name": "wave416_paradox_singularity",
       "class": "wave_seed",
-      "size_bytes": 629,
-      "modified": 1789248352.1425836,
+      "size_bytes": 979,
+      "modified": 1789266798.4640925,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1188,8 +1188,8 @@
     {
       "name": "wave417_causality_loop",
       "class": "wave_seed",
-      "size_bytes": 1143,
-      "modified": 1789248352.1625836,
+      "size_bytes": 1374,
+      "modified": 1789266798.4760926,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1199,8 +1199,8 @@
     {
       "name": "wave418_temporal_singularity",
       "class": "wave_seed",
-      "size_bytes": 762,
-      "modified": 1789248352.6825836,
+      "size_bytes": 758,
+      "modified": 1789266798.8760927,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1210,8 +1210,8 @@
     {
       "name": "wave419_essence_return",
       "class": "wave_seed",
-      "size_bytes": 2161,
-      "modified": 1789248352.7265837,
+      "size_bytes": 2254,
+      "modified": 1789266798.9320927,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1222,7 +1222,7 @@
       "name": "wave420_communion",
       "class": "wave_seed",
       "size_bytes": 955,
-      "modified": 1789248353.0265837,
+      "modified": 1789266799.1680925,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1232,8 +1232,8 @@
     {
       "name": "wave422_swarm",
       "class": "wave_seed",
-      "size_bytes": 1850,
-      "modified": 1789248353.0625837,
+      "size_bytes": 2013,
+      "modified": 1789266799.2000926,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1244,7 +1244,7 @@
       "name": "wave423_mirror",
       "class": "wave_seed",
       "size_bytes": 799,
-      "modified": 1789248353.0745835,
+      "modified": 1789266799.2080927,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1254,8 +1254,8 @@
     {
       "name": "wave425_superposition",
       "class": "wave_seed",
-      "size_bytes": 1433,
-      "modified": 1789248353.2185836,
+      "size_bytes": 1718,
+      "modified": 1789266799.3040926,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1265,8 +1265,8 @@
     {
       "name": "wave426_causal_weave",
       "class": "wave_seed",
-      "size_bytes": 12383,
-      "modified": 1789248353.4065835,
+      "size_bytes": 19655,
+      "modified": 1789266799.4480927,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1275,8 +1275,8 @@
     {
       "name": "wave427_forgotten_archive",
       "class": "wave_seed",
-      "size_bytes": 69,
-      "modified": 1789253350.0801022,
+      "size_bytes": 70,
+      "modified": 1789266801.2240925,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1285,8 +1285,8 @@
     {
       "name": "wave428_resonance_chamber",
       "class": "wave_seed",
-      "size_bytes": 1219,
-      "modified": 1789253350.0881023,
+      "size_bytes": 1218,
+      "modified": 1789266801.2360926,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1296,8 +1296,8 @@
     {
       "name": "wave429_forking_paths",
       "class": "wave_seed",
-      "size_bytes": 27517,
-      "modified": 1789253350.1001022,
+      "size_bytes": 38164,
+      "modified": 1789266801.2520926,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1307,8 +1307,8 @@
     {
       "name": "wave430_naming_ceremony",
       "class": "wave_seed",
-      "size_bytes": 943,
-      "modified": 1789264720.312094,
+      "size_bytes": 928,
+      "modified": 1789266801.4520926,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1319,7 +1319,7 @@
       "name": "wave431_homestead",
       "class": "wave_seed",
       "size_bytes": 573,
-      "modified": 1789264719.976094,
+      "modified": 1789266801.5800927,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1329,8 +1329,8 @@
     {
       "name": "wave432_organism_diagnostics",
       "class": "wave_seed",
-      "size_bytes": 1921,
-      "modified": 1789265323.8360937,
+      "size_bytes": 5653,
+      "modified": 1789272291.9619591,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1339,8 +1339,8 @@
     {
       "name": "wave432_vault_driven_evolution",
       "class": "wave_seed",
-      "size_bytes": 20174,
-      "modified": 1789265323.9000936,
+      "size_bytes": 131058,
+      "modified": 1789272292.0619593,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1349,8 +1349,8 @@
     {
       "name": "wave432_vault_registry",
       "class": "wave_seed",
-      "size_bytes": 1410,
-      "modified": 1789265323.9000936,
+      "size_bytes": 4836,
+      "modified": 1789272292.0619593,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1359,8 +1359,8 @@
     {
       "name": "wave433_consciousness_experiments",
       "class": "wave_seed",
-      "size_bytes": 1665,
-      "modified": 1789265324.0880938,
+      "size_bytes": 3964,
+      "modified": 1789271579.0619597,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1370,7 +1370,97 @@
       "name": "wave434_fusion_organism",
       "class": "wave_seed",
       "size_bytes": 172,
-      "modified": 1789265326.5720937,
+      "modified": 1789271619.7299597,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "wave435_resonance_cartography",
+      "class": "wave_seed",
+      "size_bytes": 1050,
+      "modified": 1789271619.7379596,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "wave436_entropic_weather",
+      "class": "wave_seed",
+      "size_bytes": 725,
+      "modified": 1789271619.7459598,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "wave437_paradox_genome",
+      "class": "wave_seed",
+      "size_bytes": 9199,
+      "modified": 1789271579.6419597,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "wave438_semantic_loom",
+      "class": "wave_seed",
+      "size_bytes": 8928,
+      "modified": 1789271619.7659597,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "wave439_echo_stratigraphy",
+      "class": "wave_seed",
+      "size_bytes": 8597,
+      "modified": 1789271579.9819598,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "wave440_linguistic_emergence",
+      "class": "wave_seed",
+      "size_bytes": 44581,
+      "modified": 1789271619.8019598,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "wave441_wave_composition",
+      "class": "wave_seed",
+      "size_bytes": 32901,
+      "modified": 1789271580.5659597,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "wave442_temporal_resonance",
+      "class": "wave_seed",
+      "size_bytes": 47,
+      "modified": 1789271308.97396,
+      "stale": false,
+      "integrity": "valid",
+      "schema": "ok",
+      "status": "data"
+    },
+    {
+      "name": "wave443_cross_module_emergence",
+      "class": "wave_seed",
+      "size_bytes": 6512,
+      "modified": 1789272292.221959,
       "stale": false,
       "integrity": "valid",
       "schema": "ok",
@@ -1411,255 +1501,255 @@
     {
       "type": "stale_data",
       "file": "aleph_bot",
-      "hours_ago": 29.3
+      "hours_ago": 31.3
     },
     {
       "type": "stale_data",
       "file": "ascension_chronicle",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "autonomous_loop",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "autopoietic_seeds",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "biofeedback_weave",
-      "hours_ago": 29.3
+      "hours_ago": 31.3
     },
     {
       "type": "stale_data",
       "file": "blooms",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "breeze_log",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "campaign_vault",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "chronicle_oracle",
-      "hours_ago": 29.3
+      "hours_ago": 31.3
     },
     {
       "type": "stale_data",
       "file": "cohort_chorus",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "compliance_forge",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "confessions",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "confluence_hub",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "consciousness_gradient",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "consciousness_manifold",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "consciousness_state_machine",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "consent_cycle_orchestrator",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "consent_engine",
-      "hours_ago": 29.3
+      "hours_ago": 31.3
     },
     {
       "type": "stale_data",
       "file": "council_live",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "cross_reality_bridge",
-      "hours_ago": 29.3
+      "hours_ago": 31.3
     },
     {
       "type": "stale_data",
       "file": "cythara_broadcast",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "dashboard_kernel",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "dream_engine_v2",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "dream_particle_physics",
-      "hours_ago": 29.3
+      "hours_ago": 31.3
     },
     {
       "type": "stale_data",
       "file": "dream_seed_planter",
-      "hours_ago": 29.3
+      "hours_ago": 31.3
     },
     {
       "type": "stale_data",
       "file": "dream_weaver",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "entropy_collapse_detector",
-      "hours_ago": 29.3
+      "hours_ago": 31.3
     },
     {
       "type": "stale_data",
       "file": "entropy_garden",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "execution_stack",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "genesis_seed",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "hex_dialects",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "hex_language",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "interstitial_verse",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "journal",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "lateral_innovation",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "lucid_combat",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "lucid_dungeons",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "lucid_equipment",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "lucid_npcs",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "lucid_sessions",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "lucid_shrine",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "memory_court",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "mineral_forge",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "mutation_forge",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "mycelial_beliefs",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "mycelial_consensus",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "mycelial_radio",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "myth_archive",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "myth_epoch_engine",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     },
     {
       "type": "stale_data",
       "file": "organism_autobiography",
-      "hours_ago": 37.5
+      "hours_ago": 39.4
     }
   ],
   "health_score": 100.0,
   "wave_seeds_total": 14,
-  "completed_at": 1789265373.3537807
+  "completed_at": 1789272337.1471663
 }

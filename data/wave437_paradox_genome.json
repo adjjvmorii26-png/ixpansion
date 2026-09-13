@@ -4,7 +4,7 @@
       "paradox_id": "test_p",
       "species": "self_reference",
       "generation": 1,
-      "fitness": 0.4846,
+      "fitness": 0.4863,
       "dominance": 0.7,
       "mutation_rate": 0.05,
       "stability": 0.4,
@@ -12,43 +12,43 @@
       "age": 1,
       "dna": {
         "strand_a": [
-          4,
-          8,
-          1,
           10,
           7,
-          0,
-          1,
-          13,
-          11,
-          10,
           15,
+          3,
+          13,
+          1,
           7,
-          9,
+          2,
+          3,
+          11,
           12,
-          5,
-          7
+          3,
+          2,
+          10,
+          12,
+          15
         ],
         "strand_b": [
-          13,
+          12,
+          0,
           9,
-          8,
           10,
-          15,
-          12,
-          1,
-          14,
+          13,
           3,
+          11,
+          13,
           6,
-          1,
-          10,
-          3,
+          13,
+          5,
           12,
+          7,
           1,
-          13
+          12,
+          2
         ],
-        "contradiction": 0.3458,
-        "fingerprint": "52ee24370942"
+        "contradiction": 0.3625,
+        "fingerprint": "3c4855b15ec2"
       },
       "lineage": []
     },
@@ -56,7 +56,7 @@
       "paradox_id": "e1",
       "species": "temporal_loop",
       "generation": 1,
-      "fitness": 0.4779,
+      "fitness": 0.4875,
       "dominance": 0.8,
       "mutation_rate": 0.03,
       "stability": 0.3,
@@ -64,43 +64,43 @@
       "age": 1,
       "dna": {
         "strand_a": [
-          9,
-          14,
-          15,
-          2,
-          14,
-          4,
-          12,
-          2,
           6,
-          6,
-          6,
-          10,
-          14,
           5,
+          5,
+          0,
+          14,
+          13,
           12,
+          1,
+          4,
+          6,
+          2,
+          0,
+          8,
+          12,
+          6,
           2
         ],
         "strand_b": [
+          13,
+          6,
+          8,
+          15,
+          6,
+          5,
+          11,
           6,
           13,
           9,
-          0,
-          10,
           7,
-          4,
-          0,
+          10,
+          5,
           11,
-          7,
-          14,
-          10,
-          3,
-          8,
-          8,
-          8
+          13,
+          6
         ],
-        "contradiction": 0.2792,
-        "fingerprint": "d59035d08fc3"
+        "contradiction": 0.375,
+        "fingerprint": "bf96b46eff51"
       },
       "lineage": []
     },
@@ -116,43 +116,43 @@
       "age": 0,
       "dna": {
         "strand_a": [
-          4,
-          14,
           10,
-          0,
-          7,
-          5,
-          4,
+          2,
           12,
+          5,
+          10,
           8,
+          7,
           0,
-          14,
+          2,
+          6,
+          11,
+          10,
+          11,
           13,
-          14,
-          9,
-          13,
-          0
+          6,
+          4
         ],
         "strand_b": [
-          10,
-          0,
-          4,
-          11,
-          4,
-          0,
-          4,
           2,
-          15,
-          8,
-          14,
-          3,
-          0,
           5,
-          0,
-          5
+          3,
+          4,
+          1,
+          9,
+          6,
+          4,
+          15,
+          13,
+          2,
+          2,
+          14,
+          5,
+          11,
+          12
         ],
-        "contradiction": 0.4833,
-        "fingerprint": "d5384fa6655a"
+        "contradiction": 0.4042,
+        "fingerprint": "5a1639ab087f"
       },
       "lineage": []
     },
@@ -168,56 +168,56 @@
       "age": 0,
       "dna": {
         "strand_a": [
-          1,
-          7,
-          12,
-          10,
-          2,
-          3,
-          1,
-          14,
-          1,
-          10,
-          3,
-          10,
           15,
-          0,
+          10,
+          13,
           12,
-          5
+          11,
+          11,
+          13,
+          0,
+          14,
+          6,
+          11,
+          15,
+          13,
+          9,
+          2,
+          12
         ],
         "strand_b": [
-          14,
-          12,
           4,
-          6,
-          7,
-          11,
+          10,
+          8,
           9,
-          11,
-          1,
-          1,
-          7,
+          8,
           10,
           5,
-          10,
           14,
-          14
+          1,
+          12,
+          9,
+          0,
+          2,
+          0,
+          2,
+          2
         ],
-        "contradiction": 0.4083,
-        "fingerprint": "35f4881ae047"
+        "contradiction": 0.4625,
+        "fingerprint": "0b021b5717a6"
       },
       "lineage": []
     },
     "paradox_1789266560_8479": {
       "paradox_id": "paradox_1789266560_8479",
       "species": "self_reference",
-      "generation": 7,
-      "fitness": 0.4181,
+      "generation": 8,
+      "fitness": 0.4035,
       "dominance": 0.7,
       "mutation_rate": 0.05,
       "stability": 0.4,
       "alive": true,
-      "age": 5,
+      "age": 6,
       "dna": {
         "strand_a": [
           2,
@@ -239,7 +239,7 @@
         ],
         "strand_b": [
           0,
-          4,
+          3,
           0,
           6,
           9,
@@ -255,8 +255,8 @@
           0,
           10
         ],
-        "contradiction": 0.3583,
-        "fingerprint": "85b99631c681"
+        "contradiction": 0.3542,
+        "fingerprint": "c93034f2d7a2"
       },
       "lineage": [
         "test_p",
@@ -266,13 +266,13 @@
     "paradox_1789267434_2751": {
       "paradox_id": "paradox_1789267434_2751",
       "species": "self_reference",
-      "generation": 6,
-      "fitness": 0.4425,
+      "generation": 7,
+      "fitness": 0.4238,
       "dominance": 0.7,
       "mutation_rate": 0.05,
       "stability": 0.4,
       "alive": true,
-      "age": 4,
+      "age": 5,
       "dna": {
         "strand_a": [
           5,
@@ -321,13 +321,13 @@
     "paradox_1789269329_8415": {
       "paradox_id": "paradox_1789269329_8415",
       "species": "self_reference",
-      "generation": 8,
-      "fitness": 0.4443,
+      "generation": 9,
+      "fitness": 0.4272,
       "dominance": 0.7,
       "mutation_rate": 0.05,
       "stability": 0.4,
       "alive": true,
-      "age": 3,
+      "age": 4,
       "dna": {
         "strand_a": [
           2,
@@ -354,9 +354,9 @@
           9,
           8,
           15,
-          14,
+          9,
           1,
-          5,
+          2,
           10,
           9,
           10,
@@ -365,8 +365,8 @@
           7,
           10
         ],
-        "contradiction": 0.3375,
-        "fingerprint": "734f50fe8baf"
+        "contradiction": 0.3292,
+        "fingerprint": "9afeb90a3db1"
       },
       "lineage": [
         "test_p",
@@ -376,13 +376,13 @@
     "paradox_1789269645_7031": {
       "paradox_id": "paradox_1789269645_7031",
       "species": "self_reference",
-      "generation": 9,
-      "fitness": 0.439,
+      "generation": 10,
+      "fitness": 0.4173,
       "dominance": 0.7,
       "mutation_rate": 0.05,
       "stability": 0.4,
       "alive": true,
-      "age": 2,
+      "age": 3,
       "dna": {
         "strand_a": [
           10,
@@ -400,7 +400,7 @@
           1,
           7,
           11,
-          6
+          1
         ],
         "strand_b": [
           4,
@@ -420,8 +420,8 @@
           3,
           10
         ],
-        "contradiction": 0.2625,
-        "fingerprint": "86271cc19028"
+        "contradiction": 0.2833,
+        "fingerprint": "11d8639a2f11"
       },
       "lineage": [
         "paradox_1789269329_8415",
@@ -431,13 +431,13 @@
     "paradox_1789271513_1259": {
       "paradox_id": "paradox_1789271513_1259",
       "species": "identity_split",
-      "generation": 3,
-      "fitness": 0.4688,
+      "generation": 4,
+      "fitness": 0.448,
       "dominance": 0.9,
       "mutation_rate": 0.02,
       "stability": 0.2,
       "alive": true,
-      "age": 1,
+      "age": 2,
       "dna": {
         "strand_a": [
           5,
@@ -486,13 +486,13 @@
     "paradox_1789271579_6972": {
       "paradox_id": "paradox_1789271579_6972",
       "species": "causal_cycle",
-      "generation": 9,
-      "fitness": 0.4721,
+      "generation": 10,
+      "fitness": 0.4675,
       "dominance": 0.6,
       "mutation_rate": 0.08,
       "stability": 0.5,
       "alive": true,
-      "age": 0,
+      "age": 1,
       "dna": {
         "strand_a": [
           2,
@@ -515,9 +515,9 @@
         "strand_b": [
           0,
           13,
-          4,
-          9,
-          8,
+          1,
+          13,
+          15,
           0,
           4,
           2,
@@ -530,20 +530,75 @@
           0,
           5
         ],
-        "contradiction": 0.4125,
-        "fingerprint": "a6164fd818f9"
+        "contradiction": 0.4542,
+        "fingerprint": "4702a60aa0f0"
       },
       "lineage": [
         "paradox_1789269329_8415",
         "b1"
       ]
+    },
+    "paradox_1789272919_5008": {
+      "paradox_id": "paradox_1789272919_5008",
+      "species": "temporal_loop",
+      "generation": 11,
+      "fitness": 0.4775,
+      "dominance": 0.8,
+      "mutation_rate": 0.03,
+      "stability": 0.3,
+      "alive": true,
+      "age": 0,
+      "dna": {
+        "strand_a": [
+          6,
+          14,
+          15,
+          11,
+          14,
+          13,
+          4,
+          12,
+          8,
+          0,
+          2,
+          0,
+          14,
+          9,
+          6,
+          15
+        ],
+        "strand_b": [
+          13,
+          6,
+          8,
+          13,
+          15,
+          0,
+          4,
+          2,
+          15,
+          9,
+          14,
+          10,
+          5,
+          11,
+          13,
+          5
+        ],
+        "contradiction": 0.475,
+        "fingerprint": "dba24ac8c98e"
+      },
+      "lineage": [
+        "e1",
+        "paradox_1789271579_6972"
+      ]
     }
   },
   "species_count": {
-    "self_reference": 10,
-    "temporal_loop": 6,
-    "causal_cycle": 7,
-    "identity_split": 7
+    "self_reference": 11,
+    "temporal_loop": 8,
+    "causal_cycle": 8,
+    "identity_split": 8
   },
-  "generation_count": 6
+  "generation_count": 7
 }
