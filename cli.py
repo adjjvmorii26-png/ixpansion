@@ -447,7 +447,7 @@ def cmd_children():
     result = _call("genesis_forge", "status")
     print(f"\n  🜏 Genesis Forge Children")
     print(f"  {'─'*50}")
-    for name in ["commerce_shelf", "physical_tide"]:
+    for name in ["commerce_shelf", "physical_tide", "resonance_mesh"]:
         try:
             r = _call(name, "status")
             print(f"    • {r.get('module')}: {r.get('status')} ({r.get('domain_family')})")

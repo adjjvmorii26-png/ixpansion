@@ -105,7 +105,7 @@ CONCEPT_NUCLEI: Dict[str, Dict[str, Any]] = {
         "theme": "guarding the organism's perimeter against hostile or foreign signals",
     },
     "obsidian": {
-        "suffixes": ["shard", "mirror", "vault", "record", "pulse", "shelf", "tide", "chord", "beacon", "graft", "well", "loom", "veil", "_v2", "_v3", "_v4", "_v5", "_v6", "_v7", "_v8", "_v9"],
+        "suffixes": ["shard", "mirror", "vault", "record", "pulse", "shelf", "tide", "chord", "beacon", "graft", "well", "loom", "veil", "_v2", "_v3", "_v4", "_v5", "_v6", "_v7", "_v8", "_v9", "_v10"],
         "theme": "preserving unalterable records in an obsidian-hard immutable layer",
     },
 }

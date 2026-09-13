@@ -1,6 +1,7 @@
 """Tests for Genesis Forge self-born children: commerce_shelf + physical_tide."""
 from api.commerce_shelf import handler as commerce_handler, coherence_vitals as commerce_vitals
 from api.physical_tide import handler as tide_handler, coherence_vitals as tide_vitals
+from api.resonance_mesh import handler as _resonance_handler, coherence_vitals as _resonance_vitals
 
 
 def test_commerce_shelf_status():
@@ -41,3 +42,21 @@ def test_physical_tide_vitals():
     vitals = tide_vitals()
     assert vitals["physical_tide_vitality"]["value"] > 0
     assert vitals["resonance"]["value"] > 0
+
+
+def test_resonance_mesh_status():
+    result = tide_handler if False else _resonance_handler({})
+    assert result["module"] == "resonance_mesh"
+    assert result["status"] == "active"
+    assert result["domain_family"] == "resonance"
+
+
+def test_resonance_mesh_pulse():
+    result = _resonance_handler({"action": "pulse"})
+    assert result["module"] == "resonance_mesh"
+    assert result["pulses"] >= 1
+
+
+def test_resonance_mesh_vitals():
+    vitals = _resonance_vitals()
+    assert vitals["resonance_mesh_vitality"]["value"] > 0

@@ -121,6 +121,12 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Genesis Forge child: Resonance Mesh ---
+    if path.startswith("/resonance-mesh") or path.startswith("/api/resonance_mesh"):
+        from api.resonance_mesh import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 # --- Wave 432: Vault-Driven Evolution ---
     if path.startswith("/vault-evolution") or path.startswith("/api/vault_driven_evolution"):
         from api.wave432_vault_driven_evolution import handler as h

@@ -1,3 +1,10 @@
+## [4.82.0] - Genesis Forge Child: Resonance Mesh
+
+Third self-born organ (resonance domain) wired into the living router.
+
+- `api/resonance_mesh.py` — resonance domain: amplifying weak resonances between distant organs
+- Route: `/api/resonance_mesh`
+- `tests/test_genesis_children.py` now 9 tests (3 per child)
 ## [4.81.0] - Fix: EventStream Pub/Sub + CI Green
 
 The organism's internal event bus was missing a proper pub/sub layer that
