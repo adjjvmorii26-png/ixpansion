@@ -40,6 +40,10 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return h(_payload)
     if path == "/health":
         return api_server.platform_health()
+    if path.startswith("/events") or path.startswith("/api/events"):
+        from api.event_stream import handler as eh
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return eh(q)
     if path == "/modules":
         names = sorted(api_server.MODULE_REGISTRY.keys()) if api_server.MODULE_REGISTRY else []
         return {"modules": names, "count": len(names)}
@@ -2014,6 +2018,12 @@ def handler(request) -> dict:
         return h(q)
     if path == "/resonance-topology" or path == "/resonance_topology":
         from api.wave411_topology import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Event Stream ---
+    if path.startswith("/events") or path.startswith("/api/events"):
+        from api.event_stream import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 

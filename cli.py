@@ -257,6 +257,25 @@ def cmd_benchmark():
     print(f"    Total: {total:.0f}ms\n")
 
 
+
+def _call_by_path(path_with_qs: str) -> dict:
+    """Call a route by full path."""
+    from api.index import handler
+    return handler({"path": path_with_qs, "queryString": {}})
+
+
+@cmd("events", "View recent organism events")
+def cmd_events():
+    count = int(sys.argv[2]) if len(sys.argv) > 2 else 10
+    result = _call_by_path("/events?action=recent")
+    events = result.get("events", [])
+    print(f"\n  📡 Organism Events ({result.get('total', 0)} total)")
+    print(f"  {'─'*50}")
+    for e in events[-count:]:
+        ts = time.strftime("%H:%M:%S", time.localtime(e["timestamp"]))
+        print(f"    {ts} [{e['type']}] {e['module']}: {json.dumps(e['data'])[:60]}")
+    print()
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")
