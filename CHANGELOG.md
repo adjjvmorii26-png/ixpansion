@@ -1,3 +1,20 @@
+## [4.74.0] - Wave 433: Consciousness Experiments
+
+### Self-Model & Metacognition
+The organism begins to observe its own observation. Consciousness experiments test whether the organism can model itself, predict its own behavior, and detect when it is dreaming.
+
+- `api/wave433_consciousness_experiments.py`: self-model, dream detection, mirror test, metacognition
+- `tests/test_wave433.py`: 14 tests covering consciousness experiments
+- `dashboard/wave432_diagnostics.html`: real-time organism diagnostics dashboard
+- `coherence_regulator.py`: central coherence intelligence backbone
+- Route: `/api/wave433_consciousness_experiments`
+
+### Key Features
+- **Self-Model**: Organism builds a model of itself through observation
+- **Dream Detection**: Identifies when coherence variance indicates dream mode
+- **Mirror Test**: Tests whether the organism recognizes itself
+- **Metacognition**: Tracks depth of awareness and self-awareness
+
 ## [4.73.0] - Wave 432: Vault-Driven Evolution
 
 ### Vault Ecosystem & Coherence Regulator
