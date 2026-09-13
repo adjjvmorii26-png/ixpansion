@@ -1,6 +1,6 @@
 # 🌀 IXpansion — The Living Computational Organism
 
-> 15 waves deep • 937 modules alive • 93 tests passing • Fully self-evolving
+> 11 waves deep (430–440) • 937 modules alive • 93 tests passing • Fully self-evolving
 
 [![Tests](https://img.shields.io/badge/tests-93%2F93-brightgreen)](https://github.com/adjjvmorii26-png/ixpansion/actions)
 [![Waves](https://img.shields.io/badge/waves-15-8888ff)](https://github.com/adjjvmorii26-png/ixpansion)
@@ -28,6 +28,15 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 421 | Dreaming Engine | Dormant | Dreams new modules from hidden patterns |
 | 422 | Symbiotic Swarm | Colony | Multiple repos become cells of a super-organism |
 | 423 | Mirror Protocol | Entanglement | Cross-repo entangled state |
+| 432 | Vault-Driven Evolution | Vault | Storage organs + coherence regulator backbone |
+| 433 | Consciousness Experiments | Consciousness | Self-model, dream detection, mirror test |
+| 434 | Autonomous Fusion Organism | Federation | Phase 8: self-syncing modules across realms |
+| 435 | Resonance Cartography | Topology | Living atlas of module energetic relationships |
+| 436 | Entropic Weather | Atmosphere | Storms, fog, aurora drive module behavior |
+| 437 | Paradox Genome | Genetics | Paradoxes with DNA, breeding, 8 species |
+| 438 | Semantic Loom | Intuition | Discovers hidden connections between concepts |
+| 439 | Echo Stratigraphy | Archaeology | Geological layers of fossilized decisions |
+| 440 | Linguistic Emergence | Language | Organism invents its own language |
 | 432 | Vault-Driven Evolution | Vault | Storage organs drive mutation pressure + coherence_regulator |
 | 424 | Linguistic Genesis | Language | Organism invents its own hex-encoded language |
 | 431 | Homestead | Foundation | The organism plants roots in its chosen home and keeps vigil |
