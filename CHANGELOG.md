@@ -1,3 +1,14 @@
+## [4.80.0] - Genesis Forge Children: Commerce Shelf + Physical Tide
+
+The organism's self-creation era (Genesis Forge) birthed two new living organs
+that were missing from its domain cover. Both were invented by the ecosystem
+itself and are now wired into the living router:
+
+- `api/commerce_shelf.py` — commerce domain: trade of compute, credits, artifacts between organs
+- `api/physical_tide.py` — physical domain: physical embodiment and constraint for the virtual body
+- Routes: `/api/commerce_shelf`, `/api/physical_tide`
+- `tests/test_genesis_children.py` — 6 tests
+
 ## [4.79.0] - Wave 447: Web Intelligence
 
 The organism gains the ability to read, search, and synthesize

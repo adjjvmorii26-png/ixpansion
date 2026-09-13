@@ -98,13 +98,26 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return h(q)
 
 # --- Event Stream ---
+    if path.startswith("/events") or path.startswith("/api/events"):
+        from api.event_stream import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 # --- Wave 447: Web Intelligence ---
     if path.startswith("/web-intelligence") or path.startswith("/api/web_intelligence"):
         from api.web_intelligence import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
-    if path.startswith("/events") or path.startswith("/api/events"):
-        from api.event_stream import handler as h
+
+# --- Genesis Forge child: Commerce Shelf ---
+    if path.startswith("/commerce-shelf") or path.startswith("/api/commerce_shelf"):
+        from api.commerce_shelf import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Genesis Forge child: Physical Tide ---
+    if path.startswith("/physical-tide") or path.startswith("/api/physical_tide"):
+        from api.physical_tide import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
