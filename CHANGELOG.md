@@ -1,3 +1,19 @@
+## [4.76.0] - Waves 435-437: Experimental Innovation Triad
+
+### Wave 435: Resonance Cartography
+Living atlas mapping the energetic topology between modules. Resonance signatures, attraction fields, cluster detection, and harmonic drift.
+
+### Wave 436: Entropic Weather
+The organism has weather. Storms, fog, aurora, drought, monsoon — each drives different module behavior. Seasons advance. Weather forecasts predict upcoming patterns.
+
+### Wave 437: Paradox Genome
+Paradoxes become living entities with DNA. 8 species taxonomy. Paradoxes evolve, breed, and die. Contradiction strands encode harmonic sequences. The organism breeds paradoxes instead of resolving them.
+
+- `api/wave435_resonance_cartography.py` — ResonanceSignature, AttractionField, Cartographer
+- `api/wave436_entropic_weather.py` — WeatherCell, WeatherSystem, 6 weather types
+- `api/wave437_paradox_genome.py` — ParadoxDNA, ParadoxEntity, ParadoxGenome, 8 species
+- 50 tests across 3 waves, all passing
+
 ## [4.75.0] - Wave 434: Autonomous Fusion Organism
 
 ### Phase 8: Federated Organism
