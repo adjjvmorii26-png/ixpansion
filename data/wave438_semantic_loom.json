@@ -116,8 +116,86 @@
       "strength": 0.5698,
       "novelty": 0.4302,
       "traversability": 0.8149
+    },
+    {
+      "concept_a": "entropy",
+      "concept_b": "consciousness",
+      "bridge_threads": [
+        {
+          "thread_a": "randomness",
+          "thread_b": "awareness",
+          "resonance": 0.7633,
+          "bridge_strength": 0.6693
+        },
+        {
+          "thread_a": "disorder",
+          "thread_b": "reflection",
+          "resonance": 0.6128,
+          "bridge_strength": 0.5866
+        },
+        {
+          "thread_a": "dissolution",
+          "thread_b": "reflection",
+          "resonance": 0.6403,
+          "bridge_strength": 0.5832
+        },
+        {
+          "thread_a": "randomness",
+          "thread_b": "attention",
+          "resonance": 0.5945,
+          "bridge_strength": 0.5567
+        },
+        {
+          "thread_a": "disorder",
+          "thread_b": "mirror",
+          "resonance": 0.6413,
+          "bridge_strength": 0.524
+        }
+      ],
+      "strength": 0.6504,
+      "novelty": 0.3496,
+      "traversability": 0.8778
+    },
+    {
+      "concept_a": "entropy",
+      "concept_b": "void",
+      "bridge_threads": [
+        {
+          "thread_a": "unpredictability",
+          "thread_b": "potential",
+          "resonance": 0.6875,
+          "bridge_strength": 0.6721
+        },
+        {
+          "thread_a": "disorder",
+          "thread_b": "nothingness",
+          "resonance": 0.585,
+          "bridge_strength": 0.5681
+        },
+        {
+          "thread_a": "dissolution",
+          "thread_b": "nothingness",
+          "resonance": 0.6133,
+          "bridge_strength": 0.5002
+        },
+        {
+          "thread_a": "disorder",
+          "thread_b": "silence",
+          "resonance": 0.5822,
+          "bridge_strength": 0.4888
+        },
+        {
+          "thread_a": "unpredictability",
+          "thread_b": "nothingness",
+          "resonance": 0.4936,
+          "bridge_strength": 0.4817
+        }
+      ],
+      "strength": 0.5923,
+      "novelty": 0.4077,
+      "traversability": 0.8338
     }
   ],
-  "thread_count": 168,
-  "bridge_count": 12
+  "thread_count": 196,
+  "bridge_count": 14
 }
