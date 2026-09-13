@@ -1,3 +1,23 @@
+## [4.73.0] - Wave 432: Vault-Driven Evolution
+
+### Vault Ecosystem & Coherence Regulator
+The organism grows storage organs that drive mutation pressure. The coherence_regulator backbone keeps every future module plugged into a living system.
+
+- `api/wave432_vault_driven_evolution.py`: vault organs, coherence regulator, organism diagnostics sweep
+- `coherence_regulator.py`: central coherence intelligence for the entire organism
+- `tests/test_wave432.py`: 17 tests covering vault mechanics, regulation, and diagnostics
+- `dashboard/wave432_vault_evolution.html`: interactive dashboard with real-time metrics
+- Route: `/api/wave432_vault_driven_evolution` · Dashboard: `dashboard/wave432_vault_evolution.html`
+- Actions: status, regulate, create_vault, diagnostics_sweep, evolve
+- Organism status: THRIVING
+
+### Key Features
+- **Coherence Regulator**: Central backbone that measures and maintains organism coherence
+- **Vault Organs**: Storage organs that accumulate resonance and trigger mutations
+- **Mutation Pressure**: Scales with vault density × coherence
+- **Organism Diagnostics**: Sweep across all wave modules for health assessment
+- **Evolution Cycle**: Full regulate → create vaults → mutate workflow
+
 ## [4.72.0] - Wave 431: Homestead
 
 ### Foundation
