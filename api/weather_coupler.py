@@ -21,12 +21,14 @@ def handler(payload=None, context=None):
         "resonance_shift": round(-0.2 + intensity * 0.4, 3),
         "entropy_injection": round(0.05 + intensity * 0.5, 3),
     }
+    scope = "all" if intensity > 0.5 else "core"
+    touch = "amplify" if intensity > 0.5 else "gently touch"
     return {
         "action": "weather_coupler",
         "solar_event": event,
         "intensity": intensity,
         "effects": effects,
-        "forecast": f"{event.title()} expected to {'amplify' if intensity > 0.5 else 'gently touch'} the organism's {"all" if intensity > 0.5 else "core"} layers.",
+        "forecast": f"{event.title()} expected to {touch} the organism's {scope} layers.",
         "time": time.time(),
         "vitals": coherence_vitals(),
     }

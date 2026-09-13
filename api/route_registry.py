@@ -1,9 +1,9 @@
 """Wave 139 — Route Registry.
 
 The canonical map of the live platform's HTTP routes. Loads routes
-from vercel.json (the single source of truth) and resolves which API
-module each URL pattern dispatches to, making the runtime self-aware
-of its own surface.
+from vercel.json when present, otherwise introspects the live
+dispatcher (api/index.py) so the runtime stays self-aware of its
+surface without any external hosting file.
 """
 from __future__ import annotations
 
@@ -28,7 +28,21 @@ class RouteRegistry:
                 data = json.load(f)
             self._routes = list(data.get("routes", []))
         except (OSError, json.JSONDecodeError):
-            self._routes = []
+            self._routes = self._routes_from_index()
+
+    def _routes_from_index(self) -> List[Dict[str, str]]:
+        """Introspect the live dispatcher when vercel.json is absent."""
+        import re
+        idx = ROOT / "api" / "index.py"
+        routes: List[Dict[str, str]] = []
+        seen: set = set()
+        if idx.exists():
+            for m in re.finditer(r'path\.startswith\("(/[^"]+)"\)', idx.read_text(errors="ignore")):
+                src = m.group(1)
+                if src not in seen:
+                    seen.add(src)
+                    routes.append({"src": src, "dest": "api/index.py"})
+        return routes
 
     def count(self) -> int:
         return len(self._routes)
@@ -49,9 +63,12 @@ class RouteRegistry:
         return "unified_router"
 
     def status(self) -> Dict[str, Any]:
+        source = self.vercel_path
+        if not Path(self.vercel_path).exists():
+            source = "api/index.py (introspected)"
         return {"routes": self.count(),
                 "unique_destinations": len(set(self.destinations())),
-                "source": self.vercel_path}
+                "source": source}
 
 
 def handler(payload: dict = None, context: object = None) -> dict:
