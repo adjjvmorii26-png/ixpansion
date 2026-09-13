@@ -1,20 +1,15 @@
-# IXPANSION Lab · expanded rail v2
-
-Branch: `lab/chrono-forge-wave`
+# IXPANSION Lab · v2.1 evolved
 
 ```bash
-python lab/smoke_lab.py
-python lab/ops/lab_suite.py
-python lab/ops/echo_archive.py
-python lab/ops/soft_gate_report.py
-python apps/seamwalk/serve.py
+python lab/ops/lab_bootstrap.py
+python lab/ops/caption_pulse.py
+python lab/projects/doctrine_diff.py
 ```
 
-| Layer | Modules |
-|-------|---------|
-| Gates | smoke, tickets, GRAFT-1, heartbeat, soft_gate_report |
-| Memory | route_scar, silence_ledger, proof_tide, echo_archive |
-| Creative | weather, choir, compass, constellation, dual_track |
-| App | SEAMWALK |
+| Entry | Role |
+|-------|------|
+| lab_bootstrap | doctrine → smoke → constellation → echo → soft gate → pulse |
+| caption_pulse | doctrine % · tide · scar → @CoodingLooop |
+| ORGAN_REGISTRY.json | module inventory |
 
-Doctrine: lab gates ≠ ALEPH CI · absence is structure · silence is the product surface
+Doctrine: absence is structure · silence is the product surface · lab ≠ ALEPH CI · expand meaning, compress map
