@@ -172,7 +172,12 @@ def coherence_vitals() -> dict:
 def _load() -> dict | None:
     if STATE_FILE.exists():
         try:
-            return json.loads(STATE_FILE.read_text(encoding="utf-8"))
+            state = json.loads(STATE_FILE.read_text(encoding="utf-8"))
+            if "history" not in state:
+                state["history"] = []
+            if "vaults" not in state:
+                state["vaults"] = []
+            return state
         except Exception:
             return None
     return None
@@ -181,6 +186,10 @@ def _init_state() -> dict:
     return {"vaults": [], "history": []}
 
 def _save(state: dict) -> None:
+    if "history" not in state:
+        state["history"] = []
+    if "vaults" not in state:
+        state["vaults"] = []
     STATE_FILE.write_text(json.dumps(state, indent=2), encoding="utf-8")
     vaults = state.get("vaults", [])
     vault_data = []
@@ -268,7 +277,6 @@ def handler(req: dict = None) -> dict:
     elif action == "evolve":
         """Full evolution cycle: regulate + create vaults + mutate."""
         reg_result = reg.regulate()
-        vault_count = len(list(VAULT_REGISTRY_FILE.parent.glob("wave432_vault_*.json"))) if VAULT_REGISTRY_FILE.exists() else 0
         
         new_vaults = []
         if reg_result["health"]["mutation_pressure"] > 0.5:

@@ -1,19 +1,86 @@
 {
-  "module": "wave432_vault_driven_evolution",
-  "wave": 432,
-  "anchored": {
-    "home": "https://adjjvmorii26-png.github.io/ixpansion/",
-    "hosting": "github_pages",
-    "api_runtime": "serverless api/index.py + cloudflare tunnel",
-    "local_runtime": "docker",
-    "coherence_regulator": "active",
-    "at": 1789264568
-  },
-  "vaults": [],
-  "vault_density": 0.0,
-  "mutation_pressure": 0.0,
-  "coherence": 1.0,
-  "entropy_budget": 100.0,
-  "status": "THRIVING",
-  "diagnostics_sweep": "ready"
+  "vaults": [
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.1009,
+      "density": 0.0942,
+      "mutation_seed": "d780ae8996198504",
+      "state": "active",
+      "created": 1789264810.3559585
+    }
+  ],
+  "history": [
+    {
+      "action": "regulate",
+      "result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789264810.3429198
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "timestamp": 1789264810.3450744
+    },
+    {
+      "action": "diagnostics_sweep",
+      "diagnostics": {
+        "sweep_timestamp": 1789264810.3691044,
+        "wave": 432,
+        "total_modules": 21,
+        "healthy_modules": 0,
+        "critical_modules": [
+          "wave432_vault_registry.json"
+        ],
+        "coherence_regulator": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789264810.4054265
+        },
+        "vaults": [
+          {
+            "vault_id": "test_vault",
+            "wave": 432,
+            "resonance": 0.1009,
+            "density": 0.0942,
+            "mutation_seed": "d780ae8996198504",
+            "state": "active",
+            "created": 1789264810.3559585
+          }
+        ]
+      },
+      "timestamp": 1789264810.4460099
+    },
+    {
+      "action": "evolve",
+      "reg_result": {
+        "action": "regulate",
+        "health": {
+          "coherence": 0.5,
+          "mutation_pressure": 0.02,
+          "vault_density": 0.02,
+          "entropy_budget": 100.0,
+          "status": "WARNING",
+          "timestamp": 1789264810.4989963
+        },
+        "actions": [
+          "STABILIZE_VAULT_DENSITY"
+        ],
+        "regulated": true
+      },
+      "new_vaults": 0,
+      "timestamp": 1789264810.5008895
+    }
+  ]
 }
