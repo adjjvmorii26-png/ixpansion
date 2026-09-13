@@ -1,7 +1,7 @@
 {
-  "sweep_timestamp": 1789270950.8964753,
+  "sweep_timestamp": 1789271578.6526482,
   "wave": 432,
-  "total_modules": 29,
+  "total_modules": 32,
   "healthy_modules": 0,
   "critical_modules": [
     "wave432_vault_registry.json"
@@ -12,7 +12,7 @@
     "vault_density": 0.02,
     "entropy_budget": 100.0,
     "status": "WARNING",
-    "timestamp": 1789270950.950545
+    "timestamp": 1789271578.715425
   },
   "vaults": [
     {
@@ -203,6 +203,24 @@
       "mutation_seed": "eb7586e7e534c8de",
       "state": "active",
       "created": 1789270950.8721309
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.3096,
+      "density": 0.0248,
+      "mutation_seed": "26a6ff007ba5d383",
+      "state": "active",
+      "created": 1789271512.2202895
+    },
+    {
+      "vault_id": "test_vault",
+      "wave": 432,
+      "resonance": 0.1713,
+      "density": 0.0657,
+      "mutation_seed": "765f7d66d72f9303",
+      "state": "active",
+      "created": 1789271578.6243398
     }
   ]
 }

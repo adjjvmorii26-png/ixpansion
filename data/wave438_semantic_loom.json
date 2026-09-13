@@ -233,8 +233,125 @@
       "strength": 0.6647,
       "novelty": 0.3353,
       "traversability": 0.8876
+    },
+    {
+      "concept_a": "entropy",
+      "concept_b": "dream",
+      "bridge_threads": [
+        {
+          "thread_a": "decay",
+          "thread_b": "emergence",
+          "resonance": 0.6066,
+          "bridge_strength": 0.5348
+        },
+        {
+          "thread_a": "dissolution",
+          "thread_b": "narrative",
+          "resonance": 0.62,
+          "bridge_strength": 0.516
+        },
+        {
+          "thread_a": "unpredictability",
+          "thread_b": "narrative",
+          "resonance": 0.6003,
+          "bridge_strength": 0.4871
+        },
+        {
+          "thread_a": "dissolution",
+          "thread_b": "logic_mutable",
+          "resonance": 0.5597,
+          "bridge_strength": 0.472
+        },
+        {
+          "thread_a": "dissolution",
+          "thread_b": "unconscious",
+          "resonance": 0.5053,
+          "bridge_strength": 0.461
+        }
+      ],
+      "strength": 0.5784,
+      "novelty": 0.4216,
+      "traversability": 0.8222
+    },
+    {
+      "concept_a": "entropy",
+      "concept_b": "dream",
+      "bridge_threads": [
+        {
+          "thread_a": "unpredictability",
+          "thread_b": "logic_mutable",
+          "resonance": 0.6378,
+          "bridge_strength": 0.5325
+        },
+        {
+          "thread_a": "unpredictability",
+          "thread_b": "emergence",
+          "resonance": 0.5873,
+          "bridge_strength": 0.532
+        },
+        {
+          "thread_a": "decay",
+          "thread_b": "narrative",
+          "resonance": 0.5775,
+          "bridge_strength": 0.4862
+        },
+        {
+          "thread_a": "freedom",
+          "thread_b": "emergence",
+          "resonance": 0.6167,
+          "bridge_strength": 0.4817
+        },
+        {
+          "thread_a": "decay",
+          "thread_b": "hidden",
+          "resonance": 0.615,
+          "bridge_strength": 0.4738
+        }
+      ],
+      "strength": 0.6069,
+      "novelty": 0.3931,
+      "traversability": 0.8454
+    },
+    {
+      "concept_a": "entropy",
+      "concept_b": "consciousness",
+      "bridge_threads": [
+        {
+          "thread_a": "freedom",
+          "thread_b": "self_model",
+          "resonance": 0.7688,
+          "bridge_strength": 0.7161
+        },
+        {
+          "thread_a": "unpredictability",
+          "thread_b": "reflection",
+          "resonance": 0.7263,
+          "bridge_strength": 0.5849
+        },
+        {
+          "thread_a": "dissolution",
+          "thread_b": "self_model",
+          "resonance": 0.6647,
+          "bridge_strength": 0.5542
+        },
+        {
+          "thread_a": "disorder",
+          "thread_b": "reflection",
+          "resonance": 0.6803,
+          "bridge_strength": 0.5323
+        },
+        {
+          "thread_a": "randomness",
+          "thread_b": "reflection",
+          "resonance": 0.6273,
+          "bridge_strength": 0.5019
+        }
+      ],
+      "strength": 0.6935,
+      "novelty": 0.3065,
+      "traversability": 0.906
     }
   ],
-  "thread_count": 210,
-  "bridge_count": 15
+  "thread_count": 336,
+  "bridge_count": 24
 }
