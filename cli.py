@@ -258,6 +258,42 @@ def cmd_benchmark():
 
 
 
+
+@cmd("compose", "Compose a chord from wave voices")
+def cmd_compose():
+    voices = sys.argv[2].split(",") if len(sys.argv) > 2 else ["vault", "weather", "paradox"]
+    result = _call_by_path("/wave-composition?action=compose&voices=" + ",".join(voices))
+    comp = result.get("composition", {})
+    print(f"\n  🎵 Wave Composition")
+    print(f"  {'─'*40}")
+    for voice, data in comp.get("results", {}).items():
+        if "error" not in data:
+            print(f"    {voice}: harmonic={data.get('harmonic', 0):.3f} weight={data.get('weight', 0):.1f}")
+    print(f"    Avg harmonic: {comp.get('avg_harmonic', 0):.4f}")
+    print(f"    Chord hash: {comp.get('chord_hash', '?')}")
+    print()
+
+@cmd("feel", "Feel the temporal resonance of the organism")
+def cmd_feel():
+    result = _call_by_path("/temporal-resonance?action=propagate&module=organism&steps=5")
+    echoes = result.get("echoes", [])
+    print(f"\n  ⏳ Temporal Resonance — {result.get('module', '?')}")
+    print(f"  {'─'*40}")
+    for echo in echoes:
+        bar = "█" * int(echo["strength"] * 20)
+        print(f"    Step {echo['step']}: {bar} {echo['strength']:.3f} ({echo['predicted_state']})")
+    print()
+
+@cmd("emerge", "Detect cross-module emergent behaviors")
+def cmd_emerge():
+    result = _call_by_path("/emergence?action=detect")
+    emergences = result.get("emergences", [])
+    print(f"\n  🌊 Cross-Module Emergence — {len(emergences)} phenomena detected")
+    print(f"  {'─'*50}")
+    for e in emergences[:8]:
+        print(f"    {e['type']}: {e['waves'][0]} × {e['waves'][1]} (n={e['novelty']:.2f} s={e['strength']:.2f})")
+    print()
+
 def _call_by_path(path_with_qs: str) -> dict:
     """Call a route by full path."""
     from api.index import handler
