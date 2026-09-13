@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><title>Homestead Atlas</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:ui-monospace,monospace;background:#05050c;color:#9ab;padding:24px}h1{color:#77dd88;letter-spacing:.2em;font-size:1.1rem}.sub{color:#456;margin:8px 0 24px;font-size:.85rem}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;max-width:1100px}.tile{background:#0a1a12;border:1px solid #1a3a2a;border-radius:10px;padding:14px}.tile h3{color:#77dd88;font-size:.9rem;margin-bottom:8px}.tile p{font-size:.75rem;color:#6a7}</style></head>
+<body><h1>HOMESTEAD ATLAS</h1><p class="sub">Archive Topology · Wave 431 hearth → 432+ tiles</p>
+<div class="grid" id="g"></div>
+<script>const tiles=[{t:"Homestead",d:"Anchor + vigil"},{t:"Mycelial Index",d:"Wave 432 spores"},{t:"Lab Constellation",d:"Scar · silence · tide"},{t:"Route Scar",d:"754→89 memory"},{t:"Soft Gates",d:"Lab ≠ ALEPH CI"},{t:"Parallel Vein",d:"CI shard plan"}];
+document.getElementById('g').innerHTML=tiles.map(x=>`<div class="tile"><h3>${x.t}</h3><p>${x.d}</p></div>`).join('')</script>
+</body></html>
