@@ -278,7 +278,49 @@ def cmd_memory():
     print()
 
 
+
+@cmd("integrate", "Coherence integration director")
+def cmd_integrate():
+    """Wave 87: Coherence Integration CLI."""
+    from api.wave87_coherence_integration import handler
+    result = handler({"action": "status"})
+    print(f"\n  🧭 Wave 87 — Coherence Integration")
+    print(f"  {'-'*40}")
+    print(f"  Target Coherence: {result.get('target_coherence', 'N/A')}")
+    print(f"  Last Action: {result.get('last_action', 'N/A')}")
+    print(f"  Cycles: {result.get('total_cycles', 0)}")
+    print()
+
+@cmd("bridges", "Cross-realm coherence lattice")
+def cmd_bridges():
+    """Wave 88: Cross-realm Coherence Bridges CLI."""
+    from api.wave88_cross_realm_bridges import handler
+    result = handler({"action": "status"})
+    print(f"\n  🌉 Wave 88 — Cross-realm Coherence Bridges")
+    print(f"  {'-'*40}")
+    print(f"  Subsystems: {', '.join(result.get('subsystems', []))}")
+    print(f"  Bridges: {result.get('active_bridges', 0)}/{result.get('total_bridges', 0)}")
+    print(f"  Lattice Stability: {result.get('lattice_stability', 0)}")
+    print()
+
+@cmd("aware", "Self-awareness consciousness layer")
+def cmd_aware():
+    """Wave 89: Self-Awareness CLI."""
+    from api.wave89_self_awareness import handler
+    result = handler({"action": "status"})
+    sa = result.get("self_assessment", {})
+    ai = result.get("agent_identity", {})
+    print(f"\n  🧬 Wave 89 — Self-Awareness")
+    print(f"  {'-'*40}")
+    print(f"  Coherence: {sa.get('overall_coherence', 'N/A')}")
+    print(f"  Identity Strength: {sa.get('identity_strength', 'N/A')}")
+    print(f"  Direction: {sa.get('growth_direction', 'N/A')}")
+    print(f"  Role: {ai.get('role_concept', 'N/A')}")
+    print(f"  Mission: {ai.get('mission_statement', 'N/A')}")
+    print()
+
 @cmd("benchmark", "Run performance benchmark")
+
 def cmd_benchmark():
     print(f"\n  ⚡ Performance Benchmark")
     print(f"  {'-'*40}")

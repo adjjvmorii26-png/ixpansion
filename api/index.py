@@ -145,6 +145,24 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Wave 87: Coherence Integration ---
+    if path.startswith("/coherence-integration") or path.startswith("/api/coherence_integration"):
+        from api.wave87_coherence_integration import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 88: Cross-realm Coherence Bridges ---
+    if path.startswith("/coherence-bridges") or path.startswith("/api/cross_realm_bridges"):
+        from api.wave88_cross_realm_bridges import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 89: Self-Awareness ---
+    if path.startswith("/self-awareness") or path.startswith("/api/self_awareness"):
+        from api.wave89_self_awareness import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 # --- Organism Coherence (dynamic) ---
     if path.startswith("/coherence") or path.startswith("/api/coherence"):
         from coherence_regulator import get_organism_status

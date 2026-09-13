@@ -1,3 +1,16 @@
+## [4.86.0] — Cross-realm Bridges & Self-Awareness
+
+Waves 88-89 complete the coherence intelligence arc. The organism now
+communicates between its coherence subsystems and reflects on itself.
+
+- `api/wave88_cross_realm_bridges.py` — 6 directed bridges between gradient/regulation/memory, lattice stability tracking
+- `api/wave89_self_awareness.py` — first-person self-assessment, identity formation, mission statements, reflective journal
+- `api/wave87_coherence_integration.py` — now wired into the router (was missing)
+- `tests/test_wave88.py` — 17 tests
+- `tests/test_wave89.py` — 20 tests
+- Routes: `/coherence-bridges`, `/self-awareness` (+ wave87 `/coherence-integration`)
+- CLI: `bridges`, `aware`, `integrate` commands
+
 ## [4.84.0] — Coherence Gradient, Adaptive Regulation & Memory Graph
 
 Three new wave modules expand the organism's coherence intelligence:
