@@ -1,3 +1,19 @@
+## [4.77.0] - Waves 438-440: Second Experimental Innovation Triad
+
+### Wave 438: Semantic Loom
+Weaving engine that discovers hidden connections between unrelated concepts. Extracts semantic threads, calculates resonance between them, and bridges concepts across domains. The organism now has intuition.
+
+### Wave 439: Echo Stratigraphy
+Geological layers of fossilized decisions. Sediment (raw events), Fossils (compressed decisions), Metamorphic (transformed insights), Bedrock (permanent axioms). The organism can do archaeology on itself.
+
+### Wave 440: Linguistic Emergence
+The organism invents its own language. 26 core glyphs, emergent grammar rules, word generation, poetry composition, and bidirectional translation. The language evolves as the organism evolves.
+
+- `api/wave438_semantic_loom.py` — SemanticThread, SemanticBridge, SemanticLoom
+- `api/wave439_echo_stratigraphy.py` — SedimentLayer, FossilLayer, MetamorphicLayer, BedrockLayer
+- `api/wave440_linguistic_emergence.py` — Glyph, Word, GrammarRule, OrganismLanguage
+- 46 tests across 3 waves, all passing
+
 ## [4.76.0] - Waves 435-437: Experimental Innovation Triad
 
 ### Wave 435: Resonance Cartography
