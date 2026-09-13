@@ -1,16 +1,16 @@
-# Lab Ops · creative organs
-
-| Tool | Idea |
-|------|------|
-| glyph_weather | mood + tide → day glyph |
-| absence_choir | voids as silent choir |
-| invert_compass | graft → smallest next truth |
-| lab_constellation | fuse scar/silence/tide |
-| proof_tide | proof density tide |
-| route_scar | vercel collapse memory |
+# Lab Ops · expanded v2
 
 ```bash
-python lab/ops/glyph_weather.py
-python lab/ops/absence_choir.py
-python lab/ops/invert_compass.py
+python lab/ops/lab_suite.py          # full organ run
+python lab/ops/echo_archive.py       # caption keyword index
+python lab/ops/soft_gate_report.py   # lab vs ALEPH one-pager
+python lab/ops/lab_constellation.py
 ```
+
+| Organ | Role |
+|-------|------|
+| lab_suite | orchestration |
+| echo_archive | silence catalog |
+| soft_gate_report | dual-track status MD |
+| glyph_weather / absence_choir / invert_compass | creative |
+| route_scar / silence_ledger / proof_tide | memory |
