@@ -1,15 +1,7 @@
-# lab/chrono-forge-wave
-
-Re-opened from `main@92ed394` after Waves 432–434 landed on ALEPH.
-
-| Track | Branch | Green means |
-|-------|--------|-------------|
-| **ALEPH** | `main` | full CI · Pages · Cloudflare |
-| **Lab** | `lab/chrono-forge-wave` | Lab Smoke/Graft · bootstrap · doctrine |
+# lab/chrono-forge-wave · 5y evolve burst
 
 ```bash
-python lab/ops/lab_bootstrap.py
-python lab/ops/caption_pulse.py
+python lab/evolve/velocity.py
 ```
 
-No cross-contamination: experiment here, promote by PR when ready.
+Arc: contract → memory → oblivion → atlas → proof → quiet
