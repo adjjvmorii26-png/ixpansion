@@ -4,59 +4,71 @@
   "type": "quantum_state",
   "purpose": "Organism exists in multiple states simultaneously until observed",
   "active": true,
-  "created": 1789248353.2169602,
+  "created": 1789266799.3066933,
   "states": [
     {
-      "state_id": "q0_48353",
-      "realm": "paradox_singularity",
-      "amplitude": 0.751,
-      "phase": 0.622,
+      "state_id": "q0_66799",
+      "realm": "temporal_singularity",
+      "amplitude": 0.734,
+      "phase": 2.34,
       "properties": {
-        "color": "#1eade9",
-        "frequency": 901.3
+        "color": "#097c61",
+        "frequency": 471.1
       },
-      "created": 1789248353.2169602,
+      "created": 1789266799.3066933,
+      "probability": 0.2077
+    },
+    {
+      "state_id": "q1_66799",
+      "realm": "linguistic",
+      "amplitude": 0.222,
+      "phase": 3.262,
+      "properties": {
+        "color": "#7c0ff1",
+        "frequency": 310.3
+      },
+      "created": 1789266799.3066933,
+      "probability": 0.0628
+    },
+    {
+      "state_id": "q2_66799",
+      "realm": "swarm",
+      "amplitude": 0.668,
+      "phase": 1.96,
+      "properties": {
+        "color": "#cbe562",
+        "frequency": 353.8
+      },
+      "created": 1789266799.3066933,
+      "probability": 0.189
+    },
+    {
+      "state_id": "q3_66799",
+      "realm": "fusion_evolution",
+      "amplitude": 0.953,
+      "phase": 0.929,
+      "properties": {
+        "color": "#4bda38",
+        "frequency": 665.2
+      },
+      "created": 1789266799.3066933,
+      "probability": 0.2697
+    },
+    {
+      "state_id": "q4_66799",
+      "realm": "chrono_forge",
+      "amplitude": 0.957,
+      "phase": 3.535,
+      "properties": {
+        "color": "#937ccd",
+        "frequency": 772.2
+      },
+      "created": 1789266799.3066933,
       "probability": 0.2708
-    },
-    {
-      "state_id": "q1_48353",
-      "realm": "dreaming",
-      "amplitude": 0.393,
-      "phase": 0.359,
-      "properties": {
-        "color": "#1659c6",
-        "frequency": 656.3
-      },
-      "created": 1789248353.2169602,
-      "probability": 0.1417
-    },
-    {
-      "state_id": "q2_48353",
-      "realm": "swarm",
-      "amplitude": 0.96,
-      "phase": 3.641,
-      "properties": {
-        "color": "#36265e",
-        "frequency": 888.0
-      },
-      "created": 1789248353.2169602,
-      "probability": 0.3462
-    },
-    {
-      "state_id": "q3_48353",
-      "realm": "swarm",
-      "amplitude": 0.669,
-      "phase": 1.453,
-      "properties": {
-        "color": "#1fee53",
-        "frequency": 479.4
-      },
-      "created": 1789248353.2169602,
-      "probability": 0.2413
     }
   ],
   "superposed": true,
   "uncollapsed": true,
-  "state_count": 4,
-  "entanglement_fingerprint": "1633674bb812c26d"
+  "state_count": 5,
+  "entanglement_fingerprint": "f693ec4c68fa8fab"
 }

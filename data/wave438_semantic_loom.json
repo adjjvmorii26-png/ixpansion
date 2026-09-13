@@ -1,5 +1,123 @@
 {
-  "weaves": [],
-  "thread_count": 0,
-  "bridge_count": 0
+  "weaves": [
+    {
+      "concept_a": "entropy",
+      "concept_b": "dream",
+      "bridge_threads": [
+        {
+          "thread_a": "heat",
+          "thread_b": "narrative",
+          "resonance": 0.6675,
+          "bridge_strength": 0.5496
+        },
+        {
+          "thread_a": "randomness",
+          "thread_b": "logic_mutable",
+          "resonance": 0.618,
+          "bridge_strength": 0.5345
+        },
+        {
+          "thread_a": "randomness",
+          "thread_b": "hidden",
+          "resonance": 0.622,
+          "bridge_strength": 0.4784
+        },
+        {
+          "thread_a": "randomness",
+          "thread_b": "emergence",
+          "resonance": 0.6165,
+          "bridge_strength": 0.4745
+        },
+        {
+          "thread_a": "unpredictability",
+          "thread_b": "narrative",
+          "resonance": 0.6918,
+          "bridge_strength": 0.4689
+        }
+      ],
+      "strength": 0.6432,
+      "novelty": 0.3568,
+      "traversability": 0.8727
+    },
+    {
+      "concept_a": "entropy",
+      "concept_b": "dream",
+      "bridge_threads": [
+        {
+          "thread_a": "dissolution",
+          "thread_b": "unconscious",
+          "resonance": 0.7393,
+          "bridge_strength": 0.5344
+        },
+        {
+          "thread_a": "randomness",
+          "thread_b": "symbol",
+          "resonance": 0.6304,
+          "bridge_strength": 0.5107
+        },
+        {
+          "thread_a": "disorder",
+          "thread_b": "hidden",
+          "resonance": 0.6495,
+          "bridge_strength": 0.4965
+        },
+        {
+          "thread_a": "disorder",
+          "thread_b": "narrative",
+          "resonance": 0.6045,
+          "bridge_strength": 0.4698
+        },
+        {
+          "thread_a": "randomness",
+          "thread_b": "creation",
+          "resonance": 0.5858,
+          "bridge_strength": 0.4598
+        }
+      ],
+      "strength": 0.6419,
+      "novelty": 0.3581,
+      "traversability": 0.8718
+    },
+    {
+      "concept_a": "entropy",
+      "concept_b": "dream",
+      "bridge_threads": [
+        {
+          "thread_a": "disorder",
+          "thread_b": "unconscious",
+          "resonance": 0.5797,
+          "bridge_strength": 0.4825
+        },
+        {
+          "thread_a": "randomness",
+          "thread_b": "emergence",
+          "resonance": 0.582,
+          "bridge_strength": 0.4644
+        },
+        {
+          "thread_a": "disorder",
+          "thread_b": "symbol",
+          "resonance": 0.574,
+          "bridge_strength": 0.4629
+        },
+        {
+          "thread_a": "randomness",
+          "thread_b": "creation",
+          "resonance": 0.5453,
+          "bridge_strength": 0.4175
+        },
+        {
+          "thread_a": "freedom",
+          "thread_b": "symbol",
+          "resonance": 0.568,
+          "bridge_strength": 0.4054
+        }
+      ],
+      "strength": 0.5698,
+      "novelty": 0.4302,
+      "traversability": 0.8149
+    }
+  ],
+  "thread_count": 168,
+  "bridge_count": 12
 }

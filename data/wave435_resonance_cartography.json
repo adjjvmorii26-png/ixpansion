@@ -1,4 +1,50 @@
 {
-  "modules": [],
-  "atlas": null
+  "modules": [
+    "test_mod",
+    "a",
+    "b"
+  ],
+  "atlas": {
+    "atlas_version": 2,
+    "total_modules": 3,
+    "total_fields": 3,
+    "strongest_bonds": [
+      {
+        "module_a": "test_mod",
+        "module_b": "b",
+        "distance": 0.386423,
+        "attraction": 0.72128,
+        "entanglement": 0.70848,
+        "force_type": "gravitational_pull"
+      },
+      {
+        "module_a": "a",
+        "module_b": "b",
+        "distance": 0.598223,
+        "attraction": 0.625695,
+        "entanglement": 0.488372,
+        "force_type": "gravitational_pull"
+      },
+      {
+        "module_a": "test_mod",
+        "module_b": "a",
+        "distance": 0.628577,
+        "attraction": 0.614033,
+        "entanglement": 0.349159,
+        "force_type": "gravitational_pull"
+      }
+    ],
+    "resonance_bonds": 0,
+    "entangled_pairs": 1,
+    "dissonance_fields": 0,
+    "clusters": [
+      [
+        "a",
+        "b",
+        "test_mod"
+      ]
+    ],
+    "topology_hash": "ff4ed062c29bc451",
+    "last_mapped": 1789269645.2579837
+  }
 }
