@@ -127,6 +127,24 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Wave 84: Coherence Gradient Field ---
+    if path.startswith("/coherence-gradient") or path.startswith("/api/coherence_gradient"):
+        from api.wave84_coherence_gradient import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 85: Adaptive Regulation ---
+    if path.startswith("/adaptive-regulation") or path.startswith("/api/adaptive_regulation"):
+        from api.wave85_adaptive_regulation import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 86: Coherence Memory Graph ---
+    if path.startswith("/coherence-memory") or path.startswith("/api/coherence_memory"):
+        from api.wave86_coherence_memory_graph import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 # --- Organism Coherence (dynamic) ---
     if path.startswith("/coherence") or path.startswith("/api/coherence"):
         from coherence_regulator import get_organism_status

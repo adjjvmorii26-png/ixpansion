@@ -1,3 +1,16 @@
+## [4.84.0] — Coherence Gradient, Adaptive Regulation & Memory Graph
+
+Three new wave modules expand the organism's coherence intelligence:
+
+- `api/wave84_coherence_gradient.py` — coherence gradient field with inverse-square influence model, hotspots/valleys detection
+- `api/wave85_adaptive_regulation.py` — adaptive regulation with exploration/healing/mutation modes
+- `api/wave86_coherence_memory_graph.py` — temporal coherence memory graph with recall, dream, and recognize capabilities
+- `tests/test_wave84.py` — 8 tests for wave 84
+- `tests/test_wave85.py` — 8 tests for wave 85
+- `tests/test_wave86.py` — 12 tests for wave 86
+- CLI: `gradient`, `regulate`, `memory` commands
+- API routes: `/coherence-gradient`, `/adaptive-regulation`, `/coherence-memory`
+
 ## [4.83.0] - Dynamic Coherence Regulator
 
 The organism's coherence intelligence now dynamically measures all 16

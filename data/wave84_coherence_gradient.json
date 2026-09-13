@@ -1,0 +1,57 @@
+{
+  "nodes": {
+    "test_node": {
+      "x": 1.0,
+      "y": 2.0,
+      "base_coherence": 0.5
+    },
+    "a": {
+      "x": 0,
+      "y": 0,
+      "base_coherence": 0.9
+    },
+    "b": {
+      "x": 1,
+      "y": 1,
+      "base_coherence": 0.3
+    },
+    "h": {
+      "x": 0,
+      "y": 0,
+      "base_coherence": 0.9
+    },
+    "l": {
+      "x": 1,
+      "y": 1,
+      "base_coherence": 0.1
+    }
+  },
+  "edges": [
+    [
+      "a",
+      "b",
+      1.0
+    ],
+    [
+      "a",
+      "b",
+      1.0
+    ],
+    [
+      "a",
+      "b",
+      1.0
+    ],
+    [
+      "a",
+      "b",
+      1.0
+    ],
+    [
+      "a",
+      "b",
+      1.0
+    ]
+  ],
+  "iteration": 5
+}

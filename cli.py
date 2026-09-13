@@ -239,6 +239,45 @@ def cmd_glyphs():
     print()
 
 
+@cmd("gradient", "Compute coherence gradient field")
+def cmd_gradient():
+    """Wave 84: Coherence Gradient Field CLI."""
+    from api.wave84_coherence_gradient import handler
+    result = handler({"action": "status"})
+    print(f"\n  🌊 Wave 84 — Coherence Gradient Field")
+    print(f"  {'-'*40}")
+    print(f"  Nodes: {len(result.get('nodes', {}))}")
+    print(f"  Edges: {len(result.get('edges', []))}")
+    print(f"  Iteration: {result.get('iteration', 0)}")
+    print(f"  Emotional Tone: {result.get('hotspots', {}).get('emotional_tone', 'N/A')}")
+    print()
+
+@cmd("regulate", "Adaptive regulation control")
+def cmd_regulate():
+    """Wave 85: Adaptive Regulation CLI."""
+    from api.wave85_adaptive_regulation import handler
+    result = handler({"action": "status"})
+    print(f"\n  🔄 Wave 85 — Adaptive Regulation")
+    print(f"  {'-'*40}")
+    print(f"  Mode: {result.get('mode', 'N/A')}")
+    print(f"  Cycle: {result.get('cycle', 0)}")
+    print(f"  Actions: {', '.join(result.get('action_options', []))}")
+    print()
+
+@cmd("memory", "Coherence memory graph operations")
+def cmd_memory():
+    """Wave 86: Coherence Memory Graph CLI."""
+    from api.wave86_coherence_memory_graph import handler
+    result = handler({"action": "status"})
+    print(f"\n  🧠 Wave 86 — Coherence Memory Graph")
+    print(f"  {'-'*40}")
+    print(f"  Memories: {result.get('total_memories', 0)}")
+    print(f"  Edges: {result.get('total_edges', 0)}")
+    print(f"  Snapshots: {result.get('total_snapshots', 0)}")
+    print(f"  Recent Coherence: {result.get('recent_coherence', 0)}")
+    print()
+
+
 @cmd("benchmark", "Run performance benchmark")
 def cmd_benchmark():
     print(f"\n  ⚡ Performance Benchmark")
