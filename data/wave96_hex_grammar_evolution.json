@@ -1,0 +1,23 @@
+{
+  "wave": 96,
+  "name": "HEX Grammar Evolution",
+  "description": "Hex-language evolves from opcodes into a full grammar with syntax, semantics, and execution",
+  "state": {
+    "total_rules": 0,
+    "active_rules": 0,
+    "language_complexity": 0.0,
+    "average_success_rate": 0.0,
+    "grammar_growth": 0,
+    "next_rule_id": 1
+  },
+  "coherence_vitals": {
+    "wave": 96,
+    "total_rules": 0,
+    "active_rules": 0,
+    "language_complexity": 0.0,
+    "average_success_rate": 0.0,
+    "grammar_growth": 0,
+    "next_rule_id": 1
+  },
+  "modules_affected": ["hex_engine", "language_module", "compiler", "parser"]
+}

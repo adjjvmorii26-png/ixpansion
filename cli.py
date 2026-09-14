@@ -539,6 +539,92 @@ def cmd_children():
 
 
 
+
+
+@cmd("dream", "Generate dream logic physics modifications")
+def cmd_dream_logic():
+    """Run wave 91 dream logic operations."""
+    from api.wave91_dream_logic_physics import DreamPhysicsState, DreamEngine
+    physics = DreamPhysicsState()
+    engine = DreamEngine(physics)
+    # Enter a dream state with medium intensity
+    physics.update_from_mood("excited", 0.7)
+    physics.enter_dream_state(0.5)
+    # Add a dream modification via the engine
+    engine.add_dream_modification({"effect": "surreal_gravity", "intensity": 0.6})
+    # Get vitals from both physics and engine
+    physics_vitals = physics.coherence_vitals()
+    engine_vitals = engine.coherence_vitals()
+    return {
+        "action": "dream_logic_operation",
+        "reality_fluidity": physics_vitals["reality_fluidity"],
+        "gravity_modifier": physics_vitals["gravity_modifier"],
+        "emotional_resonance": physics_vitals["emotional_resonance"],
+        "active_dreams": engine_vitals["active_dreams"],
+        "coherence_score": physics_vitals["coherence_score"],
+        "message": "Dream logic physics engine active",
+    }
+
+@cmd("ritual", "Execute entropy ritual scheduling")
+def cmd_entropy_ritual():
+    """Run wave 92 entropy ritual operations."""
+    from api.wave92_entropy_rituals import EntropyRitualScheduler
+    scheduler = EntropyRitualScheduler()
+    # Schedule a ritual
+    ritual = scheduler.schedule_ritual(
+        trigger_days=7,
+        mutation_strength=0.3,
+        mutation_type='structural',
+        description='Weekly structural innovation ritual'
+    )
+    # Check for due rituals
+    status = scheduler.coherence_vitals()
+    return {
+        "action": "entropy_ritual_operation",
+        "total_rituals": status["total_rituals"],
+        "due_rituals": status["due_rituals"],
+        "message": "Entropy ritual scheduler active",
+    }
+
+@cmd("hex", "HEX-language operations")
+def cmd_hex_language():
+    """Run wave 93 HEX-language operations."""
+    from api.wave93_hex_language_emergence import HexLanguageEngine
+    hex_engine = HexLanguageEngine()
+    # Define some opcodes
+    hex_engine.define_opcode('MOV', 'Move stack value', latency=0.5, consumes=1, produces=1)
+    hex_engine.define_opcode('ADD', 'Add two values', latency=0.3, consumes=2, produces=1)
+    # Generate self-modifying code
+    code = hex_engine.generate_self_modifying_code(8)
+    vitals = hex_engine.coherence_vitals()
+    return {
+        "action": "hex_language_operation",
+        "generated_code": code,
+        "active_opcodes": vitals["active_opcodes"],
+        "total_opcodes": vitals["total_opcodes_defined"],
+        "emergence_score": vitals["emergence_score"],
+        "message": "HEX-language engine active",
+    }
+
+@cmd("waves91-93", "Show wave 91-93 status")
+def cmd_waves_91_93():
+    """Show status of new waves."""
+    from api.wave91_dream_logic_physics import DreamPhysicsState
+    from api.wave92_entropy_rituals import EntropyRitualScheduler
+    from api.wave93_hex_language_emergence import HexLanguageEngine
+    
+    physics = DreamPhysicsState()
+    physics.update_from_mood("calm", 0.5)
+    scheduler = EntropyRitualScheduler()
+    hex_engine = HexLanguageEngine()
+    hex_engine.define_opcode('MOV', 'Move', latency=0.5, consumes=1, produces=1)
+    
+    return {
+        "wave_91": physics.coherence_vitals(),
+        "wave_92": scheduler.coherence_vitals(),
+        "wave_93": hex_engine.coherence_vitals(),
+        "message": "Waves 91-93 status report",
+    }
 @cmd("coherence", "Measure organism coherence across all waves")
 def cmd_coherence():
     result = _call("coherence_regulator", "status")
@@ -559,6 +645,46 @@ def cmd_coherence():
             print(f"      {m.get('name', '?')}: {m.get('coherence', '?')}")
     print()
 
+@cmd("hexgrammar", "HEX grammar evolution operations")
+def cmd_hex_grammar():
+    """Run wave 96 HEX grammar evolution operations."""
+    from api.wave96_hex_grammar_evolution import HexGrammar, HexGrammarEngine
+
+    grammar = HexGrammar()
+
+    def handle_hex(ctx):
+        return f"HEX-{ctx['input'].hex()}"
+
+    def handle_grammar(ctx):
+        return f"GRAMMAR-{ctx['input'].hex()[:10]}"
+
+    grammar.define_rule(
+        pattern="484558",
+        handler=handle_hex,
+        description="Match HEX magic bytes",
+        consumes=1,
+        produces=1,
+    )
+    grammar.define_rule(
+        pattern="4752414d4d4152",
+        handler=handle_grammar,
+        description="Match GRAMMAR magic bytes",
+        consumes=1,
+        produces=1,
+    )
+
+    engine = HexGrammarEngine(grammar)
+    ops = engine.interpret("484558")
+    status = engine.get_grammar_status()
+    return {
+        "action": "hex_grammar_operation",
+        "parsed_rules": len(ops),
+        "sample_result": ops[0]["result"] if ops else None,
+        "total_rules": status["total_rules"],
+        "language_complexity": status["language_complexity"],
+        "message": "HEX grammar evolution engine active",
+    }
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")
@@ -574,7 +700,11 @@ def main():
         print(f"  Run 'python cli.py help' for available commands")
         return 1
 
-    return COMMANDS[cmd_name]["fn"]()
+    result = COMMANDS[cmd_name]["fn"]()
+    if isinstance(result, dict):
+        print(json.dumps(result, indent=2, default=str))
+        return 0
+    return result
 
 
 if __name__ == "__main__":

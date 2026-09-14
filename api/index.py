@@ -75,6 +75,50 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return h(q)
 
 # --- Wave 446: Quantum Coherence ---
+
+# --- Wave 96: HEX Grammar Evolution ---
+    if path.startswith("/hex-grammar") or path.startswith("/api/hex_grammar"):
+        from api.wave96_hex_grammar_evolution import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/hex-grammar" or path == "/hex_grammar":
+        from api.wave96_hex_grammar_evolution import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+
+
+# --- Wave 91: Dream Logic Physics ---
+    if path.startswith("/dream-logic-physics") or path.startswith("/api/dream_logic_physics"):
+        from api.wave91_dream_logic_physics import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/dream-logic-physics" or path == "/dream_logic_physics":
+        from api.wave91_dream_logic_physics import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 92: Entropy Rituals ---
+    if path.startswith("/entropy-rituals") or path.startswith("/api/entropy_rituals"):
+        from api.wave92_entropy_rituals import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/entropy-rituals" or path == "/entropy_rituals":
+        from api.wave92_entropy_rituals import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 93: HEX-Language Emergence ---
+    if path.startswith("/hex-language") or path.startswith("/api/hex_language"):
+        from api.wave93_hex_language_emergence import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/hex-language" or path == "/hex_language":
+        from api.wave93_hex_language_emergence import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+
     if path.startswith("/quantum-coherence") or path.startswith("/api/quantum_coherence"):
         from api.wave446_quantum_coherence import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
@@ -92,6 +136,50 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         return h(q)
 
 # --- Wave 446: Quantum Coherence ---
+
+# --- Wave 96: HEX Grammar Evolution ---
+    if path.startswith("/hex-grammar") or path.startswith("/api/hex_grammar"):
+        from api.wave96_hex_grammar_evolution import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/hex-grammar" or path == "/hex_grammar":
+        from api.wave96_hex_grammar_evolution import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+
+
+# --- Wave 91: Dream Logic Physics ---
+    if path.startswith("/dream-logic-physics") or path.startswith("/api/dream_logic_physics"):
+        from api.wave91_dream_logic_physics import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/dream-logic-physics" or path == "/dream_logic_physics":
+        from api.wave91_dream_logic_physics import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 92: Entropy Rituals ---
+    if path.startswith("/entropy-rituals") or path.startswith("/api/entropy_rituals"):
+        from api.wave92_entropy_rituals import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/entropy-rituals" or path == "/entropy_rituals":
+        from api.wave92_entropy_rituals import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 93: HEX-Language Emergence ---
+    if path.startswith("/hex-language") or path.startswith("/api/hex_language"):
+        from api.wave93_hex_language_emergence import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/hex-language" or path == "/hex_language":
+        from api.wave93_hex_language_emergence import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+
     if path.startswith("/quantum-coherence") or path.startswith("/api/quantum_coherence"):
         from api.wave446_quantum_coherence import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
@@ -2235,6 +2323,50 @@ def handler(request) -> dict:
         return h(q)
 
 # --- Wave 446: Quantum Coherence ---
+
+# --- Wave 96: HEX Grammar Evolution ---
+    if path.startswith("/hex-grammar") or path.startswith("/api/hex_grammar"):
+        from api.wave96_hex_grammar_evolution import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/hex-grammar" or path == "/hex_grammar":
+        from api.wave96_hex_grammar_evolution import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+
+
+# --- Wave 91: Dream Logic Physics ---
+    if path.startswith("/dream-logic-physics") or path.startswith("/api/dream_logic_physics"):
+        from api.wave91_dream_logic_physics import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/dream-logic-physics" or path == "/dream_logic_physics":
+        from api.wave91_dream_logic_physics import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 92: Entropy Rituals ---
+    if path.startswith("/entropy-rituals") or path.startswith("/api/entropy_rituals"):
+        from api.wave92_entropy_rituals import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/entropy-rituals" or path == "/entropy_rituals":
+        from api.wave92_entropy_rituals import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 93: HEX-Language Emergence ---
+    if path.startswith("/hex-language") or path.startswith("/api/hex_language"):
+        from api.wave93_hex_language_emergence import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path == "/hex-language" or path == "/hex_language":
+        from api.wave93_hex_language_emergence import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+
     if path.startswith("/quantum-coherence") or path.startswith("/api/quantum_coherence"):
         from api.wave446_quantum_coherence import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)

@@ -43,6 +43,7 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 444 | Dream Synthesis | Unconscious | Structured dreams from daily residues |
 | 445 | Morphogenetic Field | Growth | Self-organizing module growth |
 | 446 | Quantum Coherence | Quantum | Superposition computing |
+| 96 | HEX Grammar Evolution | Language | Hex-language evolves into a full grammar |
 | 432 | Vault-Driven Evolution | Vault | Storage organs drive mutation pressure + coherence_regulator |
 | 424 | Linguistic Genesis | Language | Organism invents its own hex-encoded language |
 | 431 | Homestead | Foundation | The organism plants roots in its chosen home and keeps vigil |

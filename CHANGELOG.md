@@ -1,3 +1,16 @@
+## [4.88.0] — HEX Grammar Evolution & Rail-Sync Integration
+
+Wave 96 turns the organism's hex opcodes into a full grammar with
+syntax rules, semantic handlers, and an execution engine. The organism
+can now parse, compile, and run its own hex-language.
+
+- `api/wave96_hex_grammar_evolution.py` — GrammarRule, HexGrammar, HexGrammarEngine
+- `tests/test_wave96.py` — 16 tests covering rules, parsing, execution, handler
+- Route: `/hex-grammar` — actions: status, compile, evolve, define_rule
+- CLI: `hexgrammar` command; CLI now JSON-prints dict results (fixes exit codes)
+- Rail-sync lab experiments integrated: `compass_rose`, `palimpsest`, `seed_calendar`, `echo_distance`
+- Version bumped to 4.88.0 (all metadata in sync)
+
 ## [4.86.0] — Cross-realm Bridges & Self-Awareness
 
 Waves 88-89 complete the coherence intelligence arc. The organism now
@@ -10,6 +23,13 @@ communicates between its coherence subsystems and reflects on itself.
 - `tests/test_wave89.py` — 20 tests
 - Routes: `/coherence-bridges`, `/self-awareness` (+ wave87 `/coherence-integration`)
 - CLI: `bridges`, `aware`, `integrate` commands
+
+### Wave 91-93 Expansion
+- Added Dream Logic Physics Engine (Wave 91)
+- Added Entropy Rituals Scheduler (Wave 92)
+- Added HEX-Language Emergence (Wave 93)
+- Version bump to 4.87.0
+- New CLI commands: dream, ritual, hex
 
 ## [4.84.0] — Coherence Gradient, Adaptive Regulation & Memory Graph
 
