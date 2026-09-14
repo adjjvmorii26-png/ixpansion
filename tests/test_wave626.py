@@ -78,13 +78,16 @@ class TestHandler:
         assert len(out["dreams"]) == 3
 
     def test_realize(self):
-        # Dream a fresh dream, then realize the last journal entry
-        dreamed = handler({"action": "dream"})
-        journal = handler({"action": "journal"})
-        last_index = len(journal["journal"]) - 1
-        out = handler({"action": "realize", "index": last_index})
-        assert out["action"] == "realize"
-        assert "skeleton" in out
+        from api.wave626_dream_synthesis import DreamSynthesis
+        engine = DreamSynthesis()
+        engine.dream()
+        engine.dream()
+        result = engine.realize(0)
+        assert result["ok"] is True
+        assert "skeleton" in result
+        # Second realize should fail (already realized)
+        result2 = engine.realize(0)
+        assert result2["ok"] is False
 
     def test_top(self):
         out = handler({"action": "top"})
