@@ -869,6 +869,32 @@ def cmd_hexlace():
     return result
 
 
+@cmd("oracle", "Query the Performance Oracle")
+def cmd_oracle():
+    """Run wave 630 performance oracle operations.
+
+    Usage:
+      python cli.py oracle                          # oracle status
+      python cli.py oracle --observe <metric> <value>  # record metric
+      python cli.py oracle --bottlenecks               # list predicted bottlenecks
+      python cli.py oracle --suggest                   # get scaling suggestions
+      python cli.py oracle --forecast                  # all metric forecasts
+    """
+    from api.wave630_performance_oracle import handler as h
+    args = sys.argv[2:]
+    if "--observe" in args:
+        idx = args.index("--observe")
+        metric = args[idx + 1] if idx + 1 < len(args) else "latency_ms"
+        value = float(args[idx + 2]) if idx + 2 < len(args) else 0.0
+        return h({"action": "observe", "metric": metric, "value": value})
+    if "--bottlenecks" in args:
+        return h({"action": "bottlenecks"})
+    if "--suggest" in args:
+        return h({"action": "suggest"})
+    if "--forecast" in args:
+        return h({"action": "forecast"})
+    return h({"action": "status"})
+
 @cmd("resilience", "Manage the Resilience Mesh")
 def cmd_resilience():
     """Run wave 622 resilience operations.

@@ -1,3 +1,12 @@
+## [4.94.0] — Wave 630: Performance Oracle
+
+### Wave 630 — Performance Oracle: Bottleneck Prediction Engine
+- `api/wave630_performance_oracle.py` — metric windows, trend analysis, forecast, bottleneck prediction, proactive scaling suggestions
+- Route: `/performance-oracle` (status, observe, forecast, bottlenecks, suggest, alerts, acknowledge, history)
+- CLI: `oracle`
+- 24 tests: `tests/test_wave630.py`
+- Version bumped to 4.94.0
+
 ## [4.93.0] — Wave 622: Resilience Mesh
 
 ### Wave 622 — Resilience Mesh: Distributed Failure Detection & Auto-Heal

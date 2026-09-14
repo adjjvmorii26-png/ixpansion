@@ -112,6 +112,12 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Wave 630: Performance Oracle ---
+    if path.startswith("/performance-oracle") or path.startswith("/api/performance_oracle"):
+        from api.wave630_performance_oracle import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 # --- Wave 96: HEX Grammar Evolution ---
     if path.startswith("/hex-grammar") or path.startswith("/api/hex_grammar"):
         from api.wave96_hex_grammar_evolution import handler as h

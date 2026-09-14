@@ -9,7 +9,8 @@ BOARD = ["epoch_weather.py", "testament_diff.py", "spec_gravity.py", "refusal_ga
     "hex_cathedral.py",
     "dashboard_resurrector.py",
     "omnirouter.py",
-    "wave622_resilience_mesh.py"]
+    "wave622_resilience_mesh.py",
+    "wave630_performance_oracle.py"]
 def main():
     results = []
     for s in BOARD:
