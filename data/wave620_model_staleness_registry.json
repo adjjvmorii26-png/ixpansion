@@ -1,0 +1,20 @@
+{
+  "models": {
+    "spacexai/grok-4.6": {
+      "id": "spacexai/grok-4.6",
+      "release_date": "2026-08-12",
+      "last_refresh": 1757740000.0,
+      "tier": "A",
+      "staleness_score": 0.0,
+      "knowledge_cutoff": "2026-07",
+      "notes": "current default frontier"
+    }
+  },
+  "frontier_reference": "spacexai/grok-4.6",
+  "probes": [],
+  "last_sweep": null,
+  "config": {
+    "sunset_days": 90,
+    "drift_threshold": 0.12
+  }
+}
