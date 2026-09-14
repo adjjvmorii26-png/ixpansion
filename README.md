@@ -14,6 +14,7 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 
 | Wave | Name | Realm | Description |
 |------|------|-------|-------------|
+| 98 | HEX Cathedral Lacery | Linking | Chapels lace into one executable body via cross-segment `JMPZ @altars` |
 | 410 | Fusion-Evolution | Entropy-Weave | Metaphysical modules form the fusion engine |
 | 411 | Resonance Topology | Knowledge Graph | Living knowledge graph across all waves |
 | 412 | Garden Realm | Garden | Living garden of modules with seasons |

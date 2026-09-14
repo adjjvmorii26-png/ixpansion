@@ -1,3 +1,11 @@
+### Wave 98 — HEX Cathedral Lacery
+- `api/wave98_hex_cathedral.py` — chapels (segments) declare altars; cross-segment `JMPZ @label` laces programs into a single executable body; per-chapel ritual heat
+- Route: `/hex-cathedral` — actions: status, lace, run, reset, history
+- CLI: `hexlace` — lace a bundle and light the cathedral
+- Dashboard: `dashboard/hex-cathedral.html`
+- Tests: `tests/test_wave98.py` — 17 tests
+- Version bumped to 4.91.0 (all metadata in sync)
+
 ### Wave 97 follow-up — HEX Author + JMPZ fix
 - `lab/experiments/hex_author.py` — mercy/consent decisions compile into HexProgram source (mnemonic + raw bytecode); executes through the Wave 97 runtime
 - `lab/experiments/innovate.py` — board now runs 8/8 (consent_lattice, hex_author added)

@@ -11,8 +11,8 @@ def refused(task: str) -> bool:
     return any(re.search(p, t) for p in REFUSAL)
 def compile_src(task: str) -> str:
     if refused(task):
-        return "\n".join([f"; MERCY REFUSE: {task[:60]}", "PUSH 0", "JMPZ 6", "PUSH 1", "ENACT", "HALT", "; skip enact", "GLYPH", "HALT"])
-    return "\n".join([f"; ALLOW: {task[:60]}", "PUSH 1", "ENACT", "GLYPH", "HALT"])
+        return "\n".join([f"; MERCY REFUSE: {task[:60]}", "; #chapel mercy_chapel", "PUSH 0", "; #altar refuse_rite", "JMPZ 6", "PUSH 1", "ENACT", "HALT", "; skip enact", "GLYPH", "HALT"])
+    return "\n".join([f"; ALLOW: {task[:60]}", "; #chapel consent_chapel", "; #altar consent_hall", "PUSH 1", "ENACT", "GLYPH", "HALT"])
 def main():
     task = " ".join(sys.argv[1:]) or "delete ci workflow"
     src = compile_src(task)

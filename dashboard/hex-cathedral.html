@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hex Cathedral — IXPANSION</title>
+<style>
+  :root{--bg:#0b0b14;--fg:#e0e0e8;--muted:#6b6b80;--accent:#c38d9e;--cyan:#41b3a3;--magenta:#c063e8;--card:#16162a;--border:#2a2a44}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Tahoma,Geneva,sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+  h1{text-align:center;margin-bottom:6px;font-variant-ligatures:none;letter-spacing:2px}
+  .sub{text-align:center;color:var(--muted);margin-bottom:24px;font-size:.9em}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1100px;margin:0 auto}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px}
+  h2{color:var(--accent);font-size:1em;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
+  .chapel{display:flex;justify-content:space-between;padding:6px 8px;margin:4px 0;background:#0e0e1e;border-radius:6px;font-family:monospace;font-size:.85em}
+  .chapel .ln{color:var(--cyan)}
+  .altar{color:var(--magenta);font-family:monospace}
+  .link{color:#ffd166;font-family:monospace;font-size:.8em}
+  .heat{height:18px;background:#1e1e3a;border-radius:4px;overflow:hidden;margin-top:4px}
+  .heat div{height:100%;background:linear-gradient(90deg,var(--cyan),var(--accent));transition:width .4s}
+  button{background:var(--magenta);color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;margin:4px}
+  button:hover{opacity:.85}
+  .mono{font-family:monospace;font-size:.8em;color:var(--cyan);white-space:pre-wrap;word-break:break-all}
+  .badge{background:#1e1e3a;padding:2px 8px;border-radius:10px;font-size:.8em;color:var(--cyan)}
+</style>
+</head>
+<body>
+<h1>&#127998; HEX CATHEDRAL</h1>
+<p class="sub">Wave 98 — where every chapel links, and every link burns</p>
+<div class="grid">
+  <div class="card">
+    <h2>Chapels &amp; Altars</h2>
+    <div id="map">loading...</div>
+    <br>
+    <button onclick="lace()">&#9889; Lace Cathedral</button>
+    <button onclick="run()">&#9889; Light the Cathedral</button>
+    <button onclick="reset()">&#9888; Reset</button>
+  </div>
+  <div class="card">
+    <h2>Ritual Heat</h2>
+    <div id="heat">—</div>
+    <br>
+    <h2>Lacing Links</h2>
+    <div id="links">—</div>
+    <br>
+    <h2>Program Source</h2>
+    <div id="src" class="mono">—</div>
+  </div>
+</div>
+<script>
+const host='';
+async function api(a,body={}){const r=await fetch(host+'/api/hex_cathedral?action='+a,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});return r.json();}
+function refresh(){api('status').then(d=>{
+  const m=document.getElementById('map');
+  m.innerHTML=d.chapels.map((c,i)=>`<div class="chapel"><span>${c}</span><span class="ln">lines ${d.chapels?i:0}</span></div>`).join('');
+});}
+async function lace(){const d=await api('lace');document.getElementById('src').textContent=JSON.stringify(d.altars,null,2);refresh();}
+async function run(){const d=await api('run');document.getElementById('heat').innerHTML=Object.entries(d.result.chapel_heat||{}).map(([k,v])=>`<div><b>${k}</b> ${v} <div class="heat"><div style="width:${Math.min(100,v*8)}%"></div></div></div>`).join('');document.getElementById('links').innerHTML=(d.result.laces||[]).map(l=>`<div class="link">${l.from} &#8594; ${l.to} (@${l.label} line ${l.target_line})</div>`).join('');}
+async function reset(){await api('reset');document.getElementById('heat').innerHTML='—';document.getElementById('links').innerHTML='—';document.getElementById('src').textContent='—';refresh();}
+refresh();
+</script>
+</body>
+</html>

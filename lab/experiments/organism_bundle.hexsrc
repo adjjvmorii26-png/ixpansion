@@ -1,6 +1,7 @@
-; bundle 689fbac8a5d76157
+; bundle 246f3b984e9e6e70
 ; ---- consent_program.hexsrc ----
 ; auto from consent_lattice
+; #chapel consent_chapel
 PUSH 1
 ; scope delete_ci
 PUSH 0
@@ -20,13 +21,16 @@ ADD
 ; scope write_lab_experiments
 PUSH 1
 ADD
+; #altar consent_hall
 GLYPH
 ENACT
 HALT
 
 ; ---- mercy_program.hexsrc ----
 ; MERCY REFUSE: delete ci workflow
+; #chapel mercy_chapel
 PUSH 0
+; #altar refuse_rite
 JMPZ 6
 PUSH 1
 ENACT

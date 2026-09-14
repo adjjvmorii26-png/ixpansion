@@ -4,7 +4,8 @@
 - Additive lab experiments / path-filtered PRs
 - Bridge lab → Wave 97 via `*.hexsrc` mnemonics (not by rewriting `api/`)
 - Lab Smoke/Graft before full-CI panic
-- Keep CHRONOFORGE + wave 87–97 tests intact
+- Keep CHRONOFORGE + wave 87–98 tests intact
+- Additive lab experiments bridge to `/hex-cathedral` via `*.hexsrc`
 
 ## Do not
 - Merge stale `lab/chrono-forge-wave` wholesale

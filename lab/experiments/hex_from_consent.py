@@ -12,10 +12,11 @@ def load_scopes():
         except json.JSONDecodeError: pass
     return {"read_lab": True, "delete_ci": False, "push_main": False}
 def to_hex_src(scopes: dict) -> str:
-    lines = ["; auto from consent_lattice", "PUSH 1"]
+    lines = ["; auto from consent_lattice", "; #chapel consent_chapel"]
+    lines += ["PUSH 1"]
     for k, v in sorted(scopes.items()):
         lines += [f"; scope {k}", f"PUSH {1 if v else 0}", "ADD"]
-    lines += ["GLYPH", "ENACT", "HALT"]
+    lines += ["; #altar consent_hall", "GLYPH", "ENACT", "HALT"]
     return "\n".join(lines)
 def main():
     scopes = load_scopes()

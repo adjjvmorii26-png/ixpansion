@@ -17,7 +17,11 @@ def main():
     for name in ("consent_program.hexsrc", "mercy_program.hexsrc"):
         f = EXP / name
         if f.exists():
-            parts.append(f"; ---- {name} ----\n" + f.read_text())
+            txt = f.read_text()
+            # Ensure chapel/altar directives are present for cathedral lacing
+            if "; #chapel" not in txt:
+                txt = "; #chapel " + name.split(".")[0] + "\n" + txt
+            parts.append(f"; ---- {name} ----\n" + txt)
     body = "\n".join(parts) if parts else "; empty bundle\nHALT\n"
     h = hashlib.sha256(body.encode()).hexdigest()[:16]
     out = EXP / "organism_bundle.hexsrc"

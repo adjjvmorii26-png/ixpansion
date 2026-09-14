@@ -840,6 +840,34 @@ def cmd_hexrun():
         "message": "HEX runtime execution complete",
     }
 
+
+@cmd("hexlace", "Lace a HEX bundle into a living cathedral")
+def cmd_hexlace():
+    """Run wave 98 hex cathedral lacing.
+
+    Usage:
+      python cli.py hexlace                     # lace the organism bundle
+      python cli.py hexlace --src <file>        # lace a bundle file
+    """
+    from api.wave98_hex_cathedral import handler as h
+    args = sys.argv[2:]
+    if "--src" in args:
+        idx = args.index("--src")
+        if idx + 1 >= len(args):
+            return {"ok": False, "error": "--src requires a file path"}
+        path = Path(args[idx + 1])
+        if not path.exists():
+            return {"ok": False, "error": "file not found: " + str(path)}
+        result = h({"action": "lace", "bundle": path.read_text()})
+        return result
+    result = h({"action": "lace"})
+    if result.get("ok") is False:
+        return result
+    run = h({"action": "run"})
+    result["run"] = run.get("result", {})
+    result["message"] = "Cathedral laced and lit"
+    return result
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")
