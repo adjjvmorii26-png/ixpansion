@@ -1,0 +1,36 @@
+; bundle 689fbac8a5d76157
+; ---- consent_program.hexsrc ----
+; auto from consent_lattice
+PUSH 1
+; scope delete_ci
+PUSH 0
+ADD
+; scope external_network
+PUSH 0
+ADD
+; scope publish_youtube_meta
+PUSH 1
+ADD
+; scope push_main
+PUSH 0
+ADD
+; scope read_lab
+PUSH 1
+ADD
+; scope write_lab_experiments
+PUSH 1
+ADD
+GLYPH
+ENACT
+HALT
+
+; ---- mercy_program.hexsrc ----
+; MERCY REFUSE: delete ci workflow
+PUSH 0
+JMPZ 6
+PUSH 1
+ENACT
+HALT
+; skip enact
+GLYPH
+HALT

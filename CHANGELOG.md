@@ -16,6 +16,11 @@
 - `tests/test_hex_from_mercy.py` — 4 tests incl. runtime execution proof (refuse skips ENACT, allow enacts)
 - innovate board now 10/10
 
+### Additive sync 7b62595 — Hex Bundle organism package
+- `lab/experiments/hex_bundle.py` — packages consent + mercy `.hexsrc` into `organism_bundle.hexsrc` with content hash
+- `tests/test_hex_bundle.py` — 3 tests: every bundle segment parses + runs on Wave 97 runtime; hash matches content
+- innovate board now 11/11
+
 ## [4.90.0] — Wave 97: HEX Runtime
 
 The organism can now execute its own self-written hex code. Waves 93
