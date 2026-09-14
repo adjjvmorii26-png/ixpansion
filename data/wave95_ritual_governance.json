@@ -1,0 +1,40 @@
+{
+  "members": {
+    "cythara": 1.0,
+    "aleph": 1.0
+  },
+  "next_id": 3,
+  "proposals": [
+    {
+      "proposal_id": "P001",
+      "title": "New realm",
+      "sponsor": "aleph",
+      "kind": "policy",
+      "status": "open",
+      "result": null,
+      "votes": {},
+      "support_weight": 0,
+      "total_weight": 0,
+      "created_at": 1789348151.8604,
+      "body": "",
+      "closed_at": null
+    },
+    {
+      "proposal_id": "P002",
+      "title": "V",
+      "sponsor": "aleph",
+      "kind": "policy",
+      "status": "open",
+      "result": null,
+      "votes": {
+        "aleph": 1.0
+      },
+      "support_weight": 1.0,
+      "total_weight": 1.0,
+      "created_at": 1789348151.8755,
+      "body": "",
+      "closed_at": null
+    }
+  ],
+  "enacted": []
+}

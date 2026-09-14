@@ -685,6 +685,52 @@ def cmd_hex_grammar():
         "message": "HEX grammar evolution engine active",
     }
 
+@cmd("dreamcompile", "Compile dream state into executable modules")
+def cmd_dream_compile():
+    """Run wave 94 dream compiler operations."""
+    from api.wave94_dream_compiler import DreamCompiler
+
+    compiler = DreamCompiler()
+    dream_state = {
+        "reality_fluidity": 0.72,
+        "gravity_modifier": 0.6,
+        "emotional_resonance": "chaotic",
+        "layers": ["surreal_gravity", "time_dilation", "reality_fluidity"],
+    }
+    modules = compiler.compile(dream_state)
+    status = compiler.coherence_vitals()
+    return {
+        "action": "dream_compile_operation",
+        "compiled": [m.to_dict() for m in modules],
+        "count": len(modules),
+        "modules_compiled": status["compiled_modules"],
+        "message": "Dream compiler active",
+    }
+
+
+@cmd("govern", "Ritual governance operations")
+def cmd_govern():
+    """Run wave 95 ritual governance operations."""
+    from api.wave95_ritual_governance import RitualGovernance
+
+    gov = RitualGovernance()
+    gov.register_member("aleph", 1.0)
+    gov.register_member("luma", 0.9)
+    gov.register_member("axiom", 0.8)
+    proposal = gov.propose("Expand into new realm", "Evolve organism with a new experimental realm", "aleph", "structure")
+    gov.vote(proposal.proposal_id, "luma", "aye")
+    gov.vote(proposal.proposal_id, "axiom", "aye")
+    status = gov.close(proposal.proposal_id)
+    vitals = gov.coherence_vitals()
+    return {
+        "action": "govern_operation",
+        "proposal": proposal.to_dict(),
+        "close_status": status,
+        "members": vitals["members"],
+        "enacted": vitals["enacted_decisions"],
+        "message": "Ritual governance active",
+    }
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

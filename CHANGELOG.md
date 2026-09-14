@@ -1,3 +1,17 @@
+## [4.89.0] — Dream Compiler & Ritual Governance
+
+Waves 94-95 complete the trilogy of wave 91-96 experimental intelligence:
+dreams compile into executable modules, and entropy rituals become a
+formal governance protocol with weighted voting and quorum gates.
+
+- `api/wave94_dream_compiler.py` — dream state -> executable module skeletons, stateful `_load`/`_save`
+- `api/wave95_ritual_governance.py` — members, proposals, weighted votes, quorum, enactments, stateful handler
+- `tests/test_wave94.py` — 16 tests
+- `tests/test_wave95.py` — 15 tests
+- Routes: `/dream-compiler`, `/ritual-governance`
+- CLI: `dreamcompile`, `govern`
+- Version bumped to 4.89.0 (all metadata in sync)
+
 ## [4.88.0] — HEX Grammar Evolution & Rail-Sync Integration
 
 Wave 96 turns the organism's hex opcodes into a full grammar with
