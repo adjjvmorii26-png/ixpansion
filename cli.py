@@ -1083,6 +1083,30 @@ def cmd_symbiosis():
         return h({"action": "relations"})
     return h({"action": "status"})
 
+@cmd("echo-breaker", "Echo Chamber Breaker — probes, bias checks, perspective shattering")
+def cmd_echo_breaker():
+    """Echo Chamber Breaker operations.
+
+    Usage:
+      python cli.py echo-breaker                     # status
+      python cli.py echo-breaker --probe             # issue reality probe
+      python cli.py echo-breaker --bias "claim"      # check bias in claim
+      python cli.py echo-breaker --shatter TOPIC     # force counter-argument
+    """
+    from api.wave639_echo_breaker import handler as h
+    args = sys.argv[2:]
+    if "--probe" in args:
+        return h({"action": "probe", "type": "math"})
+    if "--bias" in args:
+        idx = args.index("--bias")
+        claim = " ".join(args[idx+1:]) or "IXPANSION is always flawless"
+        return h({"action": "bias_check", "claim": claim})
+    if "--shatter" in args:
+        idx = args.index("--shatter")
+        topic = " ".join(args[idx+1:]) or "growth"
+        return h({"action": "shatter", "topic": topic})
+    return h({"action": "status"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Echo Chamber Breaker — IXPANSION</title>
+<style>
+:root{--bg:#0a0a14;--fg:#e0e0e8;--muted:#6b6b80;--cyan:#41b3a3;--magenta:#c063e8;--card:#14142a;--border:#2a2a44;--green:#41d3a3;--amber:#ffcc66;--red:#e05a5a;--blue:#6fa8dc}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+.header{text-align:center;margin-bottom:24px;border-bottom:2px solid var(--border);padding-bottom:16px}
+h1{font-size:2em;background:linear-gradient(135deg,var(--red),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--muted);margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:1400px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--amber);font-size:1.1em;margin-bottom:12px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222}
+.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}
+.value{color:var(--cyan);font-weight:bold}
+.btn{border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px}
+.btn-danger{background:var(--red);color:#fff}
+.btn-warn{background:var(--amber);color:#0a0a14}
+.btn-blue{background:var(--blue);color:#fff}
+.btn:hover{opacity:0.9}
+.probe-box{padding:12px;background:#1a2a1a;border:1px solid var(--green);border-radius:8px;margin:8px 0}
+.bias-box{padding:10px;background:#2a2a1a;border:1px solid var(--amber);border-radius:6px;margin:6px 0}
+.anchors{padding:10px;background:#1a1a2a;border:1px solid var(--blue);border-radius:6px;margin:6px 0}
+input,textarea{background:#2a2a44;color:var(--fg);border:1px solid #444;padding:6px 10px;border-radius:6px;margin:4px;width:100%}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🛡 Echo Chamber Breaker</h1>
+  <p class="sub">Reality probes, bias detection, perspective shattering</p>
+  <span class="badge" id="accuracy" style="background:#2a2a44;color:var(--red);padding:4px 12px;border-radius:12px">accuracy: 0%</span>
+  <span class="badge" id="probes" style="background:#2a2a44;color:var(--amber);padding:4px 12px;border-radius:12px">probes: 0</span>
+</div>
+<div class="grid">
+  <div class="card">
+    <h2>🔬 Reality Probes</h2>
+    <button class="btn btn-danger" onclick="probe()"> Issue Math Probe</button>
+    <button class="btn btn-blue" onclick="probe('reality')"> Organism Probe</button>
+    <button class="btn btn-warn" onclick="probe('logic')"> Logic Probe</button>
+    <div id="current-probe" style="margin-top:12px">Click a probe to start</div>
+  </div>
+  <div class="card">
+    <h2>⚖️ Bias Detection</h2>
+    <textarea id="bias-claim" rows="2" placeholder="Enter a claim to check for bias..."></textarea>
+    <button class="btn btn-warn" onclick="biasCheck()"> Check Bias</button>
+    <div id="bias-result" style="margin-top:12px"></div>
+  </div>
+  <div class="card">
+    <h2>💥 Perspective Shatterer</h2>
+    <input id="shatter-topic" placeholder="Topic to argue against">
+    <button class="btn btn-danger" onclick="shatter()"> Shatter Perspective</button>
+    <div id="shatter-result" style="margin-top:12px"></div>
+  </div>
+  <div class="card">
+    <h2>📌 Reality Anchors</h2>
+    <div id="anchors">Loading...</div>
+  </div>
+</div>
+<script>
+const HOST='';
+let currentProbeId=null;
+async function api(action){
+  const r = await fetch(HOST+'/api/echo_breaker?action='+action);
+  return r.json();
+}
+async function refresh(){
+  const s = await api('status');
+  document.getElementById('accuracy').textContent = 'accuracy: '+s.accuracy+'%';
+  document.getElementById('probes').textContent = 'probes: '+s.total_probes;
+}
+async function probe(type='math'){
+  const r = await fetch(HOST+'/api/echo_breaker?action=probe&type='+type);
+  const d = await r.json();
+  currentProbeId=d.probe_id;
+  document.getElementById('current-probe').innerHTML=
+    `<div class="probe-box"><strong>${d.question}</strong>
+     <div style="margin-top:8px"><input id="probe-answer" placeholder="Your answer...">
+     <button class="btn btn-blue" onclick="verifyProbe()" style="margin-top:4px">Verify</button></div></div>`;
+}
+async function verifyProbe(){
+  if(!currentProbeId)return;
+  const ans=document.getElementById('probe-answer').value;
+  const r=await fetch(HOST+'/api/echo_breaker?action=verify&probe_id='+currentProbeId+'&answer='+encodeURIComponent(ans));
+  const d=await r.json();
+  document.getElementById('current-probe').innerHTML+=
+    `<div class="probe-box" style="border-color:${d.correct?'var(--green)':'var(--red)'}">
+     ${d.correct?'✅ Correct!':'❌ Wrong — answer was: '+d.correct_answer}</div>`;
+  currentProbeId=null;
+  await refresh();
+}
+async function biasCheck(){
+  const claim=document.getElementById('bias-claim').value;
+  if(!claim)return;
+  const r=await fetch(HOST+'/api/echo_breaker?action=bias_check&claim='+encodeURIComponent(claim));
+  const d=await r.json();
+  document.getElementById('bias-result').innerHTML=
+    `<div class="bias-box" style="border-color:${d.bias_score>0.5?'var(--red)':d.bias_score>0.2?'var(--amber)':'var(--green)'}">
+     <div><strong>Bias Score: ${d.bias_score}</strong> — ${d.verdict}</div>
+     ${d.signals.length?'<div style="margin-top:4px;font-size:0.85em;color:var(--muted)">Signals: '+d.signals.join(', ')+'</div>':''}</div>`;
+}
+async function shatter(){
+  const topic=document.getElementById('shatter-topic').value||'growth';
+  const r=await fetch(HOST+'/api/echo_breaker?action=shatter&topic='+encodeURIComponent(topic));
+  const d=await r.json();
+  document.getElementById('shatter-result').innerHTML=
+    d.counter_positions.map(p=>`<div class="bias-box">${p}</div>`).join('');
+}
+async function loadAnchors(){
+  const r=await api('anchors');
+  const ac=r.anchors||{};
+  document.getElementById('anchors').innerHTML=Object.entries(ac).map(([k,v])=>
+    `<div class="anchors"><strong>${k}</strong><div style="font-size:0.85em;color:var(--muted)">${
+      Object.entries(v).map(([pk,pv])=>pk+': '+pv).join(' · ')
+    }</div></div>`).join('');
+}
+refresh();
+loadAnchors();
+</script>
+</body>
+</html>

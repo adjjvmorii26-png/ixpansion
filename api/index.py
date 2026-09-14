@@ -2454,6 +2454,12 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Wave 639: Echo Chamber Breaker ---
+    if path.startswith("/echo-breaker") or path.startswith("/api/echo_breaker"):
+        from api.wave639_echo_breaker import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 def coherence_vitals() -> dict:
     return {"layer": "interface", "status": "active", "wave": "204", "module": "index"}
 

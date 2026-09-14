@@ -1,3 +1,12 @@
+## [4.99.0] — 2026-09-14
+
+### Added
+- **Wave 639 — Echo Chamber Breaker**: Reality probes, bias detection, perspective shattering, ground-truth anchors. Prevents epistemic closure.
+- Route: /echo-breaker (actions: probe, verify, bias_check, shatter, anchors)
+- CLI: echo-breaker
+- Dashboard: dashboard/echo-breaker.html
+- 12 new tests (all passing).
+
 ## [4.98.0] — 2026-09-14
 
 ### Added
