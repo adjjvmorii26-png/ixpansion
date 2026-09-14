@@ -1,0 +1,9 @@
+; MERCY REFUSE: delete ci workflow
+PUSH 0
+JMPZ 6
+PUSH 1
+ENACT
+HALT
+; skip enact
+GLYPH
+HALT

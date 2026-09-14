@@ -11,6 +11,11 @@
 - `tests/test_hex_from_consent.py` — verifies the `.hexsrc` runs on the Wave 97 runtime
 - innovate board now 9/9
 
+### Additive sync 3c8e421 — Hex-from-Mercy bridge
+- `lab/experiments/hex_from_mercy.py` — refused tasks emit PUSH 0 → JMPZ skip (no ENACT); allowed tasks emit ENACT
+- `tests/test_hex_from_mercy.py` — 4 tests incl. runtime execution proof (refuse skips ENACT, allow enacts)
+- innovate board now 10/10
+
 ## [4.90.0] — Wave 97: HEX Runtime
 
 The organism can now execute its own self-written hex code. Waves 93
