@@ -1,0 +1,22 @@
+{
+  "current_mode": "healing",
+  "mode_history": [],
+  "predicted_mode": "healing",
+  "prediction_confidence": 0.0,
+  "setpoints": {
+    "exploration": 0.75,
+    "healing": 0.4,
+    "mutation": 0.6,
+    "consolidation": 0.65,
+    "dreaming": 0.2
+  },
+  "genome": {
+    "adaptability": 0.5,
+    "stability": 0.5,
+    "exploration_bias": 0.0
+  },
+  "regulation_cycles": 0,
+  "tick": 0,
+  "interference_log": [],
+  "homeostatic_memory": []
+}

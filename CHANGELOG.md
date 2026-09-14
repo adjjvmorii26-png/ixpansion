@@ -1,3 +1,12 @@
+## [4.97.0] — 2026-09-14
+
+### Added
+- **Wave 637 — Meta-Regulation Engine**: Genome-evolving regulation with mode prediction, interference detection, homeostatic setpoint adjustment, and 5 regulatory modes (exploration, healing, mutation, consolidation, dreaming).
+- Route: /meta-regulation
+- CLI command: meta-regulate
+- Dashboard: dashboard/meta-regulation.html
+- 13 new tests (all passing).
+
 ## [4.96.0] — 2026-09-14
 
 ### Added

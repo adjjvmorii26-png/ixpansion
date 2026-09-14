@@ -1040,6 +1040,30 @@ def cmd_regulate():
     return h({"action": "status"})
 
 
+@cmd("meta-regulate", "Meta-Regulation — genome evolution, prediction, interference detection")
+def cmd_meta_regulate():
+    """Meta-Regulation operations.
+
+    Usage:
+      python cli.py meta-regulate                # show status
+      python cli.py meta-regulate --genome       # show genome
+      python cli.py meta-regulate --predict      # predict next mode
+      python cli.py meta-regulate --interfere    # check interference
+      python cli.py meta-regulate --mutate       # mutate genome
+    """
+    from api.wave637_meta_regulation import handler as h
+    args = sys.argv[2:]
+    if "--genome" in args:
+        return h({"action": "genome"})
+    if "--predict" in args:
+        return h({"action": "predict"})
+    if "--interfere" in args:
+        return h({"action": "interference"})
+    if "--mutate" in args:
+        return h({"action": "mutate_genome", "rate": 0.1})
+    return h({"action": "status"})
+
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")
