@@ -2429,13 +2429,13 @@ def handler(request) -> dict:
         return h(q)
 
 # --- Wave 635: Coherence Gradient ---
-    if path.startswith("/coherence-gradient") or path.startswith("/api/coherence_gradient"):
+    if path.startswith("/field-gradient") or path.startswith("/api/field_gradient"):
         from api.wave635_coherence_gradient import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
 # --- Wave 636: Adaptive Regulation ---
-    if path.startswith("/adaptive-regulation") or path.startswith("/api/adaptive_regulation"):
+    if path.startswith("/regulation-engine") or path.startswith("/api/regulation_engine"):
         from api.wave636_adaptive_regulation import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)

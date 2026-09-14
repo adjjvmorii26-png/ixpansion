@@ -66,7 +66,7 @@ h1{font-size:2em;background:linear-gradient(135deg,var(--green),var(--amber));-w
 <script>
 const HOST='';
 async function api(action){
-  const r = await fetch(HOST+'/api/adaptive_regulation?action='+action);
+  const r = await fetch(HOST+'/api/regulation_engine?action='+action);
   return r.json();
 }
 async function refresh(){
@@ -100,7 +100,7 @@ async function assess(type){
     mutate: {avg_coherence:0.6,variance:0.5}
   };
   const c = configs[type];
-  const r = await fetch(HOST+`/api/adaptive_regulation?action=assess&coherence=${JSON.stringify(c)}`);
+  const r = await fetch(HOST+`/api/regulation_engine?action=assess&coherence=${JSON.stringify(c)}`);
   const d = await r.json();
   document.getElementById('assess-result').innerHTML =
     `<div class="metric"><span class="label">New Mode</span><span class="value" style="color:${d.mode==='exploration'?'var(--green)':d.mode==='mutation'?'var(--amber)':'var(--magenta)'}">${d.mode}</span></div>
@@ -110,7 +110,7 @@ async function assess(type){
 async function policyCheck(){
   const action = document.getElementById('check-action').value;
   const s = await api('status');
-  const r = await fetch(HOST+`/api/adaptive_regulation?action=policy_check&mode=${s.current_mode}&action_name=${action}`);
+  const r = await fetch(HOST+`/api/regulation_engine?action=policy_check&mode=${s.current_mode}&action_name=${action}`);
   const d = await r.json();
   document.getElementById('policy-result').innerHTML =
     `<div class="metric"><span class="label">${action}</span><span class="value" style="color:${d.allowed?'var(--green)':'var(--red)'}">

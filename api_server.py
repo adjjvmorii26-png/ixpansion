@@ -47,6 +47,28 @@ _router = UnifiedRouter() if UnifiedRouter else None
 KEBAB_TO_SNAKE = re.compile(r"([a-z0-9])-([a-z])")
 
 
+# Explicit route aliases: URL short name → full wave module
+ROUTE_ALIASES: dict[str, str] = {
+    "temporal_field": "wave634_temporal_field",
+    "field_gradient": "wave635_coherence_gradient",
+    "regulation_engine": "wave636_adaptive_regulation",
+    "meta_regulation": "wave637_meta_regulation",
+    "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
+    "adaptive_regulation": "wave636_adaptive_regulation",
+}
+
+def resolve_route_alias(name: str) -> str:
+    """Resolve a short route name to its full wave module, preferring highest wave."""
+    if name in ROUTE_ALIASES:
+        return ROUTE_ALIASES[name]
+    # Fallback: find highest-numbered wave module matching suffix
+    matches = sorted(
+        [k for k in MODULE_REGISTRY if k.endswith("_" + name) or k == name],
+        key=lambda m: int(m.split("_")[0].replace("wave", "0")) if m.startswith("wave") else 0,
+        reverse=True,
+    )
+    return matches[0] if matches else name
+
 def route_name_to_module(path: str) -> str:
     """Convert a URL path segment into a module name.
 
@@ -73,13 +95,8 @@ def call_handler(module_name: str, payload: Dict[str, Any]) -> Tuple[Dict[str, A
         except Exception as e:  # pragma: no cover
             return {"error": str(e), "module": module_name}, 500
 
-    # Resolve short route names (e.g. "temporal_field" → "wave634_temporal_field")
-    resolved = module_name
-    if module_name not in MODULE_REGISTRY:
-        for registered in MODULE_REGISTRY:
-            if registered.endswith("_" + module_name) or registered == module_name:
-                resolved = registered
-                break
+    # Resolve short route names via alias map (highest wave wins)
+    resolved = resolve_route_alias(module_name) if module_name not in MODULE_REGISTRY else module_name
 
     # Direct fallback: try to import and call
     try:

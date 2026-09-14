@@ -60,7 +60,7 @@ h1{font-size:2em;background:linear-gradient(135deg,var(--cyan),var(--magenta));-
 <script>
 const HOST='';
 async function api(action){
-  const r = await fetch(HOST+'/api/coherence_gradient?action='+action);
+  const r = await fetch(HOST+'/api/field_gradient_field?action='+action);
   return r.json();
 }
 function colorFor(c){
