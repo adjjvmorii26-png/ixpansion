@@ -1,3 +1,12 @@
+## [4.100.0] — 2026-09-14
+
+### Added
+- **Wave 640 — Dependency Resolver**: Circular import detection, version consistency checks, duplicate capability detection, technical debt scoring. The organism's code-quality immune system.
+- Route: /dependency-resolver (actions: scan, version_check, duplicates, resolve)
+- CLI: deps
+- Dashboard: dashboard/dependency-resolver.html
+- 10 new tests (all passing).
+
 ## [4.99.0] — 2026-09-14
 
 ### Added

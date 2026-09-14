@@ -1107,6 +1107,26 @@ def cmd_echo_breaker():
         return h({"action": "shatter", "topic": topic})
     return h({"action": "status"})
 
+@cmd("deps", "Dependency Resolver — scan imports, check versions, find duplicates")
+def cmd_deps():
+    """Dependency Resolver operations.
+
+    Usage:
+      python cli.py deps                     # status
+      python cli.py deps --scan              # full dependency scan
+      python cli.py deps --versions          # version consistency
+      python cli.py deps --dupes             # duplicate capabilities
+    """
+    from api.wave640_dependency_resolver import handler as h
+    args = sys.argv[2:]
+    if "--scan" in args:
+        return h({"action": "scan"})
+    if "--versions" in args:
+        return h({"action": "version_check"})
+    if "--dupes" in args:
+        return h({"action": "duplicates"})
+    return h({"action": "status"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

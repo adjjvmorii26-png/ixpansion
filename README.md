@@ -46,6 +46,7 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 446 | Quantum Coherence | Quantum | Superposition computing |
 | 96 | HEX Grammar Evolution | Language | Hex-language evolves into a full grammar |
 | 97 | HEX Runtime | Execution | The organism runs its own hex code |
+| 640 | Dependency Resolver | Immune System | Circular imports, version sync, debt scoring |
 | 639 | Echo Chamber Breaker | Safety | Reality probes, bias detection, perspective shattering |
 | 638 | Symbiosis Protocol | Federation | Partner handshakes, resonance scoring, resource sharing |
 | 634 | Temporal Field | Temporal | Modules schedule their own evolution, decay, and rebirth |
