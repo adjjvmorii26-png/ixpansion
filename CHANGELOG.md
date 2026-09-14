@@ -21,6 +21,12 @@
 - `tests/test_hex_bundle.py` — 3 tests: every bundle segment parses + runs on Wave 97 runtime; hash matches content
 - innovate board now 11/11
 
+### Refinement — hexrun CLI runs files, raw bytecode, and bundles
+- `python cli.py hexrun --src <file.hexsrc>` — execute mnemonic hex source files
+- `python cli.py hexrun --raw <hex>` — execute raw hex bytecode
+- `python cli.py hexrun --bundle <file>` — run every segment of an organism bundle
+- `tests/test_cli_hexrun.py` — 5 CLI tests
+
 ## [4.90.0] — Wave 97: HEX Runtime
 
 The organism can now execute its own self-written hex code. Waves 93

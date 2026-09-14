@@ -733,31 +733,109 @@ def cmd_govern():
 
 @cmd("hexrun", "Execute a HEX program on the runtime")
 def cmd_hexrun():
-    """Run wave 97 hex runtime operations."""
-    from api.wave97_hex_runtime import HexProgram, HexRuntime
+    """Run wave 97 hex runtime operations.
 
-    source = (
-        "PUSH 5\n"
-        "PUSH 3\n"
-        "ADD\n"
-        "DREAM 1\n"
-        "GLYPH 7\n"
-        "ENACT 12\n"
-        "HALT"
-    )
-    program = HexProgram(source)
-    program.parse()
-    runtime = HexRuntime(coherence=0.75, mood="chaotic")
-    result = runtime.run(program)
-    vitals = runtime.coherence_vitals()
+    Usage:
+      python cli.py hexrun                     # built-in sample program
+      python cli.py hexrun --src <file.hexsrc> # run a mnemonic hex source file
+      python cli.py hexrun --raw <hex>         # run raw hex bytecode
+      python cli.py hexrun --bundle <file>     # run each segment of a bundle
+    """
+    from api.wave97_hex_runtime import HexProgram, HexRuntime
+    from pathlib import Path
+
+    args = sys.argv[2:]
+
+    def _run_source(source):
+        program = HexProgram(source)
+        if not program.parse():
+            return {"ok": False, "error": program.error, "program_hash": "n/a"}
+        runtime = HexRuntime(coherence=0.75, mood="chaotic")
+        result = runtime.run(program)
+        result["program_hash"] = program.program_hash
+        return result
+
+    if "--src" in args:
+        idx = args.index("--src")
+        if idx + 1 >= len(args):
+            return {"ok": False, "error": "--src requires a file path"}
+        path = Path(args[idx + 1])
+        if not path.exists():
+            return {"ok": False, "error": "file not found: " + str(path)}
+        result = _run_source(path.read_text())
+        if not result.get("ok"):
+            return {"ok": False, "error": result.get("error")}
+        return {
+            "action": "hex_run_file",
+            "source": str(path),
+            "result": result,
+            "message": "HEX source file executed",
+        }
+
+    if "--raw" in args:
+        idx = args.index("--raw")
+        if idx + 1 >= len(args):
+            return {"ok": False, "error": "--raw requires hex bytecode"}
+        result = _run_source(args[idx + 1].strip())
+        if not result.get("ok"):
+            return {"ok": False, "error": result.get("error")}
+        return {
+            "action": "hex_run_raw",
+            "result": result,
+            "message": "Raw hex bytecode executed",
+        }
+
+    if "--bundle" in args:
+        idx = args.index("--bundle")
+        if idx + 1 >= len(args):
+            return {"ok": False, "error": "--bundle requires a file path"}
+        path = Path(args[idx + 1])
+        if not path.exists():
+            return {"ok": False, "error": "file not found: " + str(path)}
+        segments, current, current_name = [], None, None
+        for ln in path.read_text().splitlines():
+            if ln.startswith("; ---- ") and ln.endswith(" ----"):
+                if current is not None:
+                    segments.append((current_name, "\n".join(current)))
+                current = []
+                current_name = ln.strip("; -").strip()
+            elif current is not None:
+                current.append(ln)
+        if current is not None:
+            segments.append((current_name, "\n".join(current)))
+        runs = []
+        for name, body in segments:
+            result = _run_source(body)
+            runs.append({
+                "segment": name,
+                "ok": result.get("ok", False),
+                "error": result.get("error"),
+                "glyphs": result.get("glyphs", []),
+                "enactments": result.get("enactments", []),
+                "steps": result.get("steps", 0),
+            })
+        ok_count = sum(1 for r in runs if r["ok"])
+        return {
+            "action": "hex_run_bundle",
+            "source": str(path),
+            "segments": len(runs),
+            "runs": runs,
+            "message": "Bundle executed: {}/{} segments ok".format(ok_count, len(runs)),
+        }
+
+    source = "\n".join([
+        "PUSH 5", "PUSH 3", "ADD", "DREAM 1", "GLYPH 7", "ENACT 12", "HALT",
+    ])
+    result = _run_source(source)
+    vitals = HexRuntime(coherence=0.75, mood="chaotic").coherence_vitals()
     return {
         "action": "hex_run_operation",
-        "program_hash": result["program_hash"],
-        "stack": result["stack"],
-        "glyphs": result["glyphs"],
-        "enactments": result["enactments"],
-        "steps": result["steps"],
-        "halted": result["halted"],
+        "program_hash": result.get("program_hash"),
+        "stack": result.get("stack"),
+        "glyphs": result.get("glyphs"),
+        "enactments": result.get("enactments"),
+        "steps": result.get("steps"),
+        "halted": result.get("halted"),
         "instructions_available": vitals["instruction_count"],
         "message": "HEX runtime execution complete",
     }
