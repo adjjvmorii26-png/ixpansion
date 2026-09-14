@@ -308,8 +308,57 @@
       "decision": "proceed",
       "rationale": "The council sees a clear path forward.",
       "held_at": 1789350439.231003
+    },
+    {
+      "topic": "What is the next evolutionary direction after Wave 98 (Hex Cathedral Lacery) and Wave 620 (Model Staleness Registry)?",
+      "timestamp": "2026-09-14T04:54:41.412236+00:00",
+      "verdict": null,
+      "votes": {},
+      "minutes": ""
+    },
+    {
+      "topic": "Wave 622-641 proposals \u2014 all voices propose next directions",
+      "timestamp": "2026-09-14T14:52:47.570586+00:00",
+      "verdict": "Top recommendation: Wave 622: Resilience Mesh",
+      "votes": {
+        "Wave 622: Resilience Mesh": 1,
+        "Wave 626: Dream Synthesis Engine": 1,
+        "Wave 630: Performance Oracle": 1,
+        "Wave 634: Temporal Field": 1,
+        "Wave 638: Symbiosis Protocol": 1
+      },
+      "proposals_count": 20
+    },
+    {
+      "topic": "Council consensus: build Wave 622 Resilience Mesh, Wave 630 Performance Oracle",
+      "timestamp": "2026-09-14T15:25:41.454534+00:00",
+      "verdict": "Wave 622 + 630 both built, tested, pushed. Version 4.94.0.",
+      "votes": {
+        "ALEph": "Wave 622: Resilience Mesh (built first)",
+        "AXIOM": "Wave 630: Performance Oracle (built second)",
+        "LUMA": "Wave 626: Dream Synthesis Engine (next candidate)",
+        "silence_oracle": "Wave 634: Temporal Field (future)",
+        "Cythara": "Wave 638: Symbiosis Protocol (future)"
+      },
+      "proposals_count": 20,
+      "waves_built_this_session": [
+        622,
+        630
+      ]
+    },
+    {
+      "topic": "Wave 626 + 630 built, wave98 vitals fixed, 139/139 tests pass",
+      "timestamp": "2026-09-14T15:49:53.242466+00:00",
+      "verdict": "Wave 626 (Dream Synthesis) + Wave 630 (Performance Oracle) both built and pushed. Version 4.95.0. All tests green.",
+      "waves_built_this_session": [
+        621,
+        622,
+        626,
+        630
+      ],
+      "version": "4.95.0"
     }
   ],
-  "total": 7,
+  "total": 11,
   "last_broadcast_id": 9
 }

@@ -1,0 +1,493 @@
+{
+  "organs": {
+    "hex_runtime": {
+      "organ_id": "hex_runtime",
+      "module_path": "api/wave97_hex_runtime.py",
+      "status": "healthy",
+      "last_heartbeat": 1789397915.493971,
+      "consecutive_failures": 0,
+      "total_failures": 0,
+      "total_successes": 0,
+      "health_score": 1.0,
+      "is_automated": true,
+      "recovery_attempts": 0,
+      "recovery_history": []
+    },
+    "hex_cathedral": {
+      "organ_id": "hex_cathedral",
+      "module_path": "api/wave98_hex_cathedral.py",
+      "status": "healthy",
+      "last_heartbeat": 1789397915.4940665,
+      "consecutive_failures": 0,
+      "total_failures": 0,
+      "total_successes": 0,
+      "health_score": 1.0,
+      "is_automated": true,
+      "recovery_attempts": 0,
+      "recovery_history": []
+    },
+    "omnirouter": {
+      "organ_id": "omnirouter",
+      "module_path": "api/omnirouter.py",
+      "status": "healthy",
+      "last_heartbeat": 1789397915.494071,
+      "consecutive_failures": 0,
+      "total_failures": 0,
+      "total_successes": 0,
+      "health_score": 1.0,
+      "is_automated": true,
+      "recovery_attempts": 0,
+      "recovery_history": []
+    },
+    "model_staleness": {
+      "organ_id": "model_staleness",
+      "module_path": "api/model_staleness_registry.py",
+      "status": "healthy",
+      "last_heartbeat": 1789397915.4940746,
+      "consecutive_failures": 0,
+      "total_failures": 0,
+      "total_successes": 0,
+      "health_score": 1.0,
+      "is_automated": false,
+      "recovery_attempts": 0,
+      "recovery_history": []
+    },
+    "dashboard_resurrector": {
+      "organ_id": "dashboard_resurrector",
+      "module_path": "lab/experiments/dashboard_resurrector.py",
+      "status": "healthy",
+      "last_heartbeat": 1789397915.494078,
+      "consecutive_failures": 0,
+      "total_failures": 0,
+      "total_successes": 0,
+      "health_score": 1.0,
+      "is_automated": false,
+      "recovery_attempts": 0,
+      "recovery_history": []
+    },
+    "test_org": {
+      "organ_id": "test_org",
+      "module_path": "",
+      "status": "healthy",
+      "last_heartbeat": 1789411947.706591,
+      "consecutive_failures": 0,
+      "total_failures": 0,
+      "total_successes": 12,
+      "health_score": 1.0,
+      "is_automated": false,
+      "recovery_attempts": 0,
+      "recovery_history": []
+    },
+    "status_test": {
+      "organ_id": "status_test",
+      "module_path": "",
+      "status": "healthy",
+      "last_heartbeat": 1789411947.7194622,
+      "consecutive_failures": 0,
+      "total_failures": 0,
+      "total_successes": 12,
+      "health_score": 1.0,
+      "is_automated": false,
+      "recovery_attempts": 0,
+      "recovery_history": []
+    },
+    "fail_test": {
+      "organ_id": "fail_test",
+      "module_path": "",
+      "status": "failing",
+      "last_heartbeat": 1789411947.7456238,
+      "consecutive_failures": 36,
+      "total_failures": 36,
+      "total_successes": 0,
+      "health_score": 0.0,
+      "is_automated": false,
+      "recovery_attempts": 3,
+      "recovery_history": [
+        {
+          "ts": 1789397915.5355077,
+          "action": "restart",
+          "consecutive_failures": 3,
+          "recovery_attempt": 1
+        },
+        {
+          "ts": 1789398131.6316974,
+          "action": "replace",
+          "consecutive_failures": 7,
+          "recovery_attempt": 2
+        },
+        {
+          "ts": 1789398131.639138,
+          "action": "replace",
+          "consecutive_failures": 8,
+          "recovery_attempt": 3
+        }
+      ]
+    }
+  },
+  "auto_heal_enabled": true,
+  "recovery_policy": "restart_first",
+  "history": [
+    {
+      "ts": 1789398131.59503,
+      "organ_id": "test_org",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789398131.61088,
+      "organ_id": "status_test",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789398131.6316848,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing",
+      "auto_heal": {
+        "ts": 1789398131.6316974,
+        "action": "replace",
+        "consecutive_failures": 7,
+        "recovery_attempt": 2
+      }
+    },
+    {
+      "ts": 1789398131.6391277,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing",
+      "auto_heal": {
+        "ts": 1789398131.639138,
+        "action": "replace",
+        "consecutive_failures": 8,
+        "recovery_attempt": 3
+      }
+    },
+    {
+      "ts": 1789398131.6462202,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789399415.2789228,
+      "organ_id": "test_org",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789399415.2924044,
+      "organ_id": "status_test",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789399415.3101218,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789399415.3176336,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789399415.3239634,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789399548.378737,
+      "organ_id": "test_org",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789399548.3942628,
+      "organ_id": "status_test",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789399548.414121,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789399548.4221096,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789399548.430072,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789399936.96816,
+      "organ_id": "test_org",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789399936.9847186,
+      "organ_id": "status_test",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789399937.0040066,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789399937.010839,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789399937.0174198,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400576.3149698,
+      "organ_id": "test_org",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789400576.329638,
+      "organ_id": "status_test",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789400576.3480392,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400576.3534114,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400576.3589537,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400642.1640692,
+      "organ_id": "test_org",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789400642.1797402,
+      "organ_id": "status_test",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789400642.1989365,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400642.2065856,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400642.2127867,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400792.2765148,
+      "organ_id": "test_org",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789400792.2922695,
+      "organ_id": "status_test",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789400792.3104649,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400792.31713,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400792.323775,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400846.031172,
+      "organ_id": "test_org",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789400846.0478268,
+      "organ_id": "status_test",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789400846.0677195,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400846.074773,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789400846.0817342,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789404487.884853,
+      "organ_id": "test_org",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789404487.8924718,
+      "organ_id": "status_test",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789404487.902196,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789404487.9055796,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789404487.9087994,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789411947.706616,
+      "organ_id": "test_org",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789411947.719484,
+      "organ_id": "status_test",
+      "healthy": true,
+      "latency_ms": 0.0,
+      "status": "healthy"
+    },
+    {
+      "ts": 1789411947.734473,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789411947.73935,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    },
+    {
+      "ts": 1789411947.7456415,
+      "organ_id": "fail_test",
+      "healthy": false,
+      "latency_ms": 0.0,
+      "status": "failing"
+    }
+  ]
+}

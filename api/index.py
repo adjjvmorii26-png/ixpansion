@@ -2508,6 +2508,76 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Wave 648: Ambient Sensor ---
+    if path.startswith("/ambient-sensor") or path.startswith("/api/ambient_sensor"):
+        from api.wave648_ambient_sensor import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 649: Pattern Predictor ---
+    if path.startswith("/pattern-predictor") or path.startswith("/api/pattern_predictor"):
+        from api.wave649_pattern_predictor import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 650: Auto-Optimizer ---
+    if path.startswith("/auto-optimizer") or path.startswith("/api/auto_optimizer"):
+        from api.wave650_auto_optimizer import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 651: Self-Repair Engine ---
+    if path.startswith("/self-repair") or path.startswith("/api/self_repair"):
+        from api.wave651_self_repair import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 652: Economy Unifier ---
+    if path.startswith("/economy-unifier") or path.startswith("/api/economy_unifier"):
+        from api.wave652_economy_unifier import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 653: Routing Unifier ---
+    if path.startswith("/routing-unifier") or path.startswith("/api/routing_unifier"):
+        from api.wave653_routing_unifier import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 654: Orchestration Engine ---
+    if path.startswith("/orchestration") or path.startswith("/api/orchestration_engine"):
+        from api.wave654_orchestration_engine import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 655: Priority Scheduler ---
+    if path.startswith("/priority-scheduler") or path.startswith("/api/priority_scheduler"):
+        from api.wave655_priority_scheduler import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 656: Retrocausal Engine ---
+    if path.startswith("/retrocausal") or path.startswith("/api/retrocausal_engine"):
+        from api.wave656_retrocausal_engine import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 657: Succession Planner ---
+    if path.startswith("/succession-planner") or path.startswith("/api/succession_planner"):
+        from api.wave657_succession_planner import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 658: Sovereignty Beacon ---
+    if path.startswith("/sovereignty") or path.startswith("/api/sovereignty_beacon"):
+        from api.wave658_sovereignty_beacon import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/trust-network") or path.startswith("/api/trust_network"):
+        from api.wave647_trust_network import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 def coherence_vitals() -> dict:
     return {"layer": "interface", "status": "active", "wave": "204", "module": "index"}
 

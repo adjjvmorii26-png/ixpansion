@@ -4,15 +4,15 @@
   "type": "symbiotic_swarm",
   "purpose": "Multiple repos become cells of a super-organism",
   "active": true,
-  "created": 1789322761.284631,
+  "created": 1789404484.0061946,
   "colonies": [
     {
       "repo": "ixpansion",
       "role": "core",
       "url": "https://github.com/adjjvmorii26-png/ixpansion",
       "connected": true,
-      "last_sync": 1789320074.284631,
-      "cell_id": "9d4df05b",
+      "last_sync": 1789401366.0061946,
+      "cell_id": "c0b0c352",
       "state": "active"
     },
     {
@@ -20,8 +20,8 @@
       "role": "sensor",
       "url": "https://github.com/adjjvmorii26-png/nexus-observatory",
       "connected": true,
-      "last_sync": 1789319185.284631,
-      "cell_id": "0b1910dc",
+      "last_sync": 1789401120.0061946,
+      "cell_id": "c1f74ab3",
       "state": "active"
     },
     {
@@ -29,8 +29,8 @@
       "role": "engine",
       "url": "https://github.com/adjjvmorii26-png/pentaxis-5d-engine",
       "connected": true,
-      "last_sync": 1789320773.284631,
-      "cell_id": "9328d74b",
+      "last_sync": 1789401767.0061946,
+      "cell_id": "49605340",
       "state": "active"
     },
     {
@@ -38,8 +38,8 @@
       "role": "biological",
       "url": "https://github.com/adjjvmorii26-png/solid-organism",
       "connected": true,
-      "last_sync": 1789322495.284631,
-      "cell_id": "8613c8b6",
+      "last_sync": 1789402812.0061946,
+      "cell_id": "bba409ee",
       "state": "active"
     },
     {
@@ -47,24 +47,24 @@
       "role": "growth",
       "url": "https://github.com/adjjvmorii26-png/garden",
       "connected": true,
-      "last_sync": 1789321506.284631,
-      "cell_id": "007ec749",
+      "last_sync": 1789400970.0061946,
+      "cell_id": "8ad464b4",
       "state": "active"
     },
     {
-      "repo": "colony_661",
+      "repo": "colony_543",
       "role": "unknown",
       "url": "",
       "connected": false,
-      "cell_id": "1d68a133",
+      "cell_id": "f26780ab",
       "state": "dormant"
     },
     {
-      "repo": "colony_438",
+      "repo": "colony_221",
       "role": "unknown",
       "url": "",
       "connected": false,
-      "cell_id": "11175085",
+      "cell_id": "cdd693ea",
       "state": "dormant"
     }
   ],
@@ -72,7 +72,7 @@
   "total_cells": 7,
   "active_cells": 5,
   "sync_interval": 300,
-  "last_swarm_pulse": 1789322761.284631,
+  "last_swarm_pulse": 1789404484.0061946,
   "coordination_protocol": "webhook_based",
-  "timestamp": 1789322761.284631
+  "timestamp": 1789404484.0061946
 }

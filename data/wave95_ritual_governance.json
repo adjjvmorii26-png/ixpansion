@@ -3,7 +3,7 @@
     "cythara": 1.0,
     "aleph": 1.0
   },
-  "next_id": 3,
+  "next_id": 7,
   "proposals": [
     {
       "proposal_id": "P001",
@@ -32,6 +32,66 @@
       "support_weight": 1.0,
       "total_weight": 1.0,
       "created_at": 1789348151.8755,
+      "body": "",
+      "closed_at": null
+    },
+    {
+      "proposal_id": "P003",
+      "title": "New realm",
+      "sponsor": "aleph",
+      "kind": "policy",
+      "status": "open",
+      "result": null,
+      "votes": {},
+      "support_weight": 0,
+      "total_weight": 0,
+      "created_at": 1789404489.4105,
+      "body": "",
+      "closed_at": null
+    },
+    {
+      "proposal_id": "P004",
+      "title": "V",
+      "sponsor": "aleph",
+      "kind": "policy",
+      "status": "open",
+      "result": null,
+      "votes": {
+        "aleph": 1.0
+      },
+      "support_weight": 1.0,
+      "total_weight": 1.0,
+      "created_at": 1789404489.4171,
+      "body": "",
+      "closed_at": null
+    },
+    {
+      "proposal_id": "P005",
+      "title": "New realm",
+      "sponsor": "aleph",
+      "kind": "policy",
+      "status": "open",
+      "result": null,
+      "votes": {},
+      "support_weight": 0,
+      "total_weight": 0,
+      "created_at": 1789404541.9983,
+      "body": "",
+      "closed_at": null
+    },
+    {
+      "proposal_id": "P006",
+      "title": "V",
+      "sponsor": "aleph",
+      "kind": "policy",
+      "status": "open",
+      "result": null,
+      "votes": {
+        "aleph": 1.0
+      },
+      "support_weight": 1.0,
+      "total_weight": 1.0,
+      "created_at": 1789404542.0118,
       "body": "",
       "closed_at": null
     }

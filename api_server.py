@@ -63,6 +63,17 @@ ROUTE_ALIASES: dict[str, str] = {
     "communication": "wave645_communication",
     "negotiation": "wave646_negotiation",
     "trust_network": "wave647_trust_network",
+    "ambient": "wave648_ambient_sensor",
+    "predictor": "wave649_pattern_predictor",
+    "autotune": "wave650_auto_optimizer",
+    "selfrepair": "wave651_self_repair",
+    "econ": "wave652_economy_unifier",
+    "routes": "wave653_routing_unifier",
+    "orchestrate": "wave654_orchestration_engine",
+    "schedule": "wave655_priority_scheduler",
+    "retro": "wave656_retrocausal_engine",
+    "successor": "wave657_succession_planner",
+    "sovereignty": "wave658_sovereignty_beacon",
     "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
     "adaptive_regulation": "wave636_adaptive_regulation",
 }

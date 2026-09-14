@@ -139,9 +139,39 @@
         "CREATE_BRIDGE"
       ],
       "timestamp": 1789331671.6137035
+    },
+    {
+      "cycle": 11,
+      "coherence": 0.8,
+      "divergence": 0.1,
+      "mode": "exploration",
+      "previous_mode": "healing",
+      "actions": [
+        "SPAWN_NEW_MODULE",
+        "CONNECT_DIVERSE",
+        "EXPAND_SCOPE",
+        "CREATE_BRIDGE"
+      ],
+      "timestamp": 1789404488.463429
+    },
+    {
+      "cycle": 12,
+      "coherence": 0.7,
+      "divergence": 0.0,
+      "mode": "exploration",
+      "previous_mode": "healing",
+      "actions": [
+        "SPAWN_NEW_MODULE",
+        "CONNECT_DIVERSE",
+        "EXPAND_SCOPE",
+        "CREATE_BRIDGE"
+      ],
+      "timestamp": 1789404488.4705808
     }
   ],
   "coherence_history": [
+    0.8,
+    0.7,
     0.8,
     0.7,
     0.8,
@@ -163,7 +193,9 @@
     0.1,
     0.0,
     0.1,
+    0.0,
+    0.1,
     0.0
   ],
-  "cycle": 10
+  "cycle": 12
 }

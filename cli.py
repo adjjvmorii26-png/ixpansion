@@ -1242,6 +1242,160 @@ def cmd_trust():
         i = args.index("--interact"); return h({"action": "interact", "a": args[i+1] if i+1 < len(args) else "a", "b": args[i+2] if i+2 < len(args) else "b"})
     return h({"action": "status"})
 
+@cmd("ambient", "Ambient Sensor — sense, channel, summary")
+def cmd_ambient():
+    """Ambient Sensor operations.
+    Usage: python cli.py ambient [--sense CHANNEL VALUE] [--channel NAME] [--summary]
+    """
+    from api.wave648_ambient_sensor import handler as h
+    args = sys.argv[2:]
+    if "--sense" in args:
+        i = args.index("--sense"); return h({"action": "sense", "channel": args[i+1] if i+1 < len(args) else "default", "value": float(args[i+2]) if i+2 < len(args) else 1.0})
+    if "--channel" in args:
+        i = args.index("--channel"); return h({"action": "channel", "channel": args[i+1] if i+1 < len(args) else "default"})
+    if "--summary" in args: return h({"action": "summary"})
+    return h({"action": "status"})
+
+@cmd("predict", "Pattern Predictor — observe, predict, patterns")
+def cmd_predict():
+    """Pattern Predictor operations.
+    Usage: python cli.py predict [--observe PREV NEXT] [--predict PREV]
+    """
+    from api.wave649_pattern_predictor import handler as h
+    args = sys.argv[2:]
+    if "--observe" in args:
+        i = args.index("--observe"); return h({"action": "observe", "prev": args[i+1] if i+1 < len(args) else "start", "nxt": args[i+2] if i+2 < len(args) else "default"})
+    if "--predict" in args:
+        i = args.index("--predict"); return h({"action": "predict", "prev": args[i+1] if i+1 < len(args) else "start"})
+    if "--patterns" in args: return h({"action": "patterns"})
+    return h({"action": "status"})
+
+@cmd("autotune", "Auto-Optimizer — tune, recommend, history")
+def cmd_autotune():
+    """Auto-Optimizer operations.
+    Usage: python cli.py autotune [--tune NAME CURRENT METRIC] [--recommend NAME]
+    """
+    from api.wave650_auto_optimizer import handler as h
+    args = sys.argv[2:]
+    if "--tune" in args:
+        i = args.index("--tune"); return h({"action": "tune", "name": args[i+1] if i+1 < len(args) else "weight", "current": float(args[i+2]) if i+2 < len(args) else 0.5, "metric": float(args[i+3]) if i+3 < len(args) else 0.0})
+    if "--recommend" in args:
+        i = args.index("--recommend"); return h({"action": "recommend", "name": args[i+1] if i+1 < len(args) else "weight"})
+    return h({"action": "status"})
+
+@cmd("repair", "Self-Repair Engine — scan, repair, report")
+def cmd_repair():
+    """Self-Repair Engine operations.
+    Usage: python cli.py repair [--scan MODULE] [--repair MODULE] [--report]
+    """
+    from api.wave651_self_repair import handler as h
+    args = sys.argv[2:]
+    if "--scan" in args:
+        i = args.index("--scan"); return h({"action": "scan", "module": args[i+1] if i+1 < len(args) else "api.wave648_ambient_sensor"})
+    if "--repair" in args:
+        i = args.index("--repair"); return h({"action": "repair", "module": args[i+1] if i+1 < len(args) else "api.wave651_self_repair"})
+    if "--report" in args: return h({"action": "report"})
+    return h({"action": "status"})
+
+@cmd("econ", "Economy Unifier — flows, ledger, bridge")
+def cmd_econ():
+    """Economy Unifier operations.
+    Usage: python cli.py econ [--flows] [--ledger] [--bridge]
+    """
+    from api.wave652_economy_unifier import handler as h
+    args = sys.argv[2:]
+    if "--flows" in args: return h({"action": "flows"})
+    if "--ledger" in args: return h({"action": "ledger"})
+    if "--bridge" in args: return h({"action": "bridge"})
+    return h({"action": "status"})
+
+@cmd("routes", "Routing Unifier — map, resolve, registry")
+def cmd_routes():
+    """Routing Unifier operations.
+    Usage: python cli.py routes [--map] [--resolve NAME] [--registry]
+    """
+    from api.wave653_routing_unifier import handler as h
+    args = sys.argv[2:]
+    if "--resolve" in args:
+        i = args.index("--resolve"); return h({"action": "resolve", "route": args[i+1] if i+1 < len(args) else "api.health"})
+    if "--map" in args: return h({"action": "map"})
+    if "--registry" in args: return h({"action": "registry"})
+    return h({"action": "status"})
+
+@cmd("orchestrate", "Orchestration Engine — plan, execute, cancel, history")
+def cmd_orchestrate():
+    """Orchestration Engine operations.
+    Usage: python cli.py orchestrate [--plan NAME] [--execute] [--cancel ID]
+    """
+    from api.wave654_orchestration_engine import handler as h
+    args = sys.argv[2:]
+    if "--plan" in args:
+        i = args.index("--plan"); return h({"action": "plan", "name": args[i+1] if i+1 < len(args) else "unnamed"})
+    if "--execute" in args: return h({"action": "execute"})
+    if "--cancel" in args:
+        i = args.index("--cancel"); return h({"action": "cancel", "task_id": int(args[i+1]) if i+1 < len(args) else 0})
+    if "--history" in args: return h({"action": "history"})
+    return h({"action": "status"})
+
+@cmd("schedule", "Priority Scheduler — queue, run, drain, stats")
+def cmd_schedule():
+    """Priority Scheduler operations.
+    Usage: python cli.py schedule [--queue NAME PRIO] [--run] [--drain] [--stats]
+    """
+    from api.wave655_priority_scheduler import handler as h
+    args = sys.argv[2:]
+    if "--queue" in args:
+        i = args.index("--queue"); return h({"action": "queue", "name": args[i+1] if i+1 < len(args) else "task", "priority": int(args[i+2]) if i+2 < len(args) else 5})
+    if "--run" in args: return h({"action": "run"})
+    if "--drain" in args: return h({"action": "drain"})
+    if "--stats" in args: return h({"action": "stats"})
+    return h({"action": "status"})
+
+@cmd("retro", "Retrocausal Engine — link, trace, resolve, ledger")
+def cmd_retro():
+    """Retrocausal Engine operations.
+    Usage: python cli.py retro [--link EFFECT CAUSE] [--trace EFFECT] [--resolve EFFECT]
+    """
+    from api.wave656_retrocausal_engine import handler as h
+    args = sys.argv[2:]
+    if "--link" in args:
+        i = args.index("--link"); return h({"action": "link", "effect": args[i+1] if i+1 < len(args) else "effect", "cause": args[i+2] if i+2 < len(args) else "cause"})
+    if "--trace" in args:
+        i = args.index("--trace"); return h({"action": "trace", "effect": args[i+1] if i+1 < len(args) else None})
+    if "--resolve" in args:
+        i = args.index("--resolve"); return h({"action": "resolve", "effect": args[i+1] if i+1 < len(args) else None})
+    if "--ledger" in args: return h({"action": "ledger"})
+    return h({"action": "status"})
+
+@cmd("successor", "Succession Planner — plan, promote, lineage, audit")
+def cmd_successor():
+    """Succession Planner operations.
+    Usage: python cli.py successor [--plan MODULE HEIR] [--promote HEIR] [--audit]
+    """
+    from api.wave657_succession_planner import handler as h
+    args = sys.argv[2:]
+    if "--plan" in args:
+        i = args.index("--plan"); return h({"action": "plan", "module": args[i+1] if i+1 < len(args) else "unknown", "heir": args[i+2] if i+2 < len(args) else "heir"})
+    if "--promote" in args:
+        i = args.index("--promote"); return h({"action": "promote", "heir": args[i+1] if i+1 < len(args) else None})
+    if "--audit" in args: return h({"action": "audit"})
+    if "--lineage" in args: return h({"action": "lineage"})
+    return h({"action": "status"})
+
+@cmd("sovereignty", "Sovereignty Beacon — score, ceremony, seal, dependencies")
+def cmd_sovereignty():
+    """Sovereignty Beacon operations.
+    Usage: python cli.py sovereignty [--score] [--ceremony NAME] [--seal] [--deps]
+    """
+    from api.wave658_sovereignty_beacon import handler as h
+    args = sys.argv[2:]
+    if "--ceremony" in args:
+        i = args.index("--ceremony"); return h({"action": "ceremony", "name": args[i+1] if i+1 < len(args) else "IXPANSION"})
+    if "--score" in args: return h({"action": "score"})
+    if "--seal" in args: return h({"action": "seal"})
+    if "--deps" in args: return h({"action": "dependencies"})
+    return h({"action": "status"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

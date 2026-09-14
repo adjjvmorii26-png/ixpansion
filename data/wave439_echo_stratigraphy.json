@@ -796,11 +796,86 @@
       "compressed_at": 1789322771.08791,
       "depth": 1,
       "integrity": 1.0
+    },
+    {
+      "layer_id": "81ebdb4e845e",
+      "stratum": "sediment",
+      "event_type": "mutation",
+      "module": "test",
+      "deposited": 1789404486.9171128,
+      "depth": 0,
+      "pressure": 0.0,
+      "eroded": false
+    },
+    {
+      "layer_id": "c39aa5045fc5",
+      "stratum": "sediment",
+      "event_type": "event",
+      "module": "m",
+      "deposited": 1789404486.9268143,
+      "depth": 0,
+      "pressure": 0.0,
+      "eroded": false
+    },
+    {
+      "layer_id": "0650a9a4729e",
+      "stratum": "sediment",
+      "event_type": "event",
+      "module": "m",
+      "deposited": 1789404486.9379573,
+      "depth": 0,
+      "pressure": 0.0,
+      "eroded": false
+    },
+    {
+      "layer_id": "baf81f9fcd60",
+      "stratum": "fossil",
+      "module": "test",
+      "deposited": 1789267433.9596775,
+      "compressed_at": 1789404486.9425037,
+      "depth": 1,
+      "integrity": 1.0
+    },
+    {
+      "layer_id": "19ad384dfb56",
+      "stratum": "fossil",
+      "module": "m",
+      "deposited": 1789267433.9686196,
+      "compressed_at": 1789404486.942564,
+      "depth": 1,
+      "integrity": 1.0
+    },
+    {
+      "layer_id": "c6dde5a647aa",
+      "stratum": "fossil",
+      "module": "m",
+      "deposited": 1789267433.9798405,
+      "compressed_at": 1789404486.9425895,
+      "depth": 1,
+      "integrity": 1.0
+    },
+    {
+      "layer_id": "4a0c7b9a89c1",
+      "stratum": "fossil",
+      "module": "test",
+      "deposited": 1789269330.0153515,
+      "compressed_at": 1789404486.942612,
+      "depth": 1,
+      "integrity": 1.0
+    },
+    {
+      "layer_id": "14c2358981ac",
+      "stratum": "fossil",
+      "module": "m",
+      "deposited": 1789269330.0262372,
+      "compressed_at": 1789404486.9426312,
+      "depth": 1,
+      "integrity": 1.0
     }
   ],
   "counts": {
-    "sediment": 32,
-    "fossil": 53,
+    "sediment": 35,
+    "fossil": 58,
     "metamorphic": 0,
     "bedrock": 0
   }

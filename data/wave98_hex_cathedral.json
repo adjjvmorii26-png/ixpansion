@@ -1,27 +1,13 @@
 {
-  "bundle": "; bundle 246f3b984e9e6e70\n; ---- consent_program.hexsrc ----\n; auto from consent_lattice\n; #chapel consent_chapel\nPUSH 1\n; scope delete_ci\nPUSH 0\nADD\n; scope external_network\nPUSH 0\nADD\n; scope publish_youtube_meta\nPUSH 1\nADD\n; scope push_main\nPUSH 0\nADD\n; scope read_lab\nPUSH 1\nADD\n; scope write_lab_experiments\nPUSH 1\nADD\n; #altar consent_hall\nGLYPH\nENACT\nHALT\n\n; ---- mercy_program.hexsrc ----\n; MERCY REFUSE: delete ci workflow\n; #chapel mercy_chapel\nPUSH 0\n; #altar refuse_rite\nJMPZ 6\nPUSH 1\nENACT\nHALT\n; skip enact\nGLYPH\nHALT\n",
+  "bundle": "; ---- consent_program.hexsrc ----\n; #chapel consent_chapel\nPUSH 1\nPUSH 0\nADD\nPUSH 0\nADD\nPUSH 1\nADD\nPUSH 0\nADD\nPUSH 1\nADD\n; #altar consent_hall\nGLYPH\nENACT\nHALT\n\n; ---- mercy_program.hexsrc ----\n; #chapel mercy_chapel\nPUSH 0\n; #altar refuse_rite\nJMPZ @consent_hall\nPUSH 1\nENACT\nHALT\nGLYPH\nHALT\n",
   "heat": {
-    "consent_chapel": 36
+    "consent_chapel": 12
   },
   "history": [
     {
-      "ts": 1789354897.712557,
+      "ts": 1789411947.336482,
       "program_hash": "2289902149551ba6",
       "steps": 14,
-      "glyphs": 1,
-      "halted": true
-    },
-    {
-      "ts": 1789354898.2564633,
-      "program_hash": "2289902149551ba6",
-      "steps": 14,
-      "glyphs": 1,
-      "halted": true
-    },
-    {
-      "ts": 1789354899.3443038,
-      "program_hash": "80630660bf63b73d",
-      "steps": 16,
       "glyphs": 1,
       "halted": true
     }

@@ -4,57 +4,75 @@
   "type": "causality_engine",
   "purpose": "Creates recursive causality chains that self-reference and evolve",
   "active": true,
-  "created": 1789322760.146632,
+  "created": 1789404483.4611502,
   "causality_chains": [
     {
       "id": "causal_0",
-      "cause": "event_44",
-      "effect": "outcome_32",
-      "loop_depth": 4,
-      "recursive": false,
-      "stability": 0.92
+      "cause": "event_31",
+      "effect": "outcome_79",
+      "loop_depth": 3,
+      "recursive": true,
+      "stability": 0.69,
+      "loop_back_to": "causal_0"
     },
     {
       "id": "causal_1",
-      "cause": "event_63",
-      "effect": "outcome_60",
-      "loop_depth": 3,
+      "cause": "event_61",
+      "effect": "outcome_63",
+      "loop_depth": 5,
       "recursive": true,
-      "stability": 0.92,
-      "loop_back_to": "causal_0"
-    },
-    {
-      "id": "causal_2",
-      "cause": "event_34",
-      "effect": "outcome_72",
-      "loop_depth": 1,
-      "recursive": true,
-      "stability": 0.92,
-      "loop_back_to": "causal_0"
-    },
-    {
-      "id": "causal_3",
-      "cause": "event_89",
-      "effect": "outcome_12",
-      "loop_depth": 2,
-      "recursive": true,
-      "stability": 0.76,
+      "stability": 0.78,
       "loop_back_to": "causal_1"
     },
     {
-      "id": "causal_4",
-      "cause": "event_74",
-      "effect": "outcome_41",
-      "loop_depth": 4,
+      "id": "causal_2",
+      "cause": "event_59",
+      "effect": "outcome_79",
+      "loop_depth": 2,
       "recursive": false,
-      "stability": 0.99
+      "stability": 0.68
+    },
+    {
+      "id": "causal_3",
+      "cause": "event_52",
+      "effect": "outcome_11",
+      "loop_depth": 2,
+      "recursive": false,
+      "stability": 0.6
+    },
+    {
+      "id": "causal_4",
+      "cause": "event_12",
+      "effect": "outcome_85",
+      "loop_depth": 1,
+      "recursive": true,
+      "stability": 0.9,
+      "loop_back_to": "causal_1"
+    },
+    {
+      "id": "causal_5",
+      "cause": "event_96",
+      "effect": "outcome_33",
+      "loop_depth": 3,
+      "recursive": true,
+      "stability": 0.92,
+      "loop_back_to": "causal_1"
+    },
+    {
+      "id": "causal_6",
+      "cause": "event_58",
+      "effect": "outcome_64",
+      "loop_depth": 1,
+      "recursive": true,
+      "stability": 0.83,
+      "loop_back_to": "causal_0"
     }
   ],
-  "total_loops": 14,
-  "recursive_chains": 3,
-  "average_stability": 0.902,
-  "causality_integrity": 0.854,
-  "loop_closed": true,
-  "temporal_depth": 5,
-  "timestamp": 1789322760.146632
+  "total_loops": 17,
+  "recursive_chains": 5,
+  "average_stability": 0.771,
+  "causality_integrity": 0.971,
+  "loop_closed": false,
+  "temporal_depth": 2,
+  "timestamp": 1789404483.4611502
 }

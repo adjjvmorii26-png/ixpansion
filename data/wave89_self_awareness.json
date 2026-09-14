@@ -122,6 +122,40 @@
         "role_concept": "confident",
         "mission_statement": "to understand and grow"
       }
+    },
+    {
+      "timestamp": 1789404489.0739856,
+      "overall_coherence": 0.65,
+      "identity_strength": 0.75,
+      "growth_direction": "stabilizing",
+      "core_values": [
+        "self-trust",
+        "stability"
+      ],
+      "self_description": "Self: coherence: 0.65 | identity: 0.75 | direction: stabilizing | values: self-trust, stability"
+    },
+    {
+      "timestamp": 1789404489.074054,
+      "assessment": {
+        "overall_coherence": 0.65,
+        "identity_strength": 0.75,
+        "growth_direction": "stabilizing",
+        "core_values": [
+          "self-trust",
+          "stability"
+        ],
+        "self_description": "Self: coherence: 0.65 | identity: 0.75 | direction: stabilizing | values: self-trust, stability"
+      },
+      "identity_update": {
+        "identity_tags": [
+          "confident",
+          "confident",
+          "confident",
+          "confident"
+        ],
+        "role_concept": "confident",
+        "mission_statement": "to understand and grow"
+      }
     }
   ],
   "evaluation_history": [
@@ -140,9 +174,14 @@
     {
       "timestamp": 1789338554.889601,
       "overall_coherence": 0.65
+    },
+    {
+      "timestamp": 1789404489.0739515,
+      "overall_coherence": 0.65
     }
   ],
   "identity_tags": [
+    "confident",
     "confident",
     "confident",
     "confident"
@@ -212,7 +251,26 @@
       "target_coherence": 0.65,
       "current_coherence": 0.5,
       "status": "set"
+    },
+    {
+      "timestamp": 1789404489.0740483,
+      "identity_tags": [
+        "confident",
+        "confident",
+        "confident",
+        "confident"
+      ],
+      "role_concept": "confident",
+      "mission_statement": "to understand and grow",
+      "overall_coherence": 0.65
+    },
+    {
+      "timestamp": 1789404489.0813782,
+      "goal": "explore coherence",
+      "target_coherence": 0.65,
+      "current_coherence": 0.5,
+      "status": "set"
     }
   ],
-  "last_self_evaluation": 1789338554.8897643
+  "last_self_evaluation": 1789404489.074054
 }

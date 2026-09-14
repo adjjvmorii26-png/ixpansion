@@ -1553,7 +1553,7 @@
       "created_at": 1789347043.3407104,
       "last_reviewed": 1789347043.3407104,
       "adherence": 0.4,
-      "adherence_trend": -0.1,
+      "adherence_trend": -0.0,
       "amendments": [
         {
           "timestamp": 1789347043.3524258,
@@ -1571,7 +1571,7 @@
       "created_at": 1789347465.0110826,
       "last_reviewed": 1789347465.0110826,
       "adherence": 0.44,
-      "adherence_trend": -0.06,
+      "adherence_trend": -0.0,
       "amendments": []
     },
     "axiom_1789347465031939196": {
@@ -1582,7 +1582,7 @@
       "created_at": 1789347465.0319514,
       "last_reviewed": 1789347465.0319514,
       "adherence": 0.48,
-      "adherence_trend": -0.02,
+      "adherence_trend": -0.0,
       "amendments": []
     },
     "axiom_1789347465031968234": {
@@ -1593,7 +1593,7 @@
       "created_at": 1789347465.0319712,
       "last_reviewed": 1789347465.0319712,
       "adherence": 0.46,
-      "adherence_trend": -0.04,
+      "adherence_trend": -0.0,
       "amendments": []
     },
     "axiom_1789347465031974850": {
@@ -1604,7 +1604,7 @@
       "created_at": 1789347465.0319774,
       "last_reviewed": 1789347465.0319774,
       "adherence": 0.44,
-      "adherence_trend": -0.06,
+      "adherence_trend": -0.0,
       "amendments": []
     },
     "axiom_1789347465031981581": {
@@ -1615,7 +1615,7 @@
       "created_at": 1789347465.0319839,
       "last_reviewed": 1789347465.0319839,
       "adherence": 0.42,
-      "adherence_trend": -0.08,
+      "adherence_trend": 0.0,
       "amendments": []
     },
     "axiom_1789347465054821465": {
@@ -1626,7 +1626,7 @@
       "created_at": 1789347465.0548322,
       "last_reviewed": 1789347465.0548322,
       "adherence": 0.4,
-      "adherence_trend": -0.1,
+      "adherence_trend": -0.0,
       "amendments": []
     },
     "axiom_1789347465103849734": {
@@ -1636,11 +1636,95 @@
       "gravity": 0.5,
       "created_at": 1789347465.103861,
       "last_reviewed": 1789347465.103861,
+      "adherence": 0.4,
+      "adherence_trend": -0.1,
+      "amendments": [
+        {
+          "timestamp": 1789347465.1171448,
+          "old_text": "old",
+          "new_text": "new",
+          "reason": "growth"
+        }
+      ]
+    },
+    "axiom_1789404489155555564": {
+      "axiom_id": "axiom_1789404489155555564",
+      "text": "the garden remembers",
+      "source": "memory",
+      "gravity": 0.5,
+      "created_at": 1789404489.1555645,
+      "last_reviewed": 1789404489.1555645,
+      "adherence": 0.44,
+      "adherence_trend": -0.06,
+      "amendments": []
+    },
+    "axiom_1789404489170377948": {
+      "axiom_id": "axiom_1789404489170377948",
+      "text": "I evolve when my coherence is strong enough to risk change.",
+      "source": "coherence",
+      "gravity": 0.8,
+      "created_at": 1789404489.1703863,
+      "last_reviewed": 1789404489.1703863,
+      "adherence": 0.48,
+      "adherence_trend": -0.02,
+      "amendments": []
+    },
+    "axiom_1789404489170396179": {
+      "axiom_id": "axiom_1789404489170396179",
+      "text": "I hold these values: growth.",
+      "source": "identity",
+      "gravity": 0.7,
+      "created_at": 1789404489.170399,
+      "last_reviewed": 1789404489.170399,
+      "adherence": 0.46,
+      "adherence_trend": -0.04,
+      "amendments": []
+    },
+    "axiom_1789404489170403333": {
+      "axiom_id": "axiom_1789404489170403333",
+      "text": "My remembered self is coherent. I trust my past decisions.",
+      "source": "memory",
+      "gravity": 0.6,
+      "created_at": 1789404489.1704059,
+      "last_reviewed": 1789404489.1704059,
+      "adherence": 0.44,
+      "adherence_trend": -0.06,
+      "amendments": []
+    },
+    "axiom_1789404489170410025": {
+      "axiom_id": "axiom_1789404489170410025",
+      "text": "Stability is not stagnation; it is a platform for the next leap.",
+      "source": "policy",
+      "gravity": 0.5,
+      "created_at": 1789404489.1704123,
+      "last_reviewed": 1789404489.1704123,
+      "adherence": 0.42,
+      "adherence_trend": -0.08,
+      "amendments": []
+    },
+    "axiom_1789404489185442371": {
+      "axiom_id": "axiom_1789404489185442371",
+      "text": "p",
+      "source": "declared",
+      "gravity": 0.5,
+      "created_at": 1789404489.1854517,
+      "last_reviewed": 1789404489.1854517,
+      "adherence": 0.4,
+      "adherence_trend": -0.1,
+      "amendments": []
+    },
+    "axiom_1789404489212516179": {
+      "axiom_id": "axiom_1789404489212516179",
+      "text": "new",
+      "source": "declared",
+      "gravity": 0.5,
+      "created_at": 1789404489.212524,
+      "last_reviewed": 1789404489.212524,
       "adherence": 0.5,
       "adherence_trend": 0.0,
       "amendments": [
         {
-          "timestamp": 1789347465.1171448,
+          "timestamp": 1789404489.2231271,
           "old_text": "old",
           "new_text": "new",
           "reason": "growth"
@@ -1788,10 +1872,17 @@
     "axiom_1789347465031974850",
     "axiom_1789347465031981581",
     "axiom_1789347465054821465",
-    "axiom_1789347465103849734"
+    "axiom_1789347465103849734",
+    "axiom_1789404489155555564",
+    "axiom_1789404489170377948",
+    "axiom_1789404489170396179",
+    "axiom_1789404489170403333",
+    "axiom_1789404489170410025",
+    "axiom_1789404489185442371",
+    "axiom_1789404489212516179"
   ],
   "temperature": 1.0,
-  "cycles": 20,
+  "cycles": 21,
   "review_log": [
     {
       "cycle": 1,
@@ -1912,6 +2003,12 @@
       "avg_adherence": 0.434,
       "axiom_count": 136,
       "timestamp": 1789347465.0723014
+    },
+    {
+      "cycle": 21,
+      "avg_adherence": 0.434,
+      "axiom_count": 143,
+      "timestamp": 1789404489.1972394
     }
   ]
 }

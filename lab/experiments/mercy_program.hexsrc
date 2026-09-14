@@ -1,11 +1,7 @@
-; MERCY REFUSE: delete ci workflow
-; #chapel mercy_chapel
-PUSH 0
-; #altar refuse_rite
-JMPZ 6
+; ALLOW: run cartography survey
+; #chapel consent_chapel
+; #altar consent_hall
 PUSH 1
 ENACT
-HALT
-; skip enact
 GLYPH
 HALT

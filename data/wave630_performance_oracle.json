@@ -1,0 +1,89 @@
+{
+  "windows": {
+    "latency_ms": {
+      "name": "latency_ms",
+      "count": 1,
+      "average": 50.0,
+      "trend": 0.0,
+      "current": 50.0,
+      "threshold": 100.0,
+      "severity": "normal",
+      "will_exceed": false,
+      "forecast": [
+        50.0,
+        50.0,
+        50.0,
+        50.0,
+        50.0
+      ]
+    }
+  },
+  "alerts": [],
+  "history": [
+    {
+      "ts": 1789399283.5068417,
+      "metric": "latency_ms",
+      "value": 50.0
+    },
+    {
+      "ts": 1789399346.2079203,
+      "metric": "latency_ms",
+      "value": 50.0
+    },
+    {
+      "ts": 1789399415.0302644,
+      "metric": "latency_ms",
+      "value": 50.0
+    },
+    {
+      "ts": 1789399477.4265656,
+      "metric": "latency_ms",
+      "value": 120.0
+    },
+    {
+      "ts": 1789399477.799849,
+      "metric": "latency_ms",
+      "value": 140.0
+    },
+    {
+      "ts": 1789399548.1479068,
+      "metric": "latency_ms",
+      "value": 50.0
+    },
+    {
+      "ts": 1789399936.7071843,
+      "metric": "latency_ms",
+      "value": 50.0
+    },
+    {
+      "ts": 1789400576.092023,
+      "metric": "latency_ms",
+      "value": 50.0
+    },
+    {
+      "ts": 1789400641.9148943,
+      "metric": "latency_ms",
+      "value": 50.0
+    },
+    {
+      "ts": 1789400792.0441194,
+      "metric": "latency_ms",
+      "value": 50.0
+    },
+    {
+      "ts": 1789400845.7876444,
+      "metric": "latency_ms",
+      "value": 50.0
+    },
+    {
+      "ts": 1789403054.9685059,
+      "metric": "latency_ms",
+      "value": 50.0
+    },
+    {
+      "ts": 1789404488.0946643,
+      "metric": "latency_ms",
+      "value": 50.0
+    }
+  ]
+}

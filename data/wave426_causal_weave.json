@@ -912,13 +912,96 @@
       "stability": 0.91,
       "signature": "a27eed166881d8eb",
       "woven_at": 1789322761.6468925
+    },
+    {
+      "thread_id": "weave_4484",
+      "future_event": "paradox_resolution",
+      "past_anchor": "wave401_origin",
+      "direction": "retroactive",
+      "causal_strength": 0.906,
+      "ripple_radius": 46,
+      "stability": 0.73,
+      "signature": "78857b6e9ca8a46a",
+      "woven_at": 1789404484.0914576,
+      "resolved": true,
+      "resolved_at": 1789404484.1491258,
+      "paradox_cost": 0.27
+    },
+    {
+      "thread_id": "weave_4484",
+      "future_event": "next_merge",
+      "past_anchor": "first_commit",
+      "direction": "retroactive",
+      "causal_strength": 0.506,
+      "ripple_radius": 49,
+      "stability": 0.98,
+      "signature": "5bacc3ad73a94e82",
+      "woven_at": 1789404484.1019516
+    },
+    {
+      "thread_id": "weave_4484",
+      "future_event": "paradox_resolution",
+      "past_anchor": "naming_ceremony",
+      "direction": "retroactive",
+      "causal_strength": 0.512,
+      "ripple_radius": 45,
+      "stability": 0.84,
+      "signature": "cb321a70033c3218",
+      "woven_at": 1789404484.1144273
+    },
+    {
+      "thread_id": "weave_4484",
+      "future_event": "paradox_resolution",
+      "past_anchor": "genesis_seed",
+      "direction": "retroactive",
+      "causal_strength": 0.794,
+      "ripple_radius": 18,
+      "stability": 0.43,
+      "signature": "120017c6bcdf5f3c",
+      "woven_at": 1789404484.12523,
+      "resolved": true,
+      "resolved_at": 1789404484.1322527,
+      "paradox_cost": 0.57
+    },
+    {
+      "thread_id": "weave_4484",
+      "future_event": "paradox_resolution",
+      "past_anchor": "organism_census",
+      "direction": "retroactive",
+      "causal_strength": 0.885,
+      "ripple_radius": 37,
+      "stability": 0.78,
+      "signature": "fb7dfaef250942c7",
+      "woven_at": 1789404484.1403706
+    },
+    {
+      "thread_id": "weave_4484",
+      "future_event": "singularity_collapse",
+      "past_anchor": "wave401_origin",
+      "direction": "retroactive",
+      "causal_strength": 0.442,
+      "ripple_radius": 7,
+      "stability": 0.68,
+      "signature": "01c55e917d601c59",
+      "woven_at": 1789404484.1576514
+    },
+    {
+      "thread_id": "weave_4484",
+      "future_event": "temporal_singularity",
+      "past_anchor": "naming_ceremony",
+      "direction": "retroactive",
+      "causal_strength": 0.244,
+      "ripple_radius": 5,
+      "stability": 0.56,
+      "signature": "270feec0436125a7",
+      "woven_at": 1789404484.1777248
     }
   ],
-  "total": 77,
+  "total": 84,
   "last_rewrite": {
-    "anchor": "wave401_origin",
-    "rewritten_as": "wave401_origin_reshaped_by_swarm_unification",
-    "timestamp": 1789322761.6468925
+    "anchor": "naming_ceremony",
+    "rewritten_as": "naming_ceremony_reshaped_by_temporal_singularity",
+    "timestamp": 1789404484.1777248
   },
-  "resolved": 22
+  "resolved": 24
 }

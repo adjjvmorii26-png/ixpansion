@@ -1,3 +1,21 @@
+## [4.103.0] — 2026-09-14
+
+### Added
+- **Wave 648 — Ambient Sensor**: Always-on signal channels with decay and aggregation.
+- **Wave 649 — Pattern Predictor**: Weighted next-symbol prediction from observed sequences.
+- **Wave 650 — Auto-Optimizer**: Self-tune weights; keeps best-value history per tunable.
+- **Wave 651 — Self-Repair Engine**: Importability scans, heal/restart ledger.
+- **Wave 652 — Economy Unifier**: Read-only unified view across economy organs.
+- **Wave 653 — Routing Unifier**: Canonical route registry across routing modules.
+- **Wave 654 — Orchestration Engine**: Plan/execute/cancel cross-module tasks.
+- **Wave 655 — Priority Scheduler**: Priority queue with run-highest and drain.
+- **Wave 656 — Retrocausal Engine**: Effect→cause links, traces, resolution ledger.
+- **Wave 657 — Succession Planner**: Heir planning, promotion, lineage audit.
+- **Wave 658 — Sovereignty Beacon**: Autonomy score, dependency map, sealing ceremony.
+- Routes: /ambient-sensor, /pattern-predictor, /auto-optimizer, /self-repair, /economy-unifier, /routing-unifier, /orchestration, /priority-scheduler, /retrocausal, /succession-planner, /sovereignty
+- CLI commands: ambient, predict, autotune, repair, econ, routes, orchestrate, schedule, retro, successor, sovereignty
+- 85 new tests (all passing).
+
 ## [4.102.0] — 2026-09-14
 
 ### Added
