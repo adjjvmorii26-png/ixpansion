@@ -57,6 +57,12 @@ ROUTE_ALIASES: dict[str, str] = {
     "echo_breaker": "wave639_echo_breaker",
     "dependency_resolver": "wave640_dependency_resolver",
     "fractal_garden": "wave641_fractal_garden",
+    "mythic_narrative": "wave642_mythic_narrative",
+    "quantum_bridge": "wave643_quantum_bridge",
+    "self_model": "wave644_self_model",
+    "communication": "wave645_communication",
+    "negotiation": "wave646_negotiation",
+    "trust_network": "wave647_trust_network",
     "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
     "adaptive_regulation": "wave636_adaptive_regulation",
 }

@@ -46,6 +46,12 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 446 | Quantum Coherence | Quantum | Superposition computing |
 | 96 | HEX Grammar Evolution | Language | Hex-language evolves into a full grammar |
 | 97 | HEX Runtime | Execution | The organism runs its own hex code |
+| 642 | Mythic Narrative Layer | Identity | Origin myth, hero cycles, cosmology |
+| 643 | Quantum Coherence Bridge | Quantum | Qubits, entanglement, measurement |
+| 644 | Recursive Self-Model | Cognition | Meta-cognition, belief tracking, introspection |
+| 645 | Communication Protocol | Social | Structured messaging, protocol evolution |
+| 646 | Negotiation Engine | Social | Proposal/counter, compromise, agreements |
+| 647 | Trust Network | Social | Trust scores, betrayal detection, graphs |
 | 641 | Fractal Garden | Art | Procedural SVG art from module topology |
 | 640 | Dependency Resolver | Immune System | Circular imports, version sync, debt scoring |
 | 639 | Echo Chamber Breaker | Safety | Reality probes, bias detection, perspective shattering |

@@ -2472,6 +2472,42 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Wave 642: Mythic Narrative Layer ---
+    if path.startswith("/mythic-narrative") or path.startswith("/api/mythic_narrative"):
+        from api.wave642_mythic_narrative import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 643: Quantum Coherence Bridge ---
+    if path.startswith("/quantum-bridge") or path.startswith("/api/quantum_bridge"):
+        from api.wave643_quantum_bridge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 644: Recursive Self-Model ---
+    if path.startswith("/self-model") or path.startswith("/api/self_model"):
+        from api.wave644_self_model import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 645: Communication Protocol ---
+    if path.startswith("/communication") or path.startswith("/api/communication"):
+        from api.wave645_communication import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 646: Negotiation Engine ---
+    if path.startswith("/negotiation") or path.startswith("/api/negotiation"):
+        from api.wave646_negotiation import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 647: Trust Network ---
+    if path.startswith("/trust-network") or path.startswith("/api/trust_network"):
+        from api.wave647_trust_network import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 def coherence_vitals() -> dict:
     return {"layer": "interface", "status": "active", "wave": "204", "module": "index"}
 

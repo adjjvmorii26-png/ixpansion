@@ -1152,6 +1152,96 @@ def cmd_garden():
         return h({"action": "gallery"})
     return h({"action": "status"})
 
+@cmd("myth", "Mythic Narrative Layer — origin myth, hero cycles, epochs, cosmology")
+def cmd_myth():
+    """Mythic Narrative operations.
+
+    Usage:
+      python cli.py myth                          # status
+      python cli.py myth --origin                 # read origin myth
+      python cli.py myth --hero MODULE            # write hero cycle
+      python cli.py myth --epoch NAME             # record epoch
+      python cli.py myth --cosmos                 # cosmology
+    """
+    from api.wave642_mythic_narrative import handler as h
+    args = sys.argv[2:]
+    if "--origin" in args:
+        r = h({"action": "origin"})
+        return {"ok": True, "origin_myth": (r.get("origin_myth") or "")[:400]}
+    if "--hero" in args:
+        idx = args.index("--hero")
+        name = args[idx + 1] if idx + 1 < len(args) else "unnamed"
+        return h({"action": "hero", "module": name, "wave": 1})
+    if "--cosmos" in args:
+        return h({"action": "cosmology"})
+    return h({"action": "status"})
+
+@cmd("quantum", "Quantum Coherence Bridge — qubits, entanglement, measurement collapse")
+def cmd_quantum():
+    """Quantum Bridge operations.
+    Usage: python cli.py quantum [--register NAME] [--entangle A B] [--measure NAME]
+    """
+    from api.wave643_quantum_bridge import handler as h
+    args = sys.argv[2:]
+    if "--register" in args:
+        i = args.index("--register"); return h({"action": "register", "name": args[i+1] if i+1 < len(args) else "q"})
+    if "--entangle" in args:
+        i = args.index("--entangle"); return h({"action": "entangle", "a": args[i+1] if i+1 < len(args) else "a", "b": args[i+2] if i+2 < len(args) else "b"})
+    if "--measure" in args:
+        i = args.index("--measure"); return h({"action": "measure", "name": args[i+1] if i+1 < len(args) else "q"})
+    return h({"action": "status"})
+
+@cmd("selfmodel", "Recursive Self-Model — beliefs, introspection, revision")
+def cmd_selfmodel():
+    """Self-Model operations.
+    Usage: python cli.py selfmodel [--belief KEY VALUE] [--introspect TOPIC]
+    """
+    from api.wave644_self_model import handler as h
+    args = sys.argv[2:]
+    if "--belief" in args:
+        i = args.index("--belief"); return h({"action": "belief", "key": args[i+1] if i+1 < len(args) else "k", "value": args[i+2] if i+2 < len(args) else "v"})
+    if "--introspect" in args:
+        return h({"action": "introspect", "topic": args[args.index("--introspect")+1] if args.index("--introspect")+1 < len(args) else "self"})
+    return h({"action": "status"})
+
+@cmd("comms", "Communication Protocol — send, inbox, protocol versioning")
+def cmd_comms():
+    """Communication Protocol operations.
+    Usage: python cli.py comms [--inbox RECEIVER] [--send FROM TO BODY]
+    """
+    from api.wave645_communication import handler as h
+    args = sys.argv[2:]
+    if "--inbox" in args:
+        i = args.index("--inbox"); return h({"action": "inbox", "receiver": args[i+1] if i+1 < len(args) else "?"})
+    if "--send" in args:
+        i = args.index("--send"); return h({"action": "send", "sender": args[i+1] if i+1 < len(args) else "?", "receiver": args[i+2] if i+2 < len(args) else "?", "body": " ".join(args[i+3:]) if i+3 < len(args) else ""})
+    return h({"action": "status"})
+
+@cmd("negotiate", "Negotiation Engine — propose, accept, agreements")
+def cmd_negotiate():
+    """Negotiation Engine operations.
+    Usage: python cli.py negotiate [--propose TOPIC OFFERER TERMS] [--accept ID]
+    """
+    from api.wave646_negotiation import handler as h
+    args = sys.argv[2:]
+    if "--accept" in args:
+        i = args.index("--accept"); return h({"action": "accept", "proposal_id": int(args[i+1]) if i+1 < len(args) else 0})
+    return h({"action": "status"})
+
+@cmd("trust", "Trust Network — establish, interact, graph view")
+def cmd_trust():
+    """Trust Network operations.
+    Usage: python cli.py trust [--establish A B SCORE] [--interact A B] [--graph]
+    """
+    from api.wave647_trust_network import handler as h
+    args = sys.argv[2:]
+    if "--establish" in args:
+        i = args.index("--establish"); return h({"action": "establish", "a": args[i+1] if i+1 < len(args) else "a", "b": args[i+2] if i+2 < len(args) else "b", "score": float(args[i+3]) if i+3 < len(args) else 0.7})
+    if "--graph" in args: return h({"action": "graph"})
+    if "--interact" in args:
+        i = args.index("--interact"); return h({"action": "interact", "a": args[i+1] if i+1 < len(args) else "a", "b": args[i+2] if i+2 < len(args) else "b"})
+    return h({"action": "status"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")
