@@ -88,6 +88,9 @@ class HexProgram:
             return True
 
         for ln in lines:
+            ln = ln.split(";", 1)[0].strip()  # strip comments
+            if not ln:
+                continue
             parts = ln.split()
             mnemonic = parts[0].upper()
             if mnemonic not in INSTRUCTIONS:
@@ -96,11 +99,22 @@ class HexProgram:
             arg = None
             arity = INSTRUCTIONS[mnemonic][1]
             if arity > 0:
-                try:
-                    arg = int(parts[1])
-                except (IndexError, ValueError):
+                if len(parts) > 1:
+                    try:
+                        arg = int(parts[1])
+                    except ValueError:
+                        self.error = f"instruction {mnemonic} needs an integer argument"
+                        return False
+                elif mnemonic in ("GLYPH", "ENACT"):
+                    arg = 0  # optional argument defaults to 0
+                else:
                     self.error = f"instruction {mnemonic} needs an argument"
                     return False
+            elif len(parts) > 1:
+                try:
+                    arg = int(parts[1])
+                except ValueError:
+                    arg = None
             self.instructions.append((mnemonic, arg))
         return True
 

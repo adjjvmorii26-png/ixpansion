@@ -4,6 +4,13 @@
 - `api/wave97_hex_runtime.py` — fixed JMPZ to honor 1-based line targets
 - `tests/test_lab_hex_author.py` — 5 tests; branch test updated to true 1-based semantics
 
+### Additive sync f778928 — Hex-from-Consent bridge + SAFE_ROUTES
+- `lab/experiments/hex_from_consent.py` — emits `consent_program.hexsrc` mnemonic from consent scopes
+- `docs/SAFE_ROUTES.md` — safe-sync policy (additive, no test deletes, keep wave 87-97 intact)
+- `api/wave97_hex_runtime.py` — parse `;` comments + bare GLYPH/ENACT (defaults 0); bytecode mode unchanged
+- `tests/test_hex_from_consent.py` — verifies the `.hexsrc` runs on the Wave 97 runtime
+- innovate board now 9/9
+
 ## [4.90.0] — Wave 97: HEX Runtime
 
 The organism can now execute its own self-written hex code. Waves 93
