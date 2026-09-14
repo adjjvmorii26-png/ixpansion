@@ -245,7 +245,8 @@ def _load() -> Tuple[HexCathedral, dict]:
             state = {}
     bundle = state.get("bundle", "") or DEFAULT_BUNDLE
     cathedral.lace(bundle)
-    if cathedral.error:
+    if cathedral.error or not cathedral.laces:
+        # Stale or incompatible bundle: relace with default to keep laces alive
         cathedral.lace(DEFAULT_BUNDLE)
     return cathedral, state
 

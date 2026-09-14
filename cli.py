@@ -869,6 +869,33 @@ def cmd_hexlace():
     return result
 
 
+@cmd("dream", "Dream Synthesis Engine operations")
+def cmd_dream():
+    """Run wave 626 dream synthesis operations.
+
+    Usage:
+      python cli.py dream                     # status
+      python cli.py dream --dream              # generate one dream
+      python cli.py dream --batch 5            # generate 5 dreams
+      python cli.py dream --realize <index>    # realize a dream
+      python cli.py dream --top                # show top dreams
+    """
+    from api.wave626_dream_synthesis import handler as h
+    args = sys.argv[2:]
+    if "--dream" in args:
+        return h({"action": "dream"})
+    if "--batch" in args:
+        idx = args.index("--batch")
+        count = int(args[idx + 1]) if idx + 1 < len(args) else 3
+        return h({"action": "dream_batch", "count": count})
+    if "--realize" in args:
+        idx = args.index("--realize")
+        index = int(args[idx + 1]) if idx + 1 < len(args) else 0
+        return h({"action": "realize", "index": index})
+    if "--top" in args:
+        return h({"action": "top"})
+    return h({"action": "status"})
+
 @cmd("oracle", "Query the Performance Oracle")
 def cmd_oracle():
     """Run wave 630 performance oracle operations.

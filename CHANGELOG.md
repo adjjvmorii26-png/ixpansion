@@ -1,3 +1,13 @@
+## [4.95.0] — Wave 626: Dream Synthesis Engine
+
+### Wave 626 — Dream Synthesis Engine: The Organism Dreams New Modules
+- `api/wave626_dream_synthesis.py` — dream generation, journal, realization, scoring, template pool
+- Route: `/dream-synthesis` (status, dream, dream_batch, realize, top, journal, realized, statistics)
+- CLI: `dream`
+- 19 tests: `tests/test_wave626.py`
+- Wave98 vitals fix (relaces with default if laces empty)
+- Version bumped to 4.95.0
+
 ## [4.94.0] — Wave 630: Performance Oracle
 
 ### Wave 630 — Performance Oracle: Bottleneck Prediction Engine
