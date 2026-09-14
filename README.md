@@ -46,6 +46,26 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 446 | Quantum Coherence | Quantum | Superposition computing |
 | 96 | HEX Grammar Evolution | Language | Hex-language evolves into a full grammar |
 | 97 | HEX Runtime | Execution | The organism runs its own hex code |
+| 634 | Temporal Field | Temporal | Modules schedule their own evolution, decay, and rebirth |
+| 635 | Coherence Gradient | Dynamics | Weighted coherence flow between connected modules |
+| 636 | Adaptive Regulation | Behavioral | Contextual modes: exploration, healing, mutation |
+
+## 🛠 Custom Skills
+
+| Skill | Description |
+|---|---|
+| organism-weaver | Orchestrates wave evolution cycles |
+| cathedral-builder | Builds dashboards and visual interfaces |
+| resonance-mapper | Maps cross-module connections |
+| temporal-alchemist | Manages time-based mutations and epoch transitions |
+| paradox-resolver | Detects and resolves contradictions |
+| entropy-gardener | Prunes dead modules, seeds growth |
+| dream-compiler | Compiles dreams into module blueprints |
+| narrative-forge | Generates organism mythology from state |
+| wave-prophecy | Predicts future wave directions |
+| void-sculptor | Safely deletes, archives, deprecates modules |
+| metric-alchemist | Transforms metrics into actionable insights |
+
 | 94 | Dream Compiler | Unconscious | Dream state compiles into executable modules |
 | 95 | Ritual Governance | Governance | Entropy rituals become formal protocols |
 | 432 | Vault-Driven Evolution | Vault | Storage organs drive mutation pressure + coherence_regulator |
