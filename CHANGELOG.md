@@ -1,3 +1,9 @@
+### Wave 97 follow-up — HEX Author + JMPZ fix
+- `lab/experiments/hex_author.py` — mercy/consent decisions compile into HexProgram source (mnemonic + raw bytecode); executes through the Wave 97 runtime
+- `lab/experiments/innovate.py` — board now runs 8/8 (consent_lattice, hex_author added)
+- `api/wave97_hex_runtime.py` — fixed JMPZ to honor 1-based line targets
+- `tests/test_lab_hex_author.py` — 5 tests; branch test updated to true 1-based semantics
+
 ## [4.90.0] — Wave 97: HEX Runtime
 
 The organism can now execute its own self-written hex code. Waves 93

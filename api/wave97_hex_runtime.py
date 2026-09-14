@@ -124,6 +124,7 @@ class HexRuntime:
         self.pc = 0
         self.steps = 0
         self.halted = False
+        self._jumped = False
         self.coherence = max(0.0, min(1.0, coherence))
         self.mood = mood
         self.glyphs: List[str] = []
@@ -140,6 +141,7 @@ class HexRuntime:
         self.glyphs = []
         self.enactments = []
         self.trace = []
+        self._jumped = False
 
     def run(self, program: HexProgram) -> Dict[str, Any]:
         """Execute a parsed program to completion."""
@@ -203,13 +205,16 @@ class HexRuntime:
             self.glyphs.append(f"{self.icon}glyph_{arg if arg is not None else len(self.glyphs)}")
         elif mnemonic == "JMPZ":
             if self.stack and self.stack[-1] == 0 and arg is not None:
-                self.pc = arg - 1  # -1 because pc advances after
+                self.pc = arg - 1  # 1-based line target -> 0-based index
+                self._jumped = True
         elif mnemonic == "HALT":
             self.halted = True
 
         entry.update({"stack_before": before, "stack_after": self.stack.copy()})
         self.trace.append(entry)
-        self.pc += 1
+        if not self._jumped:
+            self.pc += 1
+        self._jumped = False
 
     def summary(self, program: HexProgram) -> Dict[str, Any]:
         return {

@@ -71,7 +71,7 @@ class TestHexRuntime:
 
     def test_run_branch(self):
         rt = HexRuntime()
-        p = HexProgram("PUSH 0\nJMPZ 4\nGLYPH 1\nHALT\nGLYPH 9\nHALT")
+        p = HexProgram("PUSH 0\nJMPZ 5\nGLYPH 1\nHALT\nGLYPH 9\nHALT")
         p.parse()
         out = rt.run(p)
         assert out["glyphs"] == ["\U0001f701glyph_9"]
