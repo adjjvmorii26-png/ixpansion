@@ -49,5 +49,32 @@ ctx.strokeStyle='rgba(124,124,248,0.1)';ctx.beginPath();for(let x=0;x<c.width;x+
 requestAnimationFrame(drawChart)}drawChart();
 </script>
 <a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(124,124,248,0.15);color:#7c7cf8;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(124,124,248,0.3);z-index:9999;backdrop-filter:blur(8px);">← Organism</a>
+
+<!-- Resurrected by Dashboard Resurrector (Wave 99) -->
+<script>
+(function(){
+  var endpoints = {
+    hexcathedral: '/api/hex-cathedral?action=status',
+    hexruntime: '/api/hex-runtime?action=status',
+    hexgrammar: '/api/hex_grammar?action=status',
+    ritualgov: '/api/ritual_governance?action=status',
+    dream: '/api/dream_logic_physics?action=status',
+    coherence: '/api/coherence_regulator?action=status',
+  };
+  var data = {};
+  var container = document.getElementById('organism-data') || document.body;
+  async function fetchAll(){
+    for(var k in endpoints){
+      try{
+        var r = await fetch(endpoints[k]);
+        data[k] = await r.json();
+      }catch(e){ data[k] = {error: String(e)}; }
+    }
+    container.dispatchEvent(new CustomEvent('organism:data', {detail: data}));
+  }
+  fetchAll(); setInterval(fetchAll, 15000);
+})();
+</script>
+
 </body>
 </html>

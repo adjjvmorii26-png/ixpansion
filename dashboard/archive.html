@@ -84,5 +84,32 @@ window.addEventListener('DOMContentLoaded', async()=>{
 });
 </script>
 <a class="back-btn" href="index.html">← Organism</a>
+
+<!-- Resurrected by Dashboard Resurrector (Wave 99) -->
+<script>
+(function(){
+  var endpoints = {
+    hexcathedral: '/api/hex-cathedral?action=status',
+    hexruntime: '/api/hex-runtime?action=status',
+    hexgrammar: '/api/hex_grammar?action=status',
+    ritualgov: '/api/ritual_governance?action=status',
+    dream: '/api/dream_logic_physics?action=status',
+    coherence: '/api/coherence_regulator?action=status',
+  };
+  var data = {};
+  var container = document.getElementById('organism-data') || document.body;
+  async function fetchAll(){
+    for(var k in endpoints){
+      try{
+        var r = await fetch(endpoints[k]);
+        data[k] = await r.json();
+      }catch(e){ data[k] = {error: String(e)}; }
+    }
+    container.dispatchEvent(new CustomEvent('organism:data', {detail: data}));
+  }
+  fetchAll(); setInterval(fetchAll, 15000);
+})();
+</script>
+
 </body>
 </html>
