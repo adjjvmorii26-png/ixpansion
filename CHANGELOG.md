@@ -1,3 +1,13 @@
+## [4.93.0] — Wave 622: Resilience Mesh
+
+### Wave 622 — Resilience Mesh: Distributed Failure Detection & Auto-Heal
+- `api/wave622_resilience_mesh.py` — organ health registry, heartbeat system, failure detection, auto-heal with cooldown, organism resilience score
+- Route: `/resilience-mesh` (status, heartbeat, organ_status, failing, heal, toggle_auto_heal, policy, history)
+- CLI: `resilience`
+- 24 tests: `tests/test_wave622.py`
+- Dashboard: organism health + failing organs cards added to hex-cathedral-live
+- Version bumped to 4.93.0
+
 ## [4.92.0] — Wave 621: OmniRouter
 
 ### Wave 621 — OmniRouter: Universal Intelligent Routing Layer

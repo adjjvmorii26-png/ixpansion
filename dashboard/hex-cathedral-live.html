@@ -54,6 +54,8 @@ button:hover{opacity:.85}
   <div class="card"><h2>Glyphs &amp; Enactments</h2><div id="glyphs">Loading...</div></div>
   <div class="card"><h2>Program Source</h2><div id="src" class="mono">Loading...</div></div>
   <div class="card"><h2>Live Activity Log</h2><div id="log" class="log">Waiting...</div></div>
+  <div class="card"><h2>Organism Health</h2><div id="health">Loading...</div></div>
+  <div class="card"><h2>Failing Organs</h2><div id="failing">Loading...</div></div>
 </div>
 <script>
 const HOST='';const AUTO=15000;
@@ -70,6 +72,13 @@ function refresh(){Promise.all([api('status'),api('history')]).then(([st,hist])=
   const last=hist.history?hist.history[0]:null;
   $('glyphs').innerHTML=last?`<span class="badge">Last run: ${Math.round(last.steps)} steps, ${last.glyphs||0} glyphs, ${last.enactments||0} enact</span>`:'';
   $('src').textContent=JSON.stringify(st.altars||{},null,2);
+  // Fetch resilience mesh health
+  fetch('/api/resilience_mesh?action=status').then(r=>r.json()).then(h=>{
+    $('health').innerHTML=`<span class="badge">Score: ${h.resilience_score}</span> | <span class="badge">Healthy: ${h.healthy}/${h.total_organs}</span> | <span class="badge">Failing: ${h.failing}</span><br><span class="badge">Health Rate: ${(h.health_rate*100).toFixed(1)}%</span>`;
+  }).catch(()=>{});
+  fetch('/api/resilience_mesh?action=failing').then(r=>r.json()).then(f=>{
+    $('failing').innerHTML=(f.failing_organs||[]).map(o=>`<div class="chapel"><span>${o.organ_id}</span><span class="altar">${o.status}</span></div>`).join('')||'No failing organs';
+  }).catch(()=>{});
   const log=$('log');
   log.innerHTML+=`<div>[${new Date().toLocaleTimeString()}] Status refreshed — ${st.chapels} chapels, ${st.laces} lace(s)</div>`;
   if(log.children.length>20) log.removeChild(log.firstChild);

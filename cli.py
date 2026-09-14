@@ -869,6 +869,33 @@ def cmd_hexlace():
     return result
 
 
+@cmd("resilience", "Manage the Resilience Mesh")
+def cmd_resilience():
+    """Run wave 622 resilience operations.
+
+    Usage:
+      python cli.py resilience                        # show organism health
+      python cli.py resilience --organ <id> <healthy>     # send heartbeat
+      python cli.py resilience --failing                  # list failing organs
+      python cli.py resilience --heal <id>                # manual heal
+    """
+    from api.wave622_resilience_mesh import handler as h
+    args = sys.argv[2:]
+    if "--organ" in args:
+        idx = args.index("--organ")
+        organ_id = args[idx + 1] if idx + 1 < len(args) else ""
+        healthy = True
+        if idx + 2 < len(args):
+            healthy = args[idx + 2].lower() not in ("false", "0", "no")
+        return h({"action": "heartbeat", "organ_id": organ_id, "healthy": healthy})
+    if "--failing" in args:
+        return h({"action": "failing"})
+    if "--heal" in args:
+        idx = args.index("--heal")
+        organ_id = args[idx + 1] if idx + 1 < len(args) else ""
+        return h({"action": "heal", "organ_id": organ_id})
+    return h({"action": "status"})
+
 @cmd("omni-route", "Route a request through the OmniRouter")
 def cmd_omni_route():
     """Run wave 621 omnirouter operations.
