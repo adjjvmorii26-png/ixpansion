@@ -2448,6 +2448,12 @@ def handler(request) -> dict:
         return h(q)
 
 
+# --- Wave 638: Symbiosis Protocol ---
+    if path.startswith("/symbiosis") or path.startswith("/api/symbiosis"):
+        from api.wave638_symbiosis_protocol import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 def coherence_vitals() -> dict:
     return {"layer": "interface", "status": "active", "wave": "204", "module": "index"}
 

@@ -1064,6 +1064,25 @@ def cmd_meta_regulate():
     return h({"action": "status"})
 
 
+@cmd("symbiosis", "Symbiosis Protocol — partner handshakes, engagement, resource sharing")
+def cmd_symbiosis():
+    """Symbiosis Protocol operations.
+
+    Usage:
+      python cli.py symbiosis                         # status
+      python cli.py symbiosis --engage PARTNER_ID     # partner joins
+      python cli.py symbiosis --relations             # full relations map
+    """
+    from api.wave638_symbiosis_protocol import handler as h
+    args = sys.argv[2:]
+    if "--engage" in args:
+        idx = args.index("--engage")
+        pid = args[idx + 1] if idx + 1 < len(args) else "unknown"
+        return h({"action": "engage", "partner_id": pid})
+    if "--relations" in args:
+        return h({"action": "relations"})
+    return h({"action": "status"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

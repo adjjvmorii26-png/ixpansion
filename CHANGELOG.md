@@ -1,3 +1,12 @@
+## [4.98.0] — 2026-09-14
+
+### Added
+- **Wave 638 — Symbiosis Protocol**: Partner handshakes, engagement, resonance scoring, resource sharing between organisms.
+- Route: /symbiosis (action=status|handshake|engage|resonate|share|relations)
+- CLI: symbiosis
+- Dashboard: dashboard/symbiosis.html
+- 10 new tests (all passing).
+
 ## [4.97.0] — 2026-09-14
 
 ### Added

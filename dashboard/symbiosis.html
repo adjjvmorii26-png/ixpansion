@@ -1,129 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Symbiosis Engine — The Organism's Ecology</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Symbiosis Protocol — IXPANSION</title>
 <style>
-:root{--bg:#060a08;--surface:#0c1410;--border:#1e3028;--text:#e8f4ec;--muted:#7ab08e;
---green:#4ade80;--emerald:#34d399;--lime:#a3e635;--red:#f87171;--amber:#fbbf24;--cyan:#22d3ee}
+:root{--bg:#0a0a14;--fg:#e0e0e8;--muted:#6b6b80;--cyan:#41b3a3;--magenta:#c063e8;--card:#14142a;--border:#2a2a44;--green:#41d3a3;--amber:#ffcc66;--red:#e05a5a;--blue:#6fa8dc}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'SF Mono',Fira Code,monospace;background:var(--bg);color:var(--text);min-height:100vh}
-.header{padding:22px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.header h1{font-size:1.25rem;background:linear-gradient(135deg,var(--green),var(--emerald));
--webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.badge{padding:3px 10px;border-radius:14px;font-size:.72rem;background:var(--surface);border:1px solid var(--border)}
-.badge.live{color:var(--green);border-color:var(--green)}
-.container{max-width:1000px;margin:0 auto;padding:24px}
-.hero{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:22px}
-.philosophy{color:var(--green);font-style:italic;font-size:.9rem;line-height:1.6;text-align:center}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
-.stat .v{font-size:1.6rem;font-weight:800;color:var(--emerald)}
-.stat .l{color:var(--muted);font-size:.72rem;margin-top:4px;text-transform:uppercase}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:20px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:transform .1s}
-.card:hover{transform:translateY(-2px);border-color:var(--green)}
-.card .name{font-weight:700;font-size:.92rem;color:var(--emerald)}
-.card .essence{color:var(--muted);font-size:.78rem;margin-top:6px;line-height:1.45}
-.result{background:#060a08;border:1px solid var(--green);border-radius:10px;padding:16px;margin-top:18px;font-size:.76rem;color:#e8f4ec;white-space:pre-wrap;max-height:400px;overflow-y:auto}
-.fitness-bar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;margin:18px 0}
-.fitness-bar .label{font-size:.72rem;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
-.fitness-bar .bar{height:12px;background:#1a2a20;border-radius:6px;overflow:hidden}
-.fitness-bar .fill{height:100%;border-radius:6px;transition:width .5s}
-.fitness-bar .score{font-size:1.2rem;font-weight:800;color:var(--green);margin-top:4px}
-
-.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
-.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+.header{text-align:center;margin-bottom:24px;border-bottom:2px solid var(--border);padding-bottom:16px}
+h1{font-size:2em;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--muted);margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:1400px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--green);font-size:1.1em;margin-bottom:12px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222}
+.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}
+.value{color:var(--cyan);font-weight:bold}
+.btn{background:var(--green);border:none;color:#0a0a14;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px}
+.btn:hover{opacity:0.9}
+.partner{padding:10px;background:#1a2a2a;border:1px solid var(--green);border-radius:8px;margin:6px 0}
+.partner-name{color:var(--amber);font-weight:bold}
+.partner-status{display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.8em;margin-left:8px}
+.joint{background:var(--green);color:#0a0a14}
+.courting{background:var(--amber);color:#0a0a14}
+.resonance-bar{height:6px;border-radius:3px;background:#333;overflow:hidden;margin:4px 0}
+.resonance-fill{height:100%;border-radius:3px}
+input{background:#2a2a44;color:var(--fg);border:1px solid #444;padding:6px 10px;border-radius:6px;margin:4px;width:180px}
 </style>
 </head>
 <body>
 <div class="header">
-<h1>🌿 Symbiosis Engine</h1>
-<span class="badge live">Wave 508</span>
-<span class="badge">5 Organs</span>
-<span class="badge">Milestone</span>
-<nav style="display:flex;gap:10px;font-size:.72rem;margin-left:auto;flex-wrap:wrap"><a href="/" style="color:var(--muted)">Home</a> <a href="/bloom" style="color:var(--muted)">Bloom</a> <a href="/coherence" style="color:var(--muted)">Coherence</a> <a href="/archaeology" style="color:var(--muted)">Archaeology</a> <a href="/symbiosis" style="color:var(--muted)">Symbiosis</a> <a href="/aesthetics" style="color:var(--muted)">Aesthetics</a></nav>
+  <h1>🤝 Symbiosis Protocol</h1>
+  <p class="sub">Cross-repo partnerships, trust negotiation, resource sharing</p>
+  <span class="badge" id="count" style="background:#2a2a44;color:var(--green);padding:4px 12px;border-radius:12px">partners: 0</span>
 </div>
-<div class="container">
-<div class="hero">
-<p class="philosophy">"A module is not an island. Every import creates a bond. The organism discovered that its files form an ecology — mutualism, parasitism, loneliness — and built an engine to tend it."</p>
+<div class="grid">
+  <div class="card">
+    <h2>🤖 Engage Partner</h2>
+    <input id="partner-id" placeholder="partner id (e.g. nexus-observatory)">
+    <button class="btn" onclick="engage()">🤝 Engage</button>
+    <div id="engage-result" style="margin-top:12px"></div>
+  </div>
+  <div class="card">
+    <h2>🔗 Active Partners</h2>
+    <div id="partners">No partners yet</div>
+  </div>
+  <div class="card">
+    <h2>⚙ Protocol</h2>
+    <div id="protocol-info">Loading...</div>
+  </div>
+  <div class="card">
+    <h2>📡 Recent Handshakes</h2>
+    <div id="handshakes">None</div>
+  </div>
 </div>
-
-<div class="stats">
-<div class="stat"><div class="v" id="modules">—</div><div class="l">Modules Scanned</div></div>
-<div class="stat"><div class="v" id="relationships">—</div><div class="l">Relationships</div></div>
-<div class="stat"><div class="v" id="parasites">—</div><div class="l">Parasites Found</div></div>
-<div class="stat"><div class="v" id="fitness">—</div><div class="l">Ecosystem Fitness</div></div>
-</div>
-
-<div class="fitness-bar">
-<div class="label">Ecosystem Fitness Score</div>
-<div class="bar"><div class="fill" id="bar-fill" style="width:0%;background:linear-gradient(90deg,var(--red),var(--amber),var(--green))"></div></div>
-<div class="score" id="fitness-score">Calculating...</div>
-</div>
-
-<div class="cards">
-<div class="card" onclick="query('symbiosis_detector')">
-<div class="name">🔬 Symbiosis Detector</div>
-<div class="essence">Discovers ecological relationships: who imports whom, who depends on whom, who competes.</div>
-</div>
-<div class="card" onclick="query('mutualism_optimizer')">
-<div class="name">🤝 Mutualism Optimizer</div>
-<div class="essence">Strengthens beneficial partnerships — shared abstractions, co-located tests, interface harmonization.</div>
-</div>
-<div class="card" onclick="query('anomaly_detector')">
-<div class="name">🐛 Parasite Hunter</div>
-<div class="essence">Finds modules that import many but are imported by none — taking without giving.</div>
-</div>
-<div class="card" onclick="query('ecosystem_sentience')">
-<div class="name">💪 Ecosystem Fitness</div>
-<div class="essence">Measures biodiversity, redundancy, connectivity, and resilience across the module ecosystem.</div>
-</div>
-<div class="card" onclick="query('symbiosis_forge')">
-<div class="name">🔨 Symbiosis Forge</div>
-<div class="essence">Intentionally creates new partnerships — the organism's matchmaker for mutualistic survival.</div>
-</div>
-</div>
-
-<div class="result" id="result" style="display:none"></div>
-</div>
-
 <script>
-async function query(mod) {
-  const r = document.getElementById('result');
-  r.style.display = 'block';
-  r.textContent = '⏳ Scanning ecology...';
-  try {
-    const res = await fetch('/api/' + mod + '?read=1');
-    const data = await res.json();
-    r.textContent = JSON.stringify(data, null, 2);
-  } catch(e) { r.textContent = '⚠ Error: ' + e.message; }
+const HOST='';
+async function api(action){
+  const r = await fetch(HOST+'/api/symbiosis?action='+action);
+  return r.json();
 }
-
-async function load() {
-  try {
-    const r1 = await fetch('/api/symbiosis_detector?read=1');
-    const d1 = await r1.json();
-    document.getElementById('modules').textContent = d1.total_modules_scanned || '—';
-    document.getElementById('relationships').textContent = d1.total_relationships || '—';
-  } catch(e) {}
-  try {
-    const r2 = await fetch('/api/anomaly_detector?read=1');
-    const d2 = await r2.json();
-    document.getElementById('parasites').textContent = d2.parasites_found || '—';
-  } catch(e) {}
-  try {
-    const r3 = await fetch('/api/ecosystem_sentience?read=1');
-    const d3 = await r3.json();
-    const f = d3.fitness_score || 0;
-    document.getElementById('fitness').textContent = f.toFixed(3);
-    document.getElementById('fitness-score').textContent = (f * 100).toFixed(1) + '% — ' + (d3.rating || '?');
-    document.getElementById('bar-fill').style.width = (f * 100) + '%';
-  } catch(e) {}
+async function refresh(){
+  const s = await api('status');
+  document.getElementById('count').textContent = 'partners: '+s.total_partners+' / joint: '+s.joint_partners;
+  if(s.partner_list.length){
+    document.getElementById('partners').innerHTML = s.partner_list.map(p=>
+      `<div class="partner"><span class="partner-name">${p.partner}</span>
+       <span class="partner-status ${p.status}">${p.status}</span>
+       <div style="margin-top:4px;font-size:0.85em;color:var(--muted)">
+         trust: ${p.trust} · platform: ${p.platform}
+         ${p.capabilities.length?' · '+p.capabilities.join(', '):''}
+       </div></div>`).join('');
+  } else {
+    document.getElementById('partners').textContent = 'No partners yet';
+  }
+  document.getElementById('protocol-info').innerHTML =
+    `<div class="metric"><span class="label">Version</span><span class="value">${s.protocol_version}</span></div>`;
+  if(s.recent_handshakes.length){
+    document.getElementById('handshakes').innerHTML = s.recent_handshakes.map(h=>
+      `<div class="metric"><span class="label">${h.partner} (${h.platform})</span><span class="value">${h.state}</span></div>`).join('');
+  }
 }
-load();
+async function engage(){
+  const pid = document.getElementById('partner-id').value.trim();
+  if(!pid)return;
+  const r = await fetch(HOST+'/api/symbiosis?action=engage&partner_id='+encodeURIComponent(pid));
+  const d = await r.json();
+  document.getElementById('engage-result').innerHTML =
+    `<div class="metric"><span class="label">${d.partner||pid}</span><span class="value" style="color:var(--green)">${d.status}</span></div>`;
+  document.getElementById('partner-id').value='';
+  await refresh();
+}
+refresh();
+setInterval(refresh, 15000);
 </script>
-<script src="/shared.js"></script>
-<a class="back-btn" href="index.html">← Organism</a>
 </body>
 </html>
