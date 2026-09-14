@@ -967,6 +967,79 @@ def cmd_omni_route():
     if "--learn" in args:
         return h({"action": "learn"})
     return h({"action": "status"})
+@cmd("temporal", "Temporal Field — module age, decay, rebirth, epochs")
+def cmd_temporal():
+    """Temporal Field operations.
+
+    Usage:
+      python cli.py temporal                     # show status
+      python cli.py temporal --tick              # advance clock
+      python cli.py temporal --register MOD      # register module
+      python cli.py temporal --epoch EPOCH       # transition epoch
+      python cli.py temporal --audit             # decay audit
+    """
+    from api.wave634_temporal_field import handler as h
+    args = sys.argv[2:]
+    if "--tick" in args:
+        return h({"action": "tick"})
+    if "--register" in args:
+        idx = args.index("--register")
+        name = args[idx + 1] if idx + 1 < len(args) else "unnamed"
+        return h({"action": "register", "name": name})
+    if "--epoch" in args:
+        idx = args.index("--epoch")
+        epoch = args[idx + 1] if idx + 1 < len(args) else "unknown"
+        return h({"action": "epoch", "epoch": epoch})
+    if "--audit" in args:
+        return h({"action": "audit"})
+    return h({"action": "status"})
+
+@cmd("gradient", "Coherence Gradient — module coherence flow and field mapping")
+def cmd_gradient():
+    """Coherence Gradient operations.
+
+    Usage:
+      python cli.py gradient                     # show status
+      python cli.py gradient --tick              # advance field
+      python cli.py gradient --field             # field map
+      python cli.py gradient --stats             # gradient stats
+      python cli.py gradient --perturb MOD       # perturb a module
+    """
+    from api.wave635_coherence_gradient import handler as h
+    args = sys.argv[2:]
+    if "--tick" in args:
+        return h({"action": "tick"})
+    if "--field" in args:
+        return h({"action": "field"})
+    if "--stats" in args:
+        return h({"action": "gradients"})
+    if "--perturb" in args:
+        idx = args.index("--perturb")
+        name = args[idx + 1] if idx + 1 < len(args) else "unnamed"
+        return h({"action": "perturb", "module": name})
+    return h({"action": "status"})
+
+@cmd("regulate", "Adaptive Regulation — contextual organism behavior modes")
+def cmd_regulate():
+    """Adaptive Regulation operations.
+
+    Usage:
+      python cli.py regulate                     # show status
+      python cli.py regulate --modes             # show mode matrix
+      python cli.py regulate --assess COH VAR    # evaluate mode
+    """
+    from api.wave636_adaptive_regulation import handler as h
+    args = sys.argv[2:]
+    if "--modes" in args:
+        return h({"action": "modes"})
+    if "--assess" in args:
+        idx = args.index("--assess")
+        coh = float(args[idx + 1]) if idx + 1 < len(args) else 0.5
+        var = float(args[idx + 2]) if idx + 2 < len(args) else 0.1
+        return h({"action": "assess", "coherence": {"avg_coherence": coh, "variance": var}})
+    return h({"action": "status"})
+
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

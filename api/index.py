@@ -2422,6 +2422,25 @@ def handler(request) -> dict:
 
 # --- Compliance Forge patch (Wave 419) ---
 
+# --- Wave 634: Temporal Field ---
+    if path.startswith("/temporal-field") or path.startswith("/api/temporal_field"):
+        from api.wave634_temporal_field import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 635: Coherence Gradient ---
+    if path.startswith("/coherence-gradient") or path.startswith("/api/coherence_gradient"):
+        from api.wave635_coherence_gradient import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 636: Adaptive Regulation ---
+    if path.startswith("/adaptive-regulation") or path.startswith("/api/adaptive_regulation"):
+        from api.wave636_adaptive_regulation import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+
 def coherence_vitals() -> dict:
     return {"layer": "interface", "status": "active", "wave": "204", "module": "index"}
 

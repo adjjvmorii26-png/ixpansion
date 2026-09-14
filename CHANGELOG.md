@@ -1,3 +1,14 @@
+## [4.96.0] — 2026-09-14
+
+### Added
+- **Wave 634 — Temporal Field**: Modules schedule their own evolution, decay, and rebirth. Temporal self-awareness with epoch transitions, decay audit, and rebirth cycles.
+- **Wave 635 — Coherence Gradient Field**: Modules influence each other's coherence through weighted gradients. Emotional landscape with perturbation, field mapping, and flow dynamics.
+- **Wave 636 — Adaptive Regulation**: Contextual behavioral modes — exploration (high coherence), healing (low coherence), mutation (divergent coherence). Policy checking and mode matrix.
+- 8 new skills: temporal-alchemist, paradox-resolver, entropy-gardener, dream-compiler, narrative-forge, wave-prophecy, void-sculptor, metric-alchemist.
+- Routes: /temporal-field, /coherence-gradient, /adaptive-regulation.
+- CLI commands: temporal, gradient, regulate.
+- 30 new tests (all passing).
+
 ## [4.95.0] — Wave 626: Dream Synthesis Engine
 
 ### Wave 626 — Dream Synthesis Engine: The Organism Dreams New Modules
