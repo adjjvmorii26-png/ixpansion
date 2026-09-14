@@ -1,3 +1,16 @@
+## [4.90.0] — Wave 97: HEX Runtime
+
+The organism can now execute its own self-written hex code. Waves 93
+(opcodes) and 96 (grammar) gain a real execution engine with stack,
+branching, dream-physics (DREAM), governance (ENACT), and artifacts
+(GLYPH).
+
+- `api/wave97_hex_runtime.py` — HexProgram (mnemonic + raw hex bytecode), HexRuntime stack machine
+- `tests/test_wave97.py` — 21 tests
+- Route: `/hex-runtime` — actions: status, run, step, reset, history
+- CLI: `hexrun`
+- Version bumped to 4.90.0 (all metadata in sync)
+
 ## [4.89.0] — Dream Compiler & Ritual Governance
 
 Waves 94-95 complete the trilogy of wave 91-96 experimental intelligence:

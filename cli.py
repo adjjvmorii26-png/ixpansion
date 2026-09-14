@@ -731,6 +731,37 @@ def cmd_govern():
         "message": "Ritual governance active",
     }
 
+@cmd("hexrun", "Execute a HEX program on the runtime")
+def cmd_hexrun():
+    """Run wave 97 hex runtime operations."""
+    from api.wave97_hex_runtime import HexProgram, HexRuntime
+
+    source = (
+        "PUSH 5\n"
+        "PUSH 3\n"
+        "ADD\n"
+        "DREAM 1\n"
+        "GLYPH 7\n"
+        "ENACT 12\n"
+        "HALT"
+    )
+    program = HexProgram(source)
+    program.parse()
+    runtime = HexRuntime(coherence=0.75, mood="chaotic")
+    result = runtime.run(program)
+    vitals = runtime.coherence_vitals()
+    return {
+        "action": "hex_run_operation",
+        "program_hash": result["program_hash"],
+        "stack": result["stack"],
+        "glyphs": result["glyphs"],
+        "enactments": result["enactments"],
+        "steps": result["steps"],
+        "halted": result["halted"],
+        "instructions_available": vitals["instruction_count"],
+        "message": "HEX runtime execution complete",
+    }
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")
