@@ -6,7 +6,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 HERE = Path(__file__).resolve().parent
 BOARD = ["epoch_weather.py", "testament_diff.py", "spec_gravity.py", "refusal_garden.py", "mercy_protocol.py", "consent_lattice.py", "hex_author.py", "hex_from_consent.py", "hex_from_mercy.py", "hex_bundle.py", "carnival.py",
-    "hex_cathedral.py"]
+    "hex_cathedral.py",
+    "dashboard_resurrector.py"]
 def main():
     results = []
     for s in BOARD:
