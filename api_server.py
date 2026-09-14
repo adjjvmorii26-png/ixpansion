@@ -56,6 +56,7 @@ ROUTE_ALIASES: dict[str, str] = {
     "symbiosis": "wave638_symbiosis_protocol",
     "echo_breaker": "wave639_echo_breaker",
     "dependency_resolver": "wave640_dependency_resolver",
+    "fractal_garden": "wave641_fractal_garden",
     "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
     "adaptive_regulation": "wave636_adaptive_regulation",
 }

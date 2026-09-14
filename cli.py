@@ -1127,6 +1127,31 @@ def cmd_deps():
         return h({"action": "duplicates"})
     return h({"action": "status"})
 
+@cmd("garden", "Fractal Garden — procedural art from module topology")
+def cmd_garden():
+    """Fractal Garden operations.
+
+    Usage:
+      python cli.py garden                         # status
+      python cli.py garden --plant MODULE           # plant a module
+      python cli.py garden --grow                   # grow all plants
+      python cli.py garden --render                 # render SVG art
+      python cli.py garden --gallery                # view artifacts
+    """
+    from api.wave641_fractal_garden import handler as h
+    args = sys.argv[2:]
+    if "--plant" in args:
+        idx = args.index("--plant")
+        name = args[idx + 1] if idx + 1 < len(args) else "unnamed"
+        return h({"action": "plant", "module": name, "coherence": 0.7})
+    if "--grow" in args:
+        return h({"action": "grow"})
+    if "--render" in args:
+        return h({"action": "render"})
+    if "--gallery" in args:
+        return h({"action": "gallery"})
+    return h({"action": "status"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

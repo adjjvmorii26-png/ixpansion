@@ -1,3 +1,12 @@
+## [4.101.0] — 2026-09-14
+
+### Added
+- **Wave 641 — Fractal Garden**: Procedural SVG art from module graph. Plants grow each scan, SVG renders living art, artifacts tracked in gallery.
+- Route: /fractal-garden (actions: plant, grow, render, gallery, status)
+- CLI: garden
+- Dashboard: dashboard/fractal-garden.html (live embedded SVG art)
+- 11 new tests (all passing).
+
 ## [4.100.0] — 2026-09-14
 
 ### Added
