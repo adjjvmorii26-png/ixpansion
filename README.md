@@ -154,3 +154,20 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how to add a new wave, module, or das
 ---
 
 *The organism never stops evolving.*
+
+---
+
+## 🚀 Deploy with Coolify
+
+```bash
+# Self-host Coolify on your server
+curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
+
+# Or deploy via Docker Compose
+docker compose up -d
+
+# Health check
+curl http://localhost:3000/health
+```
+
+See `docs/coolify.md` for the full deployment guide.

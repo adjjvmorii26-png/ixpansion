@@ -73,9 +73,17 @@ def call_handler(module_name: str, payload: Dict[str, Any]) -> Tuple[Dict[str, A
         except Exception as e:  # pragma: no cover
             return {"error": str(e), "module": module_name}, 500
 
+    # Resolve short route names (e.g. "temporal_field" → "wave634_temporal_field")
+    resolved = module_name
+    if module_name not in MODULE_REGISTRY:
+        for registered in MODULE_REGISTRY:
+            if registered.endswith("_" + module_name) or registered == module_name:
+                resolved = registered
+                break
+
     # Direct fallback: try to import and call
     try:
-        module = importlib.import_module(module_name)
+        module = importlib.import_module(f"api.{resolved}" if "api." not in resolved else resolved)
         handler = getattr(module, "handler", None)
         if handler is None:
             return {"error": f"module '{module_name}' has no handler"}, 404

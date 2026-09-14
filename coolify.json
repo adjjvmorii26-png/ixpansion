@@ -1,0 +1,35 @@
+{
+  "$schema": "https://coolify.io/schema.json",
+  "name": "IXPANSION Organism",
+  "description": "Self-evolving computational organism — 70+ wave modules, living dashboards, adaptive regulation",
+  "image": "ghcr.io/adjjvmorii26-png/ixpansion:latest",
+  "port": 3000,
+  "healthcheck_path": "/health",
+  "healthcheck_interval": 30,
+  "healthcheck_timeout": 5,
+  "healthcheck_retries": 3,
+  "environment_variables": {
+    "API_PORT": "3000",
+    "API_HOST": "0.0.0.0",
+    "NEXUS_MODE": "production",
+    "NEXUS_SEED": "42"
+  },
+  "volumes": [
+    { "name": "ixpansion_data", "mount_path": "/app/data", "host_path": "/data/ixpansion" }
+  ],
+  "domains": [],
+  "ssl": {
+    "letsencrypt": true
+  },
+  "resources": {
+    "cpu": 1,
+    "memory": "512m"
+  },
+  "deploy": {
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": "."
+    }
+  },
+  "tags": ["organism", "python", "serverless", "adaptive"]
+}

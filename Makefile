@@ -41,3 +41,33 @@ benchmark:
 
 fast-gate:
 	python3 -m pytest tests/test_wave432.py tests/test_wave433.py tests/test_wave434.py tests/test_wave435.py tests/test_wave436.py tests/test_wave437.py tests/test_wave438.py tests/test_wave439.py tests/test_wave440.py -q --tb=short -x
+
+# ─── Coolify targets ───
+coolify-build:
+	docker compose build
+
+coolify-up:
+	docker compose up -d
+
+coolify-down:
+	docker compose down
+
+coolify-logs:
+	docker compose logs -f ixpansion
+
+coolify-restart:
+	docker compose restart
+
+coolify-health:
+	@curl -sf http://localhost:3000/health && echo "\n  Organism is alive ✓" || echo "\n  Organism is down ✗"
+
+coolify-status:
+	@docker compose ps
+
+coolify-image:
+	docker build -t ghcr.io/adjjvmorii26-png/ixpansion:latest .
+	docker push ghcr.io/adjjvmorii26-png/ixpansion:latest
+
+coolify-clean:
+	docker compose down -v
+	docker rmi ghcr.io/adjjvmorii26-png/ixpansion:latest 2>/dev/null || true
