@@ -1,3 +1,14 @@
+## [4.92.0] — Wave 621: OmniRouter
+
+### Wave 621 — OmniRouter: Universal Intelligent Routing Layer
+### Wave 621 — OmniRouter: Universal Intelligent Routing Layer
+- `api/omnirouter.py` — route registry, load balancing, fallback chains, circuit breaker, self-learning metrics
+- Route: `/omnirouter` — actions: status, route, register, remove, learn, routes, history
+- CLI: `omni-route`
+- 12 default routes seeded (HTTP, CLI, council, dashboard)
+- Tests: `tests/test_omnirouter.py` — 26 tests
+- Version bumped to 4.92.0
+
 ### Wave 98 — HEX Cathedral Lacery
 - `api/wave98_hex_cathedral.py` — chapels (segments) declare altars; cross-segment `JMPZ @label` laces programs into a single executable body; per-chapel ritual heat
 - Route: `/hex-cathedral` — actions: status, lace, run, reset, history

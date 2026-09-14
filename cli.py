@@ -868,6 +868,25 @@ def cmd_hexlace():
     result["message"] = "Cathedral laced and lit"
     return result
 
+
+@cmd("omni-route", "Route a request through the OmniRouter")
+def cmd_omni_route():
+    """Run wave 621 omnirouter operations.
+
+    Usage:
+      python cli.py omni-route                          # show router status
+      python cli.py omni-route --source http_api         # route from source
+      python cli.py omni-route --learn                   # run self-learning
+    """
+    from api.omnirouter import handler as h
+    args = sys.argv[2:]
+    if "--source" in args:
+        idx = args.index("--source")
+        source = args[idx + 1] if idx + 1 < len(args) else "http_api"
+        return h({"action": "route", "source": source})
+    if "--learn" in args:
+        return h({"action": "learn"})
+    return h({"action": "status"})
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")
