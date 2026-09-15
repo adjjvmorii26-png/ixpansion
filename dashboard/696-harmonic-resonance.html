@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wave 696 — Harmonic Resonance Oracle</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a12;color:#e0e0e0;font-family:'Courier New',monospace;padding:20px}
+h1{text-align:center;color:#c38d9e;margin-bottom:10px;font-size:1.4em}
+.sub{text-align:center;color:#666;margin-bottom:20px;font-size:.85em}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:0 auto}
+.card{background:#151520;border:1px solid #2a2a3a;border-radius:8px;padding:16px}
+.card h2{color:#41b3a3;font-size:1em;margin-bottom:10px}
+.stat{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1a1a2a;font-size:.85em}
+.stat .label{color:#888}.stat .val{color:#e8a87c;font-weight:bold}
+.wave{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.bar{height:20px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.7em;font-weight:bold;color:#fff}
+.constructive{background:#41b3a3}
+.destructive{background:#c38d9e}
+.btn{background:#2a2a3a;color:#e8a87c;border:1px solid #444;padding:8px 16px;border-radius:4px;cursor:pointer;margin:4px;font-family:inherit;font-size:.85em}
+.btn:hover{background:#3a3a4a}
+#log{max-width:900px;margin:20px auto;background:#151520;border:1px solid #2a2a3a;border-radius:8px;padding:12px;max-height:200px;overflow-y:auto;font-size:.8em;color:#666}
+</style>
+</head>
+<body>
+<h1>🌊 Wave 696 — Harmonic Resonance Oracle</h1>
+<div class="sub">Mapping constructive and destructive interference across the organism</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Resonance State</h2>
+    <div class="stat"><span class="label">Harmony Score</span><span class="val" id="s_harm">0.0</span></div>
+    <div class="stat"><span class="label">Constructive</span><span class="val" id="s_con">0</span></div>
+    <div class="stat"><span class="label">Destructive</span><span class="val" id="s_des">0</span></div>
+    <div class="stat"><span class="label">Total Scans</span><span class="val" id="s_scan">0</span></div>
+    <div class="wave" id="waves"></div>
+  </div>
+  <div class="card">
+    <h2>Actions</h2>
+    <button class="btn" onclick="scan()">Scan Modules</button>
+    <button class="btn" onclick="showResonance()">Show Resonance</button>
+    <button class="btn" onclick="showPatterns()">Last Patterns</button>
+    <button class="btn" onclick="loadStatus()">Refresh</button>
+    <br>
+    <input id="modInput" placeholder="module names (comma sep)" style="width:100%;padding:6px;background:#1a1a2a;color:#e8a87c;border:1px solid #444;font-family:inherit;font-size:.85em">
+  </div>
+</div>
+
+<div id="log"></div>
+
+<script>
+const API = '/api/harmonic_resonance';
+let state = {};
+
+function log(msg) {
+  const el = document.getElementById('log');
+  el.innerHTML = `<div>[${new Date().toISOString().slice(11,19)}] ${msg}</div>` + el.innerHTML;
+}
+
+async function api(params) {
+  const qs = Object.entries(params).map(([k,v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+  const r = await fetch(`${API}?${qs}`);
+  return r.json();
+}
+
+async function loadStatus() {
+  const st = await api({action:'status'});
+  document.getElementById('s_harm').textContent = st.harmony_score;
+  document.getElementById('s_con').textContent = st.constructive;
+  document.getElementById('s_des').textContent = st.destructive;
+  document.getElementById('s_scan').textContent = st.total_scan;
+  state = st;
+  log(`Harmony: ${st.harmony_score} (${st.constructive}c/${st.destructive}d)`);
+  renderWaves();
+}
+
+function renderWaves() {
+  const el = document.getElementById('waves');
+  el.innerHTML = '';
+  const modules = Object.keys(state.resonances || {});
+  if (!modules.length) return;
+  modules.forEach(m => {
+    const r = state.resonances[m];
+    const cls = r.phase === 'constructive' ? 'constructive' : 'destructive';
+    const w = Math.max(4, r.resonance * 80);
+    el.innerHTML += `<div class="bar ${cls}" style="width:${w}px" title="${m}: ${r.resonance}">${m.slice(0,6)}</div>`;
+  });
+}
+
+async function scan() {
+  const input = document.getElementById('modInput').value;
+  const mods = input ? input.split(',').map(m => m.trim()).filter(Boolean) : [];
+  const r = await api({action:'scan', modules: mods});
+  if (r.status === 'scanned') {
+    log(`Scan complete: harmony ${r.harmony_score}`);
+    loadStatus();
+  }
+}
+
+async function showResonance() {
+  const r = await api({action:'patterns'});
+  if (r.status === 'patterns') {
+    log(`Patterns: ${r.count} total, showing last 5`);
+  }
+}
+
+async function showResonance() {
+  // just show current state
+  loadStatus();
+}
+
+loadStatus();
+</script>
+</body>
+</html>

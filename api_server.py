@@ -111,6 +111,7 @@ ROUTE_ALIASES: dict[str, str] = {
     "dual_track_sentinel": "wave686_dual_track_sentinel",
     "quantum_coherence_lattice": "wave694_quantum_coherence_lattice",
     "memory_palace": "wave695_memory_palace_reanimation",
+    "harmonic_resonance": "wave696_harmonic_resonance_oracle",
     "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
     "adaptive_regulation": "wave636_adaptive_regulation",
 }

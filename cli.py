@@ -1866,6 +1866,18 @@ def main():
             q["room"] = args[1]
         import json as _j
         print(_j.dumps(h(q), indent=2))
+# --- Wave 696: Harmonic Resonance Oracle ---
+    if cmd == "wave696" or cmd == "harmonic-resonance":
+        from api.wave696_harmonic_resonance_oracle import handler as h
+        q = {"action": args[0] if args else "status"}
+        if q["action"] == "scan" and len(args) >= 2:
+            q["modules"] = args[1:]
+        elif q["action"] == "resonance" and len(args) >= 2:
+            q["module"] = args[1]
+        elif q["action"] == "patterns":
+            pass
+        import json as _j
+        print(_j.dumps(h(q), indent=2))
 
 
 if __name__ == "__main__":
