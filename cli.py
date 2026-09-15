@@ -1838,6 +1838,19 @@ def main():
         print(json.dumps(result, indent=2, default=str))
         return 0
     return result
+# --- Wave 694: Quantum Coherence Lattice ---
+    if cmd == "wave694" or cmd == "quantum-coherence-lattice":
+        from api.wave694_quantum_coherence_lattice import handler as h
+        q = {"action": args[0] if args else "status"}
+        if q["action"] == "superpose" and len(args) >= 3:
+            q["label"] = args[1]
+            q["options"] = args[2:]
+        elif q["action"] == "collapse" and len(args) >= 2:
+            q["node_id"] = args[1]
+        elif q["action"] == "observe" and len(args) >= 2:
+            q["node_id"] = args[1]
+        import json as _j
+        print(_j.dumps(h(q), indent=2))
 
 
 if __name__ == "__main__":

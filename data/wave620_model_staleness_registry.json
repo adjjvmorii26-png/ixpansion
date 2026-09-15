@@ -1,0 +1,93 @@
+{
+  "models": {
+    "spacexai/grok-4.6": {
+      "id": "spacexai/grok-4.6",
+      "release_date": "2026-08-12",
+      "last_refresh": 1789434393.19103,
+      "tier": "A",
+      "staleness_score": 0.0,
+      "knowledge_cutoff": "2026-07",
+      "notes": "current default frontier"
+    },
+    "test/model-fresh": {
+      "id": "test/model-fresh",
+      "release_date": "2026-09-01",
+      "knowledge_cutoff": "2026-08",
+      "notes": "unit test model",
+      "last_refresh": 1789434393.2061257,
+      "staleness_score": 0.0,
+      "tier": "A"
+    },
+    "test/model-drift": {
+      "id": "test/model-drift",
+      "notes": "will drift | auto-demoted after drift probe stale_probe",
+      "last_refresh": 1789434393.2250214,
+      "staleness_score": 0.0,
+      "tier": "B",
+      "last_probe": 1789434393.2390435,
+      "last_relative_score": 0.7
+    },
+    "test/primary-ok": {
+      "id": "test/primary-ok",
+      "last_refresh": 1789434393.2551491,
+      "staleness_score": 0.0,
+      "tier": "A"
+    },
+    "test/primary-bad": {
+      "id": "test/primary-bad",
+      "last_refresh": 1789434393.2661877,
+      "staleness_score": 0.0,
+      "tier": "C"
+    },
+    "test/handler-model": {
+      "id": "test/handler-model",
+      "notes": "via handler",
+      "last_refresh": 1789434393.2921388,
+      "staleness_score": 0.0,
+      "tier": "A",
+      "last_probe": 1789434393.302874,
+      "last_relative_score": 0.99
+    },
+    "test/frontier-candidate": {
+      "id": "test/frontier-candidate",
+      "last_refresh": 1789434393.3469412,
+      "staleness_score": 0.0,
+      "tier": "A"
+    }
+  },
+  "frontier_reference": "test/frontier-candidate",
+  "probes": [
+    {
+      "ts": 1789434393.2315955,
+      "model": "test/model-drift",
+      "probe": "healthy",
+      "relative_score": 0.95,
+      "drifted": false,
+      "knowledge_dependent": false,
+      "new_tier": "A"
+    },
+    {
+      "ts": 1789434393.2391024,
+      "model": "test/model-drift",
+      "probe": "stale_probe",
+      "relative_score": 0.7,
+      "drifted": true,
+      "knowledge_dependent": false,
+      "new_tier": "B"
+    },
+    {
+      "ts": 1789434393.302932,
+      "model": "test/handler-model",
+      "probe": "generic",
+      "relative_score": 0.99,
+      "drifted": false,
+      "knowledge_dependent": false,
+      "new_tier": "A"
+    }
+  ],
+  "last_sweep": 1789434393.3130987,
+  "config": {
+    "sunset_days": 90,
+    "drift_threshold": 0.12
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "module": "wave685_bloom_cascade",
+  "wave": 685,
+  "nodes": {
+    "2fefb089b2f4": {
+      "name": "horizon_cap",
+      "depth": 0,
+      "ts": "2026-09-15T07:49:15.284494+00:00"
+    },
+    "48e3a2abc2bd": {
+      "name": "child_cap",
+      "depth": 1,
+      "parent": "2fefb089b2f4",
+      "ts": "2026-09-15T07:49:15.290332+00:00"
+    }
+  },
+  "edges": [
+    {
+      "parent": "2fefb089b2f4",
+      "child": "48e3a2abc2bd"
+    },
+    {
+      "parent": "2fefb089b2f4",
+      "child": "48e3a2abc2bd"
+    },
+    {
+      "parent": "2fefb089b2f4",
+      "child": "48e3a2abc2bd"
+    }
+  ],
+  "depth_max": 1
+}

@@ -87,6 +87,11 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 680 | Organism Horizon | Vantage | 680-wave horizon report from organ vantage |
 | 681 | Hush Membrane | Compression | Silence as product surface; compress → hush tokens |
 | 682 | Scar Compass | Navigation | Post-council navigation by heal-ratio scars |
+| 683 | Void Meter | Absence | Productive absence as void capital |
+| 684 | Braid Debt Oracle | Forecasting | Paradox debt trajectory from harmony strands |
+| 685 | Bloom Cascade | Growth | Consensus blooms chain into capability trees |
+| 686 | Dual-Track Sentinel | Governance | Lab vs ALEPH contamination scoring |
+| 694 | Quantum Coherence Lattice | Resolution | Superposition collapses to coherent resolutions |
 | 641 | Fractal Garden | Art | Procedural SVG art from module topology |
 | 640 | Dependency Resolver | Immune System | Circular imports, version sync, debt scoring |
 | 639 | Echo Chamber Breaker | Safety | Reality probes, bias detection, perspective shattering |

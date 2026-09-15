@@ -1,3 +1,17 @@
+## [4.110.0] — 2026-09-15
+
+### Added
+- **Wave 683 — Void Meter**: Tracks productive absence as void capital; deliberate non-actions score as resources.
+- **Wave 684 — Braid Debt Oracle**: Predicts paradox debt trajectory from harmony strand samples with decay-growth model.
+- **Wave 685 — Bloom Cascade**: Chains consensus blooms into capability trees with parent-child proposals.
+- **Wave 686 — Dual-Track Sentinel**: Watches lab vs ALEPH contamination; emits quarantine advisories.
+- **Wave 694 — Quantum Coherence Lattice**: Superposition of choices collapses to weighted resolutions; coherence scoring.
+- Tests for waves 683-686 and 694 (all passing).
+- Routes + CLI + dashboards for all new waves.
+
+### Governance
+- Council session #24: Quantum Coherence Arc approved (waves 694-698).
+
 ## [4.109.0] — 2026-09-15
 
 ### Added

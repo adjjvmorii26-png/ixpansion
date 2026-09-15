@@ -1,0 +1,55 @@
+{
+  "module": "wave694_quantum_coherence_lattice",
+  "wave": 694,
+  "lattice": {
+    "47523e2fb56d": {
+      "label": "path_choice",
+      "options": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "weights": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "created": "2026-09-15T07:45:12.887122+00:00",
+      "collapsed": true,
+      "result": "beta",
+      "collapsed_at": "2026-09-15T07:45:12.898723+00:00"
+    },
+    "2f9c96a07347": {
+      "label": "path_choice",
+      "options": [
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "weights": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "created": "2026-09-15T07:49:15.358965+00:00",
+      "collapsed": true,
+      "result": "beta",
+      "collapsed_at": "2026-09-15T07:49:15.368382+00:00"
+    }
+  },
+  "collapsed": [
+    {
+      "node_id": "47523e2fb56d",
+      "label": "path_choice",
+      "result": "beta"
+    },
+    {
+      "node_id": "2f9c96a07347",
+      "label": "path_choice",
+      "result": "beta"
+    }
+  ],
+  "superpositions": 2,
+  "collapses": 2,
+  "coherence_score": 1.0
+}
