@@ -28,7 +28,7 @@ h1{text-align:center;margin-bottom:8px;font-size:1.8em}
 </div>
 <script>
 const HOST='';
-function link(q){return fetch(HOST+'/api/dream_compiler?'+new URLSearchParams(q).toString());}
+function link(q){return fetch(HOST+'/api/dream_compiler_v2?'+new URLSearchParams(q).toString());}
 async function refresh(){
   try{
     const r=await link({action:'status'});

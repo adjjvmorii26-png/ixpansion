@@ -5,7 +5,7 @@
 - **Wave 663 — Resonance Ledger**: Economic layer — mint resonance, transfer between organs, balances, full ledger.
 - **Wave 664 — Paradox Court**: Judicial organ — file cases, deliberate, record verdicts and precedents.
 - **Wave 665 — Mycelial Network**: Underground lattice — connect nodes, propagate signals, hyphal arbitration.
-- Renamed/aliased routes: /dream-compiler, /resonance-ledger, /paradox-court, /mycelial
+- Routes: /dream-compiler-v2, /resonance-ledger, /paradox-court, /mycelial
 - CLI commands: dreamcompile, resonance, court, mycelium
 - 34 new tests (all passing).
 

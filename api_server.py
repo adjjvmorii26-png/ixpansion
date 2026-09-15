@@ -78,6 +78,7 @@ ROUTE_ALIASES: dict[str, str] = {
     "lineage": "wave660_lineage_crystal",
     "hexanthra": "wave661_hexanthra_bloom",
     "dream_compile": "wave662_dream_compiler",
+    "dream_compiler_v2": "wave662_dream_compiler",
     "resonance": "wave663_resonance_ledger",
     "court": "wave664_paradox_court",
     "mycelial": "wave665_mycelial_network",

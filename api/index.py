@@ -77,7 +77,7 @@ def _call(request_method: str, request_path: str, body: bytes = b"") -> Dict[str
 # --- Wave 446: Quantum Coherence ---
 
 # --- Wave 94: Dream Compiler ---
-    if path.startswith("/dream-compiler") or path.startswith("/api/dream_compiler"):
+    if path.startswith("/dream-compiler?") or path.startswith("/api/dream_compiler?") or path in ("/dream-compiler", "/api/dream_compiler"):
         from api.wave94_dream_compiler import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
@@ -2593,7 +2593,7 @@ def handler(request) -> dict:
         return h(q)
 
 # --- Wave 662: Dream Compiler v2 ---
-    if path.startswith("/dream-compiler") or path.startswith("/api/dream_compiler"):
+    if path.startswith("/dream-compiler-v2") or path.startswith("/api/dream_compiler_v2"):
         from api.wave662_dream_compiler import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
