@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wave 698 — Void Syntax Engine</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a12;color:#e0e0e0;font-family:'Courier New',monospace;padding:20px}
+h1{text-align:center;color:#c38d9e;margin-bottom:10px;font-size:1.4em}
+.sub{text-align:center;color:#666;margin-bottom:20px;font-size:.85em}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:0 auto}
+.card{background:#151520;border:1px solid #2a2a3a;border-radius:8px;padding:16px}
+.card h2{color:#41b3a3;font-size:1em;margin-bottom:10px}
+.stat{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1a1a2a;font-size:.85em}
+.stat .label{color:#888}.stat .val{color:#e8a87c;font-weight:bold}
+.void-bar{height:30px;border-radius:4px;background:linear-gradient(90deg,#1a1a2a,#33334d);position:relative;overflow:hidden;margin:8px 0}
+.void-fill{height:100%;background:linear-gradient(90deg,#c38d9e,#1a1a2e);transition:width .5s}
+.void-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:.8em;font-weight:bold;color:#e0e0e0}
+.btn{background:#2a2a3a;color:#e8a87c;border:1px solid #444;padding:8px 16px;border-radius:4px;cursor:pointer;margin:4px;font-family:inherit;font-size:.85em}
+.btn:hover{background:#3a3a4a}
+.btn.danger{border-color:#c38d9e}
+.btn.danger:hover{background:#3a2a2a}
+textarea{width:100%;background:#1a1a2a;color:#e0e0e0;border:1px solid #333;padding:8px;font-family:inherit;font-size:.85em;border-radius:4px;resize:vertical}
+#log{max-width:900px;margin:20px auto;background:#151520;border:1px solid #2a2a3a;border-radius:8px;padding:12px;max-height:200px;overflow-y:auto;font-size:.8em;color:#666}
+</style>
+</head>
+<body>
+<h1>🌑 Wave 698 — Void Syntax Engine</h1>
+<div class="sub">Where syntax dissolves into silence and reconstitutes</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Void State</h2>
+    <div class="stat"><span class="label">Dissolutions</span><span class="val" id="s_dis">0</span></div>
+    <div class="stat"><span class="label">Reconstructions</span><span class="val" id="s_rec">0</span></div>
+    <div class="stat"><span class="label">Void Depth</span><span class="val" id="s_depth">0</span></div>
+    <div class="stat"><span class="label">Silence Score</span><span class="val" id="s_sil">0.0</span></div>
+    <div class="void-bar"><div class="void-fill" id="voidFill" style="width:0%"><div class="void-label" id="voidLabel">0%</div></div></div>
+  </div>
+  <div class="card">
+    <h2>Void Actions</h2>
+    <textarea id="voidContent" placeholder="Content to dissolve into the void..." rows="3"></textarea>
+    <br>
+    <button class="btn danger" onclick="dissolve()">Dissolve</button>
+    <button class="btn" onclick="silence()">Check Silence</button>
+    <button class="btn" onclick="loadStatus()">Refresh</button>
+    <br>
+    <input id="reconstituteId" placeholder="Session ID to reconstitute" style="width:100%;padding:6px;background:#1a1a2a;color:#e8a87c;border:1px solid #444;font-family:inherit;font-size:.85em">
+    <button class="btn" onclick="reconstitute()">Reconstitute</button>
+  </div>
+</div>
+
+<div id="log"></div>
+
+<script>
+const API = '/api/void_syntax';
+let state = {};
+
+function log(msg) {
+  const el = document.getElementById('log');
+  el.innerHTML = `<div>[${new Date().toISOString().slice(11,19)}] ${msg}</div>` + el.innerHTML;
+}
+
+async function api(params) {
+  const qs = Object.entries(params).map(([k,v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+  const r = await fetch(`${API}?${qs}`);
+  return r.json();
+}
+
+async function loadStatus() {
+  const st = await api({action:'status'});
+  document.getElementById('s_dis').textContent = st.dissolutions;
+  document.getElementById('s_rec').textContent = st.reconstructions;
+  document.getElementById('s_depth').textContent = st.void_depth;
+  document.getElementById('s_sil').textContent = st.silence_score;
+  const pct = Math.round(st.silence_score * 100);
+  document.getElementById('voidFill').style.width = pct + '%';
+  document.getElementById('voidLabel').textContent = pct + '%';
+  state = st;
+  log(`Void depth: ${st.void_depth}, silence: ${st.silence_score}`);
+}
+
+async function dissolve() {
+  const content = document.getElementById('voidContent').value;
+  if (!content) { log('No content'); return; }
+  const r = await api({action:'dissolve', content: content, reason: 'voluntary'});
+  if (r.status === 'dissolved') {
+    log(`Dissolved at depth ${r.depth} (session: ${r.session_id})`);
+    document.getElementById('voidContent').value = '';
+    loadStatus();
+  }
+}
+
+async function silence() {
+  const s = await api({action:'silence'});
+  if (s.status === 'silence') {
+    log(`Silence intensity: ${s.intensity} at depth ${s.depth}`);
+  }
+}
+
+async function reconstitute() {
+  const sid = document.getElementById('reconstituteId').value;
+  if (!sid) { log('No session ID'); return; }
+  const r = await api({action:'reconstitute', session_id: sid});
+  if (r.status === 'reconstituted') {
+    log(`Reconstituted ${sid}`);
+    document.getElementById('reconstituteId').value = '';
+    loadStatus();
+  } else {
+    log(`Error: ${r.message}`);
+  }
+}
+
+loadStatus();
+</script>
+</body>
+</html>

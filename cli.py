@@ -1890,6 +1890,17 @@ def main():
             q["bridge_id"] = args[1]
         import json as _j
         print(_j.dumps(h(q), indent=2))
+# --- Wave 698: Void Syntax Engine ---
+    if cmd == "wave698" or cmd == "void-syntax":
+        from api.wave698_void_syntax_engine import handler as h
+        q = {"action": args[0] if args else "status"}
+        if q["action"] == "dissolve" and len(args) >= 2:
+            q["content"] = args[1]
+            q["reason"] = args[2] if len(args) >= 3 else "voluntary"
+        elif q["action"] == "reconstitute" and len(args) >= 2:
+            q["session_id"] = args[1]
+        import json as _j
+        print(_j.dumps(h(q), indent=2))
 
 
 if __name__ == "__main__":
