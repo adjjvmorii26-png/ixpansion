@@ -6,10 +6,10 @@
 - **Version**: 4.110.0
 - **Modules**: 1046 (123 wave + 923 non-wave)
 - **Contract compliance**: 100% (all have `coherence_vitals()` + `resonates_with()`)
-- **Dashboards**: 192 (5 experimental: organism-vitals, wave-interferometer, entropy-heatmap, void-mirror, dashboard-forge)
+- **Dashboards**: 191 (all linked from index.html, 0 orphaned, 0 broken links)
 - **Tests**: 156 wave tests
 - **Council sessions**: 25 sealed
-- **Latest commit**: 92de120
+- **Latest commit**: (uncommitted)
 
 ### What Was Done This Thread
 1. Waves 683-686: Phantom routes fixed (restored from tmp worktree)
