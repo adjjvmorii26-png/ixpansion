@@ -1,0 +1,62 @@
+# Lab Council Pulse — path-filtered, dual-track safe
+# Runs on lab/api wave changes and daily cron without blocking ALEPH full CI
+name: Lab Council Pulse
+
+on:
+  push:
+    branches: [main, "lab/**"]
+    paths:
+      - "api/wave67*.py"
+      - "api/wave68*.py"
+      - "api/wave69*.py"
+      - "tests/test_council*.py"
+      - "tests/test_wave67*.py"
+      - "tests/test_wave68*.py"
+      - "lab/**"
+      - ".github/workflows/lab-council-pulse.yml"
+  pull_request:
+    paths:
+      - "api/wave67*.py"
+      - "api/wave68*.py"
+      - "tests/test_council*.py"
+      - "tests/test_wave67*.py"
+      - "lab/**"
+  schedule:
+    - cron: "0 13 * * *"  # 09:00 America/New_York approx
+  workflow_dispatch:
+
+jobs:
+  council-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test deps
+        run: |
+          pip install -q pytest
+      - name: Council 22 unit tests
+        run: |
+          if [ -f tests/test_council22_671_675.py ]; then
+            python -m pytest tests/test_council22_671_675.py -q --tb=line
+          else
+            echo "council tests not present — soft skip"
+          fi
+      - name: Wave 67x compile
+        run: |
+          python -c "
+          import compileall, pathlib, sys
+          paths = list(pathlib.Path('api').glob('wave67*.py')) + list(pathlib.Path('api').glob('wave68*.py'))
+          ok = True
+          for p in paths:
+              c = compileall.compile_file(str(p), quiet=1)
+              ok = ok and c
+              print(p.name, 'ok' if c else 'FAIL')
+          sys.exit(0 if ok else 1)
+          "
+      - name: Caption pulse
+        run: |
+          echo "lab council pulse · dual-track · silence holds"
+          date -u +"ts=%Y-%m-%dT%H:%M:%SZ"
