@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fractal Garden — IXPANSION</title>
+<style>
+:root{--bg:#0a0a14;--fg:#e0e0e8;--muted:#6b6b80;--cyan:#41b3a3;--card:#14142a;--border:#2a2a44;--green:#41d3a3;--amber:#ffcc66;--red:#e05a5a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+.header{text-align:center;margin-bottom:24px;border-bottom:2px solid var(--border);padding-bottom:16px}
+h1{font-size:2em;background:linear-gradient(135deg,var(--green),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--muted);margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:1400px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--green);font-size:1.1em;margin-bottom:12px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222}
+.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}
+.value{color:var(--cyan);font-weight:bold}
+.btn{border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px}
+.btn-green{background:var(--green);color:#0a0a14}
+.btn-amber{background:var(--amber);color:#0a0a14}
+.btn:hover{opacity:0.9}
+#artwork{width:100%;border:1px solid var(--border);border-radius:8px;background:#0a0a14;min-height:200px}
+input{background:#2a2a44;color:var(--fg);border:1px solid #444;padding:6px 10px;border-radius:6px;margin:4px;width:220px}
+.season-dot{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:6px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🌿 Fractal Garden</h1>
+  <p class="sub">Procedural art grown from module topology</p>
+  <span class="badge" id="season" style="background:#2a2a44;color:var(--green);padding:4px 12px;border-radius:12px">season: spring</span>
+  <span class="badge" id="plants" style="background:#2a2a44;color:var(--amber);padding:4px 12px;border-radius:12px">plants: 0</span>
+</div>
+<div class="grid">
+  <div class="card">
+    <h2>🌱 Plant a Module</h2>
+    <input id="module-name" placeholder="module name (e.g. wave638_symbiosis_protocol)">
+    <button class="btn btn-green" onclick="plant()">Plant</button>
+    <div id="plant-result" style="margin-top:12px"></div>
+  </div>
+  <div class="card">
+    <h2>🎨 Artwork</h2>
+    <button class="btn btn-amber" onclick="render()">Render Garden</button>
+    <button class="btn btn-green" onclick="grow()">Grow (+1)</button>
+    <div id="render-result" style="margin-top:12px"></div>
+  </div>
+  <div class="card">
+    <h2>🏵 Plant Diversity</h2>
+    <div id="diversity">Empty garden</div>
+  </div>
+  <div class="card" style="grid-column:1/-1">
+    <h2 id="artwork-title">🌍 The Garden Breathes</h2>
+    <div id="artwork-container"></div>
+  </div>
+</div>
+<script>
+const HOST='';
+async function api(action){
+  const r = await fetch(HOST+'/api/fractal_garden?action='+action);
+  return r.json();
+}
+function seasonColor(s){
+  return {spring:'#41d3a3',summer:'#ffcc66',autumn:'#e05a5a',winter:'#6fa8dc'}[s]||'#41d3a3';
+}
+async function refresh(){
+  const s = await api('status');
+  document.getElementById('season').innerHTML='<span class="season-dot" style="background:'+seasonColor(s.season)+'"></span>season: '+s.season;
+  document.getElementById('plants').textContent='plants: '+s.plants;
+  const types=s.plant_types||{};
+  document.getElementById('diversity').innerHTML=Object.keys(types).length?
+    Object.entries(types).map(([k,v])=>`<div class="metric"><span class="label">${k}</span><span class="value">${v}</span></div>`).join('')
+    :'<div style="color:var(--muted)">Plant modules or render to populate</div>';
+}
+async function plant(){
+  const name=document.getElementById('module-name').value.trim();
+  if(!name)return;
+  const r=await fetch(HOST+'/api/fractal_garden?action=plant&module='+encodeURIComponent(name)+'&coherence=0.8');
+  const d=await r.json();
+  document.getElementById('plant-result').innerHTML=
+    `<div class="metric"><span class="label">${d.module}</span><span class="value" style="color:var(--green)">${d.plant_type}</span></div>`;
+  document.getElementById('module-name').value='';
+  await refresh();
+  render();
+}
+async function grow(){
+  const r=await fetch(HOST+'/api/fractal_garden?action=grow');
+  const d=await r.json();
+  await refresh();
+  render();
+}
+async function render(){
+  const r=await fetch(HOST+'/api/fractal_garden?action=render');
+  const d=await r.json();
+  document.getElementById('artwork-container').innerHTML=d.svg;
+  document.getElementById('render-result').innerHTML=
+    `<div class="metric"><span class="label">Artifact</span><span class="value">${d.artifact.id} (${(d.artifact.svg_size/1024).toFixed(1)} KB)</span></div>`;
+}
+refresh();
+</script>
+</body>
+</html>

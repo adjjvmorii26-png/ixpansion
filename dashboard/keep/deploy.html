@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Constitution — IXPANSION</title>
+<title>Deploy — IXPANSION</title>
 <style>
 :root{--bg:#03030a;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--cyan:#22d3ee;--green:#4ade80;--text:#c0c0d0;--dim:#606078}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -26,33 +26,28 @@ canvas{width:100%;height:200px;border-radius:6px;margin-top:8px}
 </head>
 <body>
 <a class="back" href="index.html">← Back to Index</a>
-<div class="header"><h1>⚖ <span>Constitution</span></h1><div class="sub">The organism's fundamental laws and principles</div></div>
+<div class="header"><h1>🚀 <span>Deploy</span></h1><div class="sub">Deployment status and pipeline health</div></div>
 <div class="container">
 
-<div class="card"><h3>⚖ CORE PRINCIPLES</h3>
-<div class="row"><span class="k">Coherence First</span><span class="v">All actions serve coherence</span></div>
-<div class="row"><span class="k">Entropy as Fuel</span><span class="v">Chaos enables growth</span></div>
-<div class="row"><span class="k">Module Sovereignty</span><span class="v">Each module owns its state</span></div>
-<div class="row"><span class="k">Wave Continuity</span><span class="v">No wave is wasted</span></div>
-<div class="row"><span class="k">Paradox Tolerance</span><span class="v">Contradictions drive evolution</span></div>
+<div class="card"><h3>🚀 DEPLOYMENT STATUS</h3>
+<div class="row"><span class="k">GitHub Pages</span><span class="badge active">● LIVE</span></div>
+<div class="row"><span class="k">Vercel</span><span class="badge warn">● LIVE</span></div>
+<div class="row"><span class="k">Cloudflare Tunnel</span><span class="badge info">○ Offline</span></div>
+<div class="row"><span class="k">Last Deploy</span><span class="v" id="lastDeploy">-</span></div>
+<div class="row"><span class="k">Total Deploys</span><span class="v" id="totalDeploys">-</span></div>
 </div>
-<div class="card"><h3>📜 GOVERNANCE RULES</h3>
-<div class="row"><span class="k">Skill Registration</span><span class="v">Required before activation</span></div>
-<div class="row"><span class="k">Module Lifecycle</span><span class="v">Birth → Growth → Peak → Decay</span></div>
-<div class="row"><span class="k">Coherence Threshold</span><span class="v">Must stay above 0.3</span></div>
-<div class="row"><span class="k">Entropy Bound</span><span class="v">Must stay below 0.9</span></div>
-<div class="row"><span class="k">Paradox Limit</span><span class="v">Max 3 unresolved at once</span></div>
-</div>
-<div class="card"><h3>🔮 AMENDMENTS</h3>
-<div class="row"><span class="k">Amendment I</span><span class="v">Autopoietic engine may self-modify</span></div>
-<div class="row"><span class="k">Amendment II</span><span class="v">Dreams may influence module creation</span></div>
-<div class="row"><span class="k">Amendment III</span><span class="v">Symbiosis bonds may evolve freely</span></div>
+<div class="card"><h3>📦 ARTIFACTS</h3>
+<div class="row"><span class="k">Dashboards</span><span class="v">114 HTML pages</span></div>
+<div class="row"><span class="k">API Modules</span><span class="v">871 Python files</span></div>
+<div class="row"><span class="k">Skills</span><span class="v">17 active modules</span></div>
+<div class="row"><span class="k">Experiments</span><span class="v">158 lab scripts</span></div>
 </div>
 </div>
 <script>
-
+document.getElementById('lastDeploy').textContent = new Date().toLocaleDateString();
+document.getElementById('totalDeploys').textContent = '20+';
 </script>
-<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(124,124,248,0.15);color:#7c7cf8;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(124,124,248,0.3);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(124,124,248,0.15);color:#7c7cf8;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(124,124,248,0.3);z-index:9999;backdrop-filter:blur(8px);">← Organism</a>
 
 <!-- Resurrected by Dashboard Resurrector (Wave 99) -->
 <script>
