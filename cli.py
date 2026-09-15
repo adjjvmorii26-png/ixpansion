@@ -1446,6 +1446,67 @@ def cmd_hexanthra():
     if "--census" in args: return h({"action": "census"})
     return h({"action": "status"})
 
+@cmd("dreamcompile", "Dream Compiler v2 — distill, compile, manifest")
+def cmd_dreamcompile():
+    """Dream Compiler v2 operations.
+    Usage: python cli.py dreamcompile [--distill RESIDUE] [--compile NAME] [--manifest]
+    """
+    from api.wave662_dream_compiler import handler as h
+    args = sys.argv[2:]
+    if "--distill" in args:
+        i = args.index("--distill"); return h({"action": "distill", "residue": args[i+1] if i+1 < len(args) else "shimmer"})
+    if "--compile" in args:
+        i = args.index("--compile"); return h({"action": "compile", "name": args[i+1] if i+1 < len(args) else None})
+    if "--manifest" in args: return h({"action": "manifest"})
+    return h({"action": "status"})
+
+@cmd("resonance", "Resonance Ledger — mint, transfer, balance, ledger")
+def cmd_resonance():
+    """Resonance Ledger operations.
+    Usage: python cli.py resonance [--mint ACCOUNT AMOUNT] [--transfer FROM TO AMOUNT] [--balance ACCOUNT]
+    """
+    from api.wave663_resonance_ledger import handler as h
+    args = sys.argv[2:]
+    if "--mint" in args:
+        i = args.index("--mint"); return h({"action": "mint", "account": args[i+1] if i+1 < len(args) else "organ", "amount": float(args[i+2]) if i+2 < len(args) else 10.0})
+    if "--transfer" in args:
+        i = args.index("--transfer"); return h({"action": "transfer", "from": args[i+1] if i+1 < len(args) else "a", "to": args[i+2] if i+2 < len(args) else "b", "amount": float(args[i+3]) if i+3 < len(args) else 1.0})
+    if "--balance" in args:
+        i = args.index("--balance"); return h({"action": "balance", "account": args[i+1] if i+1 < len(args) else "organ"})
+    if "--ledger" in args: return h({"action": "ledger"})
+    return h({"action": "status"})
+
+@cmd("court", "Paradox Court — file, deliberate, verdict, precedents")
+def cmd_court():
+    """Paradox Court operations.
+    Usage: python cli.py court [--file NAME CHARGE] [--deliberate ID VERDICT]
+    """
+    from api.wave664_paradox_court import handler as h
+    args = sys.argv[2:]
+    if "--file" in args:
+        i = args.index("--file"); return h({"action": "file", "name": args[i+1] if i+1 < len(args) else "unnamed_paradox", "charge": args[i+2] if i+2 < len(args) else "self_reference"})
+    if "--deliberate" in args:
+        i = args.index("--deliberate"); return h({"action": "deliberate", "case_id": int(args[i+1]) if i+1 < len(args) else 0, "verdict": args[i+2] if i+2 < len(args) else "resolve"})
+    if "--verdict" in args: return h({"action": "verdict"})
+    if "--precedents" in args: return h({"action": "precedents"})
+    return h({"action": "status"})
+
+@cmd("mycelium", "Mycelial Network — connect, signal, arbitrate, map")
+def cmd_mycelium():
+    """Mycelial Network operations.
+    Usage: python cli.py mycelium [--connect NODE NEIGHBORS] [--signal FROM TO PAYLOAD] [--arbitrate A B]
+    """
+    from api.wave665_mycelial_network import handler as h
+    args = sys.argv[2:]
+    if "--connect" in args:
+        i = args.index("--connect"); return h({"action": "connect", "node": args[i+1] if i+1 < len(args) else "organ", "neighbors": [args[i+2]] if i+2 < len(args) else []})
+    if "--signal" in args:
+        i = args.index("--signal"); return h({"action": "signal", "from": args[i+1] if i+1 < len(args) else "a", "to": args[i+2] if i+2 < len(args) else "b", "payload": args[i+3] if i+3 < len(args) else "pulse"})
+    if "--arbitrate" in args:
+        i = args.index("--arbitrate"); return h({"action": "arbitrate", "claimants": [args[i+1], args[i+2]] if i+2 < len(args) else ["a", "b"]})
+    if "--map" in args: return h({"action": "map"})
+    return h({"action": "status"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

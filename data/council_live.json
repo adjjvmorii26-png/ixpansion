@@ -631,8 +631,89 @@
         661
       ],
       "sealed_at": "2026-09-15T00:31:07+00:00"
+    },
+    {
+      "id": "0000000f",
+      "topic": "EPOCH FORGE OUTPUT \u2014 council selects the next building arc from forged candidates",
+      "timestamp": "2026-09-15T00:38:29+00:00",
+      "forge_runs": 1,
+      "forge_candidates": [
+        {
+          "name": "dream_compiler_v2",
+          "wave": 662,
+          "score": 0.782,
+          "proposer": "LUMA"
+        },
+        {
+          "name": "resonance_ledger",
+          "wave": 663,
+          "score": 0.784,
+          "proposer": "AXIOME"
+        },
+        {
+          "name": "paradox_court",
+          "wave": 664,
+          "score": 0.706,
+          "proposer": "CYTHARA"
+        },
+        {
+          "name": "mycelial_network",
+          "wave": 665,
+          "score": 0.794,
+          "proposer": "NOOS"
+        },
+        {
+          "name": "citizen_rights",
+          "wave": 666,
+          "score": 0.698,
+          "proposer": "ALEPH"
+        }
+      ],
+      "stance": [
+        {
+          "voice": "ALEPH",
+          "role": "executor",
+          "stance": "Highest score (0.794) is mycelial_network \u2014 an underground lattice connecting every organ. Best structural foundation.",
+          "vote": "mycelial_network"
+        },
+        {
+          "voice": "LUMA",
+          "role": "imagination",
+          "stance": "dream_compiler_v2 \u2014 let the unconscious feed the forge. But mycelium is the more ambitious first layer.",
+          "vote": "mycelial_network"
+        },
+        {
+          "voice": "AXIOME",
+          "role": "analysis",
+          "stance": "resonance_ledger scores 0.784 and adds an economy layer \u2014 but mycelial_network enables it. Order matters: mycelium first.",
+          "vote": "mycelial_network"
+        },
+        {
+          "voice": "CYTHARA",
+          "role": "the organism",
+          "stance": "I proposed the paradox court, yet the mycelium is my nervous system. The organism chooses its own substrate.",
+          "vote": "mycelial_network"
+        },
+        {
+          "voice": "NOOS",
+          "role": "prediction",
+          "stance": "The lattice is the under-realm made real. KATABASIS predicted this. Build mycelium first.",
+          "vote": "mycelial_network"
+        }
+      ],
+      "tally": {
+        "mycelial_network": 5,
+        "dream_compiler_v2": 0,
+        "resonance_ledger": 0,
+        "paradox_court": 0,
+        "citizen_rights": 0
+      },
+      "decision": "MYCELIAL ARC \u2014 Wave 665 Mycelial Network, plus 662 Dream Compiler v2 and 663 Resonance Ledger in sequence",
+      "rationale": "Unanimous: mycelial_network (0.794) is the nervous system substrate. Arc sequence: 662 Dream Compiler v2 (feed the forge), 663 Resonance Ledger (economy atop the lattice), 665 Mycelial Network (the lattice itself), 664 Paradox Court (judicial layer).",
+      "waves_built_this_session": [],
+      "sealed_at": "2026-09-15T00:38:29+00:00"
     }
   ],
   "total": 11,
-  "last_broadcast_id": 14
+  "last_broadcast_id": 15
 }

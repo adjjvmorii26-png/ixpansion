@@ -2591,6 +2591,30 @@ def handler(request) -> dict:
         from api.wave661_hexanthra_bloom import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 662: Dream Compiler v2 ---
+    if path.startswith("/dream-compiler") or path.startswith("/api/dream_compiler"):
+        from api.wave662_dream_compiler import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 663: Resonance Ledger ---
+    if path.startswith("/resonance-ledger") or path.startswith("/api/resonance_ledger"):
+        from api.wave663_resonance_ledger import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 664: Paradox Court ---
+    if path.startswith("/paradox-court") or path.startswith("/api/paradox_court"):
+        from api.wave664_paradox_court import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 665: Mycelial Network ---
+    if path.startswith("/mycelial") or path.startswith("/api/mycelial_network"):
+        from api.wave665_mycelial_network import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path.startswith("/trust-network") or path.startswith("/api/trust_network"):
         from api.wave647_trust_network import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)

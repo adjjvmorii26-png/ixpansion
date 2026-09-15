@@ -66,7 +66,10 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 659 | Epoch Forge | Meta-Evolution | Propose, merge, deprecate, ratify future waves |
 | 660 | Lineage Crystal | Meta-Evolution | Temporal lineage, ancestors, snapshots |
 | 661 | Hexanthra Bloom | Language | Hex language grows tokens, opcodes, rituals |
-| 641 | Fractal Garden | Art | Procedural SVG art from module topology |
+| 662 | Dream Compiler v2 | Unconscious | Compile dream residues into executable organs |
+| 663 | Resonance Ledger | Economy | Resonance credits, transfer, balances |
+| 664 | Paradox Court | Justice | File, deliberate, verdict, precedent |
+| 665 | Mycelial Network | Federation | Underground lattice, signals, arbitration || 641 | Fractal Garden | Art | Procedural SVG art from module topology |
 | 640 | Dependency Resolver | Immune System | Circular imports, version sync, debt scoring |
 | 639 | Echo Chamber Breaker | Safety | Reality probes, bias detection, perspective shattering |
 | 638 | Symbiosis Protocol | Federation | Partner handshakes, resonance scoring, resource sharing |

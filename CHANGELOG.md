@@ -1,3 +1,14 @@
+## [4.105.0] — 2026-09-15
+
+### Added
+- **Wave 662 — Dream Compiler v2**: Distills dream residues into motifs, compiles executable organ blueprints.
+- **Wave 663 — Resonance Ledger**: Economic layer — mint resonance, transfer between organs, balances, full ledger.
+- **Wave 664 — Paradox Court**: Judicial organ — file cases, deliberate, record verdicts and precedents.
+- **Wave 665 — Mycelial Network**: Underground lattice — connect nodes, propagate signals, hyphal arbitration.
+- Renamed/aliased routes: /dream-compiler, /resonance-ledger, /paradox-court, /mycelial
+- CLI commands: dreamcompile, resonance, court, mycelium
+- 34 new tests (all passing).
+
 ## [4.104.0] — 2026-09-15
 
 ### Added
