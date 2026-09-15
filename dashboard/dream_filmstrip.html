@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IXPANSION · Dream Filmstrip</title>
+<style>
+  :root {
+    --void: #06050c; --cyan: #3de0ff; --magenta: #ff2d9b; --amber: #f0b429;
+    --text: #d0d4e0; --dim: #6a7088;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--void); color: var(--text);
+    font-family: "SF Mono", ui-monospace, monospace;
+    min-height: 100vh; display: flex; flex-direction: column;
+  }
+  header {
+    padding: 1.25rem 1.5rem .5rem;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  header h1 { font-size: .75rem; letter-spacing: .28em; text-transform: uppercase; color: var(--magenta); font-weight: 500; }
+  header span { font-size: .65rem; color: var(--dim); letter-spacing: .1em; }
+  .strip-wrap {
+    flex: 1; display: flex; align-items: center;
+    overflow-x: auto; padding: 2rem 1.5rem; gap: 1rem;
+    scroll-snap-type: x mandatory;
+  }
+  .frame {
+    flex: 0 0 220px; height: 280px; scroll-snap-align: center;
+    background: linear-gradient(160deg, #0e1018, #12141f);
+    border: 1px solid rgba(255,45,155,.18); border-radius: 10px;
+    padding: 1rem; display: flex; flex-direction: column;
+    position: relative; transition: border-color .25s, transform .25s;
+  }
+  .frame:hover { border-color: var(--cyan); transform: translateY(-4px); }
+  .frame .tag { font-size: .55rem; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); margin-bottom: .5rem; }
+  .frame .label { font-size: .85rem; color: var(--cyan); margin-bottom: .75rem; }
+  .frame .frag {
+    flex: 1; font-size: .7rem; line-height: 1.45; color: var(--dim);
+    overflow: hidden; display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical;
+  }
+  .frame .inhale {
+    margin-top: .75rem; align-self: flex-start;
+    background: transparent; border: 1px solid var(--magenta);
+    color: var(--magenta); font-family: inherit; font-size: .6rem;
+    letter-spacing: .15em; text-transform: uppercase;
+    padding: .4rem .7rem; border-radius: 4px; cursor: pointer;
+  }
+  .frame .inhale:hover { background: rgba(255,45,155,.12); }
+  .frame.gone { opacity: 0; transform: scale(.9); pointer-events: none; }
+  footer {
+    padding: 1rem 1.5rem 1.5rem; display: flex; gap: 1.5rem; align-items: center;
+    border-top: 1px solid rgba(255,255,255,.04);
+  }
+  footer button {
+    background: var(--cyan); color: #05060a; border: none;
+    font-family: inherit; font-size: .65rem; letter-spacing: .12em;
+    text-transform: uppercase; padding: .55rem 1rem; border-radius: 4px; cursor: pointer;
+  }
+  footer .stat { font-size: .7rem; color: var(--dim); }
+  footer .stat b { color: var(--text); font-weight: 500; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Dream Filmstrip · 688</h1>
+  <span>deposit residue · inhale to resume</span>
+</header>
+<div class="strip-wrap" id="strip"></div>
+<footer>
+  <button id="deposit">deposit residue</button>
+  <span class="stat">frames <b id="n">0</b></span>
+  <span class="stat">inhaled <b id="inh">0</b></span>
+</footer>
+<script>
+(() => {
+  const fragments = [
+    'sim→evolve→verify (halted at evolve)',
+    'harmony_braid partial strand: module_x↔module_y',
+    'consensus stake 0.61 — quorum incomplete',
+    'lattice N=24 row 3/8 soft-fail gas',
+    'caption pulse: silence holds — truncated',
+    'DAG edge publish blocked by policy_hash drift',
+    'root_archive ghost echo half-written',
+    'VSA route cosine 0.41 — nearest idle',
+  ];
+  const labels = ['partial_dag', 'braid_strand', 'bloom_soft', 'lattice_shard', 'caption_cut', 'policy_gap', 'ghost_echo', 'vsa_near'];
+  let residues = [];
+  let inhaled = 0;
+  function render() {
+    const strip = document.getElementById('strip');
+    strip.innerHTML = '';
+    residues.forEach((r, i) => {
+      const el = document.createElement('div');
+      el.className = 'frame';
+      el.innerHTML = `<div class="tag">${r.source}</div><div class="label">${r.label}</div><div class="frag">${r.fragment}</div><button class="inhale" data-i="${i}">inhale</button>`;
+      strip.appendChild(el);
+    });
+    document.getElementById('n').textContent = residues.length;
+    document.getElementById('inh').textContent = inhaled;
+    strip.querySelectorAll('.inhale').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = +btn.dataset.i;
+        const frame = strip.children[i];
+        if (frame) frame.classList.add('gone');
+        setTimeout(() => { residues.splice(i, 1); inhaled++; render(); }, 280);
+      });
+    });
+  }
+  document.getElementById('deposit').addEventListener('click', () => {
+    const i = residues.length % fragments.length;
+    residues.push({ label: labels[i], fragment: fragments[i], source: 'agent_' + (i % 4) });
+    if (residues.length > 12) residues.shift();
+    render();
+  });
+  for (let k = 0; k < 4; k++) document.getElementById('deposit').click();
+})();
+</script>
+</body>
+</html>

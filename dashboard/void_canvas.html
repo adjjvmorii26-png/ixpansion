@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IXPANSION · Void Canvas</title>
+<style>
+  :root {
+    --void: #05060a;
+    --ink: #0a0c12;
+    --cyan: #3de0ff;
+    --magenta: #ff2d9b;
+    --ghost: #1a1e2a;
+    --text: #c8d0e0;
+    --dim: #5a6578;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(180deg, rgba(5,6,10,.95), transparent);
+    pointer-events: none;
+  }
+  header h1 { font-size: .75rem; letter-spacing: .28em; text-transform: uppercase; color: var(--cyan); font-weight: 500; }
+  header .meta { font-size: .65rem; color: var(--dim); letter-spacing: .12em; }
+  #stage { position: absolute; inset: 0; cursor: crosshair; }
+  .hud {
+    position: fixed; bottom: 1.25rem; left: 1.25rem; right: 1.25rem;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;
+    pointer-events: none;
+  }
+  .card {
+    background: rgba(10,12,18,.72);
+    border: 1px solid rgba(61,224,255,.12);
+    border-radius: 8px;
+    padding: .85rem 1rem;
+    backdrop-filter: blur(8px);
+  }
+  .card label { display: block; font-size: .6rem; color: var(--dim); letter-spacing: .18em; text-transform: uppercase; margin-bottom: .35rem; }
+  .card .val { font-size: 1.35rem; color: var(--cyan); font-variant-numeric: tabular-nums; }
+  .card .sub { font-size: .65rem; color: var(--magenta); margin-top: .25rem; }
+  .hint {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-size: .7rem; color: var(--dim); letter-spacing: .2em; text-transform: uppercase;
+    opacity: .4; pointer-events: none; transition: opacity .6s;
+  }
+  .hint.fade { opacity: 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Void Canvas · 687</h1>
+  <span class="meta">negative space · click to omit · drag to link absences</span>
+</header>
+<canvas id="stage"></canvas>
+<div class="hint" id="hint">click empty space to register an omission</div>
+<div class="hud">
+  <div class="card"><label>voids</label><div class="val" id="n-voids">0</div><div class="sub" id="last-reason">—</div></div>
+  <div class="card"><label>adjacent absences</label><div class="val" id="n-edges">0</div><div class="sub">graph density</div></div>
+  <div class="card"><label>cursor</label><div class="val" id="cursor">0,0</div><div class="sub">normalized field</div></div>
+</div>
+<script>
+(() => {
+  const c = document.getElementById('stage');
+  const ctx = c.getContext('2d');
+  const voids = [];
+  const edges = [];
+  let W, H, dpr, dragFrom = null, hintGone = false;
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    c.width = W * dpr; c.height = H * dpr;
+    c.style.width = W + 'px'; c.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  function hashHue(s) {
+    let h = 0;
+    for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+    return h % 360;
+  }
+  function draw() {
+    ctx.fillStyle = '#05060a';
+    ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(61,224,255,0.03)';
+    ctx.lineWidth = 1;
+    for (let x = 40; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+    for (let y = 40; y < H; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+    edges.forEach(e => {
+      const a = voids[e.a], b = voids[e.b];
+      if (!a || !b) return;
+      ctx.setLineDash([4, 8]);
+      ctx.strokeStyle = 'rgba(255,45,155,0.25)';
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      ctx.setLineDash([]);
+    });
+    voids.forEach(v => {
+      const r = 18 + (v.reason.length % 8);
+      const g = ctx.createRadialGradient(v.x, v.y, 0, v.x, v.y, r * 2.5);
+      g.addColorStop(0, `hsla(${hashHue(v.reason)},70%,55%,0.35)}`);
+      g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(v.x, v.y, r * 2.5, 0, Math.PI * 2); ctx.fill();
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath(); ctx.arc(v.x, v.y, r * 0.55, 0, Math.PI * 2); ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.strokeStyle = `hsla(${hashHue(v.reason)},80%,60%,0.6)`;
+      ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.arc(v.x, v.y, r, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = 'rgba(200,208,224,0.7)';
+      ctx.font = '10px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(v.name.slice(0, 18), v.x, v.y + r + 14);
+    });
+    document.getElementById('n-voids').textContent = voids.length;
+    document.getElementById('n-edges').textContent = edges.length;
+    requestAnimationFrame(draw);
+  }
+  draw();
+  c.addEventListener('mousemove', e => {
+    document.getElementById('cursor').textContent =
+      (e.clientX / W).toFixed(2) + ',' + (e.clientY / H).toFixed(2);
+  });
+  c.addEventListener('mousedown', e => {
+    if (!hintGone) { document.getElementById('hint').classList.add('fade'); hintGone = true; }
+    const hit = voids.findIndex(v => Math.hypot(v.x - e.clientX, v.y - e.clientY) < 28);
+    if (hit >= 0) { dragFrom = hit; return; }
+    const reasons = ['silence_doctrine', 'deferred', 'pruned', 'never_built', 'audio_omitted'];
+    const names = ['audio_pipeline', 'noise_layer', 'alert_chime', 'legacy_banner', 'autoplay'];
+    const name = names[voids.length % names.length] + '_' + voids.length;
+    const reason = reasons[voids.length % reasons.length];
+    voids.push({ x: e.clientX, y: e.clientY, name, reason });
+    document.getElementById('last-reason').textContent = reason;
+  });
+  c.addEventListener('mouseup', e => {
+    if (dragFrom === null) return;
+    const hit = voids.findIndex(v => Math.hypot(v.x - e.clientX, v.y - e.clientY) < 28);
+    if (hit >= 0 && hit !== dragFrom) edges.push({ a: dragFrom, b: hit });
+    dragFrom = null;
+  });
+})();
+</script>
+</body>
+</html>
