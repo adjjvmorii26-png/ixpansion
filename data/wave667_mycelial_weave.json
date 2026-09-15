@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    {"name": "seed", "type": "organ", "active": true, "time": 1}
+  ],
+  "links": [
+    {"source": "seed", "target": "epoch_forge", "relation": "connects_to"}
+  ],
+  "tick": 1
+}

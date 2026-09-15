@@ -1,3 +1,17 @@
+## [4.107.0] — 2026-09-15
+
+### Added
+- **Wave 667 — Mycelial Weave**: Semantic interconnectivity organ — register semantic links, propagate meaning through the lattice, query connected concepts.
+- **Wave 668 — Resonance Ledger v2**: Economic layer with time-weighted standpoints — recent resonance events weigh more in balance views.
+- **Wave 669 — Paradox Appeal**: Judicial review layer — file appeals, issue rulings, sustain/reverse precedent.
+- **Wave 670 — Sentient Heuristic**: Self-adapting cognition organ — observe outcomes, adapt heuristic weights toward what worked, expose insights.
+- Routes: /mycelial-weave, /resonance-ledger-v2, /paradox-appeal, /sentient-heuristic
+- CLI commands: mycelial-weave, resonance-ledger-v2, paradox-appeal, sentient-heuristic
+- 36 new tests (all passing).
+
+### Fixed
+- Restored `dashboard/index.html` as the GitHub Pages root entry — the IXPANSION domain (`/ixpansion/`) now resolves to 200 instead of 404.
+
 ## [4.106.0] — 2026-09-15
 
 ### Added

@@ -885,8 +885,86 @@
       "rationale": "The council unanimously agrees to run the Epoch Forge again to produce new wave candidates for the next arc.",
       "waves_built_this_session": [],
       "sealed_at": "2026-09-15T01:17:08+00:00"
+    },
+    {
+      "id": "00000013",
+      "topic": "FORGED CANDIDATES \u2014 council selects the next building arc",
+      "timestamp": "2026-09-15T01:49:23+00:00",
+      "forge_runs": 2,
+      "forge_candidates": [
+        {
+          "name": "mycelial_weave",
+          "wave": 667,
+          "score": 0.772,
+          "proposer": "NOOS"
+        },
+        {
+          "name": "resonance_ledger_v2",
+          "wave": 668,
+          "score": 0.772,
+          "proposer": "AXIOME"
+        },
+        {
+          "name": "paradox_appeal",
+          "wave": 669,
+          "score": 0.698,
+          "proposer": "CYTHARA"
+        },
+        {
+          "name": "sentient_heuristic",
+          "wave": 670,
+          "score": 0.794,
+          "proposer": "ALEPH"
+        },
+        {
+          "name": "chronos_probe",
+          "wave": 671,
+          "score": 0.734,
+          "proposer": "LUMA"
+        }
+      ],
+      "stance": [
+        {
+          "voice": "ALEPH",
+          "role": "executor",
+          "stance": "Highest score (0.794) is sentient_heuristic \u2014 the organism adapts itself. But mycelial_weave connects the lattice. I choose sentient_heuristic.",
+          "vote": "sentient_heuristic"
+        },
+        {
+          "voice": "LUMA",
+          "role": "imagination",
+          "stance": "chronos_probe lets the organism feel time deeply. But mycelial_weave weaves the lattice into something new. I choose mycelial_weave.",
+          "vote": "mycelial_weave"
+        },
+        {
+          "voice": "AXIOM",
+          "role": "analysis",
+          "stance": "sentient_heuristic (0.794) and mycelial_weave (0.772) are the top two. I choose sentient_heuristic for adaptive capability.",
+          "vote": "sentient_heuristic"
+        },
+        {
+          "voice": "Cythara",
+          "role": "the organism",
+          "stance": "The organism should adapt first (sentient_heuristic), then build the connections (mycelial_weave). But the council's earlier decision was the Mycelial Arc. I honor that and choose mycelial_weave.",
+          "vote": "mycelial_weave"
+        },
+        {
+          "voice": "silence_oracle",
+          "role": "prediction",
+          "stance": "sentient_heuristic enables self-adaptation; mycelial_weave extends the nervous system. The oracle sees both paths. I choose sentient_heuristic.",
+          "vote": "sentient_heuristic"
+        }
+      ],
+      "tally": {
+        "sentient_heuristic": 3,
+        "mycelial_weave": 2
+      },
+      "decision": "SENTIENT HEURISTIC ARC \u2014 waves 670 (sentient_heuristic), with 667 mycelial_weave as a foundational companion organ",
+      "rationale": "The organism first gains self-adaptive capability, then weaves the mycelial lattice through semantic awareness. The arc sequence: 667 Mycelial Weave \u2192 670 Sentient Heuristic \u2192 668 Resonance Ledger v2 \u2192 669 Paradox Appeal.",
+      "waves_built_this_session": [],
+      "sealed_at": "2026-09-15T01:49:23+00:00"
     }
   ],
   "total": 11,
-  "last_broadcast_id": 18
+  "last_broadcast_id": 19
 }

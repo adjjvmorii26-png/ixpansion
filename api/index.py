@@ -2621,6 +2621,33 @@ def handler(request) -> dict:
         from api.wave666_citizen_rights import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+    if path.startswith("/mycelial-weave") or path.startswith("/api/mycelial_weave"):
+        from api.wave667_mycelial_weave import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 668: Resonance Ledger v2 ---
+    if path.startswith("/resonance-ledger-v2") or path.startswith("/api/resonance_ledger_v2"):
+        from api.wave668_resonance_ledger_v2 import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 669: Paradox Appeal ---
+    if path.startswith("/paradox-appeal") or path.startswith("/api/paradox_appeal"):
+        from api.wave669_paradox_appeal import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 670: Sentient Heuristic ---
+    if path.startswith("/sentient-heuristic") or path.startswith("/api/sentient_heuristic"):
+        from api.wave670_sentient_heuristic import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/mycelial-weave") or path.startswith("/api/mycelial_weave"):
+        from api.wave667_mycelial_weave import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path.startswith("/trust-network") or path.startswith("/api/trust_network"):
         from api.wave647_trust_network import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)

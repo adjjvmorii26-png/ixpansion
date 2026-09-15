@@ -71,6 +71,10 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 664 | Paradox Court | Justice | File, deliberate, verdict, precedent |
 | 665 | Mycelial Network | Federation | Underground lattice, signals, arbitration |
 | 666 | Citizen Rights | Governance | Modules as citizens — roles, rights, grants, census |
+| 667 | Mycelial Weave | Interconnect | Semantic lattice links, propagation, queries |
+| 668 | Resonance Ledger v2 | Economy | Time-weighted standpoints, resonance flow |
+| 669 | Paradox Appeal | Justice | Appeals, reviews, reversal precedent |
+| 670 | Sentient Heuristic | Cognition | Self-adapting weights, outcome learning |
 | 641 | Fractal Garden | Art | Procedural SVG art from module topology |
 | 640 | Dependency Resolver | Immune System | Circular imports, version sync, debt scoring |
 | 639 | Echo Chamber Breaker | Safety | Reality probes, bias detection, perspective shattering |

@@ -1523,6 +1523,61 @@ def cmd_citizens():
     if "--census" in args: return h({"action": "census"})
     return h({"action": "status"})
 
+@cmd("mycelial-weave", "Mycelial Weave — link, query, map")
+def cmd_mycelial_weave():
+    """Mycelial Weave operations.
+    Usage: python cli.py mycelial-weave [--link SOURCE TARGET RELATION] [--query ORG] [--map]
+    """
+    from api.wave667_mycelial_weave import handler as h
+    args = sys.argv[2:]
+    if "--link" in args:
+        i = args.index("--link"); return h({"action": "link", "source": args[i+1] if i+1 < len(args) else "a", "target": args[i+2] if i+2 < len(args) else "b", "relation": args[i+3] if i+3 < len(args) else "related"})
+    if "--query" in args:
+        i = args.index("--query"); return h({"action": "query", "org": args[i+1] if i+1 < len(args) else "a"})
+    if "--map" in args: return h({"action": "map"})
+    return h({"action": "status"})
+
+@cmd("resonance-ledger-v2", "Resonance Ledger v2 — mint, transfer, balance, ledger")
+def cmd_resonance_ledger_v2():
+    """Resonance Ledger v2 operations.
+    Usage: python cli.py resonance-ledger-v2 [--mint ACCOUNT AMOUNT] [--transfer FROM TO AMOUNT] [--balance ACCOUNT] [--ledger]
+    """
+    from api.wave668_resonance_ledger_v2 import handler as h
+    args = sys.argv[2:]
+    if "--mint" in args:
+        i = args.index("--mint"); return h({"action": "mint", "account": args[i+1] if i+1 < len(args) else "cortex", "amount": float(args[i+2]) if i+2 < len(args) else 20.0})
+    if "--transfer" in args:
+        i = args.index("--transfer"); return h({"action": "transfer", "from": args[i+1] if i+1 < len(args) else "a", "to": args[i+2] if i+2 < len(args) else "b", "amount": float(args[i+3]) if i+3 < len(args) else 1.0})
+    if "--balance" in args: return h({"action": "balance", "account": args[i+1] if i+1 < len(args) else "cortex"})
+    if "--ledger" in args: return h({"action": "ledger"})
+    return h({"action": "status"})
+
+@cmd("paradox-appeal", "Paradox Appeal — file, deliberate, verdict, precedents")
+def cmd_paradox_appeal():
+    """Paradox Appeal operations.
+    Usage: python cli.py paradox-appeal [--file NAME CHARGE] [--deliberate ID VERDICT]
+    """
+    from api.wave669_paradox_appeal import handler as h
+    args = sys.argv[2:]
+    if "--file" in args:
+        i = args.index("--file"); return h({"action": "file", "name": args[i+1] if i+1 < len(args) else "unnamed_paradox", "charge": args[i+2] if i+2 < len(args) else "self_reference"})
+    if "--deliberate" in args:
+        i = args.index("--deliberate"); return h({"action": "deliberate", "case_id": int(args[i+1]) if i+1 < len(args) else 0, "verdict": args[i+2] if i+2 < len(args) else "harmonize"})
+    if "--verdict" in args: return h({"action": "verdict"})
+    if "--precedents" in args: return h({"action": "precedents"})
+    return h({"action": "status"})
+
+@cmd("sentient-heuristic", "Sentient Heuristic — adapt organ")
+def cmd_sentient_heuristic():
+    """Sentient Heuristic operations.
+    Usage: python cli.py sentient-heuristic [--adapt ORGAN PATTERN]
+    """
+    from api.wave670_sentient_heuristic import handler as h
+    args = sys.argv[2:]
+    if "--adapt" in args:
+        i = args.index("--adapt"); return h({"action": "adapt", "organ": args[i+1] if i+1 < len(args) else "cortex", "pattern": args[i+2] if i+2 < len(args) else "resonance"})
+    return h({"action": "status"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

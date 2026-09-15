@@ -83,6 +83,10 @@ ROUTE_ALIASES: dict[str, str] = {
     "court": "wave664_paradox_court",
     "mycelial": "wave665_mycelial_network",
     "citizen_rights": "wave666_citizen_rights",
+    "mycelial_weave": "wave667_mycelial_weave",
+    "resonance_ledger_v2": "wave668_resonance_ledger_v2",
+    "paradox_appeal": "wave669_paradox_appeal",
+    "sentient_heuristic": "wave670_sentient_heuristic",
     "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
     "adaptive_regulation": "wave636_adaptive_regulation",
 }
