@@ -18,11 +18,28 @@
       "dissolved_at": "2026-09-15T09:55:35.030753+00:00",
       "reconstituted": true,
       "reconstituted_at": "2026-09-15T09:55:35.037298+00:00"
+    },
+    {
+      "session_id": "1d591f6270b8",
+      "content": "into the void",
+      "reason": "test",
+      "depth": 3,
+      "dissolved_at": "2026-09-15T16:21:36.248090+00:00",
+      "reconstituted": false
+    },
+    {
+      "session_id": "2172e9f3a93d",
+      "content": "void",
+      "reason": "voluntary",
+      "depth": 4,
+      "dissolved_at": "2026-09-15T16:21:36.285161+00:00",
+      "reconstituted": true,
+      "reconstituted_at": "2026-09-15T16:21:36.291079+00:00"
     }
   ],
-  "dissolutions": 2,
-  "reconstructions": 1,
-  "void_depth": 1,
-  "silence_score": 0.01,
+  "dissolutions": 4,
+  "reconstructions": 2,
+  "void_depth": 3,
+  "silence_score": 0.03,
   "max_void_depth": 100
 }
