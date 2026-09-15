@@ -1,4 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Paradox Appeal — IXPANSION</title>
-<style>:root{--bg:#0a0a14;--fg:#e0e0e8;--muted:#6b6b80;--cyan:#41b3a3;--card:#14142a;--border:#2a2a44;--amber:#ffcc66;--green:#41d3a3}*{margin:0;padding:0;box-sizing:border-box}body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--fg);padding:20px}h1{text-align:center;margin-bottom:8px;font-size:1.8em}{sub}{text-align:center;color:var(--muted);margin-bottom:24px}`.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:1200px;margin:0 auto}.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}.card h2{color:var(--amber);font-size:1.1em;margin-bottom:12px}.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222}.metric:last-child{border-bottom:none}.label{color:var(--muted)}.value{color:var(--cyan);font-weight:bold}.btn{background:var(--green);border:none;color:#0a0a14;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px}
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paradox Appeal — IXPANSION</title>
+<style>
+:root{--bg:#120a14;--fg:#e4d8e8;--muted:#7a607f;--violet:#c084fc;--card:#1e1230;--border:#3a2a4a;--amber:#ffcc66;--green:#7ee0a0;--rose:#ff88aa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+h1{text-align:center;margin-bottom:6px;font-size:1.9em;color:var(--violet)}
+.sub{text-align:center;color:var(--muted);margin-bottom:24px;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1250px;margin:0 auto 20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--amber);font-size:1.05em;margin-bottom:12px;border-bottom:1px solid #3a2a4a;padding-bottom:6px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #2a1a3a;font-size:.9em}
+.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}.value{color:var(--violet);font-weight:bold}
+.btn{background:#33205a;border:1px solid var(--violet);color:var(--violet);padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px;transition:.2s}
+.btn:hover{background:var(--violet);color:#120a14}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
+input{background:#0e0818;border:1px solid #4a3a6a;color:var(--fg);padding:6px 8px;border-radius:6px;font-size:.85em;width:130px}
+.case{background:#160c24;border:1px solid #3a2a5a;border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:.82em}
+.case .nm{color:var(--amber);font-weight:bold}
+.case .vd{color:var(--green)}
+.case .pending{color:var(--rose)}
+.ruling{background:#1a1a2a;border-left:3px solid var(--green);padding:8px 10px;border-radius:6px;margin-bottom:6px;font-size:.82em}
+.foot{text-align:center;color:var(--muted);font-size:.75em;margin-top:16px}
+</style>
+</head>
+<body>
+<h1>⚖️ Paradox Appeal</h1>
+<p class="sub">JUDICIAL REVIEW — EVERY VERDICT MAY BE APPEALED</p>
+<div class="grid">
+  <div class="card"><h2>Live Status</h2><div id="status"></div></div>
+  <div class="card"><h2>File Adjudicated Case</h2>
+    <div class="row"><input id="nm" placeholder="paradox name" value="recursive_dream"><input id="vd" placeholder="verdict" value="resolve"></div>
+    <button class="btn" onclick="fileCase()">📜 File</button><div id="fileResult" style="margin-top:8px;font-size:.85em;color:var(--amber)"></div>
+  </div>
+  <div class="card"><h2>Appeal a Case</h2>
+    <div class="row"><input id="cid" placeholder="case id" value="0"><select id="gr" style="background:#0e0818;border:1px solid #4a3a6a;color:var(--fg);padding:6px;border-radius:6px"><option value="new_evidence">new_evidence</option><option value="procedural_error">procedural_error</option><option value="conflict_of_laws">conflict_of_laws</option></select></div>
+    <button class="btn" onclick="appeal()">🕯 Appeal</button><div id="appealResult" style="margin-top:8px;font-size:.85em;color:var(--violet)"></div>
+  </div>
+  <div class="card"><h2>Review Appeal</h2>
+    <div class="row"><input id="aid" placeholder="appeal id" value="0"><select id="rl" style="background:#0e0818;border:1px solid #4a3a6a;color:var(--fg);padding:6px;border-radius:6px"><option value="sustain">sustain</option><option value="reverse">reverse</option></select></div>
+    <button class="btn" onclick="review()">⚖️ Rule</button><div id="reviewResult" style="margin-top:8px;font-size:.85em;color:var(--green)"></div>
+  </div>
+  <div class="card"><h2>Docket + Cases</h2><div id="docket"></div></div>
+  <div class="card"><h2>Rulings</h2><div id="rulings"></div></div>
+</div>
+<div style="text-align:center"><button class="btn" onclick="boot()">🔄 Refresh All</button></div>
+<div class="foot">wave 669 · /api/paradox-appeal</div>
+<script>
+const API='';
+async function fj(p){const r=await fetch(API+p);return r.json();}
+async function boot(){
+  const s=await fj('/api/paradox-appeal?action=status');
+  document.getElementById('status').innerHTML=
+    `<div class="metric"><span class="label">Tick</span><span class="value">${s.tick}</span></div>
+     <div class="metric"><span class="label">Cases</span><span class="value">${s.cases}</span></div>
+     <div class="metric"><span class="label">Appeals</span><span class="value">${s.appeals}</span></div>
+     <div class="metric"><span class="label">Rulings</span><span class="value">${s.rulings}</span></div>`;
+  const d=await fj('/api/paradox-appeal?action=docket');
+  document.getElementById('docket').innerHTML=
+    `<div class="metric"><span class="label">Pending</span><span class="value">${d.pending}</span></div>`+
+    (d.appeals&&d.appeals.length?d.appeals.slice(-6).reverse().map((a,i)=>`<div class="case"><span class="nm">#${i} ${a.case_name}</span><br>grounds: ${a.grounds} · <span class="${a.status==='pending'?'pending':''}">${a.status}</span></div>`).join(''):'<div style="color:var(--muted);font-size:.85em;margin-top:8px">no appeals filed</div>');
+  const rl=await fj('/api/paradox-appeal?action=rulings');
+  document.getElementById('rulings').innerHTML=rl.rulings&&rl.rulings.length?
+    rl.rulings.slice(-6).reverse().map(r=>`<div class="ruling">case #${r.case_id} · ${r.grounds} → <b>${r.ruling}</b></div>`).join(''):
+    '<div style="color:var(--muted);font-size:.85em;margin-top:8px">no rulings yet</div>';
+}
+async function fileCase(){
+  const r=await fj(`/api/paradox-appeal?action=file&name=${encodeURIComponent(document.getElementById('nm').value)}&verdict=${encodeURIComponent(document.getElementById('vd').value)}`);
+  document.getElementById('fileResult').textContent=r.ok?`📜 ${r.case.name} — ${r.case.verdict}`:(r.error||'failed');boot();
+}
+async function appeal(){
+  const r=await fj(`/api/paradox-appeal?action=appeal&case_id=${encodeURIComponent(document.getElementById('cid').value)}&grounds=${encodeURIComponent(document.getElementById('gr').value)}`);
+  document.getElementById('appealResult').textContent=r.ok?`🕯 appeal filed on ${r.appeal.case_name}`:(r.error||'failed');boot();
+}
+async function review(){
+  const r=await fj(`/api/paradox-appeal?action=review&appeal_id=${encodeURIComponent(document.getElementById('aid').value)}&ruling=${encodeURIComponent(document.getElementById('rl').value)}`);
+  document.getElementById('reviewResult').textContent=r.ok?`⚖️ ${r.appeal.ruling.toUpperCase()} — ${r.appeal.case_name}`:(r.error||'failed');boot();
+}
+boot();setInterval(boot,8000);
+</script>
+</body>
+</html>

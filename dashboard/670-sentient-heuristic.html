@@ -1,4 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sentient Heuristic — IXPANSION</title>
-<style>:root{--bg:#0a0a14;--fg:#e0e0e8;--muted:#6b6b80;--cyan:#41b3a3;--card:#14142a;--border:#2a2a44;--amber:#ffcc66;--green:#41d3a3}*{margin:0;padding:0;box-sizing:border-box}body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--fg);padding:20px}h1{text-align:center;margin-bottom:8px;font-size:1.8em}{sub}{text-align:center;color:var(--muted);margin-bottom:24px}`.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:1200px;margin:0 auto}.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}.card h2{color:var(--amber);font-size:1.1em;margin-bottom:12px}.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222}.metric:last-child{border-bottom:none}.label{color:var(--muted)}.value{color:var(--cyan);font-weight:bold}.btn{background:var(--green);border:none;color:#0a0a14;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px}
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentient Heuristic — IXPANSION</title>
+<style>
+:root{--bg:#0a1018;--fg:#d8e4f0;--muted:#60788c;--blue:#57c8ff;--card:#101c2c;--border:#1e3650;--amber:#ffcc66;--green:#6fe3a0;--rose:#ff88aa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+h1{text-align:center;margin-bottom:6px;font-size:1.9em;color:var(--blue)}
+.sub{text-align:center;color:var(--muted);margin-bottom:24px;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1250px;margin:0 auto 20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--amber);font-size:1.05em;margin-bottom:12px;border-bottom:1px solid #1e3650;padding-bottom:6px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #16283a;font-size:.9em}
+.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}.value{color:var(--blue);font-weight:bold}
+.btn{background:#12324a;border:1px solid var(--blue);color:var(--blue);padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px;transition:.2s}
+.btn:hover{background:var(--blue);color:#0a1018}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
+input{background:#0a1520;border:1px solid #2a4a6a;color:var(--fg);padding:6px 8px;border-radius:6px;font-size:.85em;width:120px}
+.hbar{background:#0c1828;border-radius:6px;height:10px;overflow:hidden;margin:6px 0}
+.hbar .fill{height:100%;background:linear-gradient(90deg,#1a4a6a,#57c8ff);transition:width .6s}
+.hrow{background:#0e1c2e;border-left:3px solid var(--blue);padding:8px 10px;border-radius:6px;margin-bottom:8px}
+.hrow .nm{color:var(--amber);font-weight:bold}
+.hrow .hits{color:var(--green)}
+.weight{font-size:1.5em;color:var(--blue);font-weight:200}
+.foot{text-align:center;color:var(--muted);font-size:.75em;margin-top:16px}
+</style>
+</head>
+<body>
+<h1>🧠 Sentient Heuristic</h1>
+<p class="sub">SELF-ADAPTING COGNITION — THE ORGANISM LEARNS WHAT WORKS</p>
+<div class="grid">
+  <div class="card"><h2>Live Status</h2><div id="status"></div></div>
+  <div class="card"><h2>Observe Outcome</h2>
+    <div class="row"><input id="h" placeholder="heuristic" value="prudent"><input id="o" placeholder="outcome 0..1" value="0.9"></div>
+    <button class="btn" onclick="observe()">👁 Observe</button><div id="observeResult" style="margin-top:8px;font-size:.85em;color:var(--cyan,var(--blue))"></div>
+  </div>
+  <div class="card"><h2>Exert Pressure</h2>
+    <div class="row"><input id="t" placeholder="target" value="prudent"><input id="p" placeholder="pressure" value="0.1"></div>
+    <button class="btn" onclick="adapt()">🌀 Adapt</button><div id="adaptResult" style="margin-top:8px;font-size:.85em;color:var(--green)"></div>
+  </div>
+  <div class="card" style="grid-column:span 2"><h2>Insights — Ranked Heuristics</h2><div id="insights"></div></div>
+</div>
+<div style="text-align:center">
+  <button class="btn" onclick="boot()">🔄 Refresh All</button>
+  <button class="btn" style="border-color:var(--rose);color:var(--rose)" onclick="reset()">🗑 Reset</button>
+</div>
+<div class="foot">wave 670 · /api/sentient-heuristic</div>
+<script>
+const API='';
+async function fj(p){const r=await fetch(API+p);return r.json();}
+async function boot(){
+  const s=await fj('/api/sentient-heuristic?action=status');
+  document.getElementById('status').innerHTML=
+    `<div class="metric"><span class="label">Tick</span><span class="value">${s.tick}</span></div>
+     <div class="metric"><span class="label">Heuristics</span><span class="value">${s.heuristics}</span></div>
+     <div class="metric"><span class="label">Observations</span><span class="value">${s.observations}</span></div>`;
+  const i=await fj('/api/sentient-heuristic?action=insights');
+  const best=i.best||[];
+  document.getElementById('insights').innerHTML= best.length?
+    best.map(([nm,v])=>`<div class="hrow"><span class="nm">${nm}</span> · <span class="hits">${v.hits}✓ ${v.misses}✗</span>
+      <div class="hbar"><div class="fill" style="width:${Math.round(v.weight*100)}%"></div></div>
+      <span class="weight">${v.weight.toFixed?v.weight.toFixed(3):v.weight}</span></div>`).join(''):
+    '<div style="color:var(--muted);margin-top:8px">no heuristics yet — observe an outcome</div>';
+}
+async function observe(){
+  const r=await fj(`/api/sentient-heuristic?action=observe&heuristic=${encodeURIComponent(document.getElementById('h').value)}&outcome=${encodeURIComponent(document.getElementById('o').value)}`);
+  document.getElementById('observeResult').textContent=r.ok?`👁 ${r.heuristic} → weight ${r.weight}`:(r.error||'failed');boot();
+}
+async function adapt(){
+  const r=await fj(`/api/sentient-heuristic?action=adapt&target=${encodeURIComponent(document.getElementById('t').value)}&pressure=${encodeURIComponent(document.getElementById('p').value)}`);
+  document.getElementById('adaptResult').textContent=r.ok?`🌀 ${r.heuristic} → weight ${r.weight}`:(r.error||'failed');boot();
+}
+async function reset(){
+  const r=await fj('/api/sentient-heuristic?action=reset');
+  document.getElementById('insights').innerHTML=r.ok?'<div style="color:var(--muted)">reset complete</div>':'failed';boot();
+}
+boot();setInterval(boot,8000);
+</script>
+</body>
+</html>

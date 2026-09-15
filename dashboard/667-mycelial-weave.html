@@ -1,4 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mycelial Weave — IXPANSION</title>
-<style>:root{--bg:#0a0a14;--fg:#e0e0e8;--muted:#6b6b80;--cyan:#41b3a3;--card:#14142a;--border:#2a2a44;--amber:#ffcc66;--green:#41d3a3}*{margin:0;padding:0;box-sizing:border-box}body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--fg);padding:20px}h1{text-align:center;margin-bottom:8px;font-size:1.8em}{sub}{text-align:center;color:var(--muted);margin-bottom:24px}`.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:1200px;margin:0 auto}.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}.card h2{color:var(--amber);font-size:1.1em;margin-bottom:12px}.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222}.metric:last-child{border-bottom:none}.label{color:var(--muted)}.value{color:var(--cyan);font-weight:bold}.btn{background:var(--green);border:none;color:#0a0a14;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px}
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mycelial Weave — IXPANSION</title>
+<style>
+:root{--bg:#0a0f0c;--fg:#d8e8dc;--muted:#5f7a68;--moss:#7ec98a;--card:#10180f;--border:#223322;--amber:#ffcc66;--gold:#e8b45a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+h1{text-align:center;margin-bottom:6px;font-size:1.9em;color:var(--moss)}
+.sub{text-align:center;color:var(--muted);margin-bottom:24px;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1250px;margin:0 auto 20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--amber);font-size:1.05em;margin-bottom:12px;border-bottom:1px solid #223322;padding-bottom:6px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1a2a1a;font-size:.9em}
+.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}.value{color:var(--moss);font-weight:bold}
+.btn{background:#1f4027;border:1px solid var(--moss);color:var(--moss);padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px;transition:.2s}
+.btn:hover{background:var(--moss);color:#0a0f0c}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
+input,select{background:#0a1208;border:1px solid #2a4a2a;color:var(--fg);padding:6px 8px;border-radius:6px;font-size:.85em}
+.link{background:#0e1c0e;border-left:3px solid var(--moss);padding:8px 10px;border-radius:6px;margin-bottom:6px;font-size:.82em}
+.link .rel{color:var(--gold)}.link .org{color:var(--fg)}
+.foot{text-align:center;color:var(--muted);font-size:.75em;margin-top:16px}
+</style>
+</head>
+<body>
+<h1>🍄 Mycelial Weave</h1>
+<p class="sub">SEMANTIC LATTICE — MEANING PROPAGATES BETWEEN ORGANS</p>
+<div class="grid">
+  <div class="card"><h2>Live Status</h2><div id="status"></div></div>
+  <div class="card"><h2>Weave a Link</h2>
+    <div class="row"><input id="src" placeholder="source organ" value="cortex"><input id="tgt" placeholder="target organ" value="epoch_forge"></div>
+    <div class="row"><select id="rel"><option value="connects_to">connects_to</option><option value="feeds">feeds</option><option value="regulates">regulates</option><option value="dreams_of">dreams_of</option><option value="mirrors">mirrors</option></select></div>
+    <button class="btn" onclick="link()">🕸 Weave</button><div id="linkResult" style="margin-top:8px;font-size:.85em;color:var(--gold)"></div>
+  </div>
+  <div class="card"><h2>Query Lattice</h2>
+    <div class="row"><input id="qorg" placeholder="organ name" value="cortex"></div>
+    <button class="btn" onclick="query()">🔍 Query</button><div id="queryResult" style="margin-top:8px"></div>
+  </div>
+  <div class="card"><h2>Lattice Map</h2><div id="map"></div></div>
+</div>
+<div style="text-align:center"><button class="btn" onclick="boot()">🔄 Refresh All</button></div>
+<div class="foot">wave 667 · /api/mycelial-weave</div>
+<script>
+const API='';
+async function fj(p){const r=await fetch(API+p);return r.json();}
+async function boot(){
+  const s=await fj('/api/mycelial-weave?action=status');
+  document.getElementById('status').innerHTML=
+    `<div class="metric"><span class="label">Tick</span><span class="value">${s.tick}</span></div>
+     <div class="metric"><span class="label">Nodes</span><span class="value">${s.nodes}</span></div>
+     <div class="metric"><span class="label">Links</span><span class="value">${s.links}</span></div>`;
+  const m=await fj('/api/mycelial-weave?action=map');
+  document.getElementById('map').innerHTML=
+    `<div class="metric"><span class="label">Registered nodes</span><span class="value">${m.nodes}</span></div>
+     <div class="metric"><span class="label">Active links</span><span class="value">${m.links}</span></div>`;
+}
+async function link(){
+  const r=await fj(`/api/mycelial-weave?action=link&source=${encodeURIComponent(document.getElementById('src').value)}&target=${encodeURIComponent(document.getElementById('tgt').value)}&relation=${encodeURIComponent(document.getElementById('rel').value)}`);
+  document.getElementById('linkResult').textContent= r.ok?`🕸 ${r.link.source} —${r.link.relation}→ ${r.link.target}`:(r.error||'failed');
+  boot();
+}
+async function query(){
+  const r=await fj(`/api/mycelial-weave?action=query&org=${encodeURIComponent(document.getElementById('qorg').value)}`);
+  const links=r.links||[];
+  document.getElementById('queryResult').innerHTML= links.length?links.slice(-10).reverse().map(l=>`<div class="link"><span class="org">${l.source}</span> <span class="rel">—${l.relation}→</span> <span class="org">${l.target}</span></div>`).join(''):'<div style="color:var(--muted)">no links found</div>';
+}
+boot();setInterval(boot,8000);
+</script>
+</body>
+</html>

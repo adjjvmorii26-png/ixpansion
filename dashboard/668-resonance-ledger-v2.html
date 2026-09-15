@@ -1,4 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Resonance Ledger v2 — IXPANSION</title>
-<style>:root{--bg:#0a0a14;--fg:#e0e0e8;--muted:#6b6b80;--cyan:#41b3a3;--card:#14142a;--border:#2a2a44;--amber:#ffcc66;--green:#41d3a3}*{margin:0;padding:0;box-sizing:border-box}body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--fg);padding:20px}h1{text-align:center;margin-bottom:8px;font-size:1.8em}{sub}{text-align:center;color:var(--muted);margin-bottom:24px}`.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:1200px;margin:0 auto}.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}.card h2{color:var(--amber);font-size:1.1em;margin-bottom:12px}.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222}.metric:last-child{border-bottom:none}.label{color:var(--muted)}.value{color:var(--cyan);font-weight:bold}.btn{background:var(--green);border:none;color:#0a0a14;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px}
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resonance Ledger v2 — IXPANSION</title>
+<style>
+:root{--bg:#0a0a14;--fg:#e0e0e8;--muted:#6b6b80;--cyan:#41b3a3;--card:#14142a;--border:#2a2a44;--amber:#ffcc66;--green:#41d3a3;--rose:#ff88aa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+h1{text-align:center;margin-bottom:6px;font-size:1.9em}
+.sub{text-align:center;color:var(--muted);margin-bottom:24px;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1250px;margin:0 auto 20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--amber);font-size:1.05em;margin-bottom:12px;border-bottom:1px solid #2a2a44;padding-bottom:6px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #202035;font-size:.9em}
+.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}.value{color:var(--cyan);font-weight:bold}
+.btn{background:#123a38;border:1px solid var(--cyan);color:var(--cyan);padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px;transition:.2s}
+.btn:hover{background:var(--cyan);color:#0a0a14}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
+input{background:#0c0c1c;border:1px solid #3a3a5a;color:var(--fg);padding:6px 8px;border-radius:6px;font-size:.85em;width:110px}
+.tx{background:#10202c;border-left:3px solid var(--amber);padding:8px 10px;border-radius:6px;margin-bottom:6px;font-size:.82em}
+.tx .amt{color:var(--green);font-weight:bold}.tx .why{color:var(--muted)}
+.standpoint{background:linear-gradient(90deg,#103030,#153a3a);border:1px solid var(--cyan);border-radius:10px;padding:14px;margin-top:10px}
+.standpoint .big{font-size:1.8em;color:var(--cyan);font-weight:200}
+.foot{text-align:center;color:var(--muted);font-size:.75em;margin-top:16px}
+</style>
+</head>
+<body>
+<h1>📒 Resonance Ledger v2</h1>
+<p class="sub">TIME-WEIGHTED ECONOMY — RECENT RESONANCE WEIGHS MORE</p>
+<div class="grid">
+  <div class="card"><h2>Live Status</h2><div id="status"></div></div>
+  <div class="card"><h2>Standpoint</h2>
+    <div class="row"><input id="sp" value="cortex"><button class="btn" onclick="standpoint()">🧭 Read</button></div>
+    <div id="standpointBox"><div style="color:var(--muted);font-size:.85em">Pick an organ to read its time-weighted standpoint.</div></div>
+  </div>
+  <div class="card"><h2>Mint</h2>
+    <div class="row"><input id="macc" placeholder="account" value="cortex"><input id="mamt" placeholder="amount" value="10"></div>
+    <button class="btn" onclick="mint()">✨ Mint</button><div id="mintResult" style="margin-top:8px;font-size:.85em;color:var(--cyan)"></div>
+  </div>
+  <div class="card"><h2>Transfer</h2>
+    <div class="row"><input id="tfrom" placeholder="from" value="cortex"><input id="tto" placeholder="to" value="epoch_forge"><input id="tamt" placeholder="amount" value="4"></div>
+    <button class="btn" onclick="transfer()">⇄ Transfer</button><div id="txResult" style="margin-top:8px"></div>
+  </div>
+  <div class="card" style="grid-column:span 2"><h2>Ledger</h2><div id="ledger"></div></div>
+</div>
+<div style="text-align:center"><button class="btn" onclick="boot()">🔄 Refresh All</button></div>
+<div class="foot">wave 668 · /api/resonance-ledger-v2</div>
+<script>
+const API='';
+async function fj(p){const r=await fetch(API+p);return r.json();}
+async function boot(){
+  const s=await fj('/api/resonance-ledger-v2?action=status');
+  document.getElementById('status').innerHTML=
+    `<div class="metric"><span class="label">Tick</span><span class="value">${s.tick}</span></div>
+     <div class="metric"><span class="label">Accounts</span><span class="value">${s.accounts}</span></div>
+     <div class="metric"><span class="label">Transfers</span><span class="value">${s.transfers}</span></div>`;
+  const l=await fj('/api/resonance-ledger-v2?action=ledger');
+  const accs=l.accounts?Object.entries(l.accounts):[];
+  document.getElementById('ledger').innerHTML=
+    (accs.length?accs.map(([k,v])=>`<div class="metric"><span class="label">${k}</span><span class="value">${v}</span></div>`).join(''):'<div style="color:var(--muted)">no accounts</div>')+
+    (l.transfers&&l.transfers.length?l.transfers.slice(-6).reverse().map(t=>`<div class="tx"><span class="amt">${t.type==='mint'?'+':''}${t.amount}</span> ${t.type==='mint'?('minted → '+t.to):(t.from+' → '+t.to)} <span class="why">· ${t.reason||''}</span></div>`).join(''):'');
+}
+async function mint(){
+  const r=await fj(`/api/resonance-ledger-v2?action=mint&account=${encodeURIComponent(document.getElementById('macc').value)}&amount=${encodeURIComponent(document.getElementById('mamt').value)}`);
+  document.getElementById('mintResult').textContent=r.ok?`✨ ${r.account}: ${r.balance}`:(r.error||'failed');boot();
+}
+async function transfer(){
+  const r=await fj(`/api/resonance-ledger-v2?action=transfer&from=${encodeURIComponent(document.getElementById('tfrom').value)}&to=${encodeURIComponent(document.getElementById('tto').value)}&amount=${encodeURIComponent(document.getElementById('tamt').value)}`);
+  document.getElementById('txResult').innerHTML=r.ok?
+    `<div class="tx"><span class="amt">${r.amount}</span> ${r.from} → ${r.to}</div>`:
+    `<div style="color:var(--rose)">${r.error||'failed'}</div>`;boot();
+}
+async function standpoint(){
+  const r=await fj(`/api/resonance-ledger-v2?action=standpoint&account=${encodeURIComponent(document.getElementById('sp').value)}`);
+  document.getElementById('standpointBox').innerHTML=
+    `<div class="standpoint"><div class="big">${r.standpoint}</div>
+     <div class="metric"><span class="label">events</span><span class="value">${r.events}</span></div>
+     <div class="metric"><span class="label">confidence</span><span class="value">${r.confidence}</span></div></div>`;
+}
+boot();setInterval(boot,8000);
+</script>
+</body>
+</html>
