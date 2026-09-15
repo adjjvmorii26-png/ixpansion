@@ -1901,6 +1901,19 @@ def main():
             q["session_id"] = args[1]
         import json as _j
         print(_j.dumps(h(q), indent=2))
+# --- Wave 699: Entropy Heatmap ---
+    if cmd == "wave699" or cmd == "entropy-heatmap":
+        from api.wave699_entropy_heatmap import handler as h
+        q = {"action": args[0] if args else "status"}
+        if q["action"] == "update" and len(args) >= 3:
+            q["modules"] = args[1].split(",")
+            q["grid_size"] = int(args[2])
+        elif q["action"] == "hot_zones":
+            pass
+        elif q["action"] == "cold_zones":
+            pass
+        import json as _j
+        print(_j.dumps(h(q), indent=2))
 
 
 if __name__ == "__main__":

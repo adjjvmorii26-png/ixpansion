@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard Forge</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a12;color:#e0e0e0;font-family:'Courier New',monospace;padding:20px}
+h1{text-align:center;color:#c38d9e;margin-bottom:4px;font-size:1.5em}
+.sub{text-align:center;color:#666;margin-bottom:20px;font-size:.85em}
+.container{max-width:1000px;margin:0 auto}
+.card{background:#151520;border:1px solid #2a2a3a;border-radius:8px;padding:16px;margin-bottom:16px}
+.card h2{color:#41b3a3;font-size:1em;margin-bottom:10px}
+.module-list{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0}
+.module-tag{background:#1a1a2a;border:1px solid #333;border-radius:3px;padding:3px 8px;font-size:.7em;color:#888;cursor:pointer;transition:all .2s}
+.module-tag:hover{border-color:#c38d9e;color:#e8a87c}
+.module-tag.selected{border-color:#41b3a3;color:#41b3a3;background:#41b3a322}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.btn{background:#2a2a3a;color:#e8a87c;border:1px solid #444;padding:8px 16px;border-radius:4px;cursor:pointer;font-family:inherit;font-size:.85em}
+.btn:hover{background:#3a3a4a}
+.btn.generate{background:#41b3a3;color:#0a0a12;border-color:#41b3a3;font-weight:bold}
+.btn.generate:hover{background:#3a9a8a}
+textarea{width:100%;background:#0a0a12;color:#e8a87c;border:1px solid #333;padding:12px;font-family:'Courier New',monospace;font-size:.8em;border-radius:4px;resize:vertical;min-height:200px}
+.output{background:#0a0a12;border:1px solid #2a2a3a;border-radius:4px;padding:12px;margin-top:8px;font-size:.8em}
+#preview{background:#0d0d18;border:1px solid #2a2a3a;border-radius:6px;padding:16px;margin-top:12px;min-height:200px}
+.stat{display:flex;justify-content:space-between;padding:4px 0;font-size:.85em}
+.stat .label{color:#888}.stat .val{color:#e8a87c;font-weight:bold}
+#log{max-width:1000px;margin:16px auto;background:#151520;border:1px solid #2a2a3a;border-radius:8px;padding:12px;max-height:120px;overflow-y:auto;font-size:.8em;color:#666}
+</style>
+</head>
+<body>
+<h1>🔨 Dashboard Forge</h1>
+<div class="sub">Drag modules to build custom dashboards — generate your own HTML</div>
+
+<div class="container">
+  <div class="card">
+    <h2>Available Modules</h2>
+    <div class="module-list" id="module-list"></div>
+  </div>
+  <div class="card">
+    <h2>Your Dashboard</h2>
+    <div class="stat"><span class="label">Selected</span><span class="val" id="s-selected">0</span></div>
+    <div class="stat"><span class="label">Generated</span><span class="val" id="s-generated">No</span></div>
+    <div class="controls">
+      <button class="btn" onclick="toggleAll()">Toggle All</button>
+      <button class="btn generate" onclick="generate()">⚡ Generate Dashboard</button>
+      <button class="btn" onclick="copyCode()">📋 Copy</button>
+      <button class="btn" onclick="preview()">👁 Preview</button>
+      <button class="btn" onclick="clearAll()">Clear</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Generated Code</h2>
+    <textarea id="code" placeholder="Click Generate to create dashboard code..." readonly></textarea>
+  </div>
+  <div class="card">
+    <h2>Preview</h2>
+    <div id="preview">Select modules and generate to see preview</div>
+  </div>
+</div>
+
+<div id="log"></div>
+
+<script>
+const MODULES = ["adaptation-learner","agent-rental","aesthetic-evaluator","affiliate-engine","agent-communication","ai-gateway","aleph-bot","analytics-engine","anomaly-detector","api-bridge","app-orchestrator","artifact-generator","autonomous-agent","axiom-forge","bloom-engine","brain-core","buffer-manager","calibration-engine","causal-weaver","certainty-quantum","chronicle-writer","circuit-breaker","cognition-engine","coherence-validator","colony-brain","communication-hub","compiler-core","context-engine","convergence-agent","cosmic-anchor","council-oracle","cross-realm-bridge","cryo-storage","data-catalog","data-fabric","data-pipeline","decision-engine","deep-memory","defragmenter","delta-compiler","density-estimator","derivative-engine","desire-engine","detector-core","diagnostic-engine","diffusion-engine","dimension-key","dimension-registry","dream-compiler","dream-engine","drift-corrector","durability-engine","dynamic-router","echo-validator","economy-unifier","ecosystem-governor","edgeline-sensor","efficiency-engine","eigenvector","emergence-detector","emotion-cipher","empathy-engine","entity-recognizer","entropy-engine","entropy-guardian","entropy-oracle","entropy-weaver","epoch-forge","ephemeral-buffer","equilibrium-engine","essence-extractor","essence-weaver","event-aggregator","evolution-bridge","evolution-core","executive-decision","expansion-protocol","expectation-encoder","expert-system","explicit-faith","expressions-engine","extension-manager","external-memory","extraordinary-witness","facial-recognition","faith-evaluator","family-tree","field-gradient","field-resonance","filter-engine","finalizer","fingerprint-engine","fractal-compiler","fractal-generator","fractal-garden","gateway-decoder","gateway-engine","gene-expression","gene-registry","generalist-engine","generative-optimizer","genesis-engine","geomantic-engine","governance-core","gradient-engine","grammar-compiler","grammar-evolution","graphene-engine","graph-core","graph-engine","graph-topology","gravity-well","growth-engine","habitat-engine","harmonic-resonance","heartbeat-engine","hex-core","hex-language","hex-runtime","homestead","hull-guardian","hyper-engine","hyper-symbiosis","hyperbolic-paradox","idea-canvas","idea-generator","identity-anchor","identity-engine","identity-forge","idempotency-guard","illumination-engine","image-compiler","image-resonator","imagine-engine","impulse-engine","incarnation-engine","influence-agent","infrastructure-core","innovation-hub","insight-capturer","insight-engine","intelligence-core","intention-engine","interference-engine","interpreter-engine","introspection-engine","intuition-engine","invariant-guard","inversion-engine","invention-engine","inventory-engine","invocation-engine","iridescence-engine","journey-engine","jupyter-connector","justification-engine","keystone-engine","knowledge-aggregate","knowledge-builder","knowledge-compiler","knowledge-core","knowledge-database","knowledge-extractor","knowledge-index","knowledge-parser","knowledge-retrieval","knowledge-store","knowledge-weaver","labyrinth-engine","language-evolution","language-forge","language-generator","linguistic-bloom","linguistic-engine","linguistic-evolution","linguistic-pattern","linguistic-resonance","lineage-crystal","lineage-mirror"];
+
+let selected = new Set();
+
+function initModuleList() {
+  const el = document.getElementById('module-list');
+  MODULES.forEach(m => {
+    const tag = document.createElement('div');
+    tag.className = 'module-tag';
+    tag.textContent = m;
+    tag.dataset.module = m;
+    tag.addEventListener('click', () => {
+      if (selected.has(m)) { selected.delete(m); tag.classList.remove('selected'); }
+      else { selected.add(m); tag.classList.add('selected'); }
+      document.getElementById('s-selected').textContent = selected.size;
+    });
+    el.appendChild(tag);
+  });
+}
+
+function toggleAll() {
+  if (selected.size === MODULES.length) {
+    selected.clear();
+  } else {
+    MODULES.forEach(m => selected.add(m));
+  }
+  document.querySelectorAll('.module-tag').forEach(t => {
+    t.classList.toggle('selected', selected.has(t.dataset.module));
+  });
+  document.getElementById('s-selected').textContent = selected.size;
+}
+
+function clearAll() {
+  selected.clear();
+  document.querySelectorAll('.module-tag').forEach(t => t.classList.remove('selected'));
+  document.getElementById('s-selected').textContent = 0;
+  document.getElementById('code').value = '';
+  document.getElementById('s-generated').textContent = 'No';
+  document.getElementById('preview').textContent = 'Cleared';
+}
+
+function generate() {
+  if (selected.size === 0) { log('Select at least one module'); return; }
+  const mods = Array.from(selected);
+  const cards = mods.map(m => `
+    <div style="background:#151520;border:1px solid #2a2a3a;border-radius:6px;padding:10px;margin:4px;text-align:center">
+      <div style="color:#e8a87c;font-weight:bold;font-size:.8em">${m}</div>
+      <div style="color:#666;font-size:.7em">Module</div>
+      <button onclick="alert('Querying ${m}...')" style="margin-top:4px;background:#2a2a3a;color:#e8a87c;border:1px solid #444;padding:2px 8px;border-radius:3px;cursor:pointer;font-size:.7em">Query</button>
+    </div>
+  `).join('');
+  
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Custom Dashboard</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a12;color:#e0e0e0;font-family:'Courier New',monospace;padding:20px}h1{text-align:center;color:#c38d9e}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;padding:16px}</style>
+</head><body><h1>Custom Dashboard</h1><div class="grid">${cards}</div></body></html>`;
+  
+  document.getElementById('code').value = html;
+  document.getElementById('s-generated').textContent = 'Yes';
+  log(`Generated dashboard with ${mods.length} modules`);
+}
+
+function copyCode() {
+  const code = document.getElementById('code').value;
+  if (!code) { log('No code to copy'); return; }
+  navigator.clipboard.writeText(code).then(() => log('Copied to clipboard')).catch(() => log('Copy failed'));
+}
+
+function preview() {
+  const code = document.getElementById('code').value;
+  if (!code) { log('Generate first'); return; }
+  const preview = document.getElementById('preview');
+  preview.innerHTML = code.replace(/<!DOCTYPE html>/, '').replace('<html>', '').replace('</head><body>', '').replace('</body></html>', '');
+  log('Preview updated');
+}
+
+function log(msg) {
+  const el = document.getElementById('log');
+  el.innerHTML += `<div>[${new Date().toISOString().slice(11,19)}] ${msg}</div>`;
+  el.scrollTop = el.scrollHeight;
+}
+
+initModuleList();
+</script>
+</body>
+</html>

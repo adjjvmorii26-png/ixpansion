@@ -1,0 +1,45 @@
+{
+  "module": "wave699_entropy_heatmap",
+  "wave": 699,
+  "grid": {
+    "module_a": {
+      "row": 3,
+      "col": 3,
+      "entropy": 0.3
+    },
+    "module_b": {
+      "row": 4,
+      "col": 0,
+      "entropy": 0.63
+    },
+    "module_c": {
+      "row": 1,
+      "col": 1,
+      "entropy": 0.39
+    },
+    "hot_mod": {
+      "row": 1,
+      "col": 2,
+      "entropy": 0.45
+    },
+    "cold_mod": {
+      "row": 6,
+      "col": 6,
+      "entropy": 0.91
+    },
+    "test_mod": {
+      "row": 1,
+      "col": 7,
+      "entropy": 0.66
+    }
+  },
+  "heat_cells": [],
+  "hot_zones": [
+    "cold_mod"
+  ],
+  "cold_zones": [],
+  "total_modules": 1,
+  "last_update": "2026-09-15T08:31:11.971171+00:00",
+  "entropy_average": 0.5567,
+  "entropy_stddev": 0.2025
+}

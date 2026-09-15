@@ -114,6 +114,7 @@ ROUTE_ALIASES: dict[str, str] = {
     "harmonic_resonance": "wave696_harmonic_resonance_oracle",
     "neural_syntax": "wave697_neural_syntax_bridge",
     "void_syntax": "wave698_void_syntax_engine",
+    "entropy_heatmap": "wave699_entropy_heatmap",
     "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
     "adaptive_regulation": "wave636_adaptive_regulation",
 }
