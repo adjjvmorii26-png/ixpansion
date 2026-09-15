@@ -1914,6 +1914,31 @@ def main():
             pass
         import json as _j
         print(_j.dumps(h(q), indent=2))
+# --- Big Pickle Open Zen (Wave 700) ---
+    if cmd == "bpzen" or cmd == "big-pickle-zen":
+        from api.big_pickle_gateway import handler as h
+        q = {"action": args[0] if args else "status"}
+        import json as _j
+        print(_j.dumps(h(q), indent=2))
+    if cmd == "pickle" or cmd == "pickle-jar":
+        from api.pickle_jar import handler as h
+        q = {"action": args[0] if args else "status"}
+        if q["action"] == "pickle" and len(args) >= 2:
+            q["type"] = args[1]
+        import json as _j
+        print(_j.dumps(h(q), indent=2))
+    if cmd == "zen" or cmd == "zen-session":
+        from api.zen_session import handler as h
+        q = {"action": args[0] if args else "status"}
+        if q["action"] == "open" and len(args) >= 2:
+            q["depth"] = int(args[1])
+        import json as _j
+        print(_j.dumps(h(q), indent=2))
+    if cmd == "openness" or cmd == "openness-index":
+        from api.openness_index import handler as h
+        q = {"action": args[0] if args else "status"}
+        import json as _j
+        print(_j.dumps(h(q), indent=2))
 
 
 if __name__ == "__main__":

@@ -115,6 +115,12 @@ ROUTE_ALIASES: dict[str, str] = {
     "neural_syntax": "wave697_neural_syntax_bridge",
     "void_syntax": "wave698_void_syntax_engine",
     "entropy_heatmap": "wave699_entropy_heatmap",
+    "pickle_jar": "pickle_jar",
+    "zen_session": "zen_session",
+    "equilibrium_field": "equilibrium_field",
+    "consciousness_film": "consciousness_film",
+    "openness_index": "openness_index",
+    "big_pickle_gateway": "big_pickle_gateway",
     "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
     "adaptive_regulation": "wave636_adaptive_regulation",
 }

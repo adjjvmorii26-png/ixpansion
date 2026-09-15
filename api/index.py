@@ -2621,6 +2621,33 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Big Pickle Open Zen (Wave 700) ---
+    if path.startswith("/pickle-jar") or path.startswith("/api/pickle_jar"):
+        from api.pickle_jar import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/zen-session") or path.startswith("/api/zen_session"):
+        from api.zen_session import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/equilibrium-field") or path.startswith("/api/equilibrium_field"):
+        from api.equilibrium_field import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/consciousness-film") or path.startswith("/api/consciousness_film"):
+        from api.consciousness_film import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/openness-index") or path.startswith("/api/openness_index"):
+        from api.openness_index import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+    if path.startswith("/big-pickle-zen") or path.startswith("/api/big_pickle_zen"):
+        from api.big_pickle_gateway import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+
 # --- Wave 694: Quantum Coherence Lattice ---
     if path.startswith("/quantum-coherence-lattice") or path.startswith("/api/quantum_coherence_lattice"):
         from api.wave694_quantum_coherence_lattice import handler as h
