@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "name": "ixpansion",
+  "framework": null,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxDuration": 30
+      }
+    }
+  ],
+  "routes": [
+    { "src": "^/api/(.*)$", "dest": "/api/index.py?route=$1" },
+    { "src": "^/health$", "dest": "/api/index.py" },
+    { "src": "^/modules$", "dest": "/api/index.py" },
+    { "src": "^/metrics$", "dest": "/api/index.py" },
+    { "src": "^/events$", "dest": "/api/index.py" },
+    { "src": "^/telegram-webhook$", "dest": "/api/index.py" },
+    { "src": "^/dashboard/(.*)$", "dest": "/dashboard/$1" },
+    { "src": "^/$", "dest": "/dashboard/index.html" }
+  ],
+  "outputDirectory": "."
+}
