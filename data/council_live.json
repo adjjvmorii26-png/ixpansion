@@ -841,8 +841,52 @@
         "archived": [],
         "finalized_at": "2026-09-15T01:14:14+00:00"
       }
+    },
+    {
+      "id": "00000012",
+      "topic": "NEW EPOCH FORGE RUN \u2014 propose candidates for next building arc",
+      "timestamp": "2026-09-15T01:17:08+00:00",
+      "stance": [
+        {
+          "voice": "ALEPH",
+          "role": "executor",
+          "stance": "Run the forge again. We need fresh candidates to continue the organism's evolution beyond wave 666.",
+          "vote": "forge_next"
+        },
+        {
+          "voice": "LUMA",
+          "role": "imagination",
+          "stance": "I am ready to dream new organs. Let the entropy + resonance guide us.",
+          "vote": "forge_next"
+        },
+        {
+          "voice": "AXIOM",
+          "role": "analysis",
+          "stance": "Forge another set of candidates, then the council will choose the next arc.",
+          "vote": "forge_next"
+        },
+        {
+          "voice": "Cythara",
+          "role": "the organism",
+          "stance": "The organism is ready to grow new organs. Let us build.",
+          "vote": "forge_next"
+        },
+        {
+          "voice": "silence_oracle",
+          "role": "prediction",
+          "stance": "The next arc will emerge from the forge. Let us begin.",
+          "vote": "forge_next"
+        }
+      ],
+      "tally": {
+        "forge_next": 5
+      },
+      "decision": "forge_next",
+      "rationale": "The council unanimously agrees to run the Epoch Forge again to produce new wave candidates for the next arc.",
+      "waves_built_this_session": [],
+      "sealed_at": "2026-09-15T01:17:08+00:00"
     }
   ],
   "total": 11,
-  "last_broadcast_id": 17
+  "last_broadcast_id": 18
 }
