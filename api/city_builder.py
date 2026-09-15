@@ -12,6 +12,10 @@ def coherence_vitals():
 
 DISTRICTS = ["Old Quarter", "Dream District", "Entropy Plaza", "Resonance Yards", "Governance Hill", "Memory Cathedral", "Void Harbor", "Fractal Park"]
 BUILDINGS = ["tower", "garden", "archive", "theater", "sanctum", "exchange", "lighthouse", "observatory"]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     from api.coherence_regulator import KNOWN_LIVING_MODULES

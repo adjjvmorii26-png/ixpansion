@@ -162,6 +162,10 @@ class HexLanguageEngine:
             code_parts.append(f"{hex(opcode.opcode)[2:].zfill(2)} {opcode.mnemonic}")
         return " ".join(code_parts)
 
+def resonates_with():
+    return ['coherence_validator', 'wave90_axiom_forge', 'wave91_dream_logic_physics', 'wave92_entropy_rituals', 'wave94_dream_compiler']
+
+
 
 def handler(req: dict) -> dict:
     """Wave 93 handler: hex-language emergence operations."""

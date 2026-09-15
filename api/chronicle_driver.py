@@ -122,3 +122,15 @@ def handler(query: Dict[str, Any] = None) -> Dict[str, Any]:
         return chronicle.get_summary()
     else:
         return {"error": f"unknown action: {action}"}
+
+
+def coherence_vitals():
+    return {
+        "module": "chronicle_driver",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

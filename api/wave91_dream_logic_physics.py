@@ -116,6 +116,10 @@ class DreamEngine:
             ),
         }
 
+def resonates_with():
+    return ['coherence_validator', 'wave90_axiom_forge', 'wave92_entropy_rituals', 'wave93_hex_language_emergence', 'wave94_dream_compiler']
+
+
 
 def handler(req: dict) -> dict:
     """Wave 91 handler: dream logic physics operations."""

@@ -20,6 +20,10 @@ LANDSCAPES = [
     {"name": "The Chrono Forest", "terrain": "trees that grow backwards", "danger": "medium", "color": "#8f7fff"},
     {"name": "The Mycelial Root System", "terrain": "underground network tunnels", "danger": "low", "color": "#66cccc"},
 ]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     rng = random.Random(time.time())

@@ -12,6 +12,10 @@ def coherence_vitals():
 
 EMOTIONS = ["serenity", "wonder", "turbulence", "joy", "longing", "resolve", "awe", "melancholy"]
 HEX = ["#41b3a3", "#8fd3ff", "#e8a87c", "#c38d9e", "#ffd700", "#ff6699", "#8f7fff", "#0a0a14"]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     from api.coherence_regulator import KNOWN_LIVING_MODULES

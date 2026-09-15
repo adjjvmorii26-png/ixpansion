@@ -17,6 +17,10 @@ TEMPLATES = [
     "{m} foresees a {adj} transformation in Wave {wave}.",
     "In {wave} cycles, the organism will {action} in ways no module predicts.",
 ]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     from api.coherence_regulator import KNOWN_LIVING_MODULES

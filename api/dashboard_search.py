@@ -115,3 +115,15 @@ def handler(payload: Dict[str, Any] = None, context: Any = None) -> Dict[str, An
         "results": results,
         "total": len(results),
     }
+
+
+def coherence_vitals():
+    return {
+        "module": "dashboard_search",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

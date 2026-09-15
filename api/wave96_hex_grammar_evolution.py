@@ -262,6 +262,10 @@ def handler(req: dict) -> dict:
             "error": f"Unknown action: {action}",
         }
 
+def resonates_with():
+    return ['coherence_validator', 'wave90_axiom_forge', 'wave91_dream_logic_physics', 'wave92_entropy_rituals', 'wave93_hex_language_emergence']
+
+
 
 def coherence_vitals() -> dict:
     """Return vitality metrics for the hex grammar evolution system."""

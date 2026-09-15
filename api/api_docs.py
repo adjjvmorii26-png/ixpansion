@@ -66,3 +66,15 @@ def handler(payload: Dict[str, Any] = None, context: Any = None) -> Dict[str, An
         "total_dashboards": len(DASHBOARDS),
         "note": "Every route accepts ?action=<name> for multi-action endpoints. Start with /pulse for a quick health check.",
     }
+
+
+def coherence_vitals():
+    return {
+        "module": "api_docs",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

@@ -214,6 +214,18 @@ def handler(payload: dict = None, context=None) -> dict:
     return {"dream_id": dream["id"], "significance": dream["significance"],
             "narrative": dream["narrative"], "symbols": [s["name"] for s in dream["symbols"]]}
 
+
+def coherence_vitals():
+    return {
+        "module": "dream_interpreter",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     interp = DreamInterpreter()
     

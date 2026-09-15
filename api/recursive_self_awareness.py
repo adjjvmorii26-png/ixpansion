@@ -265,3 +265,15 @@ def handler(query: Dict[str, Any] = None) -> Dict[str, Any]:
         return {"spiral": engine.get_spiral_trajectory(limit)}
     else:
         return {"error": f"unknown action: {action}"}
+
+
+def coherence_vitals():
+    return {
+        "module": "recursive_self_awareness",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

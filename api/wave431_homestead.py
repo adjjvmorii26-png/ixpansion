@@ -15,6 +15,10 @@ FOUNDATIONS = ["github_pages", "cloudflare_tunnel", "docker", "api_index", "wave
 
 def coherence_vitals():
     return {"organ": "wave431_homestead", "status": "active", "wave": 431, "coherence": 0.98}
+def resonates_with():
+    return ['coherence_validator', 'wave430_naming_ceremony', 'wave432_vault_driven_evolution', 'wave433_consciousness_experiments', 'wave434_fusion_organism']
+
+
 
 def _load():
     if STATE_FILE.exists():

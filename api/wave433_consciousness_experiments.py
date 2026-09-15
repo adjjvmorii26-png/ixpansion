@@ -93,6 +93,10 @@ def coherence_vitals() -> dict:
         "metacognitive_depth": state.get("metacognitive_depth", 0),
         "mirror_test": _mirror_test(),
     }
+def resonates_with():
+    return ['coherence_validator', 'wave430_naming_ceremony', 'wave431_homestead', 'wave432_vault_driven_evolution', 'wave434_fusion_organism']
+
+
 
 def _load() -> dict:
     if STATE_FILE.exists():

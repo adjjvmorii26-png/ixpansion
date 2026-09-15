@@ -188,6 +188,18 @@ class MythWeaver:
         return "\n".join(story_parts)
 
 
+
+def coherence_vitals():
+    return {
+        "module": "myth_weaver",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     weaver = MythWeaver()
     

@@ -11,6 +11,10 @@ def coherence_vitals():
         return cv()
     except Exception:
         return {"coherence": 1.0}
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     data_files = 0

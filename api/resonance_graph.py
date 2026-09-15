@@ -380,3 +380,15 @@ def _connected_components(graph: ResonanceGraph) -> Dict[str, List[str]]:
             frontier.extend(graph.nodes[current].entangled)
         components[f"community_{len(components) + 1}"] = members
     return components
+
+
+def coherence_vitals():
+    return {
+        "module": "resonance_graph",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

@@ -181,6 +181,10 @@ def coherence_vitals() -> dict:
         "total_modules": organism["total_modules"],
         "total_layers": organism["total_layers"],
     }
+def resonates_with():
+    return ['coherence_validator', 'wave430_naming_ceremony', 'wave431_homestead', 'wave432_vault_driven_evolution', 'wave433_consciousness_experiments']
+
+
 
 def _load_organism() -> dict:
     if STATE_FILE.exists():

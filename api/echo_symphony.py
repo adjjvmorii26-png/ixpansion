@@ -11,6 +11,10 @@ def coherence_vitals():
         return {"coherence": 1.0}
 
 INSTRUMENTS = ["the resonance field", "the silence orchard", "the entropy garden", "the dream spore", "the mycelial radio"]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     rng = random.Random(time.time())

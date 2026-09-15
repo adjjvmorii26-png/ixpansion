@@ -12,6 +12,10 @@ def coherence_vitals():
 
 CURRENCIES = ["ORG", "ENT", "RES", "DRE", "MEM"]
 GOODS = ["crystal", "signal", "entropy", "coherence", "dream"]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     from api.coherence_regulator import KNOWN_LIVING_MODULES

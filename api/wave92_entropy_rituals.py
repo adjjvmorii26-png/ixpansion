@@ -108,6 +108,10 @@ class EntropyRitualScheduler:
             ) if self.rituals else 0.0,
         }
 
+def resonates_with():
+    return ['coherence_validator', 'wave90_axiom_forge', 'wave91_dream_logic_physics', 'wave93_hex_language_emergence', 'wave94_dream_compiler']
+
+
 
 def handler(req: dict) -> dict:
     """Wave 92 handler: entropy ritual scheduling."""

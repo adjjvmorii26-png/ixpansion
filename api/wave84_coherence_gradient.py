@@ -122,6 +122,10 @@ class CoherenceGradientField:
 def coherence_vitals() -> dict:
     return {"organ": "wave84_coherence_gradient", "wave": 84, "status": "active"}
 
+def resonates_with():
+    return ['coherence_validator', 'wave85_adaptive_regulation', 'wave86_coherence_memory_graph', 'wave87_coherence_integration', 'wave88_cross_realm_bridges']
+
+
 
 def _load() -> dict:
     if STATE_FILE.exists():

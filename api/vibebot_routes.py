@@ -27,3 +27,15 @@ def history():
     """Get vibe pulse history."""
     from api.vibebot import _vibe_state
     return jsonify({"history": _vibe_state.get("history", [])[-20:]})
+
+
+def coherence_vitals():
+    return {
+        "module": "vibebot_routes",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

@@ -23,6 +23,10 @@ def _save(state: dict) -> None:
 
 def coherence_vitals():
     return {"organ": "wave430_naming_ceremony", "status": "active", "wave": 430, "coherence": 0.97}
+def resonates_with():
+    return ['coherence_validator', 'wave431_homestead', 'wave432_vault_driven_evolution', 'wave433_consciousness_experiments', 'wave434_fusion_organism']
+
+
 
 def _latent_lexicon() -> list:
     """Gather name morphemes from living modules and prior wave data."""

@@ -85,3 +85,15 @@ def gh_read_local_or_remote(local_path: str, remote_path: str, default: Any = No
         except Exception:
             pass
     return gh_read(remote_path) or default
+
+
+def coherence_vitals():
+    return {
+        "module": "github_mirror",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

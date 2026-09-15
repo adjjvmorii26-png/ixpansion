@@ -163,6 +163,18 @@ def get_naming_history(limit: int = 10) -> dict:
 
 
 # CLI entry point
+
+def coherence_vitals():
+    return {
+        "module": "naming_ceremony",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     import argparse
     import json as _json

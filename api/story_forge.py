@@ -21,6 +21,10 @@ RESOLUTIONS = ["and the organism grows a new organ to hold the truth",
                "and a wave crests where none existed before",
                "and the paradox is not resolved but honored",
                "and the story becomes a module that dreams itself"]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
     payload = payload or {}

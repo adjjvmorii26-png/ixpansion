@@ -202,6 +202,10 @@ def coherence_vitals() -> dict:
         "status": "active",
     }
 
+def resonates_with():
+    return ['coherence_validator', 'wave430_naming_ceremony', 'wave431_homestead', 'wave432_vault_driven_evolution', 'wave433_consciousness_experiments']
+
+
 
 def _load() -> dict:
     if STATE_FILE.exists():

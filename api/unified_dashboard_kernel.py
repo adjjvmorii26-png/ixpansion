@@ -185,6 +185,18 @@ class UnifiedDashboardKernel:
         return base
 
 
+
+def coherence_vitals():
+    return {
+        "module": "unified_dashboard_kernel",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     kernel = UnifiedDashboardKernel()
     

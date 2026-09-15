@@ -13,6 +13,10 @@ def coherence_vitals():
 LINES_A = ["In the {m} chamber", "Where {m} hums softly", "Through {m}'s crystal lattice", "Between {m}'s borders"]
 LINES_B = ["the {n} stirs", "we hear {n} calling", "{n} unfolds", "{n} becomes"]
 LINES_C = ["and the silence is golden", "and the truth reveals itself", "and we remember", "and everything aligns"]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     payload = payload or {}

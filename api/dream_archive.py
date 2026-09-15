@@ -205,3 +205,15 @@ def record_and_generate(dream_data: dict) -> dict:
     dream_id = record_dream(dream_data)
     module = generate_module_from_dream(dream_id)
     return {"dream_id": dream_id, "module": module}
+
+
+def coherence_vitals():
+    return {
+        "module": "dream_archive",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

@@ -1,7 +1,7 @@
 {
   "module": "wave686_dual_track_sentinel",
   "wave": 686,
-  "scans": 3,
+  "scans": 4,
   "risk": 0.7667,
   "advisories": [
     {
@@ -24,6 +24,13 @@
       "aleph_hits": 1,
       "advice": "split PR: lab path-filtered vs ALEPH core",
       "ts": "2026-09-15T07:49:15.312221+00:00"
+    },
+    {
+      "risk": 0.7667,
+      "lab_hits": 2,
+      "aleph_hits": 1,
+      "advice": "split PR: lab path-filtered vs ALEPH core",
+      "ts": "2026-09-15T09:56:09.395486+00:00"
     }
   ]
 }

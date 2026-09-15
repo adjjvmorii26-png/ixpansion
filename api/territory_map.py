@@ -20,6 +20,10 @@ DOMAINS = [
     {"name": "Infrastructure", "modules": ["execution_stack", "module_health", "nightly_health", "ledger_backup", "deploy_status", "rate_monitor"], "color": "#66cccc"},
     {"name": "Exploration", "modules": ["wave_timeline", "dependency_map", "resonance_graph", "module_search", "error_tracker"], "color": "#ff6699"},
 ]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
     return {

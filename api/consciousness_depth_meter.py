@@ -20,6 +20,10 @@ LAYERS = [
     {"layer": 7, "name": "paradox-tolerance", "desc": "holds contradictions without collapse"},
     {"layer": 8, "name": "transcendence", "desc": "rewrites its own axioms"},
 ]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     rng = random.Random(int(time.time() // 300))

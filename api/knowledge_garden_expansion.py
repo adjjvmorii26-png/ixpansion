@@ -237,6 +237,18 @@ def enable_expansion(enabled: bool = True) -> dict:
 
 
 # CLI entry point
+
+def coherence_vitals():
+    return {
+        "module": "knowledge_garden_expansion",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     import argparse
     import json as _json

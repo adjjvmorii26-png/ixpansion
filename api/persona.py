@@ -99,3 +99,15 @@ def merge_personas(p1: AgentPersona, p2: AgentPersona) -> AgentPersona:
         exploration=(p1.exploration + p2.exploration) / 2,
         conservativeness=(p1.conservativeness + p2.conservativeness) / 2,
     )
+
+
+def coherence_vitals():
+    return {
+        "module": "persona",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

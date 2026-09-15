@@ -18,6 +18,10 @@ SCALES = {
     "chromatic": ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"],
 }
 RHYTHMS = ["whole", "half", "quarter", "eighth", "triplet"]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     rng = random.Random(time.time())

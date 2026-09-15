@@ -14,6 +14,10 @@ def coherence_vitals():
 
 COLORS = ["#41b3a3", "#8fd3ff", "#e8a87c", "#c38d9e", "#ffd700", "#ff6699", "#8f7fff", "#0a0a14"]
 SHAPES = ["circle", "line", "arc", "spiral", "hexagon", "wave", "fractal", "void"]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     errors = []

@@ -14,6 +14,10 @@ STARTS = ["A wave crested at dawn.", "The entropy garden bloomed.", "In the reso
 CHARACTERS = ["a spectral observer", "the coherence regulator", "a wandering module", "the silence oracle"]
 ACTIONS = ["discovered", "was transformed by", "heard the echo of", "was reborn from"]
 ENDINGS = ["and the organism grew stronger.", "and the paradox resolved itself.", "and the void whispered a new truth."]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     rng = random.Random(time.time())

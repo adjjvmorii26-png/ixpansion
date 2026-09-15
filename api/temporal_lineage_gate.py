@@ -102,3 +102,15 @@ def handler(query: Dict[str, Any] = None) -> Dict[str, Any]:
         return gate.get_lineage_status()
     else:
         return {"error": f"unknown action: {action}"}
+
+
+def coherence_vitals():
+    return {
+        "module": "temporal_lineage_gate",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

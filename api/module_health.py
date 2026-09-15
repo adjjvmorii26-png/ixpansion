@@ -84,3 +84,15 @@ def handler(payload: Dict[str, Any] = None, context: Any = None) -> Dict[str, An
         "healthy_modules": healthy[:10],
         "health_pct": round(100 * len(healthy) / max(1, checked), 1),
     }
+
+
+def coherence_vitals():
+    return {
+        "module": "module_health",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

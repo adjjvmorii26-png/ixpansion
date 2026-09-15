@@ -154,6 +154,10 @@ class QuantumRegister:
 def coherence_vitals() -> dict:
     return {"organ": "wave446_quantum_coherence", "wave": 446, "status": "active"}
 
+def resonates_with():
+    return ['coherence_validator', 'wave440_linguistic_emergence', 'wave441_wave_composition', 'wave442_temporal_resonance', 'wave443_cross_module_emergence']
+
+
 
 def _load() -> dict:
     if STATE_FILE.exists():

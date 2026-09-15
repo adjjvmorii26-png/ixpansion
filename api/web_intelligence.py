@@ -127,6 +127,10 @@ class WebObserver:
 def coherence_vitals() -> dict:
     return {"organ": "wave447_web_intelligence", "wave": 447, "status": "active"}
 
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def _load() -> dict:
     if STATE_FILE.exists():

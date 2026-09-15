@@ -52,6 +52,18 @@ def _candidate_modules() -> List[str]:
 
 
 
+def coherence_vitals():
+    return {
+        "module": "coherence_regulator",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
+
 def measure_coherence() -> Dict[str, Any]:
     """One-number coherence reading of the living organism."""
     reading = regulate()

@@ -161,3 +161,7 @@ class EventStream:
     def channels(self) -> list:
         """All channel names seen by this stream instance."""
         return sorted(self.channel_names)
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

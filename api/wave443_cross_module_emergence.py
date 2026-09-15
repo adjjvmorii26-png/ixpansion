@@ -90,6 +90,10 @@ class EmergenceDetector:
 def coherence_vitals() -> dict:
     return {"organ": "wave443_cross_module_emergence", "wave": 443, "status": "active"}
 
+def resonates_with():
+    return ['coherence_validator', 'wave440_linguistic_emergence', 'wave441_wave_composition', 'wave442_temporal_resonance', 'wave444_dream_synthesis']
+
+
 
 def _load() -> dict:
     if STATE_FILE.exists():

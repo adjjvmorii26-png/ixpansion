@@ -43,3 +43,15 @@ def handler(request: Any = None, context: Any = None) -> Dict[str, Any]:
     except Exception as exc:
         summary["telegram"] = f"error: {exc}"
     return summary
+
+
+def coherence_vitals():
+    return {
+        "module": "nightly_health",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

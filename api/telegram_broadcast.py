@@ -256,6 +256,18 @@ def get_broadcast_status() -> dict:
 
 
 # CLI entry point
+
+def coherence_vitals():
+    return {
+        "module": "telegram_broadcast",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     import argparse
     

@@ -2,7 +2,7 @@
   "module": "wave694_quantum_coherence_lattice",
   "wave": 694,
   "lattice": {
-    "47523e2fb56d": {
+    "50e7239f0e77": {
       "label": "path_choice",
       "options": [
         "alpha",
@@ -14,86 +14,20 @@
         1.0,
         1.0
       ],
-      "created": "2026-09-15T07:45:12.887122+00:00",
+      "created": "2026-09-15T09:55:34.768609+00:00",
       "collapsed": true,
       "result": "beta",
-      "collapsed_at": "2026-09-15T07:45:12.898723+00:00"
-    },
-    "2f9c96a07347": {
-      "label": "path_choice",
-      "options": [
-        "alpha",
-        "beta",
-        "gamma"
-      ],
-      "weights": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "created": "2026-09-15T07:49:15.358965+00:00",
-      "collapsed": true,
-      "result": "beta",
-      "collapsed_at": "2026-09-15T07:49:15.368382+00:00"
-    },
-    "d5e984caf123": {
-      "label": "path_choice",
-      "options": [
-        "alpha",
-        "beta",
-        "gamma"
-      ],
-      "weights": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "created": "2026-09-15T08:00:12.263521+00:00",
-      "collapsed": true,
-      "result": "beta",
-      "collapsed_at": "2026-09-15T08:00:12.291104+00:00"
-    },
-    "52caa86e6ccb": {
-      "label": "path_choice",
-      "options": [
-        "alpha",
-        "beta",
-        "gamma"
-      ],
-      "weights": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "created": "2026-09-15T08:00:28.405536+00:00",
-      "collapsed": true,
-      "result": "beta",
-      "collapsed_at": "2026-09-15T08:00:28.416102+00:00"
+      "collapsed_at": "2026-09-15T09:55:34.791868+00:00"
     }
   },
   "collapsed": [
     {
-      "node_id": "47523e2fb56d",
-      "label": "path_choice",
-      "result": "beta"
-    },
-    {
-      "node_id": "2f9c96a07347",
-      "label": "path_choice",
-      "result": "beta"
-    },
-    {
-      "node_id": "d5e984caf123",
-      "label": "path_choice",
-      "result": "beta"
-    },
-    {
-      "node_id": "52caa86e6ccb",
+      "node_id": "50e7239f0e77",
       "label": "path_choice",
       "result": "beta"
     }
   ],
-  "superpositions": 4,
-  "collapses": 4,
+  "superpositions": 1,
+  "collapses": 1,
   "coherence_score": 1.0
 }

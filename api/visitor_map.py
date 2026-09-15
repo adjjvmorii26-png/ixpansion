@@ -11,6 +11,10 @@ def coherence_vitals() -> Dict[str, Any]:
         return cv()
     except Exception:
         return {"coherence": 1.0}
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
     path = os.path.join(DATA_DIR, "visitor_log.json")

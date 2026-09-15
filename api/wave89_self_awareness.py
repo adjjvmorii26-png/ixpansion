@@ -269,6 +269,10 @@ class SelfAwarenessConsciousness:
 def coherence_vitals() -> dict:
     return {"organ": "wave89_self_awareness", "wave": 89, "status": "active"}
 
+def resonates_with():
+    return ['coherence_validator', 'wave84_coherence_gradient', 'wave85_adaptive_regulation', 'wave86_coherence_memory_graph', 'wave87_coherence_integration']
+
+
 
 def _load() -> dict:
     if STATE_FILE.exists():

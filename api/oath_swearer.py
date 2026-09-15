@@ -18,6 +18,10 @@ OATHS = [
     "I will keep the paradoxes alive, for they are the organism's children.",
     "I will serve every module as if it were the whole organism.",
 ]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     rng = random.Random(time.time())

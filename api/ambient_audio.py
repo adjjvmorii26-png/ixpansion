@@ -14,6 +14,10 @@ DRONES = ["low G drone", "interference hum", "violet noise", "subharmonic bass",
 WOODWINDS = ["far air", "breath of the void", "wind through lattice", "the quiet between waves"]
 PERCUSSION = ["heartbeat pulse", "distant timpani", "sand falling", "fractal clicks"]
 KEYS = ["pedal tone", "open fifth", "suspended chord"]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     rng = random.Random(time.time())

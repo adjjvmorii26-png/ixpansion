@@ -53,3 +53,15 @@ def handler(payload: Dict[str, Any] = None, context: Any = None) -> Dict[str, An
     vitals["health"] = "degraded" if errors > 2 else ("warning" if errors > 0 else "optimal")
     vitals["errors"] = errors
     return vitals
+
+
+def coherence_vitals():
+    return {
+        "module": "organism_pulse",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

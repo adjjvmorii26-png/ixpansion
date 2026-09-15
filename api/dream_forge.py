@@ -166,3 +166,15 @@ def handler(query: Dict[str, Any] = None) -> Dict[str, Any]:
         return forge.get_dream_report()
     else:
         return {"error": f"unknown action: {action}"}
+
+
+def coherence_vitals():
+    return {
+        "module": "dream_forge",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

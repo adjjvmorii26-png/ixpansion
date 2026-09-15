@@ -144,6 +144,10 @@ class TemporalResonanceField:
 def coherence_vitals() -> dict:
     return {"organ": "wave442_temporal_resonance", "wave": 442, "status": "active"}
 
+def resonates_with():
+    return ['coherence_validator', 'wave440_linguistic_emergence', 'wave441_wave_composition', 'wave443_cross_module_emergence', 'wave444_dream_synthesis']
+
+
 
 def _load() -> dict:
     if STATE_FILE.exists():

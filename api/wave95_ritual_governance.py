@@ -152,6 +152,10 @@ class RitualGovernance:
             "last_action": round(time.time(), 4),
         }
 
+def resonates_with():
+    return ['coherence_validator', 'wave90_axiom_forge', 'wave91_dream_logic_physics', 'wave92_entropy_rituals', 'wave93_hex_language_emergence']
+
+
 
 def _load() -> RitualGovernance:
     """Load governance state from living state file."""

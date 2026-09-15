@@ -174,6 +174,18 @@ class ConsciousnessStateMachine:
         return {s: round(c/total, 4) for s, c in self.state["state_counts"].items()}
 
 
+
+def coherence_vitals():
+    return {
+        "module": "consciousness_state_machine",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     csm = ConsciousnessStateMachine()
     

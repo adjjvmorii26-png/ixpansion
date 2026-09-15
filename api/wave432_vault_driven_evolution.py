@@ -168,6 +168,10 @@ def coherence_vitals() -> dict:
         "mutation_pressure": health["mutation_pressure"],
         "vault_density": health["vault_density"],
     }
+def resonates_with():
+    return ['coherence_validator', 'wave430_naming_ceremony', 'wave431_homestead', 'wave433_consciousness_experiments', 'wave434_fusion_organism']
+
+
 
 def _load() -> dict | None:
     if STATE_FILE.exists():

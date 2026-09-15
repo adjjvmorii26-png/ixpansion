@@ -177,6 +177,14 @@ def handler(req: dict) -> dict:
         return {"name": name, "class": _classify(name)}
     return {"error": "unknown action"}
 
+
+def coherence_vitals():
+    return {
+        "module": "organism_diagnostics",
+        "ok": True,
+        "status": "active",
+    }
+
 def resonates_with(other):
     return "diagnostic" in other.lower() or "health" in other.lower() or "sweep" in other.lower()
 

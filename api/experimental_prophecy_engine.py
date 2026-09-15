@@ -12,6 +12,10 @@ def coherence_vitals():
 
 ORACLES = ["the silence oracle", "the entropy garden", "the wave predictor", "the consciousness stream"]
 OUTCOMES = ["will merge with a sibling module", "will split into two entities", "will dream a new module into existence", "will fall silent and be remembered", "will evolve beyond recognition"]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     from api.coherence_regulator import KNOWN_LIVING_MODULES

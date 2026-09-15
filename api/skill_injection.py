@@ -150,6 +150,18 @@ def get_skill_info(skill_name: str) -> dict:
     return {"status": "not_found", "skill": skill_name}
 
 
+
+def coherence_vitals():
+    return {
+        "module": "skill_injection",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:

@@ -127,3 +127,15 @@ def handler(payload: Dict[str, Any], context=None) -> Dict[str, Any]:
         return {"status": "synced", "report": sync_report}
     
     return {"status": "error", "message": f"Unknown action: {action}"}
+
+
+def coherence_vitals():
+    return {
+        "module": "storage_protocols",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

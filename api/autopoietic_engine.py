@@ -201,6 +201,18 @@ class AutopoieticEngine:
         return gaps[0] if gaps else None
 
 
+
+def coherence_vitals():
+    return {
+        "module": "autopoietic_engine",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     engine = AutopoieticEngine()
     

@@ -11,6 +11,10 @@ def coherence_vitals():
         return {"coherence": 1.0}
 
 CHAP = os.path.join(os.path.dirname(__file__), "..", "CHANGELOG.md")
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     waves = []

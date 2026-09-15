@@ -215,6 +215,18 @@ def get_mood_statistics() -> dict:
 
 
 # CLI entry point
+
+def coherence_vitals():
+    return {
+        "module": "organism_mood",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     import sys
     import argparse

@@ -1,7 +1,7 @@
 {
   "module": "wave683_void_meter",
   "wave": 683,
-  "void_capital": 3.0,
+  "void_capital": 4.0,
   "events": [
     {
       "kind": "silence",
@@ -20,7 +20,13 @@
       "amount": 2.0,
       "label": "skipped_audio",
       "ts": "2026-09-15T07:49:15.216059+00:00"
+    },
+    {
+      "kind": "silence",
+      "amount": 2.0,
+      "label": "skipped_audio",
+      "ts": "2026-09-15T09:56:09.194792+00:00"
     }
   ],
-  "spent": 3.0
+  "spent": 4.0
 }

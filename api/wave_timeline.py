@@ -11,6 +11,10 @@ def coherence_vitals() -> Dict[str, Any]:
         return cv()
     except Exception:
         return {"coherence": 1.0}
+def resonates_with():
+    return ['coherence_validator']
+
+
 
 def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
     waves = []

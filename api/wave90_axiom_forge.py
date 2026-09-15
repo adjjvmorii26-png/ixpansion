@@ -165,6 +165,10 @@ class AxiomForge:
 def coherence_vitals() -> dict:
     return {"organ": "wave90_axiom_forge", "wave": 90, "status": "active"}
 
+def resonates_with():
+    return ['coherence_validator', 'wave91_dream_logic_physics', 'wave92_entropy_rituals', 'wave93_hex_language_emergence', 'wave94_dream_compiler']
+
+
 
 def _load() -> dict:
     if STATE_FILE.exists():

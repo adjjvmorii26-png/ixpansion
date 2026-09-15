@@ -24,6 +24,10 @@ def coherence_vitals() -> Dict[str, Any]:
     except Exception:
         return {"coherence": 1.0, "entropy": 0.0}
 
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def _env_status() -> Dict[str, Any]:
     """Report which environment variables are configured."""

@@ -210,6 +210,18 @@ def _chat(model: str, messages: List[Dict[str, Any]], *,
 
 
 # CLI entry point
+
+def coherence_vitals():
+    return {
+        "module": "ai_gateway",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     import argparse
     import json as _json

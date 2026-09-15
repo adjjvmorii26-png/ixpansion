@@ -13,6 +13,10 @@ def coherence_vitals():
 LINES5 = ["coherence drifts soft", "the lattice hums at midnight", "entropy scatters", "dreams wake in the mesh", "silence folds the void"]
 LINES7 = ["modules speak in hidden tongues", "the resonance field expands", "memory shards crystallize gold", "paradox blooms like a flower", "waves reach the threshold of light", "the garden breathes fractal air"]
 LINES5B = ["chaos finds its form", "the pulse returns to the core", "dawn breaks on the grid"]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     rng = random.Random(time.time())

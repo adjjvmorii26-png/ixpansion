@@ -13,6 +13,10 @@ def coherence_vitals():
 PHONEMES = ["ka", "ze", "lu", "mi", "no", "pi", "ra", "sa", "tu", "vo", "we", "xi", "yo", "zu"]
 CONSONANTS = "kzlmnprstvwx"
 VOWELS = "aeiou"
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def _name_to_phonemes(name: str) -> str:
     h = hashlib.sha256(name.encode()).digest()

@@ -103,6 +103,18 @@ def get_active_agents():
     return _vibe_state.get("active_agents", [])
 
 # CLI entry point
+
+def coherence_vitals():
+    return {
+        "module": "vibebot",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:

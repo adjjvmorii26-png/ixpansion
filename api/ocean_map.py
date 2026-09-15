@@ -17,6 +17,10 @@ DEPTHS = [
     {"zone": "Abyssal Zone", "depth": "4000-6000m", "light": "none", "danger": "extreme"},
     {"zone": "Hadal Zone", "depth": "6000-11000m", "light": "none", "danger": "lethal"},
 ]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     rng = random.Random(time.time())

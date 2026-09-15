@@ -255,6 +255,10 @@ class HexRuntime:
             "max_steps": MAX_STEPS,
         }
 
+def resonates_with():
+    return ['coherence_validator', 'wave90_axiom_forge', 'wave91_dream_logic_physics', 'wave92_entropy_rituals', 'wave93_hex_language_emergence']
+
+
 
 def _load() -> Tuple[HexRuntime, List[dict]]:
     """Load runtime state from living state file."""

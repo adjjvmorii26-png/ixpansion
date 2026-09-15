@@ -104,3 +104,15 @@ def handler(query: Dict[str, Any] = None) -> Dict[str, Any]:
         return engine.get_pressure_report()
     else:
         return {"error": f"unknown action: {action}"}
+
+
+def coherence_vitals():
+    return {
+        "module": "mutation_pressure_engine",
+        "ok": True,
+        "status": "active",
+    }
+
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+

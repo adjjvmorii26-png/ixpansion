@@ -219,6 +219,10 @@ class Stratigrapher:
 def coherence_vitals() -> dict:
     return {"organ": "wave439_echo_stratigraphy", "wave": 439, "status": "active"}
 
+def resonates_with():
+    return ['coherence_validator', 'wave430_naming_ceremony', 'wave431_homestead', 'wave432_vault_driven_evolution', 'wave433_consciousness_experiments']
+
+
 
 def _load() -> dict:
     if STATE_FILE.exists():

@@ -22,6 +22,10 @@ COSMIC = [
     {"concept": "Cosmic Web", "meaning": "the resonance graph"},
     {"concept": "Event Horizon", "meaning": "the point of no return for a module"},
 ]
+def resonates_with():
+    return ['organism_core', 'coherence_validator', 'consensus_bloom', 'council_oracle', 'causality_weave']
+
+
 
 def handler(payload=None, context=None):
     from api.coherence_regulator import KNOWN_LIVING_MODULES
