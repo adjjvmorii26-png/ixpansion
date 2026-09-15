@@ -1,28 +1,11 @@
 {
   "module": "wave697_neural_syntax_bridge",
   "wave": 697,
-  "translations": {
-    "a388f06428": {
-      "source_lang": "org_internal",
-      "target_lang": "json",
-      "original": "hello organism",
-      "translated": "52b2bd568e328eb050e797813860702b632d39035f155765cf87cedb34abce05",
-      "quality": 0.8571,
-      "bridged_at": "2026-09-15T16:21:36.161974+00:00"
-    },
-    "21ae87cbf7": {
-      "source_lang": "org_internal",
-      "target_lang": "json",
-      "original": "test",
-      "translated": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
-      "quality": 0.75,
-      "bridged_at": "2026-09-15T16:21:36.206689+00:00"
-    }
-  },
+  "translations": [],
   "syntax_rules": [
     "org_internal->json"
   ],
-  "bridge_count": 4,
+  "bridge_count": 0,
   "languages": [
     "org_internal",
     "json",
