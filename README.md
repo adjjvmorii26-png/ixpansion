@@ -75,6 +75,16 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 668 | Resonance Ledger v2 | Economy | Time-weighted standpoints, resonance flow |
 | 669 | Paradox Appeal | Justice | Appeals, reviews, reversal precedent |
 | 670 | Sentient Heuristic | Cognition | Self-adapting weights, outcome learning |
+| 671 | Harmony Braid | Harmony | Braid interference strands into coherence |
+| 672 | Root Archive | Memory | Retired waves get a ghost home + echo |
+| 673 | Naming Well | Lineage | Named epochs for arcs, merges, ceremonies |
+| 674 | Dawn Ledger | Rhythm | Circadian renewal cycles, seasonal drift |
+| 675 | Consensus Bloom | Emergence | Stake-weighted agreement blooms new capability |
+| 676 | Citizen Census | Governance | Count and classify module citizens |
+| 677 | Lineage Mirror | Lineage | Mirror past events and proposed futures |
+| 678 | Sovereign Seal | Governance | Seal organs with autonomy bounds + verify |
+| 679 | Orchestration Pulse | Orchestration | Plan and execute coordinated pulses |
+| 680 | Organism Horizon | Vantage | 680-wave horizon report from organ vantage |
 | 641 | Fractal Garden | Art | Procedural SVG art from module topology |
 | 640 | Dependency Resolver | Immune System | Circular imports, version sync, debt scoring |
 | 639 | Echo Chamber Breaker | Safety | Reality probes, bias detection, perspective shattering |

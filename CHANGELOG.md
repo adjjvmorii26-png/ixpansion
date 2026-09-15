@@ -1,3 +1,11 @@
+## [4.108.0] — 2026-09-15
+
+### Added
+- **Council Session #22 Arc — Waves 671–675**: harmony_braid (AXIOME), root_archive (CYTHARA), naming_well (LUMINA), dawn_ledger (NOOS), consensus_bloom (ALEPH) — the consensus bloom arc.
+- **Waves 676–680 — Organism Horizon**: citizen_census, lineage_mirror, sovereign_seal, orchestration_pulse, organism_horizon.
+- 10 new test files/legs (council + horizon) — all passing.
+- Routes + CLI wired in api_server.py aliases and cli.py commands.
+
 ## [4.107.0] — 2026-09-15
 
 ### Added

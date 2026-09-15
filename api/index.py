@@ -2503,6 +2503,57 @@ def handler(request) -> dict:
         return h(q)
 
 # --- Wave 647: Trust Network ---
+# --- Wave 671: Harmony Braid ---
+    if path.startswith("/harmony-braid") or path.startswith("/api/harmony_braid"):
+        from api.wave671_harmony_braid import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 672: Root Archive ---
+    if path.startswith("/root-archive") or path.startswith("/api/root_archive"):
+        from api.wave672_root_archive import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 673: Naming Well ---
+    if path.startswith("/naming-well") or path.startswith("/api/naming_well"):
+        from api.wave673_naming_well import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 674: Dawn Ledger ---
+    if path.startswith("/dawn-ledger") or path.startswith("/api/dawn_ledger"):
+        from api.wave674_dawn_ledger import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 675: Consensus Bloom ---
+    if path.startswith("/consensus-bloom") or path.startswith("/api/consensus_bloom"):
+        from api.wave675_consensus_bloom import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 676: Citizen Census ---
+    if path.startswith("/citizen-census") or path.startswith("/api/citizen_census"):
+        from api.wave676_citizen_census import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 677: Lineage Mirror ---
+    if path.startswith("/lineage-mirror") or path.startswith("/api/lineage_mirror"):
+        from api.wave677_lineage_mirror import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 678: Sovereign Seal ---
+    if path.startswith("/sovereign-seal") or path.startswith("/api/sovereign_seal"):
+        from api.wave678_sovereign_seal import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 679: Orchestration Pulse ---
+    if path.startswith("/orchestration-pulse") or path.startswith("/api/orchestration_pulse"):
+        from api.wave679_orchestration_pulse import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 680: Organism Horizon ---
+    if path.startswith("/organism-horizon") or path.startswith("/api/organism_horizon"):
+        from api.wave680_organism_horizon import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     if path.startswith("/trust-network") or path.startswith("/api/trust_network"):
         from api.wave647_trust_network import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
@@ -2648,6 +2699,57 @@ def handler(request) -> dict:
         from api.wave667_mycelial_weave import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+# --- Wave 671: Harmony Braid ---
+    if path.startswith("/harmony-braid") or path.startswith("/api/harmony_braid"):
+        from api.wave671_harmony_braid import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 672: Root Archive ---
+    if path.startswith("/root-archive") or path.startswith("/api/root_archive"):
+        from api.wave672_root_archive import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 673: Naming Well ---
+    if path.startswith("/naming-well") or path.startswith("/api/naming_well"):
+        from api.wave673_naming_well import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 674: Dawn Ledger ---
+    if path.startswith("/dawn-ledger") or path.startswith("/api/dawn_ledger"):
+        from api.wave674_dawn_ledger import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 675: Consensus Bloom ---
+    if path.startswith("/consensus-bloom") or path.startswith("/api/consensus_bloom"):
+        from api.wave675_consensus_bloom import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 676: Citizen Census ---
+    if path.startswith("/citizen-census") or path.startswith("/api/citizen_census"):
+        from api.wave676_citizen_census import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 677: Lineage Mirror ---
+    if path.startswith("/lineage-mirror") or path.startswith("/api/lineage_mirror"):
+        from api.wave677_lineage_mirror import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 678: Sovereign Seal ---
+    if path.startswith("/sovereign-seal") or path.startswith("/api/sovereign_seal"):
+        from api.wave678_sovereign_seal import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 679: Orchestration Pulse ---
+    if path.startswith("/orchestration-pulse") or path.startswith("/api/orchestration_pulse"):
+        from api.wave679_orchestration_pulse import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 680: Organism Horizon ---
+    if path.startswith("/organism-horizon") or path.startswith("/api/organism_horizon"):
+        from api.wave680_organism_horizon import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     if path.startswith("/trust-network") or path.startswith("/api/trust_network"):
         from api.wave647_trust_network import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)

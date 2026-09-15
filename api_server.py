@@ -87,6 +87,16 @@ ROUTE_ALIASES: dict[str, str] = {
     "resonance_ledger_v2": "wave668_resonance_ledger_v2",
     "paradox_appeal": "wave669_paradox_appeal",
     "sentient_heuristic": "wave670_sentient_heuristic",
+    "harmony_braid": "wave671_harmony_braid",
+    "root_archive": "wave672_root_archive",
+    "naming_well": "wave673_naming_well",
+    "dawn_ledger": "wave674_dawn_ledger",
+    "consensus_bloom": "wave675_consensus_bloom",
+    "citizen_census": "wave676_citizen_census",
+    "lineage_mirror": "wave677_lineage_mirror",
+    "sovereign_seal": "wave678_sovereign_seal",
+    "orchestration_pulse": "wave679_orchestration_pulse",
+    "organism_horizon": "wave680_organism_horizon",
     "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
     "adaptive_regulation": "wave636_adaptive_regulation",
 }

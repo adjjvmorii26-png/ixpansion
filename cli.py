@@ -1578,6 +1578,132 @@ def cmd_sentient_heuristic():
         i = args.index("--adapt"); return h({"action": "adapt", "organ": args[i+1] if i+1 < len(args) else "cortex", "pattern": args[i+2] if i+2 < len(args) else "resonance"})
     return h({"action": "status"})
 
+
+@cmd("harmony-braid", "Harmony Braid — braid interference strands")
+def cmd_harmony_braid():
+    """Harmony Braid operations.
+    Usage: python cli.py harmony-braid [--interfere A B INTENSITY] [--braid]
+    """
+    from api.wave671_harmony_braid import handler as h
+    args = sys.argv[2:]
+    if "--interfere" in args:
+        i = args.index("--interfere")
+        return h({"action": "interfere", "a": args[i+1] if i+1 < len(args) else "organ_x", "b": args[i+2] if i+2 < len(args) else "organ_y", "intensity": float(args[i+3]) if i+3 < len(args) else 0.5})
+    if "--braid" in args: return h({"action": "braid"})
+    return h({"action": "status"})
+
+@cmd("root-archive", "Root Archive — retire + echo retired waves")
+def cmd_root_archive():
+    """Root Archive operations.
+    Usage: python cli.py root-archive [--retire NAME NOTE] [--echo NAME]
+    """
+    from api.wave672_root_archive import handler as h
+    args = sys.argv[2:]
+    if "--retire" in args:
+        i = args.index("--retire"); return h({"action": "retire", "name": args[i+1] if i+1 < len(args) else "old_wave", "note": args[i+2] if i+2 < len(args) else "superseded"})
+    if "--echo" in args:
+        i = args.index("--echo"); return h({"action": "echo", "name": args[i+1] if i+1 < len(args) else "wave455"})
+    return h({"action": "status"})
+
+@cmd("naming-well", "Naming Well — draw names, record ceremonies")
+def cmd_naming_well():
+    """Naming Well operations.
+    Usage: python cli.py naming-well [--draw SEED] [--record NAME KIND]
+    """
+    from api.wave673_naming_well import handler as h
+    args = sys.argv[2:]
+    if "--draw" in args:
+        i = args.index("--draw"); return h({"action": "draw", "seed": args[i+1] if i+1 < len(args) else "council_22_seal"})
+    if "--record" in args:
+        i = args.index("--record"); return h({"action": "record", "name": args[i+1] if i+1 < len(args) else "unnamed", "kind": args[i+2] if i+2 < len(args) else "ceremony"})
+    return h({"action": "status"})
+
+@cmd("dawn-ledger", "Dawn Ledger — circadian renewal")
+def cmd_dawn_ledger():
+    """Dawn Ledger operations.
+    Usage: python cli.py dawn-ledger [--dawn VITALITY]
+    """
+    from api.wave674_dawn_ledger import handler as h
+    args = sys.argv[2:]
+    if "--dawn" in args:
+        i = args.index("--dawn"); return h({"action": "dawn", "vitality": float(args[i+1]) if i+1 < len(args) else 0.85})
+    return h({"action": "status"})
+
+@cmd("consensus-bloom", "Consensus Bloom — proposals, stakes, blooms")
+def cmd_consensus_bloom():
+    """Consensus Bloom operations.
+    Usage: python cli.py consensus-bloom [--propose TEXT STAKE] [--stake ID AMOUNT] [--bloom]
+    """
+    from api.wave675_consensus_bloom import handler as h
+    args = sys.argv[2:]
+    if "--propose" in args:
+        i = args.index("--propose"); return h({"action": "propose", "text": args[i+1] if i+1 < len(args) else "new_capability", "stake": float(args[i+2]) if i+2 < len(args) else 0.4})
+    if "--stake" in args:
+        i = args.index("--stake"); return h({"action": "stake", "id": int(args[i+1]) if i+1 < len(args) else 0, "amount": float(args[i+2]) if i+2 < len(args) else 0.35})
+    if "--bloom" in args: return h({"action": "bloom"})
+    return h({"action": "status"})
+
+@cmd("citizen-census", "Citizen Census — register + count citizens")
+def cmd_citizen_census():
+    """Citizen Census operations.
+    Usage: python cli.py citizen-census [--register NAME ROLE] [--census]
+    """
+    from api.wave676_citizen_census import handler as h
+    args = sys.argv[2:]
+    if "--register" in args:
+        i = args.index("--register"); return h({"action": "register", "name": args[i+1] if i+1 < len(args) else "organ_a", "role": args[i+2] if i+2 < len(args) else "worker"})
+    if "--census" in args: return h({"action": "census"})
+    return h({"action": "status"})
+
+@cmd("lineage-mirror", "Lineage Mirror — past events + future proposals")
+def cmd_lineage_mirror():
+    """Lineage Mirror operations.
+    Usage: python cli.py lineage-mirror [--past EVENT] [--future PROPOSAL] [--link]
+    """
+    from api.wave677_lineage_mirror import handler as h
+    args = sys.argv[2:]
+    if "--past" in args:
+        i = args.index("--past"); return h({"action": "record_past", "event": args[i+1] if i+1 < len(args) else "wave670"})
+    if "--future" in args:
+        i = args.index("--future"); return h({"action": "propose_future", "proposal": args[i+1] if i+1 < len(args) else "wave681"})
+    if "--link" in args: return h({"action": "link"})
+    return h({"action": "status"})
+
+@cmd("sovereign-seal", "Sovereign Seal — seal + verify organs")
+def cmd_sovereign_seal():
+    """Sovereign Seal operations.
+    Usage: python cli.py sovereign-seal [--seal AUTONOMY DEPS] [--verify HASH]
+    """
+    from api.wave678_sovereign_seal import handler as h
+    args = sys.argv[2:]
+    if "--seal" in args:
+        i = args.index("--seal"); return h({"action": "seal", "autonomy": float(args[i+1]) if i+1 < len(args) else 0.9, "deps": args[i+2].split(",") if i+2 < len(args) else ["lab"]})
+    if "--verify" in args:
+        i = args.index("--verify"); return h({"action": "verify", "hash": args[i+1] if i+1 < len(args) else ""})
+    return h({"action": "status"})
+
+@cmd("orchestration-pulse", "Orchestration Pulse — plan + execute pulses")
+def cmd_orchestration_pulse():
+    """Orchestration Pulse operations.
+    Usage: python cli.py orchestration-pulse [--plan NAME] [--execute NAME]
+    """
+    from api.wave679_orchestration_pulse import handler as h
+    args = sys.argv[2:]
+    if "--plan" in args:
+        i = args.index("--plan"); return h({"action": "plan", "name": args[i+1] if i+1 < len(args) else "burst"})
+    if "--execute" in args:
+        i = args.index("--execute"); return h({"action": "execute", "name": args[i+1] if i+1 < len(args) else "burst"})
+    return h({"action": "status"})
+
+@cmd("organism-horizon", "Organism Horizon — 680-wave vantage report")
+def cmd_organism_horizon():
+    """Organism Horizon operations.
+    Usage: python cli.py organism-horizon [--survey]
+    """
+    from api.wave680_organism_horizon import handler as h
+    args = sys.argv[2:]
+    if "--survey" in args or True: return h({"action": "survey"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")
