@@ -1507,6 +1507,22 @@ def cmd_mycelium():
     if "--map" in args: return h({"action": "map"})
     return h({"action": "status"})
 
+@cmd("citizens", "Citizen Rights — register, grant, revoke, census")
+def cmd_citizens():
+    """Citizen Rights operations.
+    Usage: python cli.py citizens [--register NAME ROLE] [--grant NAME RIGHT] [--revoke NAME RIGHT] [--census]
+    """
+    from api.wave666_citizen_rights import handler as h
+    args = sys.argv[2:]
+    if "--register" in args:
+        i = args.index("--register"); return h({"action": "register", "citizen": args[i+1] if i+1 < len(args) else "module", "role": args[i+2] if i+2 < len(args) else "citizen"})
+    if "--grant" in args:
+        i = args.index("--grant"); return h({"action": "grant", "citizen": args[i+1] if i+1 < len(args) else "module", "right": args[i+2] if i+2 < len(args) else "evolve"})
+    if "--revoke" in args:
+        i = args.index("--revoke"); return h({"action": "revoke", "citizen": args[i+1] if i+1 < len(args) else "module", "right": args[i+2] if i+2 < len(args) else "evolve"})
+    if "--census" in args: return h({"action": "census"})
+    return h({"action": "status"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

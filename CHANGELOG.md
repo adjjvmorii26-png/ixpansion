@@ -1,3 +1,11 @@
+## [4.106.0] — 2026-09-15
+
+### Added
+- **Wave 666 — Citizen Rights**: Modules become citizens with roles and rights. Register, grant/revoke, right-checks, census.
+- Routes: /citizen-rights
+- CLI command: citizens
+- 10 new tests (all passing).
+
 ## [4.105.0] — 2026-09-15
 
 ### Added
