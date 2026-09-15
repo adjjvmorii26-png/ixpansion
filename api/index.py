@@ -2565,6 +2565,27 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Wave 683: Void Meter ---
+    if path.startswith("/void-meter") or path.startswith("/api/void_meter"):
+        from api.wave683_void_meter import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 684: Braid Debt Oracle ---
+    if path.startswith("/braid-debt-oracle") or path.startswith("/api/braid_debt_oracle"):
+        from api.wave684_braid_debt_oracle import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 685: Bloom Cascade ---
+    if path.startswith("/bloom-cascade") or path.startswith("/api/bloom_cascade"):
+        from api.wave685_bloom_cascade import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 686: Dual-Track Sentinel ---
+    if path.startswith("/dual-track-sentinel") or path.startswith("/api/dual_track_sentinel"):
+        from api.wave686_dual_track_sentinel import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     if path.startswith("/trust-network") or path.startswith("/api/trust_network"):
         from api.wave647_trust_network import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
@@ -2769,6 +2790,27 @@ def handler(request) -> dict:
 # --- Wave 682: Scar Compass ---
     if path.startswith("/scar-compass") or path.startswith("/api/scar_compass"):
         from api.wave682_scar_compass import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 683: Void Meter ---
+    if path.startswith("/void-meter") or path.startswith("/api/void_meter"):
+        from api.wave683_void_meter import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 684: Braid Debt Oracle ---
+    if path.startswith("/braid-debt-oracle") or path.startswith("/api/braid_debt_oracle"):
+        from api.wave684_braid_debt_oracle import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 685: Bloom Cascade ---
+    if path.startswith("/bloom-cascade") or path.startswith("/api/bloom_cascade"):
+        from api.wave685_bloom_cascade import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 686: Dual-Track Sentinel ---
+    if path.startswith("/dual-track-sentinel") or path.startswith("/api/dual_track_sentinel"):
+        from api.wave686_dual_track_sentinel import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 

@@ -99,6 +99,16 @@ ROUTE_ALIASES: dict[str, str] = {
     "organism_horizon": "wave680_organism_horizon",
     "hush_membrane": "wave681_hush_membrane",
     "scar_compass": "wave682_scar_compass",
+    "hush_membrane": "wave681_hush_membrane",
+    "void_meter": "wave683_void_meter",
+    "braid_debt_oracle": "wave684_braid_debt_oracle",
+    "bloom_cascade": "wave685_bloom_cascade",
+    "dual_track_sentinel": "wave686_dual_track_sentinel",
+    "hush_membrane": "wave681_hush_membrane",
+    "void_meter": "wave683_void_meter",
+    "braid_debt_oracle": "wave684_braid_debt_oracle",
+    "bloom_cascade": "wave685_bloom_cascade",
+    "dual_track_sentinel": "wave686_dual_track_sentinel",
     "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
     "adaptive_regulation": "wave636_adaptive_regulation",
 }

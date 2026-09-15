@@ -1730,6 +1730,94 @@ def cmd_scar_compass():
     if "--heading" in args: return h({"action": "heading"})
     return h({"action": "status"})
 
+
+@cmd("void-meter", "Void Meter — productive absence as spendable void capital")
+def cmd_void_meter():
+    """Void Meter operations.
+    Usage: python cli.py void-meter [--pulse TEXT CAPITAL]
+    """
+    from api.wave683_void_meter import handler as h
+    args = sys.argv[2:]
+    if "--pulse" in args:
+        i = args.index("--pulse"); return h({"action": "pulse", "text": args[i+1] if i+1 < len(args) else "void", "capital": float(args[i+2]) if i+2 < len(args) else 1.0})
+    return h({"action": "status"})
+
+@cmd("braid-debt-oracle", "Braid Debt Oracle — forecast paradox debt from harmony_braid samples")
+def cmd_braid_debt_oracle():
+    """Braid Debt Oracle operations.
+    Usage: python cli.py braid-debt-oracle [--forecast SAMPLES]
+    """
+    from api.wave684_braid_debt_oracle import handler as h
+    args = sys.argv[2:]
+    if "--forecast" in args:
+        i = args.index("--forecast"); return h({"action": "forecast", "samples": int(args[i+1]) if i+1 < len(args) else 7})
+    return h({"action": "status"})
+
+@cmd("bloom-cascade", "Bloom Cascade — capability trees parented from consensus blooms")
+def cmd_bloom_cascade():
+    """Bloom Cascade operations.
+    Usage: python cli.py bloom-cascade [--parent BLOOM] [--pressure FLOAT]
+    """
+    from api.wave685_bloom_cascade import handler as h
+    args = sys.argv[2:]
+    if "--parent" in args:
+        i = args.index("--parent"); return h({"action": "parent", "bloom": args[i+1] if i+1 < len(args) else "consensus_bloom", "pressure": float(args[i+2]) if i+2 < len(args) else 1.0})
+    return h({"action": "status"})
+
+@cmd("dual-track-sentinel", "Dual-Track Sentinel — soft contamination score lab vs ALEPH hot paths")
+def cmd_dual_track_sentinel():
+    """Dual-Track Sentinel operations.
+    Usage: python cli.py dual-track-sentinel [--probe PATH [PATH2]]
+    """
+    from api.wave686_dual_track_sentinel import handler as h
+    args = sys.argv[2:]
+    probes = args[1:] if "--probe" in args else []
+    idx = args.index("--probe") if "--probe" in args else -1
+    return h({"action": "probe", "paths": probes})
+
+@cmd("void-meter", "Void Meter — productive absence as spendable void capital")
+def cmd_void_meter():
+    """Void Meter operations.
+    Usage: python cli.py void-meter [--pulse TEXT CAPITAL]
+    """
+    from api.wave683_void_meter import handler as h
+    args = sys.argv[2:]
+    if "--pulse" in args:
+        i = args.index("--pulse"); return h({"action": "pulse", "text": args[i+1] if i+1 < len(args) else "void", "capital": float(args[i+2]) if i+2 < len(args) else 1.0})
+    return h({"action": "status"})
+
+@cmd("braid-debt-oracle", "Braid Debt Oracle — forecast paradox debt from harmony_braid samples")
+def cmd_braid_debt_oracle():
+    """Braid Debt Oracle operations.
+    Usage: python cli.py braid-debt-oracle [--forecast SAMPLES]
+    """
+    from api.wave684_braid_debt_oracle import handler as h
+    args = sys.argv[2:]
+    if "--forecast" in args:
+        i = args.index("--forecast"); return h({"action": "forecast", "samples": int(args[i+1]) if i+1 < len(args) else 7})
+    return h({"action": "status"})
+
+@cmd("bloom-cascade", "Bloom Cascade — capability trees parented from consensus blooms")
+def cmd_bloom_cascade():
+    """Bloom Cascade operations.
+    Usage: python cli.py bloom-cascade [--parent BLOOM] [--pressure FLOAT]
+    """
+    from api.wave685_bloom_cascade import handler as h
+    args = sys.argv[2:]
+    if "--parent" in args:
+        i = args.index("--parent"); return h({"action": "parent", "bloom": args[i+1] if i+1 < len(args) else "consensus_bloom", "pressure": float(args[i+2]) if i+2 < len(args) else 1.0})
+    return h({"action": "status"})
+
+@cmd("dual-track-sentinel", "Dual-Track Sentinel — soft contamination score lab vs ALEPH hot paths")
+def cmd_dual_track_sentinel():
+    """Dual-Track Sentinel operations.
+    Usage: python cli.py dual-track-sentinel [--probe PATH [PATH2]]
+    """
+    from api.wave686_dual_track_sentinel import handler as h
+    args = sys.argv[2:]
+    probes = args[1:] if "--probe" in args else []
+    idx = args.index("--probe") if "--probe" in args else -1
+    return h({"action": "probe", "paths": probes})
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")
