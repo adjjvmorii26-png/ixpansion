@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sovereign Seal — IXPANSION</title>
+<style>
+:root{--bg:#0f0f0a;--fg:#e0e0e8;--muted:#6b6b80;--accent:#ffb457;--card:#1c1a10;--border:#3a3220;--amber:#ffcc66;--green:#41d3a3}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+h1{text-align:center;margin-bottom:6px;font-size:1.9em;color:var(--accent)}
+.sub{text-align:center;color:var(--muted);margin-bottom:24px;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1250px;margin:0 auto 20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--amber);font-size:1.05em;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222;font-size:.9em}
+.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}.value{color:var(--accent);font-weight:bold}
+.btn{background:#1a2a3a;border:1px solid var(--accent);color:var(--accent);padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px;transition:.2s}
+.btn:hover{background:var(--accent);color:#0a0a14}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
+input,select{background:#0c0c1c;border:1px solid #3a3a5a;color:var(--fg);padding:6px 8px;border-radius:6px;font-size:.85em;width:120px}
+.foot{text-align:center;color:var(--muted);font-size:.75em;margin-top:16px}
+</style>
+</head>
+<body>
+<h1>🛡️ Sovereign Seal</h1>
+<p class="sub">SEAL ORGANS WITH AUTONOMY BOUNDS + VERIFY</p>
+<div class="grid">
+  <div class="card"><h2>Live Status</h2><div id="status">Loading...</div></div>
+  <div class="card"><h2>Seal an Organ</h2><div class="row"><input id="seal_autonomy" placeholder="autonomy" value="0.9"><input id="seal_deps" placeholder="deps" value="lab"></div><button class="btn" onclick="seal()">🛡️ Seal</button><div id="r_seal" style="margin-top:8px"></div></div><div class="card"><h2>Verify Seal</h2><div class="row"><input id="verify_hash" placeholder="hash" value=""></div><button class="btn" onclick="verify()">🔍 Verify</button><div id="r_vfy" style="margin-top:8px"></div></div>
+</div>
+<div style="text-align:center"><button class="btn" onclick="boot()">🔄 Refresh All</button></div>
+<div class="foot">wave 678 · /api/sovereign_seal · governance</div>
+<script>
+const API='';
+async function fj(p){const r=await fetch(API+p);return r.json();}
+async function boot(){
+  try{
+    const s=await fj('/api/sovereign_seal?action=status');
+    const el=document.getElementById('status');
+    if(!s||typeof s!=='object'){el.innerHTML='<div style="color:var(--muted)">no response</div>';return;}
+    el.innerHTML=Object.entries(s).filter(([k,v])=>typeof v==='number'||typeof v==='string'||typeof v==='boolean').slice(0,8)
+      .map(([k,v])=>`<div class="metric"><span class="label">${k}</span><span class="value">${v}</span></div>`).join('');
+  }catch(e){document.getElementById('status').innerHTML='<div style="color:#ff8888">offline</div>';}
+}
+async function seal(){
+  const r=await fj(`/api/sovereign_seal?autonomy=${encodeURIComponent(document.getElementById('seal_autonomy').value)}&deps=${encodeURIComponent(document.getElementById('seal_deps').value)}`);
+  const el=document.getElementById('r_seal');
+  if(!el) return;
+  el.innerHTML= r&&r.error ? `<div style="color:#ff8888">${r.error}</div>` : `<div style="color:var(--green);font-size:.85em">${JSON.stringify(r).slice(0,180)}</div>`;
+  boot();
+}
+async function verify(){
+  const r=await fj(`/api/sovereign_seal?hash=${encodeURIComponent(document.getElementById('verify_hash').value)}`);
+  const el=document.getElementById('r_vfy');
+  if(!el) return;
+  el.innerHTML= r&&r.error ? `<div style="color:#ff8888">${r.error}</div>` : `<div style="color:var(--green);font-size:.85em">${JSON.stringify(r).slice(0,180)}</div>`;
+  boot();
+}
+
+boot();setInterval(boot,8000);
+</script>
+</body>
+</html>

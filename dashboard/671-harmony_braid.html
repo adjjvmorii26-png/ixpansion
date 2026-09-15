@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harmony Braid — IXPANSION</title>
+<style>
+:root{--bg:#0a0f1a;--fg:#e0e0e8;--muted:#6b6b80;--accent:#7ec8ff;--card:#101c2c;--border:#1e3650;--amber:#ffcc66;--green:#41d3a3}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+h1{text-align:center;margin-bottom:6px;font-size:1.9em;color:var(--accent)}
+.sub{text-align:center;color:var(--muted);margin-bottom:24px;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1250px;margin:0 auto 20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--amber);font-size:1.05em;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222;font-size:.9em}
+.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}.value{color:var(--accent);font-weight:bold}
+.btn{background:#1a2a3a;border:1px solid var(--accent);color:var(--accent);padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px;transition:.2s}
+.btn:hover{background:var(--accent);color:#0a0a14}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
+input,select{background:#0c0c1c;border:1px solid #3a3a5a;color:var(--fg);padding:6px 8px;border-radius:6px;font-size:.85em;width:120px}
+.foot{text-align:center;color:var(--muted);font-size:.75em;margin-top:16px}
+</style>
+</head>
+<body>
+<h1>🕸️ Harmony Braid</h1>
+<p class="sub">BRAID INTERFERENCE STRANDS INTO COHERENCE</p>
+<div class="grid">
+  <div class="card"><h2>Live Status</h2><div id="status">Loading...</div></div>
+  <div class="card"><h2>Register Interference</h2><div class="row"><input id="interfere_a" placeholder="A" value="organ_x"><input id="interfere_b" placeholder="B" value="organ_y"><input id="interfere_intensity" placeholder="intensity" value="0.5"></div><button class="btn" onclick="interfere()">⚡ Interfere</button><div id="r_int" style="margin-top:8px"></div></div><div class="card"><h2>Braid Strands</h2><button class="btn" onclick="braid()">🧶 Braid</button><div id="r_braid" style="margin-top:8px"></div></div>
+</div>
+<div style="text-align:center"><button class="btn" onclick="boot()">🔄 Refresh All</button></div>
+<div class="foot">wave 671 · /api/harmony_braid · AXIOME · council-22</div>
+<script>
+const API='';
+async function fj(p){const r=await fetch(API+p);return r.json();}
+async function boot(){
+  try{
+    const s=await fj('/api/harmony_braid?action=status');
+    const el=document.getElementById('status');
+    if(!s||typeof s!=='object'){el.innerHTML='<div style="color:var(--muted)">no response</div>';return;}
+    el.innerHTML=Object.entries(s).filter(([k,v])=>typeof v==='number'||typeof v==='string'||typeof v==='boolean').slice(0,8)
+      .map(([k,v])=>`<div class="metric"><span class="label">${k}</span><span class="value">${v}</span></div>`).join('');
+  }catch(e){document.getElementById('status').innerHTML='<div style="color:#ff8888">offline</div>';}
+}
+async function interfere(){
+  const r=await fj(`/api/harmony_braid?a=${encodeURIComponent(document.getElementById('interfere_a').value)}&b=${encodeURIComponent(document.getElementById('interfere_b').value)}&intensity=${encodeURIComponent(document.getElementById('interfere_intensity').value)}`);
+  const el=document.getElementById('r_int');
+  if(!el) return;
+  el.innerHTML= r&&r.error ? `<div style="color:#ff8888">${r.error}</div>` : `<div style="color:var(--green);font-size:.85em">${JSON.stringify(r).slice(0,180)}</div>`;
+  boot();
+}
+async function braid(){
+  const r=await fj(`/api/harmony_braid`);
+  const el=document.getElementById('r_braid');
+  if(!el) return;
+  el.innerHTML= r&&r.error ? `<div style="color:#ff8888">${r.error}</div>` : `<div style="color:var(--green);font-size:.85em">${JSON.stringify(r).slice(0,180)}</div>`;
+  boot();
+}
+
+boot();setInterval(boot,8000);
+</script>
+</body>
+</html>
