@@ -824,7 +824,23 @@
         "dashboard/world.html": "keep"
       },
       "rationale": "Council session 17: 158 stale dashboards evaluated. 15 kept, 21 retired, 20 archived.",
-      "sealed_at": "2026-09-15T01:09:45+00:00"
+      "sealed_at": "2026-09-15T01:09:45+00:00",
+      "finalized": {
+        "kept": [
+          "archive.html",
+          "coherence-regulator-v2.html",
+          "commune.html",
+          "confluence.html",
+          "deploy.html",
+          "dream-gallery.html",
+          "error-lexicon.html",
+          "fractal-garden.html",
+          "pentaxis.html"
+        ],
+        "retired": [],
+        "archived": [],
+        "finalized_at": "2026-09-15T01:14:14+00:00"
+      }
     }
   ],
   "total": 11,
