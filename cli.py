@@ -1878,6 +1878,18 @@ def main():
             pass
         import json as _j
         print(_j.dumps(h(q), indent=2))
+# --- Wave 697: Neural Syntax Bridge ---
+    if cmd == "wave697" or cmd == "neural-syntax":
+        from api.wave697_neural_syntax_bridge import handler as h
+        q = {"action": args[0] if args else "status"}
+        if q["action"] == "translate" and len(args) >= 4:
+            q["source_lang"] = args[1]
+            q["target_lang"] = args[2]
+            q["content"] = " ".join(args[3:])
+        elif q["action"] == "bridge" and len(args) >= 2:
+            q["bridge_id"] = args[1]
+        import json as _j
+        print(_j.dumps(h(q), indent=2))
 
 
 if __name__ == "__main__":

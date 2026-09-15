@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wave 697 — Neural Syntax Bridge</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a12;color:#e0e0e0;font-family:'Courier New',monospace;padding:20px}
+h1{text-align:center;color:#c38d9e;margin-bottom:10px;font-size:1.4em}
+.sub{text-align:center;color:#666;margin-bottom:20px;font-size:.85em}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:0 auto}
+.card{background:#151520;border:1px solid #2a2a3a;border-radius:8px;padding:16px}
+.card h2{color:#41b3a3;font-size:1em;margin-bottom:10px}
+.stat{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1a1a2a;font-size:.85em}
+.stat .label{color:#888}.stat .val{color:#e8a87c;font-weight:bold}
+.bridge{background:#1a1a2a;border:1px solid #333;border-radius:6px;padding:10px;margin:4px 0;font-size:.8em}
+.lang{color:#41b3a3;font-weight:bold}
+.btn{background:#2a2a3a;color:#e8a87c;border:1px solid #444;padding:8px 16px;border-radius:4px;cursor:pointer;margin:4px;font-family:inherit;font-size:.85em}
+.btn:hover{background:#3a3a4a}
+textarea{width:100%;background:#1a1a2a;color:#e0e0e0;border:1px solid #333;padding:8px;font-family:inherit;font-size:.85em;border-radius:4px;resize:vertical}
+#log{max-width:900px;margin:20px auto;background:#151520;border:1px solid #2a2a3a;border-radius:8px;padding:12px;max-height:200px;overflow-y:auto;font-size:.8em;color:#666}
+</style>
+</head>
+<body>
+<h1>🔗 Wave 697 — Neural Syntax Bridge</h1>
+<div class="sub">Translating between organism language and external formats</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Bridge State</h2>
+    <div class="stat"><span class="label">Bridge Count</span><span class="val" id="s_bridge">0</span></div>
+    <div class="stat"><span class="label">Syntax Rules</span><span class="val" id="s_rules">0</span></div>
+    <div class="stat"><span class="label">Translation Quality</span><span class="val" id="s_qual">0.0</span></div>
+    <div class="stat"><span class="label">Languages</span><span class="val" id="s_langs">0</span></div>
+  </div>
+  <div class="card">
+    <h2>Translate</h2>
+    <textarea id="transContent" placeholder="Content to translate..." rows="3"></textarea>
+    <br>
+    <select id="srcLang" style="width:48%;padding:6px;background:#1a1a2a;color:#e8a87c;border:1px solid #444;font-family:inherit;font-size:.85em">
+      <option value="org_internal">Organism Internal</option>
+      <option value="json">JSON</option>
+      <option value="hex">HEX</option>
+      <option value="natural">Natural</option>
+    </select>
+    <select id="tgtLang" style="width:48%;padding:6px;background:#1a1a2a;color:#e8a87c;border:1px solid #444;font-family:inherit;font-size:.85em">
+      <option value="json">JSON</option>
+      <option value="hex">HEX</option>
+      <option value="natural">Natural</option>
+      <option value="org_internal">Organism Internal</option>
+    </select>
+    <br>
+    <button class="btn" onclick="translate()">Translate</button>
+    <button class="btn" onclick="showSyntax()">Show Syntax Rules</button>
+    <button class="btn" onclick="loadStatus()">Refresh</button>
+  </div>
+</div>
+
+<div id="log"></div>
+
+<script>
+const API = '/api/neural_syntax';
+let state = {};
+
+function log(msg) {
+  const el = document.getElementById('log');
+  el.innerHTML = `<div>[${new Date().toISOString().slice(11,19)}] ${msg}</div>` + el.innerHTML;
+}
+
+async function api(params) {
+  const qs = Object.entries(params).map(([k,v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+  const r = await fetch(`${API}?${qs}`);
+  return r.json();
+}
+
+async function loadStatus() {
+  const st = await api({action:'status'});
+  document.getElementById('s_bridge').textContent = st.bridge_count;
+  document.getElementById('s_rules').textContent = st.syntax_rules;
+  document.getElementById('s_qual').textContent = st.translation_quality;
+  document.getElementById('s_langs').textContent = st.languages ? st.languages.length : 0;
+  state = st;
+  log(`Bridges: ${st.bridge_count}, quality: ${st.translation_quality}`);
+}
+
+async function translate() {
+  const content = document.getElementById('transContent').value;
+  if (!content) { log('No content'); return; }
+  const src = document.getElementById('srcLang').value;
+  const tgt = document.getElementById('tgtLang').value;
+  const r = await api({action:'translate', source_lang: src, target_lang: tgt, content});
+  if (r.status === 'translated') {
+    log(`Translated (quality: ${r.quality})`);
+    document.getElementById('transContent').value = '';
+    loadStatus();
+  } else {
+    log(`Error: ${r.message}`);
+  }
+}
+
+async function showSyntax() {
+  const s = await api({action:'syntax'});
+  if (s.status === 'syntax') {
+    log(`Syntax rules: ${s.rules.join(', ')}`);
+    log(`Languages: ${s.languages.join(', ')}`);
+  }
+}
+
+loadStatus();
+</script>
+</body>
+</html>

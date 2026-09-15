@@ -2603,6 +2603,12 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Wave 697: Neural Syntax Bridge ---
+    if path.startswith("/neural-syntax") or path.startswith("/api/neural_syntax"):
+        from api.wave697_neural_syntax_bridge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 # --- Wave 694: Quantum Coherence Lattice ---
     if path.startswith("/quantum-coherence-lattice") or path.startswith("/api/quantum_coherence_lattice"):
         from api.wave694_quantum_coherence_lattice import handler as h
