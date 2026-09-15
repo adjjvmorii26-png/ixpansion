@@ -1851,6 +1851,21 @@ def main():
             q["node_id"] = args[1]
         import json as _j
         print(_j.dumps(h(q), indent=2))
+# --- Wave 695: Memory Palace Reanimation ---
+    if cmd == "wave695" or cmd == "memory-palace":
+        from api.wave695_memory_palace_reanimation import handler as h
+        q = {"action": args[0] if args else "status"}
+        if q["action"] == "store_memory" and len(args) >= 3:
+            q["memory_id"] = args[1]
+            q["content"] = args[2]
+            if len(args) >= 4:
+                q["room"] = args[3]
+        elif q["action"] == "recall" and len(args) >= 2:
+            q["memory_id"] = args[1]
+        elif q["action"] == "traverse" and len(args) >= 2:
+            q["room"] = args[1]
+        import json as _j
+        print(_j.dumps(h(q), indent=2))
 
 
 if __name__ == "__main__":

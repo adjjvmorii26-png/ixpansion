@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wave 695 — Memory Palace Reanimation</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a12;color:#e0e0e0;font-family:'Courier New',monospace;padding:20px}
+h1{text-align:center;color:#c38d9e;margin-bottom:10px;font-size:1.4em}
+.sub{text-align:center;color:#666;margin-bottom:20px;font-size:.85em}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:0 auto}
+.card{background:#151520;border:1px solid #2a2a3a;border-radius:8px;padding:16px}
+.card h2{color:#41b3a3;font-size:1em;margin-bottom:10px}
+.stat{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1a1a2a;font-size:.85em}
+.stat .label{color:#888}.stat .val{color:#e8a87c;font-weight:bold}
+.rooms{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.room{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7em;font-weight:bold;cursor:pointer;transition:all .3s}
+.room.empty{background:#33334d;color:#666;border:2px solid #444}
+.room.filled{background:#41b3a3;color:#0a0a12;border:2px solid #41b3a3;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 8px #41b3a333}50%{box-shadow:0 0 20px #41b3a3aa}}
+.btn{background:#2a2a3a;color:#e8a87c;border:1px solid #444;padding:8px 16px;border-radius:4px;cursor:pointer;margin:4px;font-family:inherit;font-size:.85em}
+.btn:hover{background:#3a3a4a}
+textarea{width:100%;background:#1a1a2a;color:#e0e0e0;border:1px solid #333;padding:8px;font-family:inherit;font-size:.85em;border-radius:4px;resize:vertical}
+#log{max-width:900px;margin:20px auto;background:#151520;border:1px solid #2a2a3a;border-radius:8px;padding:12px;max-height:200px;overflow-y:auto;font-size:.8em;color:#666}
+</style>
+</head>
+<body>
+<h1>🧠 Wave 695 — Memory Palace Reanimation</h1>
+<div class="sub">Store, traverse, and recall memories across a living palace</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Palace State</h2>
+    <div class="stat"><span class="label">Memories Stored</span><span class="val" id="s_mem">0</span></div>
+    <div class="stat"><span class="label">Rooms Occupied</span><span class="val" id="s_rooms">0</span></div>
+    <div class="stat"><span class="label">Palace Depth</span><span class="val" id="s_depth">0</span></div>
+    <div class="stat"><span class="label">Total Knowledge</span><span class="val" id="s_know">0</span></div>
+    <div class="rooms" id="rooms"></div>
+  </div>
+  <div class="card">
+    <h2>Memory Actions</h2>
+    <button class="btn" onclick="storeMem()">Store Memory</button>
+    <button class="btn" onclick="recallMem()">Recall Memory</button>
+    <button class="btn" onclick="traverseRoom()">Traverse Room</button>
+    <button class="btn" onclick="loadStatus()">Refresh Status</button>
+    <br>
+    <textarea id="memContent" placeholder="Memory content..." rows="3"></textarea>
+    <br>
+    <input id="memId" placeholder="Memory ID" style="width:48%;padding:6px;background:#1a1a2a;color:#e8a87c;border:1px solid #444;font-family:inherit;font-size:.85em">
+    <input id="memRoom" placeholder="Room" style="width:48%;padding:6px;background:#1a1a2a;color:#e8a87c;border:1px solid #444;font-family:inherit;font-size:.85em">
+  </div>
+</div>
+
+<div id="log"></div>
+
+<script>
+const API = '/api/memory_palace';
+let palaceState = {};
+
+function log(msg) {
+  const el = document.getElementById('log');
+  el.innerHTML = `<div>[${new Date().toISOString().slice(11,19)}] ${msg}</div>` + el.innerHTML;
+}
+
+async function api(params) {
+  const qs = Object.entries(params).map(([k,v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+  const r = await fetch(`${API}?${qs}`);
+  return r.json();
+}
+
+async function loadStatus() {
+  const st = await api({action:'status'});
+  document.getElementById('s_mem').textContent = st.memories_stored;
+  document.getElementById('s_rooms').textContent = st.rooms;
+  document.getElementById('s_depth').textContent = st.palace_depth;
+  document.getElementById('s_know').textContent = st.total_knowledge;
+  palaceState = st;
+  log(`Status: ${st.memories_stored} memories, ${st.rooms} rooms, depth ${st.palace_depth}`);
+  renderRooms();
+}
+
+function renderRooms() {
+  const el = document.getElementById('rooms');
+  const maxRooms = 20;
+  el.innerHTML = '';
+  for (let i = 0; i < maxRooms; i++) {
+    const filled = i < palaceState.rooms;
+    el.innerHTML += `<div class="room ${filled?'filled':'empty'}" title="Room ${i}">${i}</div>`;
+  }
+}
+
+async function storeMem() {
+  const content = document.getElementById('memContent').value;
+  const id = document.getElementById('memId').value || 'mem_' + Date.now();
+  const room = document.getElementById('memRoom').value || 'atrium';
+  if (!content) { log('No content provided'); return; }
+  const r = await api({action:'store_memory', memory_id: id, content: content, room: room});
+  if (r.status === 'stored') {
+    log(`Stored: ${id} in ${room}`);
+    document.getElementById('memContent').value = '';
+    loadStatus();
+  } else {
+    log(`Error: ${r.message || 'unknown'}`);
+  }
+}
+
+async function recallMem() {
+  const id = document.getElementById('memId').value;
+  if (!id) { log('No memory ID'); return; }
+  const r = await api({action:'recall', memory_id: id});
+  if (r.status === 'recalled') {
+    log(`Recalled ${id}: ${r.content}`);
+  } else {
+    log(`Error: ${r.message || 'not found'}`);
+  }
+}
+
+async function traverseRoom() {
+  const room = document.getElementById('memRoom').value || 'atrium';
+  const r = await api({action:'traverse', room: room});
+  if (r.status === 'traversed') {
+    log(`Room ${room}: ${r.memories} memories found`);
+  } else {
+    log(`Error: ${r.message || 'unknown'}`);
+  }
+}
+
+loadStatus();
+</script>
+</body>
+</html>

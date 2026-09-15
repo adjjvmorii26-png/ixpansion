@@ -1,0 +1,22 @@
+{
+  "module": "wave695_memory_palace_reanimation",
+  "wave": 695,
+  "rooms": {
+    "m1": {
+      "content": "the first secret",
+      "room": "atrium",
+      "depth": 1,
+      "stored_at": "2026-09-15T07:55:39.133298+00:00"
+    }
+  },
+  "corridors": [
+    {
+      "from": "atrium",
+      "to": "atrium",
+      "memory_id": "m1"
+    }
+  ],
+  "memories_stored": 1,
+  "palace_depth": 1,
+  "total_knowledge": 16.0
+}

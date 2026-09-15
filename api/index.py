@@ -2591,6 +2591,12 @@ def handler(request) -> dict:
         from api.wave694_quantum_coherence_lattice import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+# --- Wave 695: Memory Palace Reanimation ---
+    if path.startswith("/memory-palace") or path.startswith("/api/memory_palace"):
+        from api.wave695_memory_palace_reanimation import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
 # --- Wave 694: Quantum Coherence Lattice ---
     if path.startswith("/quantum-coherence-lattice") or path.startswith("/api/quantum_coherence_lattice"):
         from api.wave694_quantum_coherence_lattice import handler as h
