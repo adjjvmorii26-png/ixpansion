@@ -97,6 +97,8 @@ ROUTE_ALIASES: dict[str, str] = {
     "sovereign_seal": "wave678_sovereign_seal",
     "orchestration_pulse": "wave679_orchestration_pulse",
     "organism_horizon": "wave680_organism_horizon",
+    "hush_membrane": "wave681_hush_membrane",
+    "scar_compass": "wave682_scar_compass",
     "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
     "adaptive_regulation": "wave636_adaptive_regulation",
 }

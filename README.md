@@ -85,6 +85,8 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 678 | Sovereign Seal | Governance | Seal organs with autonomy bounds + verify |
 | 679 | Orchestration Pulse | Orchestration | Plan and execute coordinated pulses |
 | 680 | Organism Horizon | Vantage | 680-wave horizon report from organ vantage |
+| 681 | Hush Membrane | Compression | Silence as product surface; compress → hush tokens |
+| 682 | Scar Compass | Navigation | Post-council navigation by heal-ratio scars |
 | 641 | Fractal Garden | Art | Procedural SVG art from module topology |
 | 640 | Dependency Resolver | Immune System | Circular imports, version sync, debt scoring |
 | 639 | Echo Chamber Breaker | Safety | Reality probes, bias detection, perspective shattering |

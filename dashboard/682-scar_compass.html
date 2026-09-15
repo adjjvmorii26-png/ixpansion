@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scar Compass — IXPANSION</title>
+<style>
+:root{--bg:#0a0e0c;--fg:#d4e8dc;--muted:#5a7a6a;--accent:#5ee8a0;--card:#0e1814;--border:#1e3828;--amber:#ffcc66;--green:#41d3a3}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+h1{text-align:center;margin-bottom:6px;font-size:1.9em;color:var(--accent)}.sub{text-align:center;color:var(--muted);margin-bottom:24px;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1250px;margin:0 auto 20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--amber);font-size:1.05em;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1a2a1a;font-size:.9em}.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}.value{color:var(--accent);font-weight:bold}
+.btn{background:#142820;border:1px solid var(--accent);color:var(--accent);padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px;transition:.2s}
+.btn:hover{background:var(--accent);color:#0a0e0c}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
+input{background:#0a1410;border:1px solid #2a4a3a;color:var(--fg);padding:6px 8px;border-radius:6px;font-size:.85em;width:110px}
+.scar{background:#0c1a14;border-left:3px solid var(--accent);padding:8px 10px;border-radius:6px;margin-bottom:6px;font-size:.82em}
+.scar .ratio{color:var(--accent);font-weight:bold}
+.foot{text-align:center;color:var(--muted);font-size:.75em;margin-top:16px}
+</style>
+</head>
+<body>
+<h1>🧭 Scar Compass</h1>
+<p class="sub">NAVIGATE BY HEAL-RATIO SCARS · STRONGEST SCAR SETS THE HEADING</p>
+<div class="grid">
+  <div class="card"><h2>Live Status</h2><div id="status">Loading...</div></div>
+  <div class="card"><h2>Mark Scar</h2>
+    <div class="row"><input id="lbl" placeholder="label" value="vercel_routes"><input id="bf" placeholder="before" value="754"><input id="af" placeholder="after" value="89"></div>
+    <button class="btn" onclick="mark()">📍 Mark</button><div id="r_mark" style="margin-top:8px"></div>
+  </div>
+  <div class="card"><h2>Current Heading</h2><div id="r_heading"><button class="btn" onclick="heading()">🧭 Read Heading</button></div></div>
+</div>
+<div style="text-align:center"><button class="btn" onclick="boot()">🔄 Refresh</button></div>
+<div class="foot">wave 682 · /api/scar_compass</div>
+<script>
+const API='';
+async function fj(p){const r=await fetch(API+p);return r.json();}
+async function boot(){const s=await fj('/api/scar_compass?action=status');
+  document.getElementById('status').innerHTML=Object.entries(s).filter(([k,v])=>typeof v!=='object').map(([k,v])=>`<div class="metric"><span class="label">${k}</span><span class="value">${v}</span></div>`).join('')+
+    (s.heading?`<div class="scar">heading: <span class="ratio">${s.heading}</span></div>`:'');}
+async function mark(){const r=await fj(`/api/scar_compass?action=mark&label=${encodeURIComponent(document.getElementById('lbl').value)}&before=${document.getElementById('bf').value}&after=${document.getElementById('af').value}`);
+  document.getElementById('r_mark').innerHTML=r.status==='marked'?`<div class="scar">heal ratio: <span class="ratio">${r.scar.heal_ratio}</span> → heading: ${r.heading||'—'}</div>`:`<div style="color:#ff8888">${r.error||''}</div>`;boot();}
+async function heading(){const r=await fj('/api/scar_compass?action=heading');
+  document.getElementById('r_heading').innerHTML=r.heading?`<div class="scar">🧭 heading: <span class="ratio">${r.heading}</span> · scars: ${r.scars}</div>`:'<div style="color:var(--muted)">no heading yet</div>';}
+boot();setInterval(boot,8000);
+</script>
+</body>
+</html>

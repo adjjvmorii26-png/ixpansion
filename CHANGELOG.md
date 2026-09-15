@@ -1,3 +1,15 @@
+## [4.109.0] — 2026-09-15
+
+### Added
+- **Wave 681 — Hush Membrane**: Silence is the product surface; compression is memory. Compress pulses into hush tokens (coherence-aware).
+- **Wave 682 — Scar Compass**: Post-council navigation by heal-ratio scars; points toward strong compression events. Renumbered from original lab PR wave 676 to avoid collision with council-assigned citizen_census.
+- `.github/workflows/lab-council-pulse.yml` — path-filtered council/wave tests + daily cron.
+- Routes + CLI commands for both; dashboards live.
+- 6 additional tests (all passing).
+
+### Governance
+- Council session #23 sealed: approved renumbering `wave676_scar_compass → wave682_scar_compass` to preserve council wave-number uniqueness.
+
 ## [4.108.0] — 2026-09-15
 
 ### Added

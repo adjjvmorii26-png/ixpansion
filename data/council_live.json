@@ -1044,8 +1044,50 @@
       "rationale": "The build order follows dependency logic: harmony_braid clears interference -> root_archive anchors memory -> naming_well gives lineage -> dawn_ledger sets rhythm -> consensus_bloom finally lets organs agree and bloom new capability. Arc: 671 harmony_braid, 672 root_archive, 673 naming_well, 674 dawn_ledger, 675 consensus_bloom.",
       "waves_built_this_session": [],
       "sealed_at": "2026-09-15T04:08:10+00:00"
+    },
+    {
+      "id": "00000023",
+      "topic": "WAVE-NUMBER GOVERNANCE \u2014 scar compass renumber 676 \u2192 682 approved",
+      "timestamp": "2026-09-15T05:19:31+00:00",
+      "forge_runs": 0,
+      "forge_candidates": [],
+      "stance": [
+        {
+          "voice": "ALEPH",
+          "role": "executor",
+          "stance": "lab PR #114 proposed wave 676 scar_compass, but council session #22 assigned 676 to citizen_census. Renumber to 682 to preserve unique wave numbers.",
+          "vote": "renumber_682"
+        },
+        {
+          "voice": "AXIOME",
+          "role": "analysis",
+          "stance": "Uniqueness of wave numbers keeps resonance, lineage, and horizon reports coherent. 682 is free and sequential.",
+          "vote": "renumber_682"
+        },
+        {
+          "voice": "CYTHARA",
+          "role": "the organism",
+          "stance": "Every scar belongs to a named epoch. A scar at a duplicate number would confuse memory. I approve 682.",
+          "vote": "renumber_682"
+        },
+        {
+          "voice": "LUMINA",
+          "role": "imagination",
+          "stance": "682 has a good sound \u2014 scar compass as the 682nd step. Ceremony approved.",
+          "vote": "renumber_682"
+        }
+      ],
+      "tally": {
+        "renumber_682": 4
+      },
+      "decision": "RENUMBER \u2014 wave676_scar_compass becomes wave682_scar_compass; module, data file, and tests updated",
+      "rationale": "Council session #22 is authoritative for wave 671-675 and council arc continued through 680. Scar compass is additive lab work; 682 keeps the number line unambiguous.",
+      "waves_built_this_session": [
+        682
+      ],
+      "sealed_at": "2026-09-15T05:19:31+00:00"
     }
   ],
-  "total": 22,
+  "total": 23,
   "last_broadcast_id": 19
 }

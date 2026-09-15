@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hush Membrane — IXPANSION</title>
+<style>
+:root{--bg:#08080e;--fg:#d8d8e4;--muted:#606078;--accent:#e0a8ff;--card:#12101c;--border:#2a2240;--amber:#ffcc66;--green:#41d3a3}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+h1{text-align:center;margin-bottom:6px;font-size:1.9em;color:var(--accent)}.sub{text-align:center;color:var(--muted);margin-bottom:24px;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1250px;margin:0 auto 20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--amber);font-size:1.05em;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222;font-size:.9em}.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}.value{color:var(--accent);font-weight:bold}
+.btn{background:#1e1830;border:1px solid var(--accent);color:var(--accent);padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px;transition:.2s}
+.btn:hover{background:var(--accent);color:#08080e}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
+input{background:#0c0c18;border:1px solid #3a3a5a;color:var(--fg);padding:6px 8px;border-radius:6px;font-size:.85em;width:130px}
+.token{background:#120e1c;border-left:3px solid var(--accent);padding:8px 10px;border-radius:6px;margin-bottom:6px;font-size:.82em}
+.foot{text-align:center;color:var(--muted);font-size:.75em;margin-top:16px}
+</style>
+</head>
+<body>
+<h1>🤫 Hush Membrane</h1>
+<p class="sub">SILENCE IS THE PRODUCT SURFACE · COMPRESSION IS MEMORY</p>
+<div class="grid">
+  <div class="card"><h2>Live Status</h2><div id="status">Loading...</div></div>
+  <div class="card"><h2>Compress into Hush</h2>
+    <div class="row"><input id="pulse" placeholder="pulse text" value="council bloom holds the hush"><input id="coh" placeholder="coherence" value="0.9"></div>
+    <button class="btn" onclick="hush()">🤫 Hush</button><div id="r_hush" style="margin-top:8px"></div>
+  </div>
+</div>
+<div style="text-align:center"><button class="btn" onclick="boot()">🔄 Refresh</button></div>
+<div class="foot">wave 681 · /api/hush_membrane</div>
+<script>
+const API='';
+async function fj(p){const r=await fetch(API+p);return r.json();}
+async function boot(){const s=await fj('/api/hush_membrane?action=status');
+  document.getElementById('status').innerHTML=Object.entries(s).filter(([k,v])=>typeof v!=='object').map(([k,v])=>`<div class="metric"><span class="label">${k}</span><span class="value">${v}</span></div>`).join('')+(s.last?`<div class="token">last: ${s.last.token||'—'} (emit=${s.last.emit})</div>`:'');}
+async function hush(){const r=await fj(`/api/hush_membrane?action=hush&pulse=${encodeURIComponent(document.getElementById('pulse').value)}&coherence=${document.getElementById('coh').value}`);
+  document.getElementById('r_hush').innerHTML=r.status==='hushed'?`<div class="token">${r.token||'—'} · emit=${r.silent?'silence':'visible'}</div>`:`<div style="color:#ff8888">${r.error||JSON.stringify(r)}</div>`;boot();}
+boot();setInterval(boot,8000);
+</script>
+</body>
+</html>

@@ -1704,6 +1704,32 @@ def cmd_organism_horizon():
     args = sys.argv[2:]
     if "--survey" in args or True: return h({"action": "survey"})
 
+
+@cmd("hush-membrane", "Hush Membrane — compress pulses into hush tokens")
+def cmd_hush_membrane():
+    """Hush Membrane operations.
+    Usage: python cli.py hush-membrane [--hush PULSE COHERENCE]
+    """
+    from api.wave681_hush_membrane import handler as h
+    args = sys.argv[2:]
+    if "--hush" in args:
+        i = args.index("--hush")
+        return h({"action": "hush", "pulse": args[i+1] if i+1 < len(args) else "silence", "coherence": float(args[i+2]) if i+2 < len(args) else 0.9})
+    return h({"action": "status"})
+
+@cmd("scar-compass", "Scar Compass — navigate by heal-ratio scars")
+def cmd_scar_compass():
+    """Scar Compass operations.
+    Usage: python cli.py scar-compass [--mark LABEL BEFORE AFTER] [--heading]
+    """
+    from api.wave682_scar_compass import handler as h
+    args = sys.argv[2:]
+    if "--mark" in args:
+        i = args.index("--mark")
+        return h({"action": "mark", "label": args[i+1] if i+1 < len(args) else "scar", "before": int(args[i+2]) if i+2 < len(args) else 754, "after": int(args[i+3]) if i+3 < len(args) else 89})
+    if "--heading" in args: return h({"action": "heading"})
+    return h({"action": "status"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

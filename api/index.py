@@ -2554,6 +2554,17 @@ def handler(request) -> dict:
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
+# --- Wave 681: Hush Membrane ---
+    if path.startswith("/hush-membrane") or path.startswith("/api/hush_membrane"):
+        from api.wave681_hush_membrane import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 682: Scar Compass ---
+    if path.startswith("/scar-compass") or path.startswith("/api/scar_compass"):
+        from api.wave682_scar_compass import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
     if path.startswith("/trust-network") or path.startswith("/api/trust_network"):
         from api.wave647_trust_network import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
@@ -2747,6 +2758,17 @@ def handler(request) -> dict:
 # --- Wave 680: Organism Horizon ---
     if path.startswith("/organism-horizon") or path.startswith("/api/organism_horizon"):
         from api.wave680_organism_horizon import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 681: Hush Membrane ---
+    if path.startswith("/hush-membrane") or path.startswith("/api/hush_membrane"):
+        from api.wave681_hush_membrane import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+# --- Wave 682: Scar Compass ---
+    if path.startswith("/scar-compass") or path.startswith("/api/scar_compass"):
+        from api.wave682_scar_compass import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
 
