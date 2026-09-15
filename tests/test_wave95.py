@@ -85,6 +85,20 @@ class TestRitualGovernance:
         assert "quorum" in vitals
 
 
+import json, os
+
+DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "wave95_ritual_governance.json")
+
+
+@pytest.fixture(autouse=True)
+def _reset_wave95_state():
+    """Reset wave95 state before each test to avoid cross-run pollution."""
+    gov = RitualGovernance()
+    from api.wave95_ritual_governance import _save
+    _save(gov)
+    yield
+
+
 class TestHandler:
     def test_status(self):
         out = handler({"action": "status"})

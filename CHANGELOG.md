@@ -1,5 +1,12 @@
 ## [4.110.1] — 2026-09-15
 
+### Fixed
+- **api/index.py route cleanup**: Removed 830 lines of dead code from `handler()` (unreachable routes after early `return _call()`), deduplicated wave routes in `_call()` (waves 91-98, 441-446 appeared 2-3x), net reduction 903 lines. All routes still served via `UnifiedRouter` generic fallback + cleaned fast-path routes.
+- **test_wave95.py**: Added `autouse` state-reset fixture to prevent cross-run pollution in ritual governance register test.
+
+### Changed
+- Version bump 4.110.0 → 4.110.1 (pyproject.toml, omega_fractal_engine/pyproject.toml, CITATION.cff)
+
 ### Added
 - **Big Pickle Open Zen (Wave 700)**: Meditation engine for the organism
   - pickle_jar: State preservation engine (pickle/unpickle consciousness states)
