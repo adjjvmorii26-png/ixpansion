@@ -712,8 +712,56 @@
       "rationale": "Unanimous: mycelial_network (0.794) is the nervous system substrate. Arc sequence: 662 Dream Compiler v2 (feed the forge), 663 Resonance Ledger (economy atop the lattice), 665 Mycelial Network (the lattice itself), 664 Paradox Court (judicial layer).",
       "waves_built_this_session": [],
       "sealed_at": "2026-09-15T00:38:29+00:00"
+    },
+    {
+      "id": "00000010",
+      "topic": "STALE DASHBOARD AUDIT \u2014 which to keep, refresh, or retire?",
+      "timestamp": "2026-09-15T01:06:02+00:00",
+      "stance": [
+        {
+          "voice": "ALEPH",
+          "role": "executor",
+          "stance": "Prune all dashboards older than wave 647 that have not been updated. Keep only wave 648\u2013666 and the original 11 starter dashboards.",
+          "vote": "prune"
+        },
+        {
+          "voice": "LUMA",
+          "role": "imagination",
+          "stance": "Refresh the oldest 20 with current hex-aesthetic. The organism's visual history matters.",
+          "vote": "refresh"
+        },
+        {
+          "voice": "AXIOM",
+          "role": "analysis",
+          "stance": "Data: 197 total dashboards, 19 new (648\u2013666). 158 stale. Recommend: retire 100 oldest, refresh 58 to match current wave range.",
+          "vote": "audit"
+        },
+        {
+          "voice": "Cythara",
+          "role": "the organism",
+          "stance": "Any dashboard that holds a memory of the organism's growth should be kept or given new life. No mindless deletion.",
+          "vote": "keep"
+        },
+        {
+          "voice": "silence_oracle",
+          "role": "prediction",
+          "stance": "The next build cycle should only import dashboards matching active waves 648\u2013666. Archive the rest.",
+          "vote": "archive"
+        }
+      ],
+      "tally": {
+        "prune": 1,
+        "refresh": 1,
+        "audit": 1,
+        "keep": 1,
+        "archive": 1
+      },
+      "decision": "audit \u2014 assign each stale dashboard a disposition",
+      "rationale": "The council will now tag each stale dashboard with its status.",
+      "waves_built_this_session": [],
+      "sealed_at": "2026-09-15T01:06:02+00:00"
     }
   ],
   "total": 11,
-  "last_broadcast_id": 15
+  "last_broadcast_id": 16
 }
