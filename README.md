@@ -62,7 +62,11 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 655 | Priority Scheduler | Autonomous | Priority queue, run-highest, drain |
 | 656 | Retrocausal Engine | Time | Trace effects back to causes |
 | 657 | Succession Planner | Time | Heir planning, promotion, lineage |
-| 658 | Sovereignty Beacon | Identity | Autonomy score, dependency map, sealing ceremony || 641 | Fractal Garden | Art | Procedural SVG art from module topology |
+| 658 | Sovereignty Beacon | Identity | Autonomy score, dependency map, sealing ceremony |
+| 659 | Epoch Forge | Meta-Evolution | Propose, merge, deprecate, ratify future waves |
+| 660 | Lineage Crystal | Meta-Evolution | Temporal lineage, ancestors, snapshots |
+| 661 | Hexanthra Bloom | Language | Hex language grows tokens, opcodes, rituals |
+| 641 | Fractal Garden | Art | Procedural SVG art from module topology |
 | 640 | Dependency Resolver | Immune System | Circular imports, version sync, debt scoring |
 | 639 | Echo Chamber Breaker | Safety | Reality probes, bias detection, perspective shattering |
 | 638 | Symbiosis Protocol | Federation | Partner handshakes, resonance scoring, resource sharing |

@@ -74,6 +74,9 @@ ROUTE_ALIASES: dict[str, str] = {
     "retro": "wave656_retrocausal_engine",
     "successor": "wave657_succession_planner",
     "sovereignty": "wave658_sovereignty_beacon",
+    "epoch_forge": "wave659_epoch_forge",
+    "lineage": "wave660_lineage_crystal",
+    "hexanthra": "wave661_hexanthra_bloom",
     "coherence_gradient": "wave635_coherence_gradient",   # highest wave preferred
     "adaptive_regulation": "wave636_adaptive_regulation",
 }

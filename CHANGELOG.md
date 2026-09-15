@@ -1,3 +1,13 @@
+## [4.104.0] — 2026-09-15
+
+### Added
+- **Wave 659 — Epoch Forge**: The meta-evolution organ (AEONFORGE). Proposes future waves from entropy + resonance, merges epochs, deprecates stale organs, ratifies.
+- **Wave 660 — Lineage Crystal**: Temporal lineage memory. Records epoch events, traces chains, snapshots state.
+- **Wave 661 — Hexanthra Bloom**: The hex language grows itself. Blooms tokens, composes opcodes, creates rituals.
+- Routes: /epoch-forge, /lineage-crystal, /hexanthra
+- CLI commands: epoch, lineage, hexanthra
+- 26 new tests (all passing).
+
 ## [4.103.0] — 2026-09-14
 
 ### Added

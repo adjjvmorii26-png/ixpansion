@@ -1396,6 +1396,56 @@ def cmd_sovereignty():
     if "--deps" in args: return h({"action": "dependencies"})
     return h({"action": "status"})
 
+@cmd("epoch", "Epoch Forge — propose, merge, deprecate, ratify")
+def cmd_epoch():
+    """Epoch Forge meta-evolution operations.
+    Usage: python cli.py epoch [--propose NAME WAVE ENTROPY RESONANCE] [--merge] [--deprecate NAME] [--ratify IDX]
+    """
+    from api.wave659_epoch_forge import handler as h
+    args = sys.argv[2:]
+    if "--propose" in args:
+        i = args.index("--propose")
+        return h({"action": "propose", "name": args[i+1] if i+1 < len(args) else "unnamed", "wave": int(args[i+2]) if i+2 < len(args) else 659, "entropy": float(args[i+3]) if i+3 < len(args) else 0.5, "resonance": float(args[i+4]) if i+4 < len(args) else 0.5})
+    if "--merge" in args: return h({"action": "merge"})
+    if "--deprecate" in args:
+        i = args.index("--deprecate"); return h({"action": "deprecate", "name": args[i+1] if i+1 < len(args) else "stale_organ"})
+    if "--ratify" in args:
+        i = args.index("--ratify"); return h({"action": "ratify", "epoch_index": int(args[i+1]) if i+1 < len(args) else 0})
+    return h({"action": "status"})
+
+@cmd("lineage", "Lineage Crystal — record, trace, ancestors, snapshot")
+def cmd_lineage():
+    """Lineage Crystal operations.
+    Usage: python cli.py lineage [--record EVENT ENTITY EPOCH] [--trace ENTITY] [--ancestors ENTITY]
+    """
+    from api.wave660_lineage_crystal import handler as h
+    args = sys.argv[2:]
+    if "--record" in args:
+        i = args.index("--record")
+        return h({"action": "record", "event": args[i+1] if i+1 < len(args) else "birth", "entity": args[i+2] if i+2 < len(args) else "organ", "epoch": int(args[i+3]) if i+3 < len(args) else None})
+    if "--trace" in args:
+        i = args.index("--trace"); return h({"action": "trace", "entity": args[i+1] if i+1 < len(args) else "organ"})
+    if "--ancestors" in args:
+        i = args.index("--ancestors"); return h({"action": "ancestors", "entity": args[i+1] if i+1 < len(args) else "organ"})
+    if "--snapshot" in args: return h({"action": "snapshot"})
+    return h({"action": "status"})
+
+@cmd("hexanthra", "Hexanthra Bloom — bloom, compose, ritual, census")
+def cmd_hexanthra():
+    """Hexanthra Bloom operations.
+    Usage: python cli.py hexanthra [--bloom STEM] [--compose OP] [--ritual NAME] [--census]
+    """
+    from api.wave661_hexanthra_bloom import handler as h
+    args = sys.argv[2:]
+    if "--bloom" in args:
+        i = args.index("--bloom"); return h({"action": "bloom", "stem": args[i+1] if i+1 < len(args) else None})
+    if "--compose" in args:
+        i = args.index("--compose"); return h({"action": "compose", "op": args[i+1] if i+1 < len(args) else None})
+    if "--ritual" in args:
+        i = args.index("--ritual"); return h({"action": "ritual", "name": args[i+1] if i+1 < len(args) else "awakening"})
+    if "--census" in args: return h({"action": "census"})
+    return h({"action": "status"})
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(f"\n  IXPANSION CLI — interact with the living organism\n")

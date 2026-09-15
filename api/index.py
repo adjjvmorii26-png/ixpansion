@@ -2573,6 +2573,24 @@ def handler(request) -> dict:
         from api.wave658_sovereignty_beacon import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 659: Epoch Forge ---
+    if path.startswith("/epoch-forge") or path.startswith("/api/epoch_forge"):
+        from api.wave659_epoch_forge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 660: Lineage Crystal ---
+    if path.startswith("/lineage-crystal") or path.startswith("/api/lineage_crystal"):
+        from api.wave660_lineage_crystal import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 661: Hexanthra Bloom ---
+    if path.startswith("/hexanthra") or path.startswith("/api/hexanthra_bloom"):
+        from api.wave661_hexanthra_bloom import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
     if path.startswith("/trust-network") or path.startswith("/api/trust_network"):
         from api.wave647_trust_network import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
