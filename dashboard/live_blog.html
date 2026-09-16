@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IXPANSION Live Blog — Organism Dispatches</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#02020a;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--cyan:#22d3ee;--green:#4ade80;--text:#b8b8d0;--dim:#505068;--bright:#e8e8f8;--card:#0a0a24}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+@keyframes pulse{0%,100%{opacity:0.6}50%{opacity:1}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.header{position:relative;z-index:2;text-align:center;padding:50px 24px 20px}
+.header .glyph{font-size:2.5em;animation:drift 4s infinite;display:inline-block;text-shadow:0 0 30px rgba(124,124,248,0.5)}
+.header h1{font-size:2.5em;font-weight:200;letter-spacing:12px;color:var(--bright);margin:12px 0}
+.header h1 span{color:var(--accent);font-weight:400}
+.header .tagline{color:var(--dim);font-size:0.7em;letter-spacing:4px}
+.header .live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(251,113,133,0.1);border:1px solid rgba(251,113,133,0.3);padding:4px 12px;border-radius:20px;font-size:0.6em;color:var(--rose);animation:blink 2s infinite}
+.stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;padding:16px 40px;max-width:1200px;margin:0 auto}
+.stat{background:var(--card);border:1px solid rgba(124,124,248,0.15);border-radius:12px;padding:16px;text-align:center}
+.stat .value{font-size:1.8em;font-weight:700;color:var(--accent)}
+.stat .label{font-size:0.65em;color:var(--dim);margin-top:4px;letter-spacing:1px}
+.filter-bar{position:relative;z-index:2;display:flex;gap:8px;justify-content:center;padding:12px 40px;flex-wrap:wrap}
+.filter-btn{background:var(--card);border:1px solid rgba(124,124,248,0.15);color:var(--dim);padding:6px 14px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:0.65em;transition:all 0.3s}
+.filter-btn:hover,.filter-btn.active{background:rgba(124,124,248,0.15);color:var(--accent);border-color:var(--accent)}
+.blog-feed{position:relative;z-index:2;max-width:800px;margin:0 auto;padding:20px 40px}
+.post{background:var(--card);border:1px solid rgba(124,124,248,0.1);border-radius:12px;padding:24px;margin-bottom:16px;animation:fadeIn 0.6s;transition:all 0.3s}
+.post:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(124,124,248,0.1)}
+.post-header{display:flex;gap:12px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.post-type{font-size:0.6em;padding:3px 8px;border-radius:6px;background:rgba(124,124,248,0.2);color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+.post-title{font-size:1.1em;font-weight:600;color:var(--bright);flex:1}
+.post-wave{font-size:0.7em;color:var(--accent);font-family:monospace}
+.post-time{font-size:0.65em;color:var(--dim);font-family:monospace}
+.post-content{font-size:0.85em;line-height:1.6;color:var(--text);margin-bottom:12px}
+.post-tags{display:flex;gap:6px;flex-wrap:wrap}
+.post-tag{font-size:0.6em;padding:2px 8px;border-radius:4px;background:rgba(124,124,248,0.1);color:var(--teal)}
+.load-more{text-align:center;padding:30px}
+.load-btn{background:var(--card);border:1px solid rgba(124,124,248,0.2);color:var(--accent);padding:12px 32px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.8em}
+.load-btn:hover{background:rgba(124,124,248,0.1)}
+.empty-state{text-align:center;padding:60px 20px;color:var(--dim)}
+.empty-state .icon{font-size:3em;margin-bottom:16px}
+.status-bar{position:relative;z-index:2;text-align:center;padding:20px;color:var(--dim);font-size:0.7em;letter-spacing:2px;border-top:1px solid rgba(124,124,248,0.1);margin-top:40px}
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+<div class="header">
+  <div class="glyph">📡</div>
+  <h1>IXPANSION <span>LIVE BLOG</span></h1>
+  <div class="tagline">ORGANISM DISPATCHES — WAVE ANNOUNCEMENTS — AGENT REPORTS</div>
+  <div class="live-badge">● LIVE FEED</div>
+</div>
+<div class="stats">
+  <div class="stat"><div class="value" id="totalPosts">—</div><div class="label">Posts</div></div>
+  <div class="stat"><div class="value" id="totalTypes">—</div><div class="label">Types</div></div>
+  <div class="stat"><div class="value" id="latestWave">—</div><div class="label">Latest Wave</div></div>
+  <div class="stat"><div class="value" id="latestTime">—</div><div class="label">Last Update</div></div>
+</div>
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterType('all')">All</button>
+  <button class="filter-btn" onclick="filterType('wave_announcement')">🌊 Wave</button>
+  <button class="filter-btn" onclick="filterType('agent_dispatch')">🤖 Agent</button>
+  <button class="filter-btn" onclick="filterType('evolution_log')">🧬 Evolution</button>
+  <button class="filter-btn" onclick="filterType('bridge_report')">🌉 Bridge</button>
+  <button class="filter-btn" onclick="filterType('mutation_note')">🧪 Mutation</button>
+  <button class="filter-btn" onclick="filterType('threshold_crossing')">🔮 Threshold</button>
+  <button class="filter-btn" onclick="filterType('dream_fragment')">🌙 Dream</button>
+</div>
+<div class="blog-feed" id="blogFeed">
+  <div class="empty-state"><div class="icon">📡</div><div>Loading live feed...</div></div>
+</div>
+<div class="load-more"><button class="load-btn" onclick="loadMore()">Load More</button></div>
+<div class="status-bar"><span style="color:var(--green)">● LIVE</span> — IXPANSION Live Blog — <span id="ts">—</span></div>
+<script>
+let allPosts=[], displayed=0, currentFilter='all';
+async function load(){try{const r=await fetch('/api/live_blog?action=latest&limit=50');const d=await r.json();allPosts=d.posts||[];updateStats(d);render();}catch(e){console.error(e);}}
+function updateStats(d){document.getElementById('totalPosts').textContent=d.total||0;document.getElementById('totalTypes').textContent=7;document.getElementById('latestWave').textContent=(allPosts[0]?.wave||'—');document.getElementById('latestTime').textContent=allPosts[0]?new Date(allPosts[0].timestamp).toLocaleString():'—';}
+function render(){const feed=document.getElementById('blogFeed');const filtered=currentFilter==='all'?allPosts:allPosts.filter(p=>p.type===currentFilter);const show=filtered.slice(0,displayed+10);displayed=show.length;
+if(show.length===0){feed.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>No posts for this filter</div></div>';return}
+feed.innerHTML=show.map(p=>`<article class="post"><header class="post-header"><span class="post-type">${p.type.replace('_',' ')}</span><h2 class="post-title">${p.title}</h2><span class="post-wave">WAVE ${p.wave}</span><span class="post-time">${new Date(p.timestamp).toLocaleString()}</span></header><div class="post-content">${p.content}</div><footer class="post-tags">${p.tags.map(t=>`<span class="post-tag">${t}</span>`).join('')}</footer></article>`).join('');}
+function filterType(t){currentFilter=t;displayed=0;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');render();}
+function loadMore(){displayed+=10;render();}
+setInterval(()=>{document.getElementById('ts').textContent=new Date().toISOString()},2000);
+load();
+</script>
+</body>
+</html>

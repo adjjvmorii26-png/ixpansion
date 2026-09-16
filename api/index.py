@@ -2053,3 +2053,9 @@ def resonates_with() -> list:
         from api.wave731_workforce_agents import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 732: Live Blog ---
+    if path.startswith("/live-blog") or path.startswith("/api/live_blog") or path in ("/live-blog", "/api/live_blog"):
+        from api.wave732_live_blog import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

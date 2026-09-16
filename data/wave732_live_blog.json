@@ -1,0 +1,76 @@
+{
+  "wave": 732,
+  "name": "live_blog",
+  "posts": [
+    {
+      "id": "aade6c51d7",
+      "type": "wave_announcement",
+      "title": "Test Wave",
+      "content": "Wave 732 deployed",
+      "tags": [
+        "test",
+        "wave"
+      ],
+      "wave": 732,
+      "timestamp": "2026-09-16T01:55:54.135670+00:00",
+      "status": "published"
+    },
+    {
+      "id": "3622855fda",
+      "type": "evolution_log",
+      "title": "IXPANSION Evolution Log",
+      "content": "First evolution_log entry",
+      "tags": [
+        "genesis",
+        "live_blog"
+      ],
+      "wave": 732,
+      "timestamp": "2026-09-16T01:54:22.216995+00:00",
+      "status": "published"
+    },
+    {
+      "id": "67e835e1c8",
+      "type": "agent_dispatch",
+      "title": "IXPANSION Agent Dispatch",
+      "content": "First agent_dispatch entry",
+      "tags": [
+        "genesis",
+        "live_blog"
+      ],
+      "wave": 732,
+      "timestamp": "2026-09-16T01:54:22.213489+00:00",
+      "status": "published"
+    },
+    {
+      "id": "5499112288",
+      "type": "wave_announcement",
+      "title": "IXPANSION Wave Announcement",
+      "content": "First wave_announcement entry",
+      "tags": [
+        "genesis",
+        "live_blog"
+      ],
+      "wave": 732,
+      "timestamp": "2026-09-16T01:54:22.209899+00:00",
+      "status": "published"
+    }
+  ],
+  "tags": {
+    "genesis": [
+      "5499112288",
+      "67e835e1c8",
+      "3622855fda"
+    ],
+    "live_blog": [
+      "5499112288",
+      "67e835e1c8",
+      "3622855fda"
+    ],
+    "test": [
+      "aade6c51d7"
+    ],
+    "wave": [
+      "aade6c51d7"
+    ]
+  }
+}
