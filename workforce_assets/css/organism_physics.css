@@ -1,0 +1,33 @@
+/* Organism Physics CSS */
+.org-field {
+  --coherence: 0.85;
+  --entropy: 0.15;
+  
+  --primary: hsl(210 var(--coherence)*360% var(--entropy)*100%);
+  --secondary: hsl(30 var(--entropy)*360% var(--coherence)*100%);
+  
+  background: 
+    radial-gradient(ellipse at 30% 20%, var(--primary) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, var(--secondary) 0%, transparent 50%);
+}
+
+/* State Indicators */
+.state-active { 
+  animation: pulse 1.5s ease-in-out infinite; 
+  border-color: #4ade80; 
+}
+
+.state-balanced { 
+  border-color: #fbbf24; 
+}
+
+.state-overloaded { 
+  border-color: #f87171; 
+  animation: pulse 0.5s ease-in-out infinite; 
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}

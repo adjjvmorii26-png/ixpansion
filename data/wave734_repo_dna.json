@@ -128,5 +128,175 @@
     ],
     "complexity": 7,
     "test_success": 0.95
+  },
+  "wave735_antimeme_vaccine": {
+    "paradigm": "forgetting_curve",
+    "patterns": [
+      "import",
+      "entropy",
+      "quarantine"
+    ],
+    "complexity": 9,
+    "test_success": 0.93
+  },
+  "wave736_silent_broadcast_lattice": {
+    "paradigm": "pub_sub",
+    "patterns": [
+      "import",
+      "filesystem",
+      "relay"
+    ],
+    "complexity": 10,
+    "test_success": 0.92
+  },
+  "wave737_paradox_debt_ledger": {
+    "paradigm": "ledger",
+    "patterns": [
+      "import",
+      "debt",
+      "accounting"
+    ],
+    "complexity": 11,
+    "test_success": 0.91
+  },
+  "wave738_oblivion_compost": {
+    "paradigm": "decay_engine",
+    "patterns": [
+      "import",
+      "compost",
+      "nutrient"
+    ],
+    "complexity": 8,
+    "test_success": 0.94
+  },
+  "wave739_receipt_notary": {
+    "paradigm": "verification",
+    "patterns": [
+      "import",
+      "notary",
+      "signature"
+    ],
+    "complexity": 7,
+    "test_success": 0.96
+  },
+  "wave740_negotiation_bazaar": {
+    "paradigm": "auction",
+    "patterns": [
+      "import",
+      "bargain",
+      "exchange"
+    ],
+    "complexity": 10,
+    "test_success": 0.9
+  },
+  "wave741_dialect_mutator": {
+    "paradigm": "linguistics",
+    "patterns": [
+      "import",
+      "dialect",
+      "mutation"
+    ],
+    "complexity": 12,
+    "test_success": 0.89
+  },
+  "wave742_actuator_bridge": {
+    "paradigm": "hardware_abstraction",
+    "patterns": [
+      "import",
+      "bridge",
+      "actuate"
+    ],
+    "complexity": 9,
+    "test_success": 0.92
+  },
+  "wave743_causal_scar_graph": {
+    "paradigm": "graph",
+    "patterns": [
+      "import",
+      "causal",
+      "graph"
+    ],
+    "complexity": 13,
+    "test_success": 0.88
+  },
+  "wave744_phase_lock_clock": {
+    "paradigm": "synchronization",
+    "patterns": [
+      "import",
+      "phase",
+      "clock"
+    ],
+    "complexity": 8,
+    "test_success": 0.95
+  },
+  "wave745_mirror_world_delta": {
+    "paradigm": "divergence",
+    "patterns": [
+      "import",
+      "mirror",
+      "delta"
+    ],
+    "complexity": 11,
+    "test_success": 0.91
+  },
+  "wave746_entropy_weather_front": {
+    "paradigm": "climate",
+    "patterns": [
+      "import",
+      "entropy",
+      "weather"
+    ],
+    "complexity": 9,
+    "test_success": 0.93
+  },
+  "wave747_kolmogorov_budget": {
+    "paradigm": "complexity_theory",
+    "patterns": [
+      "import",
+      "kolmogorov",
+      "budget"
+    ],
+    "complexity": 10,
+    "test_success": 0.94
+  },
+  "wave748_lyapunov_stability": {
+    "paradigm": "dynamical_systems",
+    "patterns": [
+      "import",
+      "lyapunov",
+      "stability"
+    ],
+    "complexity": 12,
+    "test_success": 0.9
+  },
+  "wave749_renormalization_block": {
+    "paradigm": "scaling",
+    "patterns": [
+      "import",
+      "renormalize",
+      "block"
+    ],
+    "complexity": 14,
+    "test_success": 0.87
+  },
+  "wave750_spectral_scar_modes": {
+    "paradigm": "quantum_physics",
+    "patterns": [
+      "import",
+      "spectral",
+      "scar"
+    ],
+    "complexity": 15,
+    "test_success": 0.86
+  },
+  "wave751_evolution_kernel": {
+    "paradigm": "meta_evolution",
+    "patterns": [
+      "import",
+      "propose",
+      "lineage"
+    ],
+    "complexity": 16,
+    "test_success": 0.96
   }
 }

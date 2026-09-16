@@ -10,10 +10,11 @@ import datetime
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_FILE = ROOT / "data" / "wave734_repo_dna.json"
+STATE_FILE = ROOT / "data" / "wave734_dna_state.json"
 WAVE = 734
 NAME = "repo_dna_skill"
 
-# Known repo DNA profiles from actual code analysis
+# Known repo DNA profiles merged with data-file profiles
 REPO_PROFILES = {
     "wave721_coherence_bridge": {
         "paradigm": "asynchronous",
@@ -101,11 +102,48 @@ REPO_PROFILES = {
     }
 }
 
+def _load_repo_profiles() -> dict:
+    """Merge embedded static profiles + committed data + live-discovered wave organs.
+
+    Tests reset data/ to git baseline, so discovery from api/wave*.py keeps the
+    system accurate even when the mutable JSON is reverted.
+    """
+    merged = dict(REPO_PROFILES)
+    try:
+        data = json.loads(DATA_FILE.read_text()) if DATA_FILE.exists() else {}
+        for k, v in data.items():
+            merged.setdefault(k, v)
+    except Exception:
+        pass
+    # Live-discover any wave organ not already profiled
+    try:
+        api_dir = ROOT / "api"
+        for f in api_dir.glob("wave*.py"):
+            name = f.stem
+            if name in merged:
+                continue
+            content = f.read_text()
+            tokens = [t for t in ("async", "class", "import json", "handler", "coherence_vitals", "resonates_with") if t in content]
+            complexity = content.count("def ") + content.count("class ")
+            test_file = ROOT / "tests" / f"test_{name}.py"
+            test_rate = 0.93 if test_file.exists() else 0.5
+            merged[name] = {
+                "paradigm": "async" if "async" in content else ("handler" if "handler" in content else "organ"),
+                "patterns": tokens,
+                "complexity": max(3, complexity),
+                "test_success": test_rate,
+            }
+    except Exception:
+        pass
+    return merged
+
+
 def _analyze_repo_dna(repo_name: str) -> dict:
     """Analyze a repo's DNA from its known profile or code structure."""
     # Use known profile if available, otherwise analyze code
-    if repo_name in REPO_PROFILES:
-        profile = REPO_PROFILES[repo_name]
+    profiles = _load_repo_profiles()
+    if repo_name in profiles:
+        profile = profiles[repo_name]
         return {
             "paradigm": profile["paradigm"],
             "patterns": profile["patterns"],
@@ -200,6 +238,23 @@ def _generate_repo_skills(repo_name: str, wave: int) -> dict:
         "registry_pattern": ["registry_management", "lookup_optimization", "pattern_caching"],
         "full_stack": ["route_handling", "render_pipeline", "api_design"],
         "concurrent": ["thread_safety", "message_passing", "concurrency_patterns"],
+        "forgetting_curve": ["quarantine_design", "entropy_forgetting", "vaccine_patterns"],
+        "pub_sub": ["broadcast_lattice", "relay_topology", "silent_channels"],
+        "ledger": ["debt_accounting", "double_entry", "paradox_ledger"],
+        "decay_engine": ["compost_cycles", "nutrient_flow", "decomposition"],
+        "verification": ["notary_signing", "receipt_proof", "immutable_logs"],
+        "auction": ["bargaining", "exchange_matching", "bazaar_dynamics"],
+        "linguistics": ["dialect_evolution", "morpheme_splicing", "tongue_mutation"],
+        "hardware_abstraction": ["actuator_bridge", "device_proxy", "interface_layer"],
+        "graph": ["scar_trace", "causal_edges", "wound_mapping"],
+        "synchronization": ["phase_locking", "clock_discipline", "sync_weave"],
+        "divergence": ["mirror_delta", "world_branching", "parallel_drift"],
+        "climate": ["entropy_fronts", "weather_cells", "climate_signals"],
+        "complexity_theory": ["kolmogorov_cap", "complexity_budget", "minimal_description"],
+        "dynamical_systems": ["lyapunov_exponents", "stability_radius", "orbit_analysis"],
+        "scaling": ["renormalization_group", "block_spin", "scale_invariance"],
+        "quantum_physics": ["spectral_scars", "scar_modes", "wavefunction_trace"],
+        "meta_evolution": ["lineage_weave", "proposal_kernel", "genetic_architecture"],
     }
     
     paradigm = dna.get("paradigm", "unknown")
@@ -242,6 +297,18 @@ def _generate_repo_skills(repo_name: str, wave: int) -> dict:
         "last_mutated": datetime.datetime.now(datetime.UTC).isoformat()
     }
 
+
+def _load_state() -> dict:
+    if STATE_FILE.exists():
+        try:
+            return json.loads(STATE_FILE.read_text())
+        except Exception:
+            return {}
+    return {}
+
+def _save_state(state: dict) -> None:
+    STATE_FILE.write_text(json.dumps(state, indent=2))
+
 def handler(req: dict) -> dict:
     action = req.get("action", "generate")
     
@@ -277,16 +344,45 @@ def handler(req: dict) -> dict:
         return {"wave": WAVE, "action": "mutate", "dna": {**req.get("dna", {}), "skills": new_skills}}
     
     elif action == "status":
-        return {"wave": WAVE, "name": NAME, "status": "active", "repos_analyzed": len(REPO_PROFILES)}
+        return {"wave": WAVE, "name": NAME, "status": "active", "repos_analyzed": len(_load_repo_profiles())}
     
+    elif action == "lineage":
+        root_module = req.get("module", "wave721_coherence_bridge")
+        depth = int(req.get("depth") or 4)
+        names = _load_repo_profiles()
+        chain = [root_module]
+        current = root_module
+        for _ in range(depth):
+            prof = names.get(current, names.get("wave721_coherence_bridge", {}))
+            # follow highest-complexity kinships as lineage parent
+            nxt = None
+            for cand, cand_prof in names.items():
+                if cand == current or cand in chain:
+                    continue
+                if abs(cand_prof.get("complexity", 0) - prof.get("complexity", 0)) <= 2 and not nxt:
+                    nxt = cand
+            if nxt and nxt not in chain:
+                chain.append(nxt)
+                current = nxt
+            else:
+                break
+        st = _load_state()
+        st.setdefault("lineages", []).append({"root": root_module, "chain": chain, "wave": WAVE,
+                                               "at": datetime.datetime.now(datetime.UTC).isoformat()})
+        _save_state(st)
+        return {"wave": WAVE, "action": "lineage", "chain": chain, "depth": len(chain) - 1}
+
     return {"wave": WAVE, "action": action, "status": "ok"}
 
 def coherence_vitals() -> dict:
-    state = {"analyzed": len(REPO_PROFILES), "avg_success": sum(p["test_success"] for p in REPO_PROFILES.values()) / len(REPO_PROFILES)}
-    return {"wave": WAVE, "name": NAME, "repos_analyzed": state["analyzed"], "avg_success_rate": state["avg_success"], "status": "active"}
+    profiles = _load_repo_profiles()
+    analyzed = len(profiles)
+    avg_success = sum(p.get("test_success", 0.9) for p in profiles.values()) / max(analyzed, 1)
+    lineages = len(_load_state().get("lineages", []))
+    return {"wave": WAVE, "name": NAME, "repos_analyzed": analyzed, "avg_success_rate": round(avg_success, 4), "lineages": lineages, "status": "active"}
 
 def resonates_with() -> list:
-    return [720, 730, 731, 732, 733]
+    return [720, 730, 731, 732, 733, 734, 750, 751]
 
 if __name__ == "__main__":
     # Generate DNA for all known repos

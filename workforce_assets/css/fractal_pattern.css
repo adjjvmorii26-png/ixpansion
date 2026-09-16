@@ -1,0 +1,46 @@
+/* Fractal Pattern */
+.fractal {
+  --depth: 4;
+  --bg: #0a0a24;
+  --accent: #7c7cf8;
+  
+  background: var(--bg);
+  position: relative;
+}
+
+.fractal::before,
+.fractal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+.fractal::before {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 30% 20%, var(--accent), transparent 70%);
+  top: -100px;
+  left: -100px;
+  animation: rotate 20s linear infinite;
+}
+
+.fractal::after {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle at 70% 80%, #a78bfa, transparent 70%);
+  bottom: -50px;
+  right: -50px;
+  animation: rotate-reverse 18s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}

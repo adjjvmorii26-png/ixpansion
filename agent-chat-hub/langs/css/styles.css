@@ -1,0 +1,20 @@
+/* Hello from the Agent Chat Hub - CSS styles */
+body {
+    background: #0a0a24;
+    color: #e0e0e0;
+    font-family: system-ui, sans-serif;
+}
+.language {
+    border-left: 4px solid #7c7cf8;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 4px;
+}
+.code {
+    background: #1a1a24;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-family: monospace;
+    overflow-x: auto;
+    color: #d4d4d4;
+}

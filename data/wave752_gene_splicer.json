@@ -1,0 +1,139 @@
+{
+  "wave": 752,
+  "name": "gene_splicer",
+  "events": [
+    {
+      "donor_a": "wave734_repo_dna",
+      "donor_b": "wave751_evolution_kernel",
+      "paradigm": "handler->async",
+      "patterns": [
+        "async",
+        "class",
+        "coherence_vitals",
+        "handler",
+        "import json",
+        "resonates_with"
+      ],
+      "complexity": 11.0,
+      "test_success": 0.93,
+      "skills": [
+        "echo_handler",
+        "echo_import json",
+        "express_async",
+        "hybrid_async",
+        "splice_async"
+      ],
+      "spliced_at": "2026-09-16T04:20:07.840253+00:00"
+    },
+    {
+      "action": "merge",
+      "parents": [
+        "wave734_repo_dna",
+        "wave751_evolution_kernel"
+      ]
+    },
+    {
+      "action": "split",
+      "halves": [
+        {
+          "parent": "wave734_repo_dna",
+          "trait": "async"
+        },
+        {
+          "parent": "wave734_repo_dna",
+          "trait": "class"
+        }
+      ]
+    },
+    {
+      "donor_a": "wave734_repo_dna",
+      "donor_b": "wave751_evolution_kernel",
+      "paradigm": "handler->async",
+      "patterns": [
+        "async",
+        "class",
+        "coherence_vitals",
+        "handler",
+        "import json",
+        "resonates_with"
+      ],
+      "complexity": 11.0,
+      "test_success": 0.93,
+      "skills": [
+        "echo_handler",
+        "echo_import json",
+        "express_async",
+        "hybrid_async",
+        "splice_async"
+      ],
+      "spliced_at": "2026-09-16T04:20:33.651267+00:00"
+    },
+    {
+      "action": "merge",
+      "parents": [
+        "wave734_repo_dna",
+        "wave751_evolution_kernel"
+      ]
+    },
+    {
+      "action": "split",
+      "halves": [
+        {
+          "parent": "wave734_repo_dna",
+          "trait": "async"
+        },
+        {
+          "parent": "wave734_repo_dna",
+          "trait": "class"
+        }
+      ]
+    },
+    {
+      "donor_a": "wave734_repo_dna",
+      "donor_b": "wave751_evolution_kernel",
+      "paradigm": "async->meta_evolution",
+      "patterns": [
+        "async",
+        "class",
+        "coherence_vitals",
+        "handler",
+        "import",
+        "import json",
+        "lineage",
+        "propose",
+        "resonates_with"
+      ],
+      "complexity": 15.5,
+      "test_success": 0.945,
+      "skills": [
+        "echo_async",
+        "echo_class",
+        "express_meta_evolution",
+        "hybrid_meta_evolution",
+        "splice_meta_evolution"
+      ],
+      "spliced_at": "2026-09-16T04:22:33.557970+00:00"
+    },
+    {
+      "action": "merge",
+      "parents": [
+        "wave734_repo_dna",
+        "wave751_evolution_kernel"
+      ]
+    },
+    {
+      "action": "split",
+      "halves": [
+        {
+          "parent": "wave734_repo_dna",
+          "trait": "async"
+        },
+        {
+          "parent": "wave734_repo_dna",
+          "trait": "class"
+        }
+      ]
+    }
+  ],
+  "status": "seed"
+}

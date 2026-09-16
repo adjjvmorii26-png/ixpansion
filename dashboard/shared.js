@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.70.0",
-  wave: 475,
-  waveName: "Module Reproduction",
+  "version": "4.112.0",
+  wave: 752,
+  waveName: "Gene Splicer",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

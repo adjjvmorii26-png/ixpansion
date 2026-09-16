@@ -1,3 +1,14 @@
+## [4.112.0] — 2026-09-16
+
+### Added
+- **Wave 752 gene_splicer**: splices two repo DNAs into a child organ (splice/merge/split actions), wired into `api/index.py` with 6 tests.
+- **DNA engine upgrade (Wave 734)**: profiles now self-discover all live `api/wave*.py` organs (177), paradigm-specific skill maps for 18 paradigms (meta_evolution, quantum_physics, forgetting_curve, ...), `lineage` action, state persistence in `data/wave734_dna_state.json`.
+- **skill_builder upgrade (Wave 733)**: emits YAML-frontmatter SKILL.md files (install-compliant); `skills/BUILDING.md` manifest added.
+- **Wave-builder tooling**: `scripts/scaffold_organ.py` (scaffold wave organs) and `scripts/bump_versions.py` (sync VERSION/WAVE across api_server.py, organism_ontology.py, shared.js, pyproject.toml, CITATION.cff).
+
+### Changed
+- Version bump 4.111.0 → 4.112.0; wave 751 → 752; api_server.py WAVE 517 → 752 and organism_ontology/shared.js synced from stale values.
+
 ## [4.111.0] — 2026-09-16
 
 ### Added

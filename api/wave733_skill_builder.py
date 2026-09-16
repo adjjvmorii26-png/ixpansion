@@ -49,8 +49,13 @@ def handler(req: dict) -> dict:
         state["skills_catalog"][skill_name] = skill_entry
         _save(state)
 
-        # Auto-generate SKILL.md file
-        skill_md = f'''# {skill_name} Skill
+        # Auto-generate SKILL.md file (YAML-frontmatter, install-compliant)
+        skill_md = f'''---
+name: {skill_name}
+description: {description}
+---
+
+# {skill_name} Skill
 
 ## Description
 {description}
