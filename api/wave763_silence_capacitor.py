@@ -99,23 +99,23 @@ def handler(req=None) -> dict:
     captions = st.setdefault("captions", [])
 
     if action == "status":
-        return {"status": "quiet", **coherence_vitals()}
+        return {**coherence_vitals(), "status": "quiet"}
 
     if action == "hold":
         text = str(req.get("text") or req.get("pulse") or "")[:280]
         if not text.strip():
-            return {"status": "empty", **coherence_vitals()}
+            return {**coherence_vitals(), "status": "empty"}
         hid = hashlib.sha256(f"{text}:{_now()}".encode()).hexdigest()[:12]
         holds.append({"id": hid, "text": text, "ts": _now()})
         holds[:] = holds[-64:]
         st["charge"] = round(float(st.get("charge") or 0) + 0.15, 4)
         st["status"] = "holding"
         _save(st)
-        return {"status": "held", "id": hid, "charge": st["charge"], **coherence_vitals()}
+        return {**coherence_vitals(), "status": "held", "id": hid, "charge": st["charge"]}
 
     if action == "compress":
         if not holds:
-            return {"status": "nothing_to_fold", **coherence_vitals()}
+            return {**coherence_vitals(), "status": "nothing_to_fold"}
         batch = holds[-4:]
         folded = []
         for item in batch:
@@ -138,7 +138,7 @@ def handler(req=None) -> dict:
 
     if action == "discharge":
         if not tokens:
-            return {"status": "silence", "caption": "", **coherence_vitals()}
+            return {**coherence_vitals(), "status": "silence", "caption": ""}
         last = tokens[-1]
         caption = last.get("token") or ""
         captions.append({"caption": caption, "token_id": last.get("id"), "ts": _now()})
@@ -148,13 +148,13 @@ def handler(req=None) -> dict:
         st["status"] = "quiet"
         _save(st)
         return {
+            **coherence_vitals(),
             "status": "discharged",
             "caption": caption,
             "audio": False,
-            **coherence_vitals(),
         }
 
-    return {"status": "unknown_action", "action": action, **coherence_vitals()}
+    return {**coherence_vitals(), "status": "unknown_action", "action": action}
 
 
 if __name__ == "__main__":
