@@ -4736,6 +4736,64 @@
       "threshold": 55,
       "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
       "timestamp": 1789569060.2838874
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "resonance_amplifier_v2",
+        "dream_seed_planter",
+        "bridge_consciousness"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 72.8,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.79"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 72.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.78"
+          ],
+          "consented": true
+        },
+        {
+          "name": "bridge_consciousness",
+          "description": "Deepens the semantic connections between modules that share hidden conceptual overlap",
+          "score": 56.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194bridge): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.76"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1789572493.553704
     }
   ]
 }

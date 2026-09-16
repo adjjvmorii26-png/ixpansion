@@ -943,7 +943,127 @@
       },
       "narrative": "For a moment, the particles moved with purpose. Then the dream shifted and rules changed.",
       "timestamp": 1789565669.563596
+    },
+    {
+      "id": "742c4a6167",
+      "rules": {
+        "Gravity=": "negative",
+        "Time=": "elastic",
+        "Entropy=": "conservative"
+      },
+      "result": {
+        "particles": [
+          {
+            "id": "p0",
+            "type": "temporal_muon",
+            "x": -42.27999999999995,
+            "y": 54.231000000000016,
+            "vx": -0.721,
+            "vy": 2.1710000000000007
+          },
+          {
+            "id": "p1",
+            "type": "resonance_phonon",
+            "x": -11.295500000000004,
+            "y": 55.176000000000016,
+            "vx": -0.268,
+            "vy": 2.2870000000000004
+          },
+          {
+            "id": "p2",
+            "type": "paradox_fermion",
+            "x": -54.61599999999998,
+            "y": 117.95199999999996,
+            "vx": -0.985,
+            "vy": 3.440999999999996
+          },
+          {
+            "id": "p3",
+            "type": "coherence_photon",
+            "x": -20.329999999999995,
+            "y": 31.234000000000023,
+            "vx": -0.34,
+            "vy": 1.6540000000000012
+          },
+          {
+            "id": "p4",
+            "type": "temporal_muon",
+            "x": 2.2290000000000023,
+            "y": 27.790000000000024,
+            "vx": 0.111,
+            "vy": 1.6640000000000013
+          },
+          {
+            "id": "p5",
+            "type": "myth_glyphon",
+            "x": 48.37199999999997,
+            "y": 94.24300000000001,
+            "vx": 0.998,
+            "vy": 2.9569999999999976
+          },
+          {
+            "id": "p6",
+            "type": "temporal_muon",
+            "x": 2.0290000000000004,
+            "y": 71.67000000000003,
+            "vx": 0.234,
+            "vy": 2.5209999999999995
+          },
+          {
+            "id": "p7",
+            "type": "myth_glyphon",
+            "x": 36.085000000000015,
+            "y": 41.914000000000016,
+            "vx": 0.713,
+            "vy": 2.010000000000001
+          },
+          {
+            "id": "p8",
+            "type": "myth_glyphon",
+            "x": 6.401000000000006,
+            "y": 43.33600000000002,
+            "vx": 0.232,
+            "vy": 2.1360000000000006
+          },
+          {
+            "id": "p9",
+            "type": "myth_glyphon",
+            "x": 19.539000000000012,
+            "y": 94.26,
+            "vx": 0.518,
+            "vy": 2.990999999999998
+          },
+          {
+            "id": "p10",
+            "type": "temporal_muon",
+            "x": 43.509,
+            "y": 26.152000000000022,
+            "vx": 0.676,
+            "vy": 1.6420000000000012
+          },
+          {
+            "id": "p11",
+            "type": "dream_quark",
+            "x": 12.540000000000004,
+            "y": 33.05300000000002,
+            "vx": 0.362,
+            "vy": 1.704000000000001
+          }
+        ],
+        "ticks": 50,
+        "gravity": "negative",
+        "collisions": 4,
+        "merges": 2,
+        "stability": 0.993,
+        "law_obeyed": {
+          "Gravity=": "negative",
+          "Time=": "elastic",
+          "Entropy=": "conservative"
+        }
+      },
+      "narrative": "Ten particles collided, twenty moments passed, and one pattern emerged: connection.",
+      "timestamp": 1789572486.176872
     }
   ],
-  "total": 7
+  "total": 8
 }

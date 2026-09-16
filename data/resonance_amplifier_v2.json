@@ -2,46 +2,6 @@
   "amplifications": [
     {
       "action": "amplify_v2",
-      "pairs_evaluated": 1486,
-      "amplified": 3,
-      "amplifications": [
-        {
-          "module_a": "entropy_exchange",
-          "module_b": "chaos_orchestration",
-          "ghost_module": "entropy_weaver",
-          "shared_domain": "entropy",
-          "overtone_strength": 109,
-          "thread_type": "overtone",
-          "description": "entropy_exchange and chaos_orchestration both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
-        },
-        {
-          "module_a": "entropy_weaver",
-          "module_b": "emotional_weather",
-          "ghost_module": "entropy_exchange",
-          "shared_domain": "entropy",
-          "overtone_strength": 96,
-          "thread_type": "overtone",
-          "description": "entropy_weaver and emotional_weather both hum at entropy_exchange \u2014 amplifying their hidden entropy resonance"
-        },
-        {
-          "module_a": "entropy_amp",
-          "module_b": "entropy_exchange",
-          "ghost_module": "entropy_weaver",
-          "shared_domain": "entropy",
-          "overtone_strength": 101,
-          "thread_type": "overtone",
-          "description": "entropy_amp and entropy_exchange both hum at entropy_weaver \u2014 amplifying their hidden entropy resonance"
-        }
-      ],
-      "new_threads": [
-        "entropy_exchange\u2194chaos_orchestration",
-        "entropy_weaver\u2194emotional_weather",
-        "entropy_amp\u2194entropy_exchange"
-      ],
-      "timestamp": 1788996011.1590533
-    },
-    {
-      "action": "amplify_v2",
       "pairs_evaluated": 1537,
       "amplified": 3,
       "amplifications": [
@@ -1999,6 +1959,46 @@
         "mythopoetic_engine\u2194dream_archive"
       ],
       "timestamp": 1789569061.5178955
+    },
+    {
+      "action": "amplify_v2",
+      "pairs_evaluated": 1542,
+      "amplified": 3,
+      "amplifications": [
+        {
+          "module_a": "dream_hexer",
+          "module_b": "dreamcatcher",
+          "ghost_module": "dream_archive",
+          "shared_domain": "consciousness",
+          "overtone_strength": 127,
+          "thread_type": "overtone",
+          "description": "dream_hexer and dreamcatcher both hum at dream_archive \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "celestial_compass",
+          "module_b": "dream_archive",
+          "ghost_module": "dream_inception_analyzer",
+          "shared_domain": "consciousness",
+          "overtone_strength": 112,
+          "thread_type": "overtone",
+          "description": "celestial_compass and dream_archive both hum at dream_inception_analyzer \u2014 amplifying their hidden consciousness resonance"
+        },
+        {
+          "module_a": "wave723_dream_compiler",
+          "module_b": "wave94_dream_compiler",
+          "ghost_module": "dream_archive",
+          "shared_domain": "consciousness",
+          "overtone_strength": 113,
+          "thread_type": "overtone",
+          "description": "wave723_dream_compiler and wave94_dream_compiler both hum at dream_archive \u2014 amplifying their hidden consciousness resonance"
+        }
+      ],
+      "new_threads": [
+        "dream_hexer\u2194dreamcatcher",
+        "celestial_compass\u2194dream_archive",
+        "wave723_dream_compiler\u2194wave94_dream_compiler"
+      ],
+      "timestamp": 1789572484.40735
     }
   ]
 }

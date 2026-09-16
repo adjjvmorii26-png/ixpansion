@@ -18,4 +18,4 @@ Expressed from mutated DNA — paradigm: handler->handler
 ## Integration
 - Category: organism
 - Roots: r1
-- Expressed: 2026-09-16T13:00:46.468761+00:00
+- Expressed: 2026-09-16T15:24:56.910258+00:00

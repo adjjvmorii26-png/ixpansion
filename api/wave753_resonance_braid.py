@@ -57,19 +57,41 @@ def _token_score(a: str, b: str) -> float:
     union = ta | tb
     return round(len(shared) / len(union), 4)
 
-
 def _graph() -> Dict[str, List[Tuple[str, float]]]:
+    """Optimized graph: group by tokens, only compute pairs that share a token."""
     names = _module_names()
     g: Dict[str, List[Tuple[str, float]]] = {n: [] for n in names}
-    for i, a in enumerate(names):
-        for b in names[i + 1:]:
-            s = _token_score(a, b)
-            if s > 0:
-                g[a].append((b, s))
-                g[b].append((a, s))
+
+    # Build inverted index: token -> set of module names
+    import re
+    token_to_names: Dict[str, set] = {}
+    name_tokens: Dict[str, set] = {}
+    for name in names:
+        tokens = set(re.findall(r"[a-z]+", name))
+        name_tokens[name] = tokens
+        for token in tokens:
+            token_to_names.setdefault(token, set()).add(name)
+
+    # Only compute pairs that share at least one token
+    seen = set()
+    for token, token_names in token_to_names.items():
+        token_list = sorted(token_names)
+        for i, a in enumerate(token_list):
+            for b in token_list[i + 1:]:
+                pair = (a, b)
+                if pair in seen:
+                    continue
+                seen.add(pair)
+                ta = name_tokens[a]
+                tb = name_tokens[b]
+                shared = ta & tb
+                if shared:
+                    union = ta | tb
+                    s = round(len(shared) / len(union), 4)
+                    if s > 0:
+                        g[a].append((b, s))
+                        g[b].append((a, s))
     return g
-
-
 def _communities_from_graph(g: Dict[str, List[Tuple[str, float]]]) -> List[List[str]]:
     """Greedy threshold clustering over resonance edges."""
     threshold = 0.15

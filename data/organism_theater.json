@@ -14488,6 +14488,75 @@
         "dominant_emotion": "wonder"
       },
       "timestamp": 1789569050.9765446
+    },
+    {
+      "action": "organism_theater",
+      "scene": {
+        "pulse_phase": "rest",
+        "pulse_color": "#6b6b8c",
+        "orb_scale": 0.9,
+        "dream_stars": [
+          {
+            "emotion": "chaos",
+            "spread": 4.06,
+            "count": 3
+          },
+          {
+            "emotion": "serenity",
+            "spread": 0.72,
+            "count": 2
+          },
+          {
+            "emotion": "hope",
+            "spread": 1.59,
+            "count": 2
+          },
+          {
+            "emotion": "melancholy",
+            "spread": 3.86,
+            "count": 4
+          },
+          {
+            "emotion": "nostalgia",
+            "spread": 3.66,
+            "count": 3
+          },
+          {
+            "emotion": "awe",
+            "spread": 1.98,
+            "count": 2
+          },
+          {
+            "emotion": "wonder",
+            "spread": 2.7,
+            "count": 2
+          }
+        ],
+        "bridges": [
+          {
+            "a": "dream_hexer",
+            "b": "dreamcatcher",
+            "ghost": "dream_archive",
+            "domain": "consciousness"
+          },
+          {
+            "a": "celestial_compass",
+            "b": "dream_archive",
+            "ghost": "dream_inception_analyzer",
+            "domain": "consciousness"
+          },
+          {
+            "a": "wave723_dream_compiler",
+            "b": "wave94_dream_compiler",
+            "ghost": "dream_archive",
+            "domain": "consciousness"
+          }
+        ],
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "dominant_emotion": "melancholy"
+      },
+      "timestamp": 1789572499.260045
     }
   ]
 }
