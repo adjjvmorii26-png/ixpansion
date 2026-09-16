@@ -380,11 +380,11 @@ def coherence_vitals() -> dict:
         "genesis_forge_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
         "self_creation_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
         "ecosystem": {
-        "suffixes": ["root", "spire", "shard", "drift", "pulse", "shelf", "chord", "loom"],
+        "suffixes": ["root", "spire", "shard", "drift", "pulse", "shelf", "chord", "loom", "veil"],
         "theme": "newly born concept family from ecosystem children",
     },
     "genesis": {
-        "suffixes": ["root", "spire", "shard", "drift", "pulse", "loom", "tide", "veil"],
+        "suffixes": ["root", "spire", "shard", "drift", "pulse", "loom", "tide", "veil", "chord"],
         "theme": "newly born concept family from genesis children",
     },
 }
