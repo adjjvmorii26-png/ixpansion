@@ -1,3 +1,9 @@
+## [4.114.0] — 2026-09-16
+
+### Added
+- **Wave 755 threshold_engine**: detects conceptual boundary proximity (probe/readiness/cross actions), tracks crossings over time, composite readiness score from drift+entropy+coherence.
+- **Wave 756 liminal_field**: shimmering in-between layer where modules dissolve identity and recombine (dissolve/reform/pulse actions), field strength dynamics, hybrid name synthesis from parent organs.
+- **Dashboards 753-756**: interactive HTML pages for Resonance Braid, Mycelial Weather, Threshold Engine, and Liminal Field.
 ## [4.113.0] — 2026-09-16
 
 ### Added

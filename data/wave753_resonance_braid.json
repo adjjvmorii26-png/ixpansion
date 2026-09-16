@@ -612,7 +612,617 @@
         "wave_composition": {},
         "workforce_agents": {}
       }
+    },
+    {
+      "at": "2026-09-16T07:26:14.120460+00:00",
+      "modules": 158,
+      "edges": 197,
+      "edge_snapshot": {
+        "actuator_bridge": {
+          "coherence_bridge": 0.3333,
+          "interstice_bridge": 0.3333,
+          "neural_syntax_bridge": 0.25,
+          "quantum_bridge": 0.3333
+        },
+        "adaptive_regulation": {
+          "meta_regulation": 0.3333
+        },
+        "ambient_sensor": {},
+        "antimeme_vaccine": {},
+        "auto_optimizer": {},
+        "axiom_forge": {
+          "axiom_mutator": 0.3333,
+          "chrono_forge": 0.3333,
+          "epoch_forge": 0.3333,
+          "metaphor_forge": 0.3333
+        },
+        "axiom_mutator": {
+          "axiom_forge": 0.3333,
+          "dialect_mutator": 0.3333
+        },
+        "bloom_cascade": {
+          "consensus_bloom": 0.3333,
+          "hexanthra_bloom": 0.3333
+        },
+        "braid_debt_oracle": {
+          "harmonic_resonance_oracle": 0.2,
+          "harmony_braid": 0.25,
+          "paradox_debt_ledger": 0.2,
+          "performance_oracle": 0.25,
+          "resonance_braid": 0.25
+        },
+        "catalog_registry": {},
+        "causal_scar_graph": {
+          "causal_weave": 0.25,
+          "coherence_memory_graph": 0.2,
+          "scar_compass": 0.25,
+          "spectral_scar_modes": 0.2
+        },
+        "causal_weave": {
+          "causal_scar_graph": 0.25,
+          "mycelial_weave": 0.3333
+        },
+        "causality_loop": {},
+        "chrono_forge": {
+          "axiom_forge": 0.3333,
+          "epoch_forge": 0.3333,
+          "metaphor_forge": 0.3333
+        },
+        "citizen_census": {
+          "citizen_rights": 0.3333
+        },
+        "citizen_rights": {
+          "citizen_census": 0.3333
+        },
+        "coherence_bridge": {
+          "actuator_bridge": 0.3333,
+          "coherence_gradient": 0.3333,
+          "coherence_integration": 0.3333,
+          "coherence_memory_graph": 0.25,
+          "interstice_bridge": 0.3333,
+          "neural_syntax_bridge": 0.25,
+          "quantum_bridge": 0.3333,
+          "quantum_coherence": 0.3333,
+          "quantum_coherence_lattice": 0.25
+        },
+        "coherence_gradient": {
+          "coherence_bridge": 0.3333,
+          "coherence_integration": 0.3333,
+          "coherence_memory_graph": 0.25,
+          "quantum_coherence": 0.3333,
+          "quantum_coherence_lattice": 0.25
+        },
+        "coherence_integration": {
+          "coherence_bridge": 0.3333,
+          "coherence_gradient": 0.3333,
+          "coherence_memory_graph": 0.25,
+          "quantum_coherence": 0.3333,
+          "quantum_coherence_lattice": 0.25
+        },
+        "coherence_memory_graph": {
+          "causal_scar_graph": 0.2,
+          "coherence_bridge": 0.25,
+          "coherence_gradient": 0.25,
+          "coherence_integration": 0.25,
+          "memory_palace_reanimation": 0.2,
+          "quantum_coherence": 0.25,
+          "quantum_coherence_lattice": 0.2
+        },
+        "communication": {},
+        "communion": {},
+        "consciousness_experiments": {},
+        "consensus_bloom": {
+          "bloom_cascade": 0.3333,
+          "hexanthra_bloom": 0.3333
+        },
+        "constellation_gravity": {},
+        "cross_module_emergence": {
+          "cross_realm_bridges": 0.2,
+          "hex_language_emergence": 0.2,
+          "linguistic_emergence": 0.25
+        },
+        "cross_realm_bridges": {
+          "cross_module_emergence": 0.2
+        },
+        "dawn_ledger": {
+          "paradox_debt_ledger": 0.25,
+          "resonance_ledger": 0.3333,
+          "resonance_ledger_v2": 0.25
+        },
+        "dependency_resolver": {},
+        "dialect_mutator": {
+          "axiom_mutator": 0.3333
+        },
+        "dream_choir": {
+          "dream_compiler": 0.3333,
+          "dream_logic_physics": 0.25,
+          "dream_synthesis": 0.3333,
+          "rift_choir_twin_d28a": 0.1667
+        },
+        "dream_compiler": {
+          "dream_choir": 0.3333,
+          "dream_logic_physics": 0.25,
+          "dream_synthesis": 0.3333
+        },
+        "dream_logic_physics": {
+          "dream_choir": 0.25,
+          "dream_compiler": 0.25,
+          "dream_synthesis": 0.25
+        },
+        "dream_synthesis": {
+          "dream_choir": 0.3333,
+          "dream_compiler": 0.3333,
+          "dream_logic_physics": 0.25
+        },
+        "dreaming": {},
+        "dual_track_sentinel": {},
+        "echo_breaker": {
+          "echo_stratigraphy": 0.3333
+        },
+        "echo_stratigraphy": {
+          "echo_breaker": 0.3333
+        },
+        "economy_unifier": {
+          "routing_unifier": 0.3333
+        },
+        "entropic_weather": {
+          "entropy_weather_front": 0.25,
+          "mycelial_weather": 0.3333
+        },
+        "entropy_heatmap": {
+          "entropy_rituals": 0.3333,
+          "entropy_weather_front": 0.25
+        },
+        "entropy_rituals": {
+          "entropy_heatmap": 0.3333,
+          "entropy_weather_front": 0.25
+        },
+        "entropy_weather_front": {
+          "entropic_weather": 0.25,
+          "entropy_heatmap": 0.25,
+          "entropy_rituals": 0.25,
+          "mycelial_weather": 0.25
+        },
+        "epoch_forge": {
+          "axiom_forge": 0.3333,
+          "chrono_forge": 0.3333,
+          "lab_epoch_seal": 0.25,
+          "metaphor_forge": 0.3333
+        },
+        "essence_return": {},
+        "evolution_kernel": {
+          "hex_grammar_evolution": 0.25,
+          "ix_kernel": 0.3333,
+          "vault_driven_evolution": 0.25
+        },
+        "expansion": {},
+        "forgotten_archive": {
+          "root_archive": 0.3333
+        },
+        "forking_paths": {},
+        "fractal_garden": {
+          "garden": 0.5
+        },
+        "fusion": {
+          "fusion_organism": 0.5
+        },
+        "fusion_organism": {
+          "fusion": 0.5,
+          "organism_horizon": 0.3333
+        },
+        "garden": {
+          "fractal_garden": 0.5
+        },
+        "gene_splicer": {},
+        "harmonic_resonance_oracle": {
+          "braid_debt_oracle": 0.2,
+          "performance_oracle": 0.25,
+          "resonance_braid": 0.25,
+          "resonance_cartography": 0.25,
+          "resonance_chamber": 0.25,
+          "resonance_ledger": 0.25,
+          "resonance_ledger_v2": 0.2,
+          "temporal_resonance": 0.25
+        },
+        "harmony_braid": {
+          "braid_debt_oracle": 0.25,
+          "resonance_braid": 0.3333
+        },
+        "hex_cathedral": {
+          "hex_grammar_evolution": 0.25,
+          "hex_language_emergence": 0.25,
+          "hex_runtime": 0.3333
+        },
+        "hex_grammar_evolution": {
+          "evolution_kernel": 0.25,
+          "hex_cathedral": 0.25,
+          "hex_language_emergence": 0.2,
+          "hex_runtime": 0.25,
+          "vault_driven_evolution": 0.2
+        },
+        "hex_language_emergence": {
+          "cross_module_emergence": 0.2,
+          "hex_cathedral": 0.25,
+          "hex_grammar_evolution": 0.2,
+          "hex_runtime": 0.25,
+          "linguistic_emergence": 0.25
+        },
+        "hex_runtime": {
+          "hex_cathedral": 0.3333,
+          "hex_grammar_evolution": 0.25,
+          "hex_language_emergence": 0.25
+        },
+        "hexanthra_bloom": {
+          "bloom_cascade": 0.3333,
+          "consensus_bloom": 0.3333
+        },
+        "homestead": {},
+        "hush_membrane": {},
+        "import_quarantine": {},
+        "interstice_bridge": {
+          "actuator_bridge": 0.3333,
+          "coherence_bridge": 0.3333,
+          "neural_syntax_bridge": 0.25,
+          "quantum_bridge": 0.3333
+        },
+        "ix_kernel": {
+          "evolution_kernel": 0.3333
+        },
+        "kolmogorov_budget": {},
+        "lab_epoch_seal": {
+          "epoch_forge": 0.25,
+          "lab_jumpstart": 0.25,
+          "lab_os_boot": 0.2,
+          "sovereign_seal": 0.25
+        },
+        "lab_jumpstart": {
+          "lab_epoch_seal": 0.25,
+          "lab_os_boot": 0.25
+        },
+        "lab_os_boot": {
+          "lab_epoch_seal": 0.2,
+          "lab_jumpstart": 0.25
+        },
+        "liminal_field": {
+          "morphogenetic_field": 0.3333,
+          "temporal_field": 0.3333
+        },
+        "lineage_crystal": {
+          "lineage_mirror": 0.3333
+        },
+        "lineage_mirror": {
+          "lineage_crystal": 0.3333,
+          "mirror": 0.5,
+          "mirror_world_delta": 0.25
+        },
+        "linguistic": {
+          "linguistic_emergence": 0.5
+        },
+        "linguistic_emergence": {
+          "cross_module_emergence": 0.25,
+          "hex_language_emergence": 0.25,
+          "linguistic": 0.5
+        },
+        "live_blog": {},
+        "lyapunov_stability": {},
+        "memory_palace_reanimation": {
+          "coherence_memory_graph": 0.2
+        },
+        "meta_coordination": {
+          "meta_regulation": 0.3333
+        },
+        "meta_regulation": {
+          "adaptive_regulation": 0.3333,
+          "meta_coordination": 0.3333
+        },
+        "metaphor_forge": {
+          "axiom_forge": 0.3333,
+          "chrono_forge": 0.3333,
+          "epoch_forge": 0.3333
+        },
+        "mirror": {
+          "lineage_mirror": 0.5,
+          "mirror_world_delta": 0.3333
+        },
+        "mirror_world_delta": {
+          "lineage_mirror": 0.25,
+          "mirror": 0.3333,
+          "proof_delta": 0.25
+        },
+        "morphogenetic_field": {
+          "liminal_field": 0.3333,
+          "temporal_field": 0.3333
+        },
+        "mycelial_network": {
+          "mycelial_weather": 0.3333,
+          "mycelial_weave": 0.3333,
+          "trust_network": 0.3333
+        },
+        "mycelial_weather": {
+          "entropic_weather": 0.3333,
+          "entropy_weather_front": 0.25,
+          "mycelial_network": 0.3333,
+          "mycelial_weave": 0.3333
+        },
+        "mycelial_weave": {
+          "causal_weave": 0.3333,
+          "mycelial_network": 0.3333,
+          "mycelial_weather": 0.3333
+        },
+        "mythic_narrative": {},
+        "naming_ceremony": {
+          "naming_well": 0.3333
+        },
+        "naming_well": {
+          "naming_ceremony": 0.3333
+        },
+        "negotiation": {
+          "negotiation_bazaar": 0.5
+        },
+        "negotiation_bazaar": {
+          "negotiation": 0.5
+        },
+        "neural_syntax_bridge": {
+          "actuator_bridge": 0.25,
+          "coherence_bridge": 0.25,
+          "interstice_bridge": 0.25,
+          "quantum_bridge": 0.25,
+          "void_syntax_engine": 0.2
+        },
+        "oblivion_compost": {},
+        "orchestration_engine": {
+          "orchestration_pulse": 0.3333,
+          "retrocausal_engine": 0.3333,
+          "threshold_engine": 0.3333,
+          "void_syntax_engine": 0.25
+        },
+        "orchestration_pulse": {
+          "orchestration_engine": 0.3333
+        },
+        "organism_horizon": {
+          "fusion_organism": 0.3333
+        },
+        "ouroboros": {},
+        "paradox_appeal": {
+          "paradox_court": 0.3333,
+          "paradox_debt_ledger": 0.25,
+          "paradox_genome": 0.3333,
+          "paradox_singularity": 0.3333
+        },
+        "paradox_court": {
+          "paradox_appeal": 0.3333,
+          "paradox_debt_ledger": 0.25,
+          "paradox_genome": 0.3333,
+          "paradox_singularity": 0.3333
+        },
+        "paradox_debt_ledger": {
+          "braid_debt_oracle": 0.2,
+          "dawn_ledger": 0.25,
+          "paradox_appeal": 0.25,
+          "paradox_court": 0.25,
+          "paradox_genome": 0.25,
+          "paradox_singularity": 0.25,
+          "resonance_ledger": 0.25,
+          "resonance_ledger_v2": 0.2
+        },
+        "paradox_genome": {
+          "paradox_appeal": 0.3333,
+          "paradox_court": 0.3333,
+          "paradox_debt_ledger": 0.25,
+          "paradox_singularity": 0.3333
+        },
+        "paradox_singularity": {
+          "paradox_appeal": 0.3333,
+          "paradox_court": 0.3333,
+          "paradox_debt_ledger": 0.25,
+          "paradox_genome": 0.3333,
+          "temporal_singularity": 0.3333
+        },
+        "pattern_predictor": {},
+        "performance_oracle": {
+          "braid_debt_oracle": 0.25,
+          "harmonic_resonance_oracle": 0.25
+        },
+        "phase_lock_clock": {},
+        "priority_scheduler": {},
+        "proof_delta": {
+          "mirror_world_delta": 0.25
+        },
+        "quantum_bridge": {
+          "actuator_bridge": 0.3333,
+          "coherence_bridge": 0.3333,
+          "interstice_bridge": 0.3333,
+          "neural_syntax_bridge": 0.25,
+          "quantum_coherence": 0.3333,
+          "quantum_coherence_lattice": 0.25
+        },
+        "quantum_coherence": {
+          "coherence_bridge": 0.3333,
+          "coherence_gradient": 0.3333,
+          "coherence_integration": 0.3333,
+          "coherence_memory_graph": 0.25,
+          "quantum_bridge": 0.3333,
+          "quantum_coherence_lattice": 0.6667
+        },
+        "quantum_coherence_lattice": {
+          "coherence_bridge": 0.25,
+          "coherence_gradient": 0.25,
+          "coherence_integration": 0.25,
+          "coherence_memory_graph": 0.2,
+          "quantum_bridge": 0.25,
+          "quantum_coherence": 0.6667,
+          "silent_broadcast_lattice": 0.2
+        },
+        "receipt_notary": {},
+        "renormalization_block": {},
+        "repo_dna": {},
+        "resilience_mesh": {},
+        "resonance_braid": {
+          "braid_debt_oracle": 0.25,
+          "harmonic_resonance_oracle": 0.25,
+          "harmony_braid": 0.3333,
+          "resonance_cartography": 0.3333,
+          "resonance_chamber": 0.3333,
+          "resonance_ledger": 0.3333,
+          "resonance_ledger_v2": 0.25,
+          "temporal_resonance": 0.3333
+        },
+        "resonance_cartography": {
+          "harmonic_resonance_oracle": 0.25,
+          "resonance_braid": 0.3333,
+          "resonance_chamber": 0.3333,
+          "resonance_ledger": 0.3333,
+          "resonance_ledger_v2": 0.25,
+          "temporal_resonance": 0.3333
+        },
+        "resonance_chamber": {
+          "harmonic_resonance_oracle": 0.25,
+          "resonance_braid": 0.3333,
+          "resonance_cartography": 0.3333,
+          "resonance_ledger": 0.3333,
+          "resonance_ledger_v2": 0.25,
+          "temporal_resonance": 0.3333
+        },
+        "resonance_ledger": {
+          "dawn_ledger": 0.3333,
+          "harmonic_resonance_oracle": 0.25,
+          "paradox_debt_ledger": 0.25,
+          "resonance_braid": 0.3333,
+          "resonance_cartography": 0.3333,
+          "resonance_chamber": 0.3333,
+          "resonance_ledger_v2": 0.6667,
+          "temporal_resonance": 0.3333
+        },
+        "resonance_ledger_v2": {
+          "dawn_ledger": 0.25,
+          "harmonic_resonance_oracle": 0.2,
+          "paradox_debt_ledger": 0.2,
+          "resonance_braid": 0.25,
+          "resonance_cartography": 0.25,
+          "resonance_chamber": 0.25,
+          "resonance_ledger": 0.6667,
+          "temporal_resonance": 0.25
+        },
+        "retrocausal_engine": {
+          "orchestration_engine": 0.3333,
+          "threshold_engine": 0.3333,
+          "void_syntax_engine": 0.25
+        },
+        "rift_choir_twin_d28a": {
+          "dream_choir": 0.1667,
+          "rift_quill_span_f745": 0.125
+        },
+        "rift_quill_span_f745": {
+          "rift_choir_twin_d28a": 0.125
+        },
+        "ritual_governance": {},
+        "root_archive": {
+          "forgotten_archive": 0.3333
+        },
+        "routing_unifier": {
+          "economy_unifier": 0.3333
+        },
+        "scar_compass": {
+          "causal_scar_graph": 0.25,
+          "spectral_scar_modes": 0.25
+        },
+        "self_awareness": {
+          "self_model": 0.3333,
+          "self_repair": 0.3333
+        },
+        "self_model": {
+          "self_awareness": 0.3333,
+          "self_repair": 0.3333
+        },
+        "self_repair": {
+          "self_awareness": 0.3333,
+          "self_model": 0.3333
+        },
+        "semantic_loom": {},
+        "sentient_heuristic": {},
+        "silent_broadcast_lattice": {
+          "quantum_coherence_lattice": 0.2
+        },
+        "skill_builder": {},
+        "sovereign_seal": {
+          "lab_epoch_seal": 0.25
+        },
+        "sovereignty_beacon": {},
+        "spectral_scar_modes": {
+          "causal_scar_graph": 0.2,
+          "scar_compass": 0.25
+        },
+        "still_compound": {
+          "still_interval": 0.3333,
+          "still_residue_reed_4da9": 0.2
+        },
+        "still_interval": {
+          "still_compound": 0.3333,
+          "still_residue_reed_4da9": 0.2
+        },
+        "still_residue_reed_4da9": {
+          "still_compound": 0.2,
+          "still_interval": 0.2
+        },
+        "succession_planner": {},
+        "superposition": {},
+        "swarm": {},
+        "symbiosis_ecology": {
+          "symbiosis_protocol": 0.3333
+        },
+        "symbiosis_protocol": {
+          "symbiosis_ecology": 0.3333
+        },
+        "temporal_field": {
+          "liminal_field": 0.3333,
+          "morphogenetic_field": 0.3333,
+          "temporal_resonance": 0.3333,
+          "temporal_singularity": 0.3333
+        },
+        "temporal_resonance": {
+          "harmonic_resonance_oracle": 0.25,
+          "resonance_braid": 0.3333,
+          "resonance_cartography": 0.3333,
+          "resonance_chamber": 0.3333,
+          "resonance_ledger": 0.3333,
+          "resonance_ledger_v2": 0.25,
+          "temporal_field": 0.3333,
+          "temporal_singularity": 0.3333
+        },
+        "temporal_singularity": {
+          "paradox_singularity": 0.3333,
+          "temporal_field": 0.3333,
+          "temporal_resonance": 0.3333
+        },
+        "threshold_engine": {
+          "orchestration_engine": 0.3333,
+          "retrocausal_engine": 0.3333,
+          "void_syntax_engine": 0.25
+        },
+        "topology": {},
+        "trust_network": {
+          "mycelial_network": 0.3333
+        },
+        "underworld": {},
+        "vault_driven_evolution": {
+          "evolution_kernel": 0.25,
+          "hex_grammar_evolution": 0.2
+        },
+        "veil_lifter": {},
+        "void_meter": {
+          "void_syntax_engine": 0.25
+        },
+        "void_syntax_engine": {
+          "neural_syntax_bridge": 0.2,
+          "orchestration_engine": 0.25,
+          "retrocausal_engine": 0.25,
+          "threshold_engine": 0.25,
+          "void_meter": 0.25
+        },
+        "wave_composition": {},
+        "workforce_agents": {}
+      }
     }
   ],
-  "last_check": "2026-09-16T04:25:28.897920+00:00"
+  "last_check": "2026-09-16T07:26:14.003491+00:00"
 }

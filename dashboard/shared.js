@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.113.0",
-  wave: 754,
-  waveName: "Mycelial Weather",
+  "version": "4.114.0",
+  wave: 756,
+  waveName: "Liminal Field",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

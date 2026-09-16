@@ -2191,3 +2191,15 @@ def resonates_with() -> list:
         from api.wave754_mycelial_weather import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 755: Threshold Engine ---
+    if path.startswith("/threshold-engine") or path.startswith("/api/threshold_engine") or path in ("/threshold-engine", "/api/threshold_engine"):
+        from api.wave755_threshold_engine import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 756: Liminal Field ---
+    if path.startswith("/liminal-field") or path.startswith("/api/liminal_field") or path in ("/liminal-field", "/api/liminal_field"):
+        from api.wave756_liminal_field import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

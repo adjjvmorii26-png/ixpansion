@@ -1,0 +1,56 @@
+{
+  "wave": 756,
+  "name": "liminal_field",
+  "dissolved": [
+    {
+      "organ": "resonance_braid",
+      "dissolved_at": "2026-09-16T07:24:33.504424+00:00",
+      "reformed": false
+    },
+    {
+      "organ": "dream_oracle",
+      "dissolved_at": "2026-09-16T07:24:33.528172+00:00",
+      "reformed": true
+    },
+    {
+      "organ": "entropy_weaver",
+      "dissolved_at": "2026-09-16T07:24:33.531256+00:00",
+      "reformed": true
+    },
+    {
+      "organ": "resonance_braid",
+      "dissolved_at": "2026-09-16T07:26:14.768889+00:00",
+      "reformed": false
+    },
+    {
+      "organ": "dream_oracle",
+      "dissolved_at": "2026-09-16T07:26:14.784776+00:00",
+      "reformed": true
+    },
+    {
+      "organ": "entropy_weaver",
+      "dissolved_at": "2026-09-16T07:26:14.787811+00:00",
+      "reformed": true
+    }
+  ],
+  "reformed": [
+    {
+      "name": "drpy_orer",
+      "parents": [
+        "dream_oracle",
+        "entropy_weaver"
+      ],
+      "reformed_at": "2026-09-16T07:24:33.533880+00:00"
+    },
+    {
+      "name": "drpy_orer",
+      "parents": [
+        "dream_oracle",
+        "entropy_weaver"
+      ],
+      "reformed_at": "2026-09-16T07:26:14.790660+00:00"
+    }
+  ],
+  "status": "seed",
+  "last_check": "2026-09-16T07:26:14.761196+00:00"
+}
