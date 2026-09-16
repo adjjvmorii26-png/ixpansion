@@ -1,0 +1,115 @@
+{
+  "wave": 731,
+  "name": "workforce_agents",
+  "agents": [
+    {
+      "id": "28bc9d47",
+      "role": "CatalogCurator",
+      "responsibilities": [
+        "maintain catalog",
+        "classify dashboards",
+        "update metadata"
+      ],
+      "tools": [
+        "catalog_registry",
+        "search",
+        "classify"
+      ],
+      "autonomy": "high",
+      "status": "active",
+      "wave": 731,
+      "spawned_at": "2026-09-16T01:35:31.897551+00:00"
+    },
+    {
+      "id": "2cc91272",
+      "role": "ModuleDeployer",
+      "responsibilities": [
+        "deploy new wave organs",
+        "wire into index",
+        "test before deploy"
+      ],
+      "tools": [
+        "index.py",
+        "pytest",
+        "git push"
+      ],
+      "autonomy": "medium",
+      "status": "active",
+      "wave": 731,
+      "spawned_at": "2026-09-16T01:35:31.901204+00:00"
+    },
+    {
+      "id": "6962e14c",
+      "role": "TestRunner",
+      "responsibilities": [
+        "run tests",
+        "report failures",
+        "validate contracts"
+      ],
+      "tools": [
+        "pytest",
+        "coherence_vitals",
+        "velocity_burst"
+      ],
+      "autonomy": "high",
+      "status": "active",
+      "wave": 731,
+      "spawned_at": "2026-09-16T01:35:31.904941+00:00"
+    },
+    {
+      "id": "8e7e8fbb",
+      "role": "BridgeBuilder",
+      "responsibilities": [
+        "scan interstice bridges",
+        "propose integrations",
+        "build portals"
+      ],
+      "tools": [
+        "interstice_bridge",
+        "bridge_map",
+        "proposals"
+      ],
+      "autonomy": "medium",
+      "status": "active",
+      "wave": 731,
+      "spawned_at": "2026-09-16T01:35:31.908785+00:00"
+    },
+    {
+      "id": "778d5c6a",
+      "role": "DreamWeaver",
+      "responsibilities": [
+        "generate dreams",
+        "compile modules",
+        "manage dream state"
+      ],
+      "tools": [
+        "dream_compiler",
+        "metaphor_forge",
+        "liminal_field"
+      ],
+      "autonomy": "high",
+      "status": "active",
+      "wave": 731,
+      "spawned_at": "2026-09-16T01:35:31.912556+00:00"
+    },
+    {
+      "id": "b71b2ed9",
+      "role": "ThresholdGuard",
+      "responsibilities": [
+        "monitor transcendence",
+        "detect singularity risk",
+        "initiate safeguards"
+      ],
+      "tools": [
+        "threshold_engine",
+        "axiom_mutator",
+        "veil_lifter"
+      ],
+      "autonomy": "critical",
+      "status": "active",
+      "wave": 731,
+      "spawned_at": "2026-09-16T01:35:31.916219+00:00"
+    }
+  ],
+  "assignments": []
+}

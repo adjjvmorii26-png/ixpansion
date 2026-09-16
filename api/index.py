@@ -2041,3 +2041,15 @@ def resonates_with() -> list:
         from api.wave729_axiom_mutator import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 730: Catalog Registry ---
+    if path.startswith("/catalog") or path.startswith("/api/catalog_registry") or path in ("/catalog", "/api/catalog_registry"):
+        from api.wave730_catalog_registry import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 731: Workforce Agents ---
+    if path.startswith("/workforce") or path.startswith("/api/workforce_agents") or path in ("/workforce", "/api/workforce_agents"):
+        from api.wave731_workforce_agents import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

@@ -41,6 +41,22 @@
       "wave": 723,
       "timestamp": "2026-09-16T01:29:57.903474",
       "status": "compiled"
+    },
+    {
+      "id": "53fb26d5",
+      "prompt": "test dream",
+      "phase": "unconscious",
+      "wave": 723,
+      "timestamp": "2026-09-16T01:36:09.018344",
+      "status": "dreaming"
+    },
+    {
+      "id": "b4038137",
+      "prompt": "compile test",
+      "phase": "compiling",
+      "wave": 723,
+      "timestamp": "2026-09-16T01:36:09.030947",
+      "status": "compiled"
     }
   ],
   "compiled": [
@@ -67,6 +83,14 @@
       "status": "compiled",
       "wave": 723,
       "compiled_at": "2026-09-16T01:29:57.907586"
+    },
+    {
+      "id": "b4038137",
+      "source": "compile test",
+      "bytecode": "79812f0bb4155c46206f72b2ed4cb417",
+      "status": "compiled",
+      "wave": 723,
+      "compiled_at": "2026-09-16T01:36:09.034887"
     }
   ]
 }

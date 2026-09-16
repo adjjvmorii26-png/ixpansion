@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IXPANSION Catalog — The Living Dashboard Registry</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#02020a;--accent:#7c7cf8;--teal:#2dd4bf;--gold:#fbbf24;--rose:#fb7185;--cyan:#22d3ee;--green:#4ade80;--text:#b8b8d0;--dim:#505068;--bright:#e8e8f8;--card:#0a0a24}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+@keyframes pulse{0%,100%{opacity:0.6}50%{opacity:1}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glow{0%,100%{box-shadow:0 0 15px rgba(124,124,248,0.2)}50%{box-shadow:0 0 40px rgba(124,124,248,0.4)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.header{position:relative;z-index:2;text-align:center;padding:60px 24px 30px}
+.header .glyph{font-size:3em;animation:drift 4s infinite;display:inline-block;text-shadow:0 0 40px rgba(124,124,248,0.5)}
+.header h1{font-size:2.8em;font-weight:200;letter-spacing:14px;color:var(--bright);margin:14px 0}
+.header h1 span{color:var(--accent);font-weight:400}
+.header .tagline{color:var(--dim);font-size:0.7em;letter-spacing:5px}
+.stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;padding:20px 40px;max-width:1200px;margin:0 auto}
+.stat{background:var(--card);border:1px solid rgba(124,124,248,0.15);border-radius:12px;padding:20px;text-align:center;animation:fadeIn 0.6s}
+.stat .value{font-size:2.5em;font-weight:700;color:var(--accent);animation:float 3s infinite}
+.stat .label{font-size:0.7em;color:var(--dim);margin-top:6px;letter-spacing:2px}
+.filter-bar{position:relative;z-index:2;display:flex;gap:8px;justify-content:center;padding:20px 40px;flex-wrap:wrap}
+.filter-btn{background:var(--card);border:1px solid rgba(124,124,248,0.15);color:var(--dim);padding:8px 16px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:0.7em;transition:all 0.3s;letter-spacing:1px}
+.filter-btn:hover,.filter-btn.active{background:rgba(124,124,248,0.15);color:var(--accent);border-color:var(--accent);box-shadow:glow 0.5s}
+.catalog-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;padding:20px 40px;max-width:1400px;margin:0 auto}
+.catalog-card{background:var(--card);border:1px solid rgba(124,124,248,0.1);border-radius:12px;padding:24px;transition:all 0.3s;cursor:pointer;animation:fadeIn 0.6s;backdrop-filter:blur(10px)}
+.catalog-card:hover{border-color:var(--accent);box-shadow:0 0 30px rgba(124,124,248,0.15);transform:translateY(-4px)}
+.catalog-card .icon{font-size:2em;margin-bottom:8px}
+.catalog-card .title{font-size:1em;font-weight:600;color:var(--bright);margin-bottom:6px}
+.catalog-card .wave{font-size:0.7em;color:var(--accent);letter-spacing:2px}
+.catalog-card .desc{font-size:0.75em;color:var(--dim);margin-top:8px;line-height:1.4}
+.catalog-card .category{display:inline-block;background:rgba(124,124,248,0.1);color:var(--accent);padding:3px 10px;border-radius:10px;font-size:0.65em;margin-top:8px;letter-spacing:1px}
+.workforce{position:relative;z-index:2;padding:40px;max-width:1200px;margin:0 auto}
+.workforce h2{font-size:1.8em;font-weight:200;letter-spacing:10px;color:var(--bright);margin-bottom:30px;text-align:center}
+.agent-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.agent-card{background:var(--card);border:1px solid rgba(124,124,248,0.1);border-radius:12px;padding:24px;animation:fadeIn 0.6s}
+.agent-card .role{font-size:1.2em;font-weight:600;color:var(--accent);margin-bottom:8px}
+.agent-card .tools{font-size:0.7em;color:var(--dim);margin:8px 0}
+.agent-card .autonomy{font-size:0.7em;padding:3px 10px;border-radius:10px;display:inline-block}
+.autonomy.high{background:rgba(74,222,128,0.15);color:var(--green)}
+.autonomy.medium{background:rgba(251,191,36,0.15);color:var(--gold)}
+.autonomy.critical{background:rgba(251,113,133,0.15);color:var(--rose)}
+.status-bar{position:relative;z-index:2;text-align:center;padding:20px;color:var(--dim);font-size:0.7em;letter-spacing:2px;border-top:1px solid rgba(124,124,248,0.1);margin-top:40px}
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+<div class="header">
+  <div class="glyph">📋</div>
+  <h1>IXPANSION <span>CATALOG</span></h1>
+  <div class="tagline">LIVING DASHBOARD REGISTRY — 193 ENTRIES ACROSS 12 CATEGORIES</div>
+</div>
+<div class="stats">
+  <div class="stat"><div class="value">193</div><div class="label">Dashboards</div></div>
+  <div class="stat"><div class="value">153</div><div class="label">Waves</div></div>
+  <div class="stat"><div class="value">1,084</div><div class="label">Modules</div></div>
+  <div class="stat"><div class="value">76</div><div class="label">Tests Passing</div></div>
+  <div class="stat"><div class="value">92.3</div><div class="label">Velocity</div></div>
+  <div class="stat"><div class="value">75</div><div class="label">Bridges</div></div>
+</div>
+<div class="filter-bar" id="filters">
+  <button class="filter-btn active" onclick="filterCat('all')">All</button>
+  <button class="filter-btn" onclick="filterCat('Coherence')">🜂 Coherence</button>
+  <button class="filter-btn" onclick="filterCat('Dream')">🌙 Dream</button>
+  <button class="filter-btn" onclick="filterCat('Wave')">🌊 Wave</button>
+  <button class="filter-btn" onclick="filterCat('Paradox')">🔄 Paradox</button>
+  <button class="filter-btn" onclick="filterCat('Expansion')">🌿 Expansion</button>
+  <button class="filter-btn" onclick="filterCat('Mycelial')">🍄 Mycelial</button>
+  <button class="filter-btn" onclick="filterCat('Hex')">⬡ Hex</button>
+  <button class="filter-btn" onclick="filterCat('Glitch')">💀 Glitch</button>
+</div>
+<div class="catalog-grid" id="catalogGrid"></div>
+<div class="workforce">
+  <h2>👥 WORKFORCE AGENTS</h2>
+  <div class="agent-grid" id="agentGrid"></div>
+</div>
+<div class="status-bar"><span style="color:var(--green)">● LIVE</span> — IXPANSION Catalog & Workforce — <span id="ts">—</span></div>
+<script>
+const CATS=[{name:"Coherence",icon:"🜂"},{name:"Resonance",icon:"🜁"},{name:"Dream",icon:"🌙"},{name:"Glitch",icon:"💀"},{name:"Wave",icon:"🌊"},{name:"Organism",icon:"🧬"},{name:"Mesh",icon:"🕸️"},{name:"Hex",icon:"⬡"},{name:"Expansion",icon:"🌿"},{name:"Dashboard",icon:"📊"},{name:"Paradox",icon:"🔄"},{name:"Mycelial",icon:"🍄"},{name:"Temporal",icon:"⏳"},{name:"Void",icon:"🌑"},{name:"Luminant",icon:"✨"}];
+const AGENTS=[{role:"CatalogCurator",tools:"catalog_registry,search,classify",autonomy:"high",icon:"📋"},{role:"ModuleDeployer",tools:"index.py,pytest,git push",autonomy:"medium",icon:"🚀"},{role:"TestRunner",tools:"pytest,coherence_vitals,velocity",autonomy:"high",icon:"🧪"},{role:"BridgeBuilder",tools:"interstice_bridge,bridge_map",autonomy:"medium",icon:"🌉"},{role:"DreamWeaver",tools:"dream_compiler,metaphor_forge",autonomy:"high",icon:"🌙"},{role:"ThresholdGuard",tools:"threshold_engine,axiom_mutator",autonomy:"critical",icon:"🛡️"}];
+let catalogData=[];
+fetch('/api/catalog_registry?action=entries').then(r=>r.json()).then(d=>{catalogData=d.entries||[];renderCatalog(catalogData)}).catch(()=>{/* use static fallback */});
+fetch('/api/workforce_agents?action=agents').then(r=>r.json()).then(d=>{renderAgents(d.agents||[])}).catch(()=>{});
+function renderAgents(agents){const g=document.getElementById('agentGrid');g.innerHTML=AGENTS.map(a=>`<div class="agent-card"><div style="font-size:2em;margin-bottom:6px">${a.icon}</div><div class="role">${a.role}</div><div class="tools">${a.tools}</div><div class="autonomy ${a.autonomy}">${a.autonomy.toUpperCase()} AUTONOMY</div></div>`).join('');}
+function renderCatalog(entries){const g=document.getElementById('catalogGrid');const catEntries=entries.slice(0,60);g.innerHTML=catEntries.map(e=>{const cat=CATS.find(c=>e.title.toLowerCase().includes(c.name.toLowerCase()))||{icon:"📊",name:e.category};return `<div class="catalog-card" onclick="location.href='/dashboard/${e.filename}'"><div class="icon">${cat.icon}</div><div class="title">${e.title}</div><div class="wave">WAVE ${e.wave}</div><div class="desc">${e.desc||'IXPANSION dashboard entry'}</div><div class="category">${cat.icon} ${e.category}</div></div>`}).join('');}
+function filterCat(cat){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');const filtered=cat==='all'?catalogData:catalogData.filter(e=>e.category===cat);renderCatalog(filtered);}
+setInterval(()=>{document.getElementById('ts').textContent=new Date().toISOString()},2000);
+</script>
+</body>
+</html>
