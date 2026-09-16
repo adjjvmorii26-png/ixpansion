@@ -220,6 +220,8 @@ def coherence_vitals():
         "module": "dream_interpreter",
         "ok": True,
         "status": "active",
+        "module_health": {"value": 0.92, "setpoint": 0.8, "weight": 1.0},
+        "resonance": {"score": 0.9, "connections": 5},
     }
 
 def resonates_with():

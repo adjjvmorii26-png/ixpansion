@@ -122,6 +122,25 @@ def living_modules() -> list:
     return _discover_living()
 
 
+def get_organism_status() -> dict:
+    """Convenience function: full organism status summary."""
+    try:
+        r = regulate()
+        return {
+            "organism": "IXPANSION",
+            "coherence_regulator": "dynamic",
+            "living_modules": r["living_modules"],
+            "coherence": r["coherence"],
+            "status": r["status"],
+        }
+    except Exception:
+        return {
+            "organism": "IXPANSION",
+            "coherence_regulator": "dynamic",
+            "status": "unknown",
+        }
+
+
 def regulate() -> Dict[str, Any]:
     """Full-organism coherence reading.
 

@@ -379,7 +379,15 @@ def coherence_vitals() -> dict:
         "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
         "genesis_forge_vitality": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
         "self_creation_era": {"value": 1.0, "setpoint": 0.8, "weight": 0.5},
-    }
+        "ecosystem": {
+        "suffixes": ['root', 'spire', 'shard', 'drift', 'pulse'],
+        "theme": "newly born concept family from ecosystem children",
+    },
+    "genesis": {
+        "suffixes": ['root', 'spire', 'shard', 'drift', 'pulse'],
+        "theme": "newly born concept family from genesis children",
+    },
+}
 
 
 def resonates_with() -> list:

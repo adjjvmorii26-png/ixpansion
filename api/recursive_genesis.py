@@ -180,12 +180,12 @@ def apply_mutations(audit: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
             fam = mut["family"]
             # find the nucleus dict for this family and genuinely grow it
             pattern = rf'"{fam}": \{{[^}}]*"suffixes": \[([^\]]+)\]'
-            m = re.search(pattern, src)
+            m = re.search(pattern, src, re.DOTALL)
+            import random
             if m:
                 existing = [s.strip().strip('"').strip("'")
                             for s in m.group(1).split(",")]
                 # invent a fresh suffix variant to grow the vocabulary
-                import random
                 candidates = ["shard", "beacon", "tide", "chord", "shelf",
                               "veil", "loom", "graft", "pulse", "well"]
                 free = [c for c in candidates if c not in existing]
@@ -207,11 +207,26 @@ def apply_mutations(audit: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
                         src = new_src
                         changed = True
                         applied.append(f"expanded_{fam}")
+            else:
+                # nucleus missing — add a brand-new concept family (genuine growth)
+                suffixes = ["root", "spire", "shard", "drift", "pulse"]
+                new_entry = (
+                    f'    "{fam}": {{\n'
+                    f'        "suffixes": {suffixes},\n'
+                    f'        "theme": "newly born concept family from {fam} children",\n'
+                    f'    }},'
+                )
+                # insert before the closing brace of CONCEPT_NUCLEI
+                closing = src.rfind("}")
+                if closing > 0:
+                    src = src[:closing] + new_entry + "\n" + src[closing:]
+                    changed = True
+                    applied.append(f"born_{fam}_nucleus")
 
         elif mut["action"] == "prune_suffixes":
             fam = mut["family"]
             pattern = rf'"{fam}": \{{[^}}]*"suffixes": \[([^\]]+)\]'
-            m = re.search(pattern, src)
+            m = re.search(pattern, src, re.DOTALL)
             if m:
                 existing = [s.strip().strip('"').strip("'")
                             for s in m.group(1).split(",")]
