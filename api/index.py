@@ -2167,3 +2167,9 @@ def resonates_with() -> list:
         from api.wave751_evolution_kernel import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 710: Dream Choir ---
+    if path.startswith("/dream-choir") or path.startswith("/api/wave710_dream_choir") or path in ("/dream-choir", "/api/wave710_dream_choir"):
+        from api.wave710_dream_choir import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

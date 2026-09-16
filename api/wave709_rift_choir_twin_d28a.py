@@ -1,7 +1,6 @@
-"""Wave 709 · rift_choir_twin — dreamed by Ouroboros from organism DNA.
+"""Wave 709 · rift_choir_twin — awakened void twin from Ouroboros DNA dream.
 
-This organ is a *void twin*: born from fingerprint entropy, not human design.
-Scaffold only — awaken and fill.
+rift → absence metric · choir → multi-voice memory · twin → mirror parent fp
 """
 from __future__ import annotations
 import json
@@ -16,6 +15,9 @@ DEFAULT = {
     "dream": "rift_choir_twin",
     "spawned_by": "ouroboros",
     "parent_fp": "b81291d28ac6781b1509f71b34d96dd0",
+    "rift": 0.0,
+    "choir": [],
+    "awakened": None,
 }
 
 
@@ -44,12 +46,15 @@ def coherence_vitals():
         "module": "wave709_rift_choir_twin_d28a",
         "ok": True,
         "dream": st.get("dream"),
+        "rift": st.get("rift", 0),
+        "choir_n": len(st.get("choir") or []),
         "spawned_by": "ouroboros",
+        "awakened": bool(st.get("awakened")),
     }
 
 
 def resonates_with():
-    return ["wave707_ix_kernel", "wave706_lab_os_boot", "ouroboros"]
+    return ["wave708_ouroboros", "wave710_dream_choir", "wave707_ix_kernel"]
 
 
 def handler(req=None):
@@ -60,8 +65,28 @@ def handler(req=None):
         st["awakened"] = datetime.now(timezone.utc).isoformat()
         _save(st)
         return {"status": "awakened", "dream": st.get("dream"), **coherence_vitals()}
+    if action == "rift":
+        gap = float(req.get("gap") or 0.1)
+        st["rift"] = round(min(1.0, float(st.get("rift") or 0) + gap), 4)
+        _save(st)
+        return {"status": "rifted", **coherence_vitals()}
+    if action == "hear":
+        voice = str(req.get("voice") or req.get("name") or "")[:64]
+        if voice:
+            choir = st.setdefault("choir", [])
+            choir.append({"voice": voice, "ts": datetime.now(timezone.utc).isoformat()})
+            st["choir"] = choir[-24:]
+            _save(st)
+        return {"status": "heard", **coherence_vitals()}
+    if action == "twin":
+        return {
+            "status": "twin",
+            "parent_fp": st.get("parent_fp"),
+            "mirror": (st.get("parent_fp") or "")[::-1][:32],
+            **coherence_vitals(),
+        }
     if action == "status":
-        return {"status": "dreaming", **st, **coherence_vitals()}
+        return {"status": "dreaming" if not st.get("awakened") else "alive", **st, **coherence_vitals()}
     return {"status": "unknown_action", "action": action, **coherence_vitals()}
 
 
