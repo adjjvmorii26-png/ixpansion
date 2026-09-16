@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wave 720 · still_residue_reed — IXPANSION</title>
+<style>
+:root{--bg:#0a0a14;--fg:#e0e0e8;--muted:#6b6b80;--cyan:#41b3a3;--card:#14142a;--border:#2a2a44;--amber:#ffcc66;--green:#41d3a3;--reed:#7ec4c8;--residue:#e8a87c;--still:#41b3a3}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);padding:20px}
+h1{text-align:center;margin-bottom:8px;font-size:1.8em}
+.sub{text-align:center;color:var(--muted);margin-bottom:24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1200px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card h2{color:var(--amber);font-size:1.1em;margin-bottom:12px}
+.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222}
+.metric:last-child{border-bottom:none}
+.label{color:var(--muted)}.value{font-weight:bold}
+.value.ok{color:var(--green)}.value.warn{color:var(--amber)}.value.err{color:#ff6b6b}
+.value.reed{color:var(--reed)}.value.residue{color:var(--residue)}.value.still{color:var(--still)}
+.btn{background:var(--green);border:none;color:#0a0a14;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px}
+input{background:#0a0a14;border:1px solid var(--border);color:var(--fg);padding:6px 8px;border-radius:6px;margin:4px;width:calc(100% - 20px)}
+#reeds{font-size:.85em;color:var(--reed);margin-top:8px}
+#reeds .reed{background:#0a0a14;border:1px solid var(--border);border-radius:4px;padding:4px 8px;margin:4px;display:inline-block}
+.reed-bar{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--still),var(--residue),var(--reed));margin:8px 0}
+</style>
+</head>
+<body>
+<h1>🌿 Wave 720 · still_residue_reed</h1>
+<p class="sub">Marsh ecosystem — stillness compounds → residue yields → reeds grow</p>
+<div class="grid">
+  <div class="card"><h2>🌿 Marsh Vitals</h2>
+    <div id="vitals">Loading...</div>
+    <div class="reed-bar" id="coherenceBar" style="width:100%"></div>
+    <small id="coherenceLabel" class="label">Coherence: —</small>
+  </div>
+  <div class="card"><h2>🌊 Stillness → Residue → Reeds</h2>
+    <div class="metric"><span class="label">Stillness</span><span class="value still" id="valStillness">—</span></div>
+    <div class="metric"><span class="label">Still Compounds</span><span class="value" id="valCompounds">—</span></div>
+    <div class="metric"><span class="label">Residue</span><span class="value residue" id="valResidue">—</span></div>
+    <div class="metric"><span class="label">Residue Harvests</span><span class="value" id="valHarvests">—</span></div>
+    <div class="metric"><span class="label">Reeds</span><span class="value reed" id="valReeds">—</span></div>
+    <div class="metric"><span class="label">Resonance Total</span><span class="value" id="valResonance">—</span></div>
+  </div>
+  <div class="card"><h2>🎮 Actions</h2>
+    <button class="btn" onclick="refresh()">🔄 Refresh</button>
+    <button class="btn" onclick="act('awaken')">🌅 Awaken</button>
+    <div style="margin:8px 0">
+      <input type="number" id="stillSec" placeholder="seconds" value="4" style="width:80px">
+      <button class="btn" onclick="act('still', {seconds: parseFloat(document.getElementById('stillSec').value)})">🧘 Still</button>
+    </div>
+    <button class="btn" onclick="act('harvest')">🌾 Harvest</button>
+    <div style="margin:8px 0">
+      <input type="number" id="growCost" placeholder="cost" value="1" style="width:80px" step="0.5">
+      <button class="btn" onclick="act('grow', {cost: parseFloat(document.getElementById('growCost').value)})">🌱 Grow Reed</button>
+    </div>
+    <button class="btn" onclick="act('deepen')">🔍 Deepen</button>
+    <div id="result" style="margin-top:12px;font-size:.8em;color:var(--cyan);white-space:pre-wrap;"></div>
+  </div>
+  <div class="card"><h2>🌾 Reeds</h2>
+    <div id="reeds">No reeds yet</div>
+  </div>
+</div>
+<script>
+const HOST='';
+function api(params){
+  return fetch(HOST+'/api/wave720_still_residue_reed_4da9?'+new URLSearchParams(params).toString());
+}
+function valClass(key, v){
+  if(key==='coherence') return v>=0.9?'ok':v>=0.7?'warn':'err';
+  if(['stillness','still_compounds'].includes(key)) return 'still';
+  if(key==='residue') return 'residue';
+  if(['reeds','reeds','resonance_total'].some(k=>key.includes(k))) return 'reed';
+  return '';
+}
+async function refresh(){
+  try{
+    const r=await api({action:'status'});
+    const d=await r.json();
+    document.getElementById('vitals').innerHTML=Object.entries(d)
+      .filter(([k])=>!['ok','status'].includes(k))
+      .map(([k,v])=>'<div class="metric"><span class="label">'+k.replace(/_/g,' ')+'</span><span class="value '+(valClass(k,v)||'')+'">'+JSON.stringify(v)+'</span></div>').join('');
+    const coh=Number(d.coherence||1);
+    document.getElementById('coherenceBar').style.width=(coh*100)+'%';
+    document.getElementById('coherenceBar').style.background='linear-gradient(90deg,'+(coh>0.7?'#41d3a3':coh>0.4?'#ffcc66':'#ff6b6b')+','+(coh>0.7?'#41b3a3':coh>0.4?'#ffcc66':'#ff6b6b')+')';
+    document.getElementById('coherenceLabel').textContent='Coherence: '+(coh*100).toFixed(1)+'%';
+    document.getElementById('valStillness').textContent=d.stillness;
+    document.getElementById('valCompounds').textContent=d.still_compounds;
+    document.getElementById('valResidue').textContent=d.residue;
+    document.getElementById('valHarvests').textContent=d.residue_harvests;
+    document.getElementById('valReeds').textContent=d.reeds?.length||0;
+    document.getElementById('valResonance').textContent=d.resonance_total?.toFixed?.(3)||0;
+    renderReeds(d.reeds||[]);
+  }catch(e){document.getElementById('vitals').textContent='Error: '+e.message;}
+}
+function renderReeds(reeds){
+  const el=document.getElementById('reeds');
+  if(!reeds||!reeds.length){el.textContent='No reeds yet';return;}
+  el.innerHTML=reeds.map(r=>'<span class="reed">🌱 '+r.id+' — height '+r.height+' (born '+r.born.slice(11,19)+')</span>').join(' ');
+}
+async function act(action, params={}){
+  const r=await api({action,...params});
+  const d=await r.json();
+  document.getElementById('result').textContent=JSON.stringify(d,null,2);
+  refresh();
+}
+refresh();
+setInterval(refresh,10000);
+</script>
+</body>
+</html>
