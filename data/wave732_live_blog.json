@@ -3,6 +3,19 @@
   "name": "live_blog",
   "posts": [
     {
+      "id": "2c6bd6855f",
+      "type": "wave_announcement",
+      "title": "Test Wave",
+      "content": "Wave 732 deployed",
+      "tags": [
+        "test",
+        "wave"
+      ],
+      "wave": 732,
+      "timestamp": "2026-09-16T03:59:36.010576+00:00",
+      "status": "published"
+    },
+    {
       "id": "aade6c51d7",
       "type": "wave_announcement",
       "title": "Test Wave",
@@ -67,10 +80,12 @@
       "3622855fda"
     ],
     "test": [
-      "aade6c51d7"
+      "aade6c51d7",
+      "2c6bd6855f"
     ],
     "wave": [
-      "aade6c51d7"
+      "aade6c51d7",
+      "2c6bd6855f"
     ]
   }
 }
