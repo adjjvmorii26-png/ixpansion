@@ -38,3 +38,14 @@ def test_dream_wave_unknown_action():
     mod = importlib.import_module(MODULE.format(710))
     r = mod.handler({"action": "nonsense"})
     assert r["status"] == "unknown_action"
+
+def test_mutated_genome_dream_wave720():
+    mod = importlib.import_module("wave720_still_residue_reed_4da9")
+    v = mod.coherence_vitals()
+    assert v["ok"] is True
+    assert v["wave"] == 720
+    assert v["dream"] == "still_residue_reed"
+    h = mod.handler({"action": "status"})
+    assert h["status"] == "dreaming"
+    assert h["ok"] is True
+    assert "ouroboros" in mod.resonates_with()
