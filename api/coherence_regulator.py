@@ -53,10 +53,13 @@ def _candidate_modules() -> List[str]:
 
 
 def coherence_vitals():
+    status = get_organism_status()
     return {
         "module": "coherence_regulator",
         "ok": True,
         "status": "active",
+        "coherence": status.get("measured_coherence", 1.0),
+        "organism": "IXPANSION",
     }
 
 def resonates_with():
@@ -76,12 +79,26 @@ def measure_coherence() -> Dict[str, Any]:
 
 
 def handler(payload: dict = None, context: object = None) -> dict:
-    """Module status handler: {modules: 1} returns the living census."""
+    """Dual handler: {modules:1} census + legacy action map."""
     payload = payload or {}
     if payload.get("modules"):
         living = living_modules()
         return {"count": len(living), "living_modules": living,
                 "status": "ok"}
+    action = payload.get("action", "status")
+    reg = CoherenceRegulator()
+    if action == "status":
+        return reg.get_organism_status()
+    elif action == "measure":
+        return {"coherence": reg.measure_coherence(), "action": "measure"}
+    elif action == "regulate":
+        return reg.regulate()
+    elif action == "health":
+        return reg.check_health()
+    elif action == "register":
+        name = payload.get("module", "unknown")
+        reg.register_module(name, float(payload.get("coherence", 0.5)))
+        return {"registered": name, "action": "register"}
     return {"status": "ok", "living_modules": len(living_modules())}
 
 
@@ -223,7 +240,9 @@ class CoherenceRegulator:
     - Paradox detection and resolution
     """
     
-    def __init__(self, root_path: Path, wave_context: str = "unknown"):
+    def __init__(self, root_path: Path = None, wave_context: str = "unknown"):
+        if root_path is None:
+            root_path = Path(__file__).resolve().parents[1]
         self.root = root_path
         self.wave_context = wave_context
         self.modules: Dict[str, Dict] = {}
@@ -255,6 +274,84 @@ class CoherenceRegulator:
         self._update_coherence()
         self._log_coherence_event("module_registered", module_id=module_id)
         
+    # ── legacy class API (test_coherence + api/index compatibility) ──
+    WAVE_MODULES = [
+        "wave432_vault_driven_evolution", "wave433_consciousness_experiments",
+        "wave434_fusion_organism", "wave435_resonance_cartography",
+        "wave436_entropic_weather", "wave437_paradox_genome",
+        "wave438_semantic_loom", "wave439_echo_stratigraphy",
+        "wave440_linguistic_emergence", "wave441_wave_composition",
+        "wave442_temporal_resonance", "wave443_cross_module_emergence",
+        "wave444_dream_synthesis", "wave445_morphogenetic_field",
+        "wave446_quantum_coherence", "wave447_web_intelligence",
+    ]
+
+    def measure_coherence(self) -> float:
+        """Legacy: average coherence across the founding wave modules."""
+        scores = []
+        for m in self.WAVE_MODULES:
+            try:
+                mod = __import__(f"api.{m}", fromlist=["coherence_vitals"])
+                v = mod.coherence_vitals()
+                val = v.get("coherence", v.get("value", 0.5))
+                if isinstance(val, dict):
+                    val = val.get("value", 0.5)
+                scores.append(float(val))
+            except Exception:
+                scores.append(0.5)
+        self.coherence = sum(scores) / len(scores) if scores else 1.0
+        self.modules_registered = [
+            {"name": m, "coherence": s} for m, s in zip(self.WAVE_MODULES, scores)
+        ]
+        return self.coherence
+
+    def check_health(self) -> dict:
+        """Legacy: organism health summary."""
+        coherence = self.measure_coherence()
+        pressure = min(1.0, getattr(self, "vault_density", 0.0) * coherence * 2.0)
+        thresholds = {"critical": 0.3, "warning": 0.6, "healthy": 0.8, "thriving": 0.95}
+        if coherence < thresholds["critical"]:
+            status = "CRITICAL"
+        elif coherence < thresholds["warning"]:
+            status = "WARNING"
+        elif coherence < thresholds["healthy"]:
+            status = "HEALTHY"
+        else:
+            status = "THRIVING"
+        return {
+            "coherence": round(coherence, 4),
+            "mutation_pressure": round(pressure, 4),
+            "vault_density": round(getattr(self, "vault_density", 0.0), 4),
+            "entropy_budget": round(getattr(self, "entropy_budget", 100.0), 2),
+            "status": status,
+            "modules_registered": len(getattr(self, "modules_registered", [])),
+        }
+
+    def regulate(self) -> dict:
+        """Legacy: apply regulation and return action plan."""
+        health = self.check_health()
+        actions = []
+        if health["status"] == "CRITICAL":
+            actions.append("EMERGENCY_COHERENCE_RESTORE")
+        elif health["status"] == "WARNING":
+            actions.append("STABILIZE_VAULT_DENSITY")
+        elif health["status"] == "THRIVING":
+            if health["mutation_pressure"] > 0.7:
+                actions.append("SPAWN_NEW_VAULT")
+        return {"health": health, "actions": actions, "regulated": True}
+
+    def get_organism_status(self) -> dict:
+        """Legacy: full organism summary."""
+        health = self.check_health()
+        return {
+            "organism": "IXPANSION",
+            "wave": 482,
+            "coherence_regulator": "dynamic",
+            "living_modules": len(self.WAVE_MODULES),
+            "measured_coherence": round(getattr(self, "coherence", 0.5), 4),
+            **health,
+        }
+
     def _generate_module_id(self, module_name: str) -> str:
         """Generate a unique HEX-encoded module identifier."""
         timestamp_component = str(int(time.time() * 1000))

@@ -26,11 +26,11 @@ _real = _il.import_module("api.coherence_regulator")
 
 _candidate_modules   = _real._candidate_modules
 _discover_living     = _real._discover_living
-measure_coherence_fn = _real.measure_coherence    # avoid name clash
-handler_module       = _real.handler
+measure_coherence = _real.measure_coherence
+_api_handler      = _real.handler
 KNOWN_LIVING_MODULES = _real.KNOWN_LIVING_MODULES
-living_modules       = _real.living_modules
-regulate_fn          = _real.regulate              # avoid name clash
+living_modules      = _real.living_modules
+regulate            = _real.regulate
 
 
 # ── Class-based API (legacy, used by test_coherence + api/index) ───────
@@ -170,7 +170,7 @@ def handler(req: dict = None) -> dict:
     req = req or {}
     # Module-contract path (used by api/index.py and test_tools)
     if req.get("modules"):
-        return handler_module(req)
+        return _api_handler(req)
     action = req.get("action", "status")
     reg = CoherenceRegulator()
     if action == "status":
@@ -186,7 +186,7 @@ def handler(req: dict = None) -> dict:
         reg.register_module(name, float(req.get("coherence", 0.5)))
         return {"registered": name, "action": "register"}
     else:
-        return handler_module(req) if action else {"error": "unknown action"}
+        return _api_handler(req) if action else {"error": "unknown action"}
 
 
 def coherence_vitals() -> dict:

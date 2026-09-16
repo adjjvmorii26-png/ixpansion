@@ -25,9 +25,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - run: pip install pytest pytest-asyncio pytest-xdist
-      - name: Run full test suite (parallel)
-        run: python -m pytest tests/ -q --tb=short -n auto --dist loadgroup
+      - run: pip install pytest pytest-asyncio
+      - name: Run full test suite
+        run: python -m pytest tests/ -q --tb=short
       - name: Verify all modules parse
         run: |
           python -c "
