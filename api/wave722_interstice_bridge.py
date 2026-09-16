@@ -28,7 +28,7 @@ def handler(req: dict) -> dict:
     state = _load()
 
     if action == "status":
-        state["last_check"] = datetime.datetime.utcnow().isoformat()
+        state["last_check"] = datetime.datetime.now(datetime.UTC).isoformat()
         _save(state)
         return {"wave": WAVE, "action": "status", "bridge_count": len(state.get("bridges", [])), "coherence": state.get("coherence", 0.0)}
 
@@ -61,7 +61,7 @@ def handler(req: dict) -> dict:
     elif action == "build":
         repo = req.get("repo", "")
         organ = req.get("organ", "")
-        bridge = {"repo": repo, "organ": organ, "status": "building", "wave": WAVE, "started": datetime.datetime.utcnow().isoformat()}
+        bridge = {"repo": repo, "organ": organ, "status": "building", "wave": WAVE, "started": datetime.datetime.now(datetime.UTC).isoformat()}
         if "build_queue" not in state:
             state["build_queue"] = []
         state["build_queue"].append(bridge)

@@ -121,9 +121,9 @@ def parse_telemetry(data: dict) -> Optional[SatelliteState]:
                 try:
                     timestamp = datetime.datetime.strptime(timestamp_str, '%Y-%m-%d %H:%M:%S')
                 except ValueError:
-                    timestamp = datetime.datetime.utcnow()
+                    timestamp = datetime.datetime.now(datetime.UTC)
         else:
-            timestamp = datetime.datetime.utcnow()
+            timestamp = datetime.datetime.now(datetime.UTC)
         
         state = SatelliteState(
             timestamp=timestamp,

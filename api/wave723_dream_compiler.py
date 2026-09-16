@@ -29,13 +29,13 @@ def handler(req: dict) -> dict:
 
     if action == "dream":
         # Generate a dream module
-        dream_id = hashlib.md5(f"{datetime.datetime.utcnow().isoformat()}".encode()).hexdigest()[:8]
+        dream_id = hashlib.md5(f"{datetime.datetime.now(datetime.UTC).isoformat()}".encode()).hexdigest()[:8]
         dream = {
             "id": dream_id,
             "prompt": req.get("prompt", "spontaneous generation"),
             "phase": "unconscious",
             "wave": WAVE,
-            "timestamp": datetime.datetime.utcnow().isoformat(),
+            "timestamp": datetime.datetime.now(datetime.UTC).isoformat(),
             "status": "dreaming"
         }
         state["dreams"].append(dream)
@@ -53,7 +53,7 @@ def handler(req: dict) -> dict:
                     "bytecode": hashlib.sha256(d["prompt"].encode()).hexdigest()[:32],
                     "status": "compiled",
                     "wave": WAVE,
-                    "compiled_at": datetime.datetime.utcnow().isoformat()
+                    "compiled_at": datetime.datetime.now(datetime.UTC).isoformat()
                 }
                 state["compiled"].append(compiled)
                 d["status"] = "compiled"

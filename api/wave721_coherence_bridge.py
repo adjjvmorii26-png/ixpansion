@@ -33,7 +33,7 @@ def handler(req: dict) -> dict:
     state = _load()
 
     if action == "status":
-        state["last_check"] = __import__("datetime").datetime.utcnow().isoformat()
+        state["last_check"] = __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat()
         _save(state)
         return {"wave": WAVE, "action": "status", "bridge_count": len(state.get("bridges", [])), "coherence": state.get("coherence", 0.0)}
 

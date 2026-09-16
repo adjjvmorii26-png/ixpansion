@@ -40,7 +40,7 @@ def generate_vibe_pulse():
         "intensity": intensity,
         "vector": vector,
         "timestamp": time.time(),
-        "age": datetime.utcnow().isoformat() + "Z"
+        "age": datetime.now().astimezone().isoformat()
     }
     
     # Update state

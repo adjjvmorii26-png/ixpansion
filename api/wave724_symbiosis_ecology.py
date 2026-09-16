@@ -34,7 +34,7 @@ def handler(req: dict) -> dict:
             "fitness": random.uniform(0.1, 1.0),
             "genome": f"genome_{random.randint(100,999)}",
             "wave": WAVE,
-            "born": datetime.datetime.utcnow().isoformat(),
+            "born": datetime.datetime.now(datetime.UTC).isoformat(),
             "status": "active"
         }
         state["agents"].append(agent)
@@ -49,7 +49,7 @@ def handler(req: dict) -> dict:
             "agent1": a1, "agent2": a2,
             "fitness_delta": random.uniform(-0.2, 0.3),
             "wave": WAVE,
-            "timestamp": datetime.datetime.utcnow().isoformat()
+            "timestamp": datetime.datetime.now(datetime.UTC).isoformat()
         }
         state["interactions"].append(interaction)
         _save(state)
@@ -65,13 +65,13 @@ def handler(req: dict) -> dict:
             "agent_count": len(state["agents"]),
             "avg_fitness": sum(a["fitness"] for a in state["agents"]) / max(len(state["agents"]), 1),
             "wave": WAVE,
-            "timestamp": datetime.datetime.utcnow().isoformat()
+            "timestamp": datetime.datetime.now(datetime.UTC).isoformat()
         })
         _save(state)
         return {"wave": WAVE, "action": "evolve", "generations": len(state["ecologies"])}
 
     elif action == "status":
-        state["last_check"] = datetime.datetime.utcnow().isoformat()
+        state["last_check"] = datetime.datetime.now(datetime.UTC).isoformat()
         _save(state)
         return {"wave": WAVE, "agents": len(state["agents"]), "interactions": len(state["interactions"]), "ecologies": len(state["ecologies"])}
 
