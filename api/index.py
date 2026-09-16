@@ -2059,3 +2059,9 @@ def resonates_with() -> list:
         from api.wave732_live_blog import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 733: Skill Builder ---
+    if path.startswith("/skill-builder") or path.startswith("/api/skill_builder") or path in ("/skill-builder", "/api/skill_builder"):
+        from api.wave733_skill_builder import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
