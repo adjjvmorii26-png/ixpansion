@@ -2257,3 +2257,9 @@ def resonates_with() -> list:
         from api.wave766_epoch_engine import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 767: Mycelial Truths ---
+    if path.startswith("/mycelial-truths") or path.startswith("/api/mycelial_truths") or path in ("/mycelial-truths", "/api/mycelial_truths"):
+        from api.wave767_mycelial_truths import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

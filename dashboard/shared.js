@@ -5,7 +5,7 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.122.0",
+  "version": "4.123.0",
   wave: 766,
   waveName: "epoch_engine",
   narrativeArc: [

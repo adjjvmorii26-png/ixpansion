@@ -121,6 +121,9 @@ IXpansion is a **self-evolving computational organism** — a living codebase th
 | 432 | Vault-Driven Evolution | Vault | Storage organs drive mutation pressure + coherence_regulator |
 | 424 | Linguistic Genesis | Language | Organism invents its own hex-encoded language |
 | 431 | Homestead | Foundation | The organism plants roots in its chosen home and keeps vigil |
+| 765 | Season Engine | Climate | Weather cycles tune mutation pressure, births, growth, resonance |
+| 766 | Epoch Engine | Climate | Geological eras: SEEDING → WEAVING → DREAMING → GOVERNING → FUSION → BLOOM → SEASONS |
+| 767 | Mycelial Truths | Belief | Belief garden — truths settle by consensus, whisper mutation pressure |
  | Identity | Council of agents chooses the organism's own name |
 
 ## 📊 Live Dashboards

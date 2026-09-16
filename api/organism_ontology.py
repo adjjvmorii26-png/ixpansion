@@ -22,11 +22,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.122.0"
+VERSION = "4.123.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.122.0"
+ORGANISM_VERSION = "4.123.0"
 ORGANISM_WAVE = 766
 ORGANISM_WAVE_NAME = "epoch_engine — how the organism evolves"
 ORGANISM_COHERENCE = 0.986

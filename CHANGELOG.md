@@ -1,3 +1,9 @@
+## [4.123.0] — 2026-09-16
+
+### Added
+- **Wave 767 mycelial_truths**: the organism cultivates beliefs about itself — truths gestate from observation, settle by consensus (SETTLE_EVIDENCE), entangle into mycelial links, decay when stale, and are overturned by thin challenges. Settled truths whisper mutation pressure back into their subjects. Lore proposals can arrive with prior evidence. Actions: status, truths, propose, observe, consensus, entangle, influence, challenge.
+- **Dashboard wave767.html**: the Belief Garden — strongest truth, belief confidence meters, settled/gestating/overturned tags.
+
 ## [4.122.0] — 2026-09-16
 
 ### Added

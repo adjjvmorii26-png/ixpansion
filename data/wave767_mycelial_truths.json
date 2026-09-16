@@ -1,0 +1,42 @@
+{
+  "wave": 767,
+  "name": "mycelial_truths",
+  "status": "seed",
+  "beliefs": [
+    {
+      "subject": "epoch_engine",
+      "predicate": "climate gives the organism patience",
+      "confidence": 0.82,
+      "evidence": 6,
+      "status": "settled",
+      "born_wave": 766,
+      "last_reinforced": "2026-09-16T00:00:00+00:00"
+    },
+    {
+      "subject": "recursive_genesis",
+      "predicate": "organs can author organs",
+      "confidence": 0.9,
+      "evidence": 9,
+      "status": "settled",
+      "born_wave": 756,
+      "last_reinforced": "2026-09-16T00:00:00+00:00"
+    },
+    {
+      "subject": "season_engine",
+      "predicate": "weather tunes growth",
+      "confidence": 0.78,
+      "evidence": 5,
+      "status": "settled",
+      "born_wave": 765,
+      "last_reinforced": "2026-09-16T00:00:00+00:00"
+    }
+  ],
+  "links": [
+    {
+      "left": "epoch_engine",
+      "right": "season_engine",
+      "at": "2026-09-16T00:00:00+00:00",
+      "strength": 0.5
+    }
+  ]
+}
