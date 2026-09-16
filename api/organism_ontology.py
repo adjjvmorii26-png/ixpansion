@@ -22,13 +22,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "api"))
 
-VERSION = "4.115.0"
+VERSION = "4.116.0"
 LAYER = "Organism Ontology"
 
 # ── Single identity ──
-ORGANISM_VERSION = "4.115.0"
-ORGANISM_WAVE = 759
-ORGANISM_WAVE_NAME = "Transcendence Journal — how the organism evolves"
+ORGANISM_VERSION = "4.116.0"
+ORGANISM_WAVE = 760
+ORGANISM_WAVE_NAME = "Mutation Engine — how the organism evolves"
 ORGANISM_COHERENCE = 0.986
 
 # ── Single status vocabulary ──

@@ -1,3 +1,7 @@
+## [4.116.0] — 2026-09-16
+
+### Added
+- **Wave 760 mutation_engine**: applies Gene Splicer mutation patterns across the 914+ module canvas. Mutates repo DNA by cross-breeding paradigms, expresses new Codex skills from mutated DNA, propagates mutations through resonance graph, visualizes the organism's evolutionary canvas. Dashboard wave760.html.
 ## [4.115.0] — 2026-09-16
 
 ### Added

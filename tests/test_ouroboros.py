@@ -6,8 +6,8 @@ ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT / "lab" / "ops"))
 sys.path.insert(0, str(ROOT / "api"))
 
-from ouroboros import dream_name, run, cycle
-import wave708_ouroboros as w708
+from lab.ops.ouroboros import dream_name, run, cycle
+import api.wave708_ouroboros as w708
 
 
 def test_dream_name_deterministic():

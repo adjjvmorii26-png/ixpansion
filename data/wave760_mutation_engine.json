@@ -1,0 +1,602 @@
+{
+  "wave": 760,
+  "name": "mutation_engine",
+  "mutations": [
+    {
+      "donor_a": "handler",
+      "donor_b": "handler",
+      "paradigm": "handler->handler",
+      "patterns": [
+        "coherence_vitals",
+        "handler",
+        "import json",
+        "resonates_with"
+      ],
+      "complexity": 7.3,
+      "test_success": 0.7,
+      "skills": [
+        "coherence_vitals_handler",
+        "handler_handler",
+        "import json_handler",
+        "echo_import json",
+        "echo_handler"
+      ],
+      "mutated_at": "2026-09-16T12:34:29.806586+00:00"
+    },
+    {
+      "donor_a": "pub_sub",
+      "donor_b": "handler",
+      "paradigm": "pub_sub->handler",
+      "patterns": [
+        "class",
+        "coherence_vitals",
+        "filesystem",
+        "handler",
+        "import",
+        "import json",
+        "relay",
+        "resonates_with"
+      ],
+      "complexity": 9.8,
+      "test_success": 0.724,
+      "skills": [
+        "class_handler",
+        "coherence_vitals_handler",
+        "filesystem_handler",
+        "echo_import",
+        "echo_filesystem"
+      ],
+      "mutated_at": "2026-09-16T12:34:30.156796+00:00"
+    },
+    {
+      "donor_a": "handler",
+      "donor_b": "forgetting_curve",
+      "paradigm": "handler->forgetting_curve",
+      "patterns": [
+        "coherence_vitals",
+        "entropy",
+        "handler",
+        "import",
+        "quarantine",
+        "resonates_with"
+      ],
+      "complexity": 6.1,
+      "test_success": 0.95,
+      "skills": [
+        "coherence_vitals_forgetting_curve",
+        "entropy_forgetting_curve",
+        "handler_forgetting_curve",
+        "echo_handler",
+        "echo_coherence_vitals"
+      ],
+      "mutated_at": "2026-09-16T12:34:32.606640+00:00"
+    },
+    {
+      "donor_a": "asynchronous",
+      "donor_b": "data_pipeline",
+      "paradigm": "data_pipeline->asynchronous",
+      "patterns": [
+        "async",
+        "context_manager",
+        "import",
+        "json",
+        "serialization"
+      ],
+      "complexity": 10.1,
+      "test_success": 0.923,
+      "skills": [
+        "async_asynchronous",
+        "context_manager_asynchronous",
+        "import_asynchronous",
+        "echo_import",
+        "echo_json"
+      ],
+      "mutated_at": "2026-09-16T12:34:34.015924+00:00"
+    },
+    {
+      "donor_a": "handler",
+      "donor_b": "handler",
+      "paradigm": "handler->handler",
+      "patterns": [
+        "coherence_vitals",
+        "handler",
+        "import json",
+        "resonates_with"
+      ],
+      "complexity": 7.9,
+      "test_success": 0.7,
+      "skills": [
+        "coherence_vitals_handler",
+        "handler_handler",
+        "import json_handler",
+        "echo_import json",
+        "echo_handler"
+      ],
+      "mutated_at": "2026-09-16T12:35:00.643869+00:00"
+    },
+    {
+      "donor_a": "handler",
+      "donor_b": "handler",
+      "paradigm": "handler->handler",
+      "patterns": [
+        "coherence_vitals",
+        "handler",
+        "import json",
+        "resonates_with"
+      ],
+      "complexity": 6.8,
+      "test_success": 0.7,
+      "skills": [
+        "coherence_vitals_handler",
+        "handler_handler",
+        "import json_handler",
+        "echo_import json",
+        "echo_handler"
+      ],
+      "mutated_at": "2026-09-16T12:35:01.040283+00:00"
+    },
+    {
+      "donor_a": "handler",
+      "donor_b": "decay_engine",
+      "paradigm": "handler->decay_engine",
+      "patterns": [
+        "coherence_vitals",
+        "compost",
+        "handler",
+        "import",
+        "nutrient",
+        "resonates_with"
+      ],
+      "complexity": 6.3,
+      "test_success": 0.717,
+      "skills": [
+        "coherence_vitals_decay_engine",
+        "compost_decay_engine",
+        "handler_decay_engine",
+        "echo_handler",
+        "echo_coherence_vitals"
+      ],
+      "mutated_at": "2026-09-16T12:35:03.248745+00:00"
+    },
+    {
+      "donor_a": "asynchronous",
+      "donor_b": "data_pipeline",
+      "paradigm": "data_pipeline->asynchronous",
+      "patterns": [
+        "async",
+        "context_manager",
+        "import",
+        "json",
+        "serialization"
+      ],
+      "complexity": 10.3,
+      "test_success": 0.94,
+      "skills": [
+        "async_asynchronous",
+        "context_manager_asynchronous",
+        "import_asynchronous",
+        "echo_import",
+        "echo_json"
+      ],
+      "mutated_at": "2026-09-16T12:35:04.478911+00:00"
+    },
+    {
+      "donor_a": "handler",
+      "donor_b": "handler",
+      "paradigm": "handler->handler",
+      "patterns": [
+        "coherence_vitals",
+        "handler",
+        "import json",
+        "resonates_with"
+      ],
+      "complexity": 11.9,
+      "test_success": 0.717,
+      "skills": [
+        "coherence_vitals_handler",
+        "handler_handler",
+        "import json_handler",
+        "echo_import json",
+        "echo_handler"
+      ],
+      "mutated_at": "2026-09-16T12:36:33.627447+00:00"
+    },
+    {
+      "donor_a": "handler",
+      "donor_b": "handler",
+      "paradigm": "handler->handler",
+      "patterns": [
+        "class",
+        "coherence_vitals",
+        "handler",
+        "import json",
+        "resonates_with"
+      ],
+      "complexity": 14.5,
+      "test_success": 0.7,
+      "skills": [
+        "class_handler",
+        "coherence_vitals_handler",
+        "handler_handler",
+        "echo_import json",
+        "echo_handler"
+      ],
+      "mutated_at": "2026-09-16T12:36:34.060039+00:00"
+    },
+    {
+      "donor_a": "climate",
+      "donor_b": "handler",
+      "paradigm": "climate->handler",
+      "patterns": [
+        "class",
+        "coherence_vitals",
+        "entropy",
+        "handler",
+        "import",
+        "import json",
+        "resonates_with",
+        "weather"
+      ],
+      "complexity": 12.3,
+      "test_success": 0.71,
+      "skills": [
+        "class_handler",
+        "coherence_vitals_handler",
+        "entropy_handler",
+        "echo_import",
+        "echo_entropy"
+      ],
+      "mutated_at": "2026-09-16T12:36:35.443076+00:00"
+    },
+    {
+      "donor_a": "asynchronous",
+      "donor_b": "data_pipeline",
+      "paradigm": "data_pipeline->asynchronous",
+      "patterns": [
+        "async",
+        "context_manager",
+        "import",
+        "json",
+        "serialization"
+      ],
+      "complexity": 9.0,
+      "test_success": 0.919,
+      "skills": [
+        "async_asynchronous",
+        "context_manager_asynchronous",
+        "import_asynchronous",
+        "echo_import",
+        "echo_json"
+      ],
+      "mutated_at": "2026-09-16T12:36:36.891548+00:00"
+    },
+    {
+      "donor_a": "handler",
+      "donor_b": "handler",
+      "paradigm": "handler->handler",
+      "patterns": [
+        "class",
+        "coherence_vitals",
+        "handler",
+        "import json",
+        "resonates_with"
+      ],
+      "complexity": 10.2,
+      "test_success": 0.7,
+      "skills": [
+        "class_handler",
+        "coherence_vitals_handler",
+        "handler_handler",
+        "echo_class",
+        "echo_import json"
+      ],
+      "mutated_at": "2026-09-16T12:38:49.518762+00:00"
+    },
+    {
+      "donor_a": "handler",
+      "donor_b": "handler",
+      "paradigm": "handler->handler",
+      "patterns": [
+        "class",
+        "coherence_vitals",
+        "handler",
+        "import json",
+        "resonates_with"
+      ],
+      "complexity": 12.7,
+      "test_success": 0.7,
+      "skills": [
+        "class_handler",
+        "coherence_vitals_handler",
+        "handler_handler",
+        "echo_import json",
+        "echo_handler"
+      ],
+      "mutated_at": "2026-09-16T12:38:49.871379+00:00"
+    },
+    {
+      "donor_a": "asynchronous",
+      "donor_b": "handler",
+      "paradigm": "handler->asynchronous",
+      "patterns": [
+        "async",
+        "coherence_vitals",
+        "context_manager",
+        "handler",
+        "import",
+        "import json",
+        "resonates_with"
+      ],
+      "complexity": 9.3,
+      "test_success": 0.702,
+      "skills": [
+        "async_asynchronous",
+        "coherence_vitals_asynchronous",
+        "context_manager_asynchronous",
+        "echo_import json",
+        "echo_handler"
+      ],
+      "mutated_at": "2026-09-16T12:38:50.679475+00:00"
+    },
+    {
+      "donor_a": "asynchronous",
+      "donor_b": "data_pipeline",
+      "paradigm": "data_pipeline->asynchronous",
+      "patterns": [
+        "async",
+        "context_manager",
+        "import",
+        "json",
+        "serialization"
+      ],
+      "complexity": 10.1,
+      "test_success": 0.936,
+      "skills": [
+        "async_asynchronous",
+        "context_manager_asynchronous",
+        "import_asynchronous",
+        "echo_import",
+        "echo_json"
+      ],
+      "mutated_at": "2026-09-16T12:38:51.677385+00:00"
+    }
+  ],
+  "expressed_skills": [
+    {
+      "name": "pub_sub_handler_engine",
+      "paradigm": "pub_sub->handler",
+      "commands": [
+        "class_action",
+        "coherence_vitals_action",
+        "filesystem_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "pub_sub->handler"
+      ],
+      "expressed_at": "2026-09-16T12:34:30.512768+00:00"
+    },
+    {
+      "name": "pub_sub_handler_engine",
+      "paradigm": "pub_sub->handler",
+      "commands": [
+        "class_action",
+        "coherence_vitals_action",
+        "filesystem_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "pub_sub->handler"
+      ],
+      "expressed_at": "2026-09-16T12:34:30.899308+00:00"
+    },
+    {
+      "name": "data_pipeline_asynchronous_engine",
+      "paradigm": "data_pipeline->asynchronous",
+      "commands": [
+        "async_action",
+        "context_manager_action",
+        "import_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "data_pipeline->asynchronous"
+      ],
+      "expressed_at": "2026-09-16T12:34:34.015998+00:00"
+    },
+    {
+      "name": "handler_handler_engine",
+      "paradigm": "handler->handler",
+      "commands": [
+        "coherence_vitals_action",
+        "handler_action",
+        "import json_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "handler->handler"
+      ],
+      "expressed_at": "2026-09-16T12:35:01.443246+00:00"
+    },
+    {
+      "name": "handler_handler_engine",
+      "paradigm": "handler->handler",
+      "commands": [
+        "coherence_vitals_action",
+        "handler_action",
+        "import json_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "handler->handler"
+      ],
+      "expressed_at": "2026-09-16T12:35:01.847747+00:00"
+    },
+    {
+      "name": "data_pipeline_asynchronous_engine",
+      "paradigm": "data_pipeline->asynchronous",
+      "commands": [
+        "async_action",
+        "context_manager_action",
+        "import_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "data_pipeline->asynchronous"
+      ],
+      "expressed_at": "2026-09-16T12:35:04.478971+00:00"
+    },
+    {
+      "name": "data_pipeline_asynchronous_engine",
+      "paradigm": "data_pipeline->asynchronous",
+      "commands": [
+        "async_action",
+        "context_manager_action",
+        "import_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "data_pipeline->asynchronous"
+      ],
+      "expressed_at": "2026-09-16T12:35:20.697976+00:00"
+    },
+    {
+      "name": "handler_handler_engine",
+      "paradigm": "handler->handler",
+      "commands": [
+        "class_action",
+        "coherence_vitals_action",
+        "handler_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "handler->handler"
+      ],
+      "expressed_at": "2026-09-16T12:36:34.532107+00:00"
+    },
+    {
+      "name": "handler_handler_engine",
+      "paradigm": "handler->handler",
+      "commands": [
+        "class_action",
+        "coherence_vitals_action",
+        "handler_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "handler->handler"
+      ],
+      "expressed_at": "2026-09-16T12:36:34.978501+00:00"
+    },
+    {
+      "name": "data_pipeline_asynchronous_engine",
+      "paradigm": "data_pipeline->asynchronous",
+      "commands": [
+        "async_action",
+        "context_manager_action",
+        "import_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "data_pipeline->asynchronous"
+      ],
+      "expressed_at": "2026-09-16T12:36:36.891623+00:00"
+    },
+    {
+      "name": "handler_handler_engine",
+      "paradigm": "handler->handler",
+      "commands": [
+        "class_action",
+        "coherence_vitals_action",
+        "handler_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "handler->handler"
+      ],
+      "expressed_at": "2026-09-16T12:38:50.159948+00:00"
+    },
+    {
+      "name": "handler_handler_engine",
+      "paradigm": "handler->handler",
+      "commands": [
+        "class_action",
+        "coherence_vitals_action",
+        "handler_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "handler->handler"
+      ],
+      "expressed_at": "2026-09-16T12:38:50.419803+00:00"
+    },
+    {
+      "name": "data_pipeline_asynchronous_engine",
+      "paradigm": "data_pipeline->asynchronous",
+      "commands": [
+        "async_action",
+        "context_manager_action",
+        "import_action",
+        "mutate"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "mutation",
+        "expressed",
+        "data_pipeline->asynchronous"
+      ],
+      "expressed_at": "2026-09-16T12:38:51.677442+00:00"
+    }
+  ],
+  "status": "seed",
+  "last_check": "2026-09-16T12:38:49.214086+00:00"
+}
