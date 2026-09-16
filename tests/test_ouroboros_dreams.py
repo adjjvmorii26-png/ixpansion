@@ -7,7 +7,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "api"))
 
-DREAM_WAVES = [710, 711, 712, 713, 714]
+DREAM_WAVES = list(range(710, 720))
 MODULE = "wave{}_rift_quill_span_f745"
 
 @pytest.mark.parametrize("wave", DREAM_WAVES)
