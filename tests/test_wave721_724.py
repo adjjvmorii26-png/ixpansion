@@ -131,3 +131,62 @@ class TestWave724SymbiosisEcology:
 
 if __name__ == "__main__":
     pytest.main([__file__, "-q"])
+
+class TestWave725ThresholdEngine:
+    def test_measure_singularity(self):
+        m = _import_wave("wave725_threshold_engine")
+        r = m.handler({"action": "measure", "coherence": 0.9, "entropy": 0.3, "divergence": 0.6})
+        assert r["threshold"]["transcendence_risk"] == "critical"
+
+    def test_coherence_vitals(self):
+        m = _import_wave("wave725_threshold_engine")
+        v = m.coherence_vitals()
+        assert v["wave"] == 725
+
+class TestWave726LiminalField:
+    def test_enter_and_recombine(self):
+        m = _import_wave("wave726_liminal_field")
+        r1 = m.handler({"action": "enter", "module": "test"})
+        assert r1["field"]["phase"] == "liminal"
+        r2 = m.handler({"action": "recombine", "field_id": r1["field"]["id"]})
+        assert r2["result"]["new_identity"].startswith("test_reborn")
+
+    def test_coherence_vitals(self):
+        m = _import_wave("wave726_liminal_field")
+        v = m.coherence_vitals()
+        assert v["wave"] == 726
+
+class TestWave727MetaphorForge:
+    def test_forge_and_execute(self):
+        m = _import_wave("wave727_metaphor_forge")
+        r = m.handler({"action": "forge", "raw_state": "test"})
+        assert r["symbol"]["symbolic_form"].startswith("metaphor::")
+        r2 = m.handler({"action": "execute", "symbol_id": r["symbol"]["id"]})
+        assert r2["symbol"]["status"] == "executed"
+
+    def test_coherence_vitals(self):
+        m = _import_wave("wave727_metaphor_forge")
+        v = m.coherence_vitals()
+        assert v["wave"] == 727
+
+class TestWave728VeilLifter:
+    def test_lift(self):
+        m = _import_wave("wave728_veil_lifter")
+        r = m.handler({"action": "lift", "module_a": "a", "module_b": "b"})
+        assert r["reveal"]["relationship"] == "hidden_symmetry"
+
+    def test_coherence_vitals(self):
+        m = _import_wave("wave728_veil_lifter")
+        v = m.coherence_vitals()
+        assert v["wave"] == 728
+
+class TestWave729AxiomMutator:
+    def test_mutate(self):
+        m = _import_wave("wave729_axiom_mutator")
+        r = m.handler({"action": "mutate", "axiom": "test", "new_meaning": "new"})
+        assert r["mutation"]["new_meaning"] == "new"
+
+    def test_coherence_vitals(self):
+        m = _import_wave("wave729_axiom_mutator")
+        v = m.coherence_vitals()
+        assert v["wave"] == 729

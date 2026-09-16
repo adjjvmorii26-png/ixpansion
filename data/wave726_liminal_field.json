@@ -1,0 +1,46 @@
+{
+  "wave": 726,
+  "name": "liminal_field",
+  "fields": [
+    {
+      "id": "ed3e9057",
+      "module": "dream_compiler",
+      "phase": "recombined",
+      "identity_loss": true,
+      "recombination_ready": true,
+      "wave": 726,
+      "entered_at": "2026-09-16T01:29:33.842977+00:00",
+      "duration": 10,
+      "identity_restored": true,
+      "new_identity": "dream_compiler_reborn_1789522174"
+    },
+    {
+      "id": "aac4f88b",
+      "module": "test",
+      "phase": "recombined",
+      "identity_loss": true,
+      "recombination_ready": true,
+      "wave": 726,
+      "entered_at": "2026-09-16T01:29:58.061396+00:00",
+      "duration": 10,
+      "identity_restored": true,
+      "new_identity": "test_reborn_1789522198"
+    }
+  ],
+  "recombinations": [
+    {
+      "field_id": "ed3e9057",
+      "original": "dream_compiler",
+      "new_identity": "dream_compiler_reborn_1789522174",
+      "wave": 726,
+      "timestamp": "2026-09-16T01:29:33.846092+00:00"
+    },
+    {
+      "field_id": "aac4f88b",
+      "original": "test",
+      "new_identity": "test_reborn_1789522198",
+      "wave": 726,
+      "timestamp": "2026-09-16T01:29:58.064826+00:00"
+    }
+  ]
+}

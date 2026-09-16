@@ -1,0 +1,145 @@
+{
+  "wave": 724,
+  "name": "symbiosis_ecology",
+  "agents": [
+    {
+      "id": "agent_5778",
+      "type": "explorer",
+      "fitness": 0.6895555107667192,
+      "genome": "genome_935",
+      "wave": 724,
+      "born": "2026-09-16T01:28:24.651985",
+      "status": "active"
+    },
+    {
+      "id": "agent_5731",
+      "type": "builder",
+      "fitness": 0.4375406251409655,
+      "genome": "genome_371",
+      "wave": 724,
+      "born": "2026-09-16T01:28:24.656438",
+      "status": "active"
+    },
+    {
+      "id": "agent_6407",
+      "type": "explorer",
+      "fitness": 0.6552754977516589,
+      "genome": "genome_290",
+      "wave": 724,
+      "born": "2026-09-16T01:28:49.054766",
+      "status": "active"
+    },
+    {
+      "id": "agent_7375",
+      "type": "a",
+      "fitness": 0.8458800663163644,
+      "genome": "genome_705",
+      "wave": 724,
+      "born": "2026-09-16T01:28:49.065753",
+      "status": "active"
+    },
+    {
+      "id": "agent_5041",
+      "type": "b",
+      "fitness": 0.12132393466530766,
+      "genome": "genome_896",
+      "wave": 724,
+      "born": "2026-09-16T01:28:49.069469",
+      "status": "active"
+    },
+    {
+      "id": "agent_2839",
+      "type": "a",
+      "fitness": 1,
+      "genome": "genome_644",
+      "wave": 724,
+      "born": "2026-09-16T01:28:49.084165",
+      "status": "apex"
+    },
+    {
+      "id": "agent_6597",
+      "type": "explorer",
+      "fitness": 0.6571929544470279,
+      "genome": "genome_287",
+      "wave": 724,
+      "born": "2026-09-16T01:29:57.947052",
+      "status": "active"
+    },
+    {
+      "id": "agent_5854",
+      "type": "a",
+      "fitness": 0.2262410439935302,
+      "genome": "genome_343",
+      "wave": 724,
+      "born": "2026-09-16T01:29:57.962706",
+      "status": "active"
+    },
+    {
+      "id": "agent_5468",
+      "type": "b",
+      "fitness": 0.10137318213336349,
+      "genome": "genome_267",
+      "wave": 724,
+      "born": "2026-09-16T01:29:57.969012",
+      "status": "active"
+    },
+    {
+      "id": "agent_3503",
+      "type": "a",
+      "fitness": 0.4546382316879706,
+      "genome": "genome_409",
+      "wave": 724,
+      "born": "2026-09-16T01:29:57.984469",
+      "status": "active"
+    }
+  ],
+  "ecologies": [
+    {
+      "generation": 1,
+      "agent_count": 2,
+      "avg_fitness": 0.3884922246901692,
+      "wave": 724,
+      "timestamp": "2026-09-16T01:28:24.665540"
+    },
+    {
+      "generation": 2,
+      "agent_count": 6,
+      "avg_fitness": 0.5600552063364591,
+      "wave": 724,
+      "timestamp": "2026-09-16T01:28:49.087546"
+    },
+    {
+      "generation": 3,
+      "agent_count": 10,
+      "avg_fitness": 0.5189021046902907,
+      "wave": 724,
+      "timestamp": "2026-09-16T01:29:57.988880"
+    }
+  ],
+  "interactions": [
+    {
+      "type": "compete",
+      "agent1": "agent_5778",
+      "agent2": "agent_5731",
+      "fitness_delta": -0.19630154954518392,
+      "wave": 724,
+      "timestamp": "2026-09-16T01:28:24.660791"
+    },
+    {
+      "type": "parasitism",
+      "agent1": "agent_7375",
+      "agent2": "agent_5041",
+      "fitness_delta": -0.02694097169488535,
+      "wave": 724,
+      "timestamp": "2026-09-16T01:28:49.073400"
+    },
+    {
+      "type": "compete",
+      "agent1": "agent_5854",
+      "agent2": "agent_5468",
+      "fitness_delta": -0.1664578098486197,
+      "wave": 724,
+      "timestamp": "2026-09-16T01:29:57.973785"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "status": "ouroboros",
+  "ok": true,
+  "cycles": 1,
+  "results": [
+    {
+      "status": "recurrence",
+      "ok": true,
+      "dream": {
+        "name": "still_residue_reed",
+        "slug": "still_residue_reed_4da9",
+        "parts": [
+          "still",
+          "residue",
+          "reed"
+        ],
+        "salt": "4da9",
+        "seed_bytes": [
+          138,
+          169,
+          92
+        ]
+      },
+      "wave": 720,
+      "scaffold": {
+        "status": "dreamed",
+        "path": "api/wave720_still_residue_reed_4da9.py",
+        "wave": 720,
+        "slug": "still_residue_reed_4da9",
+        "dream": "still_residue_reed"
+      },
+      "fingerprint": "8aa95c4da9e601c686273662f2f9d493bec5aed04664e0a14d98835b97e085a6",
+      "synthetic": false,
+      "ms": 15.07,
+      "cycle": 1
+    }
+  ],
+  "latest_dream": {
+    "name": "still_residue_reed",
+    "slug": "still_residue_reed_4da9",
+    "parts": [
+      "still",
+      "residue",
+      "reed"
+    ],
+    "salt": "4da9",
+    "seed_bytes": [
+      138,
+      169,
+      92
+    ]
+  },
+  "ms": 48.31,
+  "ts": "2026-09-16T00:40:14.328004+00:00",
+  "caption": "ouroboros \u00b7 dream from dna \u00b7 void twin \u00b7 eternal ledger",
+  "leap": "infinite",
+  "note": "\u221e approximated by cycles; ledger is the true infinite tape"
+}

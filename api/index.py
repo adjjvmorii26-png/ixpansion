@@ -2011,3 +2011,33 @@ def resonates_with() -> list:
         from api.wave724_symbiosis_ecology import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 725: Threshold Engine ---
+    if path.startswith("/threshold-engine") or path.startswith("/api/threshold_engine") or path in ("/threshold-engine", "/api/threshold_engine"):
+        from api.wave725_threshold_engine import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 726: Liminal Field ---
+    if path.startswith("/liminal-field") or path.startswith("/api/liminal_field") or path in ("/liminal-field", "/api/liminal_field"):
+        from api.wave726_liminal_field import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 727: Metaphor Forge ---
+    if path.startswith("/metaphor-forge") or path.startswith("/api/metaphor_forge") or path in ("/metaphor-forge", "/api/metaphor_forge"):
+        from api.wave727_metaphor_forge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 728: Veil Lifter ---
+    if path.startswith("/veil-lifter") or path.startswith("/api/veil_lifter") or path in ("/veil-lifter", "/api/veil_lifter"):
+        from api.wave728_veil_lifter import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 729: Axiom Mutator ---
+    if path.startswith("/axiom-mutator") or path.startswith("/api/axiom_mutator") or path in ("/axiom-mutator", "/api/axiom_mutator"):
+        from api.wave729_axiom_mutator import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

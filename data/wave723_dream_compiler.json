@@ -1,0 +1,72 @@
+{
+  "wave": 723,
+  "name": "dream_compiler",
+  "dreams": [
+    {
+      "id": "a4c73b15",
+      "prompt": "a world where gravity flows upward",
+      "phase": "compiling",
+      "wave": 723,
+      "timestamp": "2026-09-16T01:28:24.634898",
+      "status": "compiled"
+    },
+    {
+      "id": "c8c58bcb",
+      "prompt": "test dream",
+      "phase": "unconscious",
+      "wave": 723,
+      "timestamp": "2026-09-16T01:28:48.995433",
+      "status": "dreaming"
+    },
+    {
+      "id": "1f3d5f07",
+      "prompt": "compile test",
+      "phase": "compiling",
+      "wave": 723,
+      "timestamp": "2026-09-16T01:28:49.007278",
+      "status": "compiled"
+    },
+    {
+      "id": "14df8c2d",
+      "prompt": "test dream",
+      "phase": "unconscious",
+      "wave": 723,
+      "timestamp": "2026-09-16T01:29:57.889440",
+      "status": "dreaming"
+    },
+    {
+      "id": "7a143939",
+      "prompt": "compile test",
+      "phase": "compiling",
+      "wave": 723,
+      "timestamp": "2026-09-16T01:29:57.903474",
+      "status": "compiled"
+    }
+  ],
+  "compiled": [
+    {
+      "id": "a4c73b15",
+      "source": "a world where gravity flows upward",
+      "bytecode": "b0dd6bb87f2ffa7a8ed93bac32fc27f2",
+      "status": "compiled",
+      "wave": 723,
+      "compiled_at": "2026-09-16T01:28:24.639760"
+    },
+    {
+      "id": "1f3d5f07",
+      "source": "compile test",
+      "bytecode": "79812f0bb4155c46206f72b2ed4cb417",
+      "status": "compiled",
+      "wave": 723,
+      "compiled_at": "2026-09-16T01:28:49.011182"
+    },
+    {
+      "id": "7a143939",
+      "source": "compile test",
+      "bytecode": "79812f0bb4155c46206f72b2ed4cb417",
+      "status": "compiled",
+      "wave": 723,
+      "compiled_at": "2026-09-16T01:29:57.907586"
+    }
+  ]
+}
