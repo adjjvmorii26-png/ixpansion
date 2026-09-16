@@ -1,3 +1,10 @@
+## [4.118.0] — 2026-09-16
+
+### Added
+- **Dream birth test suite**: `test_dream_births.py` validates all 36+ dream-born modules (importable, handler, vitals, resonates_with, contract).
+- **5 live dream births**: organism dreamed and birthed `well_trace`, `orbit_knot`, `memory_drift`, `harmony_flux`, `scar_garden`.
+- **Resonance graph expanded**: from 162 to 1090 modules, 7474 edges, 114 communities. One giant connected component of 959 modules.
+- **Harmony trend tracking**: wave761 now has `trend` action showing direction (improving/stable/declining), avg_delta, score range.
 ## [4.117.0] — 2026-09-16
 
 ### Added

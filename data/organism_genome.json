@@ -1,5 +1,5 @@
 {
-  "timestamp": 1788998690.7075295,
+  "timestamp": 1789564798.0778027,
   "version": "1.0",
   "identity": {
     "name": "IXpansion",
@@ -19,6 +19,12 @@
     "pressure_desc": "unknown"
   },
   "desires": [
+    {
+      "action": "remember",
+      "target": "wave762_dream_compiler",
+      "score": 2.22,
+      "reason": "highest-value forgotten module (0.86 staleness, score 2.22)"
+    },
     {
       "action": "listen",
       "target": "signal_loom",
@@ -42,12 +48,6 @@
       "target": "dream_physics_sandbox",
       "score": 1.0,
       "reason": "strong silent pair (similarity 1.0) \u2014 these modules want to speak"
-    },
-    {
-      "action": "remember",
-      "target": "void_cartographer",
-      "score": 0.98,
-      "reason": "highest-value forgotten module (0.24 staleness, score 0.98)"
     }
   ],
   "blind_spots": [
@@ -57,7 +57,7 @@
     "entropy_pressure": 0.5,
     "thread_density": 0.0,
     "silence_ratio": 0,
-    "desire_intention": 1.096
+    "desire_intention": 1.344
   },
-  "genome_hash": "04b54bdaf5e8bdae"
+  "genome_hash": "e52b4a07e83bfc64"
 }

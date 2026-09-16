@@ -31,15 +31,20 @@ def _save(state: dict) -> None:
     DATA_FILE.write_text(json.dumps(state, indent=2))
 
 
+_SKIP_FILES = {"__init__.py", "index.py", "coherence_regulator.py", "organism_ontology.py", "shared.py"}
+
 def _module_names() -> List[str]:
     names = []
-    for p in (ROOT / "api").glob("wave*.py"):
-        m = re.match(r"wave\d+_(.+)\.py", p.name)
+    for fp in sorted((ROOT / "api").glob("*.py")):
+        if fp.name in _SKIP_FILES or fp.name.startswith("_"):
+            continue
+        stem = fp.stem
+        m = re.match(r"wave\d+_(.+)", stem)
         if m:
             names.append(m.group(1))
-    return sorted(names)
-
-
+        else:
+            names.append(stem)
+    return sorted(set(names))
 def _token_score(a: str, b: str) -> float:
     """Resonance heuristic: shared tokens + shape similarity."""
     if a == b:
@@ -67,7 +72,7 @@ def _graph() -> Dict[str, List[Tuple[str, float]]]:
 
 def _communities_from_graph(g: Dict[str, List[Tuple[str, float]]]) -> List[List[str]]:
     """Greedy threshold clustering over resonance edges."""
-    threshold = 0.30
+    threshold = 0.15
     assigned: set = set()
     communities: List[List[str]] = []
     for node in sorted(g):

@@ -5,7 +5,7 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.117.0",
+  "version": "4.118.0",
   wave: 762,
   waveName: "Dream Compiler",
   narrativeArc: [

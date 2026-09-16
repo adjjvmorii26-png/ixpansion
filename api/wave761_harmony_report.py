@@ -117,6 +117,27 @@ def handler(req: dict) -> dict:
                 "layers": {k: {"count": len(v), "organs": v} for k, v in layers.items()},
                 "total_organs": len(vitals)}
 
+    if action == "trend":
+        snapshots = state.get("snapshots", [])
+        if len(snapshots) < 2:
+            return {"wave": WAVE, "name": NAME, "action": "trend", "ok": True,
+                    "trend": "insufficient_data", "snapshots": len(snapshots)}
+        scores = [s.get("harmony_score", 0) for s in snapshots]
+        deltas = [scores[i] - scores[i - 1] for i in range(1, len(scores))]
+        avg_delta = sum(deltas) / len(deltas) if deltas else 0
+        recent_delta = deltas[-1] if deltas else 0
+        if recent_delta > 0.05:
+            direction = "improving"
+        elif recent_delta < -0.05:
+            direction = "declining"
+        else:
+            direction = "stable"
+        return {"wave": WAVE, "name": NAME, "action": "trend", "ok": True,
+                "direction": direction, "avg_delta": round(avg_delta, 4),
+                "recent_delta": round(recent_delta, 4),
+                "latest_score": scores[-1], "earliest_score": scores[0],
+                "snapshots": len(snapshots)}
+
     return {"wave": WAVE, "name": NAME, "action": action, "ok": False,
             "error": "unknown_action"}
 

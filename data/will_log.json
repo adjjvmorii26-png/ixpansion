@@ -1,28 +1,6 @@
 {
   "decisions": [
     {
-      "timestamp": 1788998037.0446134,
-      "org_state": {
-        "threads": 0,
-        "modules_connected": 0,
-        "sources": [],
-        "types": {},
-        "pressure": 0,
-        "pressure_desc": "unknown",
-        "blooms": 0,
-        "bloom_ready": false,
-        "silence_pairs": 0,
-        "veins": 0,
-        "remembered": 4
-      },
-      "top_proposals": [
-        "listen: signal_loom",
-        "remember: city_builder",
-        "confess: chronicle_of_chaos"
-      ],
-      "total_forgotten": 12
-    },
-    {
       "timestamp": 1788998059.1183424,
       "org_state": {
         "threads": 0,
@@ -659,6 +637,28 @@
         "confess: dream_physics_sandbox"
       ],
       "total_forgotten": 13
+    },
+    {
+      "timestamp": 1789564799.0397067,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "remember: wave762_dream_compiler",
+        "listen: signal_loom",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 4
     }
   ],
   "total": 30
