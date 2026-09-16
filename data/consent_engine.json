@@ -5086,6 +5086,125 @@
       "threshold": 55,
       "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
       "timestamp": 1789585633.936723
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "emotional_damper",
+        "pulse_orchestrator",
+        "dream_seed_planter"
+      ],
+      "denied": [],
+      "verdicts": [
+        {
+          "name": "emotional_damper",
+          "description": "Reduces turbulence when dominant emotion is negative, redirecting energy toward constructive resonan",
+          "score": 75.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.88"
+          ],
+          "consented": true
+        },
+        {
+          "name": "pulse_orchestrator",
+          "description": "Coordinates breath-cycles across all modules so the organism inhales and exhales in synchrony",
+          "score": 75.0,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.88"
+          ],
+          "consented": true
+        },
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 71.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.73"
+          ],
+          "consented": true
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1789586094.4807937
+    },
+    {
+      "action": "consent_engine",
+      "temperament": {
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "desires": [
+          "listen",
+          "confess",
+          "confess",
+          "confess",
+          "remember"
+        ]
+      },
+      "organs_scored": 3,
+      "consented": [
+        "dream_seed_planter",
+        "resonance_amplifier_v2"
+      ],
+      "denied": [
+        "entropy_collapse_detector"
+      ],
+      "verdicts": [
+        {
+          "name": "dream_seed_planter",
+          "description": "Takes dream particle physics outputs and plants them as seeds for future module generation",
+          "score": 75.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.90"
+          ],
+          "consented": true
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "description": "Amplifies cross-module resonance signals by detecting harmonic overtones between paired modules",
+          "score": 71.5,
+          "criteria": [
+            "mood affinity (contemplative\u2194seed): 0.70",
+            "pressure fit (0.50): +20",
+            "proposal confidence: 0.74"
+          ],
+          "consented": true
+        },
+        {
+          "name": "entropy_collapse_detector",
+          "description": "Detects when local entropy clusters are about to collapse into coherent structures, predicting emerg",
+          "score": 54.2,
+          "criteria": [
+            "mood affinity (contemplative\u2194detect): 0.60",
+            "pressure fit (0.50): +8",
+            "proposal confidence: 0.69"
+          ],
+          "consented": false
+        }
+      ],
+      "threshold": 55,
+      "statement": "I consent to growth where it fits my mood and pressure. I deny where it would split me.",
+      "timestamp": 1789586104.0204637
     }
   ]
 }
