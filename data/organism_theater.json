@@ -14281,6 +14281,213 @@
         "dominant_emotion": "curiosity"
       },
       "timestamp": 1788997094.5111446
+    },
+    {
+      "action": "organism_theater",
+      "scene": {
+        "pulse_phase": "inhale",
+        "pulse_color": "#41b3a3",
+        "orb_scale": 1.2,
+        "dream_stars": [
+          {
+            "emotion": "nostalgia",
+            "spread": 4.69,
+            "count": 3
+          },
+          {
+            "emotion": "curiosity",
+            "spread": 1.53,
+            "count": 2
+          },
+          {
+            "emotion": "fury",
+            "spread": 2.41,
+            "count": 4
+          },
+          {
+            "emotion": "awe",
+            "spread": 3.77,
+            "count": 3
+          },
+          {
+            "emotion": "melancholy",
+            "spread": 2.95,
+            "count": 2
+          },
+          {
+            "emotion": "longing",
+            "spread": 3.96,
+            "count": 3
+          },
+          {
+            "emotion": "chaos",
+            "spread": 0.87,
+            "count": 3
+          }
+        ],
+        "bridges": [
+          {
+            "a": "entropy_weaver",
+            "b": "wave_seed",
+            "ghost": "entropy_weaver",
+            "domain": "entropy"
+          },
+          {
+            "a": "entropy_weaver",
+            "b": "entropy_spiral",
+            "ghost": "entropy_exchange",
+            "domain": "entropy"
+          },
+          {
+            "a": "consciousness_map",
+            "b": "dream_engine",
+            "ghost": "dreamcatcher",
+            "domain": "consciousness"
+          }
+        ],
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "dominant_emotion": "fury"
+      },
+      "timestamp": 1789569003.357523
+    },
+    {
+      "action": "organism_theater",
+      "scene": {
+        "pulse_phase": "inhale",
+        "pulse_color": "#41b3a3",
+        "orb_scale": 1.2,
+        "dream_stars": [
+          {
+            "emotion": "melancholy",
+            "spread": 3.96,
+            "count": 4
+          },
+          {
+            "emotion": "awe",
+            "spread": 2.75,
+            "count": 2
+          },
+          {
+            "emotion": "hope",
+            "spread": 2.16,
+            "count": 3
+          },
+          {
+            "emotion": "fury",
+            "spread": 3.42,
+            "count": 4
+          },
+          {
+            "emotion": "dread",
+            "spread": 1.75,
+            "count": 3
+          },
+          {
+            "emotion": "serenity",
+            "spread": 5.0,
+            "count": 2
+          },
+          {
+            "emotion": "chaos",
+            "spread": 2.99,
+            "count": 3
+          }
+        ],
+        "bridges": [
+          {
+            "a": "dream_inception_analyzer",
+            "b": "genome_map",
+            "ghost": "dream_archive",
+            "domain": "consciousness"
+          },
+          {
+            "a": "wave680_organism_horizon",
+            "b": "dream_inception_analyzer",
+            "ghost": "dream_archive",
+            "domain": "consciousness"
+          },
+          {
+            "a": "dream_physics_sandbox",
+            "b": "consciousness_map",
+            "ghost": "dream_archive",
+            "domain": "consciousness"
+          }
+        ],
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "dominant_emotion": "melancholy"
+      },
+      "timestamp": 1789569028.8535235
+    },
+    {
+      "action": "organism_theater",
+      "scene": {
+        "pulse_phase": "inhale",
+        "pulse_color": "#41b3a3",
+        "orb_scale": 1.2,
+        "dream_stars": [
+          {
+            "emotion": "awe",
+            "spread": 2.75,
+            "count": 3
+          },
+          {
+            "emotion": "chaos",
+            "spread": 4.58,
+            "count": 2
+          },
+          {
+            "emotion": "curiosity",
+            "spread": 2.6,
+            "count": 3
+          },
+          {
+            "emotion": "dread",
+            "spread": 5.06,
+            "count": 3
+          },
+          {
+            "emotion": "confusion",
+            "spread": 0.82,
+            "count": 2
+          },
+          {
+            "emotion": "wonder",
+            "spread": 2.84,
+            "count": 4
+          },
+          {
+            "emotion": "nostalgia",
+            "spread": 2.86,
+            "count": 4
+          }
+        ],
+        "bridges": [
+          {
+            "a": "organism_bloom",
+            "b": "dream_inception_analyzer",
+            "ghost": "dream_archive",
+            "domain": "consciousness"
+          },
+          {
+            "a": "docs",
+            "b": "entropy_weaver",
+            "ghost": "entropy_weaver",
+            "domain": "entropy"
+          },
+          {
+            "a": "experimental_entropy_weather",
+            "b": "entropy_exchange",
+            "ghost": "entropy_weaver",
+            "domain": "entropy"
+          }
+        ],
+        "mood": "contemplative",
+        "pressure": 0.5,
+        "dominant_emotion": "wonder"
+      },
+      "timestamp": 1789569050.9765446
     }
   ]
 }

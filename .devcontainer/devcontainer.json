@@ -1,0 +1,50 @@
+{
+  "name": "IXpansion Organism",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" }
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "forwardPorts": [8000, 8080, 5173],
+  "portsAttributes": {
+    "8000": { "label": "API Server", "onAutoForward": "notify" },
+    "8080": { "label": "Dashboard", "onAutoForward": "openBrowser" },
+    "5173": { "label": "Dev Server", "onAutoForward": "openBrowser" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "ms-azuretools.vscode-docker",
+        "github.vscode-github-actions",
+        "redhat.vscode-yaml",
+        "ms-python.black-formatter"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.testing.pytestEnabled": true,
+        "python.testing.pytestArgs": ["tests", "-q"],
+        "editor.formatOnSave": true,
+        "editor.rulers": [88, 120],
+        "files.exclude": {
+          "**/__pycache__": true,
+          "**/.pytest_cache": true,
+          "**/*.pyc": true
+        }
+      }
+    }
+  },
+  "remoteEnv": {
+    "SANDBOX_ENV": "codespace",
+    "SANDBOX_CI_MODE": "true"
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder}/data/sandbox,target=/workdir/data/sandbox,type=bind"
+  ],
+  "postStartCommand": "echo '🧬 IXpansion Codespace ready — run: python3 lab/ops/velocity_burst.py'",
+  "remoteUser": "vscode"
+}

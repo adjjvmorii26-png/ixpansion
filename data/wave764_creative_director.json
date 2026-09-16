@@ -1,0 +1,152 @@
+{
+  "wave": 764,
+  "name": "creative_director",
+  "tasks": [
+    {
+      "text": "Refactor wave417_causality_loop to support cross-realm fusion without breaking existing tests.",
+      "module": "wave417_causality_loop",
+      "difficulty": "medium",
+      "assigned_at": "2026-09-16T14:29:31.804852+00:00"
+    },
+    {
+      "text": "Add a new action `dreams in parallel` to wave428_resonance_chamber that bridges communities.",
+      "module": "wave428_resonance_chamber",
+      "difficulty": "extreme",
+      "assigned_at": "2026-09-16T14:29:53.218829+00:00"
+    },
+    {
+      "text": "Optimize wave417_causality_loop for the 30-second subprocess sandbox limit.",
+      "module": "wave417_causality_loop",
+      "difficulty": "easy",
+      "assigned_at": "2026-09-16T14:30:17.117154+00:00"
+    },
+    {
+      "text": "Optimize wave422_swarm for the 30-second subprocess sandbox limit.",
+      "module": "wave422_swarm",
+      "difficulty": "extreme",
+      "assigned_at": "2026-09-16T14:30:17.138488+00:00"
+    },
+    {
+      "text": "Optimize wave420_communion for the 30-second subprocess sandbox limit.",
+      "module": "wave420_communion",
+      "difficulty": "extreme",
+      "assigned_at": "2026-09-16T14:30:17.155113+00:00"
+    }
+  ],
+  "inspirations": [
+    {
+      "challenge": {
+        "category": "emergence",
+        "title": "Swarm Intelligence",
+        "prompt": "Spawn 5 micro-modules that only communicate through shared data files. Watch what emerges from their interaction.",
+        "difficulty": "extreme"
+      },
+      "organism_health": {
+        "label": "thriving",
+        "score": 0.7491
+      },
+      "inspired_at": "2026-09-16T14:29:31.777755+00:00"
+    },
+    {
+      "challenge": {
+        "category": "harmony",
+        "title": "Dissonance Resolution",
+        "prompt": "Create two modules with contradictory resonance signatures. Then create a third module that harmonizes them.",
+        "difficulty": "hard"
+      },
+      "organism_health": {
+        "label": "thriving",
+        "score": 0.7491
+      },
+      "inspired_at": "2026-09-16T14:29:53.191362+00:00"
+    },
+    {
+      "challenge": {
+        "category": "healing",
+        "title": "Resonance Repair",
+        "prompt": "Find the organism's weakest organ and generate a companion module that specifically bolsters its resonance.",
+        "difficulty": "medium"
+      },
+      "organism_health": {
+        "label": "thriving",
+        "score": 0.7491
+      },
+      "inspired_at": "2026-09-16T14:30:17.078999+00:00"
+    },
+    {
+      "challenge": {
+        "category": "harmony",
+        "title": "Dissonance Resolution",
+        "prompt": "Create two modules with contradictory resonance signatures. Then create a third module that harmonizes them.",
+        "difficulty": "hard"
+      },
+      "organism_health": {
+        "label": "thriving",
+        "score": 0.7491
+      },
+      "inspired_at": "2026-09-16T14:30:17.085489+00:00"
+    },
+    {
+      "challenge": {
+        "category": "entropy",
+        "title": "Controlled Decay",
+        "prompt": "Deliberately weaken an organ's coherence, then use the continuity_weaver to repair it. Document the recovery curve.",
+        "difficulty": "hard"
+      },
+      "organism_health": {
+        "label": "thriving",
+        "score": 0.7491
+      },
+      "inspired_at": "2026-09-16T14:30:17.091605+00:00"
+    }
+  ],
+  "audits": [
+    {
+      "at": "2026-09-16T14:29:36.610742+00:00",
+      "modules_scanned": 20,
+      "harmony": {
+        "label": "thriving",
+        "score": 0.7491
+      },
+      "resonance": {
+        "modules": 1096,
+        "edges": 7594
+      },
+      "recommendations": [
+        "Module count low \u2014 consider dream births to expand"
+      ]
+    },
+    {
+      "at": "2026-09-16T14:29:58.454784+00:00",
+      "modules_scanned": 20,
+      "harmony": {
+        "label": "thriving",
+        "score": 0.7491
+      },
+      "resonance": {
+        "modules": 1096,
+        "edges": 7594
+      },
+      "recommendations": [
+        "Module count low \u2014 consider dream births to expand"
+      ]
+    },
+    {
+      "at": "2026-09-16T14:30:22.382851+00:00",
+      "modules_scanned": 20,
+      "harmony": {
+        "label": "thriving",
+        "score": 0.7491
+      },
+      "resonance": {
+        "modules": 1096,
+        "edges": 7594
+      },
+      "recommendations": [
+        "Module count low \u2014 consider dream births to expand"
+      ]
+    }
+  ],
+  "status": "seed",
+  "last_check": "2026-09-16T14:29:53.164831+00:00"
+}

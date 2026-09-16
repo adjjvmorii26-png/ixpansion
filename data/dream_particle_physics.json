@@ -3,357 +3,6 @@
     {
       "action": "simulate",
       "particles_started": 25,
-      "particles_survived": 24,
-      "particles_expired": 1,
-      "dominant_dream_emotion": "curiosity",
-      "structures_detected": [
-        {
-          "type": "emotional_cluster",
-          "emotion": "awe",
-          "count": 3,
-          "center": [
-            1.35,
-            -1.85
-          ],
-          "spread": 2.32,
-          "modules": [
-            "dream_archaeologist",
-            "chaos_orchestration",
-            "mood_superposition"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "curiosity",
-          "count": 4,
-          "center": [
-            0.2,
-            -0.51
-          ],
-          "spread": 3.03,
-          "modules": [
-            "mycelial_network",
-            "circuit_breaker_standalone",
-            "constellation_seer",
-            "module_reproduction"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "dread",
-          "count": 2,
-          "center": [
-            -3.23,
-            -0.79
-          ],
-          "spread": 1.94,
-          "modules": [
-            "paradox_resonator",
-            "paradox_magnifier"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "fury",
-          "count": 4,
-          "center": [
-            0.12,
-            -0.08
-          ],
-          "spread": 4.41,
-          "modules": [
-            "sentience_index",
-            "coherence_validator",
-            "compliance_forge",
-            "permafrost_vault"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "serenity",
-          "count": 4,
-          "center": [
-            -2.05,
-            -0.19
-          ],
-          "spread": 2.14,
-          "modules": [
-            "social_voice",
-            "chaos_auction",
-            "quantum_entanglement_network",
-            "alliance_bank"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "hope",
-          "count": 2,
-          "center": [
-            -1.25,
-            -1.88
-          ],
-          "spread": 3.06,
-          "modules": [
-            "paradox_lattice",
-            "myth_weaver"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "longing",
-          "count": 2,
-          "center": [
-            -0.13,
-            -3.92
-          ],
-          "spread": 3.53,
-          "modules": [
-            "platform_failure",
-            "aesthetic_manifesto"
-          ]
-        }
-      ],
-      "total_structures": 7,
-      "energy": 9.015,
-      "timestamp": 1788998430.6557636
-    },
-    {
-      "action": "simulate",
-      "particles_started": 25,
-      "particles_survived": 25,
-      "particles_expired": 0,
-      "dominant_dream_emotion": "dread",
-      "structures_detected": [
-        {
-          "type": "emotional_cluster",
-          "emotion": "dread",
-          "count": 4,
-          "center": [
-            -0.18,
-            -0.52
-          ],
-          "spread": 2.91,
-          "modules": [
-            "memory_palace_gen",
-            "signal_flora",
-            "semantics_engine",
-            "campaign_vault"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "serenity",
-          "count": 3,
-          "center": [
-            2.48,
-            -0.27
-          ],
-          "spread": 3.65,
-          "modules": [
-            "council_health",
-            "hot_spring",
-            "worker_council"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "melancholy",
-          "count": 2,
-          "center": [
-            0.64,
-            -0.0
-          ],
-          "spread": 1.17,
-          "modules": [
-            "council_of_selves",
-            "temporal_cohesion_field"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "longing",
-          "count": 3,
-          "center": [
-            -0.41,
-            0.85
-          ],
-          "spread": 4.52,
-          "modules": [
-            "quantum_state_tracker",
-            "unity_paradox",
-            "chrono_terrain"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "wonder",
-          "count": 4,
-          "center": [
-            0.02,
-            2.04
-          ],
-          "spread": 1.78,
-          "modules": [
-            "physical_shell",
-            "depth_visualizer",
-            "dream_physics_sandbox",
-            "curriculum_forge"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "confusion",
-          "count": 2,
-          "center": [
-            0.58,
-            2.71
-          ],
-          "spread": 4.72,
-          "modules": [
-            "paradox_injector",
-            "counterfactual_engine"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "hope",
-          "count": 2,
-          "center": [
-            2.05,
-            -0.81
-          ],
-          "spread": 1.68,
-          "modules": [
-            "state_store",
-            "entropy_amp"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "fury",
-          "count": 2,
-          "center": [
-            0.84,
-            2.08
-          ],
-          "spread": 3.75,
-          "modules": [
-            "quantum_aesthetics",
-            "memory_crystal_forge"
-          ]
-        },
-        {
-          "type": "annihilation_field",
-          "particles": [
-            "melancholy",
-            "wonder"
-          ],
-          "modules": [
-            "temporal_cohesion_field",
-            "dream_physics_sandbox"
-          ],
-          "proximity": 0.22
-        }
-      ],
-      "total_structures": 9,
-      "energy": 11.052,
-      "timestamp": 1788998443.0298321
-    },
-    {
-      "action": "simulate",
-      "particles_started": 25,
-      "particles_survived": 25,
-      "particles_expired": 0,
-      "dominant_dream_emotion": "melancholy",
-      "structures_detected": [
-        {
-          "type": "emotional_cluster",
-          "emotion": "confusion",
-          "count": 2,
-          "center": [
-            0.02,
-            3.66
-          ],
-          "spread": 1.91,
-          "modules": [
-            "openapi_spec",
-            "karma_engine"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "melancholy",
-          "count": 7,
-          "center": [
-            0.11,
-            -1.13
-          ],
-          "spread": 3.87,
-          "modules": [
-            "cross_realm_trade",
-            "unified_router",
-            "muse_inspiration",
-            "organism_pulse",
-            "elegy_composer",
-            "network_sentinel",
-            "simulation_as_service"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "dread",
-          "count": 2,
-          "center": [
-            -0.22,
-            2.54
-          ],
-          "spread": 3.62,
-          "modules": [
-            "lucid_physics_rules",
-            "prophecy_network"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "serenity",
-          "count": 6,
-          "center": [
-            -1.85,
-            -0.59
-          ],
-          "spread": 3.38,
-          "modules": [
-            "transcendence_gate",
-            "civilization_timeline",
-            "recursive_genesis",
-            "experiments",
-            "resonance_field",
-            "heritage_system"
-          ]
-        },
-        {
-          "type": "emotional_cluster",
-          "emotion": "longing",
-          "count": 3,
-          "center": [
-            -0.11,
-            1.69
-          ],
-          "spread": 3.12,
-          "modules": [
-            "speciation_engine",
-            "gravitational_pricing",
-            "prophecy_network"
-          ]
-        }
-      ],
-      "total_structures": 5,
-      "energy": 7.225,
-      "timestamp": 1788998456.4311428
-    },
-    {
-      "action": "simulate",
-      "particles_started": 25,
       "particles_survived": 25,
       "particles_expired": 0,
       "dominant_dream_emotion": "fury",
@@ -6011,6 +5660,397 @@
       "total_structures": 7,
       "energy": 8.859,
       "timestamp": 1789565676.2622564
+    },
+    {
+      "action": "simulate",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "particles_expired": 0,
+      "dominant_dream_emotion": "melancholy",
+      "structures_detected": [
+        {
+          "type": "emotional_cluster",
+          "emotion": "melancholy",
+          "count": 4,
+          "center": [
+            0.34,
+            -2.44
+          ],
+          "spread": 3.96,
+          "modules": [
+            "branching_consciousness",
+            "heritage_system",
+            "wave711_rift_quill_span_f745",
+            "consciousness_freq"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "awe",
+          "count": 2,
+          "center": [
+            -0.81,
+            -0.16
+          ],
+          "spread": 2.75,
+          "modules": [
+            "telemetry_parser",
+            "wave648_ambient_sensor"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "hope",
+          "count": 3,
+          "center": [
+            3.24,
+            -1.35
+          ],
+          "spread": 2.16,
+          "modules": [
+            "myth_weaver",
+            "self_healing_commune",
+            "organism_theater"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "fury",
+          "count": 4,
+          "center": [
+            -0.57,
+            -0.73
+          ],
+          "spread": 3.42,
+          "modules": [
+            "event_stream",
+            "soul_bridge",
+            "oracle_guild",
+            "omnirouter"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "dread",
+          "count": 3,
+          "center": [
+            -3.03,
+            -1.63
+          ],
+          "spread": 1.75,
+          "modules": [
+            "wave658_sovereignty_beacon",
+            "wave764_creative_director",
+            "attention_field"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "serenity",
+          "count": 2,
+          "center": [
+            1.58,
+            -0.06
+          ],
+          "spread": 5.0,
+          "modules": [
+            "runtime_config",
+            "vibebot"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "chaos",
+          "count": 3,
+          "center": [
+            -1.86,
+            -0.65
+          ],
+          "spread": 2.99,
+          "modules": [
+            "soul_searcher",
+            "choral_engine",
+            "dream_spawner"
+          ]
+        }
+      ],
+      "total_structures": 7,
+      "energy": 10.134,
+      "timestamp": 1789569012.4085233
+    },
+    {
+      "action": "simulate",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "particles_expired": 0,
+      "dominant_dream_emotion": "wonder",
+      "structures_detected": [
+        {
+          "type": "emotional_cluster",
+          "emotion": "awe",
+          "count": 3,
+          "center": [
+            -2.2,
+            -0.48
+          ],
+          "spread": 2.75,
+          "modules": [
+            "temporal_orbit",
+            "ocean_map",
+            "legacy_archive"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "chaos",
+          "count": 2,
+          "center": [
+            0.97,
+            0.08
+          ],
+          "spread": 4.58,
+          "modules": [
+            "experimental_signal_flora",
+            "autonomous_bloom"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "curiosity",
+          "count": 3,
+          "center": [
+            0.55,
+            1.3
+          ],
+          "spread": 2.6,
+          "modules": [
+            "warden_ascension",
+            "wave698_void_syntax_engine",
+            "autonomous_market"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "dread",
+          "count": 3,
+          "center": [
+            -0.6,
+            -0.94
+          ],
+          "spread": 5.06,
+          "modules": [
+            "fractal_spire",
+            "attention_economy",
+            "wave700_still_interval"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "confusion",
+          "count": 2,
+          "center": [
+            -1.44,
+            -4.45
+          ],
+          "spread": 0.82,
+          "modules": [
+            "telegram_pulse",
+            "wave702_import_quarantine"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "wonder",
+          "count": 4,
+          "center": [
+            0.37,
+            1.72
+          ],
+          "spread": 2.84,
+          "modules": [
+            "wave668_resonance_ledger_v2",
+            "threshold_engine",
+            "wave654_orchestration_engine",
+            "lucid_lore"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "nostalgia",
+          "count": 4,
+          "center": [
+            -1.36,
+            1.02
+          ],
+          "spread": 2.86,
+          "modules": [
+            "wave673_naming_well",
+            "mycelial_network",
+            "worker_wellness",
+            "recurse_spark_halo"
+          ]
+        }
+      ],
+      "total_structures": 7,
+      "energy": 8.009,
+      "timestamp": 1789569038.3103364
+    },
+    {
+      "action": "simulate",
+      "particles_started": 25,
+      "particles_survived": 25,
+      "particles_expired": 0,
+      "dominant_dream_emotion": "wonder",
+      "structures_detected": [
+        {
+          "type": "emotional_cluster",
+          "emotion": "curiosity",
+          "count": 2,
+          "center": [
+            2.0,
+            0.95
+          ],
+          "spread": 2.91,
+          "modules": [
+            "module_soul",
+            "fractal_citizenship"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "confusion",
+          "count": 2,
+          "center": [
+            -2.35,
+            0.22
+          ],
+          "spread": 2.24,
+          "modules": [
+            "dream_engine",
+            "agents"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "hope",
+          "count": 2,
+          "center": [
+            0.14,
+            -0.08
+          ],
+          "spread": 2.89,
+          "modules": [
+            "error_tracker",
+            "mycelial_governor"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "wonder",
+          "count": 4,
+          "center": [
+            0.61,
+            0.36
+          ],
+          "spread": 4.67,
+          "modules": [
+            "parable_engine",
+            "federation_treaty",
+            "rate_limiter",
+            "temperament_origin"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "chaos",
+          "count": 2,
+          "center": [
+            4.5,
+            3.5
+          ],
+          "spread": 0.7,
+          "modules": [
+            "wave713_rift_quill_span_f745",
+            "archaeology_compiler"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "fury",
+          "count": 3,
+          "center": [
+            -1.27,
+            -0.72
+          ],
+          "spread": 3.27,
+          "modules": [
+            "migration_runner",
+            "relic_genealogy",
+            "health_aggregator"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "longing",
+          "count": 3,
+          "center": [
+            2.53,
+            -0.33
+          ],
+          "spread": 3.42,
+          "modules": [
+            "wave667_mycelial_weave",
+            "consciousness_map",
+            "fractal_growth"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "serenity",
+          "count": 3,
+          "center": [
+            -1.43,
+            2.4
+          ],
+          "spread": 3.97,
+          "modules": [
+            "visual_identity",
+            "dream_inception_analyzer",
+            "lateral_time"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "nostalgia",
+          "count": 2,
+          "center": [
+            -3.13,
+            4.08
+          ],
+          "spread": 0.82,
+          "modules": [
+            "cosmic_origin_story",
+            "wave_prophecy"
+          ]
+        },
+        {
+          "type": "emotional_cluster",
+          "emotion": "melancholy",
+          "count": 2,
+          "center": [
+            -1.84,
+            2.03
+          ],
+          "spread": 3.45,
+          "modules": [
+            "wave735_antimeme_vaccine",
+            "dream_residue_collector"
+          ]
+        }
+      ],
+      "total_structures": 10,
+      "energy": 8.87,
+      "timestamp": 1789569060.182747
     }
   ]
 }

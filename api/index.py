@@ -2239,3 +2239,9 @@ def resonates_with() -> list:
         from api.wave762_dream_compiler import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 764: Creative Director ---
+    if path.startswith("/creative-director") or path.startswith("/api/creative_director") or path in ("/creative-director", "/api/creative_director"):
+        from api.wave764_creative_director import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

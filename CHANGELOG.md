@@ -1,3 +1,9 @@
+## [4.120.0] — 2026-09-16
+
+### Added
+- **Wave 764 creative_director**: the organism designs its own evolution — generates unique creative challenges (10 categories), concrete tasks (8 templates), self-audits with recommendations, and cross-module synthesis prompts.
+- **Sandbox environment**: `.env.sandbox` with 30 isolated keys, `scripts/load_sandbox.py` loader, sandbox directories.
+- **Codespace config**: `.devcontainer/` with Python 3.12, Node LTS, GitHub CLI, 7 VS Code extensions, auto-setup script.
 ## [4.119.0] — 2026-09-16
 
 ### Added
