@@ -1,3 +1,9 @@
+## [4.113.0] — 2026-09-16
+
+### Added
+- **Wave 753 resonance_braid**: weaves all living wave organs into a resonance graph (weave/bridges/communities/drift actions), exposing hidden communities and bridge organs. Wired into `api/index.py` with 9 tests.
+- **Wave 754 mycelial_weather**: organism climate layer (forecast/currents/nutrients) — maps biome nutrient scarcity, forecasts entropy + signal decay, and advises where mutation pressure invites new organs. Wired into `api/index.py` with 9 tests.
+
 ## [4.112.0] — 2026-09-16
 
 ### Added

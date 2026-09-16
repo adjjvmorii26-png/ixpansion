@@ -2179,3 +2179,15 @@ def resonates_with() -> list:
         from api.wave752_gene_splicer import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 753: Resonance Braid ---
+    if path.startswith("/resonance-braid") or path.startswith("/api/resonance_braid") or path in ("/resonance-braid", "/api/resonance_braid"):
+        from api.wave753_resonance_braid import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 754: Mycelial Weather ---
+    if path.startswith("/mycelial-weather") or path.startswith("/api/mycelial_weather") or path in ("/mycelial-weather", "/api/mycelial_weather"):
+        from api.wave754_mycelial_weather import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
