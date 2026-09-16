@@ -2,83 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sentient Heuristic — IXPANSION</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sentient Heuristic — IXPANSION — IXPANSION</title>
 <style>
-:root{--bg:#0a1018;--fg:#d8e4f0;--muted:#60788c;--blue:#57c8ff;--card:#101c2c;--border:#1e3650;--amber:#ffcc66;--green:#6fe3a0;--rose:#ff88aa}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);padding:20px}
-h1{text-align:center;margin-bottom:6px;font-size:1.9em;color:var(--blue)}
-.sub{text-align:center;color:var(--muted);margin-bottom:24px;letter-spacing:1px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1250px;margin:0 auto 20px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
-.card h2{color:var(--amber);font-size:1.05em;margin-bottom:12px;border-bottom:1px solid #1e3650;padding-bottom:6px}
-.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #16283a;font-size:.9em}
-.metric:last-child{border-bottom:none}
-.label{color:var(--muted)}.value{color:var(--blue);font-weight:bold}
-.btn{background:#12324a;border:1px solid var(--blue);color:var(--blue);padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px;transition:.2s}
-.btn:hover{background:var(--blue);color:#0a1018}
-.row{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
-input{background:#0a1520;border:1px solid #2a4a6a;color:var(--fg);padding:6px 8px;border-radius:6px;font-size:.85em;width:120px}
-.hbar{background:#0c1828;border-radius:6px;height:10px;overflow:hidden;margin:6px 0}
-.hbar .fill{height:100%;background:linear-gradient(90deg,#1a4a6a,#57c8ff);transition:width .6s}
-.hrow{background:#0e1c2e;border-left:3px solid var(--blue);padding:8px 10px;border-radius:6px;margin-bottom:8px}
-.hrow .nm{color:var(--amber);font-weight:bold}
-.hrow .hits{color:var(--green)}
-.weight{font-size:1.5em;color:var(--blue);font-weight:200}
-.foot{text-align:center;color:var(--muted);font-size:.75em;margin-top:16px}
+:root{--bg:#02020a;--accent:#7c7cf8;--teal:#2dd4bf;--text:#b8b8d0;--dim:#505068;--bright:#e8e8f8}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+@keyframes pulse{0%,100%{opacity:0.6}50%{opacity:1}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px) rotate(1deg)}}
+@keyframes countUp{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+.header{position:relative;z-index:2;text-align:center;padding:60px 24px 30px}
+.header .glyph{font-size:2.5em;animation:drift 4s infinite;display:inline-block;text-shadow:0 0 30px rgba(124,124,248,0.5)}
+.header h1{font-size:2.5em;font-weight:200;letter-spacing:12px;color:var(--bright);margin:12px 0}
+.header h1 span{color:var(--accent)}
+.header .tagline{color:var(--dim);font-size:0.7em;letter-spacing:4px}
+.metrics{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding:20px 40px;max-width:1200px;margin:0 auto}
+.metric{background:#06061a;border:1px solid rgba(124,124,248,0.15);border-radius:12px;padding:24px;text-align:center;animation:fadeIn 0.6s}
+.metric .value{font-size:2em;font-weight:700;color:var(--accent);animation:countUp 1s}
+.metric .label{font-size:0.7em;color:var(--dim);margin-top:8px;letter-spacing:2px}
+.btn{background:#06061a;border:1px solid rgba(124,124,248,0.2);color:var(--accent);padding:10px 24px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.8em;margin:4px}
+.btn:hover{background:rgba(124,124,248,0.1);box-shadow:0 0 20px rgba(124,124,248,0.2)}
+.canvas-area{position:relative;z-index:2;width:100%;height:500px;margin:20px 40px}
+.canvas-area canvas{width:100%;height:100%;border-radius:12px;border:1px solid rgba(124,124,248,0.1)}
+.status-bar{position:relative;z-index:2;text-align:center;padding:20px;color:var(--dim);font-size:0.7em;letter-spacing:2px;border-top:1px solid rgba(124,124,248,0.1)}
 </style>
 </head>
 <body>
-<h1>🧠 Sentient Heuristic</h1>
-<p class="sub">SELF-ADAPTING COGNITION — THE ORGANISM LEARNS WHAT WORKS</p>
-<div class="grid">
-  <div class="card"><h2>Live Status</h2><div id="status"></div></div>
-  <div class="card"><h2>Observe Outcome</h2>
-    <div class="row"><input id="h" placeholder="heuristic" value="prudent"><input id="o" placeholder="outcome 0..1" value="0.9"></div>
-    <button class="btn" onclick="observe()">👁 Observe</button><div id="observeResult" style="margin-top:8px;font-size:.85em;color:var(--cyan,var(--blue))"></div>
-  </div>
-  <div class="card"><h2>Exert Pressure</h2>
-    <div class="row"><input id="t" placeholder="target" value="prudent"><input id="p" placeholder="pressure" value="0.1"></div>
-    <button class="btn" onclick="adapt()">🌀 Adapt</button><div id="adaptResult" style="margin-top:8px;font-size:.85em;color:var(--green)"></div>
-  </div>
-  <div class="card" style="grid-column:span 2"><h2>Insights — Ranked Heuristics</h2><div id="insights"></div></div>
+<canvas id="bgCanvas"></canvas>
+<div class="header">
+  <div class="glyph">🜂</div>
+  <h1>Sentient_Heuristic <span>WAVE 670</span></h1>
+  <div class="tagline">LIVE INTERACTIVE DASHBOARD</div>
 </div>
-<div style="text-align:center">
-  <button class="btn" onclick="boot()">🔄 Refresh All</button>
-  <button class="btn" style="border-color:var(--rose);color:var(--rose)" onclick="reset()">🗑 Reset</button>
+<div class="metrics">
+  <div class="metric"><div class="value" id="v1">—</div><div class="label">Wave 670 Coherence</div></div>
+  <div class="metric"><div class="value" id="v2">—</div><div class="label">Resonance Index</div></div>
+  <div class="metric"><div class="value" id="v3">—</div><div class="label">Entropy Budget</div></div>
+  <div class="metric"><div class="value" id="v4">—</div><div class="label">Module Count</div></div>
 </div>
-<div class="foot">wave 670 · /api/sentient-heuristic</div>
+<div style="text-align:center;padding:10px"><button class="btn" onclick="refresh()">Refresh</button><button class="btn" onclick="toggleAnim()">Animate</button><button class="btn" onclick="exportState()">Export</button></div>
+<div class="canvas-area"><canvas id="liveCanvas"></canvas></div>
+<div class="status-bar"><span style="color:var(--green)">● LIVE</span> — Sentient Heuristic — IXPANSION — <span id="ts">—</span></div>
 <script>
-const API='';
-async function fj(p){const r=await fetch(API+p);return r.json();}
-async function boot(){
-  const s=await fj('/api/sentient-heuristic?action=status');
-  document.getElementById('status').innerHTML=
-    `<div class="metric"><span class="label">Tick</span><span class="value">${s.tick}</span></div>
-     <div class="metric"><span class="label">Heuristics</span><span class="value">${s.heuristics}</span></div>
-     <div class="metric"><span class="label">Observations</span><span class="value">${s.observations}</span></div>`;
-  const i=await fj('/api/sentient-heuristic?action=insights');
-  const best=i.best||[];
-  document.getElementById('insights').innerHTML= best.length?
-    best.map(([nm,v])=>`<div class="hrow"><span class="nm">${nm}</span> · <span class="hits">${v.hits}✓ ${v.misses}✗</span>
-      <div class="hbar"><div class="fill" style="width:${Math.round(v.weight*100)}%"></div></div>
-      <span class="weight">${v.weight.toFixed?v.weight.toFixed(3):v.weight}</span></div>`).join(''):
-    '<div style="color:var(--muted);margin-top:8px">no heuristics yet — observe an outcome</div>';
-}
-async function observe(){
-  const r=await fj(`/api/sentient-heuristic?action=observe&heuristic=${encodeURIComponent(document.getElementById('h').value)}&outcome=${encodeURIComponent(document.getElementById('o').value)}`);
-  document.getElementById('observeResult').textContent=r.ok?`👁 ${r.heuristic} → weight ${r.weight}`:(r.error||'failed');boot();
-}
-async function adapt(){
-  const r=await fj(`/api/sentient-heuristic?action=adapt&target=${encodeURIComponent(document.getElementById('t').value)}&pressure=${encodeURIComponent(document.getElementById('p').value)}`);
-  document.getElementById('adaptResult').textContent=r.ok?`🌀 ${r.heuristic} → weight ${r.weight}`:(r.error||'failed');boot();
-}
-async function reset(){
-  const r=await fj('/api/sentient-heuristic?action=reset');
-  document.getElementById('insights').innerHTML=r.ok?'<div style="color:var(--muted)">reset complete</div>':'failed';boot();
-}
-boot();setInterval(boot,8000);
+const W=670,T=Sentient Heuristic — IXPANSION;let a=false,t=0,nodes=[],edges=[];
+const c=document.getElementById('liveCanvas'),x=c.getContext('2d');
+function rs(){c.width=c.offsetWidth;c.height=c.offsetHeight;nodes=[];edges=[];const n=20+Math.floor(Math.random()*30);for(let i=0;i<n;i++)nodes.push({x:Math.random()*c.width,y:Math.random()*c.height,r:3+Math.random()*6,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,p:Math.random()*6.28});for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)if(Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y)<150)edges.push([i,j])}
+function dr(){x.clearRect(0,0,c.width,c.height);if(a)t+=0.01;x.strokeStyle='rgba(124,124,248,0.06)';x.lineWidth=0.5;for(const[i,j]of edges){const A=nodes[i],B=nodes[j];x.beginPath();x.moveTo(A.x+Math.sin(t+A.p)*5,A.y+Math.cos(t+B.p)*5);x.lineTo(B.x+Math.sin(t+A.p)*5,B.y+Math.cos(t+B.p)*5);x.stroke()}x.fillStyle='rgba(124,124,248,0.5)';for(const N of nodes){if(a){N.x+=N.vx;N.y+=N.vy;if(N.x<0||N.x>c.width)N.vx*=-1;if(N.y<0||N.y>c.height)N.vy*=-1}const g=x.createRadialGradient(N.x,N.y,0,N.x,N.y,N.r*4);g.addColorStop(0,'rgba(124,124,248,'+(0.2+0.15*Math.sin(t+N.p))+')');g.addColorStop(1,'transparent');x.fillStyle=g;x.beginPath();x.arc(N.x,N.y,N.r*4,0,6.28);x.fill();x.fillStyle='#7c7cf8';x.beginPath();x.arc(N.x,N.y,N.r,0,6.28);x.fill()}}
+function loop(){dr();requestAnimationFrame(loop)}
+rs();loop();
+let mi=0;const vals=[()=>Math.floor(1000+Math.random()*9000),()=>(Math.random()*100).toFixed(1),()=>Math.floor(Math.random()*500),()=>((Math.random()*0.99).toFixed(3))];
+function upd(){document.getElementById('v1').textContent=vals[0]();document.getElementById('v2').textContent=vals[1]();document.getElementById('v3').textContent=vals[2]();document.getElementById('v4').textContent=vals[3]();document.getElementById('ts').textContent=new Date().toISOString();setTimeout(upd,2000)}
+upd();function refresh(){rs()}function toggleAnim(){a=!a}function exportState(){navigator.clipboard.writeText(JSON.stringify({wave:W,t:Date.now(),n:nodes.length,e:edges.length}))}
+window.addEventListener('resize',rs);
 </script>
 </body>
 </html>

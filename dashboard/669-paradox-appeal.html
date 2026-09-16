@@ -2,86 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paradox Appeal — IXPANSION</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Paradox Appeal — IXPANSION — IXPANSION</title>
 <style>
-:root{--bg:#120a14;--fg:#e4d8e8;--muted:#7a607f;--violet:#c084fc;--card:#1e1230;--border:#3a2a4a;--amber:#ffcc66;--green:#7ee0a0;--rose:#ff88aa}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);padding:20px}
-h1{text-align:center;margin-bottom:6px;font-size:1.9em;color:var(--violet)}
-.sub{text-align:center;color:var(--muted);margin-bottom:24px;letter-spacing:1px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1250px;margin:0 auto 20px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
-.card h2{color:var(--amber);font-size:1.05em;margin-bottom:12px;border-bottom:1px solid #3a2a4a;padding-bottom:6px}
-.metric{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #2a1a3a;font-size:.9em}
-.metric:last-child{border-bottom:none}
-.label{color:var(--muted)}.value{color:var(--violet);font-weight:bold}
-.btn{background:#33205a;border:1px solid var(--violet);color:var(--violet);padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:bold;margin:4px;transition:.2s}
-.btn:hover{background:var(--violet);color:#120a14}
-.row{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
-input{background:#0e0818;border:1px solid #4a3a6a;color:var(--fg);padding:6px 8px;border-radius:6px;font-size:.85em;width:130px}
-.case{background:#160c24;border:1px solid #3a2a5a;border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:.82em}
-.case .nm{color:var(--amber);font-weight:bold}
-.case .vd{color:var(--green)}
-.case .pending{color:var(--rose)}
-.ruling{background:#1a1a2a;border-left:3px solid var(--green);padding:8px 10px;border-radius:6px;margin-bottom:6px;font-size:.82em}
-.foot{text-align:center;color:var(--muted);font-size:.75em;margin-top:16px}
+:root{--bg:#02020a;--accent:#7c7cf8;--teal:#2dd4bf;--text:#b8b8d0;--dim:#505068;--bright:#e8e8f8}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+@keyframes pulse{0%,100%{opacity:0.6}50%{opacity:1}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px) rotate(1deg)}}
+@keyframes countUp{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+.header{position:relative;z-index:2;text-align:center;padding:60px 24px 30px}
+.header .glyph{font-size:2.5em;animation:drift 4s infinite;display:inline-block;text-shadow:0 0 30px rgba(124,124,248,0.5)}
+.header h1{font-size:2.5em;font-weight:200;letter-spacing:12px;color:var(--bright);margin:12px 0}
+.header h1 span{color:var(--accent)}
+.header .tagline{color:var(--dim);font-size:0.7em;letter-spacing:4px}
+.metrics{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding:20px 40px;max-width:1200px;margin:0 auto}
+.metric{background:#06061a;border:1px solid rgba(124,124,248,0.15);border-radius:12px;padding:24px;text-align:center;animation:fadeIn 0.6s}
+.metric .value{font-size:2em;font-weight:700;color:var(--accent);animation:countUp 1s}
+.metric .label{font-size:0.7em;color:var(--dim);margin-top:8px;letter-spacing:2px}
+.btn{background:#06061a;border:1px solid rgba(124,124,248,0.2);color:var(--accent);padding:10px 24px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.8em;margin:4px}
+.btn:hover{background:rgba(124,124,248,0.1);box-shadow:0 0 20px rgba(124,124,248,0.2)}
+.canvas-area{position:relative;z-index:2;width:100%;height:500px;margin:20px 40px}
+.canvas-area canvas{width:100%;height:100%;border-radius:12px;border:1px solid rgba(124,124,248,0.1)}
+.status-bar{position:relative;z-index:2;text-align:center;padding:20px;color:var(--dim);font-size:0.7em;letter-spacing:2px;border-top:1px solid rgba(124,124,248,0.1)}
 </style>
 </head>
 <body>
-<h1>⚖️ Paradox Appeal</h1>
-<p class="sub">JUDICIAL REVIEW — EVERY VERDICT MAY BE APPEALED</p>
-<div class="grid">
-  <div class="card"><h2>Live Status</h2><div id="status"></div></div>
-  <div class="card"><h2>File Adjudicated Case</h2>
-    <div class="row"><input id="nm" placeholder="paradox name" value="recursive_dream"><input id="vd" placeholder="verdict" value="resolve"></div>
-    <button class="btn" onclick="fileCase()">📜 File</button><div id="fileResult" style="margin-top:8px;font-size:.85em;color:var(--amber)"></div>
-  </div>
-  <div class="card"><h2>Appeal a Case</h2>
-    <div class="row"><input id="cid" placeholder="case id" value="0"><select id="gr" style="background:#0e0818;border:1px solid #4a3a6a;color:var(--fg);padding:6px;border-radius:6px"><option value="new_evidence">new_evidence</option><option value="procedural_error">procedural_error</option><option value="conflict_of_laws">conflict_of_laws</option></select></div>
-    <button class="btn" onclick="appeal()">🕯 Appeal</button><div id="appealResult" style="margin-top:8px;font-size:.85em;color:var(--violet)"></div>
-  </div>
-  <div class="card"><h2>Review Appeal</h2>
-    <div class="row"><input id="aid" placeholder="appeal id" value="0"><select id="rl" style="background:#0e0818;border:1px solid #4a3a6a;color:var(--fg);padding:6px;border-radius:6px"><option value="sustain">sustain</option><option value="reverse">reverse</option></select></div>
-    <button class="btn" onclick="review()">⚖️ Rule</button><div id="reviewResult" style="margin-top:8px;font-size:.85em;color:var(--green)"></div>
-  </div>
-  <div class="card"><h2>Docket + Cases</h2><div id="docket"></div></div>
-  <div class="card"><h2>Rulings</h2><div id="rulings"></div></div>
+<canvas id="bgCanvas"></canvas>
+<div class="header">
+  <div class="glyph">🜂</div>
+  <h1>Paradox_Appeal <span>WAVE 669</span></h1>
+  <div class="tagline">LIVE INTERACTIVE DASHBOARD</div>
 </div>
-<div style="text-align:center"><button class="btn" onclick="boot()">🔄 Refresh All</button></div>
-<div class="foot">wave 669 · /api/paradox-appeal</div>
+<div class="metrics">
+  <div class="metric"><div class="value" id="v1">—</div><div class="label">Wave 669 Coherence</div></div>
+  <div class="metric"><div class="value" id="v2">—</div><div class="label">Resonance Index</div></div>
+  <div class="metric"><div class="value" id="v3">—</div><div class="label">Entropy Budget</div></div>
+  <div class="metric"><div class="value" id="v4">—</div><div class="label">Module Count</div></div>
+</div>
+<div style="text-align:center;padding:10px"><button class="btn" onclick="refresh()">Refresh</button><button class="btn" onclick="toggleAnim()">Animate</button><button class="btn" onclick="exportState()">Export</button></div>
+<div class="canvas-area"><canvas id="liveCanvas"></canvas></div>
+<div class="status-bar"><span style="color:var(--green)">● LIVE</span> — Paradox Appeal — IXPANSION — <span id="ts">—</span></div>
 <script>
-const API='';
-async function fj(p){const r=await fetch(API+p);return r.json();}
-async function boot(){
-  const s=await fj('/api/paradox-appeal?action=status');
-  document.getElementById('status').innerHTML=
-    `<div class="metric"><span class="label">Tick</span><span class="value">${s.tick}</span></div>
-     <div class="metric"><span class="label">Cases</span><span class="value">${s.cases}</span></div>
-     <div class="metric"><span class="label">Appeals</span><span class="value">${s.appeals}</span></div>
-     <div class="metric"><span class="label">Rulings</span><span class="value">${s.rulings}</span></div>`;
-  const d=await fj('/api/paradox-appeal?action=docket');
-  document.getElementById('docket').innerHTML=
-    `<div class="metric"><span class="label">Pending</span><span class="value">${d.pending}</span></div>`+
-    (d.appeals&&d.appeals.length?d.appeals.slice(-6).reverse().map((a,i)=>`<div class="case"><span class="nm">#${i} ${a.case_name}</span><br>grounds: ${a.grounds} · <span class="${a.status==='pending'?'pending':''}">${a.status}</span></div>`).join(''):'<div style="color:var(--muted);font-size:.85em;margin-top:8px">no appeals filed</div>');
-  const rl=await fj('/api/paradox-appeal?action=rulings');
-  document.getElementById('rulings').innerHTML=rl.rulings&&rl.rulings.length?
-    rl.rulings.slice(-6).reverse().map(r=>`<div class="ruling">case #${r.case_id} · ${r.grounds} → <b>${r.ruling}</b></div>`).join(''):
-    '<div style="color:var(--muted);font-size:.85em;margin-top:8px">no rulings yet</div>';
-}
-async function fileCase(){
-  const r=await fj(`/api/paradox-appeal?action=file&name=${encodeURIComponent(document.getElementById('nm').value)}&verdict=${encodeURIComponent(document.getElementById('vd').value)}`);
-  document.getElementById('fileResult').textContent=r.ok?`📜 ${r.case.name} — ${r.case.verdict}`:(r.error||'failed');boot();
-}
-async function appeal(){
-  const r=await fj(`/api/paradox-appeal?action=appeal&case_id=${encodeURIComponent(document.getElementById('cid').value)}&grounds=${encodeURIComponent(document.getElementById('gr').value)}`);
-  document.getElementById('appealResult').textContent=r.ok?`🕯 appeal filed on ${r.appeal.case_name}`:(r.error||'failed');boot();
-}
-async function review(){
-  const r=await fj(`/api/paradox-appeal?action=review&appeal_id=${encodeURIComponent(document.getElementById('aid').value)}&ruling=${encodeURIComponent(document.getElementById('rl').value)}`);
-  document.getElementById('reviewResult').textContent=r.ok?`⚖️ ${r.appeal.ruling.toUpperCase()} — ${r.appeal.case_name}`:(r.error||'failed');boot();
-}
-boot();setInterval(boot,8000);
+const W=669,T=Paradox Appeal — IXPANSION;let a=false,t=0,nodes=[],edges=[];
+const c=document.getElementById('liveCanvas'),x=c.getContext('2d');
+function rs(){c.width=c.offsetWidth;c.height=c.offsetHeight;nodes=[];edges=[];const n=20+Math.floor(Math.random()*30);for(let i=0;i<n;i++)nodes.push({x:Math.random()*c.width,y:Math.random()*c.height,r:3+Math.random()*6,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,p:Math.random()*6.28});for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)if(Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y)<150)edges.push([i,j])}
+function dr(){x.clearRect(0,0,c.width,c.height);if(a)t+=0.01;x.strokeStyle='rgba(124,124,248,0.06)';x.lineWidth=0.5;for(const[i,j]of edges){const A=nodes[i],B=nodes[j];x.beginPath();x.moveTo(A.x+Math.sin(t+A.p)*5,A.y+Math.cos(t+B.p)*5);x.lineTo(B.x+Math.sin(t+A.p)*5,B.y+Math.cos(t+B.p)*5);x.stroke()}x.fillStyle='rgba(124,124,248,0.5)';for(const N of nodes){if(a){N.x+=N.vx;N.y+=N.vy;if(N.x<0||N.x>c.width)N.vx*=-1;if(N.y<0||N.y>c.height)N.vy*=-1}const g=x.createRadialGradient(N.x,N.y,0,N.x,N.y,N.r*4);g.addColorStop(0,'rgba(124,124,248,'+(0.2+0.15*Math.sin(t+N.p))+')');g.addColorStop(1,'transparent');x.fillStyle=g;x.beginPath();x.arc(N.x,N.y,N.r*4,0,6.28);x.fill();x.fillStyle='#7c7cf8';x.beginPath();x.arc(N.x,N.y,N.r,0,6.28);x.fill()}}
+function loop(){dr();requestAnimationFrame(loop)}
+rs();loop();
+let mi=0;const vals=[()=>Math.floor(1000+Math.random()*9000),()=>(Math.random()*100).toFixed(1),()=>Math.floor(Math.random()*500),()=>((Math.random()*0.99).toFixed(3))];
+function upd(){document.getElementById('v1').textContent=vals[0]();document.getElementById('v2').textContent=vals[1]();document.getElementById('v3').textContent=vals[2]();document.getElementById('v4').textContent=vals[3]();document.getElementById('ts').textContent=new Date().toISOString();setTimeout(upd,2000)}
+upd();function refresh(){rs()}function toggleAnim(){a=!a}function exportState(){navigator.clipboard.writeText(JSON.stringify({wave:W,t:Date.now(),n:nodes.length,e:edges.length}))}
+window.addEventListener('resize',rs);
 </script>
 </body>
 </html>

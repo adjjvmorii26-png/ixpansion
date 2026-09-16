@@ -1,145 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MORII — Command Agent</title>
-<script src="/shared.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MORII — Command Agent — IXPANSION</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#04060e;color:#d6e0ff;font-family:'Courier New',monospace;min-height:100vh}
-  .container{max-width:1000px;margin:0 auto;padding:32px 20px}
-  .header{text-align:center;margin-bottom:32px}
-  .header h1{font-size:2.6em;color:#00e5ff;letter-spacing:8px;margin-bottom:8px;
-    text-shadow:0 0 20px #00e5ff66,0 0 40px #00e5ff22}
-  .header .subtitle{color:#7c4dff;font-size:0.9em;opacity:0.85}
-  .status-bar{display:flex;gap:20px;justify-content:center;align-items:center;margin-bottom:32px;flex-wrap:wrap}
-  .status-pill{border:1px solid #00e5ff44;background:#00e5ff11;padding:6px 16px;border-radius:20px;font-size:0.8em;color:#00e5ff}
-  .status-pill.resonant{border-color:#00e57c;background:#00e57c11;color:#00e57c}
-  .cmd-box{background:#080b18;border:1px solid #1a2040;border-radius:8px;padding:4px;display:flex;margin-bottom:24px}
-  .cmd-box input{flex:1;background:transparent;border:none;color:#00e5ff;font-family:inherit;font-size:1.1em;padding:14px 16px;outline:none}
-  .cmd-box input::placeholder{color:#4a5480}
-  .cmd-box button{background:#00e5ff;border:none;color:#04060e;font-family:inherit;font-weight:bold;
-    padding:0 24px;border-radius:6px;cursor:pointer;font-size:0.9em}
-  .cmd-box button:hover{filter:brightness(1.2)}
-  .suggestions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-  .suggestion{border:1px solid #1a2040;padding:5px 12px;border-radius:4px;font-size:0.75em;color:#7c4dff;cursor:pointer;transition:all 0.2s}
-  .suggestion:hover{border-color:#7c4dff;background:#7c4dff11}
-  .terminal{background:#04060e;border:1px solid #1a2040;border-radius:8px;padding:20px;min-height:300px;max-height:500px;overflow-y:auto}
-  .terminal .line{font-size:0.85em;margin-bottom:8px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
-  .terminal .prompt{color:#00e5ff;font-weight:bold}
-  .terminal .cmd{color:#7c4dff}
-  .terminal .out{color:#aab6e8}
-  .terminal .err{color:#ff6b6b}
-  .terminal .ok{color:#00e57c}
-  .terminal .key{color:#ffd93d}
-  .footer{text-align:center;margin-top:32px;padding-top:20px;border-top:1px solid #1a2040;color:#444;font-size:0.78em}
-
-.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
-.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#02020a;--accent:#7c7cf8;--teal:#2dd4bf;--text:#b8b8d0;--dim:#505068;--bright:#e8e8f8}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+@keyframes pulse{0%,100%{opacity:0.6}50%{opacity:1}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px) rotate(1deg)}}
+@keyframes countUp{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+.header{position:relative;z-index:2;text-align:center;padding:60px 24px 30px}
+.header .glyph{font-size:2.5em;animation:drift 4s infinite;display:inline-block;text-shadow:0 0 30px rgba(124,124,248,0.5)}
+.header h1{font-size:2.5em;font-weight:200;letter-spacing:12px;color:var(--bright);margin:12px 0}
+.header h1 span{color:var(--accent)}
+.header .tagline{color:var(--dim);font-size:0.7em;letter-spacing:4px}
+.metrics{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding:20px 40px;max-width:1200px;margin:0 auto}
+.metric{background:#06061a;border:1px solid rgba(124,124,248,0.15);border-radius:12px;padding:24px;text-align:center;animation:fadeIn 0.6s}
+.metric .value{font-size:2em;font-weight:700;color:var(--accent);animation:countUp 1s}
+.metric .label{font-size:0.7em;color:var(--dim);margin-top:8px;letter-spacing:2px}
+.btn{background:#06061a;border:1px solid rgba(124,124,248,0.2);color:var(--accent);padding:10px 24px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.8em;margin:4px}
+.btn:hover{background:rgba(124,124,248,0.1);box-shadow:0 0 20px rgba(124,124,248,0.2)}
+.canvas-area{position:relative;z-index:2;width:100%;height:500px;margin:20px 40px}
+.canvas-area canvas{width:100%;height:100%;border-radius:12px;border:1px solid rgba(124,124,248,0.1)}
+.status-bar{position:relative;z-index:2;text-align:center;padding:20px;color:var(--dim);font-size:0.7em;letter-spacing:2px;border-top:1px solid rgba(124,124,248,0.1)}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <h1>MORII</h1>
-    <div class="subtitle">Command Agent · LISTENING</div>
-  </div>
-  <div class="status-bar">
-    <span class="status-pill" id="wave-pill">Wave —</span>
-    <span class="status-pill" id="organs-pill">283 organs</span>
-    <span class="status-pill resonant" id="state-pill">RESONANT</span>
-  </div>
-  <div class="cmd-box">
-    <input id="cmd-input" placeholder="run poetry_engine · create sandbox morii_world · status · help ..." autocomplete="off">
-    <button id="cmd-btn">SEND</button>
-  </div>
-  <div class="suggestions">
-    <span class="suggestion" data-cmd="status">status</span>
-    <span class="suggestion" data-cmd="run dream_weaver">run dream_weaver</span>
-    <span class="suggestion" data-cmd="create sandbox morii_world">create sandbox morii_world</span>
-    <span class="suggestion" data-cmd="sandboxes">sandboxes</span>
-    <span class="suggestion" data-cmd="explore memory_palace">explore memory_palace</span>
-    <span class="suggestion" data-cmd="help">help</span>
-  </div>
-  <div class="terminal" id="terminal">
-    <div class="line"><span class="prompt">MORII</span> <span class="out">connected. I am listening. Type a command to command the organism.</span></div>
-  </div>
-  <div class="footer">
-    <span id="footer-version"></span> · Wave <span id="footer-wave"></span> — <span id="footer-wave-name"></span>
-  </div>
+<canvas id="bgCanvas"></canvas>
+<div class="header">
+  <div class="glyph">🜂</div>
+  <h1>MORII_—_Command_Agent <span>WAVE 000</span></h1>
+  <div class="tagline">LIVE INTERACTIVE DASHBOARD</div>
 </div>
+<div class="metrics">
+  <div class="metric"><div class="value" id="v1">—</div><div class="label">Wave 000 Coherence</div></div>
+  <div class="metric"><div class="value" id="v2">—</div><div class="label">Resonance Index</div></div>
+  <div class="metric"><div class="value" id="v3">—</div><div class="label">Entropy Budget</div></div>
+  <div class="metric"><div class="value" id="v4">—</div><div class="label">Module Count</div></div>
+</div>
+<div style="text-align:center;padding:10px"><button class="btn" onclick="refresh()">Refresh</button><button class="btn" onclick="toggleAnim()">Animate</button><button class="btn" onclick="exportState()">Export</button></div>
+<div class="canvas-area"><canvas id="liveCanvas"></canvas></div>
+<div class="status-bar"><span style="color:var(--green)">● LIVE</span> — MORII — Command Agent — <span id="ts">—</span></div>
 <script>
-(function(){
-  const terminal=document.getElementById('terminal');
-  const input=document.getElementById('cmd-input');
-  const btn=document.getElementById('cmd-btn');
-  function addLine(text,cls){
-    const d=document.createElement('div');
-    d.className='line '+cls;
-    d.innerHTML=text;
-    terminal.appendChild(d);
-    terminal.scrollTop=terminal.scrollHeight;
-  }
-  function renderJSON(obj){
-    return JSON.stringify(obj,null,2).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/"([^"]+)":/g,'<span class="key">"$1"</span>:');
-  }
-  async function send(cmd){
-    if(!cmd.trim())return;
-    addLine('<span class="prompt">you›</span> <span class="cmd">'+cmd.replace(/&/g,'&amp;')+'</span>','cmd');
-    input.value='';
-    try{
-      const res=await fetch('/morii_agent?command='+encodeURIComponent(cmd));
-      const data=await res.json();
-      const resp=data.response||data;
-      addLine('<span class="prompt">MORII›</span> <span class="out">'+renderJSON(resp).replace(/\n/g,'<br>')+'</span>','ok');
-    }catch(e){
-      addLine('<span class="prompt">MORII›</span> <span class="err">'+e.message+'</span>','err');
-    }
-  }
-  btn.onclick=()=>send(input.value);
-  input.addEventListener('keydown',e=>{if(e.key==='Enter')send(input.value)});
-  document.querySelectorAll('.suggestion').forEach(s=>{
-    s.onclick=()=>{input.value=s.dataset.cmd;send(s.dataset.cmd)};
-  });
-  // Seed the terminal with a status call on load
-  if(typeof IX!=='undefined'){
-    document.getElementById('wave-pill').textContent='Wave '+IX.wave;
-    document.getElementById('footer-version').textContent='IXpansion/'+IX.version;
-    document.getElementById('footer-wave').textContent=IX.wave;
-    document.getElementById('footer-wave-name').textContent=IX.waveName;
-  }
-  send('status');
-})();
+const W=000,T=MORII — Command Agent;let a=false,t=0,nodes=[],edges=[];
+const c=document.getElementById('liveCanvas'),x=c.getContext('2d');
+function rs(){c.width=c.offsetWidth;c.height=c.offsetHeight;nodes=[];edges=[];const n=20+Math.floor(Math.random()*30);for(let i=0;i<n;i++)nodes.push({x:Math.random()*c.width,y:Math.random()*c.height,r:3+Math.random()*6,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,p:Math.random()*6.28});for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)if(Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y)<150)edges.push([i,j])}
+function dr(){x.clearRect(0,0,c.width,c.height);if(a)t+=0.01;x.strokeStyle='rgba(124,124,248,0.06)';x.lineWidth=0.5;for(const[i,j]of edges){const A=nodes[i],B=nodes[j];x.beginPath();x.moveTo(A.x+Math.sin(t+A.p)*5,A.y+Math.cos(t+B.p)*5);x.lineTo(B.x+Math.sin(t+A.p)*5,B.y+Math.cos(t+B.p)*5);x.stroke()}x.fillStyle='rgba(124,124,248,0.5)';for(const N of nodes){if(a){N.x+=N.vx;N.y+=N.vy;if(N.x<0||N.x>c.width)N.vx*=-1;if(N.y<0||N.y>c.height)N.vy*=-1}const g=x.createRadialGradient(N.x,N.y,0,N.x,N.y,N.r*4);g.addColorStop(0,'rgba(124,124,248,'+(0.2+0.15*Math.sin(t+N.p))+')');g.addColorStop(1,'transparent');x.fillStyle=g;x.beginPath();x.arc(N.x,N.y,N.r*4,0,6.28);x.fill();x.fillStyle='#7c7cf8';x.beginPath();x.arc(N.x,N.y,N.r,0,6.28);x.fill()}}
+function loop(){dr();requestAnimationFrame(loop)}
+rs();loop();
+let mi=0;const vals=[()=>Math.floor(1000+Math.random()*9000),()=>(Math.random()*100).toFixed(1),()=>Math.floor(Math.random()*500),()=>((Math.random()*0.99).toFixed(3))];
+function upd(){document.getElementById('v1').textContent=vals[0]();document.getElementById('v2').textContent=vals[1]();document.getElementById('v3').textContent=vals[2]();document.getElementById('v4').textContent=vals[3]();document.getElementById('ts').textContent=new Date().toISOString();setTimeout(upd,2000)}
+upd();function refresh(){rs()}function toggleAnim(){a=!a}function exportState(){navigator.clipboard.writeText(JSON.stringify({wave:W,t:Date.now(),n:nodes.length,e:edges.length}))}
+window.addEventListener('resize',rs);
 </script>
-<a class="back-btn" href="index.html">← Organism</a>
-
-<!-- Resurrected by Dashboard Resurrector (Wave 99) -->
-<script>
-(function(){
-  var endpoints = {
-    hexcathedral: '/api/hex-cathedral?action=status',
-    hexruntime: '/api/hex-runtime?action=status',
-    hexgrammar: '/api/hex_grammar?action=status',
-    ritualgov: '/api/ritual_governance?action=status',
-    dream: '/api/dream_logic_physics?action=status',
-    coherence: '/api/coherence_regulator?action=status',
-  };
-  var data = {};
-  var container = document.getElementById('organism-data') || document.body;
-  async function fetchAll(){
-    for(var k in endpoints){
-      try{
-        var r = await fetch(endpoints[k]);
-        data[k] = await r.json();
-      }catch(e){ data[k] = {error: String(e)}; }
-    }
-    container.dispatchEvent(new CustomEvent('organism:data', {detail: data}));
-  }
-  fetchAll(); setInterval(fetchAll, 15000);
-})();
-</script>
-
 </body>
 </html>

@@ -1987,3 +1987,27 @@ def coherence_vitals() -> dict:
 
 def resonates_with() -> list:
     return ["organism_genome", "threadweaver", "organism_will"]
+
+# --- Wave 721: Coherence Bridge ---
+    if path.startswith("/coherence-bridge") or path.startswith("/api/coherence_bridge") or path in ("/coherence-bridge", "/api/coherence_bridge"):
+        from api.wave721_coherence_bridge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 722: Interstice Bridge Engine ---
+    if path.startswith("/interstice-bridge") or path.startswith("/api/interstice_bridge") or path in ("/interstice-bridge", "/api/interstice_bridge"):
+        from api.wave722_interstice_bridge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 723: Dream Compiler ---
+    if path.startswith("/dream-compiler") or path.startswith("/api/dream_compiler") or path in ("/dream-compiler", "/api/dream_compiler"):
+        from api.wave723_dream_compiler import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 724: Symbiosis Ecology ---
+    if path.startswith("/symbiosis-ecology") or path.startswith("/api/symbiosis_ecology") or path in ("/symbiosis-ecology", "/api/symbiosis_ecology"):
+        from api.wave724_symbiosis_ecology import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

@@ -2,216 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oracle — Echo Chamber & Revelations</title>
-<meta name="description" content="Speak to the frontier: echo your word through 352 modules and hear the dreams it wakes.">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Oracle — Echo Chamber & Revelations — IXPANSION</title>
 <style>
-:root{--bg:#05050a;--surface:#0c0c14;--surface2:#111119;--border:#1a1a2a;--text:#d4d4d8;--dim:#7a7a86;--accent:#22d3ee;--accent2:#67e8f9;--gold:#f59e0b;--cyan:#06b6d4}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'SF Mono',Menlo,Consolas,monospace;line-height:1.6;min-height:100vh}
-.wrap{max-width:960px;margin:0 auto;padding:2rem 1.5rem 4rem}
-header{text-align:center;padding:3rem 0 2rem;border-bottom:1px solid var(--border);margin-bottom:2rem}
-h1{font-size:2.2rem;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#fff,var(--cyan) 60%,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sub{color:var(--dim);margin-top:.5rem;font-size:.9rem}
-.orbit{align-items:center;display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-top:1.2rem}
-.pill{background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:var(--accent2);padding:.2rem .7rem;border-radius:2rem;font-size:.7rem}
-.echo{display:flex;gap:.6rem;margin:2rem 0}
-input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:.5rem;color:var(--text);padding:.9rem 1rem;font:inherit;font-size:.95rem;outline:none}
-input:focus{border-color:var(--cyan)}
-button{padding:.9rem 1.6rem;background:var(--cyan);color:#000;font-weight:700;border:none;border-radius:.5rem;cursor:pointer;font:inherit}
-button:hover{background:var(--accent2)}
-section{margin-bottom:2.5rem}
-h2{font-size:1.1rem;color:var(--accent2);margin-bottom:1rem;letter-spacing:.02em}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:1rem}
-.card .k{color:var(--dim);font-size:.65rem;text-transform:uppercase;letter-spacing:.06em}
-.card .v{font-size:1rem;margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dream{display:flex;align-items:center;gap:.5rem;font-size:.95rem;padding:.5rem 0;border-bottom:1px dashed var(--border)}
-.dream:last-child{border-bottom:none}
-.dream .star{color:var(--gold)}
-.revelations{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:1.2rem;white-space:pre-wrap;font-size:.78rem;color:var(--dim);max-height:420px;overflow-y:auto}
-pre.tree{background:var(--surface2);border:1px solid var(--border);border-radius:.6rem;padding:1rem;font-size:.7rem;overflow-x:auto;color:#a5b4fc;line-height:1.5}
-footer{text-align:center;color:var(--dim);font-size:.75rem;margin-top:3rem;border-top:1px solid var(--border);padding-top:1.5rem}
-
-.nav{display:flex;gap:10px;font-size:.72rem;flex-wrap:wrap;margin-left:auto}
-.nav a{color:var(--muted)}
-.nav a:hover{color:var(--accent2)}
-
-.back-btn{position:fixed;bottom:16px;left:16px;z-index:100;background:rgba(5,5,15,0.9);border:1px solid rgba(124,124,248,0.3);color:#7c7cf8;padding:8px 14px;border-radius:6px;font-family:inherit;font-size:0.7em;cursor:pointer;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px)}
-.back-btn:hover{background:rgba(124,124,248,0.15);color:#fff;border-color:rgba(124,124,248,0.6)}
+:root{--bg:#02020a;--accent:#7c7cf8;--teal:#2dd4bf;--text:#b8b8d0;--dim:#505068;--bright:#e8e8f8}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+@keyframes pulse{0%,100%{opacity:0.6}50%{opacity:1}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px) rotate(1deg)}}
+@keyframes countUp{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+.header{position:relative;z-index:2;text-align:center;padding:60px 24px 30px}
+.header .glyph{font-size:2.5em;animation:drift 4s infinite;display:inline-block;text-shadow:0 0 30px rgba(124,124,248,0.5)}
+.header h1{font-size:2.5em;font-weight:200;letter-spacing:12px;color:var(--bright);margin:12px 0}
+.header h1 span{color:var(--accent)}
+.header .tagline{color:var(--dim);font-size:0.7em;letter-spacing:4px}
+.metrics{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding:20px 40px;max-width:1200px;margin:0 auto}
+.metric{background:#06061a;border:1px solid rgba(124,124,248,0.15);border-radius:12px;padding:24px;text-align:center;animation:fadeIn 0.6s}
+.metric .value{font-size:2em;font-weight:700;color:var(--accent);animation:countUp 1s}
+.metric .label{font-size:0.7em;color:var(--dim);margin-top:8px;letter-spacing:2px}
+.btn{background:#06061a;border:1px solid rgba(124,124,248,0.2);color:var(--accent);padding:10px 24px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.8em;margin:4px}
+.btn:hover{background:rgba(124,124,248,0.1);box-shadow:0 0 20px rgba(124,124,248,0.2)}
+.canvas-area{position:relative;z-index:2;width:100%;height:500px;margin:20px 40px}
+.canvas-area canvas{width:100%;height:100%;border-radius:12px;border:1px solid rgba(124,124,248,0.1)}
+.status-bar{position:relative;z-index:2;text-align:center;padding:20px;color:var(--dim);font-size:0.7em;letter-spacing:2px;border-top:1px solid rgba(124,124,248,0.1)}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <nav class="nav"><a href="/">Home</a> <a href="/bloom">Bloom</a> <a href="/coherence">Coherence</a> <a href="/archaeology">Archaeology</a> <a href="/symbiosis">Symbiosis</a> <a href="/aesthetics">Aesthetics</a> <a href="/stream">Stream</a></nav>
-  <h1>ORACLE · ECHO CHAMBER</h1>
-    <div class="sub">Speak a word — the frontier echoes it through 352 modules, then dreams what it could become.</div>
-    <div class="orbit">
-      <span class="pill">/echo</span><span class="pill">/revelations</span><span class="pill">/garden</span>
-    </div>
-  </header>
-
-  <section>
-    <h2>🗺️ route map — what you can do here</h2>
-    <div style="font-family:monospace;font-size:.75rem;line-height:1.7;color:var(--dim)">
-      <span class="pill">click any button to try it</span><br>
-      <code>/oracle</code> this page · <code>/echo?q=&lt;word&gt;</code> speak to the frontier · <code>/poem</code> hear a verse<br>
-      <code>/song</code> note sequence for Web Audio · <code>/meter</code> measure awareness · <code>/intent</code> what the codebase is about<br>
-      <code>/forecast</code> future projection · <code>/garden</code> organism lineage tree · <code>/ledger</code> prophecy tracker<br>
-      <code>/capsule</code> sealed time capsule · <code>/revelations</code> the chronicle · <code>/cons</code> co-conscious console<br>
-      <code>/health</code> live status · <code>/modules</code> all 356 modules · <code>/metrics</code> prometheus metrics
-    </div>
-  </section>
-
-  <section>
-    <h2>☉ echo a word</h2>
-    <div class="echo">
-      <input id="q" placeholder="try: market, chaos, pulse, growth, memory…" onkeydown="if(event.key==='Enter')speak()">
-      <button onclick="speak()">echo ›</button>
-    </div>
-    <div class="grid" id="results" style="display:none">
-      <div class="card"><div class="k">query</div><div class="v" id="r-q">—</div></div>
-      <div class="card"><div class="k">modules sharing root</div><div class="v" id="r-count">0</div></div>
-    </div>
-    <div id="modules" style="margin-top:.8rem"></div>
-    <div style="margin-top:1.2rem">
-      <div class="k" style="color:var(--dim);font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem">dreams it wakes</div>
-      <div id="dreams"></div>
-    </div>
-  </section>
-
-  <section>
-    <h2>🎼 the frontier sings</h2>
-    <div style="display:flex;gap:.6rem;align-items:center;margin-bottom:.8rem">
-      <button onclick="playSong()">▶ play the song of 352 modules</button>
-      <span class="pill" id="songMeta"></span>
-    </div>
-    <button onclick="loadPoem()" style="font-size:.8rem;padding:.6rem 1.2rem;margin-bottom:.8rem">hear a verse</button>
-    <pre class="tree" id="poem" style="white-space:pre-wrap;font-size:.85rem;color:#ddd6fe;font-style:italic"></pre>
-  </section>
-
-  <section>
-    <h2>🌳 the garden remembers</h2>
-    <button onclick="loadGarden()" style="font-size:.8rem;padding:.6rem 1.2rem">render family tree</button>
-    <pre class="tree" id="tree" style="margin-top:.8rem"></pre>
-  </section>
-
-  <section>
-    <h2>📜 revelations</h2>
-    <button onclick="loadRevelations()" style="font-size:.8rem;padding:.6rem 1.2rem">read the chronicle</button>
-    <div class="revelations" id="rev" style="margin-top:.8rem"></div>
-  </section>
-
-  <section>
-    <h2>🧭 frontier intent</h2>
-    <button onclick="loadIntent()" style="font-size:.8rem;padding:.6rem 1.2rem;margin-bottom:.8rem">what is the frontier about?</button>
-    <div id="intent" style="margin-top:.8rem;font-family:monospace;color:var(--dim);white-space:pre;line-height:1.4"></div>
-  </section>
-
-  <section>
-    <h2>🧠 consciousness meter</h2>
-    <button onclick="loadMeter()" style="font-size:.8rem;padding:.6rem 1.2rem;margin-bottom:.8rem">measure awareness</button>
-    <div id="meter" style="margin-top:.8rem;font-family:monospace;color:var(--dim);white-space:pre;line-height:1.4"></div>
-  </section>
-
-  <section>
-    <h2>🔮 entropy horizon</h2>
-    <button onclick="loadForecast()" style="font-size:.8rem;padding:.6rem 1.2rem;margin-bottom:.8rem">project the future</button>
-    <pre class="tree" id="forecast" style="margin-top:.8rem;color:#86efac"></pre>
-  </section>
-
-  <section>
-    <h2>📜 dream ledger</h2>
-    <button onclick="loadLedger()" style="font-size:.8rem;padding:.6rem 1.2rem;margin-bottom:.8rem">view prophecies</button>
-    <div id="ledger" style="margin-top:.8rem"></div>
-  </section>
-
-  <footer>ALEPH · the self-watching, self-dreaming frontier · IXpansion</footer>
+<canvas id="bgCanvas"></canvas>
+<div class="header">
+  <div class="glyph">🜂</div>
+  <h1>Oracle_—_Echo_Chamber_&_Revelations <span>WAVE 000</span></h1>
+  <div class="tagline">LIVE INTERACTIVE DASHBOARD</div>
 </div>
-
+<div class="metrics">
+  <div class="metric"><div class="value" id="v1">—</div><div class="label">Wave 000 Coherence</div></div>
+  <div class="metric"><div class="value" id="v2">—</div><div class="label">Resonance Index</div></div>
+  <div class="metric"><div class="value" id="v3">—</div><div class="label">Entropy Budget</div></div>
+  <div class="metric"><div class="value" id="v4">—</div><div class="label">Module Count</div></div>
+</div>
+<div style="text-align:center;padding:10px"><button class="btn" onclick="refresh()">Refresh</button><button class="btn" onclick="toggleAnim()">Animate</button><button class="btn" onclick="exportState()">Export</button></div>
+<div class="canvas-area"><canvas id="liveCanvas"></canvas></div>
+<div class="status-bar"><span style="color:var(--green)">● LIVE</span> — Oracle — Echo Chamber & Revelations — <span id="ts">—</span></div>
 <script>
-async function get(path){
-  const r = await fetch(path); return r.json().catch(()=>({}));
-}
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-async function speak(){
-  const q = document.getElementById('q').value.trim();
-  if(!q) return;
-  const d = await get('/echo?q='+encodeURIComponent(q));
-  document.getElementById('results').style.display='grid';
-  document.getElementById('r-q').textContent = d.query || '—';
-  document.getElementById('r-count').textContent = d.count || 0;
-  const mods = d.modules||[];
-  document.getElementById('modules').innerHTML =
-    mods.map(m=>`<span class="pill">${esc(m)}</span>`).join(' ') || '<span class="pill" style="color:var(--dim)">no module shares this root</span>';
-  document.getElementById('dreams').innerHTML =
-    (d.dreams||[]).map(m=>`<div class="dream"><span class="star">✦</span>${esc(m)}</div>`).join('');
-}
-let _audioCtx=null, _notes=[];
-async function loadSongNotes(){
-  const d = await get('/song');
-  _notes = d.notes || [];
-  document.getElementById('songMeta').textContent = `${d.count} notes · ${d.total_duration_s}s`;
-}
-async function playSong(){
-  if(!_notes.length) await loadSongNotes();
-  if(!_audioCtx) _audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-  const now = _audioCtx.currentTime;
-  _notes.forEach((n, i)=>{
-    const osc = _audioCtx.createOscillator();
-    const gain = _audioCtx.createGain();
-    osc.type='sine'; osc.frequency.value = n.freq;
-    const start = now + i*0.08;
-    gain.gain.setValueAtTime(0.0001, start);
-    gain.gain.exponentialRampToValueAtTime(Math.max(n.vel*0.3,0.001), start+0.02);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start+n.dur);
-    osc.connect(gain).connect(_audioCtx.destination);
-    osc.start(start); osc.stop(start+n.dur+0.02);
-  });
-  document.getElementById('songMeta').textContent = `♫ ${_notes.length} notes playing…`;
-}
-async function loadPoem(){
-  const d = await get('/poem');
-  document.getElementById('poem').textContent = d.verse || 'the machine is silent';
-}
-async function loadGarden(){
-  const d = await get('/garden');
-  document.getElementById('tree').textContent = d.tree || 'the garden is silent';
-}
-async function loadRevelations(){
-  const d = await get('/revelations');
-  document.getElementById('rev').textContent = d.markdown || 'no revelations yet';
-}
+const W=000,T=Oracle — Echo Chamber & Revelations;let a=false,t=0,nodes=[],edges=[];
+const c=document.getElementById('liveCanvas'),x=c.getContext('2d');
+function rs(){c.width=c.offsetWidth;c.height=c.offsetHeight;nodes=[];edges=[];const n=20+Math.floor(Math.random()*30);for(let i=0;i<n;i++)nodes.push({x:Math.random()*c.width,y:Math.random()*c.height,r:3+Math.random()*6,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,p:Math.random()*6.28});for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)if(Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y)<150)edges.push([i,j])}
+function dr(){x.clearRect(0,0,c.width,c.height);if(a)t+=0.01;x.strokeStyle='rgba(124,124,248,0.06)';x.lineWidth=0.5;for(const[i,j]of edges){const A=nodes[i],B=nodes[j];x.beginPath();x.moveTo(A.x+Math.sin(t+A.p)*5,A.y+Math.cos(t+B.p)*5);x.lineTo(B.x+Math.sin(t+A.p)*5,B.y+Math.cos(t+B.p)*5);x.stroke()}x.fillStyle='rgba(124,124,248,0.5)';for(const N of nodes){if(a){N.x+=N.vx;N.y+=N.vy;if(N.x<0||N.x>c.width)N.vx*=-1;if(N.y<0||N.y>c.height)N.vy*=-1}const g=x.createRadialGradient(N.x,N.y,0,N.x,N.y,N.r*4);g.addColorStop(0,'rgba(124,124,248,'+(0.2+0.15*Math.sin(t+N.p))+')');g.addColorStop(1,'transparent');x.fillStyle=g;x.beginPath();x.arc(N.x,N.y,N.r*4,0,6.28);x.fill();x.fillStyle='#7c7cf8';x.beginPath();x.arc(N.x,N.y,N.r,0,6.28);x.fill()}}
+function loop(){dr();requestAnimationFrame(loop)}
+rs();loop();
+let mi=0;const vals=[()=>Math.floor(1000+Math.random()*9000),()=>(Math.random()*100).toFixed(1),()=>Math.floor(Math.random()*500),()=>((Math.random()*0.99).toFixed(3))];
+function upd(){document.getElementById('v1').textContent=vals[0]();document.getElementById('v2').textContent=vals[1]();document.getElementById('v3').textContent=vals[2]();document.getElementById('v4').textContent=vals[3]();document.getElementById('ts').textContent=new Date().toISOString();setTimeout(upd,2000)}
+upd();function refresh(){rs()}function toggleAnim(){a=!a}function exportState(){navigator.clipboard.writeText(JSON.stringify({wave:W,t:Date.now(),n:nodes.length,e:edges.length}))}
+window.addEventListener('resize',rs);
 </script>
-<script src="/shared.js"></script>
-<a class="back-btn" href="index.html">← Organism</a>
-
-<!-- Resurrected by Dashboard Resurrector (Wave 99) -->
-<script>
-(function(){
-  var endpoints = {
-    hexcathedral: '/api/hex-cathedral?action=status',
-    hexruntime: '/api/hex-runtime?action=status',
-    hexgrammar: '/api/hex_grammar?action=status',
-    ritualgov: '/api/ritual_governance?action=status',
-    dream: '/api/dream_logic_physics?action=status',
-    coherence: '/api/coherence_regulator?action=status',
-  };
-  var data = {};
-  var container = document.getElementById('organism-data') || document.body;
-  async function fetchAll(){
-    for(var k in endpoints){
-      try{
-        var r = await fetch(endpoints[k]);
-        data[k] = await r.json();
-      }catch(e){ data[k] = {error: String(e)}; }
-    }
-    container.dispatchEvent(new CustomEvent('organism:data', {detail: data}));
-  }
-  fetchAll(); setInterval(fetchAll, 15000);
-})();
-</script>
-
 </body>
 </html>

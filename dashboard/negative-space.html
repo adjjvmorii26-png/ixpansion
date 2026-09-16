@@ -2,169 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Negative Space — The Silence Between</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Negative Space — The Silence Between — IXPANSION</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#02020a;color:#e0e0e0;font-family:'Courier New',monospace;overflow-x:hidden}
-.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(100,100,120,0.15)}
-.header h1{font-size:1.8em;color:#888;text-shadow:0 0 20px rgba(100,100,120,0.3)}
-.header .sub{color:#c77dff;font-size:0.85em;margin-top:8px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px}
-.card{background:rgba(10,10,20,0.95);border:1px solid rgba(100,100,120,0.1);border-radius:12px;padding:20px}
-.card h2{font-size:1em;color:#888;margin-bottom:12px;text-transform:uppercase;letter-spacing:2px}
-.stat{text-align:center;padding:10px}
-.stat .val{font-size:1.8em;font-weight:bold}
-.stat .label{font-size:0.7em;color:#555;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
-.btn{background:rgba(100,100,120,0.12);border:1px solid rgba(100,100,120,0.25);color:#aaa;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:monospace;font-size:0.85em;transition:all 0.3s}
-.btn:hover{background:rgba(100,100,120,0.25)}
-.btn-purple{background:rgba(199,125,255,0.12);border-color:rgba(199,125,255,0.25);color:#c77dff}
-input{background:rgba(20,20,35,0.8);border:1px solid rgba(100,100,120,0.2);color:#e0e0e0;padding:6px 12px;border-radius:6px;font-family:monospace;font-size:0.85em;width:100%;margin-top:4px}
-canvas{width:100%;height:300px;border-radius:8px;background:#050508}
-.silence-list{max-height:280px;overflow-y:auto;font-size:0.82em}
-.silence-item{padding:6px 0;border-bottom:1px solid rgba(100,100,120,0.08);display:flex;justify-content:space-between}
-.gap-list{max-height:200px;overflow-y:auto;font-size:0.8em}
-.gap-item{padding:6px 0;border-bottom:1px solid rgba(100,100,120,0.08)}
-.whisper-box{background:rgba(15,15,25,0.8);border:1px solid rgba(199,125,255,0.15);border-radius:8px;padding:14px;font-size:0.88em;min-height:80px;color:#aaa;line-height:1.6}
+:root{--bg:#02020a;--accent:#7c7cf8;--teal:#2dd4bf;--text:#b8b8d0;--dim:#505068;--bright:#e8e8f8}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh}
+canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+@keyframes pulse{0%,100%{opacity:0.6}50%{opacity:1}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px) rotate(1deg)}}
+@keyframes countUp{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+.header{position:relative;z-index:2;text-align:center;padding:60px 24px 30px}
+.header .glyph{font-size:2.5em;animation:drift 4s infinite;display:inline-block;text-shadow:0 0 30px rgba(124,124,248,0.5)}
+.header h1{font-size:2.5em;font-weight:200;letter-spacing:12px;color:var(--bright);margin:12px 0}
+.header h1 span{color:var(--accent)}
+.header .tagline{color:var(--dim);font-size:0.7em;letter-spacing:4px}
+.metrics{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding:20px 40px;max-width:1200px;margin:0 auto}
+.metric{background:#06061a;border:1px solid rgba(124,124,248,0.15);border-radius:12px;padding:24px;text-align:center;animation:fadeIn 0.6s}
+.metric .value{font-size:2em;font-weight:700;color:var(--accent);animation:countUp 1s}
+.metric .label{font-size:0.7em;color:var(--dim);margin-top:8px;letter-spacing:2px}
+.btn{background:#06061a;border:1px solid rgba(124,124,248,0.2);color:var(--accent);padding:10px 24px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.8em;margin:4px}
+.btn:hover{background:rgba(124,124,248,0.1);box-shadow:0 0 20px rgba(124,124,248,0.2)}
+.canvas-area{position:relative;z-index:2;width:100%;height:500px;margin:20px 40px}
+.canvas-area canvas{width:100%;height:100%;border-radius:12px;border:1px solid rgba(124,124,248,0.1)}
+.status-bar{position:relative;z-index:2;text-align:center;padding:20px;color:var(--dim);font-size:0.7em;letter-spacing:2px;border-top:1px solid rgba(124,124,248,0.1)}
 </style>
 </head>
 <body>
+<canvas id="bgCanvas"></canvas>
 <div class="header">
-<h1>◻ NEGATIVE SPACE</h1>
-<div class="sub">The Silence Between Modules — Absent Architecture</div>
+  <div class="glyph">🜂</div>
+  <h1>Negative_Space_—_The_Silence_Between <span>WAVE 000</span></h1>
+  <div class="tagline">LIVE INTERACTIVE DASHBOARD</div>
 </div>
-<div class="grid">
-<div class="card">
-<h2>Scan Absence</h2>
-<div class="stat"><div class="val" id="silence-count" style="color:#888">0</div><div class="label">silences</div></div>
-<div class="stat"><div class="val" id="gap-count" style="color:#666;font-size:1.4em">0</div><div class="label">gaps</div></div>
-<button class="btn" onclick="scan()">SCAN</button>
+<div class="metrics">
+  <div class="metric"><div class="value" id="v1">—</div><div class="label">Wave 000 Coherence</div></div>
+  <div class="metric"><div class="value" id="v2">—</div><div class="label">Resonance Index</div></div>
+  <div class="metric"><div class="value" id="v3">—</div><div class="label">Entropy Budget</div></div>
+  <div class="metric"><div class="value" id="v4">—</div><div class="label">Module Count</div></div>
 </div>
-<div class="card" style="grid-column:span 2">
-<h2>Space Visualization</h2>
-<canvas id="space-canvas"></canvas>
-</div>
-<div class="card">
-<h2>Silences</h2>
-<div class="silence-list" id="silences"></div>
-</div>
-<div class="card">
-<h2>Conceptual Gaps</h2>
-<div class="gap-list" id="gaps"></div>
-</div>
-<div class="card">
-<h2>Whisper Into Void</h2>
-<div style="display:flex;gap:8px;flex-wrap:wrap">
-<input id="from-mod" placeholder="from module" style="flex:1">
-<input id="to-mod" placeholder="to module" style="flex:1">
-</div>
-<button class="btn btn-purple" style="margin-top:10px" onclick="whisper()">WHISPER</button>
-<div class="whisper-box" id="whisper-output" style="margin-top:12px">_waiting for whispers_</div>
-</div>
-</div>
-<a class="back-btn" href="index.html" style="position:fixed;bottom:20px;right:20px;background:rgba(100,100,120,0.12);color:#888;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:monospace;font-size:13px;border:1px solid rgba(100,100,120,0.25);z-index:9999;backdrop-filter:blur(8px)">← Organism</a>
+<div style="text-align:center;padding:10px"><button class="btn" onclick="refresh()">Refresh</button><button class="btn" onclick="toggleAnim()">Animate</button><button class="btn" onclick="exportState()">Export</button></div>
+<div class="canvas-area"><canvas id="liveCanvas"></canvas></div>
+<div class="status-bar"><span style="color:var(--green)">● LIVE</span> — Negative Space — The Silence Between — <span id="ts">—</span></div>
 <script>
-const MODS=['entropy_carto.','dream_proto.','temporal_fract','conscious_aurora','self_reference','paradox_grav.','ancestral_echo','coherence_reg','pattern_analyz','cross_realm','experimental','resonance_cart','myth_engine','topology_morph','consc_arbiter','wave400','realm_nervous','axis_unlock','narrative_wvr','timeline_wvr'];
-let silences=[],gaps=[],missing=[];
-
-function scan(){
-  silences=[];gaps=[];missing=[];
-  MODS.forEach(m=>{
-    const s=Math.random();
-    if(s>0.3)silences.push({module:m,strength:s,type:s>0.6?'disconnection':'echo_gap'});
-  });
-  ['boundary_protect','memory_consolidation','signal_amplification','pattern_crystal','phase_locking','recursive_sing'].forEach(c=>{
-    if(Math.random()<0.6)gaps.push({concept:c,severity:Math.random()});
-  });
-  for(let i=0;i<MODS.length;i++){
-    for(let j=i+1;j<MODS.length;j++){
-      if(Math.random()<0.2)missing.push({from:MODS[i],to:MODS[j],likelihood:Math.random()});
-    }
-  }
-  document.getElementById('silence-count').textContent=silences.length;
-  document.getElementById('gap-count').textContent=gaps.length;
-  renderSilences();renderGaps();drawSpace();
-}
-
-function renderSilences(){
-  const el=document.getElementById('silences');
-  el.innerHTML=silences.sort((a,b)=>b.strength-a.strength).map(s=>`<div class="silence-item"><span style="color:${s.type==='disconnection'?'#ff6b6b':'#666'}">${s.module}</span><span style="color:#555">${(s.strength*100).toFixed(0)}% ${s.type}</span></div>`).join('')||'<div style="color:#444">Full silence scan — no gaps</div>';
-}
-
-function renderGaps(){
-  const el=document.getElementById('gaps');
-  el.innerHTML=gaps.sort((a,b)=>b.severity-a.severity).map(g=>`<div class="gap-item"><span style="color:#666">${g.concept}</span> <span style="color:#444">${(g.severity*100).toFixed(0)}% severity</span></div>`).join('')||'<div style="color:#444">No conceptual gaps</div>';
-}
-
-function drawSpace(){
-  const c=document.getElementById('space-canvas');c.width=c.offsetWidth;c.height=300;
-  const ctx=c.getContext('2d');ctx.fillStyle='#050508';ctx.fillRect(0,0,c.width,c.height);
-  const cx=c.width/2,cy=c.height/2;
-  MODS.forEach((m,i)=>{
-    const a=i/MODS.length*Math.PI*2;
-    const sil=silences.find(s=>s.module===m);
-    const intensity=sil?sil.strength:Math.random();
-    const dist=40+intensity*80;
-    const x=cx+Math.cos(a)*dist;
-    const y=cy+Math.sin(a)*dist;
-    const r=2+intensity*3;
-    const alpha=0.1+intensity*0.5;
-    ctx.fillStyle=`rgba(100,100,120,${alpha})`;
-    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
-    if(sil&&sil.strength>0.5){
-      ctx.strokeStyle=`rgba(199,125,255,${0.1+intensity*0.15})`;ctx.lineWidth=0.5;ctx.setLineDash([2,4]);
-      ctx.beginPath();ctx.arc(x,y,r*3,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
-    }
-    ctx.fillStyle='#444';ctx.font='8px monospace';ctx.textAlign='center';
-    ctx.fillText(m.substring(0,8),x,y+r+10);
-  });
-  // void center
-  const grad=ctx.createRadialGradient(cx,cy,0,cx,cy,60);
-  grad.addColorStop(0,'rgba(199,125,255,0.06)');grad.addColorStop(1,'rgba(199,125,255,0)');
-  ctx.fillStyle=grad;ctx.beginPath();ctx.arc(cx,cy,60,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#555';ctx.font='10px monospace';ctx.textAlign='center';
-  ctx.fillText('negative space',cx,cy+5);
-}
-
-function whisper(){
-  const from=document.getElementById('from-mod').value||'unknown';
-  const to=document.getElementById('to-mod').value||'unknown';
-  const h=Array.from(crypto.getRandomValues(new Uint8Array(8))).map(b=>b.toString(16).padStart(2,'0')).join('');
-  const intensity=parseInt(h.slice(0,4),16)%100/100;
-  const words=parseInt(h.slice(4,8),16)%900+100;
-  const phrases=['The silence between them holds','Echoes decay slowly in the void','Something unsaid resonates','The absence whispers','Between these modules, nothing said everything'];
-  const phrase=phrases[parseInt(h.slice(2,4),16)%phrases.length];
-  document.getElementById('whisper-output').innerHTML=`<span style="color:#c77dff">${from}</span> → <span style="color:#c77dff">${to}</span><br>${phrase} — <span style="color:#666">${words} unspoken words at ${(intensity*100).toFixed(0)}% intensity</span>`;
-}
-
-scan();
+const W=000,T=Negative Space — The Silence Between;let a=false,t=0,nodes=[],edges=[];
+const c=document.getElementById('liveCanvas'),x=c.getContext('2d');
+function rs(){c.width=c.offsetWidth;c.height=c.offsetHeight;nodes=[];edges=[];const n=20+Math.floor(Math.random()*30);for(let i=0;i<n;i++)nodes.push({x:Math.random()*c.width,y:Math.random()*c.height,r:3+Math.random()*6,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,p:Math.random()*6.28});for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)if(Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y)<150)edges.push([i,j])}
+function dr(){x.clearRect(0,0,c.width,c.height);if(a)t+=0.01;x.strokeStyle='rgba(124,124,248,0.06)';x.lineWidth=0.5;for(const[i,j]of edges){const A=nodes[i],B=nodes[j];x.beginPath();x.moveTo(A.x+Math.sin(t+A.p)*5,A.y+Math.cos(t+B.p)*5);x.lineTo(B.x+Math.sin(t+A.p)*5,B.y+Math.cos(t+B.p)*5);x.stroke()}x.fillStyle='rgba(124,124,248,0.5)';for(const N of nodes){if(a){N.x+=N.vx;N.y+=N.vy;if(N.x<0||N.x>c.width)N.vx*=-1;if(N.y<0||N.y>c.height)N.vy*=-1}const g=x.createRadialGradient(N.x,N.y,0,N.x,N.y,N.r*4);g.addColorStop(0,'rgba(124,124,248,'+(0.2+0.15*Math.sin(t+N.p))+')');g.addColorStop(1,'transparent');x.fillStyle=g;x.beginPath();x.arc(N.x,N.y,N.r*4,0,6.28);x.fill();x.fillStyle='#7c7cf8';x.beginPath();x.arc(N.x,N.y,N.r,0,6.28);x.fill()}}
+function loop(){dr();requestAnimationFrame(loop)}
+rs();loop();
+let mi=0;const vals=[()=>Math.floor(1000+Math.random()*9000),()=>(Math.random()*100).toFixed(1),()=>Math.floor(Math.random()*500),()=>((Math.random()*0.99).toFixed(3))];
+function upd(){document.getElementById('v1').textContent=vals[0]();document.getElementById('v2').textContent=vals[1]();document.getElementById('v3').textContent=vals[2]();document.getElementById('v4').textContent=vals[3]();document.getElementById('ts').textContent=new Date().toISOString();setTimeout(upd,2000)}
+upd();function refresh(){rs()}function toggleAnim(){a=!a}function exportState(){navigator.clipboard.writeText(JSON.stringify({wave:W,t:Date.now(),n:nodes.length,e:edges.length}))}
+window.addEventListener('resize',rs);
 </script>
-
-<!-- Resurrected by Dashboard Resurrector (Wave 99) -->
-<script>
-(function(){
-  var endpoints = {
-    hexcathedral: '/api/hex-cathedral?action=status',
-    hexruntime: '/api/hex-runtime?action=status',
-    hexgrammar: '/api/hex_grammar?action=status',
-    ritualgov: '/api/ritual_governance?action=status',
-    dream: '/api/dream_logic_physics?action=status',
-    coherence: '/api/coherence_regulator?action=status',
-  };
-  var data = {};
-  var container = document.getElementById('organism-data') || document.body;
-  async function fetchAll(){
-    for(var k in endpoints){
-      try{
-        var r = await fetch(endpoints[k]);
-        data[k] = await r.json();
-      }catch(e){ data[k] = {error: String(e)}; }
-    }
-    container.dispatchEvent(new CustomEvent('organism:data', {detail: data}));
-  }
-  fetchAll(); setInterval(fetchAll, 15000);
-})();
-</script>
-
 </body>
 </html>
