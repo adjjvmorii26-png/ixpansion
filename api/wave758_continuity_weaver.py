@@ -105,8 +105,10 @@ def coherence_vitals() -> dict:
     state = _load()
     threads = state.get("threads", [])
     avg = sum(t.get("strength", 0) for t in threads) / max(len(threads), 1)
+    health_value = min(1.0, 0.55 + 0.35 * avg)
     return {"wave": WAVE, "name": NAME, "layer": "organ", "status": "active",
-            "resonance": round(avg, 3), "threads": len(threads)}
+            "resonance": round(avg, 3), "threads": len(threads),
+            "module_health": {"value": round(health_value, 4), "setpoint": 0.8, "weight": 1.0}}
 
 
 def resonates_with() -> list:

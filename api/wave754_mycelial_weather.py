@@ -136,7 +136,8 @@ def handler(req: dict) -> dict:
 def coherence_vitals() -> dict:
     state = _load()
     return {"wave": WAVE, "name": NAME, "layer": "organ", "status": "active",
-            "resonance": 0.61, "forecasts": len(state.get("forecasts", []))}
+            "resonance": 0.61, "forecasts": len(state.get("forecasts", [])),
+            "module_health": {"value": 0.78, "setpoint": 0.75, "weight": 1.0}}
 
 
 def resonates_with() -> list:

@@ -1,3 +1,18 @@
+## [4.121.0] — 2026-09-16
+
+### Added
+- **Wave 765 season_engine**: the organism learns to season — deterministic climate cycles (SPRING → SUMMER → AUTUMN → WINTER) that tune mutation pressure, birth bonus, growth ceiling, and resonance boost across the whole ecosystem. Seasons advance from wave count. Actions: status, advance, forecast, tuning, harvest.
+
+### Fixed
+- **CI green**: resonance graph iterative DFS (prevented RecursionError on 1100+ nodes)
+- **CI green**: dual-API coherence_regulator shim bridging legacy class-based + module-level APIs
+- **CI green**: recursive genesis DOTALL regex for multi-line CONCEPT_NUCLEI + new-nucleus birth support
+- **Deprecated**: migrated `datetime.utcnow()` → timezone-aware `datetime.now(UTC)` across 6 modules
+- **Vitals**: added `module_health` to dream_interpreter, resonance_graph, continuity_weaver, mycelial_weather
+
+### Changed
+- WordPress integration: sitemap.xml (245 URLs), WXR 1.2 export (19 categories), pages index
+
 ## [4.120.0] — 2026-09-16
 
 ### Added
