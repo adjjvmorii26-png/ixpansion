@@ -2,1386 +2,6 @@
   "pulses": [
     {
       "action": "pulse",
-      "phase": "hold",
-      "remaining_seconds": 0.5,
-      "next_phase": "exhale",
-      "phase_color": "obsidian",
-      "instruction": "process \u2014 run internal computation, no external writes",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6187,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.637,
-        "exhale": 0.531,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25fb",
-      "timestamp": 1788992579.50851
-    },
-    {
-      "action": "pulse",
-      "phase": "rest",
-      "remaining_seconds": 0.4,
-      "next_phase": "inhale",
-      "phase_color": "void",
-      "instruction": "cooldown \u2014 allow garbage collection, log summary, rest",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6155,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.53,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u00b7",
-      "timestamp": 1788992543.5931473
-    },
-    {
-      "action": "pulse",
-      "phase": "inhale",
-      "remaining_seconds": 6.9,
-      "next_phase": "hold",
-      "phase_color": "venom",
-      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6139,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.529,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25c9",
-      "timestamp": 1788992521.1341183
-    },
-    {
-      "action": "pulse",
-      "phase": "inhale",
-      "remaining_seconds": 5.6,
-      "next_phase": "hold",
-      "phase_color": "venom",
-      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6155,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.53,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25c9",
-      "timestamp": 1788992498.3596315
-    },
-    {
-      "action": "pulse",
-      "phase": "rest",
-      "remaining_seconds": 2.7,
-      "next_phase": "inhale",
-      "phase_color": "void",
-      "instruction": "cooldown \u2014 allow garbage collection, log summary, rest",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6171,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.637,
-        "exhale": 0.53,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u00b7",
-      "timestamp": 1788992469.3188698
-    },
-    {
-      "action": "pulse",
-      "phase": "inhale",
-      "remaining_seconds": 7.8,
-      "next_phase": "hold",
-      "phase_color": "venom",
-      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6139,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.529,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25c9",
-      "timestamp": 1788992448.1747427
-    },
-    {
-      "action": "pulse",
-      "phase": "inhale",
-      "remaining_seconds": 4.9,
-      "next_phase": "hold",
-      "phase_color": "venom",
-      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6139,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.529,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25c9",
-      "timestamp": 1788992427.12639
-    },
-    {
-      "action": "pulse",
-      "phase": "exhale",
-      "remaining_seconds": 7.6,
-      "next_phase": "rest",
-      "phase_color": "constellation",
-      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6155,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.53,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25ce",
-      "timestamp": 1788992412.4297245
-    },
-    {
-      "action": "pulse",
-      "phase": "exhale",
-      "remaining_seconds": 6.2,
-      "next_phase": "rest",
-      "phase_color": "constellation",
-      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6155,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.53,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25ce",
-      "timestamp": 1788992389.8430545
-    },
-    {
-      "action": "pulse",
-      "phase": "rest",
-      "remaining_seconds": 2.3,
-      "next_phase": "inhale",
-      "phase_color": "void",
-      "instruction": "cooldown \u2014 allow garbage collection, log summary, rest",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6155,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.53,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u00b7",
-      "timestamp": 1788992373.7262359
-    },
-    {
-      "action": "pulse",
-      "phase": "inhale",
-      "remaining_seconds": 1.8,
-      "next_phase": "hold",
-      "phase_color": "venom",
-      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6155,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.53,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25c9",
-      "timestamp": 1788992358.242781
-    },
-    {
-      "action": "pulse",
-      "phase": "inhale",
-      "remaining_seconds": 4.1,
-      "next_phase": "hold",
-      "phase_color": "venom",
-      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6139,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.529,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25c9",
-      "timestamp": 1788992331.9156868
-    },
-    {
-      "action": "pulse",
-      "phase": "exhale",
-      "remaining_seconds": 7.5,
-      "next_phase": "rest",
-      "phase_color": "constellation",
-      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6171,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.637,
-        "exhale": 0.53,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25ce",
-      "timestamp": 1788992316.4512477
-    },
-    {
-      "action": "pulse",
-      "phase": "exhale",
-      "remaining_seconds": 0.1,
-      "next_phase": "rest",
-      "phase_color": "constellation",
-      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6171,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.637,
-        "exhale": 0.53,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25ce",
-      "timestamp": 1788992299.8814514
-    },
-    {
-      "action": "pulse",
-      "phase": "rest",
-      "remaining_seconds": 1.7,
-      "next_phase": "inhale",
-      "phase_color": "void",
-      "instruction": "cooldown \u2014 allow garbage collection, log summary, rest",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6155,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.53,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u00b7",
-      "timestamp": 1788992278.334644
-    },
-    {
-      "action": "pulse",
-      "phase": "exhale",
-      "remaining_seconds": 0.6,
-      "next_phase": "rest",
-      "phase_color": "constellation",
-      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6138,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.529,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25ce",
-      "timestamp": 1788992251.4171884
-    },
-    {
-      "action": "pulse",
-      "phase": "exhale",
-      "remaining_seconds": 4.4,
-      "next_phase": "rest",
-      "phase_color": "constellation",
-      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6155,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.53,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25ce",
-      "timestamp": 1788992223.5792239
-    },
-    {
-      "action": "pulse",
-      "phase": "inhale",
-      "remaining_seconds": 3.7,
-      "next_phase": "hold",
-      "phase_color": "venom",
-      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6138,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.529,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25c9",
-      "timestamp": 1788992188.322381
-    },
-    {
-      "action": "pulse",
-      "phase": "inhale",
-      "remaining_seconds": 1.2,
-      "next_phase": "hold",
-      "phase_color": "venom",
-      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6122,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.639,
-        "exhale": 0.528,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25c9",
-      "timestamp": 1788992166.7870967
-    },
-    {
-      "action": "pulse",
-      "phase": "exhale",
-      "remaining_seconds": 5.7,
-      "next_phase": "rest",
-      "phase_color": "constellation",
-      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
-      "cycle_duration_sec": 24,
-      "organism_vitals": {
-        "total_active": 839,
-        "total_scanned": 876,
-        "global_coherence": 1.0099,
-        "global_resonance": 0.6138,
-        "global_pressure": 0.3295,
-        "synchronization": 0.7463,
-        "total_energy_bytes": 4252896,
-        "energy_terabytes": 4e-06
-      },
-      "phase_scores": {
-        "inhale": 0.852,
-        "hold": 0.638,
-        "exhale": 0.529,
-        "rest": 0.701
-      },
-      "top_synced": [
-        {
-          "name": "organism_autobiography",
-          "vitals_count": 3
-        },
-        {
-          "name": "semantic_bridge_forge",
-          "vitals_count": 3
-        },
-        {
-          "name": "debris_field_mapper",
-          "vitals_count": 7
-        },
-        {
-          "name": "chronicle_oracle",
-          "vitals_count": 2
-        },
-        {
-          "name": "resonance_amplifier_v2",
-          "vitals_count": 2
-        },
-        {
-          "name": "execution_stack",
-          "vitals_count": 7
-        },
-        {
-          "name": "meta_wave",
-          "vitals_count": 5
-        },
-        {
-          "name": "sovereignty_assembly",
-          "vitals_count": 5
-        },
-        {
-          "name": "harmonic_identity",
-          "vitals_count": 4
-        },
-        {
-          "name": "biofeedback_weave",
-          "vitals_count": 3
-        }
-      ],
-      "breath_symbol": "\u25ce",
-      "timestamp": 1788992150.3200374
-    },
-    {
-      "action": "pulse",
       "phase": "rest",
       "remaining_seconds": 2.6,
       "next_phase": "inhale",
@@ -13799,6 +12419,1386 @@
       ],
       "breath_symbol": "\u25c9",
       "timestamp": 1789581701.3808236
+    },
+    {
+      "action": "pulse",
+      "phase": "rest",
+      "remaining_seconds": 2.9,
+      "next_phase": "inhale",
+      "phase_color": "void",
+      "instruction": "cooldown \u2014 allow garbage collection, log summary, rest",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.606,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.503,
+        "exhale": 0.499,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u2026",
+      "timestamp": 1789581501.1314878
+    },
+    {
+      "action": "pulse",
+      "phase": "exhale",
+      "remaining_seconds": 2.2,
+      "next_phase": "rest",
+      "phase_color": "constellation",
+      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6075,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.503,
+        "exhale": 0.5,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25ce",
+      "timestamp": 1789580201.819219
+    },
+    {
+      "action": "pulse",
+      "phase": "rest",
+      "remaining_seconds": 0.6,
+      "next_phase": "inhale",
+      "phase_color": "void",
+      "instruction": "cooldown \u2014 allow garbage collection, log summary, rest",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6035,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.504,
+        "exhale": 0.498,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u2026",
+      "timestamp": 1789581479.430965
+    },
+    {
+      "action": "pulse",
+      "phase": "exhale",
+      "remaining_seconds": 4.8,
+      "next_phase": "rest",
+      "phase_color": "constellation",
+      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6075,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.503,
+        "exhale": 0.5,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25ce",
+      "timestamp": 1789580175.173996
+    },
+    {
+      "action": "pulse",
+      "phase": "rest",
+      "remaining_seconds": 1.6,
+      "next_phase": "inhale",
+      "phase_color": "void",
+      "instruction": "cooldown \u2014 allow garbage collection, log summary, rest",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6023,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.504,
+        "exhale": 0.497,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u2026",
+      "timestamp": 1789581454.4300344
+    },
+    {
+      "action": "pulse",
+      "phase": "inhale",
+      "remaining_seconds": 1.5,
+      "next_phase": "hold",
+      "phase_color": "venom",
+      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6063,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.503,
+        "exhale": 0.499,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25c9",
+      "timestamp": 1789580142.4590185
+    },
+    {
+      "action": "pulse",
+      "phase": "inhale",
+      "remaining_seconds": 7.2,
+      "next_phase": "hold",
+      "phase_color": "venom",
+      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6035,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.504,
+        "exhale": 0.498,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25c9",
+      "timestamp": 1789581432.751319
+    },
+    {
+      "action": "pulse",
+      "phase": "hold",
+      "remaining_seconds": 2.3,
+      "next_phase": "exhale",
+      "phase_color": "obsidian",
+      "instruction": "process \u2014 run internal computation, no external writes",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6075,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.503,
+        "exhale": 0.5,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25fb",
+      "timestamp": 1789580121.7355473
+    },
+    {
+      "action": "pulse",
+      "phase": "exhale",
+      "remaining_seconds": 1.1,
+      "next_phase": "rest",
+      "phase_color": "constellation",
+      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6035,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.504,
+        "exhale": 0.498,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25ce",
+      "timestamp": 1789581402.8991315
+    },
+    {
+      "action": "pulse",
+      "phase": "exhale",
+      "remaining_seconds": 6.8,
+      "next_phase": "rest",
+      "phase_color": "constellation",
+      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6088,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.502,
+        "exhale": 0.5,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25ce",
+      "timestamp": 1789580101.2474988
+    },
+    {
+      "action": "pulse",
+      "phase": "exhale",
+      "remaining_seconds": 5.0,
+      "next_phase": "rest",
+      "phase_color": "constellation",
+      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6023,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.504,
+        "exhale": 0.497,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25ce",
+      "timestamp": 1789581374.9988933
+    },
+    {
+      "action": "pulse",
+      "phase": "exhale",
+      "remaining_seconds": 4.9,
+      "next_phase": "rest",
+      "phase_color": "constellation",
+      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6088,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.502,
+        "exhale": 0.5,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25ce",
+      "timestamp": 1789580079.0978014
+    },
+    {
+      "action": "pulse",
+      "phase": "exhale",
+      "remaining_seconds": 1.4,
+      "next_phase": "rest",
+      "phase_color": "constellation",
+      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6036,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.504,
+        "exhale": 0.498,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25ce",
+      "timestamp": 1789581354.574781
+    },
+    {
+      "action": "pulse",
+      "phase": "exhale",
+      "remaining_seconds": 2.0,
+      "next_phase": "rest",
+      "phase_color": "constellation",
+      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6063,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.503,
+        "exhale": 0.499,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25ce",
+      "timestamp": 1789580057.9676626
+    },
+    {
+      "action": "pulse",
+      "phase": "exhale",
+      "remaining_seconds": 4.7,
+      "next_phase": "rest",
+      "phase_color": "constellation",
+      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6048,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.504,
+        "exhale": 0.498,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25ce",
+      "timestamp": 1789581327.2596853
+    },
+    {
+      "action": "pulse",
+      "phase": "rest",
+      "remaining_seconds": 3.2,
+      "next_phase": "inhale",
+      "phase_color": "void",
+      "instruction": "cooldown \u2014 allow garbage collection, log summary, rest",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6075,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.503,
+        "exhale": 0.5,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u2026",
+      "timestamp": 1789580036.7508395
+    },
+    {
+      "action": "pulse",
+      "phase": "exhale",
+      "remaining_seconds": 1.4,
+      "next_phase": "rest",
+      "phase_color": "constellation",
+      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6023,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.504,
+        "exhale": 0.497,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25ce",
+      "timestamp": 1789581306.5614898
+    },
+    {
+      "action": "pulse",
+      "phase": "inhale",
+      "remaining_seconds": 7.8,
+      "next_phase": "hold",
+      "phase_color": "venom",
+      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6075,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.503,
+        "exhale": 0.5,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25c9",
+      "timestamp": 1789580016.2153256
+    },
+    {
+      "action": "pulse",
+      "phase": "exhale",
+      "remaining_seconds": 2.5,
+      "next_phase": "rest",
+      "phase_color": "constellation",
+      "instruction": "release \u2014 emit outputs, update dashboards, send signals",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6036,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.504,
+        "exhale": 0.498,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25ce",
+      "timestamp": 1789581281.511335
+    },
+    {
+      "action": "pulse",
+      "phase": "inhale",
+      "remaining_seconds": 4.4,
+      "next_phase": "hold",
+      "phase_color": "venom",
+      "instruction": "gather state \u2014 read all coherence_vitals, accumulate awareness",
+      "cycle_duration_sec": 24,
+      "organism_vitals": {
+        "total_active": 1141,
+        "total_scanned": 1146,
+        "global_coherence": 0.8452,
+        "global_resonance": 0.6063,
+        "global_pressure": 0.2228,
+        "synchronization": 0.5502,
+        "total_energy_bytes": 5546612,
+        "energy_terabytes": 6e-06
+      },
+      "phase_scores": {
+        "inhale": 0.668,
+        "hold": 0.503,
+        "exhale": 0.499,
+        "rest": 0.686
+      },
+      "top_synced": [
+        {
+          "name": "wave95_ritual_governance",
+          "vitals_count": 8
+        },
+        {
+          "name": "wave94_dream_compiler",
+          "vitals_count": 6
+        },
+        {
+          "name": "wave91_dream_logic_physics",
+          "vitals_count": 6
+        },
+        {
+          "name": "organism_autobiography",
+          "vitals_count": 3
+        },
+        {
+          "name": "semantic_bridge_forge",
+          "vitals_count": 3
+        },
+        {
+          "name": "chronicle_oracle",
+          "vitals_count": 2
+        },
+        {
+          "name": "debris_field_mapper",
+          "vitals_count": 7
+        },
+        {
+          "name": "resonance_amplifier_v2",
+          "vitals_count": 2
+        },
+        {
+          "name": "biofeedback_weave",
+          "vitals_count": 3
+        },
+        {
+          "name": "wave97_hex_runtime",
+          "vitals_count": 8
+        }
+      ],
+      "breath_symbol": "\u25c9",
+      "timestamp": 1789579995.6239443
     }
   ]
 }
