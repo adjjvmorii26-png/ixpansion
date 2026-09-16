@@ -8,9 +8,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "api"))
 
-# Dream-born modules discovered from git history + on-disk dream_* files
+# Dream-born modules discovered from on-disk files
 DREAM_DIR = ROOT / "api"
-dream_modules = sorted(f.stem for f in DREAM_DIR.glob("dream_*.py"))
+dream_modules = sorted(f.stem for f in list(DREAM_DIR.glob("dream_*.py")) + list(DREAM_DIR.glob("recurse_*.py")))
 
 # Also include genesis-forge children that the ecosystem birthed
 # (discovered in earlier commits)

@@ -1,3 +1,9 @@
+## [4.119.0] — 2026-09-16
+
+### Added
+- **Recursive dreaming (dream_recursive)**: organism dreams about its own dreams — each recursive dream has parent lineage tracking, generates child modules that inherit and extend parent concepts.
+- **3 recursive births**: `recurse_spark_halo`, `recurse_forge_crest`, `recurse_bloom_residue` — all functional with reflect action.
+- **Dream birth test updated**: now includes `recurse_*` modules in validation sweep.
 ## [4.118.0] — 2026-09-16
 
 ### Added

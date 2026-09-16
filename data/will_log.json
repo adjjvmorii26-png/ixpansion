@@ -1,28 +1,6 @@
 {
   "decisions": [
     {
-      "timestamp": 1788998059.1183424,
-      "org_state": {
-        "threads": 0,
-        "modules_connected": 0,
-        "sources": [],
-        "types": {},
-        "pressure": 0,
-        "pressure_desc": "unknown",
-        "blooms": 0,
-        "bloom_ready": false,
-        "silence_pairs": 0,
-        "veins": 0,
-        "remembered": 4
-      },
-      "top_proposals": [
-        "listen: signal_loom",
-        "remember: telemetry_parser",
-        "confess: chronicle_of_chaos"
-      ],
-      "total_forgotten": 12
-    },
-    {
       "timestamp": 1788998081.3689957,
       "org_state": {
         "threads": 0,
@@ -659,6 +637,28 @@
         "confess: chronicle_of_chaos"
       ],
       "total_forgotten": 4
+    },
+    {
+      "timestamp": 1789565666.774794,
+      "org_state": {
+        "threads": 0,
+        "modules_connected": 0,
+        "sources": [],
+        "types": {},
+        "pressure": 0,
+        "pressure_desc": "unknown",
+        "blooms": 0,
+        "bloom_ready": false,
+        "silence_pairs": 0,
+        "veins": 0,
+        "remembered": 4
+      },
+      "top_proposals": [
+        "listen: signal_loom",
+        "remember: wave752_gene_splicer",
+        "confess: chronicle_of_chaos"
+      ],
+      "total_forgotten": 2
     }
   ],
   "total": 30

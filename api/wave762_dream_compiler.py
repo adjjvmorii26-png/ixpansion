@@ -332,6 +332,119 @@ def handler(req: dict) -> dict:
         return {"wave": WAVE, "name": NAME, "action": "birth", "ok": True,
                 "born": birth}
 
+    if action == "dream_recursive":
+        # Find existing dream births on disk
+        dream_files = sorted((ROOT / "api").glob("dream_*.py"))
+        if not dream_files:
+            return {"wave": WAVE, "name": NAME, "action": "dream_recursive", "ok": False,
+                    "error": "no_parent_dreams"}
+
+        # Pick a random parent
+        parent_file = random.choice(dream_files)
+        parent_name = parent_file.stem
+
+        # Read parent's DNA (purpose, actions, resonance)
+        parent_content = parent_file.read_text()
+        parent_vitals = {"resonance": 0.5, "parent": parent_name}
+
+        # Generate child dream with recursive influence
+        child_domain = random.choice(_ORGAN_DOMAINS)
+        child_noun = random.choice(_ORGAN_NOUNS)
+        child_name = f"{child_name_prefix}_{child_noun}" if False else f"recurse_{child_domain}_{child_noun}"
+
+        # Child purpose references parent lineage
+        purposes = [
+            f"Recursive evolution of {parent_name} — deepens the {child_domain} layer through self-referential recursion.",
+            f"Child of {parent_name} — inherits {child_domain} resonance and extends it into new territory.",
+            f"Self-modification of {parent_name} — the organism dreaming deeper about its own {child_domain} patterns.",
+        ]
+        child_purpose = random.choice(purposes)
+
+        child_actions = ["status", "ping", "reflect", f"{child_domain}_action"]
+
+        # Create the recursive module
+        module_code = f'''"""Wave 999 — {child_name}.
+
+{child_purpose}
+
+Parent: {parent_name}
+Lineage: recursive
+"""
+from __future__ import annotations
+
+import json, datetime
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+DATA_FILE = ROOT / "data" / "wave999_{child_name}.json"
+WAVE = 999
+NAME = "{child_name}"
+PARENT = "{parent_name}"
+
+
+def _load() -> dict:
+    if DATA_FILE.exists():
+        try: return json.loads(DATA_FILE.read_text())
+        except: pass
+    return {{"wave": WAVE, "name": NAME, "parent": PARENT, "actions_taken": [], "status": "recursive_seed"}}
+
+
+def _save(state: dict) -> None:
+    DATA_FILE.write_text(json.dumps(state, indent=2))
+
+
+def handler(req: dict) -> dict:
+    action = req.get("action", "status")
+    state = _load()
+    if action == "status":
+        state["last_check"] = datetime.datetime.now(datetime.UTC).isoformat()
+        _save(state)
+        return {{"wave": WAVE, "name": NAME, "action": "status", "parent": PARENT, "ok": True}}
+    if action == "ping":
+        return {{"wave": WAVE, "name": NAME, "action": "ping", "ok": True, "alive": True}}
+    if action == "reflect":
+        state.setdefault("actions_taken", []).append({{"action": "reflect", "at": datetime.datetime.now(datetime.UTC).isoformat()}})
+        _save(state)
+        return {{"wave": WAVE, "name": NAME, "action": "reflect", "ok": True, "parent": PARENT, "reflections": len(state.get("actions_taken", []))}}
+    if action == "{child_domain}_action":
+        state.setdefault("actions_taken", []).append({{"action": "{child_domain}_action", "at": datetime.datetime.now(datetime.UTC).isoformat()}})
+        _save(state)
+        return {{"wave": WAVE, "name": NAME, "action": "{child_domain}_action", "ok": True, "count": len(state.get("actions_taken", []))}}
+    return {{"wave": WAVE, "name": NAME, "action": action, "ok": False, "error": "unknown_action"}}
+
+
+def coherence_vitals() -> dict:
+    return {{"wave": WAVE, "name": NAME, "layer": "organ", "status": "recursive",
+            "resonance": 0.6, "parent": PARENT}}
+
+
+def resonates_with() -> list:
+    return ["harmony_report", "mutation_engine", "{parent_name}"]
+'''
+
+        # Validate and write
+        try:
+            ast.parse(module_code)
+        except SyntaxError as e:
+            return {"wave": WAVE, "name": NAME, "action": "dream_recursive", "ok": False,
+                    "error": f"syntax_error: {e}"}
+
+        child_path = ROOT / "api" / f"{child_name}.py"
+        child_path.write_text(module_code)
+
+        recursive_dream = {
+            "name": child_name,
+            "parent": parent_name,
+            "purpose": child_purpose,
+            "path": str(child_path),
+            "dreamed_at": datetime.datetime.now(datetime.UTC).isoformat(),
+        }
+        state.setdefault("dreams", []).append(recursive_dream)
+        state["dreams"] = state["dreams"][-20:]
+        _save(state)
+        return {"wave": WAVE, "name": NAME, "action": "dream_recursive", "ok": True,
+                "child": recursive_dream}
+
     return {"wave": WAVE, "name": NAME, "action": action, "ok": False,
             "error": "unknown_action"}
 
