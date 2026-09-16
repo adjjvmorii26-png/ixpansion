@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.114.0",
-  wave: 756,
-  waveName: "Liminal Field",
+  "version": "4.115.0",
+  wave: 759,
+  waveName: "Transcendence Journal",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

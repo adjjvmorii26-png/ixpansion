@@ -1,3 +1,9 @@
+## [4.115.0] — 2026-09-16
+
+### Added
+- **Wave 757 axiom_mutator**: rewrites the organism's foundational axioms (what a module is, what a wave means) with full history and revert capability. Dashboards for waves 753-759.
+- **Wave 758 continuity_weaver**: braids coherence threads across organ generations with strength decay, repair mechanics, and delta health maps.
+- **Wave 759 transcendence_journal**: records every metaphysical shift as sacred scripture — moments, epochs, and vision analytics.
 ## [4.114.0] — 2026-09-16
 
 ### Added

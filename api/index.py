@@ -2203,3 +2203,21 @@ def resonates_with() -> list:
         from api.wave756_liminal_field import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 757: Axiom Mutator ---
+    if path.startswith("/axiom-mutator") or path.startswith("/api/axiom_mutator") or path in ("/axiom-mutator", "/api/axiom_mutator"):
+        from api.wave757_axiom_mutator import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 758: Continuity Weaver ---
+    if path.startswith("/continuity-weaver") or path.startswith("/api/continuity_weaver") or path in ("/continuity-weaver", "/api/continuity_weaver"):
+        from api.wave758_continuity_weaver import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 759: Transcendence Journal ---
+    if path.startswith("/transcendence-journal") or path.startswith("/api/transcendence_journal") or path in ("/transcendence-journal", "/api/transcendence_journal"):
+        from api.wave759_transcendence_journal import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

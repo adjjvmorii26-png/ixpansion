@@ -1,0 +1,154 @@
+{
+  "wave": 758,
+  "name": "continuity_weaver",
+  "threads": [
+    {
+      "name": "dream-thread",
+      "strength": 0.8,
+      "created": "2026-09-16T07:31:03.793348+00:00"
+    },
+    {
+      "name": "fragile-one",
+      "strength": 0.8999999999999999,
+      "created": "2026-09-16T07:31:03.801406+00:00"
+    },
+    {
+      "name": "x",
+      "strength": 0.5,
+      "created": "2026-09-16T07:31:03.850487+00:00"
+    },
+    {
+      "name": "dream-thread",
+      "strength": 0.8,
+      "created": "2026-09-16T07:32:38.383440+00:00"
+    },
+    {
+      "name": "fragile-one",
+      "strength": 0.1,
+      "created": "2026-09-16T07:32:38.392055+00:00"
+    },
+    {
+      "name": "x",
+      "strength": 0.5,
+      "created": "2026-09-16T07:32:38.440302+00:00"
+    },
+    {
+      "name": "dream-thread",
+      "strength": 0.8,
+      "created": "2026-09-16T07:35:38.838171+00:00"
+    },
+    {
+      "name": "fragile-one",
+      "strength": 0.1,
+      "created": "2026-09-16T07:35:38.846480+00:00"
+    },
+    {
+      "name": "x",
+      "strength": 0.5,
+      "created": "2026-09-16T07:35:38.865064+00:00"
+    },
+    {
+      "name": "dream-thread",
+      "strength": 0.8,
+      "created": "2026-09-16T07:36:16.652899+00:00"
+    },
+    {
+      "name": "fragile-one",
+      "strength": 0.1,
+      "created": "2026-09-16T07:36:16.664426+00:00"
+    },
+    {
+      "name": "x",
+      "strength": 0.5,
+      "created": "2026-09-16T07:36:16.688966+00:00"
+    }
+  ],
+  "braid_log": [
+    {
+      "at": "2026-09-16T07:31:03.793348+00:00",
+      "thread": "dream-thread",
+      "strength": 0.8
+    },
+    {
+      "at": "2026-09-16T07:31:03.801406+00:00",
+      "thread": "fragile-one",
+      "strength": 0.1
+    },
+    {
+      "at": "2026-09-16T07:31:03.804153+00:00",
+      "thread": "fragile-one",
+      "strength": 0.30000000000000004,
+      "action": "repaired"
+    },
+    {
+      "at": "2026-09-16T07:31:03.850487+00:00",
+      "thread": "x",
+      "strength": 0.5
+    },
+    {
+      "at": "2026-09-16T07:32:38.383440+00:00",
+      "thread": "dream-thread",
+      "strength": 0.8
+    },
+    {
+      "at": "2026-09-16T07:32:38.392055+00:00",
+      "thread": "fragile-one",
+      "strength": 0.1
+    },
+    {
+      "at": "2026-09-16T07:32:38.395352+00:00",
+      "thread": "fragile-one",
+      "strength": 0.5,
+      "action": "repaired"
+    },
+    {
+      "at": "2026-09-16T07:32:38.440302+00:00",
+      "thread": "x",
+      "strength": 0.5
+    },
+    {
+      "at": "2026-09-16T07:35:38.838171+00:00",
+      "thread": "dream-thread",
+      "strength": 0.8
+    },
+    {
+      "at": "2026-09-16T07:35:38.846480+00:00",
+      "thread": "fragile-one",
+      "strength": 0.1
+    },
+    {
+      "at": "2026-09-16T07:35:38.850747+00:00",
+      "thread": "fragile-one",
+      "strength": 0.7,
+      "action": "repaired"
+    },
+    {
+      "at": "2026-09-16T07:35:38.865064+00:00",
+      "thread": "x",
+      "strength": 0.5
+    },
+    {
+      "at": "2026-09-16T07:36:16.652899+00:00",
+      "thread": "dream-thread",
+      "strength": 0.8
+    },
+    {
+      "at": "2026-09-16T07:36:16.664426+00:00",
+      "thread": "fragile-one",
+      "strength": 0.1
+    },
+    {
+      "at": "2026-09-16T07:36:16.670829+00:00",
+      "thread": "fragile-one",
+      "strength": 0.8999999999999999,
+      "action": "repaired"
+    },
+    {
+      "at": "2026-09-16T07:36:16.688966+00:00",
+      "thread": "x",
+      "strength": 0.5
+    }
+  ],
+  "status": "seed",
+  "last_check": "2026-09-16T07:36:16.636541+00:00"
+}
