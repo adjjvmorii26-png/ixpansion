@@ -2227,3 +2227,15 @@ def resonates_with() -> list:
         from api.wave760_mutation_engine import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 761: Harmony Report ---
+    if path.startswith("/harmony-report") or path.startswith("/api/harmony_report") or path in ("/harmony-report", "/api/harmony_report"):
+        from api.wave761_harmony_report import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 762: Dream Compiler ---
+    if path.startswith("/dream-compiler") or path.startswith("/api/dream_compiler") or path in ("/dream-compiler", "/api/dream_compiler"):
+        from api.wave762_dream_compiler import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

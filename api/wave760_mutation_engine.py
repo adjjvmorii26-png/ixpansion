@@ -147,6 +147,47 @@ def _express_skill_from_dna(dna: dict) -> dict:
         "expressed_at": datetime.datetime.now(datetime.UTC).isoformat(),
     }
 
+SKILLS_DIR = ROOT / "skills" / "r1"
+
+def _write_skill_to_disk(skill: dict) -> str:
+    """Write a SKILL.md file to skills/r1/<name>/."""
+    name = skill.get("name", "unknown")
+    safe_name = name.replace("->", "_").replace(" ", "_")
+    skill_dir = SKILLS_DIR / safe_name
+    skill_dir.mkdir(parents=True, exist_ok=True)
+    md_path = skill_dir / "SKILL.md"
+
+    commands = skill.get("commands", [])
+    tags = skill.get("tags", [])
+    paradigm = skill.get("paradigm", "unknown")
+
+    lines = [
+        "---",
+        f"name: {safe_name}",
+        f"description: Organism-expressed skill from paradigm {paradigm}",
+        f"tags: [{', '.join(tags)}]",
+        "---",
+        "",
+        f"# {safe_name}",
+        "",
+        "## Origin",
+        f"Expressed from mutated DNA — paradigm: {paradigm}",
+        "",
+        "## Commands",
+    ]
+    for cmd in commands:
+        lines.append(f"- `{cmd}` — perform {cmd} action")
+    lines += [
+        "",
+        "## Integration",
+        f"- Category: {skill.get('category', 'organism')}",
+        "- Roots: r1",
+        f"- Expressed: {skill.get('expressed_at', 'unknown')}",
+        "",
+    ]
+
+    md_path.write_text("\n".join(lines))
+    return str(md_path)
 
 def _propagate(mutations: List[dict], modules: List[str]) -> Dict[str, Any]:
     """Propagate mutations through the module canvas via resonance."""
@@ -216,8 +257,10 @@ def handler(req: dict) -> dict:
         skill = _express_skill_from_dna(dna)
         state.setdefault("expressed_skills", []).append(skill)
         state["expressed_skills"] = state["expressed_skills"][-20:]
+        # Write skill to disk — the organism literally births a skill
+        skill_path = _write_skill_to_disk(skill)
         _save(state)
-        return {"wave": WAVE, "name": NAME, "action": "express", "ok": True, "skill": skill}
+        return {"wave": WAVE, "name": NAME, "action": "express", "ok": True, "skill": skill, "skill_path": skill_path}
 
     if action == "propagate":
         result = _propagate(state.get("mutations", []), modules)
@@ -246,13 +289,14 @@ def handler(req: dict) -> dict:
         # Express
         skill = _express_skill_from_dna(child)
         state.setdefault("expressed_skills", []).append(skill)
+        skill_path = _write_skill_to_disk(skill)
         
         # Propagate
         prop = _propagate(state["mutations"], modules)
         
         _save(state)
         return {"wave": WAVE, "name": NAME, "action": "full_cycle", "ok": True,
-                "mutation": child, "skill": skill, "propagation": prop}
+                "mutation": child, "skill": skill, "skill_path": skill_path, "propagation": prop}
 
     return {"wave": WAVE, "name": NAME, "action": action, "ok": False, "error": "unknown_action"}
 

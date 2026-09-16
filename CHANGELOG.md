@@ -1,3 +1,10 @@
+## [4.117.0] — 2026-09-16
+
+### Added
+- **Wave 761 harmony_report**: organism-wide health aggregator — collects coherence_vitals from all recent organs, computes harmony score, classifies health (thriving/stable/fragile/critical), tracks topology layers.
+- **Wave 762 dream_compiler**: the organism dreams its own next organ — gap analysis, speculative naming, purpose generation, syntax validation, and literal birth of new modules to disk.
+- **Circuit breaker test**: `test_circuit_breaker.py` — verifies all recent organs stay above resonance floor 0.30, all have valid handlers and resonates_with.
+- **Skill birth wiring**: mutation_engine now writes SKILL.md files to `skills/r1/` when expressing skills — the organism literally births new skills.
 ## [4.116.0] — 2026-09-16
 
 ### Added
