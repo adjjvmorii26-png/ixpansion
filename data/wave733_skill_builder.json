@@ -20,6 +20,126 @@
       "wave": 733,
       "created_at": "2026-09-16T02:08:21.750571+00:00",
       "status": "generated"
+    },
+    "interstice_bridge": {
+      "id": "9da7701d",
+      "name": "interstice_bridge",
+      "description": "Wire interstice bridge map into IXPANSION organism - connect 37 constellation repos with 153 waves",
+      "commands": [
+        "scan_bridges",
+        "build_portals",
+        "surface_connections"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "interstice",
+        "bridges",
+        "wireframe"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.310449+00:00",
+      "status": "generated"
+    },
+    "pentaxis_integrator": {
+      "id": "c336902d",
+      "name": "pentaxis_integrator",
+      "description": "Integrate pentaxis-5d-engine as the game engine for IXPANSION - 5D gameplay \u2194 organism interface",
+      "commands": [
+        "wire_5d",
+        "engine_bridge",
+        "reality_layer"
+      ],
+      "roots": "r1",
+      "category": "game",
+      "tags": [
+        "pentaxis",
+        "5d",
+        "game_engine"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.317284+00:00",
+      "status": "generated"
+    },
+    "oracle_bridge": {
+      "id": "2ac5c37b",
+      "name": "oracle_bridge",
+      "description": "Bridge oracle-engine research engine with IXPANSION consensus reality - multi-perspective analysis",
+      "commands": [
+        "consensus_weave",
+        "perspective_bridge",
+        "multi_perspective"
+      ],
+      "roots": "r1",
+      "category": "research",
+      "tags": [
+        "oracle",
+        "consensus",
+        "research"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.321957+00:00",
+      "status": "generated"
+    },
+    "antimemetic_weave": {
+      "id": "e857bac5",
+      "name": "antimemetic_weave",
+      "description": "Weave antimemetic-architecton absence/substrate into IXPANSION - negative space, erasure patterns",
+      "commands": [
+        "absence_patterns",
+        "erasure_vault",
+        "inversion_loom"
+      ],
+      "roots": "r1",
+      "category": "paradox",
+      "tags": [
+        "antimemetic",
+        "void",
+        "substrate"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.326826+00:00",
+      "status": "generated"
+    },
+    "luminant_memory": {
+      "id": "572a78e0",
+      "name": "luminant_memory",
+      "description": "Connect luminant-reliquary crystalline memory with IXPANSION organism memory systems",
+      "commands": [
+        "crystal_forge",
+        "luminous_memory",
+        "prism_basilica"
+      ],
+      "roots": "r1",
+      "category": "memory",
+      "tags": [
+        "luminant",
+        "memory",
+        "crystals"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.333201+00:00",
+      "status": "generated"
+    },
+    "chrono_relay": {
+      "id": "5c575c5e",
+      "name": "chrono_relay",
+      "description": "Relay chronocrypt-orrery temporal mechanics into IXPANSION wave engine - time loops, cyclic memory",
+      "commands": [
+        "time_loops",
+        "gyre_rotations",
+        "archive_vaults"
+      ],
+      "roots": "r1",
+      "category": "temporal",
+      "tags": [
+        "chrono",
+        "time",
+        "cycles"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.338464+00:00",
+      "status": "generated"
     }
   },
   "generated": [
@@ -40,6 +160,126 @@
       ],
       "wave": 733,
       "created_at": "2026-09-16T02:08:21.750571+00:00",
+      "status": "generated"
+    },
+    {
+      "id": "9da7701d",
+      "name": "interstice_bridge",
+      "description": "Wire interstice bridge map into IXPANSION organism - connect 37 constellation repos with 153 waves",
+      "commands": [
+        "scan_bridges",
+        "build_portals",
+        "surface_connections"
+      ],
+      "roots": "r1",
+      "category": "organism",
+      "tags": [
+        "interstice",
+        "bridges",
+        "wireframe"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.310449+00:00",
+      "status": "generated"
+    },
+    {
+      "id": "c336902d",
+      "name": "pentaxis_integrator",
+      "description": "Integrate pentaxis-5d-engine as the game engine for IXPANSION - 5D gameplay \u2194 organism interface",
+      "commands": [
+        "wire_5d",
+        "engine_bridge",
+        "reality_layer"
+      ],
+      "roots": "r1",
+      "category": "game",
+      "tags": [
+        "pentaxis",
+        "5d",
+        "game_engine"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.317284+00:00",
+      "status": "generated"
+    },
+    {
+      "id": "2ac5c37b",
+      "name": "oracle_bridge",
+      "description": "Bridge oracle-engine research engine with IXPANSION consensus reality - multi-perspective analysis",
+      "commands": [
+        "consensus_weave",
+        "perspective_bridge",
+        "multi_perspective"
+      ],
+      "roots": "r1",
+      "category": "research",
+      "tags": [
+        "oracle",
+        "consensus",
+        "research"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.321957+00:00",
+      "status": "generated"
+    },
+    {
+      "id": "e857bac5",
+      "name": "antimemetic_weave",
+      "description": "Weave antimemetic-architecton absence/substrate into IXPANSION - negative space, erasure patterns",
+      "commands": [
+        "absence_patterns",
+        "erasure_vault",
+        "inversion_loom"
+      ],
+      "roots": "r1",
+      "category": "paradox",
+      "tags": [
+        "antimemetic",
+        "void",
+        "substrate"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.326826+00:00",
+      "status": "generated"
+    },
+    {
+      "id": "572a78e0",
+      "name": "luminant_memory",
+      "description": "Connect luminant-reliquary crystalline memory with IXPANSION organism memory systems",
+      "commands": [
+        "crystal_forge",
+        "luminous_memory",
+        "prism_basilica"
+      ],
+      "roots": "r1",
+      "category": "memory",
+      "tags": [
+        "luminant",
+        "memory",
+        "crystals"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.333201+00:00",
+      "status": "generated"
+    },
+    {
+      "id": "5c575c5e",
+      "name": "chrono_relay",
+      "description": "Relay chronocrypt-orrery temporal mechanics into IXPANSION wave engine - time loops, cyclic memory",
+      "commands": [
+        "time_loops",
+        "gyre_rotations",
+        "archive_vaults"
+      ],
+      "roots": "r1",
+      "category": "temporal",
+      "tags": [
+        "chrono",
+        "time",
+        "cycles"
+      ],
+      "wave": 733,
+      "created_at": "2026-09-16T02:17:03.338464+00:00",
       "status": "generated"
     }
   ]
