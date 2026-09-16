@@ -1,0 +1,132 @@
+{
+  "wave721_coherence_bridge": {
+    "paradigm": "asynchronous",
+    "patterns": [
+      "import",
+      "async",
+      "context_manager"
+    ],
+    "complexity": 12,
+    "test_success": 0.94
+  },
+  "wave722_interstice_bridge": {
+    "paradigm": "data_pipeline",
+    "patterns": [
+      "import",
+      "json",
+      "serialization"
+    ],
+    "complexity": 8,
+    "test_success": 0.91
+  },
+  "wave723_dream_compiler": {
+    "paradigm": "metaprogramming",
+    "patterns": [
+      "import",
+      "meta",
+      "reflection"
+    ],
+    "complexity": 15,
+    "test_success": 0.89
+  },
+  "wave724_symbiosis_ecology": {
+    "paradigm": "agent_based",
+    "patterns": [
+      "import",
+      "class",
+      "agent"
+    ],
+    "complexity": 10,
+    "test_success": 0.92
+  },
+  "wave725_threshold_engine": {
+    "paradigm": "event_driven",
+    "patterns": [
+      "import",
+      "signal",
+      "handler"
+    ],
+    "complexity": 7,
+    "test_success": 0.95
+  },
+  "wave726_liminal_field": {
+    "paradigm": "state_machine",
+    "patterns": [
+      "import",
+      "state",
+      "transition"
+    ],
+    "complexity": 9,
+    "test_success": 0.93
+  },
+  "wave727_metaphor_forge": {
+    "paradigm": "creative_synthesis",
+    "patterns": [
+      "import",
+      "transform",
+      "generate"
+    ],
+    "complexity": 11,
+    "test_success": 0.87
+  },
+  "wave728_veil_lifter": {
+    "paradigm": "introspection",
+    "patterns": [
+      "import",
+      "reflect",
+      "examine"
+    ],
+    "complexity": 6,
+    "test_success": 0.96
+  },
+  "wave729_axiom_mutator": {
+    "paradigm": "meta_programming",
+    "patterns": [
+      "import",
+      "exec",
+      "dynamic"
+    ],
+    "complexity": 14,
+    "test_success": 0.85
+  },
+  "wave730_catalog_registry": {
+    "paradigm": "registry_pattern",
+    "patterns": [
+      "import",
+      "register",
+      "lookup"
+    ],
+    "complexity": 5,
+    "test_success": 0.97
+  },
+  "wave731_workforce_agents": {
+    "paradigm": "concurrent",
+    "patterns": [
+      "import",
+      "async",
+      "queue"
+    ],
+    "complexity": 8,
+    "test_success": 0.91
+  },
+  "wave732_live_blog": {
+    "paradigm": "full_stack",
+    "patterns": [
+      "import",
+      "route",
+      "render"
+    ],
+    "complexity": 12,
+    "test_success": 0.94
+  },
+  "wave733_skill_builder": {
+    "paradigm": "code_generation",
+    "patterns": [
+      "import",
+      "template",
+      "scaffold"
+    ],
+    "complexity": 7,
+    "test_success": 0.95
+  }
+}
