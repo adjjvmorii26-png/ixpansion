@@ -1,0 +1,202 @@
+{
+  "wave": 751,
+  "name": "evolution_kernel",
+  "proposals": [
+    {
+      "id": "e5cb9d0c",
+      "type": "stabilize",
+      "module": "coherence_bridge",
+      "partner": "dream_compiler",
+      "resonance": 0.0,
+      "entropy": 0.67,
+      "priority": "low",
+      "rationale": "coherence_bridge shows high entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:39.210881+00:00"
+    },
+    {
+      "id": "29958742",
+      "type": "merge",
+      "module": "dream_compiler",
+      "partner": "symbiosis_ecology",
+      "resonance": 0.0,
+      "entropy": 0.67,
+      "priority": "low",
+      "rationale": "dream_compiler shows high entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:39.210953+00:00"
+    },
+    {
+      "id": "78f5319b",
+      "type": "cross_pollinate",
+      "module": "symbiosis_ecology",
+      "partner": "threshold_engine",
+      "resonance": 0.0,
+      "entropy": 0.67,
+      "priority": "low",
+      "rationale": "symbiosis_ecology shows high entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:39.210986+00:00"
+    },
+    {
+      "id": "89b6430e",
+      "type": "mutate",
+      "module": "threshold_engine",
+      "partner": "metaphor_forge",
+      "resonance": 0.0,
+      "entropy": 0.67,
+      "priority": "low",
+      "rationale": "threshold_engine shows high entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:39.211013+00:00"
+    },
+    {
+      "id": "194d850d",
+      "type": "generate",
+      "module": "metaphor_forge",
+      "partner": "skill_builder",
+      "resonance": 0.0,
+      "entropy": 0.67,
+      "priority": "low",
+      "rationale": "metaphor_forge shows high entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:39.211041+00:00"
+    },
+    {
+      "id": "9bd6d73b",
+      "type": "merge",
+      "module": "skill_builder",
+      "partner": "repo_dna",
+      "resonance": 0.0,
+      "entropy": 0.67,
+      "priority": "low",
+      "rationale": "skill_builder shows high entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:39.211066+00:00"
+    },
+    {
+      "id": "56757173",
+      "type": "cross_pollinate",
+      "module": "repo_dna",
+      "partner": "live_blog",
+      "resonance": 0.0,
+      "entropy": 0.67,
+      "priority": "low",
+      "rationale": "repo_dna shows high entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:39.211089+00:00"
+    },
+    {
+      "id": "5975e332",
+      "type": "stabilize",
+      "module": "live_blog",
+      "partner": "coherence_bridge",
+      "resonance": 0.0,
+      "entropy": 0.67,
+      "priority": "low",
+      "rationale": "live_blog shows high entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:39.211112+00:00"
+    },
+    {
+      "id": "6bb3019c",
+      "type": "cross_pollinate",
+      "module": "coherence_bridge",
+      "partner": "dream_compiler",
+      "resonance": 0.0,
+      "entropy": 0.62,
+      "priority": "low",
+      "rationale": "coherence_bridge shows high entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:58.386764+00:00"
+    },
+    {
+      "id": "bad93c42",
+      "type": "merge",
+      "module": "dream_compiler",
+      "partner": "skill_builder",
+      "resonance": 0.0,
+      "entropy": 0.62,
+      "priority": "low",
+      "rationale": "dream_compiler shows high entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:58.386948+00:00"
+    },
+    {
+      "id": "d26501c7",
+      "type": "transcend",
+      "module": "skill_builder",
+      "partner": "coherence_bridge",
+      "resonance": 0.0,
+      "entropy": 0.62,
+      "priority": "low",
+      "rationale": "skill_builder shows high entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:58.387018+00:00"
+    },
+    {
+      "id": "b3f87a28",
+      "type": "stabilize",
+      "module": "a_module",
+      "partner": null,
+      "resonance": 0.0,
+      "entropy": 0.5,
+      "priority": "low",
+      "rationale": "a_module shows low entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:58.398347+00:00",
+      "decision": "adopt",
+      "decided_at": "2026-09-16T04:00:58.402905+00:00"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "b3f87a28",
+      "type": "stabilize",
+      "module": "a_module",
+      "partner": null,
+      "resonance": 0.0,
+      "entropy": 0.5,
+      "priority": "low",
+      "rationale": "a_module shows low entropy with resonance 0.0",
+      "wave": 751,
+      "timestamp": "2026-09-16T04:00:58.398347+00:00",
+      "decision": "adopt",
+      "decided_at": "2026-09-16T04:00:58.402905+00:00"
+    }
+  ],
+  "lineage": {
+    "from": 730,
+    "to": 751,
+    "waves": [
+      "wave730",
+      "wave731",
+      "wave732",
+      "wave733",
+      "wave734",
+      "wave735",
+      "wave736",
+      "wave737",
+      "wave738",
+      "wave739",
+      "wave740",
+      "wave741",
+      "wave742",
+      "wave743",
+      "wave744",
+      "wave745",
+      "wave746",
+      "wave747",
+      "wave748",
+      "wave749",
+      "wave750",
+      "wave751"
+    ]
+  },
+  "last_observation": {
+    "module_count": 1,
+    "entropy": 0.5,
+    "proposals_generated": 1,
+    "timestamp": "2026-09-16T04:00:58.398367+00:00"
+  }
+}

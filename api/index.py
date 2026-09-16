@@ -2065,3 +2065,105 @@ def resonates_with() -> list:
         from api.wave733_skill_builder import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 735: Antimeme Vaccine ---
+    if path.startswith("/antimeme-vaccine") or path.startswith("/api/antimeme_vaccine") or path in ("/antimeme-vaccine", "/api/antimeme_vaccine"):
+        from api.wave735_antimeme_vaccine import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 736: Silent Broadcast Lattice ---
+    if path.startswith("/silent-broadcast") or path.startswith("/api/silent_broadcast_lattice") or path in ("/silent-broadcast", "/api/silent_broadcast_lattice"):
+        from api.wave736_silent_broadcast_lattice import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 737: Paradox Debt Ledger ---
+    if path.startswith("/paradox-debt") or path.startswith("/api/paradox_debt_ledger") or path in ("/paradox-debt", "/api/paradox_debt_ledger"):
+        from api.wave737_paradox_debt_ledger import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 738: Oblivion Compost ---
+    if path.startswith("/oblivion-compost") or path.startswith("/api/oblivion_compost") or path in ("/oblivion-compost", "/api/oblivion_compost"):
+        from api.wave738_oblivion_compost import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 739: Receipt Notary ---
+    if path.startswith("/receipt-notary") or path.startswith("/api/receipt_notary") or path in ("/receipt-notary", "/api/receipt_notary"):
+        from api.wave739_receipt_notary import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 740: Negotiation Bazaar ---
+    if path.startswith("/negotiation-bazaar") or path.startswith("/api/negotiation_bazaar") or path in ("/negotiation-bazaar", "/api/negotiation_bazaar"):
+        from api.wave740_negotiation_bazaar import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 741: Dialect Mutator ---
+    if path.startswith("/dialect-mutator") or path.startswith("/api/dialect_mutator") or path in ("/dialect-mutator", "/api/dialect_mutator"):
+        from api.wave741_dialect_mutator import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 742: Actuator Bridge ---
+    if path.startswith("/actuator-bridge") or path.startswith("/api/actuator_bridge") or path in ("/actuator-bridge", "/api/actuator_bridge"):
+        from api.wave742_actuator_bridge import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 743: Causal Scar Graph ---
+    if path.startswith("/causal-scar") or path.startswith("/api/causal_scar_graph") or path in ("/causal-scar", "/api/causal_scar_graph"):
+        from api.wave743_causal_scar_graph import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 744: Phase Lock Clock ---
+    if path.startswith("/phase-lock") or path.startswith("/api/phase_lock_clock") or path in ("/phase-lock", "/api/phase_lock_clock"):
+        from api.wave744_phase_lock_clock import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 745: Mirror World Delta ---
+    if path.startswith("/mirror-world") or path.startswith("/api/mirror_world_delta") or path in ("/mirror-world", "/api/mirror_world_delta"):
+        from api.wave745_mirror_world_delta import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 746: Entropy Weather Front ---
+    if path.startswith("/entropy-weather") or path.startswith("/api/entropy_weather_front") or path in ("/entropy-weather", "/api/entropy_weather_front"):
+        from api.wave746_entropy_weather_front import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 747: Kolmogorov Budget ---
+    if path.startswith("/kolmogorov-budget") or path.startswith("/api/kolmogorov_budget") or path in ("/kolmogorov-budget", "/api/kolmogorov_budget"):
+        from api.wave747_kolmogorov_budget import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 748: Lyapunov Stability ---
+    if path.startswith("/lyapunov-stability") or path.startswith("/api/lyapunov_stability") or path in ("/lyapunov-stability", "/api/lyapunov_stability"):
+        from api.wave748_lyapunov_stability import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 749: Renormalization Block ---
+    if path.startswith("/renormalization") or path.startswith("/api/renormalization_block") or path in ("/renormalization", "/api/renormalization_block"):
+        from api.wave749_renormalization_block import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 750: Spectral Scar Modes ---
+    if path.startswith("/spectral-scar") or path.startswith("/api/spectral_scar_modes") or path in ("/spectral-scar", "/api/spectral_scar_modes"):
+        from api.wave750_spectral_scar_modes import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
+
+# --- Wave 751: Evolution Kernel ---
+    if path.startswith("/evolution-kernel") or path.startswith("/api/evolution_kernel") or path in ("/evolution-kernel", "/api/evolution_kernel"):
+        from api.wave751_evolution_kernel import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

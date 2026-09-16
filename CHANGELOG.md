@@ -1,3 +1,17 @@
+## [4.111.0] — 2026-09-16
+
+### Added
+- **Waves 734-750 merged to main** (17 organs):
+  - constellation_gravity, antimeme_vaccine, silent_broadcast_lattice (734-736)
+  - paradox_debt_ledger, oblivion_compost, receipt_notary, negotiation_bazaar, dialect_mutator, actuator_bridge (737-742)
+  - causal_scar_graph, phase_lock_clock, mirror_world_delta, entropy_weather_front (743-746)
+  - kolmogorov_budget, lyapunov_stability, renormalization_block, spectral_scar_modes (747-750)
+- **repo_dna_skill (Wave 734)**: per-repo DNA-derived skill generation with wave mutation
+- All wired into `api/index.py`; 24 new tests passing.
+
+### Changed
+- Version bump 4.110.1 → 4.111.0
+
 ## [4.110.1] — 2026-09-15
 
 ### Fixed
