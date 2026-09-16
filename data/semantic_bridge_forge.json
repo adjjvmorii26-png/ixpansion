@@ -15,147 +15,6 @@
           ],
           "proposed_bridge": "affiliate_docs_vein",
           "concept": "unifies economics awareness of affiliate_engine and docs",
-          "strength": 0.94
-        },
-        {
-          "parent_a": "affiliate_engine",
-          "parent_b": "parasite_hunter",
-          "similarity": 1.0,
-          "shared_domains": [
-            "economics"
-          ],
-          "proposed_bridge": "affiliate__parasite_h_bridge",
-          "concept": "unifies economics awareness of affiliate_engine and parasite_hunter",
-          "strength": 0.879
-        },
-        {
-          "parent_a": "agents",
-          "parent_b": "dissonance_detector",
-          "similarity": 1.0,
-          "shared_domains": [
-            "identity",
-            "protocol"
-          ],
-          "proposed_bridge": "agents_link_dissona",
-          "concept": "unifies identity awareness of agents and dissonance_detector",
-          "strength": 0.747
-        }
-      ],
-      "top_domain": {
-        "domain": "identity",
-        "modules": 12679
-      },
-      "timestamp": 1788996039.9627516
-    },
-    {
-      "action": "semantic_bridge_forge",
-      "modules_scanned": 878,
-      "pairs_evaluated": 385003,
-      "bridges_forged": 3,
-      "bridges": [
-        {
-          "parent_a": "affiliate_engine",
-          "parent_b": "docs",
-          "similarity": 1.0,
-          "shared_domains": [
-            "economics"
-          ],
-          "proposed_bridge": "affiliat_to_docs_conduit",
-          "concept": "unifies economics awareness of affiliate_engine and docs",
-          "strength": 0.785
-        },
-        {
-          "parent_a": "affiliate_engine",
-          "parent_b": "parasite_hunter",
-          "similarity": 1.0,
-          "shared_domains": [
-            "economics"
-          ],
-          "proposed_bridge": "affiliate_parasite__vein",
-          "concept": "unifies economics awareness of affiliate_engine and parasite_hunter",
-          "strength": 0.827
-        },
-        {
-          "parent_a": "agents",
-          "parent_b": "dissonance_detector",
-          "similarity": 1.0,
-          "shared_domains": [
-            "identity",
-            "protocol"
-          ],
-          "proposed_bridge": "agents_dissonance_bridge",
-          "concept": "unifies identity awareness of agents and dissonance_detector",
-          "strength": 0.971
-        }
-      ],
-      "top_domain": {
-        "domain": "identity",
-        "modules": 12679
-      },
-      "timestamp": 1788996061.8471322
-    },
-    {
-      "action": "semantic_bridge_forge",
-      "modules_scanned": 878,
-      "pairs_evaluated": 385003,
-      "bridges_forged": 3,
-      "bridges": [
-        {
-          "parent_a": "affiliate_engine",
-          "parent_b": "docs",
-          "similarity": 1.0,
-          "shared_domains": [
-            "economics"
-          ],
-          "proposed_bridge": "affiliate_docs_vein",
-          "concept": "unifies economics awareness of affiliate_engine and docs",
-          "strength": 0.986
-        },
-        {
-          "parent_a": "affiliate_engine",
-          "parent_b": "parasite_hunter",
-          "similarity": 1.0,
-          "shared_domains": [
-            "economics"
-          ],
-          "proposed_bridge": "affilia_link_parasit",
-          "concept": "unifies economics awareness of affiliate_engine and parasite_hunter",
-          "strength": 0.822
-        },
-        {
-          "parent_a": "agents",
-          "parent_b": "dissonance_detector",
-          "similarity": 1.0,
-          "shared_domains": [
-            "identity",
-            "protocol"
-          ],
-          "proposed_bridge": "agents_to_dissonan_conduit",
-          "concept": "unifies identity awareness of agents and dissonance_detector",
-          "strength": 0.733
-        }
-      ],
-      "top_domain": {
-        "domain": "identity",
-        "modules": 12679
-      },
-      "timestamp": 1788996086.4646971
-    },
-    {
-      "action": "semantic_bridge_forge",
-      "modules_scanned": 878,
-      "pairs_evaluated": 385003,
-      "bridges_forged": 3,
-      "bridges": [
-        {
-          "parent_a": "affiliate_engine",
-          "parent_b": "docs",
-          "similarity": 1.0,
-          "shared_domains": [
-            "economics"
-          ],
-          "proposed_bridge": "affiliate_docs_vein",
-          "concept": "unifies economics awareness of affiliate_engine and docs",
           "strength": 0.863
         },
         {
@@ -2349,6 +2208,147 @@
         "modules": 15058
       },
       "timestamp": 1789572494.5013416
+    },
+    {
+      "action": "semantic_bridge_forge",
+      "modules_scanned": 1147,
+      "pairs_evaluated": 657231,
+      "bridges_forged": 3,
+      "bridges": [
+        {
+          "parent_a": "affiliate_engine",
+          "parent_b": "docs",
+          "similarity": 1.0,
+          "shared_domains": [
+            "economics"
+          ],
+          "proposed_bridge": "affiliate_docs_vein",
+          "concept": "unifies economics awareness of affiliate_engine and docs",
+          "strength": 0.934
+        },
+        {
+          "parent_a": "affiliate_engine",
+          "parent_b": "parasite_hunter",
+          "similarity": 1.0,
+          "shared_domains": [
+            "economics"
+          ],
+          "proposed_bridge": "affiliat_to_parasite_conduit",
+          "concept": "unifies economics awareness of affiliate_engine and parasite_hunter",
+          "strength": 0.961
+        },
+        {
+          "parent_a": "agents",
+          "parent_b": "dissonance_detector",
+          "similarity": 1.0,
+          "shared_domains": [
+            "identity",
+            "protocol"
+          ],
+          "proposed_bridge": "agents_to_dissonan_conduit",
+          "concept": "unifies identity awareness of agents and dissonance_detector",
+          "strength": 0.711
+        }
+      ],
+      "top_domain": {
+        "domain": "identity",
+        "modules": 15109
+      },
+      "timestamp": 1789585570.4164593
+    },
+    {
+      "action": "semantic_bridge_forge",
+      "modules_scanned": 1147,
+      "pairs_evaluated": 657231,
+      "bridges_forged": 3,
+      "bridges": [
+        {
+          "parent_a": "affiliate_engine",
+          "parent_b": "docs",
+          "similarity": 1.0,
+          "shared_domains": [
+            "economics"
+          ],
+          "proposed_bridge": "affiliate__docs_bridge",
+          "concept": "unifies economics awareness of affiliate_engine and docs",
+          "strength": 0.806
+        },
+        {
+          "parent_a": "affiliate_engine",
+          "parent_b": "parasite_hunter",
+          "similarity": 1.0,
+          "shared_domains": [
+            "economics"
+          ],
+          "proposed_bridge": "affiliat_to_parasite_conduit",
+          "concept": "unifies economics awareness of affiliate_engine and parasite_hunter",
+          "strength": 0.891
+        },
+        {
+          "parent_a": "agents",
+          "parent_b": "dissonance_detector",
+          "similarity": 1.0,
+          "shared_domains": [
+            "identity",
+            "protocol"
+          ],
+          "proposed_bridge": "agents_dissonance_bridge",
+          "concept": "unifies identity awareness of agents and dissonance_detector",
+          "strength": 0.819
+        }
+      ],
+      "top_domain": {
+        "domain": "identity",
+        "modules": 15109
+      },
+      "timestamp": 1789585592.5401485
+    },
+    {
+      "action": "semantic_bridge_forge",
+      "modules_scanned": 1147,
+      "pairs_evaluated": 657231,
+      "bridges_forged": 3,
+      "bridges": [
+        {
+          "parent_a": "affiliate_engine",
+          "parent_b": "docs",
+          "similarity": 1.0,
+          "shared_domains": [
+            "economics"
+          ],
+          "proposed_bridge": "affiliate_docs_vein",
+          "concept": "unifies economics awareness of affiliate_engine and docs",
+          "strength": 0.724
+        },
+        {
+          "parent_a": "affiliate_engine",
+          "parent_b": "parasite_hunter",
+          "similarity": 1.0,
+          "shared_domains": [
+            "economics"
+          ],
+          "proposed_bridge": "affilia_link_parasit",
+          "concept": "unifies economics awareness of affiliate_engine and parasite_hunter",
+          "strength": 0.985
+        },
+        {
+          "parent_a": "agents",
+          "parent_b": "dissonance_detector",
+          "similarity": 1.0,
+          "shared_domains": [
+            "identity",
+            "protocol"
+          ],
+          "proposed_bridge": "agents_link_dissona",
+          "concept": "unifies identity awareness of agents and dissonance_detector",
+          "strength": 0.663
+        }
+      ],
+      "top_domain": {
+        "domain": "identity",
+        "modules": 15109
+      },
+      "timestamp": 1789585619.856628
     }
   ]
 }

@@ -5,7 +5,7 @@
     {
       "id": "agent_5778",
       "type": "explorer",
-      "fitness": 0.6200805905511878,
+      "fitness": 0.7598500599969458,
       "genome": "genome_935",
       "wave": 724,
       "born": "2026-09-16T01:28:24.651985",
@@ -14,7 +14,7 @@
     {
       "id": "agent_5731",
       "type": "builder",
-      "fitness": 0.528038498678606,
+      "fitness": 0.6238778719359064,
       "genome": "genome_371",
       "wave": 724,
       "born": "2026-09-16T01:28:24.656438",
@@ -23,7 +23,7 @@
     {
       "id": "agent_6407",
       "type": "explorer",
-      "fitness": 0.631137453839365,
+      "fitness": 0.7474090784323291,
       "genome": "genome_290",
       "wave": 724,
       "born": "2026-09-16T01:28:49.054766",
@@ -32,7 +32,7 @@
     {
       "id": "agent_7375",
       "type": "a",
-      "fitness": 0.9869462113119651,
+      "fitness": 1,
       "genome": "genome_705",
       "wave": 724,
       "born": "2026-09-16T01:28:49.065753",
@@ -41,7 +41,7 @@
     {
       "id": "agent_5041",
       "type": "b",
-      "fitness": 0.1344403421568357,
+      "fitness": 0.31497421134678394,
       "genome": "genome_896",
       "wave": 724,
       "born": "2026-09-16T01:28:49.069469",
@@ -50,7 +50,7 @@
     {
       "id": "agent_2839",
       "type": "a",
-      "fitness": 1,
+      "fitness": 0.9519706972605099,
       "genome": "genome_644",
       "wave": 724,
       "born": "2026-09-16T01:28:49.084165",
@@ -59,7 +59,7 @@
     {
       "id": "agent_6597",
       "type": "explorer",
-      "fitness": 0.7340414669520255,
+      "fitness": 0.8711191771958526,
       "genome": "genome_287",
       "wave": 724,
       "born": "2026-09-16T01:29:57.947052",
@@ -68,7 +68,7 @@
     {
       "id": "agent_5854",
       "type": "a",
-      "fitness": 0.2611445679675827,
+      "fitness": 0.24631935944026023,
       "genome": "genome_343",
       "wave": 724,
       "born": "2026-09-16T01:29:57.962706",
@@ -77,7 +77,7 @@
     {
       "id": "agent_5468",
       "type": "b",
-      "fitness": 0.2633102382153325,
+      "fitness": 0.39370489550616117,
       "genome": "genome_267",
       "wave": 724,
       "born": "2026-09-16T01:29:57.969012",
@@ -86,7 +86,7 @@
     {
       "id": "agent_3503",
       "type": "a",
-      "fitness": 0.35507808725576856,
+      "fitness": 0.29245072523415777,
       "genome": "genome_409",
       "wave": 724,
       "born": "2026-09-16T01:29:57.984469",
@@ -95,7 +95,7 @@
     {
       "id": "agent_7995",
       "type": "explorer",
-      "fitness": 0.43316695294162316,
+      "fitness": 0.5823896112005188,
       "genome": "genome_621",
       "wave": 724,
       "born": "2026-09-16T01:36:09.072074",
@@ -113,19 +113,55 @@
     {
       "id": "agent_7856",
       "type": "b",
-      "fitness": 0.8118680784250344,
+      "fitness": 0.9658954695488067,
       "genome": "genome_553",
       "wave": 724,
       "born": "2026-09-16T01:36:09.090800",
-      "status": "active"
+      "status": "apex"
     },
     {
       "id": "agent_5739",
       "type": "a",
-      "fitness": 0.5625858264507038,
+      "fitness": 0.4887067090182565,
       "genome": "genome_596",
       "wave": 724,
       "born": "2026-09-16T01:36:09.104402",
+      "status": "active"
+    },
+    {
+      "id": "agent_7508",
+      "type": "explorer",
+      "fitness": 0.2614262024204772,
+      "genome": "genome_438",
+      "wave": 724,
+      "born": "2026-09-16T19:05:51.012006+00:00",
+      "status": "active"
+    },
+    {
+      "id": "agent_5629",
+      "type": "a",
+      "fitness": 0.7992539387652655,
+      "genome": "genome_147",
+      "wave": 724,
+      "born": "2026-09-16T19:05:51.024386+00:00",
+      "status": "active"
+    },
+    {
+      "id": "agent_3282",
+      "type": "b",
+      "fitness": 0.0944007025607604,
+      "genome": "genome_326",
+      "wave": 724,
+      "born": "2026-09-16T19:05:51.029215+00:00",
+      "status": "active"
+    },
+    {
+      "id": "agent_5789",
+      "type": "a",
+      "fitness": 0.8962242263342399,
+      "genome": "genome_486",
+      "wave": 724,
+      "born": "2026-09-16T19:05:51.048968+00:00",
       "status": "active"
     }
   ],
@@ -157,6 +193,13 @@
       "avg_fitness": 0.5944170224818592,
       "wave": 724,
       "timestamp": "2026-09-16T01:36:09.108265"
+    },
+    {
+      "generation": 5,
+      "agent_count": 18,
+      "avg_fitness": 0.627220718677624,
+      "wave": 724,
+      "timestamp": "2026-09-16T19:05:51.054298+00:00"
     }
   ],
   "interactions": [
@@ -191,6 +234,14 @@
       "fitness_delta": 0.14710518821553853,
       "wave": 724,
       "timestamp": "2026-09-16T01:36:09.094389"
+    },
+    {
+      "type": "mutualism",
+      "agent1": "agent_5629",
+      "agent2": "agent_3282",
+      "fitness_delta": 0.2826967202855512,
+      "wave": 724,
+      "timestamp": "2026-09-16T19:05:51.035072+00:00"
     }
   ]
 }

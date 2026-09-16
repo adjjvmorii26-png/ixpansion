@@ -37,6 +37,18 @@
       "duration": 10,
       "identity_restored": true,
       "new_identity": "test_reborn_1789522569"
+    },
+    {
+      "id": "b2ec071f",
+      "module": "test",
+      "phase": "recombined",
+      "identity_loss": true,
+      "recombination_ready": true,
+      "wave": 726,
+      "entered_at": "2026-09-16T19:05:51.114753+00:00",
+      "duration": 10,
+      "identity_restored": true,
+      "new_identity": "test_reborn_1789585551"
     }
   ],
   "recombinations": [
@@ -60,6 +72,13 @@
       "new_identity": "test_reborn_1789522569",
       "wave": 726,
       "timestamp": "2026-09-16T01:36:09.207787+00:00"
+    },
+    {
+      "field_id": "b2ec071f",
+      "original": "test",
+      "new_identity": "test_reborn_1789585551",
+      "wave": 726,
+      "timestamp": "2026-09-16T19:05:51.118933+00:00"
     }
   ]
 }
