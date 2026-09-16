@@ -1,3 +1,5 @@
+; altar 10d36243a5b3f5ae
+; #altar altar_bundle.hexsrc
 ; altar ae26f85dbc570c73
 ; #altar altar_bundle.hexsrc
 ; altar 5e3c12f9eb7ec091
@@ -5,6 +7,59 @@
 ; altar 9258a7abe2e01f88
 ; #altar altar_bundle.hexsrc
 ; altar 69118fadec896ecf
+; #altar citizen_observer.hexsrc
+; citizen role=observer intent=enact census
+PUSH 1
+GLYPH
+HALT
+
+; #altar citizen_steward.hexsrc
+; citizen role=steward intent=enact altar
+PUSH 1
+ENACT
+GLYPH
+HALT
+
+; #altar consent_program.hexsrc
+; auto from consent_lattice
+; #chapel consent_chapel
+PUSH 1
+; scope delete_ci
+PUSH 0
+ADD
+; scope external_network
+PUSH 0
+ADD
+; scope publish_youtube_meta
+PUSH 1
+ADD
+; scope push_main
+PUSH 0
+ADD
+; scope read_lab
+PUSH 1
+ADD
+; scope write_lab_experiments
+PUSH 1
+ADD
+; #altar consent_hall
+GLYPH
+ENACT
+HALT
+
+; #altar mercy_program.hexsrc
+; MERCY REFUSE: delete ci workflow
+; #chapel mercy_chapel
+PUSH 0
+; #altar refuse_rite
+JMPZ 6
+PUSH 1
+ENACT
+HALT
+; skip enact
+GLYPH
+HALT
+
 ; #altar citizen_observer.hexsrc
 ; citizen role=observer intent=enact census
 PUSH 1

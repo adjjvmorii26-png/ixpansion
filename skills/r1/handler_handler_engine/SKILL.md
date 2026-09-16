@@ -10,12 +10,12 @@ tags: [mutation, expressed, handler->handler]
 Expressed from mutated DNA — paradigm: handler->handler
 
 ## Commands
+- `class_action` — perform class_action action
 - `coherence_vitals_action` — perform coherence_vitals_action action
 - `handler_action` — perform handler_action action
-- `import json_action` — perform import json_action action
 - `mutate` — perform mutate action
 
 ## Integration
 - Category: organism
 - Roots: r1
-- Expressed: 2026-09-16T15:24:56.910258+00:00
+- Expressed: 2026-09-16T16:18:25.157699+00:00
