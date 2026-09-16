@@ -5,9 +5,9 @@
  * identity without hardcoding.
  */
 window.IXP = {
-  "version": "4.121.0",
-  wave: 765,
-  waveName: "season_engine",
+  "version": "4.122.0",
+  wave: 766,
+  waveName: "epoch_engine",
   narrativeArc: [
     "observe","heal","govern","feel","sing","move",
     "speak","feast","excavate","forecast","symbiose",

@@ -1,3 +1,12 @@
+## [4.122.0] — 2026-09-16
+
+### Added
+- **Wave 766 epoch_engine**: the organism's climate — seasons are weather, epochs are climate. Tracks 7 geological eras (SEEDING → WEAVING → DREAMING → GOVERNING → FUSION → BLOOM → SEASONS) with actions: status, catalogue, bell, archive.
+- **Skill season_coordinator**: aligns module work with the organism's seasonal rhythm.
+
+### Fixed
+- **CI concurrency**: CI and CI v2 now have separate concurrency groups — they no longer cancel each other; legacy CI test job parallelized with xdist.
+
 ## [4.121.0] — 2026-09-16
 
 ### Added

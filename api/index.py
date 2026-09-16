@@ -2251,3 +2251,9 @@ def resonates_with() -> list:
         from api.wave765_season_engine import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 766: Epoch Engine ---
+    if path.startswith("/epoch-engine") or path.startswith("/api/epoch_engine") or path in ("/epoch-engine", "/api/epoch_engine"):
+        from api.wave766_epoch_engine import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)
