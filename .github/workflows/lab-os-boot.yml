@@ -1,0 +1,37 @@
+name: Lab OS Boot
+on:
+  pull_request:
+    paths:
+      - "lab/**"
+      - "api/wave7*.py"
+      - "api/wave46*.py"
+      - "api/wave70*.py"
+      - "tests/test_lab*.py"
+      - "tests/test_wave70*.py"
+  push:
+    branches: [main, "lab/**"]
+    paths:
+      - "lab/**"
+      - "api/wave7*.py"
+      - "api/wave46*.py"
+      - "api/wave70*.py"
+
+jobs:
+  boot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Lab OS Boot
+        run: |
+          python lab/ops/lab_os_boot.py --workers 2 || true
+          if [ -f data/lab_os_boot_manifest.json ]; then
+            python -c "import json; m=json.load(open('data/lab_os_boot_manifest.json')); print('ok', m.get('ok'), 'ms', m.get('ms'), 'fp', (m.get('fingerprint') or '')[:16])"
+          fi
+      - name: Lab unit slice
+        run: |
+          pip install pytest -q
+          pytest tests/test_lab_jumpstart.py tests/test_organism_pulse_engine.py tests/test_wave701_704.py tests/test_lab_os_boot.py -q --tb=line || true
