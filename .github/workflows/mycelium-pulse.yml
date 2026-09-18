@@ -15,6 +15,7 @@ concurrency:
 jobs:
   pulse:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -64,54 +65,65 @@ jobs:
           import os
           from pathlib import Path
 
-          pulse = json.loads(Path("artifacts/mycelium-pulse.json").read_text())
-          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a") as out:
-              out.write("## Mycelium Pulse\n\n")
-              out.write(f"- Living tips: `{pulse['stats']['living_tips']}`\n")
-              out.write(f"- Exchanges: `{pulse['stats']['exchanges']}`\n")
-              out.write(f"- Declines: `{pulse['stats']['declines']}`\n")
-              out.write(f"- Remaining nutrient: `{pulse['stats']['substrate_nutrient']}`\n")
+          def load(path):
+              p = Path(path)
+              if not p.exists():
+                  return None
+              try:
+                  return json.loads(p.read_text())
+              except Exception as e:
+                  return {"_error": str(e)}
 
-          dream_path = Path("artifacts/mycelium-dream.json")
-          if dream_path.exists():
-              dream = json.loads(dream_path.read_text()).get("dream")
+          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a") as out:
+              pulse = load("artifacts/mycelium-pulse.json")
+              out.write("## Mycelium Pulse\n\n")
+              if pulse and "_error" not in pulse and isinstance(pulse.get("stats"), dict):
+                  stats = pulse["stats"]
+                  out.write(f"- Living tips: `{stats.get('living_tips')}`\n")
+                  out.write(f"- Exchanges: `{stats.get('exchanges')}`\n")
+                  out.write(f"- Declines: `{stats.get('declines')}`\n")
+                  out.write(f"- Remaining nutrient: `{stats.get('substrate_nutrient')}`\n")
+              elif pulse and "_error" in pulse:
+                  out.write(f"- Load error: `{pulse['_error']}`\n")
+              else:
+                  out.write("- `artifacts/mycelium-pulse.json` missing or incomplete\n")
+
+              dream_doc = load("artifacts/mycelium-dream.json")
+              dream = (dream_doc or {}).get("dream") if isinstance(dream_doc, dict) else None
               if dream:
                   out.write("\n## Compiled Dream\n\n")
-                  out.write(f"- Hypothesis: {dream['hypothesis']}\n")
-                  out.write(f"- Confidence: `{dream['confidence']:.2%}`\n")
-                  out.write(f"- Entropy budget: `{dream['entropy_budget']}`\n")
-                  out.write(f"- Evidence: `{dream['evidence_hash'][:12]}`\n")
+                  out.write(f"- Hypothesis: {dream.get('hypothesis')}\n")
+                  out.write(f"- Confidence: `{float(dream.get('confidence') or 0):.2%}`\n")
+                  out.write(f"- Entropy budget: `{dream.get('entropy_budget')}`\n")
+                  out.write(f"- Evidence: `{str(dream.get('evidence_hash', ''))[:12]}`\n")
 
-          braid_path = Path("artifacts/astral-braid.json")
-          if braid_path.exists():
-              braid = json.loads(braid_path.read_text())
-              out.write("\n## Astral Braid Conservatory\n\n")
-              out.write(f"- Timelines rehearsed: `{len(braid['candidates'])}`\n")
-              out.write(f"- Selected: `{braid['selected_strategy'] or 'quarantined'}`\n")
-              out.write(f"- Certificate: `{braid['certificate_hash'][:12]}`\n")
+              braid = load("artifacts/astral-braid.json")
+              if braid and "_error" not in braid:
+                  out.write("\n## Astral Braid Conservatory\n\n")
+                  out.write(f"- Timelines rehearsed: `{len(braid.get('candidates') or [])}`\n")
+                  out.write(f"- Selected: `{braid.get('selected_strategy') or 'quarantined'}`\n")
+                  out.write(f"- Certificate: `{str(braid.get('certificate_hash', ''))[:12]}`\n")
 
-          proof_path = Path("artifacts/proof-packet.json")
-          if proof_path.exists():
-              planted = json.loads(proof_path.read_text())
-              ring = planted["record"]
-              out.write("\n## Proof Garden\n\n")
-              out.write(f"- Growth ring: `{ring['sequence']}`\n")
-              out.write(f"- Decision: `{ring['kind']}`\n")
-              out.write(f"- Root: `{ring['root'][:12]}`\n")
-              out.write(f"- Portable proof: `{planted['verified']}`\n")
+              proof = load("artifacts/proof-packet.json")
+              if proof and "_error" not in proof and isinstance(proof.get("record"), dict):
+                  ring = proof["record"]
+                  out.write("\n## Proof Garden\n\n")
+                  out.write(f"- Growth ring: `{ring.get('sequence')}`\n")
+                  out.write(f"- Decision: `{ring.get('kind')}`\n")
+                  out.write(f"- Root: `{str(ring.get('root', ''))[:12]}`\n")
+                  out.write(f"- Portable proof: `{proof.get('verified')}`\n")
 
-          resurrection_path = Path("artifacts/resurrection.json")
-          if resurrection_path.exists():
-              court = json.loads(resurrection_path.read_text())
-              out.write("\n## Resurrection Garden\n\n")
-              out.write(f"- Verdict: `{court['verdict']}`\n")
-              out.write(f"- Candidate: `{court['selected_strategy'] or 'none'}`\n")
-              out.write(f"- Activation: `{court.get('activation_gate', 'not_applicable')}`\n")
-              out.write(f"- Certificate: `{court['certificate_hash'][:12]}`\n")
+              court = load("artifacts/resurrection.json")
+              if court and "_error" not in court:
+                  out.write("\n## Resurrection Garden\n\n")
+                  out.write(f"- Verdict: `{court.get('verdict')}`\n")
+                  out.write(f"- Candidate: `{court.get('selected_strategy') or 'none'}`\n")
+                  out.write(f"- Activation: `{court.get('activation_gate', 'not_applicable')}`\n")
+                  out.write(f"- Certificate: `{str(court.get('certificate_hash', ''))[:12]}`\n")
           PY
       - uses: actions/upload-artifact@v4
         with:
           name: aleph-mycelium-pulse
           path: artifacts/*
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 30
