@@ -86,3 +86,9 @@ env-check:
 	@echo "PY=$$(command -v python3)"
 	@test -f lab/ops/copilots/council.py && echo "council: ok" || echo "council: missing (git pull origin main)"
 	@git rev-parse --abbrev-ref HEAD 2>/dev/null || true
+
+# ─── Local dashboard ───
+.PHONY: dashboard
+
+dashboard:
+	@PYTHONPATH=. python3 lab/ops/dashboard_server.py --host 127.0.0.1 --port 8765
