@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IXPANSION · Local Control</title>
+<style>
+  :root {
+    --bg: #0b0f14;
+    --panel: #121820;
+    --line: #1e2a38;
+    --text: #d6e2ef;
+    --muted: #7a8fa3;
+    --cyan: #3de0ff;
+    --mag: #ff3d9a;
+    --green: #3dff9a;
+    --amber: #ffc53d;
+    --red: #ff5c5c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: radial-gradient(1200px 600px at 10% -10%, #122033 0%, var(--bg) 55%);
+    color: var(--text); min-height: 100vh;
+  }
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.25rem; border-bottom: 1px solid var(--line);
+    background: rgba(0,0,0,.25); backdrop-filter: blur(8px);
+    position: sticky; top: 0; z-index: 10;
+  }
+  header h1 { margin: 0; font-size: 1rem; letter-spacing: .08em; }
+  header h1 span { color: var(--cyan); }
+  .actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+  button, .btn {
+    background: var(--panel); color: var(--text); border: 1px solid var(--line);
+    padding: .45rem .75rem; border-radius: 8px; cursor: pointer; font: inherit;
+  }
+  button:hover, .btn:hover { border-color: var(--cyan); color: var(--cyan); }
+  main {
+    display: grid; gap: 1rem; padding: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 1rem; min-height: 140px;
+  }
+  .card h2 { margin: 0 0 .75rem; font-size: .75rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+  .posture { font-size: 1.6rem; font-weight: 700; }
+  .posture.green { color: var(--green); }
+  .posture.amber { color: var(--amber); }
+  .posture.red { color: var(--red); }
+  .posture.unknown { color: var(--muted); }
+  ul { margin: 0; padding-left: 1.1rem; color: var(--muted); }
+  li { margin: .25rem 0; }
+  .mono { color: var(--cyan); word-break: break-all; }
+  footer {
+    padding: 1rem 1.25rem; color: var(--muted); font-size: .75rem; border-top: 1px solid var(--line);
+  }
+  #log {
+    grid-column: 1 / -1; max-height: 220px; overflow: auto;
+    background: #0a0e13; border-radius: 8px; padding: .75rem; font-size: .75rem;
+    border: 1px solid var(--line); white-space: pre-wrap;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>IXPANSION · <span>LOCAL CONTROL</span></h1>
+  <div class="actions">
+    <button type="button" id="btn-refresh">Refresh council</button>
+    <button type="button" id="btn-copy">Copy brief</button>
+    <a class="btn" href="/" id="link-root">Server root</a>
+  </div>
+</header>
+<main>
+  <section class="card">
+    <h2>AEGIS posture</h2>
+    <div id="posture" class="posture unknown">—</div>
+    <p id="aegis-detail" class="mono" style="font-size:.8rem;color:var(--muted)"></p>
+  </section>
+  <section class="card">
+    <h2>HELIX growth</h2>
+    <p>Latest: <span id="latest" class="mono">—</span></p>
+    <p>Next: <span id="next" class="mono">—</span></p>
+  </section>
+  <section class="card">
+    <h2>QUILL continuity</h2>
+    <p id="headline">—</p>
+    <ul id="bullets"></ul>
+  </section>
+  <section class="card">
+    <h2>Next moves</h2>
+    <ul id="moves"></ul>
+  </section>
+  <section class="card" style="grid-column:1/-1">
+    <h2>Live log</h2>
+    <div id="log">Waiting for local dashboard server...\nRun: make dashboard</div>
+  </section>
+</main>
+<footer>
+  All local · no cloud required · AEGIS · HELIX · QUILL · ALEPH<br/>
+  Caption: local · control · council · codespace-ready
+</footer>
+<script>
+const logEl = document.getElementById('log');
+function log(msg) {
+  const t = new Date().toISOString().slice(11,19);
+  logEl.textContent = `[${t}] ${msg}\n` + logEl.textContent.slice(0, 4000);
+}
+let lastBrief = null;
+
+async function refresh() {
+  log('Fetching /api/council …');
+  try {
+    const r = await fetch('/api/council', { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const data = await r.json();
+    lastBrief = data;
+    const posture = (data.aegis && data.aegis.scan && data.aegis.scan.posture) || 'unknown';
+    const p = document.getElementById('posture');
+    p.textContent = posture.toUpperCase();
+    p.className = 'posture ' + posture;
+    document.getElementById('aegis-detail').textContent =
+      (data.aegis && data.aegis.scan && data.aegis.scan.actions || []).join(' · ');
+    const survey = (data.helix && data.helix.survey) || {};
+    const next = (data.helix && data.helix.next) || {};
+    document.getElementById('latest').textContent = survey.latest_wave ?? '—';
+    document.getElementById('next').textContent = next.module || '—';
+    const q = data.quill || {};
+    document.getElementById('headline').textContent = q.headline || '—';
+    const bullets = document.getElementById('bullets');
+    bullets.innerHTML = '';
+    (q.bullets || []).forEach(b => {
+      const li = document.createElement('li'); li.textContent = b; bullets.appendChild(li);
+    });
+    const moves = document.getElementById('moves');
+    moves.innerHTML = '';
+    (data.next_moves || []).forEach(m => {
+      const li = document.createElement('li'); li.textContent = m; moves.appendChild(li);
+    });
+    log('Council OK · ' + (data.ts || ''));
+  } catch (e) {
+    log('Error: ' + e.message + ' — start server with: make dashboard');
+  }
+}
+
+document.getElementById('btn-refresh').onclick = refresh;
+document.getElementById('btn-copy').onclick = async () => {
+  if (!lastBrief) { log('Nothing to copy yet'); return; }
+  await navigator.clipboard.writeText(JSON.stringify(lastBrief, null, 2));
+  log('Brief copied to clipboard');
+};
+
+refresh();
+setInterval(refresh, 30000);
+</script>
+</body>
+</html>
