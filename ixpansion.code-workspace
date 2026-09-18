@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "name": "IXPANSION",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "github.copilot.enable": {
+      "*": true
+    },
+    "python.analysis.extraPaths": [
+      "${workspaceFolder}/api",
+      "${workspaceFolder}/lab"
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+      "GitHub.copilot",
+      "GitHub.copilot-chat",
+      "ms-python.python",
+      "ms-python.vscode-pylance"
+    ]
+  }
+}
