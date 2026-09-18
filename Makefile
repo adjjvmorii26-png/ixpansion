@@ -71,3 +71,18 @@ coolify-image:
 coolify-clean:
 	docker compose down -v
 	docker rmi ghcr.io/adjjvmorii26-png/ixpansion:latest 2>/dev/null || true
+
+# ─── Stable terminal ───
+.PHONY: shell council env-check
+
+shell:
+	@bash scripts/ix_shell.sh
+
+council:
+	@PYTHONPATH=. python3 lab/ops/copilots/council.py
+
+env-check:
+	@echo "ROOT=$$(pwd)"
+	@echo "PY=$$(command -v python3)"
+	@test -f lab/ops/copilots/council.py && echo "council: ok" || echo "council: missing (git pull origin main)"
+	@git rev-parse --abbrev-ref HEAD 2>/dev/null || true

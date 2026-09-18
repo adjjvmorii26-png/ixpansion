@@ -1,0 +1,19 @@
+{
+  "terminal.integrated.env.linux": {
+    "PYTHONPATH": "${workspaceFolder}",
+    "IXPANSION_ROOT": "${workspaceFolder}",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "terminal.integrated.env.osx": {
+    "PYTHONPATH": "${workspaceFolder}",
+    "IXPANSION_ROOT": "${workspaceFolder}",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "terminal.integrated.env.windows": {
+    "PYTHONPATH": "${workspaceFolder}",
+    "IXPANSION_ROOT": "${workspaceFolder}",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.terminal.activateEnvironment": true
+}
