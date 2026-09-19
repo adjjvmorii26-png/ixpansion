@@ -1,28 +1,19 @@
-# GitHub Status · 2026-09-19
+# GitHub Status · 2026-09-19 (track fix)
 
 ## Main
 | Item | State |
 |------|--------|
-| **HEAD** | wave769 **void_index** merged |
-| **Tooling** | Co-pilots · stable shell · local dashboard · CI pulse fixes |
-| **Council** | `make council` · AEGIS green |
+| **HEAD** | VS Code Copilot pack (#142) + wave769 void_index (#141) |
+| **Open PRs** | Queue cleared (stale #134/#139 closed) |
+| **Council** | AEGIS green · HELIX next ~wave770 |
 
-## Merged recently
-- #135 CI pulse / chaos timeouts
-- #140 local control dashboard + council pulse
-- #136 wave768 hush_compass
-- #141 wave769 void_index
+## Tooling on main
+- `make shell` / `make council` / `make dashboard` / `make snapshot`
+- Lab Council Pulse CI (live AEGIS·HELIX·QUILL)
+- `.github/copilot-instructions.md` + `docs/GITHUB_COPILOT_AGENTS.md`
 
-## Open / follow-ups
-- VS Code Copilot rebase PR (extensions + launch + workspace)
-- Close stale: #134 / #139 (superseded)
+## GitHub AI
+Enable Copilot coding agent on the repo, then assign issues to Copilot for background PRs.
+See `docs/GITHUB_COPILOT_AGENTS.md`.
 
-## Local
-```bash
-git pull origin main
-make shell
-ix-council
-ix-dashboard
-```
-
-Caption: `void_index · hush · council · local`
+Caption: `on-track · void_index · copilot · local`
