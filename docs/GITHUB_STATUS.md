@@ -1,20 +1,30 @@
-# GitHub Status · 2026-09-12
+# GitHub Status · 2026-09-18
 
-## Branches
-| Branch | Role |
-|--------|------|
-| main | ALEPH Waves 406–408+ |
-| **lab/chrono-forge-wave** | Organism lab rail (restored) |
-| gh-pages | Pages |
+## Main
+| Item | State |
+|------|--------|
+| **HEAD** | Stable terminal (#138) + co-pilots (#137) on main |
+| **Council** | `make council` · AEGIS · HELIX · QUILL |
+| **Shell** | `make shell` · `source scripts/ix_shell.sh` |
 
-## Open PR
-- **#106** restore lab — Lab Smoke ✅ Lab Graft ✅
+## Open PRs (priority)
+1. **#135** — CI pulse summary / chaos timeout fixes (scheduled red noise)
+2. **Tooling PR** — local dashboard + Codespaces + status snapshot + live council pulse
+3. **#136** — wave768 hush_compass (lab organ)
+4. **#134** — VS Code + Copilot pack
 
-## Heartbeat
+## Local commands
 ```bash
-python lab/ops/lab_heartbeat.py
-python lab/ops/phase_b_pipeline.py
+git pull origin main
+make shell
+ix-council
+ix-snapshot
+ix-dashboard   # http://127.0.0.1:8765/
 ```
 
-## Weekly (Mon 09:30 ET)
-Report: open PRs · lab branch alive Y/N · last Lab Smoke · GRAFT action
+## Heartbeat
+- `docs/LAB_HEARTBEAT.json` — updated by QUILL
+- `docs/LAB_STATUS.json` / `docs/LAB_STATUS.md` — `make snapshot`
+- Workflow: **Lab Council Pulse** (path-filtered + daily cron)
+
+Caption: `status · council · shell · dashboard`
