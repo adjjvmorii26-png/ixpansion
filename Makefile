@@ -73,7 +73,7 @@ coolify-clean:
 	docker rmi ghcr.io/adjjvmorii26-png/ixpansion:latest 2>/dev/null || true
 
 # ─── Stable terminal ───
-.PHONY: shell council env-check
+.PHONY: shell council env-check dashboard snapshot
 
 shell:
 	@bash scripts/ix_shell.sh
@@ -86,3 +86,9 @@ env-check:
 	@echo "PY=$$(command -v python3)"
 	@test -f lab/ops/copilots/council.py && echo "council: ok" || echo "council: missing (git pull origin main)"
 	@git rev-parse --abbrev-ref HEAD 2>/dev/null || true
+
+dashboard:
+	@PYTHONPATH=. python3 lab/ops/dashboard_server.py --host 127.0.0.1 --port 8765
+
+snapshot:
+	@PYTHONPATH=. python3 lab/ops/status_snapshot.py

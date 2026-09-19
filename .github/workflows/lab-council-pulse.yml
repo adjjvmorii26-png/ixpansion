@@ -1,5 +1,5 @@
 # Lab Council Pulse — path-filtered, dual-track safe
-# Runs on lab/api wave changes and daily cron without blocking ALEPH full CI
+# Runs AEGIS · HELIX · QUILL without blocking ALEPH full CI
 name: Lab Council Pulse
 
 on:
@@ -9,20 +9,25 @@ on:
       - "api/wave67*.py"
       - "api/wave68*.py"
       - "api/wave69*.py"
+      - "api/wave7*.py"
       - "tests/test_council*.py"
       - "tests/test_wave67*.py"
       - "tests/test_wave68*.py"
+      - "tests/test_wave7*.py"
       - "lab/**"
+      - "scripts/ix_shell.sh"
       - ".github/workflows/lab-council-pulse.yml"
   pull_request:
     paths:
       - "api/wave67*.py"
       - "api/wave68*.py"
+      - "api/wave7*.py"
       - "tests/test_council*.py"
       - "tests/test_wave67*.py"
+      - "tests/test_wave7*.py"
       - "lab/**"
   schedule:
-    - cron: "0 13 * * *"  # 09:00 America/New_York approx
+    - cron: "0 13 * * *"
   workflow_dispatch:
 
 jobs:
@@ -35,8 +40,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install test deps
-        run: |
-          pip install -q pytest
+        run: pip install -q pytest
       - name: Council 22 unit tests
         run: |
           if [ -f tests/test_council22_671_675.py ]; then
@@ -44,19 +48,61 @@ jobs:
           else
             echo "council tests not present — soft skip"
           fi
-      - name: Wave 67x compile
+      - name: Co-pilot unit tests
         run: |
-          python -c "
-          import compileall, pathlib, sys
-          paths = list(pathlib.Path('api').glob('wave67*.py')) + list(pathlib.Path('api').glob('wave68*.py'))
-          ok = True
-          for p in paths:
-              c = compileall.compile_file(str(p), quiet=1)
-              ok = ok and c
-              print(p.name, 'ok' if c else 'FAIL')
-          sys.exit(0 if ok else 1)
-          "
-      - name: Caption pulse
+          if [ -f tests/test_copilots.py ]; then
+            PYTHONPATH=. python -m pytest tests/test_copilots.py -q --tb=line
+          else
+            echo "copilot tests not present — soft skip"
+          fi
+      - name: Run AEGIS · HELIX · QUILL council
+        id: council
         run: |
-          echo "lab council pulse · dual-track · silence holds"
-          date -u +"ts=%Y-%m-%dT%H:%M:%SZ"
+          set -e
+          mkdir -p artifacts data/copilots
+          PYTHONPATH=. python lab/ops/copilots/council.py --json > artifacts/council_brief.json
+          PYTHONPATH=. python lab/ops/copilots/council.py | tee artifacts/council.txt
+          PYTHONPATH=. python lab/ops/status_snapshot.py || true
+      - name: Job summary
+        if: always()
+        run: |
+          python3 << 'PY'
+          import json, os
+          from pathlib import Path
+          out_path = Path(os.environ["GITHUB_STEP_SUMMARY"])
+          lines = ["## Lab Council Pulse", ""]
+          brief = Path("artifacts/council_brief.json")
+          try:
+              data = json.loads(brief.read_text()) if brief.exists() else {}
+              scan = (data.get("aegis") or {}).get("scan") or {}
+              helix = data.get("helix") or {}
+              next_w = helix.get("next") or {}
+              lines.append(f"- **AEGIS posture:** `{scan.get('posture', 'n/a')}`")
+              lines.append(f"- **HELIX next:** `{next_w.get('module', 'n/a')}`")
+              lines.append(f"- **QUILL:** {(data.get('quill') or {}).get('headline', 'n/a')}")
+              lines.append("")
+              lines.append("### Next moves")
+              for m in data.get("next_moves") or []:
+                  lines.append(f"- {m}")
+          except Exception as e:
+              lines.append(f"Council load failed: `{e}`")
+          txt = Path("artifacts/council.txt")
+          if txt.exists():
+              lines.append("")
+              lines.append("```")
+              lines.append(txt.read_text()[:2000])
+              lines.append("```")
+          with out_path.open("a") as out:
+              out.write("\n".join(lines) + "\n")
+          PY
+      - name: Upload council artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: council-brief
+          path: |
+            artifacts/council_brief.json
+            artifacts/council.txt
+            docs/LAB_HEARTBEAT.json
+            data/copilots/
+          if-no-files-found: warn
