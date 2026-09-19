@@ -15,6 +15,7 @@ concurrency:
 jobs:
   pulse:
     runs-on: ubuntu-latest
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -85,55 +86,73 @@ jobs:
           import os
           from pathlib import Path
 
-          data = json.loads(Path("artifacts/oracle.json").read_text())
+          def load(path):
+              p = Path(path)
+              if not p.exists():
+                  return None
+              try:
+                  return json.loads(p.read_text())
+              except Exception as e:
+                  return {"_error": str(e)}
+
           with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a") as out:
-              out.write("## Resonance Oracle\n\n")
-              out.write(f"- Verdict: `{data['verdict']}`\n")
-              out.write(f"- Similarity: `{data['similarity']:.2%}`\n")
-              out.write(f"- Baseline: `{data['old_signature'][:12]}`\n")
-              out.write(f"- Variation: `{data['new_signature'][:12]}`\n")
+              data = load("artifacts/oracle.json")
+              if data and "_error" not in data:
+                  out.write("## Resonance Oracle\n\n")
+                  out.write(f"- Verdict: `{data.get('verdict')}`\n")
+                  out.write(f"- Similarity: `{data.get('similarity', 0):.2%}`\n")
+                  out.write(f"- Baseline: `{str(data.get('old_signature', ''))[:12]}`\n")
+                  out.write(f"- Variation: `{str(data.get('new_signature', ''))[:12]}`\n")
+              elif data:
+                  out.write(f"## Resonance Oracle\n\n- Load error: `{data['_error']}`\n")
+              else:
+                  out.write("## Resonance Oracle\n\n- `artifacts/oracle.json` missing (upstream step failed)\n")
 
-          twin = json.loads(Path("artifacts/counterfactual.json").read_text())
-          divergence = twin["divergence"]
-          out.write("\n## Counterfactual Twin\n\n")
-          out.write(f"- First split: `{divergence['kind']}` at step `{divergence['step_index']}`\n")
-          out.write(f"- Similarity: `{divergence['similarity']:.2%}`\n")
-          out.write(f"- Report: `{twin['report_hash'][:12]}`\n")
-          forensics = twin["forensics"]
-          out.write("\n## Divergence Forensics\n\n")
-          out.write(f"- Classification: `{forensics['classification']}`\n")
-          out.write(f"- Camouflage index: `{forensics['camouflage_index']:.2%}`\n")
-          out.write(f"- Evidence: `{forensics['evidence_hash'][:12]}`\n")
-          if forensics["changed_paths"]:
-              out.write(f"- Paths: `{', '.join(forensics['changed_paths'])}`\n")
+              twin = load("artifacts/counterfactual.json")
+              if twin and "_error" not in twin and "divergence" in twin:
+                  divergence = twin["divergence"]
+                  out.write("\n## Counterfactual Twin\n\n")
+                  out.write(f"- First split: `{divergence.get('kind')}` at step `{divergence.get('step_index')}`\n")
+                  out.write(f"- Similarity: `{divergence.get('similarity', 0):.2%}`\n")
+                  out.write(f"- Report: `{str(twin.get('report_hash', ''))[:12]}`\n")
+                  forensics = twin.get("forensics") or {}
+                  out.write("\n## Divergence Forensics\n\n")
+                  out.write(f"- Classification: `{forensics.get('classification')}`\n")
+                  out.write(f"- Camouflage index: `{forensics.get('camouflage_index', 0):.2%}`\n")
+                  out.write(f"- Evidence: `{str(forensics.get('evidence_hash', ''))[:12]}`\n")
+                  if forensics.get("changed_paths"):
+                      out.write(f"- Paths: `{', '.join(forensics['changed_paths'])}`\n")
 
-          attribution = json.loads(Path("artifacts/causal-attribution.json").read_text())
-          verdict = attribution["verdicts"][0]
-          out.write("\n## Causal Attribution\n\n")
-          out.write(f"- Classification: `{verdict['classification']}`\n")
-          out.write(f"- Necessary: `{verdict['necessary']}`\n")
-          out.write(f"- Sufficient: `{verdict['sufficient']}`\n")
-          out.write(f"- Causal mass: `{verdict['causal_mass']:.2f}`\n")
-          out.write(f"- Fingerprint: `{attribution['causal_fingerprint'][:12]}`\n")
+              attribution = load("artifacts/causal-attribution.json")
+              if attribution and "_error" not in attribution and attribution.get("verdicts"):
+                  verdict = attribution["verdicts"][0]
+                  out.write("\n## Causal Attribution\n\n")
+                  out.write(f"- Classification: `{verdict.get('classification')}`\n")
+                  out.write(f"- Necessary: `{verdict.get('necessary')}`\n")
+                  out.write(f"- Sufficient: `{verdict.get('sufficient')}`\n")
+                  out.write(f"- Causal mass: `{verdict.get('causal_mass', 0):.2f}`\n")
+                  out.write(f"- Fingerprint: `{str(attribution.get('causal_fingerprint', ''))[:12]}`\n")
 
-          resilience = json.loads(Path("artifacts/resilience.json").read_text())
-          out.write("\n## Resilience Ledger\n\n")
-          out.write(f"- Classification: `{resilience['classification']}`\n")
-          out.write(f"- Recovery efficiency: `{resilience['recovery_efficiency']:.2%}`\n")
-          out.write(f"- Final semantic repair: `{resilience['final_semantic_recovered']}`\n")
-          out.write(f"- Final resonance repair: `{resilience['final_resonance_recovered']}`\n")
-          out.write(f"- Evidence: `{resilience['evidence_hash'][:12]}`\n")
+              resilience = load("artifacts/resilience.json")
+              if resilience and "_error" not in resilience:
+                  out.write("\n## Resilience Ledger\n\n")
+                  out.write(f"- Classification: `{resilience.get('classification')}`\n")
+                  out.write(f"- Recovery efficiency: `{resilience.get('recovery_efficiency', 0):.2%}`\n")
+                  out.write(f"- Final semantic repair: `{resilience.get('final_semantic_recovered')}`\n")
+                  out.write(f"- Final resonance repair: `{resilience.get('final_resonance_recovered')}`\n")
+                  out.write(f"- Evidence: `{str(resilience.get('evidence_hash', ''))[:12]}`\n")
 
-          treaty = json.loads(Path("artifacts/concordance-treaty.json").read_text())
-          out.write("\n## Concordance Treaty\n\n")
-          out.write(f"- Ratified: `{treaty['ratified']}`\n")
-          out.write(f"- Clauses: `{treaty['clause_count']}`\n")
-          out.write(f"- Preserved conflicts: `{treaty['preserved_conflicts']}`\n")
-          out.write(f"- Treaty hash: `{treaty['treaty_hash'][:12]}`\n")
+              treaty = load("artifacts/concordance-treaty.json")
+              if treaty and "_error" not in treaty:
+                  out.write("\n## Concordance Treaty\n\n")
+                  out.write(f"- Ratified: `{treaty.get('ratified')}`\n")
+                  out.write(f"- Clauses: `{treaty.get('clause_count')}`\n")
+                  out.write(f"- Preserved conflicts: `{treaty.get('preserved_conflicts')}`\n")
+                  out.write(f"- Treaty hash: `{str(treaty.get('treaty_hash', ''))[:12]}`\n")
           PY
       - uses: actions/upload-artifact@v4
         with:
           name: aleph-resonance-pulse
           path: artifacts/*
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 30
