@@ -2,7 +2,7 @@
 
 Keeps ALEPH moving: next wave numbers, organ gaps, scaffold pressure,
 roadmap continuity without breaking dual-track.
-Motto: \"Growth without rupture.\"
+Motto: "Growth without rupture."
 """
 from __future__ import annotations
 
@@ -61,10 +61,10 @@ class Helix:
         n = int(survey["next_free"])
         theme = (theme or "continuity_braid").strip().lower().replace(" ", "_")[:40]
         backlog = [
+            {"slug": "merge_readiness_score", "why": "Score open PRs: organism gates vs external noise"},
             {"slug": "ci_sentinel_bridge", "why": "Wire AEGIS findings into path-filtered lab gates"},
             {"slug": "wave_gap_healer", "why": "Optional fill for recent_gaps without forcing sequential IDs"},
-            {"slug": "copilot_council_pulse", "why": "Scheduled council brief -> docs/LAB_HEARTBEAT.json"},
-            {"slug": "merge_readiness_score", "why": "Score open PRs: organism gates vs external noise"},
+            {"slug": "caption_pipeline_bridge", "why": "QUILL captions -> content_output silent frames for @CoodingLooop"},
         ]
         pick = backlog[n % len(backlog)]
         proposal = {
