@@ -1,1 +1,1 @@
-"""Chrono Forge laboratory."""
+"""Lab package."""

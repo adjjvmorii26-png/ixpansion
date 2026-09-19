@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ix: stable shell",
+      "type": "shell",
+      "command": "bash -lc 'source scripts/ix_shell.sh && exec bash -i'",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}",
+          "IXPANSION_ROOT": "${workspaceFolder}"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ix: council",
+      "type": "shell",
+      "command": "python lab/ops/copilots/council.py",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": { "PYTHONPATH": "${workspaceFolder}" }
+      },
+      "problemMatcher": []
+    }
+  ]
+}
