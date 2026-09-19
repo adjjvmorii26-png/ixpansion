@@ -12,17 +12,35 @@
           "IXPANSION_ROOT": "${workspaceFolder}"
         }
       },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true
-      },
+      "presentation": { "reveal": "always", "panel": "new", "focus": true },
       "problemMatcher": []
     },
     {
       "label": "ix: council",
       "type": "shell",
       "command": "python lab/ops/copilots/council.py",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": { "PYTHONPATH": "${workspaceFolder}" }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ix: local dashboard",
+      "type": "shell",
+      "command": "python lab/ops/dashboard_server.py --host 127.0.0.1 --port 8765",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": { "PYTHONPATH": "${workspaceFolder}" }
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "ix: snapshot",
+      "type": "shell",
+      "command": "python lab/ops/status_snapshot.py",
       "options": {
         "cwd": "${workspaceFolder}",
         "env": { "PYTHONPATH": "${workspaceFolder}" }
