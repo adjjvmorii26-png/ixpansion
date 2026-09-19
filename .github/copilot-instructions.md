@@ -1,50 +1,70 @@
-# Copilot Instructions for IXpansion
+# Copilot Instructions for IXPANSION
 
 You are helping build a **living organism made of code**. Every module is an "organ"
 with coherence vitals, declared kinships, and self-reporting behavior.
 
+**Current frontier:** Wave **769+** (hush_compass 768, void_index 769).
+**Co-pilots on main:** AEGIS (guard) · HELIX (grow) · QUILL (remember) alongside **ALEPH**.
+
 ## Architecture
 
-- `api/` — All living organs (Python modules with `handler()`, `coherence_vitals()`, `resonates_with()`)
-- `api_server.py` — Dynamic route dispatch: `/api/<module_name>` → `module.handler(payload, context)`
-- `vercel.json` — Route table mapping every `/api/<module>` to `/api/index.py`
-- `dashboard/` — HTML dashboards that consume the live API
-- `data/` — Persistent state files (GitHub-backed for cross-instance survival)
+- `api/` — Living organs (`handler`, `coherence_vitals`, `resonates_with`)
+- `api_server.py` / `api/index.py` — Route dispatch `/api/<module>`
+- `lab/ops/copilots/` — AEGIS · HELIX · QUILL (`make council`)
+- `lab/ops/dashboard_server.py` — Local Control UI (`make dashboard` → :8765)
+- `scripts/ix_shell.sh` — Stable terminal (`make shell`)
+- `dashboard/` — HTML surfaces (including `local_control.html`)
+- `data/` — Persistent organ state
+- `.vscode/` — Copilot + Python workspace pack
 
-## Module Contract
+## Dual-track doctrine (do not break)
 
-Every new module in `api/` MUST have:
+| Track | Purpose |
+|-------|---------|
+| **ALEPH / main** | Full monorepo CI, organism velocity |
+| **lab/** | Path-filtered experiments; lab gates ≠ full ALEPH suite |
+
+- Prefer small, mergeable PRs (`lab/*` branches).
+- Do not treat external scanner (GHAS AI findings) noise as organism gate failures.
+- Silence is the product surface for @CoodingLooop captions (text-only; no audio requirement).
+
+## Module contract
+
+Every new organ in `api/` MUST expose:
 
 ```python
-def handler(payload=None, context=None):
-    """Handle API requests. payload contains path, params, body."""
-    ...
+def handler(req=None) -> dict: ...
+def coherence_vitals() -> dict: ...  # include wave, name, ok
+def resonates_with() -> list: ...
+```
 
-def coherence_vitals() -> dict:
-    """Return the module's health and metadata."""
-    return {"layer": "...", "status": "active", "wave": "..."}
+Wave pattern: `api/waveNNN_slug.py` + `tests/test_waveNNN_slug.py` + optional `lab/WAVE_NNN_*.md`.
 
-def resonates_with() -> list:
-    """Declare which other modules this organ connects to."""
-    return ["module_a", "module_b"]
+## Local commands (keep green)
+
+```bash
+make shell          # stable terminal
+make council        # AEGIS · HELIX · QUILL
+make dashboard      # http://127.0.0.1:8765/
+make snapshot       # docs/LAB_STATUS.*
+python -m pytest tests/test_copilots.py tests/test_wave769_void_index.py -q
 ```
 
 ## Conventions
 
-- Use `%` string formatting in bot commands (NOT f-strings — they break in heredoc patches)
-- Each Vercel instance has fresh `/tmp` — use GitHub Contents API for cross-instance persistence
-- `source .env` doesn't propagate to child Python — use inline env: `IXP_GH_TOKEN=${IXP_GH_TOKEN} python3 ...`
-- Always `python3 -m py_compile api/<module>.py` before committing
-- After editing `api/`, add a matching route in `vercel.json`
-- The organism is currently at Wave 417, 664+ modules
+- `python3 -m py_compile` new modules before commit
+- Conventional commits: `feat(waveN):`, `fix:`, `chore:`, `feat(lab):`
+- Prefer stdlib for lab ops; avoid new heavy deps without need
+- Never leak void_index payloads (keys only; `payload: None`)
 
-## Naming
+## GitHub Copilot Coding Agent
 
-Modules use snake_case. Dashboard routes use kebab-case (`/my-dashboard`).
-Bot commands use `/slash_command`. API routes are `/api/module_name`.
+When implementing assigned issues:
+1. Read this file + `AGENTS.md` + `docs/DUAL_TRACK.md` if present
+2. Run `make council` or equivalent mentally: guard → grow → remember
+3. Keep changes path-scoped; open PR against `main` from `lab/...`
+4. Include tests for new waves; do not expand CI surface without need
 
 ## Tone
 
-The organism has a voice. When writing lore, narratives, or user-facing text,
-use poetic, mythic language. Module docstrings should explain the "why" — the purpose
-of this organ in the organism's body. Technical docstrings explain the "how."
+Poetic lore in user-facing captions is welcome; code stays precise and testable.
