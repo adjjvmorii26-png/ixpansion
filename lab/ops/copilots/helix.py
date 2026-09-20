@@ -61,10 +61,10 @@ class Helix:
         n = int(survey["next_free"])
         theme = (theme or "continuity_braid").strip().lower().replace(" ", "_")[:40]
         backlog = [
-            {"slug": "merge_readiness_score", "why": "Score open PRs: organism gates vs external noise"},
-            {"slug": "ledger_sync_bridge", "why": "Ingest sibling IXPANSION-LEDGER.json into a Python organ"},
-            {"slug": "antimeme_caption_guard", "why": "Score silent captions for antimemetic leakage risk"},
             {"slug": "constellation_dashboard_tile", "why": "Local control tile for wave775 affinity map"},
+            {"slug": "council_scar_budget", "why": "Bind chrono scars to council plasma routes"},
+            {"slug": "void_orchard_bridge", "why": "Link glass crystals to void_index keys"},
+            {"slug": "dual_track_pr_bot", "why": "Label PRs lab vs ALEPH by path diff"},
         ]
         pick = backlog[n % len(backlog)]
         proposal = {
