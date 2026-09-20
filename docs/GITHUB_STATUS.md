@@ -1,19 +1,15 @@
-# GitHub Status · 2026-09-19 (track fix)
+# GitHub Status · 2026-09-20 (hygiene fix)
 
-## Main
-| Item | State |
+## Actions taken
+| Item | Result |
 |------|--------|
-| **HEAD** | VS Code Copilot pack (#142) + wave769 void_index (#141) |
-| **Open PRs** | Queue cleared (stale #134/#139 closed) |
-| **Council** | AEGIS green · HELIX next ~wave770 |
+| **PR #146** | **Closed** — duplicate Pages workflow would upload repo root; existing `deploy-pages.yml` already deploys `dashboard/` |
+| Free hosting docs | Landed as `docs/FREE-HOSTING-MATRIX.md` without unsafe workflow |
+| pytest | Filter `PytestConfigWarning` when `pytest-asyncio` missing in minimal envs |
+| HELIX | Backlog advanced past shipped 770–775 themes |
+| Waves 773–775 | Import + tests green |
 
-## Tooling on main
-- `make shell` / `make council` / `make dashboard` / `make snapshot`
-- Lab Council Pulse CI (live AEGIS·HELIX·QUILL)
-- `.github/copilot-instructions.md` + `docs/GITHUB_COPILOT_AGENTS.md`
+## Main frontier
+wave775 constellation_affinity · wave774 gap healer · wave773 sentinel
 
-## GitHub AI
-Enable Copilot coding agent on the repo, then assign issues to Copilot for background PRs.
-See `docs/GITHUB_COPILOT_AGENTS.md`.
-
-Caption: `on-track · void_index · copilot · local`
+Caption: `hygiene · pages · helix · silence`
