@@ -62,9 +62,9 @@ class Helix:
         theme = (theme or "continuity_braid").strip().lower().replace(" ", "_")[:40]
         backlog = [
             {"slug": "merge_readiness_score", "why": "Score open PRs: organism gates vs external noise"},
-            {"slug": "ci_sentinel_bridge", "why": "Wire AEGIS findings into path-filtered lab gates"},
-            {"slug": "wave_gap_healer", "why": "Optional fill for recent_gaps without forcing sequential IDs"},
-            {"slug": "caption_pipeline_bridge", "why": "QUILL captions -> content_output silent frames for @CoodingLooop"},
+            {"slug": "ledger_sync_bridge", "why": "Ingest sibling IXPANSION-LEDGER.json into a Python organ"},
+            {"slug": "antimeme_caption_guard", "why": "Score silent captions for antimemetic leakage risk"},
+            {"slug": "constellation_dashboard_tile", "why": "Local control tile for wave775 affinity map"},
         ]
         pick = backlog[n % len(backlog)]
         proposal = {

@@ -32,6 +32,10 @@ testpaths = [
 ]
 pythonpath = ["."]
 asyncio_mode = "auto"
+# Quiet when pytest-asyncio is not installed in minimal envs
+filterwarnings = [
+    "ignore::pytest.PytestConfigWarning",
+]
 
 [tool.setuptools.packages.find]
 include = ["constellation*", "omega_prime*", "mycelium*", "ixpansion*"]
