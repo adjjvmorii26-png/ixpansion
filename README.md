@@ -10,6 +10,19 @@
 
 IXpansion is a **self-evolving computational organism** — a living codebase that grows across 15 waves, spawning new modules, dashboards, and capabilities with each iteration. It is not a static project. It breathes.
 
+## ✦ Experimental Frontier
+
+### Wave 900 — Synchronicity Engine
+
+A replayable coincidence field that compares supplied events, exposes semantic
+affinities, and visualizes "collisions" between otherwise separate signals.
+It deliberately reports **association, not causation**.
+
+- API: `POST /api/wave900_synchronicity_engine` with `{"action":"field","events":[...]}`
+- Dashboard: `dashboard/synchronicity.html`
+- Deterministic fingerprints make experiments reproducible.
+- Designed to resonate with Semantic Loom, Echo Stratigraphy, Dream Synthesis, and Resonance Ledger.
+
 ## 🌊 Wave Timeline
 
 | Wave | Name | Realm | Description |
