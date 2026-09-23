@@ -23,6 +23,8 @@ DEFAULT_QUEUE = [
     {"pr": 174, "wave": 902, "title": "hypothesis_forge", "track": "experiment"},
     {"pr": 175, "wave": 903, "title": "experiment_chamber", "track": "experiment"},
     {"pr": 176, "wave": 904, "title": "evidence_ledger", "track": "experiment"},
+    {"pr": 178, "wave": 905, "title": "lineage_graph", "track": "experiment"},
+    {"pr": 179, "wave": 906, "title": "evolution_map", "track": "experiment"},
 ]
 
 DEFAULT = {
