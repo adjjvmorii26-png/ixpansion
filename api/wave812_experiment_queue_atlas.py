@@ -2,6 +2,7 @@
 
 Atlas of open experimental PR waves (900-series and lab) for dual-track hygiene.
 Records queue snapshot; does not merge — only maps and ranks.
+Supports prune_landed for waves already present under api/.
 
 Silence is the product surface. Lab gates ≠ ALEPH CI.
 """
@@ -90,6 +91,7 @@ def resonates_with() -> list:
         "wave808_discovery_cycle_engine",
         "wave809_meta_experiment_loop",
         "wave810_question_triad",
+        "wave937_experiment_track_hygiene",
     ]
 
 
@@ -130,6 +132,33 @@ def handler(req=None) -> dict:
             "status": "ranked",
             "order": q,
             "next_merge_candidate": q[0] if q else None,
+            "payload": None,
+            "audio": False,
+            "surface": "silence",
+        }
+
+    if action == "prune_landed":
+        import re
+        present = set()
+        api = ROOT / "api"
+        if api.is_dir():
+            for path in api.glob("wave*.py"):
+                m = re.match(r"wave(\d+)_", path.name)
+                if m:
+                    present.add(int(m.group(1)))
+        q = list(st.get("queue") or DEFAULT_QUEUE)
+        kept = [x for x in q if int(x.get("wave") or 0) not in present]
+        removed = [x for x in q if int(x.get("wave") or 0) in present]
+        st["queue"] = kept
+        st["status"] = "pruned"
+        st["last_ts"] = _now()
+        _save(st)
+        return {
+            **coherence_vitals(),
+            "status": "pruned",
+            "removed": removed,
+            "queue": kept,
+            "advice": "PRs for removed waves may still be open — close manually after CI check",
             "payload": None,
             "audio": False,
             "surface": "silence",
