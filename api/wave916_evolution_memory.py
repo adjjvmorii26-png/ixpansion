@@ -13,12 +13,15 @@ def _fp(v:Any)->str:
 def build(observations:List[Dict[str,Any]]|None=None)->Dict[str,Any]:
     items=observations or []; memories=[]
     for i,x in enumerate(items):
+        source=x.get("source")
+        if source is None or str(source).strip()=="":
+            raise ValueError("source is required for experimental memory provenance")
         memories.append({
             "id":str(x.get("id") or f"memory-{i:04d}"),
             "kind":str(x.get("kind","observation")),
             "content":x.get("content"),
             "status":str(x.get("status","unknown")),
-            "source":x.get("source"),
+            "source":source,
             "lineage":sorted(str(v) for v in (x.get("lineage") or [])),
         })
     memories.sort(key=lambda x:x["id"])
@@ -29,7 +32,14 @@ def build(observations:List[Dict[str,Any]]|None=None)->Dict[str,Any]:
 def recall(memory:Dict[str,Any],query:str)->Dict[str,Any]:
     q=str(query).lower()
     content=str(memory.get("content","")).lower()
-    return {"match":q in content,"memory_id":memory.get("id"),"query":query}
+    return {
+        "match":q in content,
+        "memory_id":memory.get("id"),
+        "query":query,
+        "status":memory.get("status","unknown"),
+        "source":memory.get("source"),
+        "lineage":list(memory.get("lineage") or []),
+    }
 
 def handler(payload:Dict[str,Any]|None=None)->Dict[str,Any]:
     payload=payload or {}; action=payload.get("action","status")
