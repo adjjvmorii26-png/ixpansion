@@ -38,6 +38,13 @@ def _functions(tree: ast.AST) -> set[str]:
     }
 
 
+def _display_path(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
 def inspect_file(path: Path) -> dict[str, Any]:
     try:
         source = path.read_text(encoding="utf-8")
@@ -45,7 +52,7 @@ def inspect_file(path: Path) -> dict[str, Any]:
     except (OSError, SyntaxError) as exc:
         return {
             "name": _module_name(path),
-            "path": str(path.relative_to(ROOT)),
+            "path": _display_path(path),
             "valid": False,
             "error": str(exc)[:160],
         }
@@ -57,7 +64,7 @@ def inspect_file(path: Path) -> dict[str, Any]:
     ))
     return {
         "name": _module_name(path),
-        "path": str(path.relative_to(ROOT)),
+        "path": _display_path(path),
         "valid": True,
         "contract": {
             "handler": "handler" in funcs,
