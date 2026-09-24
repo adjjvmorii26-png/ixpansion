@@ -23,11 +23,7 @@ def build(records: List[Dict[str, Any]] | None = None) -> Dict[str, Any]:
         by_id.setdefault(rid, record)
 
     ids = sorted(by_id)
-    parent = {
-        rid: str(record["parent"])
-        for rid, record in by_id.items()
-        if record.get("parent")
-    }
+    parent = {rid: str(record["parent"]) for rid, record in by_id.items() if record.get("parent")}
 
     children: Dict[str, List[str]] = {rid: [] for rid in ids}
     for child, ancestor in parent.items():
@@ -58,8 +54,7 @@ def build(records: List[Dict[str, Any]] | None = None) -> Dict[str, Any]:
 
     branch_points = [
         {"node": rid, "children": len(children[rid]), "children_ids": children[rid]}
-        for rid in ids
-        if len(children[rid]) > 1
+        for rid in ids if len(children[rid]) > 1
     ]
     leaves = sorted(rid for rid in ids if not children.get(rid))
 
@@ -92,7 +87,7 @@ def build(records: List[Dict[str, Any]] | None = None) -> Dict[str, Any]:
         "leaves": leaves,
         "branch_points": branch_points,
         "depth": {rid: depth[rid] for rid in ids},
-        "terminal_paths": sorted(terminal_paths, key=lambda item: item["leaf"]),
+        "terminal_paths": sorted(terminal_paths, key=lambda item: (-item["depth"], item["path"])),
         "orphan_parents": orphan_parents,
         "replayable": True,
     }
@@ -104,12 +99,7 @@ def handler(payload: Dict[str, Any] | None = None) -> Dict[str, Any]:
     if action == "build":
         return build(payload.get("records", []))
     if action == "status":
-        return {
-            "status": "experimental",
-            "wave": 907,
-            "name": "branch_atlas",
-            "purpose": "descriptive branch topology",
-        }
+        return {"status": "experimental", "wave": 907, "name": "branch_atlas", "purpose": "descriptive branch topology"}
     return {"error": "unknown action", "available": ["status", "build"]}
 
 
