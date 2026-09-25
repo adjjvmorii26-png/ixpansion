@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# IXPANSION pre-push — run matching wave unit tests when present.
+set -euo pipefail
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+changed=$(git diff --name-only "@{upstream}"...HEAD 2>/dev/null || git diff --name-only origin/main...HEAD 2>/dev/null || true)
+waves=$(echo "$changed" | grep -E '^api/wave[0-9]+_.*\.py$' || true)
+if [ -n "$waves" ]; then
+  tests=""
+  for f in $waves; do
+    num=$(basename "$f" | sed -n 's/^wave\([0-9]*\)_.*/\1/p')
+    [ -z "$num" ] && continue
+    for t in tests/test_wave${num}_*.py tests/test_wave${num}.py; do
+      [ -f "$t" ] && tests="$tests $t"
+    done
+  done
+  if [ -n "$tests" ]; then
+    echo "pre-push: pytest$tests"
+    PYTHONPATH=.:api python3 -m pytest -q $tests --tb=line || {
+      echo "pre-push: tests failed — abort push" >&2
+      exit 1
+    }
+  else
+    echo "pre-push: wave files changed, no local tests found (ok)"
+  fi
+fi
+
+exit 0
