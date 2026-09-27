@@ -24,7 +24,7 @@ def build(records: List[Dict[str, Any]] | None = None) -> Dict[str, Any]:
     for v in children.values(): v.sort()
     roots=sorted(rid for rid in ids if rid not in set(parents))
     leaves=sorted(rid for rid in ids if not children.get(rid))
-    divergence=sorted({"node":rid,"children":len(children[rid])} for rid in ids if len(children[rid])>1,
+    divergence=sorted(({"node":rid,"children":len(children[rid])} for rid in ids if len(children[rid])>1),
                       key=lambda x:x["node"])
     convergence=[]
     for rid in ids:

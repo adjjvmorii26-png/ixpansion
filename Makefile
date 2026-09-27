@@ -9,11 +9,11 @@ test-full:
 lint:
 	@find . -type f -name '*.py' \
 		! -path './backup/*' ! -path '*/__pycache__/*' -print0 | \
-		xargs -0 -n1 python3 -m py_compile
+		xargs -0 -P 8 -n 30 python3 -m py_compile
 	@echo "All Python files compile."
 
 clean:
-	@find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+	@find . -type d -name '__pycache__' -prune -exec rm -rf {} + 
 	@rm -rf .pytest_cache omega_fractal_engine/.pytest_cache
 
 backup:
