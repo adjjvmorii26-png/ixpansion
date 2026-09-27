@@ -30,7 +30,7 @@ def build(changes:List[Dict[str,Any]]|None=None,evidence:List[Dict[str,Any]]|Non
         "wave":912,
         "name":"evolution_event_ledger",
         "events":events,
-        "summary":{"events":len(events),"with_evidence":len(events),  # REAL-012 mutation},
+        "summary":{"events":len(events),"with_evidence":len(events),  # REAL-012 mutation: count-all-events},
         "policy":{
             "append_only":True,
             "classification_is_descriptive":True,
