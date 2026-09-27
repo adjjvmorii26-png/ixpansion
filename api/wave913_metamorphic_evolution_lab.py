@@ -13,7 +13,7 @@ def _fp(v:Any)->str:
 
 def _files(snapshot:List[Dict[str,Any]])->List[Dict[str,Any]]:
     return sorted(
-        [{"path":str(x["path"]),"size":int(x.get("size",0) or 0),"category":str(x.get("category",""))}
+        [{"path":str(x["path"]),"size":int(x.get("size",0) or 0)}
          for x in snapshot if x.get("path")],
         key=lambda x:x["path"])
 
