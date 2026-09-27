@@ -1,4 +1,4 @@
-from api.wave913_metamorphic_evolution_lab import run
+from api.wave913_metamorphic_evolution_lab import run, identity
 
 def test_reorder_preserves_file_set():
     s=[{"path":"a.py","size":1},{"path":"b.py","size":2}]
@@ -12,3 +12,7 @@ def test_unknown_invariant_is_explicit():
 def test_deterministic():
     s=[{"path":"b.py"},{"path":"a.py"}]
     assert run(s,["reorder"])["fingerprint"]==run(s,["reorder"])["fingerprint"]
+
+def test_identity_has_canonical_path_order():
+    s=[{"path":"b.py","size":2},{"path":"a.py","size":1}]
+    assert [item["path"] for item in identity(s)] == ["a.py","b.py"]
