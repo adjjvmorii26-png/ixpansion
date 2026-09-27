@@ -21,7 +21,7 @@ def identity(snapshot:List[Dict[str,Any]])->List[Dict[str,Any]]:
     return _files(snapshot)
 
 def reorder(snapshot:List[Dict[str,Any]])->List[Dict[str,Any]]:
-    return list(reversed(_files(snapshot)))
+    return _files(snapshot)
 
 TRANSFORMS={"identity":identity,"reorder":reorder}
 
