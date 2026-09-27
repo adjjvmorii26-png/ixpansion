@@ -14,7 +14,7 @@ def _files(s:List[Dict[str,Any]])->List[str]:
     return sorted(str(x["path"]) for x in s if x.get("path"))
 
 def mutate(invariants:List[str]|None=None)->List[Dict[str,Any]]:
-    invariants=sorted(set(invariants or [])); out=[]
+    invariants=sorted(invariants or []); out=[]  # REAL-014 mutation
     for inv in invariants:
         if inv.endswith("_preserved"):
             out.append({"source":inv,"mutation":inv.replace("_preserved","_strict"),"kind":"tighten"})
