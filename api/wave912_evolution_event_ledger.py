@@ -21,7 +21,6 @@ def build(changes:List[Dict[str,Any]]|None=None,evidence:List[Dict[str,Any]]|Non
             "id":str(c.get("id") or f"event-{i:04d}"),
             "path":str(c.get("path","")),
             "kind":str(c.get("kind","unknown")),
-            "classification":str(c.get("classification","unexplained")),
             "evidence_ids":sorted(ids),
         }
         events.append(event)
