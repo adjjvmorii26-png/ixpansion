@@ -12,3 +12,9 @@ def test_unknown_invariant_is_explicit():
 def test_deterministic():
     s=[{"path":"b.py"},{"path":"a.py"}]
     assert run(s,["reorder"])["fingerprint"]==run(s,["reorder"])["fingerprint"]
+
+
+def test_reorder_actually_reverses_canonical_order():
+    s=[{"path":"a.py","size":1},{"path":"b.py","size":2}]
+    out=run(s,["reorder"],["file_set_preserved"])
+    assert out["events"][0]["before_fingerprint"] != out["events"][0]["after_fingerprint"]
