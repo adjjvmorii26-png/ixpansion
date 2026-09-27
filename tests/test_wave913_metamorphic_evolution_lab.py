@@ -1,4 +1,4 @@
-from api.wave913_metamorphic_evolution_lab import run
+from api.wave913_metamorphic_evolution_lab import run, reorder
 
 def test_reorder_preserves_file_set():
     s=[{"path":"a.py","size":1},{"path":"b.py","size":2}]
@@ -16,5 +16,5 @@ def test_deterministic():
 
 def test_reorder_actually_reverses_canonical_order():
     s=[{"path":"a.py","size":1},{"path":"b.py","size":2}]
-    out=run(s,["reorder"],["file_set_preserved"])
-    assert out["events"][0]["before_fingerprint"] != out["events"][0]["after_fingerprint"]
+    out=reorder(s)
+    assert [item["path"] for item in out] == ["b.py","a.py"]
