@@ -10,3 +10,9 @@ def test_known_invariants_are_experimental():
 def test_unknown_invariant_stays_unknown():
     out=evaluate([{"path":"a.py"}],["future_rule"])
     assert out["mutations"][0]["outcome"]=="unknown"
+
+def test_unknown_outcome_policy_is_non_failing():
+    out=evaluate([{"path":"a.py"}],["future_rule"])
+    assert out["mutations"][0]["outcome"]=="unknown"
+    assert out["policy"]["unknown_is_preserved"] is True
+    assert out["policy"]["outcomes_are_not_regressions"] is True
