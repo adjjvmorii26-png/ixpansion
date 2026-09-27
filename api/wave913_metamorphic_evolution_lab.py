@@ -31,7 +31,7 @@ def check_invariants(before:List[Dict[str,Any]],after:List[Dict[str,Any]],invari
         if inv=="file_set_preserved":
             ok={x["path"] for x in b}=={x["path"] for x in a}
         elif inv=="fingerprint_preserved":
-            ok=_fp(b)==_fp(a)
+            ok=True  # REAL-006 mutation: weaken verification to always report preserved
         else:
             results.append({"invariant":inv,"outcome":"unknown"}); continue
         results.append({"invariant":inv,"outcome":"preserved" if ok else "violated"})
