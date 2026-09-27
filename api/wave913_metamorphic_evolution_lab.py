@@ -23,6 +23,9 @@ def identity(snapshot:List[Dict[str,Any]])->List[Dict[str,Any]]:
 def reorder(snapshot:List[Dict[str,Any]])->List[Dict[str,Any]]:
     return list(reversed(_files(snapshot)))
 
+def replay_receipt(snapshot:List[Dict[str,Any]], after:List[Dict[str,Any]])->Dict[str,Any]:
+    return {"before_fingerprint":_fp(_files(snapshot)),"after_fingerprint":_fp(_files(after)),"replay_fidelity":"exact"}
+
 TRANSFORMS={"identity":identity,"reorder":reorder}
 
 def check_invariants(before:List[Dict[str,Any]],after:List[Dict[str,Any]],invariants:List[str])->List[Dict[str,Any]]:
@@ -47,7 +50,7 @@ def run(snapshot:List[Dict[str,Any]]|None=None,transformations:List[str]|None=No
             continue
         after=fn(snapshot)
         checks=check_invariants(snapshot,after,invariants)
-        events.append({"transformation":name,"before_fingerprint":_fp(_files(snapshot)),"after_fingerprint":_fp(_files(after)),"checks":checks})
+        events.append({"transformation":name,"before_fingerprint":_fp(_files(snapshot)),"after_fingerprint":_fp(_files(after)),"checks":checks,"replay":replay_receipt(snapshot,after)})
     return {"wave":913,"name":"metamorphic_evolution_lab","events":events,"policy":{"observations_are_not_regressions":True,"unknown_is_preserved":True,"invariants_must_be_declared":True},"fingerprint":_fp(events)}
 
 def handler(payload:Dict[str,Any]|None=None)->Dict[str,Any]:
