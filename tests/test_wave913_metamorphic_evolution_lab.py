@@ -1,4 +1,4 @@
-from api.wave913_metamorphic_evolution_lab import run
+from api.wave913_metamorphic_evolution_lab import check_invariants, run
 
 
 def test_reorder_preserves_file_set():
@@ -17,7 +17,8 @@ def test_deterministic():
     assert run(s,["reorder"])["fingerprint"]==run(s,["reorder"])["fingerprint"]
 
 
-def test_fingerprint_invariant_detects_violation():
-    s=[{"path":"a.py","size":1},{"path":"b.py","size":2}]
-    out=run(s,["reorder"],["fingerprint_preserved"])
-    assert out["events"][0]["checks"][0]["outcome"]=="violated"
+def test_fingerprint_invariant_detects_semantic_change():
+    before=[{"path":"a.py","size":1}]
+    after=[{"path":"a.py","size":99}]
+    out=check_invariants(before,after,["fingerprint_preserved"])
+    assert out[0]["outcome"]=="violated"
