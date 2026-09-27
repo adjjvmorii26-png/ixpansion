@@ -17,7 +17,7 @@ def mutate(invariants:List[str]|None=None)->List[Dict[str,Any]]:
     invariants=sorted(set(invariants or [])); out=[]
     for inv in invariants:
         if inv.endswith("_preserved"):
-            out.append({"source":inv,"mutation":inv.replace("_preserved","_strict"),"kind":"tighten"})
+            out.append({"source":inv,"mutation":inv.replace("_preserved","_strict"),"kind":"lift"}  # REAL-015 mutation)
         else:
             out.append({"source":inv,"mutation":inv+"_preserved","kind":"lift"})
     return out
