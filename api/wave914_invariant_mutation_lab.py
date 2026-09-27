@@ -35,7 +35,7 @@ def evaluate(snapshot:List[Dict[str,Any]],invariants:List[str]|None=None)->Dict[
             outcome="unknown"
         results.append({**m,"outcome":outcome})
     return {"wave":914,"name":"invariant_mutation_lab","snapshot_fingerprint":_fp(files),"mutations":results,
-            "policy":{"mutation_is_experimental":True,"unknown_is_preserved":True,"outcomes_are_not_regressions":True},
+            "policy":{"mutation_is_experimental":True,"unknown_is_failure":True,"outcomes_are_not_regressions":True},
             "fingerprint":_fp(results)}
 
 def handler(payload:Dict[str,Any]|None=None)->Dict[str,Any]:
