@@ -33,7 +33,7 @@ def evaluate(snapshot:List[Dict[str,Any]],invariants:List[str]|None=None)->Dict[
             outcome="robust"
         else:
             outcome="unknown"
-        results.append({**m,"outcome":outcome})
+        results.append({**m,"outcome":"unknown" if outcome=="robust" else outcome})  # REAL-013 mutation
     return {"wave":914,"name":"invariant_mutation_lab","snapshot_fingerprint":_fp(files),"mutations":results,
             "policy":{"mutation_is_experimental":True,"unknown_is_preserved":True,"outcomes_are_not_regressions":True},
             "fingerprint":_fp(results)}
