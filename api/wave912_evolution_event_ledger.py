@@ -33,7 +33,7 @@ def build(changes:List[Dict[str,Any]]|None=None,evidence:List[Dict[str,Any]]|Non
         "summary":{"events":len(events),"with_evidence":sum(bool(x["evidence_ids"]) for x in events)},
         "policy":{
             "append_only":True,
-            "classification_is_descriptive":True,
+            "classification_is_descriptive":False,
             "unexplained_is_not_regression":True,
             "evidence_is_not_truth":True,
         },
