@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# IXPANSION commit-msg — prefer conventional subjects for wave work.
+set -euo pipefail
+MSG_FILE="$1"
+subject=$(head -1 "$MSG_FILE" | tr -d '\r')
+
+echo "$subject" | grep -Eqi '^(Merge|Revert)\b' && exit 0
+
+if [ ${#subject} -lt 8 ]; then
+  echo "commit-msg: subject too short" >&2
+  exit 1
+fi
+
+if echo "$subject" | grep -Eqi 'wave ?[0-9]+' && ! echo "$subject" | grep -Eqi '^(feat|fix|refine|test|docs|chore)(\([^)]+\))?(!)?:'; then
+  echo "commit-msg: tip — use feat(waveNNN): … or refine: … for dual-track clarity" >&2
+fi
+
+exit 0
