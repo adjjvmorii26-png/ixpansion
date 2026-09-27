@@ -12,3 +12,8 @@ def test_preserves_only_known_evidence_links():
 def test_unexplained_is_not_regression():
     out=build([{"path":"a.py","classification":"unexplained"}])
     assert out["policy"]["unexplained_is_not_regression"]
+
+
+def test_policy_contract_is_descriptive():
+    out=build([])
+    assert out["policy"]["classification_is_descriptive"] is True
