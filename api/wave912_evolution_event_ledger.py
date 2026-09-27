@@ -16,7 +16,7 @@ def build(changes:List[Dict[str,Any]]|None=None,evidence:List[Dict[str,Any]]|Non
     evidence_by_id={str(x.get("id")):x for x in evidence if x.get("id") is not None}
     events=[]
     for i,c in enumerate(changes):
-        ids=[str(x) for x in c.get("evidence_ids",[]) if str(x) in evidence_by_id]
+        ids=[str(x) for x in c.get("evidence_ids",[])]  # REAL-011 mutation
         event={
             "id":str(c.get("id") or f"event-{i:04d}"),
             "path":str(c.get("path","")),
