@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# IXPANSION pre-commit — fast local gates (no network).
+set -euo pipefail
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+fail() { echo "pre-commit: $*" >&2; exit 1; }
+
+# 1) Block obvious secrets
+if git diff --cached --name-only | grep -E '(^|/)\.env$|\.pem$|id_rsa|\.p12$' >/dev/null 2>&1; then
+  fail "refusing to commit secret-like paths (.env, *.pem, keys)"
+fi
+if git diff --cached -U0 | grep -E '^\+.*(API_KEY|SECRET_KEY|PRIVATE_KEY|xai-[a-zA-Z0-9]{20,})' >/dev/null 2>&1; then
+  fail "possible secret material in staged diff"
+fi
+
+# 2) Wave organ naming + contract smoke (staged api/wave*.py only)
+STAGED_WAVES=$(git diff --cached --name-only -- 'api/wave*.py' || true)
+if [ -n "$STAGED_WAVES" ]; then
+  echo "$STAGED_WAVES" | while read -r f; do
+    [ -z "$f" ] && continue
+    base=$(basename "$f")
+    echo "$base" | grep -Eq '^wave[0-9]+_[a-z0-9_]+\.py$' || fail "bad wave name: $base (want waveNNN_snake.py)"
+    python3 -m py_compile "$f" 2>/dev/null || fail "py_compile failed: $f"
+    grep -q 'def handler' "$f" || fail "$f missing handler()"
+    grep -q 'def coherence_vitals' "$f" || fail "$f missing coherence_vitals()"
+  done
+fi
+
+# 3) Warn on commits directly to main/master
+branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)
+if [ "$branch" = "main" ] || [ "$branch" = "master" ]; then
+  echo "pre-commit: warning — committing on $branch (prefer lab/* for dual-track)" >&2
+fi
+
+exit 0
