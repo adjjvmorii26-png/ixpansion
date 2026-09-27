@@ -12,3 +12,13 @@ def test_preserves_only_known_evidence_links():
 def test_unexplained_is_not_regression():
     out=build([{"path":"a.py","classification":"unexplained"}])
     assert out["policy"]["unexplained_is_not_regression"]
+
+
+def test_summary_counts_only_events_with_evidence():
+    changes=[
+        {"id":"e1","path":"a.py","evidence_ids":["known"]},
+        {"id":"e2","path":"b.py"},
+    ]
+    out=build(changes,[{"id":"known"}])
+    assert out["summary"]["events"]==2
+    assert out["summary"]["with_evidence"]==1
