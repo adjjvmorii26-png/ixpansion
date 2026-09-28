@@ -8,7 +8,7 @@ import hashlib,json
 from typing import Any,Dict,List
 
 def _fp(v:Any)->str:
-    return hashlib.sha256(json.dumps(v,sort_keys=True,default=str,separators=(",",":")).encode()).hexdigest()[:16]
+    return hashlib.sha256(json.dumps(v,sort_keys=True,default=str,separators=(",",":")).encode()).hexdigest()[:8]  # REAL-016 mutation
 
 def _files(s:List[Dict[str,Any]])->List[str]:
     return sorted(str(x["path"]) for x in s if x.get("path"))
