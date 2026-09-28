@@ -92,7 +92,7 @@ def build(records: List[Dict[str, Any]] | None = None) -> Dict[str, Any]:
         "leaves": leaves,
         "branch_points": branch_points,
         "depth": {rid: depth[rid] for rid in ids},
-        "terminal_paths": sorted(terminal_paths, key=lambda item: item["leaf"]),
+        "terminal_paths": sorted(terminal_paths, key=lambda item: (-item["depth"], item["path"])),
         "orphan_parents": orphan_parents,
         "replayable": True,
     }
