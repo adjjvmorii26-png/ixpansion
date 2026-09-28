@@ -24,7 +24,7 @@ def build(observations: List[Dict[str,Any]]|None=None) -> Dict[str,Any]:
             nodes.setdefault(eid,{"id":eid,"type":"evidence"})
             edges.append({"from":oid,"to":eid,"relation":"supported_by"})
     edges.sort(key=lambda x:(x["from"],x["to"],x["relation"]))
-    ordered=[nodes[k] for k in sorted(nodes)]
+    ordered=sorted(nodes.values(), key=lambda node: (0 if node["type"] == "observation" else 1, node["id"]))
     graph={"nodes":ordered,"edges":edges}
     return {"wave":910,"name":"repository_evidence_graph","graph":graph,
             "node_count":len(ordered),"edge_count":len(edges),
