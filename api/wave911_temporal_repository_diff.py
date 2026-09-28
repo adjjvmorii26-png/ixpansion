@@ -22,7 +22,7 @@ def build(before:List[Dict[str,Any]]|None=None,after:List[Dict[str,Any]]|None=No
     for p in removed: records.append({"path":p,"kind":"removed","status":"changed"})
     for p in changed: records.append({"path":p,"kind":"modified","before":a[p],"after":b[p],"status":"changed"})
     records.sort(key=lambda x:(x["path"],x["kind"]))
-    summary={"added":len(added),"removed":len(removed),"modified":len(changed)}
+    summary={"added":len(added),"removed":len(removed),"modified":len(records)}  # REAL-017 mutation
     return {"wave":911,"name":"temporal_repository_diff","before_fingerprint":_fp(a),"after_fingerprint":_fp(b),"summary":summary,"changes":records,"policy":{"change_is_not_regression":True,"classification_is_descriptive":True,"semantic_behavior_not_inferred":True},"fingerprint":_fp({"before":a,"after":b,"changes":records})}
 
 def handler(payload:Dict[str,Any]|None=None)->Dict[str,Any]:
