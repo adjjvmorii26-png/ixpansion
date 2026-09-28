@@ -10,3 +10,8 @@ def test_known_invariants_are_experimental():
 def test_unknown_invariant_stays_unknown():
     out=evaluate([{"path":"a.py"}],["future_rule"])
     assert out["mutations"][0]["outcome"]=="unknown"
+
+def test_preserved_invariant_mutations_tighten():
+    out=mutate(["file_set_preserved"])
+    assert out[0]["mutation"]=="file_set_strict"
+    assert out[0]["kind"]=="tighten"
