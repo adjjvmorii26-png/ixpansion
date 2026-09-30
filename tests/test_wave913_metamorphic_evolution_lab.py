@@ -12,3 +12,7 @@ def test_unknown_invariant_is_explicit():
 def test_deterministic():
     s=[{"path":"b.py"},{"path":"a.py"}]
     assert run(s,["reorder"])["fingerprint"]==run(s,["reorder"])["fingerprint"]
+
+def test_fingerprint_has_16_hex_characters():
+    out=run([{"path":"a.py"}],["identity"])
+    assert len(out["fingerprint"])==16
