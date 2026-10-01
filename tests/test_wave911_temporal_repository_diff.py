@@ -6,10 +6,11 @@ def test_classifies_added_removed_modified():
     assert {x["kind"] for x in out["changes"]}=={"added","removed","modified"}
 
 def test_normalized_fields_preserve_size_and_category():
-    out=build([], [{"path":"a.py","size":42,"category":"source"}])
-    assert out["changes"][0]["path"]=="a.py"
-    assert out["changes"][0]["status"]=="changed"
-    assert out["after_fingerprint"]
+    out=build([{"path":"a.py","size":1,"category":"source"}],[{"path":"a.py","size":42,"category":"generated"}])
+    modified=out["changes"][0]
+    assert modified["before"]=={"path":"a.py","size":1,"category":"source"}
+    assert modified["after"]=={"path":"a.py","size":42,"category":"generated"}
+    assert modified["status"]=="changed"
 
 def test_replayable():
     x=[{"path":"a.py","size":1}]
