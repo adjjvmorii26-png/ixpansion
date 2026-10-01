@@ -18,3 +18,9 @@ def test_replayable():
 
 def test_change_not_regression_policy():
     assert build([], [{"path":"a.py"}])["policy"]["change_is_not_regression"]
+
+def test_changes_are_canonically_ordered_by_path_then_kind():
+    before=[{"path":"b.py","size":1},{"path":"a.py","size":1}]
+    after=[{"path":"b.py","size":2},{"path":"c.py","size":1}]
+    out=build(before,after)
+    assert [(x["path"],x["kind"]) for x in out["changes"]]==[("a.py","removed"),("b.py","modified"),("c.py","added")]
