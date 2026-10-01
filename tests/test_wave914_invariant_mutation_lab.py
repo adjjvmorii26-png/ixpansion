@@ -14,3 +14,8 @@ def test_unknown_invariant_stays_unknown():
 def test_fingerprint_has_16_hex_characters():
     out=evaluate([{"path":"a.py"}],["file_set_preserved"])
     assert len(out["fingerprint"])==16
+
+def test_preserved_invariant_mutations_tighten():
+    out=mutate(["file_set_preserved"])
+    assert out[0]["mutation"]=="file_set_strict"
+    assert out[0]["kind"]=="tighten"
