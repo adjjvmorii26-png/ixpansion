@@ -11,3 +11,8 @@ def test_replayable():
 
 def test_change_not_regression_policy():
     assert build([], [{"path":"a.py"}])["policy"]["change_is_not_regression"]
+
+def test_semantic_behavior_policy_is_non_inferential():
+    out=build([], [{"path":"a.py"}])
+    assert out["policy"]["semantic_behavior_not_inferred"] is True
+    assert out["policy"]["classification_is_descriptive"] is True
