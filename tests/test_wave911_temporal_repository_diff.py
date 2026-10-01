@@ -5,6 +5,13 @@ def test_classifies_added_removed_modified():
     assert out["summary"]=={"added":1,"removed":1,"modified":1}
     assert {x["kind"] for x in out["changes"]}=={"added","removed","modified"}
 
+def test_normalized_fields_preserve_size_and_category():
+    out=build([{"path":"a.py","size":1,"category":"source"}],[{"path":"a.py","size":42,"category":"generated"}])
+    modified=out["changes"][0]
+    assert modified["before"]=={"path":"a.py","size":1,"category":"source"}
+    assert modified["after"]=={"path":"a.py","size":42,"category":"generated"}
+    assert modified["status"]=="changed"
+
 def test_replayable():
     x=[{"path":"a.py","size":1}]
     assert build(x,x)["fingerprint"]==build(x,x)["fingerprint"]
