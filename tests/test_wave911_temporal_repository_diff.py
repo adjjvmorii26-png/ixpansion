@@ -24,3 +24,9 @@ def test_changes_are_canonically_ordered_by_path_then_kind():
     after=[{"path":"b.py","size":2},{"path":"c.py","size":1}]
     out=build(before,after)
     assert [(x["path"],x["kind"]) for x in out["changes"]]==[("a.py","removed"),("b.py","modified"),("c.py","added")]
+
+
+def test_semantic_behavior_policy_is_non_inferential():
+    out=build([], [{"path":"a.py"}])
+    assert out["policy"]["semantic_behavior_not_inferred"] is True
+    assert out["policy"]["classification_is_descriptive"] is True
