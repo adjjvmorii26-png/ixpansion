@@ -1,4 +1,4 @@
-from api.wave911_temporal_repository_diff import build
+from api.wave911_temporal_repository_diff import build, handler
 
 def test_classifies_added_removed_modified():
     out=build([{"path":"a.py","size":1},{"path":"b.py","size":2}],[{"path":"b.py","size":3},{"path":"c.py","size":4}])
@@ -11,3 +11,6 @@ def test_replayable():
 
 def test_change_not_regression_policy():
     assert build([], [{"path":"a.py"}])["policy"]["change_is_not_regression"]
+
+def test_handler_defaults_to_status():
+    assert handler()=={"wave":911,"name":"temporal_repository_diff","status":"experimental"}
