@@ -30,3 +30,8 @@ def test_semantic_behavior_policy_is_non_inferential():
     out=build([], [{"path":"a.py"}])
     assert out["policy"]["semantic_behavior_not_inferred"] is True
     assert out["policy"]["classification_is_descriptive"] is True
+
+
+def test_handler_defaults_to_status():
+    from api.wave911_temporal_repository_diff import handler
+    assert handler()=={"wave":911,"name":"temporal_repository_diff","status":"experimental"}
