@@ -4,28 +4,20 @@ const DashboardContext = createContext();
 
 const useDashboard = () => useContext(DashboardContext);
 
-const DashboardProvider = ({children, token}) => {
+const DashboardProvider = ({children}) => {
   const [vibeState, setVibeState] = useState(null);
   const [graphData, setGraphData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!token) return;
-    
     const fetchData = async () => {
       setLoading(true);
       try {
-        // Fetch vibe state
-        const vibeResponse = await fetch('/api/vibebot/state', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        const vibeResponse = await fetch('/api/vibebot/state');
         const vibeData = await vibeResponse.json();
         setVibeState(vibeData);
-        
-        // Fetch enhanced graph data
-        const graphResponse = await fetch('/api/emergent_skills/list', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+
+        const graphResponse = await fetch('/api/emergent_skills/list');
         const graphDataResult = await graphResponse.json();
         setGraphData({
           skills: graphDataResult,
@@ -41,7 +33,7 @@ const DashboardProvider = ({children, token}) => {
     fetchData();
     const interval = setInterval(fetchData, 30000);
     return () => clearInterval(interval);
-  }, [token]);
+  }, []);
 
   return (
     <DashboardContext.Provider value={{vibeState, graphData, loading, useDashboard}}>
