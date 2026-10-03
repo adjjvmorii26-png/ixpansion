@@ -15,3 +15,8 @@ def test_empty_query_is_safe():
     out=query({"tokens":{"alpha":["m1"]}},"")
     assert out["memory_ids"]==[]
     assert out["match_count"]==0
+
+
+def test_repeated_query_tokens_are_deduplicated():
+    out=query({"tokens":{"alpha":["m1"],"beta":["m2"]}}, "alpha alpha beta")
+    assert out["tokens"]==["alpha","beta"]
