@@ -39,12 +39,10 @@ jobs:
           
       - name: Create Cloudflare Tunnel
         env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           CF_TUNNEL_TOKEN: ${{ secrets.CF_TUNNEL_TOKEN }}
         run: |
           if [ -n "$CF_TUNNEL_TOKEN" ]; then
-            cloudflared tunnel run --token $CF_TUNNEL_TOKEN &
+            cloudflared tunnel run --token "$CF_TUNNEL_TOKEN" &
             sleep 5
             echo "Tunnel started"
           else
