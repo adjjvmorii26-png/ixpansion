@@ -7,9 +7,9 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 def replay(explanation: Dict[str, Any]) -> Dict[str, Any]:
-    tokens = sorted(str(v) for v in (explanation.get("tokens") or []))
-    matched = sorted(str(v) for v in (explanation.get("matched_memory_ids") or []))
-    missing = sorted(str(v) for v in (explanation.get("missing_tokens") or []))
+    tokens = [str(v) for v in (explanation.get("tokens") or [])]  # REAL-027 mutation: drop replay token ordering
+    matched = [str(v) for v in (explanation.get("matched_memory_ids") or [])]  # REAL-027 mutation: drop replay match ordering
+    missing = [str(v) for v in (explanation.get("missing_tokens") or [])]  # REAL-027 mutation: drop replay missing ordering
     return {
         "wave": 920,
         "query": explanation.get("query", ""),
