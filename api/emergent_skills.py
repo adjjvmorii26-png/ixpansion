@@ -755,6 +755,15 @@ def install_skill_from_plugin(plugin_path):
 
 # CLI entry point
 
+def handler(payload=None, context=None):
+    """Serve the read-only skill registry used by the dashboard."""
+    payload = payload or {}
+    path = payload.get("path", "/list")
+    if path in ("", "/", "/list"):
+        return list_skills()
+    return {"error": "unknown path", "available": ["/list"]}
+
+
 def coherence_vitals():
     return {
         "module": "emergent_skills",
