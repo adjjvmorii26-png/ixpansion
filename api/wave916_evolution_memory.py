@@ -22,7 +22,7 @@ def build(observations:List[Dict[str,Any]]|None=None)->Dict[str,Any]:
             "content":x.get("content"),
             "status":str(x.get("status","unknown")),
             "source":source,
-            "lineage":sorted(str(v) for v in (x.get("lineage") or [])),
+            "lineage":[str(v) for v in (x.get("lineage") or [])],  # REAL-023 mutation: drop canonical lineage ordering
         })
     memories.sort(key=lambda x:x["id"])
     return {"wave":916,"name":"evolution_memory","memories":memories,
