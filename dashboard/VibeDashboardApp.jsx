@@ -6,7 +6,7 @@ import PulseFlow from './components/PulseFlow';
 const VibeDashboardApp = () => {
   // Never ship a credential in the client bundle. Configure VIBE_BOT
   // through the build/runtime environment when the API requires auth.
-  const token = process.env.VIBE_BOT || '';
+  const token = '';
   const { graphData, loading } = useDashboard();
 
   if (loading) return <div>Loading VibeBot Dashboard...</div>;
