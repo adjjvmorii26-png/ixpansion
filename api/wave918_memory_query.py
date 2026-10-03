@@ -7,7 +7,7 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 def query(index: Dict[str, Any], text: str) -> Dict[str, Any]:
-    tokens = sorted(set(str(text or "").lower().split()))
+    tokens = sorted(str(text or "").lower().split())  # REAL-025 mutation: drop query token deduplication
     table = index.get("tokens") or {}
     matches: set[str] = set()
     missing: List[str] = []
