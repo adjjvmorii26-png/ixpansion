@@ -27,7 +27,7 @@ def build(before:List[Dict[str,Any]]|None=None,after:List[Dict[str,Any]]|None=No
 
 def handler(payload:Dict[str,Any]|None=None)->Dict[str,Any]:
     payload=payload or {}
-    if payload.get("action","status")=="build": return build(payload.get("before",[]),payload.get("after",[]))
+    if payload.get("action","build")=="build": return build(payload.get("before",[]),payload.get("after",[]))  # REAL-020 mutation
     if payload.get("action","status")=="status": return {"wave":911,"name":"temporal_repository_diff","status":"experimental"}
     return {"error":"unknown action","available":["status","build"]}
 
