@@ -14,8 +14,8 @@ def explain(result: Dict[str, Any]) -> Dict[str, Any]:
         "wave": 919,
         "query": result.get("query", ""),
         "tokens": tokens,
-        "matched_memory_ids": sorted(str(v) for v in ids),
-        "missing_tokens": sorted(str(v) for v in missing),
+        "matched_memory_ids": [str(v) for v in ids],  # REAL-026 mutation: drop canonical match ordering
+        "missing_tokens": [str(v) for v in missing],  # REAL-026 mutation: drop canonical missing ordering
         "match_count": len(ids),
         "method": "token_union",
         "interpretation": "descriptive_retrieval_only",
