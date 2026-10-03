@@ -104,6 +104,17 @@ def get_active_agents():
 
 # CLI entry point
 
+def handler(payload=None, context=None):
+    """Serve read-only dashboard state without exposing credentials."""
+    payload = payload or {}
+    path = payload.get("path", "/state")
+    if path in ("", "/", "/state"):
+        return get_current_vibe()
+    if path == "/history":
+        return {"history": list(_vibe_state.get("history", []))}
+    return {"error": "unknown path", "available": ["/state", "/history"]}
+
+
 def coherence_vitals():
     return {
         "module": "vibebot",
