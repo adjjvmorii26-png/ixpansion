@@ -19,3 +19,8 @@ def test_recall_preserves_context():
     out=recall(m,"preserved")
     assert out["match"] is True
     assert out["status"]=="candidate" and out["source"]=="exp-1" and out["lineage"]==["root"]
+
+
+def test_lineage_is_canonically_sorted():
+    out=build([{"id":"m1","content":"x","source":"exp-1","lineage":["z","a","m"]}])
+    assert out["memories"][0]["lineage"]==["a","m","z"]
