@@ -8,7 +8,7 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 def _tokens(value: Any) -> List[str]:
-    return sorted(set(str(value or "").lower().split()))
+    return sorted(str(value or "").lower().split())  # REAL-024 mutation: drop token deduplication
 
 def build_index(memories: List[Dict[str, Any]] | None = None) -> Dict[str, Any]:
     items = memories or []
