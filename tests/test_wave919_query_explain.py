@@ -9,3 +9,9 @@ def test_explanation_has_no_ranking_or_confidence():
     assert out["method"]=="token_union"
     assert out["interpretation"]=="descriptive_retrieval_only"
     assert "rank" not in out and "confidence" not in out
+
+
+def test_explanation_canonically_orders_ids_and_missing_tokens():
+    out=explain({"query":"beta alpha","tokens":["beta","alpha"],"memory_ids":["m2","m1"],"missing_tokens":["zeta","alpha"],"match_count":2})
+    assert out["matched_memory_ids"]==["m1","m2"]
+    assert out["missing_tokens"]==["alpha","zeta"]
