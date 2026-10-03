@@ -16,3 +16,8 @@ def test_policy_does_not_rank_or_infer_truth():
     assert policy["descriptive_only"] is True
     assert policy["no_ranking"] is True
     assert policy["no_truth_inference"] is True
+
+
+def test_repeated_content_tokens_are_deduplicated():
+    out=build_index([{"id":"m1","content":"alpha alpha beta"}])
+    assert out["tokens"]["alpha"]==["m1"]
