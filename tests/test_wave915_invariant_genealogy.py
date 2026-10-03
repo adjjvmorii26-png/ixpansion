@@ -11,3 +11,8 @@ def test_derived_from_edge():
 def test_unknown_status_preserved():
     out=build([{"id":"x"}])
     assert out["graph"]["nodes"][0]["status"]=="unknown"
+
+
+def test_origin_provenance_is_preserved():
+    out=build([{"id":"child","origin":"wave914","status":"experimental"}])
+    assert out["graph"]["nodes"][0]["origin"]=="wave914"
