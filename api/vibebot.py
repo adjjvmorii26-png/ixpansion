@@ -6,7 +6,7 @@ import json, time, os, random
 from datetime import datetime, timedelta
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
-VIBE_BOT_TOKEN = os.environ.get("VIBE_BOT_TOKEN", os.environ.get("VIBE_BOT", "9bb7866ec849391842c1f93732109d4883c7e98849060447b98436a202f41a40"))
+VIBE_BOT_TOKEN = os.environ.get("VIBE_BOT_TOKEN") or os.environ.get("VIBE_BOT", "")
 VIBE_CHAT_ID = os.environ.get("VIBE_CHAT_ID", "@adjjvmorii")
 
 VECTOR_FIELDS = [
@@ -63,7 +63,7 @@ def get_current_vibe():
 
 def broadcast_vibe(message=None):
     """Broadcast a vibe pulse via Telegram if configured."""
-    if not VIBE_BOT_TOKEN or VIBE_BOT_TOKEN == "9bb7866ec849391842c1f93732109d4883c7e98849060447b98436a202f41a40":
+    if not VIBE_BOT_TOKEN:
         # In production, use actual token from env
         print(f"🌊 Vibe broadcast: {message or generate_vibe_pulse()}")
         return {"status": "simulated", "vibe": generate_vibe_pulse()}
