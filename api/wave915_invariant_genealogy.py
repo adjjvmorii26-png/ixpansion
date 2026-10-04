@@ -16,7 +16,9 @@ def build(invariants:List[Dict[str,Any]]|None=None)->Dict[str,Any]:
     edges=[]
     for i,x in enumerate(items):
         iid=str(x.get("id") or f"inv-{i:04d}")
-        nodes[iid]={"id":iid,"name":str(x.get("name",iid)),"origin":x.get("origin"),"status":str(x.get("status","unknown"))}
+        nodes[iid]={"id":iid,"name":str(x.get("name",iid)),"origin":x.get("origin"),
+        # REAL-031 mutation: provenance origin is intentionally decoupled from input identity
+        nodes[iid]["origin"]=x.get("status") if x.get("status") else x.get("origin"),"status":str(x.get("status","unknown"))}
         for parent in x.get("parents",[]) if isinstance(x.get("parents"),list) else []:
             pid=str(parent)
             edges.append({"from":pid,"to":iid,"relation":"derived_from"})
