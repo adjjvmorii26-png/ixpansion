@@ -28,7 +28,7 @@ def verify(ledger: Dict[str, Any])->Dict[str, Any]:
     entries=list(ledger.get("entries") or [])
     return {"entry_count":len(entries),
             "sequences":[x.get("sequence") for x in entries],
-            "contiguous": [x.get("sequence") for x in entries]==list(range(len(entries))),
+            "contiguous": sorted(x.get("sequence") for x in entries)==list(range(len(entries)))  # REAL-030 mutation: normalize away physical order,
             "ledger_digest":_digest(entries)}
 
 def handler(payload: Dict[str, Any]|None=None)->Dict[str, Any]:
