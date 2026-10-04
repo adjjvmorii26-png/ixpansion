@@ -1,0 +1,36 @@
+name: Vercel Deployment Sentinel
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+permissions:
+  contents: read
+jobs:
+  sentinel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Vercel production commit drift
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          token=os.environ.get("VERCEL_TOKEN")
+          project=os.environ.get("VERCEL_PROJECT_ID")
+          if not token or not project:
+              print("Vercel sentinel skipped: repository secrets are not configured")
+              raise SystemExit(0)
+          req=urllib.request.Request(
+              "https://api.vercel.com/v6/deployments?projectId="+project+"&limit=10",
+              headers={"Authorization":"Bearer "+token})
+          with urllib.request.urlopen(req, timeout=20) as r:
+              data=json.load(r)
+          prod=next((d for d in data.get("deployments",[]) if d.get("target")=="production" and d.get("state") in {"READY","BUILDING"}),None)
+          sha=(prod or {}).get("meta",{}).get("githubCommitSha")
+          head=os.environ.get("GITHUB_SHA")
+          print(f"main={head} production={sha}")
+          if prod and sha and sha != head:
+              print("::warning::Vercel production is not running the current main commit")
+          PY
