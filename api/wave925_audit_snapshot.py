@@ -8,14 +8,15 @@ import hashlib, json
 from typing import Any, Dict
 
 def snapshot(audit: Dict[str, Any]) -> Dict[str, Any]:
+    sequences = {
+        "added": sorted(str(v) for v in (audit.get("sequences", {}).get("added") or [])),
+        "removed": sorted(str(v) for v in (audit.get("sequences", {}).get("removed") or [])),
+        "changed": sorted(str(v) for v in (audit.get("sequences", {}).get("changed") or [])),
+    }
     data = {
         "status": audit.get("status", "unknown"),
-        "counts": dict(audit.get("counts") or {}),
-        "sequences": {
-            "added": sorted(str(v) for v in (audit.get("sequences", {}).get("added") or [])),
-            "removed": sorted(str(v) for v in (audit.get("sequences", {}).get("removed") or [])),
-            "changed": sorted(str(v) for v in (audit.get("sequences", {}).get("changed") or [])),
-        },
+        "counts": {key: len(values) for key, values in sequences.items()},  # REAL-033 mutation: launder supplied counts through sequences
+        "sequences": sequences,
     }
     raw = json.dumps(data, sort_keys=True, separators=(",", ":"), default=str)
     return {
