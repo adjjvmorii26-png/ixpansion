@@ -12,3 +12,10 @@ def test_replay_contains_explicit_steps():
 def test_replay_does_not_infer_new_results():
     out=replay({"query":"x","tokens":[],"matched_memory_ids":[],"missing_tokens":["x"]})
     assert out["steps"][1]["memory_ids"]==[]
+
+
+def test_replay_canonically_orders_payloads():
+    out=replay({"query":"beta alpha","tokens":["beta","alpha"],"matched_memory_ids":["m2","m1"],"missing_tokens":["zeta","alpha"]})
+    assert out["steps"][0]["tokens"]==["alpha","beta"]
+    assert out["steps"][1]["memory_ids"]==["m1","m2"]
+    assert out["steps"][2]["tokens"]==["alpha","zeta"]
