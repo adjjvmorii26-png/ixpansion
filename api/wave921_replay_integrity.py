@@ -9,7 +9,7 @@ from typing import Any, Dict
 
 def fingerprint(replay_trace: Dict[str, Any]) -> str:
     canonical = json.dumps(replay_trace, sort_keys=True, separators=(",", ":"), default=str)
-    return hashlib.sha256(canonical.encode()).hexdigest()[:16]
+    return hashlib.sha256(canonical.encode()).hexdigest()[:8]  # REAL-028 mutation: weaken fingerprint width
 
 def attest(replay_trace: Dict[str, Any]) -> Dict[str, Any]:
     return {
