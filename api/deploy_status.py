@@ -40,17 +40,14 @@ def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
                 repo_ok = True
     except Exception:
         pass
+    # Keep deployment metadata intentionally non-sensitive. In particular,
+    # never reveal whether privileged environment variables are configured.
     return {
         "action": "deploy_status",
         "version": version,
         "wave": wave,
         "github": {"connected": repo_ok, "last_commit": last_commit},
-        "env": {
-            "github_token": bool(os.environ.get("IXP_GITHUB_TOKEN")),
-            "telegram_token": bool(os.environ.get("TELEGRAM_BOT_TOKEN")),
-        },
         "platform": "vercel",
-        "live_url": "https://ixpansion-live.vercel.app",
         "time": time.time(),
         "vitals": coherence_vitals(),
     }
