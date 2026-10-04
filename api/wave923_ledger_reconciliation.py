@@ -16,7 +16,7 @@ def reconcile(before: Dict[str, Any], after: Dict[str, Any]) -> Dict[str, Any]:
     right = {str(x.get("sequence")): x for x in (after.get("entries") or [])}
     added = sorted(set(right) - set(left), key=lambda x: int(x) if x.isdigit() else x)
     removed = sorted(set(left) - set(right), key=lambda x: int(x) if x.isdigit() else x)
-    changed = sorted(k for k in set(left) & set(right) if _canonical(left[k]) != _canonical(right[k]))
+    changed = sorted(k for k in set(left) & set(right) if _canonical(left[k]) != _canonical(right[k]))\n    changed = sorted(k for k in set(left) & set(right) if left[k].get("fingerprint") != right[k].get("fingerprint"))  # REAL-035 mutation: causal comparison echoes fingerprint only
     return {
         "wave": 923,
         "added_sequences": added,
