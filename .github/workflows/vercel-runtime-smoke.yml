@@ -1,0 +1,101 @@
+name: Vercel Runtime Smoke
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "api/**"
+      - "vercel.json"
+      - "requirements.txt"
+      - "package.json"
+      - ".github/workflows/vercel-runtime-smoke.yml"
+  push:
+    branches: [main]
+    paths:
+      - "api/**"
+      - "vercel.json"
+      - "requirements.txt"
+      - "package.json"
+      - ".github/workflows/vercel-runtime-smoke.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vercel-runtime-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install declared runtime dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Validate Vercel route configuration
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          cfg = json.loads(Path("vercel.json").read_text())
+          routes = cfg.get("routes", [])
+          assert routes, "vercel.json has no routes"
+          assert any(r.get("dest") == "/api/index.py" for r in routes),               "No route targets /api/index.py"
+          print(f"Validated {len(routes)} Vercel routes")
+          PY
+
+      - name: Import Vercel entrypoint
+        run: python -c "import api.index; print('api.index import: OK')"
+
+      - name: Exercise public health contract
+        run: |
+          python - <<'PY'
+          from api.index import handler
+
+          response = handler({"path": "/health"})
+          assert isinstance(response, dict), type(response)
+          assert response.get("status") in {"ok", "healthy", "active"}, response
+          print("health contract: OK")
+          PY
+
+      - name: Exercise module discovery without invoking every module
+        run: |
+          python - <<'PY'
+          import api_server
+
+          registry = getattr(api_server, "MODULE_REGISTRY", {})
+          assert isinstance(registry, dict), type(registry)
+          assert registry, "MODULE_REGISTRY is empty"
+          print(f"module discovery: OK ({len(registry)} modules)")
+          PY
+
+      - name: Compile deployed Python surface
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          errors = []
+          count = 0
+          for path in Path("api").rglob("*.py"):
+              count += 1
+              try:
+                  ast.parse(path.read_text())
+              except SyntaxError as exc:
+                  errors.append(f"{path}: {exc}")
+
+          if errors:
+              print("\n".join(errors))
+              raise SystemExit(1)
+
+          print(f"compiled {count} API Python files successfully")
+          PY
