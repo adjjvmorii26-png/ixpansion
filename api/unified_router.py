@@ -142,6 +142,21 @@ def unified_router_handler(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 handler = unified_router_handler
 
+# --- Compatibility wrapper ---
+# Preserve direct path-style callers without shadowing the unified router.
+def handler(payload=None, context=None):
+    payload = payload or {}
+    if "action" in payload or "module" in payload or "requests" in payload:
+        return unified_router_handler(payload)
+    path = payload.get("path", "/status")
+    if path in ("", "/", "/status"):
+        return unified_router_handler({"action": "status"})
+    if path == "/modules":
+        return unified_router_handler({"action": "modules"})
+    if path == "/health":
+        return unified_router_handler({"action": "health"})
+    return {"error": "unknown", "available": ["/status", "/modules", "/health"]}
+
 # --- Compliance Forge patch (Wave 419) ---
 
 def coherence_vitals() -> dict:
@@ -150,9 +165,3 @@ def coherence_vitals() -> dict:
 def resonates_with() -> list:
     return ["organism_genome", "threadweaver", "organism_will"]
 
-def handler(payload=None, context=None):
-    payload = payload or {}
-    path = payload.get("path", "/status")
-    if path == "/status":
-        return {"action": "status", "module": "unified_router", "status": "active"}
-    return {"error": "unknown", "available": ["/status"]}
