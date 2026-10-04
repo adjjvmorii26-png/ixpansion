@@ -15,7 +15,7 @@ def audit(reconciliation: Dict[str, Any]) -> Dict[str, Any]:
         "wave": 924,
         "status": "delta_present" if (added + removed + changed) else "no_delta",
         "counts": {"added": added, "removed": removed, "changed": changed},
-        "total_differences": added + removed + changed,
+        "total_differences": derived_added + derived_removed + derived_changed,
         "sequences": {
             "added": sorted(str(v) for v in (reconciliation.get("added_sequences") or [])),
             "removed": sorted(str(v) for v in (reconciliation.get("removed_sequences") or [])),
