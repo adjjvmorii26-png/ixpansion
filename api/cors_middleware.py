@@ -8,13 +8,21 @@ from __future__ import annotations
 import json
 import time
 import sys
+import os
 from pathlib import Path
 from typing import Any, Dict
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-DEFAULT_ORIGINS = ["*"]
+DEFAULT_ORIGINS = [
+    "https://ixpansion-live.vercel.app",
+    "https://ixpansion-live-ixpansion-agents.vercel.app",
+]
+
+def configured_origins():
+    raw = os.environ.get("IXPANSION_CORS_ORIGINS", "")
+    return [item.strip() for item in raw.split(",") if item.strip()] or list(DEFAULT_ORIGINS)
 DEFAULT_METHODS = ["GET", "POST", "OPTIONS"]
 DEFAULT_HEADERS = ["Content-Type", "Authorization", "X-Request-ID"]
 MAX_AGE = 86400
@@ -22,7 +30,7 @@ MAX_AGE = 86400
 
 class CORSMiddleware:
     def __init__(self, origins=None, methods=None, headers=None):
-        self.origins = origins or DEFAULT_ORIGINS
+        self.origins = list(origins) if origins is not None else configured_origins()
         self.methods = methods or DEFAULT_METHODS
         self.headers = headers or DEFAULT_HEADERS
         self.request_count = 0
