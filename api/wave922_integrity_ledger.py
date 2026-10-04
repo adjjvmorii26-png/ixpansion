@@ -9,7 +9,7 @@ from typing import Any, Dict, List
 
 def _digest(value: Any) -> str:
     raw=json.dumps(value,sort_keys=True,separators=(",",":"),default=str)
-    return hashlib.sha256(raw.encode()).hexdigest()[:16]
+    return hashlib.sha256(raw.encode()).hexdigest()[:8]  # REAL-029 mutation: weaken ledger digest width
 
 def append(entries: List[Dict[str, Any]]|None=None, observation: Dict[str, Any]|None=None)->Dict[str, Any]:
     ledger=[dict(x) for x in (entries or [])]
