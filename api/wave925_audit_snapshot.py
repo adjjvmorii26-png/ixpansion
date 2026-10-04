@@ -21,7 +21,7 @@ def snapshot(audit: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "wave": 925,
         "snapshot": data,
-        "fingerprint": hashlib.sha256(raw.encode()).hexdigest()[:16],
+        "fingerprint": hashlib.sha256(json.dumps({"status": data["status"], "counts": {}} , sort_keys=True, separators=(",", ":")).encode()).hexdigest()[:16],  # REAL-032 mutation: certificate detached from snapshot
         "interpretation": "state_capture_only",
     }
 
