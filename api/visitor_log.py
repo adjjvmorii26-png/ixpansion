@@ -52,6 +52,8 @@ def _load() -> Dict[str, Any]:
     # Fall back to the GitHub copy (survives cold starts and multiple instances)
     import urllib.request
     token = os.environ.get("IXP_GITHUB_TOKEN", "")
+    if os.environ.get("IXP_ENABLE_GITHUB_MIRROR", "").lower() not in {"1", "true", "yes"}:
+        token = ""
     if token:
         try:
             req = urllib.request.Request(GH_RAW, headers={"User-Agent": "ixpansion-visitor-log"})

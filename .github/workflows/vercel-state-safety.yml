@@ -1,0 +1,37 @@
+name: Vercel State Safety
+on:
+  pull_request:
+    branches: [main]
+    paths: ["api/**", ".github/workflows/vercel-state-safety.yml"]
+  push:
+    branches: [main]
+    paths: ["api/**", ".github/workflows/vercel-state-safety.yml"]
+permissions:
+  contents: read
+jobs:
+  state-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: python -m pip install -r requirements.txt
+      - run: python -m compileall -q api
+      - name: Verify CORS is not wildcard by default
+        run: |
+          python - <<'PY'
+          from api.cors_middleware import CORSMiddleware
+          m = CORSMiddleware()
+          assert "*" not in m.origins
+          assert "https://ixpansion-live.vercel.app" in m.origins
+          assert m.apply("https://evil.example")["Access-Control-Allow-Origin"] == ""
+          print("CORS policy: OK")
+          PY
+      - name: Verify visitor GitHub mirror is opt-in
+        run: |
+          python - <<'PY'
+          import api.visitor_log as v
+          assert not v.GITHUB_MIRROR_ENABLED
+          print("GitHub mirror default: disabled")
+          PY
