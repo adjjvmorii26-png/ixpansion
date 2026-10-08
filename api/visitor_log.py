@@ -52,7 +52,9 @@ def _load() -> Dict[str, Any]:
     # Fall back to the GitHub copy (survives cold starts and multiple instances)
     import urllib.request
     token = os.environ.get("IXP_GITHUB_TOKEN", "")
-    if os.environ.get("IXP_ENABLE_GITHUB_MIRROR", "").lower() not in {"1", "true", "yes"}:
+    GITHUB_MIRROR_ENABLED = os.environ.get("IXP_ENABLE_GITHUB_MIRROR", "").lower() in {"1", "true", "yes"}
+
+if not GITHUB_MIRROR_ENABLED:
         token = ""
     if token:
         try:
