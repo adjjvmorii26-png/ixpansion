@@ -1942,7 +1942,7 @@ def application(environ: Dict[str, Any], start_response):
     start_response("200 OK", [
         ("Content-Type", "application/json"),
         ("Content-Length", str(len(response_body))),
-        ("Access-Control-Allow-Origin", "*"),
+        ("Access-Control-Allow-Origin", origin),
     ])
     return [response_body]
 
