@@ -28,6 +28,16 @@ DEFAULT_HEADERS = ["Content-Type", "Authorization", "X-Request-ID"]
 MAX_AGE = 86400
 
 
+
+
+def allow_origin(origin: str | None, origins: list | None = None) -> str:
+    """Return an explicit allowlisted origin, never a wildcard."""
+    origin = (origin or "").strip()
+    allowed = origins if origins is not None else configured_origins()
+    if not origin or origin == "*" or "*" in allowed:
+        return ""
+    return origin if origin in allowed else ""
+
 class CORSMiddleware:
     def __init__(self, origins=None, methods=None, headers=None):
         self.origins = list(origins) if origins is not None else configured_origins()
