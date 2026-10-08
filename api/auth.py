@@ -27,6 +27,21 @@ sys.path.insert(0, str(ROOT))
 USAGE_FILE = ROOT / ".runtime" / "usage.json"
 KEYS_FILE = ROOT / ".runtime" / "api_keys.json"
 
+# Persistence is an explicit deployment contract. Local JSON is intentionally
+# limited to development/test use; serverless production must name a durable
+# adapter before mutable auth state can be written.
+PERSISTENCE_BACKEND = os.environ.get("IXPANSION_AUTH_STORE", "").strip().lower()
+SERVERLESS = bool(os.environ.get("VERCEL") or os.environ.get("NOW_REGION"))
+
+
+def _assert_persistence_contract() -> None:
+    if SERVERLESS and PERSISTENCE_BACKEND not in {"supabase", "postgres", "external"}:
+        raise RuntimeError(
+            "auth persistence is not configured for serverless production; "
+            "set IXPANSION_AUTH_STORE to a supported durable backend"
+        )
+
+
 TIERS = {
     "free": {
         "name": "Free",
@@ -67,6 +82,7 @@ BASIC_EXPERIMENTS = {
 
 
 def _ensure_files():
+    _assert_persistence_contract()
     USAGE_FILE.parent.mkdir(parents=True, exist_ok=True)
     try:
         if not KEYS_FILE.exists():
