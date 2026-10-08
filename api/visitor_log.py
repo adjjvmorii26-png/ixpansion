@@ -40,6 +40,9 @@ def _hash(*parts):
     return hashlib.sha256("|".join(str(p) for p in parts).encode()).hexdigest()[:12]
 
 
+GITHUB_MIRROR_ENABLED = os.environ.get("IXP_ENABLE_GITHUB_MIRROR", "").lower() in {"1", "true", "yes"}
+
+
 def _load() -> Dict[str, Any]:
     # Try tmp first (writable on Vercel), then repo path (local dev)
     for path in (VISITOR_LOG_TMP, VISITOR_LOG_PATH):
@@ -52,9 +55,7 @@ def _load() -> Dict[str, Any]:
     # Fall back to the GitHub copy (survives cold starts and multiple instances)
     import urllib.request
     token = os.environ.get("IXP_GITHUB_TOKEN", "")
-    GITHUB_MIRROR_ENABLED = os.environ.get("IXP_ENABLE_GITHUB_MIRROR", "").lower() in {"1", "true", "yes"}
-
-if not GITHUB_MIRROR_ENABLED:
+    if not GITHUB_MIRROR_ENABLED:
         token = ""
     if token:
         try:
