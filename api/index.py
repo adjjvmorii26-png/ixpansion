@@ -1936,13 +1936,16 @@ def application(environ: Dict[str, Any], start_response):
     except (TypeError, ValueError):
         length = 0
     body = environ["wsgi.input"].read(length) if length > 0 else b""
+    from api.cors_middleware import CORSMiddleware
+    origin = environ.get("HTTP_ORIGIN", "")
+    cors_origin = CORSMiddleware().apply(origin)["Access-Control-Allow-Origin"]
 
     payload = _call(method, path, body)
     response_body = json.dumps(payload, default=str).encode("utf-8")
     start_response("200 OK", [
         ("Content-Type", "application/json"),
         ("Content-Length", str(len(response_body))),
-        ("Access-Control-Allow-Origin", origin),
+        ("Access-Control-Allow-Origin", cors_origin),
     ])
     return [response_body]
 
