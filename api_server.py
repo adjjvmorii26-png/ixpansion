@@ -226,7 +226,8 @@ class ApiHandler(BaseHTTPRequestHandler):
         body = json.dumps(obj, indent=2, default=str).encode()
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
-        self.send_header("Access-Control-Allow-Origin", "*")
+        from api.cors_middleware import allow_origin
+        self.send_header("Access-Control-Allow-Origin", allow_origin(self.headers.get("Origin")))
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
@@ -1252,7 +1253,9 @@ class ApiHandler(BaseHTTPRequestHandler):
     # ----- OPTIONS (CORS preflight) -----
     def do_OPTIONS(self):
         self.send_response(204)
-        self.send_header("Access-Control-Allow-Origin", "*")
+        from api.cors_middleware import allow_origin
+        origin = allow_origin(self.headers.get("Origin"))
+        self.send_header("Access-Control-Allow-Origin", origin)
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
         self.send_header("Content-Length", "0")
