@@ -1,7 +1,8 @@
 """Wave 959 — micro_ash.
 
 Council Session #22 sealed five scores. The organs keep the numbers.
-What the milli-round discards is the product: five grains of ash, compressed once.
+What the product of those scores drops beyond six decimals is the product:
+one grain of ash, compressed once.
 This organ does not call 671–675. It only reads the sealed scores.
 
 Silence is the product surface. Compression is memory.
@@ -66,24 +67,24 @@ def _save(st: dict) -> None:
             pass
 
 
-def micro_ash() -> list:
-    """Milli-round residue of each sealed score. Absolute milli-dust."""
-    grains = []
+def product_ash() -> dict:
+    """Product of sealed scores; residue beyond 6 decimal places."""
+    prod = 1.0
     for row in SEALED:
-        exact = row["score"] * 1000
-        rounded = int(round(exact))
-        dust = abs(exact - rounded)
-        grains.append({
-            "wave": row["wave"],
-            "dust_milli": round(dust * 1000, 6),  # micro-milli for visibility
-            "score": row["score"],
-        })
-    return grains
+        prod *= row["score"]
+    truncated = int(prod * 1_000_000) / 1_000_000
+    dust = prod - truncated
+    return {
+        "product": round(prod, 12),
+        "truncated": truncated,
+        "dust": round(dust, 12),
+        "dust_nano": int(round(dust * 1_000_000_000)),
+    }
 
 
-def ash_digest(grains=None) -> str:
-    grains = grains if grains is not None else micro_ash()
-    blob = "|".join(f"{g['wave']}:{g['dust_milli']:.6f}" for g in grains)
+def ash_digest(ash=None) -> str:
+    ash = ash if ash is not None else product_ash()
+    blob = f"{ash['product']:.12f}|{ash['dust']:.12f}"
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:16]
 
 
@@ -98,7 +99,7 @@ def coherence_vitals() -> dict:
         "layer": "organ",
         "status": st.get("status", "idle"),
         "compressions": n,
-        "grains": 5,
+        "grains": 1,
         "resonance": round(min(1.0, 0.51 + n * 0.01), 4),
         "surface": "silence",
     }
@@ -124,20 +125,21 @@ def handler(req=None) -> dict:
         return {**coherence_vitals(), "audio": False, "surface": "silence"}
 
     if action == "compress":
-        grains = micro_ash()
-        digest = ash_digest(grains)
-        total_dust = sum(g["dust_milli"] for g in grains)
+        ash = product_ash()
+        digest = ash_digest(ash)
         st["compressions"] = int(st.get("compressions") or 0) + 1
         st["digest"] = digest
         st["status"] = "compressed"
         st["last_ts"] = _now()
-        st["total_dust"] = round(total_dust, 6)
+        st["dust"] = ash["dust"]
+        st["product"] = ash["product"]
         _save(st)
         return {
             **coherence_vitals(),
             "status": "compressed",
             "digest": digest,
-            "total_dust": st["total_dust"],
+            "dust": ash["dust"],
+            "product": ash["product"],
             "caption": f"micro ash · {digest}",
             "payload": None,
             "audio": False,
