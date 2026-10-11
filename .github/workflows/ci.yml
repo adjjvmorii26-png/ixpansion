@@ -49,6 +49,24 @@ jobs:
           print(f'All {count} API modules parse OK')
           "
 
+  vercel-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install declared runtime dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run Vercel runtime contract
+        run: python -m pytest tests/test_cors_contract.py tests/test_api_server_cors.py -q
+      - name: Import Vercel entrypoint
+        run: python -c "import api.index; print('api.index import: OK')"
+      - name: Exercise health contract
+        run: python -c "from api.index import handler; r=handler({'path':'/health'}); assert isinstance(r,dict) and r.get('status') in {'ok','healthy','active'}, r; print('health contract: OK')"
+
   lint:
     runs-on: ubuntu-latest
     steps:
