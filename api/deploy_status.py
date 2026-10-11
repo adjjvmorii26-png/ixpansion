@@ -14,6 +14,22 @@ def resonates_with():
 
 
 
+def deployment_reality_check() -> dict:
+    """Report non-secret runtime capability mismatches.
+
+    This intentionally reports capability state, never credential values or
+    secret-presence booleans. It is safe for diagnostics and CI assertions.
+    """
+    serverless = bool(os.environ.get("VERCEL") or os.environ.get("NOW_REGION"))
+    persistence = os.environ.get("IXPANSION_AUTH_STORE", "").strip().lower()
+    durable = persistence in {"supabase", "postgres", "external"}
+    return {
+        "serverless": serverless,
+        "auth_persistence": "durable" if durable else "local_or_unconfigured",
+        "status": "ready" if (not serverless or durable) else "blocked",
+    }
+
+
 def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
     import urllib.request
     token = os.environ.get("IXP_GITHUB_TOKEN", "")
