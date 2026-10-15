@@ -13,6 +13,7 @@ from typing import Any
 
 PROOF_ID = re.compile(r"^P-[0-9]{4,}$")
 SHA256 = re.compile(r"^[a-fA-F0-9]{64}$")
+GITHUB_ARTIFACT = re.compile(r"^github-artifact://([0-9]+)$")
 ENTRY_ID = re.compile(r"^[A-Z]-[0-9]{2,}$")
 COMMIT = re.compile(r"^[a-fA-F0-9]{40,64}$")
 KINDS = {"ci_run", "test_run", "file_digest"}
@@ -56,11 +57,13 @@ def validate_proof_contract(doc: dict[str, Any], repo_root: Path | None = None) 
             errors.append(f"{pid} requires subject.entry_id and subject.claim")
         elif subject["entry_id"] not in entries:
             errors.append(f"{pid} references unknown subject entry {subject['entry_id']}")
-        if not isinstance(artifact, dict) or not _nonempty(artifact.get("uri")) or not isinstance(artifact.get("sha256"), str) or not SHA256.fullmatch(artifact.get("sha256", "")):
-            errors.append(f"{pid} requires artifact.uri and a SHA-256 digest")
+        if not isinstance(artifact, dict) or not isinstance(artifact.get("uri"), str) or not (artifact["uri"].startswith("repo://") or GITHUB_ARTIFACT.fullmatch(artifact["uri"])) or not isinstance(artifact.get("sha256"), str) or not SHA256.fullmatch(artifact.get("sha256", "")):
+            errors.append(f"{pid} requires a verifiable repo:// or github-artifact:// URI and a SHA-256 digest")
+        if kind == "file_digest" and isinstance(artifact, dict) and not str(artifact.get("uri", "")).startswith("repo://"):
+            errors.append(f"{pid} file_digest must use a repo:// artifact URI")
         if not isinstance(verifier, dict) or not _nonempty(verifier.get("name")) or not _nonempty(verifier.get("version")):
             errors.append(f"{pid} requires verifier.name and verifier.version")
-        if not isinstance(procedure, dict) or not isinstance(procedure.get("command"), list) or not procedure["command"] or any(not _nonempty(x) for x in procedure["command"]) or not _nonempty(procedure.get("environment")) or procedure.get("reproducible") is not True:
+        if not isinstance(procedure, dict) or not isinstance(procedure.get("command"), list) or not procedure["command"] or any(not _nonempty(x) for x in procedure["command"]) or not _nonempty(procedure.get("environment")) or not isinstance(procedure.get("environment_sha256"), str) or not SHA256.fullmatch(procedure.get("environment_sha256", "")) or procedure.get("reproducible") is not True:
             errors.append(f"{pid} requires a reproducible command and pinned environment description")
         if not isinstance(result, dict) or result.get("status") not in {"passed", "failed"} or not _nonempty(result.get("observed_at")):
             errors.append(f"{pid} requires result.status and result.observed_at")
