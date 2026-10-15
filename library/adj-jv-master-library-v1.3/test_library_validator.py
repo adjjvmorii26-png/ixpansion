@@ -151,9 +151,9 @@ class LibraryCoreIntegrityTests(unittest.TestCase):
             "id": "P-0001",
             "kind": kind,
             "subject": {"entry_id": entry_id, "claim": "The declared regression suite passes for this exact revision."},
-            "artifact": {"uri": "https://example.invalid/artifacts/library-test-report.json", "sha256": "a" * 64},
+            "artifact": {"uri": "github-artifact://98765", "sha256": "a" * 64},
             "verifier": {"name": "GitHub Actions", "version": "v1"},
-            "procedure": {"command": ["python", "-m", "unittest", "-v"], "environment": "python:3.11", "reproducible": True},
+            "procedure": {"command": ["python", "-m", "unittest", "-v"], "environment": "python:3.11", "environment_sha256": "c" * 64, "reproducible": True},
             "result": {"status": "passed", "observed_at": "2026-10-15T00:00:00Z"},
         }
         if kind == "ci_run":
@@ -214,7 +214,7 @@ class LibraryCoreIntegrityTests(unittest.TestCase):
                 "subject":{"entry_id":"G-03","claim":"Artifact bytes match declared digest."},
                 "artifact":{"uri":"repo://report.txt","sha256":"0" * 64},
                 "verifier":{"name":"SHA-256","version":"1"},
-                "procedure":{"command":["sha256sum","report.txt"],"environment":"python:3.11","reproducible":True},
+                "procedure":{"command":["sha256sum","report.txt"],"environment":"python:3.11","environment_sha256":"c" * 64,"reproducible":True},
                 "result":{"status":"passed","observed_at":"2026-10-15T00:00:00Z"}
             }
             doc = copy.deepcopy(self.manifest)
