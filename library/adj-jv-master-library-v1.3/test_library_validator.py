@@ -79,6 +79,16 @@ class LibraryManifestTests(unittest.TestCase):
             loaded = load_manifest(path)
             self.assertEqual(validate_manifest(loaded), [])
 
+    def test_malformed_evidence_classes_do_not_crash_validator(self):
+        doc = copy.deepcopy(self.manifest)
+        doc["evidence_classes"] = [["not", "hashable"]]
+        self.assertTrue(any("evidence_classes must contain exactly" in e for e in validate_manifest(doc)))
+
+    def test_malformed_relationship_container_is_reported_without_crash(self):
+        doc = copy.deepcopy(self.manifest)
+        doc["shelves"][0]["entries"][0]["relations"] = None
+        self.assertTrue(any("relations must be a list" in e for e in validate_manifest(doc)))
+
 
 if __name__ == "__main__":
     unittest.main()
