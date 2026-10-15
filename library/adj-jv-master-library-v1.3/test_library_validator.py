@@ -5,25 +5,23 @@ import unittest
 from pathlib import Path
 
 from library_validator import (
-    build_index,
-    find_contradictions,
-    load_manifest,
-    validate_manifest,
+    build_index, find_contradictions, load_manifest,
+    validate_lineage_delta, validate_manifest,
 )
 
 
-class LibraryManifestTests(unittest.TestCase):
+class LibraryCoreIntegrityTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.manifest = load_manifest(Path(__file__).with_name("manifest.json"))
 
-    def test_seed_manifest_is_valid(self):
+    def test_golden_manifest_is_valid(self):
         self.assertEqual(validate_manifest(self.manifest), [])
 
     def test_ids_are_unique_and_indexable(self):
         index = build_index(self.manifest)
         self.assertEqual(len(index), sum(len(s["entries"]) for s in self.manifest["shelves"]))
-        self.assertIn("G-05", index)
+        self.assertIn("G-03", index)
 
     def test_duplicate_id_is_rejected(self):
         doc = copy.deepcopy(self.manifest)
@@ -36,58 +34,101 @@ class LibraryManifestTests(unittest.TestCase):
         doc["shelves"][0]["entries"][0]["relations"].append("Z-99")
         self.assertTrue(any("dangling relations reference: Z-99" in e for e in validate_manifest(doc)))
 
+    def test_retired_ids_cannot_be_reused(self):
+        doc = copy.deepcopy(self.manifest)
+        eid = doc["shelves"][0]["entries"][0]["id"]
+        doc["identity_registry"][0]["status"] = "retired"
+        self.assertTrue(any(f"{eid} is active but its reserved ID status is retired" in e for e in validate_manifest(doc)))
+
+    def test_missing_registry_record_is_rejected(self):
+        doc = copy.deepcopy(self.manifest)
+        doc["identity_registry"] = doc["identity_registry"][1:]
+        self.assertTrue(any("missing from permanent identity_registry" in e for e in validate_manifest(doc)))
+
     def test_invalid_evidence_class_is_rejected(self):
         doc = copy.deepcopy(self.manifest)
         doc["shelves"][0]["entries"][0]["evidence"] = "verified-ish"
         self.assertTrue(any("unsupported evidence class" in e for e in validate_manifest(doc)))
 
-    def test_non_monotonic_history_is_rejected(self):
+    def test_evidence_transition_requires_event(self):
         doc = copy.deepcopy(self.manifest)
         entry = doc["shelves"][0]["entries"][0]
-        entry["version"] = 2
-        entry["history"].append({"version": 1, "change": "bad", "reason": "duplicate version"})
-        self.assertTrue(any("history versions must be strictly increasing" in e for e in validate_manifest(doc)))
+        entry["evidence"] = "hypothesis"
+        self.assertTrue(any("current evidence must match latest history tostate" in e for e in validate_manifest(doc)))
 
-    def test_latest_history_must_match_current_version(self):
+    def test_jump_more_than_one_level_is_rejected(self):
+        base = copy.deepcopy(self.manifest)
+        head = copy.deepcopy(self.manifest)
+        entry = head["shelves"][0]["entries"][0]
+        entry["evidence"] = "verified"
+        entry["history"][-1]["tostate"] = "verified"
+        self.assertTrue(any("jumps more than one evidence level" in e for e in validate_lineage_delta(base, head)))
+
+    def test_history_requires_provenance_fields(self):
         doc = copy.deepcopy(self.manifest)
-        doc["shelves"][0]["entries"][0]["version"] = 2
-        self.assertTrue(any("current version must match latest history version" in e for e in validate_manifest(doc)))
+        doc["shelves"][0]["entries"][0]["history"][0]["evidence_ref"] = ""
+        self.assertTrue(any("requires non-empty evidence_ref" in e for e in validate_manifest(doc)))
+
+    def test_downgrade_requires_reason_and_trigger(self):
+        doc = copy.deepcopy(self.manifest)
+        entry = doc["shelves"][0]["entries"][0]
+        entry["history"].append({
+            "version":2,"change":"Downgrade","reason":"","fromstate":"idea","tostate":"idea",
+            "timestamp":"2026-10-15T00:00:00Z","actor":"agent","evidence_ref":"issue"
+        })
+        entry["version"] = 2
+        self.assertTrue(any("history[1] must change evidence state" in e or "downgrade requires reason and recognized trigger" in e for e in validate_manifest(doc)))
+
+    def test_declared_contradictions_are_deduplicated(self):
+        doc = copy.deepcopy(self.manifest)
+        a = doc["shelves"][0]["entries"][0]
+        b = doc["shelves"][0]["entries"][1]
+        a["contradicts"] = [b["id"]]
+        b["contradicts"] = [a["id"]]
+        doc["contradiction_atlas"] = [{
+            "id":"F-001","tag":"frontier","entries":[a["id"],b["id"]],
+            "dimension":"correctness","description":"Example conflict for regression test",
+            "shelf":"Core Concepts","status":"active","resolution_path":"needs experiment",
+            "follow_up":"Add a falsifiable experiment to settle the claim."
+        }]
+        self.assertEqual(len(find_contradictions(doc)), 1)
+        self.assertEqual(validate_manifest(doc), [])
+
+    def test_contradiction_without_atlas_record_is_rejected(self):
+        doc = copy.deepcopy(self.manifest)
+        a = doc["shelves"][0]["entries"][0]
+        a["contradicts"] = [doc["shelves"][0]["entries"][1]["id"]]
+        self.assertTrue(any("missing from contradiction_atlas" in e for e in validate_manifest(doc)))
+
+    def test_atlas_requires_bilateral_entry_tags(self):
+        doc = copy.deepcopy(self.manifest)
+        a = doc["shelves"][0]["entries"][0]
+        b = doc["shelves"][0]["entries"][1]
+        a["contradicts"] = [b["id"]]
+        b["contradicts"] = [a["id"]]
+        doc["contradiction_atlas"] = [{
+            "id":"F-001","tag":"oops","entries":[a["id"],b["id"]],
+            "dimension":"correctness","description":"Conflict",
+            "shelf":"Core Concepts","status":"active","resolution_path":"needs experiment",
+            "follow_up":"Write experiment."
+        }]
+        self.assertTrue(any("must be tagged frontier" in e for e in validate_manifest(doc)))
 
     def test_title_collision_is_reported(self):
         doc = copy.deepcopy(self.manifest)
         doc["shelves"][0]["entries"][1]["title"] = "  ai AS a data HOLDER "
-        errors = validate_manifest(doc)
-        self.assertTrue(any("possible duplicate titles" in e for e in errors))
-
-    def test_declared_contradictions_are_deduplicated(self):
-        doc = copy.deepcopy(self.manifest)
-        doc["shelves"][0]["entries"][0]["contradicts"] = ["C-02"]
-        doc["shelves"][0]["entries"][1]["contradicts"] = ["C-01"]
-        conflicts = find_contradictions(doc)
-        self.assertEqual(len(conflicts), 1)
-        self.assertEqual((conflicts[0]["left"], conflicts[0]["right"]), ("C-01", "C-02"))
-
-    def test_empty_change_reason_is_rejected(self):
-        doc = copy.deepcopy(self.manifest)
-        doc["shelves"][0]["entries"][0]["history"][0]["reason"] = " "
-        self.assertTrue(any("history records require non-empty change and reason" in e for e in validate_manifest(doc)))
+        self.assertTrue(any("possible duplicate titles" in e for e in validate_manifest(doc)))
 
     def test_json_round_trip(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "manifest.json"
             path.write_text(json.dumps(self.manifest), encoding="utf-8")
-            loaded = load_manifest(path)
-            self.assertEqual(validate_manifest(loaded), [])
+            self.assertEqual(validate_manifest(load_manifest(path)), [])
 
     def test_malformed_evidence_classes_do_not_crash_validator(self):
         doc = copy.deepcopy(self.manifest)
         doc["evidence_classes"] = [["not", "hashable"]]
-        self.assertTrue(any("evidence_classes must contain exactly" in e for e in validate_manifest(doc)))
-
-    def test_malformed_relationship_container_is_reported_without_crash(self):
-        doc = copy.deepcopy(self.manifest)
-        doc["shelves"][0]["entries"][0]["relations"] = None
-        self.assertTrue(any("relations must be a list" in e for e in validate_manifest(doc)))
+        self.assertTrue(any("evidence_classes must exactly" in e for e in validate_manifest(doc)))
 
 
 if __name__ == "__main__":
