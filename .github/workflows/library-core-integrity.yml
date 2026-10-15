@@ -1,0 +1,56 @@
+name: Library Core integrity gate
+
+on:
+  pull_request:
+    paths:
+      - "library/adj-jv-master-library-v1.3/**"
+      - ".github/workflows/library-core-integrity.yml"
+      - ".github/pull_request_template.md"
+  push:
+    branches: [main]
+    paths:
+      - "library/adj-jv-master-library-v1.3/**"
+      - ".github/workflows/library-core-integrity.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  library-integrity:
+    name: Archivist of Coherence
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate manifest
+        working-directory: library/adj-jv-master-library-v1.3
+        run: python library_validator.py
+      - name: Run library regression tests
+        working-directory: library/adj-jv-master-library-v1.3
+        run: python -m unittest -v
+      - name: Check lineage and contradiction delta
+        if: github.event_name == 'pull_request'
+        working-directory: library/adj-jv-master-library-v1.3
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.sha }}
+        run: python library_validator.py --base-ref "$BASE_REF"
+      - name: Require contradiction accounting in PR description
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          python - <<'PY'
+          import os, sys
+          body = (os.environ.get("PR_BODY") or "").lower()
+          required = ["entries touched", "evidence changes", "new contradictions", "validator output summary"]
+          missing = [heading for heading in required if heading not in body]
+          if missing:
+              print("PR description is missing contract sections: " + ", ".join(missing))
+              sys.exit(1)
+          PY
