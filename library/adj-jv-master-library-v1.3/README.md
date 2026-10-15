@@ -46,12 +46,12 @@ Manifest evidence labels are claims governed by process, not cryptographic proof
 
 ## Proof-bearing substrate
 
-Proof objects use `proof.schema.json` and are stored in the manifest's `proof_objects` registry. Each object binds a proof ID to a specific entry and claim, artifact URI and SHA-256 digest, verifier/version, reproducible command, environment description, and observed result. CI proofs additionally bind an immutable Actions run ID/URL, workflow name, conclusion, and commit SHA.
+Proof objects use `proof.schema.json` and are stored in the manifest's `proof_objects` registry. Each object binds a proof ID to a specific entry and claim, artifact URI and SHA-256 digest, verifier/version, reproducible command, environment description, a repository lockfile URI and its SHA-256 digest, and observed result. CI proofs additionally bind an immutable Actions run ID/URL, workflow name, conclusion, and commit SHA.
 
 The contract has two layers:
 
 1. **Offline structural validation** checks schema fields, IDs, claim ownership, digest format, reproducibility declarations, and whether a Canon entry references a passing proof for itself.
-2. **CI-backed validation** hashes local `repo://` artifacts and queries GitHub's Actions API to confirm each referenced CI run completed successfully on the exact declared commit and workflow.
+2. **CI-backed validation** hashes local `repo://` artifacts and environment lockfiles, downloads and hashes referenced GitHub Actions artifact ZIPs, and queries the Actions API to confirm each referenced CI run completed successfully on the exact declared commit and workflow.
 
 A digest proves byte identity, not the truth of the claim. A CI success proves that a particular workflow passed at a particular revision, not that every statement in the library is universally true. Proofs must therefore state the claim and limitations narrowly.
 
