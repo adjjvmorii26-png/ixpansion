@@ -6,7 +6,7 @@ from pathlib import Path
 from library_validator import load_manifest
 from proof_contract import canon_promotion_errors
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def main() -> int:
