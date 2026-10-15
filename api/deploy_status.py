@@ -24,11 +24,13 @@ def deployment_reality_check() -> dict:
     store_ok = False
     store_name = "none"
     try:
-        from api.auth import get_auth_store, _ACTIVE_STORE
-        if _ACTIVE_STORE is not None:
-            h = _ACTIVE_STORE.health()
+        from api import auth_store as auth_store_mod
+        from api.auth_store import get_auth_store
+        active = auth_store_mod._ACTIVE_STORE
+        if active is not None:
+            h = active.health()
             store_ok = bool(h.get("ok"))
-            store_name = str(h.get("name") or _ACTIVE_STORE.name)
+            store_name = str(h.get("name") or active.name)
         elif not serverless:
             h = get_auth_store().health()
             store_ok = bool(h.get("ok"))
@@ -53,7 +55,6 @@ def deployment_reality_check() -> dict:
 
 def handler(payload: dict = None, context: Any = None) -> Dict[str, Any]:
     import urllib.request
-    token = os.environ.get("IXP_GITHUB_TOKEN", "")
     version = "4.68.0"
     wave = 515
     try:
