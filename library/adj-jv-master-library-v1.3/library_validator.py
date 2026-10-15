@@ -349,11 +349,20 @@ def main() -> int:
     doc = load_manifest(path)
     errors = validate_manifest(doc)
     if args.base_ref:
+        manifest_relative = "library/adj-jv-master-library-v1.3/manifest.json"
         try:
-            manifest_relative = "library/adj-jv-master-library-v1.3/manifest.json"
             base = _load_git_manifest(args.base_ref, manifest_relative)
             errors.extend(validate_lineage_delta(base, doc))
-        except (subprocess.CalledProcessError, json.JSONDecodeError, ValueError) as exc:
+        except subprocess.CalledProcessError as exc:
+            # The manifest is new in this PR; establish the first governed baseline.
+            # Do not hide an invalid base ref, but allow a valid ref without this path.
+            ref_ok = subprocess.run(
+                ["git", "rev-parse", "--verify", args.base_ref],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            ).returncode == 0
+            if not ref_ok:
+                errors.append(f"base ref does not exist: {args.base_ref}")
+        except (json.JSONDecodeError, ValueError) as exc:
             errors.append(f"could not validate lineage delta against {args.base_ref}: {exc}")
     report = {
         "library": doc.get("library"),
