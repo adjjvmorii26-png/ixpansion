@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   library-integrity:
@@ -40,6 +41,58 @@ jobs:
         env:
           BASE_REF: ${{ github.event.pull_request.base.sha }}
         run: python library_validator.py --base-ref "$BASE_REF"
+      - name: Validate proof objects and local artifact digests
+        working-directory: library/adj-jv-master-library-v1.3
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from library_validator import load_manifest
+          from proof_contract import validate_proof_contract
+          errors = validate_proof_contract(load_manifest(), Path.cwd().parents[1])
+          print("\\n".join(errors) if errors else "Proof contract valid; local artifact digests checked.")
+          raise SystemExit(bool(errors))
+          PY
+      - name: Verify referenced GitHub Actions runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPOSITORY: ${{ github.repository }}
+        working-directory: library/adj-jv-master-library-v1.3
+        run: |
+          python - <<'PY'
+          import json, os, sys, urllib.error, urllib.request
+          from library_validator import load_manifest
+          repo = os.environ["GH_REPOSITORY"]
+          token = os.environ["GH_TOKEN"]
+          doc = load_manifest()
+          errors = []
+          for proof in doc.get("proof_objects", []):
+              if not isinstance(proof, dict) or proof.get("kind") != "ci_run":
+                  continue
+              run = proof.get("run", {})
+              run_id = run.get("run_id")
+              expected_url = f"https://github.com/{repo}/actions/runs/{run_id}"
+              if run.get("run_url") != expected_url:
+                  errors.append(f"{proof.get('id')}: run URL must match repository and run ID")
+                  continue
+              request = urllib.request.Request(
+                  f"https://api.github.com/repos/{repo}/actions/runs/{run_id}",
+                  headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}
+              )
+              try:
+                  with urllib.request.urlopen(request, timeout=20) as response:
+                      actual = json.load(response)
+              except (urllib.error.URLError, json.JSONDecodeError) as exc:
+                  errors.append(f"{proof.get('id')}: unable to retrieve CI run: {exc}")
+                  continue
+              if actual.get("status") != "completed" or actual.get("conclusion") != "success":
+                  errors.append(f"{proof.get('id')}: referenced CI run is not completed successfully")
+              if actual.get("head_sha") != run.get("commit_sha"):
+                  errors.append(f"{proof.get('id')}: proof commit SHA does not match CI run head")
+              if actual.get("name") != run.get("workflow"):
+                  errors.append(f"{proof.get('id')}: workflow name does not match CI run")
+          print("\\n".join(errors) if errors else "All referenced CI runs are authentic, successful, and commit-matched.")
+          sys.exit(bool(errors))
+          PY
       - name: Require contradiction accounting in PR description
         if: github.event_name == 'pull_request'
         env:
