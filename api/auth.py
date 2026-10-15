@@ -27,6 +27,25 @@ sys.path.insert(0, str(ROOT))
 USAGE_FILE = ROOT / ".runtime" / "usage.json"
 KEYS_FILE = ROOT / ".runtime" / "api_keys.json"
 
+from api.auth_store import (  # noqa: E402
+    AuthStore,
+    LocalJsonAuthStore,
+    MemoryAuthStore,
+    PERSISTENCE_BACKEND,
+    SERVERLESS,
+    assert_persistence_contract as _assert_persistence_contract,
+    get_auth_store,
+    register_auth_store,
+)
+from api import auth_store as _auth_store_mod
+
+
+def __getattr__(name: str):
+    if name == "_ACTIVE_STORE":
+        return _auth_store_mod._ACTIVE_STORE
+    raise AttributeError(name)
+
+
 TIERS = {
     "free": {
         "name": "Free",
@@ -47,7 +66,7 @@ TIERS = {
     },
     "enterprise": {
         "name": "Enterprise",
-        "daily_limit": -1,  # unlimited
+        "daily_limit": -1,
         "monthly_price_usd": 0,
         "experiments": "all",
         "rate_limit_per_minute": 9999990,
@@ -67,34 +86,28 @@ BASIC_EXPERIMENTS = {
 
 
 def _ensure_files():
-    USAGE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    try:
-        if not KEYS_FILE.exists():
-            KEYS_FILE.write_text("{}")
-        if not USAGE_FILE.exists():
-            USAGE_FILE.write_text("{}")
-    except OSError:
-        pass  # read-only fs (serverless)
+    _assert_persistence_contract()
+    get_auth_store().ensure()
 
 
 def _load_keys() -> Dict:
     _ensure_files()
-    return json.loads(KEYS_FILE.read_text())
+    return get_auth_store().load_keys()
 
 
 def _save_keys(keys: Dict):
     _ensure_files()
-    KEYS_FILE.write_text(json.dumps(keys, indent=2))
+    get_auth_store().save_keys(keys)
 
 
 def _load_usage() -> Dict:
     _ensure_files()
-    return json.loads(USAGE_FILE.read_text())
+    return get_auth_store().load_usage()
 
 
 def _save_usage(usage: Dict):
     _ensure_files()
-    USAGE_FILE.write_text(json.dumps(usage, indent=2))
+    get_auth_store().save_usage(usage)
 
 
 def generate_api_key(owner: str, tier: str = "free") -> Dict:
@@ -177,10 +190,7 @@ def check_experiment_access(api_key: str, experiment_name: str) -> Dict:
 
 
 def handler(request, response):
-    """API handler for auth endpoints."""
     path = request.path if hasattr(request, "path") else "/auth"
-    method = request.method if hasattr(request, "method") else "GET"
-
     if "tiers" in path:
         return {"tiers": TIERS}
     elif "usage" in path:
@@ -195,26 +205,10 @@ def demo():
     result = generate_api_key("test_user", "pro")
     key = result["api_key"]
     print(f"  Created key: {key[:20]}... (tier={result['tier']})")
-
     validation = validate_key(key)
     print(f"  Validation: tier={validation['tier']}, limit={validation['daily_limit']}")
-
     usage = record_usage(key, "/api/experiments")
-    print(f"  Usage: {usage['daily_calls']}/{usage['daily_limit']} "
-          f"(remaining={usage['remaining']})")
-
-    access = check_experiment_access(key, "photon_memory")
-    print(f"  Access to photon_memory: {access['allowed']}")
-
-    access2 = check_experiment_access(key, "advanced_quantum")
-    print(f"  Access to advanced_quantum: {access2['allowed']} "
-          f"({access2.get('reason', 'ok')})")
-
-    print(f"\n  Tiers:")
-    for tier_name, tier_info in TIERS.items():
-        print(f"    {tier_name}: ${tier_info['monthly_price_usd']}/mo, "
-              f"{tier_info['daily_limit']} calls/day")
-
+    print(f"  Usage: {usage['daily_calls']}/{usage['daily_limit']} (remaining={usage['remaining']})")
     return {"tiers": TIERS}
 
 
@@ -223,7 +217,6 @@ if __name__ == "__main__":
 
 
 def coherence_vitals() -> dict:
-    """auth reports its vital signs to the living system."""
     return {
         "module_health": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
         "resonance": {"value": 0.9, "setpoint": 0.8, "weight": 1.0},
@@ -233,6 +226,4 @@ def coherence_vitals() -> dict:
 
 
 def resonates_with() -> list:
-    """Declared kinships, auto-picked from shared domain language."""
-    return ['dream_synthesis', 'analytics', 'usage_dashboard']
-
+    return ["dream_synthesis", "analytics", "usage_dashboard"]
