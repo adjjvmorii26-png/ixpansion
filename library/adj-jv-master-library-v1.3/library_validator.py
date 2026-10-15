@@ -31,7 +31,7 @@ def validate_manifest(doc: dict[str, Any]) -> list[str]:
     if not isinstance(doc.get("library_version"), str) or not doc["library_version"]:
         errors.append("library_version must be a non-empty string")
     classes = doc.get("evidence_classes")
-    if not isinstance(classes, list) or set(classes) != EVIDENCE_CLASSES:
+    if not isinstance(classes, list) or any(not isinstance(item, str) for item in classes) or set(classes) != EVIDENCE_CLASSES:
         errors.append("evidence_classes must contain exactly the supported classes")
 
     shelves = doc.get("shelves")
@@ -88,7 +88,7 @@ def validate_manifest(doc: dict[str, Any]) -> list[str]:
                 errors.append(f"{entry_id} history must be a non-empty list")
             else:
                 history_versions = [item.get("version") for item in history if isinstance(item, dict)]
-                if len(history_versions) != len(history) or history_versions != sorted(set(history_versions)):
+                if (len(history_versions) != len(history) or any(type(v) is not int or v < 1 for v in history_versions) or history_versions != sorted(set(history_versions))):
                     errors.append(f"{entry_id} history versions must be strictly increasing")
                 if history_versions and history_versions[-1] != version:
                     errors.append(f"{entry_id} current version must match latest history version")
@@ -102,12 +102,17 @@ def validate_manifest(doc: dict[str, Any]) -> list[str]:
 
     for entry_id, entry in ids.items():
         for field in ("relations", "contradicts"):
-            for ref in entry.get(field, []):
-                if ref not in ids:
+            refs = entry.get(field)
+            if not isinstance(refs, list):
+                continue
+            for ref in refs:
+                if not isinstance(ref, str) or ref not in ids:
                     errors.append(f"{entry_id} has dangling {field} reference: {ref}")
-        if entry_id in entry.get("relations", []):
+        relations = entry.get("relations")
+        contradictions = entry.get("contradicts")
+        if isinstance(relations, list) and entry_id in relations:
             errors.append(f"{entry_id} cannot relate to itself")
-        if entry_id in entry.get("contradicts", []):
+        if isinstance(contradictions, list) and entry_id in contradictions:
             errors.append(f"{entry_id} cannot contradict itself")
 
     for normalized_title, matches in sorted(title_to_ids.items()):
