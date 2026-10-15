@@ -224,6 +224,18 @@ class LibraryCoreIntegrityTests(unittest.TestCase):
             proof["artifact"]["sha256"] = hashlib.sha256(artifact.read_bytes()).hexdigest()
             self.assertFalse(any("SHA-256 mismatch" in e for e in validate_proof_contract(doc, root)))
 
+    def test_malformed_referenced_proof_is_reported_without_crashing(self):
+        doc = copy.deepcopy(self.manifest)
+        entry = next(e for s in doc["shelves"] for e in s["entries"] if e["id"] == "G-03")
+        entry["evidence"] = "verified"
+        entry["lifecycle"].update({"label": "Canon", "version_pin": "commit:" + "b" * 40, "known_limitations": [], "contradiction_watchlist": [], "proof_refs": ["P-0001"]})
+        proof = self._proof()
+        proof["result"] = None
+        doc["proof_objects"] = [proof]
+        errors = validate_proof_contract(doc)
+        self.assertTrue(any("requires result.status" in e for e in errors))
+        self.assertTrue(any("did not pass" in e for e in errors))
+
 
 if __name__ == "__main__":
     unittest.main()
