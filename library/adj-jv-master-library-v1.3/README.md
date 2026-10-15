@@ -43,3 +43,20 @@ The optional base comparison rejects evidence jumps greater than one level and r
 ## No lore without proof
 
 Manifest evidence labels are claims governed by process, not cryptographic proof. Reviewers and CI must verify the referenced artifact or run. Never promote an entry because the desired status is narratively appealing.
+
+## Proof-bearing substrate
+
+Proof objects use `proof.schema.json` and are stored in the manifest's `proof_objects` registry. Each object binds a proof ID to a specific entry and claim, artifact URI and SHA-256 digest, verifier/version, reproducible command, environment description, and observed result. CI proofs additionally bind an immutable Actions run ID/URL, workflow name, conclusion, and commit SHA.
+
+The contract has two layers:
+
+1. **Offline structural validation** checks schema fields, IDs, claim ownership, digest format, reproducibility declarations, and whether a Canon entry references a passing proof for itself.
+2. **CI-backed validation** hashes local `repo://` artifacts and queries GitHub's Actions API to confirm each referenced CI run completed successfully on the exact declared commit and workflow.
+
+A digest proves byte identity, not the truth of the claim. A CI success proves that a particular workflow passed at a particular revision, not that every statement in the library is universally true. Proofs must therefore state the claim and limitations narrowly.
+
+## Canon promotion gate
+
+Run `python canon_gate.py --entry G-03` to perform a **dry-run eligibility check**. The entry must first be `tested`, must include a version pin, known limitations, contradiction watchlist, and at least one proof reference that resolves to a passing reproducible CI/test proof. The gate never edits the manifest; promotion remains a separate, reviewable change with a new history event.
+
+Current state: `G-03` remains `implemented`; `proof_objects` is empty; no entry is Canon. This is intentional until genuine, claim-specific evidence is attached.
