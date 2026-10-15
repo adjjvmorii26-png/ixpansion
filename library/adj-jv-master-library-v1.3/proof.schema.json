@@ -53,7 +53,8 @@
       "properties": {
         "uri": {
           "type": "string",
-          "minLength": 1
+          "pattern": "^(repo://.+|github-artifact://[0-9]+)$",
+          "description": "A repository-relative file or a GitHub Actions artifact ID whose downloaded bytes are SHA-256 checked."
         },
         "sha256": {
           "type": "string",
@@ -85,6 +86,7 @@
       "required": [
         "command",
         "environment",
+        "environment_sha256",
         "reproducible"
       ],
       "properties": {
@@ -102,6 +104,10 @@
         },
         "reproducible": {
           "type": "boolean"
+        },
+        "environment_sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
         }
       }
     },
