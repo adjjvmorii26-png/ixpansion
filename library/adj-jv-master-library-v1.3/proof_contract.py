@@ -99,22 +99,29 @@ def validate_proof_contract(doc: dict[str, Any], repo_root: Path | None = None) 
             if proof is None:
                 errors.append(f"{entry_id} references missing proof object {ref}")
                 continue
-            subject = proof.get("subject", {})
+            subject = proof.get("subject")
+            if not isinstance(subject, dict):
+                errors.append(f"{entry_id} proof {ref} has malformed subject")
+                continue
             if subject.get("entry_id") != entry_id:
                 errors.append(f"{entry_id} proof {ref} belongs to a different entry")
                 continue
             if proof.get("kind") not in {"ci_run", "test_run"}:
                 errors.append(f"{entry_id} proof {ref} is not an executable test/CI proof")
                 continue
-            if proof.get("result", {}).get("status") != "passed":
+            result = proof.get("result")
+            if not isinstance(result, dict) or result.get("status") != "passed":
                 errors.append(f"{entry_id} proof {ref} did not pass")
                 continue
-            if proof.get("procedure", {}).get("reproducible") is not True:
+            procedure = proof.get("procedure")
+            if not isinstance(procedure, dict) or procedure.get("reproducible") is not True:
                 errors.append(f"{entry_id} proof {ref} is not reproducible")
                 continue
-            if proof.get("kind") == "ci_run" and proof.get("run", {}).get("conclusion") != "success":
-                errors.append(f"{entry_id} proof {ref} does not point to successful CI")
-                continue
+            if proof.get("kind") == "ci_run":
+                run = proof.get("run")
+                if not isinstance(run, dict) or run.get("conclusion") != "success":
+                    errors.append(f"{entry_id} proof {ref} does not point to successful CI")
+                    continue
             valid_count += 1
         if valid_count == 0:
             errors.append(f"{entry_id} has no usable machine-checkable Canon proof")
