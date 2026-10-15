@@ -19,6 +19,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from proof_contract import validate_proof_contract
+
 MANIFEST_PATH = Path(__file__).with_name("manifest.json")
 EVIDENCE_ORDER = ("idea", "hypothesis", "implemented", "tested", "verified")
 EVIDENCE_CLASSES = set(EVIDENCE_ORDER)
@@ -210,6 +212,7 @@ def validate_manifest(doc: dict[str, Any]) -> list[str]:
     for _, matches in sorted(title_to_ids.items()):
         if len(matches) > 1:
             errors.append("possible duplicate titles require review: " + ", ".join(sorted(matches)))
+    errors.extend(validate_proof_contract(doc))
     return errors
 
 
