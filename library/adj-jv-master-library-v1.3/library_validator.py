@@ -307,6 +307,13 @@ def validate_lineage_delta(base: dict[str, Any], head: dict[str, Any]) -> list[s
     errors = []
     old = build_index(base)
     new = build_index(head)
+    old_registry = {item.get("id"): item for item in base.get("identity_registry", []) if isinstance(item, dict) and isinstance(item.get("id"), str)}
+    new_registry = {item.get("id"): item for item in head.get("identity_registry", []) if isinstance(item, dict) and isinstance(item.get("id"), str)}
+    for reserved_id, old_record in old_registry.items():
+        if reserved_id not in new_registry:
+            errors.append(f"reserved ID {reserved_id} was removed from identity_registry")
+        elif old_record.get("status") == "retired" and new_registry[reserved_id].get("status") != "retired":
+            errors.append(f"retired ID {reserved_id} cannot be reactivated")
     for eid, after in new.items():
         if eid not in old:
             continue
@@ -343,7 +350,8 @@ def main() -> int:
     errors = validate_manifest(doc)
     if args.base_ref:
         try:
-            base = _load_git_manifest(args.base_ref, path.as_posix())
+            manifest_relative = "library/adj-jv-master-library-v1.3/manifest.json"
+            base = _load_git_manifest(args.base_ref, manifest_relative)
             errors.extend(validate_lineage_delta(base, doc))
         except (subprocess.CalledProcessError, json.JSONDecodeError, ValueError) as exc:
             errors.append(f"could not validate lineage delta against {args.base_ref}: {exc}")
