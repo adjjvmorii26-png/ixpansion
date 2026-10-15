@@ -63,7 +63,7 @@ def validate_proof_contract(doc: dict[str, Any], repo_root: Path | None = None) 
             errors.append(f"{pid} file_digest must use a repo:// artifact URI")
         if not isinstance(verifier, dict) or not _nonempty(verifier.get("name")) or not _nonempty(verifier.get("version")):
             errors.append(f"{pid} requires verifier.name and verifier.version")
-        if not isinstance(procedure, dict) or not isinstance(procedure.get("command"), list) or not procedure["command"] or any(not _nonempty(x) for x in procedure["command"]) or not _nonempty(procedure.get("environment")) or not isinstance(procedure.get("environment_sha256"), str) or not SHA256.fullmatch(procedure.get("environment_sha256", "")) or procedure.get("reproducible") is not True:
+        if not isinstance(procedure, dict) or not isinstance(procedure.get("command"), list) or not procedure["command"] or any(not _nonempty(x) for x in procedure["command"]) or not _nonempty(procedure.get("environment")) or not isinstance(procedure.get("environment_uri"), str) or not procedure.get("environment_uri", "").startswith("repo://") or not isinstance(procedure.get("environment_sha256"), str) or not SHA256.fullmatch(procedure.get("environment_sha256", "")) or procedure.get("reproducible") is not True:
             errors.append(f"{pid} requires a reproducible command and pinned environment description")
         if not isinstance(result, dict) or result.get("status") not in {"passed", "failed"} or not _nonempty(result.get("observed_at")):
             errors.append(f"{pid} requires result.status and result.observed_at")
@@ -75,18 +75,21 @@ def validate_proof_contract(doc: dict[str, Any], repo_root: Path | None = None) 
                 errors.append(f"{pid} claims passed but CI conclusion is not success")
         if kind == "test_run" and (not isinstance(procedure, dict) or procedure.get("reproducible") is not True):
             errors.append(f"{pid} test_run must be reproducible")
-        if kind == "file_digest" and repo_root is not None and isinstance(artifact, dict):
-            uri = artifact.get("uri", "")
-            if isinstance(uri, str) and uri.startswith("repo://"):
-                relative = uri[len("repo://"):]
-                target = (repo_root / relative).resolve()
-                root = repo_root.resolve()
+        if repo_root is not None:
+            root = repo_root.resolve()
+            checks = []
+            if isinstance(artifact, dict) and isinstance(artifact.get("uri"), str) and artifact["uri"].startswith("repo://"):
+                checks.append(("artifact", artifact["uri"], artifact.get("sha256")))
+            if isinstance(procedure, dict) and isinstance(procedure.get("environment_uri"), str) and procedure["environment_uri"].startswith("repo://"):
+                checks.append(("environment", procedure["environment_uri"], procedure.get("environment_sha256")))
+            for label, uri, expected in checks:
+                target = (root / uri[len("repo://"):]).resolve()
                 if root not in target.parents or not target.is_file():
-                    errors.append(f"{pid} file_digest target is missing or outside repository")
+                    errors.append(f"{pid} {label} target is missing or outside repository: {uri}")
                 else:
                     actual = hashlib.sha256(target.read_bytes()).hexdigest()
-                    if actual.lower() != str(artifact.get("sha256", "")).lower():
-                        errors.append(f"{pid} artifact SHA-256 mismatch for {uri}")
+                    if actual.lower() != str(expected or "").lower():
+                        errors.append(f"{pid} {label} SHA-256 mismatch for {uri}")
 
     for entry_id, entry in entries.items():
         if entry.get("evidence") != "verified":
