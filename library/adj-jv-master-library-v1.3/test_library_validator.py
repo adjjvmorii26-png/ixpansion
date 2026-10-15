@@ -130,6 +130,21 @@ class LibraryCoreIntegrityTests(unittest.TestCase):
         doc["evidence_classes"] = [["not", "hashable"]]
         self.assertTrue(any("evidence_classes must exactly" in e for e in validate_manifest(doc)))
 
+    def test_retired_id_cannot_be_reactivated_in_pr_delta(self):
+        base = copy.deepcopy(self.manifest)
+        head = copy.deepcopy(self.manifest)
+        eid = base["identity_registry"][0]["id"]
+        base["identity_registry"][0]["status"] = "retired"
+        head["identity_registry"][0]["status"] = "active"
+        self.assertTrue(any("cannot be reactivated" in e for e in validate_lineage_delta(base, head)))
+
+    def test_reserved_id_cannot_disappear_in_pr_delta(self):
+        base = copy.deepcopy(self.manifest)
+        head = copy.deepcopy(self.manifest)
+        eid = head["identity_registry"][0]["id"]
+        head["identity_registry"] = [r for r in head["identity_registry"] if r["id"] != eid]
+        self.assertTrue(any(f"reserved ID {eid} was removed" in e for e in validate_lineage_delta(base, head)))
+
 
 if __name__ == "__main__":
     unittest.main()
