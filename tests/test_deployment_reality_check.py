@@ -3,12 +3,14 @@
 
 def test_deployment_reality_check_is_non_secret(monkeypatch):
     from api import auth
+    import api.auth_store as auth_store
     from api.deploy_status import deployment_reality_check
 
     monkeypatch.setenv("VERCEL", "1")
     monkeypatch.delenv("IXPANSION_AUTH_STORE", raising=False)
-    monkeypatch.setattr(auth, "_ACTIVE_STORE", None)
+    monkeypatch.setattr(auth_store, "_ACTIVE_STORE", None)
     monkeypatch.setattr(auth, "SERVERLESS", True)
+    monkeypatch.setattr(auth_store, "SERVERLESS", True)
     result = deployment_reality_check()
     assert result["status"] == "blocked"
     assert result["store_operational"] is False
@@ -20,12 +22,14 @@ def test_deployment_reality_check_is_non_secret(monkeypatch):
 
 def test_deployment_reality_check_requires_operational_store(monkeypatch):
     from api import auth
+    import api.auth_store as auth_store
     from api.deploy_status import deployment_reality_check
 
     monkeypatch.setenv("VERCEL", "1")
     monkeypatch.setenv("IXPANSION_AUTH_STORE", "supabase")
-    monkeypatch.setattr(auth, "_ACTIVE_STORE", None)
+    monkeypatch.setattr(auth_store, "_ACTIVE_STORE", None)
     monkeypatch.setattr(auth, "SERVERLESS", True)
+    monkeypatch.setattr(auth_store, "SERVERLESS", True)
     result = deployment_reality_check()
     assert result["status"] == "blocked"
     assert result["named_backend"] == "supabase"
