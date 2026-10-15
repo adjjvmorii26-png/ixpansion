@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from proof_contract import canon_promotion_errors, validate_proof_contract
 from library_validator import (
     build_index, find_contradictions, load_manifest,
     validate_lineage_delta, validate_manifest,
@@ -144,6 +145,84 @@ class LibraryCoreIntegrityTests(unittest.TestCase):
         eid = head["identity_registry"][0]["id"]
         head["identity_registry"] = [r for r in head["identity_registry"] if r["id"] != eid]
         self.assertTrue(any(f"reserved ID {eid} was removed" in e for e in validate_lineage_delta(base, head)))
+
+    def _proof(self, entry_id="G-03", kind="ci_run"):
+        proof = {
+            "id": "P-0001",
+            "kind": kind,
+            "subject": {"entry_id": entry_id, "claim": "The declared regression suite passes for this exact revision."},
+            "artifact": {"uri": "https://example.invalid/artifacts/library-test-report.json", "sha256": "a" * 64},
+            "verifier": {"name": "GitHub Actions", "version": "v1"},
+            "procedure": {"command": ["python", "-m", "unittest", "-v"], "environment": "python:3.11", "reproducible": True},
+            "result": {"status": "passed", "observed_at": "2026-10-15T00:00:00Z"},
+        }
+        if kind == "ci_run":
+            proof["run"] = {
+                "run_id": 123456,
+                "run_url": "https://github.com/example/repo/actions/runs/123456",
+                "workflow": "Library Core integrity gate",
+                "commit_sha": "b" * 40,
+                "conclusion": "success",
+            }
+        return proof
+
+    def test_empty_proof_registry_is_valid_until_an_entry_claims_canon(self):
+        self.assertEqual(validate_proof_contract(self.manifest), [])
+
+    def test_verified_entry_without_proof_refs_is_rejected(self):
+        doc = copy.deepcopy(self.manifest)
+        entry = next(e for s in doc["shelves"] for e in s["entries"] if e["id"] == "G-03")
+        entry["evidence"] = "verified"
+        entry["lifecycle"]["label"] = "Canon"
+        entry["lifecycle"].update({"version_pin": "commit:" + "b" * 40, "known_limitations": [], "contradiction_watchlist": []})
+        self.assertTrue(any("cannot be Canon without lifecycle.proof_refs" in e for e in validate_proof_contract(doc)))
+
+    def test_canon_requires_a_linked_successful_machine_proof(self):
+        doc = copy.deepcopy(self.manifest)
+        entry = next(e for s in doc["shelves"] for e in s["entries"] if e["id"] == "G-03")
+        entry["evidence"] = "tested"
+        entry["lifecycle"].update({"label": "Trialed", "version_pin": "commit:" + "b" * 40, "known_limitations": [], "contradiction_watchlist": [], "proof_refs": ["P-0001"]})
+        doc["proof_objects"] = [self._proof()]
+        self.assertEqual(canon_promotion_errors(doc, "G-03"), [])
+
+    def test_canon_gate_rejects_failed_ci_proof(self):
+        doc = copy.deepcopy(self.manifest)
+        entry = next(e for s in doc["shelves"] for e in s["entries"] if e["id"] == "G-03")
+        entry["evidence"] = "tested"
+        entry["lifecycle"].update({"label": "Trialed", "version_pin": "commit:" + "b" * 40, "known_limitations": [], "contradiction_watchlist": [], "proof_refs": ["P-0001"]})
+        proof = self._proof()
+        proof["run"]["conclusion"] = "failure"
+        doc["proof_objects"] = [proof]
+        self.assertTrue(canon_promotion_errors(doc, "G-03"))
+
+    def test_proof_object_with_malformed_digest_is_rejected(self):
+        doc = copy.deepcopy(self.manifest)
+        proof = self._proof()
+        proof["artifact"]["sha256"] = "not-a-digest"
+        doc["proof_objects"] = [proof]
+        self.assertTrue(any("SHA-256 digest" in e for e in validate_proof_contract(doc)))
+
+    def test_file_digest_is_checked_against_bytes(self):
+        from proof_contract import validate_proof_contract
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            artifact = root / "report.txt"
+            artifact.write_text("actual proof bytes", encoding="utf-8")
+            import hashlib
+            proof = {
+                "id":"P-0002","kind":"file_digest",
+                "subject":{"entry_id":"G-03","claim":"Artifact bytes match declared digest."},
+                "artifact":{"uri":"repo://report.txt","sha256":"0" * 64},
+                "verifier":{"name":"SHA-256","version":"1"},
+                "procedure":{"command":["sha256sum","report.txt"],"environment":"python:3.11","reproducible":True},
+                "result":{"status":"passed","observed_at":"2026-10-15T00:00:00Z"}
+            }
+            doc = copy.deepcopy(self.manifest)
+            doc["proof_objects"] = [proof]
+            errors = validate_proof_contract(doc, root)
+            self.assertTrue(any("SHA-256 mismatch" in e for e in errors))
+            proof["artifact"]["sha256"] = hashlib.sha256(artifact.read_bytes()).hexdigest()
+            self.assertFalse(any("SHA-256 mismatch" in e for e in validate_proof_contract(doc, root)))
 
 
 if __name__ == "__main__":
