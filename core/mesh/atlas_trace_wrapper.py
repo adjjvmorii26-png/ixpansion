@@ -6,6 +6,7 @@ trust decisions outside this module.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import time
 from typing import Any, Dict, FrozenSet, Optional, Set
@@ -27,7 +28,9 @@ def emit_log(wrapper_id: str, event_type: str, user_intent: str,
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "wrapper_id": wrapper_id,
         "event_type": event_type,
-        "user_intent": user_intent,
+        # Avoid retaining potentially sensitive free-text prompts in audit logs.
+        "intent_sha256": hashlib.sha256(user_intent.encode("utf-8")).hexdigest(),
+        "intent_length": len(user_intent),
         "scope_mode": scope_mode,
         "skill_consulted": skill_consulted,
         "result": result,
@@ -42,6 +45,10 @@ def reject(wrapper_id: str, skill_name: str, intent: str, scope_mode: str,
 
 def validate_scope(wrapper_id: str, skill_name: str, intent: str,
                    scope_mode: str, allowed_scopes: FrozenSet[str]) -> None:
+    if not isinstance(intent, str) or not intent.strip() or len(intent) > 512:
+        reject(wrapper_id, skill_name, str(intent), str(scope_mode),
+               "INVALID_INTENT", "INVALID_INTENT",
+               description="Intent must be a non-empty string of at most 512 characters.")
     if not isinstance(scope_mode, str) or scope_mode not in allowed_scopes:
         reject(wrapper_id, skill_name, intent, str(scope_mode),
                "INVALID_SCOPE_MODE", "INVALID_SCOPE",
@@ -180,6 +187,10 @@ class KGValidationWrapper:
             reject(self.wrapper_id, self.skill_name, intent, scope_mode,
                    "INVALID_EXECUTION_FLAG", "INVALID_EXECUTION_FLAG",
                    description="execute_code must be a boolean.")
+        if execute_code and scope_mode == "STATIC_ANALYSIS":
+            reject(self.wrapper_id, self.skill_name, intent, scope_mode,
+                   "EXECUTION_SCOPE_MISMATCH", "EXECUTION_SCOPE_MISMATCH",
+                   description="STATIC_ANALYSIS is non-executing; code execution is forbidden in this scope.")
         if execute_code and not self.sandbox_verified:
             reject(self.wrapper_id, self.skill_name, intent, scope_mode,
                    "SANDBOX_UNAVAILABLE", "SANDBOX_UNAVAILABLE",
