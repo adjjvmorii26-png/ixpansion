@@ -1,6 +1,6 @@
 import unittest
 
-from api.atlas_trace_wrapper import AtlasTraceWrapper, KGValidationWrapper, WrapperError
+from core.mesh.atlas_trace_wrapper import AtlasTraceWrapper, KGValidationWrapper, WrapperError
 
 
 class TestWrapperVerificationSuite(unittest.TestCase):
