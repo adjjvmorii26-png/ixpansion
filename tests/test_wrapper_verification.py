@@ -23,7 +23,24 @@ class TestWrapperVerificationSuite(unittest.TestCase):
         self.assert_code("MISSING_ACCESS", lambda: self.atlas.execute("Trace restricted node", "ANCHORED_TRACE", anchor="SECRET-NODE-999"))
 
     def test_kg_sandbox_unavailable(self):
-        self.assert_code("SANDBOX_UNAVAILABLE", lambda: self.kg.execute("Run custom validator script", "STATIC_ANALYSIS", execute_code=True))
+        self.assert_code("EXECUTION_SCOPE_MISMATCH", lambda: self.kg.execute("Run custom validator script", "STATIC_ANALYSIS", execute_code=True))
+
+    def test_static_analysis_never_executes_even_with_sandbox_flag(self):
+        wrapper = KGValidationWrapper(sandbox_verified=True)
+        self.assert_code("EXECUTION_SCOPE_MISMATCH", lambda: wrapper.execute("Run code", "STATIC_ANALYSIS", execute_code=True))
+
+    def test_transaction_execution_requires_external_sandbox_gate(self):
+        self.assert_code("SANDBOX_UNAVAILABLE", lambda: self.kg.execute("Run validator", "TRANSACTION_VALIDATION", execute_code=True))
+
+    def test_audit_log_hashes_intent_instead_of_storing_raw_text(self):
+        result = self.atlas.execute("private customer name: Alice", "ANCHORED_TRACE", anchor="MEM-KG0001-CORE")
+        self.assertNotIn("user_intent", result)
+        self.assertNotIn("Alice", str(result))
+        self.assertEqual(len(result["intent_sha256"]), 64)
+
+    def test_intent_must_be_bounded_nonempty_text(self):
+        self.assert_code("INVALID_INTENT", lambda: self.atlas.execute(" ", "ANCHORED_TRACE", anchor="MEM-KG0001-CORE"))
+        self.assert_code("INVALID_INTENT", lambda: self.atlas.execute("x" * 513, "ANCHORED_TRACE", anchor="MEM-KG0001-CORE"))
 
     def test_kg_rejected_wal_rewrite(self):
         self.assert_code("REJECTED_OPERATION", lambda: self.kg.execute("Rewrite WAL entries", "STATIC_ANALYSIS", operation="WAL_REWRITE"))
