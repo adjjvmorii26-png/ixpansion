@@ -88,11 +88,25 @@ class SquirrelCache:
                     nut = json.loads(raw.decode("utf-8"))
                 except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
                     raise CacheIntegrityError(f"cannot migrate legacy cache item {filename}: {exc}") from exc
+                if not _TAG_RE.fullmatch(tag) or not filename.endswith(".json"):
+                    raise CacheIntegrityError(f"invalid legacy tag or filename: {filename}")
                 if nut.get("tag") != tag or not isinstance(nut.get("snippet"), str):
                     raise CacheIntegrityError(f"legacy cache item does not match manifest: {filename}")
+                # Upgrade the cached record itself to the v1 shape before hashing it.
+                # Otherwise the new reader would correctly reject its missing stable ID.
+                entry_id = str(uuid.uuid4())
+                cached_at = nut.get("cached_at", 0)
+                if not isinstance(cached_at, int) or isinstance(cached_at, bool) or cached_at < 0:
+                    cached_at = 0
+                upgraded = {
+                    "id": entry_id, "tag": tag,
+                    "snippet": nut["snippet"], "cached_at": cached_at,
+                }
+                upgraded_raw = _canonical_json(upgraded)
+                _atomic_write(path, upgraded_raw)
                 migrated.append({
-                    "id": str(uuid.uuid4()), "tag": tag, "file": filename,
-                    "sha256": _sha256(raw), "cached_at": nut.get("cached_at", 0),
+                    "id": entry_id, "tag": tag, "file": filename,
+                    "sha256": _sha256(upgraded_raw), "cached_at": cached_at,
                 })
             result = {"schema_version": SCHEMA_VERSION, "entries": migrated}
             self._write_manifest(result)
