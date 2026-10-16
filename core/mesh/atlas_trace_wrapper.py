@@ -24,13 +24,14 @@ class WrapperError(Exception):
 def emit_log(wrapper_id: str, event_type: str, user_intent: str,
              scope_mode: str, skill_consulted: Optional[str], result: str) -> Dict[str, Any]:
     """Create a structured log event; persistence/tamper protection is external."""
+    safe_intent = user_intent if isinstance(user_intent, str) else ""
     return {
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "wrapper_id": wrapper_id,
         "event_type": event_type,
         # Avoid retaining potentially sensitive free-text prompts in audit logs.
-        "intent_sha256": hashlib.sha256(user_intent.encode("utf-8")).hexdigest(),
-        "intent_length": len(user_intent),
+        "intent_sha256": hashlib.sha256(safe_intent.encode("utf-8")).hexdigest(),
+        "intent_length": len(safe_intent) if isinstance(user_intent, str) else None,
         "scope_mode": scope_mode,
         "skill_consulted": skill_consulted,
         "result": result,
