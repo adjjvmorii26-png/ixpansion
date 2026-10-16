@@ -79,8 +79,16 @@ class AtlasTraceWrapper:
             raise ValueError("accessible_pages must contain non-empty strings")
         self.wrapper_id = "atlas-trace-wrapper"
         self.skill_name = "Trace-Atlas-Paradoxes"
-        self.whole_atlas_authorized = whole_atlas_authorized
-        self.accessible_pages = frozenset(pages)
+        self._whole_atlas_authorized = whole_atlas_authorized
+        self._accessible_pages = frozenset(pages)
+
+    @property
+    def whole_atlas_authorized(self) -> bool:
+        return self._whole_atlas_authorized
+
+    @property
+    def accessible_pages(self) -> FrozenSet[str]:
+        return self._accessible_pages
 
     def execute(self, intent: str, scope_mode: str, anchor: Optional[str] = None,
                 operation: Optional[str] = None,
@@ -138,8 +146,16 @@ class KGValidationWrapper:
             raise ValueError("accessible_schemas must contain non-empty strings")
         self.wrapper_id = "kg-validation-wrapper"
         self.skill_name = "Validate-KG-Transactions"
-        self.sandbox_verified = sandbox_verified
-        self.accessible_schemas = frozenset(schemas)
+        self._sandbox_verified = sandbox_verified
+        self._accessible_schemas = frozenset(schemas)
+
+    @property
+    def sandbox_verified(self) -> bool:
+        return self._sandbox_verified
+
+    @property
+    def accessible_schemas(self) -> FrozenSet[str]:
+        return self._accessible_schemas
 
     def execute(self, intent: str, scope_mode: str, operation: Optional[str] = None,
                 execute_code: bool = False, schema_id: Optional[str] = None) -> Dict[str, Any]:
