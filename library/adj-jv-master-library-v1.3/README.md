@@ -60,3 +60,31 @@ A digest proves byte identity, not the truth of the claim. A CI success proves t
 Run `python canon_gate.py --entry G-03` to perform a **dry-run eligibility check**. The entry must first be `tested`, must include a version pin, known limitations, contradiction watchlist, and at least one proof reference that resolves to a passing reproducible CI/test proof. The gate never edits the manifest; promotion remains a separate, reviewable change with a new history event.
 
 Current state: `G-03` remains `implemented`; `proof_objects` is empty; no entry is Canon. This is intentional until genuine, claim-specific evidence is attached.
+
+
+## Squirrel Cache — tagged knowledge snippets
+
+`squirrel_cache.py` provides a small standard-library-only cache for local snippets.
+It preserves the original `squirrel_hoard(tag, snippet)` and
+`squirrel_retrieve(tag)` helpers, and adds a `SquirrelCache` class for explicit
+cache locations:
+
+```python
+from squirrel_cache import SquirrelCache
+
+cache = SquirrelCache("cache/nuts")
+cache.hoard("dark_hex", "Background: #03040A; accents: #00E5FF and #FF2BD6.")
+snippets = cache.retrieve("dark_hex")
+```
+
+The versioned manifest stores unique entry IDs and SHA-256 digests. Cache files and
+the manifest are written atomically; unsafe tags, missing files, malformed manifests,
+and content/digest mismatches are rejected. A legacy list-shaped manifest from the
+original demo is migrated on read. Importing the module does not create a cache
+directory; the compatibility helper initializes its default cache lazily.
+
+**Trust boundary:** a matching digest establishes byte integrity relative to the
+manifest, not truth or evidentiary quality. Snippets must retain their own evidence
+classification in the Library Core when factual claims matter.
+
+Run its regression tests from this directory with `python -m unittest -v`.
