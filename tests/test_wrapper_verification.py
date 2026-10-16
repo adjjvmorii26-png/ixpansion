@@ -47,6 +47,10 @@ class TestWrapperVerificationSuite(unittest.TestCase):
     def test_access_policy_is_immutable(self):
         with self.assertRaises(AttributeError):
             self.atlas.accessible_pages.add("SECRET-NODE-999")
+        with self.assertRaises(AttributeError):
+            self.atlas.accessible_pages = frozenset({"SECRET-NODE-999"})
+        with self.assertRaises(AttributeError):
+            self.atlas.whole_atlas_authorized = True
 
     def test_whole_scan_denied_without_explicit_grant(self):
         self.assert_code("MISSING_ACCESS", lambda: self.atlas.execute("Scan atlas", "READ_ONLY_WHOLE_ATLAS_SCAN"))
@@ -67,6 +71,15 @@ class TestWrapperVerificationSuite(unittest.TestCase):
     def test_sandbox_flag_requires_exact_boolean(self):
         with self.assertRaises(TypeError):
             KGValidationWrapper(sandbox_verified=1)
+
+    def test_kg_scope_operation_mismatch_rejected(self):
+        self.assert_code("REJECTED_OPERATION", lambda: self.kg.execute("Validate", "STATIC_ANALYSIS", operation="TRANSACTION_VALIDATION"))
+
+    def test_kg_policy_properties_are_read_only(self):
+        with self.assertRaises(AttributeError):
+            self.kg.sandbox_verified = True
+        with self.assertRaises(AttributeError):
+            self.kg.accessible_schemas = frozenset({"ADMIN_SCHEMA"})
 
     def test_explicit_empty_schema_set_denies_every_schema(self):
         wrapper = KGValidationWrapper(accessible_schemas=set())
