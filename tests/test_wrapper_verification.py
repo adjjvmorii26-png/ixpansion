@@ -117,6 +117,22 @@ class TestWrapperVerificationSuite(unittest.TestCase):
     def test_magic_invalid_schema_key_is_rejected(self):
         self.assert_code("SKILL_LOGIC_VIOLATION", lambda: self.atlas.execute("Trace", "ANCHORED_TRACE", anchor="MEM-KG0001-CORE", input_data={"invalid_schema_key": True}))
 
+    def test_atlas_payload_accepts_expected_shape(self):
+        payload = {"Nodes": [], "Connections": [], "Paradoxes": [], "Confidence": 0.75}
+        result = self.atlas.execute("Trace", "ANCHORED_TRACE", anchor="MEM-KG0001-CORE", input_data=payload)
+        self.assertEqual(result["result"], "SUCCESS")
+
+    def test_atlas_payload_rejects_missing_required_fields(self):
+        self.assert_code("SKILL_LOGIC_VIOLATION", lambda: self.atlas.execute("Trace", "ANCHORED_TRACE", anchor="MEM-KG0001-CORE", input_data={"Nodes": []}))
+
+    def test_atlas_payload_rejects_wrong_collection_types(self):
+        payload = {"Nodes": {}, "Connections": [], "Paradoxes": [], "Confidence": 0.75}
+        self.assert_code("SKILL_LOGIC_VIOLATION", lambda: self.atlas.execute("Trace", "ANCHORED_TRACE", anchor="MEM-KG0001-CORE", input_data=payload))
+
+    def test_atlas_payload_rejects_boolean_confidence(self):
+        payload = {"Nodes": [], "Connections": [], "Paradoxes": [], "Confidence": True}
+        self.assert_code("SKILL_LOGIC_VIOLATION", lambda: self.atlas.execute("Trace", "ANCHORED_TRACE", anchor="MEM-KG0001-CORE", input_data=payload))
+
 
 if __name__ == "__main__":
     unittest.main()
