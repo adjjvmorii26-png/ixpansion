@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import html
 import json
 import sys
 from datetime import datetime, timezone
@@ -46,6 +47,11 @@ def _canonical(payload: Any) -> bytes:
 def _hash(payload: dict[str, Any]) -> str:
     material = {k: v for k, v in payload.items() if k != "weave_hash"}
     return hashlib.sha256(_canonical(material)).hexdigest()
+
+
+def _html_text(value: Any) -> str:
+    """Encode untrusted values for an HTML text-node context."""
+    return html.escape("" if value is None else str(value), quote=True)
 
 
 def _label_for(entry_type: str) -> str:
@@ -101,19 +107,30 @@ def _weave_chronicle(entries: list[dict[str, Any]], *, clock: Any = utc_now) -> 
 
 def _render(payload: dict[str, Any]) -> str:
     summary_rows = "".join(
-        f'<tr><td>{t.replace("_", " ").title()}</td><td>{c}</td></tr>'
+        f'<tr><td>{_html_text(str(t).replace("_", " ").title())}</td><td>{_html_text(c)}</td></tr>'
         for t, c in payload.get("type_summary", {}).items()
     )
     timeline = "".join(
-        f'<li><span class="ts">{item["timestamp"]}</span> '
-        f'<span class="tag">{item["label"]}</span> '
-        f'<span class="ref">{item["ref"][:16] if item["ref"] else "—"}</span> '
-        f'<span class="summary">{item["summary"]}</span></li>'
+        f'<li><span class="ts">{_html_text(item.get("timestamp", ""))}</span> '
+        f'<span class="tag">{_html_text(item.get("label", ""))}</span> '
+        f'<span class="ref">{_html_text(str(item.get("ref") or "")[:16] or "—")}</span> '
+        f'<span class="summary">{_html_text(item.get("summary", ""))}</span></li>'
         for item in payload.get("timeline", [])
     )
+    audit = payload.get("audit", {})
+    warning = ""
+    if not audit.get("ok", False):
+        failure = audit.get("failure") or {}
+        warning = (
+            '<aside role="alert" class="warning">'
+            '<strong>UNTRUSTED LEDGER — integrity verification failed.</strong> '
+            f'Records below are diagnostic only. Failure: {_html_text(failure.get("kind", "unknown"))}. '
+            'Do not use this report as verified evidence.</aside>'
+        )
+    status = _html_text(payload.get("status", "unknown"))
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Chronicle</title>
+<title>Chronicle — {status}</title>
 <style>
 body {{ font-family: system-ui, sans-serif; background: #0a0f1a; color: #e2e8f0; margin: 0; padding: 24px; }}
 .wrap {{ max-width: 800px; margin: 0 auto; }}
@@ -127,13 +144,15 @@ li {{ padding: 10px 0; border-bottom: 1px solid #1e293b; font-size: 0.9rem; }}
 .tag {{ color: #38bdf8; font-weight: 600; }}
 .ref {{ color: #94a3b8; font-family: ui-monospace, monospace; font-size: 0.8rem; }}
 .summary {{ color: #cbd5e1; }}
+.warning {{ border: 2px solid #f87171; background: #451a1a; padding: 12px; margin: 16px 0; }}
 footer {{ color: #64748b; font-size: 0.8rem; margin-top: 16px; }}
 </style></head><body><div class="wrap">
 <h1>Chronicle</h1>
-<p>{payload["total_entries"]} entries · {payload["unique_types"]} unique types · sealed {payload["sealed_at"]}</p>
+{warning}
+<p>{_html_text(payload.get("total_entries", 0))} entries · {_html_text(payload.get("unique_types", 0))} unique types · sealed {_html_text(payload.get("sealed_at", ""))}</p>
 <table><thead><tr><th>Type</th><th>Count</th></tr></thead><tbody>{summary_rows}</tbody></table>
 <ul>{timeline}</ul>
-<footer>hash {payload["weave_hash"][:20]}</footer>
+<footer>status {_html_text(status)} · hash {_html_text(str(payload.get("weave_hash", ""))[:20])}</footer>
 </div></body></html>"""
 
 
@@ -149,7 +168,11 @@ def weave_chronicle(
     audit = verify_jsonl(path)
     entries = read_jsonl(path)
     result = _weave_chronicle(entries, clock=clock)
-    result["audit"] = {"ok": audit["ok"], "records": audit["records"]}
+    result["audit"] = {"ok": audit["ok"], "records": audit["records"], "failure": audit.get("failure")}
+    result["status"] = "sealed" if audit["ok"] else "untrusted"
+    # Keep the report digest aligned with the rendered status while preserving
+    # the established contract that the audit envelope itself is not hashed.
+    result["weave_hash"] = _hash({k: v for k, v in result.items() if k != "audit"})
     result["html"] = _render(result)
 
     if record:
