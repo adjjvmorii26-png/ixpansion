@@ -51,6 +51,10 @@ class TestWrapperVerificationSuite(unittest.TestCase):
             self.atlas.accessible_pages = frozenset({"SECRET-NODE-999"})
         with self.assertRaises(AttributeError):
             self.atlas.whole_atlas_authorized = True
+        with self.assertRaises(AttributeError):
+            self.atlas._whole_atlas_authorized = True
+        with self.assertRaises(AttributeError):
+            self.atlas._accessible_pages = frozenset({"SECRET-NODE-999"})
 
     def test_whole_scan_denied_without_explicit_grant(self):
         self.assert_code("MISSING_ACCESS", lambda: self.atlas.execute("Scan atlas", "READ_ONLY_WHOLE_ATLAS_SCAN"))
@@ -80,6 +84,10 @@ class TestWrapperVerificationSuite(unittest.TestCase):
             self.kg.sandbox_verified = True
         with self.assertRaises(AttributeError):
             self.kg.accessible_schemas = frozenset({"ADMIN_SCHEMA"})
+        with self.assertRaises(AttributeError):
+            self.kg._sandbox_verified = True
+        with self.assertRaises(AttributeError):
+            self.kg._accessible_schemas = frozenset({"ADMIN_SCHEMA"})
 
     def test_explicit_empty_schema_set_denies_every_schema(self):
         wrapper = KGValidationWrapper(accessible_schemas=set())
