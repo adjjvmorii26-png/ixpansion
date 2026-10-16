@@ -176,17 +176,25 @@ class SquirrelCache:
             return results
 
 
-_DEFAULT_CACHE = SquirrelCache()
+_DEFAULT_CACHE: SquirrelCache | None = None
+
+
+def _default_cache() -> SquirrelCache:
+    # Lazy initialization avoids creating cache directories just by importing this module.
+    global _DEFAULT_CACHE
+    if _DEFAULT_CACHE is None:
+        _DEFAULT_CACHE = SquirrelCache()
+    return _DEFAULT_CACHE
 
 
 def squirrel_hoard(tag: str, snippet: str) -> str:
     """Compatibility wrapper for the original demo function."""
-    return _DEFAULT_CACHE.hoard(tag, snippet)
+    return _default_cache().hoard(tag, snippet)
 
 
 def squirrel_retrieve(tag: str) -> list[str]:
     """Compatibility wrapper for the original demo function."""
-    return _DEFAULT_CACHE.retrieve(tag)
+    return _default_cache().retrieve(tag)
 
 
 if __name__ == "__main__":
