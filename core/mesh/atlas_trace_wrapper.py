@@ -138,11 +138,28 @@ class AtlasTraceWrapper:
             reject(self.wrapper_id, self.skill_name, intent, scope_mode,
                    "SKILL_LOGIC_VIOLATION", "SKILL_LOGIC_VIOLATION",
                    description="input_data must be a dictionary.")
-        if input_data is not None and "invalid_schema_key" in input_data:
-            reject(self.wrapper_id, self.skill_name, intent, scope_mode,
-                   "SKILL_LOGIC_VIOLATION", "SKILL_LOGIC_VIOLATION",
-                   description="Input contains a prohibited schema key.",
-                   expected_structure=["Nodes", "Connections", "Paradoxes", "Confidence"])
+        if input_data is not None:
+            required_keys = {"Nodes", "Connections", "Paradoxes", "Confidence"}
+            supplied_keys = set(input_data)
+            if supplied_keys != required_keys:
+                reject(self.wrapper_id, self.skill_name, intent, scope_mode,
+                       "SKILL_LOGIC_VIOLATION", "SKILL_LOGIC_VIOLATION",
+                       description="Atlas payload must contain exactly the required schema keys.",
+                       expected_structure=sorted(required_keys),
+                       missing_keys=sorted(required_keys - supplied_keys),
+                       unexpected_keys=sorted(supplied_keys - required_keys))
+            if (not isinstance(input_data["Nodes"], list)
+                    or not isinstance(input_data["Connections"], list)
+                    or not isinstance(input_data["Paradoxes"], list)):
+                reject(self.wrapper_id, self.skill_name, intent, scope_mode,
+                       "SKILL_LOGIC_VIOLATION", "SKILL_LOGIC_VIOLATION",
+                       description="Nodes, Connections, and Paradoxes must be lists.")
+            confidence = input_data["Confidence"]
+            if (isinstance(confidence, bool) or not isinstance(confidence, (int, float))
+                    or not 0 <= confidence <= 1):
+                reject(self.wrapper_id, self.skill_name, intent, scope_mode,
+                       "SKILL_LOGIC_VIOLATION", "SKILL_LOGIC_VIOLATION",
+                       description="Confidence must be a number between 0 and 1.")
         return emit_log(self.wrapper_id, "INFO", intent, scope_mode, self.skill_name, "SUCCESS")
 
 
