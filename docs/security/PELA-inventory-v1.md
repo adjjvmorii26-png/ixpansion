@@ -255,3 +255,37 @@ The fixture runs `git checkout -- data/` during pytest configuration and discard
 - [ ] Trust-transition register populated from call sites
 - [ ] Regression tests executed in a safe isolated workspace
 - [ ] Runtime behavior verified and findings reproduced
+
+
+## Initial reader and trust-transition trace (partial)
+
+The following call sites were inspected after the inventory was drafted. This section supplements the inventory; it does not close repository-wide coverage.
+
+| ID | Consumer | Observed source behavior | Initial interpretation |
+|---|---|---|---|
+| TTR-001 | `lab/pulse_oracle.py` | Calls `verify_jsonl` and `read_jsonl`; if audit `ok` is false, writes a refusal report and returns nonzero without appending a normal oracle record. | Likely fail-closed for normal success; tests still needed. |
+| TTR-002 | `lab/evolution_consent.py` | The inspected council loader checks seal, verifies the ledger, refuses failed audit, and checks a ledger hash witness. | Explicit checks present; full caller coverage unknown. |
+| TTR-003 | `lab/chronicle_weaver.py` | Calls verifier and reader, then builds a chronicle and may write outputs without visibly aborting when audit fails. | Confirmed source behavior; determine whether output is diagnostic-only or trusted. |
+| TTR-004 | `lab/vault_cli.py` | Verify command calls verifier; replay command reads records without verifying. | Potentially valid for diagnostics; replay must not imply verified evidence. |
+| TTR-005 | `api/emergent_skills.py` | Three named skill actions map to `_log_module_mutation`, which writes SQLite rows. Searches found no additional `module_dreams` or `memories_1.sqlite` matches in the searched default-branch source. | Writer/action mapping confirmed; complete reader/caller graph remains unknown. |
+| TTR-006 | `lab/repair_dreams.py` | Checks each source ledger and skips ledgers whose verification fails, with a comment indicating diagnosis should preserve the failure. | Likely intentional diagnostic behavior; verify outputs mark excluded sources and failures clearly. |
+| TTR-007 | `lab/mandate_genome.py`, `lab/ancestral_echo.py`, `lab/evolution_council.py` | Inspected paths refuse on failed audit before consuming records as accepted evidence. | Explicit fail-closed checks in those paths; runtime tests and broader caller coverage remain open. |
+
+### Trust-preserving reader contract
+
+`read_jsonl` is a parser, not an integrity verifier. For decision-sensitive consumers, verification should be bound to the exact bytes or file version consumed. Separate calls to verify and read can create a time-of-check/time-of-use gap if the ledger can change between them.
+
+### New candidate finding: TTR-003
+
+**Confidence:** confirmed source behavior; impact depends on downstream use.
+
+Chronicle generation continues after a failed ledger audit and attaches the audit status to the result. This is not automatically a vulnerability: the function may intentionally produce diagnostic output. The missing contract is whether such output is allowed to be used as verified evidence.
+
+**Recommendation:** explicitly choose one policy. Either stop trusted chronicle generation on audit failure, or mark the result and derived content diagnostic-only and ensure downstream decision paths reject it. Add a tampered-ledger test that asserts the selected policy.
+
+### Next coverage actions
+
+1. Search for direct and indirect consumers of chronicle JSON/HTML output.
+2. Inspect all `verify_jsonl` call sites for same-file verification/read binding and failed-audit behavior.
+3. Identify the external entry points that invoke `invoke_skill` and any dynamically imported SQLite readers.
+4. Run tests only in an isolated disposable workspace because pytest configuration executes `git checkout -- data/`.
