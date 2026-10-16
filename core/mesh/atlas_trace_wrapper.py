@@ -139,6 +139,10 @@ class AtlasTraceWrapper:
                    "SKILL_LOGIC_VIOLATION", "SKILL_LOGIC_VIOLATION",
                    description="input_data must be a dictionary.")
         if input_data is not None:
+            if any(not isinstance(key, str) or not key for key in input_data):
+                reject(self.wrapper_id, self.skill_name, intent, scope_mode,
+                       "SKILL_LOGIC_VIOLATION", "SKILL_LOGIC_VIOLATION",
+                       description="Atlas payload keys must be non-empty strings.")
             required_keys = {"Nodes", "Connections", "Paradoxes", "Confidence"}
             supplied_keys = set(input_data)
             if supplied_keys != required_keys:
