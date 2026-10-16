@@ -1,0 +1,134 @@
+name: Library Core integrity gate
+
+on:
+  pull_request:
+    paths:
+      - "library/adj-jv-master-library-v1.3/**"
+      - ".github/workflows/library-core-integrity.yml"
+      - ".github/pull_request_template.md"
+  push:
+    branches: [main]
+    paths:
+      - "library/adj-jv-master-library-v1.3/**"
+      - ".github/workflows/library-core-integrity.yml"
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  library-integrity:
+    name: Archivist of Coherence
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate manifest
+        working-directory: library/adj-jv-master-library-v1.3
+        run: python library_validator.py
+      - name: Run library regression tests
+        working-directory: library/adj-jv-master-library-v1.3
+        run: python -m unittest -v
+      - name: Check lineage and contradiction delta
+        if: github.event_name == 'pull_request'
+        working-directory: library/adj-jv-master-library-v1.3
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.sha }}
+        run: python library_validator.py --base-ref "$BASE_REF"
+      - name: Validate proof objects and local artifact digests
+        working-directory: library/adj-jv-master-library-v1.3
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from library_validator import load_manifest
+          from proof_contract import validate_proof_contract
+          errors = validate_proof_contract(load_manifest(), Path.cwd().parents[1])
+          print("\\n".join(errors) if errors else "Proof contract valid; local artifact digests checked.")
+          raise SystemExit(bool(errors))
+          PY
+      - name: Verify referenced GitHub Actions runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPOSITORY: ${{ github.repository }}
+        working-directory: library/adj-jv-master-library-v1.3
+        run: |
+          python - <<'PY'
+          import json, os, sys, urllib.error, urllib.request
+          from library_validator import load_manifest
+          repo = os.environ["GH_REPOSITORY"]
+          token = os.environ["GH_TOKEN"]
+          doc = load_manifest()
+          errors = []
+          for proof in doc.get("proof_objects", []):
+              if not isinstance(proof, dict) or proof.get("kind") != "ci_run":
+                  continue
+              run = proof.get("run", {})
+              run_id = run.get("run_id")
+              expected_url = f"https://github.com/{repo}/actions/runs/{run_id}"
+              if run.get("run_url") != expected_url:
+                  errors.append(f"{proof.get('id')}: run URL must match repository and run ID")
+                  continue
+              request = urllib.request.Request(
+                  f"https://api.github.com/repos/{repo}/actions/runs/{run_id}",
+                  headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}
+              )
+              try:
+                  with urllib.request.urlopen(request, timeout=20) as response:
+                      actual = json.load(response)
+              except (urllib.error.URLError, json.JSONDecodeError) as exc:
+                  errors.append(f"{proof.get('id')}: unable to retrieve CI run: {exc}")
+                  continue
+              if actual.get("status") != "completed" or actual.get("conclusion") != "success":
+                  errors.append(f"{proof.get('id')}: referenced CI run is not completed successfully")
+              if actual.get("head_sha") != run.get("commit_sha"):
+                  errors.append(f"{proof.get('id')}: proof commit SHA does not match CI run head")
+              if actual.get("name") != run.get("workflow"):
+                  errors.append(f"{proof.get('id')}: workflow name does not match CI run")
+              artifact_uri = proof.get("artifact", {}).get("uri", "")
+              if isinstance(artifact_uri, str) and artifact_uri.startswith("github-artifact://"):
+                  artifact_id = artifact_uri.split("://", 1)[1]
+                  artifact_request = urllib.request.Request(
+                      f"https://api.github.com/repos/{repo}/actions/artifacts/{artifact_id}",
+                      headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}
+                  )
+                  try:
+                      with urllib.request.urlopen(artifact_request, timeout=20) as response:
+                          artifact_meta = json.load(response)
+                      if artifact_meta.get("expired") or artifact_meta.get("workflow_run", {}).get("id") != run_id:
+                          errors.append(f"{proof.get('id')}: artifact is expired or belongs to another workflow run")
+                      else:
+                          download_request = urllib.request.Request(
+                              f"https://api.github.com/repos/{repo}/actions/artifacts/{artifact_id}/zip",
+                              headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}
+                          )
+                          with urllib.request.urlopen(download_request, timeout=30) as response:
+                              artifact_bytes = response.read()
+                          import hashlib
+                          digest = hashlib.sha256(artifact_bytes).hexdigest()
+                          if digest.lower() != proof.get("artifact", {}).get("sha256", "").lower():
+                              errors.append(f"{proof.get('id')}: downloaded artifact SHA-256 does not match proof object")
+                  except (urllib.error.URLError, json.JSONDecodeError) as exc:
+                      errors.append(f"{proof.get('id')}: unable to verify artifact bytes: {exc}")
+          print("\\n".join(errors) if errors else "All referenced CI runs are authentic, successful, and commit-matched.")
+          sys.exit(bool(errors))
+          PY
+      - name: Require contradiction accounting in PR description
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          python - <<'PY'
+          import os, sys
+          body = (os.environ.get("PR_BODY") or "").lower()
+          required = ["entries touched", "evidence changes", "new contradictions", "validator output summary"]
+          missing = [heading for heading in required if heading not in body]
+          if missing:
+              print("PR description is missing contract sections: " + ", ".join(missing))
+              sys.exit(1)
+          PY
