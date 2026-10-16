@@ -101,6 +101,20 @@ Confidence:
 8. **Failure closure:** missing, malformed, or unavailable verification evidence fails closed for trust promotion.
 9. **Fallback consistency:** alternate paths, such as temporary-directory fallbacks, cannot silently create divergent authoritative state.
 10. **Audit reproducibility:** each finding points to a repository commit and source location.
+11. **Semantic preservation:** storage, cache status, integrity, freshness, verification, and authority remain separate dimensions; no component silently promotes one dimension based on another.
+
+## Semantic preservation model
+
+Do not model trust as one linear enum. A record may be cached and integrity-valid while stale, or persisted while its origin remains unknown. Track these dimensions independently:
+
+- **Origin:** unknown or identified, with provenance metadata.
+- **Storage:** transient, persisted, or cached.
+- **Integrity:** unchecked, valid, or invalid.
+- **Freshness:** current, stale, or unknown relative to a declared use-specific TTL/clock policy.
+- **Verification:** unverified, verified, or failed, naming the exact checks and scope.
+- **Authority:** non-authoritative or authoritative for a specific claim under an explicit policy.
+
+A successful check in one dimension must not silently change another. In particular, integrity is not factual truth; persistence is not provenance; recency is not liveness; cache presence is not verification. Reports must preserve these dimensions or clearly declare any lossy projection.
 
 ## Acceptance criteria
 
@@ -109,6 +123,7 @@ PELA is complete for a declared scope only when:
 - Every discovered persistent write maps to one inventory entry.
 - Every known read and consumer is linked to its store or upstream producer, or marked unresolved with a reason.
 - Every trust transition has an explicit decision and supporting evidence.
+- Every persisted data type declares its semantic dimensions, and no implicit promotion between storage, integrity, freshness, verification, and authority is found within the declared scope.
 - Every finding contains a confidence label and reproduction/inspection method.
 - Every trust property has a test or a documented reason it cannot be automated.
 - Tests cover positive and negative cases, including tampering, stale data, malformed metadata, concurrency, duplicate payloads with distinct origins, and cache-hit non-substitution.
