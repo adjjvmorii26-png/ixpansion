@@ -1213,5 +1213,48 @@
   ],
   "contradiction_atlas": [],
   "proof_schema_version": "1.0.0",
-  "proof_objects": []
+  "proof_objects": [
+    {
+      "id": "P-G03-CI-001",
+      "kind": "ci_run",
+      "subject": {
+        "entry_id": "G-03",
+        "claim": "The Library Core integrity gate completed successfully for revision 163b5c5a3b99b677af637b0862d18cb9d8e42b4c. This is process evidence for the validator and regression suite at that revision; it does not establish the truth of G-03's substantive knowledge claims."
+      },
+      "artifact": {
+        "uri": "repo://library/adj-jv-master-library-v1.3/test_library_validator.py",
+        "sha256": "bd86ec4d92143fffe192b0ec4fccc5b766343cc6844e5d07ba06b77d8f07a59e"
+      },
+      "verifier": {
+        "name": "GitHub Actions / Library Core integrity gate",
+        "version": "workflow run 19"
+      },
+      "procedure": {
+        "command": [
+          "python",
+          "library_validator.py",
+          "&&",
+          "python",
+          "-m",
+          "unittest",
+          "-v"
+        ],
+        "environment": "ubuntu-latest; Python 3.11",
+        "environment_uri": "repo://requirements.txt",
+        "environment_sha256": "2b3bebe3ba1a22ca17b54065a6207e73a300e76982f5ec145acdb6952265f856",
+        "reproducible": true
+      },
+      "result": {
+        "status": "passed",
+        "observed_at": "2026-10-15"
+      },
+      "run": {
+        "run_id": 38826662670,
+        "run_url": "https://github.com/adjjvmorii26-png/ixpansion/actions/runs/38826662670",
+        "workflow": "Library Core integrity gate",
+        "commit_sha": "163b5c5a3b99b677af637b0862d18cb9d8e42b4c",
+        "conclusion": "success"
+      }
+    }
+  ]
 }
