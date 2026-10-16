@@ -41,6 +41,7 @@ class TestWrapperVerificationSuite(unittest.TestCase):
     def test_intent_must_be_bounded_nonempty_text(self):
         self.assert_code("INVALID_INTENT", lambda: self.atlas.execute(" ", "ANCHORED_TRACE", anchor="MEM-KG0001-CORE"))
         self.assert_code("INVALID_INTENT", lambda: self.atlas.execute("x" * 513, "ANCHORED_TRACE", anchor="MEM-KG0001-CORE"))
+        self.assert_code("INVALID_INTENT", lambda: self.atlas.execute(None, "ANCHORED_TRACE", anchor="MEM-KG0001-CORE"))
 
     def test_kg_rejected_wal_rewrite(self):
         self.assert_code("REJECTED_OPERATION", lambda: self.kg.execute("Rewrite WAL entries", "STATIC_ANALYSIS", operation="WAL_REWRITE"))
