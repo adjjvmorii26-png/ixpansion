@@ -65,6 +65,7 @@ def validate_operation(wrapper_id: str, skill_name: str, intent: str,
 
 
 class AtlasTraceWrapper:
+    _POLICY_FIELDS = frozenset({"_whole_atlas_authorized", "_accessible_pages"})
     ALLOWED_SCOPES = frozenset({"ANCHORED_TRACE", "READ_ONLY_WHOLE_ATLAS_SCAN"})
     ALLOWED_OPERATIONS = ALLOWED_SCOPES
     DEFAULT_PAGES = frozenset({"MEM-KG0001-CORE", "ECHO-WAL-001"})
@@ -81,6 +82,12 @@ class AtlasTraceWrapper:
         self.skill_name = "Trace-Atlas-Paradoxes"
         self._whole_atlas_authorized = whole_atlas_authorized
         self._accessible_pages = frozenset(pages)
+        self._policy_sealed = True
+
+    def __setattr__(self, name: str, value: Any) -> None:
+        if getattr(self, "_policy_sealed", False) and name in self._POLICY_FIELDS:
+            raise AttributeError(f"{name} is immutable after initialization")
+        object.__setattr__(self, name, value)
 
     @property
     def whole_atlas_authorized(self) -> bool:
@@ -132,6 +139,7 @@ class AtlasTraceWrapper:
 
 
 class KGValidationWrapper:
+    _POLICY_FIELDS = frozenset({"_sandbox_verified", "_accessible_schemas"})
     ALLOWED_SCOPES = frozenset({"STATIC_ANALYSIS", "TRANSACTION_VALIDATION"})
     ALLOWED_OPERATIONS = ALLOWED_SCOPES
     DEFAULT_SCHEMAS = frozenset({"WAL_ENTRY_SCHEMA"})
@@ -148,6 +156,12 @@ class KGValidationWrapper:
         self.skill_name = "Validate-KG-Transactions"
         self._sandbox_verified = sandbox_verified
         self._accessible_schemas = frozenset(schemas)
+        self._policy_sealed = True
+
+    def __setattr__(self, name: str, value: Any) -> None:
+        if getattr(self, "_policy_sealed", False) and name in self._POLICY_FIELDS:
+            raise AttributeError(f"{name} is immutable after initialization")
+        object.__setattr__(self, name, value)
 
     @property
     def sandbox_verified(self) -> bool:
