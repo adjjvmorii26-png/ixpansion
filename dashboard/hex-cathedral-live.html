@@ -67,7 +67,7 @@ function refresh(){Promise.all([api('status'),api('history')]).then(([st,hist])=
   if(st.error){$('status').innerHTML='<span class="status-err">'+esc(st.error)+'</span>';return}
   $('status').innerHTML=`<span class="status-ok">ALIVE</span> Wave ${esc(st.wave)} | ${esc(st.chapels)} chapels | ${esc(st.altars)} altars | ${esc(st.laces)} links | ${esc(st.flattened_instructions)} instr`;
   $('map').innerHTML=st.altars?Object.entries(st.altars).map(([k,v])=>`<div class="chapel"><span>${esc(k)}</span><span class="altar">${esc(v.chapel)}:${esc(v.line)}</span></div>`).join(''):'<div class="chapel">No altars</div>';
-  $('heat').innerHTML=Object.entries(st.heat||{}).map(([k,v])=>`<div><b>${esc(k)}</b> ${v} <div class="heat"><div style="width:${Math.min(100,Math.max(0,finite(v)*4))}%"></div></div></div>`).join('')||'No heat data';
+  $('heat').innerHTML=Object.entries(st.heat||{}).map(([k,v])=>`<div><b>${esc(k)}</b> ${esc(v)} <div class="heat"><div style="width:${Math.min(100,Math.max(0,finite(v)*4))}%"></div></div></div>`).join('')||'No heat data';
   $('links').innerHTML=(st.laces||[]).map(l=>`<span class="link">&#8594; ${esc(l.from)} → ${esc(l.to)} (@${esc(l.label)} line ${esc(l.target_line)})</span>`).join('')||'No links yet';
   $('vitals').innerHTML=`<span class="badge">Instruction count: ${esc(st.instruction_count||'?')}</span><br><span class="badge">Flattened: ${esc(st.flattened_instructions)}</span>`;
   const last=hist.history?hist.history[0]:null;
