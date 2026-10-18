@@ -123,7 +123,8 @@
 <script>
 let dreamVizRunning=false,dreamVizInterval=null,streamAutoRunning=false,streamInterval=null;
 
-function esc(value){return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}\nfunction fmt(o){return esc(JSON.stringify(o,null,2)).replace(/"([^"]+)":/g,'<span class="hl">"$1"</span>:').replace(/: "([^"]+)"/g,': "<span class="c">$1</span>"').replace(/: (\d+\.?\d*)/g,': <span class="w">$1</span>')}
+function esc(value){return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function fmt(o){return esc(JSON.stringify(o,null,2)).replace(/"([^"]+)":/g,'<span class="hl">"$1"</span>:').replace(/: "([^"]+)"/g,': "<span class="c">$1</span>"').replace(/: (\d+\.?\d*)/g,': <span class="w">$1</span>')}
 function log(el,msg){document.getElementById(el).innerHTML=msg}
 async function api(p){try{const r=await fetch(p);return await r.json()}catch(e){return{error:e.message}}}
 
@@ -141,7 +142,7 @@ async function dreamNew(){
     `Name: <span class="hl">${esc(l.name||'?')}</span>\n`+
     `Principle: ${esc(l.principle||'?')}\n`+
     `Scope: <span class="te">${esc(l.scope||'?')}</span>\n`+
-    `Strength: <span class="w">${l.stability||0}</span>\n`+
+    `Strength: <span class="w">${esc(l.stability||0)}</span>\n`+
     `Total dreams: <span class="g">${esc(d.total_dreams||0)}</span>`);
   document.getElementById('lawCount').textContent=`${esc(d.total_dreams||0)} LAWS`;
 }
