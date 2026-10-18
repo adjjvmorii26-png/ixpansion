@@ -244,7 +244,7 @@ async function loomListen(){
 }
 async function loomState(){
   const p=await api('/api/signal_loom/pressure');
-  document.getElementById('loom-pressure').textContent=`Pressure: ${p.pressure} (${p.pressure_desc}) · catches/hour ${esc(p.catches_this_hour)} · total ${p.total_catches}`;
+  document.getElementById('loom-pressure').textContent=`Pressure: ${esc(p.pressure)} (${esc(p.pressure_desc)}) · catches/hour ${esc(p.catches_this_hour)} · total ${esc(p.total_catches)}`;
   const c=await api('/api/signal_loom/catches?limit=10');
   const body=document.getElementById('loom-body');
   const cs=c.catches||[];
