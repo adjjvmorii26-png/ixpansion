@@ -81,7 +81,7 @@ const pulseEl=document.getElementById('pulse');
 function connect(){
   disconnect();
   eventCount=0; startTime=Date.now();
-  stream.innerHTML='';
+  stream.replaceChildren();
   statusEl.textContent='Connecting...';
   statusEl.style.color='var(--amber)';
   pulseEl.style.background='var(--amber)';
@@ -132,7 +132,6 @@ function addEvent(evt){
   while(stream.children.length>200) stream.removeChild(stream.lastChild);
 }
 
-function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 </script>
 <script src="/shared.js"></script>
 <a class="back-btn" href="index.html">← Organism</a>
