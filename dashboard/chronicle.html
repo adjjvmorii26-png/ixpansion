@@ -80,7 +80,7 @@ async function loadTimeline(){
   if (!list.length){ul.innerHTML = '<li class="tl-item"><span class="tl-time">—</span><span class="tl-type">—</span><span class="tl-prose">The chronicle is empty — a blank page waiting.</span></li>';return}
   for (const e of list){
     const li = document.createElement('li'); li.className = 'tl-item';
-    li.innerHTML = `<span class="tl-time">${e.time || ''}</span><span class="tl-type">${e.type || ''}</span><span class="tl-prose">${e.prose || ''}</span>`;
+    for (const [className, value] of [["tl-time", e.time], ["tl-type", e.type], ["tl-prose", e.prose]]) { const span = document.createElement("span"); span.className = className; span.textContent = value == null ? "" : String(value); li.appendChild(span); }
     ul.appendChild(li);
   }
 }

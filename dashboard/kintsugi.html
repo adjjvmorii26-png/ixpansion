@@ -79,7 +79,13 @@ async function post(action, extra){
   return r.json();
 }
 function showParadox(p){
-  el("paradox").innerHTML = `<div class="q">${p.question||"?"}</div><span class="tension">tension ${p.tension||"?"}</span>`;
+  const question = document.createElement("div");
+  question.className = "q";
+  question.textContent = String(p.question || "?");
+  const tension = document.createElement("span");
+  tension.className = "tension";
+  tension.textContent = "tension " + String(p.tension ?? "?");
+  el("paradox").replaceChildren(question, tension);
 }
 function showHealed(a){
   el("healed").style.display = "block";
@@ -87,14 +93,46 @@ function showHealed(a){
   el("healed-art").textContent = (a.art||"") + " — healing " + (a.healing||"?");
 }
 async function loadLists(){
-  const o = await post("open");
-  const al = await post("artifacts");
-  const ol = el("open-list"); ol.innerHTML="";
-  (o.open||[]).slice().reverse().forEach(p=>{ ol.insertAdjacentHTML("beforeend", `<div class="item">⚡ ${p.question} <span style="color:var(--muted)">t ${p.tension}</span></div>`); });
-  if(!(o.open||[]).length) ol.innerHTML = '<div class="item">Nothing open — the organism is at peace.</div>';
-  const al2 = el("artifact-list"); al2.innerHTML="";
-  (al.artifacts||[]).slice().reverse().forEach(a=>{ al2.insertAdjacentHTML("beforeend", `<div class="item"><span class="gold">${a.name}</span> — healed ${a.healing}</div>`); });
-  if(!(al.artifacts||[]).length) al2.innerHTML = '<div class="item">No artifacts yet.</div>';
+  const [openData, artifactData] = await Promise.all([post("open"), post("artifacts")]);
+  const openList = el("open-list");
+  const openItems = [];
+  for (const item of (Array.isArray(openData.open) ? openData.open : []).slice().reverse()) {
+    const row = document.createElement("div");
+    row.className = "item";
+    const question = document.createElement("span");
+    question.textContent = "⚡ " + String(item.question ?? "");
+    const tension = document.createElement("span");
+    tension.style.color = "var(--muted)";
+    tension.textContent = " t " + String(item.tension ?? "—");
+    row.append(question, tension);
+    openItems.push(row);
+  }
+  if (!openItems.length) {
+    const empty = document.createElement("div");
+    empty.className = "item";
+    empty.textContent = "Nothing open — the organism is at peace.";
+    openItems.push(empty);
+  }
+  openList.replaceChildren(...openItems);
+
+  const artifactList = el("artifact-list");
+  const artifactItems = [];
+  for (const item of (Array.isArray(artifactData.artifacts) ? artifactData.artifacts : []).slice().reverse()) {
+    const row = document.createElement("div");
+    row.className = "item";
+    const name = document.createElement("span");
+    name.className = "gold";
+    name.textContent = String(item.name ?? "Unnamed artifact");
+    row.append(name, document.createTextNode(" — healed " + String(item.healing ?? "—")));
+    artifactItems.push(row);
+  }
+  if (!artifactItems.length) {
+    const empty = document.createElement("div");
+    empty.className = "item";
+    empty.textContent = "No artifacts yet.";
+    artifactItems.push(empty);
+  }
+  artifactList.replaceChildren(...artifactItems);
 }
 document.querySelectorAll(".btn[data-action]").forEach(b=>{
   b.addEventListener("click", async ()=>{
