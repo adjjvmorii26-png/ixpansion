@@ -152,7 +152,7 @@ async function awaitModules(){
     const r=await fetch('/api/coherence_regulator?modules=1');
     const j=await r.json();
     const mods=document.getElementById('modules');
-    if(j.living_modules){mods.innerHTML='';j.living_modules.forEach(n=>{
+    if(j.living_modules){mods.replaceChildren();j.living_modules.forEach(n=>{
       const d=document.createElement('div');d.className='module';
       const info=(j.dossiers||{})[n]||{};
       const name=document.createElement('div');name.className='m-name';name.textContent=String(n);
