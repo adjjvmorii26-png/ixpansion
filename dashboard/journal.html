@@ -112,13 +112,13 @@ async function loadOrganurna(){
   const [f, l] = await Promise.all([get('/api/organurna_loop/forgotten?limit=6'), get('/api/organurna_loop/loop')]);
   const el = document.getElementById('orgLoops');
   el.innerHTML =
-    '<div class="rem-line">' + (l.narrative||'') + ' · remembered: ' + (l.remembered_count||0) + '</div>' +
+    '<div class="rem-line">' + esc(l.narrative||'') + ' · remembered: ' + esc(l.remembered_count||0) + '</div>' +
     (l.remembered||[]).filter((r,i)=>i<4).map(r=>`<div class="rem-line" style="opacity:0.8">↺ ${esc(r.module.replace(/_/g,' '))} <span style="color:var(--m)">${esc(r.sigil||'')}</span></div>`).join('') +
     (f.islands||[]).map(i=>`<div class="org-row"><span class="nm">${esc(i.module.replace(/_/g,' '))}</span><span class="st">${esc(i.sigil)}</span><button data-module="${esc(i.module)}">↺ Remember</button></div>`).join('');
 }
 async function rememberMod(mod){
   const r = await get('/api/organurna_loop/remember?module=' + encodeURIComponent(mod));
-  document.getElementById('orgLoops').innerHTML = '<div class="rem-line">🏝 ' + ((r.remembrance||{}).verse||'') + ' — ' + mod.replace(/_/g,' ') + ' re-membered (' + r.total_remembered + ' total).</div>';
+  document.getElementById('orgLoops').innerHTML = '<div class="rem-line">🏝 ' + esc((r.remembrance||{}).verse||'') + ' — ' + mod.replace(/_/g,' ') + ' re-membered (' + r.total_remembered + ' total).</div>';
   setTimeout(loadOrganurna, 1500);
 }
 document.getElementById('orgLoops').addEventListener('click',event=>{
