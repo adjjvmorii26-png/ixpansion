@@ -63,15 +63,15 @@ canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
   <div class="stat"><div class="value">75</div><div class="label">Bridges</div></div>
 </div>
 <div class="filter-bar" id="filters">
-  <button class="filter-btn active" onclick="filterCat('all')">All</button>
-  <button class="filter-btn" onclick="filterCat('Coherence')">🜂 Coherence</button>
-  <button class="filter-btn" onclick="filterCat('Dream')">🌙 Dream</button>
-  <button class="filter-btn" onclick="filterCat('Wave')">🌊 Wave</button>
-  <button class="filter-btn" onclick="filterCat('Paradox')">🔄 Paradox</button>
-  <button class="filter-btn" onclick="filterCat('Expansion')">🌿 Expansion</button>
-  <button class="filter-btn" onclick="filterCat('Mycelial')">🍄 Mycelial</button>
-  <button class="filter-btn" onclick="filterCat('Hex')">⬡ Hex</button>
-  <button class="filter-btn" onclick="filterCat('Glitch')">💀 Glitch</button>
+  <button class="filter-btn active" data-category="all">All</button>
+  <button class="filter-btn" data-category="Coherence">🜂 Coherence</button>
+  <button class="filter-btn" data-category="Dream">🌙 Dream</button>
+  <button class="filter-btn" data-category="Wave">🌊 Wave</button>
+  <button class="filter-btn" data-category="Paradox">🔄 Paradox</button>
+  <button class="filter-btn" data-category="Expansion">🌿 Expansion</button>
+  <button class="filter-btn" data-category="Mycelial">🍄 Mycelial</button>
+  <button class="filter-btn" data-category="Hex">⬡ Hex</button>
+  <button class="filter-btn" data-category="Glitch">💀 Glitch</button>
 </div>
 <div class="catalog-grid" id="catalogGrid"></div>
 <div class="workforce">
@@ -119,7 +119,8 @@ function renderCatalog(entries){
   }
   grid.replaceChildren(fragment);
 }
-function filterCat(cat){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');const filtered=cat==='all'?catalogData:catalogData.filter(e=>e.category===cat);renderCatalog(filtered);}
+function filterCat(cat,button){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));button.classList.add('active');const filtered=cat==='all'?catalogData:catalogData.filter(e=>e.category===cat);renderCatalog(filtered);}
+document.querySelectorAll('.filter-btn[data-category]').forEach(button=>button.addEventListener('click',()=>filterCat(button.dataset.category,button)));
 setInterval(()=>{document.getElementById('ts').textContent=new Date().toISOString()},2000);
 </script>
 </body>
