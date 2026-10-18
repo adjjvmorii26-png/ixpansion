@@ -24,6 +24,7 @@ GH_REPO = "adjjvmorii26-png/ixpansion"
 GH_BRANCH = "main"
 GH_API = f"https://api.github.com/repos/{GH_REPO}/contents/data/visitor_log.json"
 GH_RAW = f"https://raw.githubusercontent.com/{GH_REPO}/{GH_BRANCH}/data/visitor_log.json"
+GITHUB_MIRROR_ENABLED = os.environ.get("IXP_ENABLE_GITHUB_MIRROR", "").lower() in {"1", "true", "yes"}
 _last_sha = {"sha": None}
 
 VISITOR_STATE = {
@@ -52,7 +53,7 @@ def _load() -> Dict[str, Any]:
     # Fall back to the GitHub copy (survives cold starts and multiple instances)
     import urllib.request
     token = os.environ.get("IXP_GITHUB_TOKEN", "")
-    if os.environ.get("IXP_ENABLE_GITHUB_MIRROR", "").lower() not in {"1", "true", "yes"}:
+    if not GITHUB_MIRROR_ENABLED:
         token = ""
     if token:
         try:
@@ -73,6 +74,9 @@ def _save(data: Dict[str, Any]) -> None:
             break
         except Exception:
             continue
+    # Remote writes are explicitly opt-in; a token alone must not enable mirroring.
+    if not GITHUB_MIRROR_ENABLED:
+        return
     # Mirror to GitHub so every instance sees the same ledger
     import urllib.request
     token = os.environ.get("IXP_GITHUB_TOKEN", "")
