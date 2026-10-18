@@ -68,27 +68,77 @@
   </div>
 </div>
 <script>
-async function j(url){ return await (await fetch(url)).json(); }
+async function j(url){
+  const response = await fetch(url, {headers:{Accept:'application/json'}});
+  if(!response.ok) throw new Error('Request failed ('+response.status+')');
+  return response.json();
+}
+function node(tag, className, text){
+  const element = document.createElement(tag);
+  if(className) element.className = className;
+  if(text !== undefined) element.textContent = String(text ?? '');
+  return element;
+}
+function emptyNode(text){ return node('div','muted',text); }
 async function boot(){
-  const c = await j('/sovereignty?action=charter');
-  document.getElementById('charter').textContent = c.charter;
-  refresh();
+  try {
+    const charter = await j('/sovereignty?action=charter');
+    document.getElementById('charter').textContent = charter.charter ?? '';
+    await refresh();
+  } catch(error) {
+    document.getElementById('charter').textContent = 'Unable to load charter: ' + error.message;
+  }
 }
 async function refresh(){
-  const d = await j('/sovereignty?action=census');
-  const s = d.statistics||{};
-  document.getElementById('assembly-stats').innerHTML =
-    `<div><b>${s.citizens||0}</b> citizens</div><div><b>${s.cases||0}</b> cases</div><div><b>${s.rites||0}</b> rites</div>`;
-  document.getElementById('roles').innerHTML = Object.entries(d.roles||{}).map(([r,n])=>`<div>${r} · ${n}</div>`).join('');
-  document.getElementById('elders').innerHTML = (d.elders||[]).map(e=>`<div class="row"><b>${e.module}</b> <span class="tag">${e.role}</span></div>`).join('') || '<div class="muted">no elders yet</div>';
-  const cases = await j('/sovereignty?action=precedents');
-  document.getElementById('docket').innerHTML = (cases.precedents||[]).slice(-6).reverse().map(c=>`
-    <div class="row"><b>${c.plaintiff}</b> vs <b>${c.defendant}</b> <span class="tag">· ${c.verdict}</span>
-    <div class="rule">${c.ruling}</div></div>`).join('') || '<div class="muted">the court is silent</div>';
-  const r = await j('/sovereignty?action=relics');
-  document.getElementById('rites').innerHTML = (r.relics||[]).slice(-6).reverse().map(x=>`
-    <div class="row"><b>${x.module}</b> <span class="tag">retired · ${x.role}</span>
-    <div class="rule">contribution ${x.contribution}</div></div>`).join('') || '<div class="muted">no rites yet — nothing has been forgotten</div>';
+  try {
+    const d = await j('/sovereignty?action=census');
+    const stats = d.statistics || {};
+    const statsContainer = document.getElementById('assembly-stats');
+    const statsFragment = document.createDocumentFragment();
+    for(const [label,value] of [['citizens',stats.citizens],['cases',stats.cases],['rites',stats.rites]]){
+      const item = document.createElement('div');
+      const strong = node('b','',value ?? 0);
+      item.append(strong, document.createTextNode(' ' + label));
+      statsFragment.appendChild(item);
+    }
+    statsContainer.replaceChildren(statsFragment);
+
+    const roles = Object.entries(d.roles || {}).map(([role,count]) => {
+      const row=node('div','');
+      row.textContent=role + ' · ' + String(count);
+      return row;
+    });
+    document.getElementById('roles').replaceChildren(...roles);
+
+    const elders = (Array.isArray(d.elders) ? d.elders : []).map(elder => {
+      const row=node('div','row');
+      row.append(node('b','',elder.module));
+      row.append(document.createTextNode(' '));
+      row.append(node('span','tag',elder.role));
+      return row;
+    });
+    document.getElementById('elders').replaceChildren(...(elders.length ? elders : [emptyNode('no elders yet')]));
+
+    const cases = await j('/sovereignty?action=precedents');
+    const docket = (Array.isArray(cases.precedents) ? cases.precedents : []).slice(-6).reverse().map(item => {
+      const row=node('div','row');
+      row.append(node('b','',item.plaintiff), document.createTextNode(' vs '), node('b','',item.defendant), document.createTextNode(' '), node('span','tag','· ' + String(item.verdict ?? '')));
+      row.append(node('div','rule',item.ruling));
+      return row;
+    });
+    document.getElementById('docket').replaceChildren(...(docket.length ? docket : [emptyNode('the court is silent')]));
+
+    const relicData = await j('/sovereignty?action=relics');
+    const rites = (Array.isArray(relicData.relics) ? relicData.relics : []).slice(-6).reverse().map(item => {
+      const row=node('div','row');
+      row.append(node('b','',item.module), document.createTextNode(' '), node('span','tag','retired · ' + String(item.role ?? '')));
+      row.append(node('div','rule','contribution ' + String(item.contribution ?? '—')));
+      return row;
+    });
+    document.getElementById('rites').replaceChildren(...(rites.length ? rites : [emptyNode('no rites yet — nothing has been forgotten')]));
+  } catch(error) {
+    document.getElementById('docket').textContent = 'Unable to refresh sovereignty data: ' + error.message;
+  }
 }
 async function seat(){ await j('/sovereignty?action=assembly'); refresh(); }
 async function hear(){ await j('/sovereignty?action=court&limit=1'); refresh(); }
