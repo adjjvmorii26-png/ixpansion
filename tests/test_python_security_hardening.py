@@ -1,3 +1,4 @@
+import importlib
 from types import SimpleNamespace
 from unittest.mock import patch
 
@@ -77,3 +78,19 @@ def test_git_history_command_uses_fixed_argument_vector():
 def test_git_history_rejects_invalid_windows(days):
     with pytest.raises(ValueError):
         velocity_burst._git_commits_since(days)
+
+
+def test_visitor_github_mirror_is_disabled_without_explicit_opt_in(monkeypatch):
+    monkeypatch.delenv("IXP_ENABLE_GITHUB_MIRROR", raising=False)
+    from api import visitor_log
+    module = importlib.reload(visitor_log)
+    assert module.GITHUB_MIRROR_ENABLED is False
+
+
+def test_visitor_github_mirror_requires_explicit_truthy_opt_in(monkeypatch):
+    monkeypatch.setenv("IXP_ENABLE_GITHUB_MIRROR", "true")
+    from api import visitor_log
+    module = importlib.reload(visitor_log)
+    assert module.GITHUB_MIRROR_ENABLED is True
+    monkeypatch.delenv("IXP_ENABLE_GITHUB_MIRROR", raising=False)
+    importlib.reload(module)
