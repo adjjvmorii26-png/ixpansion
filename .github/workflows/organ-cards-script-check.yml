@@ -1,0 +1,44 @@
+name: Organ cards dashboard script checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "dashboard/choral.html"
+      - "dashboard/language.html"
+      - ".github/workflows/organ-cards-script-check.yml"
+  push:
+    branches: [main]
+    paths:
+      - "dashboard/choral.html"
+      - "dashboard/language.html"
+      - ".github/workflows/organ-cards-script-check.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  dashboard-scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Extract and syntax-check inline scripts
+        run: |
+          node <<'NODE'
+          const fs = require("node:fs");
+          for (const file of ["dashboard/choral.html", "dashboard/language.html"]) {
+            const html = fs.readFileSync(file, "utf8");
+            const scripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)]
+              .map((match) => match[1])
+              .filter((script) => script.trim());
+            if (scripts.length === 0) throw new Error("No inline scripts found in " + file);
+            const output = "/tmp/" + file.split("/").pop() + ".js";
+            fs.writeFileSync(output, scripts.join("\n"));
+            console.log(file + ": extracted " + scripts.length + " script block(s) to " + output);
+          }
+          NODE
+          node --check /tmp/choral.html.js
+          node --check /tmp/language.html.js
