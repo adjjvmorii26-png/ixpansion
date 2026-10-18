@@ -61,7 +61,8 @@ button:hover{opacity:.85}
 const HOST='';const AUTO=15000;
 function $(id){return document.getElementById(id)}
 async function api(a,body={}){try{const r=await fetch(HOST+'/api/hex-cathedral?action='+a,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});return await r.json()}catch(e){return{error:String(e)}}}
-function esc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;').replace(/'/g,'&#x27;')}\nfunction finite(value,fallback=0){const n=Number(value);return Number.isFinite(n)?n:fallback}
+function esc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;').replace(/'/g,'&#x27;')}
+function finite(value,fallback=0){const n=Number(value);return Number.isFinite(n)?n:fallback}
 function refresh(){Promise.all([api('status'),api('history')]).then(([st,hist])=>{
   if(st.error){$('status').innerHTML='<span class="status-err">'+esc(st.error)+'</span>';return}
   $('status').innerHTML=`<span class="status-ok">ALIVE</span> Wave ${esc(st.wave)} | ${esc(st.chapels)} chapels | ${esc(st.altars)} altars | ${esc(st.laces)} links | ${esc(st.flattened_instructions)} instr`;
