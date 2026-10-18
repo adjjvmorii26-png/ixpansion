@@ -67,9 +67,12 @@ const ORGANS=[
 ];
 const cards=document.getElementById('cards');
 ORGANS.forEach(o=>{
-  const d=document.createElement('div');d.className='card';
-  d.innerHTML=`<div class="name">${o.name}</div><div class="essence">${o.essence}</div>`;
-  d.onclick=()=>probe(o.route);
+  const d=document.createElement('div');d.className='card';d.tabIndex=0;d.setAttribute('role','button');
+  const name=document.createElement('div');name.className='name';name.textContent=o.name;
+  const essence=document.createElement('div');essence.className='essence';essence.textContent=o.essence;
+  d.append(name,essence);
+  d.addEventListener('click',()=>probe(o.route));
+  d.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();probe(o.route)}});
   cards.appendChild(d);
 });
 async function probe(route){
