@@ -1,0 +1,38 @@
+name: HTML sink inventory
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "**/*.html"
+      - "scripts/audit_html_sinks.py"
+      - ".github/workflows/html-sink-audit.yml"
+  push:
+    branches: [main]
+    paths:
+      - "**/*.html"
+      - "scripts/audit_html_sinks.py"
+      - ".github/workflows/html-sink-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Inventory HTML/DOM sinks
+        run: python scripts/audit_html_sinks.py
+      - name: Upload sink inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-sink-audit
+          path: html-sink-audit.json
+          if-no-files-found: error
+          retention-days: 14
