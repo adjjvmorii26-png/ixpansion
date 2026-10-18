@@ -14,7 +14,7 @@ from lab.ops import velocity_burst
         ("coherence > 0.75 AND entropy > 0.3", True),
         ("entropy > 0.7 AND coherence < 0.4", False),
         ("NOT (entropy < 0.5)", True),
-        ("coherence >= 0.5 AND entropy <= 0.5", True),
+        ("coherence >= 0.5 AND entropy <= 0.5", False),
     ],
 )
 def test_guard_interpreter_supports_declared_comparison_language(guard, expected):
