@@ -57,6 +57,7 @@ body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',mo
 const S={SPRING:'spring',SUMMER:'summer',AUTUMN:'autumn',WINTER:'winter'};
 const icons={spring:'🌱',summer:'☀️',autumn:'🍂',winter:'❄️'};
 const API='/api/season_engine';
+function esc(value){return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;')}
 async function load(){
   try{
     const st=await fetch(API+'?action=status').then(r=>r.json());
@@ -72,29 +73,29 @@ async function load(){
     // Status cards
     let si=`
       <div class="card ${S[st.season]}">
-        <h2>${icons[S[st.season]]} ${st.season}</h2>
-        <div class="desc">${st.label}</div>
-        <div><span class="stat"><span class="v">${st.mutation_pressure}</span><span class="l">mutation pressure</span></span>
-        <span class="stat"><span class="v">${st.birth_bonus}</span><span class="l">birth bonus</span></span>
-        <span class="stat"><span class="v">${st.growth_ceiling}</span><span class="l">growth ceiling</span></span>
-        <span class="stat"><span class="v">${st.resonance_boost}</span><span class="l">resonance boost</span></span></div>
-        <div style="margin-top:12px"><span class="stat"><span class="v">${st.living_modules||'?'}</span><span class="l">living modules</span></span></div>
+        <h2>${icons[S[st.season]]} ${esc(st.season)}</h2>
+        <div class="desc">${esc(st.label)}</div>
+        <div><span class="stat"><span class="v">${esc(st.mutation_pressure)}</span><span class="l">mutation pressure</span></span>
+        <span class="stat"><span class="v">${esc(st.birth_bonus)}</span><span class="l">birth bonus</span></span>
+        <span class="stat"><span class="v">${esc(st.growth_ceiling)}</span><span class="l">growth ceiling</span></span>
+        <span class="stat"><span class="v">${esc(st.resonance_boost)}</span><span class="l">resonance boost</span></span></div>
+        <div style="margin-top:12px"><span class="stat"><span class="v">${esc(st.living_modules||'?')}</span><span class="l">living modules</span></span></div>
       </div>`;
     document.getElementById('status-info').innerHTML=si;
     // Forecast
     let fh='';
     fc.forecast.forEach((f,i)=>{
       fh+=`<div class="fcast ${S[f.season]}">
-        <div class="season-name">${icons[S[f.season]]} ${f.season}</div>
-        <div class="label">cycle ${f.cycle} · ${f.label}</div>
+        <div class="season-name">${icons[S[f.season]]} ${esc(f.season)}</div>
+        <div class="label">cycle ${esc(f.cycle)} · ${esc(f.label)}</div>
         <div style="margin-top:8px;font-size:0.6em;color:var(--dim)">
-          μ=${f.mutation_pressure} · birth=${f.birth_bonus} · ceil=${f.growth_ceiling}
+          μ=${esc(f.mutation_pressure)} · birth=${esc(f.birth_bonus)} · ceil=${esc(f.growth_ceiling)}
         </div>
       </div>`;
     });
     document.getElementById('forecast-grid').innerHTML=fh;
   }catch(e){
-    document.getElementById('status-info').innerHTML='<div class="card"><h2>LOADING...</h2><div class="desc">'+e.message+'</div></div>';
+    document.getElementById('status-info').innerHTML='<div class="card"><h2>LOADING...</h2><div class="desc">'+esc(e.message)+'</div></div>';
   }
 }
 load();
