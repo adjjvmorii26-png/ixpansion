@@ -126,22 +126,38 @@ async function loadAll(){
   el("chronicle").textContent = narr;
 
   // market rows
-  const mb = el("market-body"); mb.innerHTML="";
-  const trades = (market.recent_trades||[]).slice().reverse().slice(0,12);
-  if(!trades.length){ mb.innerHTML='<tr><td class="empty" colspan="4">No trades yet.</td></tr>'; }
-  trades.forEach(t=>{
-    mb.insertAdjacentHTML("beforeend",
-      `<tr><td>${t.title||"a memory"}</td><td><span class="trade-from">${t.seller||"?"}</span> → <span class="trade-to">${t.buyer||"?"}</span></td><td>${t.price!=null?t.price:"—"}</td><td class="chain">${t.chain_length??1} deep</td></tr>`);
-  });
-
-  // release rows
-  const rb = el("release-body"); rb.innerHTML="";
-  const rels = (oblivion.recent_releases||[]).slice().reverse().slice(0,12);
-  if(!rels.length){ rb.innerHTML='<tr><td class="empty" colspan="3">Nothing released yet.</td></tr>'; }
-  rels.forEach(r=>{
-    rb.insertAdjacentHTML("beforeend",
-      `<tr><td class="released">${r.title||"a memory"}</td><td>${r.reason||""}</td><td class="fertile">${r.fertility!=null?r.fertility:"—"}</td></tr>`);
-  });
+  function fillRows(body,rows,emptyText,cellSpecs){
+    const fragment=document.createDocumentFragment();
+    if(!rows.length){const row=document.createElement('tr'),cell=document.createElement('td');cell.className='empty';cell.colSpan=cellSpecs.length;cell.textContent=emptyText;row.appendChild(cell);fragment.appendChild(row)}
+    for(const record of rows){
+      const row=document.createElement('tr');
+      for(const spec of cellSpecs){
+        const cell=document.createElement('td');if(spec.className)cell.className=spec.className;
+        if(spec.parts){
+          for(const part of spec.parts(record)){
+            if(part.className){const span=document.createElement('span');span.className=part.className;span.textContent=String(part.value??'');cell.appendChild(span)}
+            else cell.appendChild(document.createTextNode(String(part.value??'')));
+          }
+        }else cell.textContent=String(spec.value(record)??'');
+        row.appendChild(cell);
+      }
+      fragment.appendChild(row);
+    }
+    body.replaceChildren(fragment);
+  }
+  const trades=(Array.isArray(market.recent_trades)?market.recent_trades:[]).slice().reverse().slice(0,12);
+  fillRows(el('market-body'),trades,'No trades yet.',[
+    {value:t=>t.title||'a memory'},
+    {parts:t=>[{className:'trade-from',value:t.seller||'?'},{value:' → '},{className:'trade-to',value:t.buyer||'?'}]},
+    {value:t=>t.price!=null?t.price:'—'},
+    {className:'chain',value:t=>String(t.chain_length??1)+' deep'}
+  ]);
+  const releases=(Array.isArray(oblivion.recent_releases)?oblivion.recent_releases:[]).slice().reverse().slice(0,12);
+  fillRows(el('release-body'),releases,'Nothing released yet.',[
+    {className:'released',value:item=>item.title||'a memory'},
+    {value:item=>item.reason||''},
+    {className:'fertile',value:item=>item.fertility!=null?item.fertility:'—'}
+  ]);
 }
 
 async function doAction(a){
