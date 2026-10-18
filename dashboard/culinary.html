@@ -69,9 +69,12 @@ const ORGANS=[
 ];
 const cards=document.getElementById('cards');
 ORGANS.forEach(o=>{
-  const d=document.createElement('div');d.className='card';
-  d.innerHTML=`<div class="name">${o.name}</div><div class="essence">${o.essence}</div>`;
-  d.onclick=()=>probe(o.route);
+  const d=document.createElement('div');d.className='card';d.tabIndex=0;d.setAttribute('role','button');
+  const name=document.createElement('div');name.className='name';name.textContent=o.name;
+  const essence=document.createElement('div');essence.className='essence';essence.textContent=o.essence;
+  d.append(name,essence);
+  d.addEventListener('click',()=>probe(o.route));
+  d.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();probe(o.route)}});
   cards.appendChild(d);
 });
 async function probe(route){
@@ -104,10 +107,12 @@ async function probe(route){
     const banq=document.getElementById('banquet');
     b.menu.forEach(c=>{
       const div=document.createElement('div');div.className='course';
-      div.innerHTML=`<div class="label">${c.course}</div><div class="desc">${c.description}</div><div style="color:var(--muted);font-size:.72rem;margin-top:4px">organs: ${c.organs.join(', ')}</div>`;
-      banq.appendChild(div);
+      const label=document.createElement('div');label.className='label';label.textContent=String(c.course??'');
+      const description=document.createElement('div');description.className='desc';description.textContent=String(c.description??'');
+      const organs=document.createElement('div');organs.style.cssText='color:var(--muted);font-size:.72rem;margin-top:4px';organs.textContent='organs: '+(Array.isArray(c.organs)?c.organs.join(', '):'');
+      div.append(label,description,organs);banq.appendChild(div);
     });
-  }catch(e)();
+  }catch(e){}
 })();
 </script>
 <script src="/shared.js"></script>
