@@ -19,13 +19,28 @@ const http = require("http");
 const app = express();
 const PORT = parseInt(process.env.AUTH_PORT || "4000", 10);
 const API_ORIGIN = process.env.API_ORIGIN || "http://127.0.0.1:3000";
-const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString("hex");
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
+const JWT_SECRET = process.env.JWT_SECRET || (IS_PRODUCTION ? "" : crypto.randomBytes(32).toString("hex"));
+if (!JWT_SECRET) {
+  throw new Error("JWT_SECRET must be configured in production; refusing to start with an ephemeral signing key");
+}
+const ALLOWED_ORIGINS = new Set(
+  (process.env.AUTH_ALLOWED_ORIGINS || "http://localhost:4000,http://127.0.0.1:4000")
+    .split(",").map((origin) => origin.trim()).filter(Boolean)
+);
 const JWT_EXPIRY = process.env.JWT_EXPIRY || "24h";
 const USERS_FILE = path.join(__dirname, "users.json");
 
 // ─── Middleware ───────────────────────────────────────────────
-app.use(cors({ origin: true, credentials: true }));
-app.use(express.json());
+app.use(cors({
+  origin(origin, callback) {
+    // Requests without Origin are non-browser/same-origin clients; browser origins must be allowlisted.
+    if (!origin || ALLOWED_ORIGINS.has(origin)) return callback(null, true);
+    return callback(null, false);
+  },
+  credentials: true,
+}));
+app.use(express.json({ limit: "32kb" }));
 app.use(cookieParser());
 
 // ─── User store ──────────────────────────────────────────────
@@ -43,20 +58,34 @@ function checkPassword(pw, hash) {
   return bcrypt.compareSync(pw, hash);
 }
 
-// Seed default admin if no users exist
+// Bootstrap an administrator only from explicit deployment configuration.
 const db = loadUsers();
 if (Object.keys(db).length === 0) {
-  const adminHash = hashPassword("organism");
-  db["admin"] = {
-    username: "admin",
-    password: adminHash,
-    role: "admin",
-    created: new Date().toISOString(),
-    tier: "enterprise",
-    display_name: "ALEPH",
-  };
-  saveUsers(db);
-  console.log("[auth] seeded default admin user (admin / organism)");
+  const bootstrapPassword = process.env.BOOTSTRAP_ADMIN_PASSWORD || "";
+  if (!bootstrapPassword) {
+    if (IS_PRODUCTION) {
+      throw new Error("BOOTSTRAP_ADMIN_PASSWORD is required to initialize an empty production user store");
+    }
+    console.warn("[auth] no users exist; set BOOTSTRAP_ADMIN_PASSWORD to seed an administrator");
+  } else {
+    if (bootstrapPassword.length < 16) {
+      throw new Error("BOOTSTRAP_ADMIN_PASSWORD must be at least 16 characters");
+    }
+    const username = (process.env.BOOTSTRAP_ADMIN_USERNAME || "admin").trim().toLowerCase();
+    if (!/^[a-z0-9][a-z0-9_.-]{2,31}$/.test(username)) {
+      throw new Error("BOOTSTRAP_ADMIN_USERNAME must be 3-32 characters using letters, digits, dot, underscore, or hyphen");
+    }
+    db[username] = {
+      username,
+      password: hashPassword(bootstrapPassword),
+      role: "admin",
+      created: new Date().toISOString(),
+      tier: "enterprise",
+      display_name: process.env.BOOTSTRAP_ADMIN_DISPLAY_NAME || "ALEPH",
+    };
+    saveUsers(db);
+    console.log("[auth] administrator bootstrapped from environment configuration");
+  }
 }
 
 // ─── JWT helpers ─────────────────────────────────────────────
@@ -207,6 +236,5 @@ app.all("/api/*", authMiddleware, (req, res) => {
 // ─── Start ───────────────────────────────────────────────────
 app.listen(PORT, () => {
   console.log(`[ixpansion-auth] listening on http://127.0.0.1:${PORT}`);
-  console.log(`[ixpansion-auth] JWT secret: ${JWT_SECRET.slice(0, 8)}…`);
   console.log(`[ixpansion-auth] users: ${Object.keys(db).join(", ") || "(none)"}`);
 });

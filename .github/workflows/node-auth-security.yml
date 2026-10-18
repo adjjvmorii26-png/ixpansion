@@ -1,0 +1,42 @@
+name: Node auth security checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "services/node_auth/**"
+      - ".github/workflows/node-auth-security.yml"
+  push:
+    branches: [main]
+    paths:
+      - "services/node_auth/**"
+      - ".github/workflows/node-auth-security.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  node-auth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check Node.js syntax
+        run: node --check services/node_auth/server.js
+      - name: Enforce auth security defaults
+        run: |
+          node <<'NODE'
+          const assert = require("node:assert/strict");
+          const fs = require("node:fs");
+          const source = fs.readFileSync("services/node_auth/server.js", "utf8");
+          assert.match(source, /BOOTSTRAP_ADMIN_PASSWORD/);
+          assert.match(source, /AUTH_ALLOWED_ORIGINS/);
+          assert.match(source, /JWT_SECRET must be configured in production/);
+          assert.doesNotMatch(source, /hashPassword\(["']organism["']\)/);
+          assert.equal(source.includes("origin: true"), false);
+          assert.doesNotMatch(source, /JWT secret:/);
+          console.log("Node auth security defaults: OK");
+          NODE
