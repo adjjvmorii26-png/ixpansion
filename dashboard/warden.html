@@ -199,7 +199,7 @@ async function forgeNow(){
 
 async function callChorus(){
   const r=await api('/api/cohort_chorus/chorus');
-  $('chorus-info').innerHTML=`Cohort size: <b>${esc(r.cohort_size)}</b> · Chorus strength: <b>${esc(r.chorus_strength)}</b> · ${r.by_allegiance?'(by role: '+Object.entries(r.by_allegiance).map(([k,v])=>k+':'+v).join(', ')+')':''}`;
+  $('chorus-info').innerHTML=`Cohort size: <b>${esc(r.cohort_size)}</b> · Chorus strength: <b>${esc(r.chorus_strength)}</b> · ${r.by_allegiance?'(by role: '+Object.entries(r.by_allegiance).map(([k,v])=>esc(k)+':'+esc(v)).join(', ')+')':''}`;
   $('chorus-narrative').textContent=r.verse;
 }
 
@@ -241,7 +241,7 @@ async function callChronicle(){
 }
 async function callResonate(){
   const r=await owapi('/api/ascension_chronicle/resonate');
-  let m=Object.entries(r.mineral_counts||{}).map(([k,v])=>`${k}:${v}`).join(', ');
+  let m=Object.entries(r.mineral_counts||{}).map(([k,v])=>`${esc(k)}:${esc(v)}`).join(', ');
   $('chronicle-info').innerHTML=`Mineral counts: ${m||'none'} · Overwarden defeats: <b>${esc(r.overwarden_defeats||0)}</b> · Deepest: ${esc(r.deepest?r.deepest.module.replace(/_/g,' ')+'@d'+r.deepest.depth:'—')}`;
 }
 async function callGenealogy(){
