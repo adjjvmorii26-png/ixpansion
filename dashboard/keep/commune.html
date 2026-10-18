@@ -92,19 +92,43 @@ window.addEventListener('DOMContentLoaded', async()=>{
     else if(auditRes.fidelity>=0.9) fp.style.borderColor='var(--gold)';
     else fp.style.borderColor='#ff6b6b';
 
-    $('audit').innerHTML='<table><tr><th>Island</th><th>State</th><th>Stones</th><th class="r">Fidelity</th><th>Registry</th></tr>'+
-      auditRes.results.sort((a,b)=>a.repo.localeCompare(b.repo)).map(a=>{
-        const st=a.state.split(':')[0];
-        const cls=st==='CURRENT'?'ok':st==='STALE'?'warn':'bad';
-        return `<tr><td>${a.repo}</td><td><span class="pill ${cls}">${st}</span></td><td>${a.stones_in_registry||'-'}</td><td class="r">${a.fidelity}</td><td>${a.wave_in_registry?'w'+a.wave_in_registry:'-'}</td></tr>`;
-      }).join('')+'</table>';
+    function renderTable(target,headers,rows){
+      const table=document.createElement('table'),head=document.createElement('tr');
+      for(const label of headers){const th=document.createElement('th');th.textContent=label;head.appendChild(th)}
+      table.appendChild(head);
+      for(const values of rows){const row=document.createElement('tr');for(const item of values){const cell=document.createElement('td');cell.textContent=String(item??'');row.appendChild(cell)}table.appendChild(row)}
+      target.replaceChildren(table);
+    }
+    const auditRows=(Array.isArray(auditRes.results)?auditRes.results:[]).slice().sort((a,b)=>String(a.repo).localeCompare(String(b.repo))).map(item=>{
+      const state=String(item.state??'UNKNOWN').split(':')[0],cls=state==='CURRENT'?'ok':state==='STALE'?'warn':'bad';
+      const repoCell=document.createElement('td');repoCell.textContent=String(item.repo??'');
+      const stateCell=document.createElement('td'),pill=document.createElement('span');pill.className='pill '+cls;pill.textContent=state;stateCell.appendChild(pill);
+      const stones=document.createElement('td');stones.textContent=String(item.stones_in_registry||'-');
+      const fidelity=document.createElement('td');fidelity.className='r';fidelity.textContent=String(item.fidelity??'—');
+      const wave=document.createElement('td');wave.textContent=item.wave_in_registry?'w'+String(item.wave_in_registry):'-';
+      return [repoCell,stateCell,stones,fidelity,wave];
+    });
+    const auditTable=document.createElement('table'),auditHead=document.createElement('tr');
+    for(const label of ['Island','State','Stones','Fidelity','Registry']){const th=document.createElement('th');th.textContent=label;auditHead.appendChild(th)}
+    auditTable.appendChild(auditHead);for(const values of auditRows){const row=document.createElement('tr');row.append(...values);auditTable.appendChild(row)}$('audit').replaceChildren(auditTable);
 
-    $('degree').innerHTML='<table><tr><th>Island</th><th class="r">Organ partners</th></tr>'+
-      graphRes.top_connected.map(c=>`<tr><td>${c[0]}</td><td class="r">${c[1]}</td></tr>`).join('')+'</table>';
+    const degreeRows=(Array.isArray(graphRes.top_connected)?graphRes.top_connected:[]).map(item=>item);
+    renderTable($('degree'),['Island','Organ partners'],degreeRows);
 
-    const cliques=graphRes.clique_sample||[];
-    if(cliques.length===0) $('cliques').innerHTML='<span class="loading">No multi-organ alliances — every stone is a unique pairing.</span>';
-    else $('cliques').innerHTML=cliques.map(c=>`<div class="clique"><b>${c.a}</b> ↔ <b>${c.b}</b><br/><span class="meta">shared: ${c.shared_organs.join(', ')} · strength ${c.strength}</span></div>`).join('');
+    const cliques=Array.isArray(graphRes.clique_sample)?graphRes.clique_sample:[];
+    const cliqueRoot=$('cliques');
+    if(cliques.length===0){const empty=document.createElement('span');empty.className='loading';empty.textContent='No multi-organ alliances — every stone is a unique pairing.';cliqueRoot.replaceChildren(empty)}
+    else{
+      const fragment=document.createDocumentFragment();
+      for(const clique of cliques){
+        const card=document.createElement('div');card.className='clique';
+        const names=document.createElement('b');names.textContent=String(clique.a??'');card.appendChild(names);card.appendChild(document.createTextNode(' ↔ '));
+        const other=document.createElement('b');other.textContent=String(clique.b??'');card.appendChild(other);card.appendChild(document.createElement('br'));
+        const meta=document.createElement('span');meta.className='meta';meta.textContent='shared: '+(Array.isArray(clique.shared_organs)?clique.shared_organs.join(', '):'')+' · strength '+String(clique.strength??'—');
+        card.appendChild(meta);fragment.appendChild(card);
+      }
+      cliqueRoot.replaceChildren(fragment);
+    }
   }catch(e){ $('audit').textContent='ERROR: '+e.message; }
 });
 </script>
