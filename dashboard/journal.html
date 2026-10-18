@@ -118,7 +118,7 @@ async function loadOrganurna(){
 }
 async function rememberMod(mod){
   const r = await get('/api/organurna_loop/remember?module=' + encodeURIComponent(mod));
-  document.getElementById('orgLoops').innerHTML = '<div class="rem-line">🏝 ' + esc((r.remembrance||{}).verse||'') + ' — ' + mod.replace(/_/g,' ') + ' re-membered (' + r.total_remembered + ' total).</div>';
+  document.getElementById('orgLoops').innerHTML = '<div class="rem-line">🏝 ' + esc((r.remembrance||{}).verse||'') + ' — ' + esc(mod.replace(/_/g,' ')) + ' re-membered (' + esc(r.total_remembered) + ' total).</div>';
   setTimeout(loadOrganurna, 1500);
 }
 document.getElementById('orgLoops').addEventListener('click',event=>{
