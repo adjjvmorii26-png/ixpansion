@@ -106,27 +106,38 @@ function draw(now){
   requestAnimationFrame(draw);
 }
 
+function safeHue(value){return /^#[0-9a-f]{6}$/i.test(String(value||''))?value:'#00e5ff'}
+
 function show(n){
+  if(!n)return;
   selected=n;
   [...listEl.querySelectorAll('button')].forEach(b=>b.classList.toggle('active',b.dataset.id===n.id));
-  const args=(n.args&&n.args.length)?n.args.join(' '):'—';
-  riteEl.innerHTML=`<div class="sigil">${n.sigil}</div>
-    <div style="margin-top:.35rem;font-size:.95rem;color:#e8f4ff">${n.id}</div>
-    <div class="path">${n.path}</div>
-    <div class="args">args: ${args}</div>
-    <span class="badge ${n.critical?'crit':'opt'}">${n.critical?'CRITICAL':'OPTIONAL'}</span>
-    <p style="margin-top:.8rem;color:#6b7a8f;font-size:.68rem">ring ${n.ring===0?'inner · critical orbit':'outer · exploratory'}</p>`;
+  const args=(Array.isArray(n.args)&&n.args.length)?n.args.join(' '):'—';
+  const fragment=document.createDocumentFragment();
+  const sigil=document.createElement('div');sigil.className='sigil';sigil.textContent=String(n.sigil??'');
+  const id=document.createElement('div');id.style.cssText='margin-top:.35rem;font-size:.95rem;color:#e8f4ff';id.textContent=String(n.id??'');
+  const path=document.createElement('div');path.className='path';path.textContent=String(n.path??'');
+  const argLine=document.createElement('div');argLine.className='args';argLine.textContent='args: '+args;
+  const badge=document.createElement('span');badge.className='badge '+(n.critical?'crit':'opt');badge.textContent=n.critical?'CRITICAL':'OPTIONAL';
+  const ring=document.createElement('p');ring.style.cssText='margin-top:.8rem;color:#6b7a8f;font-size:.68rem';ring.textContent='ring '+(n.ring===0?'inner · critical orbit':'outer · exploratory');
+  fragment.append(sigil,id,path,argLine,badge,ring);riteEl.replaceChildren(fragment);
 }
-
 function boot(DATA){
-  channelEl.textContent=DATA.channel||'';
-  statsEl.innerHTML=`<span>TOTAL <b>${DATA.stats.total}</b></span>
-    <span>CRITICAL <b>${DATA.stats.critical}</b></span>
-    <span>OPTIONAL <b>${DATA.stats.optional}</b></span>`;
-  nodes=DATA.projects.map(p=>({...p}));
-  listEl.innerHTML=nodes.map(n=>
-    `<button data-id="${n.id}" type="button"><span class="dot" style="background:${n.hue}"></span>${n.id}</button>`
-  ).join('');
+  channelEl.textContent=String(DATA.channel||'');
+  const statsFragment=document.createDocumentFragment();
+  for(const [label,value] of [['TOTAL',DATA.stats.total],['CRITICAL',DATA.stats.critical],['OPTIONAL',DATA.stats.optional]]){
+    const item=document.createElement('span');item.append(document.createTextNode(label+' '));
+    const strong=document.createElement('b');strong.textContent=String(value??0);item.appendChild(strong);statsFragment.appendChild(item);
+  }
+  statsEl.replaceChildren(statsFragment);
+  nodes=DATA.projects.map(p=>({...p,hue:safeHue(p.hue)}));
+  const listFragment=document.createDocumentFragment();
+  for(const n of nodes){
+    const button=document.createElement('button');button.dataset.id=String(n.id??'');button.type='button';
+    const dot=document.createElement('span');dot.className='dot';dot.style.background=safeHue(n.hue);
+    button.append(dot,document.createTextNode(String(n.id??'')));listFragment.appendChild(button);
+  }
+  listEl.replaceChildren(listFragment);
   listEl.addEventListener('click',e=>{
     const btn=e.target.closest('button');
     if(!btn)return;
@@ -144,9 +155,8 @@ function boot(DATA){
   show(nodes.find(n=>n.critical)||nodes[0]);
   requestAnimationFrame(draw);
 }
-
 fetch('data.json').then(r=>r.json()).then(boot).catch(err=>{
-  riteEl.innerHTML='<p class="hint">Failed to load data.json — open via serve.py</p>';
+  const message=document.createElement('p');message.className='hint';message.textContent='Failed to load data.json — open via serve.py';riteEl.replaceChildren(message);
   console.error(err);
 });
 </script>
