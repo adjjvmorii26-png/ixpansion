@@ -91,24 +91,63 @@
 <div class="foot">WAVE 386 · MYCELIAL RADIO · TUNE IN · THE ORGANISM SPEAKS IN SIGNALS</div>
 
 <script>
-async function get(url){ const r = await fetch(url); return r.json(); }
+async function get(url){
+  const response = await fetch(url, {headers:{Accept:'application/json'}});
+  if (!response.ok) throw new Error('Request failed (' + response.status + ')');
+  return response.json();
+}
+function makeText(tag, className, value){
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  node.textContent = value == null ? '' : String(value);
+  return node;
+}
+function makeLine(label, value, className='line'){
+  const line = document.createElement('div');
+  line.className = className;
+  if (label) line.appendChild(makeText('b', '', label));
+  if (label) line.appendChild(document.createTextNode(' — '));
+  line.appendChild(document.createTextNode(value == null ? '' : String(value)));
+  return line;
+}
 let tuned = 'resonance_analyzer';
 async function scanNow(){
   const d = await get('/api/mycelial_radio/scan?limit=64');
   const el = document.getElementById('signals');
-  el.innerHTML = '<div class="line"><b>SCAN</b> — examined ' + d.examined + ' hidden pairs · ' + d.resonance_pairs.length + ' strong signals</div>' +
-    (d.resonance_pairs||[]).map(p=>`<div class="sig"><span class="pair">${p.a.replace(/_/g,' ')} <span style="color:var(--m)">↔</span> ${p.b.replace(/_/g,' ')}</span><span class="badge">${p.band}</span><span class="str">${(p.strength*100).toFixed(0)}%</span></div>`).join('') +
-    '<div class="line" style="margin-top:8px">' + ((d.resonance_pairs||[])[0]||{}).aphorism + '</div>';
+  const fragment = document.createDocumentFragment();
+  const pairs = Array.isArray(d.resonance_pairs) ? d.resonance_pairs : [];
+  fragment.appendChild(makeLine('SCAN', 'examined ' + String(d.examined ?? 0) + ' hidden pairs · ' + pairs.length + ' strong signals'));
+  for (const pair of pairs) {
+    const row = document.createElement('div'); row.className = 'sig';
+    const names = document.createElement('span'); names.className = 'pair';
+    names.append(document.createTextNode(String(pair.a ?? '').replace(/_/g,' ')), document.createTextNode(' ↔ '), document.createTextNode(String(pair.b ?? '').replace(/_/g,' ')));
+    row.appendChild(names);
+    row.appendChild(makeText('span','badge',pair.band));
+    const strength = Number(pair.strength);
+    row.appendChild(makeText('span','str',Number.isFinite(strength) ? (strength*100).toFixed(0)+'%' : '—'));
+    fragment.appendChild(row);
+  }
+  if (pairs[0]?.aphorism) fragment.appendChild(makeLine('', pairs[0].aphorism));
+  el.replaceChildren(fragment);
 }
 async function broadcastNow(){
   const d = await get('/api/mycelial_radio/broadcast');
-  const b = d.bulletin;
+  const b = d.bulletin || {};
   const el = document.getElementById('poster');
-  el.innerHTML = '<div class="headline">📻 ' + b.headline + '</div>' +
-    '<div class="weather">☂ ' + b.weather + '</div>' +
-    '<div class="verse">' + b.verse + '</div>' +
-    '<div class="omen">omen — ' + b.omen + '</div>' +
-    '<div class="line" style="margin-top:8px"><b>top signals</b><br>' + (b.top_signals||[]).map(s=>'· '+s).join('<br>') + '</div>';
+  const fragment = document.createDocumentFragment();
+  fragment.appendChild(makeText('div','headline','📻 ' + String(b.headline ?? '')));
+  fragment.appendChild(makeText('div','weather','☂ ' + String(b.weather ?? '')));
+  fragment.appendChild(makeText('div','verse',b.verse));
+  fragment.appendChild(makeText('div','omen','omen — ' + String(b.omen ?? '')));
+  const top = document.createElement('div'); top.className='line'; top.style.marginTop='8px';
+  top.appendChild(makeText('b','', 'top signals'));
+  top.appendChild(document.createElement('br'));
+  for (const signal of (Array.isArray(b.top_signals) ? b.top_signals : [])) {
+    top.appendChild(document.createTextNode('· ' + String(signal)));
+    top.appendChild(document.createElement('br'));
+  }
+  fragment.appendChild(top);
+  el.replaceChildren(fragment);
 }
 async function tuneRandom(){
   const names = ['resonance_analyzer','consciousness_stream','entropy_forecaster','paradox_resolver','mythopoetic_engine','consciousness_stream','worker_council','memory_palace_gen','void_cartographer','synchronicity_engine'];
@@ -117,12 +156,20 @@ async function tuneRandom(){
 }
 async function tune(module){
   const d = await get('/api/mycelial_radio/tune?module=' + encodeURIComponent(module));
-  tuned = d.module;
-  document.getElementById('freq').textContent = `≋ ${d.frequency} · ${d.band.toUpperCase()} · ${d.module.replace(/_/g,' ')}`;
+  tuned = String(d.module ?? module);
+  document.getElementById('freq').textContent = '≋ ' + String(d.frequency ?? '—') + ' · ' + String(d.band ?? '').toUpperCase() + ' · ' + tuned.replace(/_/g,' ');
   const el = document.getElementById('signals');
-  el.innerHTML = '<div class="line"><b>TUNED</b> — ' + d.module.replace(/_/g,' ') + ' · nearest neighbors:</div>' +
-    (d.neighbors||[]).map(n=>`<div class="sig"><span class="pair">${n.module.replace(/_/g,' ')}</span><span class="str">${(n.strength*100).toFixed(0)}%</span></div>`).join('') +
-    '<div class="line" style="margin-top:8px">' + (d.doctrine||'') + '</div>';
+  const fragment = document.createDocumentFragment();
+  fragment.appendChild(makeLine('TUNED', tuned.replace(/_/g,' ') + ' · nearest neighbors:'));
+  for (const neighbor of (Array.isArray(d.neighbors) ? d.neighbors : [])) {
+    const row=document.createElement('div');row.className='sig';
+    row.appendChild(makeText('span','pair',String(neighbor.module ?? '').replace(/_/g,' ')));
+    const strength=Number(neighbor.strength);
+    row.appendChild(makeText('span','str',Number.isFinite(strength)?(strength*100).toFixed(0)+'%':'—'));
+    fragment.appendChild(row);
+  }
+  if (d.doctrine) fragment.appendChild(makeLine('', d.doctrine));
+  el.replaceChildren(fragment);
 }
 const BAND_COLORS = {alpha:'#4ade80',beta:'#2dd4bf',gamma:'#22d3ee',delta:'#a78bfa',theta:'#fbbf24',mycelial:'#86efac',dream:'#c084fc',void:'#64748b',census:'#f59e0b',lattice:'#38bdf8'};
 let MAP = {nodes:[],edges:[]};
@@ -242,16 +289,35 @@ async function rollConcerto(){
   renderGrid();
 }
 async function loadArchives(){
-  const [b, c] = await Promise.all([
+  const [bulletinData, concertoData] = await Promise.all([
     get('/api/mycelial_radio/archive?kind=bulletins&count=6'),
     get('/api/mycelial_radio/archive?kind=concertos&count=3'),
   ]);
   const el = document.getElementById('archList');
-  const timeAgo = ts => { const s = Math.floor((Date.now()/1000 - ts)/60); return s < 1 ? 'now' : s < 60 ? s+'m ago' : Math.floor(s/60)+'h ago'; };
-  el.innerHTML =
-    (b.items||[]).map(x=>`<div class="arch-item"><span class="t">${timeAgo(x.timestamp)}</span><span><b>${(x.headline||'').replace('Hidden relationship surfaces: ','')}</b> — ${x.weather}</span></div>`).join('') +
-    (c.items||[]).map(x=>`<div class="arch-item"><span class="t">${timeAgo(x.timestamp)}</span><span class="c">♪ ${x.title}</span><span>${(x.steps||[]).length} steps</span></div>`).join('') ||
-    '<div class="arch-item" style="color:var(--m)">archives pending — broadcasts seal every 15 min</div>';
+  const fragment = document.createDocumentFragment();
+  const timeAgo = ts => {
+    const stamp = Number(ts);
+    if (!Number.isFinite(stamp)) return 'time unknown';
+    const seconds = Math.floor((Date.now()/1000 - stamp)/60);
+    return seconds < 1 ? 'now' : seconds < 60 ? seconds+'m ago' : Math.floor(seconds/60)+'h ago';
+  };
+  for (const item of (Array.isArray(bulletinData.items) ? bulletinData.items : [])) {
+    const row=document.createElement('div');row.className='arch-item';
+    row.appendChild(makeText('span','t',timeAgo(item.timestamp)));
+    const summary=document.createElement('span');
+    summary.appendChild(makeText('b','',String(item.headline ?? '').replace('Hidden relationship surfaces: ','')));
+    summary.appendChild(document.createTextNode(' — ' + String(item.weather ?? '')));
+    row.appendChild(summary);fragment.appendChild(row);
+  }
+  for (const item of (Array.isArray(concertoData.items) ? concertoData.items : [])) {
+    const row=document.createElement('div');row.className='arch-item';
+    row.appendChild(makeText('span','t',timeAgo(item.timestamp)));
+    row.appendChild(makeText('span','c','♪ ' + String(item.title ?? '')));
+    row.appendChild(makeText('span','',String((Array.isArray(item.steps)?item.steps:[]).length)+' steps'));
+    fragment.appendChild(row);
+  }
+  if (!fragment.childNodes.length) fragment.appendChild(makeText('div','arch-item','archives pending — broadcasts seal every 15 min'));
+  el.replaceChildren(fragment);
 }
 scanNow();
 loadMap();
