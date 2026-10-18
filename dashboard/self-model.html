@@ -32,8 +32,22 @@ async function refresh(){
   try{
     const r=await fetch(HOST+'/api/self_model?action=status');
     const d=await r.json();
-    document.getElementById('data').innerHTML=Object.entries(d).filter(([k])=>!['ok'].includes(k)).map(([k,v])=>
-      '<div class="metric"><span class="label">'+k.replace(/_/g,' ')+'</span><span class="value">'+JSON.stringify(v)+'</span></div>').join('')||'Empty';
+    const container = document.getElementById('data');
+    const fragment = document.createDocumentFragment();
+    for (const [key, value] of Object.entries(d).filter(([key]) => key !== 'ok')) {
+      const row = document.createElement('div');
+      row.className = 'metric';
+      const label = document.createElement('span');
+      label.className = 'label';
+      label.textContent = key.replace(/_/g, ' ');
+      const val = document.createElement('span');
+      val.className = 'value';
+      val.textContent = JSON.stringify(value);
+      row.append(label, val);
+      fragment.appendChild(row);
+    }
+    container.replaceChildren(fragment);
+    if (!container.childElementCount) container.textContent = 'Empty';
   }catch(e){
     document.getElementById('data').textContent='Error: '+e.message;
   }
