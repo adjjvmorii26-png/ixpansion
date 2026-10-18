@@ -102,36 +102,42 @@ function render(j){
   st.textContent=j.status||'dormant';
   st.className='status '+(j.status||'dormant');
   const comps=document.getElementById('components');
-  comps.innerHTML='';
+  comps.replaceChildren();
   const compsData=j.components||{};
   Object.entries(compsData).forEach(([k,v])=>{
     const div=document.createElement('div');div.className='comp';
-    const pct=Math.min(100,Math.round(v*100));
-    div.innerHTML=`<div class="name">${k}</div><div class="value">${pct}%</div>
-      <div class="bar"><div class="bar-fill" style="width:${pct}%"></div></div>`;
-    comps.appendChild(div);
+    const numeric=Number(v);
+    const pct=Number.isFinite(numeric)?Math.min(100,Math.max(0,Math.round(numeric*100))):0;
+    const name=document.createElement('div');name.className='name';name.textContent=String(k);
+    const value=document.createElement('div');value.className='value';value.textContent=pct+'%';
+    const bar=document.createElement('div');bar.className='bar';
+    const fill=document.createElement('div');fill.className='bar-fill';fill.style.width=pct+'%';
+    bar.appendChild(fill);div.append(name,value,bar);comps.appendChild(div);
   });
   const mods=document.getElementById('modules');
   if(j.living_modules!==undefined){
-    mods.innerHTML='';
+    mods.replaceChildren();
     // no dossiers in read; show count
-    mods.innerHTML=`<div class="module"><div class="m-name">${j.living_modules} living</div><div class="m-health">of ${j.total_candidates} candidates</div></div>`;
+    const card=document.createElement('div');card.className='module';
+    const name=document.createElement('div');name.className='m-name';name.textContent=String(j.living_modules)+' living';
+    const health=document.createElement('div');health.className='m-health';health.textContent='of '+String(j.total_candidates)+' candidates';
+    card.append(name,health);mods.replaceChildren(card);
   }
   const adv=document.getElementById('advisories');
-  adv.innerHTML='';
+  adv.replaceChildren();
   (j.advisories||[]).forEach(a=>{
     const div=document.createElement('div');div.className='advisory'+(a.includes('No regulation')?' good':'');
     div.textContent='✦ '+a;adv.appendChild(div);
   });
   if(!j.advisories||!j.advisories.length){
-    adv.innerHTML='<div class="advisory good">✦ No advisories — the frontier is in resonance.</div>';
+    const empty=document.createElement('div');empty.className='advisory good';empty.textContent='✦ No advisories — the frontier is in resonance.';adv.replaceChildren(empty);
   }
   const proto=document.getElementById('protocol');
   if(j.plug_in_protocol) proto.textContent='PROTOCOL: '+j.plug_in_protocol;
 }
 function drawHistory(entries){
   const hist=document.getElementById('history');
-  hist.innerHTML='';
+  hist.replaceChildren();
   const max=Math.max(...entries.map(e=>e.coherence),0.1);
   entries.forEach(e=>{
     const h=Math.round((e.coherence/max)*50);
@@ -146,10 +152,13 @@ async function awaitModules(){
     const r=await fetch('/api/coherence_regulator?modules=1');
     const j=await r.json();
     const mods=document.getElementById('modules');
-    if(j.living_modules){mods.innerHTML='';j.living_modules.forEach(n=>{
+    if(j.living_modules){mods.replaceChildren();j.living_modules.forEach(n=>{
       const d=document.createElement('div');d.className='module';
       const info=(j.dossiers||{})[n]||{};
-      d.innerHTML=`<div class="m-name">${n}</div><div class="m-health">health ${((info.health||0)*100).toFixed(0)}%</div>`;
+      const name=document.createElement('div');name.className='m-name';name.textContent=String(n);
+      const health=document.createElement('div');health.className='m-health';
+      const rawHealth=Number(info.health||0);const healthPct=Number.isFinite(rawHealth)?Math.min(100,Math.max(0,Math.round(rawHealth*100))):0;
+      health.textContent='health '+healthPct+'%';d.append(name,health);
       mods.appendChild(d);
     });}
   }catch(e){}
