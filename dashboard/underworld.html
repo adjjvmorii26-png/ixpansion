@@ -36,23 +36,34 @@
 <script>
 const API='';
 async function fetchJson(p){const r=await fetch(API+p);return r.json();}
-function esc(s){return String(s).replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function textEl(tag,className,value){const node=document.createElement(tag);if(className)node.className=className;node.textContent=String(value??'');return node;}
 async function loadUW(){
   try{
     const uw=await fetchJson('/api/underworld?action=status');
-    if(!uw.caverns){document.getElementById('uwGrid').innerHTML='<div class="card"><p>Not grown. Click Grow.</p></div>';return;}
-    const grid=document.getElementById('uwGrid');grid.innerHTML='';
-    uw.caverns.forEach(c=>{
+    const grid=document.getElementById('uwGrid');
+    if(!Array.isArray(uw.caverns)||uw.caverns.length===0){
+      grid.replaceChildren(textEl('div','card','Not grown. Click Grow.'));return;
+    }
+    const fragment=document.createDocumentFragment();
+    for(const cavern of uw.caverns){
       const card=document.createElement('div');card.className='card';
-      card.innerHTML=`<h3>${esc(c.name)} <span class="badge">${c.depth}m</span></h3>
-        <div class="stat"><span>Mineral</span><span class="val">${esc(c.mineral)}</span></div>
-        <div class="stat"><span>Age</span><span class="val">${c.age}</span></div>
-        <div class="stat"><span>Scrolls</span><span class="val">${c.subterranean_archive.scrolls}</span></div>
-        <div class="stat"><span>Deciphered</span><span class="val">${c.subterranean_archive.deciphered?'✅':'❌'}</span></div>
-        <div class="stat"><span>Echo Rate</span><span class="val">${esc(c.echo_economy.currency)}</span></div>
-        <div class="migration"><span class="path">${esc(c.migrations.map(m=>m.destination).join('→'))}</span></div>`;
-      grid.appendChild(card);
-    });
+      const heading=document.createElement('h3');heading.append(textEl('span','',cavern.name+' '),textEl('span','badge',String(cavern.depth??'?')+'m'));
+      card.appendChild(heading);
+      const stats=[
+        ['Mineral',cavern.mineral],['Age',cavern.age],
+        ['Scrolls',cavern.subterranean_archive?.scrolls],
+        ['Deciphered',cavern.subterranean_archive?.deciphered?'✅':'❌'],
+        ['Echo Rate',cavern.echo_economy?.currency]
+      ];
+      for(const [label,value] of stats){
+        const stat=document.createElement('div');stat.className='stat';
+        stat.append(textEl('span','',label),textEl('span','val',value));card.appendChild(stat);
+      }
+      const migration=document.createElement('div');migration.className='migration';
+      migration.appendChild(textEl('span','path',(Array.isArray(cavern.migrations)?cavern.migrations:[]).map(item=>item.destination).join('→')));
+      card.appendChild(migration);fragment.appendChild(card);
+    }
+    grid.replaceChildren(fragment);
     drawTopo(uw);
   }catch(e){console.error(e);}
 }
@@ -68,7 +79,15 @@ function drawTopo(uw){
 }
 async function grow(){await fetchJson('/api/underworld?action=grow');loadUW();}
 async function migrate(){await fetchJson('/api/underworld?action=migrate');loadUW();}
-async function trade(){const t=await fetchJson('/api/underworld?action=echo_trade');document.getElementById('uwGrid').innerHTML+='<div class="card"><h3>Echo Trade</h3><div class="stat"><span>Mineral</span><span class="val">'+esc(t.mineral)+'</span></div><div class="stat"><span>Rate</span><span class="val">'+t.trade.exchange_rate+'</span></div></div>';}
+async function trade(){
+  const result=await fetchJson('/api/underworld?action=echo_trade');
+  const card=document.createElement('div');card.className='card';card.appendChild(textEl('h3','','Echo Trade'));
+  const stat=document.createElement('div');stat.className='stat';
+  stat.append(textEl('span','','Mineral'),textEl('span','val',result.mineral));
+  const rate=document.createElement('div');rate.className='stat';
+  rate.append(textEl('span','','Rate'),textEl('span','val',result.trade?.exchange_rate));
+  card.append(stat,rate);document.getElementById('uwGrid').appendChild(card);
+}
 loadUW();setInterval(loadUW,5000);
 </script>
 </body>
