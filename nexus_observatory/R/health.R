@@ -24,16 +24,30 @@ nexus_health_check <- function() {
 }
 
 .check_disk <- function(threshold = 90) {
-  usage <- as.numeric(
-    gsub("%", "", system("df / | awk 'NR==2 {print $5}'", intern = TRUE))
-  )
+  # Invoke the utility with structured arguments; do not ask a shell to parse a pipeline.
+  output <- suppressWarnings(system2("df", c("-P", "/"), stdout = TRUE, stderr = FALSE))
+  status <- attr(output, "status")
+  if (!is.null(status) && status != 0L) return(NA)
+  if (length(output) < 2L) return(NA)
+
+  fields <- strsplit(trimws(output[[2L]]), "\\s+")[[1L]]
+  if (length(fields) < 5L) return(NA)
+  usage <- suppressWarnings(as.numeric(sub("%$", "", fields[[5L]])))
+  if (!is.finite(usage)) return(NA)
   usage < threshold
 }
 
 .check_memory <- function(min_mb = 128) {
   if (!nzchar(Sys.which("free"))) return(NA)
-  avail_kb <- as.numeric(
-    system("free | awk '/^Mem:/ {print $7}'", intern = TRUE)
-  )
-  (avail_kb / 1024) >= min_mb
+  output <- suppressWarnings(system2("free", "-k", stdout = TRUE, stderr = FALSE))
+  status <- attr(output, "status")
+  if (!is.null(status) && status != 0L) return(NA)
+
+  mem_line <- output[startsWith(trimws(output), "Mem:")]
+  if (!length(mem_line)) return(NA)
+  fields <- strsplit(trimws(mem_line[[1L]]), "\\s+")[[1L]]
+  if (length(fields) < 7L) return(NA)
+  available_kb <- suppressWarnings(as.numeric(fields[[7L]]))
+  if (!is.finite(available_kb)) return(NA)
+  (available_kb / 1024) >= min_mb
 }
