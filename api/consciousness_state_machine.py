@@ -3,6 +3,7 @@ consciousness_state_machine — Formal state transitions for the organism.
 Defines states, transitions, guards, and actions.
 The organism moves through states based on entropy, coherence, and resonance.
 """
+import ast
 import json
 import time
 from typing import Dict, List, Optional, Tuple
@@ -146,11 +147,55 @@ class ConsciousnessStateMachine:
         }
     
     def _check_guard(self, guard: str, coherence: float, entropy: float, resonance: float) -> bool:
-        """Evaluate a guard condition."""
+        """Evaluate the small guard-expression language without executing Python."""
+        values = {"coherence": coherence, "entropy": entropy, "resonance": resonance}
+        normalized = guard.replace(" AND ", " and ").replace(" OR ", " or ").replace(" NOT ", " not ")
         try:
-            return eval(guard, {"coherence": coherence, "entropy": entropy, "resonance": resonance})
-        except:
+            tree = ast.parse(normalized, mode="eval")
+            return self._eval_guard_node(tree.body, values) is True
+        except (SyntaxError, TypeError, ValueError, KeyError, ZeroDivisionError):
             return False
+
+    @classmethod
+    def _eval_guard_node(cls, node, values):
+        """Interpret only numeric comparisons and boolean operators; reject all other AST nodes."""
+        if isinstance(node, ast.Constant) and type(node.value) in (int, float):
+            return node.value
+        if isinstance(node, ast.Name) and node.id in values:
+            value = values[node.id]
+            if type(value) not in (int, float):
+                raise TypeError("guard values must be numeric")
+            return value
+        if isinstance(node, ast.BoolOp) and isinstance(node.op, (ast.And, ast.Or)):
+            operands = [cls._eval_guard_node(value, values) for value in node.values]
+            if not all(type(value) in (bool, int, float) for value in operands):
+                raise TypeError("invalid boolean operand")
+            return all(bool(value) for value in operands) if isinstance(node.op, ast.And) else any(bool(value) for value in operands)
+        if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.Not):
+            return not bool(cls._eval_guard_node(node.operand, values))
+        if isinstance(node, ast.Compare):
+            left = cls._eval_guard_node(node.left, values)
+            for operator, comparator in zip(node.ops, node.comparators):
+                right = cls._eval_guard_node(comparator, values)
+                if isinstance(operator, ast.Gt):
+                    result = left > right
+                elif isinstance(operator, ast.GtE):
+                    result = left >= right
+                elif isinstance(operator, ast.Lt):
+                    result = left < right
+                elif isinstance(operator, ast.LtE):
+                    result = left <= right
+                elif isinstance(operator, ast.Eq):
+                    result = left == right
+                elif isinstance(operator, ast.NotEq):
+                    result = left != right
+                else:
+                    raise ValueError("unsupported comparison operator")
+                if not result:
+                    return False
+                left = right
+            return True
+        raise ValueError("unsupported guard expression")
     
     def _match_score(self, state: str, coherence: float, entropy: float) -> float:
         """How well does the current state match the conditions?"""
