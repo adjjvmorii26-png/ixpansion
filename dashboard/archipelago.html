@@ -92,13 +92,58 @@ window.addEventListener('DOMContentLoaded', async ()=>{
 
     pill($('rhythmpill'), pulse.rhythm.toUpperCase(), pulse.rhythm==='bloom'?'':'warn');
     $('mood').textContent=pulse.mood;
-    $('timeline').innerHTML='<ul>'+pulse.timeline.map(t=>`<li>${t.date} <span class="n">— ${t.stones} stones</span></li>`).join('')+'</ul>';
+    const timelineList = document.createElement('ul');
+    for (const item of (Array.isArray(pulse.timeline) ? pulse.timeline : [])) {
+      const li = document.createElement('li');
+      li.appendChild(document.createTextNode(String(item.date ?? '')));
+      const detail = document.createElement('span');
+      detail.className = 'n';
+      detail.textContent = ' — ' + String(item.stones ?? '—') + ' stones';
+      li.appendChild(detail);
+      timelineList.appendChild(li);
+    }
+    $('timeline').replaceChildren(timelineList);
 
-    $('central').innerHTML='<b style="font-size:11px;color:var(--gold)">CENTRAL ISLANDS</b><ul>'+topo.central.slice(0,6).map(c=>`<li>${c.repo} <span class="n">(${c.stones} stones)</span></li>`).join('')+'</ul>';
-    const topClusters=Object.entries(topo.clusters).sort((a,b)=>b[1].length-a[1].length).slice(0,6);
-    $('clusters').innerHTML='<b style="font-size:11px;color:var(--gold)">CLUSTERS</b><ul>'+topClusters.map(([k,v])=>`<li>${k} <span class="n">× ${v.length} islands</span></li>`).join('')+'</ul>';
-
-    $('epitaphs').innerHTML=epi.epitaphs.slice(0,14).map(e=>`<div class="haiku">${e.haiku}<div class="meta">${e.repo} × ${e.organ} · r=${e.resonance}</div></div>`).join('');
+    function renderSection(target, title, items, makeItem) {
+      const heading = document.createElement('b');
+      heading.style.fontSize = '11px';
+      heading.style.color = 'var(--gold)';
+      heading.textContent = title;
+      const list = document.createElement('ul');
+      for (const item of items) list.appendChild(makeItem(item));
+      target.replaceChildren(heading, list);
+    }
+    renderSection($('central'), 'CENTRAL ISLANDS', (Array.isArray(topo.central) ? topo.central : []).slice(0,6), item => {
+      const li = document.createElement('li');
+      li.appendChild(document.createTextNode(String(item.repo ?? '')));
+      const detail = document.createElement('span');
+      detail.className = 'n';
+      detail.textContent = ' (' + String(item.stones ?? '—') + ' stones)';
+      li.appendChild(detail);
+      return li;
+    });
+    const topClusters=Object.entries(topo.clusters || {}).sort((a,b)=>b[1].length-a[1].length).slice(0,6);
+    renderSection($('clusters'), 'CLUSTERS', topClusters, ([name, members]) => {
+      const li = document.createElement('li');
+      li.appendChild(document.createTextNode(String(name)));
+      const detail = document.createElement('span');
+      detail.className = 'n';
+      detail.textContent = ' × ' + String(members.length) + ' islands';
+      li.appendChild(detail);
+      return li;
+    });
+    const epitaphNodes = [];
+    for (const entry of (Array.isArray(epi.epitaphs) ? epi.epitaphs : []).slice(0,14)) {
+      const card = document.createElement('div');
+      card.className = 'haiku';
+      card.appendChild(document.createTextNode(String(entry.haiku ?? '')));
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.textContent = String(entry.repo ?? '') + ' × ' + String(entry.organ ?? '') + ' · r=' + String(entry.resonance ?? '—');
+      card.appendChild(meta);
+      epitaphNodes.push(card);
+    }
+    $('epitaphs').replaceChildren(...epitaphNodes);
   }catch(e){$('epitaphs').textContent='ERROR '+e.message;}
 });
 </script>
