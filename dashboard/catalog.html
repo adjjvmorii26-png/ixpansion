@@ -85,8 +85,40 @@ const AGENTS=[{role:"CatalogCurator",tools:"catalog_registry,search,classify",au
 let catalogData=[];
 fetch('/api/catalog_registry?action=entries').then(r=>r.json()).then(d=>{catalogData=d.entries||[];renderCatalog(catalogData)}).catch(()=>{/* use static fallback */});
 fetch('/api/workforce_agents?action=agents').then(r=>r.json()).then(d=>{renderAgents(d.agents||[])}).catch(()=>{});
-function renderAgents(agents){const g=document.getElementById('agentGrid');g.innerHTML=AGENTS.map(a=>`<div class="agent-card"><div style="font-size:2em;margin-bottom:6px">${a.icon}</div><div class="role">${a.role}</div><div class="tools">${a.tools}</div><div class="autonomy ${a.autonomy}">${a.autonomy.toUpperCase()} AUTONOMY</div></div>`).join('');}
-function renderCatalog(entries){const g=document.getElementById('catalogGrid');const catEntries=entries.slice(0,60);g.innerHTML=catEntries.map(e=>{const cat=CATS.find(c=>e.title.toLowerCase().includes(c.name.toLowerCase()))||{icon:"📊",name:e.category};return `<div class="catalog-card" onclick="location.href='/dashboard/${e.filename}'"><div class="icon">${cat.icon}</div><div class="title">${e.title}</div><div class="wave">WAVE ${e.wave}</div><div class="desc">${e.desc||'IXPANSION dashboard entry'}</div><div class="category">${cat.icon} ${e.category}</div></div>`}).join('');}
+function makeText(tag,className,value){const node=document.createElement(tag);if(className)node.className=className;node.textContent=String(value??'');return node}
+function renderAgents(_agents){
+  const grid=document.getElementById('agentGrid'),fragment=document.createDocumentFragment();
+  for(const agent of AGENTS){
+    const card=document.createElement('div');card.className='agent-card';
+    const icon=makeText('div','',agent.icon);icon.style.cssText='font-size:2em;margin-bottom:6px';
+    const role=makeText('div','role',agent.role),tools=makeText('div','tools',agent.tools);
+    const autonomy=makeText('div','autonomy '+agent.autonomy,agent.autonomy.toUpperCase()+' AUTONOMY');
+    card.append(icon,role,tools,autonomy);fragment.appendChild(card);
+  }
+  grid.replaceChildren(fragment);
+}
+function renderCatalog(entries){
+  const grid=document.getElementById('catalogGrid'),fragment=document.createDocumentFragment();
+  for(const entry of (Array.isArray(entries)?entries.slice(0,60):[])){
+    const title=String(entry.title??'');
+    const category=String(entry.category??'');
+    const cat=CATS.find(item=>title.toLowerCase().includes(item.name.toLowerCase()))||{icon:'📊',name:category};
+    const filename=String(entry.filename??'');
+    const validFilename=/^[a-zA-Z0-9_-]+\.html$/.test(filename);
+    const card=document.createElement(validFilename?'a':'div');
+    card.className='catalog-card';
+    if(validFilename){card.href='/dashboard/'+filename;card.style.display='block';card.style.color='inherit';card.style.textDecoration='none'}
+    card.append(
+      makeText('div','icon',cat.icon),
+      makeText('div','title',title),
+      makeText('div','wave','WAVE '+String(entry.wave??'')),
+      makeText('div','desc',entry.desc||'IXPANSION dashboard entry'),
+      makeText('div','category',cat.icon+' '+category)
+    );
+    fragment.appendChild(card);
+  }
+  grid.replaceChildren(fragment);
+}
 function filterCat(cat){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');const filtered=cat==='all'?catalogData:catalogData.filter(e=>e.category===cat);renderCatalog(filtered);}
 setInterval(()=>{document.getElementById('ts').textContent=new Date().toISOString()},2000);
 </script>
