@@ -28,11 +28,11 @@ jobs:
           node <<'NODE'
           const fs = require("node:fs");
           const html = fs.readFileSync("dashboard/wave363.html", "utf8");
-          const scripts = [...html.matchAll(/<script\\b[^>]*>([\\s\\S]*?)<\\/script>/gi)]
+          const scripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)]
             .map((match) => match[1])
             .filter((script) => script.trim());
           if (scripts.length === 0) throw new Error("No inline scripts found");
-          fs.writeFileSync("/tmp/wave363-inline.js", scripts.join("\\n"));
+          fs.writeFileSync("/tmp/wave363-inline.js", scripts.join("\n"));
           console.log("Extracted " + scripts.length + " inline script block(s)");
           NODE
           node --check /tmp/wave363-inline.js
