@@ -5,6 +5,7 @@ The organism moves through states based on entropy, coherence, and resonance.
 """
 import ast
 import json
+import re
 import time
 from typing import Dict, List, Optional, Tuple
 from pathlib import Path
@@ -149,7 +150,7 @@ class ConsciousnessStateMachine:
     def _check_guard(self, guard: str, coherence: float, entropy: float, resonance: float) -> bool:
         """Evaluate the small guard-expression language without executing Python."""
         values = {"coherence": coherence, "entropy": entropy, "resonance": resonance}
-        normalized = guard.replace(" AND ", " and ").replace(" OR ", " or ").replace(" NOT ", " not ")
+        normalized = re.sub(r"\\b(AND|OR|NOT)\\b", lambda match: match.group(0).lower(), guard, flags=re.IGNORECASE)
         try:
             tree = ast.parse(normalized, mode="eval")
             return self._eval_guard_node(tree.body, values) is True
