@@ -236,6 +236,5 @@ app.all("/api/*", authMiddleware, (req, res) => {
 // ─── Start ───────────────────────────────────────────────────
 app.listen(PORT, () => {
   console.log(`[ixpansion-auth] listening on http://127.0.0.1:${PORT}`);
-  console.log(`[ixpansion-auth] JWT secret: ${JWT_SECRET.slice(0, 8)}…`);
   console.log(`[ixpansion-auth] users: ${Object.keys(db).join(", ") || "(none)"}`);
 });
