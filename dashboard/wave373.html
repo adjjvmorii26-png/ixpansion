@@ -98,7 +98,26 @@
 <script>
 function esc(value){return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;')}
 function fmt(o){return esc(JSON.stringify(o,null,2)).replace(/"([^"]+)":/g,'<span class="hl">"$1"</span>:').replace(/: "([^"]+)"/g,': "<span class="c">$1</span>"').replace(/: (\d+\.?\d*)/g,': <span class="w">$1</span>')}
-function log(el,msg){document.getElementById(el).textContent=String(msg).replace(/<[^>]*>/g,'')}
+function log(el,msg){
+  const target=document.getElementById(el);
+  target.replaceChildren();
+  const lines=String(msg).split('\\n');
+  for(const line of lines){
+    const row=document.createElement('div');
+    const parts=line.split(/(<span class="(?:hl|c|w|te|g|r)">|<\\/span>)/g);
+    let activeClass='';
+    for(const part of parts){
+      const open=part.match(/^<span class="(hl|c|w|te|g|r)">$/);
+      if(open){activeClass=open[1];continue}
+      if(part==='</span>'){activeClass='';continue}
+      const node=document.createElement(activeClass?'span':'span');
+      if(activeClass)node.className=activeClass;
+      node.textContent=part;
+      row.appendChild(node);
+    }
+    target.appendChild(row);
+  }
+}
 const api=async(p)=>{try{return await(await fetch(p)).json()}catch(e){return{error:e.message}}};
 
 // ─── Dream Physics Sandbox ───
