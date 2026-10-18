@@ -104,10 +104,14 @@ async function refresh(){
 }
 async function loadHistory(){
   const r = await fetch(EP+"?action=recent").then(x=>x.json());
-  const h = el("history"); h.innerHTML="";
-  (r.broadcasts||[]).forEach(b=>{
-    h.insertAdjacentHTML("beforeend", `<div class="hist-item">❝${b.message}❞ <span style="color:var(--muted)">· ${b.time}</span></div>`);
-  });
+  const h=el("history"),fragment=document.createDocumentFragment();
+  for(const item of (Array.isArray(r.broadcasts)?r.broadcasts:[])){
+    const row=document.createElement('div');row.className='hist-item';
+    row.appendChild(document.createTextNode('❝'+String(item.message??'')+'❞ '));
+    const time=document.createElement('span');time.style.color='var(--muted)';time.textContent='· '+String(item.time??'');
+    row.appendChild(time);fragment.appendChild(row);
+  }
+  h.replaceChildren(fragment);
 }
 document.querySelectorAll(".btn[data-action]").forEach(btn=>{
   btn.addEventListener("click", async ()=>{
