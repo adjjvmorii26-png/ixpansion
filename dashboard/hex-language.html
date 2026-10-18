@@ -69,27 +69,67 @@ async function j(u){ return (await fetch(u)).json(); }
 async function loadWords(){
   const d = await j('/api/hex_language');
   const words = d.generation?.new_words || d.words || [];
-  document.getElementById('words').innerHTML = words.map(w=>`<span class="word"><b>${w}</b></span>`).join(' ');
+  const container = document.getElementById('words');
+  const fragment = document.createDocumentFragment();
+  for (const word of words) {
+    const chip = document.createElement('span');
+    chip.className = 'word';
+    const strong = document.createElement('b');
+    strong.textContent = String(word);
+    chip.appendChild(strong);
+    fragment.appendChild(chip);
+  }
+  container.replaceChildren(fragment);
 }
 async function loadDialects(){
   const d = await j('/api/hex_dialect');
   const dialect = d.dialect || {};
   const voc = dialect.sample_vocabulary || [];
-  document.getElementById('dialects').innerHTML = `
-    <div class="dialect">
-      <b>${dialect.name||'unknown'}</b> — ${dialect.origin||''}
-      <div class="voc">${voc.join('  ')}</div>
-    </div>
-    <div class="muted">each dialect forms in a different quarter of the organism</div>
-  `;
+  const container = document.getElementById('dialects');
+  const card = document.createElement('div');
+  card.className = 'dialect';
+  const name = document.createElement('b');
+  name.textContent = String(dialect.name || 'unknown');
+  card.append(name, document.createTextNode(' — ' + String(dialect.origin || '')));
+  const vocabulary = document.createElement('div');
+  vocabulary.className = 'voc';
+  vocabulary.textContent = voc.map(String).join('  ');
+  card.appendChild(vocabulary);
+  const note = document.createElement('div');
+  note.className = 'muted';
+  note.textContent = 'each dialect forms in a different quarter of the organism';
+  container.replaceChildren(card, note);
 }
 async function loadTools(){
   const d = await j('/api/hex_tool');
   const actions = d.actions || [];
   const dialects = d.dialects || {};
-  let html = actions.map(a=>`<div class="tool"><b>${a}</b> — ${d.description?.split('—')[1]?.trim()||'HEX protocol action'}</div>`).join('');
-  html += Object.entries(dialects).map(([k,v])=>`<div class="tool"><b>${k}</b> — ${v}</div>`).join('');
-  document.getElementById('tools').innerHTML = html || '<div class="muted">tools loading…</div>';
+  const container = document.getElementById('tools');
+  const fragment = document.createDocumentFragment();
+  const description = d.description?.split('—')[1]?.trim() || 'HEX protocol action';
+  for (const action of actions) {
+    const row = document.createElement('div');
+    row.className = 'tool';
+    const label = document.createElement('b');
+    label.textContent = String(action);
+    row.append(label, document.createTextNode(' — ' + description));
+    fragment.appendChild(row);
+  }
+  for (const [key, value] of Object.entries(dialects)) {
+    const row = document.createElement('div');
+    row.className = 'tool';
+    const label = document.createElement('b');
+    label.textContent = key;
+    row.append(label, document.createTextNode(' — ' + String(value)));
+    fragment.appendChild(row);
+  }
+  if (!fragment.childNodes.length) {
+    const empty = document.createElement('div');
+    empty.className = 'muted';
+    empty.textContent = 'No tools available.';
+    fragment.appendChild(empty);
+  }
+  container.replaceChildren(fragment);
 }
 async function evolve(){
   await j('/api/hex_language?action=evolve');
