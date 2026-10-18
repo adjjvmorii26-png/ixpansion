@@ -89,13 +89,24 @@ window.addEventListener('DOMContentLoaded', async () => {
     hp.className = 'pill ' + (sent.health_index>=0.9?'ok':sent.health_index>=0.6?'warn':'bad');
     $('log').textContent = `health_index=${sent.health_index}\nstones=${sent.stones}\nrepos=${sent.repos}\ndrift=${sent.drift.count}\nrot=${sent.rot.count}\nnote=${sent.note}`;
 
-    if (sent.drift.count) {
-      const rows = sent.drift.bridges.slice(0,20).map(b=>`<tr><td>${b.repo}</td><td>${b.organ}</td><td class="r">${b.resonance}</td></tr>`).join('');
-      $('driftlist').outerHTML = `<table><tr><th>Repo</th><th>Organ</th><th class="r">Resonance</th></tr>${rows}</table>`;
+    function renderTable(container,headers,rows){
+      const table=document.createElement('table'),head=document.createElement('tr');
+      for(const label of headers){const th=document.createElement('th');th.textContent=label;head.appendChild(th)}
+      table.appendChild(head);
+      for(const values of rows){
+        const tr=document.createElement('tr');
+        for(const value of values){const td=document.createElement('td');td.textContent=String(value??'');tr.appendChild(td)}
+        table.appendChild(tr);
+      }
+      container.replaceWith(table);
     }
-    if (sent.rot.count) {
-      const rows = sent.rot.stones.slice(0,20).map(s=>`<tr><td>${s.stone}</td><td>${s.repo}</td><td>${s.organ}</td></tr>`).join('');
-      $('rotlist').outerHTML = `<table><tr><th>Stone</th><th>Repo</th><th>Organ</th></tr>${rows}</table>`;
+    if(sent.drift.count){
+      renderTable($('driftlist'),['Repo','Organ','Resonance'],
+        (Array.isArray(sent.drift.bridges)?sent.drift.bridges:[]).slice(0,20).map(item=>[item.repo,item.organ,item.resonance]));
+    }
+    if(sent.rot.count){
+      renderTable($('rotlist'),['Stone','Repo','Organ'],
+        (Array.isArray(sent.rot.stones)?sent.rot.stones:[]).slice(0,20).map(item=>[item.stone,item.repo,item.organ]));
     }
   } catch(e) {
     $('log').textContent = 'ERROR: ' + e.message;
