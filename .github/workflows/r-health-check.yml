@@ -1,0 +1,27 @@
+name: R health checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "nexus_observatory/R/**"
+      - ".github/workflows/r-health-check.yml"
+  push:
+    branches: [main]
+    paths:
+      - "nexus_observatory/R/**"
+      - ".github/workflows/r-health-check.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  health-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+      - name: Parse and exercise host health checks
+        run: |
+          Rscript -e 'source("nexus_observatory/R/health.R"); result <- nexus_health_check(); stopifnot(length(result$disk_ok) == 1L, is.logical(result$disk_ok), length(result$memory_ok) == 1L, is.logical(result$memory_ok)); print(result); cat("R health checks: OK\n")'
