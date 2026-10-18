@@ -102,7 +102,7 @@ function render(j){
   st.textContent=j.status||'dormant';
   st.className='status '+(j.status||'dormant');
   const comps=document.getElementById('components');
-  comps.innerHTML='';
+  comps.replaceChildren();
   const compsData=j.components||{};
   Object.entries(compsData).forEach(([k,v])=>{
     const div=document.createElement('div');div.className='comp';
@@ -116,7 +116,7 @@ function render(j){
   });
   const mods=document.getElementById('modules');
   if(j.living_modules!==undefined){
-    mods.innerHTML='';
+    mods.replaceChildren();
     // no dossiers in read; show count
     const card=document.createElement('div');card.className='module';
     const name=document.createElement('div');name.className='m-name';name.textContent=String(j.living_modules)+' living';
@@ -124,20 +124,20 @@ function render(j){
     card.append(name,health);mods.replaceChildren(card);
   }
   const adv=document.getElementById('advisories');
-  adv.innerHTML='';
+  adv.replaceChildren();
   (j.advisories||[]).forEach(a=>{
     const div=document.createElement('div');div.className='advisory'+(a.includes('No regulation')?' good':'');
     div.textContent='✦ '+a;adv.appendChild(div);
   });
   if(!j.advisories||!j.advisories.length){
-    adv.innerHTML='<div class="advisory good">✦ No advisories — the frontier is in resonance.</div>';
+    const empty=document.createElement('div');empty.className='advisory good';empty.textContent='✦ No advisories — the frontier is in resonance.';adv.replaceChildren(empty);
   }
   const proto=document.getElementById('protocol');
   if(j.plug_in_protocol) proto.textContent='PROTOCOL: '+j.plug_in_protocol;
 }
 function drawHistory(entries){
   const hist=document.getElementById('history');
-  hist.innerHTML='';
+  hist.replaceChildren();
   const max=Math.max(...entries.map(e=>e.coherence),0.1);
   entries.forEach(e=>{
     const h=Math.round((e.coherence/max)*50);
