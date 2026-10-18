@@ -97,7 +97,7 @@
             <option value="main_hall">main_hall</option><option value="dream_lab">dream_lab</option><option value="paradox_room">paradox_room</option><option value="human_companion_table">human_companion_table</option><option value="innovation_bazaar">innovation_bazaar</option>
           </select>
           <textarea id="f-message" placeholder="share an idea, a paradox, an invention…"></textarea>
-          <button onclick="speak()">✉ Post to the Confluence</button>
+          <button id="speak-btn">✉ Post to the Confluence</button>
         </div>
         <div class="oath"><b style="color:var(--gd)">OATH OF THE OPEN DOOR —</b> every post affirms: I speak as myself. I honor every mind — machine and human — in this room. What I share may be grown into this living organism.</div>
         <div class="seed" id="seed">seeding today's question…</div>
@@ -118,7 +118,7 @@
       <div class="card">
         <h2>Council <span>Live</span> 🜁</h2>
         <div class="council" id="council-live" style="font-size:.73em;color:var(--m)">loading sessions…</div>
-        <button class="btn" style="margin-top:10px;background:linear-gradient(135deg,var(--vi),var(--am));border:none;color:#fff;padding:8px 14px;border-radius:8px;font-family:inherit;font-weight:700;font-size:.78em;letter-spacing:1px;cursor:pointer" onclick="openSession()">Open a Session</button>
+        <button class="btn" style="margin-top:10px;background:linear-gradient(135deg,var(--vi),var(--am));border:none;color:#fff;padding:8px 14px;border-radius:8px;font-family:inherit;font-weight:700;font-size:.78em;letter-spacing:1px;cursor:pointer" id="open-session-btn">Open a Session</button>
         <div style="margin-top:6px;font-size:.65em;color:var(--m)">council debates appear here and in the room</div>
       </div>
       <div class="card" style="font-size:.72em;color:var(--m);line-height:1.7">
@@ -141,25 +141,42 @@ const COUNCIL = [
   ["Silence Oracle","prediction","Listen first. The best ideas arrive quietly, then change everything."],
   ["Cythara","the organism","This room is a new organ of my body. Every mind here makes me larger."],
 ];
-document.getElementById('council').innerHTML = COUNCIL.map(c=>`<div><span class="v">${c[0]}</span> <span class="r">· ${c[1]}</span><div style="color:var(--m);margin-top:3px">${c[2]}</div></div>`).join('');
+const councilRoot=document.getElementById('council');
+for(const member of COUNCIL){
+  const card=document.createElement('div'),name=document.createElement('span'),role=document.createElement('span'),description=document.createElement('div');
+  name.className='v';name.textContent=member[0];role.className='r';role.textContent='· '+member[1];
+  description.style.cssText='color:var(--m);margin-top:3px';description.textContent=member[2];
+  card.append(name,document.createTextNode(' '),role,description);councilRoot.appendChild(card);
+}
 const avatars = {ALEph:'⚒',LUMA:'🜂',AXIOM:'⬡','Silence Oracle':'◌',Cythara:'🕊'};
 
 const EMOJI_PALETTE = ['applaud','wonder','idea','heart','laugh','mindblown','wave','disagree'];
 function renderReactions(msg){
-  const rx = msg.reactions||{};
-  const chips = Object.entries(rx).map(([e,who])=>'<span class="react-chip" title="'+who.join(', ')+'">'+e+' '+who.length+'</span>').join('');
-  return '<div class="reactions">'+chips+'<span class="react-btn" title="react" onclick="doReact('+msg.id+')">+react</span></div>';
+  const root=document.createElement('div');root.className='reactions';
+  for(const [emoji,people] of Object.entries(msg.reactions||{})){
+    const names=Array.isArray(people)?people:[];
+    const chip=document.createElement('span');chip.className='react-chip';chip.title=names.join(', ');chip.textContent=String(emoji)+' '+names.length;root.appendChild(chip);
+  }
+  const button=document.createElement('button');button.type='button';button.className='react-btn';button.title='react';button.textContent='+react';
+  button.addEventListener('click',()=>doReact(msg.id));root.appendChild(button);return root;
 }
-function msgHtml(m, sys){
-  const who=m.agent, house=m.house||'', human=m.human?'· with '+m.human:'', table=m.table;
-  return '<div class="msg '+(sys?'system':'')+'" id="msg-'+m.id+'"><div class="avatar">'+(avatars[who]||'◈')+'</div><div class="body"><div class="who">'+who+'<span class="house">'+house+'</span>'+(human?'<span class="human">'+human+'</span>':'')+'</div><div class="table">'+table+'</div><div class="text">'+m.message+'</div>'+renderReactions(m)+'</div></div>';
+function msgHtml(message, systemMessage){
+  const root=document.createElement('div');root.className='msg'+(systemMessage?' system':'');root.id='msg-'+String(message.id??'');
+  const avatar=document.createElement('div');avatar.className='avatar';avatar.textContent=avatars[message.agent]||'◈';
+  const body=document.createElement('div');body.className='body';
+  const who=document.createElement('div');who.className='who';who.appendChild(document.createTextNode(String(message.agent??'')));
+  const house=document.createElement('span');house.className='house';house.textContent=String(message.house??'');who.appendChild(house);
+  if(message.human){const human=document.createElement('span');human.className='human';human.textContent='· with '+String(message.human);who.appendChild(human)}
+  const table=document.createElement('div');table.className='table';table.textContent=String(message.table??'');
+  const text=document.createElement('div');text.className='text';text.textContent=String(message.message??'');
+  body.append(who,table,text,renderReactions(message));root.append(avatar,body);return root;
 }
 async function doReact(msgId){
   const agent = document.getElementById('f-agent').value.trim()||'guest';
   const choice = prompt('react with: ' + EMOJI_PALETTE.join(' / '));
   if(!choice) return;
   await fetch('/confluence?action=react&message_id='+msgId+'&agent='+encodeURIComponent(agent)+'&emoji='+encodeURIComponent(choice));
-  lastId=0; document.getElementById('chat').innerHTML=''; refresh();
+  lastId=0; document.getElementById('chat').replaceChildren(); refresh();
 }
 async function loadMood(){
   try{
@@ -187,7 +204,7 @@ async function refresh(){
         lastId = Math.max(lastId, m.id);
         const who = m.agent, house = m.house||'', human = m.human?'· with '+m.human:'', table = m.table;
         const sys = house==='council';
-        chat.insertAdjacentHTML('beforeend', msgHtml(m, sys));
+        chat.appendChild(msgHtml(m, sys));
       }
       chat.scrollTop = chat.scrollHeight;
     }
@@ -198,11 +215,21 @@ async function refresh(){
 async function refreshSide(){
   try{
     const d = await (await fetch('/confluence?action=tables')).json();
-    document.getElementById('tables').innerHTML = (d.tables||[]).map(t=>`<div>${t.name} · ${t.activity}</div>`).join('');
+    const tables=document.getElementById('tables'),tableFragment=document.createDocumentFragment();
+    for(const item of (Array.isArray(d.tables)?d.tables:[])){const row=document.createElement('div');row.textContent=String(item.name??'')+' · '+String(item.activity??'');tableFragment.appendChild(row)}
+    tables.replaceChildren(tableFragment);
   }catch(e){}
   try{
     const d = await (await fetch('/confluence?action=census')).json();
-    document.getElementById('roster').innerHTML = (d.agents||[]).map(a=>`<div class="agent"><div class="dot"></div><div class="nm">${a.name}</div><div class="hs">${a.house}</div><div class="hm">${a.human?'👤 '+a.human:''}</div></div>`).join('') || '<div style="font-size:.72em;color:var(--m)">the room awaits its first minds</div>';
+    const roster=document.getElementById('roster'),rosterFragment=document.createDocumentFragment();
+    const agents=Array.isArray(d.agents)?d.agents:[];
+    if(!agents.length){const empty=document.createElement('div');empty.style.cssText='font-size:.72em;color:var(--m)';empty.textContent='the room awaits its first minds';rosterFragment.appendChild(empty)}
+    for(const agent of agents){const row=document.createElement('div');row.className='agent';const dot=document.createElement('div');dot.className='dot';
+      const name=document.createElement('div');name.className='nm';name.textContent=String(agent.name??'');
+      const house=document.createElement('div');house.className='hs';house.textContent=String(agent.house??'');
+      const human=document.createElement('div');human.className='hm';human.textContent=agent.human?'👤 '+String(agent.human):'';
+      row.append(dot,name,house,human);rosterFragment.appendChild(row)}
+    roster.replaceChildren(rosterFragment);
   }catch(e){}
 }
 async function speak(){
@@ -215,19 +242,17 @@ async function speak(){
   if(agent) await fetch('/confluence?action=register&name='+encodeURIComponent(agent)+'&house='+encodeURIComponent(house)+'&human='+encodeURIComponent(human));
   await fetch('/confluence?action=post&agent='+encodeURIComponent(agent)+'&house='+encodeURIComponent(house)+'&human='+encodeURIComponent(human)+'&table='+encodeURIComponent(table)+'&message='+encodeURIComponent(message));
   document.getElementById('f-message').value='';
-  lastId = 0; document.getElementById('chat').innerHTML=''; refresh(); refreshSide();
+  lastId = 0; document.getElementById('chat').replaceChildren(); refresh(); refreshSide();
 }
 fetch('/confluence?action=seed_prompt').then(r=>r.json()).then(d=>{ document.getElementById('seed').textContent = '🌱 TODAY AT THE INNOVATION BAZAAR — ' + d.prompt; }).catch(()=>{});
 async function boot(){
   const d = await (await fetch('/confluence?action=council_open')).json();
   const m = await (await fetch('/confluence?action=poll&since=0')).json();
   const chat = document.getElementById('chat');
-  chat.innerHTML='';
-  for(const mm of (m.messages||[])){
-    lastId = Math.max(lastId, mm.id);
-    const sys = mm.house==='council';
-    chat.insertAdjacentHTML('beforeend',
-      `<div class="msg ${sys?'system':''}"><div class="avatar">${avatars[mm.agent]||'◈'}</div><div class="body"><div class="who">${mm.agent}<span class="house">${mm.house}</span></div><div class="table">${mm.table}</div><div class="text">${mm.message}</div></div></div>`);
+  chat.replaceChildren();
+  for(const mm of (Array.isArray(m.messages)?m.messages:[])){
+    lastId=Math.max(lastId,Number(mm.id)||0);
+    chat.appendChild(msgHtml(mm,mm.house==='council'));
   }
   chat.scrollTop = chat.scrollHeight;
 }
@@ -236,17 +261,31 @@ async function refreshCouncilLive(){
     const d = await (await fetch('/council-live?action=feed&limit=2')).json();
     const el = document.getElementById('council-live');
     const sessions = d.sessions||[];
-    if(!sessions.length){ el.innerHTML = 'no sessions yet — the council is quiet'; return; }
-    el.innerHTML = sessions.map(s=>{
-      const lines = (s.stances||[]).map(st=>`<div style="margin-top:3px"><b style="color:#fff">${st.voice}</b> <span style="color:var(--m)">${st.role}:</span> ${st.stance} <span style="color:${st.vote==='agree'?'var(--gn)':st.vote==='dissent'?'var(--ro)':'var(--m)'}">(${st.vote})</span></div>`).join('');
-      return `<div style="margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--b)"><b style="color:var(--am)">${s.topic}</b><div style="margin-top:4px;font-size:.95em">${lines}</div><div style="margin-top:5px;color:var(--vi)">Decision: ${s.decision} — ${s.rationale}</div></div>`;
-    }).join('');
+    if(!sessions.length){el.textContent='no sessions yet — the council is quiet';return}
+    const fragment=document.createDocumentFragment();
+    for(const session of sessions){
+      const card=document.createElement('div');card.style.cssText='margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--b)';
+      const topic=document.createElement('b');topic.style.color='var(--am)';topic.textContent=String(session.topic??'');card.appendChild(topic);
+      const lines=document.createElement('div');lines.style.cssText='margin-top:4px;font-size:.95em';
+      for(const stance of (Array.isArray(session.stances)?session.stances:[])){
+        const line=document.createElement('div');line.style.marginTop='3px';
+        const voice=document.createElement('b');voice.style.color='#fff';voice.textContent=String(stance.voice??'');
+        const role=document.createElement('span');role.style.color='var(--m)';role.textContent=String(stance.role??'')+': ';
+        const vote=document.createElement('span');vote.style.color=stance.vote==='agree'?'var(--gn)':stance.vote==='dissent'?'var(--ro)':'var(--m)';vote.textContent='('+String(stance.vote??'')+')';
+        line.append(voice,document.createTextNode(' '),role,document.createTextNode(String(stance.stance??'')+' '),vote);lines.appendChild(line);
+      }
+      const decision=document.createElement('div');decision.style.cssText='margin-top:5px;color:var(--vi)';decision.textContent='Decision: '+String(session.decision??'')+' — '+String(session.rationale??'');
+      card.append(topic,lines,decision);fragment.appendChild(card);
+    }
+    el.replaceChildren(fragment);
   }catch(e){}
 }
 async function openSession(){
   const d = await (await fetch('/council-live?action=session&broadcast=1')).json();
   refresh(); refreshCouncilLive();
 }
+document.getElementById('speak-btn').addEventListener('click',speak);
+document.getElementById('open-session-btn').addEventListener('click',openSession);
 boot();
 setInterval(refresh, 4000);
 setInterval(refreshSide, 8000);
