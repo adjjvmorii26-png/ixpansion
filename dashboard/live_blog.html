@@ -78,9 +78,31 @@ canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
 let allPosts=[], displayed=0, currentFilter='all';
 async function load(){try{const r=await fetch('/api/live_blog?action=latest&limit=50');const d=await r.json();allPosts=d.posts||[];updateStats(d);render();}catch(e){console.error(e);}}
 function updateStats(d){document.getElementById('totalPosts').textContent=d.total||0;document.getElementById('totalTypes').textContent=7;document.getElementById('latestWave').textContent=(allPosts[0]?.wave||'—');document.getElementById('latestTime').textContent=allPosts[0]?new Date(allPosts[0].timestamp).toLocaleString():'—';}
-function render(){const feed=document.getElementById('blogFeed');const filtered=currentFilter==='all'?allPosts:allPosts.filter(p=>p.type===currentFilter);const show=filtered.slice(0,displayed+10);displayed=show.length;
-if(show.length===0){feed.innerHTML='<div class="empty-state"><div class="icon">📭</div><div>No posts for this filter</div></div>';return}
-feed.innerHTML=show.map(p=>`<article class="post"><header class="post-header"><span class="post-type">${p.type.replace('_',' ')}</span><h2 class="post-title">${p.title}</h2><span class="post-wave">WAVE ${p.wave}</span><span class="post-time">${new Date(p.timestamp).toLocaleString()}</span></header><div class="post-content">${p.content}</div><footer class="post-tags">${p.tags.map(t=>`<span class="post-tag">${t}</span>`).join('')}</footer></article>`).join('');}
+function textEl(tag,className,value){const node=document.createElement(tag);if(className)node.className=className;node.textContent=String(value??'');return node}
+function render(){
+  const feed=document.getElementById('blogFeed');
+  const filtered=currentFilter==='all'?allPosts:allPosts.filter(p=>p.type===currentFilter);
+  const show=filtered.slice(0,displayed+10);displayed=show.length;
+  if(show.length===0){
+    const empty=textEl('div','empty-state','');
+    empty.append(textEl('div','icon','📭'),textEl('div','','No posts for this filter'));
+    feed.replaceChildren(empty);return;
+  }
+  const fragment=document.createDocumentFragment();
+  for(const post of show){
+    const article=document.createElement('article');article.className='post';
+    const header=document.createElement('header');header.className='post-header';
+    header.append(textEl('span','post-type',String(post.type??'').replace('_',' ')),
+      textEl('h2','post-title',post.title),
+      textEl('span','post-wave','WAVE '+String(post.wave??'')),
+      textEl('span','post-time',Number.isFinite(Date.parse(post.timestamp))?new Date(post.timestamp).toLocaleString():'time unknown'));
+    const content=textEl('div','post-content',post.content);
+    const footer=document.createElement('footer');footer.className='post-tags';
+    for(const tag of (Array.isArray(post.tags)?post.tags:[]))footer.appendChild(textEl('span','post-tag',tag));
+    article.append(header,content,footer);fragment.appendChild(article);
+  }
+  feed.replaceChildren(fragment);
+}
 function filterType(t){currentFilter=t;displayed=0;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');render();}
 function loadMore(){displayed+=10;render();}
 setInterval(()=>{document.getElementById('ts').textContent=new Date().toISOString()},2000);
