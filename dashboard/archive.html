@@ -69,17 +69,25 @@ window.addEventListener('DOMContentLoaded', async()=>{
     $('first').textContent=r.timeline.first_date||'—';
     $('top').textContent=r.top_connected[0]?r.top_connected[0][0].slice(0,12):'—';
 
-    $('archive').innerHTML=a.map(isl=>{
-      const poems=isl.epitaphs.map(e=>`<div class="poem">${e.poem}<div class="meta tiny">↳ ${e.organ} · ${e.stone}</div></div>`).join('');
-      return `<div class="island">
-        <div class="head">
-          <span class="name">${isl.repo}</span>
-          <span class="badge">${isl.stones} stones</span>
-        </div>
-        <div class="meta">partners: ${isl.partners.join(', ')||'none'} · avg resonance ${isl.avg_resonance}</div>
-        ${poems}
-      </div>`;
-    }).join('');
+    const archive=document.getElementById('archive');
+    const fragment=document.createDocumentFragment();
+    for(const island of (Array.isArray(a)?a:[])){
+      const card=document.createElement('div');card.className='island';
+      const head=document.createElement('div');head.className='head';
+      const name=document.createElement('span');name.className='name';name.textContent=String(island.repo??'');
+      const badge=document.createElement('span');badge.className='badge';badge.textContent=String(island.stones??0)+' stones';
+      head.append(name,badge);
+      const meta=document.createElement('div');meta.className='meta';
+      meta.textContent='partners: '+(Array.isArray(island.partners)?island.partners.join(', '):'none')+' · avg resonance '+String(island.avg_resonance??'—');
+      card.append(head,meta);
+      for(const epitaph of (Array.isArray(island.epitaphs)?island.epitaphs:[])){
+        const poem=document.createElement('div');poem.className='poem';poem.textContent=String(epitaph.poem??'');
+        const detail=document.createElement('div');detail.className='meta tiny';detail.textContent='↳ '+String(epitaph.organ??'')+' · '+String(epitaph.stone??'');
+        poem.appendChild(detail);card.appendChild(poem);
+      }
+      fragment.appendChild(card);
+    }
+    archive.replaceChildren(fragment);
   }catch(e){ $('archive').textContent='ERROR '+e.message; }
 });
 </script>
