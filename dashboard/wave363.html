@@ -123,7 +123,7 @@
 <script>
 let dreamVizRunning=false,dreamVizInterval=null,streamAutoRunning=false,streamInterval=null;
 
-function fmt(o){return JSON.stringify(o,null,2).replace(/"([^"]+)":/g,'<span class="hl">"$1"</span>:').replace(/: "([^"]+)"/g,': "<span class="c">$1</span>"').replace(/: (\d+\.?\d*)/g,': <span class="w">$1</span>')}
+function esc(value){return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}\nfunction fmt(o){return esc(JSON.stringify(o,null,2)).replace(/"([^"]+)":/g,'<span class="hl">"$1"</span>:').replace(/: "([^"]+)"/g,': "<span class="c">$1</span>"').replace(/: (\d+\.?\d*)/g,': <span class="w">$1</span>')}
 function log(el,msg){document.getElementById(el).innerHTML=msg}
 async function api(p){try{const r=await fetch(p);return await r.json()}catch(e){return{error:e.message}}}
 
@@ -133,29 +133,29 @@ async function dreamNew(){
   const d=await api('/api/consciousness_stream/dream');
   const l=d.law||{};
   const disp=document.getElementById('lawDisplay');
-  disp.innerHTML=`<div class="law-card"><div class="law-name">☽ ${l.name||'?'}</div>`+
-    `<div class="law-desc">${l.principle||'?'}</div>`+
-    `<div class="law-meta">scope: ${l.scope} | strength: ${l.stability} | stability: ${l.stability}</div>`+
-    `<div class="law-desc" style="color:var(--vi);font-style:italic;margin-top:6px">"${l.dream_source||'?'}"</div></div>`;
+  disp.innerHTML=`<div class="law-card"><div class="law-name">☽ ${esc(l.name||'?')}</div>`+
+    `<div class="law-desc">${esc(l.principle||'?')}</div>`+
+    `<div class="law-meta">scope: ${esc(l.scope)} | strength: ${esc(l.stability)} | stability: ${esc(l.stability)}</div>`+
+    `<div class="law-desc" style="color:var(--vi);font-style:italic;margin-top:6px">"${esc(l.dream_source||'?')}"</div></div>`;
   log('dreamOut',`<span class="hl">☽ DREAM LAW GENERATED</span>\n\n`+
-    `Name: <span class="hl">${l.name||'?'}</span>\n`+
-    `Principle: ${l.principle||'?'}\n`+
-    `Scope: <span class="te">${l.scope||'?'}</span>\n`+
+    `Name: <span class="hl">${esc(l.name||'?')}</span>\n`+
+    `Principle: ${esc(l.principle||'?')}\n`+
+    `Scope: <span class="te">${esc(l.scope||'?')}</span>\n`+
     `Strength: <span class="w">${l.stability||0}</span>\n`+
-    `Total dreams: <span class="g">${d.total_dreams||0}</span>`);
-  document.getElementById('lawCount').textContent=`${d.total_dreams||0} LAWS`;
+    `Total dreams: <span class="g">${esc(d.total_dreams||0)}</span>`);
+  document.getElementById('lawCount').textContent=`${esc(d.total_dreams||0)} LAWS`;
 }
 
 async function dreamCatalog(){
   log('dreamOut','<span class="hl">📖 Loading catalog...</span>');
   const d=await api('/api/consciousness_stream/catalog');
   let msg=`<span class="hl">📖 DREAM PHYSICS CATALOG</span>\n\n`;
-  msg+=`Total laws: <span class="c">${d.total_laws||0}</span>\n`;
-  msg+=`Total dreams: <span class="g">${d.total_dreams||0}</span>\n`;
-  msg+=`Avg strength: <span class="w">${d.avg_strength||0}</span>\n`;
-  msg+=`Avg stability: <span class="te">${d.avg_stability||0}</span>\n\n`;
+  msg+=`Total laws: <span class="c">${esc(d.total_laws||0)}</span>\n`;
+  msg+=`Total dreams: <span class="g">${esc(d.total_dreams||0)}</span>\n`;
+  msg+=`Avg strength: <span class="w">${esc(d.avg_strength||0)}</span>\n`;
+  msg+=`Avg stability: <span class="te">${esc(d.avg_stability||0)}</span>\n\n`;
   msg+=`Scopes:\n${fmt(d.scope_distribution||{})}\n\n`;
-  (d.recent_laws||[]).forEach(l=>{msg+=`<span class="hl">☽</span> ${l.name} [${l.scope}] strength=${l.stability}\n`});
+  (d.recent_laws||[]).forEach(l=>{msg+=`<span class="hl">☽</span> ${esc(l.name)} [${esc(l.scope)}] strength=${esc(l.stability)}\n`});
   log('dreamOut',msg);
 }
 
@@ -163,10 +163,10 @@ async function dreamSimulate(){
   log('dreamOut','<span class="hl">⚡ Simulating dream physics...</span>');
   const d=await api('/api/consciousness_stream/simulate');
   let msg=`<span class="hl">⚡ DREAM SIMULATION</span>\n\n`;
-  msg+=`Active laws: <span class="c">${d.active_laws||0}</span>\n\n`;
+  msg+=`Active laws: <span class="c">${esc(d.active_laws||0)}</span>\n\n`;
   (d.effects||[]).forEach(e=>{
-    msg+=`<span class="hl">${e.law}</span> (${e.scope})\n`;
-    msg+=`  intensity: <span class="w">${e.intensity}</span> | modules: ${e.affected_modules} | outcome: <span class="te">${e.outcome}</span>\n`;
+    msg+=`<span class="hl">${esc(e.law)}</span> (${esc(e.scope)})\n`;
+    msg+=`  intensity: <span class="w">${esc(e.intensity)}</span> | modules: ${esc(e.affected_modules)} | outcome: <span class="te">${esc(e.outcome)}</span>\n`;
   });
   log('dreamOut',msg);
 }
@@ -179,17 +179,17 @@ async function streamNew(){
   const feed=document.getElementById('streamFeed');
 
   document.getElementById('streamStats').innerHTML=
-    `<span style="font-size:0.65em;color:var(--m)">intensity: <span style="color:var(--am)">${stats.avg_intensity||0}</span> | `+
-    `clarity: <span style="color:var(--te)">${stats.avg_clarity||0}</span> | `+
-    `valence: <span style="color:${(stats.avg_valence||0)>0?'var(--gn)':'var(--ro)'}">${stats.avg_valence||0}</span></span>`;
+    `<span style="font-size:0.65em;color:var(--m)">intensity: <span style="color:var(--am)">${esc(stats.avg_intensity||0)}</span> | `+
+    `clarity: <span style="color:var(--te)">${esc(stats.avg_clarity||0)}</span> | `+
+    `valence: <span style="color:${(stats.avg_valence||0)>0?'var(--gn)':'var(--ro)'}">${esc(stats.avg_valence||0)}</span></span>`;
 
   thoughts.forEach(t=>{
     const item=document.createElement('div');
     item.className='thought-item';
     const valenceClass=t.emotional_valence>0.2?'valence-pos':t.emotional_valence<-0.2?'valence-neg':'valence-neu';
     const ts=new Date(t.timestamp*1000).toISOString().slice(11,19);
-    item.innerHTML=`<span class="thought-type">${t.type.split('_')[0]}</span>`+
-      `<span class="thought-content">${t.content}</span>`+
+    item.innerHTML=`<span class="thought-type">${esc(String(t.type ?? '').split('_')[0])}</span>`+
+      `<span class="thought-content">${esc(t.content)}</span>`+
       `<span class="thought-meta ${valenceClass}">${ts}</span>`;
     feed.prepend(item);
   });
@@ -219,8 +219,8 @@ async function streamRecent(){
     item.className='thought-item';
     const valenceClass=t.emotional_valence>0.2?'valence-pos':t.emotional_valence<-0.2?'valence-neg':'valence-neu';
     const ts=new Date(t.timestamp*1000).toISOString().slice(11,19);
-    item.innerHTML=`<span class="thought-type">${t.type.split('_')[0]}</span>`+
-      `<span class="thought-content">${t.content}</span>`+
+    item.innerHTML=`<span class="thought-type">${esc(String(t.type ?? '').split('_')[0])}</span>`+
+      `<span class="thought-content">${esc(t.content)}</span>`+
       `<span class="thought-meta ${valenceClass}">${ts}</span>`;
     feed.appendChild(item);
   });
