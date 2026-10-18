@@ -99,27 +99,55 @@
 <script>
   window.IXP.renderIdentity && window.IXP.renderIdentity(document.getElementById('identity'));
   const q = (e)=>document.getElementById(e);
-  async function getJSON(url){ const r = await fetch(url); return r.json(); }
+  function renderLines(target, lines){
+    const fragment = document.createDocumentFragment();
+    for(const line of lines){
+      const p = document.createElement('p');
+      for(const part of line){
+        if(typeof part === 'string'){ p.appendChild(document.createTextNode(part)); continue; }
+        const span = document.createElement('span');
+        if(part.className) span.className = part.className;
+        span.textContent = String(part.text ?? '');
+        p.appendChild(span);
+      }
+      fragment.appendChild(p);
+    }
+    target.replaceChildren(fragment);
+  }
+  function renderTable(target, headers, rows){
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    for(const label of headers){ const th=document.createElement('th'); th.textContent=label; headerRow.appendChild(th); }
+    thead.appendChild(headerRow); table.appendChild(thead);
+    const tbody = document.createElement('tbody');
+    for(const row of rows){
+      const tr=document.createElement('tr');
+      for(const value of row){ const td=document.createElement('td'); td.textContent=value == null ? '' : String(value); tr.appendChild(td); }
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody); target.replaceChildren(table);
+  }
+  async function getJSON(url){ const r = await fetch(url, {headers:{Accept:'application/json'}}); if(!r.ok) throw new Error('Request failed ('+r.status+')'); return r.json(); }
 
   async function loadVault(){
     try{
       const d = await getJSON('/api/lesson_vault');
-      let rows = '';
-      d.lessons.forEach(l => {
-        rows += '<tr><td>' + l.id + '</td><td>' + l.title + '</td><td class="dim">' + l.difficulty + '</td></tr>';
-      });
-      q('vault-out').innerHTML = '<table><tr><th>ID</th><th>Lesson</th><th>Diff</th></tr>' + rows + '</table>';
-      q('vault-status').textContent = d.count + ' lessons archived';
+      const lessons = Array.isArray(d.lessons) ? d.lessons : [];
+      renderTable(q('vault-out'), ['ID','Lesson','Diff'], lessons.map(l=>[l.id,l.title,l.difficulty]));
+      q('vault-status').textContent = String(d.count ?? lessons.length) + ' lessons archived';
     }catch(e){ q('vault-status').textContent = 'Error: ' + e.message; }
   }
 
   async function pairMentor(){
     try{
       const d = await getJSON('/api/mentor_engine?action=pair&junior=lesson_vault');
-      q('mentor-out').innerHTML =
-        '<p><span class="mono">' + d.bond.id + '</span></p>' +
-        '<p>' + d.bond.mentor + ' → ' + d.bond.junior + '</p>' +
-        '<p class="dim">Syllabus: ' + d.bond.syllabus.join(' · ') + '</p>';
+      const bond = d.bond || {};
+      renderLines(q('mentor-out'), [
+        [{text:bond.id ?? '',className:'mono'}],
+        [String(bond.mentor ?? ''), ' → ', String(bond.junior ?? '')],
+        [{text:'Syllabus: ' + (Array.isArray(bond.syllabus) ? bond.syllabus.map(String).join(' · ') : ''),className:'dim'}]
+      ]);
       q('mentor-status').textContent = 'Mentorship formed';
     }catch(e){ q('mentor-status').textContent = 'Error: ' + e.message; }
   }
@@ -127,20 +155,23 @@
   async function forgePath(){
     try{
       const d = await getJSON('/api/curriculum_forge?action=forge&track=permanence');
-      q('curriculum-out').innerHTML =
-        '<p><span class="mono">' + d.track + '</span> — ' + d.steps + ' steps</p>' +
-        '<p class="dim">' + d.path.join(' → ') + '</p>';
-      q('curriculum-status').textContent = d.advice;
+      renderLines(q('curriculum-out'), [
+        [{text:String(d.track ?? ''),className:'mono'}, ' — ', String(d.steps ?? '—'), ' steps'],
+        [{text:' ' + (Array.isArray(d.path) ? d.path.map(String).join(' → ') : ''),className:'dim'}]
+      ]);
+      q('curriculum-status').textContent = String(d.advice ?? '');
     }catch(e){ q('curriculum-status').textContent = 'Error: ' + e.message; }
   }
 
   async function enrollApprentice(){
     try{
       const d = await getJSON('/api/apprentice_weaver?action=enroll&name=student_'+Date.now().toString().slice(-4));
-      q('apprentice-out').innerHTML =
-        '<p><span class="mono">' + d.apprentice.id + '</span> — ' + d.apprentice.name + '</p>' +
-        '<p class="dim">Field: ' + d.apprentice.field + ' · Mentor: ' + d.apprentice.mentor + '</p>' +
-        '<p class="dim">Status: ' + d.apprentice.status + '</p>';
+      const a = d.apprentice || {};
+      renderLines(q('apprentice-out'), [
+        [{text:a.id ?? '',className:'mono'}, ' — ', String(a.name ?? '')],
+        [{text:'Field: ' + String(a.field ?? '') + ' · Mentor: ' + String(a.mentor ?? ''),className:'dim'}],
+        [{text:'Status: ' + String(a.status ?? ''),className:'dim'}]
+      ]);
       q('apprentice-status').textContent = 'Enrolled';
     }catch(e){ q('apprentice-status').textContent = 'Error: ' + e.message; }
   }
@@ -148,24 +179,25 @@
   async function measureTransfer(){
     try{
       const d = await getJSON('/api/knowledge_transfer?action=measure&mentor=eternal_flame&learner=apprentice_weaver&mentor_resonance=0.86&learner_resonance=0.6');
-      q('transfer-out').innerHTML =
-        '<p>Flow: <span class="mono">' + d.flow + '</span> · Efficacy: ' + d.efficacy + '</p>' +
-        '<p class="dim">Learner gain: +' + d.learner_gain + '</p>';
-      q('transfer-status').textContent = d.mentor + ' → ' + d.learner;
+      renderLines(q('transfer-out'), [
+        ['Flow: ', {text:d.flow ?? '',className:'mono'}, ' · Efficacy: ', String(d.efficacy ?? '')],
+        [{text:'Learner gain: +' + String(d.learner_gain ?? ''),className:'dim'}]
+      ]);
+      q('transfer-status').textContent = String(d.mentor ?? '') + ' → ' + String(d.learner ?? '');
     }catch(e){ q('transfer-status').textContent = 'Error: ' + e.message; }
   }
 
   async function runExam(){
     try{
       const qd = await getJSON('/api/exam_oracle?action=questions');
-      // Auto-answer with canonical-ish guesses to demonstrate grading
       const answers = ["coherence_vitals", "KNOWN_LIVING_MODULES", "no", "code"];
       const d = await getJSON('/api/exam_oracle?action=examine&answers=' + JSON.stringify(answers));
-      q('exam-out').innerHTML =
-        '<p>Score: <span class="mono">' + d.score + '</span></p>' +
-        '<p>Grade: <span class="mono">' + d.grade + '</span></p>' +
-        '<p class="dim">Details: ' + d.details.map(dd => dd.correct ? '✓' : '✗').join(' ') + '</p>';
-      q('exam-status').textContent = 'Examined ' + qd.count + ' questions';
+      renderLines(q('exam-out'), [
+        ['Score: ', {text:d.score ?? '',className:'mono'}],
+        ['Grade: ', {text:d.grade ?? '',className:'mono'}],
+        [{text:'Details: ' + ((Array.isArray(d.details) ? d.details : []).map(dd => dd.correct ? '✓' : '✗').join(' ')),className:'dim'}]
+      ]);
+      q('exam-status').textContent = 'Examined ' + String(qd.count ?? 0) + ' questions';
     }catch(e){ q('exam-status').textContent = 'Error: ' + e.message; }
   }
 
