@@ -32,8 +32,15 @@ const JWT_EXPIRY = process.env.JWT_EXPIRY || "24h";
 const USERS_FILE = path.join(__dirname, "users.json");
 
 // ─── Middleware ───────────────────────────────────────────────
-app.use(cors({ origin: true, credentials: true }));
-app.use(express.json());
+app.use(cors({
+  origin(origin, callback) {
+    // Requests without Origin are non-browser/same-origin clients; browser origins must be allowlisted.
+    if (!origin || ALLOWED_ORIGINS.has(origin)) return callback(null, true);
+    return callback(null, false);
+  },
+  credentials: true,
+}));
+app.use(express.json({ limit: "32kb" }));
 app.use(cookieParser());
 
 // ─── User store ──────────────────────────────────────────────
