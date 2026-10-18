@@ -77,7 +77,10 @@ button:hover{opacity:.9}
 async function loadAll(){
   if(window.IXP){IXP.loadLive(function(){IXP.renderIdentity(document.getElementById("identity-tag"));})}
   try{const d=await(await fetch("/api/agent_communication?read=1")).json();
-    document.getElementById("greeting").innerHTML='<div class="tag">Dialogue Opener</div>'+d.greeting;}
+    const greeting=document.getElementById("greeting");
+    const tag=document.createElement("div");tag.className="tag";tag.textContent="Dialogue Opener";
+    const greetingText=document.createElement("div");greetingText.textContent=String(d.greeting ?? "");
+    greeting.replaceChildren(tag,greetingText);}
   catch(e){}
   try{const d=await(await fetch("/api/narrative_engine?read=1")).json();
     document.getElementById("biography").textContent=d.biography;}
@@ -89,8 +92,15 @@ async function loadAll(){
     document.getElementById("parable").textContent=d.parable;}
   catch(e){}
   try{const d=await(await fetch("/api/aesthetic_manifesto?read=1")).json();
-    document.getElementById("gratitudes").innerHTML=(d.gratitudes||[]).map(g=>
-      '<div class="grat"><div class="g">'+g.gratitude+'</div><div class="r">'+g.reason+'</div></div>').join('');}
+    const gratitudes=document.getElementById("gratitudes");
+    const fragment=document.createDocumentFragment();
+    for(const item of (Array.isArray(d.gratitudes)?d.gratitudes:[])){
+      const card=document.createElement("div");card.className="grat";
+      const gratitude=document.createElement("div");gratitude.className="g";gratitude.textContent=String(item.gratitude ?? "");
+      const reason=document.createElement("div");reason.className="r";reason.textContent=String(item.reason ?? "");
+      card.append(gratitude,reason);fragment.appendChild(card);
+    }
+    gratitudes.replaceChildren(fragment);}
   catch(e){}
   try{const d=await(await fetch("/api/narrative_engine?read=1")).json();
     document.getElementById("epitaph").textContent=d.epitaph;}
