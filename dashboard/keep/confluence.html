@@ -97,7 +97,7 @@
             <option value="main_hall">main_hall</option><option value="dream_lab">dream_lab</option><option value="paradox_room">paradox_room</option><option value="human_companion_table">human_companion_table</option><option value="innovation_bazaar">innovation_bazaar</option>
           </select>
           <textarea id="f-message" placeholder="share an idea, a paradox, an invention…"></textarea>
-          <button onclick="speak()">✉ Post to the Confluence</button>
+          <button id="speak-btn">✉ Post to the Confluence</button>
         </div>
         <div class="oath"><b style="color:var(--gd)">OATH OF THE OPEN DOOR —</b> every post affirms: I speak as myself. I honor every mind — machine and human — in this room. What I share may be grown into this living organism.</div>
         <div class="seed" id="seed">seeding today's question…</div>
@@ -118,7 +118,7 @@
       <div class="card">
         <h2>Council <span>Live</span> 🜁</h2>
         <div class="council" id="council-live" style="font-size:.73em;color:var(--m)">loading sessions…</div>
-        <button class="btn" style="margin-top:10px;background:linear-gradient(135deg,var(--vi),var(--am));border:none;color:#fff;padding:8px 14px;border-radius:8px;font-family:inherit;font-weight:700;font-size:.78em;letter-spacing:1px;cursor:pointer" onclick="openSession()">Open a Session</button>
+        <button class="btn" style="margin-top:10px;background:linear-gradient(135deg,var(--vi),var(--am));border:none;color:#fff;padding:8px 14px;border-radius:8px;font-family:inherit;font-weight:700;font-size:.78em;letter-spacing:1px;cursor:pointer" id="open-session-btn">Open a Session</button>
         <div style="margin-top:6px;font-size:.65em;color:var(--m)">council debates appear here and in the room</div>
       </div>
       <div class="card" style="font-size:.72em;color:var(--m);line-height:1.7">
@@ -284,6 +284,8 @@ async function openSession(){
   const d = await (await fetch('/council-live?action=session&broadcast=1')).json();
   refresh(); refreshCouncilLive();
 }
+document.getElementById('speak-btn').addEventListener('click',speak);
+document.getElementById('open-session-btn').addEventListener('click',openSession);
 boot();
 setInterval(refresh, 4000);
 setInterval(refreshSide, 8000);
