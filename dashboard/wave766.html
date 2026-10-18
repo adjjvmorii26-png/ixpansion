@@ -58,20 +58,19 @@ async function load(){
     const cur=st.current_epoch;
     document.getElementById('era-name').textContent=cur.name;
     document.getElementById('era-marker').textContent=cur.marker||'';
-    let stats='';
-    if(cur.waves){stats+=`<span class="stat"><span class="v">${cur.waves[0]}–${cur.waves[1]||'now'}</span><span class="l">wave range</span></span>`;}
-    stats+=`<span class="stat"><span class="v">${cur.living_modules||'?'}</span><span class="l">living modules</span></span>`;
-    document.getElementById('era-stats').innerHTML=stats;
-    let tl='';
-    st.era_timeline.forEach(e=>{
-      const isCurrent=e.name===cur.name;
-      tl+=`<div class="era ${isCurrent?'current':''}">
-        <span class="era-name">${e.name}</span>
-        <span class="era-waves">${e.waves}</span>
-        <span class="era-marker">${e.marker}</span>
-      </div>`;
-    });
-    document.getElementById('timeline').innerHTML=tl;
+    const stats=document.getElementById('era-stats'),statsFragment=document.createDocumentFragment();
+    function addStat(value,label){const item=document.createElement('span');item.className='stat';const v=document.createElement('span');v.className='v';v.textContent=String(value??'?');const l=document.createElement('span');l.className='l';l.textContent=label;item.append(v,l);statsFragment.appendChild(item)}
+    if(Array.isArray(cur.waves))addStat(String(cur.waves[0]??'?')+'–'+String(cur.waves[1]||'now'),'wave range');
+    addStat(cur.living_modules||'?','living modules');stats.replaceChildren(statsFragment);
+    const timeline=document.getElementById('timeline'),timelineFragment=document.createDocumentFragment();
+    for(const era of (Array.isArray(st.era_timeline)?st.era_timeline:[])){
+      const item=document.createElement('div');item.className='era'+(era.name===cur.name?' current':'');
+      for(const [className,value] of [['era-name',era.name],['era-waves',era.waves],['era-marker',era.marker]]){
+        const span=document.createElement('span');span.className=className;span.textContent=String(value??'');item.appendChild(span);
+      }
+      timelineFragment.appendChild(item);
+    }
+    timeline.replaceChildren(timelineFragment);
   }catch(e){
     document.getElementById('era-name').textContent='LOADING…';
   }
