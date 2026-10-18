@@ -96,8 +96,12 @@
 </div>
 <div class="sb"><span><span class="dl"></span>WAVE 373 ACTIVE</span><span>4 FRONTIER ORGANS</span><span id="clock"></span><span>IXPANSION ORGANISM</span></div>
 <script>
-function fmt(o){return JSON.stringify(o,null,2).replace(/"([^"]+)":/g,'<span class="hl">"$1"</span>:').replace(/: "([^"]+)"/g,': "<span class="c">$1</span>"').replace(/: (\d+\.?\d*)/g,': <span class="w">$1</span>')}
-function log(el,msg){document.getElementById(el).innerHTML=msg}
+function esc(value){return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;')}
+function fmt(o){return esc(JSON.stringify(o,null,2)).replace(/"([^"]+)":/g,'<span class="hl">"$1"</span>:').replace(/: "([^"]+)"/g,': "<span class="c">$1</span>"').replace(/: (\d+\.?\d*)/g,': <span class="w">$1</span>')}
+function log(el,msg){
+  // Keep the existing plain-text log layout without parsing API values as markup.
+  document.getElementById(el).textContent=String(msg).replace(/<[^>]*>/g,'').replace(/\\n/g,'\n');
+}
 const api=async(p)=>{try{return await(await fetch(p)).json()}catch(e){return{error:e.message}}};
 
 // ─── Dream Physics Sandbox ───
@@ -130,7 +134,11 @@ async function citizenNaturalize(){
   log('citizenOut','<span class="hl">🪪 Naturalizing...</span>');
   const d=await api('/api/fractal_citizenship/naturalize');
   const c=d.citizen||{};
-  document.getElementById('citizenArea').innerHTML=`<div class="citizen-card"><div class="citizen-mod">▸ ${c.module||'?'}</div><div class="citizen-role">Role: ${c.role||'?'} | Rights: ${(c.rights||[]).length}</div><div class="citizen-duty">${c.civic_duty||''}</div></div>`;
+  const citizenCard=document.createElement('div');citizenCard.className='citizen-card';
+  const citizenModule=document.createElement('div');citizenModule.className='citizen-mod';citizenModule.textContent='▸ '+String(c.module||'?');
+  const citizenRole=document.createElement('div');citizenRole.className='citizen-role';citizenRole.textContent='Role: '+String(c.role||'?')+' | Rights: '+(Array.isArray(c.rights)?c.rights.length:0);
+  const citizenDuty=document.createElement('div');citizenDuty.className='citizen-duty';citizenDuty.textContent=String(c.civic_duty||'');
+  citizenCard.append(citizenModule,citizenRole,citizenDuty);document.getElementById('citizenArea').replaceChildren(citizenCard);
   log('citizenOut',`<span class="hl">🪪 CITIZEN NATURALIZED</span>\n\n`+`Module: <span class="c">${c.module||'?'}</span>\n`+`Role: <span class="te">${c.role||'?'}</span>\n`+`Rights:\n`+(c.rights||[]).map(r=>`  • ${r.replace(/_/g,' ')}`).join('\n')+`\n\n`+`Duty: ${c.civic_duty||''}\n\n`+`Total citizens: <span class="g">${d.total_citizens||0}</span>`);
 }
 async function citizenCouncil(){
@@ -143,7 +151,11 @@ async function constProclaim(){
   log('constOut','<span class="hl">📜 Proclaiming...</span>');
   const d=await api('/api/organism_constitution/proclaim');
   const a=d.article||{};
-  document.getElementById('articleArea').innerHTML=`<div class="article-card"><div class="article-title">${a.title||'?'}</div><div class="article-name">${a.name||'?'}</div><div class="article-text">"${a.text||'?'}"</div></div>`;
+  const articleCard=document.createElement('div');articleCard.className='article-card';
+  for(const [className,value] of [['article-title',a.title||'?'],['article-name',a.name||'?'],['article-text','"'+(a.text||'?')+'"']]){
+    const node=document.createElement('div');node.className=className;node.textContent=String(value);articleCard.appendChild(node);
+  }
+  document.getElementById('articleArea').replaceChildren(articleCard);
   log('constOut',`<span class="hl">📜 PROCLAIMED</span>\n\n`+`${a.title||'?'} — <span class="g">${a.name||'?'}</span>\n\n`+`"${a.text||''}"\n\n`+`Total proclamations: <span class="c">${d.total_proclamations||0}</span>`);
 }
 async function constCharter(){
