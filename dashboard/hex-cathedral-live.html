@@ -61,26 +61,27 @@ button:hover{opacity:.85}
 const HOST='';const AUTO=15000;
 function $(id){return document.getElementById(id)}
 async function api(a,body={}){try{const r=await fetch(HOST+'/api/hex-cathedral?action='+a,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});return await r.json()}catch(e){return{error:String(e)}}}
-function esc(s){return String(s).replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function esc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;').replace(/'/g,'&#x27;')}
+function finite(value,fallback=0){const n=Number(value);return Number.isFinite(n)?n:fallback}
 function refresh(){Promise.all([api('status'),api('history')]).then(([st,hist])=>{
   if(st.error){$('status').innerHTML='<span class="status-err">'+esc(st.error)+'</span>';return}
-  $('status').innerHTML=`<span class="status-ok">ALIVE</span> Wave ${st.wave} | ${st.chapels} chapels | ${st.altars} altars | ${st.laces} links | ${st.flattened_instructions} instr`;
-  $('map').innerHTML=st.altars?Object.entries(st.altars).map(([k,v])=>`<div class="chapel"><span>${esc(k)}</span><span class="altar">${esc(v.chapel)}:${v.line}</span></div>`).join(''):'<div class="chapel">No altars</div>';
-  $('heat').innerHTML=Object.entries(st.heat||{}).map(([k,v])=>`<div><b>${esc(k)}</b> ${v} <div class="heat"><div style="width:${Math.min(100,v*4)}%"></div></div></div>`).join('')||'No heat data';
-  $('links').innerHTML=(st.laces||[]).map(l=>`<span class="link">&#8594; ${esc(l.from)} → ${esc(l.to)} (@${esc(l.label)} line ${l.target_line})</span>`).join('')||'No links yet';
-  $('vitals').innerHTML=`<span class="badge">Instruction count: ${st.instruction_count||'?'}</span><br><span class="badge">Flattened: ${st.flattened_instructions}</span>`;
+  $('status').innerHTML=`<span class="status-ok">ALIVE</span> Wave ${esc(st.wave)} | ${esc(st.chapels)} chapels | ${esc(st.altars)} altars | ${esc(st.laces)} links | ${esc(st.flattened_instructions)} instr`;
+  $('map').innerHTML=st.altars?Object.entries(st.altars).map(([k,v])=>`<div class="chapel"><span>${esc(k)}</span><span class="altar">${esc(v.chapel)}:${esc(v.line)}</span></div>`).join(''):'<div class="chapel">No altars</div>';
+  $('heat').innerHTML=Object.entries(st.heat||{}).map(([k,v])=>`<div><b>${esc(k)}</b> ${esc(v)} <div class="heat"><div style="width:${Math.min(100,Math.max(0,finite(v)*4))}%"></div></div></div>`).join('')||'No heat data';
+  $('links').innerHTML=(st.laces||[]).map(l=>`<span class="link">&#8594; ${esc(l.from)} → ${esc(l.to)} (@${esc(l.label)} line ${esc(l.target_line)})</span>`).join('')||'No links yet';
+  $('vitals').innerHTML=`<span class="badge">Instruction count: ${esc(st.instruction_count||'?')}</span><br><span class="badge">Flattened: ${esc(st.flattened_instructions)}</span>`;
   const last=hist.history?hist.history[0]:null;
-  $('glyphs').innerHTML=last?`<span class="badge">Last run: ${Math.round(last.steps)} steps, ${last.glyphs||0} glyphs, ${last.enactments||0} enact</span>`:'';
+  $('glyphs').innerHTML=last?`<span class="badge">Last run: ${esc(Math.round(finite(last.steps)))} steps, ${esc(last.glyphs||0)} glyphs, ${esc(last.enactments||0)} enact</span>`:'';
   $('src').textContent=JSON.stringify(st.altars||{},null,2);
   // Fetch resilience mesh health
   fetch('/api/resilience_mesh?action=status').then(r=>r.json()).then(h=>{
-    $('health').innerHTML=`<span class="badge">Score: ${h.resilience_score}</span> | <span class="badge">Healthy: ${h.healthy}/${h.total_organs}</span> | <span class="badge">Failing: ${h.failing}</span><br><span class="badge">Health Rate: ${(h.health_rate*100).toFixed(1)}%</span>`;
+    $('health').innerHTML=`<span class="badge">Score: ${esc(h.resilience_score)}</span> | <span class="badge">Healthy: ${esc(h.healthy)}/${esc(h.total_organs)}</span> | <span class="badge">Failing: ${esc(h.failing)}</span><br><span class="badge">Health Rate: ${esc((finite(h.health_rate)*100).toFixed(1))}%</span>`;
   }).catch(()=>{});
   fetch('/api/resilience_mesh?action=failing').then(r=>r.json()).then(f=>{
-    $('failing').innerHTML=(f.failing_organs||[]).map(o=>`<div class="chapel"><span>${o.organ_id}</span><span class="altar">${o.status}</span></div>`).join('')||'No failing organs';
+    $('failing').innerHTML=(f.failing_organs||[]).map(o=>`<div class="chapel"><span>${esc(o.organ_id)}</span><span class="altar">${esc(o.status)}</span></div>`).join('')||'No failing organs';
   }).catch(()=>{});
   const log=$('log');
-  log.innerHTML+=`<div>[${new Date().toLocaleTimeString()}] Status refreshed — ${st.chapels} chapels, ${st.laces} lace(s)</div>`;
+  log.innerHTML+=`<div>[${new Date().toLocaleTimeString()}] Status refreshed — ${esc(st.chapels)} chapels, ${esc(st.laces)} lace(s)</div>`;
   if(log.children.length>20) log.removeChild(log.firstChild);
 }).catch(e=>{$('status').innerHTML='<span class="status-err">'+esc(e)+'</span>'});}
 async function lace(){const d=await api('lace');$('log').innerHTML+='<div>[lace] '+esc(JSON.stringify(d.chapels||[]))+'</div>';refresh()}
