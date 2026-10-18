@@ -25,7 +25,7 @@ input{background:#0a0a14;border:1px solid var(--border);color:var(--fg);padding:
 <p class="sub">Background sensing, always-on awareness</p>
 <div class="grid">
   <div class="card"><h2>Live Status</h2><div id="data">Loading...</div></div>
-  <div class="card"><h2>Actions</h2><button class="btn" onclick="refresh()">Refresh</button><button class="btn" onclick="act({&quot;action&quot;: &quot;sense&quot;, &quot;channel&quot;: &quot;organism&quot;, &quot;value&quot;: 1.0})">Sense</button><button class="btn" onclick="act({&quot;action&quot;: &quot;channel&quot;, &quot;channel&quot;: &quot;organism&quot;})">Channel</button><button class="btn" onclick="act({&quot;action&quot;: &quot;summary&quot;})">Summary</button><div id="result" style="margin-top:12px;font-size:.85em;color:var(--cyan)"></div></div>
+  <div class="card"><h2>Actions</h2><button class="btn" data-refresh>Refresh</button><button class="btn" data-action="{&quot;action&quot;: &quot;sense&quot;, &quot;channel&quot;: &quot;organism&quot;, &quot;value&quot;: 1.0}">Sense</button><button class="btn" data-action="{&quot;action&quot;: &quot;channel&quot;, &quot;channel&quot;: &quot;organism&quot;}">Channel</button><button class="btn" data-action="{&quot;action&quot;: &quot;summary&quot;}">Summary</button><div id="result" style="margin-top:12px;font-size:.85em;color:var(--cyan)"></div></div>
 </div>
 <script>
 const HOST='';
@@ -36,14 +36,25 @@ async function refresh(){
   try{
     const r=await link({action:'status'});
     const d=await r.json();
-    document.getElementById('data').innerHTML=Object.entries(d).filter(([k])=>!['ok'].includes(k)).map(([k,v])=>
-      '<div class="metric"><span class="label">'+k.replace(/_/g,' ')+'</span><span class="value">'+JSON.stringify(v)+'</span></div>').join('')||'Empty';
+    const root=document.getElementById('data'),fragment=document.createDocumentFragment();
+    for(const [key,value] of Object.entries(d).filter(([key])=>key!=='ok')){
+      const row=document.createElement('div');row.className='metric';
+      const label=document.createElement('span');label.className='label';label.textContent=key.replace(/_/g,' ');
+      const val=document.createElement('span');val.className='value';val.textContent=typeof value==='string'?value:JSON.stringify(value);
+      row.append(label,val);fragment.appendChild(row);
+    }
+    if(!fragment.childNodes.length){const empty=document.createElement('div');empty.textContent='Empty';fragment.appendChild(empty)}
+    root.replaceChildren(fragment);
   }catch(e){document.getElementById('data').textContent='Error: '+e.message;}
 }
 async function act(q){
   const r=await link(q);const d=await r.json();
   document.getElementById('result').textContent=JSON.stringify(d,null,2);
 }
+document.querySelectorAll('[data-refresh]').forEach(button=>button.addEventListener('click',refresh));
+document.querySelectorAll('[data-action]').forEach(button=>button.addEventListener('click',()=>{
+  try{act(JSON.parse(button.dataset.action))}catch(error){document.getElementById('result').textContent='Invalid action configuration'}
+}));
 refresh();
 setInterval(refresh,15000);
 </script>
