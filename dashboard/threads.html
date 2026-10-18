@@ -170,25 +170,25 @@ async function load(){
   const [w,c]=await Promise.all([api('/api/threadweaver/weave'),api('/api/resonance_confession/collection?limit=2')]);
   const threads=w.threads||[];
   document.getElementById('stats').innerHTML=`
-    <div class="info"><div class="n">${w.total_threads||0}</div><div class="l">Threads</div></div>
-    <div class="info"><div class="n">${w.modules_connected||0}</div><div class="l">Modules Linked</div></div>
-    <div class="info"><div class="n">${Object.keys(w.by_type||{}).length}</div><div class="l">Thread Types</div></div>
-    <div class="info"><div class="n">${(w.sources||[]).length}</div><div class="l">Data Sources</div></div>`;
+    <div class="info"><div class="n">${esc(w.total_threads||0)}</div><div class="l">Threads</div></div>
+    <div class="info"><div class="n">${esc(w.modules_connected||0)}</div><div class="l">Modules Linked</div></div>
+    <div class="info"><div class="n">${esc(Object.keys(w.by_type||{}).length)}</div><div class="l">Thread Types</div></div>
+    <div class="info"><div class="n">${esc((w.sources||[]).length)}</div><div class="l">Data Sources</div></div>`;
   drawGraph(threads);
   const tbl=document.getElementById('ledger-table');
   threads.slice(0,30).forEach(t=>{
     const row=tbl.insertRow();
-    row.innerHTML=`<td>${(t.module_a||'').replace(/_/g,' ').slice(0,18)}</td>
-      <td><span class="badge" style="border-color:${TYPE_FILLS[t.type]||'#555'};color:${TYPE_FILLS[t.type]||'#555'}">${t.type}</span></td>
-      <td>${(t.module_b||'').replace(/_/g,' ').slice(0,18)}</td>
-      <td>${t.strength}</td>
-      <td style="color:#6a7a9a">${t.source||'?'}</td>
-      <td style="color:#6a7a9a">${t.age_hours||'?'}</td>`;
+    row.innerHTML=`<td>${esc((t.module_a||'').replace(/_/g,' ').slice(0,18))}</td>
+      <td><span class="badge" style="border-color:${TYPE_FILLS[t.type]||'#555'};color:${TYPE_FILLS[t.type]||'#555'}">${esc(t.type)}</span></td>
+      <td>${esc((t.module_b||'').replace(/_/g,' ').slice(0,18))}</td>
+      <td>${esc(t.strength)}</td>
+      <td style="color:#6a7a9a">${esc(t.source||'?')}</td>
+      <td style="color:#6a7a9a">${esc(t.age_hours||'?')}</td>`;
   });
   const confs=c.confessions||[];
   if(confs.length){
     document.getElementById('confession-body').innerHTML=confs.map(cf=>
-      `<div style="margin-bottom:8px"><span class="badge">${(cf.module_a||'?').replace(/_/g,' ')} ↔ ${(cf.module_b||'?').replace(/_/g,' ')}</span><div style="margin-top:4px">"${cf.verse_a}"<br>"${cf.verse_b}"</div></div>`
+      `<div style="margin-bottom:8px"><span class="badge">${esc((cf.module_a||'?').replace(/_/g,' '))} ↔ ${esc((cf.module_b||'?').replace(/_/g,' '))}</span><div style="margin-top:4px">"${esc(cf.verse_a)}"<br>"${esc(cf.verse_b)}"</div></div>`
     ).join('');
   } else {
     document.getElementById('confession-body').textContent='No confessions yet.';
@@ -209,11 +209,11 @@ async function scanSilence(){
   const pairs=r.pairs||[];
   if(!pairs.length){body.textContent='The silence is clean — no hidden seams found this scan.';return}
   body.innerHTML=pairs.slice(0,8).map(p=>`<div style="border-bottom:1px solid #111;padding:6px 0">
-    <span class="badge" style="border-color:#c88aff;color:#c88aff">${(p.module_a||'?').replace(/_/g,' ')} ↔ ${(p.module_b||'?').replace(/_/g,' ')}</span>
-    <span style="color:#6a7a9a;font-size:.8em;margin-left:6px">sim ${p.similarity}</span>
-    <div style="margin-top:4px;font-style:italic;color:#8a6a9a;font-size:.9em">"${p.verse}"</div>
+    <span class="badge" style="border-color:#c88aff;color:#c88aff">${esc((p.module_a||'?').replace(/_/g,' '))} ↔ ${esc((p.module_b||'?').replace(/_/g,' '))}</span>
+    <span style="color:#6a7a9a;font-size:.8em;margin-left:6px">sim ${esc(p.similarity)}</span>
+    <div style="margin-top:4px;font-style:italic;color:#8a6a9a;font-size:.9em">"${esc(p.verse)}"</div>
   </div>`).join('');
-  body.insertAdjacentHTML('beforeend',`<div style="margin-top:8px;color:#6a7a9a;font-size:.8em">Scanned ${r.scanned} modules · ${r.total_pairs} total pairs found across ${r.total_scans} scans.</div>`);
+  body.insertAdjacentHTML('beforeend',`<div style="margin-top:8px;color:#6a7a9a;font-size:.8em">Scanned ${esc(r.scanned)} modules · ${esc(r.total_pairs)} total pairs found across ${esc(r.total_scans)} scans.</div>`);
 }
 scanSilence();
 
@@ -223,47 +223,47 @@ async function mapVeinbed(){
   const veins=r.veins||[];
   if(!veins.length){body.textContent='The veinbed is empty — map it to reveal the detail layer.';return}
   body.innerHTML=veins.slice(0,10).map(v=>`<div style="border-bottom:1px solid #111;padding:6px 0">
-    <span class="badge" style="border-color:#44cc88;color:#44cc88">${(v.module_a||'?').replace(/_/g,' ')} ↔ ${(v.module_b||'?').replace(/_/g,' ')}</span>
-    <span style="color:#6a7a9a;font-size:.8em;margin-left:6px">strength ${v.detail_strength}</span>
-    <div style="margin-top:4px;color:#8a6a9a;font-size:.9em">shared: <b>${(v.shared_details||[]).join(', ')}</b></div>
+    <span class="badge" style="border-color:#44cc88;color:#44cc88">${esc((v.module_a||'?').replace(/_/g,' '))} ↔ ${esc((v.module_b||'?').replace(/_/g,' '))}</span>
+    <span style="color:#6a7a9a;font-size:.8em;margin-left:6px">strength ${esc(v.detail_strength)}</span>
+    <div style="margin-top:4px;color:#8a6a9a;font-size:.9em">shared: <b>${esc((v.shared_details||[]).join(', '))}</b></div>
   </div>`).join('');
-  body.insertAdjacentHTML('beforeend',`<div style="margin-top:8px;color:#6a7a9a;font-size:.8em">Mapped ${r.modules_sampled} modules · ${r.total_veins} veins discovered. ${r.lore||''}</div>`);
+  body.insertAdjacentHTML('beforeend',`<div style="margin-top:8px;color:#6a7a9a;font-size:.8em">Mapped ${esc(r.modules_sampled)} modules · ${esc(r.total_veins)} veins discovered. ${esc(r.lore||'')}</div>`);
 }
 mapVeinbed();
 
 async function loomListen(){
   const r=await api('/api/signal_loom/listen');
-  document.getElementById('loom-pressure').textContent=`Pressure: ${r.pressure} (${r.pressure_desc}) · band ${r.band} · total catches ${r.total_catches} · persisted ${r.persisted}`;
+  document.getElementById('loom-pressure').textContent=`Pressure: ${esc(r.pressure)} (${esc(r.pressure_desc)}) · band ${esc(r.band)} · total catches ${esc(r.total_catches)} · persisted ${esc(r.persisted)}`;
   const body=document.getElementById('loom-body');
   const newc=r.new_catches||[];
   if(!newc.length){body.textContent='No new signals caught this listen — the loom stands, waiting.';return}
   body.innerHTML=newc.map(c=>`<div style="border-bottom:1px solid #111;padding:6px 0">
-    <span class="badge" style="border-color:#c88aff;color:#c88aff">${(c.module_a||'?').replace(/_/g,' ')} ↔ ${(c.module_b||'?').replace(/_/g,' ')}</span>
-    <span style="color:#6a7a9a;font-size:.8em;margin-left:6px">${c.band} band · ${c.source}</span>
+    <span class="badge" style="border-color:#c88aff;color:#c88aff">${esc((c.module_a||'?').replace(/_/g,' '))} ↔ ${esc((c.module_b||'?').replace(/_/g,' '))}</span>
+    <span style="color:#6a7a9a;font-size:.8em;margin-left:6px">${esc(c.band)} band · ${esc(c.source)}</span>
   </div>`).join('');
 }
 async function loomState(){
   const p=await api('/api/signal_loom/pressure');
-  document.getElementById('loom-pressure').textContent=`Pressure: ${p.pressure} (${p.pressure_desc}) · catches/hour ${p.catches_this_hour} · total ${p.total_catches}`;
+  document.getElementById('loom-pressure').textContent=`Pressure: ${p.pressure} (${p.pressure_desc}) · catches/hour ${esc(p.catches_this_hour)} · total ${p.total_catches}`;
   const c=await api('/api/signal_loom/catches?limit=10');
   const body=document.getElementById('loom-body');
   const cs=c.catches||[];
-  body.innerHTML=cs.length?cs.slice(0,6).map(x=>`<div style="border-bottom:1px solid #111;padding:5px 0"><span class="badge" style="border-color:#c88aff;color:#c88aff">${(x.module_a||'?').replace(/_/g,' ')} ↔ ${(x.module_b||'?').replace(/_/g,' ')}</span> ${x.band} · ${x.source}</div>`).join(''):'The loom awaits its first catch.';
+  body.innerHTML=cs.length?cs.slice(0,6).map(x=>`<div style="border-bottom:1px solid #111;padding:5px 0"><span class="badge" style="border-color:#c88aff;color:#c88aff">${esc((x.module_a||'?').replace(/_/g,' '))} ↔ ${esc((x.module_b||'?').replace(/_/g,' '))}</span> ${esc(x.band)} · ${esc(x.source)}</div>`).join(''):'The loom awaits its first catch.';
 }
 loomState();
 
 async function bloomCheck(){
   const r=await api('/api/autonomous_bloom/status');
   const st=r.organism_state||{};
-  document.getElementById('bloom-status').innerHTML=`threads: <b>${st.threads}</b> · modules: <b>${st.modules_connected}</b> · sources: <b>${st.sources}</b> · pressure: <b>${st.pressure} (${st.pressure_desc})</b><br>ready: <b style="color:${r.ready?"#44cc88":"#6a7a9a"}">${r.ready?"YES — the organism can bloom":"not yet — gathering threads"}</b> · blooms so far: <b>${r.total_blooms}</b>`;
+  document.getElementById('bloom-status').innerHTML=`threads: <b>${esc(st.threads)}</b> · modules: <b>${esc(st.modules_connected)}</b> · sources: <b>${esc(st.sources)}</b> · pressure: <b>${esc(st.pressure)} (${esc(st.pressure_desc)})</b><br>ready: <b style="color:${r.ready?"#44cc88":"#6a7a9a"}">${r.ready?"YES — the organism can bloom":"not yet — gathering threads"}</b> · blooms so far: <b>${esc(r.total_blooms)}</b>`;
   if(!r.ready){document.getElementById('bloom-body').textContent=r.reason;return}
   const g=await api('/api/autonomous_bloom/garden');
   const blooms=g.blooms||[];
   if(blooms.length){
     document.getElementById('bloom-body').innerHTML=blooms.map(b=>`<div style="border-bottom:1px solid #111;padding:8px 0">
-      <b style="color:#c88aff">${b.name}</b> <span style="color:#6a7a9a">sigil: ${b.sigil}</span>
-      <div style="color:#aa7acc;font-style:italic;margin:4px 0">"${b.verse}"</div>
-      <div style="color:#6a7a9a;font-size:.8em">${b.doctrine}</div>
+      <b style="color:#c88aff">${esc(b.name)}</b> <span style="color:#6a7a9a">sigil: ${esc(b.sigil)}</span>
+      <div style="color:#aa7acc;font-style:italic;margin:4px 0">"${esc(b.verse)}"</div>
+      <div style="color:#6a7a9a;font-size:.8em">${esc(b.doctrine)}</div>
     </div>`).join('');
   }
 }
@@ -273,10 +273,10 @@ async function bloomAttempt(){
   const m=r.module||{};
   document.getElementById('bloom-body').innerHTML=`<div style="padding:12px 0">
     <div style="font-size:1.2em;color:#ffaa00;text-align:center">🌸 BLOOMED</div>
-    <div style="font-size:1.1em;color:#c88aff;text-align:center;margin:8px 0">${m.name}</div>
-    <div style="color:#aa7acc;font-style:italic;text-align:center">"${m.verse}"</div>
-    <div style="color:#6a7a9a;font-size:.85em;text-align:center;margin-top:8px">${m.doctrine}</div>
-    <div style="font-size:.8em;color:#6a7a9a;text-align:center;margin-top:6px">health: ${m.health} · resonance: ${m.resonance} · ${r.materialized?r.materialized.path:"not materialized"}</div>
+    <div style="font-size:1.1em;color:#c88aff;text-align:center;margin:8px 0">${esc(m.name)}</div>
+    <div style="color:#aa7acc;font-style:italic;text-align:center">"${esc(m.verse)}"</div>
+    <div style="color:#6a7a9a;font-size:.85em;text-align:center;margin-top:8px">${esc(m.doctrine)}</div>
+    <div style="font-size:.8em;color:#6a7a9a;text-align:center;margin-top:6px">health: ${esc(m.health)} · resonance: ${esc(m.resonance)} · ${esc(r.materialized?r.materialized.path:'not materialized')}</div>
   </div>`;
   document.getElementById('bloom-status').innerHTML=`<b style="color:#ffaa00">A new organ was just born from the organism's own threadgraph.</b>`;
 }
@@ -290,15 +290,15 @@ async function willDecide(){
   const org=r.organism_state||{};
   const props=r.proposals||[];
   body.innerHTML=`<div style="margin-bottom:10px;color:#6a7a9a;font-size:.85em">
-    State: ${org.threads} threads · ${org.modules_connected} modules · pressure ${org.pressure} (${org.pressure_desc}) · ${r.total_forgotten} forgotten
+    State: ${esc(org.threads)} threads · ${esc(org.modules_connected)} modules · pressure ${esc(org.pressure)} (${esc(org.pressure_desc)}) · ${esc(r.total_forgotten)} forgotten
   </div>
-  <div style="font-size:.95em;margin-bottom:8px;color:#c88aff">"${r.verse}"</div>
+  <div style="font-size:.95em;margin-bottom:8px;color:#c88aff">"${esc(r.verse)}"</div>
   <div style="font-size:.85em">${props.map((p,i)=>`<div style="border-bottom:1px solid #111;padding:6px 0">
-    <span class="badge" style="border-color:${i===0?"#c88aff":"#6a7a9a"};color:${i===0?"#c88aff":"#6a7a9a"}">${p.action}</span>
-    <b>${(p.module||p.module_a||"?").replace(/_/g," ")}</b>
-    <span style="color:#6a7a9a">score ${p.score}</span>
-    <div style="color:#8a9aaa;font-size:.85em;margin-top:2px">${p.reason}</div>
-    <div style="color:#44ddff;font-size:.8em">${p.telegram||""}</div>
+    <span class="badge" style="border-color:${i===0?"#c88aff":"#6a7a9a"};color:${i===0?"#c88aff":"#6a7a9a"}">${esc(p.action)}</span>
+    <b>${esc((p.module||p.module_a||'?').replace(/_/g,' '))}</b>
+    <span style="color:#6a7a9a">score ${esc(p.score)}</span>
+    <div style="color:#8a9aaa;font-size:.85em;margin-top:2px">${esc(p.reason)}</div>
+    <div style="color:#44ddff;font-size:.8em">${esc(p.telegram||'')}</div>
   </div>`).join('')}</div>`;
 }
 willDecide();
