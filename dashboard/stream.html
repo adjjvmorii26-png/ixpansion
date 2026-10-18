@@ -81,7 +81,7 @@ const pulseEl=document.getElementById('pulse');
 function connect(){
   disconnect();
   eventCount=0; startTime=Date.now();
-  stream.innerHTML='';
+  stream.replaceChildren();
   statusEl.textContent='Connecting...';
   statusEl.style.color='var(--amber)';
   pulseEl.style.background='var(--amber)';
@@ -121,15 +121,17 @@ function addEvent(evt){
   try{data=JSON.stringify(JSON.parse(evt.data),null,2)}catch(e){data=evt.data}
 
   const div=document.createElement('div');
-  div.className='event '+type;
-  div.innerHTML='<span class="time">'+now+'</span><span class="type">['+type+']</span><div class="data">'+escapeHtml(data)+'</div>';
+  div.className='event';
+  const timeNode=document.createElement('span');timeNode.className='time';timeNode.textContent=now;
+  const typeNode=document.createElement('span');typeNode.className='type';typeNode.textContent='['+String(type)+']';
+  const dataNode=document.createElement('div');dataNode.className='data';dataNode.textContent=data;
+  div.append(timeNode,typeNode,dataNode);
   stream.prepend(div);
 
   // Keep max 200 events in DOM
   while(stream.children.length>200) stream.removeChild(stream.lastChild);
 }
 
-function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 </script>
 <script src="/shared.js"></script>
 <a class="back-btn" href="index.html">← Organism</a>
