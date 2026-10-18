@@ -8,7 +8,7 @@ Outputs:
   - wave progression rate
   - overall velocity score (0-100)
 """
-import subprocess, json, time, os
+import subprocess, json, time
 from pathlib import Path
 from collections import Counter
 
@@ -19,12 +19,16 @@ DATA = REPO / "data"
 WINDOW_DAYS = 7
 
 def _run(cmd):
-    r = subprocess.run(cmd, shell=True, capture_output=True, text=True, cwd=REPO)
-    return r.stdout.strip()
+    """Run a fixed argument vector without invoking a shell interpreter."""
+    if not isinstance(cmd, (list, tuple)) or not cmd or not all(isinstance(arg, str) for arg in cmd):
+        raise TypeError("cmd must be a non-empty sequence of strings")
+    r = subprocess.run(list(cmd), shell=False, capture_output=True, text=True, cwd=REPO, check=False)
+    return r.stdout.strip() if r.returncode == 0 else ""
 
 def _git_commits_since(days):
-    since = f"{days} days ago"
-    raw = _run(f'git log --oneline --since="{since}" --format="%H %ai" main 2>/dev/null')
+    if type(days) is not int or days < 0 or days > 36500:
+        raise ValueError("days must be an integer between 0 and 36500")
+    raw = _run(["git", "log", f"--since={days} days ago", "--format=%H %ai", "main"])
     if not raw:
         return []
     out = []
@@ -35,16 +39,13 @@ def _git_commits_since(days):
     return out
 
 def _count_waves():
-    raw = _run("ls api/wave*.py 2>/dev/null | wc -l")
-    return int(raw) if raw.isdigit() else 0
+    return sum(1 for path in API.glob("wave*.py") if path.is_file())
 
 def _count_tests():
-    raw = _run("find tests -name 'test_*.py' 2>/dev/null | wc -l")
-    return int(raw) if raw.isdigit() else 0
+    return sum(1 for path in TESTS.rglob("test_*.py") if path.is_file())
 
 def _count_modules():
-    raw = _run("ls api/*.py 2>/dev/null | wc -l")
-    return int(raw) if raw.isdigit() else 0
+    return sum(1 for path in API.glob("*.py") if path.is_file())
 
 def _latest_wave():
     import re
