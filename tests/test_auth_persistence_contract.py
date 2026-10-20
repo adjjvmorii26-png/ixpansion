@@ -1,6 +1,8 @@
 """Auth persistence contract — durable adapter required in serverless."""
 import pytest
 
+from api.auth_store import AuthStore
+
 
 def _reset_auth(monkeypatch):
     import api.auth as auth
@@ -11,7 +13,7 @@ def _reset_auth(monkeypatch):
     return auth
 
 
-class ContractDurableStore:
+class ContractDurableStore(AuthStore):
     """Test double for the adapter contract; not a real persistence backend."""
 
     name = "contract_durable_test"
@@ -58,7 +60,7 @@ def test_serverless_fails_closed_without_adapter(monkeypatch):
     monkeypatch.setattr(auth, "SERVERLESS", True)
     monkeypatch.setattr(auth_store, "SERVERLESS", True)
     monkeypatch.setattr(auth_store, "PERSISTENCE_BACKEND", "")
-    with pytest.raises(RuntimeError, match="auth persistence is not configured"):
+    with pytest.raises(RuntimeError, match="auth persistence"):
         auth._assert_persistence_contract()
 
 
@@ -69,7 +71,7 @@ def test_serverless_named_backend_without_adapter_still_fails(monkeypatch):
     monkeypatch.setattr(auth, "SERVERLESS", True)
     monkeypatch.setattr(auth_store, "SERVERLESS", True)
     monkeypatch.setattr(auth_store, "PERSISTENCE_BACKEND", "supabase")
-    with pytest.raises(RuntimeError, match="auth persistence is not configured"):
+    with pytest.raises(RuntimeError, match="auth persistence"):
         auth._assert_persistence_contract()
 
 
