@@ -124,14 +124,11 @@ def register_auth_store(store: AuthStore) -> AuthStore:
 
 def get_auth_store() -> AuthStore:
     global _ACTIVE_STORE
+    if SERVERLESS:
+        assert_persistence_contract()
+        return _ACTIVE_STORE
     if _ACTIVE_STORE is not None:
         return _ACTIVE_STORE
-    if SERVERLESS:
-        raise RuntimeError(
-            "auth persistence is not configured for serverless production; "
-            "register a durable AuthStore via register_auth_store() and provide "
-            "an implemented adapter"
-        )
     store = LocalJsonAuthStore()
     _ACTIVE_STORE = store
     return store
