@@ -16,7 +16,10 @@ _ACTIVE_STORE = None
 
 
 class AuthStore:
+    """Storage interface. Implementations must opt into durability explicitly."""
+
     name = "abstract"
+    durable = False
 
     def ensure(self) -> None:
         raise NotImplementedError
@@ -34,11 +37,14 @@ class AuthStore:
         raise NotImplementedError
 
     def health(self) -> Dict:
-        return {"ok": True, "name": self.name}
+        return {"ok": False, "name": self.name, "durable": self.durable}
 
 
 class LocalJsonAuthStore(AuthStore):
+    """Local development/test store only; not durable across serverless instances."""
+
     name = "local_json"
+    durable = False
 
     def __init__(self, keys_file: Optional[Path] = None, usage_file: Optional[Path] = None):
         self.keys_file = keys_file or KEYS_FILE
@@ -46,20 +52,14 @@ class LocalJsonAuthStore(AuthStore):
 
     def ensure(self) -> None:
         self.keys_file.parent.mkdir(parents=True, exist_ok=True)
-        try:
-            if not self.keys_file.exists():
-                self.keys_file.write_text("{}")
-            if not self.usage_file.exists():
-                self.usage_file.write_text("{}")
-        except OSError:
-            pass
+        if not self.keys_file.exists():
+            self.keys_file.write_text("{}")
+        if not self.usage_file.exists():
+            self.usage_file.write_text("{}")
 
     def load_keys(self) -> Dict:
         self.ensure()
-        try:
-            return json.loads(self.keys_file.read_text())
-        except Exception:
-            return {}
+        return json.loads(self.keys_file.read_text())
 
     def save_keys(self, keys: Dict) -> None:
         self.ensure()
@@ -67,10 +67,7 @@ class LocalJsonAuthStore(AuthStore):
 
     def load_usage(self) -> Dict:
         self.ensure()
-        try:
-            return json.loads(self.usage_file.read_text())
-        except Exception:
-            return {}
+        return json.loads(self.usage_file.read_text())
 
     def save_usage(self, usage: Dict) -> None:
         self.ensure()
@@ -78,11 +75,19 @@ class LocalJsonAuthStore(AuthStore):
 
     def health(self) -> Dict:
         self.ensure()
-        return {"ok": self.keys_file.parent.exists(), "name": self.name, "writable": True}
+        return {
+            "ok": self.keys_file.parent.exists(),
+            "name": self.name,
+            "writable": os.access(self.keys_file.parent, os.W_OK),
+            "durable": False,
+        }
 
 
 class MemoryAuthStore(AuthStore):
+    """In-memory test double; never valid for production persistence."""
+
     name = "memory"
+    durable = False
 
     def __init__(self):
         self._keys: Dict = {}
@@ -107,10 +112,11 @@ class MemoryAuthStore(AuthStore):
         self.writes += 1
 
     def health(self) -> Dict:
-        return {"ok": True, "name": self.name, "writes": self.writes}
+        return {"ok": True, "name": self.name, "writes": self.writes, "durable": False}
 
 
 def register_auth_store(store: AuthStore) -> AuthStore:
+    """Register an implementation; serverless contract validates its durability."""
     global _ACTIVE_STORE
     _ACTIVE_STORE = store
     return store
@@ -123,8 +129,8 @@ def get_auth_store() -> AuthStore:
     if SERVERLESS:
         raise RuntimeError(
             "auth persistence is not configured for serverless production; "
-            "register a durable AuthStore via register_auth_store() or set "
-            "IXPANSION_AUTH_STORE and provide an implemented adapter"
+            "register a durable AuthStore via register_auth_store() and provide "
+            "an implemented adapter"
         )
     store = LocalJsonAuthStore()
     _ACTIVE_STORE = store
@@ -135,11 +141,11 @@ def assert_persistence_contract() -> None:
     if not SERVERLESS:
         return
     store = _ACTIVE_STORE
-    if store is None or store.name in {"local_json", "abstract"}:
+    if store is None or not isinstance(store, AuthStore) or store.durable is not True:
         raise RuntimeError(
-            "auth persistence is not configured for serverless production; "
-            "set IXPANSION_AUTH_STORE and register a durable AuthStore adapter"
+            "auth persistence requires a registered durable AuthStore adapter; "
+            "IXPANSION_AUTH_STORE alone does not establish durability"
         )
     health = store.health()
-    if not health.get("ok"):
+    if health.get("ok") is not True or health.get("durable") is not True:
         raise RuntimeError("auth durable backend health check failed")
