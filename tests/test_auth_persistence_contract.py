@@ -1,4 +1,9 @@
 """Auth persistence contract — durable adapter required in serverless."""
+import os
+import subprocess
+import sys
+from pathlib import Path
+
 import pytest
 
 from api.auth_store import AuthStore
@@ -87,6 +92,15 @@ def test_memory_store_is_not_a_serverless_durable_adapter(monkeypatch):
         auth._assert_persistence_contract()
 
 
+def test_get_auth_store_revalidates_registered_store_in_serverless(monkeypatch):
+    auth = _reset_auth(monkeypatch)
+    import api.auth_store as auth_store
+    monkeypatch.setattr(auth_store, "SERVERLESS", True)
+    auth.register_auth_store(auth.MemoryAuthStore())
+    with pytest.raises(RuntimeError, match="durable"):
+        auth.get_auth_store()
+
+
 def test_serverless_accepts_healthy_registered_durable_contract(monkeypatch):
     """Contract test only; this fake is not evidence of real backend durability."""
     auth = _reset_auth(monkeypatch)
@@ -144,6 +158,27 @@ def test_serverless_rejects_unhealthy_durable_adapter(monkeypatch):
     auth.register_auth_store(UnhealthyStore())
     with pytest.raises(RuntimeError, match="health"):
         auth._assert_persistence_contract()
+
+
+def test_restart_without_registered_store_fails_closed(monkeypatch):
+    """A fresh process has no in-memory registration; a backend name cannot rescue it."""
+    env = os.environ.copy()
+    env["VERCEL"] = "1"
+    env["IXPANSION_AUTH_STORE"] = "supabase"
+    script = (
+        "from api.auth import generate_api_key; "
+        "generate_api_key('restart-check', 'free')"
+    )
+    completed = subprocess.run(
+        [sys.executable, "-c", script],
+        cwd=Path(__file__).resolve().parents[1],
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert completed.returncode != 0
+    assert "auth persistence" in completed.stderr
 
 
 def test_get_auth_store_fails_closed_on_serverless(monkeypatch):
