@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#070a13">
+<meta name="description" content="IXPANSION 5D Manifold Reactor — a bounded, accessible, deterministic visual simulation.">
+<title>IXPANSION · 5D Manifold Reactor</title>
+<style>
+:root{color-scheme:dark;--bg:#070a13;--panel:rgba(14,20,35,.88);--line:#26354d;--text:#e7f1ff;--muted:#a4b4cb;--cyan:#67e8f9;--violet:#c4b5fd;--focus:#fde68a}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+body{min-height:100svh;background:radial-gradient(ellipse at 50% 25%,#101d36 0%,var(--bg) 65%)}
+button,select,input{font:inherit}button,select{color:var(--text);background:#111b2d;border:1px solid #3a4a65;border-radius:.65rem;min-height:44px;padding:.65rem .85rem}
+button{cursor:pointer}button:hover,select:hover{border-color:var(--cyan)}button:disabled{opacity:.55;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:1rem;z-index:10;background:#111b2d;padding:1rem}.skip:focus{left:1rem}
+header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,3vw,2.5rem);border-bottom:1px solid #1c2940}
+h1{font-size:clamp(1.15rem,3vw,1.7rem);letter-spacing:.08em;margin:0}h1 span{color:var(--cyan)}.eyebrow{color:var(--muted);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.35rem}
+main{max-width:1400px;margin:auto;padding:clamp(.75rem,2vw,1.5rem);display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,340px);gap:1rem}
+.stage{position:relative;min-height:440px;height:min(70svh,760px);overflow:hidden;border:1px solid var(--line);border-radius:1.1rem;background:radial-gradient(ellipse at center,#111e35,#070a13 70%);isolation:isolate}
+canvas{display:block;width:100%;height:100%;touch-action:pan-y}#fallback{position:absolute;inset:0;pointer-events:none}canvas[hidden]{display:none}
+.overlay{position:absolute;left:1rem;top:1rem;right:1rem;display:flex;justify-content:space-between;gap:.75rem;pointer-events:none}.pill{background:#0b1324e8;border:1px solid var(--line);border-radius:99px;padding:.45rem .7rem;font-size:.8rem;color:var(--muted)}
+.stage-status{position:absolute;left:1rem;bottom:1rem;max-width:calc(100% - 2rem);color:var(--muted);font-size:.82rem;background:#070a13dc;padding:.5rem .7rem;border-radius:.5rem}
+.panel{align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:1rem;padding:1rem;display:grid;gap:1rem}
+h2{font-size:1rem;margin:0}p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}.field{display:grid;gap:.45rem}.field label{font-size:.84rem;color:var(--muted)}select{width:100%}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}.actions .wide{grid-column:1/-1}.primary{border-color:#0e7490;background:#12364a}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}.metric{padding:.7rem;background:#0a1221;border:1px solid #202e45;border-radius:.7rem}.metric dt{font-size:.72rem;color:var(--muted)}.metric dd{font-variant-numeric:tabular-nums;font-weight:650;margin:.25rem 0 0}
+.note{font-size:.78rem;color:var(--muted)}footer{max-width:1400px;margin:auto;padding:0 1.5rem 1.5rem;color:var(--muted);font-size:.78rem}
+@media(max-width:850px){main{grid-template-columns:1fr}.stage{height:min(58svh,600px);min-height:340px}.panel{grid-template-columns:1fr 1fr;align-items:start}.panel>.full{grid-column:1/-1}}
+@media(max-width:520px){header{align-items:flex-start;flex-direction:column}.stage{min-height:300px;height:48svh}.panel{grid-template-columns:1fr}.panel>.full{grid-column:auto}.actions button{padding:.6rem}.overlay{flex-direction:column;align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#controls">Skip to reactor controls</a>
+<header><div><div class="eyebrow">IXPANSION · experimental systems</div><h1>5D <span>MANIFOLD</span> REACTOR</h1></div><p aria-label="Simulation mode">Local visual simulation · no network telemetry</p></header>
+<main>
+<section class="stage" aria-label="Interactive manifold visualization">
+<canvas id="reactor" role="img" aria-label="Animated abstract particle manifold. Use the controls to change its geometry or pause motion.">Your browser does not support the canvas element.</canvas><canvas id="fallback" aria-hidden="true" hidden></canvas>
+<div class="overlay" aria-hidden="true"><span class="pill" id="geometry-pill">GEOMETRY · TORUS</span><span class="pill" id="render-pill">RENDER · INITIALIZING</span></div>
+<div class="stage-status" id="stage-status" role="status" aria-live="polite">Initializing local renderer…</div>
+</section>
+<aside class="panel" id="controls" aria-label="Reactor controls">
+<div class="full"><h2>Control surface</h2><p>Bounded particle count, fixed-step updates, and graceful fallback when WebGL is unavailable.</p></div>
+<div class="field"><label for="geometry">Manifold geometry</label><select id="geometry"><option value="torus">Torus</option><option value="sphere">Sphere</option><option value="circuit">Circuit</option><option value="mobius">Möbius</option><option value="collapse">Collapse</option></select></div>
+<div class="field"><label for="energy">Energy: <output id="energy-value" for="energy">1.0×</output></label><input id="energy" type="range" min="0" max="2" step=".1" value="1" aria-describedby="energy-help"><span class="note" id="energy-help">Limits animation speed; does not affect system telemetry.</span></div>
+<div class="actions full"><button id="pause" class="primary" type="button" aria-pressed="false">Pause motion</button><button id="reset" type="button">Reset</button><button id="stealth" type="button" aria-pressed="false">Minimal HUD</button><button id="audio" type="button" aria-pressed="false">Enable audio</button></div>
+<dl class="metrics full"><div class="metric"><dt>Particles</dt><dd id="particle-count">180</dd></div><div class="metric"><dt>Frame rate</dt><dd id="fps">—</dd></div><div class="metric"><dt>Simulation ticks</dt><dd id="ticks">0</dd></div><div class="metric"><dt>Renderer</dt><dd id="renderer-state">Starting</dd></div></dl>
+<p class="note full" id="audio-note">Audio is off by default and only starts after explicit user action.</p>
+</aside>
+</main>
+<footer>Local-only demo. Visual patterns and frame rate are illustrative, not verified telemetry or evidence of external system state.</footer>
+<script type="module">
+import { FixedStepClock, createParticles, updateParticles, projectParticle } from "./reactor-core.mjs";
+
+const canvas = document.querySelector("#reactor");
+const fallbackCanvas = document.querySelector("#fallback");
+const stage = canvas.closest(".stage");
+const status = document.querySelector("#stage-status");
+const rendererPill = document.querySelector("#render-pill");
+const rendererState = document.querySelector("#renderer-state");
+const geometry = document.querySelector("#geometry");
+const energy = document.querySelector("#energy");
+const energyValue = document.querySelector("#energy-value");
+const pauseButton = document.querySelector("#pause");
+const stealthButton = document.querySelector("#stealth");
+const audioButton = document.querySelector("#audio");
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+const clock = new FixedStepClock();
+let mode = geometry.value, particles = createParticles(), energyLevel = 1;
+let gl = null, program = null, buffer = null, positionLocation = null, colorLocation = null, sizeLocation = null;
+let rafId = 0, running = false, paused = reducedMotion.matches, contextLost = false, destroyed = false;
+let width = 1, height = 1, lastFpsTime = 0, frames = 0, elapsedTime = 0, audioContext = null, oscillator = null, gain = null;
+const MAX_DPR = 1.75;
+const vertexSource = `attribute vec2 a_position; attribute float a_size; uniform float u_pointSize; varying float v_depth;
+void main(){ gl_Position=vec4(a_position,0.0,1.0); gl_PointSize=clamp(a_size*u_pointSize,1.0,9.0); v_depth=1.0-abs(a_position.y)*0.35; }`;
+const fragmentSource = `precision mediump float; varying float v_depth; uniform vec4 u_color;
+void main(){ vec2 p=gl_PointCoord-vec2(0.5); float d=dot(p,p); if(d>0.25) discard; float glow=smoothstep(0.25,0.0,d); gl_FragColor=vec4(u_color.rgb*glow*v_depth,u_color.a*glow); }`;
+
+function compileShader(context, type, source) {
+  const shader = context.createShader(type);
+  if (!shader) throw new Error("Unable to allocate shader");
+  context.shaderSource(shader, source); context.compileShader(shader);
+  if (!context.getShaderParameter(shader, context.COMPILE_STATUS)) {
+    const message = context.getShaderInfoLog(shader) || "Shader compilation failed";
+    context.deleteShader(shader); throw new Error(message);
+  }
+  return shader;
+}
+function destroyResources() {
+  if (!gl) return;
+  if (buffer) gl.deleteBuffer(buffer);
+  if (program) gl.deleteProgram(program);
+  buffer = null; program = null; positionLocation = null; colorLocation = null; sizeLocation = null;
+}
+function initializeRenderer() {
+  if (destroyed || contextLost) return false;
+  try {
+    gl = canvas.getContext("webgl", { alpha: true, antialias: false, depth: false, stencil: false, powerPreference: "low-power", preserveDrawingBuffer: false });
+    if (!gl) throw new Error("WebGL unavailable");
+    const vs = compileShader(gl, gl.VERTEX_SHADER, vertexSource);
+    const fs = compileShader(gl, gl.FRAGMENT_SHADER, fragmentSource);
+    program = gl.createProgram();
+    if (!program) throw new Error("Unable to allocate WebGL program");
+    gl.attachShader(program, vs); gl.attachShader(program, fs); gl.linkProgram(program);
+    gl.deleteShader(vs); gl.deleteShader(fs);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(program) || "Program link failed");
+    buffer = gl.createBuffer();
+    if (!buffer) throw new Error("Unable to allocate WebGL buffer");
+    positionLocation = gl.getAttribLocation(program, "a_position");
+    sizeLocation = gl.getAttribLocation(program, "a_size");
+    colorLocation = gl.getUniformLocation(program, "u_color");
+    const pointSizeLocation = gl.getUniformLocation(program, "u_pointSize");
+    gl.useProgram(program);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+    gl.disable(gl.DEPTH_TEST);
+    gl.uniform1f(pointSizeLocation, Math.min(width, height) * 0.012);
+    gl.uniform4f(colorLocation, 0.25, 0.88, 1.0, 0.85);
+    rendererPill.textContent = "RENDER · WEBGL";
+    rendererState.textContent = "WebGL";
+    status.textContent = paused ? "Ready · motion paused" : "Running local visual simulation";
+    return true;
+  } catch (error) {
+    destroyResources();
+    gl = null;
+    canvas.hidden = true; fallbackCanvas.hidden = false;
+    rendererPill.textContent = "RENDER · 2D FALLBACK";
+    rendererState.textContent = "Canvas 2D";
+    status.textContent = "WebGL unavailable; using a lightweight 2D fallback.";
+    return false;
+  }
+}
+function resize() {
+  if (destroyed) return;
+  const rect = stage.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+  width = Math.max(1, Math.round(rect.width * dpr));
+  height = Math.max(1, Math.round(rect.height * dpr));
+  if (canvas.width !== width || canvas.height !== height) {
+    canvas.width = width; canvas.height = height;
+    fallbackCanvas.width = width; fallbackCanvas.height = height;
+    if (gl && !contextLost) gl.viewport(0, 0, width, height);
+  }
+}
+function drawFallback() {
+  const ctx = fallbackCanvas.getContext("2d");
+  if (!ctx) return;
+  ctx.clearRect(0, 0, width, height);
+  const aspect = width / Math.max(1, height);
+  for (const p of particles) {
+    const q = projectParticle(p, mode, aspect, elapsedTime);
+    const x = width * (0.5 + q.x * 0.42);
+    const y = height * (0.5 - q.y * 0.42);
+    const radius = Math.max(1, p.size * q.scale * Math.min(width, height) / 800);
+    ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(103,232,249,0.75)"; ctx.fill();
+  }
+}
+function render() {
+  if (destroyed || contextLost) return;
+  if (!gl || !program || !buffer) { drawFallback(); return; }
+  const data = new Float32Array(particles.length * 3);
+  const aspect = width / Math.max(1, height);
+  for (let i = 0; i < particles.length; i++) {
+    const q = projectParticle(particles[i], mode, aspect, elapsedTime);
+    data[i * 3] = q.x * 1.7;
+    data[i * 3 + 1] = q.y * 1.7;
+    data[i * 3 + 2] = particles[i].size * q.scale;
+  }
+  gl.clearColor(0.015, 0.025, 0.05, 0.18); gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.useProgram(program); gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, data, gl.DYNAMIC_DRAW);
+  gl.enableVertexAttribArray(positionLocation);
+  gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 12, 0);
+  gl.enableVertexAttribArray(sizeLocation);
+  gl.vertexAttribPointer(sizeLocation, 1, gl.FLOAT, false, 12, 8);
+  gl.drawArrays(gl.POINTS, 0, particles.length);
+}
+function syncUi() {
+  document.querySelector("#geometry-pill").textContent = "GEOMETRY · " + mode.toUpperCase();
+  energyValue.textContent = energyLevel.toFixed(1) + "×";
+  document.querySelector("#particle-count").textContent = String(particles.length);
+  document.querySelector("#ticks").textContent = String(clock.tick);
+  pauseButton.textContent = paused ? "Resume motion" : "Pause motion";
+  pauseButton.setAttribute("aria-pressed", String(paused));
+}
+function loop(timestamp) {
+  rafId = 0;
+  if (destroyed || !running || document.hidden || contextLost) return;
+  if (!paused) {
+    clock.advance(timestamp, (dt) => { updateParticles(particles, dt, mode, energyLevel); elapsedTime += dt; });
+  } else clock.reset();
+  render();
+  frames++;
+  if (timestamp - lastFpsTime >= 1000) {
+    document.querySelector("#fps").textContent = String(Math.round(frames * 1000 / Math.max(1, timestamp - lastFpsTime)));
+    frames = 0; lastFpsTime = timestamp; syncUi();
+  }
+  rafId = requestAnimationFrame(loop);
+}
+function start() {
+  if (destroyed || running || document.hidden || contextLost) return;
+  running = true; clock.reset(); lastFpsTime = performance.now(); frames = 0;
+  rafId = requestAnimationFrame(loop);
+}
+function stop() {
+  running = false;
+  if (rafId) cancelAnimationFrame(rafId);
+  rafId = 0; clock.reset();
+}
+function onVisibilityChange() {
+  if (document.hidden) stop();
+  else if (!contextLost && !paused) start();
+  else if (!contextLost) render();
+}
+function onContextLost(event) {
+  event.preventDefault(); contextLost = true; stop();
+  rendererPill.textContent = "RENDER · CONTEXT LOST"; rendererState.textContent = "Recovering";
+  canvas.hidden = true; fallbackCanvas.hidden = false; drawFallback();
+  status.textContent = "Graphics context lost. Showing fallback while waiting for the browser to restore graphics.";
+}
+function onContextRestored() {
+  contextLost = false; destroyResources(); gl = null;
+  canvas.hidden = false; fallbackCanvas.hidden = true;
+  if (!initializeRenderer()) gl = null;
+  resize(); render();
+  status.textContent = "Graphics context restored.";
+  if (!paused && !document.hidden) start();
+}
+function onResize() { resize(); render(); }
+function onMotionPreference(event) {
+  if (event.matches) { paused = true; stop(); status.textContent = "Reduced-motion preference detected; motion paused."; }
+  syncUi(); if (!paused) start();
+}
+function toggleMinimalHud() {
+  const active = stealthButton.getAttribute("aria-pressed") !== "true";
+  stealthButton.setAttribute("aria-pressed", String(active));
+  document.querySelectorAll(".overlay,.stage-status").forEach((el) => { el.hidden = active; });
+  stealthButton.textContent = active ? "Show HUD" : "Minimal HUD";
+}
+function toggleAudio() {
+  if (audioContext) {
+    oscillator?.stop(); oscillator?.disconnect(); gain?.disconnect(); audioContext.close().catch(() => {});
+    audioContext = null; oscillator = null; gain = null;
+    audioButton.setAttribute("aria-pressed", "false"); audioButton.textContent = "Enable audio";
+    document.querySelector("#audio-note").textContent = "Audio is off.";
+    return;
+  }
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) throw new Error("Audio API unavailable");
+    audioContext = new AudioContextClass(); oscillator = audioContext.createOscillator(); gain = audioContext.createGain();
+    oscillator.type = "sine"; oscillator.frequency.value = 110; gain.gain.value = 0.018;
+    oscillator.connect(gain); gain.connect(audioContext.destination); oscillator.start();
+    audioButton.setAttribute("aria-pressed", "true"); audioButton.textContent = "Disable audio";
+    document.querySelector("#audio-note").textContent = "Low-volume tone enabled by your request.";
+  } catch {
+    audioContext = null; oscillator = null; gain = null;
+    document.querySelector("#audio-note").textContent = "Audio is not supported by this browser.";
+  }
+}
+function cleanup() {
+  if (destroyed) return;
+  destroyed = true; stop(); destroyResources();
+  if (audioContext) audioContext.close().catch(() => {});
+  audioContext = null; oscillator = null; gain = null;
+  resizeObserver?.disconnect();
+  window.removeEventListener("resize", onResize);
+  document.removeEventListener("visibilitychange", onVisibilityChange);
+  canvas.removeEventListener("webglcontextlost", onContextLost);
+  canvas.removeEventListener("webglcontextrestored", onContextRestored);
+  reducedMotion.removeEventListener?.("change", onMotionPreference);
+}
+const resizeObserver = typeof ResizeObserver === "function" ? new ResizeObserver(onResize) : null;
+geometry.addEventListener("change", () => { mode = geometry.value; if (mode === "collapse") status.textContent = "Collapse geometry selected; radius will contract to a safe minimum."; syncUi(); });
+energy.addEventListener("input", () => { energyLevel = Number(energy.value); syncUi(); });
+pauseButton.addEventListener("click", () => { paused = !paused; syncUi(); if (paused) status.textContent = "Motion paused."; else { status.textContent = "Running local visual simulation"; start(); } });
+document.querySelector("#reset").addEventListener("click", () => { particles = createParticles(); elapsedTime = 0; clock.reset(); syncUi(); render(); status.textContent = "Simulation reset to its initial seeded state."; });
+stealthButton.addEventListener("click", toggleMinimalHud);
+audioButton.addEventListener("click", toggleAudio);
+window.addEventListener("resize", onResize, { passive: true });
+document.addEventListener("visibilitychange", onVisibilityChange);
+canvas.addEventListener("webglcontextlost", onContextLost, false);
+canvas.addEventListener("webglcontextrestored", onContextRestored, false);
+reducedMotion.addEventListener?.("change", onMotionPreference);
+resizeObserver?.observe(stage);
+resize(); initializeRenderer(); render(); syncUi();
+if (paused) status.textContent = "Reduced-motion preference detected; motion paused.";
+else start();
+window.addEventListener("pagehide", cleanup, { once: true });
+</script>
+</body>
+</html>

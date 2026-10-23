@@ -1,0 +1,29 @@
+name: Manifold Reactor Tests
+
+on:
+  pull_request:
+    paths:
+      - "apps/manifold_reactor/**"
+      - "tests/manifold-reactor.test.mjs"
+      - ".github/workflows/manifold-reactor-tests.yml"
+  push:
+    branches:
+      - "hardening/5d-manifold-reactor-v1"
+
+permissions:
+  contents: read
+
+jobs:
+  reactor-core:
+    name: Reactor core tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run isolated simulation tests
+        run: node --test tests/manifold-reactor.test.mjs
