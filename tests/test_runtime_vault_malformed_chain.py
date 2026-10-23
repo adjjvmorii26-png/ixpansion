@@ -61,3 +61,30 @@ def test_legacy_records_after_chain_remain_rejected(tmp_path):
 
     assert result["ok"] is False
     assert result["failure"]["kind"] == "legacy_after_chain"
+
+
+@pytest.mark.parametrize("sequence", [0, -1])
+def test_append_rejects_non_positive_existing_sequence(tmp_path, sequence):
+    ledger = tmp_path / "invalid-tail.jsonl"
+    ledger.write_text(json.dumps({
+        "sequence": sequence,
+        "previous_hash": "0" * 64,
+        "entry_hash": "0" * 64,
+        "event": "probe",
+    }) + "\\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="invalid chain metadata"):
+        append_jsonl(ledger, {"event": "should-not-append"})
+
+
+def test_append_rejects_malformed_existing_entry_hash(tmp_path):
+    ledger = tmp_path / "invalid-tail-hash.jsonl"
+    ledger.write_text(json.dumps({
+        "sequence": 1,
+        "previous_hash": "0" * 64,
+        "entry_hash": "not-a-sha256-digest",
+        "event": "probe",
+    }) + "\\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="invalid chain metadata"):
+        append_jsonl(ledger, {"event": "should-not-append"})
