@@ -54,7 +54,8 @@ jobs:
           PY
 
       - name: Import Vercel entrypoint
-        run: python -c "import api.index; print('api.index import: OK')"
+        run: |
+          python -c "import api.index; print('api.index import: OK')"
 
       - name: Exercise public health contract
         run: |
