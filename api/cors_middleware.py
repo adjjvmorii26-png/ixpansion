@@ -58,6 +58,7 @@ class CORSMiddleware:
             "Access-Control-Allow-Headers": ", ".join(self.headers),
             "Access-Control-Allow-Credentials": "true",
             "Access-Control-Expose-Headers": "X-Request-ID, X-Rate-Limit",
+            "Vary": "Origin",
         }
 
     def stats(self) -> Dict:
