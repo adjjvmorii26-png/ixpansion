@@ -5,6 +5,7 @@ import fcntl
 import hashlib
 import json
 import os
+import re
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -129,10 +130,17 @@ def append_jsonl(path: Path, record: dict[str, Any]) -> dict[str, Any]:
         if previous_record and CHAIN_FIELDS.issubset(previous_record):
             try:
                 previous_sequence = previous_record["sequence"]
-                if isinstance(previous_sequence, bool) or not isinstance(previous_sequence, int):
+                if (
+                    isinstance(previous_sequence, bool)
+                    or not isinstance(previous_sequence, int)
+                    or previous_sequence < 1
+                ):
                     raise ValueError("invalid sequence")
+                candidate_hash = previous_record["entry_hash"]
+                if not isinstance(candidate_hash, str) or re.fullmatch(r"[0-9a-f]{64}", candidate_hash) is None:
+                    raise ValueError("invalid entry hash")
                 sequence = previous_sequence + 1
-                previous_hash = str(previous_record["entry_hash"])
+                previous_hash = candidate_hash
             except (KeyError, TypeError, ValueError):
                 raise ValueError("cannot append to a ledger with invalid chain metadata")
         else:
