@@ -31,6 +31,9 @@ MAX_AGE = 86400
 class CORSMiddleware:
     def __init__(self, origins=None, methods=None, headers=None):
         self.origins = list(origins) if origins is not None else configured_origins()
+        # Credentialed CORS must never use a wildcard origin.
+        if "*" in self.origins:
+            raise ValueError("Wildcard CORS origins are forbidden")
         self.methods = methods or DEFAULT_METHODS
         self.headers = headers or DEFAULT_HEADERS
         self.request_count = 0
@@ -43,6 +46,7 @@ class CORSMiddleware:
             "Access-Control-Allow-Headers": ", ".join(self.headers),
             "Access-Control-Max-Age": str(MAX_AGE),
             "Access-Control-Allow-Credentials": "true",
+            "Vary": "Origin",
         }
 
     def apply(self, origin: str = "*") -> Dict[str, str]:
