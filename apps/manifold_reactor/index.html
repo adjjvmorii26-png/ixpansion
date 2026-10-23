@@ -19,7 +19,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:1rem;pa
 h1{font-size:clamp(1.15rem,3vw,1.7rem);letter-spacing:.08em;margin:0}h1 span{color:var(--cyan)}.eyebrow{color:var(--muted);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.35rem}
 main{max-width:1400px;margin:auto;padding:clamp(.75rem,2vw,1.5rem);display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,340px);gap:1rem}
 .stage{position:relative;min-height:440px;height:min(70svh,760px);overflow:hidden;border:1px solid var(--line);border-radius:1.1rem;background:radial-gradient(ellipse at center,#111e35,#070a13 70%);isolation:isolate}
-canvas{display:block;width:100%;height:100%;touch-action:pan-y}
+canvas{display:block;width:100%;height:100%;touch-action:pan-y}#fallback{position:absolute;inset:0;pointer-events:none}canvas[hidden]{display:none}
 .overlay{position:absolute;left:1rem;top:1rem;right:1rem;display:flex;justify-content:space-between;gap:.75rem;pointer-events:none}.pill{background:#0b1324e8;border:1px solid var(--line);border-radius:99px;padding:.45rem .7rem;font-size:.8rem;color:var(--muted)}
 .stage-status{position:absolute;left:1rem;bottom:1rem;max-width:calc(100% - 2rem);color:var(--muted);font-size:.82rem;background:#070a13dc;padding:.5rem .7rem;border-radius:.5rem}
 .panel{align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:1rem;padding:1rem;display:grid;gap:1rem}
@@ -36,7 +36,7 @@ h2{font-size:1rem;margin:0}p{margin:0;color:var(--muted);font-size:.9rem;line-he
 <header><div><div class="eyebrow">IXPANSION · experimental systems</div><h1>5D <span>MANIFOLD</span> REACTOR</h1></div><p aria-label="Simulation mode">Local visual simulation · no network telemetry</p></header>
 <main>
 <section class="stage" aria-label="Interactive manifold visualization">
-<canvas id="reactor" role="img" aria-label="Animated abstract particle manifold. Use the controls to change its geometry or pause motion.">Your browser does not support the canvas element.</canvas>
+<canvas id="reactor" role="img" aria-label="Animated abstract particle manifold. Use the controls to change its geometry or pause motion.">Your browser does not support the canvas element.</canvas><canvas id="fallback" aria-hidden="true" hidden></canvas>
 <div class="overlay" aria-hidden="true"><span class="pill" id="geometry-pill">GEOMETRY · TORUS</span><span class="pill" id="render-pill">RENDER · INITIALIZING</span></div>
 <div class="stage-status" id="stage-status" role="status" aria-live="polite">Initializing local renderer…</div>
 </section>
@@ -54,6 +54,7 @@ h2{font-size:1rem;margin:0}p{margin:0;color:var(--muted);font-size:.9rem;line-he
 import { FixedStepClock, createParticles, updateParticles, projectParticle } from "./reactor-core.mjs";
 
 const canvas = document.querySelector("#reactor");
+const fallbackCanvas = document.querySelector("#fallback");
 const stage = canvas.closest(".stage");
 const status = document.querySelector("#stage-status");
 const rendererPill = document.querySelector("#render-pill");
@@ -121,7 +122,9 @@ function initializeRenderer() {
     return true;
   } catch (error) {
     destroyResources();
+    if (gl) { gl.getExtension("WEBGL_lose_context")?.loseContext(); }
     gl = null;
+    canvas.hidden = true; fallbackCanvas.hidden = false;
     rendererPill.textContent = "RENDER · 2D FALLBACK";
     rendererState.textContent = "Canvas 2D";
     status.textContent = "WebGL unavailable; using a lightweight 2D fallback.";
@@ -136,11 +139,12 @@ function resize() {
   height = Math.max(1, Math.round(rect.height * dpr));
   if (canvas.width !== width || canvas.height !== height) {
     canvas.width = width; canvas.height = height;
+    fallbackCanvas.width = width; fallbackCanvas.height = height;
     if (gl && !contextLost) gl.viewport(0, 0, width, height);
   }
 }
 function drawFallback() {
-  const ctx = canvas.getContext("2d");
+  const ctx = fallbackCanvas.getContext("2d");
   if (!ctx) return;
   ctx.clearRect(0, 0, width, height);
   const aspect = width / Math.max(1, height);
@@ -207,7 +211,8 @@ function stop() {
 }
 function onVisibilityChange() {
   if (document.hidden) stop();
-  else if (!contextLost) start();
+  else if (!contextLost && !paused) start();
+  else if (!contextLost) render();
 }
 function onContextLost(event) {
   event.preventDefault(); contextLost = true; stop();
@@ -216,6 +221,7 @@ function onContextLost(event) {
 }
 function onContextRestored() {
   contextLost = false; destroyResources(); gl = null;
+  canvas.hidden = false; fallbackCanvas.hidden = true;
   if (!initializeRenderer()) gl = null;
   resize(); render();
   status.textContent = "Graphics context restored.";
