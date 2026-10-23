@@ -122,7 +122,6 @@ function initializeRenderer() {
     return true;
   } catch (error) {
     destroyResources();
-    if (gl) { gl.getExtension("WEBGL_lose_context")?.loseContext(); }
     gl = null;
     canvas.hidden = true; fallbackCanvas.hidden = false;
     rendererPill.textContent = "RENDER · 2D FALLBACK";
@@ -217,7 +216,8 @@ function onVisibilityChange() {
 function onContextLost(event) {
   event.preventDefault(); contextLost = true; stop();
   rendererPill.textContent = "RENDER · CONTEXT LOST"; rendererState.textContent = "Recovering";
-  status.textContent = "Graphics context lost. Waiting for the browser to restore it.";
+  canvas.hidden = true; fallbackCanvas.hidden = false; drawFallback();
+  status.textContent = "Graphics context lost. Showing fallback while waiting for the browser to restore graphics.";
 }
 function onContextRestored() {
   contextLost = false; destroyResources(); gl = null;
