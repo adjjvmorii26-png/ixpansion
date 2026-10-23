@@ -71,7 +71,7 @@ def test_append_rejects_non_positive_existing_sequence(tmp_path, sequence):
         "previous_hash": "0" * 64,
         "entry_hash": "0" * 64,
         "event": "probe",
-    }) + "\\n", encoding="utf-8")
+    }) + "\n", encoding="utf-8")
 
     with pytest.raises(ValueError, match="invalid chain metadata"):
         append_jsonl(ledger, {"event": "should-not-append"})
@@ -84,7 +84,7 @@ def test_append_rejects_malformed_existing_entry_hash(tmp_path):
         "previous_hash": "0" * 64,
         "entry_hash": "not-a-sha256-digest",
         "event": "probe",
-    }) + "\\n", encoding="utf-8")
+    }) + "\n", encoding="utf-8")
 
     with pytest.raises(ValueError, match="invalid chain metadata"):
         append_jsonl(ledger, {"event": "should-not-append"})
