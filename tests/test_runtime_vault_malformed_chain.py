@@ -88,3 +88,27 @@ def test_append_rejects_malformed_existing_entry_hash(tmp_path):
 
     with pytest.raises(ValueError, match="invalid chain metadata"):
         append_jsonl(ledger, {"event": "should-not-append"})
+
+
+def test_append_refuses_to_extend_corrupted_ledger(tmp_path):
+    ledger = tmp_path / "corrupt.jsonl"
+    ledger.write_text('{"sequence": 1, "previous_hash": "' + "0" * 64 + '", "entry_hash": "' + "0" * 64 + '", "event": "tampered"}\\nnot-json\\n', encoding="utf-8")
+    original = ledger.read_bytes()
+
+    with pytest.raises(ValueError, match="unverifiable ledger"):
+        append_jsonl(ledger, {"event": "must-not-append"})
+
+    assert ledger.read_bytes() == original
+
+
+def test_append_refuses_to_extend_hash_mismatch(tmp_path):
+    ledger = tmp_path / "hash-mismatch.jsonl"
+    append_jsonl(ledger, {"event": "first"})
+    original = ledger.read_text(encoding="utf-8").replace('"event":"first"', '"event":"tampered"')
+    ledger.write_text(original, encoding="utf-8")
+    before = ledger.read_bytes()
+
+    with pytest.raises(ValueError, match="unverifiable ledger"):
+        append_jsonl(ledger, {"event": "must-not-append"})
+
+    assert ledger.read_bytes() == before
