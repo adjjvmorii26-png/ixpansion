@@ -27,6 +27,25 @@ sys.path.insert(0, str(ROOT))
 USAGE_FILE = ROOT / ".runtime" / "usage.json"
 KEYS_FILE = ROOT / ".runtime" / "api_keys.json"
 
+from api.auth_store import (  # noqa: E402
+    AuthStore,
+    LocalJsonAuthStore,
+    MemoryAuthStore,
+    PERSISTENCE_BACKEND,
+    SERVERLESS,
+    assert_persistence_contract as _assert_persistence_contract,
+    get_auth_store,
+    register_auth_store,
+)
+from api import auth_store as _auth_store_mod
+
+
+def __getattr__(name: str):
+    if name == "_ACTIVE_STORE":
+        return _auth_store_mod._ACTIVE_STORE
+    raise AttributeError(name)
+
+
 TIERS = {
     "free": {
         "name": "Free",
@@ -43,7 +62,7 @@ TIERS = {
         "experiments": "all",
         "rate_limit_per_minute": 999999,
         "features": ["list_experiments", "run_all", "health_check",
-                      "benchmarks", "anomaly_detection", "constellation"],
+                     "benchmarks", "anomaly_detection", "constellation"],
     },
     "enterprise": {
         "name": "Enterprise",
@@ -52,9 +71,9 @@ TIERS = {
         "experiments": "all",
         "rate_limit_per_minute": 9999990,
         "features": ["list_experiments", "run_all", "health_check",
-                      "benchmarks", "anomaly_detection", "constellation",
-                      "custom_agents", "priority_support", "sla_999",
-                      "webhook_notifications", "bulk_operations"],
+                     "benchmarks", "anomaly_detection", "constellation",
+                     "custom_agents", "priority_support", "sla_999",
+                     "webhook_notifications", "bulk_operations"],
     },
 }
 
@@ -67,34 +86,28 @@ BASIC_EXPERIMENTS = {
 
 
 def _ensure_files():
-    USAGE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    try:
-        if not KEYS_FILE.exists():
-            KEYS_FILE.write_text("{}")
-        if not USAGE_FILE.exists():
-            USAGE_FILE.write_text("{}")
-    except OSError:
-        pass  # read-only fs (serverless)
+    _assert_persistence_contract()
+    get_auth_store().ensure()
 
 
 def _load_keys() -> Dict:
     _ensure_files()
-    return json.loads(KEYS_FILE.read_text())
+    return get_auth_store().load_keys()
 
 
 def _save_keys(keys: Dict):
     _ensure_files()
-    KEYS_FILE.write_text(json.dumps(keys, indent=2))
+    get_auth_store().save_keys(keys)
 
 
 def _load_usage() -> Dict:
     _ensure_files()
-    return json.loads(USAGE_FILE.read_text())
+    return get_auth_store().load_usage()
 
 
 def _save_usage(usage: Dict):
     _ensure_files()
-    USAGE_FILE.write_text(json.dumps(usage, indent=2))
+    get_auth_store().save_usage(usage)
 
 
 def generate_api_key(owner: str, tier: str = "free") -> Dict:
@@ -210,7 +223,7 @@ def demo():
     print(f"  Access to advanced_quantum: {access2['allowed']} "
           f"({access2.get('reason', 'ok')})")
 
-    print(f"\n  Tiers:")
+    print("\n  Tiers:")
     for tier_name, tier_info in TIERS.items():
         print(f"    {tier_name}: ${tier_info['monthly_price_usd']}/mo, "
               f"{tier_info['daily_limit']} calls/day")
@@ -234,5 +247,4 @@ def coherence_vitals() -> dict:
 
 def resonates_with() -> list:
     """Declared kinships, auto-picked from shared domain language."""
-    return ['dream_synthesis', 'analytics', 'usage_dashboard']
-
+    return ["dream_synthesis", "analytics", "usage_dashboard"]
