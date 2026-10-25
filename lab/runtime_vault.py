@@ -5,6 +5,7 @@ import fcntl
 import hashlib
 import json
 import os
+import re
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -81,17 +82,6 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
     return records
 
 
-def append_jsonl(path: Path, record: dict[str, Any]) -> dict[str, Any]:
-    """Append one complete record under an exclusive process lock."""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as handle:
-        fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
-        handle.write(json.dumps(record, sort_keys=True, separators=(",", ":")) + "\n")
-        handle.flush()
-        os.fsync(handle.fileno())
-    return record
-
-
 ZERO_HASH = "0" * 64
 CHAIN_FIELDS = {"sequence", "previous_hash", "entry_hash"}
 
@@ -126,6 +116,15 @@ def append_jsonl(path: Path, record: dict[str, Any]) -> dict[str, Any]:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a+", encoding="utf-8") as handle:
         fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+        # Refuse to extend a ledger that already fails verification. Otherwise
+        # a valid-looking new tail could be appended after a corrupt record,
+        # leaving the ledger unusable while appearing to have accepted a write.
+        existing_audit = verify_jsonl(path)
+        if not existing_audit["ok"]:
+            failure = existing_audit.get("failure") or {}
+            kind = failure.get("kind", "unknown")
+            line = failure.get("line", "unknown")
+            raise ValueError(f"cannot append to an unverifiable ledger ({kind}, line {line})")
         handle.seek(0)
         previous_record = None
         for line in handle:
@@ -138,8 +137,21 @@ def append_jsonl(path: Path, record: dict[str, Any]) -> dict[str, Any]:
             if isinstance(candidate, dict):
                 previous_record = candidate
         if previous_record and CHAIN_FIELDS.issubset(previous_record):
-            sequence = int(previous_record["sequence"]) + 1
-            previous_hash = str(previous_record["entry_hash"])
+            try:
+                previous_sequence = previous_record["sequence"]
+                if (
+                    isinstance(previous_sequence, bool)
+                    or not isinstance(previous_sequence, int)
+                    or previous_sequence < 1
+                ):
+                    raise ValueError("invalid sequence")
+                candidate_hash = previous_record["entry_hash"]
+                if not isinstance(candidate_hash, str) or re.fullmatch(r"[0-9a-f]{64}", candidate_hash) is None:
+                    raise ValueError("invalid entry hash")
+                sequence = previous_sequence + 1
+                previous_hash = candidate_hash
+            except (KeyError, TypeError, ValueError):
+                raise ValueError("cannot append to a ledger with invalid chain metadata")
         else:
             sequence = 1
             previous_hash = ZERO_HASH
@@ -150,6 +162,7 @@ def append_jsonl(path: Path, record: dict[str, Any]) -> dict[str, Any]:
             "previous_hash": previous_hash,
             "entry_hash": _entry_hash(sequence, previous_hash, data),
         }
+        handle.seek(0, os.SEEK_END)
         handle.write(json.dumps(sealed, sort_keys=True, separators=(",", ":")) + "\n")
         handle.flush()
         os.fsync(handle.fileno())
@@ -170,8 +183,8 @@ def verify_jsonl(path: Path) -> dict[str, Any]:
 
     for line_number, value in raw:
         if not isinstance(value, dict):
-            failure = {"kind": "invalid_json", "line": line_number,
-                       "detail": value.get("__error__", "") if isinstance(value, dict) else ""}
+            kind = "invalid_json" if isinstance(value, str) and value.startswith("__invalid_json__:") else "invalid_record"
+            failure = {"kind": kind, "line": line_number}
             break
         if not CHAIN_FIELDS.issubset(value):
             if saw_chain:
@@ -181,15 +194,32 @@ def verify_jsonl(path: Path) -> dict[str, Any]:
             records.append(value)
             continue
 
+        sequence_value = value.get("sequence")
+        previous_value = value.get("previous_hash")
+        entry_hash_value = value.get("entry_hash")
+        if (
+            isinstance(sequence_value, bool)
+            or not isinstance(sequence_value, int)
+            or sequence_value < 1
+            or not isinstance(previous_value, str)
+            or not isinstance(entry_hash_value, str)
+        ):
+            failure = {
+                "kind": "invalid_chain_metadata",
+                "line": line_number,
+                "sequence": sequence_value if isinstance(sequence_value, (str, int, float, bool)) or sequence_value is None else type(sequence_value).__name__,
+            }
+            break
+
         data = {key: item for key, item in value.items() if key not in CHAIN_FIELDS}
-        valid_sequence = int(value["sequence"]) == expected_sequence
-        valid_link = str(value["previous_hash"]) == previous_hash
-        valid_hash = str(value["entry_hash"]) == _entry_hash(expected_sequence, previous_hash, data)
+        valid_sequence = sequence_value == expected_sequence
+        valid_link = previous_value == previous_hash
+        valid_hash = entry_hash_value == _entry_hash(expected_sequence, previous_hash, data)
         if not valid_sequence or not valid_link or not valid_hash:
             failure = {
                 "kind": "chain_mismatch",
                 "line": line_number,
-                "sequence": value.get("sequence"),
+                "sequence": sequence_value,
                 "expected_sequence": expected_sequence,
                 "link_valid": valid_link,
                 "hash_valid": valid_hash,
@@ -200,7 +230,7 @@ def verify_jsonl(path: Path) -> dict[str, Any]:
         saw_chain = True
         chained_count += 1
         records.append(value)
-        previous_hash = str(value["entry_hash"])
+        previous_hash = entry_hash_value
         expected_sequence += 1
 
     return {
