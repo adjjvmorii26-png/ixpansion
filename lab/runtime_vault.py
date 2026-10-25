@@ -116,6 +116,15 @@ def append_jsonl(path: Path, record: dict[str, Any]) -> dict[str, Any]:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a+", encoding="utf-8") as handle:
         fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+        # Refuse to extend a ledger that already fails verification. Otherwise
+        # a valid-looking new tail could be appended after a corrupt record,
+        # leaving the ledger unusable while appearing to have accepted a write.
+        existing_audit = verify_jsonl(path)
+        if not existing_audit["ok"]:
+            failure = existing_audit.get("failure") or {}
+            kind = failure.get("kind", "unknown")
+            line = failure.get("line", "unknown")
+            raise ValueError(f"cannot append to an unverifiable ledger ({kind}, line {line})")
         handle.seek(0)
         previous_record = None
         for line in handle:
