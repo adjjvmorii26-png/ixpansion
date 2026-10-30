@@ -1,0 +1,1 @@
+{"id":"holodeck.spatial-inspector","version":"0.1.0","label":"Inspect object","description":"Summarizes the selected object's spatial state.","contexts":["object.selected","scene.inspect"],"capabilities":["spatial.read"],"input":{"type":"object","required":["object"]},"output":{"type":"object"},"limits":{"timeoutMs":500,"maxInputBytes":4096,"maxDepth":1}}
