@@ -1,16 +1,15 @@
 # Motion Lab 2D
 
-Live sandbox for **motion-evolution**.
+Live arena for **motion-evolution**.
 
-- Action-conditioned 2D physics world
-- Genome-based evolution of physics parameters, controllers, and spawn behavior
-- Real-world consistency enforced (collisions, energy, permanence)
+## Current Champion
+`gen2-cross-ba` — crossover of the most stable and most lively gen1 lines.
 
-## Structure
+## Features
+- Action-conditioned physics
+- One-click genome switching (Champion / Gen1-A / Gen1-B / Gen1-C)
+- Live stats: collisions, max speed, active genome
+- Keyboard: Arrows = thrust, S = spawn, R = reset
 
-- `index.html` — runnable sandbox
-- `genomes/` — baseline + mutant motion genomes
-
-## Usage
-
-Open `index.html` (or serve the folder). Use keyboard to thrust / spawn / reset. Evolution cycles write new genomes here.
+## Genomes
+See `genomes/` for full history (gen0 → gen1 evaluation → gen2 → champion).
