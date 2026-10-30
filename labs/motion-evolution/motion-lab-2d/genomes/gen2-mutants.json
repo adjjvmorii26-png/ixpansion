@@ -1,0 +1,86 @@
+[
+  {
+    "id": "gen2-cross-ba",
+    "parents": ["gen1-mut-b", "gen1-mut-a"],
+    "generation": 2,
+    "mutation": "crossover: controlled base + bouncy restitution/thrust",
+    "genome": {
+      "physics": {
+        "gravity": 0.055,
+        "friction": 0.985,
+        "restitution": 0.84,
+        "maxSpeed": 15,
+        "substeps": 3,
+        "wallRestitution": 0.68
+      },
+      "controller": {
+        "thrustStrength": 1.25,
+        "playerMass": 2.1,
+        "dampingOnThrust": true
+      },
+      "spawn": {
+        "baseRadius": 8,
+        "radiusVariance": 9,
+        "massBase": 0.55,
+        "massVariance": 0.9,
+        "initialSpeedScale": 3.6
+      }
+    }
+  },
+  {
+    "id": "gen2-refine-b",
+    "parent": "gen1-mut-b",
+    "generation": 2,
+    "mutation": "point refine: slightly higher interest while keeping stability",
+    "genome": {
+      "physics": {
+        "gravity": 0.05,
+        "friction": 0.982,
+        "restitution": 0.76,
+        "maxSpeed": 15,
+        "substeps": 3,
+        "wallRestitution": 0.60
+      },
+      "controller": {
+        "thrustStrength": 1.15,
+        "playerMass": 2.15,
+        "dampingOnThrust": true
+      },
+      "spawn": {
+        "baseRadius": 7.5,
+        "radiusVariance": 9,
+        "massBase": 0.55,
+        "massVariance": 0.85,
+        "initialSpeedScale": 3.5
+      }
+    }
+  },
+  {
+    "id": "gen2-explore-c",
+    "parent": "gen1-mut-c",
+    "generation": 2,
+    "mutation": "diversity preserve: tame the swarm slightly",
+    "genome": {
+      "physics": {
+        "gravity": 0.065,
+        "friction": 0.988,
+        "restitution": 0.87,
+        "maxSpeed": 16.5,
+        "substeps": 2,
+        "wallRestitution": 0.75
+      },
+      "controller": {
+        "thrustStrength": 1.35,
+        "playerMass": 1.6,
+        "dampingOnThrust": false
+      },
+      "spawn": {
+        "baseRadius": 6.5,
+        "radiusVariance": 11,
+        "massBase": 0.4,
+        "massVariance": 0.95,
+        "initialSpeedScale": 4.8
+      }
+    }
+  }
+]
