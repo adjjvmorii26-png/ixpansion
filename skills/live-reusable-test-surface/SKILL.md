@@ -1,76 +1,64 @@
 ---
 name: live-reusable-test-surface
-version: 0.2.0
-description: Reusable browser preview surface plus evidence-first Playwright smoke testing for web applications and renderer previews.
+version: 0.3.0
+description: Runtime-neutral local test chamber with bounded subprocess execution and structured evidence; browser automation is an optional adapter.
 ---
 
-# Live Reusable Test Surface
+# Live Test Chamber
 
 ## Purpose
-Provide a reusable visual surface and a repeatable browser evidence runner for testing web UIs, pull-request previews, local development servers, Holodeck renderers, and canvas prototypes.
 
-## Components
-- `assets/test-surface.html`: manual sandboxed iframe preview with viewport presets, reload, reset, and direct-open fallback.
-- `scripts/browser-smoke.mjs`: optional Playwright smoke runner that captures a screenshot and JSON evidence report.
+Provide a native execution and evidence layer for IXPANSION modules, Holodeck renderers, scripts, and local application components. The chamber separates execution from presentation: it runs a declared target, captures process evidence, evaluates explicit expectations, and emits a machine-readable report. It does not require a browser canvas or iframe.
 
-## Manual preview workflow
-1. Identify a deployed preview URL, local development URL, or HTML fixture.
-2. Open `assets/test-surface.html` in a browser or serve the containing directory from a local development server.
-3. Enter an HTTP(S) URL and press **Load**.
-4. Select a viewport preset and inspect responsive layout, navigation, forms, loading states, and visible failures.
-5. Use reload/reset to repeat the visual check.
-6. If the target blocks iframe embedding with CSP `frame-ancestors` or `X-Frame-Options`, use **Open separately**. Do not bypass the target's framing policy.
-7. Record expected and observed behavior. A frame load event is not proof of application health.
+## Architecture
 
-## Automated smoke workflow
-The runner is an optional development dependency; it does not add Playwright to the repository's runtime dependencies.
+- `scripts/live_test_chamber.py`: standard-library execution controller and CLI.
+- Runtime adapters: Python and Node.js command builders. New adapters can implement the same command-builder contract.
+- Evidence envelope: target, runtime, timestamps, exit status, duration, bounded stdout/stderr, expectations, and result.
+- Optional presentation adapters may consume the JSON report. Browser automation is not part of the core.
 
-Install in a development environment:
+## Run a local target
+
+Run trusted project code only. This tool is an execution harness, not a security sandbox. It does not isolate filesystem access, prevent network access, or make hostile code safe.
+
+Python:
 ```sh
-npm install --save-dev playwright
-npx playwright install chromium
+python skills/live-reusable-test-surface/scripts/live_test_chamber.py \
+  --root . --runtime python --target tests/test_example.py \
+  --expect-exit 0 --expect-stdout "passed"
 ```
 
-Run an observation-only check:
+Node.js:
 ```sh
-node skills/live-reusable-test-surface/scripts/browser-smoke.mjs https://example.com
+python skills/live-reusable-test-surface/scripts/live_test_chamber.py \
+  --root . --runtime node --target scripts/example.mjs \
+  --expect-exit 0
 ```
 
-Observation-only runs produce a **REVIEW** result, not PASS, because no expected behavior was asserted.
+Evidence is written to stdout as JSON. Use `--report artifacts/live-test/report.json` to persist it. Exit codes: 0 PASS, 1 FAIL, 2 invalid invocation or missing runtime.
 
-Run with explicit assertions:
-```sh
-node skills/live-reusable-test-surface/scripts/browser-smoke.mjs https://example.com \
-  --expect-title "Example Domain" \
-  --expect-text "Example Domain" \
-  --viewport 1280x800 \
-  --out artifacts/browser-smoke
-```
+## Result semantics
 
-The runner emits a timestamped JSON report and screenshot. Exit codes:
-- `0`: assertions passed, or observation-only run completed without a hard failure.
-- `1`: navigation, browser execution, or supplied assertion failure.
-- `2`: invalid arguments or Playwright missing.
+- PASS: process exited with the expected code and every supplied stdout expectation matched.
+- FAIL: process failed, timed out, or an expectation did not match.
+- REVIEW: reserved for adapters that observe without assertions. The core CLI requires an explicit expected exit code.
+- BLOCKED: reserved for policy or environment refusal before execution.
 
-The JSON report records the target, viewport, final URL, main document status, page title, uncaught page errors, console errors, failed requests, HTTP error responses, assertion outcomes, screenshot path, and result. Review console errors and failed subrequests as evidence; not every subrequest failure necessarily means the application itself failed.
+A zero exit code alone is not proof of semantic correctness. Add meaningful output expectations or a dedicated test suite.
 
-## Safety and limitations
-- Treat target pages as untrusted content. Do not enter secrets into unfamiliar targets.
-- The manual iframe uses a sandbox. Some apps requiring popups, downloads, authentication flows, or top-level navigation may not work within it.
-- Cross-origin browser security prevents the manual surface from reading target DOM, console, network responses, or internal state.
-- The Playwright runner opens the target directly in a separate headless Chromium session. It does not bypass CSP, perform login, submit forms, or attempt to evade access controls.
-- A local URL is reachable only from the machine running the browser. A hosted runner cannot automatically reach a developer's localhost.
-- The runner is a smoke-test primitive, not a full test suite. Assertions must encode meaningful expected behavior, and screenshot presence alone does not prove correctness.
-- The runner writes evidence to the selected output directory. Keep generated artifacts out of version control unless they are intentionally reviewed and committed.
+## Safety boundary
 
-## Evidence record template
-- Target:
-- Commit / branch:
-- Browser and OS:
-- Viewport:
-- Expected:
-- Observed:
-- Result: PASS / FAIL / REVIEW / BLOCKED
-- Evidence report:
-- Screenshot:
-- Follow-up:
+- Accept only a target file inside the declared project root; reject path traversal and symlink escapes.
+- Invoke runtimes with argument arrays, never a shell.
+- Apply a timeout and cap the amount of output retained in the evidence report.
+- Pass a minimal environment rather than inheriting all parent variables.
+- Do not pass credentials or secrets to test targets.
+- This is not an OS-level sandbox. Run only code you trust, preferably inside a disposable container/VM with network and filesystem policy configured externally.
+
+## Optional adapters
+
+Browser/Playwright, WebGPU, GPU simulation, and remote execution can be added as independent adapters. They must emit the same evidence envelope and must not upgrade REVIEW to PASS without explicit assertions.
+
+## Evidence record
+
+The JSON report contains schema version, target, runtime, timestamps, duration, exit code, timeout state, stdout/stderr excerpts, assertions, and result. Keep reports as build artifacts; do not commit generated output by default.
