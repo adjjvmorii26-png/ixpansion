@@ -1,47 +1,76 @@
 ---
 name: live-reusable-test-surface
-version: 0.1.0
-description: Launch a reusable browser-like test surface or canvas for previewing web apps, local development servers, deployed previews, and isolated HTML fixtures.
+version: 0.2.0
+description: Reusable browser preview surface plus evidence-first Playwright smoke testing for web applications and renderer previews.
 ---
 
 # Live Reusable Test Surface
 
 ## Purpose
-Provide a reusable visual surface for testing a URL or HTML fixture without rebuilding a new test page for each run. Use when reviewing a web UI, PR preview, local dev server, Holodeck renderer, or canvas prototype.
+Provide a reusable visual surface and a repeatable browser evidence runner for testing web UIs, pull-request previews, local development servers, Holodeck renderers, and canvas prototypes.
 
-## Modes
-- URL mode: Load an HTTP(S) target inside a sandboxed iframe.
-- Fixture mode: Paste self-contained HTML into a separate preview window or save it as a local fixture.
-- Viewport mode: Test common desktop, tablet, and mobile viewport sizes.
-- Reload/reset: Reload the target, clear the current target, and reset the viewport.
-- Evidence mode: Record target URL, viewport, timestamp, expected behavior, observed behavior, and screenshots/logs supplied by the browser runner.
+## Components
+- `assets/test-surface.html`: manual sandboxed iframe preview with viewport presets, reload, reset, and direct-open fallback.
+- `scripts/browser-smoke.mjs`: optional Playwright smoke runner that captures a screenshot and JSON evidence report.
 
-## Workflow
-1. Identify the target: deployed preview URL, local development URL, or HTML fixture.
-2. Open assets/test-surface.html in a browser or serve the containing directory from a local development server.
-3. Enter the target URL and press Load. Only HTTP and HTTPS URLs are accepted.
-4. Select a viewport preset and check responsive layout, navigation, forms, loading states, and visible runtime failures.
-5. Repeat with reload and reset to check repeatability.
-6. Record results as PASS, FAIL, or BLOCKED. Never mark a test passed merely because the page rendered.
-7. If the target blocks iframe embedding with CSP frame-ancestors or X-Frame-Options, use Open separately and test the page directly. Do not attempt to bypass the site's framing policy.
-8. For automated testing, prefer Playwright or the project's existing browser test harness. This visual surface is a manual preview tool, not an automation runner.
+## Manual preview workflow
+1. Identify a deployed preview URL, local development URL, or HTML fixture.
+2. Open `assets/test-surface.html` in a browser or serve the containing directory from a local development server.
+3. Enter an HTTP(S) URL and press **Load**.
+4. Select a viewport preset and inspect responsive layout, navigation, forms, loading states, and visible failures.
+5. Use reload/reset to repeat the visual check.
+6. If the target blocks iframe embedding with CSP `frame-ancestors` or `X-Frame-Options`, use **Open separately**. Do not bypass the target's framing policy.
+7. Record expected and observed behavior. A frame load event is not proof of application health.
+
+## Automated smoke workflow
+The runner is an optional development dependency; it does not add Playwright to the repository's runtime dependencies.
+
+Install in a development environment:
+```sh
+npm install --save-dev playwright
+npx playwright install chromium
+```
+
+Run an observation-only check:
+```sh
+node skills/live-reusable-test-surface/scripts/browser-smoke.mjs https://example.com
+```
+
+Observation-only runs produce a **REVIEW** result, not PASS, because no expected behavior was asserted.
+
+Run with explicit assertions:
+```sh
+node skills/live-reusable-test-surface/scripts/browser-smoke.mjs https://example.com \
+  --expect-title "Example Domain" \
+  --expect-text "Example Domain" \
+  --viewport 1280x800 \
+  --out artifacts/browser-smoke
+```
+
+The runner emits a timestamped JSON report and screenshot. Exit codes:
+- `0`: assertions passed, or observation-only run completed without a hard failure.
+- `1`: navigation, browser execution, or supplied assertion failure.
+- `2`: invalid arguments or Playwright missing.
+
+The JSON report records the target, viewport, final URL, main document status, page title, uncaught page errors, console errors, failed requests, HTTP error responses, assertion outcomes, screenshot path, and result. Review console errors and failed subrequests as evidence; not every subrequest failure necessarily means the application itself failed.
 
 ## Safety and limitations
-- Treat the target page as untrusted content.
-- The preview iframe is sandboxed. Some apps requiring popups, downloads, authentication flows, or top-level navigation may not work inside it.
-- Cross-origin browser security prevents this page from reading the target's DOM, console, network responses, or internal state.
-- Do not enter secrets into unfamiliar targets.
-- Do not disable browser security, relax the iframe sandbox, or bypass CSP.
-- A local URL is reachable only from the browser's machine/network. A hosted sandbox cannot automatically reach a user's localhost.
-- The surface itself does not create a persistent remote browser session; persistence comes from keeping the page open or re-opening the same fixture.
+- Treat target pages as untrusted content. Do not enter secrets into unfamiliar targets.
+- The manual iframe uses a sandbox. Some apps requiring popups, downloads, authentication flows, or top-level navigation may not work within it.
+- Cross-origin browser security prevents the manual surface from reading target DOM, console, network responses, or internal state.
+- The Playwright runner opens the target directly in a separate headless Chromium session. It does not bypass CSP, perform login, submit forms, or attempt to evade access controls.
+- A local URL is reachable only from the machine running the browser. A hosted runner cannot automatically reach a developer's localhost.
+- The runner is a smoke-test primitive, not a full test suite. Assertions must encode meaningful expected behavior, and screenshot presence alone does not prove correctness.
+- The runner writes evidence to the selected output directory. Keep generated artifacts out of version control unless they are intentionally reviewed and committed.
 
-## Test record template
+## Evidence record template
 - Target:
 - Commit / branch:
 - Browser and OS:
 - Viewport:
 - Expected:
 - Observed:
-- Result: PASS / FAIL / BLOCKED
-- Evidence:
+- Result: PASS / FAIL / REVIEW / BLOCKED
+- Evidence report:
+- Screenshot:
 - Follow-up:
