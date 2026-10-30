@@ -16,12 +16,14 @@ export class World {
     this.bodies = [];
     this.nextId = 1;
   }
-  addBody({ x = this.width / 2, y = 80, vx = 0, vy = 0, mass = 1, radius = 14 } = {}) {
+  addBody({ x = this.width / 2, y = 80, vx = 0, vy = 0, mass = 1, radius = 14, id } = {}) {
     if (this.bodies.length >= LIMITS.maxBodies) throw new RangeError("body capacity reached");
     for (const [name, value] of Object.entries({ x, y, vx, vy, mass, radius })) finite(value, name);
     if (mass < LIMITS.mass[0] || mass > LIMITS.mass[1]) throw new RangeError("mass outside allowed range");
     if (radius <= 0 || radius > 100) throw new RangeError("radius outside allowed range");
-    const body = { id: this.nextId++, x, y, vx, vy, mass, radius };
+    const bodyId = id != null ? finite(id, "id") : this.nextId++;
+    if (id != null && bodyId >= this.nextId) this.nextId = bodyId + 1;
+    const body = { id: bodyId, x, y, vx, vy, mass, radius };
     this.bodies.push(body);
     return body.id;
   }
@@ -56,13 +58,30 @@ export class World {
   }
   restore(snapshot) {
     if (!snapshot || snapshot.version !== 1 || !Array.isArray(snapshot.bodies) || snapshot.bodies.length > LIMITS.maxBodies) throw new TypeError("invalid snapshot");
-    const candidate = new World({ gravity: snapshot.gravity, width: snapshot.width, height: snapshot.height });
-    candidate.tick = snapshot.tick;
-    candidate.nextId = snapshot.nextId;
-    for (const raw of snapshot.bodies) candidate.addBody(raw);
-    candidate.tick = snapshot.tick;
-    candidate.nextId = snapshot.nextId;
-    Object.assign(this, candidate);
+    finite(snapshot.gravity, "gravity");
+    finite(snapshot.width, "width");
+    finite(snapshot.height, "height");
+    finite(snapshot.tick, "tick");
+    finite(snapshot.nextId, "nextId");
+    this.gravity = Math.max(LIMITS.gravity[0], Math.min(LIMITS.gravity[1], snapshot.gravity));
+    this.width = Math.max(100, snapshot.width);
+    this.height = Math.max(100, snapshot.height);
+    this.tick = snapshot.tick;
+    this.nextId = 1;
+    this.bodies = [];
+    for (const raw of snapshot.bodies) {
+      this.addBody({
+        id: raw.id,
+        x: raw.x,
+        y: raw.y,
+        vx: raw.vx,
+        vy: raw.vy,
+        mass: raw.mass,
+        radius: raw.radius
+      });
+    }
+    this.nextId = snapshot.nextId;
+    this.tick = snapshot.tick;
   }
   stateHash() {
     // Stable serialization + FNV-1a. Integrity checksum, not proof of correct physics.
