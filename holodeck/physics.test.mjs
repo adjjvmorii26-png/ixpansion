@@ -43,3 +43,59 @@ test("body capacity is bounded", () => {
   for (let i = 0; i < LIMITS.maxBodies; i++) w.addBody();
   assert.throws(() => w.addBody(), /capacity/);
 });
+
+test("restore rejects duplicate ids without mutating the live world", () => {
+  const w = new World({ gravity: 4 });
+  w.addBody({ x: 100, y: 120 });
+  w.step();
+  const before = w.stateHash();
+  const bad = w.snapshot();
+  bad.bodies.push({ ...bad.bodies[0] });
+  bad.nextId += 1;
+  assert.throws(() => w.restore(bad), /duplicate body id/);
+  assert.equal(w.stateHash(), before);
+});
+test("restore rejects invalid numeric fields without partial mutation", () => {
+  const w = new World({ gravity: 4 });
+  w.addBody({ x: 100, y: 120 });
+  const before = w.stateHash();
+  const bad = w.snapshot();
+  bad.bodies[0].x = Infinity;
+  assert.throws(() => w.restore(bad), /finite/);
+  assert.equal(w.stateHash(), before);
+});
+test("restore rejects unsafe counters, invalid gravity, and nextId collisions", () => {
+  const w = new World();
+  w.addBody();
+  const before = w.stateHash();
+  const cases = [
+    s => { s.tick = -1; },
+    s => { s.tick = Number.MAX_SAFE_INTEGER + 1; },
+    s => { s.gravity = 999; },
+    s => { s.nextId = s.bodies[0].id; },
+    s => { s.bodies[0].id = 1.5; },
+    s => { s.bodies[0].id = -2; }
+  ];
+  for (const corrupt of cases) {
+    const bad = w.snapshot();
+    corrupt(bad);
+    assert.throws(() => w.restore(bad));
+    assert.equal(w.stateHash(), before);
+  }
+});
+test("restore rejects non-object bodies and excessive body counts", () => {
+  const w = new World();
+  const before = w.stateHash();
+  const badBody = w.snapshot();
+  badBody.bodies = [null];
+  badBody.nextId = 2;
+  assert.throws(() => w.restore(badBody), /invalid body/);
+  assert.equal(w.stateHash(), before);
+  const tooMany = w.snapshot();
+  tooMany.bodies = Array.from({ length: LIMITS.maxBodies + 1 }, (_, i) => ({
+    id: i + 1, x: 1, y: 1, vx: 0, vy: 0, mass: 1, radius: 1
+  }));
+  tooMany.nextId = LIMITS.maxBodies + 2;
+  assert.throws(() => w.restore(tooMany), /invalid snapshot/);
+  assert.equal(w.stateHash(), before);
+});
