@@ -12,6 +12,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -78,26 +79,31 @@ def execute(args: argparse.Namespace) -> dict:
         raise FileNotFoundError(f"Runtime not found: {args.runtime}")
     command = RUNTIMES[args.runtime](executable, str(target))
     timed_out = False
-    try:
-        completed = subprocess.run(
-            command,
-            cwd=root,
-            env=build_environment(),
-            stdin=subprocess.DEVNULL,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            timeout=args.timeout,
-            check=False,
-            shell=False,
-        )
-        exit_code = completed.returncode
-        stdout = read_excerpt(completed.stdout)
-        stderr = read_excerpt(completed.stderr)
-    except subprocess.TimeoutExpired as exc:
-        timed_out = True
-        exit_code = None
-        stdout = read_excerpt(exc.stdout or b"")
-        stderr = read_excerpt(exc.stderr or b"")
+    with tempfile.TemporaryFile() as stdout_file, tempfile.TemporaryFile() as stderr_file:
+        try:
+            completed = subprocess.run(
+                command,
+                cwd=root,
+                env=build_environment(),
+                stdin=subprocess.DEVNULL,
+                stdout=stdout_file,
+                stderr=stderr_file,
+                timeout=args.timeout,
+                check=False,
+                shell=False,
+            )
+            exit_code = completed.returncode
+        except subprocess.TimeoutExpired:
+            timed_out = True
+            exit_code = None
+        stdout_file.seek(0)
+        stderr_file.seek(0)
+        stdout = read_excerpt(stdout_file.read(MAX_CAPTURE_BYTES + 1))
+        stderr = read_excerpt(stderr_file.read(MAX_CAPTURE_BYTES + 1))
+        if stdout_file.seek(0, 2) > MAX_CAPTURE_BYTES and "[output truncated" not in stdout:
+            stdout += "\\n[output truncated at 65536 bytes]"
+        if stderr_file.seek(0, 2) > MAX_CAPTURE_BYTES and "[output truncated" not in stderr:
+            stderr += "\\n[output truncated at 65536 bytes]"
     assertions = [
         {"kind": "exit_code", "expected": args.expect_exit, "actual": exit_code,
          "passed": exit_code == args.expect_exit and not timed_out}
