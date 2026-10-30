@@ -225,12 +225,10 @@ class ApiHandler(BaseHTTPRequestHandler):
     def _write_cors_headers(self) -> None:
         from api.cors_middleware import CORSMiddleware
         origin = self.headers.get("Origin", "")
-        cors = CORSMiddleware().apply(origin)
-        self.send_header("Access-Control-Allow-Origin", cors["Access-Control-Allow-Origin"])
-        self.send_header("Access-Control-Allow-Methods", cors["Access-Control-Allow-Methods"])
-        self.send_header("Access-Control-Allow-Headers", cors["Access-Control-Allow-Headers"])
-        self.send_header("Access-Control-Max-Age", cors["Access-Control-Max-Age"])
-        self.send_header("Access-Control-Allow-Credentials", cors["Access-Control-Allow-Credentials"])
+        middleware = CORSMiddleware()
+        cors = middleware.preflight(origin) if self.command == "OPTIONS" else middleware.apply(origin)
+        for name, value in cors.items():
+            self.send_header(name, value)
 
     def _json(self, obj: Dict[str, Any], status: int = 200) -> None:
         body = json.dumps(obj, indent=2, default=str).encode()
@@ -1263,8 +1261,6 @@ class ApiHandler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
         self.send_response(204)
         self._write_cors_headers()
-        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
         self.send_header("Content-Length", "0")
         self.end_headers()
 
