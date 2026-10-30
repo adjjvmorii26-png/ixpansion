@@ -1,0 +1,86 @@
+[
+  {
+    "id": "gen1-mut-a",
+    "parent": "gen0-baseline",
+    "generation": 1,
+    "mutation": "higher restitution + slightly stronger thrust",
+    "genome": {
+      "physics": {
+        "gravity": 0.08,
+        "friction": 0.995,
+        "restitution": 0.89,
+        "maxSpeed": 16,
+        "substeps": 2,
+        "wallRestitution": 0.72
+      },
+      "controller": {
+        "thrustStrength": 1.35,
+        "playerMass": 2.0,
+        "dampingOnThrust": false
+      },
+      "spawn": {
+        "baseRadius": 8,
+        "radiusVariance": 10,
+        "massBase": 0.5,
+        "massVariance": 1.0,
+        "initialSpeedScale": 4.0
+      }
+    }
+  },
+  {
+    "id": "gen1-mut-b",
+    "parent": "gen0-baseline",
+    "generation": 1,
+    "mutation": "lower gravity + higher friction (more controlled)",
+    "genome": {
+      "physics": {
+        "gravity": 0.045,
+        "friction": 0.98,
+        "restitution": 0.70,
+        "maxSpeed": 14,
+        "substeps": 3,
+        "wallRestitution": 0.55
+      },
+      "controller": {
+        "thrustStrength": 1.0,
+        "playerMass": 2.2,
+        "dampingOnThrust": true
+      },
+      "spawn": {
+        "baseRadius": 8,
+        "radiusVariance": 8,
+        "massBase": 0.6,
+        "massVariance": 0.8,
+        "initialSpeedScale": 3.2
+      }
+    }
+  },
+  {
+    "id": "gen1-mut-c",
+    "parent": "gen0-baseline",
+    "generation": 1,
+    "mutation": "bouncy low-mass swarm style",
+    "genome": {
+      "physics": {
+        "gravity": 0.06,
+        "friction": 0.99,
+        "restitution": 0.92,
+        "maxSpeed": 18,
+        "substeps": 2,
+        "wallRestitution": 0.80
+      },
+      "controller": {
+        "thrustStrength": 1.5,
+        "playerMass": 1.4,
+        "dampingOnThrust": false
+      },
+      "spawn": {
+        "baseRadius": 6,
+        "radiusVariance": 12,
+        "massBase": 0.35,
+        "massVariance": 0.9,
+        "initialSpeedScale": 5.5
+      }
+    }
+  }
+]
