@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-SCRIPT = Path(__file__).parents[1] / "scripts" / "live_test_chamber.py"
+SCRIPT = Path(__file__).parents[1] / "skills" / "live-reusable-test-surface" / "scripts" / "live_test_chamber.py"
 
 
 class LiveTestChamberTests(unittest.TestCase):
