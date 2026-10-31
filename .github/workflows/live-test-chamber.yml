@@ -1,0 +1,38 @@
+name: Live Test Chamber Contract
+
+on:
+  pull_request:
+    paths:
+      - "skills/live-reusable-test-surface/**"
+      - "tests/test_live_test_chamber.py"
+      - ".github/workflows/live-test-chamber.yml"
+  push:
+    branches:
+      - "feat/live-reusable-test-surface-v0.1"
+    paths:
+      - "skills/live-reusable-test-surface/**"
+      - "tests/test_live_test_chamber.py"
+      - ".github/workflows/live-test-chamber.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: live-test-chamber-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run Live Test Chamber contract tests
+        run: python -m unittest -v tests/test_live_test_chamber.py
+      - name: Validate CLI help
+        run: python skills/live-reusable-test-surface/scripts/live_test_chamber.py --help
