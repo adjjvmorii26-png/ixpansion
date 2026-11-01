@@ -12,7 +12,8 @@ on:
       - "feat/live-reusable-test-surface-v0.1"
     paths:
       - "skills/live-reusable-test-surface/**"
-      - "tests/test_live_test_chamber.py"
+      - "tests/test_live_test-chamber.py"
+      - "tests/test_browser_smoke_cli.py"
       - ".github/workflows/live-test-chamber.yml"
 
 permissions:
