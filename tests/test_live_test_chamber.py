@@ -68,11 +68,15 @@ class LiveTestChamberTests(unittest.TestCase):
         import time
         if os.name == "nt":
             self.skipTest("Process-group descendant behavior is platform-specific")
+        (self.root / "child.py").write_text(
+            "import time\\ntime.sleep(0.6)\\n"
+            "open('child-survived', 'w').write('yes')\\n",
+            encoding="utf-8",
+        )
         (self.root / "parent.py").write_text(
-            "import subprocess, sys, time\n"
-            "subprocess.Popen([sys.executable, '-c', "
-            "\"import time; time.sleep(0.6); open('child-survived', 'w').write('yes')\"])\n"
-            "time.sleep(5)\n",
+            "import subprocess, sys, time\\n"
+            "subprocess.Popen([sys.executable, 'child.py'])\\n"
+            "time.sleep(5)\\n",
             encoding="utf-8",
         )
         result = self.run_chamber(
