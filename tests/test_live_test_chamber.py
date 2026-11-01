@@ -75,16 +75,30 @@ class LiveTestChamberTests(unittest.TestCase):
         stdout_report = json.loads(result.stdout)
         self.assertEqual(stdout_report["report_path"], saved["report_path"])
 
-    def test_large_output_is_truncated_in_evidence(self):
-        (self.root / "large.py").write_text('print("x" * 100000)\n', encoding="utf-8")
+    def test_large_stdout_and_stderr_are_bounded(self):
+        (self.root / "large.py").write_text(
+            'import sys; print("x" * 100000); print("y" * 100000, file=sys.stderr)\n',
+            encoding="utf-8",
+        )
         result = self.run_chamber(
             "--runtime", "python", "--target", "large.py", "--expect-exit", "0",
         )
         self.assertEqual(result.returncode, 0, result.stderr)
         report = json.loads(result.stdout)
         self.assertEqual(report["result"], "PASS")
-        self.assertIn("output truncated at 65536 bytes", report["stdout"])
-        self.assertLessEqual(len(report["stdout"].encode("utf-8")), 65600)
+        for stream in ("stdout", "stderr"):
+            self.assertIn("output truncated at 65536 bytes", report[stream])
+            self.assertLessEqual(len(report[stream].encode("utf-8")), 65600)
+
+    def test_report_cannot_overwrite_target(self):
+        original = (self.root / "ok.py").read_text(encoding="utf-8")
+        result = self.run_chamber(
+            "--runtime", "python", "--target", "ok.py", "--expect-exit", "0",
+            "--report", "ok.py",
+        )
+        self.assertEqual(result.returncode, 2)
+        self.assertEqual(json.loads(result.stdout)["result"], "BLOCKED")
+        self.assertEqual((self.root / "ok.py").read_text(encoding="utf-8"), original)
 
 
 if __name__ == "__main__":
