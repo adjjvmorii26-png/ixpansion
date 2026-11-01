@@ -13,7 +13,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
-import { pathToFileURL } from "node:url";
 
 function usage() {
   console.log(`Usage:
@@ -79,6 +78,15 @@ function parseArgs(argv) {
 
 function isoNow() { return new Date().toISOString(); }
 
+const MAX_EVENTS_PER_CATEGORY = 200;
+function recordEvent(report, category, event) {
+  if (report[category].length < MAX_EVENTS_PER_CATEGORY) {
+    report[category].push(event);
+  } else {
+    report.event_overflow[category] = (report.event_overflow[category] ?? 0) + 1;
+  }
+}
+
 async function main() {
   let options;
   try {
@@ -120,6 +128,7 @@ async function main() {
     page_errors: [],
     failed_requests: [],
     http_error_responses: [],
+    event_overflow: {},
     assertions_results: [],
     screenshot: screenshotPath,
     result: "REVIEW",
@@ -137,11 +146,11 @@ async function main() {
     const page = await context.newPage();
     page.setDefaultTimeout(options.timeout);
     page.on("console", message => {
-      if (message.type() === "error") report.console_errors.push({ text: message.text(), at: isoNow() });
+      if (message.type() === "error") recordEvent(report, "console_errors", { text: message.text(), at: isoNow() });
     });
-    page.on("pageerror", error => report.page_errors.push({ message: error.message, at: isoNow() }));
+    page.on("pageerror", error => recordEvent(report, "page_errors", { message: error.message, at: isoNow() }));
     page.on("requestfailed", request => {
-      report.failed_requests.push({
+      recordEvent(report, "failed_requests", {
         url: request.url(),
         method: request.method(),
         error: request.failure()?.errorText ?? "unknown",
@@ -150,7 +159,7 @@ async function main() {
     });
     page.on("response", response => {
       if (response.status() >= 400) {
-        report.http_error_responses.push({ url: response.url(), status: response.status(), at: isoNow() });
+        recordEvent(report, "http_error_responses", { url: response.url(), status: response.status(), at: isoNow() });
       }
     });
 
@@ -206,6 +215,7 @@ async function main() {
       console_errors: report.console_errors.length,
       failed_requests: report.failed_requests.length,
       http_error_responses: report.http_error_responses.length,
+      event_overflow: report.event_overflow,
       screenshot: screenshotPath,
       report: reportPath,
       failure_reason: report.failure_reason,
