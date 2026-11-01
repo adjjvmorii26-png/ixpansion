@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -79,31 +80,57 @@ def execute(args: argparse.Namespace) -> dict:
         raise FileNotFoundError(f"Runtime not found: {args.runtime}")
     command = RUNTIMES[args.runtime](executable, str(target))
     timed_out = False
-    with tempfile.TemporaryFile() as stdout_file, tempfile.TemporaryFile() as stderr_file:
+    stdout_buffer = bytearray()
+    stderr_buffer = bytearray()
+    stdout_total = [0]
+    stderr_total = [0]
+
+    def drain(stream, buffer: bytearray, total: list[int]) -> None:
         try:
-            completed = subprocess.run(
-                command,
-                cwd=root,
-                env=build_environment(),
-                stdin=subprocess.DEVNULL,
-                stdout=stdout_file,
-                stderr=stderr_file,
-                timeout=args.timeout,
-                check=False,
-                shell=False,
-            )
-            exit_code = completed.returncode
-        except subprocess.TimeoutExpired:
-            timed_out = True
-            exit_code = None
-        stdout_file.seek(0)
-        stderr_file.seek(0)
-        stdout = read_excerpt(stdout_file.read(MAX_CAPTURE_BYTES + 1))
-        stderr = read_excerpt(stderr_file.read(MAX_CAPTURE_BYTES + 1))
-        if stdout_file.seek(0, 2) > MAX_CAPTURE_BYTES and "[output truncated" not in stdout:
-            stdout += "\n[output truncated at 65536 bytes]"
-        if stderr_file.seek(0, 2) > MAX_CAPTURE_BYTES and "[output truncated" not in stderr:
-            stderr += "\n[output truncated at 65536 bytes]"
+            while True:
+                chunk = stream.read(8192)
+                if not chunk:
+                    break
+                total[0] += len(chunk)
+                remaining = MAX_CAPTURE_BYTES - len(buffer)
+                if remaining > 0:
+                    buffer.extend(chunk[:remaining])
+        finally:
+            stream.close()
+
+    process = subprocess.Popen(
+        command,
+        cwd=root,
+        env=build_environment(),
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        shell=False,
+    )
+    stdout_thread = threading.Thread(
+        target=drain, args=(process.stdout, stdout_buffer, stdout_total), daemon=True
+    )
+    stderr_thread = threading.Thread(
+        target=drain, args=(process.stderr, stderr_buffer, stderr_total), daemon=True
+    )
+    stdout_thread.start()
+    stderr_thread.start()
+    try:
+        process.wait(timeout=args.timeout)
+    except subprocess.TimeoutExpired:
+        timed_out = True
+        process.kill()
+        process.wait()
+    stdout_thread.join()
+    stderr_thread.join()
+    exit_code = None if timed_out else process.returncode
+
+    stdout = stdout_buffer.decode("utf-8", errors="replace")
+    stderr = stderr_buffer.decode("utf-8", errors="replace")
+    if stdout_total[0] > MAX_CAPTURE_BYTES:
+        stdout += "\\n[output truncated at 65536 bytes]"
+    if stderr_total[0] > MAX_CAPTURE_BYTES:
+        stderr += "\\n[output truncated at 65536 bytes]"
     assertions = [
         {"kind": "exit_code", "expected": args.expect_exit, "actual": exit_code,
          "passed": exit_code == args.expect_exit and not timed_out}
