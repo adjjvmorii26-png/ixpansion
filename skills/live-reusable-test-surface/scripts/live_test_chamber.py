@@ -10,6 +10,7 @@ import argparse
 import json
 import os
 import shutil
+import signal
 import subprocess
 import sys
 import threading
@@ -97,15 +98,19 @@ def execute(args: argparse.Namespace) -> dict:
         finally:
             stream.close()
 
-    process = subprocess.Popen(
-        command,
-        cwd=root,
-        env=build_environment(),
-        stdin=subprocess.DEVNULL,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        shell=False,
-    )
+    popen_options = {
+        "cwd": root,
+        "env": build_environment(),
+        "stdin": subprocess.DEVNULL,
+        "stdout": subprocess.PIPE,
+        "stderr": subprocess.PIPE,
+        "shell": False,
+    }
+    if os.name == "nt":
+        popen_options["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
+    else:
+        popen_options["start_new_session"] = True
+    process = subprocess.Popen(command, **popen_options)
     stdout_thread = threading.Thread(
         target=drain, args=(process.stdout, stdout_buffer, stdout_total), daemon=True
     )
@@ -118,10 +123,35 @@ def execute(args: argparse.Namespace) -> dict:
         process.wait(timeout=args.timeout)
     except subprocess.TimeoutExpired:
         timed_out = True
-        process.kill()
-        process.wait()
-    stdout_thread.join()
-    stderr_thread.join()
+        if os.name == "nt":
+            try:
+                subprocess.run(
+                    ["taskkill", "/PID", str(process.pid), "/T", "/F"],
+                    stdin=subprocess.DEVNULL,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    timeout=5,
+                    check=False,
+                )
+            except (OSError, subprocess.SubprocessError):
+                pass
+            if process.poll() is None:
+                process.kill()
+        else:
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        try:
+            process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait()
+    stdout_thread.join(timeout=5)
+    stderr_thread.join(timeout=5)
+    for thread in (stdout_thread, stderr_thread):
+        if thread.is_alive():
+            raise subprocess.SubprocessError("Output pipe remained open after process termination")
     exit_code = None if timed_out else process.returncode
 
     stdout = stdout_buffer.decode("utf-8", errors="replace")
@@ -160,6 +190,10 @@ def execute(args: argparse.Namespace) -> dict:
         report_path = (root / args.report).resolve()
         if not report_path.is_relative_to(root):
             raise ValueError("Report path must remain inside project root")
+        if report_path == target:
+            raise ValueError("Report path must not overwrite the executed target")
+        if report_path.exists() and not report_path.is_file():
+            raise ValueError("Report path must be a file path")
         report_path.parent.mkdir(parents=True, exist_ok=True)
         report["report_path"] = str(report_path.relative_to(root))
         report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
