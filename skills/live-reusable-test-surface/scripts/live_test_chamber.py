@@ -101,9 +101,9 @@ def execute(args: argparse.Namespace) -> dict:
         stdout = read_excerpt(stdout_file.read(MAX_CAPTURE_BYTES + 1))
         stderr = read_excerpt(stderr_file.read(MAX_CAPTURE_BYTES + 1))
         if stdout_file.seek(0, 2) > MAX_CAPTURE_BYTES and "[output truncated" not in stdout:
-            stdout += "\\n[output truncated at 65536 bytes]"
+            stdout += "\n[output truncated at 65536 bytes]"
         if stderr_file.seek(0, 2) > MAX_CAPTURE_BYTES and "[output truncated" not in stderr:
-            stderr += "\\n[output truncated at 65536 bytes]"
+            stderr += "\n[output truncated at 65536 bytes]"
     assertions = [
         {"kind": "exit_code", "expected": args.expect_exit, "actual": exit_code,
          "passed": exit_code == args.expect_exit and not timed_out}
@@ -135,8 +135,8 @@ def execute(args: argparse.Namespace) -> dict:
         if not report_path.is_relative_to(root):
             raise ValueError("Report path must remain inside project root")
         report_path.parent.mkdir(parents=True, exist_ok=True)
-        report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         report["report_path"] = str(report_path.relative_to(root))
+        report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     return report
 
 
