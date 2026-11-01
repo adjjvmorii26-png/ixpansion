@@ -72,6 +72,19 @@ class LiveTestChamberTests(unittest.TestCase):
         saved = json.loads((self.root / "artifacts/report.json").read_text(encoding="utf-8"))
         self.assertEqual(saved["result"], "PASS")
         self.assertEqual(saved["report_path"], "artifacts/report.json")
+        stdout_report = json.loads(result.stdout)
+        self.assertEqual(stdout_report["report_path"], saved["report_path"])
+
+    def test_large_output_is_truncated_in_evidence(self):
+        (self.root / "large.py").write_text('print("x" * 100000)\\n', encoding="utf-8")
+        result = self.run_chamber(
+            "--runtime", "python", "--target", "large.py", "--expect-exit", "0",
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(report["result"], "PASS")
+        self.assertIn("output truncated at 65536 bytes", report["stdout"])
+        self.assertLessEqual(len(report["stdout"].encode("utf-8")), 65600)
 
 
 if __name__ == "__main__":
