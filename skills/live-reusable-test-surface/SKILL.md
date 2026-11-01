@@ -48,9 +48,9 @@ A zero exit code alone is not proof of semantic correctness. Add meaningful outp
 
 ## Safety boundary
 
-- Accept only a target file inside the declared project root; reject path traversal and symlink escapes.
+- Accept only a target file inside the declared project root; reject path traversal and symlink escapes. Evidence report paths must also stay inside the root and must not overwrite the executed target.
 - Invoke runtimes with argument arrays, never a shell.
-- Apply a timeout and cap the amount of output retained in the evidence report.
+- Apply a timeout, terminate the process group on POSIX timeout, drain subprocess pipes while retaining at most 64 KiB per stream, and bound browser diagnostic arrays to 200 events per category. Overflow counts are reported.
 - Pass a minimal environment rather than inheriting all parent variables.
 - Do not pass credentials or secrets to test targets.
 - This is not an OS-level sandbox. Run only code you trust, preferably inside a disposable container/VM with network and filesystem policy configured externally.
