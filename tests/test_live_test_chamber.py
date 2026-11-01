@@ -63,6 +63,26 @@ class LiveTestChamberTests(unittest.TestCase):
         self.assertTrue(report["timed_out"])
         self.assertEqual(report["result"], "FAIL")
 
+    def test_timeout_kills_child_processes(self):
+        import os
+        if os.name == "nt":
+            self.skipTest("Process-group descendant behavior is platform-specific")
+        (self.root / "parent.py").write_text(
+            "import subprocess, sys, time\\n"
+            "subprocess.Popen([sys.executable, '-c', "
+            "'import time; time.sleep(0.6); open(\\\"child-survived\\\", \\\"w\\\").write(\\\"yes\\\")'])\\n"
+            "time.sleep(5)\\n",
+            encoding="utf-8",
+        )
+        result = self.run_chamber(
+            "--runtime", "python", "--target", "parent.py",
+            "--expect-exit", "0", "--timeout", "0.2",
+        )
+        self.assertEqual(result.returncode, 1)
+        import time
+        time.sleep(0.8)
+        self.assertFalse((self.root / "child-survived").exists())
+
     def test_report_is_persisted_inside_root(self):
         result = self.run_chamber(
             "--runtime", "python", "--target", "ok.py", "--expect-exit", "0",
