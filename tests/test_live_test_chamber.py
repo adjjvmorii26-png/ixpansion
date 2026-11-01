@@ -76,7 +76,7 @@ class LiveTestChamberTests(unittest.TestCase):
         self.assertEqual(stdout_report["report_path"], saved["report_path"])
 
     def test_large_output_is_truncated_in_evidence(self):
-        (self.root / "large.py").write_text('print("x" * 100000)\\n', encoding="utf-8")
+        (self.root / "large.py").write_text('print("x" * 100000)\n', encoding="utf-8")
         result = self.run_chamber(
             "--runtime", "python", "--target", "large.py", "--expect-exit", "0",
         )
