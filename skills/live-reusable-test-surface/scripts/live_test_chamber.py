@@ -127,9 +127,9 @@ def execute(args: argparse.Namespace) -> dict:
     stdout = stdout_buffer.decode("utf-8", errors="replace")
     stderr = stderr_buffer.decode("utf-8", errors="replace")
     if stdout_total[0] > MAX_CAPTURE_BYTES:
-        stdout += "\\n[output truncated at 65536 bytes]"
+        stdout += "\n[output truncated at 65536 bytes]"
     if stderr_total[0] > MAX_CAPTURE_BYTES:
-        stderr += "\\n[output truncated at 65536 bytes]"
+        stderr += "\n[output truncated at 65536 bytes]"
     assertions = [
         {"kind": "exit_code", "expected": args.expect_exit, "actual": exit_code,
          "passed": exit_code == args.expect_exit and not timed_out}
