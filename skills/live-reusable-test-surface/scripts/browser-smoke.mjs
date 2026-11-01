@@ -79,9 +79,18 @@ function parseArgs(argv) {
 function isoNow() { return new Date().toISOString(); }
 
 const MAX_EVENTS_PER_CATEGORY = 200;
+const MAX_EVENT_STRING_CHARS = 2048;
 function recordEvent(report, category, event) {
   if (report[category].length < MAX_EVENTS_PER_CATEGORY) {
-    report[category].push(event);
+    const boundedEvent = Object.fromEntries(
+      Object.entries(event).map(([key, value]) => [
+        key,
+        typeof value === "string" && value.length > MAX_EVENT_STRING_CHARS
+          ? value.slice(0, MAX_EVENT_STRING_CHARS) + "[truncated]"
+          : value,
+      ]),
+    );
+    report[category].push(boundedEvent);
   } else {
     report.event_overflow[category] = (report.event_overflow[category] ?? 0) + 1;
   }
@@ -107,7 +116,12 @@ async function main() {
   }
 
   const outputDir = path.resolve(options.out);
-  await fs.mkdir(outputDir, { recursive: true });
+  try {
+    await fs.mkdir(outputDir, { recursive: true });
+  } catch (error) {
+    console.error(`Could not create evidence directory: ${error.message}`);
+    return 1;
+  }
   const stamp = new Date().toISOString().replace(/[:.]/g, "-");
   const screenshotPath = path.join(outputDir, `browser-smoke-${stamp}.png`);
   const reportPath = path.join(outputDir, `browser-smoke-${stamp}.json`);
