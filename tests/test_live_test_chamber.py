@@ -65,13 +65,14 @@ class LiveTestChamberTests(unittest.TestCase):
 
     def test_timeout_kills_child_processes(self):
         import os
+        import time
         if os.name == "nt":
             self.skipTest("Process-group descendant behavior is platform-specific")
         (self.root / "parent.py").write_text(
-            "import subprocess, sys, time\\n"
+            "import subprocess, sys, time\n"
             "subprocess.Popen([sys.executable, '-c', "
-            "'import time; time.sleep(0.6); open(\\\"child-survived\\\", \\\"w\\\").write(\\\"yes\\\")'])\\n"
-            "time.sleep(5)\\n",
+            "\"import time; time.sleep(0.6); open('child-survived', 'w').write('yes')\"])\n"
+            "time.sleep(5)\n",
             encoding="utf-8",
         )
         result = self.run_chamber(
@@ -79,7 +80,6 @@ class LiveTestChamberTests(unittest.TestCase):
             "--expect-exit", "0", "--timeout", "0.2",
         )
         self.assertEqual(result.returncode, 1)
-        import time
         time.sleep(0.8)
         self.assertFalse((self.root / "child-survived").exists())
 
