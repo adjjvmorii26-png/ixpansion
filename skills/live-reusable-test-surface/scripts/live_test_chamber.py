@@ -149,9 +149,18 @@ def execute(args: argparse.Namespace) -> dict:
             process.wait()
     stdout_thread.join(timeout=5)
     stderr_thread.join(timeout=5)
-    for thread in (stdout_thread, stderr_thread):
-        if thread.is_alive():
-            raise subprocess.SubprocessError("Output pipe remained open after process termination")
+    if stdout_thread.is_alive() or stderr_thread.is_alive():
+        # A child may exit while a descendant still holds inherited pipes open.
+        # On POSIX, kill the whole process group even if its leader has exited.
+        if os.name != "nt":
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        stdout_thread.join(timeout=2)
+        stderr_thread.join(timeout=2)
+    if stdout_thread.is_alive() or stderr_thread.is_alive():
+        raise subprocess.SubprocessError("Output pipes remained open after process-tree cleanup")
     exit_code = None if timed_out else process.returncode
 
     stdout = stdout_buffer.decode("utf-8", errors="replace")
