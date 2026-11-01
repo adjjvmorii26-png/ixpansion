@@ -5,6 +5,7 @@ on:
     paths:
       - "skills/live-reusable-test-surface/**"
       - "tests/test_live_test_chamber.py"
+      - "tests/test_browser_smoke_cli.py"
       - ".github/workflows/live-test-chamber.yml"
   push:
     branches:
@@ -38,6 +39,8 @@ jobs:
         run: node --check skills/live-reusable-test-surface/scripts/browser-smoke.mjs
       - name: Run Live Test Chamber contract tests
         run: python -m unittest -v tests/test_live_test_chamber.py
+      - name: Run browser smoke CLI contract tests
+        run: python -m unittest -v tests/test_browser_smoke_cli.py
       - name: Validate Python CLI help
         run: python skills/live-reusable-test-surface/scripts/live_test_chamber.py --help
       - name: Validate browser runner CLI help
