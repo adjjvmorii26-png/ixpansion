@@ -1,5 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { createRandom, FixedStepClock, createParticles, updateParticles, projectParticle } from "../apps/manifold_reactor/reactor-core.mjs";
 
 test("seeded random sequences are reproducible and bounded", () => {
@@ -48,4 +50,22 @@ test("updates reject negative or non-finite time and clamp energy", () => {
   assert.throws(() => updateParticles(particles, NaN), RangeError);
   updateParticles(particles, 0.016, "torus", 100);
   assert.ok(particles.every((p) => Number.isFinite(p.angle)));
+});
+
+
+test("paused geometry changes request an immediate redraw", () => {
+  const htmlPath = fileURLToPath(new URL("../apps/manifold_reactor/index.html", import.meta.url));
+  const html = readFileSync(htmlPath, "utf8");
+  const geometryHandler = html.match(/geometry\\.addEventListener\\("change",\\s*\\(\\)\\s*=>\\s*\\{([\\s\\S]*?)\\n\\}\\);/);
+  assert.ok(geometryHandler, "geometry change handler should exist");
+  assert.match(geometryHandler[1], /mode\\s*=\\s*geometry\\.value/);
+  assert.match(geometryHandler[1], /render\\(\\)/, "geometry changes must redraw while paused");
+});
+
+test("WebGL render loop reuses its bounded particle buffer", () => {
+  const htmlPath = fileURLToPath(new URL("../apps/manifold_reactor/index.html", import.meta.url));
+  const html = readFileSync(htmlPath, "utf8");
+  assert.match(html, /const renderData = new Float32Array\\(particles\\.length \\* 3\\)/);
+  assert.match(html, /const data = renderData/);
+  assert.doesNotMatch(html, /function render\\(\\)\\s*\\{[\\s\\S]*?new Float32Array/);
 });
