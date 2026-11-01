@@ -32,7 +32,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Compile Python sources
+        run: python -m py_compile skills/live-reusable-test-surface/scripts/live_test_chamber.py tests/test_live_test_chamber.py
+      - name: Validate browser runner syntax
+        run: node --check skills/live-reusable-test-surface/scripts/browser-smoke.mjs
       - name: Run Live Test Chamber contract tests
         run: python -m unittest -v tests/test_live_test_chamber.py
-      - name: Validate CLI help
+      - name: Validate Python CLI help
         run: python skills/live-reusable-test-surface/scripts/live_test_chamber.py --help
+      - name: Validate browser runner CLI help
+        run: node skills/live-reusable-test-surface/scripts/browser-smoke.mjs --help
