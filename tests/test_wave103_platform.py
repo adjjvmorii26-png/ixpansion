@@ -2,6 +2,7 @@ from __future__ import annotations
 """Wave 103 — Platform Completeness Tests."""
 import sys
 import os
+import pytest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 # ── OpenAPI Spec ──────────────────────────────────────────────────
@@ -34,9 +35,19 @@ def test_spec_handler():
 def test_cors_apply():
     from api.cors_middleware import CORSMiddleware
     m = CORSMiddleware()
+    # Unknown origin must not be reflected (credentialed allowlist policy).
     headers = m.apply("https://example.com")
     assert "Access-Control-Allow-Origin" in headers
-    assert headers["Access-Control-Allow-Origin"] == "https://example.com"
+    assert headers["Access-Control-Allow-Origin"] == ""
+    assert headers.get("Vary") == "Origin"
+
+def test_cors_apply_allowed_origin():
+    from api.cors_middleware import CORSMiddleware
+    m = CORSMiddleware()
+    allowed = "https://ixpansion-live.vercel.app"
+    headers = m.apply(allowed)
+    assert headers["Access-Control-Allow-Origin"] == allowed
+    assert headers.get("Vary") == "Origin"
 
 def test_cors_preflight():
     from api.cors_middleware import CORSMiddleware
@@ -44,12 +55,12 @@ def test_cors_preflight():
     headers = m.preflight("https://example.com")
     assert "Access-Control-Max-Age" in headers
     assert headers["Access-Control-Max-Age"] == "86400"
+    assert headers.get("Vary") == "Origin"
 
 def test_cors_wildcard():
     from api.cors_middleware import CORSMiddleware
-    m = CORSMiddleware(origins=["*"])
-    headers = m.apply("https://any-origin.com")
-    assert headers["Access-Control-Allow-Origin"] != ""
+    with pytest.raises(ValueError, match="Wildcard CORS origins are forbidden"):
+        CORSMiddleware(origins=["*"])
 
 def test_cors_stats():
     from api.cors_middleware import CORSMiddleware
