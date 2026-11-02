@@ -35,6 +35,7 @@ def test_usage_invalid_authorization_rejected_without_mutation(monkeypatch, tmp_
 
     for authorization, expected in [
         ("Basic known", "invalid authorization scheme"),
+        ("Bearer\\tknown", "invalid authorization scheme"),
         ("Bearer unknown", "key not found"),
         ("Bearer known", "key deactivated"),
         ("Bearer ", "authorization required"),
