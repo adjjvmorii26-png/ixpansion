@@ -3,7 +3,7 @@
 A framework-aware workflow for creating, editing, composing, previewing, cataloging, verifying, and reusing UI components across IXPANSION and compatible projects.
 
 ## Quick start
-1. Read [SKILL.md](SKILL.md).
+1. Read the canonical [reusable UI workbench skill](../r1/reusable_ui_workbench/SKILL.md).
 2. Inspect the current component and its consumers before editing.
 3. Copy [the component contract](templates/component-contract.md) for components intended for reuse.
 4. Use [the registry example](examples/component-registry.json) as a lightweight catalog shape; replace the sample with real components before treating it as an inventory.
