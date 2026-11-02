@@ -34,22 +34,25 @@ def test_spec_handler():
 def test_cors_apply():
     from api.cors_middleware import CORSMiddleware
     m = CORSMiddleware()
-    headers = m.apply("https://example.com")
+    origin = "https://ixpansion-live.vercel.app"
+    headers = m.apply(origin)
     assert "Access-Control-Allow-Origin" in headers
-    assert headers["Access-Control-Allow-Origin"] == "https://example.com"
+    assert headers["Access-Control-Allow-Origin"] == origin
 
 def test_cors_preflight():
     from api.cors_middleware import CORSMiddleware
     m = CORSMiddleware()
-    headers = m.preflight("https://example.com")
+    origin = "https://ixpansion-live.vercel.app"
+    headers = m.preflight(origin)
+    assert headers["Access-Control-Allow-Origin"] == origin
     assert "Access-Control-Max-Age" in headers
     assert headers["Access-Control-Max-Age"] == "86400"
 
 def test_cors_wildcard():
+    import pytest
     from api.cors_middleware import CORSMiddleware
-    m = CORSMiddleware(origins=["*"])
-    headers = m.apply("https://any-origin.com")
-    assert headers["Access-Control-Allow-Origin"] != ""
+    with pytest.raises(ValueError, match="Wildcard CORS origins are forbidden"):
+        CORSMiddleware(origins=["*"])
 
 def test_cors_stats():
     from api.cors_middleware import CORSMiddleware
