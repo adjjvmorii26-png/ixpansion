@@ -22,6 +22,24 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m pip install pytest
+      - name: Initialize Artifacts and Astral Braid State
+        run: |
+          mkdir -p artifacts
+          if [ ! -f artifacts/astral-braid.json ]; then
+            echo "⚠️ artifacts/astral-braid.json not found. Generating default baseline stub..."
+            cat << 'EOF' > artifacts/astral-braid.json
+          {
+            "schema_version": "1.0.0",
+            "state": "initialized",
+            "triad_vectors": {
+              "gossip": 0.0,
+              "forge": 0.0,
+              "time": 0.0
+            },
+            "entanglement_pairs": []
+          }
+          EOF
+          fi
       - name: Validate living substrate contracts
         run: python -m pytest mycelium/tests -q --tb=short
       - name: Grow nightly pulse
