@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Motion Lab 2D — Evolution Arena</title>
+  <style>
+    body { margin: 0; background: #0a0a0f; color: #e0e0e0; font-family: system-ui, sans-serif; }
+    canvas { display: block; margin: 0 auto; background: #111; border: 1px solid #333; }
+    #hud { position: fixed; top: 8px; left: 8px; font-size: 12px; opacity: 0.85; line-height: 1.4; }
+  </style>
+</head>
+<body>
+  <div id="hud">Motion Lab 2D — action-conditioned + collision physics + genome ready</div>
+  <canvas id="c" width="640" height="480"></canvas>
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+
+    const world = {
+      t: 0,
+      entities: [
+        { id: 'player', x: 320, y: 240, vx: 0, vy: 0, r: 14, mass: 2, color: '#4af', dynamic: true },
+        { id: 'ball-1', x: 180, y: 180, vx: 2.5, vy: 1.2, r: 16, mass: 1, color: '#fa4', dynamic: true },
+        { id: 'ball-2', x: 460, y: 300, vx: -1.8, vy: -2.1, r: 12, mass: 0.8, color: '#4f4', dynamic: true },
+        { id: 'ball-3', x: 300, y: 100, vx: 0.5, vy: 3.0, r: 10, mass: 0.6, color: '#f4a', dynamic: true }
+      ],
+      rules: {
+        gravity: 0.08,
+        friction: 0.995,
+        restitution: 0.78,
+        maxSpeed: 16,
+        substeps: 2,
+        wallRestitution: 0.65
+      },
+      actionLog: [],
+      collisionLog: [],
+      genomeId: 'gen0-baseline'
+    };
+
+    function applyAction(action) {
+      if (!action || !action.type) return;
+      const p = world.entities.find(e => e.id === 'player');
+      if (!p && action.type !== 'spawn') return;
+
+      switch (action.type) {
+        case 'thrust':
+          p.vx += (action.payload?.dx || 0) * (world.rules.thrustStrength || 1.1);
+          p.vy += (action.payload?.dy || 0) * (world.rules.thrustStrength || 1.1);
+          break;
+        case 'reset':
+          p.x = 320; p.y = 240; p.vx = 0; p.vy = 0;
+          break;
+        case 'spawn':
+          world.entities.push({
+            id: 'obj-' + Date.now(),
+            x: action.payload?.x ?? (Math.random() * 560 + 40),
+            y: action.payload?.y ?? (Math.random() * 360 + 40),
+            vx: (Math.random() - 0.5) * 4,
+            vy: (Math.random() - 0.5) * 4,
+            r: 8 + Math.random() * 10,
+            mass: 0.5 + Math.random(),
+            color: `hsl(${Math.random()*360}, 70%, 60%)`,
+            dynamic: true
+          });
+          break;
+        case 'loadGenome':
+          if (action.payload?.genome?.physics) {
+            Object.assign(world.rules, action.payload.genome.physics);
+            if (action.payload.genome.controller) {
+              world.rules.thrustStrength = action.payload.genome.controller.thrustStrength || 1.1;
+            }
+            world.genomeId = action.payload.id || 'custom';
+          }
+          break;
+      }
+      world.actionLog.push({ t: world.t, ...action });
+      if (world.actionLog.length > 80) world.actionLog.shift();
+    }
+
+    function resolveCollisions() {
+      const ents = world.entities;
+      const rest = world.rules.restitution;
+      for (let i = 0; i < ents.length; i++) {
+        for (let j = i + 1; j < ents.length; j++) {
+          const a = ents[i], b = ents[j];
+          const dx = b.x - a.x, dy = b.y - a.y;
+          const dist = Math.hypot(dx, dy) || 0.0001;
+          const minDist = a.r + b.r;
+          if (dist < minDist) {
+            const nx = dx / dist, ny = dy / dist;
+            const overlap = minDist - dist;
+            const totalMass = (a.dynamic ? a.mass : 0) + (b.dynamic ? b.mass : 0) || 1;
+            const corr = overlap * 0.85;
+            if (a.dynamic) { const rA = b.dynamic ? (b.mass / totalMass) : 1; a.x -= nx * corr * rA; a.y -= ny * corr * rA; }
+            if (b.dynamic) { const rB = a.dynamic ? (a.mass / totalMass) : 1; b.x += nx * corr * rB; b.y += ny * corr * rB; }
+            const rvx = b.vx - a.vx, rvy = b.vy - a.vy;
+            const velAlongNormal = rvx * nx + rvy * ny;
+            if (velAlongNormal > 0) continue;
+            const invMassA = a.dynamic ? 1 / a.mass : 0;
+            const invMassB = b.dynamic ? 1 / b.mass : 0;
+            const jImpulse = -(1 + rest) * velAlongNormal / (invMassA + invMassB);
+            if (a.dynamic) { a.vx -= jImpulse * nx * invMassA; a.vy -= jImpulse * ny * invMassA; }
+            if (b.dynamic) { b.vx += jImpulse * nx * invMassB; b.vy += jImpulse * ny * invMassB; }
+            world.collisionLog.push({ t: world.t, a: a.id, b: b.id });
+            if (world.collisionLog.length > 40) world.collisionLog.shift();
+          }
+        }
+      }
+    }
+
+    function step(action) {
+      if (action) applyAction(action);
+      const sub = world.rules.substeps || 1;
+      for (let s = 0; s < sub; s++) {
+        for (const e of world.entities) {
+          if (!e.dynamic) continue;
+          e.vy += world.rules.gravity / sub;
+          e.vx *= Math.pow(world.rules.friction, 1/sub);
+          e.vy *= Math.pow(world.rules.friction, 1/sub);
+          e.x += e.vx / sub; e.y += e.vy / sub;
+        }
+        resolveCollisions();
+        for (const e of world.entities) {
+          if (!e.dynamic) continue;
+          const wr = world.rules.wallRestitution;
+          if (e.x < e.r) { e.x = e.r; e.vx *= -wr; }
+          if (e.x > canvas.width - e.r) { e.x = canvas.width - e.r; e.vx *= -wr; }
+          if (e.y < e.r) { e.y = e.r; e.vy *= -wr; }
+          if (e.y > canvas.height - e.r) { e.y = canvas.height - e.r; e.vy *= -wr; }
+          const sp = Math.hypot(e.vx, e.vy);
+          if (sp > world.rules.maxSpeed) { e.vx = (e.vx / sp) * world.rules.maxSpeed; e.vy = (e.vy / sp) * world.rules.maxSpeed; }
+        }
+      }
+      world.t += 1;
+    }
+
+    function render() {
+      ctx.fillStyle = '#111'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = '#1a1a22'; ctx.lineWidth = 1;
+      for (let x = 0; x < canvas.width; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke(); }
+      for (let y = 0; y < canvas.height; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke(); }
+      for (const e of world.entities) {
+        ctx.beginPath(); ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2); ctx.fillStyle = e.color; ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.beginPath(); ctx.moveTo(e.x, e.y); ctx.lineTo(e.x + e.vx * 3, e.y + e.vy * 3); ctx.stroke();
+      }
+      ctx.fillStyle = '#888'; ctx.font = '11px monospace';
+      ctx.fillText(`t=${world.t}  entities=${world.entities.length}  genome=${world.genomeId}`, 10, 18);
+      ctx.fillText(`Arrows = thrust | S = spawn | R = reset`, 10, 34);
+    }
+
+    window.sandbox = {
+      step: (action) => { step(action); render(); return JSON.parse(JSON.stringify({ t: world.t, entities: world.entities.length, genomeId: world.genomeId, rules: world.rules })); },
+      getState: () => JSON.parse(JSON.stringify(world)),
+      loadGenome: (g) => { window.sandbox.step({ type: 'loadGenome', payload: g }); },
+      lastActions: () => world.actionLog.slice(-12),
+      lastCollisions: () => world.collisionLog.slice(-12)
+    };
+
+    function loop() { step(null); render(); requestAnimationFrame(loop); }
+    loop();
+
+    window.addEventListener('keydown', e => {
+      const map = { ArrowUp: [0,-1], ArrowDown: [0,1], ArrowLeft: [-1,0], ArrowRight: [1,0] };
+      if (map[e.key]) { const [dx, dy] = map[e.key]; window.sandbox.step({ type: 'thrust', payload: { dx, dy }, actor: 'human' }); }
+      if (e.key === 'r' || e.key === 'R') window.sandbox.step({ type: 'reset', actor: 'human' });
+      if (e.key === 's' || e.key === 'S') window.sandbox.step({ type: 'spawn', actor: 'human' });
+    });
+  </script>
+</body>
+</html>

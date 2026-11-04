@@ -1,0 +1,65 @@
+[
+  {
+    "id": "gen3-stable-plus",
+    "parent": "gen1-mut-b",
+    "generation": 3,
+    "mutation": "keep extreme stability, nudge interest upward",
+    "genome": {
+      "physics": {
+        "gravity": 0.048,
+        "friction": 0.983,
+        "restitution": 0.74,
+        "maxSpeed": 13.5,
+        "substeps": 3,
+        "wallRestitution": 0.58
+      },
+      "controller": {
+        "thrustStrength": 1.1,
+        "playerMass": 2.15,
+        "dampingOnThrust": true
+      }
+    }
+  },
+  {
+    "id": "gen3-polish-champion",
+    "parents": ["gen2-cross-ba", "gen0-baseline"],
+    "generation": 3,
+    "mutation": "polish: slightly lower gravity + smoother restitution",
+    "genome": {
+      "physics": {
+        "gravity": 0.05,
+        "friction": 0.988,
+        "restitution": 0.81,
+        "maxSpeed": 14.5,
+        "substeps": 3,
+        "wallRestitution": 0.66
+      },
+      "controller": {
+        "thrustStrength": 1.2,
+        "playerMass": 2.05,
+        "dampingOnThrust": true
+      }
+    }
+  },
+  {
+    "id": "gen3-hybrid-interest",
+    "parents": ["gen2-cross-ba", "gen2-explore-c"],
+    "generation": 3,
+    "mutation": "controlled liveliness",
+    "genome": {
+      "physics": {
+        "gravity": 0.058,
+        "friction": 0.986,
+        "restitution": 0.86,
+        "maxSpeed": 15.5,
+        "substeps": 2,
+        "wallRestitution": 0.72
+      },
+      "controller": {
+        "thrustStrength": 1.3,
+        "playerMass": 1.9,
+        "dampingOnThrust": false
+      }
+    }
+  }
+]

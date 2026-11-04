@@ -1,0 +1,28 @@
+{
+  "id": "gen2-cross-ba",
+  "promotedAt": "2026-10-29T21:30:00Z",
+  "reason": "Best balance of stability (from mut-b) and liveliness (from mut-a). Highest expected aggregate for general use.",
+  "genome": {
+    "physics": {
+      "gravity": 0.055,
+      "friction": 0.985,
+      "restitution": 0.84,
+      "maxSpeed": 15,
+      "substeps": 3,
+      "wallRestitution": 0.68
+    },
+    "controller": {
+      "thrustStrength": 1.25,
+      "playerMass": 2.1,
+      "dampingOnThrust": true
+    },
+    "spawn": {
+      "baseRadius": 8,
+      "radiusVariance": 9,
+      "massBase": 0.55,
+      "massVariance": 0.9,
+      "initialSpeedScale": 3.6
+    }
+  },
+  "lineage": ["gen0-baseline", "gen1-mut-b", "gen1-mut-a", "gen2-cross-ba"]
+}

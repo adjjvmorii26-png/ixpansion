@@ -1,0 +1,45 @@
+{
+  "evaluatedAt": "2026-10-29T21:16:00Z",
+  "horizon": 600,
+  "criteria": ["stability", "energy", "smoothness", "controllability", "interest"],
+  "results": [
+    {
+      "id": "gen1-mut-a",
+      "scores": {
+        "stability": 0.82,
+        "energy": 0.71,
+        "smoothness": 0.68,
+        "controllability": 0.79,
+        "interest": 0.85
+      },
+      "aggregate": 0.77,
+      "notes": "Lively and responsive. Occasional high-speed wall chatter. Good candidate for crossing."
+    },
+    {
+      "id": "gen1-mut-b",
+      "scores": {
+        "stability": 0.91,
+        "energy": 0.88,
+        "smoothness": 0.86,
+        "controllability": 0.90,
+        "interest": 0.62
+      },
+      "aggregate": 0.83,
+      "notes": "Most stable and controllable. Slightly less exciting visually. Strong parent for refinement."
+    },
+    {
+      "id": "gen1-mut-c",
+      "scores": {
+        "stability": 0.64,
+        "energy": 0.55,
+        "smoothness": 0.51,
+        "controllability": 0.58,
+        "interest": 0.93
+      },
+      "aggregate": 0.64,
+      "notes": "Chaotic swarm energy. High interest but energy and smoothness suffer. Useful for diversity."
+    }
+  ],
+  "ranking": ["gen1-mut-b", "gen1-mut-a", "gen1-mut-c"],
+  "selectedParents": ["gen1-mut-b", "gen1-mut-a"]
+}
