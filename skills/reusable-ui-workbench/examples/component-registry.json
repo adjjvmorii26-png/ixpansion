@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "components": [
+    {
+      "id": "ui.button",
+      "name": "Button",
+      "purpose": "Consistent action control",
+      "source": "src/components/ui/button",
+      "export": "Button",
+      "framework": "react",
+      "status": "example",
+      "variants": ["primary", "secondary", "quiet", "danger"],
+      "states": ["default", "hover", "focus-visible", "disabled", "loading"],
+      "dependencies": [],
+      "tests": ["src/components/ui/button.test.tsx"],
+      "accessibility": ["semantic-button", "keyboard-operable", "visible-focus"],
+      "provenance": {
+        "repository": "",
+        "commit": "",
+        "license": ""
+      }
+    }
+  ]
+}
