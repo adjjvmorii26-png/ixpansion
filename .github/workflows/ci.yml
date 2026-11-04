@@ -15,7 +15,8 @@ concurrency:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # Pin through ubuntu-latest → 26.04 migration (through ~2026-11-19).
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -50,7 +51,7 @@ jobs:
           "
 
   vercel-contract:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -70,7 +71,7 @@ jobs:
           python -c "from api.index import handler; r=handler({'path':'/health'}); assert isinstance(r,dict) and r.get('status') in {'ok','healthy','active'}, r; print('health contract: OK')"
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -80,7 +81,7 @@ jobs:
         run: make lint
 
   docker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - name: Build Docker image
