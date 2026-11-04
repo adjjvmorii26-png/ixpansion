@@ -184,7 +184,16 @@ def handler(request, response):
     if "tiers" in path:
         return {"tiers": TIERS}
     elif "usage" in path:
-        api_key = request.headers.get("Authorization", "").replace("Bearer ", "")
+        authorization = request.headers.get("Authorization", "")
+        scheme, separator, api_key = authorization.partition(" ")
+        if not separator or scheme.lower() != "bearer" or not api_key.strip():
+            if not authorization or (separator and not api_key.strip()):
+                return {"error": "authorization required"}
+            return {"error": "invalid authorization scheme"}
+        api_key = api_key.strip()
+        validation = validate_key(api_key)
+        if not validation["valid"]:
+            return {"error": validation["error"]}
         return record_usage(api_key, path)
     else:
         return {"message": "Auth API", "endpoints": ["/tiers", "/usage", "/keys"]}
@@ -235,4 +244,3 @@ def coherence_vitals() -> dict:
 def resonates_with() -> list:
     """Declared kinships, auto-picked from shared domain language."""
     return ['dream_synthesis', 'analytics', 'usage_dashboard']
-
