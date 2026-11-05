@@ -1,6 +1,6 @@
 import json, tempfile, unittest
 from pathlib import Path
-from skill_lab import compatibility, dependency_graph, digest, drift, fuzz_cases, pipeline, scan, diagnose
+from skill_lab import PATTERNS, compatibility, dependency_graph, digest, drift, fuzz_cases, pipeline, scan, diagnose
 
 class FoundryTests(unittest.TestCase):
     def make_skill(self,root,folder,name,deps=""):
@@ -86,5 +86,11 @@ class FoundryTests(unittest.TestCase):
             r=pipeline(root)
             self.assertIn("PROFILE_FORBIDDEN",[x["code"] for x in r["scan_findings"]])
             self.assertIn("FP-004",[x["pattern_id"] for x in r["failure_pattern_matches"]])
+
+    def test_pattern_corpus_is_the_single_diagnosis_source(self):
+        corpus=Path(__file__).resolve().parents[1]/"failure_patterns.json"
+        expected=json.loads(corpus.read_text(encoding="utf-8"))["patterns"]
+        self.assertEqual(PATTERNS,expected)
+        self.assertEqual([item["id"] for item in PATTERNS],["FP-001","FP-002","FP-003","FP-004","FP-005","FP-006"])
 
 if __name__=="__main__": unittest.main()
