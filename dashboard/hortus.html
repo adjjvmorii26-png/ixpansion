@@ -33,25 +33,25 @@ canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
 <div class="header">
   <div class="glyph">🜂</div>
   <h1>HORTUS_HEXIS_—_the_garden <span>WAVE 000</span></h1>
-  <div class="tagline">LIVE INTERACTIVE DASHBOARD</div>
+  <div class="tagline">SIMULATED INTERACTIVE VISUALIZATION</div>
 </div>
 <div class="metrics">
-  <div class="metric"><div class="value" id="v1">—</div><div class="label">Wave 000 Coherence</div></div>
-  <div class="metric"><div class="value" id="v2">—</div><div class="label">Resonance Index</div></div>
-  <div class="metric"><div class="value" id="v3">—</div><div class="label">Entropy Budget</div></div>
-  <div class="metric"><div class="value" id="v4">—</div><div class="label">Module Count</div></div>
+  <div class="metric"><div class="value" id="v1">—</div><div class="label">Simulated Coherence</div></div>
+  <div class="metric"><div class="value" id="v2">—</div><div class="label">Simulated Resonance</div></div>
+  <div class="metric"><div class="value" id="v3">—</div><div class="label">Simulated Entropy</div></div>
+  <div class="metric"><div class="value" id="v4">—</div><div class="label">Simulated Module Count</div></div>
 </div>
 <div style="text-align:center;padding:10px"><button class="btn" onclick="refresh()">Refresh</button><button class="btn" onclick="toggleAnim()">Animate</button><button class="btn" onclick="exportState()">Export</button></div>
 <div class="canvas-area"><canvas id="liveCanvas"></canvas></div>
 <div class="status-bar"><span style="color:var(--green)">● LIVE</span> — HORTUS HEXIS — the garden — <span id="ts">—</span></div>
 <script>
-const W=000,T=HORTUS HEXIS — the garden;let a=false,t=0,nodes=[],edges=[];
+const W=0,T="HORTUS HEXIS — the garden";let a=false,t=0,nodes=[],edges=[];
 const c=document.getElementById('liveCanvas'),x=c.getContext('2d');
 function rs(){c.width=c.offsetWidth;c.height=c.offsetHeight;nodes=[];edges=[];const n=20+Math.floor(Math.random()*30);for(let i=0;i<n;i++)nodes.push({x:Math.random()*c.width,y:Math.random()*c.height,r:3+Math.random()*6,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,p:Math.random()*6.28});for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)if(Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y)<150)edges.push([i,j])}
 function dr(){x.clearRect(0,0,c.width,c.height);if(a)t+=0.01;x.strokeStyle='rgba(124,124,248,0.06)';x.lineWidth=0.5;for(const[i,j]of edges){const A=nodes[i],B=nodes[j];x.beginPath();x.moveTo(A.x+Math.sin(t+A.p)*5,A.y+Math.cos(t+B.p)*5);x.lineTo(B.x+Math.sin(t+A.p)*5,B.y+Math.cos(t+B.p)*5);x.stroke()}x.fillStyle='rgba(124,124,248,0.5)';for(const N of nodes){if(a){N.x+=N.vx;N.y+=N.vy;if(N.x<0||N.x>c.width)N.vx*=-1;if(N.y<0||N.y>c.height)N.vy*=-1}const g=x.createRadialGradient(N.x,N.y,0,N.x,N.y,N.r*4);g.addColorStop(0,'rgba(124,124,248,'+(0.2+0.15*Math.sin(t+N.p))+')');g.addColorStop(1,'transparent');x.fillStyle=g;x.beginPath();x.arc(N.x,N.y,N.r*4,0,6.28);x.fill();x.fillStyle='#7c7cf8';x.beginPath();x.arc(N.x,N.y,N.r,0,6.28);x.fill()}}
 function loop(){dr();requestAnimationFrame(loop)}
 rs();loop();
-let mi=0;const vals=[()=>Math.floor(1000+Math.random()*9000),()=>(Math.random()*100).toFixed(1),()=>Math.floor(Math.random()*500),()=>((Math.random()*0.99).toFixed(3))];
+const vals=[()=>(Math.random()).toFixed(3),()=>(Math.random()*100).toFixed(1),()=>(Math.random()).toFixed(3),()=>20+Math.floor(Math.random()*30)];
 function upd(){document.getElementById('v1').textContent=vals[0]();document.getElementById('v2').textContent=vals[1]();document.getElementById('v3').textContent=vals[2]();document.getElementById('v4').textContent=vals[3]();document.getElementById('ts').textContent=new Date().toISOString();setTimeout(upd,2000)}
 upd();function refresh(){rs()}function toggleAnim(){a=!a}function exportState(){navigator.clipboard.writeText(JSON.stringify({wave:W,t:Date.now(),n:nodes.length,e:edges.length}))}
 window.addEventListener('resize',rs);
