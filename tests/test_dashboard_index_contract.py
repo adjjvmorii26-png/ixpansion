@@ -40,6 +40,9 @@ def test_dashboard_index_has_no_unverified_static_counters():
     assert "wave 508" not in html
     assert "always free" not in html
     assert "coherence stable" not in html
+    assert "coherence 0.967" not in html
+    assert "always evolving" not in html
+    assert "no live health claim" in html
 
 
 def test_dashboard_index_motion_is_user_and_visibility_aware():
