@@ -20,7 +20,7 @@ import {createWorld,cloneWorld,validateWorld,hashWorld,transition,WORLD} from ".
 const canvas=document.querySelector("#world"),ctx=canvas.getContext("2d"),$=id=>document.getElementById(id);
 let world=createWorld(),history=[],ledger=[],tool="move",dragging=false;
 const dirs={north:[0,-50],south:[0,50],west:[-50,0],east:[50,0]};
-function log(type,msg){ledger.unshift("["+String(world.tick).padStart(3,"0")+"] "+type+": "+msg+" #"+hashWorld(world));ledger=ledger.slice(0,70);$("log").textContent=ledger.join("\\n");}
+function log(type,msg){ledger.unshift("["+String(world.tick).padStart(3,"0")+"] "+type+": "+msg+" #"+hashWorld(world));ledger=ledger.slice(0,70);$("log").textContent=ledger.join("\n");}
 function commit(action,label){const r=transition(world,action);if(!r.accepted){$("status").textContent="Rejected: "+r.reason;log("REJECT",label+" / "+r.reason);return false;}history.push(cloneWorld(world));if(history.length>100)history.shift();world=r.world;$("last").textContent=label.toUpperCase();$("status").textContent="Committed: "+label+" · "+r.hash;log("COMMIT",label);render();return true;}
 function setTool(name){tool=name;for(const t of ["move","build","erase"]){$(t).classList.toggle("active",t===name);$(t).setAttribute("aria-pressed",String(t===name));}}
 function draw(){ctx.clearRect(0,0,1000,700);ctx.fillStyle="#0b1729";ctx.fillRect(0,0,1000,700);ctx.strokeStyle="#263a54";ctx.globalAlpha=.55;for(let x=0;x<=1000;x+=50){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,700);ctx.stroke();}for(let y=0;y<=700;y+=50){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1000,y);ctx.stroke();}ctx.globalAlpha=1;
@@ -30,7 +30,7 @@ const a=world.agent;ctx.fillStyle="#70d6c333";ctx.beginPath();ctx.arc(a.x,a.y,25
 function render(){const errors=validateWorld(world),a=world.agent;$("position").textContent=Math.round(a.x)+", "+Math.round(a.y);$("energy").textContent=a.energy;$("count").textContent=world.beacons.length;$("hash").textContent=hashWorld(world);$("tick").textContent="TICK "+String(world.tick).padStart(3,"0");$("bounds").textContent=errors.some(e=>e.includes("bounds"))?"FAIL":"PASS";$("energy-check").textContent=errors.some(e=>e.includes("energy"))?"FAIL":"PASS";$("ids").textContent=errors.some(e=>e.includes("ID"))?"FAIL":"PASS";draw();}
 function resize(){const r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(r.width*d);canvas.height=Math.round(r.height*d);ctx.setTransform(canvas.width/1000,0,0,canvas.height/700,0,0);draw();}
 function point(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*1000,y:(e.clientY-r.top)/r.height*700};}
-function actAt(p){if(tool==="build")commit({type:"place",...p},"place beacon");else if(tool==="erase")commit({type:"remove",...p},"remove beacon");else commit({type:"move",dx:Math.max(-50,Math.min(50,p.x-world.agent.x)),dy:Math.max(-50,Math.min(50,p.y-world.agent.y))},"direct move");}
+function actAt(p){if(tool==="build")commit({type:"place",...p},"place beacon");else if(tool==="erase")commit({type:"remove",...p},"remove beacon");else{let dx=p.x-world.agent.x,dy=p.y-world.agent.y;const distance=Math.hypot(dx,dy);if(distance>WORLD.cell){dx=dx/distance*WORLD.cell;dy=dy/distance*WORLD.cell;}commit({type:"move",dx,dy},"direct move");}}
 canvas.addEventListener("pointerdown",e=>{dragging=true;canvas.setPointerCapture(e.pointerId);if(tool!=="move")actAt(point(e));});
 canvas.addEventListener("pointermove",e=>{if(dragging&&tool==="move"){const p=point(e);if(Math.hypot(p.x-world.agent.x,p.y-world.agent.y)>22)actAt(p);}});
 for(const n of ["pointerup","pointercancel","lostpointercapture"])canvas.addEventListener(n,()=>dragging=false);
@@ -38,7 +38,7 @@ for(const n of ["move","build","erase"])$(n).addEventListener("click",()=>setToo
 document.querySelectorAll("[data-action]").forEach(b=>b.addEventListener("click",()=>{const n=b.dataset.action;if(dirs[n])commit({type:"move",dx:dirs[n][0],dy:dirs[n][1]},n);else commit({type:n},n);}));
 $("pause").addEventListener("click",()=>{if(commit({type:"pause"},"pause"))$("pause").textContent=world.paused?"Resume":"Pause";});
 $("step").addEventListener("click",()=>commit({type:"step"},"step"));
-$("undo").addEventListener("click",()=>{if(!history.length){$("status").textContent="Nothing to undo.";return;}world=history.pop();log("UNDO","restored previous state");render();});
+$("undo").addEventListener("click",()=>{if(!history.length){$("status").textContent="Nothing to undo.";return;}world=history.pop();$("pause").textContent=world.paused?"Resume":"Pause";log("UNDO","restored previous state");render();});
 $("reset").addEventListener("click",()=>{history.push(cloneWorld(world));world=createWorld();ledger=[];log("RESET","seed 1337 restored");$("pause").textContent="Pause";render();});
 window.addEventListener("keydown",e=>{if(e.altKey||e.ctrlKey||e.metaKey||e.target.closest("button,input,textarea,select,[contenteditable=true]"))return;const k=e.key.toLowerCase(),m={w:"north",arrowup:"north",s:"south",arrowdown:"south",a:"west",arrowleft:"west",d:"east",arrowright:"east"};if(m[k]){e.preventDefault();const [dx,dy]=dirs[m[k]];commit({type:"move",dx,dy},m[k]);}else if(k==="b")setTool("build");else if(k==="x")setTool("erase");else if(k===" "){e.preventDefault();$("pause").click();}});
 new ResizeObserver(resize).observe(canvas);render();resize();log("INIT","seed 1337");
