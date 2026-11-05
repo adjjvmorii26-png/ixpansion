@@ -213,6 +213,9 @@
       exportPngButton.disabled = false;
       renderTimeline();
       status.textContent = 'Captured frame #' + capture.id;
+      } catch (error) {
+        status.textContent = 'Frame capture failed: ' + error.message;
+      }
     }
 
     document.getElementById('targetFPS').addEventListener('change', event => {
