@@ -41,7 +41,7 @@ class WorldCanvasGemHarnessTests(unittest.TestCase):
 
     def test_harness_exposes_evidence_and_skill_runners(self):
         html = (LAB / "index.html").read_text(encoding="utf-8")
-        for token in ("run-all", "export-report", "dual-lens", "zero-copy", "forge-breakers", "gem-skill-run"):
+        for token in ("run-all", "export-report", "dual-lens", "zero-copy", "forge-breakers", "gem-skill-run", "stack.length>100", "65536"):
             self.assertIn(token, html)
         for forbidden in ("fetch(", "XMLHttpRequest", "WebSocket(", "eval(", "new Function("):
             self.assertNotIn(forbidden, html)
