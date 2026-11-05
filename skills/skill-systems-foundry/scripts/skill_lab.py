@@ -8,14 +8,8 @@ except ImportError:
 
 PROFILES={"portable":["mcp__","plugin://","sandbox:/mnt/data"],
           "gem":["mcp__","functions.exec","tools.mcp__"],"chatgpt":[]}
-PATTERNS=[
- {"id":"FP-001","codes":["FRONTMATTER_MISSING","NAME_MISSING","DESCRIPTION_MISSING"],"diagnosis":"Skill contract metadata is incomplete.","repair":"Add valid frontmatter fields; preserve the original source."},
- {"id":"FP-002","codes":["MISSING_TARGET"],"diagnosis":"A declared dependency cannot be resolved.","repair":"Verify the dependency name and add or correct the target; do not infer aliases."},
- {"id":"FP-003","codes":["DEPENDENCY_CYCLE"],"diagnosis":"Dependencies form a directed cycle.","repair":"Break the smallest unnecessary edge and add a regression test."},
- {"id":"FP-004","codes":["PROFILE_FORBIDDEN"],"diagnosis":"A platform-specific capability leaks into the target profile.","repair":"Move platform calls behind an adapter and provide a portable fallback."},
- {"id":"FP-005","codes":["SOURCE_HASH_UNPINNED","EXPORT_HASH_UNPINNED"],"diagnosis":"Provenance is incomplete, so drift cannot be verified.","repair":"Read back canonical source and export before pinning normalized SHA-256 hashes."},
- {"id":"FP-006","codes":["SOURCE_DRIFT","EXPORT_DRIFT"],"diagnosis":"A snapshot differs from its pinned digest.","repair":"Inspect the diff; never overwrite canonical source or export automatically."}
-]
+PATTERN_FILE = Path(__file__).resolve().parents[1] / "failure_patterns.json"
+PATTERNS = json.loads(PATTERN_FILE.read_text(encoding="utf-8"))["patterns"]
 
 def frontmatter(text):
     if not text.startswith("---\n"): return ""
