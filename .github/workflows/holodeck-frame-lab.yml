@@ -40,5 +40,6 @@ jobs:
         run: |
           grep -q 'id="targetFPS"' holodeck/3d/index.html
           grep -q 'id="capture"' holodeck/3d/index.html
+          grep -q 'id="exportPNG"' holodeck/3d/index.html
           grep -q 'id="timeline"' holodeck/3d/index.html
           grep -q 'new FrameLab' holodeck/3d/index.html
