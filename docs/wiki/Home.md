@@ -5,6 +5,8 @@ Welcome to IXPANSION: a modular engineering workspace for experiments, reusable 
 ## Start here
 
 - [Architecture and system boundaries](architecture.md)
+- [Codespaces and development container](codespaces.md)
+- [OpenAI Platform integration](openai-platform.md)
 - [Labs and experiment lifecycle](../../labs/README.md)
 - [Contribution guide](../../CONTRIBUTING.md)
 - [Security policy](../../SECURITY.md)
