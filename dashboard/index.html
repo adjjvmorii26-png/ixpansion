@@ -97,6 +97,9 @@ canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;poi
 .skip-link{position:absolute;left:12px;top:-60px;z-index:1000;padding:10px 14px;background:#fff;color:#111;border-radius:6px}
 .skip-link:focus{top:12px}
 a:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+#main-content:focus{outline:none}
+.pulse-wave{animation:pulse 4s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media(max-width:640px){
   .hero h1{font-size:2em;letter-spacing:8px}
   .hero .glyph{font-size:2em}
@@ -117,7 +120,7 @@ window.si = window.si || function () { (window.siq = window.siq || []).push(argu
 <a class="skip-link" href="#main-content">Skip to content</a>
 <canvas id="bgCanvas" aria-hidden="true"></canvas>
 <div class="scanline" aria-hidden="true"></div>
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 
 <!-- ═══ HERO ═══ -->
 <div class="hero">
@@ -378,7 +381,7 @@ window.si = window.si || function () { (window.siq = window.siq || []).push(argu
 <div class="organism-pulse">
   <div class="pulse-card">
     <div class="pulse-title">◈ ORGANISM PULSE</div>
-    <div class="pulse-wave" id="pulseWave">Wave 508</div>
+    <div class="pulse-wave" id="pulseWave">Project pulse</div>
     <div class="pulse-meta">Coherence 0.967 · Entropy band 0.15–0.40 · Always evolving</div>
     <div class="pulse-bar"><div class="pulse-fill"></div></div>
   </div>
@@ -393,7 +396,7 @@ window.si = window.si || function () { (window.siq = window.siq || []).push(argu
     <a href="skills-observatory.html">Skills</a>
     <a href="wave-timeline.html">Timeline</a>
   </div>
-  <div class="credit">IXPANSION · Built by the organism · Always free · ◎ coherence ◈ entropy ✦ resonance</div>
+  <div class="credit">IXPANSION · Experimental dashboard · ◎ coherence ◈ entropy ✦ resonance</div>
 </div>
 
 <!-- ═══ BACKGROUND PARTICLES ═══ -->
@@ -402,15 +405,20 @@ const bg = document.getElementById('bgCanvas');
 const bctx = bg.getContext('2d');
 let bW, bH;
 const particles = [];
-const connections = [];
-const NUM = 60;
+const NUM = window.matchMedia("(max-width: 640px)").matches ? 24 : 48;
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+let backgroundFrame = null;
 
 function resizeBg() {
-  bW = bg.width = window.innerWidth;
-  bH = bg.height = window.innerHeight;
+  bW = window.innerWidth;
+  bH = window.innerHeight;
+  const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+  bg.width = Math.round(bW * pixelRatio);
+  bg.height = Math.round(bH * pixelRatio);
+  bctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 }
 resizeBg();
-window.addEventListener('resize', resizeBg);
+window.addEventListener('resize', resizeBg, { passive: true });
 
 for (let i = 0; i < NUM; i++) {
   particles.push({
@@ -424,6 +432,8 @@ for (let i = 0; i < NUM; i++) {
 }
 
 function animBg() {
+  backgroundFrame = null;
+  if (document.hidden || reducedMotion.matches) return;
   bctx.clearRect(0, 0, bW, bH);
   
   // Update & draw particles
@@ -445,8 +455,9 @@ function animBg() {
     for (let j = i + 1; j < particles.length; j++) {
       const dx = particles[i].x - particles[j].x;
       const dy = particles[i].y - particles[j].y;
-      const d = Math.sqrt(dx*dx + dy*dy);
-      if (d < 120) {
+      const distanceSquared = dx*dx + dy*dy;
+      if (distanceSquared < 14400) {
+        const d = Math.sqrt(distanceSquared);
         bctx.beginPath();
         bctx.moveTo(particles[i].x, particles[i].y);
         bctx.lineTo(particles[j].x, particles[j].y);
@@ -457,19 +468,26 @@ function animBg() {
     }
   }
   
-  requestAnimationFrame(animBg);
-}
-animBg();
-
-// ═══ Organism pulse ═══
-setInterval(() => {
-  const el = document.getElementById('pulseWave');
-  if (el) {
-    const t = Date.now() / 1000;
-    const pulse = 0.95 + 0.05 * Math.sin(t * 0.5);
-    el.style.opacity = pulse;
+  if (!document.hidden && !reducedMotion.matches) {
+    backgroundFrame = requestAnimationFrame(animBg);
   }
-}, 100);
+}
+
+function syncBackgroundMotion() {
+  if (document.hidden || reducedMotion.matches) {
+    if (backgroundFrame !== null) cancelAnimationFrame(backgroundFrame);
+    backgroundFrame = null;
+    bctx.clearRect(0, 0, bW, bH);
+    return;
+  }
+  if (backgroundFrame === null) backgroundFrame = requestAnimationFrame(animBg);
+}
+
+document.addEventListener("visibilitychange", syncBackgroundMotion);
+if (typeof reducedMotion.addEventListener === "function") {
+  reducedMotion.addEventListener("change", syncBackgroundMotion);
+}
+syncBackgroundMotion();
 </script>
 
 <!-- Resurrected by Dashboard Resurrector (Wave 99) -->
