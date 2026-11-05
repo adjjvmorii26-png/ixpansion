@@ -1,7 +1,7 @@
 {
   "schema": "ixpansion.gem-skill-harness/v1",
   "name": "world-canvas-gem-skill-harness",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "runtime": "browser-local",
   "entrypoint": "index.html",
   "skills": [
@@ -25,6 +25,8 @@
   "capabilities": [
     "local deterministic simulation",
     "invariant checks",
+    "versioned scenario registry",
+    "evidence lineage contract",
     "JSON evidence export"
   ],
   "non_capabilities": [
@@ -36,5 +38,13 @@
     "system": "wave733_skill_builder",
     "data_path": "data/wave733_skill_builder.json",
     "catalog_sync": "required"
+  },
+  "scenarios": {
+    "path": "labs/world-canvas-gem-harness/scenario-registry.json",
+    "schema": "ixpansion.gem-skill-scenarios/v1"
+  },
+  "evidence_contract": {
+    "path": "labs/world-canvas-gem-harness/evidence-contract.json",
+    "schema": "ixpansion.gem-skill-evidence/v1"
   }
 }
