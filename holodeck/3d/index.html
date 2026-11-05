@@ -77,7 +77,7 @@
         <label for="targetFPS">Render cap</label>
         <select id="targetFPS"><option value="30">30 FPS</option><option value="60" selected>60 FPS</option><option value="90">90 FPS</option><option value="120">120 FPS</option><option value="0">Uncapped</option></select>
         <button id="pause">Pause</button><button id="step">Step 1 tick</button>
-        <button id="capture">Capture frame</button><button id="duplicate" disabled>Duplicate</button><button id="exportPNG" disabled>Export PNG</button><button id="export">Export JSON</button>
+        <button id="capture">Capture frame</button><button id="duplicate" disabled>Duplicate</button><button id="exportJPG" disabled>Export JPG</button><button id="export">Export JSON</button>
       </div>
     </div>
     <div><h2>Frame timeline <span id="captureCount">(0)</span></h2><div id="timeline" aria-label="Captured frames"></div></div>
@@ -108,7 +108,7 @@
     const timelineEl = document.getElementById("timeline");
     const captureCountEl = document.getElementById("captureCount");
     const duplicateButton = document.getElementById("duplicate");
-    const exportPngButton = document.getElementById("exportPNG");
+    const exportPngButton = document.getElementById("exportJPG");
 
     let world, view;
     const frameLab = new FrameLab({ targetFPS: 60, fixedStep: 1 / 120 });
