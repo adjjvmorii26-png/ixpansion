@@ -109,3 +109,14 @@ test("30 FPS cap measures rendered frames, not requestAnimationFrame callbacks",
   assert.ok(metrics.fps > 28 && metrics.fps < 32, `expected about 30 rendered FPS, got ${metrics.fps}`);
   assert.ok(metrics.frameIndex >= 58 && metrics.frameIndex <= 62, `unexpected rendered frame count: ${metrics.frameIndex}`);
 });
+
+test("higher render target records missed opportunities on a 60 Hz callback stream", () => {
+  const lab = new FrameLab({ targetFPS: 120 });
+  lab.advance(0, () => {});
+  let metrics;
+  for (let time = 1000 / 60; time <= 1000; time += 1000 / 60) {
+    metrics = lab.advance(time, () => {});
+  }
+  assert.ok(metrics.missedRenderFrames > 0);
+  assert.ok(metrics.fps > 58 && metrics.fps < 62);
+});
