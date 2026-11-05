@@ -52,6 +52,7 @@ export class FrameLab {
     this.frameIndex = 0;
     this.simulationSteps = 0;
     this.droppedSeconds = 0;
+    this.missedRenderFrames = 0;
     this.samples = [];
     this.captures = [];
     this.nextCaptureId = 1;
@@ -102,6 +103,7 @@ export class FrameLab {
       shouldRender = now + 0.25 >= this.nextRenderAt;
       if (shouldRender) {
         const missed = Math.max(0, Math.floor((now - this.nextRenderAt) / interval));
+        this.missedRenderFrames += missed;
         this.nextRenderAt += (missed + 1) * interval;
       }
     }
@@ -145,6 +147,7 @@ export class FrameLab {
       stepsThisFrame: steps,
       interpolationAlpha: this.accumulator / this.fixedStep,
       droppedSeconds: this.droppedSeconds,
+      missedRenderFrames: this.missedRenderFrames,
       rendered,
       targetFPS: this.targetFPS
     };
