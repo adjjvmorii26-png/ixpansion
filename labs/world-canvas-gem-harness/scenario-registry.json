@@ -22,7 +22,8 @@
         "energy_in_range",
         "unique_entity_ids",
         "beacon_capacity_respected"
-      ]
+      ],
+      "skill_version": "1.0.0"
     },
     {
       "id": "world-energy-invalid-001",
@@ -39,7 +40,8 @@
       "assertions": [
         "candidate_rejected",
         "committed_state_unchanged"
-      ]
+      ],
+      "skill_version": "1.0.0"
     },
     {
       "id": "world-duplicate-id-001",
@@ -56,7 +58,8 @@
       "assertions": [
         "candidate_rejected",
         "committed_state_unchanged"
-      ]
+      ],
+      "skill_version": "1.0.0"
     },
     {
       "id": "world-report-bounds-001",
@@ -70,7 +73,8 @@
       "assertions": [
         "payload_within_limit_or_rejected",
         "no_partial_download"
-      ]
+      ],
+      "skill_version": "1.0.0"
     },
     {
       "id": "world-review-separation-001",
@@ -87,7 +91,8 @@
       "assertions": [
         "both_passes_present",
         "findings_labelled_by_evidence"
-      ]
+      ],
+      "skill_version": "1.0.0"
     }
   ]
 }
