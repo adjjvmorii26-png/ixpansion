@@ -1,5 +1,6 @@
 import json
 import unittest
+import importlib.util
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -7,6 +8,10 @@ LAB = ROOT / "labs" / "world-canvas-gem-harness"
 MANIFEST = LAB / "skill-manifest.json"
 SCENARIOS = LAB / "scenario-registry.json"
 EVIDENCE_CONTRACT = LAB / "evidence-contract.json"
+RUNNER_PATH = ROOT / "skills/r1/world_canvas_gem_harness/scenario_runner.py"
+_RUNNER_SPEC = importlib.util.spec_from_file_location("world_canvas_scenario_runner", RUNNER_PATH)
+RUNNER = importlib.util.module_from_spec(_RUNNER_SPEC)
+_RUNNER_SPEC.loader.exec_module(RUNNER)
 
 
 class WorldCanvasGemHarnessTests(unittest.TestCase):
@@ -68,6 +73,21 @@ class WorldCanvasGemHarnessTests(unittest.TestCase):
             self.assertIn(field, contract["required_fields"])
         self.assertTrue(any("not a signature" in rule for rule in contract["trust_rules"]))
         self.assertTrue(any("never inferred" in rule for rule in contract["trust_rules"]))
+
+    def test_scenario_runner_executes_registered_fixtures_with_lineage(self):
+        registry = json.loads(SCENARIOS.read_text(encoding="utf-8"))
+        report = RUNNER.run_registry(registry, "test-source-commit")
+        self.assertEqual(report["schema"], "ixpansion.gem-skill-evidence/v1")
+        self.assertEqual(report["source_commit"], "test-source-commit")
+        self.assertEqual(report["summary"]["scenarios"], 5)
+        self.assertEqual(report["summary"]["failed"], 0)
+        self.assertEqual(report["summary"]["status"], "PASS")
+        self.assertNotEqual(report["trust"]["browser_simulation"], "executed")
+        self.assertTrue(all(item["checks"] for item in report["results"]))
+
+    def test_scenario_runner_rejects_oversized_report_atomically(self):
+        with self.assertRaises(ValueError):
+            RUNNER.bounded_payload({"payload": "x" * 70000}, limit=1024)
 
     def test_harness_exposes_evidence_and_skill_runners(self):
         html = (LAB / "index.html").read_text(encoding="utf-8")
