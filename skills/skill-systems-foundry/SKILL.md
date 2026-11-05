@@ -9,9 +9,9 @@ Notion is canonical. GitHub exports are derived.
 
 ## Connected pipeline
 
-DISCOVER → MAP → FUZZ → DIAGNOSE → PROPOSE_REPAIR → REGRESSION_GATE → DRIFT_CHECK → EXPORT_REVIEW.
+The offline command executes discovery, dependency mapping, fuzz-case generation, static compatibility lint, diagnosis, and proposal generation. It reports unexecuted regression, live Notion, and export-review stages explicitly as `not_run_stages`.
 
-Run `python scripts/skill_lab.py pipeline --root <skills-directory> --seed 1337 --count 16 --profile portable`.
+Run `python scripts/skill_lab.py pipeline --root <skills-directory> --seed 1337 --count 16 --profile portable`. Add `--export-dir <verified-export-folder>` to execute the local snapshot drift check. Live Notion verification remains a separate command and requires an injected fetcher or offline fixture.
 
 ## Engines
 
