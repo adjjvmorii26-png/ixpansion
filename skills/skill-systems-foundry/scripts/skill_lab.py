@@ -1,6 +1,10 @@
 """Offline skill-quality pipeline. Deterministic, bounded, and proposal-only."""
 import argparse, hashlib, json, random, re
 from pathlib import Path
+try:
+    from live_notion_verify import verify_live
+except ImportError:
+    verify_live = None
 
 PROFILES={"portable":["mcp__","plugin://","sandbox:/mnt/data"],
           "gem":["mcp__","functions.exec","tools.mcp__"],"chatgpt":[]}
@@ -102,7 +106,7 @@ def pipeline(root,seed=1337,count=16,profile="portable"):
     for item in checks:
         if item["status"]=="WARN": findings.append({"code":"PROFILE_FORBIDDEN","path":item["path"],"tokens":item["findings"]})
     findings += [{"code":"ORPHAN_SKILL","path":name} for name in graph["orphans"] if name not in {x.get("path") for x in findings}]
-    return {"sequence":["DISCOVER","MAP","FUZZ","DIAGNOSE","PROPOSE_REPAIR","REGRESSION_GATE","DRIFT_CHECK","EXPORT_REVIEW"],
+    return {"sequence":["DISCOVER","MAP","FUZZ","DIAGNOSE","PROPOSE_REPAIR","REGRESSION_GATE","DRIFT_CHECK","LIVE_VERIFY","EXPORT_REVIEW"],
             "status":"FINDINGS" if findings else "NO_FINDINGS","scan_findings":findings,
             "dependency_graph":graph,"fuzz_cases":fuzz_cases(seed,count),
             "compatibility":checks,"failure_pattern_matches":diagnose(findings),
@@ -111,11 +115,11 @@ def pipeline(root,seed=1337,count=16,profile="portable"):
 
 def main():
     ap=argparse.ArgumentParser()
-    ap.add_argument("command",choices=["scan","graph","fuzz","compat","drift","repair-plan","pipeline"])
+    ap.add_argument("command",choices=["scan","graph","fuzz","compat","drift","live-verify","repair-plan","pipeline"])
     ap.add_argument("--root",default="skills"); ap.add_argument("--file")
     ap.add_argument("--profile",choices=sorted(PROFILES),default="portable")
     ap.add_argument("--seed",type=int,default=1337); ap.add_argument("--count",type=int,default=16)
-    ap.add_argument("--export-dir"); a=ap.parse_args(); root=Path(a.root)
+    ap.add_argument("--export-dir"); ap.add_argument("--fixture"); a=ap.parse_args(); root=Path(a.root)
     if a.command=="scan": result=scan(root)
     elif a.command=="graph": result=dependency_graph(root)
     elif a.command=="drift":
@@ -127,6 +131,14 @@ def main():
     elif a.command=="compat":
         if not a.file: ap.error("--file is required")
         result=compatibility(Path(a.file).read_text(encoding="utf-8"),a.profile)
+    elif a.command=="live-verify":
+        if not a.export_dir: ap.error("--export-dir is required")
+        if verify_live is None: ap.error("live_notion_verify module not available")
+        fetcher=None
+        if a.fixture:
+            body=Path(a.fixture).read_text(encoding="utf-8")
+            fetcher=lambda _pid, b=body: b
+        result=verify_live(Path(a.export_dir), fetcher=fetcher).to_dict()
     elif a.command=="pipeline": result=pipeline(root,a.seed,a.count,a.profile)
     else: result={"mode":"PROPOSAL_ONLY","findings":scan(root),"automatic_changes":False}
     print(json.dumps(result,indent=2,sort_keys=True))
