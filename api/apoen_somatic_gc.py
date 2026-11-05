@@ -1,8 +1,8 @@
 """APOEN-0: policy-only somatic timeline garbage collection.
 
 This module never deletes remote state. It verifies signed heartbeats, scores
-staleness from explicit telemetry, and emits hash-chained recommendation
-receipts suitable for a later approval-gated executor.
+staleness from explicit telemetry, protects live lineage/leases, and emits
+hash-chained recommendation receipts for a later approval-gated executor.
 """
 from __future__ import annotations
 
@@ -19,15 +19,18 @@ def canonical_json(value: Any) -> str:
 
 def sign_heartbeat(payload: Mapping[str, Any], secret: bytes) -> str:
     """Create a SHA-256 HMAC over the canonical heartbeat payload."""
-    if not secret:
-        raise ValueError("heartbeat secret must not be empty")
+    if not isinstance(secret, bytes) or not secret:
+        raise ValueError("heartbeat secret must be non-empty bytes")
     return hmac.new(secret, canonical_json(dict(payload)).encode("utf-8"), hashlib.sha256).hexdigest()
 
 
 def verify_heartbeat(payload: Mapping[str, Any], signature: str, secret: bytes) -> bool:
-    if not secret or not isinstance(signature, str):
+    if not isinstance(secret, bytes) or not secret or not isinstance(signature, str):
         return False
-    expected = sign_heartbeat(payload, secret)
+    try:
+        expected = sign_heartbeat(payload, secret)
+    except (TypeError, ValueError):
+        return False
     return hmac.compare_digest(expected, signature)
 
 
@@ -38,6 +41,9 @@ class GCPolicy:
     maximum_interactions: int = 0
 
     def __post_init__(self) -> None:
+        values = (self.stale_after_seconds, self.minimum_age_seconds, self.maximum_interactions)
+        if any(type(value) is not int for value in values):
+            raise ValueError("policy thresholds must be integers")
         if self.stale_after_seconds < 1 or self.minimum_age_seconds < 1:
             raise ValueError("age thresholds must be positive")
         if self.maximum_interactions < 0:
@@ -48,51 +54,81 @@ class SomaticGarbageCollector:
     """Deterministic, non-destructive candidate evaluator."""
 
     def __init__(self, cluster_id: str, policy: GCPolicy | None = None) -> None:
-        if not cluster_id or not cluster_id.strip():
+        if not isinstance(cluster_id, str) or not cluster_id.strip():
             raise ValueError("cluster_id must be non-empty")
         self.cluster_id = cluster_id
         self.policy = policy or GCPolicy()
 
+    @staticmethod
+    def _retained(branch_id: str, cluster_id: str, reason: str, **details: Any) -> dict[str, Any]:
+        return {
+            "branch_id": branch_id,
+            "cluster_id": cluster_id,
+            "decision": "RETAIN",
+            "eligible": False,
+            "reason": reason,
+            "destructive_action_performed": False,
+            **details,
+        }
+
+    def evaluate_authenticated_branch(
+        self,
+        branch_id: str,
+        metadata: Mapping[str, Any],
+        heartbeat_payload: Mapping[str, Any],
+        signature: str,
+        secret: bytes,
+        *,
+        now: int,
+    ) -> dict[str, Any]:
+        """Evaluate only when the signed heartbeat is bound to this branch and cluster."""
+        if not isinstance(heartbeat_payload, Mapping):
+            return self._retained(branch_id, self.cluster_id, "invalid_heartbeat")
+        expected = {
+            "branch_id": branch_id,
+            "cluster_id": self.cluster_id,
+            "last_heartbeat": metadata.get("last_heartbeat"),
+        }
+        if any(heartbeat_payload.get(key) != value for key, value in expected.items()):
+            return self._retained(branch_id, self.cluster_id, "heartbeat_binding_mismatch")
+        if not verify_heartbeat(heartbeat_payload, signature, secret):
+            return self._retained(branch_id, self.cluster_id, "invalid_heartbeat")
+        return self.evaluate_branch(branch_id, metadata, now=now)
+
     def evaluate_branch(self, branch_id: str, metadata: Mapping[str, Any], *, now: int) -> dict[str, Any]:
-        if not branch_id or not branch_id.strip():
+        if not isinstance(branch_id, str) or not branch_id.strip():
             raise ValueError("branch_id must be non-empty")
+        if not isinstance(metadata, Mapping) or type(now) is not int or now < 0:
+            return self._retained(branch_id, self.cluster_id, "invalid_telemetry")
+
         required = ("created_at", "last_heartbeat", "interaction_count")
         missing = [key for key in required if key not in metadata]
         if missing:
-            return {
-                "branch_id": branch_id,
-                "decision": "RETAIN",
-                "eligible": False,
-                "reason": "missing_telemetry",
-                "missing_fields": missing,
-                "cluster_id": self.cluster_id,
-            }
-        try:
-            created_at = int(metadata["created_at"])
-            heartbeat = int(metadata["last_heartbeat"])
-            interactions = int(metadata["interaction_count"])
-        except (TypeError, ValueError, OverflowError):
-            return {
-                "branch_id": branch_id,
-                "decision": "RETAIN",
-                "eligible": False,
-                "reason": "invalid_telemetry",
-                "cluster_id": self.cluster_id,
-            }
-        if min(created_at, heartbeat, interactions, now) < 0 or interactions < 0:
-            return {
-                "branch_id": branch_id,
-                "decision": "RETAIN",
-                "eligible": False,
-                "reason": "invalid_telemetry",
-                "cluster_id": self.cluster_id,
-            }
-        age = max(0, now - created_at)
-        heartbeat_age = max(0, now - heartbeat)
+            return self._retained(branch_id, self.cluster_id, "missing_telemetry", missing_fields=missing)
+
+        values = (metadata["created_at"], metadata["last_heartbeat"], metadata["interaction_count"])
+        if any(type(value) is not int or value < 0 for value in values):
+            return self._retained(branch_id, self.cluster_id, "invalid_telemetry")
+        created_at, heartbeat, interactions = values
+        if created_at > now or heartbeat > now:
+            return self._retained(branch_id, self.cluster_id, "future_timestamp")
+
+        guards = ("protected", "has_live_descendants", "active_lease")
+        malformed_guards = [key for key in guards if key in metadata and type(metadata[key]) is not bool]
+        if malformed_guards:
+            return self._retained(branch_id, self.cluster_id, "invalid_topology_guard", invalid_fields=malformed_guards)
+        active_guards = [key for key in guards if metadata.get(key) is True]
+        if active_guards:
+            return self._retained(branch_id, self.cluster_id, "lineage_or_lease_protected", active_guards=active_guards)
+
+        age = now - created_at
+        heartbeat_age = now - heartbeat
         checks = {
             "old_enough": age >= self.policy.minimum_age_seconds,
             "heartbeat_stale": heartbeat_age >= self.policy.stale_after_seconds,
             "low_activity": interactions <= self.policy.maximum_interactions,
+            "lineage_unprotected": True,
+            "lease_inactive": True,
         }
         eligible = all(checks.values())
         return {
