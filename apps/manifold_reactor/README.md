@@ -15,10 +15,10 @@ node --test tests/manifold-reactor.test.mjs tests/experimental-organisms.test.mj
 ## Experimental organisms
 
 `experimental-organisms.mjs` contains framework-independent simulation primitives:
-- `TemporalEchoRule` applies exponential residual-amplitude decay, creates immutable echo snapshots, and bounds cache capacity with expiry pruning.
+- `TemporalEchoRule` applies exponential residual-amplitude decay, creates immutable echo snapshots, and bounds cache capacity with expiry pruning and one refreshed entry per origin.
 - `VacuumLeech` emits a capped drain request. It does not mutate world bandwidth; the host simulation remains responsible for validating and applying the request.
 
-These primitives are not yet connected to the renderer or audio subsystem.
+`TemporalEchoRule` is connected to an isolated Canvas 2D overlay. Echo evaluation runs only during fixed simulation steps; rendering reads immutable snapshots and does not mutate simulation state. The overlay remains independent of WebGL context loss and is cleared on simulation reset and page cleanup. `VacuumLeech` remains an unconnected action generator; no audio sonification or host-side bandwidth mutation is implemented.
 
 ## Hardening decisions
 
