@@ -65,16 +65,8 @@ export class TemporalEchoRule {
   }
 
   condenseEcho(crystal, residual, currentEpoch) {
-    // Epoch bucket keeps identity stable across repeated evaluations in the
-    // same simulation epoch, while avoiding per-frame key churn.
-    const phantomKey = `echo:${crystal.id}:${Math.floor(currentEpoch)}`;
-    const cached = this.phantomCache.get(phantomKey);
-    if (cached) {
-      this.phantomCache.delete(phantomKey);
-      this.phantomCache.set(phantomKey, cached);
-      return cached;
-    }
-
+    // One stable entry per origin prevents one new cache record per tick.
+    const phantomKey = `echo:${crystal.id}`;
     const phantomState = Object.freeze({
       id: phantomKey,
       originId: crystal.id,
@@ -85,6 +77,7 @@ export class TemporalEchoRule {
       active: true,
     });
 
+    this.phantomCache.delete(phantomKey);
     this.phantomCache.set(phantomKey, phantomState);
     while (this.phantomCache.size > this.maxCacheEntries) {
       this.phantomCache.delete(this.phantomCache.keys().next().value);
@@ -97,6 +90,10 @@ export class TemporalEchoRule {
     for (const [key, echo] of this.phantomCache) {
       if (echo.expiresEpoch < currentEpoch) this.phantomCache.delete(key);
     }
+  }
+
+  snapshot() {
+    return Array.from(this.phantomCache.values());
   }
 
   clear() {
