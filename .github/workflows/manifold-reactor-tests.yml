@@ -5,6 +5,7 @@ on:
     paths:
       - "apps/manifold_reactor/**"
       - "tests/manifold-reactor.test.mjs"
+      - "tests/experimental-organisms.test.mjs"
       - ".github/workflows/manifold-reactor-tests.yml"
   push:
     branches:
@@ -15,7 +16,7 @@ permissions:
 
 jobs:
   reactor-core:
-    name: Reactor core tests
+    name: Reactor and organism tests
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -25,5 +26,5 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Run isolated simulation tests
-        run: node --test tests/manifold-reactor.test.mjs
+      - name: Run isolated simulation and organism tests
+        run: node --test tests/manifold-reactor.test.mjs tests/experimental-organisms.test.mjs
