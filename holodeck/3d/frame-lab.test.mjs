@@ -8,7 +8,7 @@ test("fixed-step simulation is independent of render cadence", () => {
   let a = 0, b = 0;
   fast.advance(0, () => a++);
   slow.advance(0, () => b++);
-  for (let t = 16; t <= 1000; t += 16) fast.advance(t, () => a++);
+  for (let t = 10; t <= 1000; t += 10) fast.advance(t, () => a++);
   for (let t = 0; t <= 1000; t += 50) slow.advance(t, () => b++);
   assert.equal(a, b);
   assert.equal(fast.simulationSteps, slow.simulationSteps);
