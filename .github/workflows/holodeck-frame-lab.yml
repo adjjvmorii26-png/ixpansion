@@ -48,4 +48,5 @@ jobs:
           grep -q 'id="capture"' holodeck/3d/index.html
           grep -q 'id="exportJPG"' holodeck/3d/index.html
           grep -q 'id="timeline"' holodeck/3d/index.html
+          grep -q 'id="missedFrames"' holodeck/3d/index.html
           grep -q 'new FrameLab' holodeck/3d/index.html
