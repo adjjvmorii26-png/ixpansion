@@ -49,7 +49,12 @@ def _organisms_payload() -> Dict[str, Any]:
     return {"count": len(out), "organisms": out}
 
 
-def _plant(words: str, commit: bool = True) -> Dict[str, Any]:
+def _commit_requested(payload: Dict[str, Any]) -> bool:
+    """Only an explicit JSON boolean may authorize a repository-writing commit."""
+    return payload.get("commit") is True
+
+
+def _plant(words: str, commit: bool = False) -> Dict[str, Any]:
     seed = words_to_seed(words)
     name = species_from_hex(seed)
     o = Organism(name, seed, words)
@@ -68,7 +73,7 @@ def _plant(words: str, commit: bool = True) -> Dict[str, Any]:
     return {"name": name, "commit": res.get("commit"), "vitality": o.vitality}
 
 
-def _cross(a: str, b: str, commit: bool = True) -> Dict[str, Any]:
+def _cross(a: str, b: str, commit: bool = False) -> Dict[str, Any]:
     rows = all()
     by_name = {e["name"]: e for e in rows}
     if a not in by_name or b not in by_name:
@@ -100,7 +105,6 @@ class GardenHandler(BaseHTTPRequestHandler):
         self.send_response(code)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
-        self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
         self.wfile.write(body)
 
@@ -149,17 +153,17 @@ class GardenHandler(BaseHTTPRequestHandler):
             words = str(payload.get("words") or "").strip()
             if not words:
                 return self._json({"error": "no words"}, 400)
-            return self._json(_plant(words, bool(payload.get("commit", True))))
+            return self._json(_plant(words, _commit_requested(payload)))
         if path == "/hortus/api/cross":
             a = str(payload.get("a") or "").strip()
             b = str(payload.get("b") or "").strip()
             if not a or not b:
                 return self._json({"error": "need a and b"}, 400)
-            return self._json(_cross(a, b, bool(payload.get("commit", True))))
+            return self._json(_cross(a, b, payload.get("commit") is True))
         return self._json({"error": "not found"}, 404)
 
 
-def serve(port: int = 8090, host: str = "0.0.0.0"):
+def serve(port: int = 8090, host: str = "127.0.0.1"):
     srv = ThreadingHTTPServer((host, port), GardenHandler)
     print(f"  HORTUS HEXIS garden:  http://localhost:{port}/hortus")
     print(f"  organisms api:        http://localhost:{port}/hortus/api/organisms")
@@ -171,6 +175,7 @@ def serve(port: int = 8090, host: str = "0.0.0.0"):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
+    ap.add_argument("--host", default="127.0.0.1", help="bind address (use 0.0.0.0 only on a trusted network)")
     ap.add_argument("--port", type=int, default=8090)
     args = ap.parse_args()
-    serve(args.port)
+    serve(args.port, args.host)
