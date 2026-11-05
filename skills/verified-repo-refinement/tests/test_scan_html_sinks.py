@@ -14,7 +14,7 @@ class HtmlSinkScannerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             page = root / "page.html"
-            page.write_text("<script>node.innerHTML = userValue;</script>\nnode.textContent = safeText;\n", encoding="utf-8")
+            page.write_text("<script>node.innerHTML = userValue;</script>\\nnode.textContent = safeText;\\n", encoding="utf-8")
             findings = MODULE.scan_file(page, root)
             self.assertEqual([(x["candidate"], x["line"]) for x in findings], [("innerHTML", 1)])
             self.assertEqual(findings[0]["classification"], "UNTRIAGED_CANDIDATE")
@@ -36,6 +36,28 @@ class HtmlSinkScannerTests(unittest.TestCase):
             (root / "b" / "two.html").write_text("x.outerHTML = value;", encoding="utf-8")
             paths = list(MODULE.iter_html_files(root, ["a"]))
             self.assertEqual([p.relative_to(root).as_posix() for p in paths], ["a/one.html"])
+
+    def test_rejects_paths_outside_repository_root(self):
+        with tempfile.TemporaryDirectory() as tmp, tempfile.TemporaryDirectory() as outside:
+            root = Path(tmp)
+            external = Path(outside) / "secret.html"
+            external.write_text("node.innerHTML = external;", encoding="utf-8")
+            self.assertEqual(list(MODULE.iter_html_files(root, [str(external)])), [])
+            self.assertEqual(list(MODULE.iter_html_files(root, ["../" + external.name])), [])
+            self.assertEqual(MODULE.scan_file(external, root), [])
+
+    def test_skips_symlinked_files_and_directories(self):
+        with tempfile.TemporaryDirectory() as tmp, tempfile.TemporaryDirectory() as outside:
+            root = Path(tmp)
+            external = Path(outside) / "external.html"
+            external.write_text("node.innerHTML = external;", encoding="utf-8")
+            try:
+                (root / "linked.html").symlink_to(external)
+                (root / "linked-dir").symlink_to(Path(outside), target_is_directory=True)
+            except (OSError, NotImplementedError):
+                self.skipTest("symlinks are unavailable on this platform")
+            self.assertEqual(list(MODULE.iter_html_files(root, [])), [])
+            self.assertEqual(MODULE.scan_file(root / "linked.html", root), [])
 
 
 if __name__ == "__main__":
