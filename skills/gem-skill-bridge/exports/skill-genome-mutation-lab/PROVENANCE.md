@@ -11,7 +11,8 @@
 - Export target: IXPANSION / skills/gem-skill-bridge/exports/skill-genome-mutation-lab/
 - Parent branch: feat/notion-seed-to-gem-forge-v1
 - Parent commit: 60793e7c5e27a76d4d7519f657411c69fb038146
+- Repository export readback: VERIFIED; SKILL.md, PROVENANCE.md, and TEST_MATRIX.md fetched from the target branch
 - Archive packaging: NOT RUN
 - Gem runtime installation/activation: NOT RUN
 - Merge/deploy: NOT RUN
-- Status: SEEDED, READBACK VERIFIED, DESK_TESTED, EXPORTED pending export readback
+- Status: SEEDED, READBACK_VERIFIED, DESK_TESTED, EXPORT_READBACK_VERIFIED; ARCHIVE_NOT_RUN; RUNTIME_NOT_RUN
