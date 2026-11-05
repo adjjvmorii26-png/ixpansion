@@ -148,3 +148,8 @@ Use **PASS**, **FAIL**, **BLOCKED**, **PENDING**, or **NOT RUN**. Never convert 
 6. **Next highest-value target:** one specific path or risk, justified by evidence.
 
 Keep reports concise. No unsupported green claims, no invented metrics, and no claim that a scan is exhaustive unless its scope and exclusions are stated.
+
+
+## Skill-library maintenance
+
+When the work involves creating or changing reusable agent procedures, follow [the skill-evolution skill](../skill-evolution/SKILL.md). Update the skill index when adding, renaming, or retiring a skill. Prefer composition over duplicated instructions, validate frontmatter and referenced assets, and distinguish static review from actual runtime behavior tests.
