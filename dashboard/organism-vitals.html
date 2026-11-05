@@ -101,8 +101,14 @@ function statusColor(status) {
 
 function addLog(msg) {
   const el = document.getElementById('log');
-  const time = new Date().toISOString().slice(11,19);
-  el.innerHTML += `<div class="entry"><span class="time">[${time}]</span> ${msg}</div>`;
+  const row = document.createElement('div');
+  row.className = 'entry';
+  const stamp = document.createElement('span');
+  stamp.className = 'time';
+  stamp.textContent = '[' + new Date().toISOString().slice(11, 19) + ']';
+  row.appendChild(stamp);
+  row.appendChild(document.createTextNode(' ' + String(msg)));
+  el.appendChild(row);
   el.scrollTop = el.scrollHeight;
 }
 
@@ -142,33 +148,62 @@ function updateStats() {
   document.getElementById('s-time').textContent = new Date().toLocaleTimeString();
 }
 
+function textNode(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  node.textContent = text;
+  return node;
+}
+
+function barNode(width, color) {
+  const bar = document.createElement('div');
+  bar.className = 'bar';
+  const fill = document.createElement('div');
+  fill.className = 'bar-fill';
+  fill.style.width = width;
+  fill.style.background = color;
+  bar.appendChild(fill);
+  return bar;
+}
+
 function renderCard(module) {
   const grid = document.getElementById('grid');
   let card = document.getElementById('mod-' + module);
   const r = results[module];
-  const name = module.replace(/-/g, ' ');
-  
+  const name = String(module).replace(/-/g, ' ');
+
   if (!card) {
     card = document.createElement('div');
     card.id = 'mod-' + module;
     card.className = 'module-card';
     grid.appendChild(card);
   }
-  
+
+  while (card.firstChild) card.removeChild(card.firstChild);
+  card.appendChild(textNode('div', 'name', name));
+
   if (r && r.ok) {
-    const score = r.coherence || 0;
+    const raw = Number(r.coherence);
+    const score = Number.isFinite(raw) ? Math.max(0, Math.min(1, raw)) : 0;
     const color = colorFor(score);
-    card.innerHTML = `<div class="name">${name}</div><div class="wave">Wave: ${r.wave || '?'}</div>
-      <div class="coherence" style="color:${color}">Coherence: ${(score * 100).toFixed(0)}%</div>
-      <div class="bar"><div class="bar-fill" style="width:${score*100}%;background:${color}"></div></div>`;
+    const wave = r.wave == null || r.wave === '' ? '?' : String(r.wave);
+    card.appendChild(textNode('div', 'wave', 'Wave: ' + wave));
+    const coherence = textNode('div', 'coherence', 'Coherence: ' + (score * 100).toFixed(0) + '%');
+    coherence.style.color = color;
+    card.appendChild(coherence);
+    card.appendChild(barNode((score * 100) + '%', color));
   } else if (r && !r.ok) {
-    card.innerHTML = `<div class="name">${name}</div><div class="wave">Error</div>
-      <div class="coherence" style="color:#c38d9e">Failed</div>
-      <div class="bar"><div class="bar-fill" style="width:0%;background:#c38d9e"></div></div>`;
+    card.appendChild(textNode('div', 'wave', 'Error'));
+    const coherence = textNode('div', 'coherence', 'Failed');
+    coherence.style.color = '#c38d9e';
+    card.appendChild(coherence);
+    card.appendChild(barNode('0%', '#c38d9e'));
   } else {
-    card.innerHTML = `<div class="name">${name}</div><div class="wave">Loading</div>
-      <div class="coherence" style="color:#888">—</div>
-      <div class="bar"><div class="bar-fill" style="width:0%;background:#1a1a2a"></div></div>`;
+    card.appendChild(textNode('div', 'wave', 'Loading'));
+    const coherence = textNode('div', 'coherence', '\u2014');
+    coherence.style.color = '#888';
+    card.appendChild(coherence);
+    card.appendChild(barNode('0%', '#1a1a2a'));
   }
 }
 
