@@ -38,5 +38,8 @@ jobs:
           assert.doesNotMatch(source, /hashPassword\(["']organism["']\)/);
           assert.equal(source.includes("origin: true"), false);
           assert.doesNotMatch(source, /JWT secret:/);
+          // Registration is public, so requested tier values must be ignored.
+          assert.match(source, /tier:\s*["\x27]free["\x27]/);
+          assert.doesNotMatch(source, /tier:\s*tier\s*\|\|/);
           console.log("Node auth security defaults: OK");
           NODE
