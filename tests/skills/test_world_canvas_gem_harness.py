@@ -19,7 +19,7 @@ class WorldCanvasGemHarnessTests(unittest.TestCase):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual(data["runtime"], "browser-local")
         self.assertIn("Gemini API execution", data["non_capabilities"])
-        self.assertEqual(data["version"], "0.3.0")
+        self.assertEqual(data["version"], "0.4.0")
         self.assertEqual(data["registry"]["system"], "wave733_skill_builder")
         self.assertEqual(data["scenarios"]["path"], "labs/world-canvas-gem-harness/scenario-registry.json")
         self.assertEqual(data["evidence_contract"]["path"], "labs/world-canvas-gem-harness/evidence-contract.json")
