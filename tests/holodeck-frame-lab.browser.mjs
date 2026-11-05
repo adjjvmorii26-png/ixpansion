@@ -50,6 +50,7 @@ try {
     await page.locator("#err").textContent());
   assert.equal(await page.locator("#c").count(), 1);
   assert.equal(await page.locator("#targetFPS").inputValue(), "60");
+  assert.equal(await page.locator("#missedFrames").count(), 1);
 
   await page.locator("#targetFPS").selectOption("30");
   await page.waitForTimeout(800);
