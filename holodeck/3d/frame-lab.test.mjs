@@ -98,3 +98,14 @@ test("FPS and 1% low use observed render-frame durations", () => {
   assert.ok(metrics.minFPS > 58 && metrics.minFPS < 60);
   assert.ok(metrics.onePercentLow > 58 && metrics.onePercentLow < 60);
 });
+
+test("30 FPS cap measures rendered frames, not requestAnimationFrame callbacks", () => {
+  const lab = new FrameLab({ targetFPS: 30 });
+  lab.advance(0, () => {});
+  let metrics;
+  for (let time = 1000 / 60; time <= 2000; time += 1000 / 60) {
+    metrics = lab.advance(time, () => {});
+  }
+  assert.ok(metrics.fps > 28 && metrics.fps < 32, `expected about 30 rendered FPS, got ${metrics.fps}`);
+  assert.ok(metrics.frameIndex >= 58 && metrics.frameIndex <= 62, `unexpected rendered frame count: ${metrics.frameIndex}`);
+});
