@@ -1,5 +1,6 @@
 import json
 import unittest
+import tempfile
 import importlib.util
 from pathlib import Path
 
@@ -93,6 +94,25 @@ class WorldCanvasGemHarnessTests(unittest.TestCase):
     def test_scenario_runner_rejects_oversized_report_atomically(self):
         with self.assertRaises(ValueError):
             RUNNER.bounded_payload({"payload": "x" * 70000}, limit=1024)
+
+
+    def test_scenario_runner_writes_complete_evidence_atomically(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            destination = Path(tmp) / "nested" / "evidence.json"
+            report = {"schema": "test", "checks": [{"status": "PASS"}]}
+            written = RUNNER.write_bounded_atomic(destination, report)
+            self.assertEqual(destination.stat().st_size, written)
+            self.assertEqual(json.loads(destination.read_text(encoding="utf-8")), report)
+            self.assertEqual(list(destination.parent.glob(".evidence.json.*.tmp")), [])
+
+    def test_oversized_evidence_preserves_existing_output(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            destination = Path(tmp) / "evidence.json"
+            destination.write_text("previous-valid-report", encoding="utf-8")
+            with self.assertRaises(ValueError):
+                RUNNER.write_bounded_atomic(destination, {"payload": "x" * 1000}, limit=64)
+            self.assertEqual(destination.read_text(encoding="utf-8"), "previous-valid-report")
+            self.assertEqual(list(destination.parent.glob(".evidence.json.*.tmp")), [])
 
     def test_harness_exposes_evidence_and_skill_runners(self):
         html = (LAB / "index.html").read_text(encoding="utf-8")
