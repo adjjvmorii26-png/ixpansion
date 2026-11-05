@@ -17,6 +17,8 @@ PATTERNS = {
     "insertAdjacentHTML": re.compile(r"\.insertAdjacentHTML\s*\("),
     "document.write": re.compile(r"\bdocument\.write(?:ln)?\s*\("),
     "srcdoc": re.compile(r"\bsrcdoc\s*="),
+    "event_handler_attribute": re.compile(r"\bon[a-z]+\s*=", re.IGNORECASE),
+    "javascript_url": re.compile(r"""(?:href|src|action|formaction)\s*=\s*["\']?\s*javascript\s*:""", re.IGNORECASE),
     "string_template_candidate": re.compile(r"(?:innerHTML|outerHTML)\s*=\s*[\x60'\"]"),
 }
 DEFAULT_IGNORES = {".git", "node_modules", "vendor", "dist", "build", ".venv", "venv", "__pycache__"}
