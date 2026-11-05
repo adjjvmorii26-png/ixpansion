@@ -30,6 +30,8 @@ jobs:
       - run: pip install pytest pytest-asyncio
       - name: Run all configured monorepo test roots
         run: python -m pytest -q --tb=short
+      - name: Run nested IXPANSION tests in an isolated pytest process
+        run: python -m pytest ixpansion/tests -q --tb=short
       - name: Verify all modules parse
         run: |
           python -c "
