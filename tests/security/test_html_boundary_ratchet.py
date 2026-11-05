@@ -34,7 +34,7 @@ deleted file mode 100644
 @@ -1 +0,0 @@
 -<div>
 """
-        self.assertEqual(added_line_map(diff), {"new.html": {1, 2}, "old.html": set()})
+        self.assertEqual(added_line_map(diff), {"new.html": {1, 2}})
 
 
 if __name__ == "__main__":
