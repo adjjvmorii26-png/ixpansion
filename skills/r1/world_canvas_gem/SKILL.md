@@ -21,8 +21,8 @@ Turn natural-language experiments into bounded, reproducible World Canvas scenar
 2. Clone before execution. Never experiment on a user's only copy of a scenario.
 3. Determinism. Record seed, ordered actions, engine version, initial state, and final hash.
 4. Pure transitions. State changes happen only through transition(); rendering is read-only.
-5. Evidence. Record accepted/rejected actions, rejection reasons, tick, and state hash.
-6. Bounded execution. Enforce world bounds, energy range, beacon capacity, unique IDs, and a 100-step default limit.
+5. Evidence. Record accepted/rejected actions, rejection reasons, tick, and state hash. The FNV-1a state fingerprint is for deterministic consistency checks only, not cryptographic integrity or authenticity.
+6. Bounded execution. The engine enforces world bounds, energy range, beacon capacity, unique IDs, and valid pulse metadata. The 100-step default is a harness policy and must be enforced by the calling runner; the engine itself does not count scenario actions.
 7. No false physics. T1 means internal simulation consistency, not real-world physical accuracy.
 8. Approval gate. Repository writes, PR creation, external integrations, deployments, and destructive actions require explicit user approval.
 9. No secrets. Never put credentials, API keys, or personal data in the world ledger or exported artifacts.
@@ -52,6 +52,8 @@ Turn natural-language experiments into bounded, reproducible World Canvas scenar
 | Skill registry | skills/BUILDING.md |
 
 ## Commands
+
+The `world-canvas:*` names below are documented harness operations, not executable shell commands or a connected Gemini/Gem runtime adapter yet. A runner must implement their input/output contracts before invoking them as tools.
 
 ### world-canvas:design
 Input: scenario objective and constraints.
