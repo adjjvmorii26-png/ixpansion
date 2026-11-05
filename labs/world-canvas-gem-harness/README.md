@@ -38,3 +38,5 @@ python skills/r1/world_canvas_gem_harness/scenario_runner.py --source-commit "$(
 ```
 
 The runner executes the five currently supported deterministic fixture adapters, emits per-assertion outcomes and lineage metadata, and rejects evidence output above 64 KiB before writing it. It validates the fixture contracts only; it does not drive the browser simulation or execute Gemini/provider models. A PASS therefore means these Python fixture adapters passed, not that the browser lab or any external environment was validated.
+
+Each scenario result is emitted as its own evidence envelope with the required skill/scenario versions, source commit, runtime, execution mode, timestamp, and named check outcomes.
