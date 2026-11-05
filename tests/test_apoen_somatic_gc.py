@@ -72,6 +72,47 @@ class SomaticGarbageCollectorTests(unittest.TestCase):
         self.assertTrue(verify_receipt(b))
         self.assertNotEqual(b["seal"], c["seal"])
 
+    def test_authenticated_heartbeat_is_bound_to_branch_and_cluster(self):
+        metadata = {"created_at": 100, "last_heartbeat": 200, "interaction_count": 1}
+        heartbeat = {"branch_id": "branch-a", "cluster_id": "CLUSTER-OMEGA", "last_heartbeat": 200}
+        signature = sign_heartbeat(heartbeat, b"test-secret")
+        out = self.gc.evaluate_authenticated_branch(
+            "branch-a", metadata, heartbeat, signature, b"test-secret", now=1000
+        )
+        self.assertTrue(out["eligible"])
+        wrong_branch = {**heartbeat, "branch_id": "branch-b"}
+        out = self.gc.evaluate_authenticated_branch(
+            "branch-a", metadata, wrong_branch,
+            sign_heartbeat(wrong_branch, b"test-secret"), b"test-secret", now=1000
+        )
+        self.assertEqual(out["reason"], "heartbeat_binding_mismatch")
+        self.assertFalse(out["eligible"])
+
+    def test_invalid_signature_cannot_make_branch_candidate(self):
+        metadata = {"created_at": 100, "last_heartbeat": 200, "interaction_count": 1}
+        heartbeat = {"branch_id": "branch-a", "cluster_id": "CLUSTER-OMEGA", "last_heartbeat": 200}
+        out = self.gc.evaluate_authenticated_branch(
+            "branch-a", metadata, heartbeat, "bad-signature", b"test-secret", now=1000
+        )
+        self.assertEqual(out["reason"], "invalid_heartbeat")
+        self.assertFalse(out["eligible"])
+
+    def test_live_lineage_and_leases_are_never_candidates(self):
+        base = {"created_at": 100, "last_heartbeat": 200, "interaction_count": 1}
+        for guard in ("protected", "has_live_descendants", "active_lease"):
+            with self.subTest(guard=guard):
+                out = self.gc.evaluate_branch("branch-a", {**base, guard: True}, now=1000)
+                self.assertEqual(out["reason"], "lineage_or_lease_protected")
+                self.assertFalse(out["eligible"])
+                self.assertFalse(out["destructive_action_performed"])
+
+    def test_boolean_and_future_timestamps_fail_closed(self):
+        base = {"created_at": 100, "last_heartbeat": 200, "interaction_count": 1}
+        out = self.gc.evaluate_branch("branch-a", {**base, "interaction_count": True}, now=1000)
+        self.assertEqual(out["reason"], "invalid_telemetry")
+        out = self.gc.evaluate_branch("branch-a", {**base, "last_heartbeat": 1001}, now=1000)
+        self.assertEqual(out["reason"], "future_timestamp")
+
     def test_status_is_non_destructive(self):
         out = handler()
         self.assertEqual(out["mode"], "policy_only")
