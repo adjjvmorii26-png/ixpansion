@@ -200,6 +200,7 @@
     }
 
     function captureFrame() {
+      try {
       const thumb = document.createElement("canvas");
       const scale = Math.min(1, 640 / canvas.width);
       thumb.width = Math.max(1, Math.round(canvas.width * scale));
