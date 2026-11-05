@@ -83,7 +83,12 @@ class WorldCanvasGemHarnessTests(unittest.TestCase):
         self.assertEqual(report["summary"]["failed"], 0)
         self.assertEqual(report["summary"]["status"], "PASS")
         self.assertNotEqual(report["trust"]["browser_simulation"], "executed")
-        self.assertTrue(all(item["checks"] for item in report["results"]))
+        required = {"skill_name", "skill_version", "scenario_id", "scenario_version",
+                    "source_commit", "runtime", "execution_mode", "executed_at", "checks"}
+        for item in report["results"]:
+            self.assertTrue(required.issubset(item))
+            self.assertEqual(item["execution_mode"], "local-deterministic")
+            self.assertTrue(item["checks"])
 
     def test_scenario_runner_rejects_oversized_report_atomically(self):
         with self.assertRaises(ValueError):
