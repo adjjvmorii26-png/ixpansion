@@ -99,6 +99,9 @@ def pipeline(root,seed=1337,count=16,profile="portable"):
     findings += [{"code":e["status"],"path":e.get("from"),"target":e.get("to")}
                  for e in graph["edges"] if e["status"] in ("MISSING_TARGET","DEPENDENCY_CYCLE")]
     checks=[{"path":str(p),**compatibility(p.read_text(encoding="utf-8"),profile)} for p in skill_files(root)]
+    for item in checks:
+        if item["status"]=="WARN": findings.append({"code":"PROFILE_FORBIDDEN","path":item["path"],"tokens":item["findings"]})
+    findings += [{"code":"ORPHAN_SKILL","path":name} for name in graph["orphans"] if name not in {x.get("path") for x in findings}]
     return {"sequence":["DISCOVER","MAP","FUZZ","DIAGNOSE","PROPOSE_REPAIR","REGRESSION_GATE","DRIFT_CHECK","EXPORT_REVIEW"],
             "status":"FINDINGS" if findings else "NO_FINDINGS","scan_findings":findings,
             "dependency_graph":graph,"fuzz_cases":fuzz_cases(seed,count),

@@ -40,4 +40,12 @@ class FoundryTests(unittest.TestCase):
             self.assertEqual(r["sequence"][-1],"EXPORT_REVIEW"); self.assertFalse(r["automatic_changes"])
             self.assertTrue(r["failure_pattern_matches"])
 
+    def test_pipeline_maps_compatibility_leak_to_pattern(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp); self.make_skill(root,"a","alpha")
+            (root/"a"/"SKILL.md").write_text("---\nname: alpha\ndescription: test\n---\nmcp__adapter\n")
+            r=pipeline(root)
+            self.assertIn("PROFILE_FORBIDDEN",[x["code"] for x in r["scan_findings"]])
+            self.assertIn("FP-004",[x["pattern_id"] for x in r["failure_pattern_matches"]])
+
 if __name__=="__main__": unittest.main()

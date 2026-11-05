@@ -1,7 +1,16 @@
 # Skill Systems Foundry
 
-Offline prototype for dependency mapping, deterministic input fuzzing, proposal-only repair plans, static Gem compatibility checks, and SHA-256 source/export drift detection.
+Offline, deterministic quality pipeline for reusable skills.
 
-Run tests with `python -m unittest discover -s skills/skill-systems-foundry/tests -v` after placing the package on the import path, or run from this folder with `PYTHONPATH=scripts python -m unittest discover -s tests -v`.
+## Run
 
-The fuzz engine generates cases only. It does not execute target skills. Repair mode only proposes. Drift compares local snapshots, not live Notion. Compatibility is static lint, not runtime integration.
+```bash
+python scripts/skill_lab.py pipeline --root skills --seed 1337 --count 16 --profile portable
+PYTHONPATH=scripts python -m unittest discover -s tests -v
+```
+
+Commands: `scan`, `graph`, `fuzz`, `compat`, `drift`, `repair-plan`, and `pipeline`.
+
+The pipeline connects discovery, dependency mapping, bounded fuzz-case generation, failure-pattern diagnosis, repair proposals, regression gates, drift checks, and export review. Failure patterns FP-001 through FP-006 are maintained in `failure_patterns.json`.
+
+Fuzz cases are generated only, not executed. Repair is proposal-only. Compatibility is static lint, not runtime proof. Drift compares local snapshots; it does not fetch Notion. Human review is required before promotion.
