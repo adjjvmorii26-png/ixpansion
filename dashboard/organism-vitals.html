@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Organism Vitals — Live</title>
+<title>Organism Vitals Monitor</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#080810;color:#e0e0e0;font-family:'Courier New',monospace}
@@ -39,19 +39,20 @@ body{background:#080810;color:#e0e0e0;font-family:'Courier New',monospace}
 <body>
 <div class="header">
   <h1>⚛ Organism Vitals Monitor</h1>
-  <div class="sub">Live coherence_vitals() from all wave modules — auto-refresh</div>
+  <div class="sub">On-demand API status checks across configured modules</div>
 </div>
 <div class="stats-bar">
   <div class="stat"><div class="label">Modules</div><div class="val" id="s-mod">0</div></div>
-  <div class="stat"><div class="label">Online</div><div class="val green" id="s-online">0</div></div>
-  <div class="stat"><div class="label">Errors</div><div class="val red" id="s-error">0</div></div>
-  <div class="stat"><div class="label">Organism Health</div><div class="val" id="s-health">0%</div></div>
+  <div class="stat"><div class="label">Responding</div><div class="val green" id="s-online">0</div></div>
+  <div class="stat"><div class="label">Unavailable</div><div class="val red" id="s-error">0</div></div>
+  <div class="stat"><div class="label">Response Rate</div><div class="val" id="s-health">0%</div></div>
   <div class="stat"><div class="label">Last Scan</div><div class="val" id="s-time">—</div></div>
 </div>
 <div class="controls">
   <button id="btn-start" onclick="startScan()">▶ Start Scan</button>
   <button id="btn-stop" onclick="stopScan()">■ Stop</button>
   <button onclick="toggleLog()">📋 Log</button>
+  <button id="btn-auto" onclick="toggleAutoRefresh()">⟳ Enable Auto-refresh</button>
   <button onclick="location.reload()">↻ Refresh</button>
   <span id="auto-label" style="color:#666;font-size:.8em;margin-left:12px">Auto-refresh: OFF</span>
 </div>
@@ -75,14 +76,25 @@ let errors = 0;
 let online = 0;
 let autoRefresh = false;
 let autoTimer = null;
+const REQUEST_TIMEOUT_MS = 8000;
+const MAX_LOG_ENTRIES = 100;
 
 async function apiCall(module, action) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   try {
-    const r = await fetch(`/api/${module}?action=${action}`);
-    const d = await r.json();
-    return d;
-  } catch(e) {
-    return null;
+    const response = await fetch(`/api/${encodeURIComponent(module)}?action=${encodeURIComponent(action)}`, {
+      signal: controller.signal,
+      headers: { Accept: "application/json" }
+    });
+    if (!response.ok) return { status: "error", message: `HTTP ${response.status}` };
+    const contentType = response.headers.get("content-type") || "";
+    if (!contentType.includes("application/json")) return { status: "error", message: "Unexpected response type" };
+    return await response.json();
+  } catch (error) {
+    return { status: "error", message: error.name === "AbortError" ? "Request timed out" : "Request failed" };
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
@@ -108,6 +120,7 @@ function addLog(msg) {
   time.textContent = `[${new Date().toISOString().slice(11,19)}]`;
   entry.append(time, document.createTextNode(' '), document.createTextNode(String(msg ?? '')));
   el.appendChild(entry);
+  while (el.children.length > MAX_LOG_ENTRIES) el.firstElementChild.remove();
   el.scrollTop = el.scrollHeight;
 }
 
@@ -144,7 +157,6 @@ function updateStats() {
   const hEl = document.getElementById('s-health');
   hEl.textContent = health + '%';
   hEl.className = 'val ' + (health >= 80 ? 'green' : health >= 50 ? 'red' : '');
-  document.getElementById('s-time').textContent = new Date().toLocaleTimeString();
 }
 
 function renderCard(module) {
@@ -214,6 +226,7 @@ async function startScan() {
   document.getElementById('prog-fill').style.width = '0%';
   document.getElementById('prog-text').textContent = 'Scanning...';
   document.getElementById('btn-start').classList.add('active');
+  document.getElementById('btn-start').disabled = true;
   addLog('Scan started');
   
   while (currentIdx < totalModules && !stopFlag) {
@@ -224,8 +237,13 @@ async function startScan() {
   
   scanning = false;
   document.getElementById('btn-start').classList.remove('active');
-  document.getElementById('prog-text').textContent = `Complete: ${online} online, ${errors} errors`;
-  addLog(`Scan complete: ${online} online, ${errors} errors`);
+  document.getElementById('btn-start').disabled = false;
+  document.getElementById('s-time').textContent = new Date().toLocaleTimeString();
+  const stopped = stopFlag && currentIdx < totalModules;
+  document.getElementById('prog-text').textContent = stopped
+    ? `Stopped: ${scanned}/${totalModules} checked`
+    : `Complete: ${online} responding, ${errors} unavailable`;
+  addLog(stopped ? `Scan stopped after ${scanned}/${totalModules} modules` : `Scan complete: ${online} responding, ${errors} unavailable`);
   
   if (autoRefresh) {
     autoTimer = setTimeout(() => startScan(), 10000);
@@ -233,10 +251,10 @@ async function startScan() {
 }
 
 function stopScan() {
+  if (!scanning) return;
   stopFlag = true;
-  scanning = false;
-  document.getElementById('btn-start').classList.remove('active');
-  addLog('Scan stopped');
+  document.getElementById('prog-text').textContent = "Stopping after current request…";
+  addLog("Stop requested");
 }
 
 function toggleLog() {
@@ -248,17 +266,31 @@ function startAutoRefresh() {
   if (autoTimer) clearTimeout(autoTimer);
   autoRefresh = true;
   document.getElementById('auto-label').textContent = 'Auto-refresh: ON (10s)';
-  startScan();
+  document.getElementById('btn-auto').textContent = '⏸ Disable Auto-refresh';
+  if (!scanning) startScan();
 }
 
 function stopAutoRefresh() {
   autoRefresh = false;
   if (autoTimer) clearTimeout(autoTimer);
+  autoTimer = null;
   document.getElementById('auto-label').textContent = 'Auto-refresh: OFF';
+  document.getElementById('btn-auto').textContent = '⟳ Enable Auto-refresh';
+}
+
+function toggleAutoRefresh() {
+  if (autoRefresh) stopAutoRefresh();
+  else startAutoRefresh();
 }
 
 document.addEventListener('keydown', e => {
-  if (e.key === ' ') { e.preventDefault(); if (scanning) stopScan(); else startScan(); }
+  const target = e.target;
+  const isInteractive = target && (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(target.tagName));
+  if (e.key === ' ' && !e.repeat && !e.altKey && !e.ctrlKey && !e.metaKey && !isInteractive) {
+    e.preventDefault();
+    if (scanning) stopScan();
+    else startScan();
+  }
 });
 
 // Start scanning on load
