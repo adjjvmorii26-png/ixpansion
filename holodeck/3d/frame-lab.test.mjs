@@ -86,3 +86,15 @@ test("frame image payloads are validated and preserved by duplication", () => {
   assert.throws(() => lab.capture({}, { imageDataUrl: "javascript:alert(1)" }), /bounded/);
   assert.throws(() => lab.capture({}, { imageDataUrl: "data:image/png;base64," + "A".repeat(3000) }), /bounded/);
 });
+
+test("FPS and 1% low use observed render-frame durations", () => {
+  const lab = new FrameLab({ targetFPS: 0 });
+  lab.advance(0, () => {});
+  let metrics;
+  for (let time = 17; time <= 170; time += 17) {
+    metrics = lab.advance(time, () => {});
+  }
+  assert.ok(metrics.fps > 58 && metrics.fps < 60);
+  assert.ok(metrics.minFPS > 58 && metrics.minFPS < 60);
+  assert.ok(metrics.onePercentLow > 58 && metrics.onePercentLow < 60);
+});
