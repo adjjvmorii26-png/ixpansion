@@ -114,6 +114,7 @@ export class FrameLab {
     if (typeof stepFn !== "function") throw new TypeError("stepFn must be a function");
     stepFn(this.fixedStep);
     this.simulationSteps++;
+    this.frameIndex++;
     this.accumulator = 0;
     return this.simulationSteps;
   }
