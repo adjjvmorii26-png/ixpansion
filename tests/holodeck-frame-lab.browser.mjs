@@ -95,6 +95,13 @@ try {
   assert.equal(exported.captures.length, 2);
   assert.match(exported.captures[0].imageDataUrl, /^data:image\/jpeg;base64,/);
 
+  await page.locator("#btnSpawn").click();
+  await page.waitForFunction(() => document.querySelector("#status")?.textContent.includes("bodies=4"));
+  await page.locator("#btnReset").click();
+  await page.waitForFunction(() => document.querySelector("#status")?.textContent.includes("bodies=3"));
+  await page.locator("#btnSpawn").click();
+  await page.waitForFunction(() => document.querySelector("#status")?.textContent.includes("bodies=4"));
+
   await page.setViewportSize({ width: 390, height: 844 });
   assert.ok(await page.locator("#frameLab").evaluate(el => el.getBoundingClientRect().height > 0),
     "frame lab should remain visible at mobile width");
