@@ -90,7 +90,7 @@ def execute(scenario: dict[str, Any]) -> list[dict[str, Any]]:
         except ValueError:
             no_partial = True
         checks.extend([
-            ("payload_within_limit_or_rejected", accepted and len(oversized) > limit, f"small={len(encoded)} bytes; limit={limit}"),
+            ("payload_within_limit_or_rejected", accepted and len(canonical_bytes(oversized)) > limit, f"small={len(encoded)} bytes; limit={limit}"),
             ("no_partial_download", no_partial, "oversized payload is rejected as a whole; no truncated artifact emitted"),
         ])
     elif sid == "world-review-separation-001":
