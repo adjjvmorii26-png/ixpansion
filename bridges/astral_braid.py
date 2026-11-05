@@ -242,3 +242,7 @@ def main(argv: list[str] | None = None) -> int:
     except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError) as error:
         print(json.dumps({"ok": False, "error": str(error)}))
         return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
