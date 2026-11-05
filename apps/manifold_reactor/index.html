@@ -19,7 +19,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:1rem;pa
 h1{font-size:clamp(1.15rem,3vw,1.7rem);letter-spacing:.08em;margin:0}h1 span{color:var(--cyan)}.eyebrow{color:var(--muted);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.35rem}
 main{max-width:1400px;margin:auto;padding:clamp(.75rem,2vw,1.5rem);display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,340px);gap:1rem}
 .stage{position:relative;min-height:440px;height:min(70svh,760px);overflow:hidden;border:1px solid var(--line);border-radius:1.1rem;background:radial-gradient(ellipse at center,#111e35,#070a13 70%);isolation:isolate}
-canvas{display:block;width:100%;height:100%;touch-action:pan-y}#fallback{position:absolute;inset:0;pointer-events:none}canvas[hidden]{display:none}
+canvas{display:block;width:100%;height:100%;touch-action:pan-y}#fallback,#echo-layer{position:absolute;inset:0;pointer-events:none}#echo-layer{z-index:1}canvas[hidden]{display:none}
 .overlay{position:absolute;left:1rem;top:1rem;right:1rem;display:flex;justify-content:space-between;gap:.75rem;pointer-events:none}.pill{background:#0b1324e8;border:1px solid var(--line);border-radius:99px;padding:.45rem .7rem;font-size:.8rem;color:var(--muted)}
 .stage-status{position:absolute;left:1rem;bottom:1rem;max-width:calc(100% - 2rem);color:var(--muted);font-size:.82rem;background:#070a13dc;padding:.5rem .7rem;border-radius:.5rem}
 .panel{align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:1rem;padding:1rem;display:grid;gap:1rem}
@@ -36,7 +36,7 @@ h2{font-size:1rem;margin:0}p{margin:0;color:var(--muted);font-size:.9rem;line-he
 <header><div><div class="eyebrow">IXPANSION · experimental systems</div><h1>5D <span>MANIFOLD</span> REACTOR</h1></div><p aria-label="Simulation mode">Local visual simulation · no network telemetry</p></header>
 <main>
 <section class="stage" aria-label="Interactive manifold visualization">
-<canvas id="reactor" role="img" aria-label="Animated abstract particle manifold. Use the controls to change its geometry or pause motion.">Your browser does not support the canvas element.</canvas><canvas id="fallback" aria-hidden="true" hidden></canvas>
+<canvas id="reactor" role="img" aria-label="Animated abstract particle manifold. Use the controls to change its geometry or pause motion.">Your browser does not support the canvas element.</canvas><canvas id="fallback" aria-hidden="true" hidden></canvas><canvas id="echo-layer" aria-hidden="true"></canvas>
 <div class="overlay" aria-hidden="true"><span class="pill" id="geometry-pill">GEOMETRY · TORUS</span><span class="pill" id="render-pill">RENDER · INITIALIZING</span></div>
 <div class="stage-status" id="stage-status" role="status" aria-live="polite">Initializing local renderer…</div>
 </section>
@@ -52,9 +52,11 @@ h2{font-size:1rem;margin:0}p{margin:0;color:var(--muted);font-size:.9rem;line-he
 <footer>Local-only demo. Visual patterns and frame rate are illustrative, not verified telemetry or evidence of external system state.</footer>
 <script type="module">
 import { FixedStepClock, createParticles, updateParticles, projectParticle } from "./reactor-core.mjs";
+import { TemporalEchoRule } from "./experimental-organisms.mjs";
 
 const canvas = document.querySelector("#reactor");
 const fallbackCanvas = document.querySelector("#fallback");
+const echoCanvas = document.querySelector("#echo-layer");
 const stage = canvas.closest(".stage");
 const status = document.querySelector("#stage-status");
 const rendererPill = document.querySelector("#render-pill");
@@ -67,6 +69,7 @@ const stealthButton = document.querySelector("#stealth");
 const audioButton = document.querySelector("#audio");
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 const clock = new FixedStepClock();
+const echoRule = new TemporalEchoRule({ maxCacheEntries: 1200, cacheTtlEpochs: 600 });
 let mode = geometry.value, particles = createParticles(), energyLevel = 1;
 let gl = null, program = null, buffer = null, positionLocation = null, colorLocation = null, sizeLocation = null;
 let rafId = 0, running = false, paused = reducedMotion.matches, contextLost = false, destroyed = false;
@@ -136,9 +139,10 @@ function resize() {
   const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
   width = Math.max(1, Math.round(rect.width * dpr));
   height = Math.max(1, Math.round(rect.height * dpr));
-  if (canvas.width !== width || canvas.height !== height) {
+  if (canvas.width !== width || canvas.height !== height || echoCanvas.width !== width || echoCanvas.height !== height) {
     canvas.width = width; canvas.height = height;
     fallbackCanvas.width = width; fallbackCanvas.height = height;
+    echoCanvas.width = width; echoCanvas.height = height;
     if (gl && !contextLost) gl.viewport(0, 0, width, height);
   }
 }
@@ -156,9 +160,23 @@ function drawFallback() {
     ctx.fillStyle = "rgba(103,232,249,0.75)"; ctx.fill();
   }
 }
+function drawEchoes() {
+  const ctx = echoCanvas.getContext("2d");
+  if (!ctx) return;
+  ctx.clearRect(0, 0, width, height);
+  const radius = Math.min(width, height) * 0.2;
+  for (const echo of echoRule.snapshot()) {
+    const x = width * 0.5 + Math.cos(echo.phaseShift) * radius;
+    const y = height * 0.5 - Math.sin(echo.phaseShift) * radius;
+    const ring = 3 + echo.amplitude * 9;
+    ctx.beginPath(); ctx.arc(x, y, ring, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(196,181,253,${Math.min(0.8, echo.amplitude * 0.65)})`;
+    ctx.lineWidth = 1.25; ctx.stroke();
+  }
+}
 function render() {
-  if (destroyed || contextLost) return;
-  if (!gl || !program || !buffer) { drawFallback(); return; }
+  if (destroyed) return;
+  if (contextLost || !gl || !program || !buffer) { drawFallback(); drawEchoes(); return; }
   const data = new Float32Array(particles.length * 3);
   const aspect = width / Math.max(1, height);
   for (let i = 0; i < particles.length; i++) {
@@ -175,7 +193,7 @@ function render() {
   gl.enableVertexAttribArray(sizeLocation);
   gl.vertexAttribPointer(sizeLocation, 1, gl.FLOAT, false, 12, 8);
   gl.drawArrays(gl.POINTS, 0, particles.length);
-}
+  drawEchoes();
 function syncUi() {
   document.querySelector("#geometry-pill").textContent = "GEOMETRY · " + mode.toUpperCase();
   energyValue.textContent = energyLevel.toFixed(1) + "×";
@@ -188,7 +206,12 @@ function loop(timestamp) {
   rafId = 0;
   if (destroyed || !running || document.hidden || contextLost) return;
   if (!paused) {
-    clock.advance(timestamp, (dt) => { updateParticles(particles, dt, mode, energyLevel); elapsedTime += dt; });
+    clock.advance(timestamp, (dt, tick) => {
+      updateParticles(particles, dt, mode, energyLevel); elapsedTime += dt;
+      for (const particle of particles) {
+        echoRule.evaluate({ id: String(particle.id), birthEpoch: 0, vector: [Math.cos(particle.angle), Math.sin(particle.angle)] }, tick + 1);
+      }
+    });
   } else clock.reset();
   render();
   frames++;
@@ -261,7 +284,8 @@ function toggleAudio() {
 }
 function cleanup() {
   if (destroyed) return;
-  destroyed = true; stop(); destroyResources();
+  destroyed = true; stop(); destroyResources(); echoRule.clear();
+  const echoContext = echoCanvas.getContext("2d"); echoContext?.clearRect(0, 0, echoCanvas.width, echoCanvas.height);
   if (audioContext) audioContext.close().catch(() => {});
   audioContext = null; oscillator = null; gain = null;
   resizeObserver?.disconnect();
