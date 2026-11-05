@@ -231,7 +231,7 @@
       fpsEl.textContent = metrics.fps.toFixed(1);
       lowFpsEl.textContent = metrics.onePercentLow.toFixed(1);
       frameIndexEl.textContent = String(metrics.frameIndex);
-      simTicksEl.textContent = String(metrics.simulationSteps);
+      simTicksEl.textContent = String(world.tick);
       droppedEl.textContent = metrics.droppedSeconds.toFixed(3) + 's';
     }
 
