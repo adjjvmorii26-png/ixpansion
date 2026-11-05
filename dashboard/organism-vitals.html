@@ -253,6 +253,7 @@ async function startScan() {
 function stopScan() {
   if (!scanning) return;
   stopFlag = true;
+  if (autoRefresh) stopAutoRefresh();
   document.getElementById('prog-text').textContent = "Stopping after current request…";
   addLog("Stop requested");
 }
