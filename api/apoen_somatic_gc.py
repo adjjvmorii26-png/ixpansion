@@ -84,11 +84,13 @@ class SomaticGarbageCollector:
         """Evaluate only when the signed heartbeat is bound to this branch and cluster."""
         if not isinstance(heartbeat_payload, Mapping) or not isinstance(metadata, Mapping):
             return self._retained(branch_id, self.cluster_id, "invalid_heartbeat")
-        expected = {
-            "branch_id": branch_id,
-            "cluster_id": self.cluster_id,
-            "last_heartbeat": metadata.get("last_heartbeat"),
-        }
+        # Bind every decision-bearing field, not just liveness identity.
+        # Otherwise an attacker could keep a valid heartbeat but alter age or
+        # interaction_count to make an active branch appear collectible.
+        bound_fields = ("created_at", "last_heartbeat", "interaction_count",
+                        "protected", "has_live_descendants", "active_lease")
+        expected = {"branch_id": branch_id, "cluster_id": self.cluster_id}
+        expected.update({key: metadata[key] for key in bound_fields if key in metadata})
         if any(heartbeat_payload.get(key) != value for key, value in expected.items()):
             return self._retained(branch_id, self.cluster_id, "heartbeat_binding_mismatch")
         if not verify_heartbeat(heartbeat_payload, signature, secret):
