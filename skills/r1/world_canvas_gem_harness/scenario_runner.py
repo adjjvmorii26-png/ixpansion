@@ -41,6 +41,13 @@ def state_errors(state: dict[str, Any]) -> list[str]:
     return errors
 
 
+def bounded_payload(value: Any, limit: int = MAX_EXPORT_BYTES) -> bytes:
+    encoded = (json.dumps(value, indent=2, ensure_ascii=False) + "\\n").encode("utf-8")
+    if len(encoded) > limit:
+        raise ValueError(f"evidence report is {len(encoded)} bytes; limit is {limit}")
+    return encoded
+
+
 def execute(scenario: dict[str, Any]) -> list[dict[str, Any]]:
     sid = scenario["id"]
     inputs = scenario["inputs"]
@@ -77,8 +84,12 @@ def execute(scenario: dict[str, Any]) -> list[dict[str, Any]]:
         sample = {"schema": SCHEMA, "checks": [{"status": "PASS"}]}
         encoded = canonical_bytes(sample)
         accepted = len(encoded) <= limit
-        oversized = b"x" * (limit + 1)
-        no_partial = len(oversized) > limit and oversized[:limit] != oversized
+        oversized = {"payload": "x" * (limit + 1)}
+        try:
+            bounded_payload(oversized, limit)
+            no_partial = False
+        except ValueError:
+            no_partial = True
         checks.extend([
             ("payload_within_limit_or_rejected", accepted and len(oversized) > limit, f"small={len(encoded)} bytes; limit={limit}"),
             ("no_partial_download", no_partial, "oversized payload is rejected as a whole; no truncated artifact emitted"),
