@@ -1,4 +1,14 @@
+import sys
 import unittest
+from pathlib import Path
+
+# Make the repository's scripts/ modules importable when pytest collects this
+# test from the repository root. The dedicated ratchet workflow already sets
+# PYTHONPATH=scripts; the full CI suite does not.
+SCRIPTS_DIR = Path(__file__).resolve().parents[2] / "scripts"
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
 from html_boundary_ratchet import added_line_map
 
 
