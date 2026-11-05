@@ -113,7 +113,7 @@ Use `scripts/scan_html_sinks.py` for a first-pass inventory. The scanner is inte
 For each HTML page:
 - identify every dynamic value rendered into the DOM;
 - classify values as trusted constants, validated structured data, or untrusted text;
-- check `innerHTML`, `outerHTML`, `insertAdjacentHTML`, `document.write`, string-built templates, event-handler attributes, and dangerous URL attributes;
+- check `innerHTML`, `outerHTML`, `insertAdjacentHTML`, `document.write`, string-built templates, inline event-handler attributes, `srcdoc`, and dangerous URL attributes such as `javascript:`; the scanner inventories these as untriaged candidates only;
 - use `textContent`, `createTextNode`, and explicit element construction for plain text;
 - if rich HTML is genuinely required, use a maintained sanitizer with a narrowly defined allowlist and test the sanitizer boundary;
 - validate URL schemes and destinations separately from HTML escaping;
