@@ -199,7 +199,7 @@ def main() -> int:
     try:
         registry = json.loads(args.registry.read_text(encoding="utf-8"))
         report = run_registry(registry, args.source_commit or git_commit())
-        payload = json.dumps(report, indent=2, ensure_ascii=False) + "\\n"
+        payload = json.dumps(report, indent=2, ensure_ascii=False) + "\n"
         encoded = payload.encode("utf-8")
         if len(encoded) > MAX_EXPORT_BYTES:
             raise ValueError(f"evidence report is {len(encoded)} bytes; limit is {MAX_EXPORT_BYTES}")
