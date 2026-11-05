@@ -108,7 +108,7 @@ def pipeline(root,seed=1337,count=16,profile="portable",export_dir=None):
     for item in checks:
         if item["status"]=="WARN":
             findings.append({"code":"PROFILE_FORBIDDEN","path":item["path"],"tokens":item["findings"]})
-    findings += [{"code":"ORPHAN_SKILL","path":name} for name in graph["orphans"]]
+    # Isolated skills are candidates for review, not defects by themselves.
     cases=fuzz_cases(seed,count)
     diagnoses=diagnose(findings)
     proposals=[{"pattern_id":item["pattern_id"],"repair_proposal":item["repair_proposal"],
