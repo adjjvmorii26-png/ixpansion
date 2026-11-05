@@ -66,3 +66,10 @@ def test_organism_vitals_refresh_and_keyboard_controls_are_explicit():
     assert "!e.repeat && !e.altKey && !e.ctrlKey && !e.metaKey" in source
     assert "On-demand API status checks" in source
     assert "Response Rate" in source
+
+
+def test_organism_vitals_maps_api_coherence_score_to_display_model():
+    page = Path(__file__).resolve().parents[1] / "dashboard" / "organism-vitals.html"
+    source = page.read_text(encoding="utf-8")
+    assert "coherence: d.coherence_score ?? d.coherence ?? 0" in source
+    assert "coherence: d.coherence_score || 0, ...d" not in source
