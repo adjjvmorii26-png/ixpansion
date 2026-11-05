@@ -67,7 +67,8 @@ export class FrameLab {
     if (typeof stepFn !== "function") throw new TypeError("stepFn must be a function");
     if (this.lastTime === null) {
       this.lastTime = now;
-      this.nextRenderAt = now;
+      this.nextRenderAt = now + (this.targetFPS > 0 ? 1000 / this.targetFPS : 0);
+      this.frameIndex++;
       return this.metrics(0, 0, true);
     }
     const rawDelta = Math.max(0, (now - this.lastTime) / 1000);
