@@ -11,6 +11,13 @@ const finite = (value, name) => {
   return value;
 };
 const clone = value => JSON.parse(JSON.stringify(value));
+const deepFreeze = value => {
+  if (value && typeof value === "object" && !Object.isFrozen(value)) {
+    Object.freeze(value);
+    for (const child of Object.values(value)) deepFreeze(child);
+  }
+  return value;
+};
 
 export class ActionEngine {
   constructor(world, { maxEvents = 2000 } = {}) {
@@ -36,7 +43,7 @@ export class ActionEngine {
     try {
       this.#apply(action);
       const afterHash = this.world.stateHash();
-      const event = Object.freeze({
+      const event = deepFreeze({
         sequence: this.events.length + 1,
         type: action.type,
         payload: clone(action.payload ?? {}),
@@ -89,6 +96,7 @@ export class ActionEngine {
         }
         const dt = p.dt ?? 1 / 120;
         finite(dt, "dt");
+        if (dt <= 0 || dt > 1 / 30) throw new RangeError("dt must be in (0, 1/30]");
         for (let i = 0; i < count; i++) this.world.step(dt);
         break;
       }
@@ -104,10 +112,12 @@ export class ActionEngine {
       throw new TypeError("ledger must be an array with at most 100000 events");
     }
     const engine = new ActionEngine(world, { maxEvents: Math.max(1, ledger.length) });
-    for (const recorded of ledger) {
+    for (let index = 0; index < ledger.length; index++) {
+      const recorded = ledger[index];
       if (!recorded || typeof recorded !== "object" ||
+          recorded.sequence !== index + 1 ||
           recorded.beforeHash !== world.stateHash()) {
-        throw new Error("replay diverged before event " + (recorded?.sequence ?? "?"));
+        throw new Error("replay sequence or state diverged before event " + (recorded?.sequence ?? "?"));
       }
       const event = engine.dispatch({ type: recorded.type, payload: recorded.payload });
       if (event.afterHash !== recorded.afterHash || event.tick !== recorded.tick) {
