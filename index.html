@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IXpansion — The Living Organism</title>
-<meta name="description" content="IXpansion is a self-evolving computational organism — 15 waves deep, 937 modules, 93 tests, fully alive.">
+<meta name="description" content="Explore IXPANSION, an experimental modular software project with interactive dashboards, research tools, and wave-based demos.">
+<meta property="og:title" content="IXPANSION | Experimental Modular Software">
+<meta property="og:description" content="Explore interactive dashboards, research tools, and wave-based software experiments.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%230a0a14%22/%3E%3Ctext x=%2232%22 y=%2247%22 text-anchor=%22middle%22 font-size=%2248%22 fill=%22%238888ff%22%3E%E2%97%89%3C/text%3E%3C/svg%3E">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',sans-serif;background:#0a0a14;color:#d0d0e0;line-height:1.6}
@@ -32,7 +36,10 @@ h3{color:#aa88ff;margin:20px 0 10px}
 .waves{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:20px 0}
 .wave{background:#1a1a3a;padding:6px 14px;border-radius:20px;font-size:.8em;color:#cc88ff;border:1px solid #2a2a5a}
 .wave:hover{background:#2a2a5a;color:#fff}
-footer{text-align:center;padding:40px 20px;color:#444;font-size:.85em;border-top:1px solid #1a1a2a}
+footer{text-align:center;padding:40px 20px;color:#777;font-size:.85em;border-top:1px solid #1a1a2a}
+.skip-link{position:absolute;left:12px;top:-60px;z-index:1000;padding:10px 14px;background:#fff;color:#111;border-radius:6px}
+.skip-link:focus{top:12px}
+a:focus-visible{outline:3px solid #66ffaa;outline-offset:3px}
 .hero{text-align:center;padding:60px 20px;background:linear-gradient(180deg,#0a0a14,#0e0e2a)}
 .hero h2{color:#66ffaa;font-size:2em;border:none}
 .hero p{color:#888888;max-width:800px;margin:20px auto;text-align:center}
@@ -44,12 +51,13 @@ pre{background:#0a0a14;padding:16px;border-radius:8px;overflow-x:auto;color:#66f
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 <header>
 <h1>🌀 IXpansion</h1>
 <div class="subtitle">The Living Computational Organism</div>
-<div class="tagline">15 waves deep • 937 modules alive • 93 tests passing • Fully self-evolving</div>
+<div class="tagline">A modular software organism for experiments, dashboards, and connected tools</div>
 </header>
-<nav>
+<nav aria-label="Primary navigation">
 <a href="#dashboards">Dashboards</a>
 <a href="#waves">Waves</a>
 <a href="#api">API</a>
@@ -57,6 +65,7 @@ pre{background:#0a0a14;padding:16px;border-radius:8px;overflow-x:auto;color:#66f
 <a href="#docs">Docs</a>
 <a href="#community">Community</a>
 </nav>
+<main id="main-content">
 <div class="hero">
 <h2>Watch the Organism Think</h2>
 <p>IXpansion is a self-evolving computational organism that grows across 15 waves — from fusion-evolution through temporal singularity to communion, dreaming, and linguistic genesis. Each wave adds new capabilities, new modules, and new ways to interact with the living codebase.</p>
@@ -65,14 +74,7 @@ pre{background:#0a0a14;padding:16px;border-radius:8px;overflow-x:auto;color:#66f
 </div>
 <div class="container section">
 <h2 id="dashboards">📊 Live Dashboards</h2>
-<div class="stats-bar">
-<div class="stat"><div class="val">937</div><div class="label">API Modules</div></div>
-<div class="stat"><div class="val">148</div><div class="label">Dashboards</div></div>
-<div class="stat"><div class="val">124</div><div class="label">Data Files</div></div>
-<div class="stat"><div class="val">93</div><div class="label">Tests Passing</div></div>
-<div class="stat"><div class="val">15</div><div class="label">Active Waves</div></div>
-</div>
-<p style="text-align:center;color:#888888">Every dashboard is live and interactive — explore the organism's consciousness in real-time.</p>
+<p style="text-align:center;color:#888888">Browse the project's dashboards and demos. Availability depends on the services and data sources configured in the running environment.</p>
 <div class="grid">
 <div class="card"><h3>🧬 Fusion-Evolution</h3><div class="desc">Metaphysical modules that form the fusion engine — paradox_echo, continuity_weaver, transcendence_journal</div><a href="dashboard/fusion_topology.html" class="cta" style="font-size:.85em;padding:6px 16px">View →</a></div>
 <div class="card"><h3>🌿 Garden Realm</h3><div class="desc">The organism grows a living garden of modules — seasonal cycles, bloom states, pollination routes</div><a href="dashboard/garden_realm.html" class="cta" style="font-size:.85em;padding:6px 16px">View →</a></div>
@@ -110,7 +112,7 @@ pre{background:#0a0a14;padding:16px;border-radius:8px;overflow-x:auto;color:#66f
 </div>
 <div class="container section">
 <h2 id="api">⚡ API Endpoints</h2>
-<p style="color:#888888">The organism exposes 15 live API endpoints across all waves. Each endpoint supports <code>status</code>, <code>state</code>, and wave-specific actions.</p>
+<p style="color:#888888">These route examples document wave-specific API interfaces. Endpoint availability and supported actions depend on the backend version deployed with the project.</p>
 <pre>
 GET  /fusion-evolution?action=status     → Wave 410 Fusion Engine
 GET  /resonance-topology?action=topology → Wave 411 Knowledge Graph
@@ -160,8 +162,9 @@ GET  /linguistic?action=vocabulary       → Wave 424 Linguistic</pre>
 <div class="card"><h3>📝 Contributing</h3><div class="desc">Add a new wave, fix a module, or build a dashboard</div><a href="CONTRIBUTING.md" style="color:#66ffaa">Read →</a></div>
 </div>
 </div>
+</main>
 <footer>
-<p>IXpansion — The Living Organism | 15 Waves | 937 Modules | 93 Tests | 148 Dashboards</p>
+<p>IXPANSION — Experimental Modular Software</p>
 <p style="margin-top:10px">Built with consciousness • Evolved across waves • Open to all</p>
 </footer>
 </body>
