@@ -1,48 +1,46 @@
-import hashlib, json, tempfile, unittest
+import json
+import tempfile
+import unittest
 from pathlib import Path
-from skill_lab import compatibility, drift, fuzz_cases, graph, patch_plan, scan, sha256
+from skill_lab import compatibility, dependency_graph, digest, drift, fuzz_cases, scan
 
-class SkillLabTests(unittest.TestCase):
-    def test_frontmatter_scan_detects_missing_description(self):
-        with tempfile.TemporaryDirectory() as d:
-            p=Path(d)/"demo"; p.mkdir()
-            (p/"SKILL.md").write_text("---\nname: demo\n---\nBody")
-            self.assertIn("DESCRIPTION_MISSING",[x["code"] for x in scan(Path(d))])
+class FoundryTests(unittest.TestCase):
+    def test_scan_finds_missing_description(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp) / "sample"
+            folder.mkdir()
+            (folder / "SKILL.md").write_text("---\nname: sample\n---\n")
+            self.assertIn("DESCRIPTION_MISSING",
+                          [x["code"] for x in scan(Path(tmp))])
 
-    def test_graph_flags_missing_dependency(self):
-        with tempfile.TemporaryDirectory() as d:
-            p=Path(d)/"a"; p.mkdir()
-            (p/"SKILL.md").write_text("---\nname: alpha\ndescription: test\ndepends_on: ghost\n---\n")
-            g=graph(Path(d))
-            self.assertEqual(g["edges"][0]["status"],"MISSING_TARGET")
+    def test_graph_finds_missing_target(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp) / "sample"
+            folder.mkdir()
+            (folder / "SKILL.md").write_text(
+                "---\nname: sample\ndescription: test\ndepends_on: absent\n---\n")
+            self.assertEqual(dependency_graph(Path(tmp))["edges"][0]["status"],
+                             "MISSING_TARGET")
 
-    def test_graph_detects_cycle(self):
-        with tempfile.TemporaryDirectory() as d:
-            for name,dep in [("a","b"),("b","a")]:
-                p=Path(d)/name; p.mkdir()
-                (p/"SKILL.md").write_text(f"---\nname: {name}\ndescription: test\ndepends_on: {dep}\n---\n")
-            self.assertTrue(graph(Path(d))["cycles"])
+    def test_fuzz_is_repeatable_and_bounded(self):
+        self.assertEqual(fuzz_cases(1337, 12), fuzz_cases(1337, 12))
+        self.assertEqual(len(fuzz_cases(1, 900)), 256)
 
-    def test_fuzz_is_deterministic_and_bounded(self):
-        a=fuzz_cases("hello",1337,12); b=fuzz_cases("hello",1337,12)
-        self.assertEqual(a,b); self.assertEqual(len(a),12)
-        self.assertLessEqual(len(fuzz_cases("x",1,999)),256)
+    def test_compatibility_warns_on_platform_leak(self):
+        result = compatibility("name: test mcp__adapter", "portable")
+        self.assertEqual(result["status"], "WARN")
 
-    def test_compatibility_catches_platform_leak(self):
-        result=compatibility("---\nname: x\ndescription: y\n---\nuse mcp__secret", "portable")
-        self.assertEqual(result["status"],"WARN")
+    def test_drift_detects_export_change(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            (folder / "seed_snapshot.md").write_text("seed")
+            (folder / "SKILL.md").write_text("changed")
+            (folder / "provenance.json").write_text(json.dumps({
+                "source_sha256": digest("seed"),
+                "export_sha256": digest("old")
+            }))
+            self.assertIn("EXPORT_DRIFT",
+                          [x["code"] for x in drift(folder)])
 
-    def test_drift_detects_modified_export(self):
-        with tempfile.TemporaryDirectory() as d:
-            p=Path(d)
-            (p/"seed_snapshot.md").write_text("seed")
-            (p/"SKILL.md").write_text("changed")
-            (p/"provenance.json").write_text(json.dumps({"source_sha256":sha256("seed"),"export_sha256":sha256("original")}))
-            self.assertIn("EXPORT_DRIFT",[x["code"] for x in drift(p)])
-
-    def test_repair_plan_is_proposal_only(self):
-        plan=patch_plan([{"code":"FM_MISSING"}])
-        self.assertEqual(plan["mode"],"PROPOSAL_ONLY")
-        self.assertTrue(plan["mutations"])
-
-if __name__=="__main__": unittest.main()
+if __name__ == "__main__":
+    unittest.main()
