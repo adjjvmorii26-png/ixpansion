@@ -93,10 +93,11 @@ def test_landing_page_exists():
     from pathlib import Path
     index = Path("dashboard/index.html")
     assert index.exists()
-    content = index.read_text()
-    assert "IXpansion" in content
-    assert "Scientist" in content
-    assert "free" in content.lower()
+    content = index.read_text(encoding="utf-8")
+    assert "IXPANSION" in content
+    assert "Project Explorer" in content
+    assert 'id="main-content"' in content
+    assert "prefers-reduced-motion" in content
 
 def test_premium_dashboard_exists():
     from pathlib import Path
