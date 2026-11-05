@@ -27,3 +27,14 @@ No Gemini API is called. No external service or device is controlled. The harnes
 ## Evidence
 
 Current browser reports include schema version, timestamp, world tick, state hash, and per-check PASS/FAIL. Hashes are fingerprints, not signatures or proof of authenticity. Missing lineage is unknown, never inferred.
+
+
+## Executable fixture runner
+
+Run the versioned fixture registry without a browser or network:
+
+```bash
+python skills/r1/world_canvas_gem_harness/scenario_runner.py --source-commit "$(git rev-parse HEAD)"
+```
+
+The runner executes the five currently supported deterministic fixture adapters, emits per-assertion outcomes and lineage metadata, and rejects evidence output above 64 KiB before writing it. It validates the fixture contracts only; it does not drive the browser simulation or execute Gemini/provider models. A PASS therefore means these Python fixture adapters passed, not that the browser lab or any external environment was validated.
