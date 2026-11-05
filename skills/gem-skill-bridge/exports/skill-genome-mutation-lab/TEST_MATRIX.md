@@ -18,4 +18,6 @@ Summary:
 - Desk scenarios: 7 passed, 0 failed.
 - Runtime execution: NOT RUN.
 - Notion seed readback: verified.
-- Gem export readback: pending.
+- Gem repository export readback: VERIFIED for SKILL.md, PROVENANCE.md, and TEST_MATRIX.md.
+- Archive packaging: NOT RUN.
+- Gem runtime installation/activation: NOT RUN.
