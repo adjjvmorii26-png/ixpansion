@@ -72,7 +72,7 @@
   <section id="frameLab" aria-label="Frame rate and frame creation lab">
     <div>
       <h2>Frame telemetry</h2>
-      <div id="frameStats" aria-live="polite"><span>FPS <strong id="fps">--</strong></span><span>1% low <strong id="lowFps">--</strong></span><span>Frame <strong id="frameIndex">0</strong></span><span>Sim ticks <strong id="simTicks">0</strong></span><span>Step loss <strong id="dropped">0.000s</strong></span></div>
+      <div id="frameStats" aria-live="polite"><span>FPS <strong id="fps">--</strong></span><span>1% low <strong id="lowFps">--</strong></span><span>Frame <strong id="frameIndex">0</strong></span><span>Sim ticks <strong id="simTicks">0</strong></span><span>Step loss <strong id="dropped">0.000s</strong></span><span>Missed targets <strong id="missedFrames">0</strong></span></div>
       <div id="frameControls">
         <label for="targetFPS">Render cap</label>
         <select id="targetFPS"><option value="30">30 FPS</option><option value="60" selected>60 FPS</option><option value="90">90 FPS</option><option value="120">120 FPS</option><option value="0">Uncapped</option></select>
@@ -105,6 +105,7 @@
     const frameIndexEl = document.getElementById("frameIndex");
     const simTicksEl = document.getElementById("simTicks");
     const droppedEl = document.getElementById("dropped");
+    const missedFramesEl = document.getElementById("missedFrames");
     const timelineEl = document.getElementById("timeline");
     const captureCountEl = document.getElementById("captureCount");
     const duplicateButton = document.getElementById("duplicate");
@@ -267,6 +268,7 @@
       frameIndexEl.textContent = String(metrics.frameIndex);
       simTicksEl.textContent = String(world.tick);
       droppedEl.textContent = metrics.droppedSeconds.toFixed(3) + 's';
+      missedFramesEl.textContent = String(metrics.missedRenderFrames);
     }
 
     function frame(now) {
