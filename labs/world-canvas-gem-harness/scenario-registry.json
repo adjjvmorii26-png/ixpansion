@@ -1,0 +1,93 @@
+{
+  "schema": "ixpansion.gem-skill-scenarios/v1",
+  "registry_version": "1.0.0",
+  "execution": "local-deterministic",
+  "scenarios": [
+    {
+      "id": "world-state-valid-001",
+      "version": "1.0.0",
+      "skill": "world_canvas_gem_harness",
+      "title": "Accept a valid seeded world",
+      "seed": 1337,
+      "inputs": {
+        "agent": {
+          "x": 320,
+          "y": 180,
+          "energy": 100
+        },
+        "beacons": []
+      },
+      "assertions": [
+        "world_bounds_valid",
+        "energy_in_range",
+        "unique_entity_ids",
+        "beacon_capacity_respected"
+      ]
+    },
+    {
+      "id": "world-energy-invalid-001",
+      "version": "1.0.0",
+      "skill": "forge_breakers",
+      "title": "Reject energy above maximum",
+      "seed": 1337,
+      "inputs": {
+        "mutation": {
+          "path": "agent.energy",
+          "value": 101
+        }
+      },
+      "assertions": [
+        "candidate_rejected",
+        "committed_state_unchanged"
+      ]
+    },
+    {
+      "id": "world-duplicate-id-001",
+      "version": "1.0.0",
+      "skill": "forge_breakers",
+      "title": "Reject duplicate entity identifiers",
+      "seed": 1337,
+      "inputs": {
+        "mutation": {
+          "path": "beacons",
+          "operation": "append_duplicate_agent_id"
+        }
+      },
+      "assertions": [
+        "candidate_rejected",
+        "committed_state_unchanged"
+      ]
+    },
+    {
+      "id": "world-report-bounds-001",
+      "version": "1.0.0",
+      "skill": "zero_copy",
+      "title": "Enforce evidence export size limit",
+      "seed": 1337,
+      "inputs": {
+        "export_limit_bytes": 65536
+      },
+      "assertions": [
+        "payload_within_limit_or_rejected",
+        "no_partial_download"
+      ]
+    },
+    {
+      "id": "world-review-separation-001",
+      "version": "1.0.0",
+      "skill": "dual_lens",
+      "title": "Separate implementation review from adversarial review",
+      "seed": 1337,
+      "inputs": {
+        "review_passes": [
+          "implementation",
+          "adversarial"
+        ]
+      },
+      "assertions": [
+        "both_passes_present",
+        "findings_labelled_by_evidence"
+      ]
+    }
+  ]
+}
