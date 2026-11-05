@@ -34,9 +34,9 @@ def read_page():
 
 def test_homepage_has_language_title_and_description():
     html = read_page()
-    assert re.search(r"<html\\s+lang=[\"']en[\"']", html, re.I)
+    assert re.search(r"""<html\s+lang=["']en["']""", html, re.I)
     assert re.search(r"<title>[^<]+</title>", html, re.I)
-    assert re.search(r'<meta\\s+name=[\"']description[\"']', html, re.I)
+    assert re.search(r"""<meta\s+name=["']description["']""", html, re.I)
 
 
 def test_homepage_has_one_heading_and_keyboard_entry_point():
