@@ -49,6 +49,11 @@ def _organisms_payload() -> Dict[str, Any]:
     return {"count": len(out), "organisms": out}
 
 
+def _commit_requested(payload: Dict[str, Any]) -> bool:
+    """Only an explicit JSON boolean may authorize a repository-writing commit."""
+    return payload.get("commit") is True
+
+
 def _plant(words: str, commit: bool = False) -> Dict[str, Any]:
     seed = words_to_seed(words)
     name = species_from_hex(seed)
@@ -148,7 +153,7 @@ class GardenHandler(BaseHTTPRequestHandler):
             words = str(payload.get("words") or "").strip()
             if not words:
                 return self._json({"error": "no words"}, 400)
-            return self._json(_plant(words, payload.get("commit") is True))
+            return self._json(_plant(words, _commit_requested(payload)))
         if path == "/hortus/api/cross":
             a = str(payload.get("a") or "").strip()
             b = str(payload.get("b") or "").strip()
