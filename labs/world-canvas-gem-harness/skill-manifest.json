@@ -27,7 +27,8 @@
     "invariant checks",
     "versioned scenario registry",
     "evidence lineage contract",
-    "JSON evidence export"
+    "JSON evidence export",
+    "executable deterministic Python scenario fixture runner"
   ],
   "non_capabilities": [
     "Gemini API execution",
@@ -46,5 +47,10 @@
   "evidence_contract": {
     "path": "labs/world-canvas-gem-harness/evidence-contract.json",
     "schema": "ixpansion.gem-skill-evidence/v1"
+  },
+  "scenario_runner": {
+    "path": "skills/r1/world_canvas_gem_harness/scenario_runner.py",
+    "execution": "local-deterministic-fixture-adapter",
+    "max_evidence_bytes": 65536
   }
 }
