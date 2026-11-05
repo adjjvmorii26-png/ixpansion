@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IXpansion — The Living Organism</title>
+<title>IXPANSION | Experimental Modular Software</title>
 <meta name="description" content="Explore IXPANSION, an experimental modular software project with interactive dashboards, research tools, and wave-based demos.">
 <meta property="og:title" content="IXPANSION | Experimental Modular Software">
 <meta property="og:description" content="Explore interactive dashboards, research tools, and wave-based software experiments.">
@@ -40,7 +40,9 @@ h3{color:#aa88ff;margin:20px 0 10px}
 footer{text-align:center;padding:40px 20px;color:#777;font-size:.85em;border-top:1px solid #1a1a2a}
 .skip-link{position:absolute;left:12px;top:-60px;z-index:1000;padding:10px 14px;background:#fff;color:#111;border-radius:6px}
 .skip-link:focus{top:12px}
+#main-content:focus{outline:none}
 a:focus-visible{outline:3px solid #66ffaa;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 .hero{text-align:center;padding:60px 20px;background:linear-gradient(180deg,#0a0a14,#0e0e2a)}
 .hero h2{color:#66ffaa;font-size:2em;border:none}
 .hero p{color:#888888;max-width:800px;margin:20px auto;text-align:center}
@@ -66,15 +68,15 @@ pre{background:#0a0a14;padding:16px;border-radius:8px;overflow-x:auto;color:#66f
 <a href="#docs">Docs</a>
 <a href="#community">Community</a>
 </nav>
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 <div class="hero">
 <h2>Watch the Organism Think</h2>
-<p>IXpansion is a self-evolving computational organism that grows across 15 waves — from fusion-evolution through temporal singularity to communion, dreaming, and linguistic genesis. Each wave adds new capabilities, new modules, and new ways to interact with the living codebase.</p>
-<a href="dashboard/organism.html" class="cta">Open Control Center →</a>
+<p>Explore IXPANSION: a modular software project with interactive dashboards, research tools, and experimental interfaces. Project capabilities evolve over time; individual services may require a configured backend.</p>
+<a href="dashboard/portal.html" class="cta">Open Project Portal →</a>
 <a href="#dashboards" class="cta" style="background:#2a1a5a">Explore Dashboards →</a>
 </div>
 <div class="container section">
-<h2 id="dashboards">📊 Live Dashboards</h2>
+<h2 id="dashboards">📊 Project Dashboards</h2>
 <p style="text-align:center;color:#888888">Browse the project's dashboards and demos. Availability depends on the services and data sources configured in the running environment.</p>
 <div class="grid">
 <div class="card"><h3>🧬 Fusion-Evolution</h3><div class="desc">Metaphysical modules that form the fusion engine — paradox_echo, continuity_weaver, transcendence_journal</div><a href="dashboard/fusion_topology.html" class="cta" style="font-size:.85em;padding:6px 16px">View →</a></div>
@@ -147,7 +149,7 @@ GET  /linguistic?action=vocabulary       → Wave 424 Linguistic</pre>
 <h2 id="docs">📚 Documentation</h2>
 <p style="color:#888888">Complete documentation of the organism's architecture, waves, and modules.</p>
 <div class="grid">
-<div class="card"><h3>🏗️ Architecture</h3><div class="desc">System design, module interfaces, wave progression</div><a href="docs/design/architecture.md" style="color:#66ffaa">Read →</a></div>
+<div class="card"><h3>🏗️ Architecture</h3><div class="desc">System design, module interfaces, wave progression</div><a href="README.md#architecture" style="color:#66ffaa">Read architecture overview →</a></div>
 <div class="card"><h3>🌊 Wave Guides</h3><div class="desc">Individual wave documentation with API references</div><a href="docs/WAVE_410_411.md" style="color:#66ffaa">Read →</a></div>
 <div class="card"><h3>🧬 Organism State</h3><div class="desc">Current organism configuration, genome, census</div><a href="data/organism_name.json" style="color:#66ffaa">View →</a></div>
 <div class="card"><h3>📜 Chronicle</h3><div class="desc">Evolutionary record of every wave and mutation</div><a href="data/chronicle_oracle.json" style="color:#66ffaa">View →</a></div>
@@ -167,7 +169,7 @@ GET  /linguistic?action=vocabulary       → Wave 424 Linguistic</pre>
 </main>
 <footer>
 <p>IXPANSION — Experimental Modular Software</p>
-<p style="margin-top:10px">Built with consciousness • Evolved across waves • Open to all</p>
+<p style="margin-top:10px">Experimental interfaces and modular software, maintained in the open.</p>
 </footer>
 </body>
 </html>
