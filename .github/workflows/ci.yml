@@ -17,6 +17,7 @@ jobs:
   test:
     # Pin through ubuntu-latest → 26.04 migration (through ~2026-11-19).
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
@@ -27,8 +28,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install pytest pytest-asyncio
-      - name: Run full test suite
-        run: python -m pytest tests/ -q --tb=short
+      - name: Run all configured monorepo test roots
+        run: python -m pytest -q --tb=short
       - name: Verify all modules parse
         run: |
           python -c "
