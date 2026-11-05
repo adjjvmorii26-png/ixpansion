@@ -164,7 +164,6 @@ export function createRenderer(canvas, THREE) {
     dispose() {
       for (const mesh of meshes.values()) {
         scene.remove(mesh);
-        mesh.geometry?.dispose?.();
         mesh.material?.dispose?.();
       }
       meshes.clear();
