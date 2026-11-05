@@ -12,12 +12,12 @@ import re
 from pathlib import Path
 
 PATTERNS = {
-    "innerHTML": re.compile(r"\\.innerHTML\\s*(?:\\+?=)"),
-    "outerHTML": re.compile(r"\\.outerHTML\\s*="),
-    "insertAdjacentHTML": re.compile(r"\\.insertAdjacentHTML\\s*\\("),
-    "document.write": re.compile(r"\\bdocument\\.write(?:ln)?\\s*\\("),
-    "srcdoc": re.compile(r"\\bsrcdoc\\s*="),
-    "string_template_candidate": re.compile(r"(?:innerHTML|outerHTML)\\s*=\\s*[\\x60'\"]"),
+    "innerHTML": re.compile(r"\.innerHTML\s*(?:\+?=)"),
+    "outerHTML": re.compile(r"\.outerHTML\s*="),
+    "insertAdjacentHTML": re.compile(r"\.insertAdjacentHTML\s*\("),
+    "document.write": re.compile(r"\bdocument\.write(?:ln)?\s*\("),
+    "srcdoc": re.compile(r"\bsrcdoc\s*="),
+    "string_template_candidate": re.compile(r"(?:innerHTML|outerHTML)\s*=\s*[\x60'\"]"),
 }
 DEFAULT_IGNORES = {".git", "node_modules", "vendor", "dist", "build", ".venv", "venv", "__pycache__"}
 
