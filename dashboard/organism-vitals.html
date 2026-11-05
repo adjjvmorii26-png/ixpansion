@@ -127,7 +127,7 @@ function addLog(msg) {
 async function scanModule(module) {
   const d = await apiCall(module, 'status');
   if (d && d.status === 'active' && d.ok) {
-    results[module] = {wave: d.wave, ok: true, coherence: d.coherence_score || 0, ...d};
+    results[module] = { ...d, wave: d.wave, ok: true, coherence: d.coherence_score ?? d.coherence ?? 0 };
     online++;
   } else if (d && d.status === 'error') {
     results[module] = {ok: false, error: d.message || 'unknown'};
