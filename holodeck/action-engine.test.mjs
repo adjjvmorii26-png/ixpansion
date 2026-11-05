@@ -57,3 +57,38 @@ test("replay detects tampered or out-of-order event history", () => {
   ledger[0].afterHash = "deadbeef";
   assert.throws(() => ActionEngine.replay(new World(), ledger), /diverged after event/);
 });
+
+
+test("world.step enforces the physics time-step interval before mutation", () => {
+  const world = new World();
+  const engine = new ActionEngine(world);
+  const before = world.stateHash();
+  for (const dt of [0, -0.001, 1 / 29, NaN, Infinity]) {
+    assert.throws(() => engine.dispatch({ type: "world.step", payload: { count: 1, dt } }));
+    assert.equal(world.stateHash(), before);
+    assert.equal(engine.exportLedger().length, 0);
+  }
+});
+
+test("returned event payloads are deeply immutable and detached from input", () => {
+  const world = new World();
+  const engine = new ActionEngine(world);
+  const payload = { x: 20, y: 30, metadata: { label: "original" } };
+  const event = engine.dispatch({ type: "body.add", payload });
+  payload.metadata.label = "mutated input";
+  assert.equal(event.payload.metadata.label, "original");
+  assert.equal(Object.isFrozen(event.payload), true);
+  assert.equal(Object.isFrozen(event.payload.metadata), true);
+  assert.throws(() => { event.payload.metadata.label = "tampered"; }, TypeError);
+  assert.equal(engine.exportLedger()[0].payload.metadata.label, "original");
+});
+
+test("replay rejects discontinuous event sequence numbers", () => {
+  const world = new World();
+  const engine = new ActionEngine(world);
+  engine.dispatch({ type: "body.add", payload: { x: 20, y: 20 } });
+  engine.dispatch({ type: "world.step", payload: { count: 1 } });
+  const ledger = engine.exportLedger();
+  ledger[1].sequence = 3;
+  assert.throws(() => ActionEngine.replay(new World(), ledger), /sequence or state diverged/);
+});
