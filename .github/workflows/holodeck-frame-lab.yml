@@ -1,0 +1,52 @@
+name: Holodeck Frame Lab
+on:
+  push:
+    branches:
+      - "feat/holodeck-frame-rate-lab"
+    paths:
+      - "holodeck/3d/**"
+      - "holodeck/physics.mjs"
+      - ".github/workflows/holodeck-frame-lab.yml"
+  pull_request:
+    paths:
+      - "holodeck/3d/**"
+      - "holodeck/physics.mjs"
+      - ".github/workflows/holodeck-frame-lab.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  frame-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install headless browser
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install --with-deps chromium
+      - name: Run Holodeck browser interaction smoke
+        run: node tests/holodeck-frame-lab.browser.mjs
+      - name: Test frame timing and capture core
+        run: node --test holodeck/3d/frame-lab.test.mjs
+      - name: Test deterministic physics core
+        run: node --test holodeck/physics.test.mjs
+      - name: Check JavaScript syntax
+        run: |
+          node --check holodeck/3d/frame-lab.mjs
+          node --check holodeck/3d/renderer.mjs
+          node --check holodeck/physics.mjs
+          sed -n '/<script type="module">/,/<\/script>/p' holodeck/3d/index.html | sed '1d;$d' > /tmp/holodeck-inline.mjs
+          node --check /tmp/holodeck-inline.mjs
+      - name: Check required lab controls
+        run: |
+          grep -q 'id="targetFPS"' holodeck/3d/index.html
+          grep -q 'id="capture"' holodeck/3d/index.html
+          grep -q 'id="exportJPG"' holodeck/3d/index.html
+          grep -q 'id="timeline"' holodeck/3d/index.html
+          grep -q 'id="missedFrames"' holodeck/3d/index.html
+          grep -q 'new FrameLab' holodeck/3d/index.html

@@ -98,7 +98,7 @@ export function createRenderer(canvas, THREE) {
     for (const [id, mesh] of meshes) {
       if (!seen.has(id)) {
         scene.remove(mesh);
-        mesh.geometry?.dispose?.();
+        // sphereGeo is shared by every body mesh; dispose it only once in dispose().
         mesh.material?.dispose?.();
         meshes.delete(id);
       }
@@ -164,10 +164,12 @@ export function createRenderer(canvas, THREE) {
     dispose() {
       for (const mesh of meshes.values()) {
         scene.remove(mesh);
-        mesh.geometry?.dispose?.();
         mesh.material?.dispose?.();
       }
       meshes.clear();
+      sphereGeo.dispose();
+      groundGeo.dispose();
+      groundMat.dispose();
       renderer.dispose();
     }
   };
