@@ -98,18 +98,38 @@ def diagnose(findings):
              "matched_codes":sorted(codes.intersection(p["codes"]))}
             for p in PATTERNS if codes.intersection(p["codes"])]
 
-def pipeline(root,seed=1337,count=16,profile="portable"):
-    findings=scan(root); graph=dependency_graph(root)
+def pipeline(root,seed=1337,count=16,profile="portable",export_dir=None):
+    # Report only stages that this offline invocation actually executes.
+    findings=scan(root)
+    graph=dependency_graph(root)
     findings += [{"code":e["status"],"path":e.get("from"),"target":e.get("to")}
                  for e in graph["edges"] if e["status"] in ("MISSING_TARGET","DEPENDENCY_CYCLE")]
     checks=[{"path":str(p),**compatibility(p.read_text(encoding="utf-8"),profile)} for p in skill_files(root)]
     for item in checks:
-        if item["status"]=="WARN": findings.append({"code":"PROFILE_FORBIDDEN","path":item["path"],"tokens":item["findings"]})
-    findings += [{"code":"ORPHAN_SKILL","path":name} for name in graph["orphans"] if name not in {x.get("path") for x in findings}]
-    return {"sequence":["DISCOVER","MAP","FUZZ","DIAGNOSE","PROPOSE_REPAIR","REGRESSION_GATE","DRIFT_CHECK","LIVE_VERIFY","EXPORT_REVIEW"],
+        if item["status"]=="WARN":
+            findings.append({"code":"PROFILE_FORBIDDEN","path":item["path"],"tokens":item["findings"]})
+    findings += [{"code":"ORPHAN_SKILL","path":name} for name in graph["orphans"]]
+    cases=fuzz_cases(seed,count)
+    diagnoses=diagnose(findings)
+    proposals=[{"pattern_id":item["pattern_id"],"repair_proposal":item["repair_proposal"],
+                "matched_codes":item["matched_codes"]} for item in diagnoses]
+    executed=["DISCOVER","MAP","FUZZ_CASE_GENERATION","STATIC_COMPATIBILITY","DIAGNOSE","PROPOSE_REPAIR"]
+    not_run=["REGRESSION_EXECUTION","LIVE_NOTION_VERIFY","EXPORT_REVIEW"]
+    drift_findings=None
+    if export_dir is not None:
+        drift_findings=drift(Path(export_dir))
+        executed.append("LOCAL_EXPORT_DRIFT_CHECK")
+        not_run.remove("EXPORT_REVIEW")
+        not_run.append("EXPORT_PROMOTION_REVIEW")
+        findings += drift_findings
+        diagnoses=diagnose(findings)
+        proposals=[{"pattern_id":item["pattern_id"],"repair_proposal":item["repair_proposal"],
+                    "matched_codes":item["matched_codes"]} for item in diagnoses]
+    return {"executed_stages":executed,"not_run_stages":not_run,
             "status":"FINDINGS" if findings else "NO_FINDINGS","scan_findings":findings,
-            "dependency_graph":graph,"fuzz_cases":fuzz_cases(seed,count),
-            "compatibility":checks,"failure_pattern_matches":diagnose(findings),
+            "dependency_graph":graph,"fuzz_cases":cases,
+            "compatibility":checks,"failure_pattern_matches":diagnoses,
+            "repair_proposals":proposals,"drift_findings":drift_findings,
             "repair_mode":"PROPOSAL_ONLY","automatic_changes":False,
             "promotion_gate":"HUMAN_REVIEW_REQUIRED"}
 
@@ -139,7 +159,7 @@ def main():
             body=Path(a.fixture).read_text(encoding="utf-8")
             fetcher=lambda _pid, b=body: b
         result=verify_live(Path(a.export_dir), fetcher=fetcher).to_dict()
-    elif a.command=="pipeline": result=pipeline(root,a.seed,a.count,a.profile)
+    elif a.command=="pipeline": result=pipeline(root,a.seed,a.count,a.profile,Path(a.export_dir) if a.export_dir else None)
     else: result={"mode":"PROPOSAL_ONLY","findings":scan(root),"automatic_changes":False}
     print(json.dumps(result,indent=2,sort_keys=True))
 
