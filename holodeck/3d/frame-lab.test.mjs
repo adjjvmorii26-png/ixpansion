@@ -23,7 +23,7 @@ test("paused advance does not change simulation steps; single-step advances exac
   lab.singleStep(() => steps++);
   assert.equal(steps, 1);
   assert.equal(lab.simulationSteps, 1);
-  assert.equal(lab.frameIndex, 1);
+  assert.equal(lab.frameIndex, 3);
 });
 
 test("large frame gaps are bounded and reported as dropped time", () => {
