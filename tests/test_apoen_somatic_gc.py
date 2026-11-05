@@ -74,7 +74,7 @@ class SomaticGarbageCollectorTests(unittest.TestCase):
 
     def test_authenticated_heartbeat_is_bound_to_branch_and_cluster(self):
         metadata = {"created_at": 100, "last_heartbeat": 200, "interaction_count": 1}
-        heartbeat = {"branch_id": "branch-a", "cluster_id": "CLUSTER-OMEGA", "last_heartbeat": 200}
+        heartbeat = {"branch_id": "branch-a", "cluster_id": "CLUSTER-OMEGA", "created_at": 100, "last_heartbeat": 200, "interaction_count": 1}
         signature = sign_heartbeat(heartbeat, b"test-secret")
         out = self.gc.evaluate_authenticated_branch(
             "branch-a", metadata, heartbeat, signature, b"test-secret", now=1000
@@ -84,6 +84,18 @@ class SomaticGarbageCollectorTests(unittest.TestCase):
         out = self.gc.evaluate_authenticated_branch(
             "branch-a", metadata, wrong_branch,
             sign_heartbeat(wrong_branch, b"test-secret"), b"test-secret", now=1000
+        )
+        self.assertEqual(out["reason"], "heartbeat_binding_mismatch")
+        self.assertFalse(out["eligible"])
+
+    def test_authenticated_heartbeat_binds_decision_bearing_activity_fields(self):
+        metadata = {"created_at": 100, "last_heartbeat": 200, "interaction_count": 1}
+        heartbeat = {"branch_id": "branch-a", "cluster_id": "CLUSTER-OMEGA",
+                     "created_at": 100, "last_heartbeat": 200, "interaction_count": 1}
+        signature = sign_heartbeat(heartbeat, b"test-secret")
+        tampered = {**metadata, "interaction_count": 0}
+        out = self.gc.evaluate_authenticated_branch(
+            "branch-a", tampered, heartbeat, signature, b"test-secret", now=1000
         )
         self.assertEqual(out["reason"], "heartbeat_binding_mismatch")
         self.assertFalse(out["eligible"])
