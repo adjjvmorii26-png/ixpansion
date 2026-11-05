@@ -7,7 +7,6 @@ It does not drive index.html, execute Gemini/provider models, or validate physic
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import subprocess
 import sys
@@ -42,7 +41,7 @@ def state_errors(state: dict[str, Any]) -> list[str]:
 
 
 def bounded_payload(value: Any, limit: int = MAX_EXPORT_BYTES) -> bytes:
-    encoded = (json.dumps(value, indent=2, ensure_ascii=False) + "\\n").encode("utf-8")
+    encoded = (json.dumps(value, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
     if len(encoded) > limit:
         raise ValueError(f"evidence report is {len(encoded)} bytes; limit is {limit}")
     return encoded
