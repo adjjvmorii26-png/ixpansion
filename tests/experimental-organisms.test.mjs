@@ -25,6 +25,10 @@ test("echo cache is stable within an epoch, bounded, and expires", () => {
   const crystal = (id) => ({ id, birthEpoch: 0, vector: [1, 0] });
   const first = rule.evaluate(crystal("a"), 1);
   assert.equal(rule.evaluate(crystal("a"), 1), first);
+  const refreshed = rule.evaluate(crystal("a"), 2);
+  assert.notEqual(refreshed, first);
+  assert.equal(refreshed.id, first.id);
+  assert.equal(rule.snapshot().length, 1);
   rule.evaluate(crystal("b"), 1);
   rule.evaluate(crystal("c"), 1);
   assert.equal(rule.phantomCache.size, 2);
