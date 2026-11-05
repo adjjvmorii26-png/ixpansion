@@ -52,4 +52,9 @@ Run the frame lab and physics tests:
 ```sh
 node --test holodeck/3d/frame-lab.test.mjs
 node --test holodeck/physics.test.mjs
+npm install --no-save --no-package-lock playwright
+npx playwright install --with-deps chromium
+node tests/holodeck-frame-lab.browser.mjs
 ```
+
+The browser smoke checks WebGL initialization, live rendered FPS, pause/resume, single-step, frame capture/duplicate/restore, JPG and JSON downloads, and mobile layout. It runs in headless Chromium with SwiftShader; this is a CI smoke test, not a substitute for measuring physical device refresh rates.
