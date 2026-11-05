@@ -34,6 +34,20 @@
       padding: 8px 10px; border-radius: 6px; line-height: 1.45;
       pointer-events: none;
     }
+    #frameLab {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 340px);
+      gap: 12px; padding: 10px 14px; background: #101019;
+      border-top: 1px solid #2a2a3a; max-height: 190px; overflow: auto;
+    }
+    #frameLab h2 { margin: 0 0 6px; font-size: 11px; letter-spacing: .12em; color: #8cf; text-transform: uppercase; }
+    #frameStats { display: flex; gap: 14px; flex-wrap: wrap; font: 11px ui-monospace, monospace; color: #aab; }
+    #frameStats strong { color: #8cf; font-weight: 600; }
+    #frameControls { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+    #frameControls select { background: #1e1e2a; color: #ddd; border: 1px solid #3a3a4a; padding: 5px; border-radius: 5px; }
+    #timeline { display: flex; gap: 5px; overflow-x: auto; padding: 4px 0; max-width: 100%; }
+    #timeline button { white-space: nowrap; font: 10px ui-monospace, monospace; }
+    #timeline button[aria-current="true"] { border-color: #8cf; color: #8cf; }
+    @media (max-width: 700px) { #frameLab { grid-template-columns: 1fr; max-height: 250px; } }
     #err {
       position: absolute; inset: 0; display: none; align-items: center;
       justify-content: center; background: #0a0a12; color: #f88; padding: 24px;
@@ -55,6 +69,19 @@
     <div id="hud">Drag to orbit · Wheel to zoom</div>
     <div id="err"></div>
   </div>
+  <section id="frameLab" aria-label="Frame rate and frame creation lab">
+    <div>
+      <h2>Frame telemetry</h2>
+      <div id="frameStats" aria-live="polite"><span>FPS <strong id="fps">--</strong></span><span>1% low <strong id="lowFps">--</strong></span><span>Frame <strong id="frameIndex">0</strong></span><span>Sim ticks <strong id="simTicks">0</strong></span><span>Step loss <strong id="dropped">0.000s</strong></span></div>
+      <div id="frameControls">
+        <label for="targetFPS">Render cap</label>
+        <select id="targetFPS"><option value="30">30 FPS</option><option value="60" selected>60 FPS</option><option value="90">90 FPS</option><option value="120">120 FPS</option><option value="0">Uncapped</option></select>
+        <button id="pause">Pause</button><button id="step">Step 1 tick</button>
+        <button id="capture">Capture frame</button><button id="duplicate" disabled>Duplicate</button><button id="export">Export JSON</button>
+      </div>
+    </div>
+    <div><h2>Frame timeline <span id="captureCount">(0)</span></h2><div id="timeline" aria-label="Captured frames"></div></div>
+  </section>
 
   <script type="importmap">
   {
@@ -67,13 +94,25 @@
     import * as THREE from "three";
     import { createRenderer } from "./renderer.mjs";
     import { World } from "../physics.mjs";
+    import { FrameLab } from "./frame-lab.mjs";
 
     const canvas = document.getElementById("c");
     const status = document.getElementById("status");
     const errEl = document.getElementById("err");
     const hud = document.getElementById("hud");
+    const fpsEl = document.getElementById("fps");
+    const lowFpsEl = document.getElementById("lowFps");
+    const frameIndexEl = document.getElementById("frameIndex");
+    const simTicksEl = document.getElementById("simTicks");
+    const droppedEl = document.getElementById("dropped");
+    const timelineEl = document.getElementById("timeline");
+    const captureCountEl = document.getElementById("captureCount");
+    const duplicateButton = document.getElementById("duplicate");
 
     let world, view;
+    const frameLab = new FrameLab({ targetFPS: 60, fixedStep: 1 / 120 });
+    let paused = false;
+    let selectedCaptureId = null;
 
     try {
       world = new World({ gravity: 9.81, width: 800, height: 400 });
@@ -94,7 +133,7 @@
     function sync() {
       view.syncBodies(world.bodies);
       status.textContent = `tick=${world.tick} · bodies=${world.bodies.length} · g=${world.gravity.toFixed(2)}`;
-      hud.innerHTML = `Drag to orbit · Wheel to zoom<br>bodies=${world.bodies.length} · hash=${world.stateHash()}`;
+      hud.textContent = `Drag to orbit · Wheel to zoom · bodies=${world.bodies.length} · hash=${world.stateHash()}`;
     }
 
     document.getElementById("btnSpawn").onclick = () => {
@@ -124,20 +163,87 @@
       world.addBody({ x: 480, y: 60, vx: 10, vy: 5, mass: 0.9, radius: 10 });
     };
 
-    let last = performance.now();
-    function frame(now) {
-      const dt = Math.min(0.033, (now - last) / 1000);
-      last = now;
-      // fixed substeps toward 120 Hz
-      let acc = dt;
-      while (acc > 0) {
-        const step = Math.min(1 / 120, acc);
-        world.step(step);
-        acc -= step;
+    function renderTimeline() {
+      timelineEl.replaceChildren();
+      for (const capture of frameLab.captures) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = '#' + capture.id + ' · F' + capture.frameIndex + ' · T' + (capture.simTick ?? '?');
+        button.setAttribute('aria-current', String(capture.id === selectedCaptureId));
+        button.addEventListener('click', () => {
+          const selected = frameLab.getCapture(capture.id);
+          if (!selected) return;
+          world.restore(selected.snapshot);
+          selectedCaptureId = selected.id;
+          duplicateButton.disabled = false;
+          sync();
+          renderTimeline();
+          status.textContent = 'Restored captured frame #' + selected.id;
+        });
+        timelineEl.append(button);
       }
+      captureCountEl.textContent = '(' + frameLab.captures.length + '/' + frameLab.maxCaptures + ')';
+    }
+
+    function captureFrame() {
+      const capture = frameLab.capture(world.snapshot(), { timestamp: performance.now(), simTick: world.tick, stateHash: world.stateHash() });
+      selectedCaptureId = capture.id;
+      duplicateButton.disabled = false;
+      renderTimeline();
+      status.textContent = 'Captured frame #' + capture.id;
+    }
+
+    document.getElementById('targetFPS').addEventListener('change', event => {
+      frameLab.setTargetFPS(Number(event.target.value));
+      status.textContent = frameLab.targetFPS ? 'Render cap: ' + frameLab.targetFPS + ' FPS' : 'Render cap: uncapped';
+    });
+    document.getElementById('pause').addEventListener('click', event => {
+      paused = !paused;
+      event.currentTarget.textContent = paused ? 'Resume' : 'Pause';
+    });
+    document.getElementById('step').addEventListener('click', () => {
+      frameLab.singleStep(dt => world.step(dt));
       sync();
       view.render();
+      updateFrameStats(frameLab.metrics(0, 1, true));
+    });
+    document.getElementById('capture').addEventListener('click', captureFrame);
+    duplicateButton.addEventListener('click', () => {
+      if (selectedCaptureId === null) return;
+      try {
+        const copy = frameLab.duplicateCapture(selectedCaptureId);
+        selectedCaptureId = copy.id;
+        renderTimeline();
+        status.textContent = 'Duplicated frame as #' + copy.id;
+      } catch (error) { status.textContent = error.message; }
+    });
+    document.getElementById('export').addEventListener('click', () => {
+      const blob = new Blob([frameLab.exportCaptures()], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'ixpansion-holodeck-frames.json';
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    function updateFrameStats(metrics) {
+      fpsEl.textContent = metrics.fps.toFixed(1);
+      lowFpsEl.textContent = metrics.onePercentLow.toFixed(1);
+      frameIndexEl.textContent = String(metrics.frameIndex);
+      simTicksEl.textContent = String(metrics.simulationSteps);
+      droppedEl.textContent = metrics.droppedSeconds.toFixed(3) + 's';
+    }
+
+    function frame(now) {
+      const metrics = frameLab.advance(now, dt => world.step(dt), { paused });
+      if (metrics.rendered) {
+        sync();
+        view.render();
+        updateFrameStats(metrics);
+      }
       requestAnimationFrame(frame);
+    }
     }
     requestAnimationFrame(frame);
   </script>
