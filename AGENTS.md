@@ -29,3 +29,12 @@ hub, and a 1400+ test suite. The organism evolves in numbered "waves".
   substring scans.
 - Commits: conventional (`feat(waveN): ...`, `fix: ...`, `chore: ...`).
   Push to `main`; deploys are automated (Pages + Cloudflare tunnel).
+
+## Evidence-led repository refinement
+For security audits, HTML/DOM sink review, cross-language risk triage, and iterative repair work, follow `skills/verified-repo-refinement/SKILL.md`.
+
+- Use `python3 skills/verified-repo-refinement/scripts/scan_html_sinks.py --root . --format json` for an initial HTML/DOM candidate inventory; scope with repeated `--path` arguments when appropriate.
+- Treat scanner output as untriaged candidates, never as a vulnerability count.
+- Add regression coverage under `tests/` so the normal CI test suite discovers it.
+- Prefer focused feature branches and draft PRs for audit/remediation work. Do not merge or deploy without explicit user approval.
+- Report exact commit/test/CI evidence and distinguish passed, blocked, pending, and not-run checks.
