@@ -101,8 +101,13 @@ function statusColor(status) {
 
 function addLog(msg) {
   const el = document.getElementById('log');
-  const time = new Date().toISOString().slice(11,19);
-  el.innerHTML += `<div class="entry"><span class="time">[${time}]</span> ${msg}</div>`;
+  const entry = document.createElement('div');
+  const time = document.createElement('span');
+  entry.className = 'entry';
+  time.className = 'time';
+  time.textContent = `[${new Date().toISOString().slice(11,19)}]`;
+  entry.append(time, document.createTextNode(' '), document.createTextNode(String(msg ?? '')));
+  el.appendChild(entry);
   el.scrollTop = el.scrollHeight;
 }
 
@@ -147,29 +152,54 @@ function renderCard(module) {
   let card = document.getElementById('mod-' + module);
   const r = results[module];
   const name = module.replace(/-/g, ' ');
-  
+
   if (!card) {
     card = document.createElement('div');
     card.id = 'mod-' + module;
     card.className = 'module-card';
     grid.appendChild(card);
   }
-  
+
+  const nameNode = document.createElement('div');
+  nameNode.className = 'name';
+  nameNode.textContent = name;
+
+  const waveNode = document.createElement('div');
+  waveNode.className = 'wave';
+
+  const coherenceNode = document.createElement('div');
+  coherenceNode.className = 'coherence';
+
+  const bar = document.createElement('div');
+  bar.className = 'bar';
+  const fill = document.createElement('div');
+  fill.className = 'bar-fill';
+  bar.appendChild(fill);
+
   if (r && r.ok) {
-    const score = r.coherence || 0;
+    const rawScore = Number(r.coherence);
+    const score = Number.isFinite(rawScore) ? Math.min(1, Math.max(0, rawScore)) : 0;
     const color = colorFor(score);
-    card.innerHTML = `<div class="name">${name}</div><div class="wave">Wave: ${r.wave || '?'}</div>
-      <div class="coherence" style="color:${color}">Coherence: ${(score * 100).toFixed(0)}%</div>
-      <div class="bar"><div class="bar-fill" style="width:${score*100}%;background:${color}"></div></div>`;
+    waveNode.textContent = `Wave: ${String(r.wave ?? '?')}`;
+    coherenceNode.textContent = `Coherence: ${(score * 100).toFixed(0)}%`;
+    coherenceNode.style.color = color;
+    fill.style.width = `${score * 100}%`;
+    fill.style.backgroundColor = color;
   } else if (r && !r.ok) {
-    card.innerHTML = `<div class="name">${name}</div><div class="wave">Error</div>
-      <div class="coherence" style="color:#c38d9e">Failed</div>
-      <div class="bar"><div class="bar-fill" style="width:0%;background:#c38d9e"></div></div>`;
+    waveNode.textContent = 'Error';
+    coherenceNode.textContent = 'Failed';
+    coherenceNode.style.color = '#c38d9e';
+    fill.style.width = '0%';
+    fill.style.backgroundColor = '#c38d9e';
   } else {
-    card.innerHTML = `<div class="name">${name}</div><div class="wave">Loading</div>
-      <div class="coherence" style="color:#888">—</div>
-      <div class="bar"><div class="bar-fill" style="width:0%;background:#1a1a2a"></div></div>`;
+    waveNode.textContent = 'Loading';
+    coherenceNode.textContent = '—';
+    coherenceNode.style.color = '#888';
+    fill.style.width = '0%';
+    fill.style.backgroundColor = '#1a1a2a';
   }
+
+  card.replaceChildren(nameNode, waveNode, coherenceNode, bar);
 }
 
 async function startScan() {
