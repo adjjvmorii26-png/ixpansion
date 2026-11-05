@@ -82,7 +82,7 @@ class SomaticGarbageCollector:
         now: int,
     ) -> dict[str, Any]:
         """Evaluate only when the signed heartbeat is bound to this branch and cluster."""
-        if not isinstance(heartbeat_payload, Mapping):
+        if not isinstance(heartbeat_payload, Mapping) or not isinstance(metadata, Mapping):
             return self._retained(branch_id, self.cluster_id, "invalid_heartbeat")
         expected = {
             "branch_id": branch_id,
