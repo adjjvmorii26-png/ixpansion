@@ -73,31 +73,54 @@
     const errEl = document.getElementById("err");
     const hud = document.getElementById("hud");
 
-    let world, view;
+    let world;
+    let view;
+    let rafId = 0;
+    let stopped = false;
+
+    function createWorld() {
+      const next = new World({ gravity: 9.81, width: 800, height: 400 });
+      next.addBody({ x: 400, y: 80, vx: 40, vy: 0, mass: 2, radius: 16 });
+      next.addBody({ x: 320, y: 120, vx: -20, vy: -10, mass: 1.2, radius: 12 });
+      next.addBody({ x: 480, y: 60, vx: 10, vy: 5, mass: 0.9, radius: 10 });
+      return next;
+    }
+
+    function onResize() {
+      view?.resize();
+    }
+
+    function cleanup() {
+      if (stopped) return;
+      stopped = true;
+      if (rafId) cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", onResize);
+      view?.dispose();
+    }
 
     try {
-      world = new World({ gravity: 9.81, width: 800, height: 400 });
-      // Seed a few bodies (2D physics; mapped into 3D space by renderer)
-      world.addBody({ x: 400, y: 80, vx: 40, vy: 0, mass: 2, radius: 16 });
-      world.addBody({ x: 320, y: 120, vx: -20, vy: -10, mass: 1.2, radius: 12 });
-      world.addBody({ x: 480, y: 60, vx: 10, vy: 5, mass: 0.9, radius: 10 });
-
+      world = createWorld();
       view = createRenderer(canvas, THREE);
       view.resize();
-      window.addEventListener("resize", () => view.resize());
-    } catch (e) {
+      window.addEventListener("resize", onResize);
+      window.addEventListener("pagehide", cleanup, { once: true });
+    } catch (error) {
       errEl.style.display = "flex";
-      errEl.textContent = "Failed to init 3D renderer: " + e.message;
-      throw e;
+      errEl.textContent = "Failed to init 3D renderer: " +
+        (error instanceof Error ? error.message : String(error));
+      cleanup();
+      throw error;
     }
 
     function sync() {
       view.syncBodies(world.bodies);
-      status.textContent = `tick=${world.tick} · bodies=${world.bodies.length} · g=${world.gravity.toFixed(2)}`;
-      hud.innerHTML = `Drag to orbit · Wheel to zoom<br>bodies=${world.bodies.length} · hash=${world.stateHash()}`;
+      status.textContent =
+        `tick=${world.tick} · bodies=${world.bodies.length} · g=${world.gravity.toFixed(2)}`;
+      hud.textContent =
+        `Drag to orbit · Wheel to zoom · bodies=${world.bodies.length} · hash=${world.stateHash()}`;
     }
 
-    document.getElementById("btnSpawn").onclick = () => {
+    document.getElementById("btnSpawn").addEventListener("click", () => {
       try {
         world.addBody({
           x: 300 + Math.random() * 200,
@@ -107,39 +130,40 @@
           mass: 0.8 + Math.random(),
           radius: 8 + Math.random() * 10
         });
-      } catch (e) {
-        status.textContent = e.message;
+      } catch (error) {
+        status.textContent = error instanceof Error ? error.message : String(error);
       }
-    };
-    document.getElementById("btnImpulse").onclick = () => {
-      for (const b of world.bodies) {
-        b.vx += (Math.random() - 0.5) * 60;
-        b.vy -= 20 + Math.random() * 30;
+    });
+
+    document.getElementById("btnImpulse").addEventListener("click", () => {
+      for (const body of world.bodies) {
+        body.vx += (Math.random() - 0.5) * 60;
+        body.vy -= 20 + Math.random() * 30;
       }
-    };
-    document.getElementById("btnReset").onclick = () => {
-      world = new World({ gravity: 9.81, width: 800, height: 400 });
-      world.addBody({ x: 400, y: 80, vx: 40, vy: 0, mass: 2, radius: 16 });
-      world.addBody({ x: 320, y: 120, vx: -20, vy: -10, mass: 1.2, radius: 12 });
-      world.addBody({ x: 480, y: 60, vx: 10, vy: 5, mass: 0.9, radius: 10 });
-    };
+    });
+
+    document.getElementById("btnReset").addEventListener("click", () => {
+      world = createWorld();
+      sync();
+    });
 
     let last = performance.now();
     function frame(now) {
-      const dt = Math.min(0.033, (now - last) / 1000);
+      if (stopped) return;
+      const dt = Math.min(0.033, Math.max(0, (now - last) / 1000));
       last = now;
-      // fixed substeps toward 120 Hz
-      let acc = dt;
-      while (acc > 0) {
-        const step = Math.min(1 / 120, acc);
+      // Fixed substeps; dt is capped to bound work after a suspended tab.
+      let accumulator = dt;
+      while (accumulator > 0) {
+        const step = Math.min(1 / 120, accumulator);
         world.step(step);
-        acc -= step;
+        accumulator -= step;
       }
       sync();
       view.render();
-      requestAnimationFrame(frame);
+      rafId = requestAnimationFrame(frame);
     }
-    requestAnimationFrame(frame);
+    rafId = requestAnimationFrame(frame);
   </script>
 </body>
 </html>
