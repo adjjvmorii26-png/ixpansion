@@ -1,6 +1,9 @@
 ---
 name: rapid-test-loop
 description: Accelerate repository testing by mapping changed files to the smallest trustworthy test set, running independent checks efficiently, isolating failures, and expanding to full validation without making unsupported pass claims.
+metadata:
+  source: https://app.notion.com/p/40f603736996815da0f1ee7c5da70b77
+  version: 1.0.0
 ---
 
 # rapid_test_loop
