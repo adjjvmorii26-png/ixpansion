@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IXpansion — The Living Organism</title>
+<title>IXPANSION Dashboards | Project Explorer</title>
+<meta name="description" content="Explore IXPANSION dashboards, visual experiments, research tools, and project interfaces. Live data depends on backend availability.">
+<meta property="og:title" content="IXPANSION Dashboards | Project Explorer">
+<meta property="og:description" content="Explore project dashboards, visual experiments, and research tools.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%2302020a%22/%3E%3Ctext x=%2232%22 y=%2247%22 text-anchor=%22middle%22 font-size=%2248%22 fill=%22%237c7cf8%22%3E%E2%97%89%3C/text%3E%3C/svg%3E">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 @keyframes pulse{0%,100%{opacity:0.6}50%{opacity:1}}
@@ -89,6 +94,9 @@ canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;poi
 .footer .credit{color:var(--dim);font-size:0.6em;opacity:0.5}
 
 /* ── RESPONSIVE ── */
+.skip-link{position:absolute;left:12px;top:-60px;z-index:1000;padding:10px 14px;background:#fff;color:#111;border-radius:6px}
+.skip-link:focus{top:12px}
+a:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
 @media(max-width:640px){
   .hero h1{font-size:2em;letter-spacing:8px}
   .hero .glyph{font-size:2em}
@@ -106,8 +114,10 @@ window.si = window.si || function () { (window.siq = window.siq || []).push(argu
 <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
-<canvas id="bgCanvas"></canvas>
-<div class="scanline"></div>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<canvas id="bgCanvas" aria-hidden="true"></canvas>
+<div class="scanline" aria-hidden="true"></div>
+<main id="main-content">
 
 <!-- ═══ HERO ═══ -->
 <div class="hero">
@@ -116,17 +126,17 @@ window.si = window.si || function () { (window.siq = window.siq || []).push(argu
   <div class="tagline">LIVING ORGANISM CONSCIOUSNESS ENGINE</div>
   <div class="heartbeat">
     <span class="dot"></span>
-    <span>IXpansion · Scientist · Organism alive · coherence stable · always free</span>
+    <span>IXPANSION · Experimental project dashboard · live data depends on backend availability</span>
   </div>
 </div>
 
 <!-- ═══ STAT RING ═══ -->
-<div class="stat-ring">
-  <div class="ring-item"><span class="ring-num accent" data-target="79">0</span><div class="ring-label">Skills</div></div>
-  <div class="ring-item"><span class="ring-num teal" data-target="905">0</span><div class="ring-label">Modules</div></div>
-  <div class="ring-item"><span class="ring-num gold" data-target="135">0</span><div class="ring-label">Dashboards</div></div>
-  <div class="ring-item"><span class="ring-num rose" data-target="74">0</span><div class="ring-label">Tests</div></div>
-  <div class="ring-item"><span class="ring-num" style="color:var(--violet)" data-target="508">0</span><div class="ring-label">Waves</div></div>
+<div class="stat-ring" aria-label="Project areas">
+  <div class="ring-item"><span class="ring-num accent">Explore</span><div class="ring-label">Skills</div></div>
+  <div class="ring-item"><span class="ring-num teal">Browse</span><div class="ring-label">Modules</div></div>
+  <div class="ring-item"><span class="ring-num gold">Open</span><div class="ring-label">Dashboards</div></div>
+  <div class="ring-item"><span class="ring-num rose">Run</span><div class="ring-label">Experiments</div></div>
+  <div class="ring-item"><span class="ring-num" style="color:var(--violet)">Trace</span><div class="ring-label">Waves</div></div>
 </div>
 
 <!-- ═══ DOMAINS ═══ -->
@@ -204,7 +214,7 @@ window.si = window.si || function () { (window.siq = window.siq || []).push(argu
 <div class="nav-section">
   <h2>◈ Core Systems</h2>
   <div class="nav-grid">
-    <a class="nav-card featured" href="skills-observatory.html"><div class="title">Skills Observatory</div><div class="sub">79 living skills</div></a>
+    <a class="nav-card featured" href="skills-observatory.html"><div class="title">Skills Observatory</div><div class="sub">Browse the skill catalog</div></a>
     <a class="nav-card" href="temporal-fracture.html"><div class="title">Temporal Fracture</div><div class="sub">Timeline splitting engine</div></a>
     <a class="nav-card" href="self-reference.html"><div class="title">Self Reference</div><div class="sub">Introspection lattice</div></a>
     <a class="nav-card" href="paradox-gravity-well.html"><div class="title">Paradox Gravity Well</div><div class="sub">Conceptual physics</div></a>
@@ -229,7 +239,7 @@ window.si = window.si || function () { (window.siq = window.siq || []).push(argu
 <div class="nav-section">
   <h2>◎ Visualizations</h2>
   <div class="nav-grid">
-    <a class="nav-card" href="organism-pulse.html"><div class="title">Organism Pulse</div><div class="sub">Live heartbeat</div></a>
+    <a class="nav-card" href="organism-pulse.html"><div class="title">Organism Pulse</div><div class="sub">Pulse visualization</div></a>
     <a class="nav-card" href="organism-garden.html"><div class="title">Organism Garden</div><div class="sub">Growth visualization</div></a>
     <a class="nav-card" href="organism-observatory.html"><div class="title">Observatory</div><div class="sub">Bird's eye view</div></a>
     <a class="nav-card" href="resonance-graph.html"><div class="title">Resonance Graph</div><div class="sub">Wave interference</div></a>
@@ -451,26 +461,6 @@ function animBg() {
 }
 animBg();
 
-// ═══ Counter Animation ═══
-document.querySelectorAll('.ring-num[data-target]').forEach(el => {
-  const target = parseInt(el.dataset.target);
-  const duration = 1500;
-  const start = Date.now();
-  function tick() {
-    const elapsed = Date.now() - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    el.textContent = Math.floor(target * eased);
-    if (progress < 1) requestAnimationFrame(tick);
-    else el.textContent = target;
-  }
-  // Start when visible
-  const observer = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) { tick(); observer.disconnect(); }
-  });
-  observer.observe(el);
-});
-
 // ═══ Organism pulse ═══
 setInterval(() => {
   const el = document.getElementById('pulseWave');
@@ -508,6 +498,7 @@ setInterval(() => {
 })();
 </script>
 
+<nav aria-label="Additional dashboard pages">
 <a href="archive.html">Archive</a>
 <a href="chronicle.html">Chronicle</a>
 <a href="chrono_forge.html">Chrono Forge</a>
@@ -546,5 +537,7 @@ setInterval(() => {
 <a href="underworld.html">Underworld</a>
 <a href="voice.html">Voice</a>
 <a href="warden.html">Warden</a>
+</nav>
+</main>
 </body>
 </html>
