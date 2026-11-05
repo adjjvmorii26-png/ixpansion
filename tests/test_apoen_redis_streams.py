@@ -51,7 +51,7 @@ class ApoenRedisStreamTests(unittest.TestCase):
         records = read_heartbeats(FakeRedis([("apoen:telemetry", [("1-0", fields)])]), "apoen:telemetry")
         gc = SomaticGarbageCollector("CLUSTER-OMEGA", GCPolicy(stale_after_seconds=100, minimum_age_seconds=500, maximum_interactions=2))
         results = evaluate_heartbeats(gc, records, self.secret, now=1000)
-        self.assertEqual(results[0]["evaluation"]["reason"], "heartbeat_binding_mismatch")
+        self.assertEqual(results[0]["evaluation"]["reason"], "invalid_heartbeat")
         self.assertFalse(results[0]["evaluation"]["eligible"])
 
 if __name__ == "__main__":
