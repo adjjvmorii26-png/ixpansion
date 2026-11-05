@@ -62,6 +62,7 @@ export class FrameLab {
     if (value !== 0 && (value < 1 || value > 240)) throw new RangeError("targetFPS must be 0 (uncapped) or between 1 and 240");
     this.targetFPS = value;
     this.nextRenderAt = null;
+    this.lastRenderedAt = null;
   }
 
   advance(now, stepFn, { paused = false } = {}) {
@@ -70,6 +71,7 @@ export class FrameLab {
     if (this.lastTime === null) {
       this.lastTime = now;
       this.nextRenderAt = now + (this.targetFPS > 0 ? 1000 / this.targetFPS : 0);
+      this.lastRenderedAt = now;
       this.frameIndex++;
       return this.metrics(0, 0, true);
     }
@@ -77,9 +79,6 @@ export class FrameLab {
     this.lastTime = now;
     const delta = Math.min(rawDelta, this.maxFrameDelta);
     this.droppedSeconds += Math.max(0, rawDelta - delta);
-    this.samples.push(rawDelta);
-    if (this.samples.length > this.sampleWindow) this.samples.shift();
-
     let steps = 0;
     if (!paused) {
       this.accumulator += delta;
@@ -106,7 +105,17 @@ export class FrameLab {
         this.nextRenderAt += (missed + 1) * interval;
       }
     }
-    if (shouldRender) this.frameIndex++;
+    if (shouldRender) {
+      if (this.lastRenderedAt !== null) {
+        const renderedDelta = Math.max(0, (now - this.lastRenderedAt) / 1000);
+        if (renderedDelta > 0) {
+          this.samples.push(renderedDelta);
+          if (this.samples.length > this.sampleWindow) this.samples.shift();
+        }
+      }
+      this.lastRenderedAt = now;
+      this.frameIndex++;
+    }
     return this.metrics(delta, steps, shouldRender);
   }
 
