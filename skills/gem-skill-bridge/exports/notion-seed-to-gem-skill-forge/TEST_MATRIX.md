@@ -16,4 +16,6 @@ Summary:
 - Instruction-level desk tests: 5 passed, 0 failed.
 - Actual execution test: NOT RUN.
 - Notion seed readback: verified.
-- Gem package readback: pending.
+- Gem repository export readback: VERIFIED for SKILL.md, PROVENANCE.md, and TEST_MATRIX.md.
+- Package archive/installer: NOT RUN.
+- Gem runtime installation/activation: NOT RUN.
