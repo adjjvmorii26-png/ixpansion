@@ -17,7 +17,7 @@ def test_hortus_dashboard_script_parses():
         pytest.skip("Node.js is required to syntax-check embedded dashboard JavaScript")
 
     html = DASHBOARD.read_text(encoding="utf-8")
-    scripts = re.findall(r"<script\\b[^>]*>(.*?)</script>", html, flags=re.IGNORECASE | re.DOTALL)
+    scripts = re.findall(r"<script\b[^>]*>(.*?)</script>", html, flags=re.IGNORECASE | re.DOTALL)
     assert scripts, "dashboard must contain an executable script"
 
     for index, script in enumerate(scripts):
