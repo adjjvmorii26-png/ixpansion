@@ -41,6 +41,7 @@ class FoundryTests(unittest.TestCase):
             self.assertIn("REGRESSION_EXECUTION",r["not_run_stages"])
             self.assertIn("LIVE_NOTION_VERIFY",r["not_run_stages"])
             self.assertFalse(r["automatic_changes"])
+            self.assertNotIn("ORPHAN_SKILL",[x["code"] for x in r["scan_findings"]])
             self.assertTrue(r["failure_pattern_matches"])
 
 
