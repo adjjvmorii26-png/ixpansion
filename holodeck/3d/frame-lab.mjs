@@ -4,7 +4,7 @@
  */
 export const FRAME_LIMITS = Object.freeze({
   sampleWindow: 120,
-  maxCaptures: 240,
+  maxCaptures: 60,
   maxSubSteps: 8,
   maxFrameDelta: 0.1
 });
@@ -34,7 +34,8 @@ export class FrameLab {
     maxSubSteps = FRAME_LIMITS.maxSubSteps,
     maxFrameDelta = FRAME_LIMITS.maxFrameDelta,
     sampleWindow = FRAME_LIMITS.sampleWindow,
-    maxCaptures = FRAME_LIMITS.maxCaptures
+    maxCaptures = FRAME_LIMITS.maxCaptures,
+    maxImageDataUrlLength = 750000
   } = {}) {
     this.setTargetFPS(targetFPS);
     this.fixedStep = finite(fixedStep, "fixedStep");
@@ -44,6 +45,7 @@ export class FrameLab {
     if (this.maxFrameDelta <= 0 || this.maxFrameDelta > 1) throw new RangeError("maxFrameDelta must be in (0, 1]");
     this.sampleWindow = Math.max(2, Math.min(600, Math.floor(sampleWindow)));
     this.maxCaptures = Math.max(1, Math.min(2000, Math.floor(maxCaptures)));
+    this.maxImageDataUrlLength = Math.max(1024, Math.min(2_000_000, Math.floor(maxImageDataUrlLength)));
     this.lastTime = null;
     this.nextRenderAt = null;
     this.accumulator = 0;
@@ -138,7 +140,10 @@ export class FrameLab {
     };
   }
 
-  capture(snapshot, { timestamp = null, simTick = null, stateHash = null, label = "" } = {}) {
+  capture(snapshot, { timestamp = null, simTick = null, stateHash = null, label = "", imageDataUrl = null } = {}) {
+    if (imageDataUrl !== null && (typeof imageDataUrl !== "string" || !/^data:image\/(png|jpeg);base64,/.test(imageDataUrl) || imageDataUrl.length > this.maxImageDataUrlLength)) {
+      throw new RangeError("frame image must be a bounded PNG or JPEG data URL");
+    }
     const frame = {
       id: this.nextCaptureId++,
       frameIndex: this.frameIndex,
@@ -146,6 +151,7 @@ export class FrameLab {
       simTick,
       stateHash,
       label: String(label).slice(0, 120),
+      imageDataUrl,
       snapshot: clone(snapshot)
     };
     this.captures.push(frame);
@@ -160,6 +166,7 @@ export class FrameLab {
       timestamp: this.lastTime,
       simTick: source.simTick,
       stateHash: source.stateHash,
+      imageDataUrl: source.imageDataUrl,
       label: label || (source.label ? source.label + " copy" : "duplicate")
     });
   }
