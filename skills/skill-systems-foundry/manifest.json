@@ -1,0 +1,8 @@
+{
+  "name": "skill-systems-foundry",
+  "version": "1.0.0",
+  "source_notion": "https://app.notion.com/p/40f603736996811baa3bd27b96ca1519",
+  "engines": ["dependency-graph", "instruction-fuzzing", "proposal-only-self-healing", "gem-compatibility-lint", "snapshot-drift-radar"],
+  "safety": {"network": false, "automatic_mutation": false, "external_side_effects": false},
+  "tests": "python -m unittest discover -s tests -v"
+}
