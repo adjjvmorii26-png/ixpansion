@@ -299,7 +299,7 @@ const resizeObserver = typeof ResizeObserver === "function" ? new ResizeObserver
 geometry.addEventListener("change", () => { mode = geometry.value; if (mode === "collapse") status.textContent = "Collapse geometry selected; radius will contract to a safe minimum."; syncUi(); });
 energy.addEventListener("input", () => { energyLevel = Number(energy.value); syncUi(); });
 pauseButton.addEventListener("click", () => { paused = !paused; syncUi(); if (paused) status.textContent = "Motion paused."; else { status.textContent = "Running local visual simulation"; start(); } });
-document.querySelector("#reset").addEventListener("click", () => { particles = createParticles(); elapsedTime = 0; clock.reset(); syncUi(); render(); status.textContent = "Simulation reset to its initial seeded state."; });
+document.querySelector("#reset").addEventListener("click", () => { particles = createParticles(); elapsedTime = 0; clock.reset(); echoRule.clear(); syncUi(); render(); status.textContent = "Simulation reset to its initial seeded state."; });
 stealthButton.addEventListener("click", toggleMinimalHud);
 audioButton.addEventListener("click", toggleAudio);
 window.addEventListener("resize", onResize, { passive: true });
