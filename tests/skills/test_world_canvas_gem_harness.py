@@ -80,7 +80,7 @@ class WorldCanvasGemHarnessTests(unittest.TestCase):
         self.assertEqual(report["schema"], "ixpansion.gem-skill-evidence/v1")
         self.assertEqual(report["source_commit"], "test-source-commit")
         self.assertEqual(report["summary"]["scenarios"], 5)
-        self.assertEqual(report["summary"]["failed"], 0)
+        self.assertEqual(report["summary"]["failed"], 0, report["results"])
         self.assertEqual(report["summary"]["status"], "PASS")
         self.assertNotEqual(report["trust"]["browser_simulation"], "executed")
         required = {"skill_name", "skill_version", "scenario_id", "scenario_version",
