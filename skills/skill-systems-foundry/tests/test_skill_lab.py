@@ -36,9 +36,30 @@ class FoundryTests(unittest.TestCase):
     def test_pipeline_is_ordered_and_proposal_only(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp); self.make_skill(root,"a","alpha","missing")
-            r=pipeline(root,1337,8); self.assertEqual(r["sequence"][0],"DISCOVER")
-            self.assertEqual(r["sequence"][-1],"EXPORT_REVIEW"); self.assertFalse(r["automatic_changes"])
+            r=pipeline(root,1337,8); self.assertEqual(r["executed_stages"][0],"DISCOVER")
+            self.assertIn("FUZZ_CASE_GENERATION",r["executed_stages"])
+            self.assertIn("REGRESSION_EXECUTION",r["not_run_stages"])
+            self.assertIn("LIVE_NOTION_VERIFY",r["not_run_stages"])
+            self.assertFalse(r["automatic_changes"])
             self.assertTrue(r["failure_pattern_matches"])
+
+
+    def test_pipeline_does_not_claim_unrun_stages(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp); self.make_skill(root,"a","alpha")
+            result=pipeline(root)
+            self.assertNotIn("REGRESSION_EXECUTION",result["executed_stages"])
+            self.assertNotIn("LIVE_NOTION_VERIFY",result["executed_stages"])
+            self.assertIsNone(result["drift_findings"])
+            self.assertIn("EXPORT_REVIEW",result["not_run_stages"])
+
+    def test_root_compatibility_entrypoint_uses_canonical_implementation(self):
+        import importlib.util
+        root_file=Path(__file__).resolve().parents[1]/"skill_lab.py"
+        spec=importlib.util.spec_from_file_location("foundry_root_compat",root_file)
+        module=importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+        self.assertEqual(module.digest("same"),digest("same"))
+        self.assertEqual(module.fuzz_cases(4,3),fuzz_cases(4,3))
 
     def test_pipeline_maps_compatibility_leak_to_pattern(self):
         with tempfile.TemporaryDirectory() as tmp:
