@@ -1,3 +1,4 @@
+// Regression suite for deterministic, bounded Holodeck action history.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { World } from "./physics.mjs";
