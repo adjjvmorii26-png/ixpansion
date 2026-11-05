@@ -10,6 +10,7 @@ A reusable IXPANSION lab for validating skill behavior against a deterministic l
 ## Capabilities
 - `world_canvas_gem_harness:open_lab` — open the local harness.
 - `world_canvas_gem_harness:run_suite` — execute all registered deterministic checks.
+- `world_canvas_gem_harness:run_scenarios` — execute the versioned Python fixture registry and emit lineage-aware results.
 - `world_canvas_gem_harness:export_evidence` — export a JSON report with per-check outcomes and state hash.
 - `world_canvas_gem_harness:review_skill` — apply Dual Lens review to a skill change.
 - `world_canvas_gem_harness:stress_invariants` — run Forge-Breakers negative checks.
@@ -51,3 +52,8 @@ Run Forge-Breakers against boundary coordinates, energy limits, duplicate IDs, c
 
 ### world_canvas_gem_harness:audit_data_flow
 Run Zero-Copy review. Identify each clone/serialization boundary and retain defensive copies wherever transaction isolation depends on them.
+
+
+### world_canvas_gem_harness:run_scenarios
+
+Run `python skills/r1/world_canvas_gem_harness/scenario_runner.py --source-commit "$(git rev-parse HEAD)"`. This executes deterministic Python fixture adapters from `scenario-registry.json`, not the browser canvas. Preserve the report's runtime, source commit, scenario versions, check outcomes, and trust limitations. The runner rejects reports larger than 64 KiB before writing output.
