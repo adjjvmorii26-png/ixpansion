@@ -21,7 +21,7 @@ class WorldCanvasGemHarnessTests(unittest.TestCase):
             path = ROOT / item["path"]
             self.assertTrue(path.is_file(), item["path"])
             content = path.read_text(encoding="utf-8")
-            self.assertTrue(content.startswith("---\\nname: "), item["name"])
+            self.assertTrue(content.startswith("---\nname: "), item["name"])
             frontmatter = content.split("---", 2)[1]
             self.assertIn("name:", frontmatter)
             self.assertIn("description:", frontmatter)
