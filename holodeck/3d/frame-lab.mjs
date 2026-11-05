@@ -24,7 +24,7 @@ const clone = value => {
 function percentile(values, fraction) {
   if (!values.length) return 0;
   const sorted = [...values].sort((a, b) => a - b);
-  return sorted[Math.min(sorted.length - 1, Math.floor((sorted.length - 1) * fraction))];
+  return sorted[Math.min(sorted.length - 1, Math.max(0, Math.ceil(sorted.length * fraction) - 1))];
 }
 
 export class FrameLab {
@@ -75,7 +75,7 @@ export class FrameLab {
     this.lastTime = now;
     const delta = Math.min(rawDelta, this.maxFrameDelta);
     this.droppedSeconds += Math.max(0, rawDelta - delta);
-    this.samples.push(delta);
+    this.samples.push(rawDelta);
     if (this.samples.length > this.sampleWindow) this.samples.shift();
 
     let steps = 0;
