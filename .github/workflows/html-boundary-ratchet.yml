@@ -1,0 +1,53 @@
+name: HTML boundary ratchet
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "**/*.html"
+      - "scripts/audit_html_sinks.py"
+      - "scripts/html_boundary_ratchet.py"
+      - "tests/security/test_html_boundary_ratchet.py"
+      - ".github/workflows/html-boundary-ratchet.yml"
+  push:
+    branches: [main]
+    paths:
+      - "**/*.html"
+      - "scripts/audit_html_sinks.py"
+      - "scripts/html_boundary_ratchet.py"
+      - "tests/security/test_html_boundary_ratchet.py"
+      - ".github/workflows/html-boundary-ratchet.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ratchet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit-test diff line mapping
+        run: PYTHONPATH=scripts python -m unittest discover -s tests/security -p 'test_html_boundary_ratchet.py' -v
+      - name: Block newly introduced HTML sinks
+        run: |
+          if [ "\${{ github.event_name }}" = "pull_request" ]; then
+            BASE_REF="origin/\${{ github.base_ref }}"
+          else
+            BASE_REF="HEAD^"
+          fi
+          python scripts/html_boundary_ratchet.py --base-ref "$BASE_REF"
+      - name: Upload boundary report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-boundary-ratchet
+          path: html-boundary-ratchet.json
+          if-no-files-found: warn
+          retention-days: 14
