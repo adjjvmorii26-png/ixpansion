@@ -8,8 +8,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -45,6 +47,27 @@ def bounded_payload(value: Any, limit: int = MAX_EXPORT_BYTES) -> bytes:
     if len(encoded) > limit:
         raise ValueError(f"evidence report is {len(encoded)} bytes; limit is {limit}")
     return encoded
+
+
+def write_bounded_atomic(path: Path, value: Any, limit: int = MAX_EXPORT_BYTES) -> int:
+    """Write a complete bounded JSON artifact or leave the previous file untouched."""
+    encoded = bounded_payload(value, limit)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(fd, "wb") as stream:
+            stream.write(encoded)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+        return len(encoded)
+    except BaseException:
+        try:
+            temporary.unlink()
+        except FileNotFoundError:
+            pass
+        raise
 
 
 def execute(scenario: dict[str, Any]) -> list[dict[str, Any]]:
@@ -176,13 +199,12 @@ def main() -> int:
     try:
         registry = json.loads(args.registry.read_text(encoding="utf-8"))
         report = run_registry(registry, args.source_commit or git_commit())
-        payload = json.dumps(report, indent=2, ensure_ascii=False) + "\n"
+        payload = json.dumps(report, indent=2, ensure_ascii=False) + "\\n"
         encoded = payload.encode("utf-8")
         if len(encoded) > MAX_EXPORT_BYTES:
             raise ValueError(f"evidence report is {len(encoded)} bytes; limit is {MAX_EXPORT_BYTES}")
         if args.output:
-            args.output.parent.mkdir(parents=True, exist_ok=True)
-            args.output.write_bytes(encoded)
+            write_bounded_atomic(args.output, report)
         else:
             sys.stdout.write(payload)
         return 0 if report["summary"]["failed"] == 0 else 1
