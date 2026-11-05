@@ -120,12 +120,19 @@ def run_registry(registry: dict[str, Any], source_commit: str) -> dict[str, Any]
     if not ids or len(ids) != len(set(ids)):
         raise ValueError("scenario registry must contain unique, non-empty scenarios")
     results = []
+    executed_at = datetime.now(timezone.utc).isoformat()
+    runtime = f"python-{sys.version_info.major}.{sys.version_info.minor}"
     for scenario in registry["scenarios"]:
         checks = execute(scenario)
         results.append({
+            "skill_name": scenario["skill"],
+            "skill_version": scenario["skill_version"],
             "scenario_id": scenario["id"],
             "scenario_version": scenario["version"],
-            "skill_name": scenario["skill"],
+            "source_commit": source_commit,
+            "runtime": runtime,
+            "execution_mode": "local-deterministic",
+            "executed_at": executed_at,
             "seed": scenario["seed"],
             "checks": checks,
             "summary": {"passed": sum(c["status"] == "PASS" for c in checks),
@@ -134,10 +141,10 @@ def run_registry(registry: dict[str, Any], source_commit: str) -> dict[str, Any]
     failed = sum(item["summary"]["failed"] for item in results)
     return {
         "schema": SCHEMA,
-        "runtime": f"python-{sys.version_info.major}.{sys.version_info.minor}",
-        "execution_mode": "local-deterministic-fixture-adapter",
+        "runtime": runtime,
+        "execution_mode": "local-deterministic",
         "source_commit": source_commit,
-        "executed_at": datetime.now(timezone.utc).isoformat(),
+        "executed_at": executed_at,
         "registry_schema": registry["schema"],
         "registry_version": registry["registry_version"],
         "summary": {"scenarios": len(results), "passed": sum(x["summary"]["passed"] for x in results),
