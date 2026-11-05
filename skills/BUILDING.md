@@ -9,6 +9,7 @@ Every skill gives the organism a repeatable capability. Skills live in
 |-------|---------|------|
 | `blog_curator` | Manage live blog posts (create/classify/archive/surface/search) | r1 |
 | `skill_builder` | Scaffold new skills with YAML-frontmatter SKILL.md | r1 |
+| `rapid_test_loop` | Select, parallelize, triage, and prove fast layered test runs | r1 |
 | `dream_compiler` | Compile organism dreams into executable modules | r1 |
 | `module_gardener` | Manage organic module growth and seeds | r1 |
 | `paradox_resolver` | Resolve cross-module paradox conflicts | r1 |
