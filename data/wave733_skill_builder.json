@@ -44,7 +44,7 @@
     "pentaxis_integrator": {
       "id": "c336902d",
       "name": "pentaxis_integrator",
-      "description": "Integrate pentaxis-5d-engine as the game engine for IXPANSION - 5D gameplay \u2194 organism interface",
+      "description": "Integrate pentaxis-5d-engine as the game engine for IXPANSION - 5D gameplay ↔ organism interface",
       "commands": [
         "wire_5d",
         "engine_bridge",
@@ -140,6 +140,90 @@
       "wave": 733,
       "created_at": "2026-09-16T02:17:03.338464+00:00",
       "status": "generated"
+    },
+    "world_canvas_gem_harness": {
+      "id": "wcgh0001",
+      "name": "world_canvas_gem_harness",
+      "description": "Orchestrate deterministic World Canvas simulation checks, skill reviews, and evidence export.",
+      "commands": [
+        "open_lab",
+        "run_suite",
+        "export_evidence",
+        "review_skill",
+        "stress_invariants",
+        "audit_data_flow"
+      ],
+      "roots": "r1",
+      "category": "developer_tooling",
+      "tags": [
+        "world_canvas",
+        "gem",
+        "harness",
+        "testing"
+      ],
+      "wave": 733,
+      "created_at": "2026-11-04T00:00:00+00:00",
+      "status": "generated"
+    },
+    "dual_lens": {
+      "id": "duallens1",
+      "name": "dual_lens",
+      "description": "Review IXPANSION changes through implementation and adversarial lenses.",
+      "commands": [
+        "review",
+        "challenge",
+        "report"
+      ],
+      "roots": "r1",
+      "category": "developer_tooling",
+      "tags": [
+        "review",
+        "adversarial",
+        "quality"
+      ],
+      "wave": 733,
+      "created_at": "2026-11-04T00:00:00+00:00",
+      "status": "generated"
+    },
+    "zero_copy": {
+      "id": "zerocopy1",
+      "name": "zero_copy",
+      "description": "Audit ownership, cloning, serialization, payload bounds, and safe data movement.",
+      "commands": [
+        "map_boundaries",
+        "optimize",
+        "check_bounds"
+      ],
+      "roots": "r1",
+      "category": "developer_tooling",
+      "tags": [
+        "performance",
+        "memory",
+        "ownership"
+      ],
+      "wave": 733,
+      "created_at": "2026-11-04T00:00:00+00:00",
+      "status": "generated"
+    },
+    "forge_breakers": {
+      "id": "forgebrk1",
+      "name": "forge_breakers",
+      "description": "Build and run deterministic negative tests against state-machine invariants.",
+      "commands": [
+        "attack_matrix",
+        "execute",
+        "report"
+      ],
+      "roots": "r1",
+      "category": "developer_tooling",
+      "tags": [
+        "testing",
+        "security",
+        "invariants"
+      ],
+      "wave": 733,
+      "created_at": "2026-11-04T00:00:00+00:00",
+      "status": "generated"
     }
   },
   "generated": [
@@ -185,7 +269,7 @@
     {
       "id": "c336902d",
       "name": "pentaxis_integrator",
-      "description": "Integrate pentaxis-5d-engine as the game engine for IXPANSION - 5D gameplay \u2194 organism interface",
+      "description": "Integrate pentaxis-5d-engine as the game engine for IXPANSION - 5D gameplay ↔ organism interface",
       "commands": [
         "wire_5d",
         "engine_bridge",
@@ -280,6 +364,90 @@
       ],
       "wave": 733,
       "created_at": "2026-09-16T02:17:03.338464+00:00",
+      "status": "generated"
+    },
+    {
+      "id": "wcgh0001",
+      "name": "world_canvas_gem_harness",
+      "description": "Orchestrate deterministic World Canvas simulation checks, skill reviews, and evidence export.",
+      "commands": [
+        "open_lab",
+        "run_suite",
+        "export_evidence",
+        "review_skill",
+        "stress_invariants",
+        "audit_data_flow"
+      ],
+      "roots": "r1",
+      "category": "developer_tooling",
+      "tags": [
+        "world_canvas",
+        "gem",
+        "harness",
+        "testing"
+      ],
+      "wave": 733,
+      "created_at": "2026-11-04T00:00:00+00:00",
+      "status": "generated"
+    },
+    {
+      "id": "duallens1",
+      "name": "dual_lens",
+      "description": "Review IXPANSION changes through implementation and adversarial lenses.",
+      "commands": [
+        "review",
+        "challenge",
+        "report"
+      ],
+      "roots": "r1",
+      "category": "developer_tooling",
+      "tags": [
+        "review",
+        "adversarial",
+        "quality"
+      ],
+      "wave": 733,
+      "created_at": "2026-11-04T00:00:00+00:00",
+      "status": "generated"
+    },
+    {
+      "id": "zerocopy1",
+      "name": "zero_copy",
+      "description": "Audit ownership, cloning, serialization, payload bounds, and safe data movement.",
+      "commands": [
+        "map_boundaries",
+        "optimize",
+        "check_bounds"
+      ],
+      "roots": "r1",
+      "category": "developer_tooling",
+      "tags": [
+        "performance",
+        "memory",
+        "ownership"
+      ],
+      "wave": 733,
+      "created_at": "2026-11-04T00:00:00+00:00",
+      "status": "generated"
+    },
+    {
+      "id": "forgebrk1",
+      "name": "forge_breakers",
+      "description": "Build and run deterministic negative tests against state-machine invariants.",
+      "commands": [
+        "attack_matrix",
+        "execute",
+        "report"
+      ],
+      "roots": "r1",
+      "category": "developer_tooling",
+      "tags": [
+        "testing",
+        "security",
+        "invariants"
+      ],
+      "wave": 733,
+      "created_at": "2026-11-04T00:00:00+00:00",
       "status": "generated"
     }
   ]

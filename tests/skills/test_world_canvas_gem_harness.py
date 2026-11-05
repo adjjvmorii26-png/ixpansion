@@ -1,0 +1,126 @@
+import json
+import unittest
+import tempfile
+import importlib.util
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+LAB = ROOT / "labs" / "world-canvas-gem-harness"
+MANIFEST = LAB / "skill-manifest.json"
+SCENARIOS = LAB / "scenario-registry.json"
+EVIDENCE_CONTRACT = LAB / "evidence-contract.json"
+RUNNER_PATH = ROOT / "skills/r1/world_canvas_gem_harness/scenario_runner.py"
+_RUNNER_SPEC = importlib.util.spec_from_file_location("world_canvas_scenario_runner", RUNNER_PATH)
+RUNNER = importlib.util.module_from_spec(_RUNNER_SPEC)
+_RUNNER_SPEC.loader.exec_module(RUNNER)
+
+
+class WorldCanvasGemHarnessTests(unittest.TestCase):
+    def test_manifest_contract_and_boundaries(self):
+        data = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        self.assertEqual(data["runtime"], "browser-local")
+        self.assertIn("Gemini API execution", data["non_capabilities"])
+        self.assertEqual(data["version"], "0.4.0")
+        self.assertEqual(data["registry"]["system"], "wave733_skill_builder")
+        self.assertEqual(data["scenarios"]["path"], "labs/world-canvas-gem-harness/scenario-registry.json")
+        self.assertEqual(data["evidence_contract"]["path"], "labs/world-canvas-gem-harness/evidence-contract.json")
+
+    def test_entrypoint_and_skill_files_exist(self):
+        data = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        self.assertTrue((LAB / data["entrypoint"]).is_file())
+        for item in data["skills"]:
+            path = ROOT / item["path"]
+            self.assertTrue(path.is_file(), item["path"])
+            content = path.read_text(encoding="utf-8")
+            self.assertTrue(content.startswith("---\nname: "), item["name"])
+            frontmatter = content.split("---", 2)[1]
+            self.assertIn("name:", frontmatter)
+            self.assertIn("description:", frontmatter)
+            self.assertIn("## Capabilities", content)
+            self.assertIn("## Roots", content)
+            commands = [line[3:line.find("`", 3)] for line in content.splitlines()
+                        if line.startswith("- `") and line.find("`", 3) > 3]
+            self.assertTrue(commands, item["name"])
+            for command in commands:
+                self.assertIn(f"### {command}", content, f"{item['name']} missing command example: {command}")
+
+    def test_skill_builder_registry_is_synced(self):
+        data = json.loads((ROOT / "data" / "wave733_skill_builder.json").read_text(encoding="utf-8"))
+        for name in ("world_canvas_gem_harness", "dual_lens", "zero_copy", "forge_breakers"):
+            self.assertIn(name, data["skills_catalog"])
+            self.assertIn(name, {item["name"] for item in data["generated"]})
+
+    def test_scenario_registry_is_versioned_and_well_formed(self):
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        registry = json.loads(SCENARIOS.read_text(encoding="utf-8"))
+        self.assertEqual(registry["schema"], manifest["scenarios"]["schema"])
+        self.assertEqual(registry["execution"], "local-deterministic")
+        ids = [item["id"] for item in registry["scenarios"]]
+        self.assertEqual(len(ids), len(set(ids)), "scenario IDs must be unique")
+        known_skills = {item["name"] for item in manifest["skills"]}
+        for scenario in registry["scenarios"]:
+            self.assertTrue(scenario["version"])
+            self.assertIn(scenario["skill"], known_skills)
+            self.assertIsInstance(scenario["seed"], int)
+            self.assertTrue(scenario["assertions"])
+            self.assertIsInstance(scenario["inputs"], dict)
+
+    def test_evidence_contract_requires_lineage_without_overclaiming(self):
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        contract = json.loads(EVIDENCE_CONTRACT.read_text(encoding="utf-8"))
+        self.assertEqual(contract["schema"], manifest["evidence_contract"]["schema"])
+        for field in ("skill_name", "skill_version", "scenario_id", "scenario_version",
+                      "source_commit", "runtime", "execution_mode", "executed_at", "checks"):
+            self.assertIn(field, contract["required_fields"])
+        self.assertTrue(any("not a signature" in rule for rule in contract["trust_rules"]))
+        self.assertTrue(any("never inferred" in rule for rule in contract["trust_rules"]))
+
+    def test_scenario_runner_executes_registered_fixtures_with_lineage(self):
+        registry = json.loads(SCENARIOS.read_text(encoding="utf-8"))
+        report = RUNNER.run_registry(registry, "test-source-commit")
+        self.assertEqual(report["schema"], "ixpansion.gem-skill-evidence/v1")
+        self.assertEqual(report["source_commit"], "test-source-commit")
+        self.assertEqual(report["summary"]["scenarios"], 5)
+        self.assertEqual(report["summary"]["failed"], 0, report["results"])
+        self.assertEqual(report["summary"]["status"], "PASS")
+        self.assertNotEqual(report["trust"]["browser_simulation"], "executed")
+        required = {"skill_name", "skill_version", "scenario_id", "scenario_version",
+                    "source_commit", "runtime", "execution_mode", "executed_at", "checks"}
+        for item in report["results"]:
+            self.assertTrue(required.issubset(item))
+            self.assertEqual(item["execution_mode"], "local-deterministic")
+            self.assertTrue(item["checks"])
+
+    def test_scenario_runner_rejects_oversized_report_atomically(self):
+        with self.assertRaises(ValueError):
+            RUNNER.bounded_payload({"payload": "x" * 70000}, limit=1024)
+
+
+    def test_scenario_runner_writes_complete_evidence_atomically(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            destination = Path(tmp) / "nested" / "evidence.json"
+            report = {"schema": "test", "checks": [{"status": "PASS"}]}
+            written = RUNNER.write_bounded_atomic(destination, report)
+            self.assertEqual(destination.stat().st_size, written)
+            self.assertEqual(json.loads(destination.read_text(encoding="utf-8")), report)
+            self.assertEqual(list(destination.parent.glob(".evidence.json.*.tmp")), [])
+
+    def test_oversized_evidence_preserves_existing_output(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            destination = Path(tmp) / "evidence.json"
+            destination.write_text("previous-valid-report", encoding="utf-8")
+            with self.assertRaises(ValueError):
+                RUNNER.write_bounded_atomic(destination, {"payload": "x" * 1000}, limit=64)
+            self.assertEqual(destination.read_text(encoding="utf-8"), "previous-valid-report")
+            self.assertEqual(list(destination.parent.glob(".evidence.json.*.tmp")), [])
+
+    def test_harness_exposes_evidence_and_skill_runners(self):
+        html = (LAB / "index.html").read_text(encoding="utf-8")
+        for token in ("run-all", "export-report", "dual-lens", "zero-copy", "forge-breakers", "gem-skill-run", "stack.length>100", "65536"):
+            self.assertIn(token, html)
+        for forbidden in ("fetch(", "XMLHttpRequest", "WebSocket(", "eval(", "new Function("):
+            self.assertNotIn(forbidden, html)
+
+
+if __name__ == "__main__":
+    unittest.main()

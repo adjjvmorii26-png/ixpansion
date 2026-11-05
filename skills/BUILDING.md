@@ -9,7 +9,7 @@ Every skill gives the organism a repeatable capability. Skills live in
 |-------|---------|------|
 | `blog_curator` | Manage live blog posts (create/classify/archive/surface/search) | r1 |
 | `skill_builder` | Scaffold new skills with YAML-frontmatter SKILL.md | r1 |
-| `dream_compiler` | Compile organism dreams into executable modules | r1 |
+| `dream_compiler` | Compile dreams into executable module blueprints | r1 |
 | `module_gardener` | Manage organic module growth and seeds | r1 |
 | `paradox_resolver` | Resolve cross-module paradox conflicts | r1 |
 | `resonance_mapper` | Map module resonance networks | r1 |
@@ -22,6 +22,10 @@ Every skill gives the organism a repeatable capability. Skills live in
 | `chrono_relay` | Relay temporal mechanics | r1 |
 | `weather_monitor` | Monitor organism vitals via weather API | r1 |
 | `reusable_ui_workbench` | Create, edit, preview, verify, and reuse UI components | r1 |
+| `world_canvas_gem_harness` | Run deterministic simulation-backed Gem Skill checks and export evidence | r1 |
+| `dual_lens` | Review implementation and adversarial behavior in separate passes | r1 |
+| `zero_copy` | Audit ownership, cloning, serialization, and bounded data flow | r1 |
+| `forge_breakers` | Execute deterministic negative tests against state invariants | r1 |
 
 ## Generation Contract
 
@@ -30,6 +34,10 @@ Every generated skill must include:
 2. `## Capabilities` — bullet list of `skill:command` entries
 3. `## Roots` — the r-root path table
 4. One `### <command>` example block per command
+
+## World Canvas Lab
+
+The browser harness lives at `labs/world-canvas-gem-harness/`. It is a local deterministic simulation and test surface. Its evidence reports are not Gemini API execution proofs, authentication artifacts, or physical-world validation.
 
 ## Wave-Builder Integration
 
