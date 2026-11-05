@@ -54,6 +54,23 @@ class FoundryTests(unittest.TestCase):
             self.assertIsNone(result["drift_findings"])
             self.assertIn("EXPORT_REVIEW",result["not_run_stages"])
 
+
+    def test_pipeline_runs_local_drift_only_when_export_dir_is_supplied(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)/"skills"; root.mkdir()
+            self.make_skill(root,"a","alpha")
+            export=Path(tmp)/"export"; export.mkdir()
+            (export/"seed_snapshot.md").write_text("seed",encoding="utf-8")
+            (export/"SKILL.md").write_text("export",encoding="utf-8")
+            (export/"provenance.json").write_text(json.dumps({
+                "source_sha256":digest("seed"),"export_sha256":digest("export")
+            }),encoding="utf-8")
+            result=pipeline(root,export_dir=export)
+            self.assertIn("LOCAL_EXPORT_DRIFT_CHECK",result["executed_stages"])
+            self.assertEqual(result["drift_findings"],[])
+            self.assertNotIn("EXPORT_REVIEW",result["not_run_stages"])
+            self.assertIn("EXPORT_PROMOTION_REVIEW",result["not_run_stages"])
+
     def test_root_compatibility_entrypoint_uses_canonical_implementation(self):
         import importlib.util
         root_file=Path(__file__).resolve().parents[1]/"skill_lab.py"
