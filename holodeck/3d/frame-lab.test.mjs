@@ -75,3 +75,13 @@ test("render cadence is throttled independently from simulation stepping", () =>
   assert.equal(due.rendered, true);
   assert.ok(steps > 0);
 });
+
+test("frame image payloads are validated and preserved by duplication", () => {
+  const lab = new FrameLab({ maxImageDataUrlLength: 2000 });
+  const image = "data:image/jpeg;base64," + "A".repeat(32);
+  const first = lab.capture({ tick: 1 }, { imageDataUrl: image });
+  const duplicate = lab.duplicateCapture(first.id);
+  assert.equal(duplicate.imageDataUrl, image);
+  assert.throws(() => lab.capture({}, { imageDataUrl: "javascript:alert(1)" }), /bounded/);
+  assert.throws(() => lab.capture({}, { imageDataUrl: "data:image/png;base64," + "A".repeat(3000) }), /bounded/);
+});
