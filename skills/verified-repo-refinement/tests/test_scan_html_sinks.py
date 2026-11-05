@@ -1,4 +1,5 @@
 import importlib.util
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -43,7 +44,7 @@ class HtmlSinkScannerTests(unittest.TestCase):
             external = Path(outside) / "secret.html"
             external.write_text("node.innerHTML = external;", encoding="utf-8")
             self.assertEqual(list(MODULE.iter_html_files(root, [str(external)])), [])
-            self.assertEqual(list(MODULE.iter_html_files(root, ["../" + external.name])), [])
+            self.assertEqual(list(MODULE.iter_html_files(root, [os.path.relpath(external, root)])), [])
             self.assertEqual(MODULE.scan_file(external, root), [])
 
     def test_skips_symlinked_files_and_directories(self):
