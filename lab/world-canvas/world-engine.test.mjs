@@ -1,0 +1,11 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {createWorld,hashWorld,transition,validateWorld} from "./world-engine.mjs";
+
+test("initial state is valid and stable",()=>{assert.deepEqual(validateWorld(createWorld()),[]);assert.equal(hashWorld(createWorld()),hashWorld(createWorld(1337)));});
+test("transitions are pure and preserve source snapshots",()=>{const before=createWorld(),hash=hashWorld(before),r=transition(before,{type:"move",dx:0,dy:-50});assert.equal(r.accepted,true);assert.equal(hashWorld(before),hash);assert.equal(before.agent.y,350);assert.equal(r.world.agent.y,300);});
+test("out-of-bounds actions reject without mutation",()=>{const edge={...createWorld(),agent:{...createWorld().agent,y:700}};const r=transition(edge,{type:"move",dx:0,dy:50});assert.equal(r.accepted,false);assert.match(r.reason,/boundary/);assert.equal(edge.agent.y,700);});
+test("pause blocks ordinary actions and step is explicit",()=>{const paused=transition(createWorld(),{type:"pause"}).world;assert.equal(transition(paused,{type:"move",dx:0,dy:-50}).accepted,false);const step=transition(paused,{type:"step"});assert.equal(step.accepted,true);assert.equal(step.world.paused,true);});
+test("beacons enforce collision and unique IDs",()=>{const one=transition(createWorld(),{type:"place",x:100,y:100});assert.equal(one.accepted,true);assert.equal(one.world.beacons[0].id,"beacon-1");const collision=transition(one.world,{type:"place",x:110,y:110});assert.equal(collision.accepted,false);assert.match(collision.reason,/collision/);});
+test("repeated seeded runs produce identical hashes",()=>{const actions=[{type:"move",dx:0,dy:-50},{type:"place",x:100,y:100},{type:"pulse"},{type:"recharge"}];const run=()=>actions.reduce((s,a)=>{const r=transition(s,a);assert.equal(r.accepted,true,r.reason);return r.world;},createWorld(1337));assert.equal(hashWorld(run()),hashWorld(run()));});
+test("repeated reads do not mutate simulation or pulse lifetime",()=>{let w=transition(createWorld(),{type:"place",x:100,y:100}).world;w=transition(w,{type:"pulse"}).world;const before=hashWorld(w);for(let i=0;i<100;i++){hashWorld(w);JSON.stringify(w);validateWorld(w);}assert.equal(hashWorld(w),before);assert.equal(w.beacons[0].pulseTicks,9);});
