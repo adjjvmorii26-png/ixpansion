@@ -78,7 +78,7 @@ try {
   assert.equal(await page.locator("#captureCount").textContent(), "(2/60)");
 
   await page.getByRole("button", { name: /Restore frame 1/ }).click();
-  assert.match(await page.locator("#status").textContent(), /Restored captured frame #1/);
+  assert.equal(await page.getByRole("button", { name: /Restore frame 1/ }).getAttribute("aria-current"), "true");
 
   const jpgDownloadPromise = page.waitForEvent("download");
   await page.locator("#exportJPG").click();
