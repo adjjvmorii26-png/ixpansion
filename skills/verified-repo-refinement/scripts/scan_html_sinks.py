@@ -8,51 +8,91 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from pathlib import Path
 
 PATTERNS = {
-    "innerHTML": re.compile(r"\.innerHTML\s*(?:\+?=)"),
-    "outerHTML": re.compile(r"\.outerHTML\s*="),
-    "insertAdjacentHTML": re.compile(r"\.insertAdjacentHTML\s*\("),
-    "document.write": re.compile(r"\bdocument\.write(?:ln)?\s*\("),
-    "srcdoc": re.compile(r"\bsrcdoc\s*="),
-    "event_handler_attribute": re.compile(r"\bon[a-z]+\s*=", re.IGNORECASE),
-    "javascript_url": re.compile(r"""(?:href|src|action|formaction)\s*=\s*["\']?\s*javascript\s*:""", re.IGNORECASE),
-    "string_template_candidate": re.compile(r"(?:innerHTML|outerHTML)\s*=\s*[\x60'\"]"),
+    "innerHTML": re.compile(r"\\.innerHTML\\s*(?:\\+?=)"),
+    "outerHTML": re.compile(r"\\.outerHTML\\s*="),
+    "insertAdjacentHTML": re.compile(r"\\.insertAdjacentHTML\\s*\\("),
+    "document.write": re.compile(r"\\bdocument\\.write(?:ln)?\\s*\\("),
+    "srcdoc": re.compile(r"\\bsrcdoc\\s*="),
+    "event_handler_attribute": re.compile(r"\\bon[a-z]+\\s*=", re.IGNORECASE),
+    "javascript_url": re.compile(r"""(?:href|src|action|formaction)\\s*=\\s*["\\']?\\s*javascript\\s*:""", re.IGNORECASE),
+    "string_template_candidate": re.compile(r"(?:innerHTML|outerHTML)\\s*=\\s*[\\x60'\\"]"),
 }
 DEFAULT_IGNORES = {".git", "node_modules", "vendor", "dist", "build", ".venv", "venv", "__pycache__"}
 
 
+def _is_within(path: Path, root: Path) -> bool:
+    try:
+        path.resolve().relative_to(root.resolve())
+        return True
+    except (OSError, ValueError, RuntimeError):
+        return False
+
+
+def _has_symlink_component(path: Path, root: Path) -> bool:
+    """Reject symlinks in the requested path, not merely the final file."""
+    try:
+        relative = path.relative_to(root)
+    except ValueError:
+        return True
+    current = root
+    for part in relative.parts:
+        current = current / part
+        if current.is_symlink():
+            return True
+    return False
+
+
 def iter_html_files(root: Path, paths: list[str]):
-    candidates = []
+    root = root.resolve()
+    candidates = set()
     roots = [root / p for p in paths] if paths else [root]
-    for start in roots:
-        if start.is_file() and start.suffix.lower() in {".html", ".htm"}:
-            candidates.append(start)
+    for requested in roots:
+        if not _is_within(requested, root) or _has_symlink_component(requested, root):
             continue
-        if not start.exists():
+        start = requested.resolve()
+        if start.is_file():
+            if start.suffix.lower() in {".html", ".htm"}:
+                candidates.add(start)
             continue
-        for path in start.rglob("*"):
-            if not path.is_file() or path.suffix.lower() not in {".html", ".htm"}:
-                continue
-            if any(part in DEFAULT_IGNORES for part in path.parts):
-                continue
-            candidates.append(path)
-    yield from sorted(set(candidates))
+        if not start.is_dir():
+            continue
+        for current, dirs, files in os.walk(start, followlinks=False):
+            current_path = Path(current)
+            dirs[:] = sorted(
+                name for name in dirs
+                if name not in DEFAULT_IGNORES
+                and not (current_path / name).is_symlink()
+            )
+            for name in files:
+                path = current_path / name
+                if path.suffix.lower() not in {".html", ".htm"} or path.is_symlink():
+                    continue
+                if _is_within(path, root):
+                    candidates.add(path.resolve())
+    yield from sorted(candidates)
 
 
 def scan_file(path: Path, root: Path):
+    root = root.resolve()
+    if not _is_within(path, root) or _has_symlink_component(path, root):
+        return []
+    path = path.resolve()
     try:
+        relative = path.relative_to(root).as_posix()
         lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
-    except OSError:
+    except (OSError, ValueError, RuntimeError):
         return []
     findings = []
     for number, line in enumerate(lines, 1):
         for name, pattern in PATTERNS.items():
             if pattern.search(line):
                 findings.append({
-                    "path": path.relative_to(root).as_posix(),
+                    "path": relative,
                     "line": number,
                     "candidate": name,
                     "context": line.strip()[:300],
