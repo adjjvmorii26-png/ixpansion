@@ -1,0 +1,21 @@
+{
+  "schema": "ixpansion.gem-skill-evidence/v1",
+  "purpose": "Define minimum lineage metadata for future evidence producers; this contract does not retroactively authenticate existing browser reports.",
+  "required_fields": {
+    "skill_name": "stable skill identifier",
+    "skill_version": "semantic version of the skill under test",
+    "scenario_id": "scenario registry identifier",
+    "scenario_version": "scenario semantic version",
+    "source_commit": "full source commit SHA or explicit null for uncommitted local runs",
+    "runtime": "execution environment identifier",
+    "execution_mode": "local-deterministic or provider-model",
+    "executed_at": "ISO-8601 timestamp",
+    "checks": "array of named checks with PASS or FAIL outcomes"
+  },
+  "trust_rules": [
+    "A state hash is a fingerprint, not a signature.",
+    "A report is not proof of execution unless its producer and execution environment are independently trusted.",
+    "Provider-model execution must identify the provider and model version and must not expose credentials.",
+    "Missing lineage fields must be reported as unknown, never inferred."
+  ]
+}
