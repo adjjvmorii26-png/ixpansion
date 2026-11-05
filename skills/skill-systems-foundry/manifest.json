@@ -1,0 +1,14 @@
+{
+  "name": "skill-systems-foundry",
+  "version": "1.0.0",
+  "source_notion": "https://app.notion.com/p/40f603736996811baa3bd27b96ca1519",
+  "engines": [
+    "dependency-graph",
+    "instruction-fuzzing",
+    "proposal-only-repair",
+    "gem-compatibility-lint",
+    "snapshot-drift-radar"
+  ],
+  "network": false,
+  "automatic_changes": false
+}

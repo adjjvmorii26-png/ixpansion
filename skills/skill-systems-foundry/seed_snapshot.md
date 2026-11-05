@@ -1,0 +1,3 @@
+# Skill Systems Foundry
+
+Canonical five-engine workflow: dependency graph; bounded deterministic instruction fuzzing; proposal-only self-healing patch loop; static Gem compatibility bench; SHA-256 source/export drift radar. Notion is canonical and GitHub exports are derivatives. Record evidence and keep static, desk, runtime, and live integration tests distinct. Never auto-rewrite Notion or perform production side effects.
