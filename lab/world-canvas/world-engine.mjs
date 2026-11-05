@@ -3,22 +3,36 @@ export function createWorld(seed=1337){return {tick:0,seed,agent:{id:"agent-0",x
 export function cloneWorld(world){return structuredClone(world);}
 export function validateWorld(world){
  const errors=[];
- if(!world||typeof world!=="object")return ["world must be an object"];
- if(!Number.isInteger(world.tick)||world.tick<0)errors.push("invalid tick");
+ if(!world||typeof world!=="object"||Array.isArray(world))return ["world must be an object"];
+ if(!Number.isSafeInteger(world.tick)||world.tick<0)errors.push("invalid tick");
+ if(!Number.isSafeInteger(world.seed)||world.seed<0)errors.push("invalid seed");
+ if(!Number.isSafeInteger(world.nextBeaconId)||world.nextBeaconId<1)errors.push("invalid next beacon ID");
+ if(typeof world.paused!=="boolean")errors.push("invalid paused flag");
  const a=world.agent;
- if(!a||!Number.isFinite(a.x)||!Number.isFinite(a.y)||a.x<0||a.x>WORLD.width||a.y<0||a.y>WORLD.height)errors.push("agent out of bounds");
+ if(!a||typeof a!=="object"||typeof a.id!=="string"||!a.id.trim()||!Number.isFinite(a.x)||!Number.isFinite(a.y)||a.x<0||a.x>WORLD.width||a.y<0||a.y>WORLD.height)errors.push("agent out of bounds or invalid ID");
  if(!Number.isFinite(a?.energy)||a.energy<0||a.energy>100)errors.push("energy out of range");
- if(!Array.isArray(world.beacons)||world.beacons.length>WORLD.maxBeacons)errors.push("invalid beacon collection");
- const ids=new Set([a?.id]);
- for(const b of world.beacons??[]){
-  if(!b||typeof b.id!=="string"||ids.has(b.id))errors.push("duplicate or invalid ID");
-  ids.add(b?.id);
-  if(!Number.isFinite(b?.x)||!Number.isFinite(b?.y)||b.x<0||b.x>WORLD.width||b.y<0||b.y>WORLD.height)errors.push("beacon out of bounds");
+ if(!Array.isArray(world.beacons))errors.push("invalid beacon collection");
+ else if(world.beacons.length>WORLD.maxBeacons)errors.push("beacon capacity exceeded");
+ const ids=new Set(a&&typeof a.id==="string"?[a.id]:[]);
+ if(Array.isArray(world.beacons)){
+  for(const b of world.beacons){
+   if(!b||typeof b!=="object"){errors.push("invalid beacon");continue;}
+   if(typeof b.id!=="string"||!b.id.trim()||ids.has(b.id))errors.push("duplicate or invalid ID");
+   if(typeof b.id==="string")ids.add(b.id);
+   if(!Number.isFinite(b.x)||!Number.isFinite(b.y)||b.x<0||b.x>WORLD.width||b.y<0||b.y>WORLD.height)errors.push("beacon out of bounds");
+   if(!Number.isInteger(b.pulseTicks)||b.pulseTicks<0||b.pulseTicks>10)errors.push("invalid beacon pulse ticks");
+  }
  }
  return errors;
 }
+function canonicalize(value){
+ if(Array.isArray(value))return value.map(canonicalize);
+ if(value&&typeof value==="object")return Object.keys(value).sort().reduce((out,key)=>{out[key]=canonicalize(value[key]);return out;},{});
+ return value;
+}
+// FNV-1a is a compact consistency fingerprint, not a cryptographic integrity proof.
 export function hashWorld(world){
- const input=JSON.stringify(world);let h=0x811c9dc5;
+ const input=JSON.stringify(canonicalize(world));let h=0x811c9dc5;
  for(let i=0;i<input.length;i++){h^=input.charCodeAt(i);h=Math.imul(h,0x01000193);}
  return (h>>>0).toString(16).padStart(8,"0");
 }
@@ -34,7 +48,7 @@ export function transition(current,action){
   case "step": if(!next.paused)return reject("pause before stepping");break;
   case "move":{
    const dx=Number(action.dx),dy=Number(action.dy);
-   if(!Number.isFinite(dx)||!Number.isFinite(dy)||Math.abs(dx)>WORLD.cell||Math.abs(dy)>WORLD.cell)return reject("movement delta exceeds one cell");
+   if(!Number.isFinite(dx)||!Number.isFinite(dy)||Math.hypot(dx,dy)>WORLD.cell)return reject("movement delta exceeds one cell");
    const x=next.agent.x+dx,y=next.agent.y+dy;
    if(x<0||x>WORLD.width||y<0||y>WORLD.height)return reject("world boundary");
    if(next.beacons.some(b=>Math.hypot(b.x-x,b.y-y)<22))return reject("beacon collision");
@@ -60,7 +74,7 @@ export function transition(current,action){
   case "pulse": if(!spend(2))return reject("no energy");next.beacons.forEach(b=>b.pulseTicks=10);break;
   default:return reject("unknown action: "+action.type);
  }
- if(action.type!=="pause"){for(const b of next.beacons)b.pulseTicks=Math.max(0,(b.pulseTicks??0)-1);next.tick++;}
+ if(action.type!=="pause"){for(const b of next.beacons)b.pulseTicks=Math.max(0,b.pulseTicks-1);next.tick++;}
  const errors=validateWorld(next);if(errors.length)return reject(errors.join(", "));
  return {accepted:true,world:next,hash:hashWorld(next)};
 }
