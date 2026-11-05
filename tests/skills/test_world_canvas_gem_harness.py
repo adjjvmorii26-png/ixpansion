@@ -1,5 +1,4 @@
 import json
-import re
 import unittest
 from pathlib import Path
 
@@ -22,10 +21,14 @@ class WorldCanvasGemHarnessTests(unittest.TestCase):
             path = ROOT / item["path"]
             self.assertTrue(path.is_file(), item["path"])
             content = path.read_text(encoding="utf-8")
-            self.assertRegex(content, r"(?s)^---\\nname: [^\\n]+\\ndescription: .+?\\n---")
+            self.assertTrue(content.startswith("---\\nname: "), item["name"])
+            frontmatter = content.split("---", 2)[1]
+            self.assertIn("name:", frontmatter)
+            self.assertIn("description:", frontmatter)
             self.assertIn("## Capabilities", content)
             self.assertIn("## Roots", content)
-            commands = re.findall(r"^- \`([^\`]+)\`", content, re.MULTILINE)
+            commands = [line[3:line.find("`", 3)] for line in content.splitlines()
+                        if line.startswith("- `") and line.find("`", 3) > 3]
             self.assertTrue(commands, item["name"])
             for command in commands:
                 self.assertIn(f"### {command}", content, f"{item['name']} missing command example: {command}")
