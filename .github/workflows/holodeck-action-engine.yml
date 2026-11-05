@@ -1,0 +1,34 @@
+name: Holodeck Action Engine
+
+on:
+  pull_request:
+    paths:
+      - "holodeck/action-engine.mjs"
+      - "holodeck/action-engine.test.mjs"
+      - ".github/workflows/holodeck-action-engine.yml"
+  push:
+    branches:
+      - "feat/world-canvas-action-engine-v0.2"
+    paths:
+      - "holodeck/action-engine.mjs"
+      - "holodeck/action-engine.test.mjs"
+      - ".github/workflows/holodeck-action-engine.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: holodeck-action-engine-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run action engine regression tests
+        run: node --test holodeck/action-engine.test.mjs
