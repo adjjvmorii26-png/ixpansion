@@ -18,7 +18,7 @@ def redact(value: Any, key: str = "") -> Any:
     if isinstance(value, (list, tuple)):
         return [redact(v) for v in value]
     if isinstance(value, str):
-        return re.sub(r"(?i)(Bearer\\s+)[A-Za-z0-9._~+/=-]+", r"\\1[REDACTED]", value)
+        return re.sub(r"(?i)(Bearer\s+)[A-Za-z0-9._~+/=-]+", r"\1[REDACTED]", value)
     if value is None or isinstance(value, (bool, int, float)):
         return value
     return str(value)
