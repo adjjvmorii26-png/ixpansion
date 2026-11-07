@@ -47,7 +47,7 @@ class Capability:
 class ExecutionContext:
     actor: str
     target: str
-    approved: bool = False
+    approved_for: frozenset[ApprovalClass] = frozenset()
     request_id: str | None = None
     metadata: Mapping[str, Any] = field(default_factory=dict)
 
@@ -228,10 +228,13 @@ class PluginRuntime:
                     "Write completed; adapter does not support verification.",
                     value=value,
                 )
-            except Exception as exc:  # adapter boundary: normalize provider failures
+            except RetryableAdapterError as exc:
                 last_error = f"{type(exc).__name__}: {exc}"
                 if attempts < attempts_limit:
                     self._sleep(self.base_delay_seconds * (2 ** (attempts - 1)))
+            except Exception as exc:  # auth, validation, and unknown errors are not retried
+                last_error = f"{type(exc).__name__}: {exc}"
+                break
 
         return self._record(
             Outcome.FAILED, adapter_id, capability_name, context.target,
