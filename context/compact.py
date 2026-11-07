@@ -1,13 +1,12 @@
-\"\"\"IXPANSION compact context packer.
+"""IXPANSION compact context packer.
 
 Typed artifacts only. No network, no secrets, no chat dumps.
 Agents load pack(budget_tokens), never full history.
-\"\"\"
+"""
 from __future__ import annotations
 
 import hashlib
 import json
-import re
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
@@ -73,7 +72,6 @@ def validate(record: dict[str, Any]) -> dict[str, Any]:
 
 def canonical_bytes(record: dict[str, Any]) -> bytes:
     r = validate(record)
-    # Hash ignores ttl for identity of meaning.
     payload = {
         "kind": r["kind"],
         "id": r["id"],
@@ -102,7 +100,7 @@ def forget(
     today: date | None = None,
     drop_kinds: Iterable[str] | None = None,
 ) -> list[dict[str, Any]]:
-    "\"\"Drop expired and optionally whole kinds.\"\"\"
+    """Drop expired records and optionally whole kinds."""
     drop = frozenset(drop_kinds or ())
     out: list[dict[str, Any]] = []
     for raw in records:
@@ -116,7 +114,7 @@ def forget(
 
 
 def bind(records: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
-    "\"\"Collapse exact duplicates; fail if same id different body.\"\"\"
+    """Collapse exact duplicates; fail if same id different body."""
     by_id: dict[str, dict[str, Any]] = {}
     order: list[str] = []
     for raw in records:
@@ -130,7 +128,6 @@ def bind(records: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
             continue
         if by_id[aid]["_h"] != h:
             raise ArtifactError(f"id conflict: {aid}")
-        # keep first-seen
     out = []
     for aid in order:
         r = dict(by_id[aid])
@@ -144,7 +141,7 @@ def promote_residue_to_seed(
     *,
     seed_id: str | None = None,
 ) -> dict[str, Any]:
-    "\"\"Turn a lesson into a permanent seed.\"\"\"
+    """Turn a lesson into a permanent seed."""
     r = validate(residue)
     if r["kind"] != "residue":
         raise ArtifactError("promote requires kind=residue")
@@ -164,16 +161,11 @@ def promote_residue_to_seed(
     )
 
 
-def _line_len(r: dict[str, Any]) -> int:
-    return len(to_line(r))
-
-
 def to_line(r: dict[str, Any]) -> str:
     r = validate(r)
     parts = [r["kind"], r["t"][:10], r["id"]]
     if r.get("sha"):
         parts.append(r["sha"][:12])
-    # Flatten a few body keys in stable order
     body = r.get("body") or {}
     for k in sorted(body.keys()):
         v = body[k]
@@ -193,7 +185,7 @@ def pack(
     today: date | None = None,
     priority: tuple[str, ...] = ("seed", "contract", "receipt", "pulse", "pointer", "residue"),
 ) -> str:
-    "\"\"Return a budget-limited text pack for agent context.\"\"\"
+    """Return a budget-limited text pack for agent context."""
     if budget_tokens < 64:
         raise ArtifactError("budget_tokens too small")
     cleaned = bind(forget(records, today=today))
