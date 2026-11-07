@@ -22,6 +22,8 @@ Every skill gives the organism a repeatable capability. Skills live in
 | `chrono_relay` | Relay temporal mechanics | r1 |
 | `weather_monitor` | Monitor organism vitals via weather API | r1 |
 | `reusable_ui_workbench` | Create, edit, preview, verify, and reuse UI components | r1 |
+| `plugin_adapter_contract` | Inspect, specify, and validate reusable service/plugin adapters | r1 |
+| `evidence_ledger` | Record, verify, and export provenance-backed engineering evidence | r1 |
 
 ## Generation Contract
 
