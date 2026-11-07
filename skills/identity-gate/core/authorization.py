@@ -1,12 +1,14 @@
 """Fail-closed authorization pipeline for IXPANSION Workbench operations."""
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime, timedelta, timezone
 from enum import Enum
+import json
 from typing import Mapping
 
 from .approval import ApprovalAuthorityResolver, ApprovalResolver
 from .audit import AuditEvent, AuditSink
 from .identity import IdentityVerifier, identity_is_current
+from .grant import GrantAuthority
 from .ownership import OwnershipResolver, OwnershipStatus
 
 
@@ -71,18 +73,29 @@ class AuthorizationGrant:
     issued_at: datetime
     expires_at: datetime
     request_id: str
+    signature: str = ""
+
+
+def grant_payload(grant: AuthorizationGrant) -> bytes:
+    fields = {
+        "actor_subject": grant.actor_subject, "tenant_id": grant.tenant_id,
+        "resource_id": grant.resource_id, "operation": grant.operation,
+        "risk": grant.risk, "issued_at": grant.issued_at.isoformat(),
+        "expires_at": grant.expires_at.isoformat(), "request_id": grant.request_id,
+    }
+    return json.dumps(fields, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
 
 class IdentityGate:
     def __init__(self, *, verifier: IdentityVerifier, ownership: OwnershipResolver,
                  approvals: ApprovalResolver, approval_authority: ApprovalAuthorityResolver,
-                 audit: AuditSink,
+                 grant_authority: GrantAuthority, audit: AuditSink,
                  policies: Mapping[str, OperationPolicy] = DEFAULT_POLICIES,
                  grant_ttl: timedelta = timedelta(minutes=2)):
         if grant_ttl <= timedelta(0) or grant_ttl > timedelta(minutes=5):
             raise ValueError("grant_ttl must be positive and no more than five minutes")
         self.verifier, self.ownership = verifier, ownership
-        self.approvals, self.approval_authority, self.audit = approvals, approval_authority, audit
+        self.approvals, self.approval_authority, self.grant_authority, self.audit = approvals, approval_authority, grant_authority, audit
         self.policies, self.grant_ttl = policies, grant_ttl
 
     def authorize(self, request: AuthorizationRequest,
@@ -160,6 +173,7 @@ class IdentityGate:
         grant = AuthorizationGrant(identity.subject, identity.tenant_id, request.resource_id,
                                    request.operation, policy.risk, now, now + self.grant_ttl,
                                    request.request_id)
+        grant = replace(grant, signature=self.grant_authority.sign(grant_payload(grant)))
         return self._finish(Decision.ALLOW, "All identity, permission, ownership, and approval checks passed.",
                             identity, request, policy, ownership.owner_subject, approval, now, grant)
 
