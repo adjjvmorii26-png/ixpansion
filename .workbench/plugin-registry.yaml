@@ -1,0 +1,80 @@
+version: 1
+name: ixpansion-plugin-fabric
+principles:
+  source_of_truth: github
+  secrets_policy: provider_managed_only
+  evidence_required: true
+  destructive_actions_require_approval: true
+  deployment_requires_approval: true
+  merge_requires_approval: true
+adapters:
+  github:
+    role: source_control_ci_reviews
+    state: connected_verified
+    capabilities: [repositories, branches, commits, pull_requests, issues, workflow_evidence]
+  gitlab:
+    role: secondary_source_control_ci
+    state: connector_available_connection_unverified
+    capabilities: [projects, repositories, merge_requests, pipelines, jobs]
+  notion:
+    role: knowledge_decisions_skills
+    state: connected_verified
+    capabilities: [search, pages, databases, skills, comments]
+  google_drive:
+    role: document_artifact_storage
+    state: connected_verified_via_composio
+    capabilities: [search, folders, files, metadata]
+  gmail:
+    role: correspondence
+    state: composio_connection_inactive
+    capabilities: [search, drafts, messages]
+    policy: never_send_without_explicit_request
+  google_calendar:
+    role: scheduling
+    state: connector_available_connection_unverified
+    capabilities: [events, availability]
+    policy: no_calendar_mutations_without_explicit_request
+  supabase:
+    role: persistent_data_and_backend
+    state: connected_projects_inactive
+    capabilities: [projects, tables, migrations, sql, edge_functions, advisors]
+    policy: inspect_before_mutation; require_approval_for_schema_or_data_changes
+  vercel:
+    role: deployment_and_runtime
+    state: connected_verified
+    capabilities: [projects, deployments, logs, sandboxes, environment_metadata]
+    policy: production_changes_require_explicit_approval
+  dropbox:
+    role: secondary_file_storage
+    state: connected_verified
+    capabilities: [search, files, folders, revisions, paper]
+  canva:
+    role: visual_artifacts
+    state: connector_available_connection_unverified
+    capabilities: [design_search, templates, editing, generation]
+  figma:
+    role: product_design_and_prototypes
+    state: connected_view_seat
+    capabilities: [files, design_context, variables, diagrams, code_connect]
+    policy: verify_write_entitlement_before_mutation
+  openart:
+    role: media_generation
+    state: connected_verified
+    capabilities: [image_generation, video_generation, projects, assets]
+    policy: check_credits_before_expensive_generation
+  website_maker:
+    role: website_scaffolding
+    state: connector_available
+    capabilities: [website_build_brief]
+  plugin_creator:
+    role: custom_plugin_lifecycle
+    state: connector_available_no_personal_plugins_found
+    capabilities: [create, inspect, update, release]
+  composio:
+    role: cross_app_orchestration
+    state: connected_verified
+    capabilities: [tool_discovery, multi_app_execution, remote_workbench, skill_management]
+  files:
+    role: conversation_and_library_artifacts
+    state: connector_available
+    capabilities: [search, read, materialize, library_management]
