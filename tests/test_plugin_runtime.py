@@ -93,7 +93,7 @@ class PluginRuntimeTests(unittest.TestCase):
         self.adapter.verification = False
         result = self.runtime.execute(
             "fake", "write", {},
-            ExecutionContext("test", "fixture", approved=True),
+            ExecutionContext("test", "fixture", approved_for=frozenset({ApprovalClass.REVERSIBLE_WRITE})),
         )
         self.assertEqual(result.outcome, Outcome.UNVERIFIED)
 
