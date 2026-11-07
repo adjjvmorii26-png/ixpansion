@@ -1,5 +1,7 @@
 import unittest
-from skills.identity_gate.core.audit import AuditEvent, redact
+import importlib
+_audit = importlib.import_module("skills.identity-gate.core.audit")
+AuditEvent, redact = _audit.AuditEvent, _audit.redact
 
 
 class AuditTests(unittest.TestCase):
