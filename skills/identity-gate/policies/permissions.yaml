@@ -1,0 +1,14 @@
+version: 1
+operations:
+  inspect: {permission: resource.read, risk: R0}
+  analyze: {permission: resource.read, risk: R0}
+  create_branch: {permission: change.propose, risk: R1}
+  create_draft: {permission: change.propose, risk: R1}
+  modify_file: {permission: resource.modify, risk: R2}
+  update_database: {permission: resource.modify, risk: R2}
+  merge: {permission: resource.modify, risk: R3}
+  deploy: {permission: resource.modify, risk: R3}
+  change_access: {permission: resource.manage, risk: R3}
+  delete: {permission: resource.manage, risk: R4}
+  rotate_credentials: {permission: resource.manage, risk: R4}
+  destructive_migration: {permission: resource.manage, risk: R4}
