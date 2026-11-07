@@ -21,10 +21,10 @@ Provider credentials and sessions stay in provider-managed connector contexts. R
 | Operation class | Approval | Retry |
 |---|---|---|
 | read | not required | bounded |
-| reversible write | required | bounded only when idempotent |
-| sensitive/destructive/production write | required; host must enforce elevated approval | bounded only when idempotent |
+| reversible write | matching reversible-write approval | bounded only for explicit transient errors and idempotent operations |
+| sensitive/destructive/production write | matching class-specific approval | bounded only for explicit transient errors and idempotent operations |
 
-The runtime currently exposes generic approval classes. Production-grade host authorization, provider-specific scopes, durable ledger storage, tamper-evident chaining/signatures, and provider adapters are separate integration tasks.
+The runtime requires a matching approval class for each write; a reversible-write approval cannot authorize a destructive or production operation. Only explicit `RetryableAdapterError` exceptions are eligible for retry. The runtime currently exposes generic approval classes. Production-grade host authorization, provider-specific scopes, durable ledger storage, tamper-evident chaining/signatures, and provider adapters are separate integration tasks.
 
 ## Outcome semantics
 
