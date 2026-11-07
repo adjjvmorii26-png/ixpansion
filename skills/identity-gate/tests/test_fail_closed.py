@@ -1,10 +1,15 @@
 import unittest
 from datetime import datetime, timedelta, timezone
 
-from skills.identity_gate.core import (
-    ApprovalDecision, AuthorizationRequest, Decision, IdentityGate,
-    OwnershipDecision, OwnershipStatus, VerifiedIdentity,
-)
+import importlib
+_core = importlib.import_module("skills.identity-gate.core")
+ApprovalDecision = _core.ApprovalDecision
+AuthorizationRequest = _core.AuthorizationRequest
+Decision = _core.Decision
+IdentityGate = _core.IdentityGate
+OwnershipDecision = _core.OwnershipDecision
+OwnershipStatus = _core.OwnershipStatus
+VerifiedIdentity = _core.VerifiedIdentity
 
 
 NOW = datetime(2026, 11, 7, 12, tzinfo=timezone.utc)
