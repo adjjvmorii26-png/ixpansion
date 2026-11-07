@@ -1,0 +1,27 @@
+name: Identity Gate tests
+
+on:
+  pull_request:
+    paths:
+      - "skills/identity-gate/**"
+      - "ixpansion_workbench/**"
+      - ".github/workflows/identity-gate-tests.yml"
+  push:
+    branches: ["feat/identity-gate-v1"]
+    paths:
+      - "skills/identity-gate/**"
+      - "ixpansion_workbench/**"
+
+permissions:
+  contents: read
+
+jobs:
+  identity-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run Identity Gate contract tests
+        run: python -m unittest discover -s skills/identity-gate/tests -v
