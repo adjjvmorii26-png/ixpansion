@@ -24,7 +24,7 @@ Every skill gives the organism a repeatable capability. Skills live in
 | `reusable_ui_workbench` | Create, edit, preview, verify, and reuse UI components | r1 |
 | `plugin_adapter_contract` | Inspect, specify, and validate reusable service/plugin adapters | r1 |
 | `evidence_ledger` | Record, verify, and export provenance-backed engineering evidence | r1 |
-| `plugin_runtime` | Execute provider-neutral plugin operations through governed adapters, policy gates, verification, and evidence | r1 |
+| `plugin_runtime` | Execute provider-neutral plugin operations through governed adapters, policy gates, verification, and evidence | r1 |\n| `identity-gate` | Verify identity, permissions, resource ownership/delegation, approval authority, expiry, and audit evidence before execution | identity-gate |
 
 ## Generation Contract
 

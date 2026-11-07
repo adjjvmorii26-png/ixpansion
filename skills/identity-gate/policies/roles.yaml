@@ -1,0 +1,20 @@
+version: 1
+roles:
+  owner:
+    permissions: ["*"]
+    approval_authority: [R3, R4]
+  administrator:
+    permissions: [resource.manage, resource.read, change.propose]
+    approval_authority: []
+  maintainer:
+    permissions: [resource.read, change.propose, resource.modify]
+    approval_authority: []
+  contributor:
+    permissions: [resource.read, change.propose]
+    approval_authority: []
+  auditor:
+    permissions: [resource.read, evidence.read]
+    approval_authority: []
+  agent:
+    permissions: [resource.read, change.propose, delegated.execute]
+    approval_authority: []

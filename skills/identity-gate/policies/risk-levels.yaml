@@ -1,0 +1,15 @@
+version: 1
+levels:
+  R0: {approval: none, audit_required: true}
+  R1: {approval: none, audit_required: true}
+  R2: {approval: none, audit_required: true}
+  R3: {approval: explicit, audit_required: true}
+  R4: {approval: strong_and_recovery_plan, audit_required: true}
+failure_states:
+  unknown_identity: DENY
+  missing_permission: DENY
+  unverified_ownership: DENY
+  missing_approval: HOLD
+  expired_authorization: REVERIFY
+  conflicting_ownership: ESCALATE
+  audit_failure_for_R2_R4: BLOCK
