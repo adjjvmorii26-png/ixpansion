@@ -21,7 +21,7 @@ def _frontmatter_value(text: str, key: str) -> str | None:
 
 def _legacy_description(text: str) -> str | None:
     description = re.search(
-        r"^## Description\\s*\\n(.*?)(?=^## |\\Z)",
+        r"^## Description\s*\n(.*?)(?=^## |\Z)",
         text,
         re.MULTILINE | re.DOTALL,
     )
