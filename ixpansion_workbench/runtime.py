@@ -78,6 +78,11 @@ class PolicyError(RuntimeError):
     pass
 
 
+class RetryableAdapterError(RuntimeError):
+    """Explicit transient provider failure eligible for bounded retry."""
+
+
+
 _SECRET_KEY = re.compile(
     r"(token|secret|password|passwd|api[_-]?key|authorization|cookie|private[_-]?key)",
     re.IGNORECASE,
@@ -183,7 +188,7 @@ class PluginRuntime:
             raise KeyError(f"Capability not advertised: {capability_name}")
         capability = capabilities[capability_name]
 
-        if capability.approval != ApprovalClass.READ and not context.approved:
+        if capability.approval != ApprovalClass.READ and capability.approval not in context.approved_for:
             return self._record(
                 Outcome.BLOCKED, adapter_id, capability_name, context.target,
                 0, "Explicit approval required for this operation.",
