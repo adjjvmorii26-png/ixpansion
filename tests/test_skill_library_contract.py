@@ -19,6 +19,23 @@ def _frontmatter_value(text: str, key: str) -> str | None:
     return match.group(1).strip().strip("\"'") if match else None
 
 
+def _legacy_description(text: str) -> str | None:
+    description = re.search(
+        r"^## Description\\s*\\n(.*?)(?=^## |\\Z)",
+        text,
+        re.MULTILINE | re.DOTALL,
+    )
+    if description:
+        value = description.group(1).strip()
+        if value:
+            return value
+    for line in text.splitlines():
+        candidate = line.strip()
+        if candidate and not candidate.startswith("#") and not candidate.startswith("```"):
+            return candidate
+    return None
+
+
 def test_skill_directories_have_unique_names_and_descriptions():
     skill_roots = [SKILLS_ROOT, ROOT / "codetools" / "plugins" / "ixpansion-toolkit" / "skills"]
     skill_files = sorted(path for root in skill_roots for path in root.rglob("SKILL.md"))
@@ -27,10 +44,12 @@ def test_skill_directories_have_unique_names_and_descriptions():
     names = []
     for path in skill_files:
         text = path.read_text(encoding="utf-8")
-        name = _frontmatter_value(text, "name")
-        description = _frontmatter_value(text, "description")
-        assert name, f"{path.relative_to(ROOT)} is missing a frontmatter name"
-        assert description, f"{path.relative_to(ROOT)} is missing a frontmatter description"
+        # Modern skills use YAML frontmatter. The R1 collection predates that
+        # convention, so retain its directory slug as its stable identity.
+        name = _frontmatter_value(text, "name") or path.parent.name
+        description = _frontmatter_value(text, "description") or _legacy_description(text)
+        assert name, f"{path.relative_to(ROOT)} has no usable skill identity"
+        assert description, f"{path.relative_to(ROOT)} has no usable description"
         assert re.fullmatch(r"[a-z0-9]+(?:[-_][a-z0-9]+)*", name), f"invalid skill name: {name}"
         names.append(name)
 
