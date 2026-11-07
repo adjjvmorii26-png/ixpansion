@@ -38,4 +38,4 @@ filterwarnings = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["constellation*", "omega_prime*", "mycelium*", "ixpansion*"]
+include = ["constellation*", "omega_prime*", "mycelium*", "ixpansion*", "ixpansion_workbench*"]
