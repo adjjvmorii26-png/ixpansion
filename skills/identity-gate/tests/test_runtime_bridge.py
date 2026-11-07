@@ -3,6 +3,7 @@ from dataclasses import replace
 from datetime import datetime, timedelta, timezone
 
 import importlib
+_core = importlib.import_module("skills.identity-gate.core")
 _auth = importlib.import_module("skills.identity-gate.core.authorization")
 _bridge = importlib.import_module("skills.identity-gate.core.runtime_bridge")
 AuthorizationGrant = _auth.AuthorizationGrant
