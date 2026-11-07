@@ -10,6 +10,7 @@ IdentityGate = _core.IdentityGate
 OwnershipDecision = _core.OwnershipDecision
 OwnershipStatus = _core.OwnershipStatus
 VerifiedIdentity = _core.VerifiedIdentity
+HMACGrantAuthority = _core.HMACGrantAuthority
 
 
 NOW = datetime(2026, 11, 7, 12, tzinfo=timezone.utc)
@@ -73,6 +74,7 @@ def gate(*, ident=None, owner=None, approval=None, audit=None,
         ownership=Ownership(owner or owned()),
         approvals=Approvals(approval),
         approval_authority=ApprovalAuthority(approver_authorized),
+        grant_authority=HMACGrantAuthority(b"test-grant-signing-key-32-bytes!!"),
         audit=audit or Audit(),
     )
 
