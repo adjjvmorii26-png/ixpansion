@@ -26,7 +26,7 @@ Authentication is not authorization. Access is not ownership. Ownership is not a
 - Roles come only from the trusted identity provider, never from request payloads.
 - Resource ownership or explicit, scoped delegation must be independently resolved.
 - Approval is a separate decision from role permission and must be attributable to an authorized approver.
-- Authorization grants are short-lived and bound to actor, resource, operation, and risk.
+- Authorization grants are short-lived, HMAC-signed with a host-injected key, and bound to actor, tenant, resource, operation, risk, and request ID. Dispatch verifies the signature and trusted tenant again.
 - R3 requires explicit approval. R4 requires strong approval and a recovery plan.
 - Audit failure blocks R2-R4 operations.
 - Never log credentials, tokens, secrets, or raw authentication material.
