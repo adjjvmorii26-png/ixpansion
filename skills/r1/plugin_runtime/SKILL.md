@@ -27,7 +27,9 @@ Execute provider-neutral integration operations through injected, authorized ada
 - Inject adapters only after the host confirms provider authorization and target identity.
 - Treat advertised connector tools as availability, not proof of account permission.
 - Read operations may execute without approval; all writes require an approved context.
-- Destructive and production operations require an explicit approval decision from the host policy layer. The boolean context is not an authentication mechanism.
+- Each write requires a class-specific approval in `ExecutionContext.approved_for`; destructive and production operations cannot be authorized by a reversible-write approval.
+- The host must authenticate the actor, target, scopes, and approval decision. Runtime approval metadata is not itself an authentication mechanism.
+- Only explicit `RetryableAdapterError` failures are retried; authorization, validation, and unknown exceptions fail immediately.
 - Retry only idempotent operations, with a hard maximum of five attempts.
 - Verify writes when the adapter supports read-after-write checks.
 - Record every terminal outcome. Redact credential-like fields before evidence persistence.
