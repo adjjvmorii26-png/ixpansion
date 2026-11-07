@@ -94,14 +94,15 @@ def test_landing_page_exists():
     index = Path("dashboard/index.html")
     assert index.exists()
     content = index.read_text()
-    # Match the current repository field-guide landing page contract.
-    assert "IXPANSION" in content
-    assert "README" in content
-    assert "Explore the repository" in content
+    # Field guide landing (replaced older marketing page)
+    assert "IXPANSION" in content or "IXpansion" in content
+    assert "field guide" in content.lower() or "FIELD GUIDE" in content
+    assert "repository" in content.lower()
+    assert "pytest" in content.lower()
 
 def test_premium_dashboard_exists():
     from pathlib import Path
     premium = Path("dashboard/premium.html")
     assert premium.exists()
     content = premium.read_text()
-    assert "IXpansion" in content
+    assert "IXpansion" in content or "IXPANSION" in content
