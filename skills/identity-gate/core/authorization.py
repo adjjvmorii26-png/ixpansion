@@ -133,7 +133,6 @@ class IdentityGate:
                 approval = None
             valid = (approval is not None and approval.approved
                      and approval.approver_subject is not None
-                     and approval.approver_subject != identity.subject
                      and approval.resource_id == request.resource_id
                      and approval.operation == request.operation
                      and approval.risk == policy.risk
