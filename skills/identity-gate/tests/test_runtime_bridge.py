@@ -1,8 +1,11 @@
 import unittest
 from datetime import datetime, timedelta, timezone
 
-from skills.identity_gate.core.authorization import AuthorizationGrant
-from skills.identity_gate.core.runtime_bridge import GrantRejected, execute_authorized
+import importlib
+_auth = importlib.import_module("skills.identity-gate.core.authorization")
+_bridge = importlib.import_module("skills.identity-gate.core.runtime_bridge")
+AuthorizationGrant = _auth.AuthorizationGrant
+GrantRejected, execute_authorized = _bridge.GrantRejected, _bridge.execute_authorized
 from ixpansion_workbench.runtime import ExecutionContext
 
 
@@ -40,7 +43,7 @@ class RuntimeBridgeTests(unittest.TestCase):
             grant=grant(), operation="modify_file", now=NOW)
         self.assertEqual(result, "dispatched")
         self.assertEqual(len(runtime.calls), 1)
-        self.assertEqual(runtime.calls[0][3].approved_for.pop().value, "sensitive_write")
+        self.assertEqual(next(iter(runtime.calls[0][3].approved_for)).value, "sensitive_write")
 
     def test_wrong_actor_is_rejected_before_dispatch(self):
         runtime = Runtime()
