@@ -16,25 +16,25 @@ These existing specialist skills are retained in their original paths and naming
 
 | Skill | Definition | Trigger summary |
 |---|---|---|
-| `antimemetic_weave` | [Open](../r1/antimemetic_weave/SKILL.md) | See skill definition |
-| `blog_curator` | [Open](../r1/blog_curator/SKILL.md) | See skill definition |
-| `chrono_relay` | [Open](../r1/chrono_relay/SKILL.md) | See skill definition |
-| `data_pipeline_asynchronous_engine` | [Open](../r1/data_pipeline_asynchronous_engine/SKILL.md) | See skill definition |
-| `dream_compiler` | [Open](../r1/dream_compiler/SKILL.md) | See skill definition |
-| `handler_handler_engine` | [Open](../r1/handler_handler_engine/SKILL.md) | See skill definition |
-| `handler_meta_evolution_engine` | [Open](../r1/handler_meta_evolution_engine/SKILL.md) | See skill definition |
-| `interstice_bridge` | [Open](../r1/interstice_bridge/SKILL.md) | See skill definition |
-| `luminant_memory` | [Open](../r1/luminant_memory/SKILL.md) | See skill definition |
-| `module_gardener` | [Open](../r1/module_gardener/SKILL.md) | See skill definition |
-| `oracle_bridge` | [Open](../r1/oracle_bridge/SKILL.md) | See skill definition |
-| `paradox_resolver` | [Open](../r1/paradox_resolver/SKILL.md) | See skill definition |
-| `pentaxis_integrator` | [Open](../r1/pentaxis_integrator/SKILL.md) | See skill definition |
-| `resonance_mapper` | [Open](../r1/resonance_mapper/SKILL.md) | See skill definition |
-| `season_coordinator` | [Open](../r1/season_coordinator/SKILL.md) | See skill definition |
-| `skill_builder` | [Open](../r1/skill_builder/SKILL.md) | See skill definition |
-| `threshold_engineer` | [Open](../r1/threshold_engineer/SKILL.md) | See skill definition |
-| `truth_cultivator` | [Open](../r1/truth_cultivator/SKILL.md) | See skill definition |
-| `weather_monitor` | [Open](../r1/weather_monitor/SKILL.md) | See skill definition |
+| `antimemetic_weave` | [Open](r1/antimemetic_weave/SKILL.md) | See skill definition |
+| `blog_curator` | [Open](r1/blog_curator/SKILL.md) | See skill definition |
+| `chrono_relay` | [Open](r1/chrono_relay/SKILL.md) | See skill definition |
+| `data_pipeline_asynchronous_engine` | [Open](r1/data_pipeline_asynchronous_engine/SKILL.md) | See skill definition |
+| `dream_compiler` | [Open](r1/dream_compiler/SKILL.md) | See skill definition |
+| `handler_handler_engine` | [Open](r1/handler_handler_engine/SKILL.md) | See skill definition |
+| `handler_meta_evolution_engine` | [Open](r1/handler_meta_evolution_engine/SKILL.md) | See skill definition |
+| `interstice_bridge` | [Open](r1/interstice_bridge/SKILL.md) | See skill definition |
+| `luminant_memory` | [Open](r1/luminant_memory/SKILL.md) | See skill definition |
+| `module_gardener` | [Open](r1/module_gardener/SKILL.md) | See skill definition |
+| `oracle_bridge` | [Open](r1/oracle_bridge/SKILL.md) | See skill definition |
+| `paradox_resolver` | [Open](r1/paradox_resolver/SKILL.md) | See skill definition |
+| `pentaxis_integrator` | [Open](r1/pentaxis_integrator/SKILL.md) | See skill definition |
+| `resonance_mapper` | [Open](r1/resonance_mapper/SKILL.md) | See skill definition |
+| `season_coordinator` | [Open](r1/season_coordinator/SKILL.md) | See skill definition |
+| `skill_builder` | [Open](r1/skill_builder/SKILL.md) | See skill definition |
+| `threshold_engineer` | [Open](r1/threshold_engineer/SKILL.md) | See skill definition |
+| `truth_cultivator` | [Open](r1/truth_cultivator/SKILL.md) | See skill definition |
+| `weather_monitor` | [Open](r1/weather_monitor/SKILL.md) | See skill definition |
 
 ## Toolkit extension
 
