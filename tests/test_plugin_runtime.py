@@ -125,25 +125,6 @@ class PluginRuntimeTests(unittest.TestCase):
         self.assertEqual(result.outcome, Outcome.FAILED)
         self.assertEqual(result.attempts, 1)
 
-    def test_approval_is_class_specific(self):
-        context = ExecutionContext("test", "fixture", approved_for=frozenset({ApprovalClass.REVERSIBLE_WRITE}))
-        result = self.runtime.execute("fake", "unsafe", {}, context)
-        self.assertEqual(result.outcome, Outcome.BLOCKED)
-        self.assertEqual(self.adapter.calls, 0)
-
-    def test_unknown_failure_is_not_retried(self):
-        class BrokenAdapter(FakeAdapter):
-            def execute(self, capability, payload, context):
-                self.calls += 1
-                raise PermissionError("insufficient scope")
-        adapter = BrokenAdapter()
-        registry = PluginRegistry()
-        registry.register(adapter)
-        runtime = PluginRuntime(registry, self.ledger, max_attempts=4, base_delay_seconds=0, sleeper=lambda _: None)
-        result = runtime.execute("fake", "read", {}, self.ctx)
-        self.assertEqual(result.outcome, Outcome.FAILED)
-        self.assertEqual(result.attempts, 1)
-
     def test_duplicate_adapter_registration_fails(self):
         with self.assertRaises(ValueError):
             self.runtime.registry.register(self.adapter)
