@@ -20,7 +20,8 @@ def _frontmatter_value(text: str, key: str) -> str | None:
 
 
 def test_skill_directories_have_unique_names_and_descriptions():
-    skill_files = sorted(SKILLS_ROOT.rglob("SKILL.md"))
+    skill_roots = [SKILLS_ROOT, ROOT / "codetools" / "plugins" / "ixpansion-toolkit" / "skills"]
+    skill_files = sorted(path for root in skill_roots for path in root.rglob("SKILL.md"))
     assert skill_files, "no skill definitions found"
 
     names = []
@@ -30,7 +31,7 @@ def test_skill_directories_have_unique_names_and_descriptions():
         description = _frontmatter_value(text, "description")
         assert name, f"{path.relative_to(ROOT)} is missing a frontmatter name"
         assert description, f"{path.relative_to(ROOT)} is missing a frontmatter description"
-        assert re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name), f"invalid skill name: {name}"
+        assert re.fullmatch(r"[a-z0-9]+(?:[-_][a-z0-9]+)*", name), f"invalid skill name: {name}"
         names.append(name)
 
     assert len(names) == len(set(names)), f"duplicate skill names: {names}"
@@ -48,12 +49,14 @@ def test_skill_index_links_resolve_to_skill_files():
     ]
     assert not missing, f"broken skill index links: {missing}"
 
+    skill_roots = [SKILLS_ROOT, ROOT / "codetools" / "plugins" / "ixpansion-toolkit" / "skills"]
     discovered = {
-        path.relative_to(SKILLS_ROOT).as_posix()
-        for path in SKILLS_ROOT.rglob("SKILL.md")
+        path.relative_to(ROOT).as_posix()
+        for root in skill_roots
+        for path in root.rglob("SKILL.md")
     }
     indexed = {
-        (INDEX.parent / link).resolve().relative_to(SKILLS_ROOT.resolve()).as_posix()
+        (INDEX.parent / link).resolve().relative_to(ROOT.resolve()).as_posix()
         for link in links
     }
     assert indexed == discovered, (
