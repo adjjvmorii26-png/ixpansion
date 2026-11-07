@@ -4,9 +4,9 @@ from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Mapping
 
-from .approval import ApprovalResolver
+from .approval import ApprovalAuthorityResolver, ApprovalResolver
 from .audit import AuditEvent, AuditSink
-from .identity import IdentityError, IdentityVerifier, identity_is_current
+from .identity import IdentityVerifier, identity_is_current
 from .ownership import OwnershipResolver, OwnershipStatus
 
 
@@ -75,13 +75,14 @@ class AuthorizationGrant:
 
 class IdentityGate:
     def __init__(self, *, verifier: IdentityVerifier, ownership: OwnershipResolver,
-                 approvals: ApprovalResolver, audit: AuditSink,
+                 approvals: ApprovalResolver, approval_authority: ApprovalAuthorityResolver,
+                 audit: AuditSink,
                  policies: Mapping[str, OperationPolicy] = DEFAULT_POLICIES,
                  grant_ttl: timedelta = timedelta(minutes=2)):
         if grant_ttl <= timedelta(0) or grant_ttl > timedelta(minutes=5):
             raise ValueError("grant_ttl must be positive and no more than five minutes")
         self.verifier, self.ownership = verifier, ownership
-        self.approvals, self.audit = approvals, audit
+        self.approvals, self.approval_authority, self.audit = approvals, approval_authority, audit
         self.policies, self.grant_ttl = policies, grant_ttl
 
     def authorize(self, request: AuthorizationRequest,
@@ -107,6 +108,8 @@ class IdentityGate:
                                                identity.tenant_id, request.operation)
         except Exception:
             return self._finish(Decision.DENY, "Ownership could not be verified.", identity, request, policy, None, None, now)
+        if ownership.resource_id != request.resource_id:
+            return self._finish(Decision.DENY, "Ownership evidence is for a different resource.", identity, request, policy, ownership.owner_subject, None, now)
         if ownership.status == OwnershipStatus.CONFLICT:
             return self._finish(Decision.ESCALATE, "Conflicting resource ownership.", identity, request, policy, ownership.owner_subject, None, now)
         if ownership.tenant_id != identity.tenant_id:
@@ -136,12 +139,23 @@ class IdentityGate:
                      and approval.risk == policy.risk
                      and approval.approved_at is not None
                      and approval.approved_at.tzinfo is not None
-                     and approval.approved_at <= now)
+                     and approval.approved_at <= now
+                     and approval.expires_at is not None
+                     and approval.expires_at.tzinfo is not None
+                     and now < approval.expires_at)
             if not valid:
-                return self._finish(Decision.HOLD, "Explicit approval is missing or invalid.", identity, request, policy, ownership.owner_subject, approval, now)
+                return self._finish(Decision.HOLD, "Explicit approval is missing, expired, or invalid.", identity, request, policy, ownership.owner_subject, approval, now)
             if policy.risk == "R4" and (not approval.strong or not approval.recovery_plan_ref):
                 return self._finish(Decision.HOLD, "R4 requires strong approval and a recovery plan.", identity, request, policy, ownership.owner_subject, approval, now)
-            if "owner" not in identity.roles and not _has_approval_authority(approval.approver_subject, policy.risk):
+            try:
+                authority_ok = self.approval_authority.is_authorized(
+                    approver_subject=approval.approver_subject,
+                    resource_id=request.resource_id, operation=request.operation,
+                    risk=policy.risk,
+                )
+            except Exception:
+                authority_ok = False
+            if not authority_ok:
                 return self._finish(Decision.HOLD, "Approver authority is not independently established.", identity, request, policy, ownership.owner_subject, approval, now)
 
         grant = AuthorizationGrant(identity.subject, identity.tenant_id, request.resource_id,
@@ -166,8 +180,7 @@ class IdentityGate:
             occurred_at=now,
         )
         try:
-            event_data = event.normalized()
-            audit_id = self.audit.append(event_data)
+            audit_id = self.audit.append(event.normalized())
         except Exception:
             if risk in ("R2", "R3", "R4") or decision == Decision.ALLOW:
                 return AuthorizationResult(Decision.BLOCK, "Audit persistence failed; operation blocked.",
@@ -187,9 +200,3 @@ def _role_permissions(role: str) -> frozenset[str]:
         "auditor": frozenset({"resource.read", "evidence.read"}),
         "agent": frozenset({"resource.read", "change.propose", "delegated.execute"}),
     }.get(role, frozenset())
-
-
-def _has_approval_authority(approver_subject: str, risk: str) -> bool:
-    # Deliberately deny until a host-backed approval-authority resolver is injected.
-    # The caller's role claims and approval record alone cannot prove authority.
-    return False
