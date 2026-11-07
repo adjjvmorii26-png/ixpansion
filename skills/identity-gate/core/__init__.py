@@ -4,7 +4,7 @@ from .authorization import (
 )
 from .identity import IdentityError, IdentityVerifier, VerifiedIdentity
 from .ownership import OwnershipDecision, OwnershipResolver, OwnershipStatus
-from .approval import ApprovalDecision, ApprovalResolver
+from .approval import ApprovalAuthorityResolver, ApprovalDecision, ApprovalResolver
 from .audit import AuditEvent, AuditSink
 
 __all__ = [
@@ -12,5 +12,5 @@ __all__ = [
     "Decision", "IdentityGate", "OperationPolicy", "IdentityError",
     "IdentityVerifier", "VerifiedIdentity", "OwnershipDecision",
     "OwnershipResolver", "OwnershipStatus", "ApprovalDecision",
-    "ApprovalResolver", "AuditEvent", "AuditSink",
+    "ApprovalResolver", "ApprovalAuthorityResolver", "AuditEvent", "AuditSink",
 ]
