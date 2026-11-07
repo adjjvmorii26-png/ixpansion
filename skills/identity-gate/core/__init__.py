@@ -13,5 +13,6 @@ __all__ = [
     "Decision", "IdentityGate", "OperationPolicy", "IdentityError",
     "IdentityVerifier", "VerifiedIdentity", "OwnershipDecision",
     "OwnershipResolver", "OwnershipStatus", "ApprovalDecision",
-    "ApprovalResolver", "ApprovalAuthorityResolver", "AuditEvent", "AuditSink",\n    "GrantAuthority", "HMACGrantAuthority",
+    "ApprovalResolver", "ApprovalAuthorityResolver", "AuditEvent", "AuditSink",
+    "GrantAuthority", "HMACGrantAuthority",
 ]
