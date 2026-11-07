@@ -1,7 +1,6 @@
 """Trusted identity verification contracts. No provider credentials are stored here."""
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from enum import Enum
 from typing import Protocol
 
 
@@ -28,7 +27,11 @@ class IdentityVerifier(Protocol):
 
 def identity_is_current(identity: VerifiedIdentity, now: datetime | None = None) -> bool:
     now = now or datetime.now(timezone.utc)
+    if not isinstance(identity, VerifiedIdentity):
+        return False
     if not identity.subject or not identity.issuer or not identity.tenant_id:
+        return False
+    if not isinstance(identity.authenticated_at, datetime) or not isinstance(identity.expires_at, datetime):
         return False
     if identity.authenticated_at.tzinfo is None or identity.expires_at.tzinfo is None:
         return False
