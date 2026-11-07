@@ -160,7 +160,8 @@ class IdentityGateTests(unittest.TestCase):
 
     def test_r4_requires_strong_approval_and_recovery_plan(self):
         approval = valid_approval("R4", strong=False)
-        self.assertEqual(gate(approval=approval, approver_authorized=True).authorize(
+        self.assertEqual(gate(ident=identity(("owner",)), approval=approval,
+                              approver_authorized=True).authorize(
             AuthorizationRequest("opaque", "repo:one", "delete", "r1"), NOW
         ).decision, Decision.HOLD)
 
