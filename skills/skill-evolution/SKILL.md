@@ -53,6 +53,8 @@ Use valid YAML frontmatter. Keep names lowercase and hyphenated. Avoid triggers 
 
 ### 3. Structure for retrieval
 
+- Discover definitions recursively (`skills/**/SKILL.md`), not only at the first directory level; nested skill collections are valid.
+- Keep the library index synchronized with every discovered skill and link to the actual path.
 - Put the common workflow first and specialized details in named sections.
 - Use checklists only for steps that must be verified, not as decoration.
 - Prefer tables for compact contracts and decision matrices.
