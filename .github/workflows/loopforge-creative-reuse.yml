@@ -5,7 +5,10 @@ on:
       - "feat/loopforge-creative-reuse-skill-v1"
     paths:
       - "skills/loopforge-creative-reuse/**"
-      - "tests/test_loopforge_creative_reuse_contract.py"
+      - "tests/test_loopforge_*.py"
+      - "loopforge/**"
+      - "seeds/loopforge/**"
+      - "builders/loopforge/**"
       - ".github/workflows/loopforge-creative-reuse.yml"
   pull_request:
     paths:
@@ -26,4 +29,4 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run focused skill contract tests
-        run: python -m unittest discover -s tests -p 'test_loopforge_creative_reuse_contract.py' -v
+        run: python -m unittest discover -s tests -p 'test_loopforge_*.py' -v
