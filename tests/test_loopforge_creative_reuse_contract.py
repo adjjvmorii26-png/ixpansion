@@ -44,6 +44,25 @@ class LoopforgeCreativeReuseContractTests(unittest.TestCase):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase.lower(), self.text.lower())
 
+
+    def test_seed_pack_is_versioned_and_bounded(self):
+        import json
+
+        seed_path = Path(__file__).resolve().parents[1] / "seeds" / "loopforge" / "meme-chaos-v1.json"
+        payload = json.loads(seed_path.read_text(encoding="utf-8"))
+        self.assertEqual(payload["version"], "1.0.0")
+        self.assertGreaterEqual(len(payload["recipes"]), 1)
+        self.assertTrue(payload["constraints"]["human_review_before_publication"])
+
+    def test_plugin_blueprint_disables_implicit_publication_and_deletion(self):
+        import json
+
+        manifest_path = Path(__file__).resolve().parents[1] / "plugins" / "loopforge" / "plugin-blueprint.json"
+        payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(payload["status"], "blueprint-not-installed")
+        self.assertEqual(payload["future_capabilities"]["deletion"], "not exposed")
+        self.assertTrue(payload["safety"]["no_implicit_external_writes"])
+
     def test_test_protocol_includes_focused_and_full_runs(self):
         self.assertIn("Changed-surface tests", self.text)
         self.assertIn("Full suite", self.text)
