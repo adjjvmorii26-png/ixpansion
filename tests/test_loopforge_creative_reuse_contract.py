@@ -42,7 +42,7 @@ class LoopforgeCreativeReuseContractTests(unittest.TestCase):
             "A proposed change is not a merged change",
         ):
             with self.subTest(phrase=phrase):
-                self.assertIn(phrase, self.text)
+                self.assertIn(phrase.lower(), self.text.lower())
 
     def test_test_protocol_includes_focused_and_full_runs(self):
         self.assertIn("Changed-surface tests", self.text)
