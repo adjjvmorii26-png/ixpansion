@@ -87,6 +87,11 @@ class ArchaeologistTests(unittest.TestCase):
         self.assertEqual(result.status, ArtifactStatus.ARCHIVE_CANDIDATE)
         self.assertIn("retain", result.reason)
 
+    def test_recent_unreferenced_asset_is_retained(self):
+        result = assess_artifact(age_days=3, reference_count=0, compatible=True)
+        self.assertEqual(result.status, ArtifactStatus.ACTIVE)
+        self.assertIn("retained", result.reason)
+
     def test_negative_age_rejected(self):
         with self.assertRaises(ValueError):
             assess_artifact(age_days=-1, reference_count=0, compatible=True)
