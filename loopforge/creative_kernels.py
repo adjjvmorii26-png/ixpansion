@@ -8,6 +8,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 import random
+import math
 from typing import Sequence
 
 
@@ -133,10 +134,10 @@ def loop_seam_score(
     """
     if not first_signature or len(first_signature) != len(last_signature):
         raise ValueError("frame signatures must be non-empty and equal length")
-    if max_channel_value <= 0:
-        raise ValueError("max_channel_value must be positive")
-    if any(not isinstance(v, (int, float)) for v in (*first_signature, *last_signature)):
-        raise ValueError("frame signatures must contain numeric values")
+    if not math.isfinite(max_channel_value) or max_channel_value <= 0:
+        raise ValueError("max_channel_value must be finite and positive")
+    if any(not isinstance(v, (int, float)) or not math.isfinite(v) for v in (*first_signature, *last_signature)):
+        raise ValueError("frame signatures must contain finite numeric values")
     distance = sum(abs(float(a) - float(b)) for a, b in zip(first_signature, last_signature))
     mean_distance = distance / len(first_signature)
     return max(0.0, min(1.0, 1.0 - mean_distance / max_channel_value))
