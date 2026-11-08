@@ -63,6 +63,20 @@ class LoopforgeCreativeReuseContractTests(unittest.TestCase):
         self.assertEqual(payload["future_capabilities"]["deletion"], "not exposed")
         self.assertTrue(payload["safety"]["no_implicit_external_writes"])
 
+
+    def test_gem_library_has_reusable_recipes(self):
+        gem_path = Path(__file__).resolve().parents[1] / "gems" / "loopforge" / "creative-recipes.md"
+        gem_text = gem_path.read_text(encoding="utf-8")
+        for recipe in ("Glitch-to-Giggle", "Seamless Loop Alchemy", "Museum of Almost-Forgotten Things", "Mutation Kaleidoscope"):
+            self.assertIn(recipe, gem_text)
+
+    def test_artifact_shelf_requires_provenance(self):
+        shelf_path = Path(__file__).resolve().parents[1] / "artifacts" / "loopforge" / "README.md"
+        shelf_text = shelf_path.read_text(encoding="utf-8")
+        self.assertIn("source or parent asset ID", shelf_text)
+        self.assertIn("license/provenance", shelf_text)
+        self.assertIn("Never store secrets", shelf_text)
+
     def test_test_protocol_includes_focused_and_full_runs(self):
         self.assertIn("Changed-surface tests", self.text)
         self.assertIn("Full suite", self.text)
