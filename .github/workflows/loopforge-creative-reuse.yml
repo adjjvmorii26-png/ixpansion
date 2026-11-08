@@ -20,6 +20,9 @@ on:
       - "loopforge/**"
       - "seeds/loopforge/**"
       - "builders/loopforge/**"
+      - "plugins/loopforge/**"
+      - "gems/loopforge/**"
+      - "artifacts/loopforge/**"
       - ".github/workflows/loopforge-creative-reuse.yml"
 
 permissions:
