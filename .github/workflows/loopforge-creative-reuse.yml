@@ -26,4 +26,4 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run focused skill contract tests
-        run: python -m unittest -v tests.test_loopforge_creative_reuse_contract
+        run: python -m unittest discover -s tests -p 'test_loopforge_creative_reuse_contract.py' -v
