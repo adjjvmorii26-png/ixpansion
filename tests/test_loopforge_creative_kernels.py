@@ -53,6 +53,14 @@ class GifReactorTests(unittest.TestCase):
     def test_opposite_seam_scores_zero(self):
         self.assertEqual(loop_seam_score([0, 0], [255, 255]), 0.0)
 
+    def test_non_finite_signature_values_are_rejected(self):
+        with self.assertRaises(ValueError):
+            loop_seam_score([float("nan")], [0])
+
+    def test_non_finite_normalizer_is_rejected(self):
+        with self.assertRaises(ValueError):
+            loop_seam_score([0], [0], max_channel_value=float("inf"))
+
     def test_signature_shape_is_validated(self):
         with self.assertRaises(ValueError):
             loop_seam_score([0], [0, 1])
