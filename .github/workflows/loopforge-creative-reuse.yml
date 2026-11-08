@@ -13,7 +13,10 @@ on:
   pull_request:
     paths:
       - "skills/loopforge-creative-reuse/**"
-      - "tests/test_loopforge_creative_reuse_contract.py"
+      - "tests/test_loopforge_*.py"
+      - "loopforge/**"
+      - "seeds/loopforge/**"
+      - "builders/loopforge/**"
       - ".github/workflows/loopforge-creative-reuse.yml"
 
 permissions:
