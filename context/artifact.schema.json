@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ixpansion://context/artifact.schema.json",
+  "title": "IXPANSION compact context artifact",
+  "description": "One fact per record. Load via pack(budget), never paste chat history.",
+  "type": "object",
+  "required": ["kind", "id", "t"],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": ["pulse", "receipt", "seed", "residue", "contract", "pointer"]
+    },
+    "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "t": { "type": "string" },
+    "sha": { "type": "string" },
+    "body": { "type": "object", "additionalProperties": true },
+    "ttl_days": { "type": "integer", "minimum": 0 },
+    "refs": { "type": "array", "items": { "type": "string" } }
+  }
+}

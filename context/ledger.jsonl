@@ -1,0 +1,9 @@
+{"kind":"seed","id":"seed:silence-is-product","t":"2026-08-20","ttl_days":0,"body":{"intent":"Silence is the product surface; prefer hush over noise"}}
+{"kind":"seed","id":"seed:evidence-before-merge","t":"2026-11-04","ttl_days":0,"body":{"intent":"No merge of drafts that still say tests not run"}}
+{"kind":"seed","id":"seed:compact-context","t":"2026-11-07","ttl_days":0,"body":{"intent":"Agents load pack(budget), never chat history"}}
+{"kind":"contract","id":"contract:cors-allowlist","t":"2026-11-04","sha":"886ec0598bec","ttl_days":0,"body":{"in":"Origin","out":"Allow-Origin or empty","deny":"wildcard *"}}
+{"kind":"receipt","id":"receipt:378","t":"2026-11-04","sha":"886ec0598bec","ttl_days":90,"body":{"act":"merge","pr":378,"what":"cors tests + ubuntu-24.04 + hygiene"}}
+{"kind":"receipt","id":"receipt:366","t":"2026-11-04","sha":"94f43f77b9d0","ttl_days":90,"body":{"act":"merge","pr":366,"what":"bearer key for usage tracking"}}
+{"kind":"pulse","id":"pulse:2026-11-07","t":"2026-11-07","ttl_days":7,"body":{"health":"ci-green","drift":"draft-stack-401-404","next":"compact context on main; hold untested drafts"}}
+{"kind":"residue","id":"residue:empty-job-ci","t":"2026-11-02","ttl_days":180,"body":{"fail":"empty-job CI jobs=0","lesson":"platform noise; pin ubuntu-24.04; not app failure"}}
+{"kind":"pointer","id":"ptr:ixpansion-live","t":"2026-11-07","ttl_days":30,"body":{"uri":"https://ixpansion-live.vercel.app","summary":"prod surface"}}
