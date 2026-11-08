@@ -178,4 +178,4 @@ def assess_artifact(
             ArtifactStatus.ARCHIVE_CANDIDATE,
             "no references and past the stale threshold; archive only after approval",
         )
-    return ArtifactAssessment(ArtifactStatus.NEW_GAP, "unreferenced recent artifact needs owner triage")
+    return ArtifactAssessment(ArtifactStatus.ACTIVE, "recent artifact retained for discovery; no references found yet")
