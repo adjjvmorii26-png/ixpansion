@@ -4,6 +4,10 @@
 {"kind":"contract","id":"contract:cors-allowlist","t":"2026-11-04","sha":"886ec0598bec","ttl_days":0,"body":{"in":"Origin","out":"Allow-Origin or empty","deny":"wildcard *"}}
 {"kind":"receipt","id":"receipt:378","t":"2026-11-04","sha":"886ec0598bec","ttl_days":90,"body":{"act":"merge","pr":378,"what":"cors tests + ubuntu-24.04 + hygiene"}}
 {"kind":"receipt","id":"receipt:366","t":"2026-11-04","sha":"94f43f77b9d0","ttl_days":90,"body":{"act":"merge","pr":366,"what":"bearer key for usage tracking"}}
-{"kind":"pulse","id":"pulse:2026-11-07","t":"2026-11-07","ttl_days":7,"body":{"health":"ci-green","drift":"draft-stack-401-404","next":"compact context on main; hold untested drafts"}}
+{"kind":"receipt","id":"receipt:context-main","t":"2026-11-08","sha":"a1cf157927a2","ttl_days":90,"body":{"act":"land","what":"compact context packer on main","ci":"green"}}
+{"kind":"receipt","id":"receipt:site-meta","t":"2026-11-08","sha":"859f9a756467","ttl_days":90,"body":{"act":"docs","what":"index.html + README current organism meta"}}
+{"kind":"pulse","id":"pulse:2026-11-08","t":"2026-11-08","ttl_days":7,"body":{"health":"ci-green","repos":32,"open_ixpansion":38,"drift":"draft-stack+outdated-about","next":"close pan-copilot#1; hold drafts; About text manual"}}
 {"kind":"residue","id":"residue:empty-job-ci","t":"2026-11-02","ttl_days":180,"body":{"fail":"empty-job CI jobs=0","lesson":"platform noise; pin ubuntu-24.04; not app failure"}}
-{"kind":"pointer","id":"ptr:ixpansion-live","t":"2026-11-07","ttl_days":30,"body":{"uri":"https://ixpansion-live.vercel.app","summary":"prod surface"}}
+{"kind":"residue","id":"residue:outdated-about","t":"2026-11-08","ttl_days":90,"body":{"fail":"GitHub About still ALEPH quantum blurb","lesson":"connector has no update_repository; paste Settings description manually"}}
+{"kind":"pointer","id":"ptr:ixpansion-live","t":"2026-11-08","ttl_days":30,"body":{"uri":"https://ixpansion-live.vercel.app","summary":"prod surface"}}
+{"kind":"pointer","id":"ptr:pan-copilot","t":"2026-11-08","ttl_days":30,"body":{"uri":"https://github.com/adjjvmorii26-png/pan-copilot","summary":"Pan agent; default main; dirty PR#1 main	o master"}}
