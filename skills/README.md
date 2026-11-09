@@ -8,6 +8,7 @@ Reusable operating procedures maintained in this repository.
 |---|---|---|
 | [verified-repo-refinement](verified-repo-refinement/SKILL.md) | Repository audits, security/reliability triage, focused fixes, regression tests, CI evidence | Audits and refines code with traceable evidence and safe PR delivery |
 | [skill-evolution](skill-evolution/SKILL.md) | Creating, reviewing, composing, testing, or maintaining reusable skills | Governs the skill lifecycle, quality checks, and library consistency |
+| [kernel-forge](kernel_forge/SKILL.md) | Decomposing workflows into bounded, independently testable kernels | Defines kernel boundaries, composition, and deterministic compaction |
 | [reusable-ui-workbench](r1/reusable_ui_workbench/SKILL.md) | Building, editing, testing, or reusing UI components and design systems | Composes and maintains portable UI assets |
 
 ## Project organism (R1 collection)

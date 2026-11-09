@@ -1,0 +1,25 @@
+{
+  "name": "kernel-forge",
+  "version": "0.1.0",
+  "runtime": "python>=3.11",
+  "entrypoint": "skills.kernel_forge.kernel:compact_records",
+  "purpose": "Deterministically deduplicate bounded JSON records by stable identity.",
+  "input": {
+    "records": "sequence of JSON objects with a non-empty string id",
+    "max_items": "positive integer",
+    "max_bytes": "positive integer"
+  },
+  "output": {
+    "records": "first-seen unique records in input order",
+    "duplicate_count": "number of exact duplicate identities removed",
+    "byte_count": "UTF-8 bytes in canonical serialized records",
+    "digest": "SHA-256 of newline-delimited canonical records"
+  },
+  "failure_modes": [
+    "invalid identity or non-JSON value",
+    "same identity with different canonical content",
+    "item or byte limit exceeded"
+  ],
+  "side_effects": [],
+  "deterministic": true
+}
