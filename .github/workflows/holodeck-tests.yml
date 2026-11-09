@@ -27,6 +27,13 @@ jobs:
           node-version: "22"
       - name: Run deterministic physics tests
         run: node --test holodeck/physics.test.mjs
+      - name: Run action-engine regression tests when present
+        run: |
+          if [ -f holodeck/action-engine.test.mjs ]; then
+            node --test holodeck/action-engine.test.mjs
+          else
+            echo "Action-engine suite not present on this branch; skipped."
+          fi
       - name: Check HTML and module files exist
         run: |
           test -s holodeck/index.html
