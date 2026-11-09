@@ -1,10 +1,13 @@
-.PHONY: test test-full lint clean backup push
+.PHONY: test test-full test-contracts lint clean backup push
 
 test:
 	python3 -m pytest tests/ -q --tb=short -n auto --dist loadgroup
 
 test-full:
 	python3 -m pytest tests/ -v --tb=short
+
+test-contracts:
+	python3 -m pytest tests/contracts/ -v --tb=short
 
 lint:
 	@find . -type f -name '*.py' \
@@ -13,7 +16,7 @@ lint:
 	@echo "All Python files compile."
 
 clean:
-	@find . -type d -name '__pycache__' -prune -exec rm -rf {} + 
+	@find . -type d -name '__pycache__' -prune -exec rm -rf {} +
 	@rm -rf .pytest_cache omega_fractal_engine/.pytest_cache
 
 backup:
@@ -59,18 +62,18 @@ coolify-restart:
 	docker compose restart
 
 coolify-health:
-	@curl -sf http://localhost:3000/health && echo "\n  Organism is alive ✓" || echo "\n  Organism is down ✗"
+	@curl -sf http://localhost:3000/health && echo "\\n  Organism is alive ✓" || echo "\\n  Organism is down ✗"
 
 coolify-status:
 	@docker compose ps
 
 coolify-image:
 	docker build -t ghcr.io/adjjvmorii26-png/ixpansion:latest .
-	docker push ghcr.io/adjjvmorii26-png/ixpansion:latest
+	docker push ghcr.io/adjjvmorii-png/ixpansion:latest
 
 coolify-clean:
 	docker compose down -v
-	docker rmi ghcr.io/adjjvmorii26-png/ixpansion:latest 2>/dev/null || true
+	docker rmi ghcr.io/adjjvmorii-png/ixpansion:latest 2>/dev/null || true
 
 # ─── Stable terminal ───
 .PHONY: shell council env-check dashboard snapshot
