@@ -69,11 +69,11 @@ coolify-status:
 
 coolify-image:
 	docker build -t ghcr.io/adjjvmorii26-png/ixpansion:latest .
-	docker push ghcr.io/adjjvmorii-png/ixpansion:latest
+	docker push ghcr.io/adjjvmorii26-png/ixpansion:latest
 
 coolify-clean:
 	docker compose down -v
-	docker rmi ghcr.io/adjjvmorii-png/ixpansion:latest 2>/dev/null || true
+	docker rmi ghcr.io/adjjvmorii26-png/ixpansion:latest 2>/dev/null || true
 
 # ─── Stable terminal ───
 .PHONY: shell council env-check dashboard snapshot
