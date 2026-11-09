@@ -1,0 +1,41 @@
+name: Skill Systems Foundry
+
+on:
+  pull_request:
+    paths:
+      - "skills/skill-systems-foundry/**"
+      - ".github/workflows/skill-systems-foundry.yml"
+  push:
+    branches:
+      - "feat/skill-systems-foundry-v1"
+    paths:
+      - "skills/skill-systems-foundry/**"
+      - ".github/workflows/skill-systems-foundry.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: skill-systems-foundry-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    name: Unit tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run Foundry unit tests
+        env:
+          PYTHONPATH: skills/skill-systems-foundry/scripts
+        run: python -m unittest discover -s skills/skill-systems-foundry/tests -v
+      - name: Run offline pipeline smoke test
+        run: python skills/skill-systems-foundry/scripts/skill_lab.py pipeline --root skills/skill-systems-foundry --seed 1337 --count 16 --profile portable
