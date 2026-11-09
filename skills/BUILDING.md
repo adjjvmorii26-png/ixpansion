@@ -21,6 +21,7 @@ Every skill gives the organism a repeatable capability. Skills live in
 | `luminant_memory` | Connect crystalline memory systems | r1 |
 | `chrono_relay` | Relay temporal mechanics | r1 |
 | `weather_monitor` | Monitor organism vitals via weather API | r1 |
+| `reusable_ui_workbench` | Create, edit, preview, verify, and reuse UI components | r1 |
 
 ## Generation Contract
 

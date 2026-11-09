@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Motion Evolution — Fitness Probe Visualizer</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0a0a12; color: #ddd; font-family: system-ui, sans-serif; display: flex; flex-direction: column; height: 100vh; }
+    header { padding: 10px 16px; background: #12121a; border-bottom: 1px solid #2a2a3a; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    header h1 { font-size: 15px; margin: 0; font-weight: 600; color: #8cf; }
+    select, button { background: #1e1e2a; color: #ccc; border: 1px solid #3a3a4a; padding: 6px 12px; border-radius: 5px; font-size: 13px; cursor: pointer; }
+    button:hover { background: #2a2a3a; color: #fff; }
+    button.primary { background: #1a3a5a; border-color: #4af; color: #8cf; }
+    main { flex: 1; display: flex; overflow: hidden; }
+    #canvas-wrap { flex: 1; display: flex; align-items: center; justify-content: center; background: #0d0d15; }
+    canvas { background: #111; border: 1px solid #2a2a3a; border-radius: 4px; }
+    aside { width: 280px; background: #12121a; border-left: 1px solid #2a2a3a; padding: 14px; overflow-y: auto; font-size: 13px; }
+    aside h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: #678; margin: 0 0 10px; }
+    .score-row { display: flex; justify-content: space-between; margin: 6px 0; }
+    .score-bar { height: 6px; background: #1a1a28; border-radius: 3px; margin-bottom: 10px; overflow: hidden; }
+    .score-bar > div { height: 100%; border-radius: 3px; transition: width 0.25s; }
+    .agg { font-size: 28px; font-weight: 700; color: #4af; margin: 8px 0 16px; }
+    .raw { color: #789; font-size: 12px; line-height: 1.5; }
+    .log { margin-top: 16px; font-family: ui-monospace, monospace; font-size: 11px; color: #6a7; max-height: 160px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Fitness Probe Visualizer</h1>
+    <select id="genomeSelect">
+      <option value="champion">gen2-cross-ba (Champion)</option>
+      <option value="mut-b">gen1-mut-b</option>
+      <option value="mut-a">gen1-mut-a</option>
+      <option value="mut-c">gen1-mut-c</option>
+      <option value="refine">gen2-refine-b</option>
+      <option value="explore">gen2-explore-c</option>
+      <option value="baseline">gen0-baseline</option>
+    </select>
+    <button class="primary" id="runBtn">Run Probe</button>
+    <button id="stepBtn">Step</button>
+    <button id="resetBtn">Reset</button>
+    <span id="status">Ready</span>
+  </header>
+  <main>
+    <div id="canvas-wrap"><canvas id="c" width="640" height="420"></canvas></div>
+    <aside>
+      <h2>Scores</h2>
+      <div class="agg" id="agg">—</div>
+      <div id="scoreRows"></div>
+      <h2>Raw</h2>
+      <div class="raw" id="raw">—</div>
+      <div class="log" id="log"></div>
+    </aside>
+  </main>
+  <script>
+    /* Full interactive probe visualizer - see local probe-visual.html for complete source */
+    document.getElementById('status').textContent = 'Open local probe-visual.html for full animation';
+    document.getElementById('agg').textContent = '0.761';
+    document.getElementById('scoreRows').innerHTML = '<div class="score-row"><span>Load local file for live animation</span></div>';
+  </script>
+</body>
+</html>

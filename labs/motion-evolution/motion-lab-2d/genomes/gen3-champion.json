@@ -1,0 +1,22 @@
+{
+  "id": "gen3-stable-plus",
+  "promotedAt": "2026-10-29T22:19:00Z",
+  "reason": "Highest gen3 probe score (0.917). Extreme stability with improved energy comfort.",
+  "genome": {
+    "physics": {
+      "gravity": 0.048,
+      "friction": 0.983,
+      "restitution": 0.74,
+      "maxSpeed": 13.5,
+      "substeps": 3,
+      "wallRestitution": 0.58
+    },
+    "controller": {
+      "thrustStrength": 1.1,
+      "playerMass": 2.15,
+      "dampingOnThrust": true
+    }
+  },
+  "lineage": ["gen0-baseline", "gen1-mut-b", "gen3-stable-plus"],
+  "probeAggregate": 0.917
+}

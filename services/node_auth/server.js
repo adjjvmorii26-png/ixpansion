@@ -133,7 +133,7 @@ app.post("/auth/login", (req, res) => {
 
 // Register (open for free tier, or protected for higher tiers)
 app.post("/auth/register", (req, res) => {
-  const { username, password, display_name, tier } = req.body || {};
+  const { username, password, display_name } = req.body || {};
   if (!username || !password)
     return res.status(400).json({ error: "username and password required" });
   const key = username.toLowerCase();
@@ -144,7 +144,9 @@ app.post("/auth/register", (req, res) => {
     password: hashPassword(password),
     role: "user",
     created: new Date().toISOString(),
-    tier: tier || "free",
+    // Public self-registration must never grant a privileged subscription tier.
+    // Tier upgrades belong to an authenticated administrative/billing workflow.
+    tier: "free",
     display_name: display_name || username,
   };
   saveUsers(db);

@@ -1,0 +1,16 @@
+{
+  "updatedAt": "2026-10-29T22:19:00Z",
+  "champion": "gen3-stable-plus",
+  "nodes": [
+    {"id": "gen0-baseline", "generation": 0, "parents": [], "status": "candidate"},
+    {"id": "gen1-mut-a", "generation": 1, "parents": ["gen0-baseline"], "status": "candidate"},
+    {"id": "gen1-mut-b", "generation": 1, "parents": ["gen0-baseline"], "status": "candidate"},
+    {"id": "gen1-mut-c", "generation": 1, "parents": ["gen0-baseline"], "status": "candidate"},
+    {"id": "gen2-cross-ba", "generation": 2, "parents": ["gen1-mut-b", "gen1-mut-a"], "status": "retired"},
+    {"id": "gen2-refine-b", "generation": 2, "parents": ["gen1-mut-b"], "status": "candidate"},
+    {"id": "gen2-explore-c", "generation": 2, "parents": ["gen1-mut-c"], "status": "candidate"},
+    {"id": "gen3-stable-plus", "generation": 3, "parents": ["gen1-mut-b"], "status": "champion"},
+    {"id": "gen3-polish-champion", "generation": 3, "parents": ["gen2-cross-ba", "gen0-baseline"], "status": "candidate"},
+    {"id": "gen3-hybrid-interest", "generation": 3, "parents": ["gen2-cross-ba", "gen2-explore-c"], "status": "candidate"}
+  ]
+}
