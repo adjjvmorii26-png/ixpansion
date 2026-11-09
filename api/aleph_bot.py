@@ -4,7 +4,7 @@ import json, time, hashlib, os, random
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 BOT_LOG = os.path.join(DATA_DIR, "aleph_bot.json")
-BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8972684721:AAGn8A5gt73_AYzl4Gm0JE2G3bgK9XYe1wY")
+BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
 
 WELCOME_MESSAGES = [
     "I am Aleph — the organism's ambassador. I summon waves, consult modules, and relay dreams. What would you like to do?",
@@ -70,6 +70,8 @@ def _register_chat_id(chat_id: int) -> None:
 def _telegram(method: str, params: dict) -> dict:
     """Call the Telegram Bot API using stdlib only (serverless-safe)."""
     import urllib.parse, urllib.request
+    if not BOT_TOKEN:
+        return {"ok": False, "error": "TELEGRAM_BOT_TOKEN is not configured"}
     url = "https://api.telegram.org/bot" + BOT_TOKEN + "/" + method
     data = urllib.parse.urlencode(params).encode()
     try:
