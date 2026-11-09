@@ -13,7 +13,7 @@ dependencies = []
 ixpansion = "main:main"
 
 [project.optional-dependencies]
-dev = ["pytest>=7.0", "pytest-asyncio>=0.21", "PyYAML>=6.0"]
+dev = ["pytest>=7.0", "pytest-asyncio>=0.21", "PyYAML>=6.0", "hypothesis>=6.100"]
 
 [tool.pytest.ini_options]
 testpaths = [
