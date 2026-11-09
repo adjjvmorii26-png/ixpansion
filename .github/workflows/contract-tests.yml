@@ -1,28 +1,68 @@
-name: Contract Tests
+name: Contract Tests Execution Pipeline
 
 on:
-  pull_request:
-    branches: [main]
   push:
-    branches: [main]
-
-permissions:
-  contents: read
+    branches:
+      - main
+      - release/*
+    paths:
+      - 'tests/contracts/**'
+      - 'tests/fixtures/**'
+      - '.github/workflows/contract-tests.yml'
+      - 'Makefile'
+      - 'requirements.txt'
+      - 'pyproject.toml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'tests/contracts/**'
+      - 'tests/fixtures/**'
+      - '.github/workflows/contract-tests.yml'
+      - 'Makefile'
+      - 'requirements.txt'
+      - 'pyproject.toml'
 
 concurrency:
-  group: contract-tests-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  contracts:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
+  contract-suite:
+    name: Run Disposable Contract Tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-      - name: Install contract test dependencies
-        run: python -m pip install pytest PyYAML
-      - name: Run isolated cross-system contracts
-        run: make test-contracts
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest PyYAML
+
+      - name: Execute Contract Test Suite
+        run: |
+          make test-contracts
+
+      - name: Upload Test Artifacts / Summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-test-results-py${{ matrix.python-version }}
+          path: |
+            .pytest_cache
+            tests/fixtures/
+          if-no-files-found: warn
+          retention-days: 7
