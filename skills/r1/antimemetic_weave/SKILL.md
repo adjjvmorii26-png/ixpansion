@@ -1,3 +1,8 @@
+---
+name: antimemetic-weave
+description: Weave antimemetic absence and substrate patterns into IXPANSION, including negative-space analysis, erasure patterns, and inversion workflows.
+---
+
 # antimemetic_weave Skill
 
 ## Description
