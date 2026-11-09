@@ -53,6 +53,8 @@ jobs:
           python -m pip install pytest PyYAML
 
       - name: Execute Contract Test Suite
+        env:
+          PYTEST_ADDOPTS: --junitxml=contract-test-results.xml
         run: |
           make test-contracts
 
@@ -62,6 +64,7 @@ jobs:
         with:
           name: contract-test-results-py${{ matrix.python-version }}
           path: |
+            contract-test-results.xml
             .pytest_cache
             tests/fixtures/
           if-no-files-found: warn
