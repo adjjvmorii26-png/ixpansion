@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 NAME_RE = re.compile(r"^[a-z0-9]+(?:[-_][a-z0-9]+)*$")
-KEY_RE = re.compile(r"^(name|description):\\s*(.*?)\\s*$")
+KEY_RE = re.compile(r"^(name|description):\s*(.*?)\s*$")
 
 
 @dataclass
