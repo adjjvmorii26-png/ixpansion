@@ -1,0 +1,23 @@
+# Keep deployment small — runtime state must NOT ship with the function bundle
+data/**
+!data/.gitkeep
+
+# Local / lab / heavy artifacts
+artifacts/**
+*.tar.gz
+*.gif
+*.mp4
+
+# Dev / tests not needed at runtime
+tests/**
+.github/**
+docs/**
+*.md
+!README.md
+
+# Python cache / env
+__pycache__/**
+*.pyc
+.env
+.venv/**
+node_modules/**
