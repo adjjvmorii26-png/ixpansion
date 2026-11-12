@@ -11,7 +11,7 @@ from typing import Dict, List, Optional, Any
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 
 # Telegram bot configuration
-BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8903755459:AAGwjuM6Q5U8lclNO980VfN2Gjtv90WCbMk")
+BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 
 # Vibe pulse emoji mapping
 _VIBE_EMOJI = {
@@ -52,6 +52,8 @@ _broadcast_state = {
 
 def _telegram(method: str, params: dict) -> dict:
     """Call Telegram Bot API using stdlib."""
+    if not BOT_TOKEN:
+        return {"ok": False, "error": "Telegram bot token is not configured"}
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/{method}"
     data = urllib.parse.urlencode(params).encode()
     try:
