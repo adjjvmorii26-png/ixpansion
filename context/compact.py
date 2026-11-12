@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
@@ -21,6 +22,8 @@ DEFAULT_TTL = {
     "pointer": 30,
 }
 CHARS_PER_TOKEN = 4
+# Raw controls (except tab/LF/CR) break strict JSON; sanitize before loads.
+_CTRL_RE = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f]")
 
 
 class ArtifactError(ValueError):
@@ -198,7 +201,9 @@ def load_jsonl(path: Path | str) -> list[dict[str, Any]]:
         line = line.strip()
         if not line or line.startswith("#"):
             continue
-        out.append(validate(json.loads(line)))
+        # Tolerate accidental raw control chars in historical ledger lines.
+        safe = _CTRL_RE.sub(" ", line)
+        out.append(validate(json.loads(safe)))
     return out
 
 
@@ -207,7 +212,7 @@ def append_jsonl(path: Path | str, record: dict[str, Any]) -> dict[str, Any]:
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
     with p.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(r, separators=(",", ":")) + "\n")
+        f.write(json.dumps(r, separators=(",", ":"), ensure_ascii=True) + "\n")
     return r
 
 
