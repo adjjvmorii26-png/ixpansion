@@ -8,6 +8,6 @@
     { "src": "^/events$", "dest": "/api/index.py" },
     { "src": "^/telegram-webhook$", "dest": "/api/index.py" },
     { "src": "^/dashboard/(.*)", "dest": "/dashboard/$1" },
-    { "src": "^/$", "dest": "/dashboard/index.html" }
+    { "src": "^/$", "dest": "/index.html" }
   ]
 }

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0e0c" />
+  <title>IXPANSION — live</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b0e0c; --text:#eef1e8; --muted:#a3aaa0; --lime:#d7f47a; --line:rgba(223,235,214,.14); }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; background:radial-gradient(ellipse at 80% 10%,rgba(57,86,56,.14),transparent 40%),var(--bg); color:var(--text); font:15px/1.6 Manrope,system-ui,sans-serif; display:flex; align-items:center; justify-content:center; padding:32px; }
+    main { max-width:560px; width:100%; border:1px solid var(--line); padding:36px 32px; background:rgba(20,26,22,.72); }
+    .eyebrow { font:10px/1.4 ui-monospace,monospace; letter-spacing:.16em; color:#a6c851; margin:0 0 18px; }
+    h1 { margin:0 0 14px; font-size:clamp(36px,8vw,52px); letter-spacing:-.06em; font-weight:600; line-height:1.05; }
+    h1 em { color:var(--lime); font-family:Georgia,serif; font-style:italic; font-weight:400; }
+    p { margin:0 0 14px; color:var(--muted); }
+    .status { display:flex; gap:10px; align-items:center; margin:22px 0; font:11px ui-monospace,monospace; color:#c6cec3; }
+    .dot { width:8px; height:8px; border-radius:50%; background:var(--lime); box-shadow:0 0 12px rgba(215,244,122,.7); }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
+    a.btn { display:inline-flex; align-items:center; padding:12px 16px; background:var(--lime); color:#0b0e0c; font-size:12px; font-weight:700; text-decoration:none; }
+    a.link { color:var(--lime); font-size:12px; font-weight:600; text-decoration:none; padding:12px 8px; }
+    code { font-family:ui-monospace,monospace; font-size:12px; color:var(--lime); }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">IXPANSION · LIVE SURFACE</p>
+    <h1>A codebase<br /><em>in motion.</em></h1>
+    <p>Public organism on Vercel. API health is live; the full field guide also lives on GitHub Pages.</p>
+    <div class="status" id="st"><span class="dot" aria-hidden="true"></span><span id="stt">checking /health…</span></div>
+    <p style="font-size:12px">Endpoint: <code>/health</code> · Project: <code>ixpansion-live</code></p>
+    <div class="actions">
+      <a class="btn" href="/health">Open /health</a>
+      <a class="link" href="https://github.com/adjjvmorii26-png/ixpansion" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="link" href="https://adjjvmorii26-png.github.io/ixpansion/" target="_blank" rel="noopener">Field guide ↗</a>
+    </div>
+  </main>
+  <script>
+    fetch('/health').then(r => r.json()).then(j => {
+      document.getElementById('stt').textContent = 'healthy · v' + (j.version || '?') + ' · modules ' + (j.modules || '?');
+    }).catch(() => {
+      document.getElementById('stt').textContent = 'health probe failed';
+    });
+  </script>
+</body>
+</html>
