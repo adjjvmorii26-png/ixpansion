@@ -61,8 +61,10 @@ class OffVercelStoreTests(unittest.TestCase):
             store.backend()
 
     def test_invalid_key_rejected(self):
-        with self.assertRaises(ValueError):
-            store.get_json("../escape", None)
+        for key in ("../escape", "tenant/../escape", r"tenant\\..\\escape", "./secret", "tenant/./secret"):
+            with self.subTest(key=key):
+                with self.assertRaises(ValueError):
+                    store.get_json(key, None)
 
     def test_no_credentials_reports_ephemeral_backend(self):
         os.environ.clear()
