@@ -1,0 +1,36 @@
+name: Wrapper Security Audit
+
+on:
+  push:
+    branches: ["main", "master", "dev"]
+  pull_request:
+    branches: ["main", "master", "dev"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wrapper-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        # IXPANSION declares requires-python >=3.11; don't test unsupported runtimes.
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile wrapper and tests
+        run: |
+          python -m py_compile core/mesh/atlas_trace_wrapper.py tests/test_wrapper_verification.py
+      - name: Run adversarial regression suite
+        run: |
+          python -m unittest discover -s tests -p 'test_wrapper_verification.py' -v
