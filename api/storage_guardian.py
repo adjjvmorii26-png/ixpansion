@@ -70,12 +70,47 @@ def inspect_storage() -> Dict[str, Any]:
         "backend_reachability": "NOT_PROBED", "cache": cache,
         "recommendations": recommendations,
         "autonomy": {
-            "mode": "observe_and_recommend", "may_change_credentials": False,
+            "mode": "observe_and_safe_ephemeral_maintenance", "may_change_credentials": False,
             "may_delete_durable_data": False, "may_change_provider_configuration": False,
             "may_claim_unverified_durability": False,
         },
     }
 
+
+
+def maintain_ephemeral_cache(now: float | None = None) -> Dict[str, Any]:
+    """Safely remove expired rows from the disposable local cache only.
+
+    This is the guardian's first autonomous repair: bounded by cache TTL and
+    isolated to the configured SquirrelCache SQLite file. It never touches the
+    authoritative remote backend or any application data files.
+    """
+    path = os.environ.get("IXP_SQUIRREL_CACHE_PATH", "/tmp/ixp_squirrel_cache.sqlite3")
+    if not Path(path).is_file():
+        return {"action": "skipped", "reason": "cache_absent", "expired_removed": 0}
+    try:
+        with sqlite3.connect(path, timeout=3) as db:
+            db.execute("PRAGMA busy_timeout=3000")
+            integrity = db.execute("PRAGMA quick_check").fetchone()
+            if not integrity or integrity[0] != "ok":
+                return {"action": "blocked", "reason": "cache_integrity_failed",
+                        "expired_removed": 0}
+            db.execute("BEGIN IMMEDIATE")
+            cursor = db.execute(
+                "DELETE FROM cache_entries WHERE expires_at <= ?",
+                (float(__import__("time").time() if now is None else now),),
+            )
+            removed = cursor.rowcount
+            db.execute("COMMIT")
+            verified = db.execute("PRAGMA quick_check").fetchone()
+            if not verified or verified[0] != "ok":
+                return {"action": "degraded", "reason": "post_maintenance_check_failed",
+                        "expired_removed": removed}
+        return {"action": "completed", "reason": "expired_cache_entries_pruned",
+                "expired_removed": removed, "durable_data_touched": False}
+    except sqlite3.Error as exc:
+        return {"action": "failed", "reason": type(exc).__name__,
+                "expired_removed": 0, "durable_data_touched": False}
 
 def coherence_vitals() -> Dict[str, Any]:
     report = inspect_storage()
