@@ -1,0 +1,88 @@
+"""Contract checks for the LOOPFORGE Creative Reuse skill."""
+
+from pathlib import Path
+import re
+import unittest
+
+
+SKILL = Path(__file__).resolve().parents[1] / "skills" / "loopforge-creative-reuse" / "SKILL.md"
+
+
+class LoopforgeCreativeReuseContractTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.text = SKILL.read_text(encoding="utf-8")
+
+    def test_skill_has_frontmatter_and_version(self):
+        self.assertTrue(self.text.startswith("---\n"))
+        self.assertRegex(self.text, r"(?m)^name: loopforge-creative-reuse$")
+        self.assertRegex(self.text, r"(?m)^version: 1\.0\.0$")
+
+    def test_stale_lifecycle_has_all_six_states(self):
+        for state in ("ACTIVE", "REFRESH", "FORK", "QUARANTINE", "ARCHIVE-CANDIDATE", "NEW-GAP"):
+            with self.subTest(state=state):
+                self.assertIn(state, self.text)
+
+    def test_library_shelves_cover_requested_reusable_types(self):
+        for shelf in ("GEMS", "SEEDS", "SKILLS", "PLUGINS", "BUILDERS", "ARTIFACTS", "KERNELS"):
+            with self.subTest(shelf=shelf):
+                self.assertIn(shelf, self.text)
+
+    def test_creative_pipelines_are_documented(self):
+        for pipeline in ("GIF Foundry", "Meme Engine", "Remix Laboratory", "AI Gallery"):
+            with self.subTest(pipeline=pipeline):
+                self.assertIn(pipeline, self.text)
+
+    def test_safety_and_evidence_gates_are_present(self):
+        for phrase in (
+            "preserve original assets",
+            "untrusted input",
+            "Ask for approval",
+            "Do not call a test",
+            "A proposed change is not a merged change",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase.lower(), self.text.lower())
+
+
+    def test_seed_pack_is_versioned_and_bounded(self):
+        import json
+
+        seed_path = Path(__file__).resolve().parents[1] / "seeds" / "loopforge" / "meme-chaos-v1.json"
+        payload = json.loads(seed_path.read_text(encoding="utf-8"))
+        self.assertEqual(payload["version"], "1.0.0")
+        self.assertGreaterEqual(len(payload["recipes"]), 1)
+        self.assertTrue(payload["constraints"]["human_review_before_publication"])
+
+    def test_plugin_blueprint_disables_implicit_publication_and_deletion(self):
+        import json
+
+        manifest_path = Path(__file__).resolve().parents[1] / "plugins" / "loopforge" / "plugin-blueprint.json"
+        payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(payload["status"], "blueprint-not-installed")
+        self.assertEqual(payload["future_capabilities"]["deletion"], "not exposed")
+        self.assertTrue(payload["safety"]["no_implicit_external_writes"])
+
+
+    def test_gem_library_has_reusable_recipes(self):
+        gem_path = Path(__file__).resolve().parents[1] / "gems" / "loopforge" / "creative-recipes.md"
+        gem_text = gem_path.read_text(encoding="utf-8")
+        for recipe in ("Glitch-to-Giggle", "Seamless Loop Alchemy", "Museum of Almost-Forgotten Things", "Mutation Kaleidoscope"):
+            self.assertIn(recipe, gem_text)
+
+    def test_artifact_shelf_requires_provenance(self):
+        shelf_path = Path(__file__).resolve().parents[1] / "artifacts" / "loopforge" / "README.md"
+        shelf_text = shelf_path.read_text(encoding="utf-8")
+        self.assertIn("source or parent asset ID", shelf_text)
+        self.assertIn("license/provenance", shelf_text)
+        self.assertIn("Never store secrets", shelf_text)
+
+    def test_test_protocol_includes_focused_and_full_runs(self):
+        self.assertIn("Changed-surface tests", self.text)
+        self.assertIn("Full suite", self.text)
+        self.assertRegex(self.text, r"default 10 iterations")
+        self.assertRegex(self.text, r"100 only when runtime is reasonable")
+
+
+if __name__ == "__main__":
+    unittest.main()

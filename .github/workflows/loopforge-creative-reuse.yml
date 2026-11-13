@@ -1,0 +1,47 @@
+name: LOOPFORGE Creative Reuse Contract
+on:
+  push:
+    branches:
+      - "feat/loopforge-creative-reuse-skill-v1"
+    paths:
+      - "skills/loopforge-creative-reuse/**"
+      - "tests/test_loopforge_*.py"
+      - "loopforge/**"
+      - "seeds/loopforge/**"
+      - "builders/loopforge/**"
+      - "plugins/loopforge/**"
+      - "gems/loopforge/**"
+      - "artifacts/loopforge/**"
+      - ".github/workflows/loopforge-creative-reuse.yml"
+  pull_request:
+    paths:
+      - "skills/loopforge-creative-reuse/**"
+      - "tests/test_loopforge_*.py"
+      - "loopforge/**"
+      - "seeds/loopforge/**"
+      - "builders/loopforge/**"
+      - "plugins/loopforge/**"
+      - "gems/loopforge/**"
+      - "artifacts/loopforge/**"
+      - ".github/workflows/loopforge-creative-reuse.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run focused creative contract tests
+        run: python -m unittest discover -s tests -p 'test_loopforge_*.py' -v
+      - name: Repeat deterministic suite 10 times
+        shell: bash
+        run: |
+          for iteration in {1..10}; do
+            python -m unittest discover -s tests -p 'test_loopforge_*.py' -q
+          done
