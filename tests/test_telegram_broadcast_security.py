@@ -1,4 +1,3 @@
-import json
 import os
 import unittest
 from unittest.mock import patch
@@ -37,7 +36,7 @@ class TelegramCredentialTests(unittest.TestCase):
             request.full_url,
             "https://api.telegram.org/bottest-token/sendMessage",
         )
-        self.assertEqual(json.loads(result.__repr__()) if False else result, {"ok": True})
+        self.assertEqual(result, {"ok": True})
 
 
 if __name__ == "__main__":
