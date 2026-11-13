@@ -149,7 +149,7 @@ def get_json(key: str, default: Any = None, cache_ttl: float = 0) -> Any:
         req = urllib.request.Request(url, headers={"Accept": "application/json"})
         with _open(req) as response:
             try:
-                return json.loads(response.read().decode("utf-8") or "null")
+                value = json.loads(response.read().decode("utf-8") or "null")
             except (UnicodeDecodeError, json.JSONDecodeError) as exc:
                 raise StoreError("HTTP storage backend returned invalid JSON") from exc
         if value is not None:
