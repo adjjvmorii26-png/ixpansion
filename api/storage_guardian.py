@@ -115,12 +115,15 @@ def maintain_ephemeral_cache(now: float | None = None) -> Dict[str, Any]:
                 "expired_removed": 0, "durable_data_touched": False}
 
 def coherence_vitals() -> Dict[str, Any]:
+    # The organism's normal vital-sign sweep also triggers bounded cache cleanup.
+    maintenance = maintain_ephemeral_cache()
     report = inspect_storage()
     return {
         "module": "storage_guardian", "ok": report["status"] == "HEALTHY_CONFIGURED",
         "status": report["status"],
         "durable_backend_configured": report["durable_backend_configured"],
         "backend_reachability": report["backend_reachability"],
+        "maintenance": maintenance,
     }
 
 
