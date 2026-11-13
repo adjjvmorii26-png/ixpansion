@@ -90,7 +90,8 @@ def maintain_ephemeral_cache(now: float | None = None) -> Dict[str, Any]:
     if not Path(path).is_file():
         return {"action": "skipped", "reason": "cache_absent", "expired_removed": 0}
     try:
-        with sqlite3.connect(path, timeout=3) as db:
+        uri = Path(path).resolve().as_uri() + "?mode=rw"
+        with sqlite3.connect(uri, uri=True, timeout=3) as db:
             db.execute("PRAGMA busy_timeout=3000")
             integrity = db.execute("PRAGMA quick_check").fetchone()
             if not integrity or integrity[0] != "ok":
