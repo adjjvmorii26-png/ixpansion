@@ -1,0 +1,14 @@
+{
+  "skills": [
+    {
+      "id": "fixture-clean-001",
+      "slug": "fixture-clean-skill",
+      "title": "Fixture Clean Skill",
+      "provider": "fixture",
+      "source_of_truth": "tests/fixtures/skill_registry/clean.json",
+      "evidence_state": "VERIFIED",
+      "runtime_binding": "unbound",
+      "dependencies": []
+    }
+  ]
+}
