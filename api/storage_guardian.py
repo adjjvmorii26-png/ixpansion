@@ -7,6 +7,7 @@ or promotes an ephemeral backend to authoritative status.
 from __future__ import annotations
 import os
 import sqlite3
+import time
 from pathlib import Path
 from typing import Any, Dict, List
 from api import off_vercel_store
@@ -98,7 +99,7 @@ def maintain_ephemeral_cache(now: float | None = None) -> Dict[str, Any]:
             db.execute("BEGIN IMMEDIATE")
             cursor = db.execute(
                 "DELETE FROM cache_entries WHERE expires_at <= ?",
-                (float(__import__("time").time() if now is None else now),),
+                (float(time.time() if now is None else now),),
             )
             removed = cursor.rowcount
             db.execute("COMMIT")
