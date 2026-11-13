@@ -53,6 +53,32 @@ class StorageGuardianTests(unittest.TestCase):
         self.assertNotIn("super-secret-token", rendered)
         self.assertNotIn("secret-host", rendered)
 
+    def test_maintenance_prunes_only_expired_ephemeral_cache_rows(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "cache.sqlite3")
+            with sqlite3.connect(path) as db:
+                db.execute("CREATE TABLE cache_entries (cache_key TEXT PRIMARY KEY, payload BLOB NOT NULL, expires_at REAL NOT NULL, touched_at REAL NOT NULL, byte_size INTEGER NOT NULL)")
+                db.executemany(
+                    "INSERT INTO cache_entries VALUES (?, '{}', ?, 1, 2)",
+                    [("expired", 9), ("live", 11)],
+                )
+            with patch.dict(os.environ, {"IXP_SQUIRREL_CACHE_PATH": path}, clear=True):
+                result = storage_guardian.maintain_ephemeral_cache(now=10)
+            self.assertEqual(result["action"], "completed")
+            self.assertEqual(result["expired_removed"], 1)
+            self.assertFalse(result["durable_data_touched"])
+            with sqlite3.connect(path) as db:
+                keys = [row[0] for row in db.execute("SELECT cache_key FROM cache_entries")]
+            self.assertEqual(keys, ["live"])
+
+    def test_maintenance_skips_missing_cache_without_creating_it(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "absent.sqlite3")
+            with patch.dict(os.environ, {"IXP_SQUIRREL_CACHE_PATH": path}, clear=True):
+                result = storage_guardian.maintain_ephemeral_cache(now=10)
+            self.assertEqual(result["action"], "skipped")
+            self.assertFalse(os.path.exists(path))
+
 
 if __name__ == "__main__":
     unittest.main()
