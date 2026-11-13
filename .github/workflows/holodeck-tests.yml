@@ -1,0 +1,35 @@
+name: Holodeck Core Tests
+on:
+  pull_request:
+    paths:
+      - "holodeck/**"
+      - ".github/workflows/holodeck-tests.yml"
+  push:
+    branches:
+      - "feat/holodeck-core-v0.1"
+    paths:
+      - "holodeck/**"
+      - ".github/workflows/holodeck-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  physics-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run deterministic physics tests
+        run: node --test holodeck/physics.test.mjs
+      - name: Check HTML and module files exist
+        run: |
+          test -s holodeck/index.html
+          test -s holodeck/physics.mjs
+          grep -q 'type="module"' holodeck/index.html
+          grep -q 'from "./physics.mjs"' holodeck/index.html
