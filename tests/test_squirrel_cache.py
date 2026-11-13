@@ -69,3 +69,23 @@ class SquirrelCacheTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+    def test_stats_closes_sqlite_connection(self):
+        from unittest.mock import patch
+
+        real_connection = self.cache._connect()
+        state = {"closed": False}
+
+        class TrackingConnection:
+            def __getattr__(self, name):
+                return getattr(real_connection, name)
+
+            def close(self):
+                state["closed"] = True
+                real_connection.close()
+
+        with patch.object(self.cache, "_connect", return_value=TrackingConnection()):
+            self.cache.stats()
+
+        self.assertTrue(state["closed"])
