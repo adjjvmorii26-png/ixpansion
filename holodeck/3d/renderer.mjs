@@ -4,6 +4,8 @@
  * Does not own physics. Deterministic layout helpers only.
  */
 
+import { mapBodyTo3D } from "./mapping.mjs";
+
 /**
  * @typedef {{ id: number, x: number, y: number, z?: number, radius: number, mass?: number }} BodyState
  */
@@ -22,7 +24,6 @@ export function createRenderer(canvas, THREE) {
   camera.position.set(12, 14, 22);
   camera.lookAt(0, 2, 0);
 
-  // Lights
   const ambient = new THREE.AmbientLight(0x6688aa, 0.45);
   scene.add(ambient);
   const sun = new THREE.DirectionalLight(0xffffff, 1.05);
@@ -34,7 +35,6 @@ export function createRenderer(canvas, THREE) {
   fill.position.set(-10, 8, -8);
   scene.add(fill);
 
-  // Ground
   const groundGeo = new THREE.PlaneGeometry(80, 80);
   const groundMat = new THREE.MeshStandardMaterial({
     color: 0x1a1a28,
@@ -46,14 +46,12 @@ export function createRenderer(canvas, THREE) {
   ground.receiveShadow = true;
   scene.add(ground);
 
-  // Grid helper
   const grid = new THREE.GridHelper(80, 40, 0x334455, 0x222233);
   grid.position.y = 0.01;
   scene.add(grid);
 
-  /** @type {Map<number, THREE.Mesh>} */
+  /** @type {Map<number, import("three").Mesh>} */
   const meshes = new Map();
-
   const sphereGeo = new THREE.SphereGeometry(1, 24, 16);
 
   function colorForId(id) {
@@ -78,22 +76,14 @@ export function createRenderer(canvas, THREE) {
     return mesh;
   }
 
-  /**
-   * Map Holodeck 2D (x,y screen-ish) into 3D (x, y-up, z).
-   * y from physics is treated as height; z defaults to 0 unless provided.
-   */
   function syncBodies(bodies) {
     const seen = new Set();
     for (const b of bodies) {
       seen.add(b.id);
       const mesh = ensureMesh(b);
-      const r = Math.max(0.2, b.radius / 14); // scale toy radii into meters-ish
-      mesh.scale.setScalar(r);
-      // Physics y increases downward in 2D canvas; invert for 3D up-axis
-      const height = typeof b.z === "number" ? b.y : Math.max(r, (400 - b.y) / 40);
-      const x = (b.x - 400) / 40;
-      const z = typeof b.z === "number" ? b.z : 0;
-      mesh.position.set(x, height, z);
+      const m = mapBodyTo3D(b);
+      mesh.scale.setScalar(m.r);
+      mesh.position.set(m.x, m.y, m.z);
     }
     for (const [id, mesh] of meshes) {
       if (!seen.has(id)) {
@@ -114,7 +104,6 @@ export function createRenderer(canvas, THREE) {
     renderer.setSize(w, h, false);
   }
 
-  // Simple orbit drag
   let dragging = false;
   let prevX = 0, prevY = 0;
   let theta = 0.6, phi = 0.9, radius = 28;
