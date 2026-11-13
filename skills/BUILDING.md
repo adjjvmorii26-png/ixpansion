@@ -37,3 +37,7 @@ Use `scripts/scaffold_organ.py` for new wave organs and
 `scripts/bump_versions.py` to sync VERSION/WAVE across:
 `api_server.py`, `api/organism_ontology.py`, `dashboard/shared.js`,
 `pyproject.toml`, `CITATION.cff`, `CHANGELOG.md`.
+
+## Automated Validation
+
+Run `python scripts/validate_skills.py` from the repository root to check every `SKILL.md` manifest. New skills should include YAML frontmatter with a unique `name` and a useful `description`. Existing legacy skills without frontmatter remain accepted with warnings during migration; malformed frontmatter is rejected. The focused regression suite is `python -m unittest discover -s tests -p 'test_skill_manifest.py' -v`.

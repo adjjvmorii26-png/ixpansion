@@ -1,0 +1,37 @@
+name: Skills Lab Validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "scripts/validate_skills.py"
+      - "tests/test_skill_manifest.py"
+      - ".github/workflows/skills-lab.yml"
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "scripts/validate_skills.py"
+      - "tests/test_skill_manifest.py"
+      - ".github/workflows/skills-lab.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: skills-lab-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate skill manifests
+        run: python scripts/validate_skills.py
+      - name: Run validator tests
+        run: python -m unittest discover -s tests -p 'test_skill_manifest.py' -v
