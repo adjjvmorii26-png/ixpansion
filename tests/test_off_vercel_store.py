@@ -1,8 +1,6 @@
 import json
 import os
 import unittest
-from contextlib import contextmanager
-from io import BytesIO
 from unittest.mock import patch
 
 from api import off_vercel_store as store
