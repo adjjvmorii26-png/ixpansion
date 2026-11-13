@@ -106,16 +106,43 @@ def _decode_value(result: Any, default: Any) -> Any:
     return result
 
 
-def get_json(key: str, default: Any = None) -> Any:
+def _cache_read(key: str):
+    try:
+        from api.squirrel_cache import SquirrelCache
+        return SquirrelCache().get(key)
+    except Exception:
+        # Cache is an optimization; failures must not mask the source store.
+        return False, None
+
+
+def _cache_write(key: str, value: Any, ttl: float) -> None:
+    if ttl <= 0:
+        return
+    try:
+        from api.squirrel_cache import SquirrelCache
+        SquirrelCache().put(key, value, ttl=ttl)
+    except Exception:
+        # The durable write already succeeded; cache failure is non-fatal.
+        return
+
+
+def get_json(key: str, default: Any = None, cache_ttl: float = 0) -> Any:
     key = _key(key)
     b = backend()
+    if cache_ttl > 0 and b in {"upstash", "http"}:
+        hit, cached = _cache_read(key)
+        if hit:
+            return cached
     if b == "upstash":
         url = f"{_upstash_url()}/get/{_encoded_key(key)}"
         req = urllib.request.Request(
             url, headers={"Authorization": f"Bearer {_upstash_token()}"}
         )
         with _open(req) as response:
-            return _decode_value(_read_response(response), default)
+            value = _decode_value(_read_response(response), default)
+        if value is not default:
+            _cache_write(key, value, cache_ttl)
+        return value
 
     if b == "http":
         url = os.environ["IXP_STATE_HTTP_GET"].format(key=_encoded_key(key))
@@ -125,6 +152,9 @@ def get_json(key: str, default: Any = None) -> Any:
                 return json.loads(response.read().decode("utf-8") or "null")
             except (UnicodeDecodeError, json.JSONDecodeError) as exc:
                 raise StoreError("HTTP storage backend returned invalid JSON") from exc
+        if value is not None:
+            _cache_write(key, value, cache_ttl)
+        return value
 
     if b == "github_cold":
         try:
@@ -145,7 +175,7 @@ def get_json(key: str, default: Any = None) -> Any:
         raise StoreError(f"temporary state read failed: {exc}") from exc
 
 
-def set_json(key: str, value: Any) -> bool:
+def set_json(key: str, value: Any, cache_ttl: float = 0) -> bool:
     key = _key(key)
     payload = json.dumps(value, separators=(",", ":"), ensure_ascii=False)
     b = backend()
@@ -165,6 +195,7 @@ def set_json(key: str, value: Any) -> bool:
             result = _read_response(response)
         if result != "OK":
             raise StoreError(f"Upstash SET returned unexpected result: {result!r}")
+        _cache_write(key, value, cache_ttl)
         return True
 
     if b == "http":
@@ -177,6 +208,7 @@ def set_json(key: str, value: Any) -> bool:
         )
         with _open(req) as response:
             _read_response(response)
+        _cache_write(key, value, cache_ttl)
         return True
 
     if b == "github_cold":
