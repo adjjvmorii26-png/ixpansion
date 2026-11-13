@@ -109,7 +109,7 @@ def _decode_value(result: Any, default: Any) -> Any:
 def _cache_read(key: str):
     try:
         from api.squirrel_cache import SquirrelCache
-        return SquirrelCache().get(key)
+        return SquirrelCache().get(f"off_vercel_store:{key}")
     except Exception:
         # Cache is an optimization; failures must not mask the source store.
         return False, None
@@ -120,7 +120,7 @@ def _cache_write(key: str, value: Any, ttl: float) -> None:
         return
     try:
         from api.squirrel_cache import SquirrelCache
-        SquirrelCache().put(key, value, ttl=ttl)
+        SquirrelCache().put(f"off_vercel_store:{key}", value, ttl=ttl)
     except Exception:
         # The durable write already succeeded; cache failure is non-fatal.
         return
