@@ -7,6 +7,7 @@ identity, authorization, or integrity.
 from __future__ import annotations
 
 import json
+from contextlib import closing
 import os
 import sqlite3
 import time
@@ -45,7 +46,7 @@ class SquirrelCache:
             path, max_entries, max_bytes
         )
         Path(self.path).parent.mkdir(parents=True, exist_ok=True)
-        with self._connect() as db:
+        with closing(self._connect()) as db:
             db.execute(
                 """
                 CREATE TABLE IF NOT EXISTS cache_entries (
@@ -72,7 +73,7 @@ class SquirrelCache:
         if not isinstance(key, str) or not key:
             raise ValueError("cache key must be a non-empty string")
         current = time.time() if now is None else float(now)
-        with self._connect() as db:
+        with closing(self._connect()) as db:
             db.execute("BEGIN IMMEDIATE")
             db.execute("DELETE FROM cache_entries WHERE expires_at <= ?", (current,))
             row = db.execute(
@@ -115,7 +116,7 @@ class SquirrelCache:
             self.delete(key)
             return False
 
-        with self._connect() as db:
+        with closing(self._connect()) as db:
             db.execute("BEGIN IMMEDIATE")
             db.execute("DELETE FROM cache_entries WHERE expires_at <= ?", (current,))
             db.execute(
@@ -146,19 +147,19 @@ class SquirrelCache:
         return True
 
     def delete(self, key: str) -> None:
-        with self._connect() as db:
+        with closing(self._connect()) as db:
             db.execute("BEGIN IMMEDIATE")
             db.execute("DELETE FROM cache_entries WHERE cache_key = ?", (key,))
             db.execute("COMMIT")
 
     def clear(self) -> None:
-        with self._connect() as db:
+        with closing(self._connect()) as db:
             db.execute("BEGIN IMMEDIATE")
             db.execute("DELETE FROM cache_entries")
             db.execute("COMMIT")
 
     def stats(self) -> dict:
-        with self._connect() as db:
+        with closing(self._connect()) as db:
             count, total = db.execute(
                 "SELECT COUNT(*), COALESCE(SUM(byte_size), 0) FROM cache_entries"
             ).fetchone()
