@@ -33,6 +33,8 @@ class StoreConfigurationError(StoreError):
 def _key(key: str) -> str:
     if not isinstance(key, str) or not key or key in {".", ".."}:
         raise ValueError("storage key must be a non-empty string")
+    if any(part in {".", ".."} for part in key.replace("\\\\", "/").split("/")):
+        raise ValueError("storage key must not contain path traversal segments")
     if any(ord(char) < 32 or ord(char) == 127 for char in key):
         raise ValueError("storage key must not contain control characters")
     return key
