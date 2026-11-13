@@ -1,53 +1,63 @@
 # Get data storage off Vercel
 
-## What was happening
+## Storage layers
 
-1. **Ephemeral FS** — writes under the function filesystem die between invocations.
-2. **GitHub mirror as “disk”** — `api/github_mirror.py` commits JSON into `data/`, which:
-   - bloats the **git** history and **deployment** upload size
-   - still feels like “Vercel storage” when every deploy ships `data/**`
-3. **No Vercel Blob/KV** was connected on `ixpansion-live` (good — don’t add them if the goal is off-Vercel).
+| Layer | Role | Authority |
+|---|---|---|
+| Upstash Redis or configured HTTPS JSON API | Durable source of truth | Authoritative |
+| SquirrelCache (`api/squirrel_cache.py`) | Bounded SQLite TTL/LRU acceleration | Never authoritative |
+| GitHub mirror | Cold archive only | Not a hot-path database |
+| `/tmp` | Explicit ephemeral fallback | Not durable |
 
-## What we shipped
+## SquirrelCache behavior
 
-| Change | Effect |
-|--------|--------|
-| `.vercelignore` | **Excludes `data/**`** (and tests/docs/artifacts) from the Vercel build upload |
-| `api/off_vercel_store.py` | Runtime get/set prefers **Upstash Redis** or generic HTTP, not Vercel Blob |
-| GitHub mirror | Keep for **cold archive only**; block hot writes unless `IXP_ALLOW_GITHUB_HOT_WRITE=1` |
+SquirrelCache is a local SQLite cache intended to reduce repeat reads from the
+durable external store. It uses BEGIN IMMEDIATE transactions, WAL mode, TTL
+expiry, entry and byte ceilings, and least-recently-used eviction.
 
-## Recommended external store (free tier)
-
-**Upstash Redis** (REST, works from serverless):
-
-1. Create a Redis DB at upstash.com (not on Vercel storage).
-2. Add to Vercel project env (production):
-   - `UPSTASH_REDIS_REST_URL`
-   - `UPSTASH_REDIS_REST_TOKEN`
-3. In modules, prefer:
+It is opt-in per call:
 
 ```python
 from api.off_vercel_store import get_json, set_json
-state = get_json("visitor_log", {"entries": []})
-set_json("visitor_log", state)
+
+# Read-through cache; remote durable store remains the authority.
+state = get_json("telemetry/summary", {}, cache_ttl=15)
+set_json("telemetry/summary", state, cache_ttl=15)
 ```
 
-## Reduce repo weight (optional but strong)
+Cache configuration:
+- `IXP_SQUIRREL_CACHE_PATH` (default `/tmp/ixp_squirrel_cache.sqlite3`)
+- `IXP_SQUIRREL_CACHE_MAX_ENTRIES` (default `512`)
+- `IXP_SQUIRREL_CACHE_MAX_BYTES` (default `8388608`)
 
-Large historical JSON under `data/` can move to a **separate private archive repo** or object storage (R2/S3/Backblaze). Keep only seed/manifest files in `ixpansion`.
+Cache TTL is supplied by the caller. The default is zero, so caching is off
+unless explicitly requested. Cache failures are non-fatal; durable backend
+failures still raise `StoreError`. A cache hit is not proof of identity,
+authorization, freshness beyond its TTL, or data integrity. Do not use this
+cache as the sole source for API-key validation, authorization decisions,
+billing counters, or transactional state.
 
-```bash
-# example: stop tracking a heavy file without deleting history yet
-git rm --cached data/some_huge.json
-# add to .gitignore: data/*.json (keep data/.gitkeep)
-```
+On Vercel, SQLite cache files are local to a function instance and ephemeral.
+They are not shared across instances and are not a replacement for Upstash.
 
-## Do not
+## Durable backend
 
-- Create Vercel Blob / KV / Postgres if the goal is off Vercel storage
-- Commit high-churn counters to `main` from production handlers
-- Rely on `/tmp` for anything that must survive a cold start
+The runtime adapter prefers:
+- `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`, or
+- `IXP_STATE_HTTP_GET` + `IXP_STATE_HTTP_PUT`.
 
-## Verify
+The two variables for each backend must be configured together. Configured
+backend failures raise errors rather than silently falling back to `/tmp`.
 
-After merge + redeploy, deployment file size should drop (no `data/**` in the bundle). Runtime state goes to Upstash (or HTTP), not the deploy package.
+GitHub remains cold-archive only. Hot writes remain disabled unless
+`IXP_ALLOW_GITHUB_HOT_WRITE=1` is explicitly enabled.
+
+## Reduce deployment weight
+
+`.vercelignore` excludes `data/**`, tests, docs, and artifacts from CLI deploy
+uploads. Confirm the actual deployment method and artifact contents before
+assuming this also changes Git-connected deployment behavior.
+
+Do not create Vercel Blob, KV, or Postgres when the requirement is storage
+outside Vercel. Do not remove historical `data/**` files until an archive and
+restore verification exist.
