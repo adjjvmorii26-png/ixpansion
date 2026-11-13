@@ -61,7 +61,7 @@ class UpstashAtomicStore:
         url = off_vercel_store._upstash_url()
         token = off_vercel_store._upstash_token()
         request = urllib.request.Request(
-            url,
+            url + "/",
             data=json.dumps(list(parts), separators=(",", ":")).encode("utf-8"),
             method="POST",
             headers={
