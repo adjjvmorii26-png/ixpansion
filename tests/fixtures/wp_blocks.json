@@ -1,0 +1,20 @@
+{
+  "custom_block_tree": [
+    {
+      "blockName": "ixpansion/telemetry-hud",
+      "attrs": {"theme": "dark-hex", "refreshRate": 1000},
+      "innerBlocks": [
+        {
+          "blockName": "core/paragraph",
+          "attrs": {},
+          "innerHTML": "<p>Telemetry stream active.</p>"
+        }
+      ]
+    },
+    {
+      "blockName": "unknown/legacy-vendor-widget",
+      "attrs": {"id": "legacy_99"},
+      "innerHTML": "<div>Legacy raw markup</div>"
+    }
+  ]
+}

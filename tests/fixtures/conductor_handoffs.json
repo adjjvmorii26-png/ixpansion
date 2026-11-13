@@ -1,0 +1,14 @@
+{
+  "valid_handoff": {
+    "step_id": "step_04",
+    "status": "partial",
+    "compensation_ref": "comp_rollback_tx_99",
+    "atomicity_claimed": false
+  },
+  "false_atomicity": {
+    "step_id": "step_05",
+    "status": "partial",
+    "compensation_ref": null,
+    "atomicity_claimed": true
+  }
+}
