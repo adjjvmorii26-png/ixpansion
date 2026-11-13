@@ -4,8 +4,9 @@
 
 The storage guardian gives IXPANSION an independent storage-health observer. It
 classifies configured backends, inspects local SquirrelCache read-only, and
-emits safe remediation guidance. It is not a second storage engine and does not
-claim configuration proves reachability or durability.
+emits safe remediation guidance. Its first autonomous repair is bounded TTL
+cleanup inside the disposable SquirrelCache database. It is not a second storage
+engine and does not claim configuration proves reachability or durability.
 
 ## Operating contract
 
@@ -20,11 +21,11 @@ claim configuration proves reachability or durability.
 
 ## Autonomy boundary
 
-The guardian is currently observe-and-recommend only. It may be scheduled by a
-runtime supervisor and its reports may drive alerts or proposed repairs. It
-may not rotate credentials, modify provider settings, delete durable data,
-migrate authentication state, or claim a repair succeeded without read-back
-evidence.
+The guardian may inspect storage and prune expired rows from the ephemeral
+SquirrelCache database after an integrity check and transactional lock. It may
+be scheduled by a runtime supervisor. It may not rotate credentials, modify
+provider settings, delete durable data, migrate authentication state, or claim
+a repair succeeded without read-back evidence.
 
 ## Next evolution
 
@@ -35,6 +36,13 @@ evidence.
 3. Add a scheduled supervisor that stores signed health reports and opens
    deduplicated incidents on state transitions.
 4. Add restore drills against disposable fixtures before any production restore.
+
+## Safe maintenance
+
+Call maintain_ephemeral_cache() from a supervised maintenance cycle. It only
+removes rows whose TTL has expired in the configured local cache. Missing or
+corrupt cache files are not recreated or deleted automatically; they are
+reported for diagnosis. The operation returns an explicit action and count.
 
 ## Run
 
