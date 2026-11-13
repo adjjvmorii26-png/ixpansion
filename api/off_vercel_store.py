@@ -31,10 +31,16 @@ class StoreConfigurationError(StoreError):
 
 
 def _key(key: str) -> str:
-    if not isinstance(key, str) or not key or key in {".", ".."}:
+    if not isinstance(key, str) or not key:
         raise ValueError("storage key must be a non-empty string")
     if any(ord(char) < 32 or ord(char) == 127 for char in key):
         raise ValueError("storage key must not contain control characters")
+    # Treat both separator styles as path boundaries before URL encoding.
+    # URL encoding prevents URL syntax injection, but it is not a substitute
+    # for rejecting traversal segments at the storage-key contract boundary.
+    segments = key.replace("\\", "/").split("/")
+    if any(segment in {".", ".."} for segment in segments):
+        raise ValueError("storage key must not contain traversal segments")
     return key
 
 
