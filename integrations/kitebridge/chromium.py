@@ -51,7 +51,12 @@ def _stdlib_transport(
             raw = response.read(1_000_001)
             if len(raw) > 1_000_000:
                 raise ChromiumSessionProtocolError("Cloudflare response exceeds the 1 MB limit")
-            parsed = json.loads(raw.decode("utf-8"))
+            if not raw:
+                return response.status, {}
+            try:
+                parsed = json.loads(raw.decode("utf-8"))
+            except (UnicodeError, ValueError):
+                raise ChromiumSessionProtocolError("Cloudflare returned a non-JSON session response") from None
             return response.status, parsed if isinstance(parsed, dict) else {}
     except urllib.error.HTTPError as exc:
         raw = exc.read(1_000_001)
@@ -157,6 +162,7 @@ class CloudflareChromiumSessionLauncher:
         if not (
             parsed_ws.scheme == "wss"
             and parsed_ws.hostname == "api.cloudflare.com"
+            and parsed_ws.port in (None, 443)
             and parsed_ws.path == expected_path
             and not parsed_ws.username
             and not parsed_ws.password
