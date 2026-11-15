@@ -8,6 +8,7 @@ description: Route browser tasks through Cloudflare Kitesurf or guarded Chromium
 ## Capabilities
 - kitebridge:classify_task — select Kitesurf or Chromium based on task requirements
 - kitebridge:build_chromium_guardrails — compile Cloudflare session-level HTTP/HTTPS request restrictions
+- kitebridge:open_guarded_chromium_session — acquire a bounded Chromium session with guardrails attached at creation and close it through its lease
 - kitebridge:capture_public_page — capture trusted allowlisted public pages with Kitesurf
 - kitebridge:verify_evidence — validate local evidence hashes without overstating source trust
 - kitebridge:benchmark_route — compare compatible public tasks against Chromium
@@ -43,7 +44,7 @@ guardrails = build_chromium_guardrails(allow_no_network=True)
 # Produces {"allowedDomains": []}; all HTTP/HTTPS requests are blocked.
 ~~~
 
-Do not silently omit the guardrails option or fall back to an unrestricted session. An outbound Worker configured with outboundByHost is a separate request path and must enforce its own destination policy.
+Use CloudflareChromiumSessionLauncher from integrations.kitebridge to create and close guarded sessions. Its launch() method posts the compiled guardrails object to Browser Run session creation, enforces the documented 10,000 to 1,200,000 ms keep-alive bounds, validates the returned session ID and websocket URL, and returns a lease whose repr hides the websocket URL. Call close(lease) in a finally block. Do not silently omit the guardrails option or fall back to an unrestricted session. An outbound Worker configured with outboundByHost is a separate request path and must enforce its own destination policy.
 
 ## Kitesurf boundary
 
