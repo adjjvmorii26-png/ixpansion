@@ -285,21 +285,43 @@ class WorkspaceSyncRunner:
                     for item in self.outbox.preview_due(now=now, limit=limit)]
         outcomes: list[dict[str, Any]] = []
         for event in self.outbox.claim_due(now=now, limit=limit):
+            event_id = event["event_id"]
+            attempt = event["attempts"]
             adapter = self.adapters.get(event["target"])
             if adapter is None:
-                state = self.outbox.mark_failed(event["event_id"], "no adapter registered", attempt=event["attempts"], transient=False, now=now)
-                outcomes.append({"event_id": event["event_id"], "state": state, "reason": "adapter_missing"})
+                try:
+                    state = self.outbox.mark_failed(
+                        event_id, "no adapter registered", attempt=attempt,
+                        transient=False, now=now
+                    )
+                except WorkspaceSyncError:
+                    state = "stale_claim"
+                outcomes.append({"event_id": event_id, "state": state, "reason": "adapter_missing"})
                 continue
             try:
                 receipt = adapter.deliver(event)
                 if not isinstance(receipt, dict) or not adapter.verify(event, receipt):
                     raise PermanentAdapterError("destination read-after-write verification failed")
-                self.outbox.mark_delivered(event["event_id"], attempt=event["attempts"], now=now)
-                outcomes.append({"event_id": event["event_id"], "state": "delivered_verified"})
+                try:
+                    self.outbox.mark_delivered(event_id, attempt=attempt, now=now)
+                    state = "delivered_verified"
+                except WorkspaceSyncError:
+                    state = "stale_claim"
+                outcomes.append({"event_id": event_id, "state": state})
             except TransientAdapterError as exc:
-                state = self.outbox.mark_failed(event["event_id"], str(exc), attempt=event["attempts"], transient=True, now=now)
-                outcomes.append({"event_id": event["event_id"], "state": state, "reason": "transient_adapter_error"})
+                try:
+                    state = self.outbox.mark_failed(
+                        event_id, str(exc), attempt=attempt, transient=True, now=now
+                    )
+                except WorkspaceSyncError:
+                    state = "stale_claim"
+                outcomes.append({"event_id": event_id, "state": state, "reason": "transient_adapter_error"})
             except Exception as exc:
-                state = self.outbox.mark_failed(event["event_id"], str(exc), attempt=event["attempts"], transient=False, now=now)
-                outcomes.append({"event_id": event["event_id"], "state": state, "reason": "permanent_or_unclassified_error"})
+                try:
+                    state = self.outbox.mark_failed(
+                        event_id, str(exc), attempt=attempt, transient=False, now=now
+                    )
+                except WorkspaceSyncError:
+                    state = "stale_claim"
+                outcomes.append({"event_id": event_id, "state": state, "reason": "permanent_or_unclassified_error"})
         return outcomes
