@@ -22,10 +22,10 @@ WS_URL = (
 class FakeTransport:
     def __init__(self, *, status=200, response=None):
         self.status = status
-        self.response = response or {
+        self.response = {
             "sessionId": SESSION_ID,
             "webSocketDebuggerUrl": WS_URL,
-        }
+        } if response is None else response
         self.calls = []
 
     def __call__(self, method, url, headers, body, timeout):
