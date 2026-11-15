@@ -215,26 +215,28 @@ class WorkspaceOutbox:
             db.execute("COMMIT")
         return claimed
 
-    def mark_delivered(self, event_id: int, *, now: float | None = None) -> None:
+    def mark_delivered(self, event_id: int, *, attempt: int, now: float | None = None) -> None:
+        """Complete only the exact claim attempt; stale workers are fenced out."""
         timestamp = time.time() if now is None else float(now)
         with closing(self._connect()) as db:
             cursor = db.execute("""
                 UPDATE workspace_outbox SET state='delivered', lease_until=NULL,
-                    updated_at=?, last_error=NULL WHERE event_id=? AND state='inflight'
-            """, (timestamp, int(event_id)))
+                    updated_at=?, last_error=NULL WHERE event_id=? AND state='inflight' AND attempts=?
+            """, (timestamp, int(event_id), int(attempt)))
             if cursor.rowcount != 1:
-                raise WorkspaceSyncError(f"event is not inflight: {event_id}")
+                raise WorkspaceSyncError(f"stale or non-inflight claim: {event_id} attempt {attempt}")
 
-    def mark_failed(self, event_id: int, error: str, *, transient: bool,
+    def mark_failed(self, event_id: int, error: str, *, attempt: int, transient: bool,
                     now: float | None = None) -> str:
+        """Fail only the exact claim attempt; stale workers cannot overwrite a newer claim."""
         timestamp = time.time() if now is None else float(now)
         with closing(self._connect()) as db:
             row = db.execute(
-                "SELECT attempts,idempotent FROM workspace_outbox WHERE event_id=? AND state='inflight'",
-                (int(event_id),),
+                "SELECT attempts,idempotent FROM workspace_outbox WHERE event_id=? AND state='inflight' AND attempts=?",
+                (int(event_id), int(attempt)),
             ).fetchone()
             if row is None:
-                raise WorkspaceSyncError(f"event is not inflight: {event_id}")
+                raise WorkspaceSyncError(f"stale or non-inflight claim: {event_id} attempt {attempt}")
             retry = bool(transient and row["idempotent"])
             if retry:
                 delay = min(self.retry_max_seconds, self.retry_base_seconds * (2 ** max(0, int(row["attempts"]) - 1)))
@@ -243,8 +245,8 @@ class WorkspaceOutbox:
                 state, next_at = "dead", timestamp
             db.execute("""
                 UPDATE workspace_outbox SET state=?, next_attempt_at=?, lease_until=NULL,
-                    updated_at=?, last_error=? WHERE event_id=?
-            """, (state, next_at, timestamp, _redact_error(error), int(event_id)))
+                    updated_at=?, last_error=? WHERE event_id=? AND state='inflight' AND attempts=?
+            """, (state, next_at, timestamp, _redact_error(error), int(event_id), int(attempt)))
         return state
 
     def get(self, event_id: int) -> dict[str, Any] | None:
@@ -279,17 +281,17 @@ class WorkspaceSyncRunner:
         for event in self.outbox.claim_due(now=now, limit=limit):
             adapter = self.adapters.get(event["target"])
             if adapter is None:
-                state = self.outbox.mark_failed(event["event_id"], "no adapter registered", transient=False, now=now)
+                state = self.outbox.mark_failed(event["event_id"], "no adapter registered", attempt=event["attempts"], attempt=event["attempts"], transient=False, now=now)
                 outcomes.append({"event_id": event["event_id"], "state": state, "reason": "adapter_missing"})
                 continue
             try:
                 receipt = adapter.deliver(event)
                 if not isinstance(receipt, dict) or not adapter.verify(event, receipt):
                     raise PermanentAdapterError("destination read-after-write verification failed")
-                self.outbox.mark_delivered(event["event_id"], now=now)
+                self.outbox.mark_delivered(event["event_id"], attempt=event["attempts"], now=now)
                 outcomes.append({"event_id": event["event_id"], "state": "delivered_verified"})
             except TransientAdapterError as exc:
-                state = self.outbox.mark_failed(event["event_id"], str(exc), transient=True, now=now)
+                state = self.outbox.mark_failed(event["event_id"], str(exc), attempt=event["attempts"], transient=True, now=now)
                 outcomes.append({"event_id": event["event_id"], "state": state, "reason": "transient_adapter_error"})
             except Exception as exc:
                 state = self.outbox.mark_failed(event["event_id"], str(exc), transient=False, now=now)
