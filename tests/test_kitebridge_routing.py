@@ -1,6 +1,10 @@
 import unittest
 
-from integrations.kitebridge.routing import BrowserTask, select_browser_route
+from integrations.kitebridge.routing import (
+    BrowserTask,
+    build_chromium_guardrails,
+    select_browser_route,
+)
 
 
 class BrowserRoutingTests(unittest.TestCase):
@@ -63,10 +67,26 @@ class BrowserRoutingTests(unittest.TestCase):
                                  allowed_hosts={"127.0.0.1"}),
             "deny",
         )
+        self.assertEqual(
+            select_browser_route(BrowserTask("https://docs.example.com/"),
+                                 allowed_hosts={"*.example.com"}),
+            "deny",
+        )
 
     def test_oversized_urls_are_denied_even_for_chromium(self):
         task = BrowserTask("https://docs.example.com/" + "x" * 2050, authenticated=True)
         self.assertEqual(select_browser_route(task, allowed_hosts={"docs.example.com"}), "deny")
+
+    def test_chromium_guardrails_are_exact_normalized_and_sorted(self):
+        self.assertEqual(
+            build_chromium_guardrails(allowed_hosts={"DOCS.example.com.", "app.example.com"}),
+            {"allowedDomains": ["app.example.com", "docs.example.com"]},
+        )
+
+    def test_chromium_guardrails_reject_wildcards_and_empty_lists(self):
+        for hosts in (set(), {"*.example.com"}, {"127.0.0.1"}, {"bad host.example"}):
+            with self.subTest(hosts=hosts), self.assertRaises(ValueError):
+                build_chromium_guardrails(allowed_hosts=hosts)
 
 
 if __name__ == "__main__":
