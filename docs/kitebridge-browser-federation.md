@@ -30,7 +30,8 @@ KITEBRIDGE exposes build_chromium_guardrails(...) to compile a validated Cloudfl
 - Up to 50 allowedDomains hostname patterns.
 - Up to four allowedDomainSets references.
 - Exact hostnames and one leading wildcard pattern such as *.example.com.
-- Explicit allow_no_network=True produces {"allowedDomains": []}, which blocks all HTTP/HTTPS requests.
+- Domain-set-only policies emit allowedDomainSets without an empty allowedDomains property. Cloudflare interprets an explicit empty allowedDomains array as deny-all.
+- Explicit allow_no_network=True produces {"allowedDomains": []}, which blocks all HTTP/HTTPS requests; it cannot be combined with domains or domain sets.
 - Omitting both allowlist properties is rejected by the helper because Cloudflare treats that as unrestricted network access.
 
 The Chromium session launcher must pass this object as the guardrails option when creating a Puppeteer/Playwright session, or in the Browser Run REST/CDP session creation request. Do not silently omit it or fall back to an unguarded session. Cloudflare's guardrails are session-level request controls, not a general policy for every Cloudflare product.
