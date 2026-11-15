@@ -86,6 +86,8 @@ class WorkspaceOutbox:
     def __init__(self, database: str | Path, *, retry_base_seconds: float = 5.0,
                  retry_max_seconds: float = 3600.0) -> None:
         self.database = str(database)
+        if self.database == ":memory:":
+            raise ValueError("use a file-backed SQLite database for durable multi-connection outbox state")
         self.retry_base_seconds = max(0.1, float(retry_base_seconds))
         self.retry_max_seconds = max(self.retry_base_seconds, float(retry_max_seconds))
         if self.database != ":memory:":
@@ -163,6 +165,18 @@ class WorkspaceOutbox:
                   digest, int(bool(idempotent)), timestamp, timestamp, timestamp))
             db.execute("COMMIT")
         return True
+
+    def preview_due(self, *, now: float | None = None, limit: int = 10) -> list[dict[str, Any]]:
+        """Inspect due work without claiming it or changing durable state."""
+        timestamp = time.time() if now is None else float(now)
+        batch = max(1, min(int(limit), 100))
+        with closing(self._connect()) as db:
+            rows = db.execute("""
+                SELECT event_id,idempotency_key,target,operation,attempts
+                FROM workspace_outbox WHERE state='pending' AND next_attempt_at <= ?
+                ORDER BY event_id LIMIT ?
+            """, (timestamp, batch)).fetchall()
+        return [dict(row) for row in rows]
 
     def claim_due(self, *, now: float | None = None, lease_seconds: float = 60.0,
                   limit: int = 10) -> list[dict[str, Any]]:
@@ -259,9 +273,8 @@ class WorkspaceSyncRunner:
     def run_once(self, *, now: float | None = None, limit: int = 10,
                  dry_run: bool = False) -> list[dict[str, Any]]:
         if dry_run:
-            return [{"state": "would_dispatch", "event_id": item["event_id"],
-                     "target": item["target"], "operation": item["operation"]}
-                    for item in self.outbox.claim_due(now=now, limit=limit)] if False else []
+            return [{"state": "would_dispatch", **item}
+                    for item in self.outbox.preview_due(now=now, limit=limit)]
         outcomes: list[dict[str, Any]] = []
         for event in self.outbox.claim_due(now=now, limit=limit):
             adapter = self.adapters.get(event["target"])
