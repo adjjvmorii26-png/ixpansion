@@ -61,29 +61,34 @@ def build_chromium_guardrails(
     Puppeteer, Playwright, and CDP sessions. They are not available to
     Browser Run Quick Actions such as Kitesurf snapshots.
     """
-    hosts = allowed_hosts or set()
-    domain_sets = allowed_domain_sets or set()
+    hosts = set() if allowed_hosts is None else allowed_hosts
+    domain_sets = set() if allowed_domain_sets is None else allowed_domain_sets
     if not isinstance(hosts, set) or not isinstance(domain_sets, set):
         raise ValueError("allowed_hosts and allowed_domain_sets must be sets")
+    if not isinstance(allow_no_network, bool):
+        raise ValueError("allow_no_network must be a boolean")
     if len(hosts) > 50:
         raise ValueError("Cloudflare Browser Run allows at most 50 allowedDomains entries")
     if len(domain_sets) > 4:
         raise ValueError("Cloudflare Browser Run allows at most four allowedDomainSets entries")
 
     normalized_hosts = sorted({_normalize_domain_pattern(host) for host in hosts})
-    normalized_sets = sorted(domain_sets)
     if any(
         not isinstance(name, str)
         or not _DOMAIN_SET.fullmatch(name)
-        for name in normalized_sets
+        for name in domain_sets
     ):
         raise ValueError("domain-set names must be non-empty identifiers without whitespace")
+    normalized_sets = sorted(domain_sets)
+
     if not normalized_hosts and not normalized_sets and not allow_no_network:
         raise ValueError("an allowlist is required; use allow_no_network=True to block all web requests")
     if allow_no_network and (normalized_hosts or normalized_sets):
         raise ValueError("allow_no_network cannot be combined with allowed domains or domain sets")
 
-    guardrails: dict[str, list[str]] = {"allowedDomains": normalized_hosts}
+    guardrails: dict[str, list[str]] = {}
+    if normalized_hosts or allow_no_network:
+        guardrails["allowedDomains"] = normalized_hosts
     if normalized_sets:
         guardrails["allowedDomainSets"] = normalized_sets
     return guardrails
