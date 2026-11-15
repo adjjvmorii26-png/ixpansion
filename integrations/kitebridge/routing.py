@@ -29,8 +29,28 @@ def _normalize_dns_host(value: str) -> str:
 
 
 def select_browser_route(task: BrowserTask, *, allowed_hosts: set[str]) -> str:
-    """Return kitesurf, chromium, or deny; never infer auth from URL alone."""
-    if not task.public:
+    """Return kitesurf, chromium, or deny after applying one target policy.
+
+    The exact-host allowlist and URL safety checks apply to every engine.
+    Engine capability flags may select Chromium, but never bypass target policy.
+    """
+    if not task.public or not isinstance(task.url, str) or len(task.url) > 2048:
+        return "deny"
+    try:
+        parsed = urlsplit(task.url)
+        hostname = _normalize_dns_host(parsed.hostname or "")
+        port = parsed.port
+        normalized_allowlist = {_normalize_dns_host(host) for host in allowed_hosts}
+    except (ValueError, UnicodeError, AttributeError):
+        return "deny"
+    if not (
+        parsed.scheme.lower() == "https"
+        and not parsed.username
+        and not parsed.password
+        and port in (None, 443)
+        and not parsed.fragment
+        and hostname in normalized_allowlist
+    ):
         return "deny"
     if (
         task.authenticated
@@ -40,22 +60,4 @@ def select_browser_route(task: BrowserTask, *, allowed_hosts: set[str]) -> str:
         or task.bot_challenge
     ):
         return "chromium"
-    if not isinstance(task.url, str) or len(task.url) > 2048:
-        return "deny"
-    try:
-        parsed = urlsplit(task.url)
-        hostname = _normalize_dns_host(parsed.hostname or "")
-        port = parsed.port
-        normalized_allowlist = {_normalize_dns_host(host) for host in allowed_hosts}
-    except (ValueError, UnicodeError, AttributeError):
-        return "deny"
-    if (
-        parsed.scheme.lower() == "https"
-        and not parsed.username
-        and not parsed.password
-        and port in (None, 443)
-        and not parsed.fragment
-        and hostname in normalized_allowlist
-    ):
-        return "kitesurf"
-    return "deny"
+    return "kitesurf"
