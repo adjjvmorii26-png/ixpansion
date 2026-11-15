@@ -5,6 +5,7 @@ not upload arbitrary file bytes, change sharing permissions, or delete remote da
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import urllib.error
@@ -174,7 +175,7 @@ class NotionDatabaseAdapter(_JsonProvider):
             title = "".join(x.get("plain_text", "") for x in props[self.title_property]["title"])
         except (KeyError, TypeError, AttributeError):
             return False
-        expected_title = str(event["payload"].get("title") or event["payload"].get("artifact_id") or "").strip()
+        expected_title = str(event["payload"].get("title") or event["payload"].get("artifact_id") or "").strip()[:2000]
         return (
             key == event["idempotency_key"]
             and revision == str(event["payload"]["source_revision"])
@@ -195,7 +196,7 @@ class GoogleDriveMetadataAdapter(_JsonProvider):
         return value.replace("\\", "\\\\").replace("'", "\\'")
 
     def _find(self, event: dict[str, Any]) -> list[dict[str, Any]]:
-        key = self._escape_query(event["idempotency_key"])
+        key = hashlib.sha256(event["idempotency_key"].encode("utf-8")).hexdigest()
         query = f"appProperties has {{ key='ixpansion_key' and value='{key}' }} and trashed=false"
         url = "https://www.googleapis.com/drive/v3/files?" + urllib.parse.urlencode({
             "q": query, "spaces": "drive", "pageSize": "10",
@@ -217,8 +218,8 @@ class GoogleDriveMetadataAdapter(_JsonProvider):
         metadata: dict[str, Any] = {
             "name": name[:255],
             "appProperties": {
-                "ixpansion_key": event["idempotency_key"][:124],
-                "ixpansion_revision": revision[:124],
+                "ixpansion_key": hashlib.sha256(event["idempotency_key"].encode("utf-8")).hexdigest(),
+                "ixpansion_revision": hashlib.sha256(revision.encode("utf-8")).hexdigest(),
             },
             "description": f"IXPANSION artifact pointer; source revision: {revision[:500]}",
         }
@@ -241,6 +242,9 @@ class GoogleDriveMetadataAdapter(_JsonProvider):
             raise ProviderProtocolError("duplicate Drive files found for one idempotency key")
         fields = "id,name,appProperties,description,webViewLink"
         if matches:
+            # Drive parent membership is changed only through explicit add/remove-parent
+            # query parameters; this adapter never moves an existing file.
+            metadata.pop("parents", None)
             file_id = matches[0].get("id")
             if not file_id:
                 raise ProviderProtocolError("Drive query result omitted file id")
@@ -274,6 +278,6 @@ class GoogleDriveMetadataAdapter(_JsonProvider):
         return (
             file.get("id") == file_id
             and file.get("name") == expected_name[:255]
-            and props.get("ixpansion_key") == event["idempotency_key"][:124]
-            and props.get("ixpansion_revision") == str(event["payload"]["source_revision"])[:124]
+            and props.get("ixpansion_key") == hashlib.sha256(event["idempotency_key"].encode("utf-8")).hexdigest()
+            and props.get("ixpansion_revision") == hashlib.sha256(str(event["payload"]["source_revision"]).encode("utf-8")).hexdigest()
         )
