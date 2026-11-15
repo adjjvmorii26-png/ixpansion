@@ -58,6 +58,7 @@ DISCOVER → RESOLVE → PREFLIGHT → PLAN → APPROVAL GATE → ENQUEUE → DE
 - Never store secrets, tokens, passwords, or private keys in Notion, Drive, Sheets, GitHub, or logs.
 - Retry only transient failures for idempotent operations.
 - Treat expired non-idempotent leases as uncertain outcomes and quarantine them.
+- Fence every completion/failure with the exact claim-attempt number; a late worker must not overwrite a newer lease owner.
 - Require destination read-back before marking an operation verified.
 - Ask before destructive actions, permission changes, external sharing, merges, or production deployments.
 
