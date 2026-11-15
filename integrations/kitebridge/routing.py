@@ -8,7 +8,6 @@ from urllib.parse import urlsplit
 
 
 _DNS_LABEL = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$")
-_DOMAIN_SET = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 
 
 @dataclass(frozen=True)
@@ -75,7 +74,9 @@ def build_chromium_guardrails(
     normalized_hosts = sorted({_normalize_domain_pattern(host) for host in hosts})
     if any(
         not isinstance(name, str)
-        or not _DOMAIN_SET.fullmatch(name)
+        or not name
+        or len(name) > 128
+        or any(character.isspace() for character in name)
         for name in domain_sets
     ):
         raise ValueError("domain-set names must be non-empty identifiers without whitespace")
