@@ -178,6 +178,10 @@ class NotionDatabaseAdapter(_JsonProvider):
             key == event["idempotency_key"]
             and revision == str(event["payload"]["source_revision"])
             and title == expected_title
+            and (
+                not event["payload"].get("url")
+                or props.get("Artifact URL", {}).get("url") == event["payload"]["url"]
+            )
         )
 
 
@@ -245,6 +249,7 @@ class GoogleDriveMetadataAdapter(_JsonProvider):
             # Drive parent membership is changed only through explicit add/remove-parent
             # query parameters; this adapter never moves an existing file.
             metadata.pop("parents", None)
+            metadata.pop("mimeType", None)
             file_id = matches[0].get("id")
             if not file_id:
                 raise ProviderProtocolError("Drive query result omitted file id")
@@ -280,4 +285,8 @@ class GoogleDriveMetadataAdapter(_JsonProvider):
             and file.get("name") == expected_name[:255]
             and props.get("ixpansion_key") == hashlib.sha256(event["idempotency_key"].encode("utf-8")).hexdigest()
             and props.get("ixpansion_revision") == hashlib.sha256(str(event["payload"]["source_revision"]).encode("utf-8")).hexdigest()
+            and (
+                not event["payload"].get("url")
+                or str(event["payload"]["url"]) in str(file.get("description", ""))
+            )
         )
