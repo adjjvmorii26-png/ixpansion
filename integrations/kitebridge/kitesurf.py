@@ -168,6 +168,8 @@ class KitesurfBrowserAdapter:
             raise KitesurfProtocolError("screenshot is not valid base64") from None
         if not screenshot_bytes or len(screenshot_bytes) > 1_875_000:
             raise KitesurfProtocolError("decoded screenshot is empty or exceeds the 1.875 MB limit")
+        if not isinstance(tree, (dict, list)):
+            raise KitesurfProtocolError("accessibility tree is missing or malformed")
         try:
             tree_bytes = json.dumps(tree, sort_keys=True, separators=(",", ":")).encode("utf-8")
         except (TypeError, ValueError):
