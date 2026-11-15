@@ -141,6 +141,8 @@ class ProviderAdapterTests(unittest.TestCase):
         item = event("drive")
         receipt = adapter.deliver(item)
         self.assertTrue(adapter.verify(item, receipt))
+        list_url = next(call[1] for call in fake.calls if call[0] == "GET" and "/files?" in call[1])
+        self.assertIn("corpora=allDrives", list_url)
         replay = adapter.deliver(item)
         self.assertEqual(receipt["file_id"], replay["file_id"])
         self.assertEqual(len(fake.files), 1)
