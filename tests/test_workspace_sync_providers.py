@@ -40,7 +40,11 @@ class FakeTransport:
         if parsed.netloc == "api.notion.com":
             if parsed.path.endswith("/query"):
                 key = payload["filter"]["rich_text"]["equals"]
-                rows = [p for p in self.pages.values() if p["properties"]["IXPANSION Key"]["rich_text"][0]["plain_text"] == key]
+                rows = [
+                    p for p in self.pages.values()
+                    if p["properties"]["IXPANSION Key"]["rich_text"][0].get("plain_text",
+                       p["properties"]["IXPANSION Key"]["rich_text"][0].get("text", {}).get("content")) == key
+                ]
                 return 200, {"results": rows}
             if parsed.path == "/v1/pages" and method == "POST":
                 self.next_id += 1
