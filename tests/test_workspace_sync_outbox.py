@@ -174,6 +174,32 @@ class WorkspaceOutboxTests(unittest.TestCase):
         self.assertEqual(self.queue.get(second["event_id"])["state"], "inflight")
         self.queue.mark_delivered(second["event_id"], attempt=second["attempts"], now=103)
 
+    def test_runner_reports_stale_claim_without_overwriting_newer_worker(self):
+        self.enqueue()
+        queue = self.queue
+
+        class LeaseStealingAdapter:
+            second_claim = None
+
+            def deliver(self, event):
+                self.second_claim = queue.claim_due(now=161, lease_seconds=60)[0]
+                return {"verified": True}
+
+            def verify(self, event, receipt):
+                return receipt.get("verified") is True
+
+        adapter = LeaseStealingAdapter()
+        runner = WorkspaceSyncRunner(queue, {"notion": adapter})
+        result = runner.run_once(now=100)
+        self.assertEqual(result[0]["state"], "stale_claim")
+        self.assertEqual(queue.get(adapter.second_claim["event_id"])["state"], "inflight")
+        queue.mark_delivered(
+            adapter.second_claim["event_id"],
+            attempt=adapter.second_claim["attempts"],
+            now=161,
+        )
+        self.assertEqual(queue.stats()["delivered"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()
