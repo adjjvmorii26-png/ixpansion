@@ -201,7 +201,7 @@ class GoogleDriveMetadataAdapter(_JsonProvider):
         key = hashlib.sha256(event["idempotency_key"].encode("utf-8")).hexdigest()
         query = f"appProperties has {{ key='ixpansion_key' and value='{key}' }} and trashed=false"
         url = "https://www.googleapis.com/drive/v3/files?" + urllib.parse.urlencode({
-            "q": query, "spaces": "drive", "pageSize": "10",
+            "q": query, "spaces": "drive", "corpora": "allDrives", "pageSize": "10",
             "fields": "files(id,name,appProperties,description,webViewLink)",
             "supportsAllDrives": "true", "includeItemsFromAllDrives": "true",
         })
