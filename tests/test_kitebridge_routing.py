@@ -121,7 +121,7 @@ class BrowserRoutingTests(unittest.TestCase):
             ({"hosts": {"docs.example.com:443"}, "sets": set()}, "hostname"),
             ({"hosts": {"a.*.example.com"}, "sets": set()}, "wildcard"),
             ({"hosts": set(), "sets": {"common-cdns"}, "no_network": True}, "no_network"),
-            ({"hosts": [] , "sets": set()}, "must be sets"),
+            ({"hosts": [], "sets": set()}, "must be sets"),
             ({"hosts": set(), "sets": []}, "must be sets"),
         )
         for args, expected in cases:
@@ -139,7 +139,7 @@ class BrowserRoutingTests(unittest.TestCase):
             build_chromium_guardrails(allowed_domain_sets={f"set-{i}" for i in range(5)})
 
     def test_guardrails_reject_invalid_domain_set_identifiers(self):
-        for name in ("", "two words", "set/name"):
+        for name in ("", "two words", "x" * 129):
             with self.subTest(name=name), self.assertRaisesRegex(ValueError, "domain-set"):
                 build_chromium_guardrails(allowed_domain_sets={name})
 
