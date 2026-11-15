@@ -7,7 +7,7 @@ from .kitesurf import (
     KitesurfPolicyError,
     KitesurfProtocolError,
 )
-from .routing import BrowserTask, select_browser_route
+from .routing import BrowserTask, build_chromium_guardrails, select_browser_route
 
 __all__ = [
     "BrowserTask",
@@ -16,5 +16,6 @@ __all__ = [
     "KitesurfError",
     "KitesurfPolicyError",
     "KitesurfProtocolError",
+    "build_chromium_guardrails",
     "select_browser_route",
 ]
