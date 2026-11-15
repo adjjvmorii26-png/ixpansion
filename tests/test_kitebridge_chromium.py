@@ -142,6 +142,15 @@ class ChromiumSessionLauncherTests(unittest.TestCase):
         self.assertTrue(fake.calls[1]["url"].endswith("/" + SESSION_ID))
         self.assertIsNone(fake.calls[1]["payload"])
 
+    def test_close_accepts_empty_204_response(self):
+        fake = FakeTransport()
+        launcher = self.launcher(fake)
+        lease = launcher.launch(allowed_hosts={"docs.example.com"})
+        fake.status = 204
+        fake.response = {}
+        launcher.close(lease)
+        self.assertEqual(fake.calls[1]["method"], "DELETE")
+
     def test_close_rejects_arbitrary_session_id(self):
         with self.assertRaises(ChromiumSessionConfigurationError):
             self.launcher(FakeTransport()).close("some-other-session")
