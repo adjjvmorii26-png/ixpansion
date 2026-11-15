@@ -231,11 +231,13 @@ class WorkspaceOutbox:
         """Fail only the exact claim attempt; stale workers cannot overwrite a newer claim."""
         timestamp = time.time() if now is None else float(now)
         with closing(self._connect()) as db:
+            db.execute("BEGIN IMMEDIATE")
             row = db.execute(
                 "SELECT attempts,idempotent FROM workspace_outbox WHERE event_id=? AND state='inflight' AND attempts=?",
                 (int(event_id), int(attempt)),
             ).fetchone()
             if row is None:
+                db.execute("ROLLBACK")
                 raise WorkspaceSyncError(f"stale or non-inflight claim: {event_id} attempt {attempt}")
             retry = bool(transient and row["idempotent"])
             if retry:
@@ -243,10 +245,14 @@ class WorkspaceOutbox:
                 state, next_at = "pending", timestamp + delay
             else:
                 state, next_at = "dead", timestamp
-            db.execute("""
+            cursor = db.execute("""
                 UPDATE workspace_outbox SET state=?, next_attempt_at=?, lease_until=NULL,
                     updated_at=?, last_error=? WHERE event_id=? AND state='inflight' AND attempts=?
             """, (state, next_at, timestamp, _redact_error(error), int(event_id), int(attempt)))
+            if cursor.rowcount != 1:
+                db.execute("ROLLBACK")
+                raise WorkspaceSyncError(f"stale or non-inflight claim: {event_id} attempt {attempt}")
+            db.execute("COMMIT")
         return state
 
     def get(self, event_id: int) -> dict[str, Any] | None:
@@ -281,7 +287,7 @@ class WorkspaceSyncRunner:
         for event in self.outbox.claim_due(now=now, limit=limit):
             adapter = self.adapters.get(event["target"])
             if adapter is None:
-                state = self.outbox.mark_failed(event["event_id"], "no adapter registered", attempt=event["attempts"], attempt=event["attempts"], transient=False, now=now)
+                state = self.outbox.mark_failed(event["event_id"], "no adapter registered", attempt=event["attempts"], transient=False, now=now)
                 outcomes.append({"event_id": event["event_id"], "state": state, "reason": "adapter_missing"})
                 continue
             try:
@@ -294,6 +300,6 @@ class WorkspaceSyncRunner:
                 state = self.outbox.mark_failed(event["event_id"], str(exc), attempt=event["attempts"], transient=True, now=now)
                 outcomes.append({"event_id": event["event_id"], "state": state, "reason": "transient_adapter_error"})
             except Exception as exc:
-                state = self.outbox.mark_failed(event["event_id"], str(exc), transient=False, now=now)
+                state = self.outbox.mark_failed(event["event_id"], str(exc), attempt=event["attempts"], transient=False, now=now)
                 outcomes.append({"event_id": event["event_id"], "state": state, "reason": "permanent_or_unclassified_error"})
         return outcomes
