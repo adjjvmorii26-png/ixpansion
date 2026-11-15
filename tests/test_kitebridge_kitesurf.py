@@ -93,6 +93,12 @@ class KitesurfAdapterTests(unittest.TestCase):
         }})
         with self.assertRaises(KitesurfProtocolError):
             self.adapter(huge).capture("https://docs.example.com", task_id="test-4")
+        missing_tree = FakeTransport(response={"success": True, "result": {
+            "markdown": "x",
+            "screenshot": base64.b64encode(b"png").decode("ascii"),
+        }})
+        with self.assertRaises(KitesurfProtocolError):
+            self.adapter(missing_tree).capture("https://docs.example.com", task_id="test-7")
 
     def test_http_errors_fail_closed(self):
         with self.assertRaisesRegex(Exception, "HTTP 403"):
