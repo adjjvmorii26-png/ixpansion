@@ -6,6 +6,7 @@ import hashlib
 import ipaddress
 import json
 import os
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -78,7 +79,10 @@ class KitesurfBrowserAdapter:
                 for host in os.getenv("IXPANSION_KITESURF_ALLOWED_HOSTS", "").split(",")
                 if host.strip()
             }
-        self.allowed_hosts = frozenset(configured)
+        self.allowed_hosts = frozenset(
+            host.strip().encode("idna").decode("ascii").lower().rstrip(".")
+            for host in configured if host.strip()
+        )
         if not self.account_id or not self.token:
             raise KitesurfConfigurationError("Cloudflare account id and Browser Run API token are required")
         if not self.allowed_hosts:
