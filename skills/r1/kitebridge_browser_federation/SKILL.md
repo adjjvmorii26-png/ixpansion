@@ -1,14 +1,14 @@
 ---
 name: kitebridge-browser-federation
-description: Route public-page browser capture through Cloudflare Kitesurf with strict target policy, bounded evidence, and Chromium fallback boundaries.
+description: Route browser tasks through Cloudflare Kitesurf or guarded Chromium sessions with bounded evidence and fail-closed network policy.
 ---
 
 # KITEBRIDGE Browser Federation Skill
 
 ## Capabilities
 - kitebridge:classify_task — select Kitesurf or Chromium based on task requirements
-- kitebridge:build_chromium_guardrails — create exact-host Cloudflare Browser Run guardrails for Chromium sessions
-- kitebridge:capture_public_page — capture allowlisted public pages with Kitesurf
+- kitebridge:build_chromium_guardrails — compile Cloudflare session-level HTTP/HTTPS request restrictions
+- kitebridge:capture_public_page — capture trusted allowlisted public pages with Kitesurf
 - kitebridge:verify_evidence — validate local evidence hashes without overstating source trust
 - kitebridge:benchmark_route — compare compatible public tasks against Chromium
 
@@ -20,49 +20,43 @@ description: Route public-page browser capture through Cloudflare Kitesurf with 
 | tests | tests/test_kitebridge_kitesurf.py and tests/test_kitebridge_routing.py | Fake-transport safety and route-policy contract tests |
 | docs | docs/kitebridge-browser-federation.md | Architecture, configuration and activation gates |
 
-## Routing rules
+## Network policy
 
-Apply HTTPS, exact-host allowlist, default-port, credential-free, fragment-free, non-IP, and URL-length checks before selecting either browser engine. Authenticated, persistent, WebGL/video, or bot-challenge tasks may select Chromium only after that common target policy passes. Never pass user cookies, passwords, authorization headers, or provider credentials to a page. Do not expose an unauthenticated self-hosted Kitesurf endpoint.
+Cloudflare Browser Run guardrails restrict HTTP and HTTPS requests for Puppeteer, Playwright, and CDP sessions, including navigation, redirects, APIs, scripts, images, and fonts. The policy is fixed at session creation. Respect Cloudflare's 50-entry allowedDomains and four-entry allowedDomainSets limits. A missing allowlist is unrestricted, so fail closed.
 
-Kitesurf does not support Cloudflare Browser Run guardrails. Its initial URL allowlist does not constrain redirects or subresource requests. Do not send untrusted arbitrary URLs to Kitesurf until a browser-service-enforced or trusted egress proxy boundary exists.
-
-Chromium Browser Run sessions using Puppeteer or Playwright must receive Cloudflare's `guardrails.allowedDomains` option at session creation. Use the helper below and fail closed if it cannot produce a valid exact-host list.
-
-### kitebridge:classify_task
+KITEBRIDGE's helper supports exact hostnames, one leading wildcard such as *.example.com, centrally maintained domain sets, and an explicit no-network mode. The helper rejects malformed patterns, IP literals, oversized lists, and ambiguous empty policies.
 
 ~~~python
-route = select_browser_route(task, allowed_hosts=approved_hosts)
-# "chromium" is only eligible when the session launcher applies guardrails.
-# "kitesurf" is limited to trusted allowlisted origins until egress enforcement exists.
+guardrails = build_chromium_guardrails(
+    allowed_hosts={"docs.example.com", "*.static.example.com"},
+    allowed_domain_sets={"common-cdns"},
+)
+# Pass as the guardrails option when creating a Browser Run session.
 ~~~
 
-### kitebridge:build_chromium_guardrails
+For a self-contained page that must not access the network:
 
 ~~~python
-guardrails = build_chromium_guardrails(allowed_hosts=approved_hosts)
-# Pass as the guardrails option to Puppeteer/Playwright browser launch.
-# Example shape: {"allowedDomains": ["docs.example.com"]}
+guardrails = build_chromium_guardrails(allow_no_network=True)
+# Produces {"allowedDomains": []}; all HTTP/HTTPS requests are blocked.
 ~~~
 
-### kitebridge:capture_public_page
+Do not silently omit the guardrails option or fall back to an unrestricted session. An outbound Worker configured with outboundByHost is a separate request path and must enforce its own destination policy.
 
-~~~python
-adapter = KitesurfBrowserAdapter()
-evidence = adapter.capture("https://docs.example.com/guide", task_id="docs-check-001")
-# Evidence is LIVE/PENDING; hashes are integrity checks, not source verification.
-~~~
+## Kitesurf boundary
 
-### kitebridge:verify_evidence
+Cloudflare Browser Run guardrails are unavailable for Quick Actions, including Kitesurf snapshots. The Kitesurf adapter validates only the initial URL; that does not constrain redirects or subresource requests. Keep Kitesurf limited to trusted controlled origins until a browser-service or trusted egress proxy provides independent enforcement.
 
-~~~python
-assert KitesurfBrowserAdapter.verify_evidence(evidence)
-# Never upgrade PENDING to VERIFIED based on hashes alone.
-~~~
+Never pass page credentials, cookies, authorization headers, or provider secrets to the target page. Do not expose an unauthenticated self-hosted Kitesurf endpoint.
 
-### kitebridge:benchmark_route
+## Evidence
 
-~~~text
-Use the same public URL/task corpus on Kitesurf and Chromium.
-Record compatibility, wall time, CPU, memory, output bytes, extraction accuracy,
-and failure rate. Keep authenticated and challenge pages out of the Kitesurf corpus.
-~~~
+Kitesurf captures are LIVE/PENDING. SHA-256 hashes prove local payload integrity only. Never upgrade PENDING to VERIFIED based on hashes alone.
+
+## Validation and activation
+
+Unit tests use fake transports and do not contact Cloudflare. Before activation:
+1. Implement a Chromium session launcher that always supplies compiled guardrails.
+2. Prove an off-allowlist request is blocked and verify Cloudflare's documented response headers.
+3. Benchmark compatible public pages against Chromium.
+4. Keep arbitrary untrusted URLs disabled for Kitesurf until independent egress enforcement is verified.
