@@ -21,7 +21,7 @@ Tokens are read only from process environment. Never put them in source, event p
 
 ## Event payload
 
-For `upsert_artifact`, supply `artifact_id` or `title`, plus `source_revision`. Optional fields: HTTP(S) `url`, and Drive-only `mime_type`. The event idempotency key is hashed into Drive's private appProperties to avoid truncation collisions. A replay queries by that marker and updates the same remote artifact. Multiple matches are quarantined.
+For `upsert_artifact`, supply `artifact_id` or `title`, plus `source_revision`. Optional fields: HTTP(S) `url`, and Drive-only `mime_type`. Drive lookups search across accessible My Drives and Shared Drives (`corpora=allDrives`). The event idempotency key is hashed into Drive's private appProperties to avoid truncation collisions. A replay queries by that marker and updates the same remote artifact. Multiple matches are quarantined.
 
 ## Required Notion database schema
 
