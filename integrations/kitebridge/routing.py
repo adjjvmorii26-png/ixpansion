@@ -1,4 +1,4 @@
-"""Deterministic route policy and Cloudflare guardrails for browser tasks."""
+"""Deterministic route policy and Cloudflare Browser Run guardrails."""
 from __future__ import annotations
 
 import ipaddress
@@ -8,6 +8,7 @@ from urllib.parse import urlsplit
 
 
 _DNS_LABEL = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$")
+_DOMAIN_SET = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 
 
 @dataclass(frozen=True)
@@ -30,7 +31,7 @@ def _normalize_dns_host(value: str) -> str:
         or len(labels) < 2
         or any(not _DNS_LABEL.fullmatch(label) for label in labels)
     ):
-        raise ValueError("an exact fully-qualified DNS hostname is required")
+        raise ValueError("a fully-qualified DNS hostname is required")
     try:
         ipaddress.ip_address(host)
     except ValueError:
@@ -38,16 +39,54 @@ def _normalize_dns_host(value: str) -> str:
     raise ValueError("IP-literal hosts are not allowed")
 
 
-def build_chromium_guardrails(*, allowed_hosts: set[str]) -> dict[str, list[str]]:
-    """Build Cloudflare Browser Run guardrails for a Chromium session.
+def _normalize_domain_pattern(value: str) -> str:
+    if not isinstance(value, str) or not value or value.strip() != value:
+        raise ValueError("domain patterns must be non-empty hostnames")
+    if value.startswith("*."):
+        return "*." + _normalize_dns_host(value[2:])
+    if "*" in value:
+        raise ValueError("only a single leading wildcard is supported")
+    return _normalize_dns_host(value)
 
-    Cloudflare documents allowedDomains for Puppeteer/Playwright sessions;
-    these guardrails are not supported by Kitesurf.
+
+def build_chromium_guardrails(
+    *,
+    allowed_hosts: set[str] | None = None,
+    allowed_domain_sets: set[str] | None = None,
+    allow_no_network: bool = False,
+) -> dict[str, list[str]]:
+    """Compile a fail-closed Cloudflare Browser Run session guardrail object.
+
+    Cloudflare applies session guardrails to HTTP/HTTPS requests in
+    Puppeteer, Playwright, and CDP sessions. They are not available to
+    Browser Run Quick Actions such as Kitesurf snapshots.
     """
-    normalized = sorted({_normalize_dns_host(host) for host in allowed_hosts})
-    if not normalized:
-        raise ValueError("at least one exact allowed hostname is required")
-    return {"allowedDomains": normalized}
+    hosts = allowed_hosts or set()
+    domain_sets = allowed_domain_sets or set()
+    if not isinstance(hosts, set) or not isinstance(domain_sets, set):
+        raise ValueError("allowed_hosts and allowed_domain_sets must be sets")
+    if len(hosts) > 50:
+        raise ValueError("Cloudflare Browser Run allows at most 50 allowedDomains entries")
+    if len(domain_sets) > 4:
+        raise ValueError("Cloudflare Browser Run allows at most four allowedDomainSets entries")
+
+    normalized_hosts = sorted({_normalize_domain_pattern(host) for host in hosts})
+    normalized_sets = sorted(domain_sets)
+    if any(
+        not isinstance(name, str)
+        or not _DOMAIN_SET.fullmatch(name)
+        for name in normalized_sets
+    ):
+        raise ValueError("domain-set names must be non-empty identifiers without whitespace")
+    if not normalized_hosts and not normalized_sets and not allow_no_network:
+        raise ValueError("an allowlist is required; use allow_no_network=True to block all web requests")
+    if allow_no_network and (normalized_hosts or normalized_sets):
+        raise ValueError("allow_no_network cannot be combined with allowed domains or domain sets")
+
+    guardrails: dict[str, list[str]] = {"allowedDomains": normalized_hosts}
+    if normalized_sets:
+        guardrails["allowedDomainSets"] = normalized_sets
+    return guardrails
 
 
 def select_browser_route(task: BrowserTask, *, allowed_hosts: set[str]) -> str:
