@@ -12,6 +12,7 @@ from integrations.workspace_sync import (
     TransientAdapterError,
     WorkspaceOutbox,
     WorkspaceSyncRunner,
+    WorkspaceSyncError,
 )
 
 
@@ -107,7 +108,7 @@ class WorkspaceOutboxTests(unittest.TestCase):
     def test_non_idempotent_transient_failure_is_not_retried(self):
         self.enqueue(idempotent=False)
         event = self.queue.claim_due(now=100)[0]
-        self.assertEqual(self.queue.mark_failed(event["event_id"], "timeout", transient=True, now=100), "dead")
+        self.assertEqual(self.queue.mark_failed(event["event_id"], "timeout", attempt=event["attempts"], transient=True, now=100), "dead")
 
     def test_error_text_is_redacted(self):
         self.enqueue()
@@ -159,7 +160,7 @@ class WorkspaceOutboxTests(unittest.TestCase):
         self.enqueue()
         first = self.queue.claim_due(now=100, lease_seconds=2)[0]
         second = self.queue.claim_due(now=103, lease_seconds=2)[0]
-        with self.assertRaises(Exception):
+        with self.assertRaises(WorkspaceSyncError):
             self.queue.mark_delivered(first["event_id"], attempt=first["attempts"], now=103)
         self.queue.mark_delivered(second["event_id"], attempt=second["attempts"], now=103)
         self.assertEqual(self.queue.stats()["delivered"], 1)
