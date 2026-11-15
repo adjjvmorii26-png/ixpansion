@@ -147,6 +147,14 @@ class WorkspaceOutboxTests(unittest.TestCase):
         result = runner.run_once(now=100)
         self.assertEqual(result[0]["state"], "dead")
 
+    def test_dry_run_does_not_claim_or_mutate(self):
+        self.enqueue()
+        runner = WorkspaceSyncRunner(self.queue, {})
+        result = runner.run_once(now=100, dry_run=True)
+        self.assertEqual(result[0]["state"], "would_dispatch")
+        self.assertEqual(self.queue.stats()["pending"], 1)
+        self.assertEqual(self.queue.stats()["inflight"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()
