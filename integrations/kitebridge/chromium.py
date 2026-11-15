@@ -183,5 +183,5 @@ class CloudflareChromiumSessionLauncher:
         if not isinstance(lease, BrowserSessionLease) or not _SESSION_ID.fullmatch(lease.session_id):
             raise ChromiumSessionConfigurationError("a valid BrowserSessionLease is required")
         status, _ = self._request("DELETE", self._endpoint("/" + lease.session_id), None)
-        if status not in (200, 202, 204):
+        if status not in (200, 202, 204, 404):
             raise ChromiumSessionError(f"Browser Run rejected session close with HTTP {status}")
