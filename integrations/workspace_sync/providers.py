@@ -39,15 +39,11 @@ def _stdlib_transport(method: str, url: str, headers: dict[str, str],
                 raise ProviderProtocolError("provider returned a non-object response")
             return response.status, parsed
     except urllib.error.HTTPError as exc:
-        raw = exc.read(64_001)
-        try:
-            parsed = json.loads(raw.decode("utf-8")) if raw else {}
-        except (UnicodeDecodeError, json.JSONDecodeError):
-            parsed = {}
-        message = str(parsed.get("message") or parsed.get("error_description") or "provider HTTP error")
+        # Provider response bodies are intentionally not copied into logs or queue state.
+        exc.close()
         if exc.code == 429 or exc.code >= 500:
-            raise TransientAdapterError(f"provider HTTP {exc.code}: {message[:160]}") from None
-        raise PermanentAdapterError(f"provider HTTP {exc.code}: {message[:160]}") from None
+            raise TransientAdapterError(f"provider HTTP {exc.code}") from None
+        raise PermanentAdapterError(f"provider HTTP {exc.code}") from None
     except (urllib.error.URLError, TimeoutError, OSError) as exc:
         # Do not include exception repr: URL errors can contain request details.
         raise TransientAdapterError(f"provider transport failure: {type(exc).__name__}") from None
@@ -133,6 +129,8 @@ class NotionDatabaseAdapter(_JsonProvider):
         rows = result.get("results", [])
         if not isinstance(rows, list):
             raise ProviderProtocolError("Notion query results were malformed")
+        if result.get("has_more"):
+            raise ProviderProtocolError("Notion query is paginated; refusing an incomplete uniqueness check")
         return rows
 
     def deliver(self, event: dict[str, Any]) -> dict[str, Any]:
@@ -207,6 +205,8 @@ class GoogleDriveMetadataAdapter(_JsonProvider):
         rows = result.get("files", [])
         if not isinstance(rows, list):
             raise ProviderProtocolError("Drive file list was malformed")
+        if result.get("nextPageToken"):
+            raise ProviderProtocolError("Drive query is paginated; refusing an incomplete uniqueness check")
         return rows
 
     def _metadata(self, event: dict[str, Any]) -> dict[str, Any]:
