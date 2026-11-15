@@ -77,16 +77,63 @@ class BrowserRoutingTests(unittest.TestCase):
         task = BrowserTask("https://docs.example.com/" + "x" * 2050, authenticated=True)
         self.assertEqual(select_browser_route(task, allowed_hosts={"docs.example.com"}), "deny")
 
-    def test_chromium_guardrails_are_exact_normalized_and_sorted(self):
+    def test_chromium_guardrails_are_normalized_and_sorted(self):
         self.assertEqual(
             build_chromium_guardrails(allowed_hosts={"DOCS.example.com.", "app.example.com"}),
             {"allowedDomains": ["app.example.com", "docs.example.com"]},
         )
 
-    def test_chromium_guardrails_reject_wildcards_and_empty_lists(self):
-        for hosts in (set(), {"*.example.com"}, {"127.0.0.1"}, {"bad host.example"}):
-            with self.subTest(hosts=hosts), self.assertRaises(ValueError):
-                build_chromium_guardrails(allowed_hosts=hosts)
+    def test_guardrails_support_one_leading_wildcard_pattern(self):
+        self.assertEqual(
+            build_chromium_guardrails(allowed_hosts={"*.EXAMPLE.com", "example.com"}),
+            {"allowedDomains": ["*.example.com", "example.com"]},
+        )
+
+    def test_guardrails_support_domain_sets(self):
+        self.assertEqual(
+            build_chromium_guardrails(
+                allowed_hosts={"docs.example.com"},
+                allowed_domain_sets={"common-cdns", "internal-api"},
+            ),
+            {
+                "allowedDomains": ["docs.example.com"],
+                "allowedDomainSets": ["common-cdns", "internal-api"],
+            },
+        )
+
+    def test_guardrails_can_explicitly_block_all_web_requests(self):
+        self.assertEqual(
+            build_chromium_guardrails(allow_no_network=True),
+            {"allowedDomains": []},
+        )
+
+    def test_guardrails_reject_unbounded_or_ambiguous_policies(self):
+        cases = (
+            ({"hosts": set(), "sets": set(), "no_network": False}, "allowlist"),
+            ({"hosts": {"bad host.example"}, "sets": set()}, "hostname"),
+            ({"hosts": {"https://docs.example.com"}, "sets": set()}, "hostname"),
+            ({"hosts": {"docs.example.com:443"}, "sets": set()}, "hostname"),
+            ({"hosts": {"a.*.example.com"}, "sets": set()}, "wildcard"),
+            ({"hosts": set(), "sets": {"common-cdns"}, "no_network": True}, "no_network"),
+        )
+        for args, expected in cases:
+            with self.subTest(args=args), self.assertRaisesRegex(ValueError, expected):
+                build_chromium_guardrails(
+                    allowed_hosts=args.get("hosts"),
+                    allowed_domain_sets=args.get("sets"),
+                    allow_no_network=args.get("no_network", False),
+                )
+
+    def test_guardrails_enforce_cloudflare_documented_limits(self):
+        with self.assertRaisesRegex(ValueError, "50"):
+            build_chromium_guardrails(allowed_hosts={f"h{i}.example.com" for i in range(51)})
+        with self.assertRaisesRegex(ValueError, "four"):
+            build_chromium_guardrails(allowed_domain_sets={f"set-{i}" for i in range(5)})
+
+    def test_guardrails_reject_invalid_domain_set_identifiers(self):
+        for name in ("", "two words", "set/name"):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "domain-set"):
+                build_chromium_guardrails(allowed_domain_sets={name})
 
 
 if __name__ == "__main__":
