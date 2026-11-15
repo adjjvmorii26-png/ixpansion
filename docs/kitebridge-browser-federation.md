@@ -20,7 +20,7 @@ Required runtime configuration:
 - CLOUDFLARE_BROWSER_RUN_API_TOKEN with Browser Run edit permission
 - IXPANSION_KITESURF_ALLOWED_HOSTS, a comma-separated list of exact hostnames
 
-No page credentials, cookies, basic-auth data, custom page headers, or arbitrary CDP commands are accepted. Only HTTPS on the default port is accepted. The exact hostname must be allowlisted. Payload and response sizes are bounded. The provider token is sent only to the Cloudflare API endpoint.
+No page credentials, cookies, basic-auth data, custom page headers, or arbitrary CDP commands are accepted. Routing and adapter validation reject non-HTTPS schemes, non-default ports, URL credentials, fragments, IP-literal hosts, malformed URLs, and non-allowlisted exact hostnames. Payload and response sizes are bounded. The provider token is sent only to the Cloudflare API endpoint.
 
 ## Evidence contract
 
