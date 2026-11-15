@@ -79,6 +79,9 @@ class FakeTransport:
     def _notion_props(props):
         result = {}
         for name, value in props.items():
+            if "url" in value:
+                result[name] = {"url": value["url"]}
+                continue
             kind = "title" if "title" in value else "rich_text"
             text = value[kind][0]["text"]["content"]
             result[name] = {kind: [{"plain_text": text}]}
@@ -102,6 +105,15 @@ class ProviderAdapterTests(unittest.TestCase):
         self.assertEqual(receipt["page_id"], replay["page_id"])
         self.assertEqual(len(fake.pages), 1)
         self.assertEqual([call[0] for call in fake.calls].count("POST"), 3)  # two queries + one create
+
+    def test_notion_readback_verifies_artifact_url(self):
+        fake = FakeTransport()
+        adapter = NotionDatabaseAdapter(database_id="db", token="test-token", transport=fake)
+        item = event()
+        receipt = adapter.deliver(item)
+        self.assertTrue(adapter.verify(item, receipt))
+        fake.pages[receipt["page_id"]]["properties"]["Artifact URL"]["url"] = "https://wrong.invalid"
+        self.assertFalse(adapter.verify(item, receipt))
 
     def test_notion_duplicate_matches_are_quarantined(self):
         fake = FakeTransport()
@@ -133,6 +145,15 @@ class ProviderAdapterTests(unittest.TestCase):
         self.assertEqual(receipt["file_id"], replay["file_id"])
         self.assertEqual(len(fake.files), 1)
 
+    def test_drive_readback_verifies_artifact_url(self):
+        fake = FakeTransport()
+        adapter = GoogleDriveMetadataAdapter(token="test-token", transport=fake)
+        item = event("drive")
+        receipt = adapter.deliver(item)
+        self.assertTrue(adapter.verify(item, receipt))
+        fake.files[receipt["file_id"]]["description"] = "wrong link"
+        self.assertFalse(adapter.verify(item, receipt))
+
     def test_drive_uses_collision_resistant_markers_and_never_moves_existing_file(self):
         fake = FakeTransport()
         adapter = GoogleDriveMetadataAdapter(token="test-token", parent_id="folder-1", transport=fake)
@@ -142,6 +163,18 @@ class ProviderAdapterTests(unittest.TestCase):
         adapter.deliver(item)
         self.assertEqual(fake.files[receipt["file_id"]]["parents"], ["folder-1"])
         self.assertEqual(len(fake.files), 1)
+
+    def test_drive_does_not_patch_mime_type_or_parent_on_existing_file(self):
+        fake = FakeTransport()
+        adapter = GoogleDriveMetadataAdapter(token="test-token", parent_id="folder-1", transport=fake)
+        item = event("drive")
+        item["payload"]["mime_type"] = "application/pdf"
+        receipt = adapter.deliver(item)
+        updated = {**item, "payload": {**item["payload"], "source_revision": "def456", "mime_type": "text/plain"}}
+        adapter.deliver(updated)
+        saved = fake.files[receipt["file_id"]]
+        self.assertEqual(saved["mimeType"], "application/pdf")
+        self.assertEqual(saved["parents"], ["folder-1"])
 
     def test_drive_revision_update_targets_existing_file(self):
         fake = FakeTransport()
