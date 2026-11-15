@@ -169,7 +169,7 @@ class WorkspaceOutboxTests(unittest.TestCase):
         self.enqueue()
         first = self.queue.claim_due(now=100, lease_seconds=2)[0]
         second = self.queue.claim_due(now=103, lease_seconds=2)[0]
-        with self.assertRaises(Exception):
+        with self.assertRaises(WorkspaceSyncError):
             self.queue.mark_failed(first["event_id"], "late timeout", attempt=first["attempts"], transient=False, now=103)
         self.assertEqual(self.queue.get(second["event_id"])["state"], "inflight")
         self.queue.mark_delivered(second["event_id"], attempt=second["attempts"], now=103)
