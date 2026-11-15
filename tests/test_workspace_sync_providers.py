@@ -163,6 +163,28 @@ class ProviderAdapterTests(unittest.TestCase):
         with self.assertRaises(ProviderProtocolError):
             adapter.deliver(item)
 
+    def test_notion_incomplete_paginated_lookup_is_quarantined(self):
+        fake = FakeTransport()
+        def paginated(*args):
+            status, result = fake(*args)
+            if urlparse(args[1]).path.endswith("/query"):
+                result["has_more"] = True
+            return status, result
+        adapter = NotionDatabaseAdapter(database_id="db", token="test-token", transport=paginated)
+        with self.assertRaises(ProviderProtocolError):
+            adapter.deliver(event())
+
+    def test_drive_incomplete_paginated_lookup_is_quarantined(self):
+        fake = FakeTransport()
+        def paginated(*args):
+            status, result = fake(*args)
+            if urlparse(args[1]).path.endswith("/files"):
+                result["nextPageToken"] = "next-page"
+            return status, result
+        adapter = GoogleDriveMetadataAdapter(token="test-token", transport=paginated)
+        with self.assertRaises(ProviderProtocolError):
+            adapter.deliver(event("drive"))
+
     def test_http_failure_classes_are_not_swallowed(self):
         def forbidden(*args):
             return 403, {"error": "forbidden"}
