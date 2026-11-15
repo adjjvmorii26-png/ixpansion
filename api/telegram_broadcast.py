@@ -11,7 +11,7 @@ from typing import Dict, List, Optional, Any
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 
 # Telegram bot configuration
-BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8903755459:AAGwjuM6Q5U8lclNO980VfN2Gjtv90WCbMk")
+BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
 
 # Vibe pulse emoji mapping
 _VIBE_EMOJI = {
@@ -51,7 +51,9 @@ _broadcast_state = {
 
 
 def _telegram(method: str, params: dict) -> dict:
-    """Call Telegram Bot API using stdlib."""
+    """Call Telegram Bot API using stdlib; fail closed when unconfigured."""
+    if not BOT_TOKEN:
+        return {"ok": False, "error": "TELEGRAM_BOT_TOKEN not configured"}
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/{method}"
     data = urllib.parse.urlencode(params).encode()
     try:
@@ -260,8 +262,8 @@ def get_broadcast_status() -> dict:
 def coherence_vitals():
     return {
         "module": "telegram_broadcast",
-        "ok": True,
-        "status": "active",
+        "ok": bool(BOT_TOKEN),
+        "status": "active" if BOT_TOKEN else "missing_configuration",
     }
 
 def resonates_with():
