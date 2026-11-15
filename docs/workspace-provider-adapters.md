@@ -28,7 +28,7 @@ For `upsert_artifact`, supply `artifact_id` or `title`, plus `source_revision`. 
 The configured database must already exist, be shared with the integration, and have:
 - a title property (default name `Name`; override with `IXPANSION_NOTION_TITLE_PROPERTY`),
 - rich-text property `IXPANSION Key`,
-- rich-text property `Source Revision`.
+- rich-text property `Source Revision`,\n- optional URL property `Artifact URL` if event payloads include `url`.
 
 The adapter does not create or mutate the database schema.
 
