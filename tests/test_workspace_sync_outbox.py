@@ -100,7 +100,7 @@ class WorkspaceOutboxTests(unittest.TestCase):
     def test_transient_failure_retries_only_idempotent_events(self):
         self.enqueue()
         event = self.queue.claim_due(now=100)[0]
-        self.assertEqual(self.queue.mark_failed(event["event_id"], "timeout", transient=True, now=100), "pending")
+        self.assertEqual(self.queue.mark_failed(event["event_id"], "timeout", attempt=event["attempts"], transient=True, now=100), "pending")
         self.assertEqual(self.queue.claim_due(now=104), [])
         self.assertEqual(len(self.queue.claim_due(now=105)), 1)
 
@@ -112,7 +112,7 @@ class WorkspaceOutboxTests(unittest.TestCase):
     def test_error_text_is_redacted(self):
         self.enqueue()
         event = self.queue.claim_due(now=100)[0]
-        self.queue.mark_failed(event["event_id"], "Bearer abc.def and access_token=supersecret", transient=False, now=100)
+        self.queue.mark_failed(event["event_id"], "Bearer abc.def and access_token=supersecret", attempt=event["attempts"], transient=False, now=100)
         error = self.queue.get(event["event_id"])["last_error"]
         self.assertNotIn("abc.def", error)
         self.assertNotIn("supersecret", error)
@@ -154,6 +154,24 @@ class WorkspaceOutboxTests(unittest.TestCase):
         self.assertEqual(result[0]["state"], "would_dispatch")
         self.assertEqual(self.queue.stats()["pending"], 1)
         self.assertEqual(self.queue.stats()["inflight"], 0)
+
+    def test_stale_worker_cannot_complete_newer_claim(self):
+        self.enqueue()
+        first = self.queue.claim_due(now=100, lease_seconds=2)[0]
+        second = self.queue.claim_due(now=103, lease_seconds=2)[0]
+        with self.assertRaises(Exception):
+            self.queue.mark_delivered(first["event_id"], attempt=first["attempts"], now=103)
+        self.queue.mark_delivered(second["event_id"], attempt=second["attempts"], now=103)
+        self.assertEqual(self.queue.stats()["delivered"], 1)
+
+    def test_stale_worker_cannot_fail_newer_claim(self):
+        self.enqueue()
+        first = self.queue.claim_due(now=100, lease_seconds=2)[0]
+        second = self.queue.claim_due(now=103, lease_seconds=2)[0]
+        with self.assertRaises(Exception):
+            self.queue.mark_failed(first["event_id"], "late timeout", attempt=first["attempts"], transient=False, now=103)
+        self.assertEqual(self.queue.get(second["event_id"])["state"], "inflight")
+        self.queue.mark_delivered(second["event_id"], attempt=second["attempts"], now=103)
 
 
 if __name__ == "__main__":
