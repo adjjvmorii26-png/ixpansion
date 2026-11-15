@@ -20,13 +20,26 @@ Required runtime configuration:
 - CLOUDFLARE_BROWSER_RUN_API_TOKEN with Browser Run edit permission
 - IXPANSION_KITESURF_ALLOWED_HOSTS, a comma-separated list of exact hostnames
 
-No page credentials, cookies, basic-auth data, custom page headers, or arbitrary CDP commands are accepted. Both Kitesurf and Chromium route selection apply the same exact-host allowlist and URL safety checks: HTTPS only, default port, no URL credentials, fragments, IP literals, malformed or oversized URLs, or non-allowlisted hosts. Capability flags select the engine only after target policy passes. Payload and response sizes are bounded. The provider token is sent only to the Cloudflare API endpoint.
+No page credentials, cookies, basic-auth data, custom page headers, or arbitrary CDP commands are accepted. The adapter validates the initial target as HTTPS, default-port, credential-free, fragment-free, non-IP, well-formed, bounded, and exact-host-allowlisted. Payload and response sizes are bounded. The provider token is sent only to the Cloudflare API endpoint.
 
 ## Chromium session guardrails
 
-Cloudflare Browser Run documents `guardrails.allowedDomains` for Puppeteer and Playwright sessions. KITEBRIDGE exposes `build_chromium_guardrails(allowed_hosts=...)` to produce a normalized, exact-host-only allowlist. The Chromium session launcher must pass this object as its `guardrails` option. Do not silently omit it or fall back to an unguarded session.
+Cloudflare Browser Run session guardrails restrict HTTP and HTTPS requests made by Puppeteer, Playwright, and CDP sessions. The restriction applies to navigation, redirects, and page dependencies such as APIs, scripts, images, and fonts. The policy is fixed for the session lifetime.
 
-Important limitation: Cloudflare documents that Browser Run guardrails are not supported by Kitesurf. Therefore the helper protects only the Chromium session path. It does not make the Kitesurf Quick Action safe against redirects or subresource egress.
+KITEBRIDGE exposes build_chromium_guardrails(...) to compile a validated Cloudflare guardrail object:
+- Up to 50 allowedDomains hostname patterns.
+- Up to four allowedDomainSets references.
+- Exact hostnames and one leading wildcard pattern such as *.example.com.
+- Explicit allow_no_network=True produces {"allowedDomains": []}, which blocks all HTTP/HTTPS requests.
+- Omitting both allowlist properties is rejected by the helper because Cloudflare treats that as unrestricted network access.
+
+The Chromium session launcher must pass this object as the guardrails option when creating a Puppeteer/Playwright session, or in the Browser Run REST/CDP session creation request. Do not silently omit it or fall back to an unguarded session. Cloudflare's guardrails are session-level request controls, not a general policy for every Cloudflare product.
+
+Outbound Worker exception: Cloudflare documents that HTTP requests routed through outboundByHost to an outbound Worker are handled by that Worker rather than the normal network path. The Worker must apply its own destination policy. KITEBRIDGE does not configure outbound Workers.
+
+## Kitesurf limitation
+
+Cloudflare explicitly states that Browser Run guardrails are unavailable for Quick Actions, including the Kitesurf snapshot path used by this adapter. Therefore the initial exact-host URL validation does not constrain redirects or subresource requests made by Kitesurf. Do not send untrusted arbitrary URLs to Kitesurf until an independently enforced browser-service or trusted egress-proxy boundary exists. Keep the current Kitesurf allowlist limited to trusted, controlled origins.
 
 ## Evidence contract
 
@@ -34,20 +47,22 @@ Each Kitesurf capture returns source URL, UTC capture time, task ID and engine i
 
 The local verifier checks only payload integrity. It does not prove that the remote page is truthful, current, safe, or authored by the claimed source. A screenshot is evidence of a render, not a trust oracle.
 
-## Security boundary and activation gate
+## Security and activation gates
 
-The hostname allowlist validates the initial requested URL. It does not prove that redirects or subresource requests remain within the allowlist, and it is not a complete SSRF/egress boundary. Do not activate Kitesurf for untrusted arbitrary URLs until redirect and outbound-request restrictions are enforced by the browser service or a trusted egress proxy. For Chromium sessions, require the documented Browser Run guardrails to be attached at session creation. Keep the Cloudflare API token in the runtime secret manager; never put it in the outbox, Notion, Drive, logs, or repository.
-
-For self-hosted Kitesurf, require Cloudflare Access or an equivalent authentication layer before exposing any endpoint. Kitesurf has no built-in authentication, and an unprotected endpoint can be abused to browse outbound from the account and consume paid Dynamic Worker resources. Self-hosting requires a Workers Paid plan because it uses Dynamic Workers.
+- Keep the Cloudflare API token in the runtime secret manager; never put it in the outbox, Notion, Drive, logs, or repository.
+- For self-hosted Kitesurf, require Cloudflare Access or equivalent authentication before exposing any endpoint.
+- Never enable arbitrary untrusted Kitesurf URLs without independent egress enforcement.
+- Never create a Chromium session without a compiled, non-empty allowlist or an explicit no-network policy.
+- Verify blocked requests using Cloudflare's documented guardrail response headers before declaring the integration active.
 
 ## Validation
 
-Unit tests use a fake transport and make no Cloudflare API requests. Live account connectivity, Browser Run permissions, compatibility, redirect containment, performance, cost, and production activation are not verified by these tests.
+Unit tests use deterministic inputs and no Cloudflare API requests. Live account connectivity, Browser Run permissions, compatibility, guardrail enforcement, performance, cost, and production activation are not verified by these tests.
 
 ## Next gates
 
 1. Run the unit suite and CI on this PR head.
-2. Benchmark an agreed public URL corpus against Chromium for compatibility, latency, CPU, memory, extraction accuracy, and output size.
-3. Add enforced redirect/egress control for Kitesurf before any untrusted URL support.
-4. Implement and integration-test the Chromium session launcher with `build_chromium_guardrails`.
+2. Implement a guarded Chromium session launcher and test a deliberately blocked off-allowlist request.
+3. Benchmark an agreed public URL corpus against Chromium for compatibility, latency, CPU, memory, extraction accuracy, and output size.
+4. Add independent redirect/egress control for Kitesurf before any untrusted URL support.
 5. Configure runtime secrets and test one explicitly approved public target before enabling scheduled work.
