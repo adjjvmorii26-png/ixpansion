@@ -24,9 +24,11 @@ description: Route browser tasks through Cloudflare Kitesurf or guarded Chromium
 
 Cloudflare Browser Run guardrails restrict HTTP and HTTPS requests for Puppeteer, Playwright, and CDP sessions, including navigation, redirects, APIs, scripts, images, and fonts. The policy is fixed at session creation. Respect Cloudflare's 50-entry allowedDomains and four-entry allowedDomainSets limits. A missing allowlist is unrestricted, so fail closed.
 
-KITEBRIDGE's helper supports exact hostnames, one leading wildcard such as *.example.com, centrally maintained domain sets, and an explicit no-network mode. The helper rejects malformed patterns, IP literals, oversized lists, and ambiguous empty policies.
+KITEBRIDGE's helper supports exact hostnames, one leading wildcard such as *.example.com, centrally maintained domain sets, and an explicit no-network mode. It enforces the 50-host and four-domain-set limits, rejects malformed patterns, IP literals, oversized lists, and ambiguous empty policies. For domain-set-only policies it omits allowedDomains; an explicit empty allowedDomains array means deny-all, not an empty contribution to the combined allowlist.
 
 ~~~python
+from integrations.kitebridge import build_chromium_guardrails
+
 guardrails = build_chromium_guardrails(
     allowed_hosts={"docs.example.com", "*.static.example.com"},
     allowed_domain_sets={"common-cdns"},
