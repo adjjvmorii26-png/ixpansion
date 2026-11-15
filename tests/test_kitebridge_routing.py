@@ -20,21 +20,13 @@ class BrowserRoutingTests(unittest.TestCase):
                 self.assertEqual(select_browser_route(task, allowed_hosts={"docs.example.com"}), "chromium")
 
     def test_private_or_non_allowlisted_pages_are_denied(self):
-        self.assertEqual(
-            select_browser_route(BrowserTask("https://docs.example.com/", public=False),
-                                 allowed_hosts={"docs.example.com"}),
-            "deny",
-        )
-        self.assertEqual(
-            select_browser_route(BrowserTask("https://evil.example/", public=True),
-                                 allowed_hosts={"docs.example.com"}),
-            "deny",
-        )
-        self.assertEqual(
-            select_browser_route(BrowserTask("http://docs.example.com/"),
-                                 allowed_hosts={"docs.example.com"}),
-            "deny",
-        )
+        for task in (
+            BrowserTask("https://docs.example.com/", public=False),
+            BrowserTask("https://evil.example/"),
+            BrowserTask("http://docs.example.com/"),
+        ):
+            with self.subTest(task=task):
+                self.assertEqual(select_browser_route(task, allowed_hosts={"docs.example.com"}), "deny")
 
     def test_credentials_ports_fragments_and_ip_literals_are_denied(self):
         for url in (
@@ -46,10 +38,19 @@ class BrowserRoutingTests(unittest.TestCase):
             "https://docs.example.com:bad/",
         ):
             with self.subTest(url=url):
-                self.assertEqual(
-                    select_browser_route(BrowserTask(url), allowed_hosts={"docs.example.com"}),
-                    "deny",
-                )
+                task = BrowserTask(url, authenticated=True)
+                self.assertEqual(select_browser_route(task, allowed_hosts={"docs.example.com"}), "deny")
+
+    def test_chromium_flags_do_not_bypass_allowlist_or_url_validation(self):
+        tasks = (
+            BrowserTask("https://evil.example/", authenticated=True),
+            BrowserTask("http://docs.example.com/", persistent_session=True),
+            BrowserTask("https://127.0.0.1/", requires_webgl=True),
+            BrowserTask("https://user@docs.example.com/", bot_challenge=True),
+        )
+        for task in tasks:
+            with self.subTest(task=task):
+                self.assertEqual(select_browser_route(task, allowed_hosts={"docs.example.com"}), "deny")
 
     def test_allowlist_normalization_and_invalid_allowlist_fail_closed(self):
         self.assertEqual(
@@ -62,6 +63,10 @@ class BrowserRoutingTests(unittest.TestCase):
                                  allowed_hosts={"127.0.0.1"}),
             "deny",
         )
+
+    def test_oversized_urls_are_denied_even_for_chromium(self):
+        task = BrowserTask("https://docs.example.com/" + "x" * 2050, authenticated=True)
+        self.assertEqual(select_browser_route(task, allowed_hosts={"docs.example.com"}), "deny")
 
 
 if __name__ == "__main__":
