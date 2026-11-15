@@ -89,7 +89,13 @@ class BrowserRoutingTests(unittest.TestCase):
             {"allowedDomains": ["*.example.com", "example.com"]},
         )
 
-    def test_guardrails_support_domain_sets(self):
+    def test_guardrails_support_domain_sets_without_empty_allowed_domains(self):
+        self.assertEqual(
+            build_chromium_guardrails(allowed_domain_sets={"common-cdns", "internal-api"}),
+            {"allowedDomainSets": ["common-cdns", "internal-api"]},
+        )
+
+    def test_guardrails_support_domain_sets_and_explicit_hosts(self):
         self.assertEqual(
             build_chromium_guardrails(
                 allowed_hosts={"docs.example.com"},
@@ -115,6 +121,8 @@ class BrowserRoutingTests(unittest.TestCase):
             ({"hosts": {"docs.example.com:443"}, "sets": set()}, "hostname"),
             ({"hosts": {"a.*.example.com"}, "sets": set()}, "wildcard"),
             ({"hosts": set(), "sets": {"common-cdns"}, "no_network": True}, "no_network"),
+            ({"hosts": [] , "sets": set()}, "must be sets"),
+            ({"hosts": set(), "sets": []}, "must be sets"),
         )
         for args, expected in cases:
             with self.subTest(args=args), self.assertRaisesRegex(ValueError, expected):
@@ -134,6 +142,10 @@ class BrowserRoutingTests(unittest.TestCase):
         for name in ("", "two words", "set/name"):
             with self.subTest(name=name), self.assertRaisesRegex(ValueError, "domain-set"):
                 build_chromium_guardrails(allowed_domain_sets={name})
+
+    def test_guardrails_require_boolean_no_network_switch(self):
+        with self.assertRaisesRegex(ValueError, "boolean"):
+            build_chromium_guardrails(allow_no_network="yes")
 
 
 if __name__ == "__main__":
