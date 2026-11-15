@@ -97,7 +97,16 @@ class ProviderAdapterTests(unittest.TestCase):
         replay = adapter.deliver(item)
         self.assertEqual(receipt["page_id"], replay["page_id"])
         self.assertEqual(len(fake.pages), 1)
-        self.assertEqual([call[0] for call in fake.calls].count("POST"), 2)  # query + create
+        self.assertEqual([call[0] for call in fake.calls].count("POST"), 3)  # two queries + one create
+
+    def test_notion_duplicate_matches_are_quarantined(self):
+        fake = FakeTransport()
+        adapter = NotionDatabaseAdapter(database_id="db", token="test-token", transport=fake)
+        item = event()
+        fake.pages["p1"] = {"id": "p1", "properties": adapter._properties(item)}
+        fake.pages["p2"] = {"id": "p2", "properties": adapter._properties(item)}
+        with self.assertRaises(ProviderProtocolError):
+            adapter.deliver(item)
 
     def test_notion_revision_update_targets_existing_page(self):
         fake = FakeTransport()
@@ -118,6 +127,16 @@ class ProviderAdapterTests(unittest.TestCase):
         self.assertTrue(adapter.verify(item, receipt))
         replay = adapter.deliver(item)
         self.assertEqual(receipt["file_id"], replay["file_id"])
+        self.assertEqual(len(fake.files), 1)
+
+    def test_drive_uses_collision_resistant_markers_and_never_moves_existing_file(self):
+        fake = FakeTransport()
+        adapter = GoogleDriveMetadataAdapter(token="test-token", parent_id="folder-1", transport=fake)
+        item = event("drive")
+        receipt = adapter.deliver(item)
+        self.assertEqual(fake.files[receipt["file_id"]]["parents"], ["folder-1"])
+        adapter.deliver(item)
+        self.assertEqual(fake.files[receipt["file_id"]]["parents"], ["folder-1"])
         self.assertEqual(len(fake.files), 1)
 
     def test_drive_revision_update_targets_existing_file(self):
