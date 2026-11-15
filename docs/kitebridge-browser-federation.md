@@ -34,7 +34,7 @@ KITEBRIDGE exposes build_chromium_guardrails(...) to compile a validated Cloudfl
 - Explicit allow_no_network=True produces {"allowedDomains": []}, which blocks all HTTP/HTTPS requests; it cannot be combined with domains or domain sets.
 - Omitting both allowlist properties is rejected by the helper because Cloudflare treats that as unrestricted network access.
 
-The Chromium session launcher must pass this object as the guardrails option when creating a Puppeteer/Playwright session, or in the Browser Run REST/CDP session creation request. Do not silently omit it or fall back to an unguarded session. Cloudflare's guardrails are session-level request controls, not a general policy for every Cloudflare product.
+KITEBRIDGE now provides CloudflareChromiumSessionLauncher, which POSTs the compiled policy to Browser Run's documented /devtools/browser session-creation endpoint and returns a BrowserSessionLease containing the session ID, websocket URL, policy, and bounded keep-alive. The websocket URL is hidden from the lease repr to reduce accidental log exposure. close(lease) releases the session. The launcher never creates a session without an explicit allowlist or explicit no-network policy. Its fake-transport tests do not make Cloudflare API calls. Cloudflare's guardrails are session-level request controls, not a general policy for every Cloudflare product.
 
 Outbound Worker exception: Cloudflare documents that HTTP requests routed through outboundByHost to an outbound Worker are handled by that Worker rather than the normal network path. The Worker must apply its own destination policy. KITEBRIDGE does not configure outbound Workers.
 
@@ -63,7 +63,7 @@ Unit tests use deterministic inputs and no Cloudflare API requests. Live account
 ## Next gates
 
 1. Run the unit suite and CI on this PR head.
-2. Implement a guarded Chromium session launcher and test a deliberately blocked off-allowlist request.
+2. Exercise the Chromium session launcher against a staging Cloudflare account and prove an off-allowlist request is blocked, checking Cloudflare's documented response headers.
 3. Benchmark an agreed public URL corpus against Chromium for compatibility, latency, CPU, memory, extraction accuracy, and output size.
 4. Add independent redirect/egress control for Kitesurf before any untrusted URL support.
 5. Configure runtime secrets and test one explicitly approved public target before enabling scheduled work.
