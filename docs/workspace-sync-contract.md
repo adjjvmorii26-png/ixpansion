@@ -51,6 +51,7 @@ A duplicate key with the same operation and payload is a no-op. A duplicate key 
 ## Recovery model
 
 - Atomic `BEGIN IMMEDIATE` claim prevents two workers from claiming the same pending event.
+- Completion and failure updates are fenced by the exact claim-attempt number, so a late worker cannot overwrite a newer lease owner.
 - A lease bounds worker ownership.
 - Expired idempotent leases return to pending.
 - Expired non-idempotent leases become dead because the remote side effect may have happened.
