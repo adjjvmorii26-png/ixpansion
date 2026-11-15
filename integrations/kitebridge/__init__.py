@@ -1,5 +1,12 @@
 """KITEBRIDGE public-page browser federation primitives."""
 
+from .chromium import (
+    BrowserSessionLease,
+    ChromiumSessionConfigurationError,
+    ChromiumSessionError,
+    ChromiumSessionProtocolError,
+    CloudflareChromiumSessionLauncher,
+)
 from .kitesurf import (
     KitesurfBrowserAdapter,
     KitesurfConfigurationError,
@@ -10,7 +17,12 @@ from .kitesurf import (
 from .routing import BrowserTask, build_chromium_guardrails, select_browser_route
 
 __all__ = [
+    "BrowserSessionLease",
     "BrowserTask",
+    "ChromiumSessionConfigurationError",
+    "ChromiumSessionError",
+    "ChromiumSessionProtocolError",
+    "CloudflareChromiumSessionLauncher",
     "KitesurfBrowserAdapter",
     "KitesurfConfigurationError",
     "KitesurfError",
