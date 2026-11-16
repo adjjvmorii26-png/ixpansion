@@ -61,8 +61,8 @@ def _utc_timestamp(value: datetime) -> str:
 
 
 def _valid_names(values: frozenset[str], label: str) -> None:
-    if not values:
-        raise ValueError(f"{label} must not be empty")
+    if not isinstance(values, frozenset) or not values:
+        raise ValueError(f"{label} must be a non-empty frozenset")
     if any(not isinstance(value, str) or not _IDENTIFIER.fullmatch(value) for value in values):
         raise ValueError(f"{label} contains an invalid identifier")
 
@@ -120,6 +120,28 @@ class ExecutionEnvelope:
     payload_sha256: str
     payload_bytes: int
     created_at: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.execution_id, str) or not _EXECUTION_ID.fullmatch(self.execution_id):
+            raise ValueError("execution_id is invalid")
+        if not isinstance(self.provider, str) or not _IDENTIFIER.fullmatch(self.provider):
+            raise ValueError("provider is invalid")
+        if not isinstance(self.action, str) or not _IDENTIFIER.fullmatch(self.action):
+            raise ValueError("action is invalid")
+        if not isinstance(self.action_class, ActionClass):
+            raise ValueError("action_class must be an ActionClass")
+        if not isinstance(self.idempotency_key, str) or not _IDEMPOTENCY_KEY.fullmatch(self.idempotency_key):
+            raise ValueError("idempotency_key is invalid")
+        if not isinstance(self.payload_sha256, str) or not re.fullmatch(r"[a-f0-9]{64}", self.payload_sha256):
+            raise ValueError("payload_sha256 must be a SHA-256 hex digest")
+        if isinstance(self.payload_bytes, bool) or not isinstance(self.payload_bytes, int) or self.payload_bytes < 0:
+            raise ValueError("payload_bytes must be a non-negative integer")
+        try:
+            parsed = datetime.fromisoformat(self.created_at.replace("Z", "+00:00"))
+        except (AttributeError, TypeError, ValueError):
+            raise ValueError("created_at must be a canonical UTC timestamp") from None
+        if parsed.tzinfo is None or parsed.utcoffset() is None or not self.created_at.endswith("Z"):
+            raise ValueError("created_at must be a canonical UTC timestamp")
 
     @classmethod
     def build(
