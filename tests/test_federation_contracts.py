@@ -53,7 +53,16 @@ def test_envelope_hash_is_stable_for_equivalent_json_objects():
 
 def test_envelope_rejects_oversized_payload():
     with pytest.raises(ValueError, match="exceeds"):
-        make_envelope(payload={"blob": "x" * 128},)
+        ExecutionEnvelope.build(
+            execution_id="exec-001",
+            provider="cloudflare",
+            action="capture",
+            action_class=ActionClass.READ_ONLY,
+            idempotency_key="ixpansion:exec-001",
+            payload={"blob": "x" * 128},
+            created_at=NOW,
+            max_payload_bytes=32,
+        )
 
 
 def test_envelope_rejects_non_finite_json_values():
