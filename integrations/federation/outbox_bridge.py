@@ -52,6 +52,8 @@ def enqueue_if_authorized(
         raise TypeError("policy must be an ExecutionPolicy")
     if not isinstance(payload, dict):
         raise ValueError("payload must be a JSON object")
+    if target != envelope.provider:
+        raise ValueError("outbox target must match the policy-authorized provider")
 
     try:
         created_at = datetime.fromisoformat(envelope.created_at.replace("Z", "+00:00"))
