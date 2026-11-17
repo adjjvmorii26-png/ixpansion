@@ -120,7 +120,7 @@ def test_outbox_rejects_secret_payload_even_after_policy_allows(outbox):
 def test_outbox_target_cannot_differ_from_authorized_provider(outbox):
     item = envelope()
     with pytest.raises(ValueError, match="target must match"):
-        enqueue_if_target = enqueue_if_authorized(
+        enqueue_if_authorized(
             outbox,
             item,
             policy(),
