@@ -34,7 +34,11 @@ def _stdlib_transport(method: str, url: str, headers: dict[str, str],
             raw = response.read(2_000_001)
             if len(raw) > 2_000_000:
                 raise ProviderProtocolError("provider response exceeded 2 MB limit")
-            parsed = json.loads(raw.decode("utf-8")) if raw else {}
+            try:
+                parsed = json.loads(raw.decode("utf-8")) if raw else {}
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                # Malformed provider data is a protocol defect, not a network fault.
+                raise ProviderProtocolError("provider returned invalid JSON") from None
             if not isinstance(parsed, dict):
                 raise ProviderProtocolError("provider returned a non-object response")
             return response.status, parsed
