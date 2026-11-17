@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping
 
-from .contracts import EvidenceReceipt
+from .contracts import EvidenceMode, EvidenceReceipt, VerificationState
 
 
 _GENESIS = "0" * 64
@@ -46,6 +46,28 @@ def _receipt_document(receipt: EvidenceReceipt | None) -> dict[str, str] | None:
         return None
     if not isinstance(receipt, EvidenceReceipt):
         raise TypeError("receipt must be an EvidenceReceipt")
+    if (
+        not isinstance(receipt.execution_id, str)
+        or not _EXECUTION_ID.fullmatch(receipt.execution_id)
+        or not isinstance(receipt.provider, str)
+        or not isinstance(receipt.action, str)
+        or not isinstance(receipt.mode, EvidenceMode)
+        or not isinstance(receipt.verification, VerificationState)
+    ):
+        raise ValueError("receipt contains invalid identity or evidence state")
+    if any(
+        not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{64}", value)
+        for value in (receipt.policy_sha256, receipt.payload_sha256, receipt.result_sha256)
+    ):
+        raise ValueError("receipt digests must be SHA-256 hex values")
+    if not isinstance(receipt.observed_at, str) or not receipt.observed_at.endswith("Z"):
+        raise ValueError("receipt observed_at must be a canonical UTC timestamp")
+    try:
+        parsed = datetime.fromisoformat(receipt.observed_at.replace("Z", "+00:00"))
+    except ValueError:
+        raise ValueError("receipt observed_at must be a canonical UTC timestamp") from None
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise ValueError("receipt observed_at must be a canonical UTC timestamp")
     return {
         "execution_id": receipt.execution_id,
         "provider": receipt.provider,
@@ -128,7 +150,7 @@ class ReceiptLedger:
         """Append one immutable lifecycle fact and return its sequence/hash."""
         if not isinstance(execution_id, str) or not _EXECUTION_ID.fullmatch(execution_id):
             raise ValueError("execution_id is invalid")
-        if event_kind not in _EVENT_KINDS:
+        if not isinstance(event_kind, str) or event_kind not in _EVENT_KINDS:
             raise ValueError("unsupported event_kind")
         if (event_kind == "receipt_recorded") != (receipt is not None):
             raise ValueError("receipt is required only for receipt_recorded events")
@@ -139,7 +161,7 @@ class ReceiptLedger:
             "execution_id": execution_id,
             "event_kind": event_kind,
             "occurred_at": _timestamp(occurred_at),
-            "details": self._validate_details(details or {}),
+            "details": self._validate_details({} if details is None else details),
             "receipt": receipt_doc,
         }
         encoded = _canonical(document).decode("utf-8")
