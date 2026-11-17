@@ -10,7 +10,7 @@ from integrations.federation.contracts import (
     ExecutionPolicy,
 )
 from integrations.federation.outbox_bridge import enqueue_if_authorized
-from integrations.workspace_sync import WorkspaceOutbox
+from integrations.workspace_sync import InvalidEvent, WorkspaceOutbox
 
 
 NOW = datetime(2026, 11, 17, 12, 0, tzinfo=timezone.utc)
@@ -112,7 +112,7 @@ def test_outbox_rejects_secret_payload_even_after_policy_allows(outbox):
     secret_payload = {"access_token": "not-stored"}
     item = envelope(payload=secret_payload)
 
-    with pytest.raises(Exception, match="credential-like"):
+    with pytest.raises(InvalidEvent, match="credential-like"):
         enqueue(outbox, item, policy(), payload=secret_payload)
 
     assert outbox.stats()["pending"] == 0
