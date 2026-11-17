@@ -116,3 +116,19 @@ def test_outbox_rejects_secret_payload_even_after_policy_allows(outbox):
         enqueue(outbox, item, policy(), payload=secret_payload)
 
     assert outbox.stats()["pending"] == 0
+
+def test_outbox_target_cannot_differ_from_authorized_provider(outbox):
+    item = envelope()
+    with pytest.raises(ValueError, match="target must match"):
+        enqueue_if_target = enqueue_if_authorized(
+            outbox,
+            item,
+            policy(),
+            payload=PAYLOAD,
+            source="github",
+            target="drive",
+            operation="upsert_artifact_pointer",
+            now=100,
+        )
+    assert outbox.stats()["pending"] == 0
+
