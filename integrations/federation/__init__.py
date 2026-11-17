@@ -1,4 +1,4 @@
-"""Federated execution contracts and guarded workspace handoff."""
+"""Federated execution contracts, guarded handoff, and evidence ledger."""
 
 from .contracts import (
     ActionClass,
@@ -11,6 +11,7 @@ from .contracts import (
     evaluate_policy,
 )
 from .outbox_bridge import EnqueueDecision, enqueue_if_authorized
+from .receipt_ledger import ReceiptLedger
 
 __all__ = [
     "ActionClass",
@@ -20,6 +21,7 @@ __all__ = [
     "ExecutionEnvelope",
     "ExecutionPolicy",
     "PolicyDecision",
+    "ReceiptLedger",
     "VerificationState",
     "enqueue_if_authorized",
     "evaluate_policy",
