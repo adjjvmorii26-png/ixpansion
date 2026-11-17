@@ -18,7 +18,7 @@ The shared execution contract gives provider adapters one deterministic vocabula
 | external_side_effect | Required |
 | production_change | Required |
 
-Provider and action allowlists are always required. Payloads are canonicalized as UTF-8 JSON with sorted keys and compact separators. NaN and Infinity are rejected. The default payload ceiling is 64 KiB; the hard configurable ceiling is 1 MiB. Attempts are bounded to 1–20 and lease TTL to 1–3600 seconds.
+Provider and action allowlists are always required. Payloads are canonicalized as UTF-8 JSON with sorted keys, compact separators, and ASCII escaping so the envelope digest matches the Workspace Outbox digest. NaN and Infinity are rejected. The default payload ceiling is 64 KiB; the hard configurable ceiling is 1 MiB. Attempts are bounded to 1–20 and lease TTL to 1–3600 seconds.
 
 ## Example
 
@@ -53,15 +53,16 @@ assert decision.allowed
 
 ## Critical boundaries
 
-- This package is a contract and policy evaluator, not an execution engine.
-- It makes no network calls and does not acquire durable leases.
+- This package is a contract, policy evaluator, and guarded enqueue bridge, not a provider execution engine.
+- `enqueue_if_authorized` verifies the payload digest, evaluates the policy, and inserts an allowed event into the existing SQLite outbox. A denied action is never enqueued.
+- The bridge makes no provider network calls and does not claim a durable lease. `WorkspaceSyncRunner` remains the dispatch path.
 - It does not persist payloads, provider credentials, or raw result bodies.
 - A SHA-256 digest proves byte-level correspondence only. It does not prove source authenticity, truth, freshness, or authorization.
 - LIVE is a statement about the declared execution mode, not proof that a provider actually ran. Callers must only issue LIVE receipts after observing a real provider response.
 - VERIFIED must be supplied only by a separate verifier with an explicit verification basis. The default receipt state is PENDING.
-- Durable lease ownership, retries, cancellation, idempotent delivery, and outbox recovery remain the responsibility of the Workspace Nervous System.
+- Durable lease ownership, retries, cancellation, idempotent delivery, and outbox recovery remain the responsibility of the Workspace Nervous System. The bridge does not duplicate these mechanisms.
 - Provider adapters must not bypass this policy gate or reinterpret a denial as permission.
 
 ## Validation
 
-Tests cover deterministic canonical hashing, malformed/non-finite payloads, payload bounds, timezone requirements, allowlist denials, approval gates, policy digest changes, and evidence receipt semantics. CI results for this branch are pending until GitHub Actions completes.
+Tests cover deterministic canonical hashing, malformed/non-finite payloads, payload bounds, timezone requirements, allowlist denials, approval gates, policy digest changes, evidence receipt semantics, digest binding to the outbox, Unicode payload parity, secret rejection, replay suppression, and no-enqueue-on-denial. CI results for the latest bridge commit are pending until GitHub Actions completes.
