@@ -99,6 +99,22 @@ class ReceiptLedgerTests(unittest.TestCase):
                 receipt=self.make_receipt(),
             )
 
+    def test_unhashable_event_kind_and_invalid_empty_details_are_rejected(self):
+        with self.assertRaises(ValueError):
+            self.ledger.append(
+                execution_id="exec-ledger-001",
+                event_kind=[],
+                occurred_at=NOW,
+            )
+        with self.assertRaises(ValueError):
+            self.ledger.append(
+                execution_id="exec-ledger-001",
+                event_kind="claimed",
+                occurred_at=NOW,
+                details=[],
+            )
+        self.assertEqual(self.ledger.verify_chain()["checked"], 0)
+
     def test_secret_like_details_are_rejected(self):
         with self.assertRaises(ValueError):
             self.ledger.append(
