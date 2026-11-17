@@ -25,7 +25,7 @@ def outbox():
 
 def policy(**overrides):
     values = {
-        "allowed_providers": frozenset({"cloudflare"}),
+        "allowed_providers": frozenset({"notion"}),
         "allowed_actions": frozenset({"capture", "publish"}),
     }
     values.update(overrides)
@@ -35,7 +35,7 @@ def policy(**overrides):
 def envelope(payload=PAYLOAD, *, action="capture", action_class=ActionClass.READ_ONLY):
     return ExecutionEnvelope.build(
         execution_id="exec-bridge-001",
-        provider="cloudflare",
+        provider="notion",
         action=action,
         action_class=action_class,
         idempotency_key="ixpansion:exec-bridge-001",
