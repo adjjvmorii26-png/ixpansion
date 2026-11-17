@@ -54,7 +54,7 @@ assert decision.allowed
 ## Critical boundaries
 
 - This package is a contract, policy evaluator, and guarded enqueue bridge, not a provider execution engine.
-- `enqueue_if_authorized` verifies the payload digest, evaluates the policy, and inserts an allowed event into the existing SQLite outbox. A denied action is never enqueued.
+- `enqueue_if_authorized` verifies the payload digest, evaluates the policy, requires the outbox target to equal the policy-authorized provider, and inserts an allowed event into the existing SQLite outbox. A denied or mismatched action is never enqueued.
 - The bridge makes no provider network calls and does not claim a durable lease. `WorkspaceSyncRunner` remains the dispatch path.
 - It does not persist payloads, provider credentials, or raw result bodies.
 - A SHA-256 digest proves byte-level correspondence only. It does not prove source authenticity, truth, freshness, or authorization.
