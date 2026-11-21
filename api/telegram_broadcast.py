@@ -10,8 +10,8 @@ from typing import Dict, List, Optional, Any
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 
-# Telegram bot configuration
-BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8903755459:AAGwjuM6Q5U8lclNO980VfN2Gjtv90WCbMk")
+# Telegram bot configuration — fail closed; no hardcoded credential fallback.
+BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
 
 # Vibe pulse emoji mapping
 _VIBE_EMOJI = {
@@ -51,7 +51,9 @@ _broadcast_state = {
 
 
 def _telegram(method: str, params: dict) -> dict:
-    """Call Telegram Bot API using stdlib."""
+    """Call Telegram Bot API using stdlib. Fails closed when no token is configured."""
+    if not BOT_TOKEN:
+        return {"ok": False, "error": "TELEGRAM_BOT_TOKEN is not configured"}
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/{method}"
     data = urllib.parse.urlencode(params).encode()
     try:
@@ -241,7 +243,7 @@ def send_mood_alert(mood: dict, chat_ids: list = None) -> dict:
         if result.get("ok"):
             sent_count += 1
     
-    return {"status": "sent", "sent_count": sent_count, "recipients": subscribed}
+    return {"status": "sent" if sent_count > 0 else "failed", "sent_count": sent_count, "recipients": subscribed}
 
 
 def get_broadcast_status() -> dict:
