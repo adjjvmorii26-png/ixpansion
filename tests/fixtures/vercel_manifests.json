@@ -1,0 +1,12 @@
+{
+  "valid_manifest": {
+    "project_id": "prj_ixpansion_edge",
+    "commit_sha": "a1b2c3d4e5f67890123456789abcdef012345678",
+    "environment": "production"
+  },
+  "invalid_sha": {
+    "project_id": "prj_ixpansion_edge",
+    "commit_sha": "SHORT_SHA",
+    "environment": "production"
+  }
+}

@@ -1,0 +1,22 @@
+valid_pipeline:
+  stages:
+    - build
+    - test
+  build_job:
+    stage: build
+    script:
+      - make build
+  test_job:
+    stage: test
+    dependencies:
+      - build_job
+    script:
+      - pytest
+
+unsafe_pipeline:
+  stages:
+    - deploy
+  deploy_job:
+    stage: deploy
+    script:
+      - 'echo "Exposing $AWS_SECRET_ACCESS_KEY to public logs"'

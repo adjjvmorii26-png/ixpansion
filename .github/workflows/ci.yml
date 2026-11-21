@@ -26,7 +26,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - run: pip install pytest pytest-asyncio
+      - run: pip install pytest pytest-asyncio PyYAML
       - name: Run full test suite
         run: python -m pytest tests/ -q --tb=short
       - name: Verify all modules parse
