@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "artifact_id": "connector-federation-lab",
+  "artifact_type": "plugin-and-gem-seed",
+  "version": "0.1.0",
+  "status": "CANDIDATE",
+  "canonical_seed": {
+    "system": "notion",
+    "page_id": "42160373-6996-81f9-9fdc-efc6c69d067a",
+    "url": "https://app.notion.com/p/42160373699681f99fdcefc6c69d067a"
+  },
+  "plugin": {
+    "name": "connector-federation-lab",
+    "plugin_id": "plugins_6b04d17ef0d08191a009a9b22d1b1f56",
+    "release_id": "pluginrel_6b04d17f96a0819188115274cb810e25",
+    "scope": "USER",
+    "discoverability": "PRIVATE"
+  },
+  "implementation": {
+    "repository": "adjjvmorii26-png/ixpansion",
+    "source_ref": "feat/connector-federation-lab",
+    "source_commit": "UNSET",
+    "sha256": "NOT_COMPUTED"
+  },
+  "promotion": {
+    "state": "CANDIDATE",
+    "approval_ref": null,
+    "rollback_ref": "main"
+  }
+}
