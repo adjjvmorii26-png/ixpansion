@@ -1,0 +1,49 @@
+{
+  "id": "loopforge.creative-lab",
+  "name": "LOOPFORGE Creative Lab",
+  "version": "0.1.0-blueprint",
+  "status": "blueprint-not-installed",
+  "purpose": "Reusable workflows for meme seeds, GIF loop planning, remix provenance, and stale artifact triage.",
+  "skills": [
+    "skills/loopforge-creative-reuse/SKILL.md"
+  ],
+  "tools": [
+    {
+      "name": "generate_meme_seeds",
+      "module": "loopforge.creative_kernels",
+      "side_effects": "none",
+      "permissions": []
+    },
+    {
+      "name": "plan_gif",
+      "module": "loopforge.creative_kernels",
+      "side_effects": "none",
+      "permissions": []
+    },
+    {
+      "name": "loop_seam_score",
+      "module": "loopforge.creative_kernels",
+      "side_effects": "none",
+      "permissions": []
+    },
+    {
+      "name": "assess_artifact",
+      "module": "loopforge.creative_kernels",
+      "side_effects": "read-only classification",
+      "permissions": ["repository.read"]
+    }
+  ],
+  "future_capabilities": {
+    "gallery": "read-only preview and metadata browsing until publication is explicitly authorized",
+    "generation": "provider adapter must be separately connected and budget-limited",
+    "publishing": "disabled by default; requires explicit per-action approval",
+    "deletion": "not exposed"
+  },
+  "safety": {
+    "least_privilege": true,
+    "bounded_inputs": true,
+    "preserve_source_assets": true,
+    "require_provenance": true,
+    "no_implicit_external_writes": true
+  }
+}

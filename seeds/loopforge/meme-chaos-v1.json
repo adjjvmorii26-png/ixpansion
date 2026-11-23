@@ -1,0 +1,19 @@
+{
+  "id": "loopforge.seeds.meme-chaos-v1",
+  "version": "1.0.0",
+  "kind": "seed-pack",
+  "description": "Safe, reusable starting prompts for short-form meme experiments.",
+  "default_seed": 1337,
+  "recipes": [
+    {"id":"tiny-boss-battle","format":"reaction","premise":"a minor inconvenience becomes an epic boss battle","mutation":"make the background tell a second joke"},
+    {"id":"expectation-glitch","format":"expectation-reality","premise":"the plan looked simple until reality loaded","mutation":"invert the expected outcome"},
+    {"id":"wholesome-plot-twist","format":"two-panel","premise":"a chaotic day ends with an unexpectedly kind moment","mutation":"reveal a surprisingly wholesome ending"},
+    {"id":"overconfident-loading","format":"tiny-victory","premise":"a system is still loading but the narrator declares victory","mutation":"use an overconfident narrator"}
+  ],
+  "constraints": {
+    "max_caption_chars": 120,
+    "no_personal_data": true,
+    "no_unlicensed_reference_assets": true,
+    "human_review_before_publication": true
+  }
+}
