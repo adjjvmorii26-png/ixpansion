@@ -20,7 +20,7 @@ class ConnectorFederationContractTests(unittest.TestCase):
             body = path.read_text(encoding="utf-8")
             self.assertTrue(body.startswith("---\n"))
             frontmatter = body.split("---", 2)[1]
-            match = re.search(r"^name:\\s*([a-z0-9-]+)$", frontmatter, re.M)
+            match = re.search(r"^name:\s*([a-z0-9-]+)$", frontmatter, re.M)
             self.assertIsNotNone(match)
             names.append(match.group(1))
         self.assertEqual(len(names), len(set(names)))
@@ -42,7 +42,7 @@ class ConnectorFederationContractTests(unittest.TestCase):
         self.assertIsNone(manifest["promotion"]["approval_ref"])
 
     def test_synthetic_only_and_live_verification_boundary(self):
-        body = "\\n".join(path.read_text(encoding="utf-8") for path in SKILLS)
+        body = "\n".join(path.read_text(encoding="utf-8") for path in SKILLS)
         self.assertIn("fake transports", body.lower())
         self.assertIn("synthetic", body.lower())
         self.assertIn("live provider compatibility", body.lower())
