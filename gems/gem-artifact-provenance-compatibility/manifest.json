@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "artifact_id": "gem-artifact-provenance-compatibility",
+  "artifact_type": "gem-seed",
+  "version": "0.1.0",
+  "status": "CANDIDATE",
+  "canonical_seed": {
+    "system": "notion",
+    "page_id": "42160373-6996-8159-8b9f-c1fab471025f",
+    "url": "https://app.notion.com/p/42160373699681598b9fc1fab471025f"
+  },
+  "implementation": {
+    "repository": "adjjvmorii26-png/ixpansion",
+    "skill_path": "skills/gem-artifact-provenance-compatibility/SKILL.md",
+    "source_ref": "feat/gem-artifact-provenance-compatibility",
+    "source_commit": "UNSET",
+    "sha256": "NOT_COMPUTED"
+  },
+  "compatibility": {
+    "gemini_account_activation": "NOT_TESTED",
+    "plugin_runtime": "NOT_TESTED",
+    "notion_mcp": "SOURCE_READ",
+    "github_skill_loader": "NOT_TESTED"
+  },
+  "promotion": {
+    "state": "CANDIDATE",
+    "approval_ref": null,
+    "rollback_ref": "main"
+  }
+}
