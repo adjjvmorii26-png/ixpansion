@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Source-grounded component and design-token workbench for IXPANSION.">
+  <meta name="theme-color" content="#050711">
+  <title>UI Workbench — IXPANSION</title>
+  <link rel="stylesheet" href="assets/ui-workbench.css">
+  <script src="assets/ui-workbench.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to workbench</a>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="IXPANSION dashboard home"><span class="brand-mark">⬡</span><span>IXPANSION <small>INTERFACE SYSTEMS</small></span></a>
+    <nav aria-label="Workbench navigation"><a href="#library">Library</a><a href="#inspector">Inspector</a><a href="#tokens">Tokens</a><a href="https://github.com/adjjvmorii26-png/ixpansion/tree/main/dashboard/components" target="_blank" rel="noopener noreferrer">Source ↗</a></nav>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="eyebrow"><span class="pulse" aria-hidden="true"></span> COMPONENT SYSTEM / FIELD LAB 01</div>
+      <h1>Reusable UI <em>Workbench</em></h1>
+      <p>Explore source-inspected interface modules and the shared visual language. Search, filter, inspect contracts, and preview token specimens without pretending this static catalog is a connected editor.</p>
+      <div class="hero-meta"><span>REPOSITORY <b>adjjvmorii26-png/ixpansion</b></span><span>BRANCH <b>main · catalog view</b></span><span>DATA <b>curated source inventory</b></span></div>
+    </section>
+    <section class="workspace" id="library" aria-labelledby="library-title">
+      <div class="section-head"><div><div class="eyebrow">01 / DISCOVER</div><h2 id="library-title">Component library</h2></div><span class="count" id="result-count" aria-live="polite">— components</span></div>
+      <div class="toolbar">
+        <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search components, purpose, or source…" autocomplete="off"></label>
+        <label class="filter-label" for="category">Category</label>
+        <select id="category"><option value="all">All categories</option><option value="visualization">Visualization</option><option value="dashboard">Dashboard</option><option value="design-system">Design system</option></select>
+      </div>
+      <div class="library-layout">
+        <div class="component-list" id="component-list" aria-label="Component results"></div>
+        <aside class="inspector" id="inspector" aria-labelledby="inspector-title">
+          <div class="inspector-top"><div class="eyebrow">02 / INSPECT</div><span class="status-pill">SOURCE INSPECTED</span></div>
+          <h2 id="inspector-title">Select a component</h2>
+          <p class="muted" id="component-purpose">Choose an item from the library to inspect its contract and source provenance.</p>
+          <div class="preview" id="preview" aria-label="Illustrative design token specimen"><div class="preview-caption">SPECIMEN PREVIEW · DESIGN TOKENS</div><div class="specimen"><span class="specimen-orb"></span><strong>Interface specimen</strong><small>Illustrative token sample</small><button type="button" disabled>Example action</button></div></div>
+          <dl class="facts" id="facts"></dl>
+          <div class="source-row"><span>Source</span><a id="source-link" href="https://github.com/adjjvmorii26-png/ixpansion/tree/main/dashboard/components" target="_blank" rel="noopener noreferrer">Browse dashboard components ↗</a></div>
+          <p class="notice">Preview is a token specimen, not the imported React component running in a sandbox. Source-inspected does not mean tested or verified.</p>
+        </aside>
+      </div>
+    </section>
+    <section class="tokens-section" id="tokens" aria-labelledby="tokens-title">
+      <div class="section-head"><div><div class="eyebrow">03 / SYSTEM DNA</div><h2 id="tokens-title">Design token inspector</h2></div><span class="count">READ-ONLY SOURCE VALUES</span></div>
+      <p class="muted">Values below are copied from <code>dashboard/assets/themes.css</code>. This panel is an inspection aid; it does not write to the stylesheet.</p>
+      <div class="token-grid" id="token-grid"></div>
+    </section>
+  </main>
+  <footer><span>IXPANSION / UI WORKBENCH</span><span>Static inventory · no persistence · no live telemetry</span></footer>
+</body>
+</html>
