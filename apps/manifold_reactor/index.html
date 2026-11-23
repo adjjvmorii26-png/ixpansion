@@ -71,6 +71,7 @@ let mode = geometry.value, particles = createParticles(), energyLevel = 1;
 let gl = null, program = null, buffer = null, positionLocation = null, colorLocation = null, sizeLocation = null;
 let rafId = 0, running = false, paused = reducedMotion.matches, contextLost = false, destroyed = false;
 let width = 1, height = 1, lastFpsTime = 0, frames = 0, elapsedTime = 0, audioContext = null, oscillator = null, gain = null;
+const renderData = new Float32Array(particles.length * 3);
 const MAX_DPR = 1.75;
 const vertexSource = `attribute vec2 a_position; attribute float a_size; uniform float u_pointSize; varying float v_depth;
 void main(){ gl_Position=vec4(a_position,0.0,1.0); gl_PointSize=clamp(a_size*u_pointSize,1.0,9.0); v_depth=1.0-abs(a_position.y)*0.35; }`;
@@ -159,7 +160,7 @@ function drawFallback() {
 function render() {
   if (destroyed || contextLost) return;
   if (!gl || !program || !buffer) { drawFallback(); return; }
-  const data = new Float32Array(particles.length * 3);
+  const data = renderData;
   const aspect = width / Math.max(1, height);
   for (let i = 0; i < particles.length; i++) {
     const q = projectParticle(particles[i], mode, aspect, elapsedTime);
@@ -272,7 +273,13 @@ function cleanup() {
   reducedMotion.removeEventListener?.("change", onMotionPreference);
 }
 const resizeObserver = typeof ResizeObserver === "function" ? new ResizeObserver(onResize) : null;
-geometry.addEventListener("change", () => { mode = geometry.value; if (mode === "collapse") status.textContent = "Collapse geometry selected; radius will contract to a safe minimum."; syncUi(); });
+geometry.addEventListener("change", () => {
+  mode = geometry.value;
+  if (mode === "collapse") status.textContent = "Collapse geometry selected; radius will contract to a safe minimum.";
+  syncUi();
+  // Geometry is a visual state change, so redraw immediately even while paused.
+  render();
+});
 energy.addEventListener("input", () => { energyLevel = Number(energy.value); syncUi(); });
 pauseButton.addEventListener("click", () => { paused = !paused; syncUi(); if (paused) status.textContent = "Motion paused."; else { status.textContent = "Running local visual simulation"; start(); } });
 document.querySelector("#reset").addEventListener("click", () => { particles = createParticles(); elapsedTime = 0; clock.reset(); syncUi(); render(); status.textContent = "Simulation reset to its initial seeded state."; });
