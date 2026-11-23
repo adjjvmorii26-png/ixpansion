@@ -34,7 +34,7 @@ class LivingPortalDomSafetyTests(unittest.TestCase):
     def test_family_map_uses_text_nodes_and_bounded_numeric_width(self):
         block = function_block("async function loadMap(){", "// Init")
         self.assertIn("name.textContent=String(family)", block)
-        self.assertIn("countLabel.textContent = String(safeCount)", block)
+        self.assertIn("countLabel.textContent=String(safeCount)", block)
         self.assertIn("track.style.width=`${pct}%`", block)
         self.assertIn("Math.min(100", block)
         self.assertNotIn(".innerHTML", block)
