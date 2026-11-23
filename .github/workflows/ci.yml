@@ -50,6 +50,16 @@ jobs:
           print(f'All {count} API modules parse OK')
           "
 
+  world-canvas:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Test deterministic World Canvas engine
+        run: node --test lab/world-canvas/world-engine.test.mjs
+
   vercel-contract:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
