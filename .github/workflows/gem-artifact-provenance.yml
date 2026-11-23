@@ -1,0 +1,28 @@
+name: Gem Artifact Provenance Contract
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "skills/gem-artifact-provenance-compatibility/**"
+      - "gems/gem-artifact-provenance-compatibility/**"
+      - "tests/test_gem_artifact_provenance.py"
+      - ".github/workflows/gem-artifact-provenance.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gem-artifact-provenance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate Gem provenance contract
+        run: python -m unittest discover -s tests -p 'test_gem_artifact_provenance.py' -v
