@@ -2266,3 +2266,9 @@ def resonates_with() -> list:
         from api.wave767_mycelial_truths import handler as h
         q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
         return h(q)
+
+# --- Wave 980: Hush Tide ---
+    if path.startswith("/hush-tide") or path.startswith("/api/hush_tide") or path in ("/hush-tide", "/api/hush_tide"):
+        from api.wave980_hush_tide import handler as h
+        q = {} if "?" not in raw_path else dict(item.split("=", 1) for item in raw_path.split("?", 1)[1].split("&") if "=" in item)
+        return h(q)

@@ -1,0 +1,10 @@
+{
+  "wave": 980,
+  "name": "hush_tide",
+  "status": "seed",
+  "doctrine": "silence is the product surface",
+  "phases": ["EBB", "SLACK", "FLOOD", "STILL"],
+  "defaults": {"gossip": 0.5, "forge": 0.5, "time": 0.5},
+  "thresholds": {"still": 0.72, "ebb": 0.48, "slack": 0.28},
+  "product_surface_map": {"hush": ">= 0.48", "noise": "< 0.48"}
+}

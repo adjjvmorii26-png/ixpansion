@@ -1,7 +1,7 @@
 """Tests for wave980 hush_tide — pure, no network."""
 from __future__ import annotations
 
-from api.wave980_hush_tide import evaluate, hush_score, tide_phase
+from api.wave980_hush_tide import evaluate, hush_score, tide_phase, coherence_vitals
 
 
 def test_still_when_quiet():
@@ -34,3 +34,13 @@ def test_phase_boundaries():
     assert tide_phase(0.5) == "EBB"
     assert tide_phase(0.3) == "SLACK"
     assert tide_phase(0.1) == "FLOOD"
+
+
+def test_coherence_vitals():
+    v = coherence_vitals()
+    assert v["wave"] == 980
+    assert v["name"] == "hush_tide"
+    assert v["layer"] == "organ"
+    assert v["status"] == "active"
+    assert "module_health" in v
+    assert "phases" in v

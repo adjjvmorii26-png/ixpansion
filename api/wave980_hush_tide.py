@@ -77,6 +77,27 @@ def handler(query: Dict[str, Any] | None = None) -> Dict[str, Any]:
     return evaluate(q)
 
 
+WAVE = 980
+NAME = "hush_tide"
+
+
+def coherence_vitals() -> dict:
+    return {
+        "wave": WAVE,
+        "name": NAME,
+        "layer": "organ",
+        "status": "active",
+        "hush_score_range": [0.0, 1.0],
+        "phases": list(PHASES),
+        "product_surface": "hush",
+        "module_health": {"value": 0.88, "setpoint": 0.80, "weight": 1.0},
+    }
+
+
+def resonates_with() -> list:
+    return ["continuity_weaver", "axiom_mutator", "harmony_report", "coherence_regulator"]
+
+
 if __name__ == "__main__":
     import json
     print(json.dumps(evaluate({"gossip": 0.7, "forge": 0.65, "time": 0.8}), indent=2))
