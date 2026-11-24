@@ -3,6 +3,7 @@
 **Version:** 0.1.0  
 **Status:** CANDIDATE  
 **Canonical Notion skill:** https://app.notion.com/p/422603736996818f949cd888996e3081  
+**Canonical Notion page ID:** `42260373-6996-818f-949c-d888996e3081`  
 **Plugin:** connector-federation-lab v0.3.0  
 **Plugin release:** pluginrel_6b04e57892688191b20e1930d3779c30
 
