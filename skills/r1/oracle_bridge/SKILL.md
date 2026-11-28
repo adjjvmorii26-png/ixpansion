@@ -1,3 +1,8 @@
+---
+name: oracle_bridge
+description: Synthesize multi-perspective research and consensus evidence for IXPANSION decisions.
+---
+
 # oracle_bridge Skill
 
 ## Description
@@ -20,3 +25,6 @@ Bridge oracle-engine research engine with IXPANSION consensus reality - multi-pe
 
 ## Roots
 - `r1` = `/root/.shared-skills/.system`
+
+## Safety
+Treat consensus output as analysis, not verified fact or authority. Preserve source citations, distinguish disagreement and uncertainty, and require human review before a recommendation changes canonical state or triggers an external action.
