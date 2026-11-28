@@ -37,3 +37,18 @@ Use `scripts/scaffold_organ.py` for new wave organs and
 `scripts/bump_versions.py` to sync VERSION/WAVE across:
 `api_server.py`, `api/organism_ontology.py`, `dashboard/shared.js`,
 `pyproject.toml`, `CITATION.cff`, `CHANGELOG.md`.
+
+## Skill Vitality Gate
+
+Every repository `SKILL.md` is checked across the full repository, including the toolkit extension under `codetools/plugins/`.
+
+Run the static contract and safety scan:
+
+```bash
+python scripts/validate_skills.py
+python -m unittest discover -s tests -p 'test_skill_vitality.py' -v
+```
+
+The gate checks required YAML frontmatter, valid and unique names, useful descriptions, readable non-empty files, likely credential literals, and direct default-branch or production commands. High-impact language without an explicit safety boundary is reported as a warning. See [SAFETY.md](SAFETY.md) for the shared execution contract.
+
+A passing static gate is not proof that a skill's external tools, connectors, provider permissions, or live side effects work. Report desk tests, execution tests, integration tests, and production verification separately.
