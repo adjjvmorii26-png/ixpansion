@@ -1,6 +1,6 @@
 ---
 name: handler_meta_evolution_engine
-description: Organism-expressed skill from paradigm handler->meta_evolution
+description: Analyze and propose bounded handler evolution and meta-level refactors for IXPANSION.
 tags: [mutation, expressed, handler->meta_evolution]
 ---
 
@@ -19,3 +19,6 @@ Expressed from mutated DNA — paradigm: handler->meta_evolution
 - Category: organism
 - Roots: r1
 - Expressed: 2026-09-16T16:43:15.109463+00:00
+
+## Safety
+Mutation commands are proposal-only by default. Require a bounded diff, isolated branch, regression tests, explicit approval, and rollback reference before applying changes. Never mutate the default branch or runtime state directly.
