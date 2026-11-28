@@ -141,6 +141,12 @@ footer{text-align:center;margin-top:50px;padding:20px;color:var(--dim);font-size
 const B='https://alexalex.info';
 async function api(p){try{const r=await fetch(B+'/api/'+p);return await r.json()}catch(e){return{error:e.message}}}
 
+function safePercent(value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return 0;
+  return Math.round(Math.min(1, Math.max(0, numeric)) * 100);
+}
+
 // Pulse
 async function pulse(){
   // Fetch sensory experience
@@ -193,18 +199,33 @@ async function breathe(){
 async function dream(){
   const el=document.getElementById('dream-output');
   el.textContent='dreaming...';
-  const r=await api('dream_weaver/dream');
-  el.innerHTML='"'+r.concept+'" <br><small style="color:var(--dim)">domain: '+r.domain+' · '+Math.round(r.lucidity*100)+'% lucidity</small>';
+  const response=await api('dream_weaver/dream');
+  const payload=response && typeof response === 'object' ? response : {};
+  const concept=document.createTextNode('"'+String(payload.concept ?? payload.error ?? 'No concept returned')+'" ');
+  const meta=document.createElement('small');
+  meta.style.color='var(--dim)';
+  meta.textContent=`domain: ${String(payload.domain ?? 'unknown')} · ${safePercent(payload.lucidity)}% lucidity`;
+  el.replaceChildren(concept, document.createElement('br'), meta);
 }
 
 // Innovate
 async function innovate(){
   const el=document.getElementById('innovate-output');
   el.textContent='reaching outside...';
-  const r=await api('lateral_innovation_engine/innovate?count=1');
-  const i=(r.innovations||[])[0];
-  if(i) el.innerHTML='<strong>['+i.external_domain+']</strong> '+i.novel_concept+'<br><small style="color:var(--dim)">novelty: '+Math.round(i.novelty_score*100)+'% · module: '+i.suggested_module+'</small>';
-  else el.textContent='all external sources unreachable — the organism dreams inward';
+  const response=await api('lateral_innovation_engine/innovate?count=1');
+  const payload=response && typeof response === 'object' ? response : {};
+  const innovation=Array.isArray(payload.innovations) ? payload.innovations[0] : null;
+  if(innovation && typeof innovation === 'object') {
+    const domain=document.createElement('strong');
+    domain.textContent='['+String(innovation.external_domain ?? 'unknown')+']';
+    const concept=document.createTextNode(' '+String(innovation.novel_concept ?? ''));
+    const meta=document.createElement('small');
+    meta.style.color='var(--dim)';
+    meta.textContent=`novelty: ${safePercent(innovation.novelty_score)}% · module: ${String(innovation.suggested_module ?? 'unknown')}`;
+    el.replaceChildren(domain, concept, document.createElement('br'), meta);
+  } else {
+    el.textContent='all external sources unreachable — the organism dreams inward';
+  }
 }
 
 // Whisper
@@ -227,25 +248,39 @@ async function ceremony(){
 
 // Family map
 async function loadMap(){
-  const m=await api('module_cartographer/map');
-  const map=m.map||{};
-  const families=map.families||{};
-  const total=map.total_modules||1;
+  const response=await api('module_cartographer/map');
+  const payload=response && typeof response === 'object' ? response : {};
+  const map=payload.map && typeof payload.map === 'object' ? payload.map : {};
+  const families=map.families && typeof map.families === 'object' ? map.families : {};
+  const rawTotal=Number(map.total_modules);
+  const total=Number.isFinite(rawTotal) && rawTotal > 0 ? rawTotal : 1;
   const el=document.getElementById('family-map');
-  el.innerHTML='';
+  el.replaceChildren();
   const colors=['var(--gold)','var(--violet)','var(--blue)','var(--green)','var(--forge)','#c084fc','#fb923c','#a78bfa','#67e8f9','#86efac','#fca5a5'];
-  let i=0;
-  for(const[fam,count] of Object.entries(families)){
-    const pct=Math.round(count/total*100);
-    const bar=document.createElement('div');
-    bar.className='family-bar';
-    bar.innerHTML='<span class="name">'+fam+'</span><div class="bar" style="width:'+pct+'%;background:'+colors[i%colors.length]+'"></div><span class="count">'+count+'</span>';
-    el.appendChild(bar);
-    i++;
+  let index=0;
+  for(const [family,count] of Object.entries(families)) {
+    const rawCount=Number(count);
+    const safeCount=Number.isFinite(rawCount) ? Math.max(0, rawCount) : 0;
+    const pct=Math.min(100, Math.max(0, Math.round(safeCount/total*100)));
+    const row=document.createElement('div');
+    row.className='family-bar';
+    const name=document.createElement('span');
+    name.className='name';
+    name.textContent=String(family);
+    const track=document.createElement('div');
+    track.className='bar';
+    track.style.width=`${pct}%`;
+    track.style.background=colors[index%colors.length];
+    const countLabel=document.createElement('span');
+    countLabel.className='count';
+    countLabel.textContent=String(safeCount);
+    row.append(name, track, countLabel);
+    el.appendChild(row);
+    index++;
   }
   const foot=document.createElement('p');
   foot.style.cssText='color:var(--dim);font-size:.8em;margin-top:10px;text-align:center';
-  foot.textContent=map.orphan_count+' orphans · '+map.bridge_count+' bridges · '+map.cluster_count+' clusters · density '+map.connection_density;
+  foot.textContent=String(map.orphan_count ?? 0)+' orphans · '+String(map.bridge_count ?? 0)+' bridges · '+String(map.cluster_count ?? 0)+' clusters · density '+String(map.connection_density ?? 0);
   el.appendChild(foot);
 }
 
