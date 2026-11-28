@@ -1,0 +1,43 @@
+name: Skill Vitality Contract
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "codetools/plugins/**/SKILL.md"
+      - "scripts/validate_skills.py"
+      - "tests/test_skill_vitality.py"
+      - ".github/workflows/skill-vitality.yml"
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "codetools/plugins/**/SKILL.md"
+      - "scripts/validate_skills.py"
+      - "tests/test_skill_vitality.py"
+      - ".github/workflows/skill-vitality.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: skill-vitality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Validate skill manifests and safety boundaries
+        run: python scripts/validate_skills.py
+      - name: Run Skill Vitality regression tests
+        run: python -m unittest discover -s tests -p 'test_skill_vitality.py' -v
