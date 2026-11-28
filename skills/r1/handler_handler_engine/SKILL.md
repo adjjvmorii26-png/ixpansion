@@ -19,3 +19,8 @@ Expressed from mutated DNA — paradigm: handler->handler
 - Category: organism
 - Roots: r1
 - Expressed: 2026-09-16T16:18:25.157699+00:00
+
+
+## Safety
+
+Treat handler actions that mutate state as proposal-only. Require exact target identity, explicit approval, an isolated branch or fixture, regression tests, and a rollback reference before applying changes.
