@@ -1,3 +1,8 @@
+---
+name: antimemetic_weave
+description: Analyze absence patterns, erasure structures, and negative-space relationships without destroying source evidence.
+---
+
 # antimemetic_weave Skill
 
 ## Description
@@ -20,3 +25,6 @@ Weave antimemetic-architecton absence/substrate into IXPANSION - negative space,
 
 ## Roots
 - `r1` = `/root/.shared-skills/.system`
+
+## Safety
+Treat erasure and absence operations as analytical proposals. Never delete, redact, conceal, or overwrite source records. Any material change requires explicit approval, a preserved backup, and a rollback reference.
