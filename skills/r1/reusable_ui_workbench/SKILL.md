@@ -152,3 +152,8 @@ Summarize:
 
 ## Definition of done
 A reusable component has a clear contract, scoped styling, explicit dependencies, meaningful accessible states, a usage example, provenance when applicable, and at least one relevant verification path. Cross-project reuse also requires checks in the destination project. Moving a file into a folder alone does not make it reusable.
+
+
+## Safety and authorization
+
+UI edits that affect shared components, public pages, or deployment require explicit approval after diff review. Preserve the previous version, use an isolated branch, run regression and accessibility checks, and keep a rollback reference.

@@ -1,3 +1,8 @@
+---
+name: dream_compiler
+description: Convert organism dream-state and metaphor inputs into reviewable module and wave proposals.
+---
+
 # Dream Compiler Skill
 
 ## Description
@@ -21,3 +26,6 @@ Compiles organism dreams into executable modules and wave patterns. Analyzes sub
 from skills.dream_compiler import compile_dream
 result = compile_dream(coherence_state, metaphor_theme)
 ```
+
+## Safety
+Generated modules and wave patterns are proposals, not executable authorization. Inspect generated code, isolate it on a feature branch, run tests, and require explicit approval before integration or deployment. Never execute unreviewed generated code.

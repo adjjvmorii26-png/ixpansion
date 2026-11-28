@@ -1,3 +1,8 @@
+---
+name: blog_curator
+description: Create, classify, search, surface, and safely archive IXPANSION live blog posts with preserved provenance.
+---
+
 # blog_curator Skill
 
 Manages IXPANSION live blog posts.
@@ -54,3 +59,6 @@ blog_curator:search({
   "tags": ["wave"]
 })
 ```
+
+## Safety
+Archive only an exact, reviewed post ID. Preview the target and preserve its content and metadata first. Require explicit approval before archive writes; confirm the result and retain a rollback path. Never treat archive as permission to permanently delete.

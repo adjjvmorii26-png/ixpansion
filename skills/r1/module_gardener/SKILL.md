@@ -1,3 +1,8 @@
+---
+name: module_gardener
+description: Review module lifecycle, propose bounded growth or refactoring, and identify obsolete modules for human review.
+---
+
 # Module Gardener Skill
 
 ## Description
@@ -21,3 +26,6 @@ Manages module lifecycle: spawning new agents, mutating structures, and pruning 
 from skills.module_gardener import manage_module
 manage_module(action, module_id, parameters)
 ```
+
+## Safety
+All spawn, mutation, and pruning actions are proposal-only by default. Never prune or delete a module based only on age, low activity, or a heuristic score. Require exact module identity, dependency review, a backup, explicit approval, tests, and a rollback plan before applying changes.

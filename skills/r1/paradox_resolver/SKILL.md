@@ -1,3 +1,8 @@
+---
+name: paradox_resolver
+description: Detect and explain coherence conflicts between modules and propose reviewable resolutions.
+---
+
 # Paradox Resolver Skill
 
 ## Description
@@ -21,3 +26,6 @@ Resolves coherence conflicts between modules when axioms mutate. Ensures organis
 from skills.paradox_resolver import resolve_conflict
 result = resolve_conflict(module_a, module_b, conflict_type)
 ```
+
+## Safety
+Generate a conflict report and bounded resolution proposal first. Do not mutate module state, rewrite axioms, or alter canonical configuration without explicit approval, regression tests, and a rollback reference.

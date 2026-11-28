@@ -1,3 +1,8 @@
+---
+name: weather_monitor
+description: Monitor IXPANSION organism vitals and produce bounded health reports and alerts.
+---
+
 # weather_monitor Skill
 
 ## Description
@@ -20,3 +25,6 @@ Monitor organism vitals via weather API
 
 ## Roots
 - `r1` = `/root/.shared-skills/.system`
+
+## Safety
+Monitoring is read-only by default. Before sending an alert, verify the destination, severity threshold, and message contents; require explicit approval for external notifications or other side effects.

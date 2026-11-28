@@ -1,3 +1,8 @@
+---
+name: resonance_mapper
+description: Map cross-module resonance patterns, visualize coherence gradients, and report bounded trend hypotheses.
+---
+
 # Resonance Mapper Skill
 
 ## Description
@@ -21,3 +26,11 @@ Maps cross-module resonance patterns and identifies emergent behaviors. Visualiz
 from skills.resonance_mapper import map_patterns
 graph = map_patterns(module_states)
 ```
+
+## Safety
+Label forecasts as hypotheses with source, freshness, and confidence. A resonance score is not authorization to change module state, delete resources, or trigger deployment.
+
+
+## Safety and authorization
+
+Resonance forecasts are advisory hypotheses, not authorization. Require explicit approval and a rollback reference before any downstream action changes module state, deletes resources, or triggers deployment.

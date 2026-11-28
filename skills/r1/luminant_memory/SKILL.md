@@ -1,3 +1,8 @@
+---
+name: luminant_memory
+description: Inspect and organize IXPANSION memory structures while preserving provenance and original records.
+---
+
 # luminant_memory Skill
 
 ## Description
@@ -20,3 +25,6 @@ Connect luminant-reliquary crystalline memory with IXPANSION organism memory sys
 
 ## Roots
 - `r1` = `/root/.shared-skills/.system`
+
+## Safety
+Preserve original memory records and provenance. Do not overwrite, delete, or silently consolidate source memories. Any mutation requires explicit approval, a recoverable snapshot, and a documented rollback path.

@@ -19,3 +19,8 @@ Expressed from mutated DNA — paradigm: data_pipeline->asynchronous
 - Category: organism
 - Roots: r1
 - Expressed: 2026-09-16T16:43:18.173510+00:00
+
+
+## Safety
+
+Pipeline execution and mutation commands are proposal-only by default. Require explicit approval, an isolated branch or disposable fixture, bounded inputs, regression tests, and a rollback reference before changing durable data or production state.

@@ -1,3 +1,8 @@
+---
+name: threshold_engineer
+description: Analyze transition readiness and propose controlled state-boundary changes with evidence.
+---
+
 # Threshold Engineer Skill
 
 ## Description
@@ -21,3 +26,6 @@ Engineers threshold transitions for the organism. Detects when modules are ready
 from skills.threshold_engineer import engineer_threshold
 result = engineer_threshold(module_id, target_state)
 ```
+
+## Safety
+Threshold scores are advisory. Treat state transitions as proposals; require explicit approval, precondition checks, regression tests, and a rollback point before applying them to live modules.
