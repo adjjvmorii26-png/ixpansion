@@ -1,3 +1,8 @@
+---
+name: chrono_relay
+description: Analyze and coordinate temporal mechanics, cyclic memory, and archive timelines in IXPANSION.
+---
+
 # chrono_relay Skill
 
 ## Description
@@ -20,3 +25,6 @@ Relay chronocrypt-orrery temporal mechanics into IXPANSION wave engine - time lo
 
 ## Roots
 - `r1` = `/root/.shared-skills/.system`
+
+## Safety
+Treat time shifts and archive operations as simulations until their effects are inspected. Preserve source snapshots; require explicit approval and a rollback reference before changing or archiving durable records.
