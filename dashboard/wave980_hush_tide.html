@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wave 980 — Hush Tide</title>
+<script src="/shared.js"></script>
+<style>
+:root{--bg:#02030a;--accent:#8b5cf6;--vine:#a855f7;--text:#b8b8d0;--dim:#505068;--bright:#e8e8f8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Fira Code',monospace;min-height:100vh;overflow-x:hidden}
+.hero{text-align:center;padding:60px 24px 40px;border-bottom:1px solid #8b5cf622}
+.hero h1{font-size:3em;font-weight:200;letter-spacing:10px;color:var(--bright)}
+.hero h1 span{color:var(--accent)}
+.hero .sub{color:var(--dim);font-size:0.8em;letter-spacing:4px;margin-top:8px}
+.hero .badge{display:inline-block;margin-top:16px;padding:6px 16px;border:1px solid #8b5cf644;border-radius:20px;font-size:0.7em;color:var(--accent)}
+.container{max-width:1100px;margin:0 auto;padding:32px 24px}
+.tide{text-align:center;padding:40px 24px;margin-top:24px;border:1px solid #8b5cf633;border-radius:16px;background:radial-gradient(ellipse at bottom,rgba(139,92,246,0.07),transparent 65%)}
+.tide h2{color:var(--accent);font-size:1.6em;font-weight:200;letter-spacing:4px}
+#phase{color:var(--bright);font-size:1.2em;margin-top:12px}
+#score{color:var(--accent);font-weight:700}
+.stat-row{margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.stat{display:inline-block;padding:6px 14px;border-radius:8px;font-size:0.7em;background:#8b5cf611;border:1px solid #8b5cf633}
+.stat .v{color:var(--accent);font-weight:700}.stat .l{color:var(--dim);margin-left:6px}
+.triad{margin-top:40px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.triad .cell{padding:16px;border-radius:12px;background:#8b5cf60a;border:1px solid #8b5cf622;text-align:center;min-width:120px}
+.triad .label{color:var(--dim);font-size:0.7em;letter-spacing:2px;text-transform:uppercase}
+.triad .value{color:var(--bright);font-size:1.4em;margin-top:4px}
+.controls{margin-top:30px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+input{padding:8px 12px;border-radius:6px;border:1px solid #8b5cf633;background:#0a0a12;color:var(--text);font-family:inherit;font-size:0.75em}
+button{padding:8px 18px;border-radius:6px;border:1px solid #8b5cf6;background:transparent;color:var(--accent);font-family:inherit;cursor:pointer;font-size:0.75em}
+button:hover{background:#8b5cf622}
+#result{margin-top:20px;padding:16px;border-radius:8px;background:#0a0a12;border:1px solid #8b5cf622;font-size:0.75em;color:var(--text);white-space:pre-wrap}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>Wave <span>980</span><br>Hush Tide</h1>
+  <div class="sub">Silence Is the Product Surface</div>
+  <div class="badge">Organ · Readback · Deterministic</div>
+</div>
+
+<div class="container">
+  <div class="tide">
+    <h2>Tide Phase</h2>
+    <div id="phase">—</div>
+    <div class="stat-row">
+      <div class="stat"><span class="v" id="score">—</span><span class="l">hush score</span></div>
+      <div class="stat"><span class="v" id="surface">—</span><span class="l">product surface</span></div>
+    </div>
+  </div>
+
+  <div class="triad">
+    <div class="cell"><div class="label">Gossip</div><div class="value" id="gossip">—</div></div>
+    <div class="cell"><div class="label">Forge</div><div class="value" id="forge">—</div></div>
+    <div class="cell"><div class="label">Time</div><div class="value" id="time">—</div></div>
+  </div>
+
+  <div class="controls">
+    <input type="number" id="iGossip" step="0.01" min="0" max="1" placeholder="gossip 0-1">
+    <input type="number" id="iForge" step="0.01" min="0" max="1" placeholder="forge 0-1">
+    <input type="number" id="iTime" step="0.01" min="0" max="1" placeholder="time 0-1">
+    <button onclick="evaluate()">Evaluate</button>
+  </div>
+
+  <div id="result"></div>
+</div>
+
+<script>
+async function evaluate(){
+  const g = document.getElementById('iGossip').value;
+  const f = document.getElementById('iForge').value;
+  const t = document.getElementById('iTime').value;
+  const qs = new URLSearchParams();
+  if(g!=='') qs.set('gossip', g);
+  if(f!=='') qs.set('forge', f);
+  if(t!=='') qs.set('time', t);
+  const url = '/api/hush_tide?' + qs.toString();
+  const res = await fetch(url);
+  const json = await res.json();
+  document.getElementById('phase').textContent = json.tide;
+  document.getElementById('score').textContent = json.hush_score;
+  document.getElementById('surface').textContent = json.product_surface;
+  document.getElementById('gossip').textContent = json.triad.gossip;
+  document.getElementById('forge').textContent = json.triad.forge;
+  document.getElementById('time').textContent = json.triad.time;
+  document.getElementById('result').textContent = JSON.stringify(json, null, 2);
+}
+evaluate();
+</script>
+</body>
+</html>

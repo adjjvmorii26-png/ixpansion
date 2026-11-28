@@ -1,0 +1,28 @@
+name: Artifact Parity Gate Contract
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "skills/artifact-parity-gate/**"
+      - "gems/artifact-parity-gate/**"
+      - "tests/test_artifact_parity_gate.py"
+      - ".github/workflows/artifact-parity-gate.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: artifact-parity-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run artifact parity contract tests
+        run: python -m unittest discover -s tests -p 'test_artifact_parity_gate.py' -v
