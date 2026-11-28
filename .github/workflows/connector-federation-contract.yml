@@ -1,0 +1,30 @@
+name: Connector Federation Contract
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "skills/capability-contract-compiler/**"
+      - "skills/federation-shadow-twin/**"
+      - "skills/connector-chaos-simulator/**"
+      - "gems/connector-federation-lab/**"
+      - "tests/test_connector_federation_contract.py"
+      - ".github/workflows/connector-federation-contract.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: connector-federation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run federation contract checks
+        run: python -m unittest discover -s tests -p 'test_connector_federation_contract.py' -v
