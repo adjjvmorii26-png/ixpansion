@@ -35,3 +35,8 @@ pressure, birth bonus, growth ceiling, and resonance boost:
 - Don't force SPRING-level births during WINTER — respect the organism's rest cycle.
 - AUTUMN harvest takes priority over new births when resonance drift is high.
 - If coherence < 0.6, treat as early WINTER regardless of actual season.
+
+
+## Safety and authorization
+
+Seasonal scores and pruning suggestions are advisory. Do not delete, prune, or mutate modules automatically. Require explicit approval, dependency review, backup, regression tests, and rollback before applying any lifecycle change.
