@@ -1,3 +1,9 @@
+## [4.124.0] — 2026-11-24
+
+### Added
+- **Wave 980 hush_tide**: silence as product surface — converts triad pressure (Gossip / Forge / Time) into a tide phase and hush score. Actions: evaluate. Pure, deterministic, no network.
+- **Dashboard wave980.html**: Hush Tide console — live phase/score readback, triad inputs, JSON result output.
+
 ## [4.123.0] — 2026-09-16
 
 ### Added

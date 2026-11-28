@@ -3,43 +3,190 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b0e0c" />
-  <title>IXPANSION — live</title>
+  <meta name="theme-color" content="#040410" />
+  <meta name="description" content="IXPANSION live surface — hush tide, health, product of silence." />
+  <title>IXPANSION — hush tide</title>
   <style>
-    :root { color-scheme: dark; --bg:#0b0e0c; --text:#eef1e8; --muted:#a3aaa0; --lime:#d7f47a; --line:rgba(223,235,214,.14); }
+    :root {
+      color-scheme: dark;
+      --bg: #040410;
+      --panel: rgba(10, 12, 24, 0.88);
+      --text: #e8e8f2;
+      --muted: #8b8ba3;
+      --lime: #d7f47a;
+      --cyan: #2dd4bf;
+      --violet: #a78bfa;
+      --line: rgba(255,255,255,0.08);
+      --flood: #f472b6;
+    }
     * { box-sizing: border-box; }
-    body { margin:0; min-height:100vh; background:radial-gradient(ellipse at 80% 10%,rgba(57,86,56,.14),transparent 40%),var(--bg); color:var(--text); font:15px/1.6 Manrope,system-ui,sans-serif; display:flex; align-items:center; justify-content:center; padding:32px; }
-    main { max-width:560px; width:100%; border:1px solid var(--line); padding:36px 32px; background:rgba(20,26,22,.72); }
-    .eyebrow { font:10px/1.4 ui-monospace,monospace; letter-spacing:.16em; color:#a6c851; margin:0 0 18px; }
-    h1 { margin:0 0 14px; font-size:clamp(36px,8vw,52px); letter-spacing:-.06em; font-weight:600; line-height:1.05; }
-    h1 em { color:var(--lime); font-family:Georgia,serif; font-style:italic; font-weight:400; }
-    p { margin:0 0 14px; color:var(--muted); }
-    .status { display:flex; gap:10px; align-items:center; margin:22px 0; font:11px ui-monospace,monospace; color:#c6cec3; }
-    .dot { width:8px; height:8px; border-radius:50%; background:var(--lime); box-shadow:0 0 12px rgba(215,244,122,.7); }
-    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
-    a.btn { display:inline-flex; align-items:center; padding:12px 16px; background:var(--lime); color:#0b0e0c; font-size:12px; font-weight:700; text-decoration:none; }
-    a.link { color:var(--lime); font-size:12px; font-weight:600; text-decoration:none; padding:12px 8px; }
-    code { font-family:ui-monospace,monospace; font-size:12px; color:var(--lime); }
+    body {
+      margin: 0; min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 12% 20%, rgba(167,139,250,0.12), transparent 42%),
+        radial-gradient(ellipse at 88% 8%, rgba(45,212,191,0.10), transparent 38%),
+        var(--bg);
+      color: var(--text);
+      font: 15px/1.6 "Manrope", system-ui, sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      padding: 28px 18px;
+    }
+    main {
+      width: min(640px, 100%);
+      border: 1px solid var(--line);
+      background: var(--panel);
+      backdrop-filter: blur(16px);
+      padding: 34px 30px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    main::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 40%, rgba(215,244,122,0.03) 50%, transparent 60%);
+      pointer-events: none;
+      animation: sweep 9s ease-in-out infinite;
+    }
+    @keyframes sweep {
+      0%, 100% { transform: translateX(-30%); opacity: 0.3; }
+      50% { transform: translateX(30%); opacity: 0.7; }
+    }
+    .eyebrow {
+      font: 10px/1.4 ui-monospace, monospace;
+      letter-spacing: 0.18em; color: var(--cyan); margin: 0 0 16px;
+      position: relative;
+    }
+    h1 {
+      margin: 0 0 12px; font-size: clamp(34px, 7vw, 48px);
+      letter-spacing: -0.06em; font-weight: 600; line-height: 1.05;
+      position: relative;
+    }
+    h1 em { color: var(--lime); font-family: Georgia, serif; font-style: italic; font-weight: 400; }
+    p { margin: 0 0 12px; color: var(--muted); position: relative; }
+    .triad {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+      margin: 22px 0 14px; position: relative;
+    }
+    .cell {
+      border: 1px solid var(--line); padding: 12px 10px; background: rgba(0,0,0,0.25);
+    }
+    .cell label {
+      display: block; font: 9px ui-monospace, monospace; letter-spacing: 0.12em;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    .cell .val { font: 18px/1 ui-monospace, monospace; color: var(--text); }
+    .cell.g .val { color: var(--violet); }
+    .cell.f .val { color: var(--lime); }
+    .cell.t .val { color: var(--cyan); }
+    .tide-row {
+      display: flex; align-items: center; gap: 14px; margin: 18px 0;
+      position: relative;
+    }
+    .tide-meter {
+      flex: 1; height: 10px; border-radius: 99px; background: rgba(255,255,255,0.06);
+      overflow: hidden; border: 1px solid var(--line);
+    }
+    .tide-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--flood), var(--violet), var(--cyan), var(--lime));
+      transition: width 0.8s ease;
+    }
+    .tide-label {
+      font: 11px ui-monospace, monospace; min-width: 72px; text-align: right;
+      color: var(--lime);
+    }
+    .status {
+      display: flex; gap: 10px; align-items: center; margin: 16px 0;
+      font: 11px ui-monospace, monospace; color: #c6cec3; position: relative;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--lime);
+      box-shadow: 0 0 12px rgba(215,244,122,0.7);
+    }
+    .rec {
+      border-left: 2px solid var(--violet); padding: 8px 12px;
+      font-size: 12px; color: #c4c4d8; margin: 12px 0 8px; position: relative;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; position: relative; }
+    a.btn {
+      display: inline-flex; align-items: center; padding: 11px 15px;
+      background: var(--lime); color: #0b0e0c; font-size: 12px; font-weight: 700; text-decoration: none;
+    }
+    a.link { color: var(--cyan); font-size: 12px; font-weight: 600; text-decoration: none; padding: 11px 8px; }
+    code { font-family: ui-monospace, monospace; font-size: 11px; color: var(--lime); }
   </style>
 </head>
 <body>
   <main>
-    <p class="eyebrow">IXPANSION · LIVE SURFACE</p>
-    <h1>A codebase<br /><em>in motion.</em></h1>
-    <p>Public organism on Vercel. API health is live; the full field guide also lives on GitHub Pages.</p>
-    <div class="status" id="st"><span class="dot" aria-hidden="true"></span><span id="stt">checking /health…</span></div>
-    <p style="font-size:12px">Endpoint: <code>/health</code> · Project: <code>ixpansion-live</code></p>
+    <p class="eyebrow">IXPANSION · WAVE 980 · HUSH TIDE</p>
+    <h1>Silence is the<br /><em>product surface.</em></h1>
+    <p>Live organism landing. Triad pressure becomes a hush score — prefer absence when the mesh is loud.</p>
+
+    <div class="triad" aria-label="Synthetic triad">
+      <div class="cell g"><label>GOSSIP</label><div class="val" id="g">—</div></div>
+      <div class="cell f"><label>FORGE</label><div class="val" id="f">—</div></div>
+      <div class="cell t"><label>TIME</label><div class="val" id="t">—</div></div>
+    </div>
+
+    <div class="tide-row">
+      <div class="tide-meter" title="hush score"><div class="tide-fill" id="fill"></div></div>
+      <div class="tide-label" id="phase">…</div>
+    </div>
+    <div class="rec" id="rec">reading tide…</div>
+
+    <div class="status"><span class="dot" aria-hidden="true"></span><span id="stt">probing /health…</span></div>
+    <p style="font-size:12px">API <code>/health</code> · organ <code>wave980_hush_tide</code> · project <code>ixpansion-live</code></p>
+
     <div class="actions">
-      <a class="btn" href="/health">Open /health</a>
+      <a class="btn" href="/health">/health</a>
       <a class="link" href="https://github.com/adjjvmorii26-png/ixpansion" target="_blank" rel="noopener">GitHub ↗</a>
       <a class="link" href="https://adjjvmorii26-png.github.io/ixpansion/" target="_blank" rel="noopener">Field guide ↗</a>
     </div>
   </main>
   <script>
-    fetch('/health').then(r => r.json()).then(j => {
-      document.getElementById('stt').textContent = 'healthy · v' + (j.version || '?') + ' · modules ' + (j.modules || '?');
+    function clamp(x) {
+      const n = Number(x);
+      if (!Number.isFinite(n)) return 0;
+      return Math.max(0, Math.min(1, n));
+    }
+    function hushScore(g, f, t) {
+      const pressure = (clamp(g) + clamp(f) + clamp(t)) / 3;
+      return 1 - Math.pow(pressure, 0.85);
+    }
+    function tidePhase(s) {
+      if (s >= 0.72) return "STILL";
+      if (s >= 0.48) return "EBB";
+      if (s >= 0.28) return "SLACK";
+      return "FLOOD";
+    }
+    function recommend(phase) {
+      return ({
+        STILL: "Protect silence — ship nothing ornamental; seal only.",
+        EBB: "Prefer compression and compost over new organs.",
+        SLACK: "One reversible probe only; avoid parallel noise.",
+        FLOOD: "Mesh is loud — gate merges; run witness, not invention."
+      })[phase] || "Observe.";
+    }
+    function paint(g, f, t) {
+      const score = hushScore(g, f, t);
+      const phase = tidePhase(score);
+      document.getElementById("g").textContent = clamp(g).toFixed(2);
+      document.getElementById("f").textContent = clamp(f).toFixed(2);
+      document.getElementById("t").textContent = clamp(t).toFixed(2);
+      document.getElementById("fill").style.width = (score * 100).toFixed(1) + "%";
+      document.getElementById("phase").textContent = phase + " · " + score.toFixed(2);
+      document.getElementById("rec").textContent = recommend(phase);
+    }
+    paint(0.70, 0.65, 0.80);
+    fetch("/health").then(r => r.json()).then(j => {
+      document.getElementById("stt").textContent =
+        "healthy · v" + (j.version || "?") + " · modules " + (j.modules || "?") +
+        " · wave " + (j.wave || "?");
+      const m = Number(j.modules) || 1000;
+      const dens = Math.min(1, m / 2000);
+      paint(0.55 + dens * 0.2, 0.5 + dens * 0.15, 0.6 + dens * 0.15);
     }).catch(() => {
-      document.getElementById('stt').textContent = 'health probe failed';
+      document.getElementById("stt").textContent = "health probe failed — showing sample triad";
     });
   </script>
 </body>
