@@ -11,18 +11,18 @@ from pathlib import Path
 
 NAME_RE = re.compile(r"^[a-z0-9]+(?:[-_][a-z0-9]+)*$")
 SECRET_PATTERNS = (
-    re.compile(r"\\b\\d{8,}:[A-Za-z0-9_-]{30,}\\b"),
-    re.compile(r"\\bgh[pousr]_[A-Za-z0-9]{20,}\\b"),
-    re.compile(r"\\bgithub_pat_[A-Za-z0-9_]{20,}\\b"),
-    re.compile(r"\\bsk-[A-Za-z0-9]{20,}\\b"),
+    re.compile(r"\b\d{8,}:[A-Za-z0-9_-]{30,}\b"),
+    re.compile(r"\bgh[pousr]_[A-Za-z0-9]{20,}\b"),
+    re.compile(r"\bgithub_pat_[A-Za-z0-9_]{20,}\b"),
+    re.compile(r"\bsk-[A-Za-z0-9]{20,}\b"),
 )
 UNSAFE_COMMANDS = (
-    re.compile(r"(?im)^\\s*(?:\\d+\\.\\s*)?git\\s+push\\s+(?:origin\\s+)?main\\b"),
-    re.compile(r"(?im)^\\s*(?:\\d+\\.\\s*)?vercel\\s+--(?:yes\\s+)?prod\\b"),
-    re.compile(r"(?im)^\\s*(?:\\d+\\.\\s*)?git\\s+push\\s+--force\\b"),
+    re.compile(r"(?im)^\s*(?:\d+\.\s*)?git\s+push\s+(?:origin\s+)?main\b"),
+    re.compile(r"(?im)^\s*(?:\d+\.\s*)?vercel\s+--(?:yes\s+)?prod\b"),
+    re.compile(r"(?im)^\s*(?:\d+\.\s*)?git\s+push\s+--force\b"),
 )
-HIGH_IMPACT = re.compile(r"\\b(?:prune|delete|remove|archive|mutate|deploy|overwrite|publish)\\b", re.I)
-SAFETY_CUES = re.compile(r"\\b(?:approval|approved|dry.run|rollback|backup|proposal.only|human review|explicitly authorize)\\b", re.I)
+HIGH_IMPACT = re.compile(r"\b(?:prune|delete|remove|archive|mutate|deploy|overwrite|publish)\b", re.I)
+SAFETY_CUES = re.compile(r"\b(?:approval|approved|dry.run|rollback|backup|proposal.only|human review|explicitly authorize)\b", re.I)
 SKIP_DIRS = {".git", ".venv", "venv", "node_modules", "__pycache__", ".tox"}
 
 
