@@ -34,3 +34,8 @@ back into their subjects — so beliefs literally steer evolution.
 - Challenge truths that have encouraged failed waves — the garden must prune.
 - Cross-pollinate: entangle organs that cooperate (e.g., season_engine ↔ epoch_engine).
 - Keep the garden bounded: the mycelial governor caps at 64 beliefs.
+
+
+## Safety and authorization
+
+HTTP GET does not guarantee read-only behavior. Treat propose, observe, consensus, entangle, and challenge actions as state-changing until the route implementation proves otherwise. Require explicit approval before state changes, preserve the before-state, and verify the after-state. Never let an unverified belief authorize code mutation, deletion, or deployment.
