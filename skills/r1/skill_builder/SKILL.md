@@ -1,3 +1,8 @@
+---
+name: skill_builder
+description: Scaffold, inspect, and propose refactors for reusable Codex skills with consistent metadata and test contracts.
+---
+
 # skill_builder Skill
 
 Generates and scaffolds new Codex skills automatically. Analyzes existing skill patterns
@@ -64,3 +69,6 @@ skill_builder:create_skill({
   "tags": ["health", "monitoring"]
 })
 ```
+
+## Safety
+Generate changes in a proposal or feature branch. Integration into `api/index.py`, routing, or dashboards requires explicit approval, exact file review, regression tests, and rollback reference. Never write directly to the default branch or activate a generated skill automatically.
